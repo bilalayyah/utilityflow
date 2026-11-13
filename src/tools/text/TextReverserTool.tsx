@@ -34,6 +34,36 @@ Tercera línea de texto`,
       { id: 'lines', label: 'Invertir orden de líneas' },
     ],
   },
+  pt: {
+    sampleText: `Primeira linha de texto
+Segunda linha de texto
+Terceira linha de texto`,
+    originalText: 'Texto original',
+    reversedOutput: 'Saída invertida',
+    inputPlaceholder: 'Digite texto ou linhas para inverter...',
+    outputPlaceholder: 'O texto invertido aparece aqui...',
+    modes: [
+      { id: 'characters', label: 'Inverter caracteres' },
+      { id: 'words', label: 'Inverter ordem das palavras' },
+      { id: 'each-word', label: 'Inverter cada palavra' },
+      { id: 'lines', label: 'Inverter ordem das linhas' },
+    ],
+  },
+  fr: {
+    sampleText: `Première ligne de texte
+Deuxième ligne de texte
+Troisième ligne de texte`,
+    originalText: 'Texte d\'origine',
+    reversedOutput: 'Sortie inversée',
+    inputPlaceholder: 'Saisissez du texte ou des lignes à inverser...',
+    outputPlaceholder: 'Le texte inversé apparaît ici...',
+    modes: [
+      { id: 'characters', label: 'Inverser les caractères' },
+      { id: 'words', label: 'Inverser l\'ordre des mots' },
+      { id: 'each-word', label: 'Inverser chaque mot' },
+      { id: 'lines', label: 'Inverser l\'ordre des lignes' },
+    ],
+  },
 };
 
 type ReverseMode = 'characters' | 'words' | 'each-word' | 'lines';

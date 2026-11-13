@@ -68,6 +68,70 @@ Obtén más información en [UtilityFlow](/tools/).`,
     inputPlaceholder: 'Escribe Markdown (# Encabezado, **negrita**, - lista, [enlace](https://...))...',
     emptyPreview: 'La vista previa aparecerá mientras escribes Markdown...',
   },
+  pt: {
+    sampleMarkdown: `# Notas de lançamento do UtilityFlow
+
+Bem-vindo ao **Markdown Previewer**, um editor rápido no navegador com exportação *HTML* em tempo real.
+
+## Principais recursos
+
+- Formatação instantânea para títulos, listas e links
+- Escape seguro de HTML sem nenhum upload remoto
+- Cópia e download de HTML bruto com um clique
+
+> Mantenha a documentação perto do trabalho e revise a estrutura antes de publicar.
+
+\`\`\`json
+{
+  "tool": "markdown-previewer",
+  "mode": "browser-side"
+}
+\`\`\`
+
+Saiba mais em [UtilityFlow](/tools/).`,
+    renderedPreview: 'Prévia renderizada',
+    rawHtml: 'HTML bruto',
+    exportHtml: 'Exportar HTML',
+    copyHtml: 'Copiar HTML',
+    markdownSource: 'Fonte Markdown',
+    livePreview: 'Prévia ao vivo',
+    compiledHtml: 'HTML compilado',
+    compiledHtmlAria: 'Código-fonte HTML compilado',
+    inputPlaceholder: 'Escreva Markdown (# Título, **negrito**, - lista, [link](https://...))...',
+    emptyPreview: 'A prévia aparecerá conforme você digita Markdown...',
+  },
+  fr: {
+    sampleMarkdown: `# Notes de version d'UtilityFlow
+
+Bienvenue dans **Markdown Previewer**, un éditeur rapide côté client avec export *HTML* en direct.
+
+## Fonctionnalités clés
+
+- Mise en forme instantanée pour les titres, les listes et les liens
+- Échappement HTML sécurisé sans aucun envoi distant
+- Copie et téléchargement du HTML brut en un clic
+
+> Gardez la documentation près du travail et vérifiez la structure avant de publier.
+
+\`\`\`json
+{
+  "tool": "markdown-previewer",
+  "mode": "browser-side"
+}
+\`\`\`
+
+En savoir plus sur [UtilityFlow](/tools/).`,
+    renderedPreview: 'Aperçu rendu',
+    rawHtml: 'HTML brut',
+    exportHtml: 'Exporter le HTML',
+    copyHtml: 'Copier le HTML',
+    markdownSource: 'Source Markdown',
+    livePreview: 'Aperçu en direct',
+    compiledHtml: 'HTML compilé',
+    compiledHtmlAria: 'Code source HTML compilé',
+    inputPlaceholder: 'Écrivez du Markdown (# Titre, **gras**, - liste, [lien](https://...))...',
+    emptyPreview: 'L\'aperçu apparaîtra au fur et à mesure de votre saisie Markdown...',
+  },
 };
 
 function escapeHtml(text: string): string {

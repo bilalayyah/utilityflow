@@ -32,6 +32,34 @@ Cómo crear un sitio estático rápido en Cloudflare Pages`,
     copySlugs: 'Copiar slugs',
     outputPlaceholder: 'los-slugs-de-url-limpios-aparecen-aqui',
   },
+  pt: {
+    sampleTitles: `10 melhores formas de formatar JSON online!
+Café e creme: guia para 2026
+Como criar um site estático rápido no Cloudflare Pages`,
+    hyphen: 'Hífen (-)',
+    underscore: 'Sublinhado (_)',
+    forceLowercase: 'Forçar minúsculas',
+    stripStopWords: 'Remover palavras vazias comuns',
+    titlesLabel: 'Títulos ou frases (um por linha para o modo em lote)',
+    inputPlaceholder: 'Digite um título de blog, nome de produto ou lista de títulos...',
+    generatedSlugs: 'Slugs de URL gerados',
+    copySlugs: 'Copiar slugs',
+    outputPlaceholder: 'slugs-de-url-limpos-aparecem-aqui',
+  },
+  fr: {
+    sampleTitles: `10 meilleures façons de formater du JSON en ligne !
+Café et crème : guide pour 2026
+Comment créer un site statique rapide sur Cloudflare Pages`,
+    hyphen: 'Trait d\'union (-)',
+    underscore: 'Tiret bas (_)',
+    forceLowercase: 'Forcer les minuscules',
+    stripStopWords: 'Supprimer les mots vides courants',
+    titlesLabel: 'Titres ou phrases (un par ligne pour le mode par lot)',
+    inputPlaceholder: 'Saisissez un titre de blog, un nom de produit ou une liste de titres...',
+    generatedSlugs: 'Slugs d\'URL générés',
+    copySlugs: 'Copier les slugs',
+    outputPlaceholder: 'les-slugs-d-url-propres-apparaissent-ici',
+  },
 };
 
 const STOP_WORDS = new Set([

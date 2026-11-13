@@ -58,6 +58,60 @@ const STRINGS = {
       { name: 'Publicación de LinkedIn', note: 'Actualización estándar máxima del feed' },
     ],
   },
+  pt: {
+    sampleText:
+      'Escreva textos claros e concisos que caibam nos limites de caracteres das plataformas, sem cortes estranhos nos resultados de pesquisa ou nas redes sociais.',
+    withSpaces: 'Com espaços',
+    withoutSpaces: 'Sem espaços',
+    words: 'Palavras',
+    letters: 'Letras',
+    digits: 'Dígitos',
+    utf8Bytes: 'Bytes UTF-8',
+    copyText: 'Copiar texto',
+    textToMeasure: 'Texto para medir o comprimento em caracteres',
+    placeholder:
+      'Digite ou cole texto para ver contagens exatas de caracteres, tamanho em bytes e limites de plataformas...',
+    whitespaceChars: 'Caracteres de espaço em branco',
+    lines: 'Linhas',
+    platformLimitsTitle: 'Limites de caracteres de plataformas e SEO',
+    over: 'acima',
+    left: 'restantes',
+    platformLimits: [
+      { name: 'Meta título SEO', note: 'Comprimento recomendado do título no Google' },
+      { name: 'Meta descrição SEO', note: 'Limite padrão do snippet em desktop' },
+      { name: 'Segmento SMS', note: 'Uma única mensagem SMS GSM-7' },
+      { name: 'Post no X / Twitter', note: 'Comprimento padrão de post' },
+      { name: 'Prévia da legenda do Instagram', note: 'Visível antes do corte em "Mais"' },
+      { name: 'Post no LinkedIn', note: 'Atualização padrão máxima do feed' },
+    ],
+  },
+  fr: {
+    sampleText:
+      'Rédigez des textes clairs et concis qui respectent les limites de caractères des plateformes, sans coupure gênante dans les résultats de recherche ou les flux sociaux.',
+    withSpaces: 'Avec espaces',
+    withoutSpaces: 'Sans espaces',
+    words: 'Mots',
+    letters: 'Lettres',
+    digits: 'Chiffres',
+    utf8Bytes: 'Octets UTF-8',
+    copyText: 'Copier le texte',
+    textToMeasure: 'Texte pour mesurer la longueur en caractères',
+    placeholder:
+      'Saisissez ou collez du texte pour voir les nombres exacts de caractères, la taille en octets et les limites des plateformes...',
+    whitespaceChars: 'Caractères d\'espacement',
+    lines: 'Lignes',
+    platformLimitsTitle: 'Limites de caractères des plateformes et du SEO',
+    over: 'en trop',
+    left: 'restants',
+    platformLimits: [
+      { name: 'Meta titre SEO', note: 'Longueur recommandée du titre Google' },
+      { name: 'Meta description SEO', note: 'Seuil standard de l\'extrait sur ordinateur' },
+      { name: 'Segment SMS', note: 'Un seul message SMS GSM-7' },
+      { name: 'Publication X / Twitter', note: 'Longueur standard de publication' },
+      { name: 'Aperçu de légende Instagram', note: 'Visible avant la troncature « Plus »' },
+      { name: 'Publication LinkedIn', note: 'Mise à jour standard maximale du fil' },
+    ],
+  },
 };
 
 interface PlatformLimit {

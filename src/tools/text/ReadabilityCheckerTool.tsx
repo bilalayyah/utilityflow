@@ -73,6 +73,76 @@ Las oraciones largas llenas de cláusulas anidadas obligan a los lectores a rele
       { level: 'Muy difícil', audience: 'Posgrado / especialista' },
     ],
   },
+  pt: {
+    sampleText: `A escrita técnica clara respeita o tempo do leitor. Use substantivos concretos e verbos ativos sempre que possível para que instruções complexas continuem fáceis de seguir.
+
+Frases longas cheias de orações aninhadas obrigam os leitores a reler parágrafos. Dividir explicações densas em passos mais curtos torna a documentação mais rápida de ler e mais simples de aplicar.`,
+    level: 'Nível:',
+    textToCheck: 'Texto para verificar a legibilidade',
+    placeholder:
+      'Cole seu artigo, ensaio ou texto de landing page para calcular a facilidade de leitura Flesch e as pontuações de nível escolar...',
+    fleschEase: 'Facilidade de leitura Flesch',
+    fleschKincaid: 'Nível Flesch-Kincaid',
+    usGrade: 'Nível escolar dos EUA',
+    gunningFog: 'Índice Gunning Fog',
+    yearsEducation: 'Anos de escolaridade',
+    smog: 'Índice SMOG',
+    polysyllable: 'Complexidade polissilábica',
+    structuralBreakdown: 'Detalhamento estrutural',
+    wordsSentences: 'Palavras / Frases',
+    avgSentenceLength: 'Comprimento médio da frase',
+    words: 'palavras',
+    avgSyllablesPerWord: 'Média de sílabas por palavra',
+    complexWords: 'Palavras complexas (3+ sílabas)',
+    longWordsDetected: 'Palavras longas detectadas (3+ sílabas)',
+    noLongWords: 'Nenhuma palavra com 3+ sílabas encontrada nesta passagem.',
+    emptyState:
+      'Digite pelo menos uma frase acima para ver as fórmulas de legibilidade e as proporções estruturais.',
+    levels: [
+      { level: 'Muito fácil', audience: '5.º ano (10–11 anos)' },
+      { level: 'Fácil', audience: '6.º ano (11–12 anos)' },
+      { level: 'Bastante fácil', audience: '7.º ano (12–13 anos)' },
+      { level: 'Padrão', audience: '8.º–9.º ano (13–15 anos)' },
+      { level: 'Bastante difícil', audience: '10.º–12.º ano' },
+      { level: 'Difícil', audience: 'Nível universitário' },
+      { level: 'Muito difícil', audience: 'Pós-graduação / especialista' },
+    ],
+  },
+  fr: {
+    sampleText: `Une rédaction technique claire respecte le temps du lecteur. Utilisez des noms concrets et des verbes actifs chaque fois que possible pour que les instructions complexes restent faciles à suivre.
+
+Les phrases longues remplies de propositions imbriquées obligent les lecteurs à relire les paragraphes. Diviser les explications denses en étapes plus courtes rend la documentation plus rapide à parcourir et plus simple à appliquer.`,
+    level: 'Niveau :',
+    textToCheck: 'Texte à vérifier (lisibilité)',
+    placeholder:
+      'Collez votre article, votre essai ou le texte de votre page d\'accueil pour calculer la facilité de lecture Flesch et les scores de niveau scolaire...',
+    fleschEase: 'Facilité de lecture Flesch',
+    fleschKincaid: 'Niveau Flesch-Kincaid',
+    usGrade: 'Niveau scolaire américain',
+    gunningFog: 'Indice Gunning Fog',
+    yearsEducation: 'Années d\'études',
+    smog: 'Indice SMOG',
+    polysyllable: 'Complexité polysyllabique',
+    structuralBreakdown: 'Répartition structurelle',
+    wordsSentences: 'Mots / Phrases',
+    avgSentenceLength: 'Longueur moyenne des phrases',
+    words: 'mots',
+    avgSyllablesPerWord: 'Moyenne de syllabes par mot',
+    complexWords: 'Mots complexes (3+ syllabes)',
+    longWordsDetected: 'Mots longs détectés (3+ syllabes)',
+    noLongWords: 'Aucun mot de 3+ syllabes trouvé dans ce passage.',
+    emptyState:
+      'Saisissez au moins une phrase ci-dessus pour voir les formules de lisibilité et les ratios structurels.',
+    levels: [
+      { level: 'Très facile', audience: '5e année (10–11 ans)' },
+      { level: 'Facile', audience: '6e année (11–12 ans)' },
+      { level: 'Assez facile', audience: '7e année (12–13 ans)' },
+      { level: 'Standard', audience: '8e–9e année (13–15 ans)' },
+      { level: 'Assez difficile', audience: '10e–12e année' },
+      { level: 'Difficile', audience: 'Niveau universitaire' },
+      { level: 'Très difficile', audience: 'Diplômé universitaire / spécialiste' },
+    ],
+  },
 };
 
 function countSyllables(word: string): number {

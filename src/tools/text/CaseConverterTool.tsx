@@ -14,6 +14,16 @@ const STRINGS = {
     placeholder: 'Escribe o pega texto y luego haz clic en cualquier botón de conversión...',
     copyResult: 'Copiar resultado',
   },
+  pt: {
+    textToConvert: 'Texto para converter maiúsculas e minúsculas',
+    placeholder: 'Digite ou cole texto e clique em qualquer botão de conversão abaixo...',
+    copyResult: 'Copiar resultado',
+  },
+  fr: {
+    textToConvert: 'Texte à convertir (casse)',
+    placeholder: 'Saisissez ou collez du texte, puis cliquez sur un bouton de conversion ci-dessous...',
+    copyResult: 'Copier le résultat',
+  },
 };
 
 const SAMPLE_TEXT = 'welcome to utilityFlow: fast text_case formatting & clean URLs';

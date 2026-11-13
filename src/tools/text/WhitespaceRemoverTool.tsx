@@ -48,6 +48,50 @@ Tercera   línea aquí.   `,
     inputPlaceholder: 'Pega texto desordenado con espacios de más, tabulaciones o líneas en blanco...',
     outputPlaceholder: 'El resultado limpio aparece automáticamente...',
   },
+  pt: {
+    sampleText: `   Primeira   linha com   espaços   extras.   
+
+   Segunda linha   com   tabs	e   lacunas.
+
+
+Terceira   linha aqui.   `,
+    collapseSpaces: 'Colapsar espaços múltiplos',
+    trimEdges: 'Recortar bordas de linha',
+    tabsToSpaces: 'Converter tabs em espaços',
+    lineBreaks: 'Quebras de linha:',
+    keepBreaks: 'Manter quebras de linha',
+    removeBlankLines: 'Remover linhas em branco',
+    replaceWithSpaces: 'Substituir por espaços',
+    removeAllBreaks: 'Remover todas as quebras',
+    inputText: 'Texto de entrada',
+    chars: 'caracteres',
+    cleanedText: 'Texto limpo',
+    removed: 'removidos',
+    inputPlaceholder: 'Cole texto desorganizado com espaços extras, tabs ou linhas em branco...',
+    outputPlaceholder: 'O resultado limpo aparece automaticamente...',
+  },
+  fr: {
+    sampleText: `   Première   ligne avec   des espaces   en trop.   
+
+   Deuxième ligne   avec   des tabulations	et   des écarts.
+
+
+Troisième   ligne ici.   `,
+    collapseSpaces: 'Réduire les espaces multiples',
+    trimEdges: 'Supprimer les espaces en bord de ligne',
+    tabsToSpaces: 'Convertir les tabulations en espaces',
+    lineBreaks: 'Sauts de ligne :',
+    keepBreaks: 'Conserver les sauts de ligne',
+    removeBlankLines: 'Supprimer les lignes vides',
+    replaceWithSpaces: 'Remplacer par des espaces',
+    removeAllBreaks: 'Supprimer tous les sauts',
+    inputText: 'Texte d\'entrée',
+    chars: 'caractères',
+    cleanedText: 'Texte nettoyé',
+    removed: 'supprimés',
+    inputPlaceholder: 'Collez du texte désordonné avec des espaces en trop, des tabulations ou des lignes vides...',
+    outputPlaceholder: 'Le résultat nettoyé apparaît automatiquement...',
+  },
 };
 
 type LineBreakMode = 'keep' | 'collapse-blank' | 'remove-all' | 'to-spaces';

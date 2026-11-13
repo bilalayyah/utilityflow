@@ -41,6 +41,42 @@ const STRINGS = {
     emptyState:
       'Escribe texto arriba para ver los conteos de palabras y los porcentajes de densidad de palabras clave.',
   },
+  pt: {
+    sampleText: `Auditorias técnicas de SEO verificam rastreabilidade, links internos e velocidade da página. Páginas rápidas melhoram o engajamento do usuário e os sinais de velocidade de página na pesquisa móvel. Links internos conectam guias relacionados e fortalecem a estrutura técnica de SEO.`,
+    ngramLabels: { 1: '1 palavra', 2: 'Frases de 2 palavras', 3: 'Frases de 3 palavras' },
+    excludeStopWords: 'Excluir palavras vazias comuns',
+    minLength: 'Compr. mín.:',
+    textForAnalysis: 'Texto para análise de frequência',
+    placeholder:
+      'Cole textos de artigos, descrições de produtos ou notas para contar termos repetidos e densidade de palavras-chave...',
+    totalWords: 'Total de palavras:',
+    uniqueTerms: 'Termos únicos:',
+    exportCsv: 'Exportar CSV',
+    copyCsv: 'Copiar CSV',
+    rank: '#',
+    termPhrase: 'Termo / Frase',
+    count: 'Contagem',
+    density: 'Densidade',
+    emptyState: 'Digite texto acima para ver contagens de palavras e percentuais de densidade de palavras-chave.',
+  },
+  fr: {
+    sampleText: `Les audits SEO techniques vérifient l'explorabilité, les liens internes et la vitesse des pages. Les pages rapides améliorent l'engagement des utilisateurs et les signaux de vitesse des pages dans la recherche mobile. Les liens internes relient les guides associés et renforcent la structure SEO technique.`,
+    ngramLabels: { 1: '1 mot', 2: 'Expressions de 2 mots', 3: 'Expressions de 3 mots' },
+    excludeStopWords: 'Exclure les mots vides courants',
+    minLength: 'Longueur min. :',
+    textForAnalysis: 'Texte pour l\'analyse de fréquence',
+    placeholder:
+      'Collez des textes d\'articles, des descriptions de produits ou des notes pour compter les termes répétés et la densité des mots-clés...',
+    totalWords: 'Nombre total de mots :',
+    uniqueTerms: 'Termes uniques :',
+    exportCsv: 'Exporter CSV',
+    copyCsv: 'Copier CSV',
+    rank: '#',
+    termPhrase: 'Terme / Expression',
+    count: 'Nombre',
+    density: 'Densité',
+    emptyState: 'Saisissez du texte ci-dessus pour voir les nombres de mots et les pourcentages de densité des mots-clés.',
+  },
 };
 
 const STOP_WORDS = new Set([

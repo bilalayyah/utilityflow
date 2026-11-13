@@ -30,6 +30,32 @@ const STRINGS = {
     inputPlaceholder: 'Pega una lista con un elemento por línea...',
     outputPlaceholder: 'El resultado sin duplicados aparecerá aquí...',
   },
+  pt: {
+    caseSensitive: 'Diferenciar maiúsculas de minúsculas',
+    trimWhitespace: 'Remover espaços em branco',
+    removeEmptyLines: 'Remover linhas vazias',
+    sortAlphabetically: 'Ordenar alfabeticamente',
+    originalLines: 'Linhas originais',
+    lines: 'linhas',
+    uniqueLines: 'Linhas únicas',
+    unique: 'únicas',
+    removed: 'removidas',
+    inputPlaceholder: 'Cole uma lista com um item por linha...',
+    outputPlaceholder: 'O resultado sem duplicatas aparecerá aqui...',
+  },
+  fr: {
+    caseSensitive: 'Respecter la casse',
+    trimWhitespace: 'Supprimer les espaces',
+    removeEmptyLines: 'Supprimer les lignes vides',
+    sortAlphabetically: 'Trier par ordre alphabétique',
+    originalLines: 'Lignes d\'origine',
+    lines: 'lignes',
+    uniqueLines: 'Lignes uniques',
+    unique: 'uniques',
+    removed: 'supprimées',
+    inputPlaceholder: 'Collez une liste avec un élément par ligne...',
+    outputPlaceholder: 'Le résultat sans doublons apparaîtra ici...',
+  },
 };
 
 const SAMPLE_LINES = `apple@example.com

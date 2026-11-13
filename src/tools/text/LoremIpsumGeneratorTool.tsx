@@ -28,6 +28,30 @@ const STRINGS = {
     copyPlaceholder: 'Copiar texto de relleno',
     generatedText: 'Texto de relleno generado',
   },
+  pt: {
+    amount: 'Quantidade',
+    unit: 'Unidade',
+    unitLabels: { paragraphs: 'parágrafos', sentences: 'frases', words: 'palavras' },
+    startClassic: 'Começar com “Lorem ipsum”',
+    wrapHtml: 'Envolver em tags <p>',
+    words: 'palavras',
+    characters: 'caracteres',
+    regenerate: 'Regenerar',
+    copyPlaceholder: 'Copiar texto de exemplo',
+    generatedText: 'Texto de exemplo gerado',
+  },
+  fr: {
+    amount: 'Quantité',
+    unit: 'Unité',
+    unitLabels: { paragraphs: 'paragraphes', sentences: 'phrases', words: 'mots' },
+    startClassic: 'Commencer par « Lorem ipsum »',
+    wrapHtml: 'Entourer de balises <p>',
+    words: 'mots',
+    characters: 'caractères',
+    regenerate: 'Régénérer',
+    copyPlaceholder: 'Copier le texte d\'exemple',
+    generatedText: 'Texte d\'exemple généré',
+  },
 };
 
 type UnitType = 'paragraphs' | 'sentences' | 'words';
