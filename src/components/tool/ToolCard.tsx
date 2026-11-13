@@ -1,6 +1,8 @@
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { getCategoryById } from '../../registry/categories';
+import { useLocale } from '../../locales/LocaleContext';
+import { toolHref } from '../../locales/config';
+import { getLocalizedCategory, getLocalizedTool } from '../../locales/tools';
 import type { ToolDefinition } from '../../types/tool';
 import { CategoryIcon } from '../common/CategoryIcon';
 
@@ -9,11 +11,16 @@ interface ToolCardProps {
 }
 
 export function ToolCard({ tool }: ToolCardProps) {
-  const category = getCategoryById(tool.categoryId);
+  const { locale, t } = useLocale();
+  // Always render the current locale's fields, even when the caller passes
+  // an English base definition (RelatedTools, popular lists, search).
+  const localized = getLocalizedTool(tool, locale);
+  const category = getLocalizedCategory(localized.categoryId, locale);
+  const href = toolHref(localized.slug, locale);
 
   return (
     <Link
-      to={`/${tool.slug}/`}
+      to={href}
       className="group flex flex-col justify-between rounded-xl border border-slate-200 bg-white p-5 transition-all duration-150 hover:border-indigo-300 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600"
     >
       <div>
@@ -23,11 +30,11 @@ export function ToolCard({ tool }: ToolCardProps) {
             <span>{category ? category.shortName : 'Utility'}</span>
             <span aria-hidden="true">·</span>
             <span>
-              {tool.id.startsWith('ai-')
-                ? 'Free AI Tool'
-                : tool.requiresExternalApi
-                ? 'External API'
-                : 'Browser-side'}
+              {localized.id.startsWith('ai-')
+                ? t.common.freeAiTool
+                : localized.requiresExternalApi
+                ? t.common.externalApi
+                : t.common.browserSide}
             </span>
           </div>
           <ArrowRight
@@ -37,16 +44,16 @@ export function ToolCard({ tool }: ToolCardProps) {
         </div>
 
         <h3 className="text-base font-semibold text-slate-900 group-hover:text-indigo-700 transition-colors">
-          {tool.name}
+          {localized.name}
         </h3>
         <p className="mt-1.5 text-sm leading-relaxed text-slate-600 line-clamp-2">
-          {tool.shortDescription}
+          {localized.shortDescription}
         </p>
       </div>
 
       <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-medium text-indigo-600">
-        <span>Open tool</span>
-        <span className="font-mono text-slate-400">/{tool.slug}/</span>
+        <span>{t.common.openTool}</span>
+        <span className="font-mono text-slate-400">{href}</span>
       </div>
     </Link>
   );

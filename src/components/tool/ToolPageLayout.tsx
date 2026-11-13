@@ -1,7 +1,11 @@
 import { Check, Info } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { buildCanonicalUrl } from '../../config/site';
-import { getCategoryById } from '../../registry/categories';
+import { useLocale } from '../../locales/LocaleContext';
+import { categoryHref, localizeStaticPath } from '../../locales/config';
+import { getToolAlternatePaths, toHreflangEntries } from '../../locales/routes';
+import { getLocalizedCategory } from '../../locales/tools';
+import { formatString } from '../../locales/ui';
 import type { BreadcrumbItem, ToolDefinition, ToolStep } from '../../types/tool';
 import { AdSlot } from '../common/AdSlot';
 import { Breadcrumbs, buildBreadcrumbSchema } from '../common/Breadcrumbs';
@@ -14,11 +18,11 @@ interface ToolPageLayoutProps {
   children: ReactNode;
 }
 
-export function buildHowToSchema(toolName: string, description: string, steps: ToolStep[]) {
+export function buildHowToSchema(howToTitle: string, description: string, steps: ToolStep[]) {
   return {
     '@context': 'https://schema.org',
     '@type': 'HowTo',
-    name: `How to Use ${toolName}`,
+    name: howToTitle,
     description,
     step: steps.map((step) => ({
       '@type': 'HowToStep',
@@ -29,13 +33,15 @@ export function buildHowToSchema(toolName: string, description: string, steps: T
 }
 
 export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
-  const category = getCategoryById(tool.categoryId);
-  const canonicalPath = `/${tool.slug}/`;
+  const { locale, t } = useLocale();
+  const category = getLocalizedCategory(tool.categoryId, locale);
+  const canonicalPath = locale === 'es' ? `/es/${tool.slug}/` : `/${tool.slug}/`;
+  const howToTitle = formatString(t.toolPage.howToUse, { name: tool.name });
 
   const breadcrumbItems: BreadcrumbItem[] = [
-    { label: 'Home', href: '/' },
+    { label: t.footer.home, href: localizeStaticPath('/', locale) },
     ...(category
-      ? [{ label: category.name, href: `/category/${category.slug}/` }]
+      ? [{ label: category.name, href: categoryHref(category.id, locale) }]
       : []),
     { label: tool.name },
   ];
@@ -60,7 +66,7 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
     softwareSchema,
     buildBreadcrumbSchema(breadcrumbItems),
     ...(tool.instructions.length > 0
-      ? [buildHowToSchema(tool.name, tool.seo.description, tool.instructions)]
+      ? [buildHowToSchema(howToTitle, tool.seo.description, tool.instructions)]
       : []),
     ...(tool.faqs.length > 0 ? [buildFaqSchema(tool.faqs)] : []),
   ];
@@ -77,6 +83,7 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
           ...tool.seo.longTailKeywords,
         ]}
         structuredData={structuredData}
+        alternates={toHreflangEntries(getToolAlternatePaths(tool.id))}
       />
 
       <article className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
@@ -88,10 +95,10 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
             <span aria-hidden="true">·</span>
             <span>
               {tool.id.startsWith('ai-')
-                ? 'Free AI Tool · Zero Login'
+                ? t.toolPage.freeAiTool
                 : tool.requiresExternalApi
-                ? 'External API integration'
-                : 'Runs locally in your browser'}
+                ? t.toolPage.externalApi
+                : t.toolPage.runsLocally}
             </span>
           </div>
           <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 text-balance">
@@ -126,7 +133,7 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
             {tool.instructions.length > 0 && (
               <section aria-labelledby="how-to-use-heading">
                 <h2 id="how-to-use-heading" className="text-2xl font-bold text-slate-900 mb-4">
-                  How to Use {tool.name}
+                  {howToTitle}
                 </h2>
                 <ol className="space-y-4">
                   {tool.instructions.map((step, index) => (
@@ -152,7 +159,7 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
             {tool.examples.length > 0 && (
               <section aria-labelledby="examples-heading">
                 <h2 id="examples-heading" className="text-2xl font-bold text-slate-900 mb-4">
-                  Practical Examples
+                  {t.toolPage.practicalExamples}
                 </h2>
                 <div className="space-y-4">
                   {tool.examples.map((example) => (
@@ -163,13 +170,13 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
                       <h3 className="text-base font-semibold text-slate-900">{example.title}</h3>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-mono">
                         <div className="rounded-lg bg-slate-50 border border-slate-200 p-3">
-                          <div className="font-sans font-semibold text-slate-500 mb-1">Input</div>
+                          <div className="font-sans font-semibold text-slate-500 mb-1">{t.toolPage.input}</div>
                           <pre className="whitespace-pre-wrap break-words text-slate-800">
                             {example.input}
                           </pre>
                         </div>
                         <div className="rounded-lg bg-slate-50 border border-slate-200 p-3">
-                          <div className="font-sans font-semibold text-slate-500 mb-1">Output</div>
+                          <div className="font-sans font-semibold text-slate-500 mb-1">{t.toolPage.output}</div>
                           <pre className="whitespace-pre-wrap break-words text-slate-800">
                             {example.output}
                           </pre>
@@ -187,7 +194,7 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
             {tool.faqs.length > 0 && (
               <section aria-labelledby="tool-faq-heading">
                 <h2 id="tool-faq-heading" className="text-2xl font-bold text-slate-900 mb-4">
-                  Frequently Asked Questions
+                  {t.toolPage.faqs}
                 </h2>
                 <FAQAccordion items={tool.faqs} />
               </section>
@@ -197,7 +204,7 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
           <aside className="lg:col-span-4 space-y-8">
             {tool.benefits.length > 0 && (
               <section className="rounded-xl border border-slate-200 bg-slate-50 p-5">
-                <h2 className="text-lg font-bold text-slate-900 mb-3">Key Benefits</h2>
+                <h2 className="text-lg font-bold text-slate-900 mb-3">{t.toolPage.keyBenefits}</h2>
                 <ul className="space-y-2.5 text-sm text-slate-700">
                   {tool.benefits.map((benefit) => (
                     <li key={benefit} className="flex items-start gap-2.5">
@@ -214,7 +221,7 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
 
             {tool.useCases.length > 0 && (
               <section className="rounded-xl border border-slate-200 bg-white p-5">
-                <h2 className="text-lg font-bold text-slate-900 mb-3">Common Use Cases</h2>
+                <h2 className="text-lg font-bold text-slate-900 mb-3">{t.toolPage.commonUseCases}</h2>
                 <ul className="space-y-2 text-sm text-slate-600 list-disc pl-4">
                   {tool.useCases.map((useCase) => (
                     <li key={useCase}>{useCase}</li>
