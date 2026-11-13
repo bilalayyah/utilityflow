@@ -1,5 +1,61 @@
 import { Info } from 'lucide-react';
 import { useMemo, useState } from 'react';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    sampleContent:
+      'Technical SEO starts with clean crawlable URLs, accurate canonical tags, and structured XML sitemaps. When publishers write helpful content focused on user intent rather than keyword stuffing, search engines understand topic depth naturally. Audit your headings, meta descriptions, and internal links regularly.',
+    defaultTargetKeyword: 'technical seo',
+    guidanceTitle: 'Editorial Guidance:',
+    guidanceBody:
+      'Modern search engines do not reward hitting a fixed keyword-density quota. Use this distribution audit to spot accidental repetition or confirm that primary concepts appear clearly in your copy.',
+    targetLabel: 'Target Keyword / Phrase (Optional)',
+    targetPlaceholder: 'e.g. technical seo',
+    phraseLengthLabel: 'Phrase Length',
+    oneWord: '1-Word',
+    twoWord: '2-Word Phrases',
+    threeWord: '3-Word Phrases',
+    stripHtml: 'Strip HTML tags',
+    ignoreStopWords: 'Ignore stop words',
+    textLabel: 'Article Draft or Pasted HTML Copy',
+    totalWords: 'Total Words',
+    uniqueVocabulary: 'Unique Vocabulary',
+    readingTime: 'Est. Reading Time',
+    targetPrefix: 'Target: ',
+    hits: '{n} hits ({d}%)',
+    rankHeader: 'Rank',
+    termHeader: 'Term / N-gram',
+    occurrencesHeader: 'Occurrences',
+    shareHeader: 'Share (%)',
+  },
+  es: {
+    sampleContent:
+      'El SEO técnico comienza con URL limpias y rastreables, etiquetas canónicas precisas y sitemaps XML estructurados. Cuando los editores escriben contenido útil centrado en la intención del usuario en lugar de rellenar palabras clave, los motores de búsqueda comprenden la profundidad del tema de forma natural. Audita tus encabezados, metadescripciones y enlaces internos con regularidad.',
+    defaultTargetKeyword: 'seo técnico',
+    guidanceTitle: 'Orientación editorial:',
+    guidanceBody:
+      'Los motores de búsqueda modernos no premian alcanzar una cuota fija de densidad de palabras clave. Usa esta auditoría de distribución para detectar repeticiones accidentales o confirmar que los conceptos principales aparecen con claridad en tu texto.',
+    targetLabel: 'Palabra clave / frase objetivo (opcional)',
+    targetPlaceholder: 'p. ej., seo técnico',
+    phraseLengthLabel: 'Longitud de la frase',
+    oneWord: '1 palabra',
+    twoWord: 'Frases de 2 palabras',
+    threeWord: 'Frases de 3 palabras',
+    stripHtml: 'Eliminar etiquetas HTML',
+    ignoreStopWords: 'Ignorar palabras vacías',
+    textLabel: 'Borrador de artículo o texto HTML pegado',
+    totalWords: 'Palabras totales',
+    uniqueVocabulary: 'Vocabulario único',
+    readingTime: 'Tiempo estimado de lectura',
+    targetPrefix: 'Objetivo: ',
+    hits: '{n} coincidencias ({d}%)',
+    rankHeader: 'Posición',
+    termHeader: 'Término / N-grama',
+    occurrencesHeader: 'Ocurrencias',
+    shareHeader: 'Porcentaje (%)',
+  },
+};
 
 const STOP_WORDS = new Set([
   'a', 'an', 'and', 'are', 'as', 'at', 'be', 'but', 'by', 'for', 'if', 'in',
@@ -9,10 +65,10 @@ const STOP_WORDS = new Set([
 ]);
 
 export default function KeywordDensityCheckerTool() {
-  const [content, setContent] = useState(
-    'Technical SEO starts with clean crawlable URLs, accurate canonical tags, and structured XML sitemaps. When publishers write helpful content focused on user intent rather than keyword stuffing, search engines understand topic depth naturally. Audit your headings, meta descriptions, and internal links regularly.'
-  );
-  const [targetKeyword, setTargetKeyword] = useState('technical seo');
+  const { locale } = useLocale();
+  const s = STRINGS[locale];
+  const [content, setContent] = useState(s.sampleContent);
+  const [targetKeyword, setTargetKeyword] = useState(s.defaultTargetKeyword);
   const [stripHtml, setStripHtml] = useState(true);
   const [ignoreStopWords, setIgnoreStopWords] = useState(true);
   const [ngramSize, setNgramSize] = useState<1 | 2 | 3>(1);
@@ -90,27 +146,27 @@ export default function KeywordDensityCheckerTool() {
       <div className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-xs sm:text-sm text-slate-700 flex items-start gap-2.5">
         <Info className="w-4 h-4 shrink-0 text-indigo-600 mt-0.5" />
         <p>
-          <strong>Editorial Guidance:</strong> Modern search engines do not reward hitting a fixed keyword-density quota. Use this distribution audit to spot accidental repetition or confirm that primary concepts appear clearly in your copy.
+          <strong>{s.guidanceTitle}</strong> {s.guidanceBody}
         </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
         <div>
           <label htmlFor="kd-target" className="block text-xs font-semibold text-slate-800 mb-1.5">
-            Target Keyword / Phrase (Optional)
+            {s.targetLabel}
           </label>
           <input
             id="kd-target"
             type="text"
             value={targetKeyword}
             onChange={(e) => setTargetKeyword(e.target.value)}
-            placeholder="e.g. technical seo"
+            placeholder={s.targetPlaceholder}
             className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"
           />
         </div>
 
         <div>
-          <span className="block text-xs font-semibold text-slate-800 mb-1.5">Phrase Length</span>
+          <span className="block text-xs font-semibold text-slate-800 mb-1.5">{s.phraseLengthLabel}</span>
           <div className="inline-flex rounded-lg bg-slate-100 p-1">
             {([1, 2, 3] as (1 | 2 | 3)[]).map((n) => (
               <button
@@ -121,7 +177,7 @@ export default function KeywordDensityCheckerTool() {
                   ngramSize === n ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
                 }`}
               >
-                {n === 1 ? '1-Word' : n === 2 ? '2-Word Phrases' : '3-Word Phrases'}
+                {n === 1 ? s.oneWord : n === 2 ? s.twoWord : s.threeWord}
               </button>
             ))}
           </div>
@@ -135,7 +191,7 @@ export default function KeywordDensityCheckerTool() {
               onChange={(e) => setStripHtml(e.target.checked)}
               className="h-4 w-4 rounded border-slate-300 text-indigo-600"
             />
-            Strip HTML tags
+            {s.stripHtml}
           </label>
           <label className="inline-flex items-center gap-2 text-xs font-medium text-slate-700 cursor-pointer">
             <input
@@ -144,14 +200,14 @@ export default function KeywordDensityCheckerTool() {
               onChange={(e) => setIgnoreStopWords(e.target.checked)}
               className="h-4 w-4 rounded border-slate-300 text-indigo-600"
             />
-            Ignore stop words
+            {s.ignoreStopWords}
           </label>
         </div>
       </div>
 
       <div>
         <label htmlFor="kd-text" className="block text-sm font-semibold text-slate-900 mb-1.5">
-          Article Draft or Pasted HTML Copy
+          {s.textLabel}
         </label>
         <textarea
           id="kd-text"
@@ -164,29 +220,30 @@ export default function KeywordDensityCheckerTool() {
 
       <dl className="grid grid-cols-2 lg:grid-cols-4 gap-3 tabular-nums">
         <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
-          <dt className="text-xs text-slate-500">Total Words</dt>
+          <dt className="text-xs text-slate-500">{s.totalWords}</dt>
           <dd className="mt-1 text-xl font-bold font-mono text-slate-900">
-            {analysis.totalWords.toLocaleString()}
+            {analysis.totalWords.toLocaleString(locale)}
           </dd>
         </div>
         <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
-          <dt className="text-xs text-slate-500">Unique Vocabulary</dt>
+          <dt className="text-xs text-slate-500">{s.uniqueVocabulary}</dt>
           <dd className="mt-1 text-xl font-bold font-mono text-slate-900">
-            {analysis.uniqueWords.toLocaleString()}
+            {analysis.uniqueWords.toLocaleString(locale)}
           </dd>
         </div>
         <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
-          <dt className="text-xs text-slate-500">Est. Reading Time</dt>
+          <dt className="text-xs text-slate-500">{s.readingTime}</dt>
           <dd className="mt-1 text-xl font-bold font-mono text-slate-900">
             ~{analysis.readingMins} min
           </dd>
         </div>
         <div className="rounded-lg border border-indigo-200 bg-indigo-50/70 p-4">
           <dt className="text-xs text-indigo-700 truncate">
-            Target: {targetKeyword.trim() || '—'}
+            {s.targetPrefix}
+            {targetKeyword.trim() || '—'}
           </dt>
           <dd className="mt-1 text-xl font-bold font-mono text-slate-900">
-            {analysis.targetHits} hits ({analysis.targetDensity.toFixed(2)}%)
+            {s.hits.replace('{n}', String(analysis.targetHits)).replace('{d}', analysis.targetDensity.toFixed(2))}
           </dd>
         </div>
       </dl>
@@ -196,10 +253,10 @@ export default function KeywordDensityCheckerTool() {
           <table className="w-full text-left text-xs sm:text-sm">
             <thead className="bg-slate-50 text-slate-500 border-b border-slate-200">
               <tr>
-                <th className="py-2.5 px-4 font-semibold">Rank</th>
-                <th className="py-2.5 px-4 font-semibold">Term / N-gram</th>
-                <th className="py-2.5 px-4 font-semibold text-right">Occurrences</th>
-                <th className="py-2.5 px-4 font-semibold text-right">Share (%)</th>
+                <th className="py-2.5 px-4 font-semibold">{s.rankHeader}</th>
+                <th className="py-2.5 px-4 font-semibold">{s.termHeader}</th>
+                <th className="py-2.5 px-4 font-semibold text-right">{s.occurrencesHeader}</th>
+                <th className="py-2.5 px-4 font-semibold text-right">{s.shareHeader}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 tabular-nums">

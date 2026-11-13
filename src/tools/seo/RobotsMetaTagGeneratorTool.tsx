@@ -1,7 +1,45 @@
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    indexingLabel: 'Indexing Directive',
+    indexOption: 'index (Allow search indexing)',
+    noindexOption: 'noindex (Exclude from SERPs)',
+    linkCrawlingLabel: 'Link Crawling',
+    followOption: 'follow (Pass link signals)',
+    nofollowOption: 'nofollow (Do not follow links)',
+    largeOption: 'large (Discover eligible)',
+    htmlTagLabel: 'HTML <head> Meta Tag',
+    copyHtmlTag: 'Copy HTML Tag',
+    httpHeaderLabel: 'HTTP Response Header (PDF / Non-HTML)',
+    copyHeader: 'Copy Header',
+    cloudflareHeadersLabel: 'Cloudflare Pages _headers',
+    cloudflarePathAria: 'Cloudflare _headers path pattern',
+    copyBlock: 'Copy Block',
+  },
+  es: {
+    indexingLabel: 'Directiva de indexación',
+    indexOption: 'index (Permitir la indexación)',
+    noindexOption: 'noindex (Excluir de los resultados de búsqueda)',
+    linkCrawlingLabel: 'Rastreo de enlaces',
+    followOption: 'follow (Transmitir señales de enlace)',
+    nofollowOption: 'nofollow (No seguir enlaces)',
+    largeOption: 'large (Elegible para Discover)',
+    htmlTagLabel: 'Metaetiqueta HTML <head>',
+    copyHtmlTag: 'Copiar etiqueta HTML',
+    httpHeaderLabel: 'Encabezado de respuesta HTTP (PDF / no HTML)',
+    copyHeader: 'Copiar encabezado',
+    cloudflareHeadersLabel: 'Cloudflare Pages _headers',
+    cloudflarePathAria: 'Patrón de ruta de _headers de Cloudflare',
+    copyBlock: 'Copiar bloque',
+  },
+};
 
 export default function RobotsMetaTagGeneratorTool() {
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
   const [indexMode, setIndexMode] = useState<'index' | 'noindex'>('index');
   const [followMode, setFollowMode] = useState<'follow' | 'nofollow'>('follow');
   const [noarchive, setNoarchive] = useState(false);
@@ -47,7 +85,7 @@ export default function RobotsMetaTagGeneratorTool() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <div>
           <label htmlFor="rm-index" className="block text-xs font-semibold text-slate-800 mb-1.5">
-            Indexing Directive
+            {s.indexingLabel}
           </label>
           <select
             id="rm-index"
@@ -55,14 +93,14 @@ export default function RobotsMetaTagGeneratorTool() {
             onChange={(e) => setIndexMode(e.target.value as 'index' | 'noindex')}
             className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"
           >
-            <option value="index">index (Allow search indexing)</option>
-            <option value="noindex">noindex (Exclude from SERPs)</option>
+            <option value="index">{s.indexOption}</option>
+            <option value="noindex">{s.noindexOption}</option>
           </select>
         </div>
 
         <div>
           <label htmlFor="rm-follow" className="block text-xs font-semibold text-slate-800 mb-1.5">
-            Link Crawling
+            {s.linkCrawlingLabel}
           </label>
           <select
             id="rm-follow"
@@ -70,8 +108,8 @@ export default function RobotsMetaTagGeneratorTool() {
             onChange={(e) => setFollowMode(e.target.value as 'follow' | 'nofollow')}
             className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"
           >
-            <option value="follow">follow (Pass link signals)</option>
-            <option value="nofollow">nofollow (Do not follow links)</option>
+            <option value="follow">{s.followOption}</option>
+            <option value="nofollow">{s.nofollowOption}</option>
           </select>
         </div>
 
@@ -86,7 +124,7 @@ export default function RobotsMetaTagGeneratorTool() {
             onChange={(e) => setMaxImagePreview(e.target.value as 'large' | 'standard' | 'none')}
             className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm disabled:opacity-50"
           >
-            <option value="large">large (Discover eligible)</option>
+            <option value="large">{s.largeOption}</option>
             <option value="standard">standard</option>
             <option value="none">none</option>
           </select>
@@ -156,8 +194,8 @@ export default function RobotsMetaTagGeneratorTool() {
       <div className="space-y-4">
         <div className="rounded-xl border border-indigo-200 bg-indigo-50/60 p-4 space-y-2">
           <div className="flex items-center justify-between gap-2">
-            <span className="text-xs font-semibold text-indigo-800">HTML &lt;head&gt; Meta Tag</span>
-            <CopyButton text={htmlTag} label="Copy HTML Tag" />
+            <span className="text-xs font-semibold text-indigo-800">{s.htmlTagLabel}</span>
+            <CopyButton text={htmlTag} label={s.copyHtmlTag} copiedLabel={t.common.copied} />
           </div>
           <code className="block rounded-lg border border-indigo-100 bg-white px-3 py-2.5 font-mono text-xs sm:text-sm text-slate-900 break-all">
             {htmlTag}
@@ -167,8 +205,8 @@ export default function RobotsMetaTagGeneratorTool() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 space-y-2">
             <div className="flex items-center justify-between gap-2">
-              <span className="text-xs font-semibold text-slate-700">HTTP Response Header (PDF / Non-HTML)</span>
-              <CopyButton text={httpHeader} label="Copy Header" />
+              <span className="text-xs font-semibold text-slate-700">{s.httpHeaderLabel}</span>
+              <CopyButton text={httpHeader} label={s.copyHeader} copiedLabel={t.common.copied} />
             </div>
             <code className="block rounded-lg border border-slate-200 bg-white px-3 py-2.5 font-mono text-xs text-slate-900 break-all">
               {httpHeader}
@@ -178,16 +216,16 @@ export default function RobotsMetaTagGeneratorTool() {
           <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 space-y-2">
             <div className="flex items-center justify-between gap-2">
               <div className="flex items-center gap-2">
-                <span className="text-xs font-semibold text-slate-700">Cloudflare Pages _headers</span>
+                <span className="text-xs font-semibold text-slate-700">{s.cloudflareHeadersLabel}</span>
                 <input
                   type="text"
-                  aria-label="Cloudflare _headers path pattern"
+                  aria-label={s.cloudflarePathAria}
                   value={targetPath}
                   onChange={(e) => setTargetPath(e.target.value)}
                   className="w-28 rounded border border-slate-300 bg-white px-2 py-0.5 font-mono text-xs"
                 />
               </div>
-              <CopyButton text={cloudflareHeadersSnippet} label="Copy Block" />
+              <CopyButton text={cloudflareHeadersSnippet} label={s.copyBlock} copiedLabel={t.common.copied} />
             </div>
             <pre className="rounded-lg border border-slate-200 bg-white px-3 py-2 font-mono text-xs text-slate-900 whitespace-pre-wrap">
               {cloudflareHeadersSnippet}

@@ -1,6 +1,36 @@
 import { Download } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    lastmodLabel: '<lastmod> Date (Optional)',
+    changefreqLabel: '<changefreq> Hint',
+    priorityLabel: 'Default <priority>',
+    omitTag: 'Omit tag',
+    deduplicateLabel: 'Deduplicate exact URLs',
+    urlsLabel: 'Canonical URLs (One full https:// URL per line)',
+    skippedInvalid: 'Skipped {n} invalid URL line(s): ',
+    generatedLabel: 'Generated sitemap.xml ({n} URLs)',
+    copyXml: 'Copy XML',
+    downloadXml: 'Download .xml',
+    generatedAria: 'Generated XML sitemap',
+  },
+  es: {
+    lastmodLabel: 'Fecha de <lastmod> (opcional)',
+    changefreqLabel: 'Sugerencia de <changefreq>',
+    priorityLabel: '<priority> predeterminada',
+    omitTag: 'Omitir etiqueta',
+    deduplicateLabel: 'Eliminar URL duplicadas exactas',
+    urlsLabel: 'URL canónicas (una URL https:// completa por línea)',
+    skippedInvalid: 'Se omitieron {n} línea(s) de URL no válidas: ',
+    generatedLabel: 'sitemap.xml generado ({n} URL)',
+    copyXml: 'Copiar XML',
+    downloadXml: 'Descargar .xml',
+    generatedAria: 'Mapa del sitio XML generado',
+  },
+};
 
 function escapeXml(str: string): string {
   return str
@@ -12,6 +42,8 @@ function escapeXml(str: string): string {
 }
 
 export default function XmlSitemapGeneratorTool() {
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
   const [urlsInput, setUrlsInput] = useState(
     'https://utilityflow.online/\nhttps://utilityflow.online/tools/\nhttps://utilityflow.online/word-counter/\nhttps://utilityflow.online/json-formatter/\nhttps://utilityflow.online/qr-code-generator/'
   );
@@ -87,7 +119,7 @@ export default function XmlSitemapGeneratorTool() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <div>
           <label htmlFor="sm-lastmod" className="block text-xs font-semibold text-slate-800 mb-1.5">
-            &lt;lastmod&gt; Date (Optional)
+            {s.lastmodLabel}
           </label>
           <input
             id="sm-lastmod"
@@ -100,7 +132,7 @@ export default function XmlSitemapGeneratorTool() {
 
         <div>
           <label htmlFor="sm-freq" className="block text-xs font-semibold text-slate-800 mb-1.5">
-            &lt;changefreq&gt; Hint
+            {s.changefreqLabel}
           </label>
           <select
             id="sm-freq"
@@ -108,7 +140,7 @@ export default function XmlSitemapGeneratorTool() {
             onChange={(e) => setChangefreq(e.target.value as 'none' | 'daily' | 'weekly' | 'monthly')}
             className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"
           >
-            <option value="none">Omit tag</option>
+            <option value="none">{s.omitTag}</option>
             <option value="daily">daily</option>
             <option value="weekly">weekly</option>
             <option value="monthly">monthly</option>
@@ -117,7 +149,7 @@ export default function XmlSitemapGeneratorTool() {
 
         <div>
           <label htmlFor="sm-pri" className="block text-xs font-semibold text-slate-800 mb-1.5">
-            Default &lt;priority&gt;
+            {s.priorityLabel}
           </label>
           <select
             id="sm-pri"
@@ -125,7 +157,7 @@ export default function XmlSitemapGeneratorTool() {
             onChange={(e) => setPriority(e.target.value as 'none' | '1.0' | '0.8' | '0.5')}
             className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"
           >
-            <option value="none">Omit tag</option>
+            <option value="none">{s.omitTag}</option>
             <option value="1.0">1.0</option>
             <option value="0.8">0.8</option>
             <option value="0.5">0.5</option>
@@ -140,7 +172,7 @@ export default function XmlSitemapGeneratorTool() {
               onChange={(e) => setDeduplicate(e.target.checked)}
               className="h-4 w-4 rounded border-slate-300 text-indigo-600"
             />
-            Deduplicate exact URLs
+            {s.deduplicateLabel}
           </label>
         </div>
       </div>
@@ -148,7 +180,7 @@ export default function XmlSitemapGeneratorTool() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div>
           <label htmlFor="sm-urls" className="block text-sm font-semibold text-slate-900 mb-1.5">
-            Canonical URLs (One full https:// URL per line)
+            {s.urlsLabel}
           </label>
           <textarea
             id="sm-urls"
@@ -159,7 +191,7 @@ export default function XmlSitemapGeneratorTool() {
           />
           {result.invalidLines.length > 0 && (
             <div className="mt-2 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-900">
-              Skipped {result.invalidLines.length} invalid URL line(s):{' '}
+              {s.skippedInvalid.replace('{n}', String(result.invalidLines.length))}
               <code className="font-mono">{result.invalidLines.slice(0, 3).join(', ')}</code>
             </div>
           )}
@@ -168,10 +200,10 @@ export default function XmlSitemapGeneratorTool() {
         <div>
           <div className="flex flex-wrap items-center justify-between gap-2 mb-1.5">
             <span className="text-sm font-semibold text-slate-900 tabular-nums">
-              Generated sitemap.xml ({result.validCount} URLs)
+              {s.generatedLabel.replace('{n}', String(result.validCount))}
             </span>
             <div className="flex items-center gap-2">
-              <CopyButton text={result.xml} label="Copy XML" />
+              <CopyButton text={result.xml} label={s.copyXml} copiedLabel={t.common.copied} />
               <button
                 type="button"
                 disabled={result.validCount === 0}
@@ -179,12 +211,12 @@ export default function XmlSitemapGeneratorTool() {
                 className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 disabled:opacity-50 cursor-pointer"
               >
                 <Download className="w-3.5 h-3.5" />
-                Download .xml
+                {s.downloadXml}
               </button>
             </div>
           </div>
           <textarea
-            aria-label="Generated XML sitemap"
+            aria-label={s.generatedAria}
             rows={10}
             readOnly
             value={result.xml}

@@ -1,5 +1,45 @@
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    sampleTitles:
+      'How to Build a Clean URL Slug for Technical SEO!\n10 Best Café & Productivity Tools in 2026\nXML Sitemap & Robots.txt Complete Checklist',
+    domainLabel: 'Base Domain / Subfolder (for full URL preview)',
+    separatorLabel: 'Word Separator',
+    hyphenOption: 'Hyphen (-) — Google Recommended',
+    underscoreOption: 'Underscore (_)',
+    maxLengthLabel: 'Max Slug Length ({n} chars)',
+    stripStopWords: 'Strip optional English stop words (a, the, and, of, in, to)',
+    trailingSlash: 'Include trailing slash (/)',
+    titlesLabel: 'Page Headlines / Titles (One per line for batch generation)',
+    generatedLabel: 'Generated SEO Slugs ({n})',
+    copyAllSlugs: 'Copy All Slugs',
+    copyAllUrls: 'Copy All Full URLs',
+    originalTitleHeader: 'Original Title',
+    slugUrlHeader: 'SEO Slug & Full URL',
+    copyHeader: 'Copy',
+  },
+  es: {
+    sampleTitles:
+      '¡Cómo crear un slug de URL limpio para SEO técnico!\n10 mejores herramientas de café y productividad en 2026\nLista de verificación completa de sitemap XML y robots.txt',
+    domainLabel: 'Dominio base / subcarpeta (para la vista previa de la URL completa)',
+    separatorLabel: 'Separador de palabras',
+    hyphenOption: 'Guion (-) — recomendado por Google',
+    underscoreOption: 'Guion bajo (_)',
+    maxLengthLabel: 'Longitud máxima del slug ({n} caracteres)',
+    stripStopWords: 'Eliminar palabras vacías opcionales en inglés (a, the, and, of, in, to)',
+    trailingSlash: 'Incluir barra final (/)',
+    titlesLabel: 'Titulares / títulos de página (uno por línea para generación por lotes)',
+    generatedLabel: 'Slugs SEO generados ({n})',
+    copyAllSlugs: 'Copiar todos los slugs',
+    copyAllUrls: 'Copiar todas las URL completas',
+    originalTitleHeader: 'Título original',
+    slugUrlHeader: 'Slug SEO y URL completa',
+    copyHeader: 'Copiar',
+  },
+};
 
 const SEO_STOP_WORDS = new Set([
   'a', 'an', 'and', 'are', 'as', 'at', 'be', 'by', 'for', 'from', 'how',
@@ -36,10 +76,10 @@ function makeSeoSlug(
 }
 
 export default function UrlSlugGeneratorTool() {
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
   const [domainBase, setDomainBase] = useState('https://utilityflow.online');
-  const [titlesInput, setTitlesInput] = useState(
-    'How to Build a Clean URL Slug for Technical SEO!\n10 Best Café & Productivity Tools in 2026\nXML Sitemap & Robots.txt Complete Checklist'
-  );
+  const [titlesInput, setTitlesInput] = useState(s.sampleTitles);
   const [removeStopWords, setRemoveStopWords] = useState(true);
   const [separator, setSeparator] = useState<'-' | '_'>('-');
   const [maxLength, setMaxLength] = useState(60);
@@ -65,7 +105,7 @@ export default function UrlSlugGeneratorTool() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="sm:col-span-2">
           <label htmlFor="usg-domain" className="block text-xs font-semibold text-slate-800 mb-1.5">
-            Base Domain / Subfolder (for full URL preview)
+            {s.domainLabel}
           </label>
           <input
             id="usg-domain"
@@ -79,7 +119,7 @@ export default function UrlSlugGeneratorTool() {
 
         <div>
           <label htmlFor="usg-sep" className="block text-xs font-semibold text-slate-800 mb-1.5">
-            Word Separator
+            {s.separatorLabel}
           </label>
           <select
             id="usg-sep"
@@ -87,14 +127,14 @@ export default function UrlSlugGeneratorTool() {
             onChange={(e) => setSeparator(e.target.value as '-' | '_')}
             className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"
           >
-            <option value="-">Hyphen (-) — Google Recommended</option>
-            <option value="_">Underscore (_)</option>
+            <option value="-">{s.hyphenOption}</option>
+            <option value="_">{s.underscoreOption}</option>
           </select>
         </div>
 
         <div>
           <label htmlFor="usg-len" className="block text-xs font-semibold text-slate-800 mb-1.5">
-            Max Slug Length ({maxLength} chars)
+            {s.maxLengthLabel.replace('{n}', String(maxLength))}
           </label>
           <input
             id="usg-len"
@@ -116,7 +156,7 @@ export default function UrlSlugGeneratorTool() {
             onChange={(e) => setRemoveStopWords(e.target.checked)}
             className="h-4 w-4 rounded border-slate-300 text-indigo-600"
           />
-          Strip optional English stop words (a, the, and, of, in, to)
+          {s.stripStopWords}
         </label>
 
         <label className="inline-flex items-center gap-2 text-sm text-slate-700 cursor-pointer">
@@ -126,13 +166,13 @@ export default function UrlSlugGeneratorTool() {
             onChange={(e) => setTrailingSlash(e.target.checked)}
             className="h-4 w-4 rounded border-slate-300 text-indigo-600"
           />
-          Include trailing slash (/)
+          {s.trailingSlash}
         </label>
       </div>
 
       <div>
         <label htmlFor="usg-titles" className="block text-sm font-semibold text-slate-900 mb-1.5">
-          Page Headlines / Titles (One per line for batch generation)
+          {s.titlesLabel}
         </label>
         <textarea
           id="usg-titles"
@@ -147,11 +187,11 @@ export default function UrlSlugGeneratorTool() {
         <div className="space-y-3">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <span className="text-xs font-semibold text-slate-600">
-              Generated SEO Slugs ({results.length})
+              {s.generatedLabel.replace('{n}', String(results.length))}
             </span>
             <div className="flex items-center gap-2">
-              <CopyButton text={allSlugs} label="Copy All Slugs" />
-              <CopyButton text={allUrls} label="Copy All Full URLs" />
+              <CopyButton text={allSlugs} label={s.copyAllSlugs} copiedLabel={t.common.copied} />
+              <CopyButton text={allUrls} label={s.copyAllUrls} copiedLabel={t.common.copied} />
             </div>
           </div>
 
@@ -159,9 +199,9 @@ export default function UrlSlugGeneratorTool() {
             <table className="w-full text-left text-xs sm:text-sm">
               <thead className="bg-slate-50 text-slate-500 border-b border-slate-200">
                 <tr>
-                  <th className="py-2.5 px-4 font-semibold">Original Title</th>
-                  <th className="py-2.5 px-4 font-semibold">SEO Slug &amp; Full URL</th>
-                  <th className="py-2.5 px-4 font-semibold text-right">Copy</th>
+                  <th className="py-2.5 px-4 font-semibold">{s.originalTitleHeader}</th>
+                  <th className="py-2.5 px-4 font-semibold">{s.slugUrlHeader}</th>
+                  <th className="py-2.5 px-4 font-semibold text-right">{s.copyHeader}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
@@ -175,7 +215,7 @@ export default function UrlSlugGeneratorTool() {
                       </div>
                     </td>
                     <td className="py-2.5 px-4 text-right">
-                      <CopyButton text={row.slug} label="Copy" />
+                      <CopyButton text={row.slug} label={t.common.copy} copiedLabel={t.common.copied} />
                     </td>
                   </tr>
                 ))}

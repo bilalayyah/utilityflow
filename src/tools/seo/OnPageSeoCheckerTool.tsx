@@ -1,5 +1,73 @@
 import { AlertCircle, CheckCircle2, XCircle } from 'lucide-react';
 import { useMemo, useState } from 'react';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    auditTitle: 'Client-Side HTML Source Audit:',
+    auditBody:
+      'Browsers block cross-origin scraping (CORS) of arbitrary third-party websites and do not have access to private search analytics. Paste your page\'s HTML source below (View Page Source) to audit DOM tags locally.',
+    pastedHtmlLabel: 'Pasted HTML Source',
+    loadSampleHtml: 'Load sample HTML',
+    htmlPlaceholder: 'Paste raw <html>...</html> source here...',
+    scoreLabel: 'DOM Audit Score',
+    checksPassed: '{passed} / {total} checks passed',
+    linksSummary: 'Links: {total} ({internal} int / {external} ext)',
+    robotsMetaLabel: 'Robots meta: ',
+    robotsDefault: 'Default (index, follow)',
+    headingOutline: 'Heading Outline (H1–H4)',
+    emptyState: 'Paste HTML source on the left to inspect title, description, headings, canonicals, and alt tags.',
+    checkTitle: 'Title Tag (<title>)',
+    checkMetaDesc: 'Meta Description',
+    checkH1: 'Exactly One <h1> Heading',
+    checkCanonical: 'Canonical URL (<link rel="canonical">)',
+    checkAlt: 'Image Alt Attributes',
+    checkOgJsonLd: 'Open Graph & JSON-LD Structured Data',
+    titleDetail: '{n} chars: "{title}"',
+    titleMissing: 'Missing <title> tag in <head>.',
+    descDetail: '{n} chars (target 120–160).',
+    descMissing: 'Missing <meta name="description">.',
+    h1Detail: 'Found {n} <h1> element(s).',
+    canonicalMissing: 'No canonical tag declared.',
+    noImages: 'No <img> elements in markup.',
+    altDetail: '{with}/{total} images include descriptive alt text.',
+    ogDetail: 'og:title {presence} · {n} JSON-LD block(s).',
+    present: 'present',
+    missing: 'missing',
+  },
+  es: {
+    auditTitle: 'Auditoría de código fuente HTML en el cliente:',
+    auditBody:
+      'Los navegadores bloquean el raspado entre orígenes (CORS) de sitios web de terceros y no tienen acceso a analíticas de búsqueda privadas. Pega el código fuente HTML de tu página a continuación (Ver código fuente) para auditar las etiquetas DOM localmente.',
+    pastedHtmlLabel: 'Código fuente HTML pegado',
+    loadSampleHtml: 'Cargar HTML de ejemplo',
+    htmlPlaceholder: 'Pega aquí el código fuente <html>...</html> sin procesar...',
+    scoreLabel: 'Puntuación de auditoría DOM',
+    checksPassed: '{passed} / {total} verificaciones superadas',
+    linksSummary: 'Enlaces: {total} ({internal} int. / {external} ext.)',
+    robotsMetaLabel: 'Meta robots: ',
+    robotsDefault: 'Predeterminado (index, follow)',
+    headingOutline: 'Esquema de encabezados (H1–H4)',
+    emptyState: 'Pega el código fuente HTML a la izquierda para inspeccionar el título, la descripción, los encabezados, las URL canónicas y las etiquetas alt.',
+    checkTitle: 'Etiqueta de título (<title>)',
+    checkMetaDesc: 'Metadescripción',
+    checkH1: 'Exactamente un encabezado <h1>',
+    checkCanonical: 'URL canónica (<link rel="canonical">)',
+    checkAlt: 'Atributos alt de imágenes',
+    checkOgJsonLd: 'Open Graph y datos estructurados JSON-LD',
+    titleDetail: '{n} caracteres: "{title}"',
+    titleMissing: 'Falta la etiqueta <title> en <head>.',
+    descDetail: '{n} caracteres (objetivo: 120–160).',
+    descMissing: 'Falta <meta name="description">.',
+    h1Detail: 'Se encontraron {n} elemento(s) <h1>.',
+    canonicalMissing: 'No se declaró ninguna etiqueta canónica.',
+    noImages: 'No hay elementos <img> en el código.',
+    altDetail: '{with}/{total} imágenes incluyen texto alternativo descriptivo.',
+    ogDetail: 'og:title {presence} · {n} bloque(s) JSON-LD.',
+    present: 'presente',
+    missing: 'ausente',
+  },
+};
 
 const SAMPLE_HTML = `<!doctype html>
 <html lang="en">
@@ -22,6 +90,8 @@ const SAMPLE_HTML = `<!doctype html>
 </html>`;
 
 export default function OnPageSeoCheckerTool() {
+  const { locale } = useLocale();
+  const s = STRINGS[locale];
   const [htmlInput, setHtmlInput] = useState(SAMPLE_HTML);
 
   const audit = useMemo(() => {
@@ -59,41 +129,45 @@ export default function OnPageSeoCheckerTool() {
 
     const checks = [
       {
-        label: 'Title Tag (<title>)',
+        label: s.checkTitle,
         pass: title.length >= 30 && title.length <= 65,
         detail: title
-          ? `${title.length} chars: "${title}"`
-          : 'Missing <title> tag in <head>.',
+          ? s.titleDetail.replace('{n}', String(title.length)).replace('{title}', title)
+          : s.titleMissing,
       },
       {
-        label: 'Meta Description',
+        label: s.checkMetaDesc,
         pass: metaDesc.length >= 110 && metaDesc.length <= 165,
         detail: metaDesc
-          ? `${metaDesc.length} chars (target 120–160).`
-          : 'Missing <meta name="description">.',
+          ? s.descDetail.replace('{n}', String(metaDesc.length))
+          : s.descMissing,
       },
       {
-        label: 'Exactly One <h1> Heading',
+        label: s.checkH1,
         pass: h1Count === 1,
-        detail: `Found ${h1Count} <h1> element(s).`,
+        detail: s.h1Detail.replace('{n}', String(h1Count)),
       },
       {
-        label: 'Canonical URL (<link rel="canonical">)',
+        label: s.checkCanonical,
         pass: Boolean(canonical),
-        detail: canonical || 'No canonical tag declared.',
+        detail: canonical || s.canonicalMissing,
       },
       {
-        label: 'Image Alt Attributes',
+        label: s.checkAlt,
         pass: imgs.length === 0 || imgsMissingAlt === 0,
         detail:
           imgs.length === 0
-            ? 'No <img> elements in markup.'
-            : `${imgs.length - imgsMissingAlt}/${imgs.length} images include descriptive alt text.`,
+            ? s.noImages
+            : s.altDetail
+                .replace('{with}', String(imgs.length - imgsMissingAlt))
+                .replace('{total}', String(imgs.length)),
       },
       {
-        label: 'Open Graph & JSON-LD Structured Data',
+        label: s.checkOgJsonLd,
         pass: Boolean(ogTitle) && ldJsonScripts > 0,
-        detail: `og:title ${ogTitle ? 'present' : 'missing'} · ${ldJsonScripts} JSON-LD block(s).`,
+        detail: s.ogDetail
+          .replace('{presence}', ogTitle ? s.present : s.missing)
+          .replace('{n}', String(ldJsonScripts)),
       },
     ];
 
@@ -108,14 +182,14 @@ export default function OnPageSeoCheckerTool() {
       internalLinks,
       externalLinks,
     };
-  }, [htmlInput]);
+  }, [htmlInput, locale]);
 
   return (
     <div className="space-y-6">
       <div className="rounded-xl border border-amber-200 bg-amber-50/80 px-4 py-3 text-xs sm:text-sm text-amber-950 flex items-start gap-2.5">
         <AlertCircle className="w-4 h-4 shrink-0 text-amber-700 mt-0.5" />
         <p>
-          <strong>Client-Side HTML Source Audit:</strong> Browsers block cross-origin scraping (CORS) of arbitrary third-party websites and do not have access to private search analytics. Paste your page&apos;s HTML source below (View Page Source) to audit DOM tags locally.
+          <strong>{s.auditTitle}</strong> {s.auditBody}
         </p>
       </div>
 
@@ -123,14 +197,14 @@ export default function OnPageSeoCheckerTool() {
         <div className="lg:col-span-6">
           <div className="flex items-center justify-between gap-2 mb-1.5">
             <label htmlFor="seo-html-in" className="text-sm font-semibold text-slate-900">
-              Pasted HTML Source
+              {s.pastedHtmlLabel}
             </label>
             <button
               type="button"
               onClick={() => setHtmlInput(SAMPLE_HTML)}
               className="text-xs font-medium text-indigo-600 hover:text-indigo-800 cursor-pointer"
             >
-              Load sample HTML
+              {s.loadSampleHtml}
             </button>
           </div>
           <textarea
@@ -138,7 +212,7 @@ export default function OnPageSeoCheckerTool() {
             rows={14}
             value={htmlInput}
             onChange={(e) => setHtmlInput(e.target.value)}
-            placeholder="Paste raw <html>...</html> source here..."
+            placeholder={s.htmlPlaceholder}
             className="w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 font-mono text-xs leading-relaxed"
           />
         </div>
@@ -148,14 +222,24 @@ export default function OnPageSeoCheckerTool() {
             <>
               <div className="rounded-xl border border-indigo-200 bg-indigo-50/70 p-4 flex items-center justify-between">
                 <div>
-                  <div className="text-xs font-semibold text-indigo-700">DOM Audit Score</div>
+                  <div className="text-xs font-semibold text-indigo-700">{s.scoreLabel}</div>
                   <div className="text-2xl font-bold text-slate-900 tabular-nums">
-                    {audit.passedCount} / {audit.checks.length} checks passed
+                    {s.checksPassed
+                      .replace('{passed}', String(audit.passedCount))
+                      .replace('{total}', String(audit.checks.length))}
                   </div>
                 </div>
                 <div className="text-right text-xs text-slate-600 tabular-nums">
-                  <div>Links: {audit.linksTotal} ({audit.internalLinks} int / {audit.externalLinks} ext)</div>
-                  <div>Robots meta: {audit.robots || 'Default (index, follow)'}</div>
+                  <div>
+                    {s.linksSummary
+                      .replace('{total}', String(audit.linksTotal))
+                      .replace('{internal}', String(audit.internalLinks))
+                      .replace('{external}', String(audit.externalLinks))}
+                  </div>
+                  <div>
+                    {s.robotsMetaLabel}
+                    {audit.robots || s.robotsDefault}
+                  </div>
                 </div>
               </div>
 
@@ -183,7 +267,7 @@ export default function OnPageSeoCheckerTool() {
               {audit.headings.length > 0 && (
                 <div className="rounded-xl border border-slate-200 bg-white p-3.5">
                   <div className="text-xs font-semibold text-slate-700 mb-2">
-                    Heading Outline (H1–H4)
+                    {s.headingOutline}
                   </div>
                   <ul className="space-y-1 text-xs font-mono text-slate-700">
                     {audit.headings.map((h, i) => (
@@ -197,7 +281,7 @@ export default function OnPageSeoCheckerTool() {
             </>
           ) : (
             <div className="rounded-xl border border-slate-200 bg-slate-50 p-6 text-sm text-slate-500 text-center">
-              Paste HTML source on the left to inspect title, description, headings, canonicals, and alt tags.
+              {s.emptyState}
             </div>
           )}
         </div>

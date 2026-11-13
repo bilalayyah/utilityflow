@@ -1,5 +1,53 @@
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    defaultTitle: 'JSON Formatter & Validator – Pretty Print & Minify | UtilityFlow',
+    defaultDescription:
+      'Format, validate, minify, and sort keys in JSON payloads instantaneously in your browser with line/column syntax error details.',
+    desktopSerp: 'Desktop SERP (~580px title)',
+    mobileSerp: 'Mobile SERP (~120ch desc)',
+    copyTitleMeta: 'Copy Title & Meta',
+    seoTitleLabel: 'SEO Title',
+    titleMetrics: '{chars} chars · ~{px} px / 580 px max',
+    metaDescriptionLabel: 'Meta Description',
+    descMetrics: '{chars} chars · ~{px} px',
+    pageUrlLabel: 'Page URL (for breadcrumb preview)',
+    siteNameLabel: 'Site Name',
+    boldKeywordLabel: 'Bold Keyword',
+    optionalPlaceholder: 'Optional',
+    datePrefixLabel: 'Date Prefix',
+    datePlaceholder: 'e.g. Nov 12, 2025',
+    desktopSimulation: 'Desktop Search Snippet Simulation',
+    mobileSimulation: 'Mobile Search Snippet Simulation',
+    titleFallback: 'Your SEO Title Appears Here',
+    descFallback: 'Your meta description preview appears here.',
+  },
+  es: {
+    defaultTitle: 'Formateador y validador de JSON – Imprimir bonito y minificar | UtilityFlow',
+    defaultDescription:
+      'Formatea, valida, minifica y ordena las claves de cargas útiles JSON al instante en tu navegador, con detalles de errores de sintaxis por línea y columna.',
+    desktopSerp: 'SERP de escritorio (título de ~580 px)',
+    mobileSerp: 'SERP móvil (desc. de ~120 caracteres)',
+    copyTitleMeta: 'Copiar título y meta',
+    seoTitleLabel: 'Título SEO',
+    titleMetrics: '{chars} caracteres · ~{px} px / máx. 580 px',
+    metaDescriptionLabel: 'Metadescripción',
+    descMetrics: '{chars} caracteres · ~{px} px',
+    pageUrlLabel: 'URL de la página (para la vista previa de la ruta de navegación)',
+    siteNameLabel: 'Nombre del sitio',
+    boldKeywordLabel: 'Palabra clave en negrita',
+    optionalPlaceholder: 'Opcional',
+    datePrefixLabel: 'Prefijo de fecha',
+    datePlaceholder: 'p. ej., 12 nov 2025',
+    desktopSimulation: 'Simulación de fragmento de búsqueda de escritorio',
+    mobileSimulation: 'Simulación de fragmento de búsqueda móvil',
+    titleFallback: 'Tu título SEO aparece aquí',
+    descFallback: 'Aquí aparece la vista previa de tu metadescripción.',
+  },
+};
 
 function measureTextWidthPx(text: string, font: string): number {
   if (typeof document === 'undefined') return text.length * 9;
@@ -16,11 +64,11 @@ function truncateToWidth(text: string, maxChars: number): string {
 }
 
 export default function SerpSnippetPreviewTool() {
-  const [title, setTitle] = useState('JSON Formatter & Validator – Pretty Print & Minify | UtilityFlow');
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
+  const [title, setTitle] = useState(s.defaultTitle);
   const [url, setUrl] = useState('https://utilityflow.online/json-formatter/');
-  const [description, setDescription] = useState(
-    'Format, validate, minify, and sort keys in JSON payloads instantaneously in your browser with line/column syntax error details.'
-  );
+  const [description, setDescription] = useState(s.defaultDescription);
   const [siteName, setSiteName] = useState('UtilityFlow');
   const [targetKeyword, setTargetKeyword] = useState('JSON');
   const [dateLabel, setDateLabel] = useState('');
@@ -86,7 +134,7 @@ export default function SerpSnippetPreviewTool() {
               device === 'desktop' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
             }`}
           >
-            Desktop SERP (~580px title)
+            {s.desktopSerp}
           </button>
           <button
             type="button"
@@ -95,21 +143,21 @@ export default function SerpSnippetPreviewTool() {
               device === 'mobile' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
             }`}
           >
-            Mobile SERP (~120ch desc)
+            {s.mobileSerp}
           </button>
         </div>
 
-        <CopyButton text={headSnippet} label="Copy Title & Meta" />
+        <CopyButton text={headSnippet} label={s.copyTitleMeta} copiedLabel={t.common.copied} />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="md:col-span-2">
           <div className="flex flex-wrap justify-between gap-2 text-xs mb-1">
             <label htmlFor="serp-title" className="text-sm font-semibold text-slate-900">
-              SEO Title
+              {s.seoTitleLabel}
             </label>
             <span className={`font-mono tabular-nums ${metrics.titleOver ? 'text-red-700 font-semibold' : 'text-emerald-700 font-semibold'}`}>
-              {title.length} chars · ~{metrics.titlePx} px / 580 px max
+              {s.titleMetrics.replace('{chars}', String(title.length)).replace('{px}', String(metrics.titlePx))}
             </span>
           </div>
           <input
@@ -124,10 +172,10 @@ export default function SerpSnippetPreviewTool() {
         <div className="md:col-span-2">
           <div className="flex flex-wrap justify-between gap-2 text-xs mb-1">
             <label htmlFor="serp-desc" className="text-sm font-semibold text-slate-900">
-              Meta Description
+              {s.metaDescriptionLabel}
             </label>
             <span className={`font-mono tabular-nums ${metrics.descOver ? 'text-amber-700 font-semibold' : 'text-emerald-700 font-semibold'}`}>
-              {description.length} chars · ~{metrics.descPx} px
+              {s.descMetrics.replace('{chars}', String(description.length)).replace('{px}', String(metrics.descPx))}
             </span>
           </div>
           <textarea
@@ -141,7 +189,7 @@ export default function SerpSnippetPreviewTool() {
 
         <div>
           <label htmlFor="serp-url" className="block text-xs font-semibold text-slate-800 mb-1">
-            Page URL (for breadcrumb preview)
+            {s.pageUrlLabel}
           </label>
           <input
             id="serp-url"
@@ -155,7 +203,7 @@ export default function SerpSnippetPreviewTool() {
         <div className="grid grid-cols-3 gap-2">
           <div>
             <label htmlFor="serp-site" className="block text-xs font-semibold text-slate-800 mb-1">
-              Site Name
+              {s.siteNameLabel}
             </label>
             <input
               id="serp-site"
@@ -167,27 +215,27 @@ export default function SerpSnippetPreviewTool() {
           </div>
           <div>
             <label htmlFor="serp-kw" className="block text-xs font-semibold text-slate-800 mb-1">
-              Bold Keyword
+              {s.boldKeywordLabel}
             </label>
             <input
               id="serp-kw"
               type="text"
               value={targetKeyword}
               onChange={(e) => setTargetKeyword(e.target.value)}
-              placeholder="Optional"
+              placeholder={s.optionalPlaceholder}
               className="w-full rounded-lg border border-slate-300 bg-white px-2.5 py-2 text-xs"
             />
           </div>
           <div>
             <label htmlFor="serp-date" className="block text-xs font-semibold text-slate-800 mb-1">
-              Date Prefix
+              {s.datePrefixLabel}
             </label>
             <input
               id="serp-date"
               type="text"
               value={dateLabel}
               onChange={(e) => setDateLabel(e.target.value)}
-              placeholder="e.g. Nov 12, 2025"
+              placeholder={s.datePlaceholder}
               className="w-full rounded-lg border border-slate-300 bg-white px-2.5 py-2 text-xs"
             />
           </div>
@@ -196,7 +244,7 @@ export default function SerpSnippetPreviewTool() {
 
       <div className="rounded-xl border border-slate-200 bg-slate-50 p-5">
         <div className="text-xs font-semibold text-slate-500 mb-3">
-          {device === 'desktop' ? 'Desktop Search Snippet Simulation' : 'Mobile Search Snippet Simulation'}
+          {device === 'desktop' ? s.desktopSimulation : s.mobileSimulation}
         </div>
 
         <div
@@ -218,12 +266,12 @@ export default function SerpSnippetPreviewTool() {
           </div>
 
           <h3 className="text-xl leading-snug font-normal text-[#1a0dab] hover:underline cursor-pointer">
-            {metrics.displayedTitle || 'Your SEO Title Appears Here'}
+            {metrics.displayedTitle || s.titleFallback}
           </h3>
 
           <p className="mt-1 text-sm leading-relaxed text-[#4d5156]">
             {dateLabel.trim() && <span className="text-slate-500">{dateLabel.trim()} — </span>}
-            {highlightText(metrics.displayedDesc || 'Your meta description preview appears here.')}
+            {highlightText(metrics.displayedDesc || s.descFallback)}
           </p>
         </div>
       </div>

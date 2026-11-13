@@ -1,6 +1,42 @@
 import { Download, Plus, Trash2 } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    starterTemplates: 'Starter Templates:',
+    allowAll: 'Allow All Crawlers',
+    standardWebApp: 'Standard Web App / SaaS',
+    wordpressClean: 'WordPress Clean',
+    stagingBlockAll: 'Staging (Block All)',
+    crawlerRules: 'Crawler Path Rules',
+    addRule: 'Add Rule',
+    directiveAria: 'Directive',
+    pathAria: 'Path',
+    deleteRuleAria: 'Delete rule',
+    crawlDelayLabel: 'Crawl-delay (seconds, optional)',
+    crawlDelayPlaceholder: 'None',
+    sitemapUrlsLabel: 'Sitemap URLs (one per line)',
+    generatedLabel: 'Generated robots.txt',
+  },
+  es: {
+    starterTemplates: 'Plantillas iniciales:',
+    allowAll: 'Permitir todos los rastreadores',
+    standardWebApp: 'Aplicación web / SaaS estándar',
+    wordpressClean: 'WordPress limpio',
+    stagingBlockAll: 'Entorno de pruebas (bloquear todo)',
+    crawlerRules: 'Reglas de rutas para rastreadores',
+    addRule: 'Agregar regla',
+    directiveAria: 'Directiva',
+    pathAria: 'Ruta',
+    deleteRuleAria: 'Eliminar regla',
+    crawlDelayLabel: 'Crawl-delay (segundos, opcional)',
+    crawlDelayPlaceholder: 'Ninguno',
+    sitemapUrlsLabel: 'URL de sitemaps (una por línea)',
+    generatedLabel: 'robots.txt generado',
+  },
+};
 
 interface RuleRow {
   id: number;
@@ -10,6 +46,8 @@ interface RuleRow {
 }
 
 export default function RobotsTxtGeneratorTool() {
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
   const [rules, setRules] = useState<RuleRow[]>([
     { id: 1, userAgent: '*', directive: 'Allow', path: '/' },
     { id: 2, userAgent: '*', directive: 'Disallow', path: '/admin/' },
@@ -96,48 +134,48 @@ export default function RobotsTxtGeneratorTool() {
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-center gap-2">
-        <span className="text-xs font-semibold text-slate-500">Starter Templates:</span>
+        <span className="text-xs font-semibold text-slate-500">{s.starterTemplates}</span>
         <button
           type="button"
           onClick={() => applyPreset('open')}
           className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-medium text-slate-700 hover:border-indigo-300 cursor-pointer"
         >
-          Allow All Crawlers
+          {s.allowAll}
         </button>
         <button
           type="button"
           onClick={() => applyPreset('spa')}
           className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-medium text-slate-700 hover:border-indigo-300 cursor-pointer"
         >
-          Standard Web App / SaaS
+          {s.standardWebApp}
         </button>
         <button
           type="button"
           onClick={() => applyPreset('wordpress')}
           className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-medium text-slate-700 hover:border-indigo-300 cursor-pointer"
         >
-          WordPress Clean
+          {s.wordpressClean}
         </button>
         <button
           type="button"
           onClick={() => applyPreset('block-all')}
           className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-medium text-slate-700 hover:border-indigo-300 cursor-pointer"
         >
-          Staging (Block All)
+          {s.stagingBlockAll}
         </button>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
         <div className="lg:col-span-7 space-y-4">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-semibold text-slate-900">Crawler Path Rules</h3>
+            <h3 className="text-sm font-semibold text-slate-900">{s.crawlerRules}</h3>
             <button
               type="button"
               onClick={addRule}
               className="inline-flex items-center gap-1 rounded-lg border border-indigo-200 bg-indigo-50 px-3 py-1.5 text-xs font-semibold text-indigo-700 hover:bg-indigo-100 cursor-pointer"
             >
               <Plus className="w-3.5 h-3.5" />
-              Add Rule
+              {s.addRule}
             </button>
           </div>
 
@@ -155,7 +193,7 @@ export default function RobotsTxtGeneratorTool() {
                   className="col-span-3 rounded-lg border border-slate-300 bg-white px-2.5 py-2 font-mono text-xs"
                 />
                 <select
-                  aria-label="Directive"
+                  aria-label={s.directiveAria}
                   value={rule.directive}
                   onChange={(e) =>
                     setRules(
@@ -171,7 +209,7 @@ export default function RobotsTxtGeneratorTool() {
                 </select>
                 <input
                   type="text"
-                  aria-label="Path"
+                  aria-label={s.pathAria}
                   value={rule.path}
                   onChange={(e) =>
                     setRules(rules.map((r) => (r.id === rule.id ? { ...r, path: e.target.value } : r)))
@@ -183,7 +221,7 @@ export default function RobotsTxtGeneratorTool() {
                   type="button"
                   disabled={rules.length <= 1}
                   onClick={() => setRules(rules.filter((r) => r.id !== rule.id))}
-                  aria-label="Delete rule"
+                  aria-label={s.deleteRuleAria}
                   className="col-span-1 flex justify-center rounded-lg border border-slate-300 bg-white p-2 text-slate-600 hover:bg-slate-50 disabled:opacity-40 cursor-pointer"
                 >
                   <Trash2 className="w-3.5 h-3.5" />
@@ -195,7 +233,7 @@ export default function RobotsTxtGeneratorTool() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div>
               <label htmlFor="rob-delay" className="block text-xs font-semibold text-slate-800 mb-1">
-                Crawl-delay (seconds, optional)
+                {s.crawlDelayLabel}
               </label>
               <input
                 id="rob-delay"
@@ -204,13 +242,13 @@ export default function RobotsTxtGeneratorTool() {
                 max={60}
                 value={crawlDelay}
                 onChange={(e) => setCrawlDelay(e.target.value)}
-                placeholder="None"
+                placeholder={s.crawlDelayPlaceholder}
                 className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 font-mono text-sm"
               />
             </div>
             <div className="sm:col-span-2">
               <label htmlFor="rob-sitemaps" className="block text-xs font-semibold text-slate-800 mb-1">
-                Sitemap URLs (one per line)
+                {s.sitemapUrlsLabel}
               </label>
               <textarea
                 id="rob-sitemaps"
@@ -225,16 +263,16 @@ export default function RobotsTxtGeneratorTool() {
 
         <div className="lg:col-span-5 rounded-xl border border-slate-200 bg-slate-50 p-4 space-y-3">
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <span className="text-xs font-semibold text-slate-700">Generated robots.txt</span>
+            <span className="text-xs font-semibold text-slate-700">{s.generatedLabel}</span>
             <div className="flex items-center gap-2">
-              <CopyButton text={robotsOutput} label="Copy" />
+              <CopyButton text={robotsOutput} label={t.common.copy} copiedLabel={t.common.copied} />
               <button
                 type="button"
                 onClick={downloadFile}
                 className="inline-flex items-center gap-1 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
               >
                 <Download className="w-3.5 h-3.5" />
-                Download
+                {t.common.download}
               </button>
             </div>
           </div>
