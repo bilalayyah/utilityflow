@@ -89,6 +89,44 @@ const PDF_STRINGS = {
       'Ce PDF est chiffré ou protégé par mot de passe. Déverrouillez-le avant de le traiter localement.',
     unable: 'Impossible de traiter le fichier PDF.',
   },
+  de: {
+    noFile: 'Es wurde keine Datei ausgewählt.',
+    notPdf: (name: string) => `"${name}" scheint keine PDF-Datei zu sein.`,
+    empty: (name: string) => `"${name}" ist leer oder unvollständig.`,
+    noHeader: (name: string) =>
+      `"${name}" fehlt ein gültiger %PDF-Header und kann nicht verarbeitet werden.`,
+    enterRanges: 'Geben Sie Seitennummern oder Bereiche ein, z. B. „1-3, 5".',
+    rangeOutside: (token: string, total: number) =>
+      `Bereich „${token}" liegt außerhalb der Seitengrenzen des Dokuments (1–${total}).`,
+    rangeReversed: (token: string) =>
+      `Bereich „${token}": Die Startseite ist größer als die Endseite.`,
+    pageMissing: (page: number, total: number) =>
+      `Seite ${page} existiert nicht (das Dokument hat ${total} Seiten).`,
+    invalidSyntax: (token: string) =>
+      `Ungültige Seitensyntax „${token}". Verwenden Sie Zahlen und Bereiche wie „1-3, 5".`,
+    encrypted:
+      'Diese PDF ist verschlüsselt oder passwortgeschützt. Entsperren Sie sie, bevor Sie sie lokal verarbeiten.',
+    unable: 'PDF-Datei konnte nicht verarbeitet werden.',
+  },
+  it: {
+    noFile: 'Nessun file selezionato.',
+    notPdf: (name: string) => `"${name}" non sembra essere un file PDF.`,
+    empty: (name: string) => `"${name}" è vuoto o troncato.`,
+    noHeader: (name: string) =>
+      `"${name}" non ha un’intestazione %PDF valida e non può essere elaborato.`,
+    enterRanges: 'Inserisci numeri di pagina o intervalli come «1-3, 5».',
+    rangeOutside: (token: string, total: number) =>
+      `L’intervallo «${token}» è fuori dai limiti di pagina del documento (1–${total}).`,
+    rangeReversed: (token: string) =>
+      `L’intervallo «${token}» ha una pagina iniziale maggiore della pagina finale.`,
+    pageMissing: (page: number, total: number) =>
+      `La pagina ${page} non esiste (il documento ha ${total} pagine).`,
+    invalidSyntax: (token: string) =>
+      `Sintassi di pagina non valida «${token}». Usa numeri e intervalli come «1-3, 5».`,
+    encrypted:
+      'Questo PDF è crittografato o protetto da password. Sbloccalo prima di elaborarlo in locale.',
+    unable: 'Impossibile elaborare il file PDF.',
+  },
 } as const;
 
 export function formatBytes(bytes: number, locale: LocaleCode = 'en'): string {
@@ -156,7 +194,7 @@ export function parsePageRanges(
 ): { indices: number[]; error: string } {
   const s = PDF_STRINGS[locale];
   const trimmed = input.trim();
-  // "all" in English; "todas"/"todo" in Spanish; "todas"/"todos" in Portuguese; "toutes"/"tous" in French.
+  // "all" in English; "todas"/"todo" in Spanish; "todas"/"todos" in Portuguese; "toutes"/"tous" in French; "alle" in German; "tutte"/"tutti"/"tutto" in Italian.
   const allKeyword =
     locale === 'es'
       ? ['all', 'todas', 'todo'].includes(trimmed.toLowerCase())
@@ -164,7 +202,11 @@ export function parsePageRanges(
         ? ['all', 'todas', 'todos'].includes(trimmed.toLowerCase())
         : locale === 'fr'
           ? ['all', 'toutes', 'tous'].includes(trimmed.toLowerCase())
-          : trimmed.toLowerCase() === 'all';
+          : locale === 'de'
+            ? ['all', 'alle'].includes(trimmed.toLowerCase())
+            : locale === 'it'
+              ? ['all', 'tutte', 'tutti', 'tutto'].includes(trimmed.toLowerCase())
+              : trimmed.toLowerCase() === 'all';
   if (!trimmed || allKeyword) {
     return {
       indices: Array.from({ length: totalPages }, (_, i) => i),

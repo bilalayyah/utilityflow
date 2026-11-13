@@ -95,6 +95,48 @@ const STRINGS = {
     extracting: 'Extraction du PDF...',
     splitBtn: 'Diviser et télécharger le PDF',
   },
+  de: {
+    errBurst: (n: number) =>
+      `Beim Aufteilen in Einzelseiten wird eine Datei pro Seite heruntergeladen. Bei Dokumenten mit mehr als 25 Seiten (${n} Seiten hier) extrahieren Sie stattdessen Bereiche, damit Ihr Browser keine Massendownloads blockiert.`,
+    exportedAll: (n: number) => `${n} einseitige PDF-Dateien exportiert.`,
+    errNoMatch: 'Keine Seiten passen zu dieser Auswahl (z. B. erfordert „Gerade Seiten" mindestens 2 Seiten).',
+    extractedSuccess: (a: number, b: number, size: string) =>
+      `${a} von ${b} Seiten extrahiert (${size}).`,
+    dropTitleEmpty: 'PDF-Datei zum Teilen oder Extrahieren auswählen',
+    dropTitleFile: (name: string, pages: number, size: string) => `${name} (${pages} Seiten · ${size})`,
+    dropSub: 'Lokal im Speicher verarbeitet · Klicken zum Ersetzen des Dokuments',
+    modeRange: 'Seitenbereiche extrahieren',
+    modeOdd: 'Nur ungerade Seiten',
+    modeEven: 'Nur gerade Seiten',
+    modeBurst: 'Alle Einzelseiten extrahieren',
+    labelRange: (n: number) => `Zu extrahierende Seiten (1–${n})`,
+    phRange: 'z. B. 1-3, 5, 8-10',
+    rangeHintBefore: 'Verwenden Sie Kommas und Bindestriche (zum Beispiel ',
+    rangeHintAfter: ').',
+    extracting: 'PDF wird extrahiert...',
+    splitBtn: 'Teilen & PDF herunterladen',
+  },
+  it: {
+    errBurst: (n: number) =>
+      `La divisione in singole pagine scarica un file per pagina. Per documenti di oltre 25 pagine (${n} pagine qui), estrai invece degli intervalli, così il browser non blocca i download multipli.`,
+    exportedAll: (n: number) => `${n} file PDF di una pagina esportati.`,
+    errNoMatch: 'Nessuna pagina corrisponde alla selezione (ad esempio, «Pagine pari» richiede almeno 2 pagine).',
+    extractedSuccess: (a: number, b: number, size: string) =>
+      `${a} di ${b} pagine estratte (${size}).`,
+    dropTitleEmpty: 'Scegli un file PDF da dividere o da cui estrarre pagine',
+    dropTitleFile: (name: string, pages: number, size: string) => `${name} (${pages} pagine · ${size})`,
+    dropSub: 'Elaborato in locale, in memoria · Fai clic per sostituire il documento',
+    modeRange: 'Estrai intervalli di pagine',
+    modeOdd: 'Solo pagine dispari',
+    modeEven: 'Solo pagine pari',
+    modeBurst: 'Estrai tutte le singole pagine',
+    labelRange: (n: number) => `Pagine da estrarre (1–${n})`,
+    phRange: 'es. 1-3, 5, 8-10',
+    rangeHintBefore: 'Usa virgole e trattini (ad esempio ',
+    rangeHintAfter: ').',
+    extracting: 'Estrazione del PDF...',
+    splitBtn: 'Dividi e scarica PDF',
+  },
 };
 
 type SplitMode = 'range' | 'every-page' | 'odd' | 'even';
