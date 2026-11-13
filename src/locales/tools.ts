@@ -8,10 +8,14 @@ import { DE_CATEGORY_OVERRIDES } from './de/categories';
 import { DE_TOOL_OVERRIDES } from './de/tools';
 import { FR_CATEGORY_OVERRIDES } from './fr/categories';
 import { FR_TOOL_OVERRIDES } from './fr/tools';
+import { ID_CATEGORY_OVERRIDES } from './id/categories';
+import { ID_TOOL_OVERRIDES } from './id/tools';
 import { IT_CATEGORY_OVERRIDES } from './it/categories';
 import { IT_TOOL_OVERRIDES } from './it/tools';
 import { PT_CATEGORY_OVERRIDES } from './pt/categories';
 import { PT_TOOL_OVERRIDES } from './pt/tools';
+import { RU_CATEGORY_OVERRIDES } from './ru/categories';
+import { RU_TOOL_OVERRIDES } from './ru/tools';
 import type { CategoryLocaleOverride, ToolLocaleOverride } from './types';
 
 /**
@@ -31,6 +35,8 @@ const TOOL_OVERRIDES: Record<NonDefaultLocale, Record<string, ToolLocaleOverride
   fr: FR_TOOL_OVERRIDES,
   de: DE_TOOL_OVERRIDES,
   it: IT_TOOL_OVERRIDES,
+  id: ID_TOOL_OVERRIDES,
+  ru: RU_TOOL_OVERRIDES,
 };
 
 const CATEGORY_OVERRIDES: Record<NonDefaultLocale, Record<string, CategoryLocaleOverride>> = {
@@ -39,6 +45,8 @@ const CATEGORY_OVERRIDES: Record<NonDefaultLocale, Record<string, CategoryLocale
   fr: FR_CATEGORY_OVERRIDES,
   de: DE_CATEGORY_OVERRIDES,
   it: IT_CATEGORY_OVERRIDES,
+  id: ID_CATEGORY_OVERRIDES,
+  ru: RU_CATEGORY_OVERRIDES,
 };
 
 const TOOL_BY_ID = new Map<string, ToolDefinition>(

@@ -3,7 +3,7 @@
  *
  * Designed for 11 languages from the start: English (default) + es + pt + de +
  * fr + ja + id + it + ru + ko + zh. Phase 1 shipped en + es; Phase 2 adds
- * pt + fr; Phase 3 adds de + it. Later phases add a LocaleInfo entry, a locales/<code>.ts
+ * pt + fr; Phase 3 adds de + it; Phase 4 adds id + ru. Later phases add a LocaleInfo entry, a locales/<code>.ts
  * dictionary, tool overrides and category overrides — no routing or component
  * rework required.
  *
@@ -17,7 +17,7 @@
 import { getCategoryById } from '../registry/categories';
 import type { CategoryId, ToolCategory } from '../types/tool';
 
-export type LocaleCode = 'en' | 'es' | 'pt' | 'fr' | 'de' | 'it';
+export type LocaleCode = 'en' | 'es' | 'pt' | 'fr' | 'de' | 'it' | 'id' | 'ru';
 
 /** Non-default locales (the ones that live under a /<code>/ prefix). */
 export type NonDefaultLocale = Exclude<LocaleCode, 'en'>;
@@ -39,6 +39,8 @@ export const SUPPORTED_LOCALES: LocaleInfo[] = [
   { code: 'fr', nativeName: 'Français', pathPrefix: '/fr', htmlLang: 'fr' },
   { code: 'de', nativeName: 'Deutsch', pathPrefix: '/de', htmlLang: 'de' },
   { code: 'it', nativeName: 'Italiano', pathPrefix: '/it', htmlLang: 'it' },
+  { code: 'id', nativeName: 'Bahasa Indonesia', pathPrefix: '/id', htmlLang: 'id' },
+  { code: 'ru', nativeName: 'Русский', pathPrefix: '/ru', htmlLang: 'ru' },
 ];
 
 /** Literal 'en' type (not LocaleCode) so `locale === DEFAULT_LOCALE` narrows the type. */
@@ -73,6 +75,10 @@ export function localeTag(locale: LocaleCode): string {
       return 'de';
     case 'it':
       return 'it';
+    case 'id':
+      return 'id';
+    case 'ru':
+      return 'ru';
   }
 }
 
@@ -93,7 +99,7 @@ export function getLocaleFromPath(pathname: string): { locale: LocaleCode; restP
 
 /** Localized URL for a static page path (English path in, localized path out). */
 export const STATIC_PATHS: Record<string, Partial<Record<LocaleCode, string>>> = {
-  '/': { en: '/', es: '/es/', pt: '/pt/', fr: '/fr/', de: '/de/', it: '/it/' },
+  '/': { en: '/', es: '/es/', pt: '/pt/', fr: '/fr/', de: '/de/', it: '/it/', id: '/id/', ru: '/ru/' },
   '/tools/': {
     en: '/tools/',
     es: '/es/todas-las-herramientas/',
@@ -101,9 +107,11 @@ export const STATIC_PATHS: Record<string, Partial<Record<LocaleCode, string>>> =
     fr: '/fr/tous-les-outils/',
     de: '/de/alle-tools/',
     it: '/it/tutti-gli-strumenti/',
+    id: '/id/semua-alat/',
+    ru: '/ru/vse-instrumenty/',
   },
-  '/about/': { en: '/about/', es: '/es/acerca-de/', pt: '/pt/sobre/', fr: '/fr/a-propos/', de: '/de/ueber-uns/', it: '/it/chi-siamo/' },
-  '/contact/': { en: '/contact/', es: '/es/contacto/', pt: '/pt/contato/', fr: '/fr/contact/', de: '/de/kontakt/', it: '/it/contatti/' },
+  '/about/': { en: '/about/', es: '/es/acerca-de/', pt: '/pt/sobre/', fr: '/fr/a-propos/', de: '/de/ueber-uns/', it: '/it/chi-siamo/', id: '/id/tentang-kami/', ru: '/ru/o-nas/' },
+  '/contact/': { en: '/contact/', es: '/es/contacto/', pt: '/pt/contato/', fr: '/fr/contact/', de: '/de/kontakt/', it: '/it/contatti/', id: '/id/kontak/', ru: '/ru/kontakty/' },
   '/privacy-policy/': {
     en: '/privacy-policy/',
     es: '/es/politica-de-privacidad/',
@@ -111,6 +119,8 @@ export const STATIC_PATHS: Record<string, Partial<Record<LocaleCode, string>>> =
     fr: '/fr/politique-de-confidentialite/',
     de: '/de/datenschutzerklaerung/',
     it: '/it/informativa-sulla-privacy/',
+    id: '/id/kebijakan-privasi/',
+    ru: '/ru/politika-konfidentsialnosti/',
   },
   '/terms-of-service/': {
     en: '/terms-of-service/',
@@ -119,6 +129,8 @@ export const STATIC_PATHS: Record<string, Partial<Record<LocaleCode, string>>> =
     fr: '/fr/conditions-d-utilisation/',
     de: '/de/nutzungsbedingungen/',
     it: '/it/termini-di-servizio/',
+    id: '/id/syarat-layanan/',
+    ru: '/ru/usloviya-ispolzovaniya/',
   },
   '/ai-writing-assistant/': {
     en: '/ai-writing-assistant/',
@@ -127,6 +139,8 @@ export const STATIC_PATHS: Record<string, Partial<Record<LocaleCode, string>>> =
     fr: '/fr/assistant-d-ecriture-ia/',
     de: '/de/ki-schreibassistent/',
     it: '/it/assistente-di-scrittura-ia/',
+    id: '/id/asisten-penulisan-ai/',
+    ru: '/ru/ai-assistent-pisma/',
   },
   '/ai-text-summarizer/': {
     en: '/ai-text-summarizer/',
@@ -135,6 +149,8 @@ export const STATIC_PATHS: Record<string, Partial<Record<LocaleCode, string>>> =
     fr: '/fr/resumeur-de-texte-ia/',
     de: '/de/ki-text-zusammenfasser/',
     it: '/it/riassuntore-di-testo-ia/',
+    id: '/id/peringkas-teks-ai/',
+    ru: '/ru/ai-summarizator-teksta/',
   },
   '/ai-tool-finder/': {
     en: '/ai-tool-finder/',
@@ -143,6 +159,8 @@ export const STATIC_PATHS: Record<string, Partial<Record<LocaleCode, string>>> =
     fr: '/fr/chercheur-d-outils-ia/',
     de: '/de/ki-tool-finder/',
     it: '/it/cercatore-di-strumenti-ia/',
+    id: '/id/pencari-alat-ai/',
+    ru: '/ru/ai-poisk-instrumentov/',
   },
 };
 
@@ -197,18 +215,38 @@ export const CATEGORY_LOCALE_SLUGS: Record<NonDefaultLocale, Record<string, stri
     seo: 'strumenti-seo',
     'image-file': 'strumenti-per-immagini-e-file',
   },
+  id: {
+    'text-writing': 'alat-teks-dan-penulisan',
+    developer: 'alat-pengembang',
+    calculators: 'kalkulator',
+    'social-media': 'alat-media-sosial',
+    pdf: 'alat-pdf',
+    seo: 'alat-seo',
+    'image-file': 'alat-gambar-dan-file',
+  },
+  ru: {
+    'text-writing': 'instrumenty-dlya-teksta-i-pisma',
+    developer: 'instrumenty-dlya-razrabotchikov',
+    calculators: 'kalkulyatory',
+    'social-media': 'instrumenty-dlya-sotsialnyh-setej',
+    pdf: 'pdf-instrumenty',
+    seo: 'seo-instrumenty',
+    'image-file': 'instrumenty-dlya-izobrazhenij-i-fajlov',
+  },
 };
 
 /** Spanish slugs for the 7 categories, keyed by category id. Kept for the Phase 1 validator. */
 export const CATEGORY_ES_SLUGS: Record<string, string> = CATEGORY_LOCALE_SLUGS.es;
 
-/** Category hub path segment per non-default locale ('categoria' / 'categorie' / 'kategorie'). */
+/** Category hub path segment per non-default locale ('categoria' / 'categorie' / 'kategorie' / 'kategori' / 'kategoriya'). */
 export const CATEGORY_PATH_SEGMENT: Record<NonDefaultLocale, string> = {
   es: 'categoria',
   pt: 'categoria',
   fr: 'categorie',
   de: 'kategorie',
   it: 'categoria',
+  id: 'kategori',
+  ru: 'kategoriya',
 };
 
 /**

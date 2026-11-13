@@ -4,8 +4,10 @@ import { enStrings } from './en/ui';
 import { esStrings } from './es/ui';
 import { deStrings } from './de/ui';
 import { frStrings } from './fr/ui';
+import { idStrings } from './id/ui';
 import { itStrings } from './it/ui';
 import { ptStrings } from './pt/ui';
+import { ruStrings } from './ru/ui';
 import type { InfoSection, WhyChooseItem } from './types';
 
 /**
@@ -266,6 +268,8 @@ const LOCALIZED_STRINGS: Record<NonDefaultLocale, UiStrings> = {
   fr: frStrings,
   de: deStrings,
   it: itStrings,
+  id: idStrings,
+  ru: ruStrings,
 };
 
 export function getUiStrings(locale: LocaleCode): UiStrings {
