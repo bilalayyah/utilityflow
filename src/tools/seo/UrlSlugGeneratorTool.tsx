@@ -109,6 +109,42 @@ const STRINGS = {
     slugUrlHeader: 'Slug SEO e URL completo',
     copyHeader: 'Copia',
   },
+  id: {
+    sampleTitles:
+      'Cara Membuat Slug URL yang Bersih untuk SEO Teknis!\n10 Alat Café & Produktivitas Terbaik di 2026\nChecklist Lengkap XML Sitemap & Robots.txt',
+    domainLabel: 'Domain Dasar / Subfolder (untuk pratinjau URL lengkap)',
+    separatorLabel: 'Pemisah Kata',
+    hyphenOption: 'Tanda hubung (-) — Direkomendasikan Google',
+    underscoreOption: 'Garis bawah (_)',
+    maxLengthLabel: 'Panjang Slug Maks ({n} karakter)',
+    stripStopWords: 'Hapus kata henti opsional Bahasa Inggris (a, the, and, of, in, to)',
+    trailingSlash: 'Sertakan garis miring di akhir (/)',
+    titlesLabel: 'Judul / Judul Halaman (Satu per baris untuk pembuatan batch)',
+    generatedLabel: 'Slug SEO yang Dihasilkan ({n})',
+    copyAllSlugs: 'Salin Semua Slug',
+    copyAllUrls: 'Salin Semua URL Lengkap',
+    originalTitleHeader: 'Judul Asli',
+    slugUrlHeader: 'Slug SEO & URL Lengkap',
+    copyHeader: 'Salin',
+  },
+  ru: {
+    sampleTitles:
+      'Как создать чистый URL-слаг для технического SEO!\n10 лучших инструментов Café и продуктивности в 2026 году\nПолный чек-лист XML Sitemap и Robots.txt',
+    domainLabel: 'Базовый домен / подпапка (для предпросмотра полного URL)',
+    separatorLabel: 'Разделитель слов',
+    hyphenOption: 'Дефис (-) — рекомендуется Google',
+    underscoreOption: 'Подчёркивание (_)',
+    maxLengthLabel: 'Макс. длина слага ({n} симв.)',
+    stripStopWords: 'Удалять необязательные английские стоп-слова (a, the, and, of, in, to)',
+    trailingSlash: 'Включать завершающий слеш (/)',
+    titlesLabel: 'Заголовки страниц (по одному в строке для пакетной генерации)',
+    generatedLabel: 'Сгенерированные SEO-слаги ({n})',
+    copyAllSlugs: 'Копировать все слаги',
+    copyAllUrls: 'Копировать все полные URL',
+    originalTitleHeader: 'Исходный заголовок',
+    slugUrlHeader: 'SEO-слаг и полный URL',
+    copyHeader: 'Копировать',
+  },
 };
 
 const SEO_STOP_WORDS = new Set([

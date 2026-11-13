@@ -82,6 +82,32 @@ const STRINGS = {
     downloadXml: 'Scarica .xml',
     generatedAria: 'Sitemap XML generata',
   },
+  id: {
+    lastmodLabel: 'Tanggal <lastmod> (Opsional)',
+    changefreqLabel: 'Petunjuk <changefreq>',
+    priorityLabel: '<priority> Default',
+    omitTag: 'Hilangkan tag',
+    deduplicateLabel: 'Deduplikasi URL yang persis sama',
+    urlsLabel: 'URL Kanonis (Satu URL https:// lengkap per baris)',
+    skippedInvalid: '{n} baris URL tidak valid dilewati: ',
+    generatedLabel: 'sitemap.xml yang dihasilkan ({n} URL)',
+    copyXml: 'Salin XML',
+    downloadXml: 'Unduh .xml',
+    generatedAria: 'Sitemap XML yang dihasilkan',
+  },
+  ru: {
+    lastmodLabel: 'Дата <lastmod> (необязательно)',
+    changefreqLabel: 'Подсказка <changefreq>',
+    priorityLabel: '<priority> по умолчанию',
+    omitTag: 'Пропустить тег',
+    deduplicateLabel: 'Удалять дубликаты точных URL',
+    urlsLabel: 'Канонические URL (по одному полному https:// URL в строке)',
+    skippedInvalid: 'Пропущено неверных строк URL ({n}): ',
+    generatedLabel: 'Сгенерированный sitemap.xml ({n} URL)',
+    copyXml: 'Копировать XML',
+    downloadXml: 'Скачать .xml',
+    generatedAria: 'Сгенерированная XML-карта сайта',
+  },
 };
 
 function escapeXml(str: string): string {
