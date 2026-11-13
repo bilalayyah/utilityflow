@@ -111,6 +111,42 @@ const STRINGS = {
     fitsBio: 'Entra nella bio Instagram di 150 caratteri',
     captionLength: 'Lunghezza didascalia (oltre il limite bio di 150)',
   },
+  id: {
+    sampleText:
+      'Membangun alat browser cepat untuk kreator & tim.   \n\nRilis alur kerja mingguan baru setiap Selasa.\n\nCoba utilitas gratis di tautan di bawah!',
+    modeBraille: 'Spacer Tak Terlihat (⠀ U+2800)',
+    modeDot: 'Spacer Titik Minimal (.)',
+    modeClean: 'Hanya Spasi di Akhir yang Bersih',
+    collapse: 'Gabungkan spasi ganda yang tidak disengaja',
+    labelRaw: 'Draf Caption atau Bio',
+    phRaw: 'Tulis caption Anda dengan baris kosong di tempat Anda menginginkan jeda paragraf...',
+    tip: 'Tips: Aplikasi sosial sering menggabungkan paragraf kosong saat spasi di akhir berada di akhir baris di atasnya.',
+    labelOut: 'Hasil Siap Tempel',
+    copyFormatted: 'Salin Caption yang Diformat',
+    charsLabel: 'Karakter:',
+    linesLabel: 'Baris:',
+    blankLabel: 'Jeda kosong yang dipertahankan:',
+    fitsBio: 'Cocok untuk bio Instagram 150 karakter',
+    captionLength: 'Panjang caption (>batas bio 150)',
+  },
+  ru: {
+    sampleText:
+      'Создаём быстрые браузерные инструменты для авторов и команд.   \n\nНовые еженедельные рабочие процессы — каждый вторник.\n\nПопробуйте бесплатные утилиты по ссылке ниже!',
+    modeBraille: 'Невидимый разделитель (⠀ U+2800)',
+    modeDot: 'Минимальный разделитель-точка (.)',
+    modeClean: 'Только чистые пробелы в конце',
+    collapse: 'Убирать случайные двойные пробелы',
+    labelRaw: 'Черновик подписи или био',
+    phRaw: 'Напишите подпись с пустыми строками там, где нужны разрывы абзацев...',
+    tip: 'Совет: соцсети часто схлопывают пустые абзацы, когда в конце строки выше стоят пробелы.',
+    labelOut: 'Готовый результат для вставки',
+    copyFormatted: 'Копировать отформатированную подпись',
+    charsLabel: 'Символов:',
+    linesLabel: 'Строк:',
+    blankLabel: 'Сохранено пустых разрывов:',
+    fitsBio: 'Подходит для био Instagram на 150 символов',
+    captionLength: 'Длина подписи (> лимита био 150)',
+  },
 };
 
 type SpacerMode = 'braille' | 'dot' | 'clean-only';
