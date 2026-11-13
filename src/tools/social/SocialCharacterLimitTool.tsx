@@ -1,9 +1,9 @@
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
 import { useLocale } from '../../locales/LocaleContext';
+import { useComponentStrings } from '../../locales/componentStrings';
 
-const STRINGS = {
-  en: {
+const STRINGS_EN = {
     surfaces: {
       standardPost: 'Standard Post',
       profileBio: 'Profile Bio',
@@ -33,227 +33,9 @@ const STRINGS = {
       `Preview what readers see before tapping “See more” (${limit} characters for ${platform} ${surface}).`,
     selectAria: 'Choose truncation preview platform',
     previewEmpty: 'Preview appears here...',
-  },
-  es: {
-    surfaces: {
-      standardPost: 'Publicación estándar',
-      profileBio: 'Biografía del perfil',
-      caption: 'Descripción',
-      feedPost: 'Publicación del feed',
-      videoCaption: 'Descripción del video',
-      post: 'Publicación',
-      videoTitle: 'Título del video',
-      description: 'Descripción',
-    },
-    sampleText:
-      'Enviar más rápido empieza con pequeñas mejoras diarias.\n\nPruebe nuestras utilidades para creadores en el navegador en https://utilityflow.online/tools/ — no necesita registrarse.\n\n#CreatorTools #Workflow',
-    labelInput: 'Borrador de publicación o biografía',
-    copyDraft: 'Copiar borrador',
-    placeholder: 'Escriba o pegue su descripción, publicación, biografía o título de YouTube...',
-    charsLabel: 'Caracteres:',
-    wordsLabel: 'Palabras:',
-    hashtagsLabel: 'Hashtags:',
-    mentionsLabel: 'Menciones:',
-    urlsLabel: 'URL detectadas:',
-    urlsWeighted: '(ponderadas en 23 caracteres en X)',
-    overLimit: (n: number, loc: string) => `${n.toLocaleString(loc)} sobre el límite`,
-    left: (n: number, loc: string) => `quedan ${n.toLocaleString(loc)}`,
-    foldLabel: (n: number) => `Pliegue ~${n} car.`,
-    foldTitle: 'Vista previa de truncamiento / pliegue de «Ver más»',
-    foldDesc: (limit: number, platform: string, surface: string) =>
-      `Vista previa de lo que ven los lectores antes de tocar «Ver más» (${limit} caracteres para ${platform} ${surface}).`,
-    selectAria: 'Elija la plataforma para la vista previa de truncamiento',
-    previewEmpty: 'La vista previa aparece aquí...',
-  },
-  pt: {
-    surfaces: {
-      standardPost: 'Publicação padrão',
-      profileBio: 'Bio do perfil',
-      caption: 'Legenda',
-      feedPost: 'Publicação do feed',
-      videoCaption: 'Legenda do vídeo',
-      post: 'Publicação',
-      videoTitle: 'Título do vídeo',
-      description: 'Descrição',
-    },
-    sampleText:
-      'Enviar mais rápido começa com pequenas melhorias diárias.\n\nExperimente nossas utilidades para criadores no navegador em https://utilityflow.online/tools/ — sem necessidade de cadastro.\n\n#CreatorTools #Workflow',
-    labelInput: 'Rascunho de publicação ou bio',
-    copyDraft: 'Copiar rascunho',
-    placeholder: 'Escreva ou cole sua legenda, publicação, bio ou título do YouTube...',
-    charsLabel: 'Caracteres:',
-    wordsLabel: 'Palavras:',
-    hashtagsLabel: 'Hashtags:',
-    mentionsLabel: 'Menções:',
-    urlsLabel: 'URLs detectadas:',
-    urlsWeighted: '(ponderadas em 23 caracteres no X)',
-    overLimit: (n: number, loc: string) => `${n.toLocaleString(loc)} acima do limite`,
-    left: (n: number, loc: string) => `${n.toLocaleString(loc)} restantes`,
-    foldLabel: (n: number) => `Dobra ~${n} car.`,
-    foldTitle: 'Pré-visualização de truncamento / dobra "Ver mais"',
-    foldDesc: (limit: number, platform: string, surface: string) =>
-      `Pré-visualização do que os leitores veem antes de tocar em "Ver mais" (${limit} caracteres para ${platform} ${surface}).`,
-    selectAria: 'Escolha a plataforma para a pré-visualização de truncamento',
-    previewEmpty: 'A pré-visualização aparece aqui...',
-  },
-  fr: {
-    surfaces: {
-      standardPost: 'Publication standard',
-      profileBio: 'Bio du profil',
-      caption: 'Légende',
-      feedPost: 'Publication du fil',
-      videoCaption: 'Légende de la vidéo',
-      post: 'Publication',
-      videoTitle: 'Titre de la vidéo',
-      description: 'Description',
-    },
-    sampleText:
-      'Expédier plus vite commence par de petites améliorations quotidiennes.\n\nEssayez nos utilitaires pour créateurs dans le navigateur sur https://utilityflow.online/tools/ — sans inscription.\n\n#CreatorTools #Workflow',
-    labelInput: 'Brouillon de publication ou de bio',
-    copyDraft: 'Copier le brouillon',
-    placeholder: 'Rédigez ou collez votre légende, publication, bio ou titre YouTube...',
-    charsLabel: 'Caractères :',
-    wordsLabel: 'Mots :',
-    hashtagsLabel: 'Hashtags :',
-    mentionsLabel: 'Mentions :',
-    urlsLabel: 'URL détectées :',
-    urlsWeighted: '(pondérées à 23 caractères sur X)',
-    overLimit: (n: number, loc: string) => `${n.toLocaleString(loc)} au-dessus de la limite`,
-    left: (n: number, loc: string) => `${n.toLocaleString(loc)} restants`,
-    foldLabel: (n: number) => `Repli ~${n} car.`,
-    foldTitle: 'Aperçu du tronquage / repli « Voir plus »',
-    foldDesc: (limit: number, platform: string, surface: string) =>
-      `Aperçu de ce que les lecteurs voient avant d’appuyer sur « Voir plus » (${limit} caractères pour ${platform} ${surface}).`,
-    selectAria: 'Choisissez la plateforme pour l’aperçu du tronquage',
-    previewEmpty: 'L’aperçu apparaît ici...',
-  },
-  de: {
-    surfaces: {
-      standardPost: 'Standardbeitrag',
-      profileBio: 'Profil-Bio',
-      caption: 'Caption',
-      feedPost: 'Feed-Beitrag',
-      videoCaption: 'Video-Caption',
-      post: 'Beitrag',
-      videoTitle: 'Videotitel',
-      description: 'Beschreibung',
-    },
-    sampleText:
-      'Schneller zu liefern beginnt mit kleinen täglichen Verbesserungen.\n\nProbieren Sie unsere browserbasierten Creator-Utilities unter https://utilityflow.online/tools/ aus — keine Anmeldung erforderlich.\n\n#CreatorTools #Workflow',
-    labelInput: 'Social-Post / Bio-Entwurf',
-    copyDraft: 'Entwurf kopieren',
-    placeholder: 'Schreiben oder fügen Sie Ihre Social-Caption, Ihren Post, Ihre Bio oder Ihren YouTube-Titel ein...',
-    charsLabel: 'Zeichen:',
-    wordsLabel: 'Wörter:',
-    hashtagsLabel: 'Hashtags:',
-    mentionsLabel: 'Erwähnungen:',
-    urlsLabel: 'Erkannte URLs:',
-    urlsWeighted: '(gewichtet 23 Zeichen auf X)',
-    overLimit: (n: number, loc: string) => `${n.toLocaleString(loc)} über dem Limit`,
-    left: (n: number, loc: string) => `${n.toLocaleString(loc)} übrig`,
-    foldLabel: (n: number) => `Umbruch ~${n} Z.`,
-    foldTitle: 'Vorschau auf Feed-Kürzung / „Mehr anzeigen“-Umbruch',
-    foldDesc: (limit: number, platform: string, surface: string) =>
-      `Vorschau, was Leser sehen, bevor sie auf „Mehr anzeigen“ tippen (${limit} Zeichen für ${platform} ${surface}).`,
-    selectAria: 'Plattform für die Kürzungsvorschau wählen',
-    previewEmpty: 'Die Vorschau erscheint hier...',
-  },
-  it: {
-    surfaces: {
-      standardPost: 'Post standard',
-      profileBio: 'Bio del profilo',
-      caption: 'Didascalia',
-      feedPost: 'Post del feed',
-      videoCaption: 'Didascalia video',
-      post: 'Post',
-      videoTitle: 'Titolo video',
-      description: 'Descrizione',
-    },
-    sampleText:
-      'Spedire più velocemente inizia con piccoli miglioramenti quotidiani.\n\nProva le nostre utility per creator basate su browser su https://utilityflow.online/tools/ — nessuna registrazione richiesta.\n\n#CreatorTools #Workflow',
-    labelInput: 'Bozza post social / bio',
-    copyDraft: 'Copia bozza',
-    placeholder: 'Scrivi o incolla la didascalia social, il post, la bio o il titolo YouTube...',
-    charsLabel: 'Caratteri:',
-    wordsLabel: 'Parole:',
-    hashtagsLabel: 'Hashtag:',
-    mentionsLabel: 'Menzioni:',
-    urlsLabel: 'URL rilevati:',
-    urlsWeighted: '(pesati 23 caratteri su X)',
-    overLimit: (n: number, loc: string) => `${n.toLocaleString(loc)} oltre il limite`,
-    left: (n: number, loc: string) => `${n.toLocaleString(loc)} rimanenti`,
-    foldLabel: (n: number) => `Piega ~${n} car.`,
-    foldTitle: 'Anteprima troncamento feed / piega “Vedi altro”',
-    foldDesc: (limit: number, platform: string, surface: string) =>
-      `Anteprima di ciò che i lettori vedono prima di toccare “Vedi altro” (${limit} caratteri per ${platform} ${surface}).`,
-    selectAria: 'Scegli la piattaforma per l’anteprima del troncamento',
-    previewEmpty: 'L’anteprima appare qui...',
-  },
-  id: {
-    surfaces: {
-      standardPost: 'Postingan Standar',
-      profileBio: 'Bio Profil',
-      caption: 'Caption',
-      feedPost: 'Postingan Feed',
-      videoCaption: 'Caption Video',
-      post: 'Postingan',
-      videoTitle: 'Judul Video',
-      description: 'Deskripsi',
-    },
-    sampleText:
-      'Pengiriman lebih cepat dimulai dengan perbaikan kecil setiap hari.\n\nCoba utilitas kreator berbasis browser kami di https://utilityflow.online/tools/ — tanpa perlu mendaftar.\n\n#CreatorTools #Workflow',
-    labelInput: 'Draf Postingan Sosial / Bio',
-    copyDraft: 'Salin Draf',
-    placeholder: 'Tulis atau tempel caption sosial, postingan, bio, atau judul YouTube Anda...',
-    charsLabel: 'Karakter:',
-    wordsLabel: 'Kata:',
-    hashtagsLabel: 'Hashtag:',
-    mentionsLabel: 'Mention:',
-    urlsLabel: 'URL terdeteksi:',
-    urlsWeighted: '(dihitung 23 karakter di X)',
-    overLimit: (n: number, loc: string) => `${n.toLocaleString(loc)} melebihi batas`,
-    left: (n: number, loc: string) => `${n.toLocaleString(loc)} tersisa`,
-    foldLabel: (n: number) => `Lipat ~${n} karakter`,
-    foldTitle: 'Pratinjau Pemotongan Feed / Lipatan “Lihat Selengkapnya”',
-    foldDesc: (limit: number, platform: string, surface: string) =>
-      `Pratinjau apa yang dilihat pembaca sebelum mengetuk “Lihat selengkapnya” (${limit} karakter untuk ${platform} ${surface}).`,
-    selectAria: 'Pilih platform pratinjau pemotongan',
-    previewEmpty: 'Pratinjau muncul di sini...',
-  },
-  ru: {
-    surfaces: {
-      standardPost: 'Стандартный пост',
-      profileBio: 'Био профиля',
-      caption: 'Подпись',
-      feedPost: 'Пост в ленте',
-      videoCaption: 'Подпись к видео',
-      post: 'Пост',
-      videoTitle: 'Название видео',
-      description: 'Описание',
-    },
-    sampleText:
-      'Быстрая доставка начинается с небольших ежедневных улучшений.\n\nПопробуйте наши браузерные инструменты для авторов на https://utilityflow.online/tools/ — без регистрации.\n\n#CreatorTools #Workflow',
-    labelInput: 'Черновик поста / био для соцсетей',
-    copyDraft: 'Копировать черновик',
-    placeholder: 'Напишите или вставьте подпись, пост, био или заголовок YouTube...',
-    charsLabel: 'Символов:',
-    wordsLabel: 'Слов:',
-    hashtagsLabel: 'Хештегов:',
-    mentionsLabel: 'Упоминаний:',
-    urlsLabel: 'Обнаружено URL:',
-    urlsWeighted: '(считается как 23 символа в X)',
-    overLimit: (n: number, loc: string) => `превышение лимита: ${n.toLocaleString(loc)}`,
-    left: (n: number, loc: string) => `осталось: ${n.toLocaleString(loc)}`,
-    foldLabel: (n: number) => `Свёртка ~${n} симв.`,
-    foldTitle: 'Предпросмотр обрезки ленты / свёртки «Показать ещё»',
-    foldDesc: (limit: number, platform: string, surface: string) =>
-      `Предпросмотр того, что читатели видят перед нажатием «Показать ещё» (${limit} символов для ${platform} ${surface}).`,
-    selectAria: 'Выбрать платформу для предпросмотра обрезки',
-    previewEmpty: 'Здесь появится предпросмотр...',
-  },
-};
+  };
 
-type SurfaceKey = keyof typeof STRINGS.en.surfaces;
+type SurfaceKey = keyof typeof STRINGS_EN.surfaces;
 
 interface PlatformSpec {
   id: string;
@@ -289,7 +71,7 @@ function measureForPlatform(text: string, spec: PlatformSpec): number {
 
 export default function SocialCharacterLimitTool() {
   const { locale, t } = useLocale();
-  const s = STRINGS[locale];
+  const s = useComponentStrings('social-character-limit-checker', STRINGS_EN);
   const [text, setText] = useState(s.sampleText);
   const [previewId, setPreviewId] = useState('ig-cap');
 

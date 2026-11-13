@@ -2,9 +2,9 @@ import { ExternalLink, Info } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
 import { useLocale } from '../../locales/LocaleContext';
+import { useComponentStrings } from '../../locales/componentStrings';
 
-const STRINGS = {
-  en: {
+const STRINGS_EN = {
     ruleSummaries: {
       x: '4–15 chars · letters, numbers, underscores',
       instagram: '1–30 chars · letters, numbers, periods, underscores',
@@ -30,199 +30,9 @@ const STRINGS = {
     valid: 'Valid format',
     invalid: 'Invalid syntax/length',
     checkUrl: 'Check URL',
-  },
-  es: {
-    ruleSummaries: {
-      x: '4–15 caracteres · letras, números, guiones bajos',
-      instagram: '1–30 caracteres · letras, números, puntos, guiones bajos',
-      tiktok: '2–24 caracteres · letras, números, guiones bajos, puntos',
-      youtube: '3–30 caracteres · letras, números, _, -, .',
-      threads: '1–30 caracteres · espacio de nombres compartido de Instagram',
-      github: '1–39 caracteres · alfanuméricos y guiones simples',
-    },
-    infoTitle: 'Validador de reglas y enlaces de verificación directa:',
-    infoBodyBefore:
-      'Valida la sintaxis del nombre de usuario y los límites de caracteres sin conexión, sin adivinar la disponibilidad. Haga clic en el enlace',
-    infoEm: 'Abrir URL del perfil',
-    infoBodyAfter: 'de cualquier plataforma para verificar en vivo si el nombre ya está en uso.',
-    labelBrand: 'Nombre de marca, proyecto o creador',
-    phBrand: 'p. ej., Utility Hub',
-    labelActive: 'Nombre de usuario activo para validar',
-    copyAt: 'Copiar @',
-    variationsTitle: 'Variaciones consistentes del nombre de usuario:',
-    thPlatform: 'Plataforma',
-    thRules: 'Reglas de formato',
-    thStatus: 'Estado de sintaxis',
-    thCheck: 'Verificación manual',
-    valid: 'Formato válido',
-    invalid: 'Sintaxis o longitud no válidas',
-    checkUrl: 'Verificar URL',
-  },
-  pt: {
-    ruleSummaries: {
-      x: '4–15 caracteres · letras, números, sublinhados',
-      instagram: '1–30 caracteres · letras, números, pontos, sublinhados',
-      tiktok: '2–24 caracteres · letras, números, sublinhados, pontos',
-      youtube: '3–30 caracteres · letras, números, _, -, .',
-      threads: '1–30 caracteres · namespace compartilhado do Instagram',
-      github: '1–39 caracteres · alfanuméricos e hifens simples',
-    },
-    infoTitle: 'Validador de regras e links de verificação direta:',
-    infoBodyBefore:
-      'Valida a sintaxe do nome de usuário e os limites de caracteres offline, sem adivinhar a disponibilidade. Clique no link',
-    infoEm: 'Abrir URL do perfil',
-    infoBodyAfter: 'de qualquer plataforma para verificar ao vivo se o nome já está em uso.',
-    labelBrand: 'Nome da marca, projeto ou criador',
-    phBrand: 'ex.: Utility Hub',
-    labelActive: 'Nome de usuário ativo para validar',
-    copyAt: 'Copiar @',
-    variationsTitle: 'Variações consistentes de nome de usuário:',
-    thPlatform: 'Plataforma',
-    thRules: 'Regras de formato',
-    thStatus: 'Status de sintaxe',
-    thCheck: 'Verificação manual',
-    valid: 'Formato válido',
-    invalid: 'Sintaxe ou tamanho inválidos',
-    checkUrl: 'Verificar URL',
-  },
-  fr: {
-    ruleSummaries: {
-      x: '4–15 car. · lettres, chiffres, tirets bas',
-      instagram: '1–30 car. · lettres, chiffres, points, tirets bas',
-      tiktok: '2–24 car. · lettres, chiffres, tirets bas, points',
-      youtube: '3–30 car. · lettres, chiffres, _, -, .',
-      threads: '1–30 car. · espace de noms Instagram partagé',
-      github: '1–39 car. · alphanumériques et traits d’union simples',
-    },
-    infoTitle: 'Validateur de règles et liens de vérification directe :',
-    infoBodyBefore:
-      'Valide la syntaxe du pseudo et les limites de caractères hors ligne, sans deviner la disponibilité. Cliquez sur le lien',
-    infoEm: 'Ouvrir l’URL du profil',
-    infoBodyAfter: 'de n’importe quelle plateforme pour vérifier en direct si le pseudo est déjà pris.',
-    labelBrand: 'Nom de marque, de projet ou de créateur',
-    phBrand: 'p. ex. Utility Hub',
-    labelActive: 'Pseudo actif à valider',
-    copyAt: 'Copier @',
-    variationsTitle: 'Variations cohérentes du pseudo :',
-    thPlatform: 'Plateforme',
-    thRules: 'Règles de format',
-    thStatus: 'Statut de syntaxe',
-    thCheck: 'Vérification manuelle',
-    valid: 'Format valide',
-    invalid: 'Syntaxe ou longueur non valides',
-    checkUrl: 'Vérifier l’URL',
-  },
-  de: {
-    ruleSummaries: {
-      x: '4–15 Zeichen · Buchstaben, Zahlen, Unterstriche',
-      instagram: '1–30 Zeichen · Buchstaben, Zahlen, Punkte, Unterstriche',
-      tiktok: '2–24 Zeichen · Buchstaben, Zahlen, Unterstriche, Punkte',
-      youtube: '3–30 Zeichen · Buchstaben, Zahlen, _, -, .',
-      threads: '1–30 Zeichen · gemeinsamer Instagram-Namensraum',
-      github: '1–39 Zeichen · alphanumerisch und einzelne Bindestriche',
-    },
-    infoTitle: 'Regelprüfer & direkte Prüflinks:',
-    infoBodyBefore:
-      'Prüft Handle-Syntax und Zeichenlimits offline, ohne die Verfügbarkeit zu raten. Klicken Sie auf den',
-    infoEm: 'Profil-URL öffnen',
-    infoBodyAfter: '-Link einer Plattform, um den Live-Status direkt zu prüfen.',
-    labelBrand: 'Marken-, Projekt- oder Creator-Name',
-    phBrand: 'z. B. Utility Hub',
-    labelActive: 'Aktiver Handle zur Prüfung',
-    copyAt: '@ kopieren',
-    variationsTitle: 'Einheitliche Handle-Varianten:',
-    thPlatform: 'Plattform',
-    thRules: 'Formatregeln',
-    thStatus: 'Syntax-Status',
-    thCheck: 'Manuelle Prüfung',
-    valid: 'Gültiges Format',
-    invalid: 'Ungültige Syntax/Länge',
-    checkUrl: 'URL prüfen',
-  },
-  it: {
-    ruleSummaries: {
-      x: '4–15 caratteri · lettere, numeri, trattini bassi',
-      instagram: '1–30 caratteri · lettere, numeri, punti, trattini bassi',
-      tiktok: '2–24 caratteri · lettere, numeri, trattini bassi, punti',
-      youtube: '3–30 caratteri · lettere, numeri, _, -, .',
-      threads: '1–30 caratteri · namespace Instagram condiviso',
-      github: '1–39 caratteri · alfanumerici e trattini singoli',
-    },
-    infoTitle: 'Validatore di regole e link di verifica diretta:',
-    infoBodyBefore:
-      'Convalida sintassi e limiti di caratteri degli handle offline senza indovinare la disponibilità. Fai clic sul link',
-    infoEm: 'Apri URL profilo',
-    infoBodyAfter: 'di una piattaforma per verificare direttamente lo stato live.',
-    labelBrand: 'Nome di brand, progetto o creator',
-    phBrand: 'es. Utility Hub',
-    labelActive: 'Handle attivo da convalidare',
-    copyAt: 'Copia @',
-    variationsTitle: 'Varianti di handle coerenti:',
-    thPlatform: 'Piattaforma',
-    thRules: 'Regole di formato',
-    thStatus: 'Stato sintassi',
-    thCheck: 'Verifica manuale',
-    valid: 'Formato valido',
-    invalid: 'Sintassi/lunghezza non valida',
-    checkUrl: 'Verifica URL',
-  },
-  id: {
-    ruleSummaries: {
-      x: '4–15 karakter · huruf, angka, garis bawah',
-      instagram: '1–30 karakter · huruf, angka, titik, garis bawah',
-      tiktok: '2–24 karakter · huruf, angka, garis bawah, titik',
-      youtube: '3–30 karakter · huruf, angka, _, -, .',
-      threads: '1–30 karakter · namespace Instagram bersama',
-      github: '1–39 karakter · alfanumerik dan tanda hubung tunggal',
-    },
-    infoTitle: 'Validator Aturan & Tautan Pemeriksaan Langsung:',
-    infoBodyBefore:
-      "Memvalidasi sintaks handle dan batas karakter secara offline tanpa menebak ketersediaan. Klik tautan ",
-    infoEm: 'Buka URL Profil',
-    infoBodyAfter: ' untuk memverifikasi status klaim langsung.',
-    labelBrand: 'Nama Merek, Proyek, atau Kreator',
-    phBrand: 'cth. Utility Hub',
-    labelActive: 'Handle Aktif untuk Divalidasi',
-    copyAt: 'Salin @',
-    variationsTitle: 'Variasi Handle yang Konsisten:',
-    thPlatform: 'Platform',
-    thRules: 'Aturan Format',
-    thStatus: 'Status Sintaks',
-    thCheck: 'Pemeriksaan Manual',
-    valid: 'Format valid',
-    invalid: 'Sintaks/panjang tidak valid',
-    checkUrl: 'Periksa URL',
-  },
-  ru: {
-    ruleSummaries: {
-      x: '4–15 симв. · буквы, цифры, подчёркивания',
-      instagram: '1–30 симв. · буквы, цифры, точки, подчёркивания',
-      tiktok: '2–24 симв. · буквы, цифры, подчёркивания, точки',
-      youtube: '3–30 симв. · буквы, цифры, _, -, .',
-      threads: '1–30 симв. · общее пространство имён Instagram',
-      github: '1–39 симв. · буквы, цифры и одиночные дефисы',
-    },
-    infoTitle: 'Проверка правил и прямые ссылки для проверки:',
-    infoBodyBefore:
-      "Проверяет синтаксис и ограничения длины хендла офлайн, не угадывая доступность. Нажмите на ссылку ",
-    infoEm: 'Открыть URL профиля',
-    infoBodyAfter: ', чтобы проверить статус занятости напрямую.',
-    labelBrand: 'Имя бренда, проекта или автора',
-    phBrand: 'напр. Utility Hub',
-    labelActive: 'Активный хендл для проверки',
-    copyAt: 'Копировать @',
-    variationsTitle: 'Согласованные варианты хендлов:',
-    thPlatform: 'Платформа',
-    thRules: 'Правила формата',
-    thStatus: 'Статус синтаксиса',
-    thCheck: 'Ручная проверка',
-    valid: 'Допустимый формат',
-    invalid: 'Недопустимый синтаксис/длина',
-    checkUrl: 'Проверить URL',
-  },
-};
+  };
 
-type PlatformId = keyof typeof STRINGS.en.ruleSummaries;
+type PlatformId = keyof typeof STRINGS_EN.ruleSummaries;
 
 interface PlatformRule {
   id: PlatformId;
@@ -285,8 +95,8 @@ const PLATFORM_RULES: PlatformRule[] = [
 ];
 
 export default function SocialHandleFormatterTool() {
-  const { locale, t } = useLocale();
-  const s = STRINGS[locale];
+  const { t } = useLocale();
+  const s = useComponentStrings('social-handle-formatter', STRINGS_EN);
   const [brandInput, setBrandInput] = useState('Utility Hub');
   const [selectedVariant, setSelectedVariant] = useState('');
 

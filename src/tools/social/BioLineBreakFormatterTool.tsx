@@ -1,9 +1,9 @@
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
 import { useLocale } from '../../locales/LocaleContext';
+import { useComponentStrings } from '../../locales/componentStrings';
 
-const STRINGS = {
-  en: {
+const STRINGS_EN = {
     sampleText:
       'Building fast browser tools for makers & teams.   \n\nNew weekly workflow drops every Tuesday.\n\nTry free utilities at the link below!',
     modeBraille: 'Invisible Spacer (⠀ U+2800)',
@@ -20,140 +20,13 @@ const STRINGS = {
     blankLabel: 'Blank breaks preserved:',
     fitsBio: 'Fits Instagram 150-char bio',
     captionLength: 'Caption length (>150 bio limit)',
-  },
-  es: {
-    sampleText:
-      'Creando herramientas rápidas en el navegador para creadores y equipos.   \n\nNuevos consejos de flujo de trabajo cada martes.\n\n¡Pruebe las utilidades gratuitas en el enlace de abajo!',
-    modeBraille: 'Espaciador invisible (⠀ U+2800)',
-    modeDot: 'Espaciador de punto mínimo (.)',
-    modeClean: 'Solo limpiar espacios finales',
-    collapse: 'Colapsar espacios dobles accidentales',
-    labelRaw: 'Borrador de descripción o biografía',
-    phRaw: 'Escriba su descripción con líneas en blanco donde quiera saltos de párrafo...',
-    tip: 'Consejo: las aplicaciones sociales suelen colapsar los párrafos en blanco cuando hay espacios finales al final de la línea anterior.',
-    labelOut: 'Resultado listo para pegar',
-    copyFormatted: 'Copiar descripción formateada',
-    charsLabel: 'Caracteres:',
-    linesLabel: 'Líneas:',
-    blankLabel: 'Saltos en blanco conservados:',
-    fitsBio: 'Cabe en la biografía de Instagram de 150 caracteres',
-    captionLength: 'Longitud de descripción (supera el límite de 150 de la biografía)',
-  },
-  pt: {
-    sampleText:
-      'Criando ferramentas rápidas no navegador para criadores e equipes.   \n\nNovas dicas de fluxo de trabalho toda terça-feira.\n\nExperimente as utilidades gratuitas no link abaixo!',
-    modeBraille: 'Espaçador invisível (⠀ U+2800)',
-    modeDot: 'Espaçador de ponto mínimo (.)',
-    modeClean: 'Apenas limpar espaços finais',
-    collapse: 'Recolher espaços duplos acidentais',
-    labelRaw: 'Rascunho de legenda ou bio',
-    phRaw: 'Escreva sua legenda com linhas em branco onde quiser quebras de parágrafo...',
-    tip: 'Dica: os apps de redes sociais costumam recolher parágrafos em branco quando há espaços finais no fim da linha acima.',
-    labelOut: 'Resultado pronto para colar',
-    copyFormatted: 'Copiar legenda formatada',
-    charsLabel: 'Caracteres:',
-    linesLabel: 'Linhas:',
-    blankLabel: 'Quebras em branco preservadas:',
-    fitsBio: 'Cabe na bio do Instagram de 150 caracteres',
-    captionLength: 'Tamanho da legenda (acima do limite de 150 da bio)',
-  },
-  fr: {
-    sampleText:
-      'Créer des outils de navigateur rapides pour les créateurs et les équipes.   \n\nNouveaux conseils de flux de travail chaque mardi.\n\nEssayez les utilitaires gratuits via le lien ci-dessous !',
-    modeBraille: 'Espaceur invisible (⠀ U+2800)',
-    modeDot: 'Espaceur point minimal (.)',
-    modeClean: 'Nettoyer uniquement les espaces finaux',
-    collapse: 'Réduire les doubles espaces accidentels',
-    labelRaw: 'Brouillon de légende ou de bio',
-    phRaw: 'Rédigez votre légende avec des lignes vides là où vous voulez des sauts de paragraphe...',
-    tip: 'Astuce : les applications sociales réduisent souvent les paragraphes vides lorsque des espaces traînent à la fin de la ligne précédente.',
-    labelOut: 'Résultat prêt à coller',
-    copyFormatted: 'Copier la légende formatée',
-    charsLabel: 'Caractères :',
-    linesLabel: 'Lignes :',
-    blankLabel: 'Sauts vides préservés :',
-    fitsBio: 'Convient à la bio Instagram de 150 caractères',
-    captionLength: 'Longueur de la légende (au-delà de la limite de 150 de la bio)',
-  },
-  de: {
-    sampleText:
-      'Wir entwickeln schnelle Browser-Tools für Maker & Teams.   \n\nJeden Dienstag gibt es neue Workflow-Tipps.\n\nProbieren Sie unsere kostenlosen Utilities über den Link unten aus!',
-    modeBraille: 'Unsichtbarer Abstandhalter (⠀ U+2800)',
-    modeDot: 'Minimaler Punkt-Abstandhalter (.)',
-    modeClean: 'Nur saubere Leerzeichen am Zeilenende',
-    collapse: 'Versehentliche doppelte Leerzeichen zusammenführen',
-    labelRaw: 'Entwurf für Caption oder Bio',
-    phRaw: 'Schreiben Sie Ihre Caption mit Leerzeilen, wo Absatzumbrüche sein sollen...',
-    tip: 'Tipp: Social-Apps lassen leere Absätze oft verschwinden, wenn am Ende der Zeile darüber Leerzeichen stehen.',
-    labelOut: 'Einfügefertige Ausgabe',
-    copyFormatted: 'Formatierte Caption kopieren',
-    charsLabel: 'Zeichen:',
-    linesLabel: 'Zeilen:',
-    blankLabel: 'Erhaltene Leerzeilen:',
-    fitsBio: 'Passt in die Instagram-Bio (150 Zeichen)',
-    captionLength: 'Caption-Länge (über dem Bio-Limit von 150)',
-  },
-  it: {
-    sampleText:
-      'Creiamo strumenti browser veloci per creator e team.   \n\nOgni martedì nuovi consigli sui flussi di lavoro.\n\nProva le nostre utility gratuite al link qui sotto!',
-    modeBraille: 'Spaziatore invisibile (⠀ U+2800)',
-    modeDot: 'Spaziatore minimo con punto (.)',
-    modeClean: 'Solo spazi finali puliti',
-    collapse: 'Unisci i doppi spazi accidentali',
-    labelRaw: 'Bozza di didascalia o bio',
-    phRaw: 'Scrivi la didascalia con righe vuote dove vuoi le interruzioni di paragrafo...',
-    tip: 'Suggerimento: le app social spesso eliminano i paragrafi vuoti quando ci sono spazi finali alla fine della riga sopra.',
-    labelOut: 'Output pronto da incollare',
-    copyFormatted: 'Copia didascalia formattata',
-    charsLabel: 'Caratteri:',
-    linesLabel: 'Righe:',
-    blankLabel: 'Interruzioni vuote mantenute:',
-    fitsBio: 'Entra nella bio Instagram di 150 caratteri',
-    captionLength: 'Lunghezza didascalia (oltre il limite bio di 150)',
-  },
-  id: {
-    sampleText:
-      'Membangun alat browser cepat untuk kreator & tim.   \n\nRilis alur kerja mingguan baru setiap Selasa.\n\nCoba utilitas gratis di tautan di bawah!',
-    modeBraille: 'Spacer Tak Terlihat (⠀ U+2800)',
-    modeDot: 'Spacer Titik Minimal (.)',
-    modeClean: 'Hanya Spasi di Akhir yang Bersih',
-    collapse: 'Gabungkan spasi ganda yang tidak disengaja',
-    labelRaw: 'Draf Caption atau Bio',
-    phRaw: 'Tulis caption Anda dengan baris kosong di tempat Anda menginginkan jeda paragraf...',
-    tip: 'Tips: Aplikasi sosial sering menggabungkan paragraf kosong saat spasi di akhir berada di akhir baris di atasnya.',
-    labelOut: 'Hasil Siap Tempel',
-    copyFormatted: 'Salin Caption yang Diformat',
-    charsLabel: 'Karakter:',
-    linesLabel: 'Baris:',
-    blankLabel: 'Jeda kosong yang dipertahankan:',
-    fitsBio: 'Cocok untuk bio Instagram 150 karakter',
-    captionLength: 'Panjang caption (>batas bio 150)',
-  },
-  ru: {
-    sampleText:
-      'Создаём быстрые браузерные инструменты для авторов и команд.   \n\nНовые еженедельные рабочие процессы — каждый вторник.\n\nПопробуйте бесплатные утилиты по ссылке ниже!',
-    modeBraille: 'Невидимый разделитель (⠀ U+2800)',
-    modeDot: 'Минимальный разделитель-точка (.)',
-    modeClean: 'Только чистые пробелы в конце',
-    collapse: 'Убирать случайные двойные пробелы',
-    labelRaw: 'Черновик подписи или био',
-    phRaw: 'Напишите подпись с пустыми строками там, где нужны разрывы абзацев...',
-    tip: 'Совет: соцсети часто схлопывают пустые абзацы, когда в конце строки выше стоят пробелы.',
-    labelOut: 'Готовый результат для вставки',
-    copyFormatted: 'Копировать отформатированную подпись',
-    charsLabel: 'Символов:',
-    linesLabel: 'Строк:',
-    blankLabel: 'Сохранено пустых разрывов:',
-    fitsBio: 'Подходит для био Instagram на 150 символов',
-    captionLength: 'Длина подписи (> лимита био 150)',
-  },
-};
+  };
 
 type SpacerMode = 'braille' | 'dot' | 'clean-only';
 
 export default function BioLineBreakFormatterTool() {
-  const { locale, t } = useLocale();
-  const s = STRINGS[locale];
+  const { t } = useLocale();
+  const s = useComponentStrings('bio-line-break-formatter', STRINGS_EN);
   const [rawText, setRawText] = useState(s.sampleText);
   const [spacerMode, setSpacerMode] = useState<SpacerMode>('braille');
   const [stripEmojisExtraSpaces, setStripEmojisExtraSpaces] = useState(true);

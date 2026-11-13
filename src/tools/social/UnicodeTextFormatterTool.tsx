@@ -2,9 +2,9 @@ import { AlertTriangle } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
 import { useLocale } from '../../locales/LocaleContext';
+import { useComponentStrings } from '../../locales/componentStrings';
 
-const STRINGS = {
-  en: {
+const STRINGS_EN = {
     styleNames: {
       'sans-bold': 'Bold (Sans-Serif)',
       'sans-italic': 'Italic (Sans-Serif)',
@@ -36,241 +36,9 @@ const STRINGS = {
     labelInput: 'Text to Stylize',
     placeholder: 'Type a short headline, bio line, or CTA...',
     previewEmpty: 'Preview',
-  },
-  es: {
-    styleNames: {
-      'sans-bold': 'Negrita (sans serif)',
-      'sans-italic': 'Cursiva (sans serif)',
-      'sans-bold-italic': 'Negrita cursiva (sans serif)',
-      'serif-bold': 'Negrita (serif)',
-      monospace: 'Monoespaciada',
-      'double-struck': 'Doble trazo (pizarra)',
-      'script-bold': 'Cursiva decorativa en negrita',
-      'fraktur-bold': 'Fraktur en negrita',
-      'small-caps': 'Versalitas',
-      fullwidth: 'Estética de ancho completo',
-    },
-    styleNotes: {
-      'sans-bold': 'Alta legibilidad para encabezados de biografía y ganchos de publicaciones',
-      'sans-italic': 'Énfasis sutil dentro de las descripciones',
-      'sans-bold-italic': 'Llamados fuertes y divisores de sección',
-      'serif-bold': 'Énfasis de estilo editorial',
-      monospace: 'Nombres de usuario de código, fechas y etiquetas técnicas',
-      'double-struck': 'Acentos de exhibición',
-      'script-bold': 'Firmas decorativas para biografías',
-      'fraktur-bold': 'Letras góticas de exhibición',
-      'small-caps': 'Etiquetas de perfil limpias con aspecto de mayúsculas',
-      fullwidth: 'Encabezados sociales retro con espaciado amplio',
-    },
-    sampleText: 'Nuevo kit de herramientas para creadores 2025',
-    accessibilityTitle: 'Nota de accesibilidad:',
-    accessibilityBody:
-      'Los caracteres Unicode estilizados pertenecen a bloques de símbolos matemáticos, por lo que los lectores de pantalla pueden leerlos letra por letra u omitirlos, y algunos índices de búsqueda los ignoran. Úselos con moderación para resaltar textos cortos, no para párrafos completos.',
-    labelInput: 'Texto para estilizar',
-    placeholder: 'Escriba un titular corto, una línea de biografía o un llamado a la acción...',
-    previewEmpty: 'Vista previa',
-  },
-  pt: {
-    styleNames: {
-      'sans-bold': 'Negrito (sans-serif)',
-      'sans-italic': 'Itálico (sans-serif)',
-      'sans-bold-italic': 'Negrito itálico (sans-serif)',
-      'serif-bold': 'Negrito (serif)',
-      monospace: 'Monospace',
-      'double-struck': 'Duplo traço (quadro-negro)',
-      'script-bold': 'Script em negrito',
-      'fraktur-bold': 'Fraktur em negrito',
-      'small-caps': 'Versalete',
-      fullwidth: 'Estética fullwidth',
-    },
-    styleNotes: {
-      'sans-bold': 'Alta legibilidade para cabeçalhos de bio e ganchos de publicações',
-      'sans-italic': 'Ênfase sutil dentro de legendas',
-      'sans-bold-italic': 'Chamadas fortes e divisores de seção',
-      'serif-bold': 'Ênfase de estilo editorial',
-      monospace: 'Handles de código, datas e tags técnicas',
-      'double-struck': 'Acentos de exibição',
-      'script-bold': 'Assinaturas decorativas de bio',
-      'fraktur-bold': 'Letras góticas de exibição',
-      'small-caps': 'Rótulos de perfil limpos com aparência de maiúsculas',
-      fullwidth: 'Cabeçalhos sociais retrô com espaçamento amplo',
-    },
-    sampleText: 'Novo kit de ferramentas para criadores 2025',
-    accessibilityTitle: 'Nota de acessibilidade:',
-    accessibilityBody:
-      'Caracteres Unicode estilizados pertencem a blocos de símbolos matemáticos, então os leitores de tela podem lê-los letra por letra ou ignorá-los, e alguns índices de busca os ignoram. Use com moderação para destaques curtos, não para parágrafos inteiros.',
-    labelInput: 'Texto para estilizar',
-    placeholder: 'Digite um título curto, uma linha de bio ou um CTA...',
-    previewEmpty: 'Pré-visualização',
-  },
-  fr: {
-    styleNames: {
-      'sans-bold': 'Gras (sans-serif)',
-      'sans-italic': 'Italique (sans-serif)',
-      'sans-bold-italic': 'Gras italique (sans-serif)',
-      'serif-bold': 'Gras (serif)',
-      monospace: 'Monospace',
-      'double-struck': 'Double barré (tableau noir)',
-      'script-bold': 'Script gras',
-      'fraktur-bold': 'Fraktur gras',
-      'small-caps': 'Petites capitales',
-      fullwidth: 'Esthétique pleine largeur',
-    },
-    styleNotes: {
-      'sans-bold': 'Haute lisibilité pour les en-têtes de bio et les accroches de publications',
-      'sans-italic': 'Emphase subtile dans les légendes',
-      'sans-bold-italic': 'Appels forts et séparateurs de section',
-      'serif-bold': 'Emphase de style éditorial',
-      monospace: 'Pseudos de code, dates et balises techniques',
-      'double-struck': 'Accents d’affichage',
-      'script-bold': 'Signatures décoratives de bio',
-      'fraktur-bold': 'Lettrage gothique d’affichage',
-      'small-caps': 'Libellés de profil épurés avec aspect majuscules',
-      fullwidth: 'En-têtes sociaux rétro à large espacement',
-    },
-    sampleText: 'Nouvelle boîte à outils pour créateurs 2025',
-    accessibilityTitle: 'Note d’accessibilité :',
-    accessibilityBody:
-      'Les caractères Unicode stylisés appartiennent à des blocs de symboles mathématiques, donc les lecteurs d’écran peuvent les lire lettre par lettre ou les ignorer, et certains index de recherche les ignorent. Utilisez-les avec parcimonie pour de courtes mises en avant plutôt que pour des paragraphes entiers.',
-    labelInput: 'Texte à styliser',
-    placeholder: 'Saisissez un titre court, une ligne de bio ou un CTA...',
-    previewEmpty: 'Aperçu',
-  },
-  de: {
-    styleNames: {
-      'sans-bold': 'Fett (serifenlos)',
-      'sans-italic': 'Kursiv (serifenlos)',
-      'sans-bold-italic': 'Fett kursiv (serifenlos)',
-      'serif-bold': 'Fett (Serif)',
-      monospace: 'Monospace',
-      'double-struck': 'Doppelt gestrichen (Blackboard)',
-      'script-bold': 'Script fett',
-      'fraktur-bold': 'Fraktur fett',
-      'small-caps': 'Kapitälchen',
-      fullwidth: 'Volle Breite (ästhetisch)',
-    },
-    styleNotes: {
-      'sans-bold': 'Hohe Lesbarkeit für Bio-Überschriften & Post-Hooks',
-      'sans-italic': 'Subtile Betonung in Captions',
-      'sans-bold-italic': 'Starke Callouts & Abschnittstrenner',
-      'serif-bold': 'Betonung im Editorial-Stil',
-      monospace: 'Code-Handles, Daten & technische Tags',
-      'double-struck': 'Display-Akzente',
-      'script-bold': 'Dekorative Bio-Signaturen',
-      'fraktur-bold': 'Gotische Display-Schrift',
-      'small-caps': 'Saubere Profil-Labels in Großbuchstaben-Optik',
-      fullwidth: 'Breit gesetzte Retro-Social-Überschriften',
-    },
-    sampleText: 'Neues Creator-Toolkit 2025',
-    accessibilityTitle: 'Hinweis zur Barrierefreiheit:',
-    accessibilityBody:
-      'Stilisierte Unicode-Zeichen gehören zu mathematischen Symbolblöcken, daher lesen Screenreader sie möglicherweise Buchstabe für Buchstabe vor oder überspringen sie, und manche Suchindizes ignorieren sie. Sparsam für kurze Highlights verwenden, nicht für ganze Absätze.',
-    labelInput: 'Zu stilisierender Text',
-    placeholder: 'Tippen Sie eine kurze Überschrift, Bio-Zeile oder CTA...',
-    previewEmpty: 'Vorschau',
-  },
-  it: {
-    styleNames: {
-      'sans-bold': 'Grassetto (sans-serif)',
-      'sans-italic': 'Corsivo (sans-serif)',
-      'sans-bold-italic': 'Grassetto corsivo (sans-serif)',
-      'serif-bold': 'Grassetto (serif)',
-      monospace: 'Monospazio',
-      'double-struck': 'Doppio tratto (lavagna)',
-      'script-bold': 'Corsivo grassetto',
-      'fraktur-bold': 'Fraktur grassetto',
-      'small-caps': 'Maiuscoletto',
-      fullwidth: 'Larghezza intera estetica',
-    },
-    styleNotes: {
-      'sans-bold': 'Alta leggibilità per intestazioni bio e ganci dei post',
-      'sans-italic': 'Enfasi discreta nelle didascalie',
-      'sans-bold-italic': 'Richami forti e divisori di sezione',
-      'serif-bold': 'Enfasi in stile editoriale',
-      monospace: 'Handle di codice, date e tag tecnici',
-      'double-struck': 'Accenti di display',
-      'script-bold': 'Firme bio decorative',
-      'fraktur-bold': 'Caratteri gotici da display',
-      'small-caps': 'Etichette profilo pulite in stile maiuscolo',
-      fullwidth: 'Intestazioni social retrò a spaziatura larga',
-    },
-    sampleText: 'Nuovo Toolkit per Creator 2025',
-    accessibilityTitle: 'Nota di accessibilità:',
-    accessibilityBody:
-      'I caratteri Unicode stilizzati appartengono ai blocchi dei simboli matematici, quindi gli screen reader potrebbero leggerli lettera per lettera o saltarli, e alcuni indici di ricerca li ignorano. Usali con parsimonia per brevi evidenze, non per interi paragrafi.',
-    labelInput: 'Testo da stilizzare',
-    placeholder: 'Scrivi un breve titolo, una riga bio o una CTA...',
-    previewEmpty: 'Anteprima',
-  },
-  id: {
-    styleNames: {
-      'sans-bold': 'Tebal (Sans-Serif)',
-      'sans-italic': 'Miring (Sans-Serif)',
-      'sans-bold-italic': 'Tebal Miring (Sans-Serif)',
-      'serif-bold': 'Tebal (Serif)',
-      monospace: 'Monospace',
-      'double-struck': 'Double-Struck (Papan Tulis)',
-      'script-bold': 'Script Tebal',
-      'fraktur-bold': 'Fraktur Tebal',
-      'small-caps': 'Kapitel Kecil',
-      fullwidth: 'Estetika Lebar Penuh',
-    },
-    styleNotes: {
-      'sans-bold': 'Keterbacaan tinggi untuk header bio & hook postingan',
-      'sans-italic': 'Penekanan halus di dalam caption',
-      'sans-bold-italic': 'Callout kuat & pemisah bagian',
-      'serif-bold': 'Penekanan gaya editorial',
-      monospace: 'Handle kode, tanggal & tag teknis',
-      'double-struck': 'Aksen tampilan',
-      'script-bold': 'Tanda tangan bio dekoratif',
-      'fraktur-bold': 'Huruf tampilan Gotik',
-      'small-caps': 'Label profil tampilan huruf besar yang bersih',
-      fullwidth: 'Header sosial retro berjarak lebar',
-    },
-    sampleText: 'Toolkit Kreator Baru 2025',
-    accessibilityTitle: 'Catatan Aksesibilitas:',
-    accessibilityBody:
-      'Karakter Unicode bergaya termasuk dalam blok simbol matematika, jadi pembaca layar mungkin membacanya huruf demi huruf atau melewatkannya, dan beberapa indeks pencarian mengabaikannya. Gunakan secukupnya untuk sorotan singkat, bukan paragraf penuh.',
-    labelInput: 'Teks untuk Dibuat Gaya',
-    placeholder: 'Ketik judul singkat, baris bio, atau CTA...',
-    previewEmpty: 'Pratinjau',
-  },
-  ru: {
-    styleNames: {
-      'sans-bold': 'Жирный (без засечек)',
-      'sans-italic': 'Курсив (без засечек)',
-      'sans-bold-italic': 'Жирный курсив (без засечек)',
-      'serif-bold': 'Жирный (с засечками)',
-      monospace: 'Моноширинный',
-      'double-struck': 'Двойной штрих (доска)',
-      'script-bold': 'Жирный рукописный',
-      'fraktur-bold': 'Жирный фрактур',
-      'small-caps': 'Малые прописные',
-      fullwidth: 'Полноширинная эстетика',
-    },
-    styleNotes: {
-      'sans-bold': 'Высокая читаемость для заголовков био и хуков постов',
-      'sans-italic': 'Мягкий акцент внутри подписей',
-      'sans-bold-italic': 'Сильные акценты и разделители секций',
-      'serif-bold': 'Акцент в редакционном стиле',
-      monospace: 'Кодовые хендлы, даты и технические теги',
-      'double-struck': 'Акценты оформления',
-      'script-bold': 'Декоративные подписи в био',
-      'fraktur-bold': 'Готическое начертание',
-      'small-caps': 'Чистые метки профиля в виде прописных',
-      fullwidth: 'Широкие ретро-заголовки для соцсетей',
-    },
-    sampleText: 'Новый набор инструментов автора 2025',
-    accessibilityTitle: 'Примечание о доступности:',
-    accessibilityBody:
-      'Стилизованные символы Unicode относятся к блокам математических символов, поэтому скринридеры могут читать их по буквам или пропускать, а некоторые поисковые индексы их игнорируют. Используйте их умеренно для коротких акцентов, а не для целых абзацев.',
-    labelInput: 'Текст для стилизации',
-    placeholder: 'Введите короткий заголовок, строку био или CTA...',
-    previewEmpty: 'Предпросмотр',
-  },
-};
+  };
 
-type StyleId = keyof typeof STRINGS.en.styleNames;
+type StyleId = keyof typeof STRINGS_EN.styleNames;
 
 interface StyleDef {
   id: StyleId;
@@ -372,8 +140,8 @@ const STYLES: StyleDef[] = [
 ];
 
 export default function UnicodeTextFormatterTool() {
-  const { locale, t } = useLocale();
-  const s = STRINGS[locale];
+  const { t } = useLocale();
+  const s = useComponentStrings('unicode-fancy-text-formatter', STRINGS_EN);
   const [input, setInput] = useState(s.sampleText);
 
   const outputs = useMemo(
