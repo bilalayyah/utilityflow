@@ -30,6 +30,32 @@ const STRINGS = {
     downloadXml: 'Descargar .xml',
     generatedAria: 'Mapa del sitio XML generado',
   },
+  pt: {
+    lastmodLabel: 'Data de <lastmod> (opcional)',
+    changefreqLabel: 'Sugestão de <changefreq>',
+    priorityLabel: '<priority> padrão',
+    omitTag: 'Omitir tag',
+    deduplicateLabel: 'Remover URLs duplicadas exatas',
+    urlsLabel: 'URLs canônicas (uma URL https:// completa por linha)',
+    skippedInvalid: 'Ignoradas {n} linha(s) de URL inválida(s): ',
+    generatedLabel: 'sitemap.xml gerado ({n} URLs)',
+    copyXml: 'Copiar XML',
+    downloadXml: 'Baixar .xml',
+    generatedAria: 'Sitemap XML gerado',
+  },
+  fr: {
+    lastmodLabel: 'Date <lastmod> (facultatif)',
+    changefreqLabel: 'Indication <changefreq>',
+    priorityLabel: '<priority> par défaut',
+    omitTag: 'Omettre la balise',
+    deduplicateLabel: 'Supprimer les URL en double exactes',
+    urlsLabel: 'URL canoniques (une URL https:// complète par ligne)',
+    skippedInvalid: '{n} ligne(s) d\'URL non valide(s) ignorée(s) : ',
+    generatedLabel: 'sitemap.xml généré ({n} URL)',
+    copyXml: 'Copier le XML',
+    downloadXml: 'Télécharger le .xml',
+    generatedAria: 'Sitemap XML généré',
+  },
 };
 
 function escapeXml(str: string): string {
