@@ -91,8 +91,10 @@ function inferIoFormats(tool: ToolDefinition, locale: LocaleCode): string | unde
   else if (tool.id === 'ai-writing-assistant') value = 'Text -> Edited Text / TXT';
   else if (tool.id === 'ai-text-summarizer') value = 'Long Text -> Summary / TXT';
   if (!value) return undefined;
-  if (locale !== 'es') return value;
-  return IO_FORMATS_ES[value] ?? value;
+  if (locale === 'en') return value;
+  const map =
+    locale === 'es' ? IO_FORMATS_ES : locale === 'pt' ? IO_FORMATS_PT : IO_FORMATS_FR;
+  return map[value] ?? value;
 }
 
 const IO_FORMATS_ES: Record<string, string> = {
@@ -108,22 +110,48 @@ const IO_FORMATS_ES: Record<string, string> = {
   'Long Text -> Summary / TXT': 'Texto largo -> resumen / TXT',
 };
 
+const IO_FORMATS_PT: Record<string, string> = {
+  'Input: PDF · Output: PNG, JPG': 'Entrada: PDF · Saída: PNG, JPG',
+  'Input: PNG, JPG, WebP · Output: PDF': 'Entrada: PNG, JPG, WebP · Saída: PDF',
+  'Input: PDF · Output: Plain Text (.txt)': 'Entrada: PDF · Saída: texto simples (.txt)',
+  'Input: PDF · Output: PDF': 'Entrada: PDF · Saída: PDF',
+  'Markdown -> HTML Preview': 'Markdown -> pré-visualização de HTML',
+  'Text / Bytes <-> Base64': 'Texto / bytes <-> Base64',
+  'Text / URL -> PNG, SVG QR': 'Texto / URL -> QR em PNG, SVG',
+  'QR Image / Camera -> Text, URL': 'Imagem QR / câmera -> texto, URL',
+  'Text -> Edited Text / TXT': 'Texto -> texto editado / TXT',
+  'Long Text -> Summary / TXT': 'Texto longo -> resumo / TXT',
+};
+
+const IO_FORMATS_FR: Record<string, string> = {
+  'Input: PDF · Output: PNG, JPG': 'Entrée : PDF · Sortie : PNG, JPG',
+  'Input: PNG, JPG, WebP · Output: PDF': 'Entrée : PNG, JPG, WebP · Sortie : PDF',
+  'Input: PDF · Output: Plain Text (.txt)': 'Entrée : PDF · Sortie : texte brut (.txt)',
+  'Input: PDF · Output: PDF': 'Entrée : PDF · Sortie : PDF',
+  'Markdown -> HTML Preview': 'Markdown -> aperçu HTML',
+  'Text / Bytes <-> Base64': 'Texte / octets <-> Base64',
+  'Text / URL -> PNG, SVG QR': 'Texte / URL -> QR en PNG, SVG',
+  'QR Image / Camera -> Text, URL': 'Image QR / caméra -> texte, URL',
+  'Text -> Edited Text / TXT': 'Texte -> texte modifié / TXT',
+  'Long Text -> Summary / TXT': 'Texte long -> résumé / TXT',
+};
+
 /**
  * Dynamically builds the verified tool inventory from TOOLS_REGISTRY.
  * Excludes 'ai-tool-finder' itself so search results recommend actionable utility tools
  * across all 85 browser utilities + 2 AI writing/summarization tools (87 tools).
- * Pass locale 'es' for Spanish names, descriptions, keywords and URLs.
+ * Pass a non-English locale for localized names, descriptions, keywords and URLs.
  */
 export function buildStructuredToolInventory(locale: LocaleCode = 'en'): StructuredToolEntry[] {
   const tools =
-    locale === 'es'
-      ? getLocalizedTools('es')
-      : TOOLS_REGISTRY;
+    locale === 'en'
+      ? TOOLS_REGISTRY
+      : getLocalizedTools(locale);
   return tools.filter((tool) => tool.slug !== 'ai-tool-finder' && tool.id !== 'ai-tool-finder').map((tool) => {
     const category =
-      locale === 'es'
-        ? getLocalizedCategory(tool.categoryId, 'es')
-        : getCategoryById(tool.categoryId);
+      locale === 'en'
+        ? getCategoryById(tool.categoryId)
+        : getLocalizedCategory(tool.categoryId, locale);
     return {
       id: tool.id,
       slug: tool.slug,
