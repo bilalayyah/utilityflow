@@ -1,9 +1,9 @@
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
 import { useLocale } from '../../locales/LocaleContext';
+import { useComponentStrings } from '../../locales/componentStrings';
 
-const STRINGS = {
-  en: {
+const STRINGS_EN = {
     defaultTitle: 'JSON Formatter & Validator – Pretty Print & Minify | UtilityFlow',
     defaultDescription:
       'Format, validate, minify, and sort keys in JSON payloads instantaneously in your browser with line/column syntax error details.',
@@ -24,160 +24,7 @@ const STRINGS = {
     mobileSimulation: 'Mobile Search Snippet Simulation',
     titleFallback: 'Your SEO Title Appears Here',
     descFallback: 'Your meta description preview appears here.',
-  },
-  es: {
-    defaultTitle: 'Formateador y validador de JSON – Imprimir bonito y minificar | UtilityFlow',
-    defaultDescription:
-      'Formatea, valida, minifica y ordena las claves de cargas útiles JSON al instante en tu navegador, con detalles de errores de sintaxis por línea y columna.',
-    desktopSerp: 'SERP de escritorio (título de ~580 px)',
-    mobileSerp: 'SERP móvil (desc. de ~120 caracteres)',
-    copyTitleMeta: 'Copiar título y meta',
-    seoTitleLabel: 'Título SEO',
-    titleMetrics: '{chars} caracteres · ~{px} px / máx. 580 px',
-    metaDescriptionLabel: 'Metadescripción',
-    descMetrics: '{chars} caracteres · ~{px} px',
-    pageUrlLabel: 'URL de la página (para la vista previa de la ruta de navegación)',
-    siteNameLabel: 'Nombre del sitio',
-    boldKeywordLabel: 'Palabra clave en negrita',
-    optionalPlaceholder: 'Opcional',
-    datePrefixLabel: 'Prefijo de fecha',
-    datePlaceholder: 'p. ej., 12 nov 2025',
-    desktopSimulation: 'Simulación de fragmento de búsqueda de escritorio',
-    mobileSimulation: 'Simulación de fragmento de búsqueda móvil',
-    titleFallback: 'Tu título SEO aparece aquí',
-    descFallback: 'Aquí aparece la vista previa de tu metadescripción.',
-  },
-  pt: {
-    defaultTitle: 'Formatador e validador de JSON – Formatar e minificar | UtilityFlow',
-    defaultDescription: 'Formate, valide, minifique e ordene as chaves de cargas JSON instantaneamente no navegador, com detalhes de erros de sintaxe por linha e coluna.',
-    desktopSerp: 'SERP de desktop (título de ~580 px)',
-    mobileSerp: 'SERP de celular (desc. de ~120 caracteres)',
-    copyTitleMeta: 'Copiar título e meta',
-    seoTitleLabel: 'Título de SEO',
-    titleMetrics: '{chars} caracteres · ~{px} px / máx. 580 px',
-    metaDescriptionLabel: 'Meta descrição',
-    descMetrics: '{chars} caracteres · ~{px} px',
-    pageUrlLabel: 'URL da página (para pré-visualização do breadcrumb)',
-    siteNameLabel: 'Nome do site',
-    boldKeywordLabel: 'Palavra-chave em negrito',
-    optionalPlaceholder: 'Opcional',
-    datePrefixLabel: 'Prefixo de data',
-    datePlaceholder: 'ex.: 12 de nov. de 2025',
-    desktopSimulation: 'Simulação de snippet de pesquisa no desktop',
-    mobileSimulation: 'Simulação de snippet de pesquisa no celular',
-    titleFallback: 'Seu título de SEO aparece aqui',
-    descFallback: 'A pré-visualização da sua meta descrição aparece aqui.',
-  },
-  fr: {
-    defaultTitle: 'Formateur et validateur JSON – Mise en forme et minification | UtilityFlow',
-    defaultDescription: 'Formatez, validez, minifiez et triez les clés des charges JSON instantanément dans votre navigateur, avec les détails des erreurs de syntaxe par ligne et colonne.',
-    desktopSerp: 'SERP sur ordinateur (titre ~580 px)',
-    mobileSerp: 'SERP mobile (desc. ~120 caractères)',
-    copyTitleMeta: 'Copier le titre et la méta',
-    seoTitleLabel: 'Titre SEO',
-    titleMetrics: '{chars} caractères · ~{px} px / 580 px max',
-    metaDescriptionLabel: 'Méta-description',
-    descMetrics: '{chars} caractères · ~{px} px',
-    pageUrlLabel: 'URL de la page (pour l\'aperçu du fil d\'Ariane)',
-    siteNameLabel: 'Nom du site',
-    boldKeywordLabel: 'Mot-clé en gras',
-    optionalPlaceholder: 'Facultatif',
-    datePrefixLabel: 'Préfixe de date',
-    datePlaceholder: 'ex. : 12 nov. 2025',
-    desktopSimulation: 'Simulation d\'extrait de recherche sur ordinateur',
-    mobileSimulation: 'Simulation d\'extrait de recherche mobile',
-    titleFallback: 'Votre titre SEO apparaît ici',
-    descFallback: 'L\'aperçu de votre méta-description apparaît ici.',
-  },
-  de: {
-    defaultTitle: 'JSON-Formatter & Validator – Schön drucken & minimieren | UtilityFlow',
-    defaultDescription:
-      'Formatieren, validieren, minimieren und sortieren Sie Schlüssel in JSON-Payloads sofort in Ihrem Browser – mit Syntaxfehlerdetails nach Zeile und Spalte.',
-    desktopSerp: 'Desktop-SERP (Titel ~580 px)',
-    mobileSerp: 'Mobile-SERP (Beschr. ~120 Zeichen)',
-    copyTitleMeta: 'Titel & Meta kopieren',
-    seoTitleLabel: 'SEO-Titel',
-    titleMetrics: '{chars} Zeichen · ~{px} px / max. 580 px',
-    metaDescriptionLabel: 'Meta-Beschreibung',
-    descMetrics: '{chars} Zeichen · ~{px} px',
-    pageUrlLabel: 'Seiten-URL (für Breadcrumb-Vorschau)',
-    siteNameLabel: 'Website-Name',
-    boldKeywordLabel: 'Fettes Schlüsselwort',
-    optionalPlaceholder: 'Optional',
-    datePrefixLabel: 'Datumspräfix',
-    datePlaceholder: 'z. B. 12. Nov. 2025',
-    desktopSimulation: 'Desktop-Suchergebnis-Simulation',
-    mobileSimulation: 'Mobile-Suchergebnis-Simulation',
-    titleFallback: 'Ihr SEO-Titel erscheint hier',
-    descFallback: 'Hier erscheint die Vorschau Ihrer Meta-Beschreibung.',
-  },
-  it: {
-    defaultTitle: 'Formattatore e validatore JSON – Stampa formattata e minificazione | UtilityFlow',
-    defaultDescription:
-      'Formatta, convalida, minimizza e ordina le chiavi dei payload JSON istantaneamente nel browser, con dettagli di errore di sintassi per riga e colonna.',
-    desktopSerp: 'SERP desktop (titolo ~580 px)',
-    mobileSerp: 'SERP mobile (descr. ~120 caratteri)',
-    copyTitleMeta: 'Copia titolo e meta',
-    seoTitleLabel: 'Titolo SEO',
-    titleMetrics: '{chars} caratteri · ~{px} px / max 580 px',
-    metaDescriptionLabel: 'Meta description',
-    descMetrics: '{chars} caratteri · ~{px} px',
-    pageUrlLabel: 'URL pagina (per anteprima breadcrumb)',
-    siteNameLabel: 'Nome sito',
-    boldKeywordLabel: 'Parola chiave in grassetto',
-    optionalPlaceholder: 'Facoltativo',
-    datePrefixLabel: 'Prefisso data',
-    datePlaceholder: 'es. 12 nov 2025',
-    desktopSimulation: 'Simulazione snippet di ricerca desktop',
-    mobileSimulation: 'Simulazione snippet di ricerca mobile',
-    titleFallback: 'Il titolo SEO compare qui',
-    descFallback: 'Anteprima della meta description visualizzata qui.',
-  },
-  id: {
-    defaultTitle: 'JSON Formatter & Validator – Pretty Print & Minify | UtilityFlow',
-    defaultDescription:
-      'Format, validasi, minifikasi, dan urutkan kunci dalam payload JSON secara instan di browser Anda dengan detail kesalahan sintaks baris/kolom.',
-    desktopSerp: 'SERP Desktop (~580px judul)',
-    mobileSerp: 'SERP Seluler (~120 karakter deskripsi)',
-    copyTitleMeta: 'Salin Judul & Meta',
-    seoTitleLabel: 'Judul SEO',
-    titleMetrics: '{chars} karakter · ~{px} px / maks 580 px',
-    metaDescriptionLabel: 'Deskripsi Meta',
-    descMetrics: '{chars} karakter · ~{px} px',
-    pageUrlLabel: 'URL Halaman (untuk pratinjau breadcrumb)',
-    siteNameLabel: 'Nama Situs',
-    boldKeywordLabel: 'Kata Kunci Tebal',
-    optionalPlaceholder: 'Opsional',
-    datePrefixLabel: 'Awalan Tanggal',
-    datePlaceholder: 'cth. 12 Nov 2025',
-    desktopSimulation: 'Simulasi Cuplikan Pencarian Desktop',
-    mobileSimulation: 'Simulasi Cuplikan Pencarian Seluler',
-    titleFallback: 'Judul SEO Anda Muncul di Sini',
-    descFallback: 'Pratinjau deskripsi meta Anda muncul di sini.',
-  },
-  ru: {
-    defaultTitle: 'Форматировщик и валидатор JSON — красивая печать и минификация | UtilityFlow',
-    defaultDescription:
-      'Форматируйте, проверяйте, минифицируйте и сортируйте ключи в JSON-данных мгновенно в браузере, с деталями синтаксических ошибок по строкам и столбцам.',
-    desktopSerp: 'SERP на компьютере (~580px заголовок)',
-    mobileSerp: 'Мобильный SERP (~120 симв. описания)',
-    copyTitleMeta: 'Копировать заголовок и мета',
-    seoTitleLabel: 'SEO-заголовок',
-    titleMetrics: '{chars} симв. · ~{px} px / макс. 580 px',
-    metaDescriptionLabel: 'Метаописание',
-    descMetrics: '{chars} симв. · ~{px} px',
-    pageUrlLabel: 'URL страницы (для предпросмотра хлебных крошек)',
-    siteNameLabel: 'Название сайта',
-    boldKeywordLabel: 'Жирное ключевое слово',
-    optionalPlaceholder: 'Необязательно',
-    datePrefixLabel: 'Префикс даты',
-    datePlaceholder: 'напр. 12 ноя 2025',
-    desktopSimulation: 'Симуляция поискового сниппета на компьютере',
-    mobileSimulation: 'Симуляция поискового сниппета на мобильном',
-    titleFallback: 'Здесь появится ваш SEO-заголовок',
-    descFallback: 'Здесь появится предпросмотр вашего метаописания.',
-  },
-};
+  };
 
 function measureTextWidthPx(text: string, font: string): number {
   if (typeof document === 'undefined') return text.length * 9;
@@ -194,8 +41,8 @@ function truncateToWidth(text: string, maxChars: number): string {
 }
 
 export default function SerpSnippetPreviewTool() {
-  const { locale, t } = useLocale();
-  const s = STRINGS[locale];
+  const { t } = useLocale();
+  const s = useComponentStrings('serp-snippet-preview', STRINGS_EN);
   const [title, setTitle] = useState(s.defaultTitle);
   const [url, setUrl] = useState('https://utilityflow.online/json-formatter/');
   const [description, setDescription] = useState(s.defaultDescription);

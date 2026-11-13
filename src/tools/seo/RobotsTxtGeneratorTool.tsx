@@ -2,9 +2,9 @@ import { Download, Plus, Trash2 } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
 import { useLocale } from '../../locales/LocaleContext';
+import { useComponentStrings } from '../../locales/componentStrings';
 
-const STRINGS = {
-  en: {
+const STRINGS_EN = {
     starterTemplates: 'Starter Templates:',
     allowAll: 'Allow All Crawlers',
     standardWebApp: 'Standard Web App / SaaS',
@@ -19,120 +19,7 @@ const STRINGS = {
     crawlDelayPlaceholder: 'None',
     sitemapUrlsLabel: 'Sitemap URLs (one per line)',
     generatedLabel: 'Generated robots.txt',
-  },
-  es: {
-    starterTemplates: 'Plantillas iniciales:',
-    allowAll: 'Permitir todos los rastreadores',
-    standardWebApp: 'Aplicación web / SaaS estándar',
-    wordpressClean: 'WordPress limpio',
-    stagingBlockAll: 'Entorno de pruebas (bloquear todo)',
-    crawlerRules: 'Reglas de rutas para rastreadores',
-    addRule: 'Agregar regla',
-    directiveAria: 'Directiva',
-    pathAria: 'Ruta',
-    deleteRuleAria: 'Eliminar regla',
-    crawlDelayLabel: 'Crawl-delay (segundos, opcional)',
-    crawlDelayPlaceholder: 'Ninguno',
-    sitemapUrlsLabel: 'URL de sitemaps (una por línea)',
-    generatedLabel: 'robots.txt generado',
-  },
-  pt: {
-    starterTemplates: 'Modelos iniciais:',
-    allowAll: 'Permitir todos os rastreadores',
-    standardWebApp: 'Aplicativo web / SaaS padrão',
-    wordpressClean: 'WordPress limpo',
-    stagingBlockAll: 'Staging (bloquear tudo)',
-    crawlerRules: 'Regras de caminho para rastreadores',
-    addRule: 'Adicionar regra',
-    directiveAria: 'Diretiva',
-    pathAria: 'Caminho',
-    deleteRuleAria: 'Excluir regra',
-    crawlDelayLabel: 'Crawl-delay (segundos, opcional)',
-    crawlDelayPlaceholder: 'Nenhum',
-    sitemapUrlsLabel: 'URLs de sitemap (uma por linha)',
-    generatedLabel: 'robots.txt gerado',
-  },
-  fr: {
-    starterTemplates: 'Modèles de départ :',
-    allowAll: 'Autoriser tous les robots d\'exploration',
-    standardWebApp: 'Application web / SaaS standard',
-    wordpressClean: 'WordPress épuré',
-    stagingBlockAll: 'Préproduction (tout bloquer)',
-    crawlerRules: 'Règles de chemin pour les robots',
-    addRule: 'Ajouter une règle',
-    directiveAria: 'Directive',
-    pathAria: 'Chemin',
-    deleteRuleAria: 'Supprimer la règle',
-    crawlDelayLabel: 'Crawl-delay (secondes, facultatif)',
-    crawlDelayPlaceholder: 'Aucun',
-    sitemapUrlsLabel: 'URL de sitemap (une par ligne)',
-    generatedLabel: 'robots.txt généré',
-  },
-  de: {
-    starterTemplates: 'Startvorlagen:',
-    allowAll: 'Alle Crawler erlauben',
-    standardWebApp: 'Standard-Web-App / SaaS',
-    wordpressClean: 'WordPress (sauber)',
-    stagingBlockAll: 'Staging (alle blockieren)',
-    crawlerRules: 'Crawler-Pfadregeln',
-    addRule: 'Regel hinzufügen',
-    directiveAria: 'Anweisung',
-    pathAria: 'Pfad',
-    deleteRuleAria: 'Regel löschen',
-    crawlDelayLabel: 'Crawl-Delay (Sekunden, optional)',
-    crawlDelayPlaceholder: 'Keiner',
-    sitemapUrlsLabel: 'Sitemap-URLs (eine pro Zeile)',
-    generatedLabel: 'Generierte robots.txt',
-  },
-  it: {
-    starterTemplates: 'Modelli di partenza:',
-    allowAll: 'Consenti tutti i crawler',
-    standardWebApp: 'Web app standard / SaaS',
-    wordpressClean: 'WordPress pulito',
-    stagingBlockAll: 'Staging (blocca tutto)',
-    crawlerRules: 'Regole di percorso per i crawler',
-    addRule: 'Aggiungi regola',
-    directiveAria: 'Direttiva',
-    pathAria: 'Percorso',
-    deleteRuleAria: 'Elimina regola',
-    crawlDelayLabel: 'Crawl-delay (secondi, facoltativo)',
-    crawlDelayPlaceholder: 'Nessuno',
-    sitemapUrlsLabel: 'URL sitemap (uno per riga)',
-    generatedLabel: 'robots.txt generato',
-  },
-  id: {
-    starterTemplates: 'Template Awal:',
-    allowAll: 'Izinkan Semua Crawler',
-    standardWebApp: 'Aplikasi Web / SaaS Standar',
-    wordpressClean: 'WordPress Bersih',
-    stagingBlockAll: 'Staging (Blokir Semua)',
-    crawlerRules: 'Aturan Path Crawler',
-    addRule: 'Tambah Aturan',
-    directiveAria: 'Direktif',
-    pathAria: 'Path',
-    deleteRuleAria: 'Hapus aturan',
-    crawlDelayLabel: 'Crawl-delay (detik, opsional)',
-    crawlDelayPlaceholder: 'Tidak ada',
-    sitemapUrlsLabel: 'URL Sitemap (satu per baris)',
-    generatedLabel: 'robots.txt yang Dihasilkan',
-  },
-  ru: {
-    starterTemplates: 'Стартовые шаблоны:',
-    allowAll: 'Разрешить всех краулеров',
-    standardWebApp: 'Стандартное веб-приложение / SaaS',
-    wordpressClean: 'Чистый WordPress',
-    stagingBlockAll: 'Staging (заблокировать всё)',
-    crawlerRules: 'Правила путей краулера',
-    addRule: 'Добавить правило',
-    directiveAria: 'Директива',
-    pathAria: 'Путь',
-    deleteRuleAria: 'Удалить правило',
-    crawlDelayLabel: 'Crawl-delay (секунды, необязательно)',
-    crawlDelayPlaceholder: 'Нет',
-    sitemapUrlsLabel: 'URL карт сайта (по одному в строке)',
-    generatedLabel: 'Сгенерированный robots.txt',
-  },
-};
+  };
 
 interface RuleRow {
   id: number;
@@ -142,8 +29,8 @@ interface RuleRow {
 }
 
 export default function RobotsTxtGeneratorTool() {
-  const { locale, t } = useLocale();
-  const s = STRINGS[locale];
+  const { t } = useLocale();
+  const s = useComponentStrings('robots-txt-generator', STRINGS_EN);
   const [rules, setRules] = useState<RuleRow[]>([
     { id: 1, userAgent: '*', directive: 'Allow', path: '/' },
     { id: 2, userAgent: '*', directive: 'Disallow', path: '/admin/' },

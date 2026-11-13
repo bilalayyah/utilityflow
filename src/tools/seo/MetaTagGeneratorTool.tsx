@@ -2,9 +2,9 @@ import { Download } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
 import { useLocale } from '../../locales/LocaleContext';
+import { useComponentStrings } from '../../locales/componentStrings';
 
-const STRINGS = {
-  en: {
+const STRINGS_EN = {
     defaultTitle: 'UtilityFlow – Fast Browser-Based Online Utility Tools',
     defaultDescription:
       'Explore 85 fast, privacy-first browser tools for text editing, developer encoding, finance calculators, PDF workflows, and SEO.',
@@ -27,174 +27,7 @@ const STRINGS = {
     socialPreviewFallback: 'Social Share Preview',
     untitledPage: 'Untitled Page',
     metaSnippetFallback: 'Meta description snippet appears here.',
-  },
-  es: {
-    defaultTitle: 'UtilityFlow – Herramientas de utilidad rápidas en el navegador',
-    defaultDescription:
-      'Explora 85 herramientas rápidas y privadas en el navegador para editar texto, codificar, calcular finanzas, trabajar con PDF y SEO.',
-    pageTitleLabel: 'Título de la página (<title> / og:title)',
-    titleChars: '{n} caracteres (ideal: 30–60)',
-    metaDescriptionLabel: 'Metadescripción',
-    descChars: '{n} caracteres (ideal: 120–160)',
-    canonicalUrlLabel: 'URL canónica',
-    ogImageLabel: 'URL de la imagen Open Graph (se recomienda 1200×630)',
-    siteNameLabel: 'Nombre del sitio (og:site_name)',
-    ogTypeLabel: 'og:type',
-    twitterCardLabel: 'Twitter Card',
-    robotsLabel: 'Robots:',
-    robotsFollowAria: 'Directiva de seguimiento de robots',
-    includeViewportLabel: 'Incluir etiquetas charset y viewport',
-    generatedTagsLabel: 'Etiquetas HTML <head> generadas',
-    copyHtml: 'Copiar HTML',
-    downloadHtml: 'Descargar .html',
-    socialPreviewLabel: 'Vista previa de la tarjeta para compartir',
-    socialPreviewFallback: 'Vista previa para compartir en redes',
-    untitledPage: 'Página sin título',
-    metaSnippetFallback: 'Aquí aparece el fragmento de la metadescripción.',
-  },
-  pt: {
-    defaultTitle: 'UtilityFlow – Ferramentas de utilidade rápidas no navegador',
-    defaultDescription: 'Explore 85 ferramentas rápidas e focadas em privacidade no navegador para editar texto, codificar, calcular finanças, trabalhar com PDF e SEO.',
-    pageTitleLabel: 'Título da página (<title> / og:title)',
-    titleChars: '{n} caracteres (ideal: 30–60)',
-    metaDescriptionLabel: 'Meta descrição',
-    descChars: '{n} caracteres (ideal: 120–160)',
-    canonicalUrlLabel: 'URL canônica',
-    ogImageLabel: 'URL da imagem Open Graph (recomendado: 1200×630)',
-    siteNameLabel: 'Nome do site (og:site_name)',
-    ogTypeLabel: 'og:type',
-    twitterCardLabel: 'Twitter Card',
-    robotsLabel: 'Robots:',
-    robotsFollowAria: 'Diretiva de follow dos robots',
-    includeViewportLabel: 'Incluir tags charset e viewport',
-    generatedTagsLabel: 'Tags HTML <head> geradas',
-    copyHtml: 'Copiar HTML',
-    downloadHtml: 'Baixar .html',
-    socialPreviewLabel: 'Pré-visualização do cartão de compartilhamento',
-    socialPreviewFallback: 'Pré-visualização de compartilhamento',
-    untitledPage: 'Página sem título',
-    metaSnippetFallback: 'O trecho da meta descrição aparece aqui.',
-  },
-  fr: {
-    defaultTitle: 'UtilityFlow – Outils utilitaires rapides dans le navigateur',
-    defaultDescription: 'Découvrez 85 outils rapides et respectueux de la vie privée dans le navigateur pour modifier du texte, encoder, calculer des finances, travailler avec des PDF et le SEO.',
-    pageTitleLabel: 'Titre de la page (<title> / og:title)',
-    titleChars: '{n} caractères (idéal : 30–60)',
-    metaDescriptionLabel: 'Méta-description',
-    descChars: '{n} caractères (idéal : 120–160)',
-    canonicalUrlLabel: 'URL canonique',
-    ogImageLabel: 'URL de l\'image Open Graph (1200×630 recommandé)',
-    siteNameLabel: 'Nom du site (og:site_name)',
-    ogTypeLabel: 'og:type',
-    twitterCardLabel: 'Twitter Card',
-    robotsLabel: 'Robots :',
-    robotsFollowAria: 'Directive de suivi des robots',
-    includeViewportLabel: 'Inclure les balises charset et viewport',
-    generatedTagsLabel: 'Balises HTML <head> générées',
-    copyHtml: 'Copier le HTML',
-    downloadHtml: 'Télécharger le .html',
-    socialPreviewLabel: 'Aperçu de la carte de partage',
-    socialPreviewFallback: 'Aperçu du partage',
-    untitledPage: 'Page sans titre',
-    metaSnippetFallback: 'L\'extrait de la méta-description apparaît ici.',
-  },
-  de: {
-    defaultTitle: 'UtilityFlow – Schnelle browserbasierte Online-Utility-Tools',
-    defaultDescription:
-      'Entdecken Sie 85 schnelle, datenschutzfreundliche Browser-Tools für Textbearbeitung, Entwickler-Codierung, Finanzrechner, PDF-Workflows und SEO.',
-    pageTitleLabel: 'Seitentitel (<title> / og:title)',
-    titleChars: '{n} Zeichen (ideal 30–60)',
-    metaDescriptionLabel: 'Meta-Beschreibung',
-    descChars: '{n} Zeichen (ideal 120–160)',
-    canonicalUrlLabel: 'Canonical-URL',
-    ogImageLabel: 'Open-Graph-Bild-URL (1200×630 empfohlen)',
-    siteNameLabel: 'Website-Name (og:site_name)',
-    ogTypeLabel: 'og:type',
-    twitterCardLabel: 'Twitter-Card',
-    robotsLabel: 'Robots:',
-    robotsFollowAria: 'Robots-Follow-Anweisung',
-    includeViewportLabel: 'Charset- & Viewport-Tags einfügen',
-    generatedTagsLabel: 'Generierte HTML-<head>-Tags',
-    copyHtml: 'HTML kopieren',
-    downloadHtml: '.html herunterladen',
-    socialPreviewLabel: 'Vorschau der Social-Sharing-Karte',
-    socialPreviewFallback: 'Social-Sharing-Vorschau',
-    untitledPage: 'Seite ohne Titel',
-    metaSnippetFallback: 'Hier erscheint der Meta-Beschreibungs-Ausschnitt.',
-  },
-  it: {
-    defaultTitle: 'UtilityFlow – Strumenti online veloci basati sul browser',
-    defaultDescription:
-      'Esplora 85 strumenti browser veloci e attenti alla privacy per modifica di testi, codifica per sviluppatori, calcolatori finanziari, flussi di lavoro PDF e SEO.',
-    pageTitleLabel: 'Titolo pagina (<title> / og:title)',
-    titleChars: '{n} caratteri (ideale 30–60)',
-    metaDescriptionLabel: 'Meta description',
-    descChars: '{n} caratteri (ideale 120–160)',
-    canonicalUrlLabel: 'URL canonical',
-    ogImageLabel: 'URL immagine Open Graph (consigliato 1200×630)',
-    siteNameLabel: 'Nome sito (og:site_name)',
-    ogTypeLabel: 'og:type',
-    twitterCardLabel: 'Twitter Card',
-    robotsLabel: 'Robots:',
-    robotsFollowAria: 'Direttiva follow per i robots',
-    includeViewportLabel: 'Includi tag charset e viewport',
-    generatedTagsLabel: 'Tag HTML <head> generati',
-    copyHtml: 'Copia HTML',
-    downloadHtml: 'Scarica .html',
-    socialPreviewLabel: 'Anteprima della scheda di condivisione social',
-    socialPreviewFallback: 'Anteprima di condivisione social',
-    untitledPage: 'Pagina senza titolo',
-    metaSnippetFallback: 'Qui compare il frammento della meta description.',
-  },
-  id: {
-    defaultTitle: 'UtilityFlow – Alat Utilitas Online Cepat Berbasis Browser',
-    defaultDescription:
-      'Jelajahi 85 alat browser cepat yang mengutamakan privasi untuk pengeditan teks, encoding developer, kalkulator keuangan, alur kerja PDF, dan SEO.',
-    pageTitleLabel: 'Judul Halaman (<title> / og:title)',
-    titleChars: '{n} karakter (ideal 30–60)',
-    metaDescriptionLabel: 'Deskripsi Meta',
-    descChars: '{n} karakter (ideal 120–160)',
-    canonicalUrlLabel: 'URL Kanonis',
-    ogImageLabel: 'URL Gambar Open Graph (disarankan 1200×630)',
-    siteNameLabel: 'Nama Situs (og:site_name)',
-    ogTypeLabel: 'og:type',
-    twitterCardLabel: 'Kartu Twitter',
-    robotsLabel: 'Robots:',
-    robotsFollowAria: 'Direktif follow robots',
-    includeViewportLabel: 'Sertakan tag charset & viewport',
-    generatedTagsLabel: 'Tag HTML <head> yang Dihasilkan',
-    copyHtml: 'Salin HTML',
-    downloadHtml: 'Unduh .html',
-    socialPreviewLabel: 'Pratinjau Kartu Berbagi Sosial',
-    socialPreviewFallback: 'Pratinjau Berbagi Sosial',
-    untitledPage: 'Halaman Tanpa Judul',
-    metaSnippetFallback: 'Cuplikan deskripsi meta muncul di sini.',
-  },
-  ru: {
-    defaultTitle: 'UtilityFlow — быстрые браузерные онлайн-инструменты',
-    defaultDescription:
-      'Изучите 85 быстрых браузерных инструментов с приоритетом приватности: редактирование текста, кодирование для разработчиков, финансовые калькуляторы, PDF-процессы и SEO.',
-    pageTitleLabel: 'Заголовок страницы (<title> / og:title)',
-    titleChars: '{n} симв. (идеально 30–60)',
-    metaDescriptionLabel: 'Метаописание',
-    descChars: '{n} симв. (идеально 120–160)',
-    canonicalUrlLabel: 'Канонический URL',
-    ogImageLabel: 'URL изображения Open Graph (рекомендуется 1200×630)',
-    siteNameLabel: 'Название сайта (og:site_name)',
-    ogTypeLabel: 'og:type',
-    twitterCardLabel: 'Twitter Card',
-    robotsLabel: 'Robots:',
-    robotsFollowAria: 'Директива follow для роботов',
-    includeViewportLabel: 'Включать теги charset и viewport',
-    generatedTagsLabel: 'Сгенерированные HTML-теги <head>',
-    copyHtml: 'Копировать HTML',
-    downloadHtml: 'Скачать .html',
-    socialPreviewLabel: 'Предпросмотр карточки для соцсетей',
-    socialPreviewFallback: 'Предпросмотр карточки для соцсетей',
-    untitledPage: 'Страница без названия',
-    metaSnippetFallback: 'Здесь появится фрагмент метаописания.',
-  },
-};
+  };
 
 function escAttr(value: string): string {
   return value
@@ -205,8 +38,8 @@ function escAttr(value: string): string {
 }
 
 export default function MetaTagGeneratorTool() {
-  const { locale, t } = useLocale();
-  const s = STRINGS[locale];
+  const { t } = useLocale();
+  const s = useComponentStrings('meta-tag-generator', STRINGS_EN);
   const [title, setTitle] = useState(s.defaultTitle);
   const [description, setDescription] = useState(s.defaultDescription);
   const [canonicalUrl, setCanonicalUrl] = useState('https://utilityflow.online/');

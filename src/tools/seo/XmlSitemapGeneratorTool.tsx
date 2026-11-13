@@ -2,9 +2,9 @@ import { Download } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
 import { useLocale } from '../../locales/LocaleContext';
+import { useComponentStrings } from '../../locales/componentStrings';
 
-const STRINGS = {
-  en: {
+const STRINGS_EN = {
     lastmodLabel: '<lastmod> Date (Optional)',
     changefreqLabel: '<changefreq> Hint',
     priorityLabel: 'Default <priority>',
@@ -16,99 +16,7 @@ const STRINGS = {
     copyXml: 'Copy XML',
     downloadXml: 'Download .xml',
     generatedAria: 'Generated XML sitemap',
-  },
-  es: {
-    lastmodLabel: 'Fecha de <lastmod> (opcional)',
-    changefreqLabel: 'Sugerencia de <changefreq>',
-    priorityLabel: '<priority> predeterminada',
-    omitTag: 'Omitir etiqueta',
-    deduplicateLabel: 'Eliminar URL duplicadas exactas',
-    urlsLabel: 'URL canónicas (una URL https:// completa por línea)',
-    skippedInvalid: 'Se omitieron {n} línea(s) de URL no válidas: ',
-    generatedLabel: 'sitemap.xml generado ({n} URL)',
-    copyXml: 'Copiar XML',
-    downloadXml: 'Descargar .xml',
-    generatedAria: 'Mapa del sitio XML generado',
-  },
-  pt: {
-    lastmodLabel: 'Data de <lastmod> (opcional)',
-    changefreqLabel: 'Sugestão de <changefreq>',
-    priorityLabel: '<priority> padrão',
-    omitTag: 'Omitir tag',
-    deduplicateLabel: 'Remover URLs duplicadas exatas',
-    urlsLabel: 'URLs canônicas (uma URL https:// completa por linha)',
-    skippedInvalid: 'Ignoradas {n} linha(s) de URL inválida(s): ',
-    generatedLabel: 'sitemap.xml gerado ({n} URLs)',
-    copyXml: 'Copiar XML',
-    downloadXml: 'Baixar .xml',
-    generatedAria: 'Sitemap XML gerado',
-  },
-  fr: {
-    lastmodLabel: 'Date <lastmod> (facultatif)',
-    changefreqLabel: 'Indication <changefreq>',
-    priorityLabel: '<priority> par défaut',
-    omitTag: 'Omettre la balise',
-    deduplicateLabel: 'Supprimer les URL en double exactes',
-    urlsLabel: 'URL canoniques (une URL https:// complète par ligne)',
-    skippedInvalid: '{n} ligne(s) d\'URL non valide(s) ignorée(s) : ',
-    generatedLabel: 'sitemap.xml généré ({n} URL)',
-    copyXml: 'Copier le XML',
-    downloadXml: 'Télécharger le .xml',
-    generatedAria: 'Sitemap XML généré',
-  },
-  de: {
-    lastmodLabel: '<lastmod>-Datum (optional)',
-    changefreqLabel: '<changefreq>-Hinweis',
-    priorityLabel: 'Standard-<priority>',
-    omitTag: 'Tag weglassen',
-    deduplicateLabel: 'Exakte URLs deduplizieren',
-    urlsLabel: 'Canonical-URLs (eine vollständige https://-URL pro Zeile)',
-    skippedInvalid: '{n} ungültige URL-Zeile(n) übersprungen: ',
-    generatedLabel: 'Generierte sitemap.xml ({n} URLs)',
-    copyXml: 'XML kopieren',
-    downloadXml: '.xml herunterladen',
-    generatedAria: 'Generierte XML-Sitemap',
-  },
-  it: {
-    lastmodLabel: 'Data <lastmod> (facoltativo)',
-    changefreqLabel: 'Suggerimento <changefreq>',
-    priorityLabel: '<priority> predefinito',
-    omitTag: 'Ometti tag',
-    deduplicateLabel: 'Rimuovi URL duplicati esatti',
-    urlsLabel: 'URL canonical (un URL https:// completo per riga)',
-    skippedInvalid: '{n} riga/e di URL non valido saltata/e: ',
-    generatedLabel: 'sitemap.xml generata ({n} URL)',
-    copyXml: 'Copia XML',
-    downloadXml: 'Scarica .xml',
-    generatedAria: 'Sitemap XML generata',
-  },
-  id: {
-    lastmodLabel: 'Tanggal <lastmod> (Opsional)',
-    changefreqLabel: 'Petunjuk <changefreq>',
-    priorityLabel: '<priority> Default',
-    omitTag: 'Hilangkan tag',
-    deduplicateLabel: 'Deduplikasi URL yang persis sama',
-    urlsLabel: 'URL Kanonis (Satu URL https:// lengkap per baris)',
-    skippedInvalid: '{n} baris URL tidak valid dilewati: ',
-    generatedLabel: 'sitemap.xml yang dihasilkan ({n} URL)',
-    copyXml: 'Salin XML',
-    downloadXml: 'Unduh .xml',
-    generatedAria: 'Sitemap XML yang dihasilkan',
-  },
-  ru: {
-    lastmodLabel: 'Дата <lastmod> (необязательно)',
-    changefreqLabel: 'Подсказка <changefreq>',
-    priorityLabel: '<priority> по умолчанию',
-    omitTag: 'Пропустить тег',
-    deduplicateLabel: 'Удалять дубликаты точных URL',
-    urlsLabel: 'Канонические URL (по одному полному https:// URL в строке)',
-    skippedInvalid: 'Пропущено неверных строк URL ({n}): ',
-    generatedLabel: 'Сгенерированный sitemap.xml ({n} URL)',
-    copyXml: 'Копировать XML',
-    downloadXml: 'Скачать .xml',
-    generatedAria: 'Сгенерированная XML-карта сайта',
-  },
-};
+  };
 
 function escapeXml(str: string): string {
   return str
@@ -120,8 +28,8 @@ function escapeXml(str: string): string {
 }
 
 export default function XmlSitemapGeneratorTool() {
-  const { locale, t } = useLocale();
-  const s = STRINGS[locale];
+  const { t } = useLocale();
+  const s = useComponentStrings('xml-sitemap-generator', STRINGS_EN);
   const [urlsInput, setUrlsInput] = useState(
     'https://utilityflow.online/\nhttps://utilityflow.online/tools/\nhttps://utilityflow.online/word-counter/\nhttps://utilityflow.online/json-formatter/\nhttps://utilityflow.online/qr-code-generator/'
   );

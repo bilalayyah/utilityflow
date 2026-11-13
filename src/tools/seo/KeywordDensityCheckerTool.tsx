@@ -1,9 +1,9 @@
 import { Info } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { useLocale } from '../../locales/LocaleContext';
+import { useComponentStrings } from '../../locales/componentStrings';
 
-const STRINGS = {
-  en: {
+const STRINGS_EN = {
     sampleContent:
       'Technical SEO starts with clean crawlable URLs, accurate canonical tags, and structured XML sitemaps. When publishers write helpful content focused on user intent rather than keyword stuffing, search engines understand topic depth naturally. Audit your headings, meta descriptions, and internal links regularly.',
     defaultTargetKeyword: 'technical seo',
@@ -28,186 +28,7 @@ const STRINGS = {
     termHeader: 'Term / N-gram',
     occurrencesHeader: 'Occurrences',
     shareHeader: 'Share (%)',
-  },
-  es: {
-    sampleContent:
-      'El SEO técnico comienza con URL limpias y rastreables, etiquetas canónicas precisas y sitemaps XML estructurados. Cuando los editores escriben contenido útil centrado en la intención del usuario en lugar de rellenar palabras clave, los motores de búsqueda comprenden la profundidad del tema de forma natural. Audita tus encabezados, metadescripciones y enlaces internos con regularidad.',
-    defaultTargetKeyword: 'seo técnico',
-    guidanceTitle: 'Orientación editorial:',
-    guidanceBody:
-      'Los motores de búsqueda modernos no premian alcanzar una cuota fija de densidad de palabras clave. Usa esta auditoría de distribución para detectar repeticiones accidentales o confirmar que los conceptos principales aparecen con claridad en tu texto.',
-    targetLabel: 'Palabra clave / frase objetivo (opcional)',
-    targetPlaceholder: 'p. ej., seo técnico',
-    phraseLengthLabel: 'Longitud de la frase',
-    oneWord: '1 palabra',
-    twoWord: 'Frases de 2 palabras',
-    threeWord: 'Frases de 3 palabras',
-    stripHtml: 'Eliminar etiquetas HTML',
-    ignoreStopWords: 'Ignorar palabras vacías',
-    textLabel: 'Borrador de artículo o texto HTML pegado',
-    totalWords: 'Palabras totales',
-    uniqueVocabulary: 'Vocabulario único',
-    readingTime: 'Tiempo estimado de lectura',
-    targetPrefix: 'Objetivo: ',
-    hits: '{n} coincidencias ({d}%)',
-    rankHeader: 'Posición',
-    termHeader: 'Término / N-grama',
-    occurrencesHeader: 'Ocurrencias',
-    shareHeader: 'Porcentaje (%)',
-  },
-  pt: {
-    sampleContent: 'O SEO técnico começa com URLs limpas e rastreáveis, tags canônicas precisas e sitemaps XML estruturados. Quando os editores escrevem conteúdo útil focado na intenção do usuário em vez de encher o texto de palavras-chave, os mecanismos de busca entendem a profundidade do tema naturalmente. Audite seus títulos, meta descrições e links internos regularmente.',
-    defaultTargetKeyword: 'seo técnico',
-    guidanceTitle: 'Orientação editorial:',
-    guidanceBody: 'Os mecanismos de busca modernos não recompensam atingir uma cota fixa de densidade de palavras-chave. Use esta auditoria de distribuição para identificar repetições acidentais ou confirmar que os conceitos principais aparecem claramente no seu texto.',
-    targetLabel: 'Palavra-chave / frase-alvo (opcional)',
-    targetPlaceholder: 'ex.: seo técnico',
-    phraseLengthLabel: 'Comprimento da frase',
-    oneWord: '1 palavra',
-    twoWord: 'Frases de 2 palavras',
-    threeWord: 'Frases de 3 palavras',
-    stripHtml: 'Remover tags HTML',
-    ignoreStopWords: 'Ignorar stop words',
-    textLabel: 'Rascunho de artigo ou texto HTML colado',
-    totalWords: 'Total de palavras',
-    uniqueVocabulary: 'Vocabulário único',
-    readingTime: 'Tempo estimado de leitura',
-    targetPrefix: 'Alvo: ',
-    hits: '{n} ocorrências ({d}%)',
-    rankHeader: 'Posição',
-    termHeader: 'Termo / N-grama',
-    occurrencesHeader: 'Ocorrências',
-    shareHeader: 'Participação (%)',
-  },
-  fr: {
-    sampleContent: 'Le SEO technique commence par des URL propres et explorables, des balises canoniques précises et des sitemaps XML structurés. Quand les rédacteurs écrivent du contenu utile centré sur l\'intention de l\'utilisateur plutôt que de bourrer le texte de mots-clés, les moteurs de recherche comprennent naturellement la profondeur du sujet. Auditez régulièrement vos titres, vos méta-descriptions et vos liens internes.',
-    defaultTargetKeyword: 'seo technique',
-    guidanceTitle: 'Conseils éditoriaux :',
-    guidanceBody: 'Les moteurs de recherche modernes ne récompensent pas le fait d\'atteindre un quota fixe de densité de mots-clés. Utilisez cet audit de distribution pour repérer les répétitions accidentelles ou confirmer que les concepts principaux apparaissent clairement dans votre texte.',
-    targetLabel: 'Mot-clé / expression cible (facultatif)',
-    targetPlaceholder: 'ex. : seo technique',
-    phraseLengthLabel: 'Longueur de l\'expression',
-    oneWord: '1 mot',
-    twoWord: 'Expressions de 2 mots',
-    threeWord: 'Expressions de 3 mots',
-    stripHtml: 'Supprimer les balises HTML',
-    ignoreStopWords: 'Ignorer les mots vides',
-    textLabel: 'Brouillon d\'article ou texte HTML collé',
-    totalWords: 'Nombre total de mots',
-    uniqueVocabulary: 'Vocabulaire unique',
-    readingTime: 'Temps de lecture estimé',
-    targetPrefix: 'Cible : ',
-    hits: '{n} occurrences ({d} %)',
-    rankHeader: 'Rang',
-    termHeader: 'Terme / N-gramme',
-    occurrencesHeader: 'Occurrences',
-    shareHeader: 'Part (%)',
-  },
-  de: {
-    sampleContent:
-      'Technisches SEO beginnt mit sauberen, crawlbaren URLs, korrekten Canonical-Tags und strukturierten XML-Sitemaps. Wenn Publisher hilfreiche Inhalte schreiben, die sich auf die Suchintention der Nutzer konzentrieren statt auf Keyword-Stuffing, verstehen Suchmaschinen die inhaltliche Tiefe ganz von selbst. Prüfen Sie regelmäßig Ihre Überschriften, Meta-Beschreibungen und internen Links.',
-    defaultTargetKeyword: 'technisches seo',
-    guidanceTitle: 'Redaktionelle Hinweise:',
-    guidanceBody:
-      'Moderne Suchmaschinen belohnen keine feste Keyword-Dichte. Nutzen Sie diese Verteilungsanalyse, um versehentliche Wiederholungen zu erkennen oder zu bestätigen, dass zentrale Begriffe in Ihrem Text klar vorkommen.',
-    targetLabel: 'Ziel-Keyword / Wortgruppe (optional)',
-    targetPlaceholder: 'z. B. technisches seo',
-    phraseLengthLabel: 'Phrasenlänge',
-    oneWord: '1 Wort',
-    twoWord: '2-Wort-Phrasen',
-    threeWord: '3-Wort-Phrasen',
-    stripHtml: 'HTML-Tags entfernen',
-    ignoreStopWords: 'Stoppwörter ignorieren',
-    textLabel: 'Artikelentwurf oder eingefügter HTML-Text',
-    totalWords: 'Wörter gesamt',
-    uniqueVocabulary: 'Einzigartige Wörter',
-    readingTime: 'Geschätzte Lesezeit',
-    targetPrefix: 'Ziel: ',
-    hits: '{n} Treffer ({d} %)',
-    rankHeader: 'Rang',
-    termHeader: 'Begriff / N-Gramm',
-    occurrencesHeader: 'Vorkommen',
-    shareHeader: 'Anteil (%)',
-  },
-  it: {
-    sampleContent:
-      'La SEO tecnica inizia con URL puliti e scansionabili, tag canonical accurati e sitemap XML strutturate. Quando gli editori scrivono contenuti utili focalizzati sull’intento di ricerca degli utenti invece di riempire il testo di parole chiave, i motori di ricerca comprendono naturalmente la profondità dell’argomento. Controlla regolarmente titoli, meta description e link interni.',
-    defaultTargetKeyword: 'seo tecnica',
-    guidanceTitle: 'Linee guida editoriali:',
-    guidanceBody:
-      'I motori di ricerca moderni non premiano il raggiungimento di una quota fissa di densità delle parole chiave. Usa questa analisi della distribuzione per individuare ripetizioni accidentali o per confermare che i concetti principali compaiano chiaramente nel testo.',
-    targetLabel: 'Parola chiave / frase target (facoltativo)',
-    targetPlaceholder: 'es. seo tecnica',
-    phraseLengthLabel: 'Lunghezza frase',
-    oneWord: '1 parola',
-    twoWord: 'Frasi di 2 parole',
-    threeWord: 'Frasi di 3 parole',
-    stripHtml: 'Rimuovi tag HTML',
-    ignoreStopWords: 'Ignora le stop word',
-    textLabel: 'Bozza di articolo o testo HTML incollato',
-    totalWords: 'Parole totali',
-    uniqueVocabulary: 'Vocabolario unico',
-    readingTime: 'Tempo di lettura stimato',
-    targetPrefix: 'Target: ',
-    hits: '{n} occorrenze ({d}%)',
-    rankHeader: 'Posizione',
-    termHeader: 'Termine / N-gramma',
-    occurrencesHeader: 'Occorrenze',
-    shareHeader: 'Quota (%)',
-  },
-  id: {
-    sampleContent:
-      'SEO teknis dimulai dengan URL yang bersih dan dapat dirayapi, tag canonical yang akurat, dan sitemap XML terstruktur. Ketika penerbit menulis konten bermanfaat yang berfokus pada maksud pengguna daripada isian kata kunci, mesin pencari memahami kedalaman topik secara alami. Audit judul, deskripsi meta, dan tautan internal Anda secara berkala.',
-    defaultTargetKeyword: 'seo teknis',
-    guidanceTitle: 'Panduan Editorial:',
-    guidanceBody:
-      'Mesin pencari modern tidak memberi imbalan karena mencapai kuota kepadatan kata kunci yang tetap. Gunakan audit distribusi ini untuk menemukan pengulangan yang tidak disengaja atau memastikan konsep utama muncul jelas dalam teks Anda.',
-    targetLabel: 'Kata Kunci / Frasa Target (Opsional)',
-    targetPlaceholder: 'cth. seo teknis',
-    phraseLengthLabel: 'Panjang Frasa',
-    oneWord: '1 Kata',
-    twoWord: 'Frasa 2 Kata',
-    threeWord: 'Frasa 3 Kata',
-    stripHtml: 'Hapus tag HTML',
-    ignoreStopWords: 'Abaikan kata henti',
-    textLabel: 'Draf Artikel atau Teks HTML yang Ditempel',
-    totalWords: 'Total Kata',
-    uniqueVocabulary: 'Kosakata Unik',
-    readingTime: 'Perk. Waktu Baca',
-    targetPrefix: 'Target: ',
-    hits: '{n} kemunculan ({d}%)',
-    rankHeader: 'Peringkat',
-    termHeader: 'Istilah / N-gram',
-    occurrencesHeader: 'Kemunculan',
-    shareHeader: 'Bagian (%)',
-  },
-  ru: {
-    sampleContent:
-      'Техническое SEO начинается с чистых сканируемых URL, точных канонических тегов и структурированных XML-карт сайта. Когда издатели пишут полезный контент, ориентированный на намерения пользователей, а не на набивку ключевых слов, поисковые системы естественно понимают глубину темы. Регулярно проверяйте заголовки, метаописания и внутренние ссылки.',
-    defaultTargetKeyword: 'техническое seo',
-    guidanceTitle: 'Редакционные рекомендации:',
-    guidanceBody:
-      'Современные поисковые системы не вознаграждают за достижение фиксированной нормы плотности ключевых слов. Используйте этот аудит распределения, чтобы заметить случайные повторы или убедиться, что основные понятия ясно представлены в вашем тексте.',
-    targetLabel: 'Целевое ключевое слово / фраза (необязательно)',
-    targetPlaceholder: 'напр. техническое seo',
-    phraseLengthLabel: 'Длина фразы',
-    oneWord: '1 слово',
-    twoWord: 'Фразы из 2 слов',
-    threeWord: 'Фразы из 3 слов',
-    stripHtml: 'Удалять HTML-теги',
-    ignoreStopWords: 'Игнорировать стоп-слова',
-    textLabel: 'Черновик статьи или вставленный HTML-текст',
-    totalWords: 'Всего слов',
-    uniqueVocabulary: 'Уникальная лексика',
-    readingTime: 'Прибл. время чтения',
-    targetPrefix: 'Цель: ',
-    hits: '{n} вхождений ({d}%)',
-    rankHeader: 'Ранг',
-    termHeader: 'Термин / N-грамма',
-    occurrencesHeader: 'Вхождения',
-    shareHeader: 'Доля (%)',
-  },
-};
+  };
 
 const STOP_WORDS = new Set([
   'a', 'an', 'and', 'are', 'as', 'at', 'be', 'but', 'by', 'for', 'if', 'in',
@@ -218,7 +39,7 @@ const STOP_WORDS = new Set([
 
 export default function KeywordDensityCheckerTool() {
   const { locale } = useLocale();
-  const s = STRINGS[locale];
+  const s = useComponentStrings('keyword-density-checker', STRINGS_EN);
   const [content, setContent] = useState(s.sampleContent);
   const [targetKeyword, setTargetKeyword] = useState(s.defaultTargetKeyword);
   const [stripHtml, setStripHtml] = useState(true);

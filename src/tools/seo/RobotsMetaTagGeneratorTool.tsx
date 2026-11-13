@@ -1,9 +1,9 @@
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
 import { useLocale } from '../../locales/LocaleContext';
+import { useComponentStrings } from '../../locales/componentStrings';
 
-const STRINGS = {
-  en: {
+const STRINGS_EN = {
     indexingLabel: 'Indexing Directive',
     indexOption: 'index (Allow search indexing)',
     noindexOption: 'noindex (Exclude from SERPs)',
@@ -18,124 +18,11 @@ const STRINGS = {
     cloudflareHeadersLabel: 'Cloudflare Pages _headers',
     cloudflarePathAria: 'Cloudflare _headers path pattern',
     copyBlock: 'Copy Block',
-  },
-  es: {
-    indexingLabel: 'Directiva de indexación',
-    indexOption: 'index (Permitir la indexación)',
-    noindexOption: 'noindex (Excluir de los resultados de búsqueda)',
-    linkCrawlingLabel: 'Rastreo de enlaces',
-    followOption: 'follow (Transmitir señales de enlace)',
-    nofollowOption: 'nofollow (No seguir enlaces)',
-    largeOption: 'large (Elegible para Discover)',
-    htmlTagLabel: 'Metaetiqueta HTML <head>',
-    copyHtmlTag: 'Copiar etiqueta HTML',
-    httpHeaderLabel: 'Encabezado de respuesta HTTP (PDF / no HTML)',
-    copyHeader: 'Copiar encabezado',
-    cloudflareHeadersLabel: 'Cloudflare Pages _headers',
-    cloudflarePathAria: 'Patrón de ruta de _headers de Cloudflare',
-    copyBlock: 'Copiar bloque',
-  },
-  pt: {
-    indexingLabel: 'Diretiva de indexação',
-    indexOption: 'index (permitir indexação)',
-    noindexOption: 'noindex (excluir dos resultados de pesquisa)',
-    linkCrawlingLabel: 'Rastreamento de links',
-    followOption: 'follow (transmitir sinais de link)',
-    nofollowOption: 'nofollow (não seguir links)',
-    largeOption: 'large (elegível para o Discover)',
-    htmlTagLabel: 'Meta tag HTML <head>',
-    copyHtmlTag: 'Copiar tag HTML',
-    httpHeaderLabel: 'Cabeçalho de resposta HTTP (PDF / não HTML)',
-    copyHeader: 'Copiar cabeçalho',
-    cloudflareHeadersLabel: 'Cloudflare Pages _headers',
-    cloudflarePathAria: 'Padrão de caminho do _headers da Cloudflare',
-    copyBlock: 'Copiar bloco',
-  },
-  fr: {
-    indexingLabel: 'Directive d\'indexation',
-    indexOption: 'index (autoriser l\'indexation)',
-    noindexOption: 'noindex (exclure des résultats de recherche)',
-    linkCrawlingLabel: 'Exploration des liens',
-    followOption: 'follow (transmettre les signaux de lien)',
-    nofollowOption: 'nofollow (ne pas suivre les liens)',
-    largeOption: 'large (éligible à Discover)',
-    htmlTagLabel: 'Balise meta HTML <head>',
-    copyHtmlTag: 'Copier la balise HTML',
-    httpHeaderLabel: 'En-tête de réponse HTTP (PDF / non HTML)',
-    copyHeader: 'Copier l\'en-tête',
-    cloudflareHeadersLabel: 'Cloudflare Pages _headers',
-    cloudflarePathAria: 'Modèle de chemin _headers de Cloudflare',
-    copyBlock: 'Copier le bloc',
-  },
-  de: {
-    indexingLabel: 'Indexierungsanweisung',
-    indexOption: 'index (Suchindexierung erlauben)',
-    noindexOption: 'noindex (aus SERPs ausschließen)',
-    linkCrawlingLabel: 'Link-Crawling',
-    followOption: 'follow (Linksignale weitergeben)',
-    nofollowOption: 'nofollow (Links nicht folgen)',
-    largeOption: 'large (Entdeckung zulässig)',
-    htmlTagLabel: 'HTML-<head>-Meta-Tag',
-    copyHtmlTag: 'HTML-Tag kopieren',
-    httpHeaderLabel: 'HTTP-Antwortheader (PDF / Nicht-HTML)',
-    copyHeader: 'Header kopieren',
-    cloudflareHeadersLabel: 'Cloudflare Pages _headers',
-    cloudflarePathAria: 'Cloudflare-_headers-Pfadmuster',
-    copyBlock: 'Block kopieren',
-  },
-  it: {
-    indexingLabel: 'Direttiva di indicizzazione',
-    indexOption: 'index (consenti indicizzazione)',
-    noindexOption: 'noindex (escludi dai risultati di ricerca)',
-    linkCrawlingLabel: 'Scansione dei link',
-    followOption: 'follow (trasmetti segnali dai link)',
-    nofollowOption: 'nofollow (non seguire i link)',
-    largeOption: 'large (scoperta consentita)',
-    htmlTagLabel: 'Meta tag HTML <head>',
-    copyHtmlTag: 'Copia tag HTML',
-    httpHeaderLabel: 'Intestazione di risposta HTTP (PDF / non HTML)',
-    copyHeader: 'Copia intestazione',
-    cloudflareHeadersLabel: 'Cloudflare Pages _headers',
-    cloudflarePathAria: 'Modello di percorso _headers di Cloudflare',
-    copyBlock: 'Copia blocco',
-  },
-  id: {
-    indexingLabel: 'Direktif Pengindeksan',
-    indexOption: 'index (Izinkan pengindeksan pencarian)',
-    noindexOption: 'noindex (Kecualikan dari SERP)',
-    linkCrawlingLabel: 'Perayapan Tautan',
-    followOption: 'follow (Teruskan sinyal tautan)',
-    nofollowOption: 'nofollow (Jangan ikuti tautan)',
-    largeOption: 'large (Temukan yang memenuhi syarat)',
-    htmlTagLabel: 'Tag Meta HTML <head>',
-    copyHtmlTag: 'Salin Tag HTML',
-    httpHeaderLabel: 'Header Respons HTTP (PDF / Non-HTML)',
-    copyHeader: 'Salin Header',
-    cloudflareHeadersLabel: 'Cloudflare Pages _headers',
-    cloudflarePathAria: 'Pola path _headers Cloudflare',
-    copyBlock: 'Salin Blok',
-  },
-  ru: {
-    indexingLabel: 'Директива индексации',
-    indexOption: 'index (разрешить индексацию)',
-    noindexOption: 'noindex (исключить из выдачи)',
-    linkCrawlingLabel: 'Обход ссылок',
-    followOption: 'follow (передавать сигналы ссылок)',
-    nofollowOption: 'nofollow (не переходить по ссылкам)',
-    largeOption: 'large (обнаруживать подходящие)',
-    htmlTagLabel: 'HTML-метатег в <head>',
-    copyHtmlTag: 'Копировать HTML-тег',
-    httpHeaderLabel: 'HTTP-заголовок ответа (PDF / не-HTML)',
-    copyHeader: 'Копировать заголовок',
-    cloudflareHeadersLabel: 'Cloudflare Pages _headers',
-    cloudflarePathAria: 'Шаблон пути Cloudflare _headers',
-    copyBlock: 'Копировать блок',
-  },
-};
+  };
 
 export default function RobotsMetaTagGeneratorTool() {
-  const { locale, t } = useLocale();
-  const s = STRINGS[locale];
+  const { t } = useLocale();
+  const s = useComponentStrings('robots-meta-tag-generator', STRINGS_EN);
   const [indexMode, setIndexMode] = useState<'index' | 'noindex'>('index');
   const [followMode, setFollowMode] = useState<'follow' | 'nofollow'>('follow');
   const [noarchive, setNoarchive] = useState(false);
