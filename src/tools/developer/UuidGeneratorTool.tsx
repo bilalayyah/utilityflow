@@ -28,6 +28,30 @@ const STRINGS = {
     generatedLabel: 'UUID generados',
     copyAll: 'Copiar todo',
   },
+  pt: {
+    versionLabel: 'Versão do UUID',
+    v4: 'v4 (Aleatória)',
+    v7: 'v7 (Ordenada por tempo)',
+    quantity: 'Quantidade (1–100)',
+    generate: 'Gerar UUIDs',
+    uppercase: 'Maiúsculas',
+    includeHyphens: 'Incluir hifens',
+    wrapBraces: 'Envolver em {chaves}',
+    generatedLabel: 'UUIDs gerados',
+    copyAll: 'Copiar tudo',
+  },
+  fr: {
+    versionLabel: 'Version UUID',
+    v4: 'v4 (aléatoire)',
+    v7: 'v7 (ordonnée par le temps)',
+    quantity: 'Quantité (1–100)',
+    generate: 'Générer des UUID',
+    uppercase: 'Majuscules',
+    includeHyphens: 'Inclure les tirets',
+    wrapBraces: 'Entourer d\'{accolades}',
+    generatedLabel: 'UUID générés',
+    copyAll: 'Tout copier',
+  },
 };
 
 function generateUuidV4(): string {

@@ -43,6 +43,46 @@ const STRINGS = {
     replacePlaceholder: 'p. ej., $1 [at] $2',
     invalidRegex: 'Expresión regular no válida.',
   },
+  pt: {
+    patternLabel: 'Padrão de expressão regular',
+    patternPlaceholder: 'Digite o padrão regex...',
+    flagsLabel: 'Flags:',
+    syntaxError: 'Erro de sintaxe:',
+    testStringLabel: 'String de teste',
+    testPlaceholder: 'Cole um texto de exemplo para testar seu padrão...',
+    highlightedMatches: 'Correspondências destacadas',
+    matchSingular: 'correspondência',
+    matchPlural: 'correspondências',
+    highlightEmpty: 'As correspondências são destacadas aqui em tempo real...',
+    capturedTitle: 'Correspondências capturadas',
+    matchLabel: 'Correspondência',
+    indexLabel: 'índice',
+    groupsLabel: 'Grupos:',
+    noMatches: 'Nenhuma correspondência encontrada.',
+    replaceLabel: 'Prévia do modelo de substituição',
+    replacePlaceholder: 'ex.: $1 [at] $2',
+    invalidRegex: 'Expressão regular inválida.',
+  },
+  fr: {
+    patternLabel: 'Motif d\'expression régulière',
+    patternPlaceholder: 'Saisissez le motif regex...',
+    flagsLabel: 'Drapeaux :',
+    syntaxError: 'Erreur de syntaxe :',
+    testStringLabel: 'Chaîne de test',
+    testPlaceholder: 'Collez un exemple de texte pour tester votre motif...',
+    highlightedMatches: 'Correspondances surlignées',
+    matchSingular: 'correspondance',
+    matchPlural: 'correspondances',
+    highlightEmpty: 'Les correspondances sont surlignées ici en temps réel...',
+    capturedTitle: 'Correspondances capturées',
+    matchLabel: 'Correspondance',
+    indexLabel: 'indice',
+    groupsLabel: 'Groupes :',
+    noMatches: 'Aucune correspondance trouvée.',
+    replaceLabel: 'Aperçu du modèle de remplacement',
+    replacePlaceholder: 'p. ex. $1 [at] $2',
+    invalidRegex: 'Expression régulière invalide.',
+  },
 };
 
 interface RegexMatchItem {
@@ -59,6 +99,12 @@ Invalid email: not-an-email@`,
   es: `Contacto principal: support@utilityflow.online
 Equipo de facturación: billing@example.org
 Correo no válido: not-an-email@`,
+  pt: `Contato principal: support@utilityflow.online
+Equipe de faturamento: billing@example.org
+E-mail inválido: not-an-email@`,
+  fr: `Contact principal : support@utilityflow.online
+Équipe de facturation : billing@example.org
+E-mail invalide : not-an-email@`,
 } as const;
 
 const FLAG_DEFS = {
@@ -72,6 +118,18 @@ const FLAG_DEFS = {
     { flag: 'g', label: 'g (global)' },
     { flag: 'i', label: 'i (ignorar mayúsculas)' },
     { flag: 'm', label: 'm (multilínea)' },
+    { flag: 's', label: 's (dotAll)' },
+  ],
+  pt: [
+    { flag: 'g', label: 'g (global)' },
+    { flag: 'i', label: 'i (ignorar maiúsculas/minúsculas)' },
+    { flag: 'm', label: 'm (multilinha)' },
+    { flag: 's', label: 's (dotAll)' },
+  ],
+  fr: [
+    { flag: 'g', label: 'g (global)' },
+    { flag: 'i', label: 'i (ignorer la casse)' },
+    { flag: 'm', label: 'm (multiligne)' },
     { flag: 's', label: 's (dotAll)' },
   ],
 } as const;

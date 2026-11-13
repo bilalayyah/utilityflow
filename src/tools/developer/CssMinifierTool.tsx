@@ -26,6 +26,28 @@ const STRINGS = {
     outputPlaceholder: 'El CSS procesado aparece aquí...',
     copyCss: 'Copiar CSS',
   },
+  pt: {
+    minifyTab: 'Minificar CSS',
+    beautifyTab: 'Formatar CSS',
+    inputLabel: 'CSS de entrada',
+    bytesLabel: 'bytes',
+    inputPlaceholder: 'Cole regras CSS ou folhas de estilo aqui...',
+    outputLabelMinify: 'CSS minificado',
+    outputLabelBeautify: 'CSS formatado',
+    outputPlaceholder: 'O CSS processado aparece aqui...',
+    copyCss: 'Copiar CSS',
+  },
+  fr: {
+    minifyTab: 'Minifier le CSS',
+    beautifyTab: 'Embellir le CSS',
+    inputLabel: 'CSS d\'entrée',
+    bytesLabel: 'bytes',
+    inputPlaceholder: 'Collez des règles CSS ou des feuilles de style ici...',
+    outputLabelMinify: 'CSS minifié',
+    outputLabelBeautify: 'CSS embelli',
+    outputPlaceholder: 'Le CSS traité apparaît ici...',
+    copyCss: 'Copier le CSS',
+  },
 };
 
 const SAMPLE_CSS = `/* Primary card surface */

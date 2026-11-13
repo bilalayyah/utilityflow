@@ -28,6 +28,30 @@ const STRINGS = {
     cryptoUnavailable: 'El hash con Web Crypto no está disponible.',
     sampleText: '¡Hola, UtilityFlow!',
   },
+  pt: {
+    textInputTab: 'Entrada de texto',
+    fileTab: 'Checksum de arquivo local',
+    uppercaseHex: 'Hex em maiúsculas',
+    inputLabel: 'String de entrada (UTF-8)',
+    inputPlaceholder: 'Digite texto para calcular os hashes SHA-1, SHA-256, SHA-384 e SHA-512...',
+    chooseFileLabel: 'Escolher arquivo local para gerar o hash',
+    fileNoteDefault: 'O arquivo é lido localmente na memória do navegador e nunca é enviado.',
+    bytesLabel: 'bytes',
+    cryptoUnavailable: 'O hash via Web Crypto não está disponível.',
+    sampleText: 'Olá, UtilityFlow!',
+  },
+  fr: {
+    textInputTab: 'Saisie de texte',
+    fileTab: 'Somme de contrôle du fichier local',
+    uppercaseHex: 'Hex en majuscules',
+    inputLabel: 'Chaîne d\'entrée (UTF-8)',
+    inputPlaceholder: 'Saisissez du texte pour calculer les hachages SHA-1, SHA-256, SHA-384 et SHA-512...',
+    chooseFileLabel: 'Choisir un fichier local à hacher',
+    fileNoteDefault: 'Le fichier est lu localement dans la mémoire du navigateur et n\'est jamais envoyé.',
+    bytesLabel: 'bytes',
+    cryptoUnavailable: 'Le hachage Web Crypto n\'est pas disponible.',
+    sampleText: 'Bonjour, UtilityFlow !',
+  },
 };
 
 type DigestAlgorithm = 'SHA-1' | 'SHA-256' | 'SHA-384' | 'SHA-512';

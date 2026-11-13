@@ -40,11 +40,49 @@ const STRINGS = {
     invalidLength: 'Longitud de cadena Base64 no válida.',
     invalidInput: 'Entrada Base64 no válida o secuencia de bytes UTF-8 incorrecta.',
   },
+  pt: {
+    encodeTab: 'Codificar para Base64',
+    decodeTab: 'Decodificar Base64',
+    urlSafe: 'Seguro para URL (- e _)',
+    omitPadding: 'Omitir o preenchimento = final',
+    swap: 'Trocar',
+    decodeError: 'Erro de decodificação:',
+    inputLabelEncode: 'Texto simples (UTF-8)',
+    inputLabelDecode: 'String Base64',
+    inputPlaceholderEncode: 'Digite texto ou JSON para codificar...',
+    inputPlaceholderDecode: 'Cole uma string Base64 padrão ou segura para URL...',
+    outputLabelEncode: 'Saída Base64',
+    outputLabelDecode: 'Texto decodificado',
+    outputPlaceholder: 'A saída convertida aparece aqui...',
+    copyOutput: 'Copiar saída',
+    invalidLength: 'Comprimento de string Base64 inválido.',
+    invalidInput: 'Entrada Base64 inválida ou sequência de bytes UTF-8 malformada.',
+  },
+  fr: {
+    encodeTab: 'Encoder en Base64',
+    decodeTab: 'Décoder Base64',
+    urlSafe: 'Compatible URL (- et _)',
+    omitPadding: 'Omettre le remplissage = final',
+    swap: 'Échanger',
+    decodeError: 'Erreur de décodage :',
+    inputLabelEncode: 'Texte brut (UTF-8)',
+    inputLabelDecode: 'Chaîne Base64',
+    inputPlaceholderEncode: 'Saisissez du texte ou du JSON à encoder...',
+    inputPlaceholderDecode: 'Collez une chaîne Base64 standard ou compatible URL...',
+    outputLabelEncode: 'Sortie Base64',
+    outputLabelDecode: 'Texte décodé',
+    outputPlaceholder: 'La sortie convertie apparaît ici...',
+    copyOutput: 'Copier la sortie',
+    invalidLength: 'Longueur de chaîne Base64 invalide.',
+    invalidInput: 'Entrée Base64 invalide ou séquence d\'octets UTF-8 mal formée.',
+  },
 };
 
 const SAMPLE_PLAIN = {
   en: 'UtilityFlow: UTF-8 safe Base64 encoding ✓',
   es: 'UtilityFlow: codificación Base64 segura con UTF-8 ✓',
+  pt: 'UtilityFlow: codificação Base64 segura com UTF-8 ✓',
+  fr: 'UtilityFlow : encodage Base64 sûr en UTF-8 ✓',
 } as const;
 
 function encodeUtf8Base64(text: string, urlSafe: boolean, omitPadding: boolean): string {
@@ -63,7 +101,7 @@ function encodeUtf8Base64(text: string, urlSafe: boolean, omitPadding: boolean):
   return base64;
 }
 
-function decodeUtf8Base64(raw: string, locale: 'en' | 'es'): string {
+function decodeUtf8Base64(raw: string, locale: 'en' | 'es' | 'pt' | 'fr'): string {
   let normalized = raw.trim().replace(/-/g, '+').replace(/_/g, '/');
   const mod = normalized.length % 4;
   if (mod === 2) normalized += '==';

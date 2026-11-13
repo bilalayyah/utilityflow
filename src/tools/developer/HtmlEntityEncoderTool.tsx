@@ -30,6 +30,32 @@ const STRINGS = {
     outputLabelDecode: 'Texto decodificado',
     outputPlaceholder: 'Las entidades convertidas aparecen aquí...',
   },
+  pt: {
+    encodeTab: 'Codificar entidades',
+    decodeTab: 'Decodificar entidades',
+    encodeNonAscii: 'Codificar símbolos não ASCII (&#...;)',
+    swap: 'Trocar',
+    inputLabelEncode: 'HTML / texto bruto',
+    inputLabelDecode: 'String codificada em HTML',
+    inputPlaceholderEncode: '<p>Digite tags HTML ou caracteres especiais...</p>',
+    inputPlaceholderDecode: '&lt;p&gt;Cole entidades codificadas...&lt;/p&gt;',
+    outputLabelEncode: 'Entidades codificadas',
+    outputLabelDecode: 'Texto decodificado',
+    outputPlaceholder: 'As entidades convertidas aparecem aqui...',
+  },
+  fr: {
+    encodeTab: 'Encoder les entités',
+    decodeTab: 'Décoder les entités',
+    encodeNonAscii: 'Encoder les symboles non ASCII (&#...;)',
+    swap: 'Échanger',
+    inputLabelEncode: 'HTML / texte brut',
+    inputLabelDecode: 'Chaîne encodée en HTML',
+    inputPlaceholderEncode: '<p>Saisissez des balises HTML ou des caractères spéciaux...</p>',
+    inputPlaceholderDecode: '&lt;p&gt;Collez des entités encodées...&lt;/p&gt;',
+    outputLabelEncode: 'Entités encodées',
+    outputLabelDecode: 'Texte décodé',
+    outputPlaceholder: 'Les entités converties apparaissent ici...',
+  },
 };
 
 const SAMPLE_HTML = `<div class="notice">5 < 10 & "café" — ready!</div>`;

@@ -59,6 +59,62 @@ const STRINGS = {
     dayBoth: 'el día {day} o {dow}',
     monthIn: ' en {months}',
   },
+  pt: {
+    inputLabel: 'Expressão cron de 5 campos',
+    copyCron: 'Copiar cron',
+    humanTitle: 'Agenda em linguagem simples',
+    breakdownTitle: 'Detalhamento por campo',
+    fieldMinute: 'Minuto (0–59)',
+    fieldHour: 'Hora (0–23)',
+    fieldDom: 'Dia do mês (1–31)',
+    fieldMonth: 'Mês (1–12)',
+    fieldDow: 'Dia da semana (0–6)',
+    nextRuns: 'Próximas {count} execuções agendadas (hora local)',
+    noRuns: 'Nenhuma execução correspondente encontrada nos próximos 366 dias.',
+    fieldsError: 'O cron padrão espera 5 campos (minuto hora dia-do-mês mês dia-da-semana). Encontrados {count}.',
+    emptySegment: 'Segmento vazio em "{token}"',
+    invalidStep: 'Passo inválido "{step}" em "{token}"',
+    outOfRange: 'Valor fora do intervalo ({min}–{max}) em "{token}"',
+    invalidCron: 'Expressão cron inválida.',
+    everyMinutes: 'A cada {n} minutos',
+    minuteZeroHour: 'No minuto 0 de cada hora',
+    atTime: 'Às {time}',
+    atFields: 'Em {a}, {b}',
+    dayEveryDay: 'todos os dias',
+    dayWeekdays: 'em dias úteis (segunda a sexta)',
+    dayOfMonth: 'no dia {day} do mês',
+    dayDow: 'em {dow}',
+    dayBoth: 'no dia {day} ou {dow}',
+    monthIn: ' em {months}',
+  },
+  fr: {
+    inputLabel: 'Expression cron à 5 champs',
+    copyCron: 'Copier le cron',
+    humanTitle: 'Planning en langage clair',
+    breakdownTitle: 'Détail par champ',
+    fieldMinute: 'Minute (0–59)',
+    fieldHour: 'Heure (0–23)',
+    fieldDom: 'Jour du mois (1–31)',
+    fieldMonth: 'Mois (1–12)',
+    fieldDow: 'Jour de la semaine (0–6)',
+    nextRuns: 'Prochaines {count} exécutions planifiées (heure locale)',
+    noRuns: 'Aucune exécution correspondante trouvée dans les 366 prochains jours.',
+    fieldsError: 'Le cron standard attend 5 champs (minute heure jour-du-mois mois jour-de-la-semaine). {count} trouvés.',
+    emptySegment: 'Segment vide dans « {token} »',
+    invalidStep: 'Pas invalide « {step} » dans « {token} »',
+    outOfRange: 'Valeur hors limites ({min}–{max}) dans « {token} »',
+    invalidCron: 'Expression cron invalide.',
+    everyMinutes: 'Toutes les {n} minutes',
+    minuteZeroHour: 'À la minute 0 de chaque heure',
+    atTime: 'À {time}',
+    atFields: 'À {a}, {b}',
+    dayEveryDay: 'tous les jours',
+    dayWeekdays: 'en semaine (lundi–vendredi)',
+    dayOfMonth: 'le {day} du mois',
+    dayDow: 'le {dow}',
+    dayBoth: 'le {day} ou {dow}',
+    monthIn: ' en {months}',
+  },
 };
 
 const PRESETS = {
@@ -76,6 +132,20 @@ const PRESETS = {
     { label: 'Entre semana a las 9:00', expr: '0 9 * * 1-5' },
     { label: 'El 1 del mes a las 08:30', expr: '30 8 1 * *' },
   ],
+  pt: [
+    { label: 'A cada 5 minutos', expr: '*/5 * * * *' },
+    { label: 'A cada hora', expr: '0 * * * *' },
+    { label: 'Diariamente à meia-noite', expr: '0 0 * * *' },
+    { label: 'Dias úteis às 9:00', expr: '0 9 * * 1-5' },
+    { label: 'Dia 1 do mês às 08:30', expr: '30 8 1 * *' },
+  ],
+  fr: [
+    { label: 'Toutes les 5 minutes', expr: '*/5 * * * *' },
+    { label: 'Toutes les heures', expr: '0 * * * *' },
+    { label: 'Tous les jours à minuit', expr: '0 0 * * *' },
+    { label: 'En semaine à 9:00', expr: '0 9 * * 1-5' },
+    { label: 'Le 1er du mois à 08:30', expr: '30 8 1 * *' },
+  ],
 } as const;
 
 const MONTH_NAMES: Record<string, number> = {
@@ -90,6 +160,8 @@ const DOW_NAMES: Record<string, number> = {
 const DOW_LABELS = {
   en: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
   es: ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'],
+  pt: ['domingo', 'segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sábado'],
+  fr: ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'],
 } as const;
 const MONTH_LABELS = {
   en: [
@@ -100,15 +172,27 @@ const MONTH_LABELS = {
     '', 'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
     'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre',
   ],
+  pt: [
+    '', 'janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho',
+    'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro',
+  ],
+  fr: [
+    '', 'janvier', 'février', 'mars', 'avril', 'mai', 'juin',
+    'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre',
+  ],
 } as const;
 
 const UNIT_WORDS = {
   en: { minute: 'minute', hour: 'hour', day: 'day', month: 'month', weekday: 'weekday' },
   es: { minute: 'minuto', hour: 'hora', day: 'día', month: 'mes', weekday: 'día de la semana' },
+  pt: { minute: 'minuto', hour: 'hora', day: 'dia', month: 'mês', weekday: 'dia da semana' },
+  fr: { minute: 'minute', hour: 'heure', day: 'jour', month: 'mois', weekday: 'jour de la semaine' },
 } as const;
 const UNIT_PLURALS = {
   en: { minute: 'minutes', hour: 'hours', day: 'days', month: 'months', weekday: 'weekdays' },
   es: { minute: 'minutos', hour: 'horas', day: 'días', month: 'meses', weekday: 'días de la semana' },
+  pt: { minute: 'minutos', hour: 'horas', day: 'dias', month: 'meses', weekday: 'dias da semana' },
+  fr: { minute: 'minutes', hour: 'heures', day: 'jours', month: 'mois', weekday: 'jours de la semaine' },
 } as const;
 type CronUnit = keyof typeof UNIT_WORDS.en;
 
@@ -116,7 +200,7 @@ function parseFieldToken(
   token: string,
   min: number,
   max: number,
-  locale: 'en' | 'es',
+  locale: 'en' | 'es' | 'pt' | 'fr',
   nameMap?: Record<string, number>
 ): number[] {
   const s = STRINGS[locale];
@@ -176,13 +260,13 @@ function parseFieldToken(
 function describeField(
   raw: string,
   unit: CronUnit,
-  locale: 'en' | 'es',
+  locale: 'en' | 'es' | 'pt' | 'fr',
   formatter?: (n: number) => string
 ): string {
   const u = UNIT_WORDS[locale][unit];
-  if (raw === '*') return locale === 'es' ? `cada ${u}` : `every ${u}`;
+  if (raw === '*') return locale === 'es' || locale === 'pt' ? `cada ${u}` : locale === 'fr' ? `chaque ${u}` : `every ${u}`;
   if (raw.startsWith('*/')) {
-    const prefix = locale === 'es' ? 'cada' : 'every';
+    const prefix = locale === 'es' || locale === 'pt' ? 'cada' : locale === 'fr' ? 'chaque' : 'every';
     return `${prefix} ${raw.slice(2)} ${UNIT_PLURALS[locale][unit]}`;
   }
   if (formatter) {

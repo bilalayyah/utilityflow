@@ -48,9 +48,53 @@ const STRINGS = {
     segmentCount: 'Se esperaban 3 segmentos JWT separados por puntos (header.payload.signature); se encontraron {count}.',
     parseFallback: 'No se pudieron analizar los segmentos JSON Base64Url del JWT.',
   },
+  pt: {
+    infoNote:
+      'Decodifica o cabeçalho e o payload Base64Url localmente na memória do navegador. Não verifica assinaturas criptográficas.',
+    loadSampleJwt: 'Carregar JWT de exemplo',
+    inputLabel: 'Token JWT codificado',
+    inputPlaceholder: 'Cole um token JWT (eyJhbGciOi...) para inspecionar seu cabeçalho e suas claims...',
+    invalidJwt: 'JWT inválido:',
+    headerLabel: 'Cabeçalho (algoritmo e tipo)',
+    payloadLabel: 'Payload (claims)',
+    copyHeader: 'Copiar cabeçalho',
+    copyPayload: 'Copiar payload',
+    timestampTitle: 'Claims de timestamp',
+    iatLabel: 'Emitido em (iat)',
+    nbfLabel: 'Válido a partir de (nbf)',
+    expLabel: 'Expira em (exp)',
+    expired: 'Expirado',
+    active: 'Ativo (ainda não expirado)',
+    signatureLabel: 'Segmento de assinatura (Base64Url)',
+    invalidB64Url: 'Comprimento de segmento Base64Url inválido.',
+    segmentCount: 'Esperados 3 segmentos JWT separados por pontos (header.payload.signature); encontrados {count}.',
+    parseFallback: 'Não foi possível analisar os segmentos JSON Base64Url do JWT.',
+  },
+  fr: {
+    infoNote:
+      'Décode l\'en-tête et la charge utile Base64Url localement dans la mémoire du navigateur. Ne vérifie pas les signatures cryptographiques.',
+    loadSampleJwt: 'Charger un JWT d\'exemple',
+    inputLabel: 'Jeton JWT encodé',
+    inputPlaceholder: 'Collez un jeton JWT (eyJhbGciOi...) pour inspecter son en-tête et ses claims...',
+    invalidJwt: 'JWT invalide :',
+    headerLabel: 'En-tête (algorithme et type)',
+    payloadLabel: 'Charge utile (claims)',
+    copyHeader: 'Copier l\'en-tête',
+    copyPayload: 'Copier la charge utile',
+    timestampTitle: 'Claims d\'horodatage',
+    iatLabel: 'Émis le (iat)',
+    nbfLabel: 'Valide à partir du (nbf)',
+    expLabel: 'Expire le (exp)',
+    expired: 'Expiré',
+    active: 'Actif (pas encore expiré)',
+    signatureLabel: 'Segment de signature (Base64Url)',
+    invalidB64Url: 'Longueur de segment Base64Url invalide.',
+    segmentCount: '3 segments JWT séparés par des points attendus (header.payload.signature), {count} trouvés.',
+    parseFallback: 'Impossible d\'analyser les segments JSON Base64Url du JWT.',
+  },
 };
 
-function decodeBase64UrlToUtf8(segment: string, locale: 'en' | 'es'): string {
+function decodeBase64UrlToUtf8(segment: string, locale: 'en' | 'es' | 'pt' | 'fr'): string {
   let base64 = segment.replace(/-/g, '+').replace(/_/g, '/');
   const pad = base64.length % 4;
   if (pad === 2) base64 += '==';
