@@ -1,6 +1,7 @@
 import { Download, RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import type { LocaleCode } from '../../locales/config';
 import { useLocale } from '../../locales/LocaleContext';
 
 const STRINGS = {
@@ -118,6 +119,44 @@ const STRINGS = {
     outputPlaceholder: 'Il JSON formattato e convalidato apparirà qui...',
     copyJson: 'Copia JSON',
   },
+  id: {
+    indent2: '2 Spasi',
+    indent4: '4 Spasi',
+    indentTab: 'Tab',
+    indentMinify: 'Minifikasi',
+    sortKeys: 'Urutkan kunci A–Z',
+    validJson: 'JSON Valid',
+    keysLabel: 'kunci',
+    depthLabel: 'kedalaman',
+    bytesLabel: 'byte',
+    invalidJson: 'JSON Tidak Valid:',
+    invalidJsonSyntax: 'Sintaks JSON tidak valid',
+    lineCol: 'Baris {line}, Kolom {col}',
+    inputLabel: 'Input JSON Mentah',
+    inputPlaceholder: '{"hello": "world", "items": [1, 2, 3]}',
+    outputLabel: 'Hasil yang Diformat',
+    outputPlaceholder: 'JSON yang diformat dan divalidasi muncul di sini...',
+    copyJson: 'Salin JSON',
+  },
+  ru: {
+    indent2: '2 пробела',
+    indent4: '4 пробела',
+    indentTab: 'Табуляция',
+    indentMinify: 'Минифицировать',
+    sortKeys: 'Сортировать ключи А–Я',
+    validJson: 'Корректный JSON',
+    keysLabel: 'ключей',
+    depthLabel: 'глубина',
+    bytesLabel: 'байт',
+    invalidJson: 'Недопустимый JSON:',
+    invalidJsonSyntax: 'Недопустимый синтаксис JSON',
+    lineCol: 'Строка {line}, столбец {col}',
+    inputLabel: 'Исходный JSON',
+    inputPlaceholder: '{"hello": "world", "items": [1, 2, 3]}',
+    outputLabel: 'Отформатированный вывод',
+    outputPlaceholder: 'Здесь появится отформатированный и проверенный JSON...',
+    copyJson: 'Копировать JSON',
+  },
 };
 
 const SAMPLE_JSON = `{
@@ -172,7 +211,7 @@ function measureJsonStats(value: unknown, depth = 0): { keys: number; maxDepth: 
   return { keys: 0, maxDepth: depth };
 }
 
-function getLineColFromSyntaxError(input: string, err: unknown, locale: 'en' | 'es' | 'pt' | 'fr' | 'de' | 'it'): string {
+function getLineColFromSyntaxError(input: string, err: unknown, locale: LocaleCode): string {
   const s = STRINGS[locale];
   const message = err instanceof Error ? err.message : s.invalidJsonSyntax;
   const posMatch = /position\s+(\d+)/i.exec(message);

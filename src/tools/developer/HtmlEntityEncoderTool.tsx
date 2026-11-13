@@ -82,6 +82,32 @@ const STRINGS = {
     outputLabelDecode: 'Testo decodificato',
     outputPlaceholder: 'Le entità convertite appariranno qui...',
   },
+  id: {
+    encodeTab: 'Encode Entitas',
+    decodeTab: 'Decode Entitas',
+    encodeNonAscii: 'Encode simbol non-ASCII (&#...;)',
+    swap: 'Tukar',
+    inputLabelEncode: 'HTML / Teks Mentah',
+    inputLabelDecode: 'String yang Di-encode HTML',
+    inputPlaceholderEncode: '<p>Masukkan tag HTML atau karakter khusus...</p>',
+    inputPlaceholderDecode: '&lt;p&gt;Tempel entitas yang di-encode...&lt;/p&gt;',
+    outputLabelEncode: 'Entitas yang Di-encode',
+    outputLabelDecode: 'Teks yang Didecode',
+    outputPlaceholder: 'Entitas yang dikonversi muncul di sini...',
+  },
+  ru: {
+    encodeTab: 'Кодировать сущности',
+    decodeTab: 'Декодировать сущности',
+    encodeNonAscii: 'Кодировать не-ASCII символы (&#...;)',
+    swap: 'Поменять местами',
+    inputLabelEncode: 'Исходный HTML / текст',
+    inputLabelDecode: 'HTML-кодированная строка',
+    inputPlaceholderEncode: '<p>Введите HTML-теги или специальные символы...</p>',
+    inputPlaceholderDecode: '&lt;p&gt;Вставьте закодированные сущности...&lt;/p&gt;',
+    outputLabelEncode: 'Закодированные сущности',
+    outputLabelDecode: 'Декодированный текст',
+    outputPlaceholder: 'Здесь появятся преобразованные сущности...',
+  },
 };
 
 const SAMPLE_HTML = `<div class="notice">5 < 10 & "café" — ready!</div>`;

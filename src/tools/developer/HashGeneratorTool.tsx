@@ -76,6 +76,30 @@ const STRINGS = {
     cryptoUnavailable: 'La funzione di hashing Web Crypto non è disponibile.',
     sampleText: 'Ciao, UtilityFlow!',
   },
+  id: {
+    textInputTab: 'Input Teks',
+    fileTab: 'Checksum File Lokal',
+    uppercaseHex: 'Hex huruf besar',
+    inputLabel: 'String Input (UTF-8)',
+    inputPlaceholder: 'Masukkan teks untuk menghitung hash SHA-1, SHA-256, SHA-384, dan SHA-512...',
+    chooseFileLabel: 'Pilih file lokal untuk di-hash',
+    fileNoteDefault: 'File dibaca secara lokal di memori browser dan tidak pernah diunggah.',
+    bytesLabel: 'byte',
+    cryptoUnavailable: 'Hashing Web Crypto tidak tersedia.',
+    sampleText: 'Halo, UtilityFlow!',
+  },
+  ru: {
+    textInputTab: 'Ввод текста',
+    fileTab: 'Контрольная сумма локального файла',
+    uppercaseHex: 'Hex в верхнем регистре',
+    inputLabel: 'Входная строка (UTF-8)',
+    inputPlaceholder: 'Введите текст для вычисления хешей SHA-1, SHA-256, SHA-384 и SHA-512...',
+    chooseFileLabel: 'Выберите локальный файл для хеширования',
+    fileNoteDefault: 'Файл читается локально в памяти браузера и никогда не загружается.',
+    bytesLabel: 'байт',
+    cryptoUnavailable: 'Хеширование Web Crypto недоступно.',
+    sampleText: 'Привет, UtilityFlow!',
+  },
 };
 
 type DigestAlgorithm = 'SHA-1' | 'SHA-256' | 'SHA-384' | 'SHA-512';

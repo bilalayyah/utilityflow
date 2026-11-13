@@ -123,6 +123,46 @@ const STRINGS = {
     replacePlaceholder: 'es. $1 [at] $2',
     invalidRegex: 'Espressione regolare non valida.',
   },
+  id: {
+    patternLabel: 'Pola Ekspresi Reguler',
+    patternPlaceholder: 'Masukkan pola regex...',
+    flagsLabel: 'Flag:',
+    syntaxError: 'Kesalahan sintaks:',
+    testStringLabel: 'String Uji',
+    testPlaceholder: 'Tempel teks contoh untuk diuji dengan pola Anda...',
+    highlightedMatches: 'Kecocokan yang Disorot',
+    matchSingular: 'cocok',
+    matchPlural: 'cocok',
+    highlightEmpty: 'Kecocokan disorot di sini secara real time...',
+    capturedTitle: 'Kecocokan yang Ditangkap',
+    matchLabel: 'Cocok',
+    indexLabel: 'indeks',
+    groupsLabel: 'Grup:',
+    noMatches: 'Tidak ditemukan kecocokan.',
+    replaceLabel: 'Pratinjau Template Pengganti',
+    replacePlaceholder: 'cth. $1 [at] $2',
+    invalidRegex: 'Ekspresi reguler tidak valid.',
+  },
+  ru: {
+    patternLabel: 'Шаблон регулярного выражения',
+    patternPlaceholder: 'Введите шаблон регулярного выражения...',
+    flagsLabel: 'Флаги:',
+    syntaxError: 'Ошибка синтаксиса:',
+    testStringLabel: 'Тестовая строка',
+    testPlaceholder: 'Вставьте пример текста для проверки по вашему шаблону...',
+    highlightedMatches: 'Подсвеченные совпадения',
+    matchSingular: 'совпадение',
+    matchPlural: 'совпадений',
+    highlightEmpty: 'Совпадения будут подсвечиваться здесь в реальном времени...',
+    capturedTitle: 'Захваченные совпадения',
+    matchLabel: 'Совпадение',
+    indexLabel: 'индекс',
+    groupsLabel: 'Группы:',
+    noMatches: 'Совпадений не найдено.',
+    replaceLabel: 'Предпросмотр шаблона замены',
+    replacePlaceholder: 'напр. $1 [at] $2',
+    invalidRegex: 'Недопустимое регулярное выражение.',
+  },
 };
 
 interface RegexMatchItem {
@@ -151,6 +191,12 @@ Ungültige E-Mail: not-an-email@`,
   it: `Contatto principale: support@utilityflow.online
 Team di fatturazione: billing@example.org
 Email non valida: not-an-email@`,
+  id: `Kontak utama: support@utilityflow.online
+Tim penagihan: billing@example.org
+Email tidak valid: not-an-email@`,
+  ru: `Основной контакт: support@utilityflow.online
+Команда биллинга: billing@example.org
+Неверный email: not-an-email@`,
 } as const;
 
 const FLAG_DEFS = {
@@ -188,6 +234,18 @@ const FLAG_DEFS = {
     { flag: 'g', label: 'g (global)' },
     { flag: 'i', label: 'i (ignora maiuscole/minuscole)' },
     { flag: 'm', label: 'm (multilinea)' },
+    { flag: 's', label: 's (dotAll)' },
+  ],
+  id: [
+    { flag: 'g', label: 'g (global)' },
+    { flag: 'i', label: 'i (abaikan huruf besar-kecil)' },
+    { flag: 'm', label: 'm (multibaris)' },
+    { flag: 's', label: 's (dotAll)' },
+  ],
+  ru: [
+    { flag: 'g', label: 'g (global)' },
+    { flag: 'i', label: 'i (без учёта регистра)' },
+    { flag: 'm', label: 'm (многострочный)' },
     { flag: 's', label: 's (dotAll)' },
   ],
 } as const;

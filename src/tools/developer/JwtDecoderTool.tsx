@@ -1,6 +1,7 @@
 import { Info, RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import type { LocaleCode } from '../../locales/config';
 import { useLocale } from '../../locales/LocaleContext';
 
 const STRINGS = {
@@ -136,9 +137,53 @@ const STRINGS = {
     segmentCount: 'Previsti 3 segmenti JWT separati da punti (header.payload.signature), trovati {count}.',
     parseFallback: 'Impossibile analizzare i segmenti JSON Base64Url del JWT.',
   },
+  id: {
+    infoNote:
+      'Mendecode header dan payload Base64Url secara lokal di memori browser. Tidak memverifikasi tanda tangan kriptografi.',
+    loadSampleJwt: 'Muat contoh JWT',
+    inputLabel: 'Token JWT yang Di-encode',
+    inputPlaceholder: 'Tempel token JWT (eyJhbGciOi...) untuk memeriksa header dan klaimnya...',
+    invalidJwt: 'JWT Tidak Valid:',
+    headerLabel: 'Header (Algoritma & Tipe)',
+    payloadLabel: 'Payload (Klaim)',
+    copyHeader: 'Salin header',
+    copyPayload: 'Salin payload',
+    timestampTitle: 'Klaim Stempel Waktu',
+    iatLabel: 'Diterbitkan Pada (iat)',
+    nbfLabel: 'Tidak Sebelum (nbf)',
+    expLabel: 'Kedaluwarsa Pada (exp)',
+    expired: 'Kedaluwarsa',
+    active: 'Aktif (belum kedaluwarsa)',
+    signatureLabel: 'Segmen Tanda Tangan (Base64Url)',
+    invalidB64Url: 'Panjang segmen Base64Url tidak valid.',
+    segmentCount: 'Diharapkan 3 segmen JWT yang dipisahkan titik (header.payload.signature), ditemukan {count}.',
+    parseFallback: 'Tidak dapat mengurai segmen JSON Base64Url JWT.',
+  },
+  ru: {
+    infoNote:
+      'Декодирует заголовок и полезную нагрузку Base64Url локально в памяти браузера. Не проверяет криптографические подписи.',
+    loadSampleJwt: 'Загрузить пример JWT',
+    inputLabel: 'Закодированный JWT-токен',
+    inputPlaceholder: 'Вставьте JWT-токен (eyJhbGciOi...), чтобы проверить его заголовок и утверждения...',
+    invalidJwt: 'Недопустимый JWT:',
+    headerLabel: 'Заголовок (алгоритм и тип)',
+    payloadLabel: 'Полезная нагрузка (утверждения)',
+    copyHeader: 'Копировать заголовок',
+    copyPayload: 'Копировать полезную нагрузку',
+    timestampTitle: 'Утверждения с метками времени',
+    iatLabel: 'Выдан (iat)',
+    nbfLabel: 'Действителен с (nbf)',
+    expLabel: 'Истекает (exp)',
+    expired: 'Истёк',
+    active: 'Активен (ещё не истёк)',
+    signatureLabel: 'Сегмент подписи (Base64Url)',
+    invalidB64Url: 'Недопустимая длина сегмента Base64Url.',
+    segmentCount: 'Ожидалось 3 JWT-сегмента, разделённых точками (header.payload.signature), найдено: {count}.',
+    parseFallback: 'Не удаётся разобрать JSON-сегменты Base64Url JWT.',
+  },
 };
 
-function decodeBase64UrlToUtf8(segment: string, locale: 'en' | 'es' | 'pt' | 'fr' | 'de' | 'it'): string {
+function decodeBase64UrlToUtf8(segment: string, locale: LocaleCode): string {
   let base64 = segment.replace(/-/g, '+').replace(/_/g, '/');
   const pad = base64.length % 4;
   if (pad === 2) base64 += '==';

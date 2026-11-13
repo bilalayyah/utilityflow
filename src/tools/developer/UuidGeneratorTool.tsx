@@ -76,6 +76,30 @@ const STRINGS = {
     generatedLabel: 'UUID generati',
     copyAll: 'Copia tutto',
   },
+  id: {
+    versionLabel: 'Versi UUID',
+    v4: 'v4 (Acak)',
+    v7: 'v7 (Terurut waktu)',
+    quantity: 'Jumlah (1–100)',
+    generate: 'Buat UUID',
+    uppercase: 'Huruf besar',
+    includeHyphens: 'Sertakan tanda hubung',
+    wrapBraces: 'Bungkus dalam {braces}',
+    generatedLabel: 'UUID yang Dihasilkan',
+    copyAll: 'Salin semua',
+  },
+  ru: {
+    versionLabel: 'Версия UUID',
+    v4: 'v4 (случайный)',
+    v7: 'v7 (упорядоченный по времени)',
+    quantity: 'Количество (1–100)',
+    generate: 'Сгенерировать UUID',
+    uppercase: 'Верхний регистр',
+    includeHyphens: 'Включать дефисы',
+    wrapBraces: 'Обернуть в {braces}',
+    generatedLabel: 'Сгенерированные UUID',
+    copyAll: 'Копировать все',
+  },
 };
 
 function generateUuidV4(): string {

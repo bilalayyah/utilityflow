@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import type { LocaleCode } from '../../locales/config';
 import { useLocale } from '../../locales/LocaleContext';
 
 const STRINGS = {
@@ -123,9 +124,49 @@ const STRINGS = {
     millisecondsLabel: 'Millisecondi',
     isoLabel2: 'ISO 8601',
   },
+  id: {
+    currentLabel: 'Unix Timestamp Saat Ini (Detik)',
+    useCurrent: 'Gunakan waktu saat ini',
+    copyEpoch: 'Salin epoch',
+    converter1Label: 'Unix Timestamp → Tanggal Manusia',
+    epochPlaceholder: 'cth. 1794544800',
+    unitAuto: 'otomatis',
+    unitSeconds: 'detik',
+    unitMilliseconds: 'milidetik',
+    errorNotNumeric: 'Masukkan Unix timestamp numerik yang valid.',
+    errorOutOfRange: 'Timestamp berada di luar rentang Date JavaScript yang valid.',
+    isoLabel: 'ISO 8601 (UTC)',
+    localLabel: 'Zona Waktu Lokal',
+    rfcLabel: 'RFC 2822 / GMT',
+    relativeLabel: 'Relatif',
+    converter2Label: 'Tanggal & Waktu Lokal → Unix Timestamp',
+    secondsLabel: 'Detik',
+    millisecondsLabel: 'Milidetik',
+    isoLabel2: 'ISO 8601',
+  },
+  ru: {
+    currentLabel: 'Текущая Unix-метка (секунды)',
+    useCurrent: 'Использовать текущее время',
+    copyEpoch: 'Копировать epoch',
+    converter1Label: 'Unix-метка → дата для человека',
+    epochPlaceholder: 'напр. 1794544800',
+    unitAuto: 'авто',
+    unitSeconds: 'секунды',
+    unitMilliseconds: 'миллисекунды',
+    errorNotNumeric: 'Введите корректную числовую Unix-метку.',
+    errorOutOfRange: 'Метка времени вне допустимого диапазона JavaScript Date.',
+    isoLabel: 'ISO 8601 (UTC)',
+    localLabel: 'Местный часовой пояс',
+    rfcLabel: 'RFC 2822 / GMT',
+    relativeLabel: 'Относительное',
+    converter2Label: 'Местная дата и время → Unix-метка',
+    secondsLabel: 'Секунды',
+    millisecondsLabel: 'Миллисекунды',
+    isoLabel2: 'ISO 8601',
+  },
 };
 
-function formatRelative(ms: number, nowMs: number, locale: 'en' | 'es' | 'pt' | 'fr' | 'de' | 'it'): string {
+function formatRelative(ms: number, nowMs: number, locale: LocaleCode): string {
   const diffSec = Math.round((ms - nowMs) / 1000);
   const abs = Math.abs(diffSec);
   if (locale === 'es') {
@@ -157,6 +198,18 @@ function formatRelative(ms: number, nowMs: number, locale: 'en' | 'es' | 'pt' | 
     if (abs < 3600) return diffSec >= 0 ? `tra ${Math.round(abs / 60)} min` : `${Math.round(abs / 60)} min fa`;
     if (abs < 86400) return diffSec >= 0 ? `tra ${Math.round(abs / 3600)} h` : `${Math.round(abs / 3600)} h fa`;
     return diffSec >= 0 ? `tra ${Math.round(abs / 86400)} g` : `${Math.round(abs / 86400)} g fa`;
+  }
+  if (locale === 'id') {
+    if (abs < 60) return diffSec >= 0 ? `dalam ${abs} dtk` : `${abs} dtk yang lalu`;
+    if (abs < 3600) return diffSec >= 0 ? `dalam ${Math.round(abs / 60)} mnt` : `${Math.round(abs / 60)} mnt yang lalu`;
+    if (abs < 86400) return diffSec >= 0 ? `dalam ${Math.round(abs / 3600)} jam` : `${Math.round(abs / 3600)} jam yang lalu`;
+    return diffSec >= 0 ? `dalam ${Math.round(abs / 86400)} hari` : `${Math.round(abs / 86400)} hari yang lalu`;
+  }
+  if (locale === 'ru') {
+    if (abs < 60) return diffSec >= 0 ? `через ${abs} с` : `${abs} с назад`;
+    if (abs < 3600) return diffSec >= 0 ? `через ${Math.round(abs / 60)} мин` : `${Math.round(abs / 60)} мин назад`;
+    if (abs < 86400) return diffSec >= 0 ? `через ${Math.round(abs / 3600)} ч` : `${Math.round(abs / 3600)} ч назад`;
+    return diffSec >= 0 ? `через ${Math.round(abs / 86400)} дн` : `${Math.round(abs / 86400)} дн назад`;
   }
   const suffix = diffSec >= 0 ? 'from now' : 'ago';
   if (abs < 60) return `${abs}s ${suffix}`;

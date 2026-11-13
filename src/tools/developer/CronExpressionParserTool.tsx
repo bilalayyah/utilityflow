@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import type { LocaleCode } from '../../locales/config';
 import { useLocale } from '../../locales/LocaleContext';
 
 const STRINGS = {
@@ -171,6 +172,62 @@ const STRINGS = {
     dayBoth: 'il giorno {day} o il {dow}',
     monthIn: ' in {months}',
   },
+  id: {
+    inputLabel: 'Ekspresi Cron 5 Bidang',
+    copyCron: 'Salin cron',
+    humanTitle: 'Jadwal yang Mudah Dibaca Manusia',
+    breakdownTitle: 'Rincian Bidang',
+    fieldMinute: 'Menit (0–59)',
+    fieldHour: 'Jam (0–23)',
+    fieldDom: 'Hari dalam Bulan (1–31)',
+    fieldMonth: 'Bulan (1–12)',
+    fieldDow: 'Hari dalam Minggu (0–6)',
+    nextRuns: '{count} Jadwal Berikutnya (Waktu Lokal)',
+    noRuns: 'Tidak ditemukan jadwal yang cocok dalam 366 hari ke depan.',
+    fieldsError: 'Cron standar membutuhkan 5 bidang (menit jam hari-dalam-bulan bulan hari-dalam-minggu). Ditemukan {count}.',
+    emptySegment: 'Segmen kosong dalam "{token}"',
+    invalidStep: 'Langkah "{step}" tidak valid dalam "{token}"',
+    outOfRange: 'Nilai di luar rentang ({min}–{max}) dalam "{token}"',
+    invalidCron: 'Ekspresi cron tidak valid.',
+    everyMinutes: 'Setiap {n} menit',
+    minuteZeroHour: 'Pada menit 0 setiap jam',
+    atTime: 'Pada {time}',
+    atFields: 'Pada {a}, {b}',
+    dayEveryDay: 'setiap hari',
+    dayWeekdays: 'pada hari kerja (Senin–Jumat)',
+    dayOfMonth: 'pada hari {day} dalam sebulan',
+    dayDow: 'pada {dow}',
+    dayBoth: 'pada hari {day} atau {dow}',
+    monthIn: ' pada {months}',
+  },
+  ru: {
+    inputLabel: 'Cron-выражение из 5 полей',
+    copyCron: 'Копировать cron',
+    humanTitle: 'Расписание понятным языком',
+    breakdownTitle: 'Разбор полей',
+    fieldMinute: 'Минута (0–59)',
+    fieldHour: 'Час (0–23)',
+    fieldDom: 'День месяца (1–31)',
+    fieldMonth: 'Месяц (1–12)',
+    fieldDow: 'День недели (0–6)',
+    nextRuns: 'Следующие {count} запусков (местное время)',
+    noRuns: 'Подходящих запусков не найдено в ближайшие 366 дней.',
+    fieldsError: 'Стандартный cron ожидает 5 полей (минута час день-месяца месяц день-недели). Найдено: {count}.',
+    emptySegment: 'Пустой сегмент в «{token}»',
+    invalidStep: 'Недопустимый шаг «{step}» в «{token}»',
+    outOfRange: 'Значение вне диапазона ({min}–{max}) в «{token}»',
+    invalidCron: 'Недопустимое cron-выражение.',
+    everyMinutes: 'Каждые {n} минут',
+    minuteZeroHour: 'В 0 минут каждого часа',
+    atTime: 'В {time}',
+    atFields: 'В {a}, {b}',
+    dayEveryDay: 'каждый день',
+    dayWeekdays: 'по будням (понедельник–пятница)',
+    dayOfMonth: 'в {day}-й день месяца',
+    dayDow: 'в {dow}',
+    dayBoth: 'в день {day} или {dow}',
+    monthIn: ' в {months}',
+  },
 };
 
 const PRESETS = {
@@ -216,6 +273,20 @@ const PRESETS = {
     { label: 'Nei giorni feriali alle 9:00', expr: '0 9 * * 1-5' },
     { label: 'Il 1° del mese alle 08:30', expr: '30 8 1 * *' },
   ],
+  id: [
+    { label: 'Setiap 5 menit', expr: '*/5 * * * *' },
+    { label: 'Setiap jam', expr: '0 * * * *' },
+    { label: 'Setiap hari tengah malam', expr: '0 0 * * *' },
+    { label: 'Hari kerja pukul 9:00', expr: '0 9 * * 1-5' },
+    { label: 'Tanggal 1 setiap bulan pukul 08:30', expr: '30 8 1 * *' },
+  ],
+  ru: [
+    { label: 'Каждые 5 минут', expr: '*/5 * * * *' },
+    { label: 'Каждый час', expr: '0 * * * *' },
+    { label: 'Ежедневно в полночь', expr: '0 0 * * *' },
+    { label: 'По будням в 9:00', expr: '0 9 * * 1-5' },
+    { label: '1-го числа месяца в 08:30', expr: '30 8 1 * *' },
+  ],
 } as const;
 
 const MONTH_NAMES: Record<string, number> = {
@@ -234,6 +305,8 @@ const DOW_LABELS = {
   fr: ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'],
   de: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'],
   it: ['domenica', 'lunedì', 'martedì', 'mercoledì', 'giovedì', 'venerdì', 'sabato'],
+  id: ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'],
+  ru: ['воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота'],
 } as const;
 const MONTH_LABELS = {
   en: [
@@ -260,6 +333,14 @@ const MONTH_LABELS = {
     '', 'gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno',
     'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre',
   ],
+  id: [
+    '', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+    'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember',
+  ],
+  ru: [
+    '', 'январь', 'февраль', 'март', 'апрель', 'май', 'июнь',
+    'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь',
+  ],
 } as const;
 
 const UNIT_WORDS = {
@@ -269,6 +350,8 @@ const UNIT_WORDS = {
   fr: { minute: 'minute', hour: 'heure', day: 'jour', month: 'mois', weekday: 'jour de la semaine' },
   de: { minute: 'Minute', hour: 'Stunde', day: 'Tag', month: 'Monat', weekday: 'Wochentag' },
   it: { minute: 'minuto', hour: 'ora', day: 'giorno', month: 'mese', weekday: 'giorno della settimana' },
+  id: { minute: 'menit', hour: 'jam', day: 'hari', month: 'bulan', weekday: 'hari kerja' },
+  ru: { minute: 'минута', hour: 'час', day: 'день', month: 'месяц', weekday: 'будний день' },
 } as const;
 const UNIT_PLURALS = {
   en: { minute: 'minutes', hour: 'hours', day: 'days', month: 'months', weekday: 'weekdays' },
@@ -277,6 +360,8 @@ const UNIT_PLURALS = {
   fr: { minute: 'minutes', hour: 'heures', day: 'jours', month: 'mois', weekday: 'jours de la semaine' },
   de: { minute: 'Minuten', hour: 'Stunden', day: 'Tage', month: 'Monate', weekday: 'Wochentage' },
   it: { minute: 'minuti', hour: 'ore', day: 'giorni', month: 'mesi', weekday: 'giorni della settimana' },
+  id: { minute: 'menit', hour: 'jam', day: 'hari', month: 'bulan', weekday: 'hari kerja' },
+  ru: { minute: 'минуты', hour: 'часы', day: 'дни', month: 'месяцы', weekday: 'будние дни' },
 } as const;
 type CronUnit = keyof typeof UNIT_WORDS.en;
 
@@ -284,7 +369,7 @@ function parseFieldToken(
   token: string,
   min: number,
   max: number,
-  locale: 'en' | 'es' | 'pt' | 'fr' | 'de' | 'it',
+  locale: LocaleCode,
   nameMap?: Record<string, number>
 ): number[] {
   const s = STRINGS[locale];
@@ -344,13 +429,17 @@ function parseFieldToken(
 function describeField(
   raw: string,
   unit: CronUnit,
-  locale: 'en' | 'es' | 'pt' | 'fr' | 'de' | 'it',
+  locale: LocaleCode,
   formatter?: (n: number) => string
 ): string {
   const u = UNIT_WORDS[locale][unit];
-  if (raw === '*') return locale === 'es' || locale === 'pt' ? `cada ${u}` : locale === 'fr' ? `chaque ${u}` : locale === 'de' ? `alle ${UNIT_PLURALS[locale][unit]}` : locale === 'it' ? `ogni ${u}` : `every ${u}`;
+  if (raw === '*') {
+    if (locale === 'id') return `setiap ${u}`;
+    if (locale === 'ru') return unit === 'minute' ? 'каждая минута' : `каждый ${u}`;
+    return locale === 'es' || locale === 'pt' ? `cada ${u}` : locale === 'fr' ? `chaque ${u}` : locale === 'de' ? `alle ${UNIT_PLURALS[locale][unit]}` : locale === 'it' ? `ogni ${u}` : `every ${u}`;
+  }
   if (raw.startsWith('*/')) {
-    const prefix = locale === 'es' || locale === 'pt' ? 'cada' : locale === 'fr' ? 'chaque' : locale === 'de' ? 'alle' : locale === 'it' ? 'ogni' : 'every';
+    const prefix = locale === 'es' || locale === 'pt' ? 'cada' : locale === 'fr' ? 'chaque' : locale === 'de' ? 'alle' : locale === 'it' ? 'ogni' : locale === 'id' ? 'setiap' : locale === 'ru' ? 'каждые' : 'every';
     return `${prefix} ${raw.slice(2)} ${UNIT_PLURALS[locale][unit]}`;
   }
   if (formatter) {

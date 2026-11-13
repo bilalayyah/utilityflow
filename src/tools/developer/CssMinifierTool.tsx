@@ -70,6 +70,28 @@ const STRINGS = {
     outputPlaceholder: 'Il CSS elaborato apparirà qui...',
     copyCss: 'Copia CSS',
   },
+  id: {
+    minifyTab: 'Minifikasi CSS',
+    beautifyTab: 'Percantik CSS',
+    inputLabel: 'CSS Input',
+    bytesLabel: 'byte',
+    inputPlaceholder: 'Tempel aturan CSS atau stylesheet di sini...',
+    outputLabelMinify: 'CSS yang Diminifikasi',
+    outputLabelBeautify: 'CSS yang Dipercantik',
+    outputPlaceholder: 'CSS yang diproses muncul di sini...',
+    copyCss: 'Salin CSS',
+  },
+  ru: {
+    minifyTab: 'Минифицировать CSS',
+    beautifyTab: 'Форматировать CSS',
+    inputLabel: 'Входной CSS',
+    bytesLabel: 'байт',
+    inputPlaceholder: 'Вставьте правила CSS или таблицы стилей...',
+    outputLabelMinify: 'Минифицированный CSS',
+    outputLabelBeautify: 'Отформатированный CSS',
+    outputPlaceholder: 'Здесь появится обработанный CSS...',
+    copyCss: 'Копировать CSS',
+  },
 };
 
 const SAMPLE_CSS = `/* Primary card surface */

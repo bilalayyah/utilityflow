@@ -1,6 +1,7 @@
 import { ArrowLeftRight, RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import type { LocaleCode } from '../../locales/config';
 import { useLocale } from '../../locales/LocaleContext';
 
 const STRINGS = {
@@ -112,6 +113,42 @@ const STRINGS = {
     invalidLength: 'Lunghezza della stringa Base64 non valida.',
     invalidInput: 'Input Base64 non valido o sequenza di byte UTF-8 malformata.',
   },
+  id: {
+    encodeTab: 'Encode ke Base64',
+    decodeTab: 'Decode Base64',
+    urlSafe: 'URL-safe (- dan _)',
+    omitPadding: 'Hilangkan padding = di akhir',
+    swap: 'Tukar',
+    decodeError: 'Kesalahan decode:',
+    inputLabelEncode: 'Teks Biasa (UTF-8)',
+    inputLabelDecode: 'String Base64',
+    inputPlaceholderEncode: 'Masukkan teks atau JSON untuk di-encode...',
+    inputPlaceholderDecode: 'Tempel string Base64 standar atau URL-safe...',
+    outputLabelEncode: 'Hasil Base64',
+    outputLabelDecode: 'Teks yang Didecode',
+    outputPlaceholder: 'Hasil konversi muncul di sini...',
+    copyOutput: 'Salin hasil',
+    invalidLength: 'Panjang string Base64 tidak valid.',
+    invalidInput: 'Input Base64 tidak valid atau urutan byte UTF-8 rusak.',
+  },
+  ru: {
+    encodeTab: 'Кодировать в Base64',
+    decodeTab: 'Декодировать Base64',
+    urlSafe: 'URL-safe (- и _)',
+    omitPadding: 'Убирать конечный padding =',
+    swap: 'Поменять местами',
+    decodeError: 'Ошибка декодирования:',
+    inputLabelEncode: 'Обычный текст (UTF-8)',
+    inputLabelDecode: 'Строка Base64',
+    inputPlaceholderEncode: 'Введите текст или JSON для кодирования...',
+    inputPlaceholderDecode: 'Вставьте стандартную или URL-safe строку Base64...',
+    outputLabelEncode: 'Вывод Base64',
+    outputLabelDecode: 'Декодированный текст',
+    outputPlaceholder: 'Здесь появится преобразованный результат...',
+    copyOutput: 'Копировать результат',
+    invalidLength: 'Недопустимая длина строки Base64.',
+    invalidInput: 'Недопустимый ввод Base64 или повреждённая последовательность байтов UTF-8.',
+  },
 };
 
 const SAMPLE_PLAIN = {
@@ -121,6 +158,8 @@ const SAMPLE_PLAIN = {
   fr: 'UtilityFlow : encodage Base64 sûr en UTF-8 ✓',
   de: 'UtilityFlow: UTF-8-sichere Base64-Kodierung ✓',
   it: 'UtilityFlow: codifica Base64 sicura con UTF-8 ✓',
+  id: 'UtilityFlow: pengodean Base64 yang aman dengan UTF-8 ✓',
+  ru: 'UtilityFlow: безопасное кодирование Base64 с UTF-8 ✓',
 } as const;
 
 function encodeUtf8Base64(text: string, urlSafe: boolean, omitPadding: boolean): string {
@@ -139,7 +178,7 @@ function encodeUtf8Base64(text: string, urlSafe: boolean, omitPadding: boolean):
   return base64;
 }
 
-function decodeUtf8Base64(raw: string, locale: 'en' | 'es' | 'pt' | 'fr' | 'de' | 'it'): string {
+function decodeUtf8Base64(raw: string, locale: LocaleCode): string {
   let normalized = raw.trim().replace(/-/g, '+').replace(/_/g, '/');
   const mod = normalized.length % 4;
   if (mod === 2) normalized += '==';
