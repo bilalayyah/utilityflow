@@ -20,6 +20,8 @@ import { JA_CATEGORY_OVERRIDES } from '../src/locales/ja/categories';
 import { JA_TOOL_OVERRIDES } from '../src/locales/ja/tools';
 import { KO_CATEGORY_OVERRIDES } from '../src/locales/ko/categories';
 import { KO_TOOL_OVERRIDES } from '../src/locales/ko/tools';
+import { ZH_CATEGORY_OVERRIDES } from '../src/locales/zh/categories';
+import { ZH_TOOL_OVERRIDES } from '../src/locales/zh/tools';
 import type { CategoryLocaleOverride, ToolLocaleOverride } from '../src/locales/types';
 
 /**
@@ -44,6 +46,7 @@ const TOOL_OVERRIDES: Record<NonDefaultLocale, Record<string, ToolLocaleOverride
   ru: RU_TOOL_OVERRIDES,
   ja: JA_TOOL_OVERRIDES,
   ko: KO_TOOL_OVERRIDES,
+  zh: ZH_TOOL_OVERRIDES,
 };
 
 const CATEGORY_OVERRIDES: Record<
@@ -59,6 +62,7 @@ const CATEGORY_OVERRIDES: Record<
   ru: RU_CATEGORY_OVERRIDES,
   ja: JA_CATEGORY_OVERRIDES,
   ko: KO_CATEGORY_OVERRIDES,
+  zh: ZH_CATEGORY_OVERRIDES,
 };
 
 function sortRecord(record: Record<string, string>): Record<string, string> {
