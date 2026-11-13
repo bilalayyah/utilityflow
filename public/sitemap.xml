@@ -1,607 +1,1819 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://utilityflow.online/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/tools/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/tools/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/todas-las-herramientas/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/tools/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/todas-las-herramientas/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/tools/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/todas-las-herramientas/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/tools/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/about/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/about/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/acerca-de/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/about/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/acerca-de/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/about/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/acerca-de/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/about/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/contact/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/contact/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/contacto/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/contact/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/contacto/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/contact/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/contacto/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/contact/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/privacy-policy/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/privacy-policy/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/politica-de-privacidad/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/privacy-policy/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/politica-de-privacidad/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/privacy-policy/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/politica-de-privacidad/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/privacy-policy/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/terms-of-service/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/terms-of-service/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/terminos-de-servicio/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/terms-of-service/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/terminos-de-servicio/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/terms-of-service/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/terminos-de-servicio/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/terms-of-service/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/category/text-writing-tools/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/category/text-writing-tools/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/categoria/herramientas-de-texto-y-escritura/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/category/text-writing-tools/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/categoria/herramientas-de-texto-y-escritura/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/category/text-writing-tools/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/categoria/herramientas-de-texto-y-escritura/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/category/text-writing-tools/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/category/developer-tools/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/category/developer-tools/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/categoria/herramientas-para-desarrolladores/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/category/developer-tools/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/categoria/herramientas-para-desarrolladores/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/category/developer-tools/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/categoria/herramientas-para-desarrolladores/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/category/developer-tools/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/category/calculators/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/category/calculators/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/categoria/calculadoras/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/category/calculators/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/categoria/calculadoras/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/category/calculators/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/categoria/calculadoras/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/category/calculators/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/category/social-media-tools/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/category/social-media-tools/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/categoria/herramientas-de-redes-sociales/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/category/social-media-tools/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/categoria/herramientas-de-redes-sociales/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/category/social-media-tools/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/categoria/herramientas-de-redes-sociales/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/category/social-media-tools/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/category/pdf-tools/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/category/pdf-tools/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/categoria/herramientas-pdf/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/category/pdf-tools/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/categoria/herramientas-pdf/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/category/pdf-tools/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/categoria/herramientas-pdf/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/category/pdf-tools/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/category/seo-tools/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/category/seo-tools/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/categoria/herramientas-seo/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/category/seo-tools/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/categoria/herramientas-seo/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/category/seo-tools/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/categoria/herramientas-seo/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/category/seo-tools/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/category/image-file-tools/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/category/image-file-tools/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/categoria/herramientas-de-imagenes-y-archivos/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/category/image-file-tools/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/categoria/herramientas-de-imagenes-y-archivos/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/category/image-file-tools/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/categoria/herramientas-de-imagenes-y-archivos/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/category/image-file-tools/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/word-counter/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/word-counter/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/contador-de-palabras/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/word-counter/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/contador-de-palabras/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/word-counter/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/contador-de-palabras/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/word-counter/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/character-counter/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/character-counter/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/contador-de-caracteres/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/character-counter/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/contador-de-caracteres/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/character-counter/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/contador-de-caracteres/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/character-counter/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/case-converter/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/case-converter/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/convertidor-de-mayusculas-y-minusculas/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/case-converter/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/convertidor-de-mayusculas-y-minusculas/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/case-converter/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/convertidor-de-mayusculas-y-minusculas/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/case-converter/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/remove-duplicate-lines/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/remove-duplicate-lines/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/eliminar-lineas-duplicadas/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/remove-duplicate-lines/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/eliminar-lineas-duplicadas/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/remove-duplicate-lines/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/eliminar-lineas-duplicadas/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/remove-duplicate-lines/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/text-diff-checker/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/text-diff-checker/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/comparador-de-textos/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/text-diff-checker/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/comparador-de-textos/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/text-diff-checker/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/comparador-de-textos/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/text-diff-checker/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/whitespace-remover/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/whitespace-remover/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/eliminador-de-espacios-en-blanco/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/whitespace-remover/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/eliminador-de-espacios-en-blanco/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/whitespace-remover/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/eliminador-de-espacios-en-blanco/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/whitespace-remover/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/sort-lines/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/sort-lines/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/ordenar-lineas-alfabeticamente/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/sort-lines/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/ordenar-lineas-alfabeticamente/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/sort-lines/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/ordenar-lineas-alfabeticamente/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/sort-lines/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/find-and-replace/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/find-and-replace/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/buscar-y-reemplazar-texto/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/find-and-replace/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/buscar-y-reemplazar-texto/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/find-and-replace/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/buscar-y-reemplazar-texto/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/find-and-replace/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/text-reverser/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/text-reverser/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/inversor-de-texto/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/text-reverser/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/inversor-de-texto/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/text-reverser/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/inversor-de-texto/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/text-reverser/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/lorem-ipsum-generator/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/lorem-ipsum-generator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/generador-de-lorem-ipsum/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/lorem-ipsum-generator/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/generador-de-lorem-ipsum/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/lorem-ipsum-generator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/generador-de-lorem-ipsum/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/lorem-ipsum-generator/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/readability-checker/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/readability-checker/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/verificador-de-legibilidad/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/readability-checker/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/verificador-de-legibilidad/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/readability-checker/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/verificador-de-legibilidad/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/readability-checker/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/word-frequency-counter/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/word-frequency-counter/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/contador-de-frecuencia-de-palabras/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/word-frequency-counter/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/contador-de-frecuencia-de-palabras/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/word-frequency-counter/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/contador-de-frecuencia-de-palabras/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/word-frequency-counter/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/text-to-slug/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/text-to-slug/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/convertidor-de-texto-a-slug/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/text-to-slug/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/convertidor-de-texto-a-slug/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/text-to-slug/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/convertidor-de-texto-a-slug/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/text-to-slug/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/markdown-previewer/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/markdown-previewer/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/visor-de-markdown/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/markdown-previewer/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/visor-de-markdown/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/markdown-previewer/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/visor-de-markdown/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/markdown-previewer/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/line-prefix-suffix/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/line-prefix-suffix/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/agregar-prefijo-sufijo-y-numeros-a-lineas/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/line-prefix-suffix/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/agregar-prefijo-sufijo-y-numeros-a-lineas/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/line-prefix-suffix/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/agregar-prefijo-sufijo-y-numeros-a-lineas/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/line-prefix-suffix/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/json-formatter/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/json-formatter/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/formateador-json/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/json-formatter/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/formateador-json/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/json-formatter/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/formateador-json/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/json-formatter/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/base64-encoder-decoder/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/base64-encoder-decoder/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/codificador-decodificador-base64/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/base64-encoder-decoder/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/codificador-decodificador-base64/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/base64-encoder-decoder/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/codificador-decodificador-base64/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/base64-encoder-decoder/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/url-encoder-decoder/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/url-encoder-decoder/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/codificador-decodificador-url/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/url-encoder-decoder/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/codificador-decodificador-url/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/url-encoder-decoder/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/codificador-decodificador-url/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/url-encoder-decoder/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/uuid-generator/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/uuid-generator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/generador-uuid/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/uuid-generator/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/generador-uuid/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/uuid-generator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/generador-uuid/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/uuid-generator/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/regex-tester/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/regex-tester/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/probador-regex/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/regex-tester/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/probador-regex/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/regex-tester/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/probador-regex/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/regex-tester/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/jwt-decoder/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/jwt-decoder/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/decodificador-jwt/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/jwt-decoder/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/decodificador-jwt/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/jwt-decoder/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/decodificador-jwt/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/jwt-decoder/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/hash-generator/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/hash-generator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/generador-hash/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/hash-generator/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/generador-hash/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/hash-generator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/generador-hash/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/hash-generator/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/html-entity-encoder/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/html-entity-encoder/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/codificador-entidades-html/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/html-entity-encoder/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/codificador-entidades-html/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/html-entity-encoder/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/codificador-entidades-html/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/html-entity-encoder/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/json-csv-converter/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/json-csv-converter/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/convertidor-json-csv/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/json-csv-converter/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/convertidor-json-csv/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/json-csv-converter/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/convertidor-json-csv/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/json-csv-converter/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/unix-timestamp-converter/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/unix-timestamp-converter/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/convertidor-marca-tiempo-unix/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/unix-timestamp-converter/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/convertidor-marca-tiempo-unix/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/unix-timestamp-converter/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/convertidor-marca-tiempo-unix/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/unix-timestamp-converter/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/sql-formatter/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/sql-formatter/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/formateador-sql/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/sql-formatter/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/formateador-sql/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/sql-formatter/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/formateador-sql/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/sql-formatter/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/css-minifier/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/css-minifier/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/minificador-css/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/css-minifier/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/minificador-css/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/css-minifier/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/minificador-css/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/css-minifier/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/js-formatter/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/js-formatter/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/formateador-javascript/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/js-formatter/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/formateador-javascript/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/js-formatter/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/formateador-javascript/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/js-formatter/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/cron-expression-parser/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/cron-expression-parser/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/analizador-expresiones-cron/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/cron-expression-parser/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/analizador-expresiones-cron/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/cron-expression-parser/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/analizador-expresiones-cron/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/cron-expression-parser/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/color-converter/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/color-converter/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/convertidor-colores/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/color-converter/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/convertidor-colores/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/color-converter/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/convertidor-colores/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/color-converter/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/age-calculator/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/age-calculator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/calculadora-de-edad/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/age-calculator/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/calculadora-de-edad/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/age-calculator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/calculadora-de-edad/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/age-calculator/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/percentage-calculator/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/percentage-calculator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/calculadora-de-porcentaje/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/percentage-calculator/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/calculadora-de-porcentaje/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/percentage-calculator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/calculadora-de-porcentaje/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/percentage-calculator/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/loan-emi-calculator/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/loan-emi-calculator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/calculadora-de-prestamo-emi/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/loan-emi-calculator/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/calculadora-de-prestamo-emi/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/loan-emi-calculator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/calculadora-de-prestamo-emi/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/loan-emi-calculator/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/mortgage-calculator/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/mortgage-calculator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/calculadora-de-hipoteca/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/mortgage-calculator/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/calculadora-de-hipoteca/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/mortgage-calculator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/calculadora-de-hipoteca/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/mortgage-calculator/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/compound-interest-calculator/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/compound-interest-calculator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/calculadora-de-interes-compuesto/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/compound-interest-calculator/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/calculadora-de-interes-compuesto/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/compound-interest-calculator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/calculadora-de-interes-compuesto/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/compound-interest-calculator/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/discount-margin-calculator/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/discount-margin-calculator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/calculadora-de-descuento-y-margen/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/discount-margin-calculator/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/calculadora-de-descuento-y-margen/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/discount-margin-calculator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/calculadora-de-descuento-y-margen/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/discount-margin-calculator/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/vat-tax-calculator/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/vat-tax-calculator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/calculadora-de-iva-e-impuestos/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/vat-tax-calculator/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/calculadora-de-iva-e-impuestos/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/vat-tax-calculator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/calculadora-de-iva-e-impuestos/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/vat-tax-calculator/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/salary-calculator/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/salary-calculator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/calculadora-de-salario/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/salary-calculator/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/calculadora-de-salario/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/salary-calculator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/calculadora-de-salario/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/salary-calculator/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/tip-calculator/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/tip-calculator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/calculadora-de-propina/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/tip-calculator/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/calculadora-de-propina/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/tip-calculator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/calculadora-de-propina/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/tip-calculator/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/bmi-calculator/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/bmi-calculator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/calculadora-de-imc/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/bmi-calculator/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/calculadora-de-imc/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/bmi-calculator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/calculadora-de-imc/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/bmi-calculator/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/calorie-calculator/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/calorie-calculator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/calculadora-de-calorias/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/calorie-calculator/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/calculadora-de-calorias/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/calorie-calculator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/calculadora-de-calorias/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/calorie-calculator/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/date-difference-calculator/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/date-difference-calculator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/calculadora-de-diferencia-de-fechas/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/date-difference-calculator/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/calculadora-de-diferencia-de-fechas/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/date-difference-calculator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/calculadora-de-diferencia-de-fechas/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/date-difference-calculator/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/time-duration-calculator/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/time-duration-calculator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/calculadora-de-duracion-de-tiempo/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/time-duration-calculator/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/calculadora-de-duracion-de-tiempo/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/time-duration-calculator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/calculadora-de-duracion-de-tiempo/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/time-duration-calculator/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/unit-converter/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/unit-converter/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/conversor-de-unidades/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/unit-converter/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/conversor-de-unidades/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/unit-converter/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/conversor-de-unidades/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/unit-converter/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/currency-calculator/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/currency-calculator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/calculadora-de-divisas/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/currency-calculator/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/calculadora-de-divisas/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/currency-calculator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/calculadora-de-divisas/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/currency-calculator/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/qr-code-generator/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/qr-code-generator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/generador-de-codigos-qr/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/qr-code-generator/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/generador-de-codigos-qr/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/qr-code-generator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/generador-de-codigos-qr/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/qr-code-generator/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/utm-link-builder/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/utm-link-builder/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/creador-de-enlaces-utm/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/utm-link-builder/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/creador-de-enlaces-utm/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/utm-link-builder/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/creador-de-enlaces-utm/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/utm-link-builder/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/social-character-limit-checker/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/social-character-limit-checker/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/contador-de-caracteres-para-redes-sociales/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/social-character-limit-checker/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/contador-de-caracteres-para-redes-sociales/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/social-character-limit-checker/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/contador-de-caracteres-para-redes-sociales/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/social-character-limit-checker/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/unicode-fancy-text-formatter/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/unicode-fancy-text-formatter/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/formateador-de-texto-unicode/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/unicode-fancy-text-formatter/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/formateador-de-texto-unicode/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/unicode-fancy-text-formatter/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/formateador-de-texto-unicode/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/unicode-fancy-text-formatter/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/bio-line-break-formatter/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/bio-line-break-formatter/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/formateador-de-saltos-de-linea-para-bio/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/bio-line-break-formatter/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/formateador-de-saltos-de-linea-para-bio/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/bio-line-break-formatter/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/formateador-de-saltos-de-linea-para-bio/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/bio-line-break-formatter/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/youtube-timestamp-generator/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/youtube-timestamp-generator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/generador-de-marcas-de-tiempo-de-youtube/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/youtube-timestamp-generator/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/generador-de-marcas-de-tiempo-de-youtube/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/youtube-timestamp-generator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/generador-de-marcas-de-tiempo-de-youtube/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/youtube-timestamp-generator/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/social-thumbnail-previewer/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/social-thumbnail-previewer/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/vista-previa-de-miniaturas-de-youtube/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/social-thumbnail-previewer/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/vista-previa-de-miniaturas-de-youtube/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/social-thumbnail-previewer/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/vista-previa-de-miniaturas-de-youtube/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/social-thumbnail-previewer/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/hashtag-formatter/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/hashtag-formatter/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/formateador-de-hashtags/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/hashtag-formatter/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/formateador-de-hashtags/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/hashtag-formatter/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/formateador-de-hashtags/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/hashtag-formatter/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/caption-template-builder/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/caption-template-builder/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/creador-de-plantillas-de-publicaciones/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/caption-template-builder/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/creador-de-plantillas-de-publicaciones/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/caption-template-builder/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/creador-de-plantillas-de-publicaciones/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/caption-template-builder/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/social-handle-formatter/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/social-handle-formatter/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/formateador-de-nombres-de-usuario/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/social-handle-formatter/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/formateador-de-nombres-de-usuario/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/social-handle-formatter/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/formateador-de-nombres-de-usuario/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/social-handle-formatter/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/merge-pdf/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/merge-pdf/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/combinar-pdf/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/merge-pdf/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/combinar-pdf/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/merge-pdf/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/combinar-pdf/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/merge-pdf/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/split-pdf/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/split-pdf/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/dividir-pdf/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/split-pdf/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/dividir-pdf/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/split-pdf/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/dividir-pdf/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/split-pdf/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/images-to-pdf/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/images-to-pdf/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/imagenes-a-pdf/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/images-to-pdf/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/imagenes-a-pdf/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/images-to-pdf/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/imagenes-a-pdf/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/images-to-pdf/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/pdf-to-images/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/pdf-to-images/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/pdf-a-imagenes/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/pdf-to-images/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/pdf-a-imagenes/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/pdf-to-images/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/pdf-a-imagenes/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/pdf-to-images/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/pdf-page-rotator/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/pdf-page-rotator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/rotador-de-paginas-pdf/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/pdf-page-rotator/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/rotador-de-paginas-pdf/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/pdf-page-rotator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/rotador-de-paginas-pdf/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/pdf-page-rotator/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/reorder-delete-pdf-pages/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/reorder-delete-pdf-pages/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/reordenar-y-eliminar-paginas-pdf/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/reorder-delete-pdf-pages/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/reordenar-y-eliminar-paginas-pdf/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/reorder-delete-pdf-pages/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/reordenar-y-eliminar-paginas-pdf/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/reorder-delete-pdf-pages/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/pdf-watermark/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/pdf-watermark/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/marca-de-agua-en-pdf/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/pdf-watermark/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/marca-de-agua-en-pdf/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/pdf-watermark/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/marca-de-agua-en-pdf/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/pdf-watermark/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/add-pdf-page-numbers/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/add-pdf-page-numbers/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/agregar-numeros-de-pagina-a-pdf/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/add-pdf-page-numbers/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/agregar-numeros-de-pagina-a-pdf/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/add-pdf-page-numbers/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/agregar-numeros-de-pagina-a-pdf/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/add-pdf-page-numbers/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/pdf-metadata-editor/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/pdf-metadata-editor/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/editor-de-metadatos-pdf/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/pdf-metadata-editor/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/editor-de-metadatos-pdf/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/pdf-metadata-editor/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/editor-de-metadatos-pdf/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/pdf-metadata-editor/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/pdf-text-extractor/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/pdf-text-extractor/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/extractor-de-texto-de-pdf/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/pdf-text-extractor/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/extractor-de-texto-de-pdf/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/pdf-text-extractor/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/extractor-de-texto-de-pdf/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/pdf-text-extractor/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/meta-tag-generator/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/meta-tag-generator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/generador-de-meta-etiquetas/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/meta-tag-generator/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/generador-de-meta-etiquetas/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/meta-tag-generator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/generador-de-meta-etiquetas/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/meta-tag-generator/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/serp-snippet-preview/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/serp-snippet-preview/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/vista-previa-de-fragmento-serp/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/serp-snippet-preview/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/vista-previa-de-fragmento-serp/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/serp-snippet-preview/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/vista-previa-de-fragmento-serp/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/serp-snippet-preview/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/xml-sitemap-generator/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/xml-sitemap-generator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/generador-de-sitemap-xml/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/xml-sitemap-generator/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/generador-de-sitemap-xml/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/xml-sitemap-generator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/generador-de-sitemap-xml/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/xml-sitemap-generator/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/robots-txt-generator/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/robots-txt-generator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/generador-de-robots-txt/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/robots-txt-generator/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/generador-de-robots-txt/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/robots-txt-generator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/generador-de-robots-txt/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/robots-txt-generator/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/schema-markup-generator/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/schema-markup-generator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/generador-de-datos-estructurados/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/schema-markup-generator/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/generador-de-datos-estructurados/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/schema-markup-generator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/generador-de-datos-estructurados/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/schema-markup-generator/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/url-slug-generator/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/url-slug-generator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/generador-de-slugs-de-url/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/url-slug-generator/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/generador-de-slugs-de-url/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/url-slug-generator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/generador-de-slugs-de-url/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/url-slug-generator/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/keyword-density-checker/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/keyword-density-checker/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/verificador-de-densidad-de-palabras-clave/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/keyword-density-checker/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/verificador-de-densidad-de-palabras-clave/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/keyword-density-checker/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/verificador-de-densidad-de-palabras-clave/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/keyword-density-checker/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/canonical-hreflang-generator/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/canonical-hreflang-generator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/generador-de-hreflang-y-redirecciones-301/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/canonical-hreflang-generator/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/generador-de-hreflang-y-redirecciones-301/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/canonical-hreflang-generator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/generador-de-hreflang-y-redirecciones-301/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/canonical-hreflang-generator/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/on-page-seo-checker/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/on-page-seo-checker/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/verificador-de-seo-on-page/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/on-page-seo-checker/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/verificador-de-seo-on-page/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/on-page-seo-checker/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/verificador-de-seo-on-page/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/on-page-seo-checker/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/robots-meta-tag-generator/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/robots-meta-tag-generator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/generador-de-meta-etiquetas-robots/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/robots-meta-tag-generator/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/generador-de-meta-etiquetas-robots/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/robots-meta-tag-generator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/generador-de-meta-etiquetas-robots/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/robots-meta-tag-generator/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/image-compressor/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/image-compressor/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/compresor-de-imagenes/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/image-compressor/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/compresor-de-imagenes/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/image-compressor/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/compresor-de-imagenes/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/image-compressor/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/image-resizer/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/image-resizer/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/redimensionador-de-imagenes/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/image-resizer/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/redimensionador-de-imagenes/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/image-resizer/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/redimensionador-de-imagenes/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/image-resizer/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/image-format-converter/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/image-format-converter/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/conversor-de-formato-de-imagen/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/image-format-converter/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/conversor-de-formato-de-imagen/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/image-format-converter/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/conversor-de-formato-de-imagen/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/image-format-converter/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/image-rotate-flip/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/image-rotate-flip/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/rotar-y-voltear-imagen/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/image-rotate-flip/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/rotar-y-voltear-imagen/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/image-rotate-flip/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/rotar-y-voltear-imagen/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/image-rotate-flip/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/image-to-base64/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/image-to-base64/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/imagen-a-base64/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/image-to-base64/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/imagen-a-base64/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/image-to-base64/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/imagen-a-base64/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/image-to-base64/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/color-contrast-checker/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/color-contrast-checker/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/verificador-de-contraste-de-color/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/color-contrast-checker/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/verificador-de-contraste-de-color/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/color-contrast-checker/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/verificador-de-contraste-de-color/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/color-contrast-checker/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/qr-code-scanner/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/qr-code-scanner/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/escaneador-de-codigos-qr/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/qr-code-scanner/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/escaneador-de-codigos-qr/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/qr-code-scanner/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/escaneador-de-codigos-qr/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/qr-code-scanner/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/password-generator/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/password-generator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/generador-de-contrasenas/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/password-generator/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/generador-de-contrasenas/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/password-generator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/generador-de-contrasenas/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/password-generator/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/file-hash-verifier/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/file-hash-verifier/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/verificador-de-hash-de-archivos/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/file-hash-verifier/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/verificador-de-hash-de-archivos/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/file-hash-verifier/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/verificador-de-hash-de-archivos/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/file-hash-verifier/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/favicon-generator/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/favicon-generator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/generador-de-favicon/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/favicon-generator/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/generador-de-favicon/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/favicon-generator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/generador-de-favicon/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/favicon-generator/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/ai-writing-assistant/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/ai-writing-assistant/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/asistente-de-escritura-ia/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/ai-writing-assistant/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/asistente-de-escritura-ia/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/ai-writing-assistant/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/asistente-de-escritura-ia/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/ai-writing-assistant/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/ai-text-summarizer/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/ai-text-summarizer/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/resumidor-de-texto-ia/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/ai-text-summarizer/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/resumidor-de-texto-ia/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/ai-text-summarizer/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/resumidor-de-texto-ia/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/ai-text-summarizer/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://utilityflow.online/ai-tool-finder/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/ai-tool-finder/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/buscador-de-herramientas-ia/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/ai-tool-finder/" />
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/es/buscador-de-herramientas-ia/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://utilityflow.online/ai-tool-finder/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/buscador-de-herramientas-ia/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/ai-tool-finder/" />
     <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
