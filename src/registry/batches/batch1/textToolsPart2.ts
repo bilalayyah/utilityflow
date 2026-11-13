@@ -19,17 +19,23 @@ export const TEXT_TOOLS_PART_2: ToolDefinition[] = [
       'line break remover',
       'remove blank lines',
       'clean copied pdf text',
+      'remove trailing spaces',
+      'fix pdf line breaks',
+      'collapse multiple spaces',
+      'clean text online',
     ],
     seo: {
-      title: 'Whitespace & Line Break Remover – Clean Extra Spaces | UtilityFlow',
+      title: 'Whitespace Remover – Clean Extra Spaces | UtilityFlow',
       description:
-        'Remove extra spaces, tabs, trailing whitespace, blank lines, and awkward PDF line breaks cleanly in your browser.',
+        'Remove extra spaces, tabs, trailing whitespace, blank lines and broken PDF line breaks in your browser — fast, free and completely private, with no sign-up.',
       primaryKeyword: 'whitespace remover',
-      secondaryKeywords: ['remove extra spaces', 'remove line breaks', 'clean text whitespace'],
+      secondaryKeywords: ['remove extra spaces', 'remove line breaks', 'clean text whitespace', 'remove blank lines', 'fix pdf line breaks'],
       longTailKeywords: [
         'remove extra spaces and blank lines online',
         'fix line breaks when copying from pdf',
         'convert tabs and multiple spaces to single space',
+        'remove trailing spaces from copied text',
+        'turn multi-line text into a single line',
       ],
       schemaApplicationCategory: 'UtilitiesApplication',
     },
@@ -42,14 +48,29 @@ export const TEXT_TOOLS_PART_2: ToolDefinition[] = [
           'Drop text containing double spaces, stray tabs, or broken line wraps into Input Text.',
       },
       {
-        title: 'Select cleanup rules',
+        title: 'Choose how spaces and tabs are handled',
         description:
-          'Choose how spaces, tabs, and line breaks should be handled (keep breaks, remove blank lines, replace breaks with spaces, or strip all breaks).',
+          'Collapse runs of multiple spaces into one, convert tabs to single spaces, and trim leading and trailing spaces from each line.',
       },
       {
-        title: 'Copy cleaned text',
+        title: 'Pick a line break option',
         description:
-          'Review the saved character count and copy the normalized result.',
+          'Keep paragraph breaks, remove blank lines only, replace line breaks with spaces to rejoin wrapped sentences, or strip all breaks to make one continuous line.',
+      },
+      {
+        title: 'Review the cleaned output',
+        description:
+          'Check the result in the output panel and the character count showing exactly how many characters were removed during cleanup.',
+      },
+      {
+        title: 'Copy the cleaned text',
+        description:
+          'Use the copy button to copy the normalized result, then paste it into your document, form, or CMS field.',
+      },
+      {
+        title: 'Fix sentences that run together',
+        description:
+          'If words from separate lines join without a space, switch to "Replace with spaces". If paragraphs merged into one block, switch back to "Remove blank lines" instead.',
       },
     ],
     examples: [
@@ -88,6 +109,91 @@ export const TEXT_TOOLS_PART_2: ToolDefinition[] = [
         answer:
           'Yes, when "Convert tabs to spaces" is enabled, tab characters are turned into single spaces and merged with adjacent whitespace.',
       },
+      {
+        question: 'Is the Whitespace Remover free to use?',
+        answer:
+          'Yes. It is completely free with no sign-up, no account, and no limits on how many times you clean text.',
+      },
+      {
+        question: 'Does my text leave my browser when I use the Whitespace Remover?',
+        answer:
+          'No. All cleanup happens locally in your browser, so your text is never uploaded to a server.',
+      },
+      {
+        question: 'What does the "Remove blank lines" option do?',
+        answer:
+          'It deletes empty lines from your text while keeping every line that contains content, so paragraphs and list items stay in order.',
+      },
+      {
+        question: 'Can I keep paragraph breaks while removing extra spaces?',
+        answer:
+          'Yes. Choose the option that keeps line breaks and only collapses extra spaces, so your paragraphs stay separated while the spacing inside them is fixed.',
+      },
+      {
+        question: 'What is the difference between "Replace with spaces" and removing all line breaks?',
+        answer:
+          '"Replace with spaces" joins lines with a single space so wrapped sentences read correctly, while removing all breaks joins lines directly with no space between them.',
+      },
+      {
+        question: 'Does the Whitespace Remover delete trailing spaces at the end of lines?',
+        answer:
+          'Yes. Spaces and tabs at the end of each line are trimmed, which is useful before pasting text into forms or code fields.',
+      },
+      {
+        question: 'Does it remove leading spaces and indentation at the start of lines?',
+        answer:
+          'Yes. Leading whitespace at the start of each line is trimmed, so indented or misaligned pasted text lines up cleanly.',
+      },
+      {
+        question: 'Can I clean text copied from a spreadsheet with the Whitespace Remover?',
+        answer:
+          'Yes. Tabs between spreadsheet cells are converted to single spaces, and extra blank lines from copied ranges are removed.',
+      },
+      {
+        question: 'How do I turn multi-line text into a single line?',
+        answer:
+          'Paste your text, then choose the option that replaces line breaks with spaces or strips all breaks, and copy the resulting single-line output.',
+      },
+      {
+        question: 'Does the Whitespace Remover change punctuation, letters, or numbers?',
+        answer:
+          'No. It only changes whitespace characters such as spaces, tabs, and line breaks; your words, punctuation, and numbers stay exactly as they were.',
+      },
+      {
+        question: 'Can I use the Whitespace Remover to clean text before pasting it into a form?',
+        answer:
+          'Yes. It is ideal for stripping trailing spaces and stray line breaks from addresses, names, or descriptions before they go into a web form or CMS field.',
+      },
+      {
+        question: 'What does the character count shown after cleanup mean?',
+        answer:
+          'It shows how many characters were removed during cleanup, so you can see exactly how much extra whitespace the tool stripped from your text.',
+      },
+      {
+        question: 'Does the Whitespace Remover work on very long documents?',
+        answer:
+          'Yes. Because it runs locally in your browser, you can paste long documents, though extremely large blocks of text may take a moment to process.',
+      },
+      {
+        question: 'Can I undo a cleanup if I pick the wrong option?',
+        answer:
+          'Your original text stays in the input field, so you can simply pick a different option and the output updates without losing your pasted text.',
+      },
+      {
+        question: 'Does the Whitespace Remover remove spaces inside words?',
+        answer:
+          'No. Spaces inside words are single spaces, so they are left untouched; only runs of two or more spaces are collapsed.',
+      },
+      {
+        question: 'What kinds of whitespace does the tool clean?',
+        answer:
+          'It cleans regular spaces, tab characters, trailing and leading whitespace on lines, blank lines, and unwanted line breaks.',
+      },
+      {
+        question: 'Can I use the Whitespace Remover on code?',
+        answer:
+          'It works for prose, but be careful with indentation-sensitive code such as Python, because trimming leading spaces can change how the code behaves.',
+      },
     ],
     relatedToolSlugs: [
       'remove-duplicate-lines',
@@ -113,17 +219,24 @@ export const TEXT_TOOLS_PART_2: ToolDefinition[] = [
       'alphabetize list online',
       'natural sort tool',
       'sort text by length',
+      'sort list a to z',
+      'alphabetical order tool',
+      'shuffle lines online',
+      'sort lines z to a',
+      'reverse line order',
     ],
     seo: {
-      title: 'Sort Lines Alphabetically – A-Z, Natural & Length Sorter | UtilityFlow',
+      title: 'Sort Lines Alphabetically – A-Z & Natural | UtilityFlow',
       description:
-        'Sort text lines A to Z, Z to A, natural numeric order, character length, reverse order, or random shuffle with optional deduplication.',
+        'Sort lines A to Z, Z to A, in natural numeric order, by length, in reverse, or shuffled — with optional deduplication and blank-line removal included.',
       primaryKeyword: 'sort lines alphabetically',
-      secondaryKeywords: ['alphabetize list', 'text line sorter', 'natural sort online'],
+      secondaryKeywords: ['alphabetize list', 'text line sorter', 'natural sort online', 'sort lines a to z', 'shuffle lines'],
       longTailKeywords: [
         'sort list alphabetically with numbers in natural order',
         'sort lines by length shortest to longest',
         'alphabetize and remove duplicate lines',
+        'reverse order of lines online',
+        'sort list z to a online',
       ],
       schemaApplicationCategory: 'UtilitiesApplication',
     },
@@ -133,7 +246,7 @@ export const TEXT_TOOLS_PART_2: ToolDefinition[] = [
       {
         title: 'Enter one item per line',
         description:
-          'Paste your list into the Input Lines field.',
+          'Paste your list into the Input Lines field, with each item on its own line.',
       },
       {
         title: 'Choose a sort order',
@@ -141,9 +254,24 @@ export const TEXT_TOOLS_PART_2: ToolDefinition[] = [
           'Pick A → Z, Z → A, Natural (1, 2, 10), Shortest/Longest First, Reverse Order, or Shuffle.',
       },
       {
+        title: 'Set case sensitivity',
+        description:
+          'Turn on case-sensitive comparison if uppercase and lowercase letters should sort separately; otherwise "apple" and "Apple" are treated the same.',
+      },
+      {
         title: 'Toggle cleanup options',
         description:
-          'Optionally enforce case-sensitive comparison, drop blank lines, or remove duplicates in the same pass.',
+          'Optionally drop blank lines or remove duplicates in the same pass so your sorted list comes out clean.',
+      },
+      {
+        title: 'Review and copy the sorted list',
+        description:
+          'Check the sorted output in order, then copy it with one click to paste into your document, spreadsheet, or code file.',
+      },
+      {
+        title: 'Fix numbered items sorting out of order',
+        description:
+          'If "Item 10" appears before "Item 2", switch from A → Z to Natural sort, which compares the numbers inside each line numerically.',
       },
     ],
     examples: [
@@ -183,6 +311,91 @@ export const TEXT_TOOLS_PART_2: ToolDefinition[] = [
         answer:
           'Z → A sorts alphabetically descending, whereas Reverse Order flips your existing line sequence from bottom to top without alphabetizing.',
       },
+      {
+        question: 'Is the Sort Lines tool free to use?',
+        answer:
+          'Yes. It is completely free with no sign-up, no account, and no limit on how many lists you sort.',
+      },
+      {
+        question: 'Does my list leave my browser when I sort it?',
+        answer:
+          'No. Sorting happens locally in your browser, so your list is never uploaded to a server.',
+      },
+      {
+        question: 'What is natural sort and when should I use it?',
+        answer:
+          'Natural sort compares numbers inside text numerically, so use it for numbered items like "Chapter 2" and "Chapter 10" to keep them in true numeric order.',
+      },
+      {
+        question: 'Can I sort a list from Z to A?',
+        answer:
+          'Yes. Choose the Z → A option to sort your lines in reverse alphabetical order.',
+      },
+      {
+        question: 'Can I sort lines by length instead of alphabetically?',
+        answer:
+          'Yes. Choose Shortest First or Longest First to order lines by character length, which is handy for checking UI tables or aligning copy.',
+      },
+      {
+        question: 'What does the Shuffle option do in the Sort Lines tool?',
+        answer:
+          'Shuffle randomizes the order of your lines, which is useful for giveaway entries, quiz questions, or any list you want in random order.',
+      },
+      {
+        question: 'Does the Sort Lines tool remove blank lines?',
+        answer:
+          'Yes, if you enable the blank-line option. Otherwise empty lines are kept in the output.',
+      },
+      {
+        question: 'Can I sort case-sensitively with the Sort Lines tool?',
+        answer:
+          'Yes. Turn on case-sensitive comparison to sort uppercase and lowercase letters separately; with it off, "apple" and "Apple" are treated the same.',
+      },
+      {
+        question: 'Does the Sort Lines tool work with numbers and dates?',
+        answer:
+          'Yes. Natural sort orders embedded numbers correctly, and dates sort correctly when written in YYYY-MM-DD format; other date formats sort as plain text.',
+      },
+      {
+        question: 'Can I sort columns inside a line, like CSV values?',
+        answer:
+          'No. The tool sorts whole lines, so each line moves as one unit; it does not reorder values separated by commas within a single line.',
+      },
+      {
+        question: 'What happens to duplicate lines when I sort?',
+        answer:
+          'Duplicates stay in the list unless you enable "Remove duplicates", which keeps only the first occurrence of each line before sorting.',
+      },
+      {
+        question: 'Can I reverse a list without sorting it alphabetically?',
+        answer:
+          'Yes. Use Reverse Order to flip your list from bottom to top while keeping the text inside each line unchanged.',
+      },
+      {
+        question: 'Does the Sort Lines tool handle accented letters and other languages?',
+        answer:
+          'Yes. It uses a locale-aware collator, so accented characters and non-English letters sort in a sensible order rather than by raw character codes.',
+      },
+      {
+        question: 'Can I sort a numbered list like "1. Apple, 2. Banana, 10. Cherry"?',
+        answer:
+          'Yes. Natural sort reads the numbers at the start of each line, so "2. Banana" correctly comes before "10. Cherry".',
+      },
+      {
+        question: 'How large a list can the Sort Lines tool handle?',
+        answer:
+          'It runs locally in your browser and handles long lists easily, though extremely large pastes with tens of thousands of lines may take a moment.',
+      },
+      {
+        question: 'Does sorting change the text inside each line?',
+        answer:
+          'No. Sorting only changes the order of the lines; the words, numbers, and punctuation inside each line stay exactly the same.',
+      },
+      {
+        question: 'Can I undo a sort if I pick the wrong order?',
+        answer:
+          'Your original list stays in the input field, so you can pick a different sort order and the output updates without losing your pasted list.',
+      },
     ],
     relatedToolSlugs: [
       'remove-duplicate-lines',
@@ -208,17 +421,24 @@ export const TEXT_TOOLS_PART_2: ToolDefinition[] = [
       'bulk text replace',
       'regex find and replace',
       'search and replace online',
+      'replace text online',
+      'find replace words',
+      'regex replace online',
+      'replace all occurrences',
+      'text replacer tool',
     ],
     seo: {
-      title: 'Find & Replace Text – Bulk & RegExp Text Replacer | UtilityFlow',
+      title: 'Find & Replace Text – Bulk & Regex Tool | UtilityFlow',
       description:
-        'Find and replace text online with live match counts, case sensitivity, whole-word matching, and JavaScript RegExp capture group support.',
+        'Find and replace text in your browser with live match counts, case sensitivity, whole-word matching and JavaScript RegExp capture group support — no sign-up.',
       primaryKeyword: 'find and replace text',
-      secondaryKeywords: ['online find and replace', 'regex replace tool', 'bulk replace text'],
+      secondaryKeywords: ['online find and replace', 'regex replace tool', 'bulk replace text', 'replace text online', 'find replace words'],
       longTailKeywords: [
         'find and replace whole words only online',
         'regex find and replace with capture groups',
         'bulk replace text strings in browser',
+        'replace all occurrences in text online',
+        'case sensitive find and replace',
       ],
       schemaApplicationCategory: 'UtilitiesApplication',
     },
@@ -236,9 +456,24 @@ export const TEXT_TOOLS_PART_2: ToolDefinition[] = [
           'Toggle Case-sensitive, Whole word only, or Use Regular Expression (RegExp) for pattern matching.',
       },
       {
-        title: 'Review matches and copy',
+        title: 'Paste the text to edit',
         description:
-          'Check the live count of replaced occurrences and copy the updated text.',
+          'Paste the full document, CSV snippet, or code block into the source text field so every occurrence is covered in one pass.',
+      },
+      {
+        title: 'Check the live match count',
+        description:
+          'Look at the live count of replaced occurrences to confirm the match is hitting exactly the spots you expect before copying.',
+      },
+      {
+        title: 'Review the output and copy',
+        description:
+          'Scan the updated text for unintended changes, then copy it with one click to paste back into your document or editor.',
+      },
+      {
+        title: 'Fix a match that replaces nothing',
+        description:
+          'If the count is zero, check case sensitivity, turn off Whole word only, or escape special characters like . and ( in RegExp mode; invalid patterns show a syntax error message.',
       },
     ],
     examples: [
@@ -277,6 +512,91 @@ export const TEXT_TOOLS_PART_2: ToolDefinition[] = [
         answer:
           'Yes. Leaving the Replace field blank removes every matched occurrence cleanly.',
       },
+      {
+        question: 'Is the Find & Replace tool free to use?',
+        answer:
+          'Yes. It is completely free with no sign-up, no account, and no limit on how many replacements you make.',
+      },
+      {
+        question: 'Does my text leave my browser when I use Find & Replace?',
+        answer:
+          'No. Everything runs locally in your browser, so private snippets, documents, and code stay on your device.',
+      },
+      {
+        question: 'What does the live match count show?',
+        answer:
+          'It shows how many occurrences of your Find term were replaced, so you can confirm the replacement hit exactly the spots you expected.',
+      },
+      {
+        question: 'Can I replace only whole words and not parts of longer words?',
+        answer:
+          'Yes. Turn on "Whole word only" so "cat" is replaced but "catalog" is left untouched; in RegExp mode, use \\b word boundaries instead.',
+      },
+      {
+        question: 'Is Find & Replace case-sensitive?',
+        answer:
+          'Only if you turn on the Case-sensitive option. With it off, "Apple" and "apple" are treated as the same match.',
+      },
+      {
+        question: 'Can I replace text across multiple lines at once?',
+        answer:
+          'Yes. The tool processes your entire pasted text in one pass, so matches on every line are replaced together.',
+      },
+      {
+        question: 'What happens if my regular expression is invalid?',
+        answer:
+          'The tool shows a clear syntax error message instead of producing bad output, so you can fix the pattern before copying anything.',
+      },
+      {
+        question: 'Can I match special characters like line breaks or tabs in Find & Replace?',
+        answer:
+          'Yes, in RegExp mode you can use escapes such as \\n for a line break and \\t for a tab inside your pattern.',
+      },
+      {
+        question: 'Can I swap two words around using capture groups?',
+        answer:
+          'Yes. For example, find (\\w+) (\\w+) and replace with $2 $1 to flip "John Smith" into "Smith John".',
+      },
+      {
+        question: 'Can I insert the whole matched text into the replacement?',
+        answer:
+          'Yes. In RegExp mode, $& in the Replace field inserts the entire matched text, which is useful for wrapping matches in quotes or tags.',
+      },
+      {
+        question: 'Can I replace URLs or dates across a whole document?',
+        answer:
+          'Yes. Paste the full document and use one Find & Replace pass to swap every old URL, brand name, or date at once.',
+      },
+      {
+        question: 'Does Find & Replace change only the first occurrence or all of them?',
+        answer:
+          'It replaces all matches in the pasted text at once; to change only one occurrence, edit that spot manually after copying the result.',
+      },
+      {
+        question: 'Does Find & Replace work on code?',
+        answer:
+          'Yes. It works on code blocks, templates, and config snippets, so you can rename variables, update placeholders, or change delimiters in bulk.',
+      },
+      {
+        question: 'Can I fix a repeated typo with Find & Replace?',
+        answer:
+          'Yes. Enter the misspelled word in Find and the correct spelling in Replace, then check the match count to see how many typos were fixed.',
+      },
+      {
+        question: 'Which regular expression flavor does the tool use?',
+        answer:
+          'It uses JavaScript RegExp, the same pattern syntax used in browsers, with capture groups, character classes, and quantifiers.',
+      },
+      {
+        question: 'Can I undo a replacement if I make a mistake?',
+        answer:
+          'Your original text stays in the input field, so you can change the Find or Replace terms and the output updates without losing your source text.',
+      },
+      {
+        question: 'Is there a limit on how much text I can process with Find & Replace?',
+        answer:
+          'There is no set limit. It runs locally in your browser and handles long documents, though extremely large pastes may take a moment to process.',
+      },
     ],
     relatedToolSlugs: [
       'text-diff-checker',
@@ -302,17 +622,24 @@ export const TEXT_TOOLS_PART_2: ToolDefinition[] = [
       'reverse string online',
       'reverse words',
       'reverse lines',
+      'reverse text characters',
+      'flip text online',
+      'mirror text generator',
+      'reverse sentence order',
+      'backwards text generator',
     ],
     seo: {
-      title: 'Text Reverser – Reverse Characters, Words & Lines | UtilityFlow',
+      title: 'Text Reverser – Reverse Words & Lines | UtilityFlow',
       description:
-        'Reverse characters, flip word order, mirror each word individually, or invert line order from bottom to top instantaneously.',
+        'Reverse characters, flip word order, mirror each word, or invert line order instantly — Unicode-safe, free, and fully private in your browser — no sign-up.',
       primaryKeyword: 'text reverser',
-      secondaryKeywords: ['reverse text online', 'reverse word order', 'invert lines'],
+      secondaryKeywords: ['reverse text online', 'reverse word order', 'invert lines', 'flip text online', 'mirror text generator'],
       longTailKeywords: [
         'reverse each word in a sentence online',
         'reverse order of lines in text file',
         'unicode safe string reverser',
+        'reverse text characters online',
+        'backwards text generator',
       ],
       schemaApplicationCategory: 'UtilitiesApplication',
     },
@@ -330,9 +657,24 @@ export const TEXT_TOOLS_PART_2: ToolDefinition[] = [
           'Type or paste text into Original Text to see the reversed output immediately.',
       },
       {
+        title: 'Check the live preview',
+        description:
+          'The output updates as you type, so you can instantly see how the chosen mode transforms your text.',
+      },
+      {
+        title: 'Compare modes side by side',
+        description:
+          'Switch between modes on the same input to compare character reversal, word-order reversal, and line inversion before settling on one.',
+      },
+      {
         title: 'Copy the output',
         description:
-          'Use the Copy button to copy the transformed text.',
+          'Use the Copy button to copy the transformed text, then paste it into your document, puzzle, or message.',
+      },
+      {
+        title: 'Fix lines that reversed the wrong way',
+        description:
+          'If the words inside each line flipped when you only wanted the list flipped, switch to Reverse Line Order, which moves lines without touching the text inside them.',
       },
     ],
     examples: [
@@ -371,6 +713,91 @@ export const TEXT_TOOLS_PART_2: ToolDefinition[] = [
         answer:
           '"Reverse Word Order" turns "one two three" into "three two one", whereas "Reverse Each Word" keeps word positions and flips letters to "eno owt eerht".',
       },
+      {
+        question: 'Is the Text Reverser free to use?',
+        answer:
+          'Yes. It is completely free with no sign-up, no account, and no limit on how much text you reverse.',
+      },
+      {
+        question: 'Does my text leave my browser when I use the Text Reverser?',
+        answer:
+          'No. Reversal happens locally in your browser, so your text is never uploaded or stored anywhere.',
+      },
+      {
+        question: 'What are the four reversal modes in the Text Reverser?',
+        answer:
+          'Reverse Characters flips every character, Reverse Word Order flips the order of words, Reverse Each Word mirrors letters inside each word, and Reverse Line Order inverts the sequence of lines.',
+      },
+      {
+        question: 'Can I reverse a whole paragraph with the Text Reverser?',
+        answer:
+          'Yes. Paste the paragraph and choose Reverse Characters to flip the entire block, or Reverse Line Order to flip multi-line text line by line.',
+      },
+      {
+        question: 'Can I use the Text Reverser to create a mirror effect?',
+        answer:
+          'Yes. Reverse Characters produces mirrored-looking text that reads backwards, which works well for puzzles, ciphers, and playful messages.',
+      },
+      {
+        question: 'Does the Text Reverser work with accented letters?',
+        answer:
+          'Yes. It handles Unicode characters by code point, so accented letters such as é and ü are reversed correctly without breaking apart.',
+      },
+      {
+        question: 'Does the Text Reverser work with text in other languages?',
+        answer:
+          'Yes. It works on any Unicode text, including non-Latin scripts, because reversal is done character by character rather than by language rules.',
+      },
+      {
+        question: 'What is a palindrome and can the Text Reverser help check one?',
+        answer:
+          'A palindrome reads the same forwards and backwards, like "racecar". Reverse your text and compare it with the original to check.',
+      },
+      {
+        question: 'Can I use the Text Reverser for puzzles and word games?',
+        answer:
+          'Yes. Reversed words and sentences are a classic puzzle format, and the live preview makes it easy to build clues and answers quickly.',
+      },
+      {
+        question: 'Does reversing text add or remove spaces?',
+        answer:
+          'Reverse Characters reverses everything including spaces, while the word-based modes keep single spaces between words so the output stays readable.',
+      },
+      {
+        question: 'Can I reverse a very long block of text?',
+        answer:
+          'Yes. It runs locally in your browser and handles long pastes, though extremely large blocks may take a moment to update in the live preview.',
+      },
+      {
+        question: 'Does the Text Reverser save or store my text?',
+        answer:
+          'No. Nothing is saved or sent to a server; your text exists only in your browser tab while you use the tool.',
+      },
+      {
+        question: 'How do I reverse "First Last" names into "Last First"?',
+        answer:
+          'Use Reverse Word Order, which turns "John Smith" into "Smith John" while keeping each name spelled correctly.',
+      },
+      {
+        question: 'Can the Text Reverser reverse numbers?',
+        answer:
+          'Yes. In Reverse Characters mode, "12345" becomes "54321", which is useful for testing numeric strings and codes.',
+      },
+      {
+        question: 'What happens to line breaks when I reverse characters?',
+        answer:
+          'Line breaks are reversed along with the rest of the text, so lines end up in the opposite order too; use Reverse Line Order if you want lines flipped but text inside them untouched.',
+      },
+      {
+        question: 'Can I undo a reversal?',
+        answer:
+          'Yes. Your original text stays in the input field, and reversing the output a second time with the same mode restores the original text.',
+      },
+      {
+        question: 'Is reversed text readable?',
+        answer:
+          'No, reversed text reads backwards by design. Paste it back into the tool and reverse it again to restore the original wording.',
+      },
     ],
     relatedToolSlugs: [
       'sort-lines',
@@ -396,17 +823,24 @@ export const TEXT_TOOLS_PART_2: ToolDefinition[] = [
       'placeholder text generator',
       'dummy text',
       'html lorem ipsum',
+      'lorem ipsum text',
+      'dummy text generator',
+      'placeholder paragraphs',
+      'lorem ipsum words',
+      'filler text generator',
     ],
     seo: {
-      title: 'Lorem Ipsum Generator – Custom Paragraphs & HTML Tags | UtilityFlow',
+      title: 'Lorem Ipsum Generator – Placeholder Text | UtilityFlow',
       description:
-        'Generate customizable Lorem Ipsum placeholder paragraphs, sentences, or exact word counts with optional HTML <p> wrapping.',
+        'Generate Lorem Ipsum placeholder text by paragraphs, sentences or exact word count, with optional HTML paragraph tags for mockups and layouts — no sign-up.',
       primaryKeyword: 'lorem ipsum generator',
-      secondaryKeywords: ['placeholder text', 'dummy copy generator', 'lorem ipsum paragraphs'],
+      secondaryKeywords: ['placeholder text', 'dummy copy generator', 'lorem ipsum paragraphs', 'dummy text generator', 'lorem ipsum text'],
       longTailKeywords: [
         'generate lorem ipsum by word count',
         'lorem ipsum generator with html p tags',
         'clean placeholder text for ui mockups',
+        'lorem ipsum generator for website mockup',
+        'placeholder text for design wireframes',
       ],
       schemaApplicationCategory: 'UtilitiesApplication',
     },
@@ -424,9 +858,24 @@ export const TEXT_TOOLS_PART_2: ToolDefinition[] = [
           'Choose whether to begin with the classic "Lorem ipsum dolor sit amet..." sentence and whether to wrap paragraphs in HTML <p> tags.',
       },
       {
+        title: 'Generate the placeholder text',
+        description:
+          'The text is generated instantly in your browser, with no waiting and no network calls.',
+      },
+      {
+        title: 'Check the word and character count',
+        description:
+          'Use the live word and character counter to verify the generated text fits your layout before pasting it into your design.',
+      },
+      {
         title: 'Regenerate or copy',
         description:
           'Click Regenerate for a fresh sentence variation or Copy placeholder text to paste into your design.',
+      },
+      {
+        title: 'Match text length to your layout',
+        description:
+          'If a card overflows or looks empty, switch to the Words unit and generate an exact word count that matches the space, then regenerate until the fit looks right.',
       },
     ],
     examples: [
@@ -464,6 +913,91 @@ export const TEXT_TOOLS_PART_2: ToolDefinition[] = [
         question: 'Does the <p> tag option work with Sentences and Words modes?',
         answer:
           'Yes. In Paragraphs mode each paragraph gets its own <p>...</p> wrapper, while Sentences and Words wrap the generated block in a single <p> element.',
+      },
+      {
+        question: 'Is the Lorem Ipsum Generator free to use?',
+        answer:
+          'Yes. It is completely free with no sign-up, no account, and no limit on how much placeholder text you generate.',
+      },
+      {
+        question: 'Do I need an account or an internet connection to generate Lorem Ipsum?',
+        answer:
+          'No. The generator runs entirely in your browser with no sign-up and no network calls, so it works instantly whenever the page is loaded.',
+      },
+      {
+        question: 'What is Lorem Ipsum?',
+        answer:
+          'Lorem Ipsum is scrambled Latin-like placeholder text that designers have used since the days of print typesetting to fill layouts before the real copy is ready.',
+      },
+      {
+        question: 'Can I generate a single sentence of Lorem Ipsum?',
+        answer:
+          'Yes. Choose the Sentences unit, enter 1, and the generator produces one placeholder sentence.',
+      },
+      {
+        question: 'Can I start my text with the classic "Lorem ipsum dolor sit amet..." sentence?',
+        answer:
+          'Yes. Enable the classic opening option and your generated text begins with the familiar "Lorem ipsum dolor sit amet..." sentence.',
+      },
+      {
+        question: 'Can I paste the generated text directly into HTML?',
+        answer:
+          'Yes. Turn on the <p> tag option and the output is wrapped in HTML paragraph tags, ready to paste into templates or a CMS code view.',
+      },
+      {
+        question: 'Can I generate exactly 100 words of Lorem Ipsum?',
+        answer:
+          'Yes. Select the Words unit, enter 100, and the generator produces exactly 100 words of placeholder text.',
+      },
+      {
+        question: 'Is the generated Lorem Ipsum text always the same?',
+        answer:
+          'No. Click Regenerate to produce a fresh variation with different sentence structures, so repeated blocks do not look identical.',
+      },
+      {
+        question: 'Is Lorem Ipsum real Latin?',
+        answer:
+          'No. It is scrambled pseudo-Latin made of Latin-like words; it looks like real language but carries no actual meaning.',
+      },
+      {
+        question: 'Can I use Lorem Ipsum on a published website?',
+        answer:
+          'It is meant as temporary placeholder copy, so replace it with real content before publishing, otherwise visitors will see dummy text.',
+      },
+      {
+        question: 'What is Lorem Ipsum used for?',
+        answer:
+          'It fills wireframes, mockups, and prototypes so designers can test typography, spacing, and layout without waiting for final copy.',
+      },
+      {
+        question: 'Can I control the length of individual sentences?',
+        answer:
+          'No. You control the total count in paragraphs, sentences, or words, while the generator varies sentence lengths naturally; regenerate if the rhythm does not suit your layout.',
+      },
+      {
+        question: 'Does the Lorem Ipsum Generator work for print design too?',
+        answer:
+          'Yes. Copy the generated text into print tools, slide decks, or page-layout software to preview how real copy will flow in the design.',
+      },
+      {
+        question: 'How do I test text truncation with Lorem Ipsum?',
+        answer:
+          'Generate an exact word count that matches your space, paste it into the component, and watch whether the text truncates or overflows at different screen sizes.',
+      },
+      {
+        question: 'Can I generate Lorem Ipsum in another language?',
+        answer:
+          'No. The tool generates only the classic Latin-like placeholder text; for readable copy in another language, write or translate real text instead.',
+      },
+      {
+        question: 'Does the Lorem Ipsum Generator save my generated text?',
+        answer:
+          'No. Everything runs locally in your browser and nothing is stored or sent to a server.',
+      },
+      {
+        question: 'Why does placeholder text help clients focus on the design?',
+        answer:
+          'Readable draft copy pulls attention to the words themselves, while neutral Lorem Ipsum keeps reviewers focused on layout, typography, and spacing.',
       },
     ],
     relatedToolSlugs: [
