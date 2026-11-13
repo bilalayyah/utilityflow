@@ -66,6 +66,54 @@ export default function App() {
             <Route path="/es/:toolSlug" element={<ToolPage />} />
             <Route path="/es/:toolSlug/" element={<ToolPage />} />
 
+            {/* Portuguese (pt) routes — same components, locale from URL */}
+            <Route path="/pt" element={<HomePage />} />
+            <Route path="/pt/" element={<HomePage />} />
+            <Route path="/pt/todas-as-ferramentas" element={<ToolsDirectoryPage />} />
+            <Route path="/pt/todas-as-ferramentas/" element={<ToolsDirectoryPage />} />
+            <Route path="/pt/categoria/:categorySlug" element={<CategoryPage />} />
+            <Route path="/pt/categoria/:categorySlug/" element={<CategoryPage />} />
+            <Route path="/pt/assistente-de-escrita-ia" element={<AiWritingAssistantPage />} />
+            <Route path="/pt/assistente-de-escrita-ia/" element={<AiWritingAssistantPage />} />
+            <Route path="/pt/resumidor-de-texto-ia" element={<AiTextSummarizerPage />} />
+            <Route path="/pt/resumidor-de-texto-ia/" element={<AiTextSummarizerPage />} />
+            <Route path="/pt/buscador-de-ferramentas-ia" element={<AiToolFinderPage />} />
+            <Route path="/pt/buscador-de-ferramentas-ia/" element={<AiToolFinderPage />} />
+            <Route path="/pt/sobre" element={<AboutPage />} />
+            <Route path="/pt/sobre/" element={<AboutPage />} />
+            <Route path="/pt/contato" element={<ContactPage />} />
+            <Route path="/pt/contato/" element={<ContactPage />} />
+            <Route path="/pt/politica-de-privacidade" element={<PrivacyPolicyPage />} />
+            <Route path="/pt/politica-de-privacidade/" element={<PrivacyPolicyPage />} />
+            <Route path="/pt/termos-de-servico" element={<TermsOfServicePage />} />
+            <Route path="/pt/termos-de-servico/" element={<TermsOfServicePage />} />
+            <Route path="/pt/:toolSlug" element={<ToolPage />} />
+            <Route path="/pt/:toolSlug/" element={<ToolPage />} />
+
+            {/* French (fr) routes — same components, locale from URL */}
+            <Route path="/fr" element={<HomePage />} />
+            <Route path="/fr/" element={<HomePage />} />
+            <Route path="/fr/tous-les-outils" element={<ToolsDirectoryPage />} />
+            <Route path="/fr/tous-les-outils/" element={<ToolsDirectoryPage />} />
+            <Route path="/fr/categorie/:categorySlug" element={<CategoryPage />} />
+            <Route path="/fr/categorie/:categorySlug/" element={<CategoryPage />} />
+            <Route path="/fr/assistant-d-ecriture-ia" element={<AiWritingAssistantPage />} />
+            <Route path="/fr/assistant-d-ecriture-ia/" element={<AiWritingAssistantPage />} />
+            <Route path="/fr/resumeur-de-texte-ia" element={<AiTextSummarizerPage />} />
+            <Route path="/fr/resumeur-de-texte-ia/" element={<AiTextSummarizerPage />} />
+            <Route path="/fr/chercheur-d-outils-ia" element={<AiToolFinderPage />} />
+            <Route path="/fr/chercheur-d-outils-ia/" element={<AiToolFinderPage />} />
+            <Route path="/fr/a-propos" element={<AboutPage />} />
+            <Route path="/fr/a-propos/" element={<AboutPage />} />
+            <Route path="/fr/contact" element={<ContactPage />} />
+            <Route path="/fr/contact/" element={<ContactPage />} />
+            <Route path="/fr/politique-de-confidentialite" element={<PrivacyPolicyPage />} />
+            <Route path="/fr/politique-de-confidentialite/" element={<PrivacyPolicyPage />} />
+            <Route path="/fr/conditions-d-utilisation" element={<TermsOfServicePage />} />
+            <Route path="/fr/conditions-d-utilisation/" element={<TermsOfServicePage />} />
+            <Route path="/fr/:toolSlug" element={<ToolPage />} />
+            <Route path="/fr/:toolSlug/" element={<ToolPage />} />
+
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </SiteLayout>
