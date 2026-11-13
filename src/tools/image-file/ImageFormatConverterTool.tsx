@@ -1,0 +1,239 @@
+import { Download, ImagePlus, RefreshCw } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { formatBytes } from '../pdf/pdfUtils';
+
+type TargetMime = 'image/png' | 'image/jpeg' | 'image/webp';
+
+interface ConvertedItem {
+  id: number;
+  originalName: string;
+  originalSize: number;
+  width: number;
+  height: number;
+  outputUrl: string;
+  outputSize: number;
+  ext: string;
+}
+
+export default function ImageFormatConverterTool() {
+  const [targetMime, setTargetMime] = useState<TargetMime>('image/webp');
+  const [quality, setQuality] = useState(90);
+  const [jpgFillColor, setJpgFillColor] = useState('#ffffff');
+  const [items, setItems] = useState<ConvertedItem[]>([]);
+  const [sourceFiles, setSourceFiles] = useState<File[]>([]);
+  const [isConverting, setIsConverting] = useState(false);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    return () => {
+      items.forEach((it) => URL.revokeObjectURL(it.outputUrl));
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const convertBatch = async (files: File[], mime: TargetMime, qual: number, fillHex: string) => {
+    if (files.length === 0) return;
+    setError('');
+    setIsConverting(true);
+
+    const ext = mime === 'image/png' ? 'png' : mime === 'image/jpeg' ? 'jpg' : 'webp';
+    const nextResults: ConvertedItem[] = [];
+
+    try {
+      for (let i = 0; i < files.length; i += 1) {
+        const file = files[i];
+        const srcUrl = URL.createObjectURL(file);
+        try {
+          const img = await new Promise<HTMLImageElement>((resolve, reject) => {
+            const el = new Image();
+            el.onload = () => resolve(el);
+            el.onerror = () => reject(new Error(`Could not decode "${file.name}".`));
+            el.src = srcUrl;
+          });
+
+          const canvas = document.createElement('canvas');
+          canvas.width = img.naturalWidth;
+          canvas.height = img.naturalHeight;
+          const ctx = canvas.getContext('2d');
+          if (!ctx) throw new Error('Canvas 2D unavailable.');
+
+          if (mime === 'image/jpeg') {
+            ctx.fillStyle = fillHex;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+          }
+          ctx.drawImage(img, 0, 0);
+
+          const blob = await new Promise<Blob | null>((resolve) =>
+            canvas.toBlob(resolve, mime, mime === 'image/png' ? undefined : qual / 100)
+          );
+          if (!blob) throw new Error(`Conversion failed for "${file.name}".`);
+
+          nextResults.push({
+            id: i + 1,
+            originalName: file.name,
+            originalSize: file.size,
+            width: img.naturalWidth,
+            height: img.naturalHeight,
+            outputUrl: URL.createObjectURL(blob),
+            outputSize: blob.size,
+            ext,
+          });
+        } finally {
+          URL.revokeObjectURL(srcUrl);
+        }
+      }
+
+      setItems((prev) => {
+        prev.forEach((it) => URL.revokeObjectURL(it.outputUrl));
+        return nextResults;
+      });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Batch image conversion failed.');
+    } finally {
+      setIsConverting(false);
+    }
+  };
+
+  const handleSelectFiles = async (fileList: FileList | null) => {
+    if (!fileList || fileList.length === 0) return;
+    const valid = Array.from(fileList).filter((f) => f.type.startsWith('image/'));
+    if (valid.length === 0) {
+      setError('Select one or more image files (PNG, JPG, WebP, SVG, GIF).');
+      return;
+    }
+    setSourceFiles(valid);
+    await convertBatch(valid, targetMime, quality, jpgFillColor);
+  };
+
+  return (
+    <div className="space-y-6">
+      <label
+        htmlFor="ifc-input"
+        className="flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-slate-300 bg-slate-50 px-6 py-8 text-center hover:border-indigo-400 hover:bg-indigo-50/40 cursor-pointer transition-colors"
+      >
+        <ImagePlus className="w-8 h-8 text-indigo-600 mb-2" />
+        <span className="text-sm font-semibold text-slate-900">
+          {sourceFiles.length > 0
+            ? `${sourceFiles.length} image(s) loaded — Click to add or replace`
+            : 'Select One or Multiple Images to Convert'}
+        </span>
+        <span className="mt-1 text-xs text-slate-500">
+          Batch convert PNG, JPG, WebP, SVG, or GIF to PNG, JPG, or WebP locally
+        </span>
+        <input
+          id="ifc-input"
+          type="file"
+          accept="image/*"
+          multiple
+          onChange={(e) => {
+            void handleSelectFiles(e.target.files);
+            e.target.value = '';
+          }}
+          className="sr-only"
+        />
+      </label>
+
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 items-end">
+        <div>
+          <label htmlFor="ifc-mime" className="block text-xs font-semibold text-slate-800 mb-1.5">
+            Convert To Format
+          </label>
+          <select
+            id="ifc-mime"
+            value={targetMime}
+            onChange={(e) => setTargetMime(e.target.value as TargetMime)}
+            className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"
+          >
+            <option value="image/webp">WebP (.webp)</option>
+            <option value="image/png">PNG (.png — preserves transparency)</option>
+            <option value="image/jpeg">JPG (.jpg)</option>
+          </select>
+        </div>
+
+        <div>
+          <label htmlFor="ifc-q" className="block text-xs font-semibold text-slate-800 mb-1.5">
+            Lossy Quality: <span className="font-mono">{targetMime === 'image/png' ? 'Lossless' : `${quality}%`}</span>
+          </label>
+          <input
+            id="ifc-q"
+            type="range"
+            min={20}
+            max={100}
+            step={5}
+            disabled={targetMime === 'image/png'}
+            value={quality}
+            onChange={(e) => setQuality(Number(e.target.value))}
+            className="w-full accent-indigo-600 disabled:opacity-40"
+          />
+        </div>
+
+        <div className="flex items-end gap-3">
+          {targetMime === 'image/jpeg' && (
+            <div>
+              <label htmlFor="ifc-bg" className="block text-xs font-semibold text-slate-800 mb-1">
+                Alpha Fill
+              </label>
+              <input
+                id="ifc-bg"
+                type="color"
+                value={jpgFillColor}
+                onChange={(e) => setJpgFillColor(e.target.value)}
+                className="h-9 w-12 rounded border border-slate-300 p-1 cursor-pointer"
+              />
+            </div>
+          )}
+          <button
+            type="button"
+            disabled={sourceFiles.length === 0 || isConverting}
+            onClick={() => void convertBatch(sourceFiles, targetMime, quality, jpgFillColor)}
+            className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-700 disabled:opacity-50 cursor-pointer"
+          >
+            <RefreshCw className={`w-4 h-4 ${isConverting ? 'animate-spin' : ''}`} />
+            {isConverting ? 'Converting...' : 'Re-convert'}
+          </button>
+        </div>
+      </div>
+
+      {error && (
+        <div role="alert" className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
+          {error}
+        </div>
+      )}
+
+      {items.length > 0 && (
+        <ul className="divide-y divide-slate-200 rounded-xl border border-slate-200 bg-white">
+          {items.map((item) => {
+            const base = item.originalName.replace(/\.[^.]+$/, '') || 'image';
+            return (
+              <li key={item.id} className="flex flex-wrap items-center justify-between gap-3 p-3.5">
+                <div className="flex items-center gap-3 min-w-0">
+                  <img
+                    src={item.outputUrl}
+                    alt={item.originalName}
+                    className="h-12 w-12 rounded-md border border-slate-200 object-cover shrink-0"
+                  />
+                  <div className="min-w-0">
+                    <div className="text-sm font-semibold text-slate-900 truncate">
+                      {base}.{item.ext}
+                    </div>
+                    <div className="text-xs text-slate-500 font-mono tabular-nums">
+                      {item.width}×{item.height} · {formatBytes(item.originalSize)} → {formatBytes(item.outputSize)}
+                    </div>
+                  </div>
+                </div>
+                <a
+                  href={item.outputUrl}
+                  download={`${base}.${item.ext}`}
+                  className="inline-flex items-center gap-1.5 rounded-lg bg-indigo-50 px-3 py-1.5 text-xs font-semibold text-indigo-700 hover:bg-indigo-100"
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  Download .{item.ext.toUpperCase()}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      )}
+    </div>
+  );
+}

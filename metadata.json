@@ -1,0 +1,6 @@
+{
+  "name": "UtilityHub",
+  "description": "Fast, privacy-first online utility tools for text, code, calculators, PDFs, SEO, and images.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

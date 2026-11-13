@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem('utilityflow-theme');
+          var mode = stored === 'light' || stored === 'dark' || stored === 'system' ? stored : 'system';
+          var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolved = mode === 'system' ? (prefersDark ? 'dark' : 'light') : mode;
+          var root = document.documentElement;
+          root.classList.toggle('dark', resolved === 'dark');
+          root.style.colorScheme = resolved;
+          root.dataset.themeMode = mode;
+        } catch (e) {}
+      })();
+    </script>
+    <title>UtilityFlow – Fast Browser-Based Online Utility Tools</title>
+    <meta
+      name="description"
+      content="Free, fast, privacy-first online utility tools for text analysis, developer formatting, calculators, PDFs, SEO checks, and image workflows."
+    />
+    <link rel="canonical" href="https://utilityflow.online/" />
+    <meta property="og:title" content="UtilityFlow – Fast Browser-Based Online Utility Tools" />
+    <meta
+      property="og:description"
+      content="Free, fast, privacy-first online utility tools for text analysis, developer formatting, calculators, PDFs, SEO checks, and image workflows."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://utilityflow.online/" />
+    <meta property="og:site_name" content="UtilityFlow" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="UtilityFlow – Fast Browser-Based Online Utility Tools" />
+    <meta
+      name="twitter:description"
+      content="Free, fast, privacy-first online utility tools for text analysis, developer formatting, calculators, PDFs, SEO checks, and image workflows."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

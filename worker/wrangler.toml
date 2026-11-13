@@ -1,0 +1,33 @@
+# Standalone Cloudflare Worker configuration for UtilityFlow Free AI Endpoints.
+# Deploy separately from the Cloudflare Pages static frontend (dist/):
+#   cd worker && npx wrangler deploy
+#
+# Required free-tier Groq secret (never commit API keys to this file):
+#   npx wrangler secret put GROQ_API_KEY
+
+name = "utilityflow-ai-worker"
+main = "src/index.ts"
+compatibility_date = "2026-11-01"
+
+[vars]
+# Active free-tier eligible Groq text models only (no paid plan or billing escalation)
+GROQ_MODEL = "openai/gpt-oss-20b"
+GROQ_FALLBACK_MODEL = "llama-3.1-8b-instant"
+
+# Optional comma-separated allowed browser origins.
+# Leave empty until your production domain is live, or set your deployed origin before production launch.
+ALLOWED_ORIGINS = ""
+
+# Strict free-tier usage guardrails
+GLOBAL_DAILY_CAP = "400"
+WRITING_DAILY_LIMIT = "5"
+SUMMARIZE_DAILY_LIMIT = "5"
+FINDER_DAILY_LIMIT = "10"
+RATE_LIMIT_PER_MIN = "8"
+
+# Persistent distributed rate-limiting & daily quota counters (recommended for production):
+# 1. Create a KV namespace: npx wrangler kv namespace create AI_QUOTA_KV
+# 2. Uncomment the block below and replace with the returned namespace ID.
+# [[kv_namespaces]]
+# binding = "AI_QUOTA_KV"
+# id = "YOUR_KV_NAMESPACE_ID"

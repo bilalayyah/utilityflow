@@ -1,0 +1,232 @@
+import { useMemo, useState } from 'react';
+import { CopyButton } from '../../components/common/CopyButton';
+
+function measureTextWidthPx(text: string, font: string): number {
+  if (typeof document === 'undefined') return text.length * 9;
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return text.length * 9;
+  ctx.font = font;
+  return Math.round(ctx.measureText(text).width);
+}
+
+function truncateToWidth(text: string, maxChars: number): string {
+  if (text.length <= maxChars) return text;
+  return `${text.slice(0, Math.max(0, maxChars - 1)).trimEnd()}…`;
+}
+
+export default function SerpSnippetPreviewTool() {
+  const [title, setTitle] = useState('JSON Formatter & Validator – Pretty Print & Minify | UtilityFlow');
+  const [url, setUrl] = useState('https://utilityflow.online/json-formatter/');
+  const [description, setDescription] = useState(
+    'Format, validate, minify, and sort keys in JSON payloads instantaneously in your browser with line/column syntax error details.'
+  );
+  const [siteName, setSiteName] = useState('UtilityFlow');
+  const [targetKeyword, setTargetKeyword] = useState('JSON');
+  const [dateLabel, setDateLabel] = useState('');
+  const [device, setDevice] = useState<'desktop' | 'mobile'>('desktop');
+
+  const metrics = useMemo(() => {
+    const titlePx = measureTextWidthPx(title, '400 20px Arial, sans-serif');
+    const descPx = measureTextWidthPx(description, '400 14px Arial, sans-serif');
+
+    let host = 'example.com';
+    let breadcrumbTrail = '';
+    try {
+      const parsed = new URL(/^https?:\/\//i.test(url.trim()) ? url.trim() : `https://${url.trim()}`);
+      host = parsed.hostname;
+      const segs = parsed.pathname.split('/').filter(Boolean);
+      breadcrumbTrail = segs.length > 0 ? ` › ${segs.join(' › ')}` : '';
+    } catch {
+      host = 'example.com';
+      breadcrumbTrail = '';
+    }
+
+    const titleCapPx = device === 'desktop' ? 580 : 600;
+    const descCapChars = device === 'desktop' ? 158 : 120;
+
+    return {
+      titlePx,
+      descPx,
+      titleOver: titlePx > titleCapPx,
+      descOver: description.length > descCapChars,
+      host,
+      breadcrumbTrail,
+      displayedTitle: truncateToWidth(title, device === 'desktop' ? 62 : 56),
+      displayedDesc: truncateToWidth(description, descCapChars),
+    };
+  }, [title, url, description, device]);
+
+  const highlightText = (text: string) => {
+    const kw = targetKeyword.trim();
+    if (!kw) return text;
+    const escaped = kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const parts = text.split(new RegExp(`(${escaped})`, 'gi'));
+    return parts.map((part, i) =>
+      part.toLowerCase() === kw.toLowerCase() ? (
+        <strong key={i} className="font-semibold text-slate-900">
+          {part}
+        </strong>
+      ) : (
+        <span key={i}>{part}</span>
+      )
+    );
+  };
+
+  const headSnippet = `<title>${title.trim()}</title>\n<meta name="description" content="${description.trim()}" />`;
+
+  return (
+    <div className="space-y-6">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <div className="inline-flex rounded-lg bg-slate-100 p-1">
+          <button
+            type="button"
+            onClick={() => setDevice('desktop')}
+            className={`rounded-md px-3.5 py-1.5 text-xs sm:text-sm font-medium cursor-pointer ${
+              device === 'desktop' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+            }`}
+          >
+            Desktop SERP (~580px title)
+          </button>
+          <button
+            type="button"
+            onClick={() => setDevice('mobile')}
+            className={`rounded-md px-3.5 py-1.5 text-xs sm:text-sm font-medium cursor-pointer ${
+              device === 'mobile' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+            }`}
+          >
+            Mobile SERP (~120ch desc)
+          </button>
+        </div>
+
+        <CopyButton text={headSnippet} label="Copy Title & Meta" />
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="md:col-span-2">
+          <div className="flex flex-wrap justify-between gap-2 text-xs mb-1">
+            <label htmlFor="serp-title" className="text-sm font-semibold text-slate-900">
+              SEO Title
+            </label>
+            <span className={`font-mono tabular-nums ${metrics.titleOver ? 'text-red-700 font-semibold' : 'text-emerald-700 font-semibold'}`}>
+              {title.length} chars · ~{metrics.titlePx} px / 580 px max
+            </span>
+          </div>
+          <input
+            id="serp-title"
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            className="w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm"
+          />
+        </div>
+
+        <div className="md:col-span-2">
+          <div className="flex flex-wrap justify-between gap-2 text-xs mb-1">
+            <label htmlFor="serp-desc" className="text-sm font-semibold text-slate-900">
+              Meta Description
+            </label>
+            <span className={`font-mono tabular-nums ${metrics.descOver ? 'text-amber-700 font-semibold' : 'text-emerald-700 font-semibold'}`}>
+              {description.length} chars · ~{metrics.descPx} px
+            </span>
+          </div>
+          <textarea
+            id="serp-desc"
+            rows={3}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            className="w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="serp-url" className="block text-xs font-semibold text-slate-800 mb-1">
+            Page URL (for breadcrumb preview)
+          </label>
+          <input
+            id="serp-url"
+            type="text"
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+            className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 font-mono text-sm"
+          />
+        </div>
+
+        <div className="grid grid-cols-3 gap-2">
+          <div>
+            <label htmlFor="serp-site" className="block text-xs font-semibold text-slate-800 mb-1">
+              Site Name
+            </label>
+            <input
+              id="serp-site"
+              type="text"
+              value={siteName}
+              onChange={(e) => setSiteName(e.target.value)}
+              className="w-full rounded-lg border border-slate-300 bg-white px-2.5 py-2 text-xs"
+            />
+          </div>
+          <div>
+            <label htmlFor="serp-kw" className="block text-xs font-semibold text-slate-800 mb-1">
+              Bold Keyword
+            </label>
+            <input
+              id="serp-kw"
+              type="text"
+              value={targetKeyword}
+              onChange={(e) => setTargetKeyword(e.target.value)}
+              placeholder="Optional"
+              className="w-full rounded-lg border border-slate-300 bg-white px-2.5 py-2 text-xs"
+            />
+          </div>
+          <div>
+            <label htmlFor="serp-date" className="block text-xs font-semibold text-slate-800 mb-1">
+              Date Prefix
+            </label>
+            <input
+              id="serp-date"
+              type="text"
+              value={dateLabel}
+              onChange={(e) => setDateLabel(e.target.value)}
+              placeholder="e.g. Nov 12, 2025"
+              className="w-full rounded-lg border border-slate-300 bg-white px-2.5 py-2 text-xs"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="rounded-xl border border-slate-200 bg-slate-50 p-5">
+        <div className="text-xs font-semibold text-slate-500 mb-3">
+          {device === 'desktop' ? 'Desktop Search Snippet Simulation' : 'Mobile Search Snippet Simulation'}
+        </div>
+
+        <div
+          className={`rounded-xl border border-slate-200 bg-white p-5 ${
+            device === 'mobile' ? 'max-w-sm shadow-xs' : 'max-w-2xl'
+          }`}
+        >
+          <div className="flex items-center gap-2.5 mb-1.5">
+            <div className="h-7 w-7 rounded-full bg-indigo-50 border border-indigo-100 flex items-center justify-center text-xs font-bold text-indigo-700 shrink-0">
+              {(siteName.trim() || metrics.host).slice(0, 1).toUpperCase()}
+            </div>
+            <div className="min-w-0 leading-tight">
+              <div className="text-sm text-slate-900 truncate">{siteName || metrics.host}</div>
+              <div className="text-xs text-slate-600 truncate font-sans">
+                {metrics.host}
+                {metrics.breadcrumbTrail}
+              </div>
+            </div>
+          </div>
+
+          <h3 className="text-xl leading-snug font-normal text-[#1a0dab] hover:underline cursor-pointer">
+            {metrics.displayedTitle || 'Your SEO Title Appears Here'}
+          </h3>
+
+          <p className="mt-1 text-sm leading-relaxed text-[#4d5156]">
+            {dateLabel.trim() && <span className="text-slate-500">{dateLabel.trim()} — </span>}
+            {highlightText(metrics.displayedDesc || 'Your meta description preview appears here.')}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
