@@ -1,6 +1,48 @@
 import { Download, RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    indent2: '2 Spaces',
+    indent4: '4 Spaces',
+    indentTab: 'Tab',
+    indentMinify: 'Minify',
+    sortKeys: 'Sort keys A–Z',
+    validJson: 'Valid JSON',
+    keysLabel: 'keys',
+    depthLabel: 'depth',
+    bytesLabel: 'bytes',
+    invalidJson: 'Invalid JSON:',
+    invalidJsonSyntax: 'Invalid JSON syntax',
+    lineCol: 'Line {line}, Column {col}',
+    inputLabel: 'Raw JSON Input',
+    inputPlaceholder: '{"hello": "world", "items": [1, 2, 3]}',
+    outputLabel: 'Formatted Output',
+    outputPlaceholder: 'Formatted and validated JSON appears here...',
+    copyJson: 'Copy JSON',
+  },
+  es: {
+    indent2: '2 espacios',
+    indent4: '4 espacios',
+    indentTab: 'Tabulación',
+    indentMinify: 'Minificar',
+    sortKeys: 'Ordenar claves A–Z',
+    validJson: 'JSON válido',
+    keysLabel: 'claves',
+    depthLabel: 'profundidad',
+    bytesLabel: 'bytes',
+    invalidJson: 'JSON no válido:',
+    invalidJsonSyntax: 'Sintaxis JSON no válida',
+    lineCol: 'Línea {line}, Columna {col}',
+    inputLabel: 'Entrada JSON sin formato',
+    inputPlaceholder: '{"hello": "world", "items": [1, 2, 3]}',
+    outputLabel: 'Salida con formato',
+    outputPlaceholder: 'El JSON con formato y validado aparece aquí...',
+    copyJson: 'Copiar JSON',
+  },
+};
 
 const SAMPLE_JSON = `{
   "service": "utilityflow-api",
@@ -54,8 +96,9 @@ function measureJsonStats(value: unknown, depth = 0): { keys: number; maxDepth: 
   return { keys: 0, maxDepth: depth };
 }
 
-function getLineColFromSyntaxError(input: string, err: unknown): string {
-  const message = err instanceof Error ? err.message : 'Invalid JSON syntax';
+function getLineColFromSyntaxError(input: string, err: unknown, locale: 'en' | 'es'): string {
+  const s = STRINGS[locale];
+  const message = err instanceof Error ? err.message : s.invalidJsonSyntax;
   const posMatch = /position\s+(\d+)/i.exec(message);
   if (posMatch) {
     const pos = Number(posMatch[1]);
@@ -63,12 +106,14 @@ function getLineColFromSyntaxError(input: string, err: unknown): string {
     const lines = slice.split('\n');
     const line = lines.length;
     const col = lines[lines.length - 1].length + 1;
-    return `${message} (Line ${line}, Column ${col})`;
+    return `${message} (${s.lineCol.replace('{line}', String(line)).replace('{col}', String(col))})`;
   }
   return message;
 }
 
 export default function JsonFormatterTool() {
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
   const [input, setInput] = useState('');
   const [indent, setIndent] = useState<'2' | '4' | 'tab' | 'minify'>('2');
   const [sortKeys, setSortKeys] = useState(false);
@@ -95,12 +140,12 @@ export default function JsonFormatterTool() {
       return {
         valid: false,
         output: '',
-        error: getLineColFromSyntaxError(input, err),
+        error: getLineColFromSyntaxError(input, err, locale),
         keys: 0,
         maxDepth: 0,
       };
     }
-  }, [input, indent, sortKeys]);
+  }, [input, indent, sortKeys, locale]);
 
   const handleDownload = () => {
     if (!parsed.output) return;
@@ -120,10 +165,10 @@ export default function JsonFormatterTool() {
           <div className="inline-flex rounded-lg bg-slate-100 p-1">
             {(
               [
-                { id: '2', label: '2 Spaces' },
-                { id: '4', label: '4 Spaces' },
-                { id: 'tab', label: 'Tab' },
-                { id: 'minify', label: 'Minify' },
+                { id: '2', label: s.indent2 },
+                { id: '4', label: s.indent4 },
+                { id: 'tab', label: s.indentTab },
+                { id: 'minify', label: s.indentMinify },
               ] as const
             ).map((opt) => (
               <button
@@ -146,7 +191,7 @@ export default function JsonFormatterTool() {
               onChange={(e) => setSortKeys(e.target.checked)}
               className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-600"
             />
-            <span>Sort keys A–Z</span>
+            <span>{s.sortKeys}</span>
           </label>
         </div>
 
@@ -157,7 +202,7 @@ export default function JsonFormatterTool() {
             className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
           >
             <Sparkles className="w-3.5 h-3.5 text-indigo-600" aria-hidden="true" />
-            <span>Load sample</span>
+            <span>{t.common.loadSample}</span>
           </button>
           <button
             type="button"
@@ -166,16 +211,16 @@ export default function JsonFormatterTool() {
             className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 disabled:opacity-50 cursor-pointer"
           >
             <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
-            <span>Clear</span>
+            <span>{t.common.clear}</span>
           </button>
         </div>
       </div>
 
       {parsed.valid === true && (
         <div className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-2.5 text-xs sm:text-sm text-emerald-900">
-          <span className="font-semibold">Valid JSON</span>
+          <span className="font-semibold">{s.validJson}</span>
           <span className="font-mono tabular-nums">
-            {parsed.keys} keys · depth {parsed.maxDepth} · {parsed.output.length.toLocaleString()} bytes
+            {parsed.keys} {s.keysLabel} · {s.depthLabel} {parsed.maxDepth} · {parsed.output.length.toLocaleString(locale)} {s.bytesLabel}
           </span>
         </div>
       )}
@@ -185,21 +230,21 @@ export default function JsonFormatterTool() {
           role="alert"
           className="rounded-lg border border-red-200 bg-red-50 px-4 py-2.5 text-xs sm:text-sm text-red-800 font-mono"
         >
-          Invalid JSON: {parsed.error}
+          {s.invalidJson} {parsed.error}
         </div>
       )}
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div>
           <label htmlFor="json-input" className="block text-sm font-semibold text-slate-900 mb-1.5">
-            Raw JSON Input
+            {s.inputLabel}
           </label>
           <textarea
             id="json-input"
             rows={12}
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder='{"hello": "world", "items": [1, 2, 3]}'
+            placeholder={s.inputPlaceholder}
             className="w-full rounded-xl border border-slate-300 bg-white p-3.5 font-mono text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/20"
           />
         </div>
@@ -207,7 +252,7 @@ export default function JsonFormatterTool() {
         <div>
           <div className="flex items-center justify-between mb-1.5">
             <label htmlFor="json-output" className="text-sm font-semibold text-slate-900">
-              Formatted Output
+              {s.outputLabel}
             </label>
             <div className="flex items-center gap-2">
               <button
@@ -219,7 +264,7 @@ export default function JsonFormatterTool() {
                 <Download className="w-3.5 h-3.5" aria-hidden="true" />
                 <span>.json</span>
               </button>
-              <CopyButton text={parsed.output} label="Copy JSON" />
+              <CopyButton text={parsed.output} label={s.copyJson} copiedLabel={t.common.copied} />
             </div>
           </div>
           <textarea
@@ -227,7 +272,7 @@ export default function JsonFormatterTool() {
             rows={12}
             readOnly
             value={parsed.output}
-            placeholder="Formatted and validated JSON appears here..."
+            placeholder={s.outputPlaceholder}
             className="w-full rounded-xl border border-slate-200 bg-slate-50 p-3.5 font-mono text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none"
           />
         </div>

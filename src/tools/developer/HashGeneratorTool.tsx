@@ -1,6 +1,34 @@
 import { RotateCcw, Sparkles, Upload } from 'lucide-react';
 import { useEffect, useState, type ChangeEvent } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    textInputTab: 'Text Input',
+    fileTab: 'Local File Checksum',
+    uppercaseHex: 'Uppercase hex',
+    inputLabel: 'Input String (UTF-8)',
+    inputPlaceholder: 'Enter text to compute SHA-1, SHA-256, SHA-384, and SHA-512 hashes...',
+    chooseFileLabel: 'Choose local file to hash',
+    fileNoteDefault: 'File is read locally in browser memory and never uploaded.',
+    bytesLabel: 'bytes',
+    cryptoUnavailable: 'Web Crypto hashing is unavailable.',
+    sampleText: 'Hello, UtilityFlow!',
+  },
+  es: {
+    textInputTab: 'Entrada de texto',
+    fileTab: 'Checksum de archivo local',
+    uppercaseHex: 'Hex en mayúsculas',
+    inputLabel: 'Cadena de entrada (UTF-8)',
+    inputPlaceholder: 'Escribe texto para calcular los hashes SHA-1, SHA-256, SHA-384 y SHA-512...',
+    chooseFileLabel: 'Elegir archivo local para calcular el hash',
+    fileNoteDefault: 'El archivo se lee localmente en la memoria del navegador y nunca se sube.',
+    bytesLabel: 'bytes',
+    cryptoUnavailable: 'El hash con Web Crypto no está disponible.',
+    sampleText: '¡Hola, UtilityFlow!',
+  },
+};
 
 type DigestAlgorithm = 'SHA-1' | 'SHA-256' | 'SHA-384' | 'SHA-512';
 
@@ -21,6 +49,8 @@ function bufferToBase64(buffer: ArrayBuffer): string {
 }
 
 export default function HashGeneratorTool() {
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
   const [inputMode, setInputMode] = useState<'text' | 'file'>('text');
   const [text, setText] = useState('UtilityFlow');
   const [fileName, setFileName] = useState('');
@@ -69,7 +99,7 @@ export default function HashGeneratorTool() {
         setHashes(map);
       } catch (err) {
         if (!active) return;
-        setError(err instanceof Error ? err.message : 'Web Crypto hashing is unavailable.');
+        setError(err instanceof Error ? err.message : s.cryptoUnavailable);
       }
     }
 
@@ -77,12 +107,12 @@ export default function HashGeneratorTool() {
     return () => {
       active = false;
     };
-  }, [inputMode, text, fileBytes, encoding, uppercase]);
+  }, [inputMode, text, fileBytes, encoding, uppercase, s.cryptoUnavailable]);
 
   const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    setFileName(`${file.name} (${file.size.toLocaleString()} bytes)`);
+    setFileName(`${file.name} (${file.size.toLocaleString(locale)} ${s.bytesLabel})`);
     const buf = await file.arrayBuffer();
     setFileBytes(buf);
   };
@@ -99,7 +129,7 @@ export default function HashGeneratorTool() {
                 inputMode === 'text' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
               }`}
             >
-              Text Input
+              {s.textInputTab}
             </button>
             <button
               type="button"
@@ -108,7 +138,7 @@ export default function HashGeneratorTool() {
                 inputMode === 'file' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
               }`}
             >
-              Local File Checksum
+              {s.fileTab}
             </button>
           </div>
 
@@ -141,7 +171,7 @@ export default function HashGeneratorTool() {
                 onChange={(e) => setUppercase(e.target.checked)}
                 className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-600"
               />
-              <span>Uppercase hex</span>
+              <span>{s.uppercaseHex}</span>
             </label>
           )}
         </div>
@@ -150,11 +180,11 @@ export default function HashGeneratorTool() {
           <div className="flex items-center gap-2">
             <button
               type="button"
-              onClick={() => setText('Hello, UtilityFlow!')}
+              onClick={() => setText(s.sampleText)}
               className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
             >
               <Sparkles className="w-3.5 h-3.5 text-indigo-600" aria-hidden="true" />
-              <span>Load sample</span>
+              <span>{t.common.loadSample}</span>
             </button>
             <button
               type="button"
@@ -163,7 +193,7 @@ export default function HashGeneratorTool() {
               className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 disabled:opacity-50 cursor-pointer"
             >
               <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
-              <span>Clear</span>
+              <span>{t.common.clear}</span>
             </button>
           </div>
         )}
@@ -172,14 +202,14 @@ export default function HashGeneratorTool() {
       {inputMode === 'text' ? (
         <div>
           <label htmlFor="hash-text-input" className="block text-sm font-semibold text-slate-900 mb-1.5">
-            Input String (UTF-8)
+            {s.inputLabel}
           </label>
           <textarea
             id="hash-text-input"
             rows={4}
             value={text}
             onChange={(e) => setText(e.target.value)}
-            placeholder="Enter text to compute SHA-1, SHA-256, SHA-384, and SHA-512 hashes..."
+            placeholder={s.inputPlaceholder}
             className="w-full rounded-xl border border-slate-300 bg-white p-3.5 font-mono text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/20"
           />
         </div>
@@ -190,7 +220,7 @@ export default function HashGeneratorTool() {
             htmlFor="hash-file-input"
             className="inline-flex items-center justify-center rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-700 cursor-pointer"
           >
-            Choose local file to hash
+            {s.chooseFileLabel}
           </label>
           <input
             id="hash-file-input"
@@ -199,7 +229,7 @@ export default function HashGeneratorTool() {
             className="sr-only"
           />
           <p className="mt-2 text-xs text-slate-600">
-            {fileName || 'File is read locally in browser memory and never uploaded.'}
+            {fileName || s.fileNoteDefault}
           </p>
         </div>
       )}
@@ -222,7 +252,7 @@ export default function HashGeneratorTool() {
                 {hashes[alg] || '—'}
               </div>
             </div>
-            <CopyButton text={hashes[alg]} label="Copy" />
+            <CopyButton text={hashes[alg]} label={t.common.copy} copiedLabel={t.common.copied} />
           </div>
         ))}
       </div>

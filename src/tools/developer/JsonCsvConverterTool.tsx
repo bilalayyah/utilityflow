@@ -1,6 +1,40 @@
 import { Download, RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    delimiterLabel: 'Delimiter:',
+    commaOpt: 'Comma (,)',
+    semicolonOpt: 'Semicolon (;)',
+    tabOpt: 'Tab (TSV)',
+    conversionError: 'Conversion error:',
+    inputLabelJson: 'JSON Input',
+    inputLabelCsv: 'CSV Input',
+    inputPlaceholderJson: '[{"id": 1, "name": "Example"}]',
+    inputPlaceholderCsv: 'id,name\n1,Example',
+    outputLabelCsv: 'CSV Output',
+    outputLabelJson: 'JSON Output',
+    outputPlaceholder: 'Converted data appears here...',
+    parseFallback: 'Unable to parse input format.',
+  },
+  es: {
+    delimiterLabel: 'Delimitador:',
+    commaOpt: 'Coma (,)',
+    semicolonOpt: 'Punto y coma (;)',
+    tabOpt: 'Tabulación (TSV)',
+    conversionError: 'Error de conversión:',
+    inputLabelJson: 'Entrada JSON',
+    inputLabelCsv: 'Entrada CSV',
+    inputPlaceholderJson: '[{"id": 1, "name": "Example"}]',
+    inputPlaceholderCsv: 'id,name\n1,Example',
+    outputLabelCsv: 'Salida CSV',
+    outputLabelJson: 'Salida JSON',
+    outputPlaceholder: 'Los datos convertidos aparecen aquí...',
+    parseFallback: 'No se pudo analizar el formato de entrada.',
+  },
+};
 
 const SAMPLE_JSON = `[
   { "id": 101, "name": "Alice Chen", "role": "Engineer", "active": true },
@@ -133,6 +167,8 @@ function csvToJson(csvStr: string, delimiter: string): string {
 }
 
 export default function JsonCsvConverterTool() {
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
   const [direction, setDirection] = useState<'json-to-csv' | 'csv-to-json'>('json-to-csv');
   const [delimiter, setDelimiter] = useState<',' | ';' | '\t'>(',');
   const [input, setInput] = useState('');
@@ -148,10 +184,10 @@ export default function JsonCsvConverterTool() {
     } catch (err) {
       return {
         output: '',
-        error: err instanceof Error ? err.message : 'Unable to parse input format.',
+        error: err instanceof Error ? err.message : s.parseFallback,
       };
     }
-  }, [input, direction, delimiter]);
+  }, [input, direction, delimiter, s.parseFallback]);
 
   const handleDownload = () => {
     if (!result.output) return;
@@ -193,15 +229,15 @@ export default function JsonCsvConverterTool() {
           </div>
 
           <label className="inline-flex items-center gap-2 text-xs sm:text-sm text-slate-700">
-            <span>Delimiter:</span>
+            <span>{s.delimiterLabel}</span>
             <select
               value={delimiter}
               onChange={(e) => setDelimiter(e.target.value as ',' | ';' | '\t')}
               className="rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-xs sm:text-sm text-slate-900"
             >
-              <option value=",">Comma (,)</option>
-              <option value=";">Semicolon (;)</option>
-              <option value={'\t'}>Tab (TSV)</option>
+              <option value=",">{s.commaOpt}</option>
+              <option value=";">{s.semicolonOpt}</option>
+              <option value={'\t'}>{s.tabOpt}</option>
             </select>
           </label>
         </div>
@@ -213,7 +249,7 @@ export default function JsonCsvConverterTool() {
             className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
           >
             <Sparkles className="w-3.5 h-3.5 text-indigo-600" aria-hidden="true" />
-            <span>Load sample</span>
+            <span>{t.common.loadSample}</span>
           </button>
           <button
             type="button"
@@ -222,21 +258,21 @@ export default function JsonCsvConverterTool() {
             className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 disabled:opacity-50 cursor-pointer"
           >
             <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
-            <span>Clear</span>
+            <span>{t.common.clear}</span>
           </button>
         </div>
       </div>
 
       {result.error && (
         <div role="alert" className="rounded-lg border border-red-200 bg-red-50 px-4 py-2.5 text-xs sm:text-sm text-red-800 font-mono">
-          Conversion error: {result.error}
+          {s.conversionError} {result.error}
         </div>
       )}
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div>
           <label htmlFor="jcsv-in" className="block text-sm font-semibold text-slate-900 mb-1.5">
-            {direction === 'json-to-csv' ? 'JSON Input' : 'CSV Input'}
+            {direction === 'json-to-csv' ? s.inputLabelJson : s.inputLabelCsv}
           </label>
           <textarea
             id="jcsv-in"
@@ -245,8 +281,8 @@ export default function JsonCsvConverterTool() {
             onChange={(e) => setInput(e.target.value)}
             placeholder={
               direction === 'json-to-csv'
-                ? '[{"id": 1, "name": "Example"}]'
-                : 'id,name\n1,Example'
+                ? s.inputPlaceholderJson
+                : s.inputPlaceholderCsv
             }
             className="w-full rounded-xl border border-slate-300 bg-white p-3.5 font-mono text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/20"
           />
@@ -255,7 +291,7 @@ export default function JsonCsvConverterTool() {
         <div>
           <div className="flex items-center justify-between mb-1.5">
             <label htmlFor="jcsv-out" className="text-sm font-semibold text-slate-900">
-              {direction === 'json-to-csv' ? 'CSV Output' : 'JSON Output'}
+              {direction === 'json-to-csv' ? s.outputLabelCsv : s.outputLabelJson}
             </label>
             <div className="flex items-center gap-2">
               <button
@@ -267,7 +303,7 @@ export default function JsonCsvConverterTool() {
                 <Download className="w-3.5 h-3.5" aria-hidden="true" />
                 <span>{direction === 'json-to-csv' ? '.csv' : '.json'}</span>
               </button>
-              <CopyButton text={result.output} label="Copy" />
+              <CopyButton text={result.output} label={t.common.copy} copiedLabel={t.common.copied} />
             </div>
           </div>
           <textarea
@@ -275,7 +311,7 @@ export default function JsonCsvConverterTool() {
             rows={10}
             readOnly
             value={result.output}
-            placeholder="Converted data appears here..."
+            placeholder={s.outputPlaceholder}
             className="w-full rounded-xl border border-slate-200 bg-slate-50 p-3.5 font-mono text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none"
           />
         </div>

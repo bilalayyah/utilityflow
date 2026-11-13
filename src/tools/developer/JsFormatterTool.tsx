@@ -1,6 +1,38 @@
 import { RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    minifyTab: 'Minify JS',
+    beautifyTab: 'Beautify JS',
+    indentLabel: 'Indent:',
+    indent2: '2 spaces',
+    indent4: '4 spaces',
+    inputLabel: 'JavaScript / TypeScript Input',
+    bytesLabel: 'bytes',
+    inputPlaceholder: 'Paste JavaScript or TypeScript snippet...',
+    outputLabelMinify: 'Minified Output',
+    outputLabelBeautify: 'Beautified Output',
+    outputPlaceholder: 'Formatted JavaScript appears here...',
+    copyCode: 'Copy code',
+  },
+  es: {
+    minifyTab: 'Minificar JS',
+    beautifyTab: 'Dar formato a JS',
+    indentLabel: 'Sangría:',
+    indent2: '2 espacios',
+    indent4: '4 espacios',
+    inputLabel: 'Entrada de JavaScript / TypeScript',
+    bytesLabel: 'bytes',
+    inputPlaceholder: 'Pega un fragmento de JavaScript o TypeScript...',
+    outputLabelMinify: 'Salida minificada',
+    outputLabelBeautify: 'Salida con formato',
+    outputPlaceholder: 'El JavaScript con formato aparece aquí...',
+    copyCode: 'Copiar código',
+  },
+};
 
 const SAMPLE_JS = `// Compute discounted invoice total
 function calculateTotal(items, taxRate = 0.08) {
@@ -169,6 +201,8 @@ function processJavaScript(code: string, mode: 'minify' | 'beautify', indentWidt
 }
 
 export default function JsFormatterTool() {
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
   const [input, setInput] = useState('');
   const [mode, setMode] = useState<'beautify' | 'minify'>('minify');
   const [indentSize, setIndentSize] = useState<2 | 4>(2);
@@ -193,7 +227,7 @@ export default function JsFormatterTool() {
                 mode === 'minify' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
               }`}
             >
-              Minify JS
+              {s.minifyTab}
             </button>
             <button
               type="button"
@@ -202,20 +236,20 @@ export default function JsFormatterTool() {
                 mode === 'beautify' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
               }`}
             >
-              Beautify JS
+              {s.beautifyTab}
             </button>
           </div>
 
           {mode === 'beautify' && (
             <label className="inline-flex items-center gap-2 text-xs sm:text-sm text-slate-700">
-              <span>Indent:</span>
+              <span>{s.indentLabel}</span>
               <select
                 value={indentSize}
                 onChange={(e) => setIndentSize(Number(e.target.value) as 2 | 4)}
                 className="rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-xs sm:text-sm"
               >
-                <option value={2}>2 spaces</option>
-                <option value={4}>4 spaces</option>
+                <option value={2}>{s.indent2}</option>
+                <option value={4}>{s.indent4}</option>
               </select>
             </label>
           )}
@@ -228,7 +262,7 @@ export default function JsFormatterTool() {
             className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
           >
             <Sparkles className="w-3.5 h-3.5 text-indigo-600" aria-hidden="true" />
-            <span>Load sample</span>
+            <span>{t.common.loadSample}</span>
           </button>
           <button
             type="button"
@@ -237,7 +271,7 @@ export default function JsFormatterTool() {
             className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 disabled:opacity-50 cursor-pointer"
           >
             <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
-            <span>Clear</span>
+            <span>{t.common.clear}</span>
           </button>
         </div>
       </div>
@@ -246,10 +280,10 @@ export default function JsFormatterTool() {
         <div>
           <div className="flex items-center justify-between mb-1.5">
             <label htmlFor="js-in" className="text-sm font-semibold text-slate-900">
-              JavaScript / TypeScript Input
+              {s.inputLabel}
             </label>
             <span className="text-xs font-mono text-slate-500 tabular-nums">
-              {input.length.toLocaleString()} bytes
+              {input.length.toLocaleString(locale)} {s.bytesLabel}
             </span>
           </div>
           <textarea
@@ -257,7 +291,7 @@ export default function JsFormatterTool() {
             rows={11}
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Paste JavaScript or TypeScript snippet..."
+            placeholder={s.inputPlaceholder}
             className="w-full rounded-xl border border-slate-300 bg-white p-3.5 font-mono text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/20"
           />
         </div>
@@ -265,15 +299,15 @@ export default function JsFormatterTool() {
         <div>
           <div className="flex items-center justify-between mb-1.5">
             <label htmlFor="js-out" className="text-sm font-semibold text-slate-900">
-              {mode === 'minify' ? 'Minified Output' : 'Beautified Output'}
+              {mode === 'minify' ? s.outputLabelMinify : s.outputLabelBeautify}
             </label>
             <div className="flex items-center gap-3">
               {mode === 'minify' && input.length > 0 && (
                 <span className="text-xs font-mono text-emerald-700 tabular-nums">
-                  {output.length.toLocaleString()} bytes (-{savedPct}%)
+                  {output.length.toLocaleString(locale)} {s.bytesLabel} (-{savedPct}%)
                 </span>
               )}
-              <CopyButton text={output} label="Copy code" />
+              <CopyButton text={output} label={s.copyCode} copiedLabel={t.common.copied} />
             </div>
           </div>
           <textarea
@@ -281,7 +315,7 @@ export default function JsFormatterTool() {
             rows={11}
             readOnly
             value={output}
-            placeholder="Formatted JavaScript appears here..."
+            placeholder={s.outputPlaceholder}
             className="w-full rounded-xl border border-slate-200 bg-slate-50 p-3.5 font-mono text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none"
           />
         </div>

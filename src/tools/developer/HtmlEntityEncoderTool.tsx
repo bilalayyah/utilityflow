@@ -1,6 +1,36 @@
 import { ArrowLeftRight, RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    encodeTab: 'Encode Entities',
+    decodeTab: 'Decode Entities',
+    encodeNonAscii: 'Encode non-ASCII symbols (&#...;)',
+    swap: 'Swap',
+    inputLabelEncode: 'Raw HTML / Text',
+    inputLabelDecode: 'HTML-Encoded String',
+    inputPlaceholderEncode: '<p>Enter HTML tags or special characters...</p>',
+    inputPlaceholderDecode: '&lt;p&gt;Paste encoded entities...&lt;/p&gt;',
+    outputLabelEncode: 'Encoded Entities',
+    outputLabelDecode: 'Decoded Text',
+    outputPlaceholder: 'Converted entities appear here...',
+  },
+  es: {
+    encodeTab: 'Codificar entidades',
+    decodeTab: 'Decodificar entidades',
+    encodeNonAscii: 'Codificar símbolos no ASCII (&#...;)',
+    swap: 'Intercambiar',
+    inputLabelEncode: 'HTML / texto sin formato',
+    inputLabelDecode: 'Cadena codificada en HTML',
+    inputPlaceholderEncode: '<p>Escribe etiquetas HTML o caracteres especiales...</p>',
+    inputPlaceholderDecode: '&lt;p&gt;Pega entidades codificadas...&lt;/p&gt;',
+    outputLabelEncode: 'Entidades codificadas',
+    outputLabelDecode: 'Texto decodificado',
+    outputPlaceholder: 'Las entidades convertidas aparecen aquí...',
+  },
+};
 
 const SAMPLE_HTML = `<div class="notice">5 < 10 & "café" — ready!</div>`;
 
@@ -32,6 +62,8 @@ function decodeHtmlEntities(input: string): string {
 }
 
 export default function HtmlEntityEncoderTool() {
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
   const [mode, setMode] = useState<'encode' | 'decode'>('encode');
   const [encodeNonAscii, setEncodeNonAscii] = useState(true);
   const [input, setInput] = useState('');
@@ -55,7 +87,7 @@ export default function HtmlEntityEncoderTool() {
                 mode === 'encode' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
               }`}
             >
-              Encode Entities
+              {s.encodeTab}
             </button>
             <button
               type="button"
@@ -64,7 +96,7 @@ export default function HtmlEntityEncoderTool() {
                 mode === 'decode' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
               }`}
             >
-              Decode Entities
+              {s.decodeTab}
             </button>
           </div>
 
@@ -76,7 +108,7 @@ export default function HtmlEntityEncoderTool() {
                 onChange={(e) => setEncodeNonAscii(e.target.checked)}
                 className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-600"
               />
-              <span>Encode non-ASCII symbols (&amp;#...;)</span>
+              <span>{s.encodeNonAscii}</span>
             </label>
           )}
         </div>
@@ -93,7 +125,7 @@ export default function HtmlEntityEncoderTool() {
             className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 disabled:opacity-50 cursor-pointer"
           >
             <ArrowLeftRight className="w-3.5 h-3.5" aria-hidden="true" />
-            <span>Swap</span>
+            <span>{s.swap}</span>
           </button>
           <button
             type="button"
@@ -104,7 +136,7 @@ export default function HtmlEntityEncoderTool() {
             className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
           >
             <Sparkles className="w-3.5 h-3.5 text-indigo-600" aria-hidden="true" />
-            <span>Load sample</span>
+            <span>{t.common.loadSample}</span>
           </button>
           <button
             type="button"
@@ -113,7 +145,7 @@ export default function HtmlEntityEncoderTool() {
             className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 disabled:opacity-50 cursor-pointer"
           >
             <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
-            <span>Clear</span>
+            <span>{t.common.clear}</span>
           </button>
         </div>
       </div>
@@ -121,7 +153,7 @@ export default function HtmlEntityEncoderTool() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div>
           <label htmlFor="html-ent-in" className="block text-sm font-semibold text-slate-900 mb-1.5">
-            {mode === 'encode' ? 'Raw HTML / Text' : 'HTML-Encoded String'}
+            {mode === 'encode' ? s.inputLabelEncode : s.inputLabelDecode}
           </label>
           <textarea
             id="html-ent-in"
@@ -130,8 +162,8 @@ export default function HtmlEntityEncoderTool() {
             onChange={(e) => setInput(e.target.value)}
             placeholder={
               mode === 'encode'
-                ? '<p>Enter HTML tags or special characters...</p>'
-                : '&lt;p&gt;Paste encoded entities...&lt;/p&gt;'
+                ? s.inputPlaceholderEncode
+                : s.inputPlaceholderDecode
             }
             className="w-full rounded-xl border border-slate-300 bg-white p-3.5 font-mono text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/20"
           />
@@ -140,16 +172,16 @@ export default function HtmlEntityEncoderTool() {
         <div>
           <div className="flex items-center justify-between mb-1.5">
             <label htmlFor="html-ent-out" className="text-sm font-semibold text-slate-900">
-              {mode === 'encode' ? 'Encoded Entities' : 'Decoded Text'}
+              {mode === 'encode' ? s.outputLabelEncode : s.outputLabelDecode}
             </label>
-            <CopyButton text={output} label="Copy" />
+            <CopyButton text={output} label={t.common.copy} copiedLabel={t.common.copied} />
           </div>
           <textarea
             id="html-ent-out"
             rows={8}
             readOnly
             value={output}
-            placeholder="Converted entities appear here..."
+            placeholder={s.outputPlaceholder}
             className="w-full rounded-xl border border-slate-200 bg-slate-50 p-3.5 font-mono text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none"
           />
         </div>

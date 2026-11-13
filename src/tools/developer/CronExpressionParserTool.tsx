@@ -1,13 +1,82 @@
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { useLocale } from '../../locales/LocaleContext';
 
-const PRESETS = [
-  { label: 'Every 5 minutes', expr: '*/5 * * * *' },
-  { label: 'Every hour', expr: '0 * * * *' },
-  { label: 'Daily at midnight', expr: '0 0 * * *' },
-  { label: 'Weekdays at 9:00 AM', expr: '0 9 * * 1-5' },
-  { label: '1st of month at 08:30', expr: '30 8 1 * *' },
-];
+const STRINGS = {
+  en: {
+    inputLabel: '5-Field Cron Expression',
+    copyCron: 'Copy cron',
+    humanTitle: 'Human-Readable Schedule',
+    breakdownTitle: 'Field Breakdown',
+    fieldMinute: 'Minute (0–59)',
+    fieldHour: 'Hour (0–23)',
+    fieldDom: 'Day of Month (1–31)',
+    fieldMonth: 'Month (1–12)',
+    fieldDow: 'Day of Week (0–6)',
+    nextRuns: 'Next {count} Scheduled Runs (Local Time)',
+    noRuns: 'No matching run found within the next 366 days.',
+    fieldsError: 'Standard cron expects 5 fields (minute hour day-of-month month day-of-week). Found {count}.',
+    emptySegment: 'Empty segment in "{token}"',
+    invalidStep: 'Invalid step "{step}" in "{token}"',
+    outOfRange: 'Value out of range ({min}–{max}) in "{token}"',
+    invalidCron: 'Invalid cron expression.',
+    everyMinutes: 'Every {n} minutes',
+    minuteZeroHour: 'At minute 0 of every hour',
+    atTime: 'At {time}',
+    atFields: 'At {a}, {b}',
+    dayEveryDay: 'every day',
+    dayWeekdays: 'on weekdays (Monday–Friday)',
+    dayOfMonth: 'on day {day} of the month',
+    dayDow: 'on {dow}',
+    dayBoth: 'on day {day} or {dow}',
+    monthIn: ' in {months}',
+  },
+  es: {
+    inputLabel: 'Expresión cron de 5 campos',
+    copyCron: 'Copiar cron',
+    humanTitle: 'Horario en lenguaje sencillo',
+    breakdownTitle: 'Desglose por campo',
+    fieldMinute: 'Minuto (0–59)',
+    fieldHour: 'Hora (0–23)',
+    fieldDom: 'Día del mes (1–31)',
+    fieldMonth: 'Mes (1–12)',
+    fieldDow: 'Día de la semana (0–6)',
+    nextRuns: 'Próximas {count} ejecuciones programadas (hora local)',
+    noRuns: 'No se encontró ninguna ejecución coincidente en los próximos 366 días.',
+    fieldsError: 'El cron estándar espera 5 campos (minuto hora día-del-mes mes día-de-la-semana). Se encontraron {count}.',
+    emptySegment: 'Segmento vacío en "{token}"',
+    invalidStep: 'Paso no válido "{step}" en "{token}"',
+    outOfRange: 'Valor fuera de rango ({min}–{max}) en "{token}"',
+    invalidCron: 'Expresión cron no válida.',
+    everyMinutes: 'Cada {n} minutos',
+    minuteZeroHour: 'En el minuto 0 de cada hora',
+    atTime: 'A las {time}',
+    atFields: 'En {a}, {b}',
+    dayEveryDay: 'todos los días',
+    dayWeekdays: 'entre semana (lunes a viernes)',
+    dayOfMonth: 'el día {day} del mes',
+    dayDow: 'los {dow}',
+    dayBoth: 'el día {day} o {dow}',
+    monthIn: ' en {months}',
+  },
+};
+
+const PRESETS = {
+  en: [
+    { label: 'Every 5 minutes', expr: '*/5 * * * *' },
+    { label: 'Every hour', expr: '0 * * * *' },
+    { label: 'Daily at midnight', expr: '0 0 * * *' },
+    { label: 'Weekdays at 9:00 AM', expr: '0 9 * * 1-5' },
+    { label: '1st of month at 08:30', expr: '30 8 1 * *' },
+  ],
+  es: [
+    { label: 'Cada 5 minutos', expr: '*/5 * * * *' },
+    { label: 'Cada hora', expr: '0 * * * *' },
+    { label: 'Diario a medianoche', expr: '0 0 * * *' },
+    { label: 'Entre semana a las 9:00', expr: '0 9 * * 1-5' },
+    { label: 'El 1 del mes a las 08:30', expr: '30 8 1 * *' },
+  ],
+} as const;
 
 const MONTH_NAMES: Record<string, number> = {
   JAN: 1, FEB: 2, MAR: 3, APR: 4, MAY: 5, JUN: 6,
@@ -18,18 +87,39 @@ const DOW_NAMES: Record<string, number> = {
   SUN: 0, MON: 1, TUE: 2, WED: 3, THU: 4, FRI: 5, SAT: 6,
 };
 
-const DOW_LABELS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-const MONTH_LABELS = [
-  '', 'January', 'February', 'March', 'April', 'May', 'June',
-  'July', 'August', 'September', 'October', 'November', 'December',
-];
+const DOW_LABELS = {
+  en: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+  es: ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'],
+} as const;
+const MONTH_LABELS = {
+  en: [
+    '', 'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December',
+  ],
+  es: [
+    '', 'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
+    'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre',
+  ],
+} as const;
+
+const UNIT_WORDS = {
+  en: { minute: 'minute', hour: 'hour', day: 'day', month: 'month', weekday: 'weekday' },
+  es: { minute: 'minuto', hour: 'hora', day: 'día', month: 'mes', weekday: 'día de la semana' },
+} as const;
+const UNIT_PLURALS = {
+  en: { minute: 'minutes', hour: 'hours', day: 'days', month: 'months', weekday: 'weekdays' },
+  es: { minute: 'minutos', hour: 'horas', day: 'días', month: 'meses', weekday: 'días de la semana' },
+} as const;
+type CronUnit = keyof typeof UNIT_WORDS.en;
 
 function parseFieldToken(
   token: string,
   min: number,
   max: number,
+  locale: 'en' | 'es',
   nameMap?: Record<string, number>
 ): number[] {
+  const s = STRINGS[locale];
   const replaceNames = (raw: string) => {
     const upper = raw.toUpperCase();
     if (nameMap && upper in nameMap) return String(nameMap[upper]);
@@ -40,11 +130,11 @@ function parseFieldToken(
   const parts = token.split(',');
 
   for (const part of parts) {
-    if (!part) throw new Error(`Empty segment in "${token}"`);
+    if (!part) throw new Error(s.emptySegment.replace('{token}', token));
     const [rangePart, stepPart] = part.split('/');
     const step = stepPart !== undefined ? Number(stepPart) : 1;
     if (!Number.isInteger(step) || step < 1) {
-      throw new Error(`Invalid step "${stepPart}" in "${token}"`);
+      throw new Error(s.invalidStep.replace('{step}', String(stepPart)).replace('{token}', token));
     }
 
     let start = min;
@@ -70,7 +160,9 @@ function parseFieldToken(
       end > max ||
       start > end
     ) {
-      throw new Error(`Value out of range (${min}–${max}) in "${token}"`);
+      throw new Error(
+        s.outOfRange.replace('{min}', String(min)).replace('{max}', String(max)).replace('{token}', token)
+      );
     }
 
     for (let v = start; v <= end; v += step) {
@@ -83,11 +175,16 @@ function parseFieldToken(
 
 function describeField(
   raw: string,
-  unit: string,
+  unit: CronUnit,
+  locale: 'en' | 'es',
   formatter?: (n: number) => string
 ): string {
-  if (raw === '*') return `every ${unit}`;
-  if (raw.startsWith('*/')) return `every ${raw.slice(2)} ${unit}s`;
+  const u = UNIT_WORDS[locale][unit];
+  if (raw === '*') return locale === 'es' ? `cada ${u}` : `every ${u}`;
+  if (raw.startsWith('*/')) {
+    const prefix = locale === 'es' ? 'cada' : 'every';
+    return `${prefix} ${raw.slice(2)} ${UNIT_PLURALS[locale][unit]}`;
+  }
   if (formatter) {
     return raw
       .split(',')
@@ -97,10 +194,12 @@ function describeField(
       })
       .join(', ');
   }
-  return `${unit} ${raw}`;
+  return `${u} ${raw}`;
 }
 
 export default function CronExpressionParserTool() {
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
   const [expression, setExpression] = useState('0 9 * * 1-5');
 
   const analysis = useMemo(() => {
@@ -108,7 +207,7 @@ export default function CronExpressionParserTool() {
     const fields = trimmed.split(' ');
     if (fields.length !== 5) {
       return {
-        error: `Standard cron expects 5 fields (minute hour day-of-month month day-of-week). Found ${fields.length}.`,
+        error: s.fieldsError.replace('{count}', String(fields.length)),
         summary: '',
         breakdown: [] as Array<{ label: string; raw: string; meaning: string }>,
         nextRuns: [] as Date[],
@@ -117,11 +216,11 @@ export default function CronExpressionParserTool() {
 
     try {
       const [minF, hourF, domF, monF, dowF] = fields;
-      const mins = parseFieldToken(minF, 0, 59);
-      const hours = parseFieldToken(hourF, 0, 23);
-      const doms = parseFieldToken(domF, 1, 31);
-      const months = parseFieldToken(monF, 1, 12, MONTH_NAMES);
-      const dows = parseFieldToken(dowF.replace(/\b7\b/g, '0'), 0, 6, DOW_NAMES);
+      const mins = parseFieldToken(minF, 0, 59, locale);
+      const hours = parseFieldToken(hourF, 0, 23, locale);
+      const doms = parseFieldToken(domF, 1, 31, locale);
+      const months = parseFieldToken(monF, 1, 12, locale, MONTH_NAMES);
+      const dows = parseFieldToken(dowF.replace(/\b7\b/g, '0'), 0, 6, locale, DOW_NAMES);
 
       const minSet = new Set(mins);
       const hourSet = new Set(hours);
@@ -181,43 +280,43 @@ export default function CronExpressionParserTool() {
 
       const timeSummary =
         minF.startsWith('*/') && hourF === '*'
-          ? `Every ${minF.slice(2)} minutes`
+          ? s.everyMinutes.replace('{n}', minF.slice(2))
           : minF === '0' && hourF === '*'
-          ? 'At minute 0 of every hour'
+          ? s.minuteZeroHour
           : minF !== '*' && hourF !== '*' && !minF.includes('/') && !hourF.includes('/')
-          ? `At ${String(hours[0]).padStart(2, '0')}:${String(mins[0]).padStart(2, '0')}`
-          : `At ${describeField(minF, 'minute')}, ${describeField(hourF, 'hour')}`;
+          ? s.atTime.replace('{time}', `${String(hours[0]).padStart(2, '0')}:${String(mins[0]).padStart(2, '0')}`)
+          : s.atFields.replace('{a}', describeField(minF, 'minute', locale)).replace('{b}', describeField(hourF, 'hour', locale));
 
       const daySummary =
         domF === '*' && dowF === '*'
-          ? 'every day'
+          ? s.dayEveryDay
           : dowF === '1-5' && domF === '*'
-          ? 'on weekdays (Monday–Friday)'
+          ? s.dayWeekdays
           : domF !== '*' && dowF === '*'
-          ? `on day ${domF} of the month`
+          ? s.dayOfMonth.replace('{day}', domF)
           : domF === '*' && dowF !== '*'
-          ? `on ${describeField(dowF, 'weekday', (n) => DOW_LABELS[n] ?? String(n))}`
-          : `on day ${domF} or ${describeField(dowF, 'weekday', (n) => DOW_LABELS[n] ?? String(n))}`;
+          ? s.dayDow.replace('{dow}', describeField(dowF, 'weekday', locale, (n) => DOW_LABELS[locale][n] ?? String(n)))
+          : s.dayBoth.replace('{day}', domF).replace('{dow}', describeField(dowF, 'weekday', locale, (n) => DOW_LABELS[locale][n] ?? String(n)));
 
       const monthSummary =
-        monF === '*' ? '' : ` in ${describeField(monF, 'month', (n) => MONTH_LABELS[n] ?? String(n))}`;
+        monF === '*' ? '' : s.monthIn.replace('{months}', describeField(monF, 'month', locale, (n) => MONTH_LABELS[locale][n] ?? String(n)));
 
       return {
         error: '',
         summary: `${timeSummary}, ${daySummary}${monthSummary}.`,
         breakdown: [
-          { label: 'Minute (0–59)', raw: minF, meaning: describeField(minF, 'minute') },
-          { label: 'Hour (0–23)', raw: hourF, meaning: describeField(hourF, 'hour') },
-          { label: 'Day of Month (1–31)', raw: domF, meaning: describeField(domF, 'day') },
+          { label: s.fieldMinute, raw: minF, meaning: describeField(minF, 'minute', locale) },
+          { label: s.fieldHour, raw: hourF, meaning: describeField(hourF, 'hour', locale) },
+          { label: s.fieldDom, raw: domF, meaning: describeField(domF, 'day', locale) },
           {
-            label: 'Month (1–12)',
+            label: s.fieldMonth,
             raw: monF,
-            meaning: describeField(monF, 'month', (n) => MONTH_LABELS[n] ?? String(n)),
+            meaning: describeField(monF, 'month', locale, (n) => MONTH_LABELS[locale][n] ?? String(n)),
           },
           {
-            label: 'Day of Week (0–6)',
+            label: s.fieldDow,
             raw: dowF,
-            meaning: describeField(dowF, 'weekday', (n) => DOW_LABELS[n] ?? String(n)),
+            meaning: describeField(dowF, 'weekday', locale, (n) => DOW_LABELS[locale][n] ?? String(n)),
           },
         ],
         nextRuns,
@@ -226,20 +325,20 @@ export default function CronExpressionParserTool() {
       };
     } catch (err) {
       return {
-        error: err instanceof Error ? err.message : 'Invalid cron expression.',
+        error: err instanceof Error ? err.message : s.invalidCron,
         summary: '',
         breakdown: [],
         nextRuns: [],
       };
     }
-  }, [expression]);
+  }, [expression, locale, s]);
 
   return (
     <div className="space-y-5">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div className="flex-1 min-w-[260px]">
           <label htmlFor="cron-expr" className="block text-sm font-semibold text-slate-900 mb-1.5">
-            5-Field Cron Expression
+            {s.inputLabel}
           </label>
           <input
             id="cron-expr"
@@ -250,11 +349,11 @@ export default function CronExpressionParserTool() {
             className="w-full rounded-lg border border-slate-300 bg-white px-4 py-2.5 font-mono text-base text-slate-900 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/20"
           />
         </div>
-        <CopyButton text={expression.trim()} label="Copy cron" />
+        <CopyButton text={expression.trim()} label={s.copyCron} copiedLabel={t.common.copied} />
       </div>
 
       <div className="flex flex-wrap gap-2">
-        {PRESETS.map((preset) => (
+        {PRESETS[locale].map((preset) => (
           <button
             key={preset.expr}
             type="button"
@@ -277,13 +376,13 @@ export default function CronExpressionParserTool() {
       ) : (
         <>
           <div className="rounded-xl border border-indigo-200 bg-indigo-50/70 p-4">
-            <div className="text-xs font-semibold text-indigo-700 mb-1">Human-Readable Schedule</div>
+            <div className="text-xs font-semibold text-indigo-700 mb-1">{s.humanTitle}</div>
             <p className="text-base sm:text-lg font-semibold text-slate-900">{analysis.summary}</p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <div className="rounded-xl border border-slate-200 bg-white p-4">
-              <h3 className="text-sm font-semibold text-slate-900 mb-3">Field Breakdown</h3>
+              <h3 className="text-sm font-semibold text-slate-900 mb-3">{s.breakdownTitle}</h3>
               <dl className="divide-y divide-slate-100 text-xs sm:text-sm">
                 {analysis.breakdown.map((item) => (
                   <div key={item.label} className="py-2 flex items-center justify-between gap-3">
@@ -299,20 +398,20 @@ export default function CronExpressionParserTool() {
 
             <div className="rounded-xl border border-slate-200 bg-white p-4">
               <h3 className="text-sm font-semibold text-slate-900 mb-3">
-                Next {analysis.nextRuns.length} Scheduled Runs (Local Time)
+                {s.nextRuns.replace('{count}', String(analysis.nextRuns.length))}
               </h3>
               {analysis.nextRuns.length > 0 ? (
                 <ol className="space-y-1.5 font-mono text-xs sm:text-sm text-slate-800 tabular-nums">
                   {analysis.nextRuns.map((dt, idx) => (
                     <li key={dt.toISOString()} className="flex items-center justify-between">
                       <span className="text-slate-400">#{idx + 1}</span>
-                      <span>{dt.toLocaleString()}</span>
+                      <span>{dt.toLocaleString(locale)}</span>
                     </li>
                   ))}
                 </ol>
               ) : (
                 <p className="text-sm text-slate-500">
-                  No matching run found within the next 366 days.
+                  {s.noRuns}
                 </p>
               )}
             </div>

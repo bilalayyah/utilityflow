@@ -1,6 +1,32 @@
 import { RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    minifyTab: 'Minify CSS',
+    beautifyTab: 'Beautify CSS',
+    inputLabel: 'Input CSS',
+    bytesLabel: 'bytes',
+    inputPlaceholder: 'Paste CSS rules or stylesheets here...',
+    outputLabelMinify: 'Minified CSS',
+    outputLabelBeautify: 'Beautified CSS',
+    outputPlaceholder: 'Processed CSS appears here...',
+    copyCss: 'Copy CSS',
+  },
+  es: {
+    minifyTab: 'Minificar CSS',
+    beautifyTab: 'Dar formato al CSS',
+    inputLabel: 'CSS de entrada',
+    bytesLabel: 'bytes',
+    inputPlaceholder: 'Pega reglas CSS u hojas de estilo aquí...',
+    outputLabelMinify: 'CSS minificado',
+    outputLabelBeautify: 'CSS con formato',
+    outputPlaceholder: 'El CSS procesado aparece aquí...',
+    copyCss: 'Copiar CSS',
+  },
+};
 
 const SAMPLE_CSS = `/* Primary card surface */
 .utility-card {
@@ -123,6 +149,8 @@ function beautifyCss(css: string): string {
 }
 
 export default function CssMinifierTool() {
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
   const [input, setInput] = useState('');
   const [mode, setMode] = useState<'minify' | 'beautify'>('minify');
 
@@ -145,7 +173,7 @@ export default function CssMinifierTool() {
               mode === 'minify' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
             }`}
           >
-            Minify CSS
+            {s.minifyTab}
           </button>
           <button
             type="button"
@@ -154,7 +182,7 @@ export default function CssMinifierTool() {
               mode === 'beautify' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
             }`}
           >
-            Beautify CSS
+            {s.beautifyTab}
           </button>
         </div>
 
@@ -165,7 +193,7 @@ export default function CssMinifierTool() {
             className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
           >
             <Sparkles className="w-3.5 h-3.5 text-indigo-600" aria-hidden="true" />
-            <span>Load sample</span>
+            <span>{t.common.loadSample}</span>
           </button>
           <button
             type="button"
@@ -174,7 +202,7 @@ export default function CssMinifierTool() {
             className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 disabled:opacity-50 cursor-pointer"
           >
             <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
-            <span>Clear</span>
+            <span>{t.common.clear}</span>
           </button>
         </div>
       </div>
@@ -183,10 +211,10 @@ export default function CssMinifierTool() {
         <div>
           <div className="flex items-center justify-between mb-1.5">
             <label htmlFor="css-in" className="text-sm font-semibold text-slate-900">
-              Input CSS
+              {s.inputLabel}
             </label>
             <span className="text-xs font-mono text-slate-500 tabular-nums">
-              {input.length.toLocaleString()} bytes
+              {input.length.toLocaleString(locale)} {s.bytesLabel}
             </span>
           </div>
           <textarea
@@ -194,7 +222,7 @@ export default function CssMinifierTool() {
             rows={11}
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Paste CSS rules or stylesheets here..."
+            placeholder={s.inputPlaceholder}
             className="w-full rounded-xl border border-slate-300 bg-white p-3.5 font-mono text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/20"
           />
         </div>
@@ -202,15 +230,15 @@ export default function CssMinifierTool() {
         <div>
           <div className="flex items-center justify-between mb-1.5">
             <label htmlFor="css-out" className="text-sm font-semibold text-slate-900">
-              {mode === 'minify' ? 'Minified CSS' : 'Beautified CSS'}
+              {mode === 'minify' ? s.outputLabelMinify : s.outputLabelBeautify}
             </label>
             <div className="flex items-center gap-3">
               {mode === 'minify' && input.length > 0 && (
                 <span className="text-xs font-mono text-emerald-700 tabular-nums">
-                  {output.length.toLocaleString()} bytes (-{savedPct}%)
+                  {output.length.toLocaleString(locale)} {s.bytesLabel} (-{savedPct}%)
                 </span>
               )}
-              <CopyButton text={output} label="Copy CSS" />
+              <CopyButton text={output} label={s.copyCss} copiedLabel={t.common.copied} />
             </div>
           </div>
           <textarea
@@ -218,7 +246,7 @@ export default function CssMinifierTool() {
             rows={11}
             readOnly
             value={output}
-            placeholder="Processed CSS appears here..."
+            placeholder={s.outputPlaceholder}
             className="w-full rounded-xl border border-slate-200 bg-slate-50 p-3.5 font-mono text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none"
           />
         </div>

@@ -1,5 +1,45 @@
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    pickColor: 'Pick color',
+    colorPickerAria: 'Color picker',
+    copyHex: 'Copy HEX',
+    copyRgb: 'Copy RGB',
+    copyHsl: 'Copy HSL',
+    contrastTitle: 'WCAG 2.1 Contrast Ratio Check',
+    contrastDesc: 'Preview foreground ({color}) against any background color.',
+    backgroundLabel: 'Background:',
+    bgAria: 'Background color for contrast',
+    sampleTitle: 'Sample Body & UI Text',
+    sampleSentence: 'The quick brown fox jumps over the lazy dog.',
+    aaNormal: 'AA Normal Text (≥ 4.5:1)',
+    aaaNormal: 'AAA Normal Text (≥ 7.0:1)',
+    aaLarge: 'AA Large Text (≥ 3.0:1)',
+    pass: 'Pass',
+    fail: 'Fail',
+  },
+  es: {
+    pickColor: 'Elegir color',
+    colorPickerAria: 'Selector de color',
+    copyHex: 'Copiar HEX',
+    copyRgb: 'Copiar RGB',
+    copyHsl: 'Copiar HSL',
+    contrastTitle: 'Verificación de la relación de contraste WCAG 2.1',
+    contrastDesc: 'Vista previa del primer plano ({color}) sobre cualquier color de fondo.',
+    backgroundLabel: 'Fondo:',
+    bgAria: 'Color de fondo para el contraste',
+    sampleTitle: 'Texto de ejemplo del cuerpo y la interfaz',
+    sampleSentence: 'El veloz murciélago hindú comía feliz cardillo y kiwi.',
+    aaNormal: 'Texto normal AA (≥ 4.5:1)',
+    aaaNormal: 'Texto normal AAA (≥ 7.0:1)',
+    aaLarge: 'Texto grande AA (≥ 3.0:1)',
+    pass: 'Aprobado',
+    fail: 'No aprobado',
+  },
+};
 
 interface RGB {
   r: number;
@@ -124,6 +164,8 @@ function contrastRatio(c1: RGB, c2: RGB): number {
 }
 
 export default function ColorConverterTool() {
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
   const [hex, setHex] = useState('#2563eb');
   const [hexDraft, setHexDraft] = useState('#2563eb');
   const [bgHex, setBgHex] = useState('#ffffff');
@@ -174,12 +216,12 @@ export default function ColorConverterTool() {
             </span>
           </div>
           <label className="flex items-center justify-between rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700 cursor-pointer">
-            <span>Pick color</span>
+            <span>{s.pickColor}</span>
             <input
               type="color"
               value={hex}
               onChange={(e) => updateFromHex(e.target.value)}
-              aria-label="Color picker"
+              aria-label={s.colorPickerAria}
               className="h-7 w-12 cursor-pointer border-0 bg-transparent p-0"
             />
           </label>
@@ -192,7 +234,7 @@ export default function ColorConverterTool() {
               <label htmlFor="color-hex" className="text-xs font-semibold text-slate-700">
                 HEX
               </label>
-              <CopyButton text={hexCss} label="Copy HEX" />
+              <CopyButton text={hexCss} label={s.copyHex} copiedLabel={t.common.copied} />
             </div>
             <input
               id="color-hex"
@@ -206,7 +248,7 @@ export default function ColorConverterTool() {
           <div className="rounded-xl border border-slate-200 bg-slate-50/70 p-4">
             <div className="flex items-center justify-between gap-2 mb-2">
               <span className="text-xs font-semibold text-slate-700">RGB ({rgbCss})</span>
-              <CopyButton text={rgbCss} label="Copy RGB" />
+              <CopyButton text={rgbCss} label={s.copyRgb} copiedLabel={t.common.copied} />
             </div>
             <div className="grid grid-cols-3 gap-2">
               {(['r', 'g', 'b'] as const).map((ch) => (
@@ -228,7 +270,7 @@ export default function ColorConverterTool() {
           <div className="rounded-xl border border-slate-200 bg-slate-50/70 p-4">
             <div className="flex items-center justify-between gap-2 mb-2">
               <span className="text-xs font-semibold text-slate-700">HSL ({hslCss})</span>
-              <CopyButton text={hslCss} label="Copy HSL" />
+              <CopyButton text={hslCss} label={s.copyHsl} copiedLabel={t.common.copied} />
             </div>
             <div className="grid grid-cols-3 gap-2">
               <label className="text-xs text-slate-600">
@@ -273,18 +315,18 @@ export default function ColorConverterTool() {
       <div className="rounded-xl border border-slate-200 bg-white p-5 space-y-4">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
-            <h3 className="text-sm font-semibold text-slate-900">WCAG 2.1 Contrast Ratio Check</h3>
+            <h3 className="text-sm font-semibold text-slate-900">{s.contrastTitle}</h3>
             <p className="text-xs text-slate-500">
-              Preview foreground ({hexCss}) against any background color.
+              {s.contrastDesc.replace('{color}', hexCss)}
             </p>
           </div>
           <label className="inline-flex items-center gap-2 text-xs font-medium text-slate-700 cursor-pointer">
-            <span>Background:</span>
+            <span>{s.backgroundLabel}</span>
             <input
               type="color"
               value={bgHex}
               onChange={(e) => setBgHex(e.target.value)}
-              aria-label="Background color for contrast"
+              aria-label={s.bgAria}
               className="h-7 w-10 cursor-pointer border-0 bg-transparent p-0"
             />
             <span className="font-mono">{bgHex.toUpperCase()}</span>
@@ -296,8 +338,8 @@ export default function ColorConverterTool() {
           style={{ backgroundColor: bgHex, color: hex }}
         >
           <div>
-            <div className="text-base font-semibold">Sample Body &amp; UI Text</div>
-            <div className="text-xs opacity-90">The quick brown fox jumps over the lazy dog.</div>
+            <div className="text-base font-semibold">{s.sampleTitle}</div>
+            <div className="text-xs opacity-90">{s.sampleSentence}</div>
           </div>
           <div className="rounded-md bg-white/90 px-3 py-1.5 font-mono text-sm font-bold text-slate-900 tabular-nums">
             {ratio.toFixed(2)}:1
@@ -306,21 +348,21 @@ export default function ColorConverterTool() {
 
         <dl className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
           <div className="rounded-lg border border-slate-200 bg-slate-50 p-3 flex justify-between">
-            <dt className="text-slate-600">AA Normal Text (≥ 4.5:1)</dt>
+            <dt className="text-slate-600">{s.aaNormal}</dt>
             <dd className={`font-semibold ${ratio >= 4.5 ? 'text-emerald-700' : 'text-red-700'}`}>
-              {ratio >= 4.5 ? 'Pass' : 'Fail'}
+              {ratio >= 4.5 ? s.pass : s.fail}
             </dd>
           </div>
           <div className="rounded-lg border border-slate-200 bg-slate-50 p-3 flex justify-between">
-            <dt className="text-slate-600">AAA Normal Text (≥ 7.0:1)</dt>
+            <dt className="text-slate-600">{s.aaaNormal}</dt>
             <dd className={`font-semibold ${ratio >= 7.0 ? 'text-emerald-700' : 'text-red-700'}`}>
-              {ratio >= 7.0 ? 'Pass' : 'Fail'}
+              {ratio >= 7.0 ? s.pass : s.fail}
             </dd>
           </div>
           <div className="rounded-lg border border-slate-200 bg-slate-50 p-3 flex justify-between">
-            <dt className="text-slate-600">AA Large Text (≥ 3.0:1)</dt>
+            <dt className="text-slate-600">{s.aaLarge}</dt>
             <dd className={`font-semibold ${ratio >= 3.0 ? 'text-emerald-700' : 'text-red-700'}`}>
-              {ratio >= 3.0 ? 'Pass' : 'Fail'}
+              {ratio >= 3.0 ? s.pass : s.fail}
             </dd>
           </div>
         </dl>

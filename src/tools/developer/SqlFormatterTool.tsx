@@ -1,6 +1,38 @@
 import { RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    beautify: 'Beautify',
+    minify: 'Minify',
+    uppercaseKw: 'UPPERCASE keywords',
+    lowercaseKw: 'lowercase',
+    indentLabel: 'Indent:',
+    indent2: '2 spaces',
+    indent4: '4 spaces',
+    inputLabel: 'Raw SQL Query',
+    inputPlaceholder: 'Paste SQL query (SELECT, INSERT, UPDATE, JOIN...)...',
+    outputLabel: 'Formatted SQL',
+    outputPlaceholder: 'Formatted SQL appears here...',
+    copySql: 'Copy SQL',
+  },
+  es: {
+    beautify: 'Dar formato',
+    minify: 'Minificar',
+    uppercaseKw: 'Palabras clave en MAYÚSCULAS',
+    lowercaseKw: 'minúsculas',
+    indentLabel: 'Sangría:',
+    indent2: '2 espacios',
+    indent4: '4 espacios',
+    inputLabel: 'Consulta SQL sin formato',
+    inputPlaceholder: 'Pega una consulta SQL (SELECT, INSERT, UPDATE, JOIN...)...',
+    outputLabel: 'SQL con formato',
+    outputPlaceholder: 'El SQL con formato aparece aquí...',
+    copySql: 'Copiar SQL',
+  },
+};
 
 const SAMPLE_SQL = `select u.id, u.email, count(o.id) as order_count, sum(o.total) as revenue from users u left join orders o on o.user_id = u.id where u.active = 1 and o.created_at >= '2026-01-01' group by u.id, u.email having count(o.id) > 2 order by revenue desc limit 25;`;
 
@@ -272,6 +304,8 @@ function formatSql(
 }
 
 export default function SqlFormatterTool() {
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
   const [input, setInput] = useState('');
   const [mode, setMode] = useState<'beautify' | 'minify'>('beautify');
   const [keywordCase, setKeywordCase] = useState<'upper' | 'lower'>('upper');
@@ -294,7 +328,7 @@ export default function SqlFormatterTool() {
                 mode === 'beautify' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
               }`}
             >
-              Beautify
+              {s.beautify}
             </button>
             <button
               type="button"
@@ -303,7 +337,7 @@ export default function SqlFormatterTool() {
                 mode === 'minify' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
               }`}
             >
-              Minify
+              {s.minify}
             </button>
           </div>
 
@@ -315,7 +349,7 @@ export default function SqlFormatterTool() {
                 keywordCase === 'upper' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
               }`}
             >
-              UPPERCASE keywords
+              {s.uppercaseKw}
             </button>
             <button
               type="button"
@@ -324,20 +358,20 @@ export default function SqlFormatterTool() {
                 keywordCase === 'lower' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
               }`}
             >
-              lowercase
+              {s.lowercaseKw}
             </button>
           </div>
 
           {mode === 'beautify' && (
             <label className="inline-flex items-center gap-2 text-xs sm:text-sm text-slate-700">
-              <span>Indent:</span>
+              <span>{s.indentLabel}</span>
               <select
                 value={indentSize}
                 onChange={(e) => setIndentSize(Number(e.target.value) as 2 | 4)}
                 className="rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-xs sm:text-sm"
               >
-                <option value={2}>2 spaces</option>
-                <option value={4}>4 spaces</option>
+                <option value={2}>{s.indent2}</option>
+                <option value={4}>{s.indent4}</option>
               </select>
             </label>
           )}
@@ -350,7 +384,7 @@ export default function SqlFormatterTool() {
             className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
           >
             <Sparkles className="w-3.5 h-3.5 text-indigo-600" aria-hidden="true" />
-            <span>Load sample</span>
+            <span>{t.common.loadSample}</span>
           </button>
           <button
             type="button"
@@ -359,7 +393,7 @@ export default function SqlFormatterTool() {
             className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 disabled:opacity-50 cursor-pointer"
           >
             <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
-            <span>Clear</span>
+            <span>{t.common.clear}</span>
           </button>
         </div>
       </div>
@@ -367,14 +401,14 @@ export default function SqlFormatterTool() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div>
           <label htmlFor="sql-in" className="block text-sm font-semibold text-slate-900 mb-1.5">
-            Raw SQL Query
+            {s.inputLabel}
           </label>
           <textarea
             id="sql-in"
             rows={11}
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Paste SQL query (SELECT, INSERT, UPDATE, JOIN...)..."
+            placeholder={s.inputPlaceholder}
             className="w-full rounded-xl border border-slate-300 bg-white p-3.5 font-mono text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/20"
           />
         </div>
@@ -382,16 +416,16 @@ export default function SqlFormatterTool() {
         <div>
           <div className="flex items-center justify-between mb-1.5">
             <label htmlFor="sql-out" className="text-sm font-semibold text-slate-900">
-              Formatted SQL
+              {s.outputLabel}
             </label>
-            <CopyButton text={output} label="Copy SQL" />
+            <CopyButton text={output} label={s.copySql} copiedLabel={t.common.copied} />
           </div>
           <textarea
             id="sql-out"
             rows={11}
             readOnly
             value={output}
-            placeholder="Formatted SQL appears here..."
+            placeholder={s.outputPlaceholder}
             className="w-full rounded-xl border border-slate-200 bg-slate-50 p-3.5 font-mono text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none"
           />
         </div>

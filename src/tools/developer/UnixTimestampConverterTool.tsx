@@ -1,9 +1,59 @@
 import { useEffect, useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { useLocale } from '../../locales/LocaleContext';
 
-function formatRelative(ms: number, nowMs: number): string {
+const STRINGS = {
+  en: {
+    currentLabel: 'Current Unix Timestamp (Seconds)',
+    useCurrent: 'Use current time',
+    copyEpoch: 'Copy epoch',
+    converter1Label: 'Unix Timestamp → Human Date',
+    epochPlaceholder: 'e.g. 1794544800',
+    unitAuto: 'auto',
+    unitSeconds: 'seconds',
+    unitMilliseconds: 'milliseconds',
+    errorNotNumeric: 'Enter a valid numeric Unix timestamp.',
+    errorOutOfRange: 'Timestamp is outside valid JavaScript Date range.',
+    isoLabel: 'ISO 8601 (UTC)',
+    localLabel: 'Local Timezone',
+    rfcLabel: 'RFC 2822 / GMT',
+    relativeLabel: 'Relative',
+    converter2Label: 'Local Date & Time → Unix Timestamp',
+    secondsLabel: 'Seconds',
+    millisecondsLabel: 'Milliseconds',
+    isoLabel2: 'ISO 8601',
+  },
+  es: {
+    currentLabel: 'Marca de tiempo Unix actual (segundos)',
+    useCurrent: 'Usar hora actual',
+    copyEpoch: 'Copiar epoch',
+    converter1Label: 'Marca de tiempo Unix → fecha legible',
+    epochPlaceholder: 'p. ej., 1794544800',
+    unitAuto: 'auto',
+    unitSeconds: 'segundos',
+    unitMilliseconds: 'milisegundos',
+    errorNotNumeric: 'Escribe una marca de tiempo Unix numérica válida.',
+    errorOutOfRange: 'La marca de tiempo está fuera del rango válido de Date de JavaScript.',
+    isoLabel: 'ISO 8601 (UTC)',
+    localLabel: 'Zona horaria local',
+    rfcLabel: 'RFC 2822 / GMT',
+    relativeLabel: 'Relativo',
+    converter2Label: 'Fecha y hora local → marca de tiempo Unix',
+    secondsLabel: 'Segundos',
+    millisecondsLabel: 'Milisegundos',
+    isoLabel2: 'ISO 8601',
+  },
+};
+
+function formatRelative(ms: number, nowMs: number, locale: 'en' | 'es'): string {
   const diffSec = Math.round((ms - nowMs) / 1000);
   const abs = Math.abs(diffSec);
+  if (locale === 'es') {
+    if (abs < 60) return diffSec >= 0 ? `dentro de ${abs} s` : `hace ${abs} s`;
+    if (abs < 3600) return diffSec >= 0 ? `dentro de ${Math.round(abs / 60)} min` : `hace ${Math.round(abs / 60)} min`;
+    if (abs < 86400) return diffSec >= 0 ? `dentro de ${Math.round(abs / 3600)} h` : `hace ${Math.round(abs / 3600)} h`;
+    return diffSec >= 0 ? `dentro de ${Math.round(abs / 86400)} d` : `hace ${Math.round(abs / 86400)} d`;
+  }
   const suffix = diffSec >= 0 ? 'from now' : 'ago';
   if (abs < 60) return `${abs}s ${suffix}`;
   if (abs < 3600) return `${Math.round(abs / 60)}m ${suffix}`;
@@ -19,6 +69,8 @@ function toDatetimeLocalValue(date: Date): string {
 }
 
 export default function UnixTimestampConverterTool() {
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
   const [nowMs, setNowMs] = useState(() => Date.now());
   const [epochInput, setEpochInput] = useState(() => String(Math.floor(Date.now() / 1000)));
   const [unit, setUnit] = useState<'auto' | 'seconds' | 'milliseconds'>('auto');
@@ -34,7 +86,7 @@ export default function UnixTimestampConverterTool() {
     if (!trimmed) return { error: '', date: null as Date | null, ms: 0, detected: 'seconds' };
     const num = Number(trimmed);
     if (!Number.isFinite(num)) {
-      return { error: 'Enter a valid numeric Unix timestamp.', date: null, ms: 0, detected: 'seconds' };
+      return { error: s.errorNotNumeric, date: null, ms: 0, detected: 'seconds' };
     }
 
     const detected =
@@ -42,10 +94,10 @@ export default function UnixTimestampConverterTool() {
     const ms = detected === 'milliseconds' ? num : num * 1000;
     const date = new Date(ms);
     if (Number.isNaN(date.getTime())) {
-      return { error: 'Timestamp is outside valid JavaScript Date range.', date: null, ms: 0, detected };
+      return { error: s.errorOutOfRange, date: null, ms: 0, detected };
     }
     return { error: '', date, ms, detected };
-  }, [epochInput, unit]);
+  }, [epochInput, unit, s.errorNotNumeric, s.errorOutOfRange]);
 
   const parsedFromDate = useMemo(() => {
     if (!dateInput) return null;
@@ -60,12 +112,18 @@ export default function UnixTimestampConverterTool() {
 
   const currentSec = Math.floor(nowMs / 1000);
 
+  const unitLabels: Record<'auto' | 'seconds' | 'milliseconds', string> = {
+    auto: s.unitAuto,
+    seconds: s.unitSeconds,
+    milliseconds: s.unitMilliseconds,
+  };
+
   return (
     <div className="space-y-6">
       {/* Live Current Epoch Banner */}
       <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 flex flex-wrap items-center justify-between gap-4">
         <div>
-          <div className="text-xs font-medium text-slate-500">Current Unix Timestamp (Seconds)</div>
+          <div className="text-xs font-medium text-slate-500">{s.currentLabel}</div>
           <div className="mt-1 text-2xl font-bold font-mono text-indigo-600 tabular-nums">
             {currentSec}
           </div>
@@ -76,9 +134,9 @@ export default function UnixTimestampConverterTool() {
             onClick={() => setEpochInput(String(currentSec))}
             className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
           >
-            Use current time
+            {s.useCurrent}
           </button>
-          <CopyButton text={String(currentSec)} label="Copy epoch" />
+          <CopyButton text={String(currentSec)} label={s.copyEpoch} copiedLabel={t.common.copied} />
         </div>
       </div>
 
@@ -87,14 +145,14 @@ export default function UnixTimestampConverterTool() {
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div className="flex-1 min-w-[220px]">
             <label htmlFor="epoch-in" className="block text-sm font-semibold text-slate-900 mb-1.5">
-              Unix Timestamp → Human Date
+              {s.converter1Label}
             </label>
             <input
               id="epoch-in"
               type="text"
               value={epochInput}
               onChange={(e) => setEpochInput(e.target.value)}
-              placeholder="e.g. 1794544800"
+              placeholder={s.epochPlaceholder}
               className="w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2 font-mono text-sm tabular-nums text-slate-900 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/20"
             />
           </div>
@@ -109,7 +167,7 @@ export default function UnixTimestampConverterTool() {
                   unit === u ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
                 }`}
               >
-                {u}
+                {unitLabels[u]}
               </button>
             ))}
           </div>
@@ -124,27 +182,27 @@ export default function UnixTimestampConverterTool() {
         {parsedFromEpoch.date && (
           <dl className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm">
             <div className="rounded-lg bg-slate-50 border border-slate-200 p-3">
-              <dt className="text-slate-500">ISO 8601 (UTC)</dt>
+              <dt className="text-slate-500">{s.isoLabel}</dt>
               <dd className="mt-1 font-mono text-slate-900 break-all tabular-nums">
                 {parsedFromEpoch.date.toISOString()}
               </dd>
             </div>
             <div className="rounded-lg bg-slate-50 border border-slate-200 p-3">
-              <dt className="text-slate-500">Local Timezone</dt>
+              <dt className="text-slate-500">{s.localLabel}</dt>
               <dd className="mt-1 font-mono text-slate-900 break-all tabular-nums">
-                {parsedFromEpoch.date.toLocaleString()}
+                {parsedFromEpoch.date.toLocaleString(locale)}
               </dd>
             </div>
             <div className="rounded-lg bg-slate-50 border border-slate-200 p-3">
-              <dt className="text-slate-500">RFC 2822 / GMT</dt>
+              <dt className="text-slate-500">{s.rfcLabel}</dt>
               <dd className="mt-1 font-mono text-slate-900 break-all tabular-nums">
                 {parsedFromEpoch.date.toUTCString()}
               </dd>
             </div>
             <div className="rounded-lg bg-slate-50 border border-slate-200 p-3">
-              <dt className="text-slate-500">Relative ({parsedFromEpoch.detected})</dt>
+              <dt className="text-slate-500">{s.relativeLabel} ({unitLabels[parsedFromEpoch.detected as 'seconds' | 'milliseconds']})</dt>
               <dd className="mt-1 font-mono text-slate-900 tabular-nums">
-                {formatRelative(parsedFromEpoch.ms, nowMs)}
+                {formatRelative(parsedFromEpoch.ms, nowMs, locale)}
               </dd>
             </div>
           </dl>
@@ -155,7 +213,7 @@ export default function UnixTimestampConverterTool() {
       <div className="rounded-xl border border-slate-200 bg-white p-5 space-y-4">
         <div>
           <label htmlFor="date-in" className="block text-sm font-semibold text-slate-900 mb-1.5">
-            Local Date &amp; Time → Unix Timestamp
+            {s.converter2Label}
           </label>
           <input
             id="date-in"
@@ -171,24 +229,24 @@ export default function UnixTimestampConverterTool() {
           <dl className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs sm:text-sm">
             <div className="rounded-lg bg-slate-50 border border-slate-200 p-3 flex items-center justify-between gap-2">
               <div>
-                <dt className="text-slate-500">Seconds</dt>
+                <dt className="text-slate-500">{s.secondsLabel}</dt>
                 <dd className="mt-0.5 font-mono font-semibold text-slate-900 tabular-nums">
                   {parsedFromDate.seconds}
                 </dd>
               </div>
-              <CopyButton text={String(parsedFromDate.seconds)} label="Copy" />
+              <CopyButton text={String(parsedFromDate.seconds)} label={t.common.copy} copiedLabel={t.common.copied} />
             </div>
             <div className="rounded-lg bg-slate-50 border border-slate-200 p-3 flex items-center justify-between gap-2">
               <div>
-                <dt className="text-slate-500">Milliseconds</dt>
+                <dt className="text-slate-500">{s.millisecondsLabel}</dt>
                 <dd className="mt-0.5 font-mono font-semibold text-slate-900 tabular-nums">
                   {parsedFromDate.milliseconds}
                 </dd>
               </div>
-              <CopyButton text={String(parsedFromDate.milliseconds)} label="Copy" />
+              <CopyButton text={String(parsedFromDate.milliseconds)} label={t.common.copy} copiedLabel={t.common.copied} />
             </div>
             <div className="rounded-lg bg-slate-50 border border-slate-200 p-3">
-              <dt className="text-slate-500">ISO 8601</dt>
+              <dt className="text-slate-500">{s.isoLabel2}</dt>
               <dd className="mt-0.5 font-mono text-slate-900 break-all tabular-nums">
                 {parsedFromDate.iso}
               </dd>
