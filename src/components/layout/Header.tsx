@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { SITE_CONFIG } from '../../config/site';
 import { LanguageSwitcher } from '../../locales/LanguageSwitcher';
 import { useLocale } from '../../locales/LocaleContext';
-import { localizeStaticPath } from '../../locales/config';
+import { localizeStaticPath, getLocaleInfo } from '../../locales/config';
 import { ToolSearchBar } from '../tool/ToolSearchBar';
 import { ThemeToggle } from './ThemeToggle';
 
@@ -16,7 +16,7 @@ export function Header() {
   const aiMenuRef = useRef<HTMLDivElement | null>(null);
   const location = useLocation();
 
-  const homePrefix = locale === 'es' ? '/es' : '';
+  const homePrefix = getLocaleInfo(locale).pathPrefix;
   const categoriesAnchor = `${homePrefix}/#categories`;
   const aiAnchor = `${homePrefix}/#ai-tools`;
 
