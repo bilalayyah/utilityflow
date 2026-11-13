@@ -2,9 +2,9 @@ import { Download, ImagePlus, RefreshCw } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { formatBytes } from '../pdf/pdfUtils';
 import { useLocale } from '../../locales/LocaleContext';
+import { useComponentStrings } from '../../locales/componentStrings';
 
-const STRINGS = {
-  en: {
+const STRINGS_EN = {
     selectImages: 'Select One or Multiple Images to Convert',
     imagesLoaded: '{n} image(s) loaded — Click to add or replace',
     batchNote: 'Batch convert PNG, JPG, WebP, SVG, or GIF to PNG, JPG, or WebP locally',
@@ -21,134 +21,7 @@ const STRINGS = {
     conversionFailed: 'Conversion failed for "{name}".',
     batchFailed: 'Batch image conversion failed.',
     downloadExt: 'Download .{ext}',
-  },
-  es: {
-    selectImages: 'Selecciona una o varias imágenes para convertir',
-    imagesLoaded: '{n} imagen(es) cargada(s): haz clic para agregar o reemplazar',
-    batchNote: 'Convierte por lotes PNG, JPG, WebP, SVG o GIF a PNG, JPG o WebP localmente',
-    convertToLabel: 'Convertir a formato',
-    pngOption: 'PNG (.png: conserva la transparencia)',
-    qualityLabel: 'Calidad con pérdida: ',
-    lossless: 'Sin pérdida',
-    alphaFillLabel: 'Relleno alfa',
-    converting: 'Convirtiendo...',
-    reconvert: 'Volver a convertir',
-    selectFilesError: 'Selecciona uno o más archivos de imagen (PNG, JPG, WebP, SVG, GIF).',
-    couldNotDecode: 'No se pudo decodificar "{name}".',
-    canvasUnavailable: 'Canvas 2D no disponible.',
-    conversionFailed: 'La conversión falló para "{name}".',
-    batchFailed: 'La conversión por lotes de imágenes falló.',
-    downloadExt: 'Descargar .{ext}',
-  },
-  pt: {
-    selectImages: 'Selecione uma ou várias imagens para converter',
-    imagesLoaded: '{n} imagem(ns) carregada(s) — clique para adicionar ou substituir',
-    batchNote: 'Converta PNG, JPG, WebP, SVG ou GIF em PNG, JPG ou WebP em lote, localmente',
-    convertToLabel: 'Converter para o formato',
-    pngOption: 'PNG (.png — preserva a transparência)',
-    qualityLabel: 'Qualidade com perda: ',
-    lossless: 'Sem perda',
-    alphaFillLabel: 'Preenchimento alfa',
-    converting: 'Convertendo...',
-    reconvert: 'Converter novamente',
-    selectFilesError: 'Selecione um ou mais arquivos de imagem (PNG, JPG, WebP, SVG, GIF).',
-    couldNotDecode: 'Não foi possível decodificar "{name}".',
-    canvasUnavailable: 'Canvas 2D indisponível.',
-    conversionFailed: 'Falha na conversão de "{name}".',
-    batchFailed: 'Falha na conversão em lote das imagens.',
-    downloadExt: 'Baixar .{ext}',
-  },
-  fr: {
-    selectImages: 'Sélectionnez une ou plusieurs images à convertir',
-    imagesLoaded: '{n} image(s) chargée(s) — cliquez pour ajouter ou remplacer',
-    batchNote: 'Convertissez par lot des PNG, JPG, WebP, SVG ou GIF en PNG, JPG ou WebP localement',
-    convertToLabel: 'Convertir au format',
-    pngOption: 'PNG (.png — préserve la transparence)',
-    qualityLabel: 'Qualité avec perte : ',
-    lossless: 'Sans perte',
-    alphaFillLabel: 'Remplissage alpha',
-    converting: 'Conversion en cours...',
-    reconvert: 'Reconvertir',
-    selectFilesError: 'Sélectionnez un ou plusieurs fichiers image (PNG, JPG, WebP, SVG, GIF).',
-    couldNotDecode: 'Impossible de décoder « {name} ».',
-    canvasUnavailable: 'Canvas 2D indisponible.',
-    conversionFailed: 'Échec de la conversion de « {name} ».',
-    batchFailed: 'Échec de la conversion d\'images par lot.',
-    downloadExt: 'Télécharger le .{ext}',
-  },
-  de: {
-    selectImages: 'Ein oder mehrere Bilder zum Konvertieren auswählen',
-    imagesLoaded: '{n} Bild(er) geladen — Klicken zum Hinzufügen oder Ersetzen',
-    batchNote: 'PNG, JPG, WebP, SVG oder GIF lokal im Stapel in PNG, JPG oder WebP umwandeln',
-    convertToLabel: 'Zielformat',
-    pngOption: 'PNG (.png — behält Transparenz)',
-    qualityLabel: 'Qualität (verlustbehaftet): ',
-    lossless: 'Verlustfrei',
-    alphaFillLabel: 'Alpha-Füllung',
-    converting: 'Wird umgewandelt...',
-    reconvert: 'Erneut umwandeln',
-    selectFilesError: 'Wählen Sie eine oder mehrere Bilddateien aus (PNG, JPG, WebP, SVG, GIF).',
-    couldNotDecode: '"{name}" konnte nicht decodiert werden.',
-    canvasUnavailable: 'Canvas 2D nicht verfügbar.',
-    conversionFailed: 'Umwandlung von "{name}" fehlgeschlagen.',
-    batchFailed: 'Stapel-Umwandlung der Bilder fehlgeschlagen.',
-    downloadExt: '.{ext} herunterladen',
-  },
-  it: {
-    selectImages: 'Seleziona una o più immagini da convertire',
-    imagesLoaded: '{n} immagine/i caricata/e — fai clic per aggiungere o sostituire',
-    batchNote: 'Converti in batch PNG, JPG, WebP, SVG o GIF in PNG, JPG o WebP in locale',
-    convertToLabel: 'Converti in formato',
-    pngOption: 'PNG (.png — preserva la trasparenza)',
-    qualityLabel: 'Qualità con perdita: ',
-    lossless: 'Senza perdita',
-    alphaFillLabel: 'Riempimento alfa',
-    converting: 'Conversione...',
-    reconvert: 'Riconverti',
-    selectFilesError: 'Seleziona uno o più file immagine (PNG, JPG, WebP, SVG, GIF).',
-    couldNotDecode: 'Impossibile decodificare "{name}".',
-    canvasUnavailable: 'Canvas 2D non disponibile.',
-    conversionFailed: 'Conversione di "{name}" non riuscita.',
-    batchFailed: 'Conversione in batch delle immagini non riuscita.',
-    downloadExt: 'Scarica .{ext}',
-  },
-  id: {
-    selectImages: 'Pilih Satu atau Beberapa Gambar untuk Dikonversi',
-    imagesLoaded: '{n} gambar dimuat — Klik untuk menambah atau mengganti',
-    batchNote: 'Konversi batch PNG, JPG, WebP, SVG, atau GIF ke PNG, JPG, atau WebP secara lokal',
-    convertToLabel: 'Konversi ke Format',
-    pngOption: 'PNG (.png — mempertahankan transparansi)',
-    qualityLabel: 'Kualitas Lossy: ',
-    lossless: 'Lossless',
-    alphaFillLabel: 'Isian Alpha',
-    converting: 'Mengonversi...',
-    reconvert: 'Konversi ulang',
-    selectFilesError: 'Pilih satu atau beberapa file gambar (PNG, JPG, WebP, SVG, GIF).',
-    couldNotDecode: 'Tidak dapat mendecode "{name}".',
-    canvasUnavailable: 'Canvas 2D tidak tersedia.',
-    conversionFailed: 'Konversi gagal untuk "{name}".',
-    batchFailed: 'Konversi gambar batch gagal.',
-    downloadExt: 'Unduh .{ext}',
-  },
-  ru: {
-    selectImages: 'Выберите одно или несколько изображений для конвертации',
-    imagesLoaded: 'Загружено изображений: {n} — нажмите, чтобы добавить или заменить',
-    batchNote: 'Пакетная конвертация PNG, JPG, WebP, SVG или GIF в PNG, JPG или WebP локально',
-    convertToLabel: 'Преобразовать в формат',
-    pngOption: 'PNG (.png — сохраняет прозрачность)',
-    qualityLabel: 'Качество с потерями: ',
-    lossless: 'Без потерь',
-    alphaFillLabel: 'Заливка альфа-канала',
-    converting: 'Конвертация...',
-    reconvert: 'Конвертировать снова',
-    selectFilesError: 'Выберите один или несколько файлов изображений (PNG, JPG, WebP, SVG, GIF).',
-    couldNotDecode: 'Не удаётся декодировать «{name}».',
-    canvasUnavailable: 'Canvas 2D недоступен.',
-    conversionFailed: 'Конвертация не удалась для «{name}».',
-    batchFailed: 'Пакетная конвертация изображений не удалась.',
-    downloadExt: 'Скачать .{ext}',
-  },
-};
+  };
 
 type TargetMime = 'image/png' | 'image/jpeg' | 'image/webp';
 
@@ -165,7 +38,7 @@ interface ConvertedItem {
 
 export default function ImageFormatConverterTool() {
   const { locale } = useLocale();
-  const s = STRINGS[locale];
+  const s = useComponentStrings('image-format-converter', STRINGS_EN);
   const [targetMime, setTargetMime] = useState<TargetMime>('image/webp');
   const [quality, setQuality] = useState(90);
   const [jpgFillColor, setJpgFillColor] = useState('#ffffff');
