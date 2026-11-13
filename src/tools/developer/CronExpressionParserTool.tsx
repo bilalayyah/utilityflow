@@ -134,11 +134,13 @@ function describeField(
     if (locale === 'ru') return unit === 'minute' ? 'каждая минута' : `каждый ${u}`;
     if (locale === 'ja') return `毎${u}`;
     if (locale === 'ko') return `매${u}`;
+    if (locale === 'zh') return `每${u}`;
     return locale === 'es' || locale === 'pt' ? `cada ${u}` : locale === 'fr' ? `chaque ${u}` : locale === 'de' ? `alle ${tables.unitPlurals[unit]}` : locale === 'it' ? `ogni ${u}` : `every ${u}`;
   }
   if (raw.startsWith('*/')) {
     if (locale === 'ja') return `${raw.slice(2)}${tables.unitPlurals[unit]}ごと`;
     if (locale === 'ko') return `${raw.slice(2)}${tables.unitPlurals[unit]}마다`;
+    if (locale === 'zh') return `每${raw.slice(2)}${tables.unitPlurals[unit]}`;
     const prefix = locale === 'es' || locale === 'pt' ? 'cada' : locale === 'fr' ? 'chaque' : locale === 'de' ? 'alle' : locale === 'it' ? 'ogni' : locale === 'id' ? 'setiap' : locale === 'ru' ? 'каждые' : 'every';
     return `${prefix} ${raw.slice(2)} ${tables.unitPlurals[unit]}`;
   }

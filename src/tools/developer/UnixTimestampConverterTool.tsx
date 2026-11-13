@@ -82,6 +82,12 @@ function formatRelative(ms: number, nowMs: number, locale: LocaleCode): string {
     if (abs < 86400) return diffSec >= 0 ? `${Math.round(abs / 3600)}시간 후` : `${Math.round(abs / 3600)}시간 전`;
     return diffSec >= 0 ? `${Math.round(abs / 86400)}일 후` : `${Math.round(abs / 86400)}일 전`;
   }
+  if (locale === 'zh') {
+    if (abs < 60) return diffSec >= 0 ? `${abs}秒后` : `${abs}秒前`;
+    if (abs < 3600) return diffSec >= 0 ? `${Math.round(abs / 60)}分钟后` : `${Math.round(abs / 60)}分钟前`;
+    if (abs < 86400) return diffSec >= 0 ? `${Math.round(abs / 3600)}小时后` : `${Math.round(abs / 3600)}小时前`;
+    return diffSec >= 0 ? `${Math.round(abs / 86400)}天后` : `${Math.round(abs / 86400)}天前`;
+  }
   const suffix = diffSec >= 0 ? 'from now' : 'ago';
   if (abs < 60) return `${abs}s ${suffix}`;
   if (abs < 3600) return `${Math.round(abs / 60)}m ${suffix}`;
