@@ -1,4 +1,50 @@
 import { useMemo, useState } from 'react';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    errorInvalidDates: 'Please enter valid calendar dates.',
+    errorDobAfterTarget: 'Date of birth cannot be after the target date.',
+    dobLabel: 'Date of Birth',
+    targetLabel: 'Age at Date',
+    exactAge: 'Exact Chronological Age',
+    yearsWord: 'years',
+    monthsWord: 'months',
+    daysWord: 'days',
+    nextBirthday: 'Next birthday',
+    turning: 'turning',
+    inWord: 'in',
+    totalMonths: 'Total Months',
+    totalWeeks: 'Total Weeks',
+    totalDays: 'Total Days',
+    totalHours: 'Total Hours (approx.)',
+    monthsAbbr: 'mo',
+    weeksAbbr: 'wk',
+    daysAbbr: 'd',
+    hoursAbbr: 'hr',
+  },
+  es: {
+    errorInvalidDates: 'Ingresa fechas válidas del calendario.',
+    errorDobAfterTarget: 'La fecha de nacimiento no puede ser posterior a la fecha objetivo.',
+    dobLabel: 'Fecha de nacimiento',
+    targetLabel: 'Edad en la fecha',
+    exactAge: 'Edad cronológica exacta',
+    yearsWord: 'años',
+    monthsWord: 'meses',
+    daysWord: 'días',
+    nextBirthday: 'Próximo cumpleaños',
+    turning: 'cumple',
+    inWord: 'en',
+    totalMonths: 'Meses totales',
+    totalWeeks: 'Semanas totales',
+    totalDays: 'Días totales',
+    totalHours: 'Horas totales (aprox.)',
+    monthsAbbr: 'mes',
+    weeksAbbr: 'sem',
+    daysAbbr: 'd',
+    hoursAbbr: 'h',
+  },
+};
 
 function toIsoDateInput(date: Date): string {
   const pad = (n: number) => String(n).padStart(2, '0');
@@ -21,6 +67,8 @@ function daysInMonth(year: number, monthIndex: number): number {
 }
 
 export default function AgeCalculatorTool() {
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
   const [birthDate, setBirthDate] = useState('1995-06-15');
   const [targetDate, setTargetDate] = useState(() => toIsoDateInput(new Date()));
 
@@ -29,10 +77,10 @@ export default function AgeCalculatorTool() {
     const target = parseLocalDate(targetDate);
 
     if (!dob || !target) {
-      return { error: 'Please enter valid calendar dates.', data: null };
+      return { error: s.errorInvalidDates, data: null };
     }
     if (dob > target) {
-      return { error: 'Date of birth cannot be after the target date.', data: null };
+      return { error: s.errorDobAfterTarget, data: null };
     }
 
     let years = target.getFullYear() - dob.getFullYear();
@@ -92,14 +140,14 @@ export default function AgeCalculatorTool() {
         turningAge: years + 1,
       },
     };
-  }, [birthDate, targetDate]);
+  }, [birthDate, targetDate, s]);
 
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label htmlFor="age-dob" className="block text-sm font-semibold text-slate-900 mb-1.5">
-            Date of Birth
+            {s.dobLabel}
           </label>
           <input
             id="age-dob"
@@ -112,7 +160,7 @@ export default function AgeCalculatorTool() {
 
         <div>
           <label htmlFor="age-target" className="block text-sm font-semibold text-slate-900 mb-1.5">
-            Age at Date
+            {s.targetLabel}
           </label>
           <input
             id="age-target"
@@ -133,39 +181,44 @@ export default function AgeCalculatorTool() {
       {result.data && (
         <>
           <div className="rounded-xl border border-indigo-200 bg-indigo-50/70 p-5">
-            <div className="text-xs font-semibold text-indigo-700 mb-1">Exact Chronological Age</div>
+            <div className="text-xs font-semibold text-indigo-700 mb-1">{s.exactAge}</div>
             <div className="text-2xl sm:text-3xl font-bold text-slate-900 tabular-nums">
-              {result.data.years} years, {result.data.months} months, {result.data.days} days
+              {result.data.years} {s.yearsWord}, {result.data.months} {s.monthsWord},{' '}
+              {result.data.days} {s.daysWord}
             </div>
             <p className="mt-1.5 text-sm text-slate-600 tabular-nums">
-              Next birthday (turning {result.data.turningAge}): in{' '}
-              <strong className="text-slate-900">{result.data.daysToNextBirthday} days</strong>
+              {s.nextBirthday} ({s.turning} {result.data.turningAge}): {s.inWord}{' '}
+              <strong className="text-slate-900">
+                {result.data.daysToNextBirthday} {s.daysWord}
+              </strong>
             </p>
           </div>
 
           <dl className="grid grid-cols-2 lg:grid-cols-4 gap-3">
             <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
-              <dt className="text-xs text-slate-500">Total Months</dt>
+              <dt className="text-xs text-slate-500">{s.totalMonths}</dt>
               <dd className="mt-1 text-xl font-bold font-mono text-slate-900 tabular-nums">
-                {result.data.totalMonths.toLocaleString()} mo
+                {result.data.totalMonths.toLocaleString(locale)} {s.monthsAbbr}
               </dd>
             </div>
             <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
-              <dt className="text-xs text-slate-500">Total Weeks</dt>
+              <dt className="text-xs text-slate-500">{s.totalWeeks}</dt>
               <dd className="mt-1 text-xl font-bold font-mono text-slate-900 tabular-nums">
-                {result.data.totalWeeks.toLocaleString()} wk {result.data.remainderDays}d
+                {result.data.totalWeeks.toLocaleString(locale)} {s.weeksAbbr}{' '}
+                {result.data.remainderDays}
+                {s.daysAbbr}
               </dd>
             </div>
             <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
-              <dt className="text-xs text-slate-500">Total Days</dt>
+              <dt className="text-xs text-slate-500">{s.totalDays}</dt>
               <dd className="mt-1 text-xl font-bold font-mono text-slate-900 tabular-nums">
-                {result.data.totalDays.toLocaleString()} days
+                {result.data.totalDays.toLocaleString(locale)} {s.daysWord}
               </dd>
             </div>
             <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
-              <dt className="text-xs text-slate-500">Total Hours (approx.)</dt>
+              <dt className="text-xs text-slate-500">{s.totalHours}</dt>
               <dd className="mt-1 text-xl font-bold font-mono text-slate-900 tabular-nums">
-                {result.data.totalHours.toLocaleString()} hr
+                {result.data.totalHours.toLocaleString(locale)} {s.hoursAbbr}
               </dd>
             </div>
           </dl>

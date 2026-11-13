@@ -1,5 +1,79 @@
 import { Plus, Trash2 } from 'lucide-react';
 import { useMemo, useState } from 'react';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    errorInvalidTimes: 'Enter valid start and end times.',
+    errorBreakRange: 'Enter a break deduction between 0 and 1,440 minutes.',
+    errorEndEarlier:
+      'End time is earlier than start time. Enable overnight rollover if spanning midnight.',
+    errorBreakExceeds: 'Break deduction exceeds total elapsed time.',
+    errorSumFields: 'All duration fields must be non-negative numbers.',
+    betweenTab: 'Elapsed Time Between Clocks',
+    sumTab: 'Add Timesheet Durations',
+    startLabel: 'Start Time',
+    endLabel: 'End Time',
+    breakLabel: 'Unpaid Break (min)',
+    overnightLabel: 'Treat end time earlier than start time as next day (overnight shift)',
+    netDuration: 'Net Duration',
+    overnightTag: '(Overnight)',
+    decimalHours: 'Decimal Hours',
+    totalMinutes: 'Total Minutes',
+    totalSeconds: 'Total Seconds',
+    hoursAbbr: 'hr',
+    minutesAbbr: 'min',
+    secondsAbbr: 'sec',
+    labelHeader: 'Label',
+    hoursHeader: 'Hours',
+    minutesHeader: 'Minutes',
+    secondsHeader: 'Seconds',
+    removeButton: 'Remove',
+    removeAria: 'Remove',
+    addRowButton: 'Add Duration Row',
+    morningSession: 'Morning session',
+    afternoonSession: 'Afternoon session',
+    segmentPrefix: 'Segment',
+    combinedTime: 'Combined Time (HH:MM:SS)',
+    dayEquivalent: '24-Hour Days',
+    daysAbbr: 'd',
+  },
+  es: {
+    errorInvalidTimes: 'Ingresa horas válidas de inicio y fin.',
+    errorBreakRange: 'Ingresa un descuento por descanso entre 0 y 1,440 minutos.',
+    errorEndEarlier:
+      'La hora de fin es anterior a la hora de inicio. Activa el cambio nocturno si el turno cruza la medianoche.',
+    errorBreakExceeds: 'El descuento por descanso supera el tiempo total transcurrido.',
+    errorSumFields: 'Todos los campos de duración deben ser números no negativos.',
+    betweenTab: 'Tiempo transcurrido entre dos horas',
+    sumTab: 'Sumar duraciones de planilla',
+    startLabel: 'Hora de inicio',
+    endLabel: 'Hora de fin',
+    breakLabel: 'Descanso no remunerado (min)',
+    overnightLabel: 'Tratar la hora de fin anterior a la de inicio como el día siguiente (turno nocturno)',
+    netDuration: 'Duración neta',
+    overnightTag: '(Nocturno)',
+    decimalHours: 'Horas decimales',
+    totalMinutes: 'Minutos totales',
+    totalSeconds: 'Segundos totales',
+    hoursAbbr: 'h',
+    minutesAbbr: 'min',
+    secondsAbbr: 's',
+    labelHeader: 'Etiqueta',
+    hoursHeader: 'Horas',
+    minutesHeader: 'Minutos',
+    secondsHeader: 'Segundos',
+    removeButton: 'Eliminar',
+    removeAria: 'Eliminar',
+    addRowButton: 'Agregar fila de duración',
+    morningSession: 'Sesión de la mañana',
+    afternoonSession: 'Sesión de la tarde',
+    segmentPrefix: 'Segmento',
+    combinedTime: 'Tiempo combinado (HH:MM:SS)',
+    dayEquivalent: 'Días de 24 horas',
+    daysAbbr: 'd',
+  },
+};
 
 type Mode = 'between' | 'sum';
 
@@ -30,6 +104,8 @@ function formatHms(totalSeconds: number): string {
 }
 
 export default function TimeDurationCalculatorTool() {
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
   const [mode, setMode] = useState<Mode>('between');
   const [startTime, setStartTime] = useState('09:00:00');
   const [endTime, setEndTime] = useState('17:30:00');
@@ -37,8 +113,8 @@ export default function TimeDurationCalculatorTool() {
   const [rollOverMidnight, setRollOverMidnight] = useState(true);
 
   const [rows, setRows] = useState<DurationRow[]>([
-    { id: 1, label: 'Morning session', hours: '3', minutes: '45', seconds: '0' },
-    { id: 2, label: 'Afternoon session', hours: '4', minutes: '20', seconds: '30' },
+    { id: 1, label: s.morningSession, hours: '3', minutes: '45', seconds: '0' },
+    { id: 2, label: s.afternoonSession, hours: '4', minutes: '20', seconds: '30' },
   ]);
 
   const betweenResult = useMemo(() => {
@@ -47,10 +123,10 @@ export default function TimeDurationCalculatorTool() {
     const breakMin = Number(breakMinutes) || 0;
 
     if (startSec === null || endSec === null) {
-      return { error: 'Enter valid start and end times.', data: null };
+      return { error: s.errorInvalidTimes, data: null };
     }
     if (!Number.isFinite(breakMin) || breakMin < 0 || breakMin > 1440) {
-      return { error: 'Enter a break deduction between 0 and 1,440 minutes.', data: null };
+      return { error: s.errorBreakRange, data: null };
     }
 
     let rawDiff = endSec - startSec;
@@ -61,7 +137,7 @@ export default function TimeDurationCalculatorTool() {
         overnightApplied = true;
       } else {
         return {
-          error: 'End time is earlier than start time. Enable overnight rollover if spanning midnight.',
+          error: s.errorEndEarlier,
           data: null,
         };
       }
@@ -69,7 +145,7 @@ export default function TimeDurationCalculatorTool() {
 
     const breakSec = breakMin * 60;
     if (breakSec > rawDiff) {
-      return { error: 'Break deduction exceeds total elapsed time.', data: null };
+      return { error: s.errorBreakExceeds, data: null };
     }
 
     const netSec = rawDiff - breakSec;
@@ -84,18 +160,18 @@ export default function TimeDurationCalculatorTool() {
         overnightApplied,
       },
     };
-  }, [startTime, endTime, breakMinutes, rollOverMidnight]);
+  }, [startTime, endTime, breakMinutes, rollOverMidnight, s]);
 
   const sumResult = useMemo(() => {
     let totalSec = 0;
     for (const row of rows) {
       const h = Number(row.hours) || 0;
       const m = Number(row.minutes) || 0;
-      const s = Number(row.seconds) || 0;
-      if (h < 0 || m < 0 || s < 0 || !Number.isFinite(h) || !Number.isFinite(m) || !Number.isFinite(s)) {
-        return { error: 'All duration fields must be non-negative numbers.', data: null };
+      const sec = Number(row.seconds) || 0;
+      if (h < 0 || m < 0 || sec < 0 || !Number.isFinite(h) || !Number.isFinite(m) || !Number.isFinite(sec)) {
+        return { error: s.errorSumFields, data: null };
       }
-      totalSec += h * 3600 + m * 60 + s;
+      totalSec += h * 3600 + m * 60 + sec;
     }
 
     return {
@@ -108,11 +184,11 @@ export default function TimeDurationCalculatorTool() {
         daysEquivalent: totalSec / 86400,
       },
     };
-  }, [rows]);
+  }, [rows, s]);
 
   const addRow = () => {
     const nextId = rows.reduce((max, r) => Math.max(max, r.id), 0) + 1;
-    setRows([...rows, { id: nextId, label: `Segment ${nextId}`, hours: '1', minutes: '0', seconds: '0' }]);
+    setRows([...rows, { id: nextId, label: `${s.segmentPrefix} ${nextId}`, hours: '1', minutes: '0', seconds: '0' }]);
   };
 
   const removeRow = (id: number) => {
@@ -130,7 +206,7 @@ export default function TimeDurationCalculatorTool() {
             mode === 'between' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
           }`}
         >
-          Elapsed Time Between Clocks
+          {s.betweenTab}
         </button>
         <button
           type="button"
@@ -139,7 +215,7 @@ export default function TimeDurationCalculatorTool() {
             mode === 'sum' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
           }`}
         >
-          Add Timesheet Durations
+          {s.sumTab}
         </button>
       </div>
 
@@ -148,7 +224,7 @@ export default function TimeDurationCalculatorTool() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
               <label htmlFor="td-start" className="block text-sm font-semibold text-slate-900 mb-1.5">
-                Start Time
+                {s.startLabel}
               </label>
               <input
                 id="td-start"
@@ -162,7 +238,7 @@ export default function TimeDurationCalculatorTool() {
 
             <div>
               <label htmlFor="td-end" className="block text-sm font-semibold text-slate-900 mb-1.5">
-                End Time
+                {s.endLabel}
               </label>
               <input
                 id="td-end"
@@ -176,7 +252,7 @@ export default function TimeDurationCalculatorTool() {
 
             <div>
               <label htmlFor="td-break" className="block text-sm font-semibold text-slate-900 mb-1.5">
-                Unpaid Break (min)
+                {s.breakLabel}
               </label>
               <input
                 id="td-break"
@@ -197,7 +273,7 @@ export default function TimeDurationCalculatorTool() {
               onChange={(e) => setRollOverMidnight(e.target.checked)}
               className="h-4 w-4 rounded border-slate-300 text-indigo-600"
             />
-            Treat end time earlier than start time as next day (overnight shift)
+            {s.overnightLabel}
           </label>
 
           {betweenResult.error && (
@@ -210,28 +286,28 @@ export default function TimeDurationCalculatorTool() {
             <dl className="grid grid-cols-2 lg:grid-cols-4 gap-3">
               <div className="rounded-xl border border-indigo-200 bg-indigo-50/70 p-4">
                 <dt className="text-xs font-medium text-indigo-700">
-                  Net Duration {betweenResult.data.overnightApplied ? '(Overnight)' : ''}
+                  {s.netDuration} {betweenResult.data.overnightApplied ? s.overnightTag : ''}
                 </dt>
                 <dd className="mt-1 text-2xl font-bold font-mono text-slate-900 tabular-nums">
                   {betweenResult.data.hms}
                 </dd>
               </div>
               <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-                <dt className="text-xs font-medium text-slate-500">Decimal Hours</dt>
+                <dt className="text-xs font-medium text-slate-500">{s.decimalHours}</dt>
                 <dd className="mt-1 text-xl font-bold font-mono text-slate-900 tabular-nums">
-                  {betweenResult.data.decimalHours.toFixed(2)} hr
+                  {betweenResult.data.decimalHours.toFixed(2)} {s.hoursAbbr}
                 </dd>
               </div>
               <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-                <dt className="text-xs font-medium text-slate-500">Total Minutes</dt>
+                <dt className="text-xs font-medium text-slate-500">{s.totalMinutes}</dt>
                 <dd className="mt-1 text-xl font-bold font-mono text-slate-900 tabular-nums">
-                  {Number(betweenResult.data.totalMinutes.toFixed(2)).toLocaleString()} min
+                  {Number(betweenResult.data.totalMinutes.toFixed(2)).toLocaleString(locale)} {s.minutesAbbr}
                 </dd>
               </div>
               <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-                <dt className="text-xs font-medium text-slate-500">Total Seconds</dt>
+                <dt className="text-xs font-medium text-slate-500">{s.totalSeconds}</dt>
                 <dd className="mt-1 text-xl font-bold font-mono text-slate-900 tabular-nums">
-                  {betweenResult.data.totalSeconds.toLocaleString()} sec
+                  {betweenResult.data.totalSeconds.toLocaleString(locale)} {s.secondsAbbr}
                 </dd>
               </div>
             </dl>
@@ -243,7 +319,7 @@ export default function TimeDurationCalculatorTool() {
             {rows.map((row) => (
               <div key={row.id} className="grid grid-cols-12 gap-2 items-end rounded-lg border border-slate-200 bg-slate-50/70 p-3">
                 <div className="col-span-12 sm:col-span-4">
-                  <label className="block text-xs font-medium text-slate-600 mb-1">Label</label>
+                  <label className="block text-xs font-medium text-slate-600 mb-1">{s.labelHeader}</label>
                   <input
                     type="text"
                     value={row.label}
@@ -254,7 +330,7 @@ export default function TimeDurationCalculatorTool() {
                   />
                 </div>
                 <div className="col-span-4 sm:col-span-2">
-                  <label className="block text-xs font-medium text-slate-600 mb-1">Hours</label>
+                  <label className="block text-xs font-medium text-slate-600 mb-1">{s.hoursHeader}</label>
                   <input
                     type="number"
                     min={0}
@@ -266,7 +342,7 @@ export default function TimeDurationCalculatorTool() {
                   />
                 </div>
                 <div className="col-span-4 sm:col-span-2">
-                  <label className="block text-xs font-medium text-slate-600 mb-1">Minutes</label>
+                  <label className="block text-xs font-medium text-slate-600 mb-1">{s.minutesHeader}</label>
                   <input
                     type="number"
                     min={0}
@@ -278,7 +354,7 @@ export default function TimeDurationCalculatorTool() {
                   />
                 </div>
                 <div className="col-span-4 sm:col-span-2">
-                  <label className="block text-xs font-medium text-slate-600 mb-1">Seconds</label>
+                  <label className="block text-xs font-medium text-slate-600 mb-1">{s.secondsHeader}</label>
                   <input
                     type="number"
                     min={0}
@@ -294,11 +370,11 @@ export default function TimeDurationCalculatorTool() {
                     type="button"
                     disabled={rows.length <= 1}
                     onClick={() => removeRow(row.id)}
-                    aria-label={`Remove ${row.label}`}
+                    aria-label={`${s.removeAria} ${row.label}`}
                     className="inline-flex items-center gap-1 rounded-md border border-slate-300 bg-white px-2.5 py-2 text-xs text-slate-600 hover:bg-slate-50 disabled:opacity-40 cursor-pointer"
                   >
                     <Trash2 className="w-3.5 h-3.5" />
-                    Remove
+                    {s.removeButton}
                   </button>
                 </div>
               </div>
@@ -310,7 +386,7 @@ export default function TimeDurationCalculatorTool() {
               className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3.5 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 cursor-pointer"
             >
               <Plus className="w-3.5 h-3.5" />
-              Add Duration Row
+              {s.addRowButton}
             </button>
           </div>
 
@@ -323,27 +399,27 @@ export default function TimeDurationCalculatorTool() {
           {sumResult.data && (
             <dl className="grid grid-cols-2 lg:grid-cols-4 gap-3">
               <div className="rounded-xl border border-indigo-200 bg-indigo-50/70 p-4">
-                <dt className="text-xs font-medium text-indigo-700">Combined Time (HH:MM:SS)</dt>
+                <dt className="text-xs font-medium text-indigo-700">{s.combinedTime}</dt>
                 <dd className="mt-1 text-2xl font-bold font-mono text-slate-900 tabular-nums">
                   {sumResult.data.hms}
                 </dd>
               </div>
               <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-                <dt className="text-xs font-medium text-slate-500">Decimal Hours</dt>
+                <dt className="text-xs font-medium text-slate-500">{s.decimalHours}</dt>
                 <dd className="mt-1 text-xl font-bold font-mono text-slate-900 tabular-nums">
-                  {sumResult.data.decimalHours.toFixed(2)} hr
+                  {sumResult.data.decimalHours.toFixed(2)} {s.hoursAbbr}
                 </dd>
               </div>
               <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-                <dt className="text-xs font-medium text-slate-500">Total Minutes</dt>
+                <dt className="text-xs font-medium text-slate-500">{s.totalMinutes}</dt>
                 <dd className="mt-1 text-xl font-bold font-mono text-slate-900 tabular-nums">
-                  {Number(sumResult.data.totalMinutes.toFixed(2)).toLocaleString()} min
+                  {Number(sumResult.data.totalMinutes.toFixed(2)).toLocaleString(locale)} {s.minutesAbbr}
                 </dd>
               </div>
               <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-                <dt className="text-xs font-medium text-slate-500">24-Hour Days</dt>
+                <dt className="text-xs font-medium text-slate-500">{s.dayEquivalent}</dt>
                 <dd className="mt-1 text-xl font-bold font-mono text-slate-900 tabular-nums">
-                  {sumResult.data.daysEquivalent.toFixed(3)} d
+                  {sumResult.data.daysEquivalent.toFixed(3)} {s.daysAbbr}
                 </dd>
               </div>
             </dl>

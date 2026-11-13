@@ -1,6 +1,154 @@
 import { ArrowLeftRight } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    errorInvalidValue: 'Enter a valid numeric value to convert.',
+    errorAbsoluteZero: 'Temperature cannot be below absolute zero (-273.15 °C / 0 K).',
+    categoryNames: {
+      length: 'Length',
+      weight: 'Weight & Mass',
+      temperature: 'Temperature',
+      area: 'Area',
+      volume: 'Volume',
+      speed: 'Speed',
+      storage: 'Digital Storage',
+    },
+    unitLabels: {
+      mm: 'Millimeter',
+      cm: 'Centimeter',
+      m: 'Meter',
+      km: 'Kilometer',
+      in: 'Inch',
+      ft: 'Foot',
+      yd: 'Yard',
+      mi: 'Mile',
+      mg: 'Milligram',
+      g: 'Gram',
+      kg: 'Kilogram',
+      t: 'Metric Tonne',
+      oz: 'Ounce',
+      lb: 'Pound',
+      st: 'Stone',
+      C: 'Celsius',
+      F: 'Fahrenheit',
+      K: 'Kelvin',
+      cm2: 'Square Centimeter',
+      m2: 'Square Meter',
+      ha: 'Hectare',
+      km2: 'Square Kilometer',
+      ft2: 'Square Foot',
+      yd2: 'Square Yard',
+      acre: 'Acre',
+      mi2: 'Square Mile',
+      mL: 'Milliliter',
+      L: 'Liter',
+      m3: 'Cubic Meter',
+      floz: 'Fluid Ounce (US)',
+      cup: 'Cup (US)',
+      pt: 'Pint (US)',
+      qt: 'Quart (US)',
+      gal: 'Gallon (US)',
+      ms: 'Meters / second',
+      kmh: 'Kilometers / hour',
+      mph: 'Miles / hour',
+      knot: 'Knot',
+      fts: 'Feet / second',
+      B: 'Byte',
+      KB: 'Kilobyte (10³)',
+      MB: 'Megabyte (10⁶)',
+      GB: 'Gigabyte (10⁹)',
+      TB: 'Terabyte (10¹²)',
+      KiB: 'Kibibyte (2¹⁰)',
+      MiB: 'Mebibyte (2²⁰)',
+      GiB: 'Gibibyte (2³⁰)',
+    },
+    valueLabel: 'Value',
+    fromLabel: 'From Unit',
+    toLabel: 'To Unit',
+    swapAria: 'Swap units',
+    swapTitle: 'Swap units',
+    toWord: 'to',
+    copyResult: 'Copy Result',
+    unitHeader: 'Unit',
+    symbolHeader: 'Symbol',
+    equivalentHeader: 'Equivalent Value',
+  },
+  es: {
+    errorInvalidValue: 'Ingresa un valor numérico válido para convertir.',
+    errorAbsoluteZero: 'La temperatura no puede estar por debajo del cero absoluto (-273.15 °C / 0 K).',
+    categoryNames: {
+      length: 'Longitud',
+      weight: 'Peso y masa',
+      temperature: 'Temperatura',
+      area: 'Área',
+      volume: 'Volumen',
+      speed: 'Velocidad',
+      storage: 'Almacenamiento digital',
+    },
+    unitLabels: {
+      mm: 'Milímetro',
+      cm: 'Centímetro',
+      m: 'Metro',
+      km: 'Kilómetro',
+      in: 'Pulgada',
+      ft: 'Pie',
+      yd: 'Yarda',
+      mi: 'Milla',
+      mg: 'Miligramo',
+      g: 'Gramo',
+      kg: 'Kilogramo',
+      t: 'Tonelada métrica',
+      oz: 'Onza',
+      lb: 'Libra',
+      st: 'Stone',
+      C: 'Celsius',
+      F: 'Fahrenheit',
+      K: 'Kelvin',
+      cm2: 'Centímetro cuadrado',
+      m2: 'Metro cuadrado',
+      ha: 'Hectárea',
+      km2: 'Kilómetro cuadrado',
+      ft2: 'Pie cuadrado',
+      yd2: 'Yarda cuadrada',
+      acre: 'Acre',
+      mi2: 'Milla cuadrada',
+      mL: 'Mililitro',
+      L: 'Litro',
+      m3: 'Metro cúbico',
+      floz: 'Onza líquida (EE. UU.)',
+      cup: 'Taza (EE. UU.)',
+      pt: 'Pinta (EE. UU.)',
+      qt: 'Cuarto (EE. UU.)',
+      gal: 'Galón (EE. UU.)',
+      ms: 'Metros / segundo',
+      kmh: 'Kilómetros / hora',
+      mph: 'Millas / hora',
+      knot: 'Nudo',
+      fts: 'Pies / segundo',
+      B: 'Byte',
+      KB: 'Kilobyte (10³)',
+      MB: 'Megabyte (10⁶)',
+      GB: 'Gigabyte (10⁹)',
+      TB: 'Terabyte (10¹²)',
+      KiB: 'Kibibyte (2¹⁰)',
+      MiB: 'Mebibyte (2²⁰)',
+      GiB: 'Gibibyte (2³⁰)',
+    },
+    valueLabel: 'Valor',
+    fromLabel: 'Unidad de origen',
+    toLabel: 'Unidad de destino',
+    swapAria: 'Intercambiar unidades',
+    swapTitle: 'Intercambiar unidades',
+    toWord: 'a',
+    copyResult: 'Copiar resultado',
+    unitHeader: 'Unidad',
+    symbolHeader: 'Símbolo',
+    equivalentHeader: 'Valor equivalente',
+  },
+};
 
 type CategoryKey =
   | 'length'
@@ -152,12 +300,17 @@ function formatConverted(val: number): string {
 }
 
 export default function UnitConverterTool() {
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
   const [category, setCategory] = useState<CategoryKey>('length');
   const [fromId, setFromId] = useState('km');
   const [toId, setToId] = useState('mi');
   const [inputValue, setInputValue] = useState('10');
 
   const activeCategory = CATEGORIES_UNITS[category];
+
+  const unitLabel = (id: string): string =>
+    (s.unitLabels as Record<string, string>)[id] ?? id;
 
   const handleCategoryChange = (next: CategoryKey) => {
     setCategory(next);
@@ -168,7 +321,7 @@ export default function UnitConverterTool() {
   const result = useMemo(() => {
     const val = Number(inputValue);
     if (!Number.isFinite(val)) {
-      return { error: 'Enter a valid numeric value to convert.', data: null };
+      return { error: s.errorInvalidValue, data: null };
     }
 
     const fromUnit = activeCategory.units.find((u) => u.id === fromId) ?? activeCategory.units[0];
@@ -176,7 +329,7 @@ export default function UnitConverterTool() {
     const baseVal = fromUnit.toBase(val);
 
     if (category === 'temperature' && fromUnit.toBase(val) < -273.15) {
-      return { error: 'Temperature cannot be below absolute zero (-273.15 °C / 0 K).', data: null };
+      return { error: s.errorAbsoluteZero, data: null };
     }
 
     const converted = toUnit.fromBase(baseVal);
@@ -197,7 +350,7 @@ export default function UnitConverterTool() {
         allUnits,
       },
     };
-  }, [activeCategory, category, fromId, toId, inputValue]);
+  }, [activeCategory, category, fromId, toId, inputValue, s]);
 
   return (
     <div className="space-y-6">
@@ -211,7 +364,7 @@ export default function UnitConverterTool() {
               category === key ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600 hover:text-slate-900'
             }`}
           >
-            {CATEGORIES_UNITS[key].name}
+            {s.categoryNames[key]}
           </button>
         ))}
       </div>
@@ -219,7 +372,7 @@ export default function UnitConverterTool() {
       <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr_auto_1fr] gap-3 items-end">
         <div>
           <label htmlFor="uc-val" className="block text-sm font-semibold text-slate-900 mb-1.5">
-            Value
+            {s.valueLabel}
           </label>
           <input
             id="uc-val"
@@ -233,7 +386,7 @@ export default function UnitConverterTool() {
 
         <div>
           <label htmlFor="uc-from" className="block text-sm font-semibold text-slate-900 mb-1.5">
-            From Unit
+            {s.fromLabel}
           </label>
           <select
             id="uc-from"
@@ -243,7 +396,7 @@ export default function UnitConverterTool() {
           >
             {activeCategory.units.map((u) => (
               <option key={u.id} value={u.id}>
-                {u.label} ({u.symbol})
+                {unitLabel(u.id)} ({u.symbol})
               </option>
             ))}
           </select>
@@ -255,8 +408,8 @@ export default function UnitConverterTool() {
             setFromId(toId);
             setToId(fromId);
           }}
-          aria-label="Swap units"
-          title="Swap units"
+          aria-label={s.swapAria}
+          title={s.swapTitle}
           className="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-slate-700 hover:bg-slate-50 cursor-pointer"
         >
           <ArrowLeftRight className="w-4 h-4" />
@@ -264,7 +417,7 @@ export default function UnitConverterTool() {
 
         <div>
           <label htmlFor="uc-to" className="block text-sm font-semibold text-slate-900 mb-1.5">
-            To Unit
+            {s.toLabel}
           </label>
           <select
             id="uc-to"
@@ -274,7 +427,7 @@ export default function UnitConverterTool() {
           >
             {activeCategory.units.map((u) => (
               <option key={u.id} value={u.id}>
-                {u.label} ({u.symbol})
+                {unitLabel(u.id)} ({u.symbol})
               </option>
             ))}
           </select>
@@ -292,29 +445,33 @@ export default function UnitConverterTool() {
           <div className="rounded-xl border border-indigo-200 bg-indigo-50/70 p-5 flex flex-wrap items-center justify-between gap-4">
             <div>
               <div className="text-xs font-semibold text-indigo-700 mb-1">
-                {result.data.fromUnit.label} to {result.data.toUnit.label}
+                {unitLabel(result.data.fromUnit.id)} {s.toWord} {unitLabel(result.data.toUnit.id)}
               </div>
               <div className="text-2xl sm:text-3xl font-bold font-mono text-slate-900 tabular-nums">
                 {inputValue || 0} {result.data.fromUnit.symbol} = {result.data.formatted}{' '}
                 {result.data.toUnit.symbol}
               </div>
             </div>
-            <CopyButton text={`${result.data.formatted} ${result.data.toUnit.symbol}`} label="Copy Result" />
+            <CopyButton
+              text={`${result.data.formatted} ${result.data.toUnit.symbol}`}
+              label={s.copyResult}
+              copiedLabel={t.common.copied}
+            />
           </div>
 
           <div className="rounded-xl border border-slate-200 overflow-x-auto">
             <table className="w-full text-left text-sm">
               <thead className="bg-slate-50 text-xs text-slate-500 border-b border-slate-200">
                 <tr>
-                  <th className="py-2.5 px-4 font-semibold">Unit</th>
-                  <th className="py-2.5 px-4 font-semibold">Symbol</th>
-                  <th className="py-2.5 px-4 font-semibold text-right">Equivalent Value</th>
+                  <th className="py-2.5 px-4 font-semibold">{s.unitHeader}</th>
+                  <th className="py-2.5 px-4 font-semibold">{s.symbolHeader}</th>
+                  <th className="py-2.5 px-4 font-semibold text-right">{s.equivalentHeader}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 tabular-nums">
                 {result.data.allUnits.map((u) => (
                   <tr key={u.id} className={u.id === toId ? 'bg-indigo-50/50' : ''}>
-                    <td className="py-2 px-4 text-slate-800 font-medium">{u.label}</td>
+                    <td className="py-2 px-4 text-slate-800 font-medium">{unitLabel(u.id)}</td>
                     <td className="py-2 px-4 font-mono text-slate-500">{u.symbol}</td>
                     <td className="py-2 px-4 font-mono font-semibold text-slate-900 text-right">
                       {u.formatted}

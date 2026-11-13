@@ -1,12 +1,44 @@
 import { useMemo, useState } from 'react';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    errorAmount: 'Amount cannot be negative.',
+    errorRate: 'Tax rate must be between 0% and 100%.',
+    addTab: 'Add Tax (Net → Gross)',
+    removeTab: 'Extract Tax (Gross → Net)',
+    commonRates: 'Common rates:',
+    netAmountLabel: 'Net Amount (Excluding Tax) ($)',
+    grossAmountLabel: 'Gross Amount (Including Tax) ($)',
+    rateLabel: 'VAT / Sales Tax Rate (%)',
+    netPrice: 'Net Price (Excl. Tax)',
+    taxAmount: 'Tax Amount',
+    grossPrice: 'Gross Price (Incl. Tax)',
+  },
+  es: {
+    errorAmount: 'El monto no puede ser negativo.',
+    errorRate: 'La tasa de impuesto debe estar entre 0% y 100%.',
+    addTab: 'Agregar impuesto (neto → bruto)',
+    removeTab: 'Extraer impuesto (bruto → neto)',
+    commonRates: 'Tasas comunes:',
+    netAmountLabel: 'Monto neto (sin impuesto) ($)',
+    grossAmountLabel: 'Monto bruto (con impuesto) ($)',
+    rateLabel: 'Tasa de IVA / impuesto sobre las ventas (%)',
+    netPrice: 'Precio neto (sin impuesto)',
+    taxAmount: 'Monto del impuesto',
+    grossPrice: 'Precio bruto (con impuesto)',
+  },
+};
 
 const RATE_PRESETS = [5, 7, 10, 15, 20, 21];
 
-function money(n: number): string {
-  return n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+function money(n: number, locale: string): string {
+  return n.toLocaleString(locale, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
 export default function VatTaxCalculatorTool() {
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
   const [mode, setMode] = useState<'add' | 'remove'>('add');
   const [amount, setAmount] = useState('1000');
   const [taxRate, setTaxRate] = useState('20');
@@ -15,10 +47,10 @@ export default function VatTaxCalculatorTool() {
     const val = Number(amount);
     const rate = Number(taxRate);
     if (!Number.isFinite(val) || val < 0) {
-      return { error: 'Amount cannot be negative.', data: null };
+      return { error: s.errorAmount, data: null };
     }
     if (!Number.isFinite(rate) || rate < 0 || rate > 100) {
-      return { error: 'Tax rate must be between 0% and 100%.', data: null };
+      return { error: s.errorRate, data: null };
     }
 
     const r = rate / 100;
@@ -33,7 +65,7 @@ export default function VatTaxCalculatorTool() {
     const net = gross / (1 + r);
     const tax = gross - net;
     return { error: '', data: { net, tax, gross } };
-  }, [mode, amount, taxRate]);
+  }, [mode, amount, taxRate, s]);
 
   return (
     <div className="space-y-6">
@@ -46,7 +78,7 @@ export default function VatTaxCalculatorTool() {
               mode === 'add' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
             }`}
           >
-            Add Tax (Net → Gross)
+            {s.addTab}
           </button>
           <button
             type="button"
@@ -55,12 +87,12 @@ export default function VatTaxCalculatorTool() {
               mode === 'remove' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
             }`}
           >
-            Extract Tax (Gross → Net)
+            {s.removeTab}
           </button>
         </div>
 
         <div className="flex flex-wrap items-center gap-1.5">
-          <span className="text-xs text-slate-500 mr-1">Common rates:</span>
+          <span className="text-xs text-slate-500 mr-1">{s.commonRates}</span>
           {RATE_PRESETS.map((preset) => (
             <button
               key={preset}
@@ -81,7 +113,7 @@ export default function VatTaxCalculatorTool() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label htmlFor="vat-amount" className="block text-sm font-semibold text-slate-900 mb-1.5">
-            {mode === 'add' ? 'Net Amount (Excluding Tax) ($)' : 'Gross Amount (Including Tax) ($)'}
+            {mode === 'add' ? s.netAmountLabel : s.grossAmountLabel}
           </label>
           <input
             id="vat-amount"
@@ -96,7 +128,7 @@ export default function VatTaxCalculatorTool() {
 
         <div>
           <label htmlFor="vat-rate" className="block text-sm font-semibold text-slate-900 mb-1.5">
-            VAT / Sales Tax Rate (%)
+            {s.rateLabel}
           </label>
           <input
             id="vat-rate"
@@ -120,21 +152,23 @@ export default function VatTaxCalculatorTool() {
       {calc.data && (
         <dl className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-            <dt className="text-xs font-medium text-slate-500">Net Price (Excl. Tax)</dt>
+            <dt className="text-xs font-medium text-slate-500">{s.netPrice}</dt>
             <dd className="mt-1 text-2xl font-bold font-mono text-slate-900 tabular-nums">
-              ${money(calc.data.net)}
+              ${money(calc.data.net, locale)}
             </dd>
           </div>
           <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-            <dt className="text-xs font-medium text-slate-500">Tax Amount ({taxRate}%)</dt>
+            <dt className="text-xs font-medium text-slate-500">
+              {s.taxAmount} ({taxRate}%)
+            </dt>
             <dd className="mt-1 text-2xl font-bold font-mono text-indigo-600 tabular-nums">
-              ${money(calc.data.tax)}
+              ${money(calc.data.tax, locale)}
             </dd>
           </div>
           <div className="rounded-xl border border-indigo-200 bg-indigo-50/70 p-4">
-            <dt className="text-xs font-medium text-indigo-700">Gross Price (Incl. Tax)</dt>
+            <dt className="text-xs font-medium text-indigo-700">{s.grossPrice}</dt>
             <dd className="mt-1 text-2xl font-bold font-mono text-slate-900 tabular-nums">
-              ${money(calc.data.gross)}
+              ${money(calc.data.gross, locale)}
             </dd>
           </div>
         </dl>

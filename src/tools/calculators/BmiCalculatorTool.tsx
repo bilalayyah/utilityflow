@@ -1,13 +1,70 @@
 import { useMemo, useState } from 'react';
+import { useLocale } from '../../locales/LocaleContext';
 
-function classifyBmi(bmi: number): { category: string; tone: string } {
-  if (bmi < 18.5) return { category: 'Underweight', tone: 'text-amber-700' };
-  if (bmi < 25) return { category: 'Normal weight', tone: 'text-emerald-700' };
-  if (bmi < 30) return { category: 'Overweight', tone: 'text-amber-700' };
-  return { category: 'Obesity', tone: 'text-red-700' };
+const STRINGS = {
+  en: {
+    underweight: 'Underweight',
+    normalWeight: 'Normal weight',
+    overweight: 'Overweight',
+    obesity: 'Obesity',
+    errorHeightMetric: 'Enter height between 50 cm and 280 cm.',
+    errorWeightMetric: 'Enter weight between 15 kg and 500 kg.',
+    errorHeightImperial: 'Enter a valid height between 2 ft and 9 ft.',
+    errorWeightImperial: 'Enter weight between 30 lbs and 1100 lbs.',
+    metricTab: 'Metric (cm / kg)',
+    imperialTab: 'Imperial (ft, in / lbs)',
+    heightCmLabel: 'Height (cm)',
+    weightKgLabel: 'Weight (kg)',
+    heightFtLabel: 'Height (ft)',
+    heightInLabel: 'Height (in)',
+    weightLbsLabel: 'Weight (lbs)',
+    bmiLabel: 'Body Mass Index (BMI)',
+    whoCategory: 'WHO Category',
+    healthyRange: 'Healthy BMI Weight Range (18.5–24.9)',
+    disclaimer:
+      'BMI is a general screening ratio and does not distinguish muscle mass from body fat.',
+  },
+  es: {
+    underweight: 'Bajo peso',
+    normalWeight: 'Peso normal',
+    overweight: 'Sobrepeso',
+    obesity: 'Obesidad',
+    errorHeightMetric: 'Ingresa una altura entre 50 cm y 280 cm.',
+    errorWeightMetric: 'Ingresa un peso entre 15 kg y 500 kg.',
+    errorHeightImperial: 'Ingresa una altura válida entre 2 ft y 9 ft.',
+    errorWeightImperial: 'Ingresa un peso entre 30 lbs y 1100 lbs.',
+    metricTab: 'Métrico (cm / kg)',
+    imperialTab: 'Imperial (ft, in / lbs)',
+    heightCmLabel: 'Altura (cm)',
+    weightKgLabel: 'Peso (kg)',
+    heightFtLabel: 'Altura (ft)',
+    heightInLabel: 'Altura (in)',
+    weightLbsLabel: 'Peso (lbs)',
+    bmiLabel: 'Índice de masa corporal (IMC)',
+    whoCategory: 'Categoría de la OMS',
+    healthyRange: 'Rango de peso saludable según el IMC (18.5–24.9)',
+    disclaimer:
+      'El IMC es un índice general de detección y no distingue la masa muscular de la grasa corporal.',
+  },
+};
+
+type BmiCategories = {
+  underweight: string;
+  normalWeight: string;
+  overweight: string;
+  obesity: string;
+};
+
+function classifyBmi(bmi: number, cats: BmiCategories): { category: string; tone: string } {
+  if (bmi < 18.5) return { category: cats.underweight, tone: 'text-amber-700' };
+  if (bmi < 25) return { category: cats.normalWeight, tone: 'text-emerald-700' };
+  if (bmi < 30) return { category: cats.overweight, tone: 'text-amber-700' };
+  return { category: cats.obesity, tone: 'text-red-700' };
 }
 
 export default function BmiCalculatorTool() {
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
   const [unitSystem, setUnitSystem] = useState<'metric' | 'imperial'>('metric');
   const [heightCm, setHeightCm] = useState('175');
   const [weightKg, setWeightKg] = useState('70');
@@ -23,10 +80,10 @@ export default function BmiCalculatorTool() {
       const cm = Number(heightCm);
       const w = Number(weightKg);
       if (!Number.isFinite(cm) || cm < 50 || cm > 280) {
-        return { error: 'Enter height between 50 cm and 280 cm.', data: null };
+        return { error: s.errorHeightMetric, data: null };
       }
       if (!Number.isFinite(w) || w < 15 || w > 500) {
-        return { error: 'Enter weight between 15 kg and 500 kg.', data: null };
+        return { error: s.errorWeightMetric, data: null };
       }
       meters = cm / 100;
       kg = w;
@@ -36,10 +93,10 @@ export default function BmiCalculatorTool() {
       const totalInches = ft * 12 + inches;
       const lbs = Number(weightLbs);
       if (!Number.isFinite(totalInches) || totalInches < 20 || totalInches > 110) {
-        return { error: 'Enter a valid height between 2 ft and 9 ft.', data: null };
+        return { error: s.errorHeightImperial, data: null };
       }
       if (!Number.isFinite(lbs) || lbs < 30 || lbs > 1100) {
-        return { error: 'Enter weight between 30 lbs and 1100 lbs.', data: null };
+        return { error: s.errorWeightImperial, data: null };
       }
       meters = totalInches * 0.0254;
       kg = lbs * 0.45359237;
@@ -48,7 +105,7 @@ export default function BmiCalculatorTool() {
     const bmi = kg / (meters * meters);
     const minHealthyKg = 18.5 * meters * meters;
     const maxHealthyKg = 24.9 * meters * meters;
-    const band = classifyBmi(bmi);
+    const band = classifyBmi(bmi, s);
 
     return {
       error: '',
@@ -61,7 +118,7 @@ export default function BmiCalculatorTool() {
         maxHealthyLbs: maxHealthyKg / 0.45359237,
       },
     };
-  }, [unitSystem, heightCm, weightKg, heightFt, heightIn, weightLbs]);
+  }, [unitSystem, heightCm, weightKg, heightFt, heightIn, weightLbs, s]);
 
   return (
     <div className="space-y-6">
@@ -73,7 +130,7 @@ export default function BmiCalculatorTool() {
             unitSystem === 'metric' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
           }`}
         >
-          Metric (cm / kg)
+          {s.metricTab}
         </button>
         <button
           type="button"
@@ -82,7 +139,7 @@ export default function BmiCalculatorTool() {
             unitSystem === 'imperial' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
           }`}
         >
-          Imperial (ft, in / lbs)
+          {s.imperialTab}
         </button>
       </div>
 
@@ -90,7 +147,7 @@ export default function BmiCalculatorTool() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label htmlFor="bmi-cm" className="block text-sm font-semibold text-slate-900 mb-1.5">
-              Height (cm)
+              {s.heightCmLabel}
             </label>
             <input
               id="bmi-cm"
@@ -104,7 +161,7 @@ export default function BmiCalculatorTool() {
           </div>
           <div>
             <label htmlFor="bmi-kg" className="block text-sm font-semibold text-slate-900 mb-1.5">
-              Weight (kg)
+              {s.weightKgLabel}
             </label>
             <input
               id="bmi-kg"
@@ -122,7 +179,7 @@ export default function BmiCalculatorTool() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div>
             <label htmlFor="bmi-ft" className="block text-sm font-semibold text-slate-900 mb-1.5">
-              Height (ft)
+              {s.heightFtLabel}
             </label>
             <input
               id="bmi-ft"
@@ -136,7 +193,7 @@ export default function BmiCalculatorTool() {
           </div>
           <div>
             <label htmlFor="bmi-in" className="block text-sm font-semibold text-slate-900 mb-1.5">
-              Height (in)
+              {s.heightInLabel}
             </label>
             <input
               id="bmi-in"
@@ -150,7 +207,7 @@ export default function BmiCalculatorTool() {
           </div>
           <div>
             <label htmlFor="bmi-lbs" className="block text-sm font-semibold text-slate-900 mb-1.5">
-              Weight (lbs)
+              {s.weightLbsLabel}
             </label>
             <input
               id="bmi-lbs"
@@ -175,27 +232,23 @@ export default function BmiCalculatorTool() {
         <div className="space-y-4">
           <dl className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="rounded-xl border border-indigo-200 bg-indigo-50/70 p-5">
-              <dt className="text-xs font-medium text-indigo-700">Body Mass Index (BMI)</dt>
+              <dt className="text-xs font-medium text-indigo-700">{s.bmiLabel}</dt>
               <dd className="mt-1 text-3xl font-bold font-mono text-slate-900 tabular-nums">
                 {result.data.bmi.toFixed(1)} <span className="text-sm font-normal">kg/m²</span>
               </dd>
               <dd className={`mt-1 text-sm font-semibold ${result.data.band.tone}`}>
-                WHO Category: {result.data.band.category}
+                {s.whoCategory}: {result.data.band.category}
               </dd>
             </div>
 
             <div className="rounded-xl border border-slate-200 bg-slate-50 p-5">
-              <dt className="text-xs font-medium text-slate-500">
-                Healthy BMI Weight Range (18.5–24.9)
-              </dt>
+              <dt className="text-xs font-medium text-slate-500">{s.healthyRange}</dt>
               <dd className="mt-1 text-xl font-bold font-mono text-slate-900 tabular-nums">
                 {unitSystem === 'metric'
                   ? `${result.data.minHealthyKg.toFixed(1)} – ${result.data.maxHealthyKg.toFixed(1)} kg`
                   : `${result.data.minHealthyLbs.toFixed(0)} – ${result.data.maxHealthyLbs.toFixed(0)} lbs`}
               </dd>
-              <dd className="mt-1 text-xs text-slate-500">
-                BMI is a general screening ratio and does not distinguish muscle mass from body fat.
-              </dd>
+              <dd className="mt-1 text-xs text-slate-500">{s.disclaimer}</dd>
             </div>
           </dl>
         </div>

@@ -1,5 +1,79 @@
 import { ArrowLeftRight } from 'lucide-react';
 import { useMemo, useState } from 'react';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    errorInvalidDates: 'Please select valid start and end calendar dates.',
+    errorInvalidBase: 'Please enter a valid starting calendar date.',
+    errorNonNegative: 'Enter non-negative whole numbers for years, months, and days.',
+    differenceTab: 'Difference Between Dates',
+    addSubtractTab: 'Add / Subtract Time',
+    startLabel: 'Start Date',
+    endLabel: 'End Date',
+    swapTitle: 'Swap dates',
+    swapAria: 'Swap start and end dates',
+    includeEnd: 'Include end date in count (+1 calendar day)',
+    calendarDuration: 'Calendar Duration',
+    reversedRange: '(Reversed range)',
+    totalSpan: 'Total span:',
+    calendarDays: 'calendar days',
+    weeksDays: 'Weeks & Days',
+    weekdays: 'Weekdays (Mon–Fri)',
+    weekendDays: 'Weekend Days (Sat–Sun)',
+    totalHours: 'Total Hours',
+    yearsWord: 'years',
+    monthsWord: 'months',
+    daysWord: 'days',
+    weeksAbbr: 'wk',
+    daysAbbr: 'd',
+    hoursAbbr: 'hr',
+    referenceLabel: 'Reference Date',
+    operationLabel: 'Operation',
+    addOption: 'Add (+)',
+    subtractOption: 'Subtract (-)',
+    yearsLabel: 'Years',
+    monthsLabel: 'Months',
+    daysLabel: 'Days',
+    resultingDate: 'Resulting Calendar Date',
+    isoPrefix: 'ISO 8601:',
+  },
+  es: {
+    errorInvalidDates: 'Selecciona fechas válidas de inicio y fin en el calendario.',
+    errorInvalidBase: 'Ingresa una fecha inicial válida del calendario.',
+    errorNonNegative: 'Ingresa números enteros no negativos para años, meses y días.',
+    differenceTab: 'Diferencia entre fechas',
+    addSubtractTab: 'Sumar / restar tiempo',
+    startLabel: 'Fecha de inicio',
+    endLabel: 'Fecha de fin',
+    swapTitle: 'Intercambiar fechas',
+    swapAria: 'Intercambiar fecha de inicio y fecha de fin',
+    includeEnd: 'Incluir la fecha de fin en el conteo (+1 día calendario)',
+    calendarDuration: 'Duración en el calendario',
+    reversedRange: '(Rango invertido)',
+    totalSpan: 'Duración total:',
+    calendarDays: 'días calendario',
+    weeksDays: 'Semanas y días',
+    weekdays: 'Días laborables (lun–vie)',
+    weekendDays: 'Días de fin de semana (sáb–dom)',
+    totalHours: 'Horas totales',
+    yearsWord: 'años',
+    monthsWord: 'meses',
+    daysWord: 'días',
+    weeksAbbr: 'sem',
+    daysAbbr: 'd',
+    hoursAbbr: 'h',
+    referenceLabel: 'Fecha de referencia',
+    operationLabel: 'Operación',
+    addOption: 'Sumar (+)',
+    subtractOption: 'Restar (-)',
+    yearsLabel: 'Años',
+    monthsLabel: 'Meses',
+    daysLabel: 'Días',
+    resultingDate: 'Fecha resultante del calendario',
+    isoPrefix: 'ISO 8601:',
+  },
+};
 
 type Mode = 'difference' | 'add-subtract';
 
@@ -43,8 +117,8 @@ function countWeekdaysBetween(startUtc: Date, endUtc: Date, inclusive: boolean):
   return { weekdays, weekends };
 }
 
-function formatReadableUtc(date: Date): string {
-  return date.toLocaleDateString('en-US', {
+function formatReadableUtc(date: Date, locale: string): string {
+  return date.toLocaleDateString(locale === 'es' ? 'es' : 'en-US', {
     weekday: 'long',
     year: 'numeric',
     month: 'long',
@@ -54,6 +128,8 @@ function formatReadableUtc(date: Date): string {
 }
 
 export default function DateDifferenceCalculatorTool() {
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
   const [mode, setMode] = useState<Mode>('difference');
   const [startDate, setStartDate] = useState('2025-01-15');
   const [endDate, setEndDate] = useState('2025-11-12');
@@ -67,15 +143,15 @@ export default function DateDifferenceCalculatorTool() {
   const [deltaDays, setDeltaDays] = useState('14');
 
   const diffResult = useMemo(() => {
-    const s = parseIsoDate(startDate);
+    const sDate = parseIsoDate(startDate);
     const e = parseIsoDate(endDate);
-    if (!s || !e) {
-      return { error: 'Please select valid start and end calendar dates.', data: null };
+    if (!sDate || !e) {
+      return { error: s.errorInvalidDates, data: null };
     }
 
-    const inverted = s > e;
-    const from = inverted ? e : s;
-    const toBase = inverted ? s : e;
+    const inverted = sDate > e;
+    const from = inverted ? e : sDate;
+    const toBase = inverted ? sDate : e;
     const toForCalendar = inclusiveEnd
       ? new Date(toBase.getTime() + 86400000)
       : toBase;
@@ -120,12 +196,12 @@ export default function DateDifferenceCalculatorTool() {
         totalHours: totalDays * 24,
       },
     };
-  }, [startDate, endDate, inclusiveEnd]);
+  }, [startDate, endDate, inclusiveEnd, s]);
 
   const offsetResult = useMemo(() => {
     const base = parseIsoDate(baseDate);
     if (!base) {
-      return { error: 'Please enter a valid starting calendar date.', data: null };
+      return { error: s.errorInvalidBase, data: null };
     }
 
     const y = Number(deltaYears) || 0;
@@ -133,7 +209,7 @@ export default function DateDifferenceCalculatorTool() {
     const d = Number(deltaDays) || 0;
 
     if (!Number.isInteger(y) || !Number.isInteger(m) || !Number.isInteger(d) || y < 0 || m < 0 || d < 0) {
-      return { error: 'Enter non-negative whole numbers for years, months, and days.', data: null };
+      return { error: s.errorNonNegative, data: null };
     }
 
     const sign = operation === 'add' ? 1 : -1;
@@ -156,10 +232,10 @@ export default function DateDifferenceCalculatorTool() {
       error: '',
       data: {
         iso,
-        readable: formatReadableUtc(finalDate),
+        readable: formatReadableUtc(finalDate, locale),
       },
     };
-  }, [baseDate, operation, deltaYears, deltaMonths, deltaDays]);
+  }, [baseDate, operation, deltaYears, deltaMonths, deltaDays, s, locale]);
 
   return (
     <div className="space-y-6">
@@ -171,7 +247,7 @@ export default function DateDifferenceCalculatorTool() {
             mode === 'difference' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
           }`}
         >
-          Difference Between Dates
+          {s.differenceTab}
         </button>
         <button
           type="button"
@@ -180,7 +256,7 @@ export default function DateDifferenceCalculatorTool() {
             mode === 'add-subtract' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
           }`}
         >
-          Add / Subtract Time
+          {s.addSubtractTab}
         </button>
       </div>
 
@@ -189,7 +265,7 @@ export default function DateDifferenceCalculatorTool() {
           <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto_1fr] gap-3 items-end">
             <div>
               <label htmlFor="dd-start" className="block text-sm font-semibold text-slate-900 mb-1.5">
-                Start Date
+                {s.startLabel}
               </label>
               <input
                 id="dd-start"
@@ -206,8 +282,8 @@ export default function DateDifferenceCalculatorTool() {
                 setStartDate(endDate);
                 setEndDate(startDate);
               }}
-              title="Swap dates"
-              aria-label="Swap start and end dates"
+              title={s.swapTitle}
+              aria-label={s.swapAria}
               className="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-slate-700 hover:bg-slate-50 cursor-pointer"
             >
               <ArrowLeftRight className="w-4 h-4" />
@@ -215,7 +291,7 @@ export default function DateDifferenceCalculatorTool() {
 
             <div>
               <label htmlFor="dd-end" className="block text-sm font-semibold text-slate-900 mb-1.5">
-                End Date
+                {s.endLabel}
               </label>
               <input
                 id="dd-end"
@@ -234,7 +310,7 @@ export default function DateDifferenceCalculatorTool() {
               onChange={(e) => setInclusiveEnd(e.target.checked)}
               className="h-4 w-4 rounded border-slate-300 text-indigo-600"
             />
-            Include end date in count (+1 calendar day)
+            {s.includeEnd}
           </label>
 
           {diffResult.error && (
@@ -247,39 +323,45 @@ export default function DateDifferenceCalculatorTool() {
             <>
               <div className="rounded-xl border border-indigo-200 bg-indigo-50/70 p-5">
                 <div className="text-xs font-semibold text-indigo-700 mb-1">
-                  Calendar Duration {diffResult.data.inverted ? '(Reversed range)' : ''}
+                  {s.calendarDuration} {diffResult.data.inverted ? s.reversedRange : ''}
                 </div>
                 <div className="text-2xl sm:text-3xl font-bold text-slate-900 tabular-nums">
-                  {diffResult.data.years} years, {diffResult.data.months} months, {diffResult.data.days} days
+                  {diffResult.data.years} {s.yearsWord}, {diffResult.data.months} {s.monthsWord},{' '}
+                  {diffResult.data.days} {s.daysWord}
                 </div>
                 <p className="mt-1 text-sm text-slate-600 tabular-nums">
-                  Total span: <strong className="text-slate-900">{diffResult.data.totalDays.toLocaleString()} calendar days</strong>
+                  {s.totalSpan}{' '}
+                  <strong className="text-slate-900">
+                    {diffResult.data.totalDays.toLocaleString(locale)} {s.calendarDays}
+                  </strong>
                 </p>
               </div>
 
               <dl className="grid grid-cols-2 lg:grid-cols-4 gap-3">
                 <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
-                  <dt className="text-xs text-slate-500">Weeks & Days</dt>
+                  <dt className="text-xs text-slate-500">{s.weeksDays}</dt>
                   <dd className="mt-1 text-lg font-bold font-mono text-slate-900 tabular-nums">
-                    {diffResult.data.weeks.toLocaleString()} wk {diffResult.data.remainderDays}d
+                    {diffResult.data.weeks.toLocaleString(locale)} {s.weeksAbbr}{' '}
+                    {diffResult.data.remainderDays}
+                    {s.daysAbbr}
                   </dd>
                 </div>
                 <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
-                  <dt className="text-xs text-slate-500">Weekdays (Mon–Fri)</dt>
+                  <dt className="text-xs text-slate-500">{s.weekdays}</dt>
                   <dd className="mt-1 text-lg font-bold font-mono text-slate-900 tabular-nums">
-                    {diffResult.data.weekdays.toLocaleString()} days
+                    {diffResult.data.weekdays.toLocaleString(locale)} {s.daysWord}
                   </dd>
                 </div>
                 <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
-                  <dt className="text-xs text-slate-500">Weekend Days (Sat–Sun)</dt>
+                  <dt className="text-xs text-slate-500">{s.weekendDays}</dt>
                   <dd className="mt-1 text-lg font-bold font-mono text-slate-900 tabular-nums">
-                    {diffResult.data.weekends.toLocaleString()} days
+                    {diffResult.data.weekends.toLocaleString(locale)} {s.daysWord}
                   </dd>
                 </div>
                 <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
-                  <dt className="text-xs text-slate-500">Total Hours</dt>
+                  <dt className="text-xs text-slate-500">{s.totalHours}</dt>
                   <dd className="mt-1 text-lg font-bold font-mono text-slate-900 tabular-nums">
-                    {diffResult.data.totalHours.toLocaleString()} hr
+                    {diffResult.data.totalHours.toLocaleString(locale)} {s.hoursAbbr}
                   </dd>
                 </div>
               </dl>
@@ -291,7 +373,7 @@ export default function DateDifferenceCalculatorTool() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
             <div className="lg:col-span-2">
               <label htmlFor="dd-base" className="block text-sm font-semibold text-slate-900 mb-1.5">
-                Reference Date
+                {s.referenceLabel}
               </label>
               <input
                 id="dd-base"
@@ -304,7 +386,7 @@ export default function DateDifferenceCalculatorTool() {
 
             <div>
               <label htmlFor="dd-op" className="block text-sm font-semibold text-slate-900 mb-1.5">
-                Operation
+                {s.operationLabel}
               </label>
               <select
                 id="dd-op"
@@ -312,15 +394,15 @@ export default function DateDifferenceCalculatorTool() {
                 onChange={(e) => setOperation(e.target.value as 'add' | 'subtract')}
                 className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm"
               >
-                <option value="add">Add (+)</option>
-                <option value="subtract">Subtract (-)</option>
+                <option value="add">{s.addOption}</option>
+                <option value="subtract">{s.subtractOption}</option>
               </select>
             </div>
 
             <div className="grid grid-cols-3 gap-2 lg:col-span-2">
               <div>
                 <label htmlFor="dd-y" className="block text-sm font-semibold text-slate-900 mb-1.5">
-                  Years
+                  {s.yearsLabel}
                 </label>
                 <input
                   id="dd-y"
@@ -333,7 +415,7 @@ export default function DateDifferenceCalculatorTool() {
               </div>
               <div>
                 <label htmlFor="dd-m" className="block text-sm font-semibold text-slate-900 mb-1.5">
-                  Months
+                  {s.monthsLabel}
                 </label>
                 <input
                   id="dd-m"
@@ -346,7 +428,7 @@ export default function DateDifferenceCalculatorTool() {
               </div>
               <div>
                 <label htmlFor="dd-d" className="block text-sm font-semibold text-slate-900 mb-1.5">
-                  Days
+                  {s.daysLabel}
                 </label>
                 <input
                   id="dd-d"
@@ -368,9 +450,11 @@ export default function DateDifferenceCalculatorTool() {
 
           {offsetResult.data && (
             <div className="rounded-xl border border-indigo-200 bg-indigo-50/70 p-5">
-              <div className="text-xs font-semibold text-indigo-700 mb-1">Resulting Calendar Date</div>
+              <div className="text-xs font-semibold text-indigo-700 mb-1">{s.resultingDate}</div>
               <div className="text-2xl font-bold text-slate-900">{offsetResult.data.readable}</div>
-              <div className="mt-1 text-sm font-mono text-slate-600">ISO 8601: {offsetResult.data.iso}</div>
+              <div className="mt-1 text-sm font-mono text-slate-600">
+                {s.isoPrefix} {offsetResult.data.iso}
+              </div>
             </div>
           )}
         </>

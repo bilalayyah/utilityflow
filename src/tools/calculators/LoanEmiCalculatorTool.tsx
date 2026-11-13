@@ -1,4 +1,62 @@
 import { useMemo, useState } from 'react';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    errorPrincipal: 'Enter a loan principal greater than 0.',
+    errorRate: 'Enter an annual interest rate between 0% and 100%.',
+    errorDuration: 'Loan duration must be between 1 and 600 months.',
+    principalLabel: 'Loan Principal ($)',
+    rateLabel: 'Annual Interest Rate (% APR)',
+    termLabel: 'Loan Term',
+    termUnitAria: 'Loan term unit',
+    yearsOption: 'Years',
+    monthsOption: 'Months',
+    monthlyPayment: 'Monthly Payment (EMI)',
+    forPrefix: 'for',
+    monthlyPayments: 'monthly payments',
+    totalInterest: 'Total Interest',
+    ofTotalCost: 'of total cost',
+    totalRepayment: 'Total Repayment',
+    principalWord: 'principal',
+    principalLabelShort: 'Principal',
+    interestLabelShort: 'Interest',
+    showSchedule: 'Show Amortization Schedule',
+    hideSchedule: 'Hide Amortization Schedule',
+    monthHeader: 'Month',
+    paymentHeader: 'Payment',
+    principalHeader: 'Principal',
+    interestHeader: 'Interest',
+    balanceHeader: 'Balance',
+  },
+  es: {
+    errorPrincipal: 'Ingresa un capital del préstamo mayor que 0.',
+    errorRate: 'Ingresa una tasa de interés anual entre 0% y 100%.',
+    errorDuration: 'La duración del préstamo debe ser de entre 1 y 600 meses.',
+    principalLabel: 'Capital del préstamo ($)',
+    rateLabel: 'Tasa de interés anual (% TAE)',
+    termLabel: 'Plazo del préstamo',
+    termUnitAria: 'Unidad del plazo del préstamo',
+    yearsOption: 'Años',
+    monthsOption: 'Meses',
+    monthlyPayment: 'Pago mensual (EMI)',
+    forPrefix: 'durante',
+    monthlyPayments: 'pagos mensuales',
+    totalInterest: 'Intereses totales',
+    ofTotalCost: 'del costo total',
+    totalRepayment: 'Reembolso total',
+    principalWord: 'de capital',
+    principalLabelShort: 'Capital',
+    interestLabelShort: 'Intereses',
+    showSchedule: 'Mostrar tabla de amortización',
+    hideSchedule: 'Ocultar tabla de amortización',
+    monthHeader: 'Mes',
+    paymentHeader: 'Pago',
+    principalHeader: 'Capital',
+    interestHeader: 'Intereses',
+    balanceHeader: 'Saldo',
+  },
+};
 
 interface ScheduleRow {
   month: number;
@@ -8,11 +66,13 @@ interface ScheduleRow {
   balance: number;
 }
 
-function formatMoney(n: number): string {
-  return n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+function formatMoney(n: number, locale: string): string {
+  return n.toLocaleString(locale, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
 export default function LoanEmiCalculatorTool() {
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
   const [principal, setPrincipal] = useState('25000');
   const [annualRate, setAnnualRate] = useState('6.5');
   const [termValue, setTermValue] = useState('5');
@@ -25,14 +85,14 @@ export default function LoanEmiCalculatorTool() {
     const term = Number(termValue);
 
     if (!Number.isFinite(p) || p <= 0) {
-      return { error: 'Enter a loan principal greater than 0.', data: null };
+      return { error: s.errorPrincipal, data: null };
     }
     if (!Number.isFinite(apr) || apr < 0 || apr > 100) {
-      return { error: 'Enter an annual interest rate between 0% and 100%.', data: null };
+      return { error: s.errorRate, data: null };
     }
     const months = Math.round(termUnit === 'years' ? term * 12 : term);
     if (!Number.isFinite(months) || months < 1 || months > 600) {
-      return { error: 'Loan duration must be between 1 and 600 months.', data: null };
+      return { error: s.errorDuration, data: null };
     }
 
     const monthlyRate = apr / 100 / 12;
@@ -75,14 +135,14 @@ export default function LoanEmiCalculatorTool() {
         schedule,
       },
     };
-  }, [principal, annualRate, termValue, termUnit]);
+  }, [principal, annualRate, termValue, termUnit, s]);
 
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div>
           <label htmlFor="loan-principal" className="block text-sm font-semibold text-slate-900 mb-1.5">
-            Loan Principal ($)
+            {s.principalLabel}
           </label>
           <input
             id="loan-principal"
@@ -97,7 +157,7 @@ export default function LoanEmiCalculatorTool() {
 
         <div>
           <label htmlFor="loan-rate" className="block text-sm font-semibold text-slate-900 mb-1.5">
-            Annual Interest Rate (% APR)
+            {s.rateLabel}
           </label>
           <input
             id="loan-rate"
@@ -113,7 +173,7 @@ export default function LoanEmiCalculatorTool() {
 
         <div>
           <label htmlFor="loan-term" className="block text-sm font-semibold text-slate-900 mb-1.5">
-            Loan Term
+            {s.termLabel}
           </label>
           <div className="flex gap-2">
             <input
@@ -125,13 +185,13 @@ export default function LoanEmiCalculatorTool() {
               className="w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 font-mono text-sm tabular-nums text-slate-900 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/20"
             />
             <select
-              aria-label="Loan term unit"
+              aria-label={s.termUnitAria}
               value={termUnit}
               onChange={(e) => setTermUnit(e.target.value as 'years' | 'months')}
               className="rounded-lg border border-slate-300 bg-white px-2.5 py-2 text-sm text-slate-900"
             >
-              <option value="years">Years</option>
-              <option value="months">Months</option>
+              <option value="years">{s.yearsOption}</option>
+              <option value="months">{s.monthsOption}</option>
             </select>
           </div>
         </div>
@@ -147,32 +207,32 @@ export default function LoanEmiCalculatorTool() {
         <>
           <dl className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="rounded-xl border border-indigo-200 bg-indigo-50/70 p-4">
-              <dt className="text-xs font-medium text-indigo-700">Monthly Payment (EMI)</dt>
+              <dt className="text-xs font-medium text-indigo-700">{s.monthlyPayment}</dt>
               <dd className="mt-1 text-2xl font-bold font-mono text-slate-900 tabular-nums">
-                ${formatMoney(calculation.data.emi)}
+                ${formatMoney(calculation.data.emi, locale)}
               </dd>
               <dd className="mt-1 text-xs text-slate-600 tabular-nums">
-                for {calculation.data.months} monthly payments
+                {s.forPrefix} {calculation.data.months} {s.monthlyPayments}
               </dd>
             </div>
 
             <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-              <dt className="text-xs font-medium text-slate-500">Total Interest</dt>
+              <dt className="text-xs font-medium text-slate-500">{s.totalInterest}</dt>
               <dd className="mt-1 text-2xl font-bold font-mono text-slate-900 tabular-nums">
-                ${formatMoney(calculation.data.totalInterest)}
+                ${formatMoney(calculation.data.totalInterest, locale)}
               </dd>
               <dd className="mt-1 text-xs text-slate-600 tabular-nums">
-                {(100 - calculation.data.principalShare).toFixed(1)}% of total cost
+                {(100 - calculation.data.principalShare).toFixed(1)}% {s.ofTotalCost}
               </dd>
             </div>
 
             <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-              <dt className="text-xs font-medium text-slate-500">Total Repayment</dt>
+              <dt className="text-xs font-medium text-slate-500">{s.totalRepayment}</dt>
               <dd className="mt-1 text-2xl font-bold font-mono text-slate-900 tabular-nums">
-                ${formatMoney(calculation.data.totalPayment)}
+                ${formatMoney(calculation.data.totalPayment, locale)}
               </dd>
               <dd className="mt-1 text-xs text-slate-600 tabular-nums">
-                {calculation.data.principalShare.toFixed(1)}% principal
+                {calculation.data.principalShare.toFixed(1)}% {s.principalWord}
               </dd>
             </div>
           </dl>
@@ -186,8 +246,12 @@ export default function LoanEmiCalculatorTool() {
               />
             </div>
             <div className="mt-1.5 flex justify-between text-xs text-slate-500 tabular-nums">
-              <span>Principal ({calculation.data.principalShare.toFixed(1)}%)</span>
-              <span>Interest ({(100 - calculation.data.principalShare).toFixed(1)}%)</span>
+              <span>
+                {s.principalLabelShort} ({calculation.data.principalShare.toFixed(1)}%)
+              </span>
+              <span>
+                {s.interestLabelShort} ({(100 - calculation.data.principalShare).toFixed(1)}%)
+              </span>
             </div>
           </div>
 
@@ -197,7 +261,7 @@ export default function LoanEmiCalculatorTool() {
               onClick={() => setShowSchedule((prev) => !prev)}
               className="rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-800 hover:bg-slate-50 cursor-pointer"
             >
-              {showSchedule ? 'Hide Amortization Schedule' : 'Show Amortization Schedule'}
+              {showSchedule ? s.hideSchedule : s.showSchedule}
             </button>
 
             {showSchedule && (
@@ -205,26 +269,26 @@ export default function LoanEmiCalculatorTool() {
                 <table className="w-full text-left text-xs sm:text-sm font-mono tabular-nums">
                   <thead className="bg-slate-50 border-b border-slate-200 font-sans text-slate-600 sticky top-0">
                     <tr>
-                      <th className="py-2.5 px-3 font-semibold">Month</th>
-                      <th className="py-2.5 px-3 font-semibold text-right">Payment</th>
-                      <th className="py-2.5 px-3 font-semibold text-right">Principal</th>
-                      <th className="py-2.5 px-3 font-semibold text-right">Interest</th>
-                      <th className="py-2.5 px-3 font-semibold text-right">Balance</th>
+                      <th className="py-2.5 px-3 font-semibold">{s.monthHeader}</th>
+                      <th className="py-2.5 px-3 font-semibold text-right">{s.paymentHeader}</th>
+                      <th className="py-2.5 px-3 font-semibold text-right">{s.principalHeader}</th>
+                      <th className="py-2.5 px-3 font-semibold text-right">{s.interestHeader}</th>
+                      <th className="py-2.5 px-3 font-semibold text-right">{s.balanceHeader}</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-100 bg-white">
                     {calculation.data.schedule.map((row) => (
                       <tr key={row.month}>
                         <td className="py-2 px-3 text-slate-500">{row.month}</td>
-                        <td className="py-2 px-3 text-right">${formatMoney(row.payment)}</td>
+                        <td className="py-2 px-3 text-right">${formatMoney(row.payment, locale)}</td>
                         <td className="py-2 px-3 text-right text-slate-900">
-                          ${formatMoney(row.principal)}
+                          ${formatMoney(row.principal, locale)}
                         </td>
                         <td className="py-2 px-3 text-right text-amber-700">
-                          ${formatMoney(row.interest)}
+                          ${formatMoney(row.interest, locale)}
                         </td>
                         <td className="py-2 px-3 text-right text-slate-600">
-                          ${formatMoney(row.balance)}
+                          ${formatMoney(row.balance, locale)}
                         </td>
                       </tr>
                     ))}

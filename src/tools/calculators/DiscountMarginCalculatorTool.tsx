@@ -1,10 +1,62 @@
 import { useMemo, useState } from 'react';
+import { useLocale } from '../../locales/LocaleContext';
 
-function money(n: number): string {
-  return n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const STRINGS = {
+  en: {
+    errorPrice: 'Original price cannot be negative.',
+    errorDiscount: 'Discount must be between 0% and 100%.',
+    errorTax: 'Sales tax must be between 0% and 100%.',
+    errorCost: 'Cost cannot be negative.',
+    errorSelling: 'Selling price must be greater than 0.',
+    discountTab: 'Sale Discount',
+    marginTab: 'Profit Margin & Markup',
+    originalPriceLabel: 'Original Price ($)',
+    discountLabel: 'Discount (%)',
+    salesTaxLabel: 'Sales Tax (%)',
+    costLabel: 'Unit Cost ($)',
+    sellingLabel: 'Selling Price ($)',
+    finalPrice: 'Final Price',
+    beforeTax: 'Before tax:',
+    youSave: 'You Save',
+    taxAdded: 'Tax Added',
+    grossProfit: 'Gross Profit',
+    profitMargin: 'Profit Margin',
+    profitDivSelling: '(Profit ÷ Selling Price)',
+    markup: 'Markup',
+    profitDivCost: '(Profit ÷ Cost)',
+  },
+  es: {
+    errorPrice: 'El precio original no puede ser negativo.',
+    errorDiscount: 'El descuento debe estar entre 0% y 100%.',
+    errorTax: 'El impuesto sobre las ventas debe estar entre 0% y 100%.',
+    errorCost: 'El costo no puede ser negativo.',
+    errorSelling: 'El precio de venta debe ser mayor que 0.',
+    discountTab: 'Descuento de venta',
+    marginTab: 'Margen de ganancia y recargo',
+    originalPriceLabel: 'Precio original ($)',
+    discountLabel: 'Descuento (%)',
+    salesTaxLabel: 'Impuesto sobre las ventas (%)',
+    costLabel: 'Costo unitario ($)',
+    sellingLabel: 'Precio de venta ($)',
+    finalPrice: 'Precio final',
+    beforeTax: 'Antes de impuestos:',
+    youSave: 'Ahorras',
+    taxAdded: 'Impuesto agregado',
+    grossProfit: 'Ganancia bruta',
+    profitMargin: 'Margen de ganancia',
+    profitDivSelling: '(Ganancia ÷ Precio de venta)',
+    markup: 'Recargo',
+    profitDivCost: '(Ganancia ÷ Costo)',
+  },
+};
+
+function money(n: number, locale: string): string {
+  return n.toLocaleString(locale, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
 export default function DiscountMarginCalculatorTool() {
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
   const [mode, setMode] = useState<'discount' | 'margin'>('discount');
 
   // Sale discount state
@@ -21,9 +73,9 @@ export default function DiscountMarginCalculatorTool() {
     const disc = Number(discountPct);
     const tax = Number(taxPct) || 0;
 
-    if (!Number.isFinite(price) || price < 0) return { error: 'Original price cannot be negative.', data: null };
-    if (!Number.isFinite(disc) || disc < 0 || disc > 100) return { error: 'Discount must be between 0% and 100%.', data: null };
-    if (!Number.isFinite(tax) || tax < 0 || tax > 100) return { error: 'Sales tax must be between 0% and 100%.', data: null };
+    if (!Number.isFinite(price) || price < 0) return { error: s.errorPrice, data: null };
+    if (!Number.isFinite(disc) || disc < 0 || disc > 100) return { error: s.errorDiscount, data: null };
+    if (!Number.isFinite(tax) || tax < 0 || tax > 100) return { error: s.errorTax, data: null };
 
     const savings = price * (disc / 100);
     const salePrice = price - savings;
@@ -31,21 +83,21 @@ export default function DiscountMarginCalculatorTool() {
     const finalTotal = salePrice + taxAmount;
 
     return { error: '', data: { savings, salePrice, taxAmount, finalTotal } };
-  }, [originalPrice, discountPct, taxPct]);
+  }, [originalPrice, discountPct, taxPct, s]);
 
   const marginResult = useMemo(() => {
     const cost = Number(costPrice);
     const sell = Number(sellingPrice);
 
-    if (!Number.isFinite(cost) || cost < 0) return { error: 'Cost cannot be negative.', data: null };
-    if (!Number.isFinite(sell) || sell <= 0) return { error: 'Selling price must be greater than 0.', data: null };
+    if (!Number.isFinite(cost) || cost < 0) return { error: s.errorCost, data: null };
+    if (!Number.isFinite(sell) || sell <= 0) return { error: s.errorSelling, data: null };
 
     const grossProfit = sell - cost;
     const marginPct = (grossProfit / sell) * 100;
     const markupPct = cost > 0 ? (grossProfit / cost) * 100 : 0;
 
     return { error: '', data: { grossProfit, marginPct, markupPct } };
-  }, [costPrice, sellingPrice]);
+  }, [costPrice, sellingPrice, s]);
 
   return (
     <div className="space-y-5">
@@ -57,7 +109,7 @@ export default function DiscountMarginCalculatorTool() {
             mode === 'discount' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
           }`}
         >
-          Sale Discount
+          {s.discountTab}
         </button>
         <button
           type="button"
@@ -66,7 +118,7 @@ export default function DiscountMarginCalculatorTool() {
             mode === 'margin' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
           }`}
         >
-          Profit Margin &amp; Markup
+          {s.marginTab}
         </button>
       </div>
 
@@ -75,7 +127,7 @@ export default function DiscountMarginCalculatorTool() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
               <label htmlFor="disc-orig" className="block text-xs font-semibold text-slate-700 mb-1">
-                Original Price ($)
+                {s.originalPriceLabel}
               </label>
               <input
                 id="disc-orig"
@@ -89,7 +141,7 @@ export default function DiscountMarginCalculatorTool() {
             </div>
             <div>
               <label htmlFor="disc-pct" className="block text-xs font-semibold text-slate-700 mb-1">
-                Discount (%)
+                {s.discountLabel}
               </label>
               <input
                 id="disc-pct"
@@ -104,7 +156,7 @@ export default function DiscountMarginCalculatorTool() {
             </div>
             <div>
               <label htmlFor="disc-tax" className="block text-xs font-semibold text-slate-700 mb-1">
-                Sales Tax (%)
+                {s.salesTaxLabel}
               </label>
               <input
                 id="disc-tax"
@@ -128,24 +180,24 @@ export default function DiscountMarginCalculatorTool() {
           {discountResult.data && (
             <dl className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="rounded-xl border border-indigo-200 bg-indigo-50/70 p-4">
-                <dt className="text-xs font-medium text-indigo-700">Final Price</dt>
+                <dt className="text-xs font-medium text-indigo-700">{s.finalPrice}</dt>
                 <dd className="mt-1 text-2xl font-bold font-mono text-slate-900 tabular-nums">
-                  ${money(discountResult.data.finalTotal)}
+                  ${money(discountResult.data.finalTotal, locale)}
                 </dd>
                 <dd className="mt-0.5 text-xs text-slate-600 tabular-nums">
-                  Before tax: ${money(discountResult.data.salePrice)}
+                  {s.beforeTax} ${money(discountResult.data.salePrice, locale)}
                 </dd>
               </div>
               <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-                <dt className="text-xs font-medium text-slate-500">You Save</dt>
+                <dt className="text-xs font-medium text-slate-500">{s.youSave}</dt>
                 <dd className="mt-1 text-2xl font-bold font-mono text-emerald-700 tabular-nums">
-                  ${money(discountResult.data.savings)}
+                  ${money(discountResult.data.savings, locale)}
                 </dd>
               </div>
               <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-                <dt className="text-xs font-medium text-slate-500">Tax Added</dt>
+                <dt className="text-xs font-medium text-slate-500">{s.taxAdded}</dt>
                 <dd className="mt-1 text-2xl font-bold font-mono text-slate-900 tabular-nums">
-                  ${money(discountResult.data.taxAmount)}
+                  ${money(discountResult.data.taxAmount, locale)}
                 </dd>
               </div>
             </dl>
@@ -156,7 +208,7 @@ export default function DiscountMarginCalculatorTool() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label htmlFor="m-cost" className="block text-xs font-semibold text-slate-700 mb-1">
-                Unit Cost ($)
+                {s.costLabel}
               </label>
               <input
                 id="m-cost"
@@ -170,7 +222,7 @@ export default function DiscountMarginCalculatorTool() {
             </div>
             <div>
               <label htmlFor="m-sell" className="block text-xs font-semibold text-slate-700 mb-1">
-                Selling Price ($)
+                {s.sellingLabel}
               </label>
               <input
                 id="m-sell"
@@ -193,28 +245,28 @@ export default function DiscountMarginCalculatorTool() {
           {marginResult.data && (
             <dl className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="rounded-xl border border-indigo-200 bg-indigo-50/70 p-4">
-                <dt className="text-xs font-medium text-indigo-700">Gross Profit</dt>
+                <dt className="text-xs font-medium text-indigo-700">{s.grossProfit}</dt>
                 <dd
                   className={`mt-1 text-2xl font-bold font-mono tabular-nums ${
                     marginResult.data.grossProfit >= 0 ? 'text-slate-900' : 'text-red-700'
                   }`}
                 >
-                  ${money(marginResult.data.grossProfit)}
+                  ${money(marginResult.data.grossProfit, locale)}
                 </dd>
               </div>
               <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-                <dt className="text-xs font-medium text-slate-500">Profit Margin</dt>
+                <dt className="text-xs font-medium text-slate-500">{s.profitMargin}</dt>
                 <dd className="mt-1 text-2xl font-bold font-mono text-slate-900 tabular-nums">
                   {marginResult.data.marginPct.toFixed(2)}%
                 </dd>
-                <dd className="mt-0.5 text-xs text-slate-500">(Profit ÷ Selling Price)</dd>
+                <dd className="mt-0.5 text-xs text-slate-500">{s.profitDivSelling}</dd>
               </div>
               <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-                <dt className="text-xs font-medium text-slate-500">Markup</dt>
+                <dt className="text-xs font-medium text-slate-500">{s.markup}</dt>
                 <dd className="mt-1 text-2xl font-bold font-mono text-slate-900 tabular-nums">
                   {marginResult.data.markupPct.toFixed(2)}%
                 </dd>
-                <dd className="mt-0.5 text-xs text-slate-500">(Profit ÷ Cost)</dd>
+                <dd className="mt-0.5 text-xs text-slate-500">{s.profitDivCost}</dd>
               </div>
             </dl>
           )}

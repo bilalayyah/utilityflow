@@ -1,12 +1,72 @@
 import { useMemo, useState } from 'react';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    errorAmount: 'Compensation amount cannot be negative.',
+    errorHours: 'Hours per week must be between 1 and 168.',
+    errorWeeks: 'Weeks per year must be between 1 and 52.',
+    errorTax: 'Effective tax rate must be between 0% and 99%.',
+    amountLabel: 'Pay Amount ($)',
+    frequencyLabel: 'Frequency',
+    hourlyOption: 'Hourly',
+    dailyOption: 'Daily',
+    weeklyOption: 'Weekly',
+    biweeklyOption: 'Bi-Weekly',
+    monthlyOption: 'Monthly',
+    annualOption: 'Annual',
+    hoursLabel: 'Hours / Week',
+    weeksLabel: 'Weeks / Year',
+    taxLabel: 'Est. Tax Rate (%)',
+    rowHourly: 'Hourly',
+    rowDaily: 'Daily (5-day week)',
+    rowWeekly: 'Weekly',
+    rowBiweekly: 'Bi-Weekly',
+    rowMonthly: 'Monthly',
+    rowAnnual: 'Annual',
+    payPeriodHeader: 'Pay Period',
+    grossPayHeader: 'Gross Pay',
+    estNetPay: 'Est. Net Pay',
+    taxWord: 'tax',
+  },
+  es: {
+    errorAmount: 'El monto de la compensación no puede ser negativo.',
+    errorHours: 'Las horas por semana deben estar entre 1 y 168.',
+    errorWeeks: 'Las semanas por año deben estar entre 1 y 52.',
+    errorTax: 'La tasa impositiva efectiva debe estar entre 0% y 99%.',
+    amountLabel: 'Monto del pago ($)',
+    frequencyLabel: 'Frecuencia',
+    hourlyOption: 'Por hora',
+    dailyOption: 'Por día',
+    weeklyOption: 'Semanal',
+    biweeklyOption: 'Quincenal',
+    monthlyOption: 'Mensual',
+    annualOption: 'Anual',
+    hoursLabel: 'Horas / semana',
+    weeksLabel: 'Semanas / año',
+    taxLabel: 'Tasa impositiva est. (%)',
+    rowHourly: 'Por hora',
+    rowDaily: 'Por día (semana de 5 días)',
+    rowWeekly: 'Semanal',
+    rowBiweekly: 'Quincenal',
+    rowMonthly: 'Mensual',
+    rowAnnual: 'Anual',
+    payPeriodHeader: 'Periodo de pago',
+    grossPayHeader: 'Pago bruto',
+    estNetPay: 'Pago neto est.',
+    taxWord: 'de impuesto',
+  },
+};
 
 type PayPeriod = 'hourly' | 'daily' | 'weekly' | 'biweekly' | 'monthly' | 'annual';
 
-function money(n: number): string {
-  return n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+function money(n: number, locale: string): string {
+  return n.toLocaleString(locale, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
 export default function SalaryCalculatorTool() {
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
   const [amount, setAmount] = useState('45');
   const [period, setPeriod] = useState<PayPeriod>('hourly');
   const [hoursPerWeek, setHoursPerWeek] = useState('40');
@@ -19,10 +79,10 @@ export default function SalaryCalculatorTool() {
     const wpy = Number(weeksPerYear);
     const tax = Number(taxRatePct) || 0;
 
-    if (!Number.isFinite(val) || val < 0) return { error: 'Compensation amount cannot be negative.', rows: null };
-    if (!Number.isFinite(hpw) || hpw <= 0 || hpw > 168) return { error: 'Hours per week must be between 1 and 168.', rows: null };
-    if (!Number.isFinite(wpy) || wpy <= 0 || wpy > 52.2) return { error: 'Weeks per year must be between 1 and 52.', rows: null };
-    if (!Number.isFinite(tax) || tax < 0 || tax >= 100) return { error: 'Effective tax rate must be between 0% and 99%.', rows: null };
+    if (!Number.isFinite(val) || val < 0) return { error: s.errorAmount, rows: null };
+    if (!Number.isFinite(hpw) || hpw <= 0 || hpw > 168) return { error: s.errorHours, rows: null };
+    if (!Number.isFinite(wpy) || wpy <= 0 || wpy > 52.2) return { error: s.errorWeeks, rows: null };
+    if (!Number.isFinite(tax) || tax < 0 || tax >= 100) return { error: s.errorTax, rows: null };
 
     const totalAnnualHours = hpw * wpy;
     let annualGross = 0;
@@ -50,26 +110,26 @@ export default function SalaryCalculatorTool() {
 
     const netFactor = 1 - tax / 100;
     const rows = [
-      { label: 'Hourly', gross: annualGross / totalAnnualHours },
-      { label: 'Daily (5-day week)', gross: annualGross / (wpy * 5) },
-      { label: 'Weekly', gross: annualGross / wpy },
-      { label: 'Bi-Weekly', gross: annualGross / (wpy / 2) },
-      { label: 'Monthly', gross: annualGross / 12 },
-      { label: 'Annual', gross: annualGross },
+      { id: 'hourly', label: s.rowHourly, gross: annualGross / totalAnnualHours },
+      { id: 'daily', label: s.rowDaily, gross: annualGross / (wpy * 5) },
+      { id: 'weekly', label: s.rowWeekly, gross: annualGross / wpy },
+      { id: 'biweekly', label: s.rowBiweekly, gross: annualGross / (wpy / 2) },
+      { id: 'monthly', label: s.rowMonthly, gross: annualGross / 12 },
+      { id: 'annual', label: s.rowAnnual, gross: annualGross },
     ].map((item) => ({
       ...item,
       net: item.gross * netFactor,
     }));
 
     return { error: '', rows, totalAnnualHours };
-  }, [amount, period, hoursPerWeek, weeksPerYear, taxRatePct]);
+  }, [amount, period, hoursPerWeek, weeksPerYear, taxRatePct, s]);
 
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
         <div>
           <label htmlFor="sal-amt" className="block text-xs font-semibold text-slate-700 mb-1">
-            Pay Amount ($)
+            {s.amountLabel}
           </label>
           <input
             id="sal-amt"
@@ -84,7 +144,7 @@ export default function SalaryCalculatorTool() {
 
         <div>
           <label htmlFor="sal-per" className="block text-xs font-semibold text-slate-700 mb-1">
-            Frequency
+            {s.frequencyLabel}
           </label>
           <select
             id="sal-per"
@@ -92,18 +152,18 @@ export default function SalaryCalculatorTool() {
             onChange={(e) => setPeriod(e.target.value as PayPeriod)}
             className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"
           >
-            <option value="hourly">Hourly</option>
-            <option value="daily">Daily</option>
-            <option value="weekly">Weekly</option>
-            <option value="biweekly">Bi-Weekly</option>
-            <option value="monthly">Monthly</option>
-            <option value="annual">Annual</option>
+            <option value="hourly">{s.hourlyOption}</option>
+            <option value="daily">{s.dailyOption}</option>
+            <option value="weekly">{s.weeklyOption}</option>
+            <option value="biweekly">{s.biweeklyOption}</option>
+            <option value="monthly">{s.monthlyOption}</option>
+            <option value="annual">{s.annualOption}</option>
           </select>
         </div>
 
         <div>
           <label htmlFor="sal-hpw" className="block text-xs font-semibold text-slate-700 mb-1">
-            Hours / Week
+            {s.hoursLabel}
           </label>
           <input
             id="sal-hpw"
@@ -118,7 +178,7 @@ export default function SalaryCalculatorTool() {
 
         <div>
           <label htmlFor="sal-wpy" className="block text-xs font-semibold text-slate-700 mb-1">
-            Weeks / Year
+            {s.weeksLabel}
           </label>
           <input
             id="sal-wpy"
@@ -133,7 +193,7 @@ export default function SalaryCalculatorTool() {
 
         <div>
           <label htmlFor="sal-tax" className="block text-xs font-semibold text-slate-700 mb-1">
-            Est. Tax Rate (%)
+            {s.taxLabel}
           </label>
           <input
             id="sal-tax"
@@ -159,19 +219,19 @@ export default function SalaryCalculatorTool() {
           <table className="w-full text-left text-sm font-mono tabular-nums">
             <thead className="bg-slate-50 border-b border-slate-200 font-sans text-xs text-slate-600">
               <tr>
-                <th className="py-3 px-4 font-semibold">Pay Period</th>
-                <th className="py-3 px-4 font-semibold text-right">Gross Pay</th>
+                <th className="py-3 px-4 font-semibold">{s.payPeriodHeader}</th>
+                <th className="py-3 px-4 font-semibold text-right">{s.grossPayHeader}</th>
                 <th className="py-3 px-4 font-semibold text-right">
-                  Est. Net Pay ({taxRatePct}% tax)
+                  {s.estNetPay} ({taxRatePct}% {s.taxWord})
                 </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 bg-white">
               {breakdown.rows.map((row) => (
-                <tr key={row.label} className={row.label === 'Annual' ? 'bg-indigo-50/40 font-semibold' : ''}>
+                <tr key={row.label} className={row.id === 'annual' ? 'bg-indigo-50/40 font-semibold' : ''}>
                   <td className="py-2.5 px-4 font-sans text-slate-800">{row.label}</td>
-                  <td className="py-2.5 px-4 text-right text-slate-900">${money(row.gross)}</td>
-                  <td className="py-2.5 px-4 text-right text-indigo-700">${money(row.net)}</td>
+                  <td className="py-2.5 px-4 text-right text-slate-900">${money(row.gross, locale)}</td>
+                  <td className="py-2.5 px-4 text-right text-indigo-700">${money(row.net, locale)}</td>
                 </tr>
               ))}
             </tbody>

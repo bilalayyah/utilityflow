@@ -1,5 +1,113 @@
 import { AlertCircle, ArrowLeftRight, RefreshCw } from 'lucide-react';
 import { useMemo, useState } from 'react';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    errorAmount: 'Enter an amount of 0 or greater.',
+    errorRate: 'Enter a positive exchange rate greater than 0.',
+    errorFee: 'Enter a conversion fee between 0% and 50%.',
+    fetchErrorWithMessage:
+      'Could not fetch external rate ({message}). Continue by entering your exchange rate manually above.',
+    fetchErrorGeneric:
+      'Could not reach external rate API. Enter your exchange rate manually above.',
+    fetchErrorNoPair: 'Selected currency pair was not returned by the reference API.',
+    currencyNames: {
+      USD: 'US Dollar',
+      EUR: 'Euro',
+      GBP: 'British Pound',
+      JPY: 'Japanese Yen',
+      CAD: 'Canadian Dollar',
+      AUD: 'Australian Dollar',
+      CHF: 'Swiss Franc',
+      INR: 'Indian Rupee',
+      SGD: 'Singapore Dollar',
+      NZD: 'New Zealand Dollar',
+      MXN: 'Mexican Peso',
+      CNY: 'Chinese Yuan',
+    },
+    rateSourceManualDefault: 'Manual user-entered rate (offline default)',
+    rateSourceManual: 'Manual user-entered rate',
+    rateSourceIdentity: 'Identity rate (1.0000) for matching currencies',
+    rateSourceEcb: 'External ECB reference rate via Frankfurter API (date: {date})',
+    rateSourceInverted: 'Inverted from previous rate',
+    disclosureTitle: 'Rate Source Disclosure:',
+    disclosureBody:
+      'Live market exchange rates are never fabricated offline. Enter your exact quoted exchange rate manually, or click',
+    disclosureBodyAfter:
+      'to request a reference rate from the external Frankfurter API.',
+    activeRateSource: 'Active rate source:',
+    amountLabel: 'Amount',
+    fromLabel: 'From Currency',
+    toLabel: 'To Currency',
+    swapAria: 'Swap currencies',
+    swapTitle: 'Swap currencies and invert rate',
+    rateLabel: 'Exchange Rate',
+    feeLabel: 'Bank / Card FX Fee (%)',
+    fetchButton: 'Fetch ECB Reference Rate',
+    fetchingButton: 'Fetching ECB Rate...',
+    netConverted: 'Net Converted Amount',
+    grossBeforeFee: 'Gross Before FX Fee',
+    feeLabelShort: 'Fee',
+    inverseRate: 'Inverse Exchange Rate',
+    perOne: 'per 1',
+    amountHeaderSuffix: 'Amount',
+    netHeaderPrefix: 'Net',
+    netHeaderSuffix: '(at entered rate & fee)',
+  },
+  es: {
+    errorAmount: 'Ingresa un monto de 0 o más.',
+    errorRate: 'Ingresa una tasa de cambio positiva mayor que 0.',
+    errorFee: 'Ingresa una comisión de conversión entre 0% y 50%.',
+    fetchErrorWithMessage:
+      'No se pudo obtener la tasa externa ({message}). Continúa ingresando tu tasa de cambio manualmente arriba.',
+    fetchErrorGeneric:
+      'No se pudo contactar la API externa de tasas. Ingresa tu tasa de cambio manualmente arriba.',
+    fetchErrorNoPair: 'La API de referencia no devolvió el par de monedas seleccionado.',
+    currencyNames: {
+      USD: 'Dólar estadounidense',
+      EUR: 'Euro',
+      GBP: 'Libra esterlina',
+      JPY: 'Yen japonés',
+      CAD: 'Dólar canadiense',
+      AUD: 'Dólar australiano',
+      CHF: 'Franco suizo',
+      INR: 'Rupia india',
+      SGD: 'Dólar de Singapur',
+      NZD: 'Dólar neozelandés',
+      MXN: 'Peso mexicano',
+      CNY: 'Yuan chino',
+    },
+    rateSourceManualDefault: 'Tasa manual ingresada por el usuario (predeterminada sin conexión)',
+    rateSourceManual: 'Tasa manual ingresada por el usuario',
+    rateSourceIdentity: 'Tasa de identidad (1.0000) para monedas iguales',
+    rateSourceEcb: 'Tasa de referencia externa del BCE vía API de Frankfurter (fecha: {date})',
+    rateSourceInverted: 'Invertida de la tasa anterior',
+    disclosureTitle: 'Aviso sobre la fuente de la tasa:',
+    disclosureBody:
+      'Las tasas de cambio del mercado en vivo nunca se inventan sin conexión. Ingresa tu tasa de cambio cotizada exacta manualmente, o haz clic en',
+    disclosureBodyAfter:
+      'para solicitar una tasa de referencia de la API externa de Frankfurter.',
+    activeRateSource: 'Fuente de tasa activa:',
+    amountLabel: 'Monto',
+    fromLabel: 'Moneda de origen',
+    toLabel: 'Moneda de destino',
+    swapAria: 'Intercambiar monedas',
+    swapTitle: 'Intercambiar monedas e invertir la tasa',
+    rateLabel: 'Tasa de cambio',
+    feeLabel: 'Comisión bancaria / de tarjeta (%)',
+    fetchButton: 'Obtener tasa de referencia del BCE',
+    fetchingButton: 'Obteniendo tasa del BCE...',
+    netConverted: 'Monto neto convertido',
+    grossBeforeFee: 'Bruto antes de la comisión',
+    feeLabelShort: 'Comisión',
+    inverseRate: 'Tasa de cambio inversa',
+    perOne: 'por 1',
+    amountHeaderSuffix: 'Monto',
+    netHeaderPrefix: 'Neto',
+    netHeaderSuffix: '(a la tasa y comisión ingresadas)',
+  },
+};
 
 const CURRENCIES = [
   { code: 'USD', name: 'US Dollar', symbol: '$' },
@@ -19,20 +127,25 @@ const CURRENCIES = [
 const QUICK_AMOUNTS = [1, 10, 50, 100, 500, 1000];
 
 export default function CurrencyCalculatorTool() {
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
   const [amount, setAmount] = useState('100');
   const [fromCurrency, setFromCurrency] = useState('USD');
   const [toCurrency, setToCurrency] = useState('EUR');
   const [exchangeRate, setExchangeRate] = useState('1.0000');
   const [feePercent, setFeePercent] = useState('0');
-  const [rateSource, setRateSource] = useState<string>('Manual user-entered rate (offline default)');
+  const [rateSource, setRateSource] = useState<string>(s.rateSourceManualDefault);
   const [isFetching, setIsFetching] = useState(false);
   const [fetchError, setFetchError] = useState('');
+
+  const currencyName = (code: string): string =>
+    (s.currencyNames as Record<string, string>)[code] ?? code;
 
   const handleFetchRate = async () => {
     setFetchError('');
     if (fromCurrency === toCurrency) {
       setExchangeRate('1.0000');
-      setRateSource('Identity rate (1.0000) for matching currencies');
+      setRateSource(s.rateSourceIdentity);
       return;
     }
 
@@ -50,17 +163,15 @@ export default function CurrencyCalculatorTool() {
       };
       const liveRate = payload.rates?.[toCurrency];
       if (typeof liveRate !== 'number' || !Number.isFinite(liveRate)) {
-        throw new Error('Selected currency pair was not returned by the reference API.');
+        throw new Error(s.fetchErrorNoPair);
       }
       setExchangeRate(liveRate.toFixed(6).replace(/0+$/, '').replace(/\.$/, ''));
-      setRateSource(
-        `External ECB reference rate via Frankfurter API (date: ${payload.date ?? 'latest'})`
-      );
+      setRateSource(s.rateSourceEcb.replace('{date}', payload.date ?? 'latest'));
     } catch (err) {
       setFetchError(
         err instanceof Error
-          ? `Could not fetch external rate (${err.message}). Continue by entering your exchange rate manually above.`
-          : 'Could not reach external rate API. Enter your exchange rate manually above.'
+          ? s.fetchErrorWithMessage.replace('{message}', err.message)
+          : s.fetchErrorGeneric
       );
     } finally {
       setIsFetching(false);
@@ -73,13 +184,13 @@ export default function CurrencyCalculatorTool() {
     const feePct = Number(feePercent);
 
     if (!Number.isFinite(amt) || amt < 0) {
-      return { error: 'Enter an amount of 0 or greater.', data: null };
+      return { error: s.errorAmount, data: null };
     }
     if (!Number.isFinite(rate) || rate <= 0) {
-      return { error: 'Enter a positive exchange rate greater than 0.', data: null };
+      return { error: s.errorRate, data: null };
     }
     if (!Number.isFinite(feePct) || feePct < 0 || feePct > 50) {
-      return { error: 'Enter a conversion fee between 0% and 50%.', data: null };
+      return { error: s.errorFee, data: null };
     }
 
     const grossConverted = amt * rate;
@@ -103,17 +214,17 @@ export default function CurrencyCalculatorTool() {
         })),
       },
     };
-  }, [amount, exchangeRate, feePercent]);
+  }, [amount, exchangeRate, feePercent, s]);
 
   return (
     <div className="space-y-6">
       <div className="rounded-xl border border-amber-200 bg-amber-50/80 px-4 py-3 text-xs sm:text-sm text-amber-950 flex items-start gap-2.5">
         <AlertCircle className="w-4 h-4 shrink-0 text-amber-700 mt-0.5" />
         <div>
-          <strong>Rate Source Disclosure:</strong> Live market exchange rates are never fabricated offline. Enter your exact quoted exchange rate manually, or click{' '}
-          <em>Fetch ECB Reference Rate</em> to request a reference rate from the external Frankfurter API.
+          <strong>{s.disclosureTitle}</strong> {s.disclosureBody}{' '}
+          <em>{s.fetchButton}</em> {s.disclosureBodyAfter}
           <div className="mt-1 text-xs text-amber-800">
-            Active rate source: <span className="font-medium">{rateSource}</span>
+            {s.activeRateSource} <span className="font-medium">{rateSource}</span>
           </div>
         </div>
       </div>
@@ -121,7 +232,7 @@ export default function CurrencyCalculatorTool() {
       <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr_auto_1fr] gap-3 items-end">
         <div>
           <label htmlFor="cur-amount" className="block text-sm font-semibold text-slate-900 mb-1.5">
-            Amount
+            {s.amountLabel}
           </label>
           <input
             id="cur-amount"
@@ -136,20 +247,20 @@ export default function CurrencyCalculatorTool() {
 
         <div>
           <label htmlFor="cur-from" className="block text-sm font-semibold text-slate-900 mb-1.5">
-            From Currency
+            {s.fromLabel}
           </label>
           <select
             id="cur-from"
             value={fromCurrency}
             onChange={(e) => {
               setFromCurrency(e.target.value);
-              setRateSource('Manual user-entered rate');
+              setRateSource(s.rateSourceManual);
             }}
             className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm"
           >
             {CURRENCIES.map((c) => (
               <option key={c.code} value={c.code}>
-                {c.code} — {c.name}
+                {c.code} — {currencyName(c.code)}
               </option>
             ))}
           </select>
@@ -164,10 +275,10 @@ export default function CurrencyCalculatorTool() {
             if (Number.isFinite(current) && current > 0) {
               setExchangeRate((1 / current).toFixed(6).replace(/0+$/, '').replace(/\.$/, ''));
             }
-            setRateSource('Inverted from previous rate');
+            setRateSource(s.rateSourceInverted);
           }}
-          aria-label="Swap currencies"
-          title="Swap currencies and invert rate"
+          aria-label={s.swapAria}
+          title={s.swapTitle}
           className="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-slate-700 hover:bg-slate-50 cursor-pointer"
         >
           <ArrowLeftRight className="w-4 h-4" />
@@ -175,20 +286,20 @@ export default function CurrencyCalculatorTool() {
 
         <div>
           <label htmlFor="cur-to" className="block text-sm font-semibold text-slate-900 mb-1.5">
-            To Currency
+            {s.toLabel}
           </label>
           <select
             id="cur-to"
             value={toCurrency}
             onChange={(e) => {
               setToCurrency(e.target.value);
-              setRateSource('Manual user-entered rate');
+              setRateSource(s.rateSourceManual);
             }}
             className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm"
           >
             {CURRENCIES.map((c) => (
               <option key={c.code} value={c.code}>
-                {c.code} — {c.name}
+                {c.code} — {currencyName(c.code)}
               </option>
             ))}
           </select>
@@ -198,7 +309,7 @@ export default function CurrencyCalculatorTool() {
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 items-end">
         <div>
           <label htmlFor="cur-rate" className="block text-sm font-semibold text-slate-900 mb-1.5">
-            Exchange Rate (1 {fromCurrency} = ? {toCurrency})
+            {s.rateLabel} (1 {fromCurrency} = ? {toCurrency})
           </label>
           <input
             id="cur-rate"
@@ -208,7 +319,7 @@ export default function CurrencyCalculatorTool() {
             value={exchangeRate}
             onChange={(e) => {
               setExchangeRate(e.target.value);
-              setRateSource('Manual user-entered rate');
+              setRateSource(s.rateSourceManual);
             }}
             className="w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 font-mono text-sm tabular-nums"
           />
@@ -216,7 +327,7 @@ export default function CurrencyCalculatorTool() {
 
         <div>
           <label htmlFor="cur-fee" className="block text-sm font-semibold text-slate-900 mb-1.5">
-            Bank / Card FX Fee (%)
+            {s.feeLabel}
           </label>
           <input
             id="cur-fee"
@@ -237,7 +348,7 @@ export default function CurrencyCalculatorTool() {
           className="inline-flex items-center justify-center gap-2 rounded-lg border border-indigo-200 bg-indigo-50 px-4 py-2.5 text-sm font-semibold text-indigo-700 hover:bg-indigo-100 disabled:opacity-60 cursor-pointer"
         >
           <RefreshCw className={`w-4 h-4 ${isFetching ? 'animate-spin' : ''}`} />
-          {isFetching ? 'Fetching ECB Rate...' : 'Fetch ECB Reference Rate'}
+          {isFetching ? s.fetchingButton : s.fetchButton}
         </button>
       </div>
 
@@ -258,10 +369,10 @@ export default function CurrencyCalculatorTool() {
           <dl className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="rounded-xl border border-indigo-200 bg-indigo-50/70 p-5">
               <dt className="text-xs font-medium text-indigo-700">
-                Net Converted Amount ({toCurrency})
+                {s.netConverted} ({toCurrency})
               </dt>
               <dd className="mt-1 text-2xl sm:text-3xl font-bold font-mono text-slate-900 tabular-nums">
-                {result.data.netConverted.toLocaleString(undefined, {
+                {result.data.netConverted.toLocaleString(locale, {
                   minimumFractionDigits: 2,
                   maximumFractionDigits: 4,
                 })}{' '}
@@ -273,25 +384,27 @@ export default function CurrencyCalculatorTool() {
             </div>
 
             <div className="rounded-xl border border-slate-200 bg-slate-50 p-5">
-              <dt className="text-xs font-medium text-slate-500">Gross Before FX Fee</dt>
+              <dt className="text-xs font-medium text-slate-500">{s.grossBeforeFee}</dt>
               <dd className="mt-1 text-xl font-bold font-mono text-slate-900 tabular-nums">
-                {result.data.grossConverted.toLocaleString(undefined, {
+                {result.data.grossConverted.toLocaleString(locale, {
                   minimumFractionDigits: 2,
                   maximumFractionDigits: 4,
                 })}{' '}
                 {toCurrency}
               </dd>
               <dd className="mt-1 text-xs text-slate-500 font-mono tabular-nums">
-                Fee ({result.data.feePct}%): -{result.data.feeCost.toFixed(2)} {toCurrency}
+                {s.feeLabelShort} ({result.data.feePct}%): -{result.data.feeCost.toFixed(2)} {toCurrency}
               </dd>
             </div>
 
             <div className="rounded-xl border border-slate-200 bg-slate-50 p-5">
-              <dt className="text-xs font-medium text-slate-500">Inverse Exchange Rate</dt>
+              <dt className="text-xs font-medium text-slate-500">{s.inverseRate}</dt>
               <dd className="mt-1 text-xl font-bold font-mono text-slate-900 tabular-nums">
                 {result.data.inverseRate.toFixed(6)} {fromCurrency}
               </dd>
-              <dd className="mt-1 text-xs text-slate-500">per 1 {toCurrency}</dd>
+              <dd className="mt-1 text-xs text-slate-500">
+                {s.perOne} {toCurrency}
+              </dd>
             </div>
           </dl>
 
@@ -299,9 +412,11 @@ export default function CurrencyCalculatorTool() {
             <table className="w-full text-left text-sm">
               <thead className="bg-slate-50 text-xs text-slate-500 border-b border-slate-200">
                 <tr>
-                  <th className="py-2.5 px-4 font-semibold">{fromCurrency} Amount</th>
+                  <th className="py-2.5 px-4 font-semibold">
+                    {fromCurrency} {s.amountHeaderSuffix}
+                  </th>
                   <th className="py-2.5 px-4 font-semibold text-right">
-                    Net {toCurrency} (at entered rate &amp; fee)
+                    {s.netHeaderPrefix} {toCurrency} {s.netHeaderSuffix}
                   </th>
                 </tr>
               </thead>
@@ -309,10 +424,10 @@ export default function CurrencyCalculatorTool() {
                 {result.data.table.map((row) => (
                   <tr key={row.base}>
                     <td className="py-2 px-4 text-slate-700">
-                      {row.base.toLocaleString()} {fromCurrency}
+                      {row.base.toLocaleString(locale)} {fromCurrency}
                     </td>
                     <td className="py-2 px-4 text-right font-semibold text-slate-900">
-                      {row.converted.toLocaleString(undefined, {
+                      {row.converted.toLocaleString(locale, {
                         minimumFractionDigits: 2,
                         maximumFractionDigits: 2,
                       })}{' '}

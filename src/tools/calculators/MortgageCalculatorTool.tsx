@@ -1,10 +1,64 @@
 import { useMemo, useState } from 'react';
+import { useLocale } from '../../locales/LocaleContext';
 
-function money(n: number): string {
-  return n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const STRINGS = {
+  en: {
+    errorPrice: 'Home price must be greater than 0.',
+    errorDownPayment: 'Down payment percentage must be between 0% and 99.9%.',
+    errorRate: 'Interest rate must be between 0% and 50%.',
+    errorTerm: 'Loan term must be between 1 and 50 years.',
+    homePriceLabel: 'Home Price ($)',
+    downPaymentLabel: 'Down Payment (%)',
+    rateLabel: 'Interest Rate (% APR)',
+    termLabel: 'Loan Term (Years)',
+    yearsWord: 'Years',
+    taxLabel: 'Property Tax ($ / year)',
+    insuranceLabel: 'Home Insurance ($ / year)',
+    hoaLabel: 'HOA Dues ($ / month)',
+    estimatedMonthly: 'Estimated Monthly Payment',
+    loanAmount: 'Loan Amount',
+    downPayment: 'Down Payment',
+    lifetimeInterest: 'Lifetime Interest',
+    breakdownHeading: 'Monthly Payment Breakdown',
+    principalInterest: 'Principal & Interest (P&I)',
+    propertyTaxes: 'Property Taxes',
+    homeownersInsurance: 'Homeowners Insurance',
+    hoaDues: 'HOA Dues',
+    pmiLabel: 'Est. PMI (0.5%/yr when down < 20%)',
+  },
+  es: {
+    errorPrice: 'El precio de la vivienda debe ser mayor que 0.',
+    errorDownPayment: 'El porcentaje de pago inicial debe estar entre 0% y 99.9%.',
+    errorRate: 'La tasa de interés debe estar entre 0% y 50%.',
+    errorTerm: 'El plazo del préstamo debe ser de entre 1 y 50 años.',
+    homePriceLabel: 'Precio de la vivienda ($)',
+    downPaymentLabel: 'Pago inicial (%)',
+    rateLabel: 'Tasa de interés (% TAE)',
+    termLabel: 'Plazo del préstamo (años)',
+    yearsWord: 'años',
+    taxLabel: 'Impuesto sobre la propiedad ($ / año)',
+    insuranceLabel: 'Seguro de vivienda ($ / año)',
+    hoaLabel: 'Cuotas de la HOA ($ / mes)',
+    estimatedMonthly: 'Pago mensual estimado',
+    loanAmount: 'Monto del préstamo',
+    downPayment: 'Pago inicial',
+    lifetimeInterest: 'Intereses de por vida',
+    breakdownHeading: 'Desglose del pago mensual',
+    principalInterest: 'Capital e intereses (P&I)',
+    propertyTaxes: 'Impuestos sobre la propiedad',
+    homeownersInsurance: 'Seguro de vivienda',
+    hoaDues: 'Cuotas de la HOA',
+    pmiLabel: 'PMI est. (0.5%/año cuando el pago inicial es < 20%)',
+  },
+};
+
+function money(n: number, locale: string): string {
+  return n.toLocaleString(locale, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
 export default function MortgageCalculatorTool() {
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
   const [homePrice, setHomePrice] = useState('420000');
   const [downPaymentPct, setDownPaymentPct] = useState('20');
   const [interestRate, setInterestRate] = useState('6.25');
@@ -23,16 +77,16 @@ export default function MortgageCalculatorTool() {
     const hoa = Number(monthlyHoa) || 0;
 
     if (!Number.isFinite(price) || price <= 0) {
-      return { error: 'Home price must be greater than 0.', data: null };
+      return { error: s.errorPrice, data: null };
     }
     if (!Number.isFinite(dpPct) || dpPct < 0 || dpPct >= 100) {
-      return { error: 'Down payment percentage must be between 0% and 99.9%.', data: null };
+      return { error: s.errorDownPayment, data: null };
     }
     if (!Number.isFinite(rate) || rate < 0 || rate > 50) {
-      return { error: 'Interest rate must be between 0% and 50%.', data: null };
+      return { error: s.errorRate, data: null };
     }
     if (!Number.isFinite(years) || years < 1 || years > 50) {
-      return { error: 'Loan term must be between 1 and 50 years.', data: null };
+      return { error: s.errorTerm, data: null };
     }
 
     const downPayment = price * (dpPct / 100);
@@ -69,14 +123,14 @@ export default function MortgageCalculatorTool() {
         totalLoanCost: loanAmount + totalInterest,
       },
     };
-  }, [homePrice, downPaymentPct, interestRate, loanTermYears, annualPropertyTax, annualInsurance, monthlyHoa]);
+  }, [homePrice, downPaymentPct, interestRate, loanTermYears, annualPropertyTax, annualInsurance, monthlyHoa, s]);
 
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <div>
           <label htmlFor="mort-price" className="block text-xs font-semibold text-slate-700 mb-1">
-            Home Price ($)
+            {s.homePriceLabel}
           </label>
           <input
             id="mort-price"
@@ -90,7 +144,7 @@ export default function MortgageCalculatorTool() {
         </div>
         <div>
           <label htmlFor="mort-dp" className="block text-xs font-semibold text-slate-700 mb-1">
-            Down Payment (%)
+            {s.downPaymentLabel}
           </label>
           <input
             id="mort-dp"
@@ -105,7 +159,7 @@ export default function MortgageCalculatorTool() {
         </div>
         <div>
           <label htmlFor="mort-rate" className="block text-xs font-semibold text-slate-700 mb-1">
-            Interest Rate (% APR)
+            {s.rateLabel}
           </label>
           <input
             id="mort-rate"
@@ -120,7 +174,7 @@ export default function MortgageCalculatorTool() {
         </div>
         <div>
           <label htmlFor="mort-term" className="block text-xs font-semibold text-slate-700 mb-1">
-            Loan Term (Years)
+            {s.termLabel}
           </label>
           <select
             id="mort-term"
@@ -128,15 +182,15 @@ export default function MortgageCalculatorTool() {
             onChange={(e) => setLoanTermYears(e.target.value)}
             className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 font-mono text-sm tabular-nums"
           >
-            <option value="10">10 Years</option>
-            <option value="15">15 Years</option>
-            <option value="20">20 Years</option>
-            <option value="30">30 Years</option>
+            <option value="10">10 {s.yearsWord}</option>
+            <option value="15">15 {s.yearsWord}</option>
+            <option value="20">20 {s.yearsWord}</option>
+            <option value="30">30 {s.yearsWord}</option>
           </select>
         </div>
         <div>
           <label htmlFor="mort-tax" className="block text-xs font-semibold text-slate-700 mb-1">
-            Property Tax ($ / year)
+            {s.taxLabel}
           </label>
           <input
             id="mort-tax"
@@ -149,7 +203,7 @@ export default function MortgageCalculatorTool() {
         </div>
         <div>
           <label htmlFor="mort-ins" className="block text-xs font-semibold text-slate-700 mb-1">
-            Home Insurance ($ / year)
+            {s.insuranceLabel}
           </label>
           <input
             id="mort-ins"
@@ -162,7 +216,7 @@ export default function MortgageCalculatorTool() {
         </div>
         <div>
           <label htmlFor="mort-hoa" className="block text-xs font-semibold text-slate-700 mb-1">
-            HOA Dues ($ / month)
+            {s.hoaLabel}
           </label>
           <input
             id="mort-hoa"
@@ -185,51 +239,49 @@ export default function MortgageCalculatorTool() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
           <div className="lg:col-span-5 rounded-xl border border-indigo-200 bg-indigo-50/70 p-5 flex flex-col justify-between">
             <div>
-              <div className="text-xs font-semibold text-indigo-700">Estimated Monthly Payment</div>
+              <div className="text-xs font-semibold text-indigo-700">{s.estimatedMonthly}</div>
               <div className="mt-1 text-3xl font-bold font-mono text-slate-900 tabular-nums">
-                ${money(calc.data.totalMonthly)}
+                ${money(calc.data.totalMonthly, locale)}
               </div>
             </div>
             <dl className="mt-5 pt-4 border-t border-indigo-200/70 space-y-1.5 text-xs sm:text-sm font-mono tabular-nums">
               <div className="flex justify-between">
-                <dt className="font-sans text-slate-600">Loan Amount</dt>
-                <dd className="text-slate-900">${money(calc.data.loanAmount)}</dd>
+                <dt className="font-sans text-slate-600">{s.loanAmount}</dt>
+                <dd className="text-slate-900">${money(calc.data.loanAmount, locale)}</dd>
               </div>
               <div className="flex justify-between">
-                <dt className="font-sans text-slate-600">Down Payment</dt>
-                <dd className="text-slate-900">${money(calc.data.downPayment)}</dd>
+                <dt className="font-sans text-slate-600">{s.downPayment}</dt>
+                <dd className="text-slate-900">${money(calc.data.downPayment, locale)}</dd>
               </div>
               <div className="flex justify-between">
-                <dt className="font-sans text-slate-600">Lifetime Interest</dt>
-                <dd className="text-slate-900">${money(calc.data.totalInterest)}</dd>
+                <dt className="font-sans text-slate-600">{s.lifetimeInterest}</dt>
+                <dd className="text-slate-900">${money(calc.data.totalInterest, locale)}</dd>
               </div>
             </dl>
           </div>
 
           <div className="lg:col-span-7 rounded-xl border border-slate-200 bg-slate-50 p-5">
-            <h3 className="text-sm font-semibold text-slate-900 mb-3">Monthly Payment Breakdown</h3>
+            <h3 className="text-sm font-semibold text-slate-900 mb-3">{s.breakdownHeading}</h3>
             <dl className="divide-y divide-slate-200 text-sm font-mono tabular-nums">
               <div className="py-2 flex justify-between">
-                <dt className="font-sans text-slate-700">Principal &amp; Interest (P&amp;I)</dt>
-                <dd className="font-semibold text-slate-900">${money(calc.data.monthlyPI)}</dd>
+                <dt className="font-sans text-slate-700">{s.principalInterest}</dt>
+                <dd className="font-semibold text-slate-900">${money(calc.data.monthlyPI, locale)}</dd>
               </div>
               <div className="py-2 flex justify-between">
-                <dt className="font-sans text-slate-700">Property Taxes</dt>
-                <dd className="text-slate-900">${money(calc.data.monthlyTax)}</dd>
+                <dt className="font-sans text-slate-700">{s.propertyTaxes}</dt>
+                <dd className="text-slate-900">${money(calc.data.monthlyTax, locale)}</dd>
               </div>
               <div className="py-2 flex justify-between">
-                <dt className="font-sans text-slate-700">Homeowners Insurance</dt>
-                <dd className="text-slate-900">${money(calc.data.monthlyIns)}</dd>
+                <dt className="font-sans text-slate-700">{s.homeownersInsurance}</dt>
+                <dd className="text-slate-900">${money(calc.data.monthlyIns, locale)}</dd>
               </div>
               <div className="py-2 flex justify-between">
-                <dt className="font-sans text-slate-700">HOA Dues</dt>
-                <dd className="text-slate-900">${money(calc.data.monthlyHoaFee)}</dd>
+                <dt className="font-sans text-slate-700">{s.hoaDues}</dt>
+                <dd className="text-slate-900">${money(calc.data.monthlyHoaFee, locale)}</dd>
               </div>
               <div className="py-2 flex justify-between">
-                <dt className="font-sans text-slate-700">
-                  Est. PMI (0.5%/yr when down &lt; 20%)
-                </dt>
-                <dd className="text-slate-900">${money(calc.data.monthlyPmi)}</dd>
+                <dt className="font-sans text-slate-700">{s.pmiLabel}</dt>
+                <dd className="text-slate-900">${money(calc.data.monthlyPmi, locale)}</dd>
               </div>
             </dl>
           </div>
