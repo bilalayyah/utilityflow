@@ -1,5 +1,6 @@
 import * as pdfjsLib from 'pdfjs-dist';
 import type { LocaleCode } from '../../locales/config';
+import { localeTag } from '../../locales/config';
 
 // Configure Vite-bundled local worker for pdfjs-dist so zero external CDN calls are required.
 if (typeof window !== 'undefined' && !pdfjsLib.GlobalWorkerOptions.workerSrc) {
@@ -50,17 +51,57 @@ const PDF_STRINGS = {
       'Este PDF está cifrado o protegido con contraseña. Desbloquéalo antes de procesarlo localmente.',
     unable: 'No se pudo procesar el archivo PDF.',
   },
+  pt: {
+    noFile: 'Nenhum arquivo foi selecionado.',
+    notPdf: (name: string) => `"${name}" não parece ser um arquivo PDF.`,
+    empty: (name: string) => `"${name}" está vazio ou truncado.`,
+    noHeader: (name: string) =>
+      `"${name}" não tem um cabeçalho %PDF válido e não pode ser processado.`,
+    enterRanges: 'Insira números de página ou intervalos como "1-3, 5".',
+    rangeOutside: (token: string, total: number) =>
+      `O intervalo "${token}" está fora dos limites do documento (1–${total} páginas).`,
+    rangeReversed: (token: string) =>
+      `O intervalo "${token}" tem uma página inicial maior que a final.`,
+    pageMissing: (page: number, total: number) =>
+      `A página ${page} não existe (o documento tem ${total} páginas).`,
+    invalidSyntax: (token: string) =>
+      `Sintaxe de página inválida: "${token}". Use números e intervalos como "1-3, 5".`,
+    encrypted:
+      'Este PDF está criptografado ou protegido por senha. Desbloqueie-o antes de processá-lo localmente.',
+    unable: 'Não foi possível processar o arquivo PDF.',
+  },
+  fr: {
+    noFile: 'Aucun fichier n’a été sélectionné.',
+    notPdf: (name: string) => `"${name}" ne semble pas être un fichier PDF.`,
+    empty: (name: string) => `"${name}" est vide ou tronqué.`,
+    noHeader: (name: string) =>
+      `"${name}" n’a pas d’en-tête %PDF valide et ne peut pas être traité.`,
+    enterRanges: 'Saisissez des numéros de page ou des plages comme « 1-3, 5 ».',
+    rangeOutside: (token: string, total: number) =>
+      `La plage « ${token} » est hors des limites du document (1–${total} pages).`,
+    rangeReversed: (token: string) =>
+      `La plage « ${token} » a une page de début supérieure à sa page de fin.`,
+    pageMissing: (page: number, total: number) =>
+      `La page ${page} n’existe pas (le document a ${total} pages).`,
+    invalidSyntax: (token: string) =>
+      `Syntaxe de page non valide : « ${token} ». Utilisez des nombres et des plages comme « 1-3, 5 ».`,
+    encrypted:
+      'Ce PDF est chiffré ou protégé par mot de passe. Déverrouillez-le avant de le traiter localement.',
+    unable: 'Impossible de traiter le fichier PDF.',
+  },
 } as const;
 
 export function formatBytes(bytes: number, locale: LocaleCode = 'en'): string {
+  // localeTag maps 'pt' -> 'pt-BR' so numbers render the Brazilian way.
+  const tag = localeTag(locale);
   if (!Number.isFinite(bytes) || bytes < 0) return '0 B';
-  if (bytes < 1024) return `${bytes.toLocaleString(locale)} B`;
+  if (bytes < 1024) return `${bytes.toLocaleString(tag)} B`;
   if (bytes < 1024 * 1024)
-    return `${(bytes / 1024).toLocaleString(locale, {
+    return `${(bytes / 1024).toLocaleString(tag, {
       minimumFractionDigits: 1,
       maximumFractionDigits: 1,
     })} KB`;
-  return `${(bytes / (1024 * 1024)).toLocaleString(locale, {
+  return `${(bytes / (1024 * 1024)).toLocaleString(tag, {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   })} MB`;
@@ -115,11 +156,15 @@ export function parsePageRanges(
 ): { indices: number[]; error: string } {
   const s = PDF_STRINGS[locale];
   const trimmed = input.trim();
-  // "all" in English; "todas"/"todo" in Spanish.
+  // "all" in English; "todas"/"todo" in Spanish; "todas"/"todos" in Portuguese; "toutes"/"tous" in French.
   const allKeyword =
     locale === 'es'
       ? ['all', 'todas', 'todo'].includes(trimmed.toLowerCase())
-      : trimmed.toLowerCase() === 'all';
+      : locale === 'pt'
+        ? ['all', 'todas', 'todos'].includes(trimmed.toLowerCase())
+        : locale === 'fr'
+          ? ['all', 'toutes', 'tous'].includes(trimmed.toLowerCase())
+          : trimmed.toLowerCase() === 'all';
   if (!trimmed || allKeyword) {
     return {
       indices: Array.from({ length: totalPages }, (_, i) => i),

@@ -53,6 +53,48 @@ const STRINGS = {
     extracting: 'Extrayendo PDF...',
     splitBtn: 'Dividir y descargar PDF',
   },
+  pt: {
+    errBurst: (n: number) =>
+      `A divisão em massa baixa um arquivo por página. Para documentos com mais de 25 páginas (${n} páginas aqui), extraia intervalos para que seu navegador não bloqueie downloads em massa.`,
+    exportedAll: (n: number) => `${n} arquivos PDF de uma página exportados.`,
+    errNoMatch: 'Nenhuma página correspondeu a essa seleção (por exemplo, Páginas pares exige 2 ou mais páginas).',
+    extractedSuccess: (a: number, b: number, size: string) =>
+      `${a} de ${b} páginas extraídas (${size}).`,
+    dropTitleEmpty: 'Escolha um arquivo PDF para dividir ou extrair',
+    dropTitleFile: (name: string, pages: number, size: string) => `${name} (${pages} páginas · ${size})`,
+    dropSub: 'Processado localmente na memória · Clique para substituir o documento',
+    modeRange: 'Extrair intervalos de páginas',
+    modeOdd: 'Somente páginas ímpares',
+    modeEven: 'Somente páginas pares',
+    modeBurst: 'Dividir todas as páginas individuais',
+    labelRange: (n: number) => `Páginas para extrair (1–${n})`,
+    phRange: 'ex.: 1-3, 5, 8-10',
+    rangeHintBefore: 'Use vírgulas e hifens (por exemplo ',
+    rangeHintAfter: ').',
+    extracting: 'Extraindo PDF...',
+    splitBtn: 'Dividir e baixar PDF',
+  },
+  fr: {
+    errBurst: (n: number) =>
+      `La division en masse télécharge un fichier par page. Pour les documents de plus de 25 pages (${n} pages ici), extrayez plutôt des plages afin que votre navigateur ne bloque pas les téléchargements en masse.`,
+    exportedAll: (n: number) => `${n} fichiers PDF d’une seule page exportés.`,
+    errNoMatch: 'Aucune page ne correspond à cette sélection (par exemple, Pages paires exige 2 pages ou plus).',
+    extractedSuccess: (a: number, b: number, size: string) =>
+      `${a} pages sur ${b} extraites (${size}).`,
+    dropTitleEmpty: 'Choisissez un fichier PDF à diviser ou à extraire',
+    dropTitleFile: (name: string, pages: number, size: string) => `${name} (${pages} pages · ${size})`,
+    dropSub: 'Traité localement en mémoire · Cliquez pour remplacer le document',
+    modeRange: 'Extraire des plages de pages',
+    modeOdd: 'Pages impaires uniquement',
+    modeEven: 'Pages paires uniquement',
+    modeBurst: 'Éclater toutes les pages individuelles',
+    labelRange: (n: number) => `Pages à extraire (1–${n})`,
+    phRange: 'p. ex. 1-3, 5, 8-10',
+    rangeHintBefore: 'Utilisez des virgules et des traits d’union (par exemple ',
+    rangeHintAfter: ').',
+    extracting: 'Extraction du PDF...',
+    splitBtn: 'Diviser et télécharger le PDF',
+  },
 };
 
 type SplitMode = 'range' | 'every-page' | 'odd' | 'even';
