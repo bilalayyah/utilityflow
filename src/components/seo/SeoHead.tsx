@@ -9,6 +9,8 @@ export interface SeoHeadProps {
   ogType?: 'website' | 'article';
   noIndex?: boolean;
   structuredData?: Record<string, unknown> | Array<Record<string, unknown>>;
+  /** hreflang alternates (absolute URLs). Rendered as <link rel="alternate">. */
+  alternates?: Array<{ hreflang: string; href: string }>;
 }
 
 function upsertMeta(attribute: 'name' | 'property', key: string, content: string): void {
@@ -31,6 +33,20 @@ function upsertCanonical(href: string): void {
   link.setAttribute('href', href);
 }
 
+function upsertAlternates(alternates?: Array<{ hreflang: string; href: string }>): void {
+  document.head
+    .querySelectorAll('link[rel="alternate"][hreflang]')
+    .forEach((node) => node.remove());
+  if (!alternates) return;
+  for (const alt of alternates) {
+    const link = document.createElement('link');
+    link.setAttribute('rel', 'alternate');
+    link.setAttribute('hreflang', alt.hreflang);
+    link.setAttribute('href', alt.href);
+    document.head.appendChild(link);
+  }
+}
+
 export function SeoHead({
   title,
   description,
@@ -39,10 +55,12 @@ export function SeoHead({
   ogType = 'website',
   noIndex = false,
   structuredData,
+  alternates,
 }: SeoHeadProps) {
   const canonicalUrl = buildCanonicalUrl(canonicalPath);
   const serializedSchema = structuredData ? JSON.stringify(structuredData) : '';
   const serializedKeywords = keywords?.join(', ') || '';
+  const serializedAlternates = alternates ? JSON.stringify(alternates) : '';
 
   useEffect(() => {
     document.title = title;
@@ -54,6 +72,7 @@ export function SeoHead({
     upsertMeta('name', 'robots', noIndex ? 'noindex, follow' : 'index, follow');
 
     upsertCanonical(canonicalUrl);
+    upsertAlternates(alternates);
 
     upsertMeta('property', 'og:title', title);
     upsertMeta('property', 'og:description', description);
@@ -84,7 +103,7 @@ export function SeoHead({
       const cleanupScripts = document.head.querySelectorAll('script[data-seo-jsonld="true"]');
       cleanupScripts.forEach((node) => node.remove());
     };
-  }, [title, description, canonicalUrl, serializedKeywords, ogType, noIndex, serializedSchema, structuredData]);
+  }, [title, description, canonicalUrl, serializedKeywords, ogType, noIndex, serializedSchema, serializedAlternates, structuredData, alternates]);
 
   return null;
 }
