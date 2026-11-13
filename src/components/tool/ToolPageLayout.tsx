@@ -2,7 +2,7 @@ import { Check, Info } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { buildCanonicalUrl } from '../../config/site';
 import { getCategoryById } from '../../registry/categories';
-import type { BreadcrumbItem, ToolDefinition } from '../../types/tool';
+import type { BreadcrumbItem, ToolDefinition, ToolStep } from '../../types/tool';
 import { AdSlot } from '../common/AdSlot';
 import { Breadcrumbs, buildBreadcrumbSchema } from '../common/Breadcrumbs';
 import { FAQAccordion, buildFaqSchema } from '../common/FAQAccordion';
@@ -12,6 +12,20 @@ import { RelatedTools } from './RelatedTools';
 interface ToolPageLayoutProps {
   tool: ToolDefinition;
   children: ReactNode;
+}
+
+export function buildHowToSchema(toolName: string, description: string, steps: ToolStep[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: `How to Use ${toolName}`,
+    description,
+    step: steps.map((step) => ({
+      '@type': 'HowToStep',
+      name: step.title,
+      text: step.description,
+    })),
+  };
 }
 
 export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
@@ -45,6 +59,9 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
   const structuredData = [
     softwareSchema,
     buildBreadcrumbSchema(breadcrumbItems),
+    ...(tool.instructions.length > 0
+      ? [buildHowToSchema(tool.name, tool.seo.description, tool.instructions)]
+      : []),
     ...(tool.faqs.length > 0 ? [buildFaqSchema(tool.faqs)] : []),
   ];
 
