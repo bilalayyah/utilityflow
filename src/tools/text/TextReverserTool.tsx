@@ -94,6 +94,36 @@ Terza riga di testo`,
       { id: 'lines', label: 'Inverti ordine delle righe' },
     ],
   },
+  id: {
+    sampleText: `Baris pertama teks
+Baris kedua teks
+Baris ketiga teks`,
+    originalText: 'Teks Asli',
+    reversedOutput: 'Hasil yang Dibalik',
+    inputPlaceholder: 'Masukkan teks atau baris untuk dibalik...',
+    outputPlaceholder: 'Teks yang dibalik muncul di sini...',
+    modes: [
+      { id: 'characters', label: 'Balik Karakter' },
+      { id: 'words', label: 'Balik Urutan Kata' },
+      { id: 'each-word', label: 'Balik Setiap Kata' },
+      { id: 'lines', label: 'Balik Urutan Baris' },
+    ],
+  },
+  ru: {
+    sampleText: `Первая строка текста
+Вторая строка текста
+Третья строка текста`,
+    originalText: 'Исходный текст',
+    reversedOutput: 'Перевёрнутый результат',
+    inputPlaceholder: 'Введите текст или строки для переворота...',
+    outputPlaceholder: 'Здесь появится перевёрнутый текст...',
+    modes: [
+      { id: 'characters', label: 'Перевернуть символы' },
+      { id: 'words', label: 'Перевернуть порядок слов' },
+      { id: 'each-word', label: 'Перевернуть каждое слово' },
+      { id: 'lines', label: 'Перевернуть порядок строк' },
+    ],
+  },
 };
 
 type ReverseMode = 'characters' | 'words' | 'each-word' | 'lines';

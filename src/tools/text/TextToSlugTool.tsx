@@ -88,6 +88,34 @@ Come creare un sito statico veloce su Cloudflare Pages`,
     copySlugs: 'Copia gli slug',
     outputPlaceholder: 'slug-url-puliti-appaiono-qui',
   },
+  id: {
+    sampleTitles: `10 Cara Terbaik Memformat JSON Online!
+Café & Crème: Panduan untuk 2026
+Cara Membangun Situs Statis Cepat di Cloudflare Pages`,
+    hyphen: 'Tanda hubung (-)',
+    underscore: 'Garis bawah (_)',
+    forceLowercase: 'Paksa huruf kecil',
+    stripStopWords: 'Hapus kata henti umum',
+    titlesLabel: 'Judul atau Frasa (satu per baris untuk mode batch)',
+    inputPlaceholder: 'Masukkan judul blog, nama produk, atau daftar judul...',
+    generatedSlugs: 'Slug URL yang Dihasilkan',
+    copySlugs: 'Salin slug',
+    outputPlaceholder: 'slug-url-bersih-muncul-di-sini',
+  },
+  ru: {
+    sampleTitles: `10 лучших способов форматировать JSON онлайн!
+Café & Crème: руководство на 2026 год
+Как создать быстрый статический сайт на Cloudflare Pages`,
+    hyphen: 'Дефис (-)',
+    underscore: 'Подчёркивание (_)',
+    forceLowercase: 'Принудительно в нижний регистр',
+    stripStopWords: 'Удалять общие стоп-слова',
+    titlesLabel: 'Заголовки или фразы (по одному в строке для пакетного режима)',
+    inputPlaceholder: 'Введите заголовок блога, название продукта или список заголовков...',
+    generatedSlugs: 'Сгенерированные URL-слаги',
+    copySlugs: 'Копировать слаги',
+    outputPlaceholder: 'чистые-url-слаги-появятся-здесь',
+  },
 };
 
 const STOP_WORDS = new Set([

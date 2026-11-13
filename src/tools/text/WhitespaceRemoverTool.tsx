@@ -136,6 +136,50 @@ Terza   riga qui.   `,
     inputPlaceholder: 'Incolla testo disordinato con spazi extra, tabulazioni o righe vuote...',
     outputPlaceholder: 'L\'output pulito apparirà automaticamente...',
   },
+  id: {
+    sampleText: `   Baris   pertama dengan   spasi   berlebih.   
+
+   Baris kedua   dengan   tab	dan   celah.
+
+
+Baris   ketiga di sini.   `,
+    collapseSpaces: 'Gabungkan beberapa spasi',
+    trimEdges: 'Pangkas tepi baris',
+    tabsToSpaces: 'Ubah tab menjadi spasi',
+    lineBreaks: 'Jeda baris:',
+    keepBreaks: 'Pertahankan jeda baris',
+    removeBlankLines: 'Hapus baris kosong',
+    replaceWithSpaces: 'Ganti dengan spasi',
+    removeAllBreaks: 'Hapus semua jeda',
+    inputText: 'Teks Input',
+    chars: 'karakter',
+    cleanedText: 'Teks yang Dibersihkan',
+    removed: 'dihapus',
+    inputPlaceholder: 'Tempel teks berantakan dengan spasi berlebih, tab, atau baris kosong...',
+    outputPlaceholder: 'Hasil yang dibersihkan muncul secara otomatis...',
+  },
+  ru: {
+    sampleText: `   Первая   строка с   лишними   пробелами.   
+
+   Вторая строка   с   табуляцией	и   пробелами.
+
+
+Третья   строка здесь.   `,
+    collapseSpaces: 'Схлопывать несколько пробелов',
+    trimEdges: 'Обрезать края строк',
+    tabsToSpaces: 'Преобразовывать табуляцию в пробелы',
+    lineBreaks: 'Переносы строк:',
+    keepBreaks: 'Сохранять переносы строк',
+    removeBlankLines: 'Удалять пустые строки',
+    replaceWithSpaces: 'Заменить пробелами',
+    removeAllBreaks: 'Удалить все переносы',
+    inputText: 'Входной текст',
+    chars: 'симв.',
+    cleanedText: 'Очищенный текст',
+    removed: 'удалено',
+    inputPlaceholder: 'Вставьте неаккуратный текст с лишними пробелами, табуляцией или пустыми строками...',
+    outputPlaceholder: 'Очищенный результат появится автоматически...',
+  },
 };
 
 type LineBreakMode = 'keep' | 'collapse-blank' | 'remove-all' | 'to-spaces';

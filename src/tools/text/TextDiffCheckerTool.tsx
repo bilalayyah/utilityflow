@@ -82,6 +82,32 @@ const STRINGS = {
     unchanged: 'invariate',
     emptyState: 'Inserisci il testo in entrambe le caselle qui sopra per confrontare righe aggiunte e rimosse.',
   },
+  id: {
+    ignoreWhitespace: 'Abaikan spasi',
+    ignoreCase: 'Abaikan huruf besar/kecil',
+    originalText: 'Teks Asli',
+    modifiedText: 'Teks yang Diubah',
+    originalPlaceholder: 'Tempel teks asli...',
+    modifiedPlaceholder: 'Tempel teks yang diperbarui...',
+    lineComparison: 'Perbandingan Baris',
+    added: 'ditambahkan',
+    removed: 'dihapus',
+    unchanged: 'tidak berubah',
+    emptyState: 'Masukkan teks di kedua kotak di atas untuk membandingkan penambahan dan penghapusan baris.',
+  },
+  ru: {
+    ignoreWhitespace: 'Игнорировать пробелы',
+    ignoreCase: 'Игнорировать регистр',
+    originalText: 'Исходный текст',
+    modifiedText: 'Изменённый текст',
+    originalPlaceholder: 'Вставьте исходный текст...',
+    modifiedPlaceholder: 'Вставьте обновлённый текст...',
+    lineComparison: 'Сравнение строк',
+    added: 'добавлено',
+    removed: 'удалено',
+    unchanged: 'без изменений',
+    emptyState: 'Введите текст в оба поля выше, чтобы сравнить добавленные и удалённые строки.',
+  },
 };
 
 interface DiffLine {

@@ -196,6 +196,70 @@ Scopri di più su [UtilityFlow](/tools/).`,
     inputPlaceholder: 'Scrivi Markdown (# Titolo, **grassetto**, - elenco, [link](https://...))...',
     emptyPreview: 'L\'anteprima apparirà mentre scrivi Markdown...',
   },
+  id: {
+    sampleMarkdown: `# Catatan Rilis UtilityFlow
+
+Selamat datang di **Markdown Previewer**, editor sisi klien yang cepat dengan ekspor *HTML* langsung.
+
+## Kemampuan Utama
+
+- Pemformatan instan untuk judul, daftar, dan tautan
+- Escaping HTML yang aman tanpa unggahan jarak jauh
+- Salin dan unduh HTML mentah dengan satu klik
+
+> Simpan dokumentasi dekat dengan pekerjaan dan pratinjau strukturnya sebelum menerbitkan.
+
+\`\`\`json
+{
+  "tool": "markdown-previewer",
+  "mode": "browser-side"
+}
+\`\`\`
+
+Pelajari lebih lanjut di [UtilityFlow](/tools/).`,
+    renderedPreview: 'Pratinjau yang Dirender',
+    rawHtml: 'HTML Mentah',
+    exportHtml: 'Ekspor HTML',
+    copyHtml: 'Salin HTML',
+    markdownSource: 'Sumber Markdown',
+    livePreview: 'Pratinjau Langsung',
+    compiledHtml: 'HTML yang Dikompilasi',
+    compiledHtmlAria: 'Sumber HTML yang dikompilasi',
+    inputPlaceholder: 'Tulis Markdown (# Judul, **tebal**, - daftar, [tautan](https://...))...',
+    emptyPreview: 'Pratinjau akan muncul saat Anda mengetik Markdown...',
+  },
+  ru: {
+    sampleMarkdown: `# Заметки о выпуске UtilityFlow
+
+Добро пожаловать в **Markdown Previewer** — быстрый редактор на стороне клиента с живым экспортом в *HTML*.
+
+## Основные возможности
+
+- Мгновенное форматирование заголовков, списков и ссылок
+- Безопасное экранирование HTML без загрузки на сервер
+- Копирование и скачивание исходного HTML в один клик
+
+> Держите документацию рядом с работой и проверяйте структуру перед публикацией.
+
+\`\`\`json
+{
+  "tool": "markdown-previewer",
+  "mode": "browser-side"
+}
+\`\`\`
+
+Подробнее — на [UtilityFlow](/tools/).`,
+    renderedPreview: 'Отрендеренный предпросмотр',
+    rawHtml: 'Исходный HTML',
+    exportHtml: 'Экспорт HTML',
+    copyHtml: 'Копировать HTML',
+    markdownSource: 'Исходник Markdown',
+    livePreview: 'Живой предпросмотр',
+    compiledHtml: 'Скомпилированный HTML',
+    compiledHtmlAria: 'Исходный код скомпилированного HTML',
+    inputPlaceholder: 'Напишите Markdown (# Заголовок, **жирный**, - список, [ссылка](https://...))...',
+    emptyPreview: 'Предпросмотр появится, когда вы начнёте вводить Markdown...',
+  },
 };
 
 function escapeHtml(text: string): string {

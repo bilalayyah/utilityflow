@@ -113,6 +113,42 @@ const STRINGS = {
     density: 'Densità',
     emptyState: 'Inserisci il testo qui sopra per visualizzare i conteggi delle parole e le percentuali di densità delle parole chiave.',
   },
+  id: {
+    sampleText: `Audit SEO teknis memeriksa kemampuan perayapan, tautan internal, dan kecepatan halaman. Halaman yang cepat meningkatkan keterlibatan pengguna dan sinyal kecepatan halaman di pencarian seluler. Tautan internal menghubungkan panduan terkait dan memperkuat struktur SEO teknis.`,
+    ngramLabels: { 1: '1 Kata', 2: 'Frasa 2 Kata', 3: 'Frasa 3 Kata' },
+    excludeStopWords: 'Kecualikan kata henti umum',
+    minLength: 'Panjang min:',
+    textForAnalysis: 'Teks untuk analisis frekuensi',
+    placeholder:
+      'Tempel teks artikel, deskripsi produk, atau catatan untuk menghitung istilah yang berulang dan kepadatan kata kunci...',
+    totalWords: 'Total kata:',
+    uniqueTerms: 'Istilah unik:',
+    exportCsv: 'Ekspor CSV',
+    copyCsv: 'Salin CSV',
+    rank: '#',
+    termPhrase: 'Istilah / Frasa',
+    count: 'Jumlah',
+    density: 'Kepadatan',
+    emptyState: 'Masukkan teks di atas untuk memeriksa jumlah kata dan persentase kepadatan kata kunci.',
+  },
+  ru: {
+    sampleText: `Технические SEO-аудиты проверяют сканируемость, внутренние ссылки и скорость страниц. Быстрые страницы улучшают вовлечённость пользователей и сигналы скорости в мобильном поиске. Внутренние ссылки связывают связанные руководства и укрепляют структуру технического SEO.`,
+    ngramLabels: { 1: '1 слово', 2: 'Фразы из 2 слов', 3: 'Фразы из 3 слов' },
+    excludeStopWords: 'Исключать общие стоп-слова',
+    minLength: 'Мин. длина:',
+    textForAnalysis: 'Текст для анализа частотности',
+    placeholder:
+      'Вставьте текст статьи, описания товаров или заметки, чтобы подсчитать повторяющиеся термины и плотность ключевых слов...',
+    totalWords: 'Всего слов:',
+    uniqueTerms: 'Уникальных терминов:',
+    exportCsv: 'Экспорт CSV',
+    copyCsv: 'Копировать CSV',
+    rank: '#',
+    termPhrase: 'Термин / фраза',
+    count: 'Количество',
+    density: 'Плотность',
+    emptyState: 'Введите текст выше, чтобы увидеть подсчёт слов и процент плотности ключевых слов.',
+  },
 };
 
 const STOP_WORDS = new Set([

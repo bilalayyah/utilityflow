@@ -213,6 +213,76 @@ Le frasi lunghe piene di proposizioni subordinate costringono i lettori a rilegg
       { level: 'Molto difficile', audience: 'Laurea / specializzazione' },
     ],
   },
+  id: {
+    sampleText: `Penulisan teknis yang jelas menghargai waktu pembaca. Gunakan kata benda yang konkret dan kata kerja aktif sebisa mungkin agar instruksi yang rumit tetap mudah diikuti.
+
+Kalimat panjang yang dipenuhi klausa bersarang memaksa pembaca membaca ulang paragraf. Memecah penjelasan yang padat menjadi langkah-langkah yang lebih pendek membuat dokumentasi lebih cepat dipindai dan lebih mudah diterapkan.`,
+    level: 'Tingkat:',
+    textToCheck: 'Teks untuk diperiksa keterbacaannya',
+    placeholder:
+      'Tempel artikel, esai, atau teks landing page Anda untuk menghitung Flesch Reading Ease dan skor tingkat kelas...',
+    fleschEase: 'Flesch Reading Ease',
+    fleschKincaid: 'Tingkat Kelas Flesch-Kincaid',
+    usGrade: 'Tingkat kelas sekolah AS',
+    gunningFog: 'Indeks Gunning Fog',
+    yearsEducation: 'Tahun pendidikan',
+    smog: 'Indeks SMOG',
+    polysyllable: 'Kompleksitas polisilabel',
+    structuralBreakdown: 'Rincian Struktural',
+    wordsSentences: 'Kata / Kalimat',
+    avgSentenceLength: 'Rata-rata panjang kalimat',
+    words: 'kata',
+    avgSyllablesPerWord: 'Rata-rata suku kata per kata',
+    complexWords: 'Kata kompleks (3+ suku kata)',
+    longWordsDetected: 'Kata Panjang Terdeteksi (3+ Suku Kata)',
+    noLongWords: 'Tidak ditemukan kata dengan 3+ suku kata dalam bagian ini.',
+    emptyState:
+      'Masukkan setidaknya satu kalimat di atas untuk melihat rumus keterbacaan dan rasio struktural.',
+    levels: [
+      { level: 'Sangat Mudah', audience: 'Kelas 5 (10–11 thn)' },
+      { level: 'Mudah', audience: 'Kelas 6 (11–12 thn)' },
+      { level: 'Cukup Mudah', audience: 'Kelas 7 (12–13 thn)' },
+      { level: 'Standar', audience: 'Kelas 8–9 (13–15 thn)' },
+      { level: 'Cukup Sulit', audience: 'Kelas 10–12' },
+      { level: 'Sulit', audience: 'Tingkat perguruan tinggi' },
+      { level: 'Sangat Sulit', audience: 'Lulusan perguruan tinggi / spesialis' },
+    ],
+  },
+  ru: {
+    sampleText: `Понятный технический текст уважает время читателя. Используйте конкретные существительные и активные глаголы, когда это возможно, чтобы сложные инструкции было легко выполнять.
+
+Длинные предложения, перегруженные вложенными придаточными, заставляют читателей перечитывать абзацы. Разбивка плотных объяснений на более короткие шаги делает документацию быстрее для просмотра и проще в применении.`,
+    level: 'Уровень:',
+    textToCheck: 'Текст для проверки читаемости',
+    placeholder:
+      'Вставьте статью, эссе или текст лендинга, чтобы вычислить показатель лёгкости чтения Флеша и оценки уровня класса...',
+    fleschEase: 'Лёгкость чтения по Флешу',
+    fleschKincaid: 'Класс по Флешу — Кинкейду',
+    usGrade: 'Уровень класса школы США',
+    gunningFog: 'Индекс туманности Ганнинга',
+    yearsEducation: 'Лет образования',
+    smog: 'Индекс SMOG',
+    polysyllable: 'Сложность многосложных слов',
+    structuralBreakdown: 'Структурный разбор',
+    wordsSentences: 'Слова / предложения',
+    avgSentenceLength: 'Средняя длина предложения',
+    words: 'слов',
+    avgSyllablesPerWord: 'Среднее число слогов в слове',
+    complexWords: 'Сложные слова (3+ слога)',
+    longWordsDetected: 'Обнаружены длинные слова (3+ слога)',
+    noLongWords: 'В этом отрывке не найдено слов из 3+ слогов.',
+    emptyState:
+      'Введите хотя бы одно предложение выше, чтобы увидеть формулы читаемости и структурные соотношения.',
+    levels: [
+      { level: 'Очень легко', audience: '5-й класс (10–11 лет)' },
+      { level: 'Легко', audience: '6-й класс (11–12 лет)' },
+      { level: 'Довольно легко', audience: '7-й класс (12–13 лет)' },
+      { level: 'Стандартно', audience: '8–9-й класс (13–15 лет)' },
+      { level: 'Довольно сложно', audience: '10–12-й класс' },
+      { level: 'Сложно', audience: 'Уровень колледжа' },
+      { level: 'Очень сложно', audience: 'Выпускник колледжа / специалист' },
+    ],
+  },
 };
 
 function countSyllables(word: string): number {

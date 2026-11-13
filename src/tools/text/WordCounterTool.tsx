@@ -142,6 +142,52 @@ Le frasi brevi migliorano la leggibilità. Variare la lunghezza delle frasi mant
     mostFrequentWords: 'Parole più frequenti',
     emptyKeywords: 'Inserisci il testo qui sopra per vedere le parole più ripetute.',
   },
+  id: {
+    sampleText: `UtilityFlow memproses setiap perhitungan teks langsung di browser Anda. Baik saat Anda menyusun artikel blog, menyempurnakan pengumuman produk, atau memeriksa esai akademis dengan batas kata yang ketat, hitungan instan membantu Anda mengatur pesan dengan jelas.
+
+Kalimat pendek memudahkan pemindaian. Memvariasikan panjang kalimat membuat panduan yang lebih panjang tetap menarik bagi pembaca di layar desktop dan seluler.`,
+    words: 'Kata',
+    characters: 'Karakter',
+    noSpaces: 'Tanpa Spasi',
+    sentences: 'Kalimat',
+    paragraphs: 'Paragraf',
+    readingTime: 'Waktu Baca',
+    downloadTxt: 'Unduh .txt',
+    copyText: 'Salin teks',
+    textToCount: 'Teks yang dihitung',
+    placeholder:
+      'Tempel atau ketik teks Anda di sini untuk menghitung kata, karakter, kalimat, dan waktu baca...',
+    deliveryTimingLines: 'Waktu Penyampaian & Baris',
+    speakingTime: 'Waktu berbicara (130 kpm)',
+    totalLines: 'Total baris',
+    avgWordLength: 'Rata-rata panjang kata',
+    chars: 'karakter',
+    mostFrequentWords: 'Kata yang Paling Sering Muncul',
+    emptyKeywords: 'Masukkan teks di atas untuk melihat kata yang paling sering diulang.',
+  },
+  ru: {
+    sampleText: `UtilityFlow выполняет все подсчёты текста прямо в вашем браузере. Составляете ли вы статью для блога, дорабатываете анонс продукта или проверяете научное эссе на соответствие строгому лимиту слов — мгновенные подсчёты помогут вам чётко выстроить сообщение.
+
+Короткие предложения легче читать. Разная длина предложений делает длинные руководства интересными для читателей на экранах компьютеров и мобильных устройств.`,
+    words: 'Слова',
+    characters: 'Символы',
+    noSpaces: 'Без пробелов',
+    sentences: 'Предложения',
+    paragraphs: 'Абзацы',
+    readingTime: 'Время чтения',
+    downloadTxt: 'Скачать .txt',
+    copyText: 'Копировать текст',
+    textToCount: 'Текст для подсчёта',
+    placeholder:
+      'Вставьте или введите текст, чтобы подсчитать слова, символы, предложения и время чтения...',
+    deliveryTimingLines: 'Время произнесения и строки',
+    speakingTime: 'Время произнесения (130 слов/мин)',
+    totalLines: 'Всего строк',
+    avgWordLength: 'Средняя длина слова',
+    chars: 'симв.',
+    mostFrequentWords: 'Самые частые слова',
+    emptyKeywords: 'Введите текст выше, чтобы увидеть самые повторяющиеся слова.',
+  },
 };
 
 export default function WordCounterTool() {

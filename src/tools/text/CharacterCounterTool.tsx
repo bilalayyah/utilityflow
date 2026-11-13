@@ -166,6 +166,60 @@ const STRINGS = {
       { name: 'Post su LinkedIn', note: 'Aggiornamento standard massimo del feed' },
     ],
   },
+  id: {
+    sampleText:
+      'Tulis teks yang jelas dan ringkas agar sesuai dengan batas karakter platform tanpa terpotong secara aneh di hasil pencarian atau feed media sosial.',
+    withSpaces: 'Dengan Spasi',
+    withoutSpaces: 'Tanpa Spasi',
+    words: 'Kata',
+    letters: 'Huruf',
+    digits: 'Angka',
+    utf8Bytes: 'Byte UTF-8',
+    copyText: 'Salin teks',
+    textToMeasure: 'Teks untuk mengukur panjang karakter',
+    placeholder:
+      'Ketik atau tempel teks untuk melihat jumlah karakter yang tepat, ukuran byte, dan batas platform...',
+    whitespaceChars: 'Karakter spasi',
+    lines: 'Baris',
+    platformLimitsTitle: 'Batas Karakter Platform & SEO',
+    over: 'lebih',
+    left: 'tersisa',
+    platformLimits: [
+      { name: 'Judul Meta SEO', note: 'Panjang judul SERP Google yang disarankan' },
+      { name: 'Deskripsi Meta SEO', note: 'Batas standar cuplikan desktop' },
+      { name: 'Segmen SMS', note: 'Satu pesan SMS GSM-7' },
+      { name: 'Postingan X / Twitter', note: 'Panjang postingan standar' },
+      { name: 'Pratinjau Caption Instagram', note: 'Terlihat sebelum pemotongan "Selengkapnya"' },
+      { name: 'Postingan LinkedIn', note: 'Pembaruan feed standar maksimum' },
+    ],
+  },
+  ru: {
+    sampleText:
+      'Пишите чёткий и лаконичный текст, который укладывается в ограничения символов платформ и не обрывается неловко в результатах поиска или лентах соцсетей.',
+    withSpaces: 'С пробелами',
+    withoutSpaces: 'Без пробелов',
+    words: 'Слова',
+    letters: 'Буквы',
+    digits: 'Цифры',
+    utf8Bytes: 'Байты UTF-8',
+    copyText: 'Копировать текст',
+    textToMeasure: 'Текст для измерения длины в символах',
+    placeholder:
+      'Введите или вставьте текст, чтобы узнать точное число символов, размер в байтах и лимиты платформ...',
+    whitespaceChars: 'Пробельные символы',
+    lines: 'Строки',
+    platformLimitsTitle: 'Лимиты символов платформ и SEO',
+    over: 'превышение',
+    left: 'осталось',
+    platformLimits: [
+      { name: 'SEO-заголовок Meta', note: 'Рекомендуемая длина заголовка в выдаче Google' },
+      { name: 'SEO-описание Meta', note: 'Стандартный порог сниппета на компьютере' },
+      { name: 'Сегмент SMS', note: 'Одно SMS-сообщение GSM-7' },
+      { name: 'Пост X / Twitter', note: 'Стандартная длина поста' },
+      { name: 'Предпросмотр подписи Instagram', note: 'Видно до обрезки «Ещё»' },
+      { name: 'Пост LinkedIn', note: 'Максимальное стандартное обновление ленты' },
+    ],
+  },
 };
 
 interface PlatformLimit {

@@ -76,6 +76,30 @@ const STRINGS = {
     copyPlaceholder: 'Copia il testo segnaposto',
     generatedText: 'Testo segnaposto generato',
   },
+  id: {
+    amount: 'Jumlah',
+    unit: 'Satuan',
+    unitLabels: { paragraphs: 'paragraf', sentences: 'kalimat', words: 'kata' },
+    startClassic: 'Mulai dengan “Lorem ipsum”',
+    wrapHtml: 'Bungkus dengan tag <p>',
+    words: 'kata',
+    characters: 'karakter',
+    regenerate: 'Buat Ulang',
+    copyPlaceholder: 'Salin teks placeholder',
+    generatedText: 'Teks placeholder yang dihasilkan',
+  },
+  ru: {
+    amount: 'Количество',
+    unit: 'Единица',
+    unitLabels: { paragraphs: 'абзацев', sentences: 'предложений', words: 'слов' },
+    startClassic: 'Начать с «Lorem ipsum»',
+    wrapHtml: 'Обернуть в теги <p>',
+    words: 'слов',
+    characters: 'символов',
+    regenerate: 'Сгенерировать заново',
+    copyPlaceholder: 'Копировать текст-заполнитель',
+    generatedText: 'Сгенерированный текст-заполнитель',
+  },
 };
 
 type UnitType = 'paragraphs' | 'sentences' | 'words';

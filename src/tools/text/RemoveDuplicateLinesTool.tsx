@@ -82,6 +82,32 @@ const STRINGS = {
     inputPlaceholder: 'Incolla un elenco con un elemento per riga...',
     outputPlaceholder: 'L\'output deduplicato apparirà qui...',
   },
+  id: {
+    caseSensitive: 'Peka huruf besar/kecil',
+    trimWhitespace: 'Pangkas spasi',
+    removeEmptyLines: 'Hapus baris kosong',
+    sortAlphabetically: 'Urutkan menurut abjad',
+    originalLines: 'Baris Asli',
+    lines: 'baris',
+    uniqueLines: 'Baris Unik',
+    unique: 'unik',
+    removed: 'dihapus',
+    inputPlaceholder: 'Tempel daftar dengan satu item per baris...',
+    outputPlaceholder: 'Hasil yang dideduplikasi akan muncul di sini...',
+  },
+  ru: {
+    caseSensitive: 'С учётом регистра',
+    trimWhitespace: 'Обрезать пробелы',
+    removeEmptyLines: 'Удалять пустые строки',
+    sortAlphabetically: 'Сортировать по алфавиту',
+    originalLines: 'Исходные строки',
+    lines: 'строк',
+    uniqueLines: 'Уникальные строки',
+    unique: 'уникальных',
+    removed: 'удалено',
+    inputPlaceholder: 'Вставьте список — по одному элементу в строке...',
+    outputPlaceholder: 'Здесь появится результат без дубликатов...',
+  },
 };
 
 const SAMPLE_LINES = `apple@example.com

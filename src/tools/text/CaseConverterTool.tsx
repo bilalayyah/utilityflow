@@ -34,6 +34,16 @@ const STRINGS = {
     placeholder: 'Digita o incolla il testo, poi fai clic su uno dei pulsanti di conversione qui sotto...',
     copyResult: 'Copia il risultato',
   },
+  id: {
+    textToConvert: 'Teks yang diubah hurufnya',
+    placeholder: 'Ketik atau tempel teks, lalu klik tombol konversi huruf di bawah...',
+    copyResult: 'Salin hasil',
+  },
+  ru: {
+    textToConvert: 'Текст для изменения регистра',
+    placeholder: 'Введите или вставьте текст, затем нажмите любую кнопку преобразования регистра ниже...',
+    copyResult: 'Копировать результат',
+  },
 };
 
 const SAMPLE_TEXT = 'welcome to utilityFlow: fast text_case formatting & clean URLs';
