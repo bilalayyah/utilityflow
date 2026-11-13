@@ -1,11 +1,11 @@
 import { FileUp, Stamp } from 'lucide-react';
 import { degrees, PDFDocument, rgb, StandardFonts } from 'pdf-lib';
 import { useState } from 'react';
-import { formatBytes, formatFriendlyPdfError, readValidatedPdfBytes, triggerPdfDownload } from './pdfUtils';
+import { formatBytes, formatFriendlyPdfError, PDF_STRINGS_EN, readValidatedPdfBytes, triggerPdfDownload } from './pdfUtils';
 import { useLocale } from '../../locales/LocaleContext';
+import { useComponentStrings } from '../../locales/componentStrings';
 
-const STRINGS = {
-  en: {
+const STRINGS_EN = {
     colorLabels: {
       slate: 'Neutral Gray',
       indigo: 'Brand Indigo',
@@ -28,176 +28,7 @@ const STRINGS = {
     labelAngle: 'Rotation:',
     applying: 'Watermarking PDF...',
     applyBtn: 'Apply Watermark & Download',
-  },
-  es: {
-    colorLabels: {
-      slate: 'Gris neutro',
-      indigo: 'Índigo de marca',
-      red: 'Rojo de sello',
-    },
-    defaultWatermark: 'CONFIDENCIAL',
-    errEmpty: 'Ingrese el texto de la marca de agua antes de generar el PDF.',
-    appliedSuccess: (text: string, n: number, size: string) =>
-      `Se aplicó la marca de agua «${text}» a ${n} página(s) (${size}).`,
-    dropTitleEmpty: 'Elija un archivo PDF para ponerle marca de agua',
-    dropTitleFile: (name: string, pages: number) => `${name} (${pages} páginas)`,
-    dropSub: 'Incrusta sellos de texto vectoriales nítidos localmente con pdf-lib',
-    labelText: 'Texto de la marca de agua',
-    phText: 'CONFIDENCIAL / BORRADOR / USO INTERNO',
-    labelColor: 'Color del sello',
-    firstPageOnly: 'Solo la primera página',
-    labelSize: 'Tamaño de fuente:',
-    ptSuffix: (n: number) => `${n} pt`,
-    labelOpacity: 'Opacidad:',
-    labelAngle: 'Rotación:',
-    applying: 'Aplicando marca de agua al PDF...',
-    applyBtn: 'Aplicar marca de agua y descargar',
-  },
-  pt: {
-    colorLabels: {
-      slate: 'Cinza neutro',
-      indigo: 'Índigo da marca',
-      red: 'Vermelho de carimbo',
-    },
-    defaultWatermark: 'CONFIDENCIAL',
-    errEmpty: 'Insira o texto da marca d’água antes de gerar o PDF.',
-    appliedSuccess: (text: string, n: number, size: string) =>
-      `Marca d’água "${text}" aplicada a ${n} página(s) (${size}).`,
-    dropTitleEmpty: 'Escolha um arquivo PDF para colocar marca d’água',
-    dropTitleFile: (name: string, pages: number) => `${name} (${pages} páginas)`,
-    dropSub: 'Incorpora carimbos de texto vetoriais nítidos localmente via pdf-lib',
-    labelText: 'Texto da marca d’água',
-    phText: 'CONFIDENCIAL / RASCUNHO / USO INTERNO',
-    labelColor: 'Cor do carimbo',
-    firstPageOnly: 'Somente a primeira página',
-    labelSize: 'Tamanho da fonte:',
-    ptSuffix: (n: number) => `${n} pt`,
-    labelOpacity: 'Opacidade:',
-    labelAngle: 'Rotação:',
-    applying: 'Aplicando marca d’água ao PDF...',
-    applyBtn: 'Aplicar marca d’água e baixar',
-  },
-  fr: {
-    colorLabels: {
-      slate: 'Gris neutre',
-      indigo: 'Indigo de marque',
-      red: 'Rouge tampon',
-    },
-    defaultWatermark: 'CONFIDENTIEL',
-    errEmpty: 'Saisissez le texte du filigrane avant de générer le PDF.',
-    appliedSuccess: (text: string, n: number, size: string) =>
-      `Filigrane « ${text} » appliqué à ${n} page(s) (${size}).`,
-    dropTitleEmpty: 'Choisissez un fichier PDF à filigraner',
-    dropTitleFile: (name: string, pages: number) => `${name} (${pages} pages)`,
-    dropSub: 'Intègre des tampons de texte vectoriels nets localement via pdf-lib',
-    labelText: 'Texte du filigrane',
-    phText: 'CONFIDENTIEL / BROUILLON / USAGE INTERNE',
-    labelColor: 'Couleur du tampon',
-    firstPageOnly: 'Première page uniquement',
-    labelSize: 'Taille de police :',
-    ptSuffix: (n: number) => `${n} pt`,
-    labelOpacity: 'Opacité :',
-    labelAngle: 'Rotation :',
-    applying: 'Application du filigrane au PDF...',
-    applyBtn: 'Appliquer le filigrane et télécharger',
-  },
-  de: {
-    colorLabels: {
-      slate: 'Neutrales Grau',
-      indigo: 'Marken-Indigo',
-      red: 'Stempelrot',
-    },
-    defaultWatermark: 'CONFIDENTIAL',
-    errEmpty: 'Geben Sie zuerst einen Wasserzeichen-Text ein, bevor Sie das PDF erstellen.',
-    appliedSuccess: (text: string, n: number, size: string) =>
-      `Wasserzeichen "${text}" auf ${n} Seite(n) angewendet (${size}).`,
-    dropTitleEmpty: 'PDF-Datei zum Hinzufügen eines Wasserzeichens auswählen',
-    dropTitleFile: (name: string, pages: number) => `${name} (${pages} Seiten)`,
-    dropSub: 'Bettet gestochen scharfe Vektor-Textstempel lokal mit pdf-lib ein',
-    labelText: 'Wasserzeichen-Text',
-    phText: 'VERTRAULICH / ENTWURF / NUR INTERN',
-    labelColor: 'Stempelfarbe',
-    firstPageOnly: 'Nur erste Seite',
-    labelSize: 'Schriftgröße:',
-    ptSuffix: (n: number) => `${n} pt`,
-    labelOpacity: 'Deckkraft:',
-    labelAngle: 'Drehung:',
-    applying: 'Wasserzeichen wird hinzugefügt...',
-    applyBtn: 'Wasserzeichen anwenden & herunterladen',
-  },
-  it: {
-    colorLabels: {
-      slate: 'Grigio neutro',
-      indigo: 'Indaco del marchio',
-      red: 'Rosso timbro',
-    },
-    defaultWatermark: 'CONFIDENTIAL',
-    errEmpty: 'Inserisci il testo della filigrana prima di generare il PDF.',
-    appliedSuccess: (text: string, n: number, size: string) =>
-      `Filigrana "${text}" applicata a ${n} pagina/e (${size}).`,
-    dropTitleEmpty: 'Scegli un file PDF per aggiungere una filigrana',
-    dropTitleFile: (name: string, pages: number) => `${name} (${pages} pagine)`,
-    dropSub: 'Incorpora timbri di testo vettoriali nitidi in locale con pdf-lib',
-    labelText: 'Testo filigrana',
-    phText: 'RISERVATO / BOZZA / USO INTERNO',
-    labelColor: 'Colore timbro',
-    firstPageOnly: 'Solo prima pagina',
-    labelSize: 'Dimensione carattere:',
-    ptSuffix: (n: number) => `${n} pt`,
-    labelOpacity: 'Opacità:',
-    labelAngle: 'Rotazione:',
-    applying: 'Applicazione della filigrana...',
-    applyBtn: 'Applica filigrana e scarica',
-  },
-  id: {
-    colorLabels: {
-      slate: 'Abu-abu Netral',
-      indigo: 'Indigo Merek',
-      red: 'Merah Cap',
-    },
-    defaultWatermark: 'RAHASIA',
-    errEmpty: 'Masukkan teks watermark sebelum membuat PDF.',
-    appliedSuccess: (text: string, n: number, size: string) =>
-      `Watermark "${text}" diterapkan ke ${n} halaman (${size}).`,
-    dropTitleEmpty: 'Pilih File PDF untuk Diberi Watermark',
-    dropTitleFile: (name: string, pages: number) => `${name} (${pages} halaman)`,
-    dropSub: 'Menyematkan cap teks vektor yang tajam secara lokal via pdf-lib',
-    labelText: 'Teks Watermark',
-    phText: 'RAHASIA / DRAF / PENGGUNAAN INTERNAL',
-    labelColor: 'Warna Cap',
-    firstPageOnly: 'Hanya halaman pertama',
-    labelSize: 'Ukuran Font:',
-    ptSuffix: (n: number) => `${n} pt`,
-    labelOpacity: 'Opasitas:',
-    labelAngle: 'Rotasi:',
-    applying: 'Memberi Watermark pada PDF...',
-    applyBtn: 'Terapkan Watermark & Unduh',
-  },
-  ru: {
-    colorLabels: {
-      slate: 'Нейтральный серый',
-      indigo: 'Фирменный индиго',
-      red: 'Красный штамп',
-    },
-    defaultWatermark: 'КОНФИДЕНЦИАЛЬНО',
-    errEmpty: 'Введите текст водяного знака перед созданием PDF.',
-    appliedSuccess: (text: string, n: number, size: string) =>
-      `Водяной знак «${text}» применён к ${n} стр. (${size}).`,
-    dropTitleEmpty: 'Выберите PDF-файл для нанесения водяного знака',
-    dropTitleFile: (name: string, pages: number) => `${name} (${pages} стр.)`,
-    dropSub: 'Встраивает чёткие векторные текстовые штампы локально через pdf-lib',
-    labelText: 'Текст водяного знака',
-    phText: 'КОНФИДЕНЦИАЛЬНО / ЧЕРНОВИК / ТОЛЬКО ДЛЯ ВНУТРЕННЕГО ИСПОЛЬЗОВАНИЯ',
-    labelColor: 'Цвет штампа',
-    firstPageOnly: 'Только первая страница',
-    labelSize: 'Размер шрифта:',
-    ptSuffix: (n: number) => `${n} пт`,
-    labelOpacity: 'Непрозрачность:',
-    labelAngle: 'Поворот:',
-    applying: 'Нанесение водяного знака на PDF...',
-    applyBtn: 'Применить водяной знак и скачать',
-  },
-};
+  };
 
 type ColorChoice = 'slate' | 'indigo' | 'red';
 
@@ -209,7 +40,8 @@ const COLOR_MAP: Record<ColorChoice, { r: number; g: number; b: number }> = {
 
 export default function PdfWatermarkTool() {
   const { locale } = useLocale();
-  const s = STRINGS[locale];
+  const s = useComponentStrings('pdf-watermark', STRINGS_EN);
+  const pdfS = useComponentStrings('pdf-utils', PDF_STRINGS_EN);
   const [pdfBytes, setPdfBytes] = useState<Uint8Array | null>(null);
   const [fileName, setFileName] = useState('');
   const [pageCount, setPageCount] = useState(0);
@@ -231,14 +63,14 @@ export default function PdfWatermarkTool() {
     setStatusMessage('');
 
     try {
-      const bytes = await readValidatedPdfBytes(file, locale);
+      const bytes = await readValidatedPdfBytes(file, pdfS);
       const doc = await PDFDocument.load(bytes);
       setPdfBytes(bytes);
       setFileName(file.name);
       setPageCount(doc.getPageCount());
     } catch (err) {
       setPdfBytes(null);
-      setError(formatFriendlyPdfError(err, file.name, locale));
+      setError(formatFriendlyPdfError(err, file.name, pdfS));
     }
   };
 
@@ -286,7 +118,7 @@ export default function PdfWatermarkTool() {
         s.appliedSuccess(text, targetPages.length, formatBytes(outBytes.byteLength, locale))
       );
     } catch (err) {
-      setError(formatFriendlyPdfError(err, fileName, locale));
+      setError(formatFriendlyPdfError(err, fileName, pdfS));
     } finally {
       setIsApplying(false);
     }

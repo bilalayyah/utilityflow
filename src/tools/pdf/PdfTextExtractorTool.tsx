@@ -1,11 +1,11 @@
 import { AlertCircle, Download, FileUp } from 'lucide-react';
 import { useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
-import { formatBytes, formatFriendlyPdfError, pdfjsLib, readValidatedPdfBytes } from './pdfUtils';
+import { formatBytes, formatFriendlyPdfError, PDF_STRINGS_EN, pdfjsLib, readValidatedPdfBytes } from './pdfUtils';
 import { useLocale } from '../../locales/LocaleContext';
+import { useComponentStrings } from '../../locales/componentStrings';
 
-const STRINGS = {
-  en: {
+const STRINGS_EN = {
     pageMarker: (n: number) => `--- Page ${n} ---`,
     dropExtracting: 'Extracting PDF text layer...',
     dropTitleFile: (name: string, pages: number) => `${name} (${pages} pages)`,
@@ -23,145 +23,12 @@ const STRINGS = {
     pagesScanned: 'Pages scanned:',
     wordsExtracted: 'Words extracted:',
     textSize: 'Text size:',
-  },
-  es: {
-    pageMarker: (n: number) => `--- Página ${n} ---`,
-    dropExtracting: 'Extrayendo la capa de texto del PDF...',
-    dropTitleFile: (name: string, pages: number) => `${name} (${pages} páginas)`,
-    dropTitleEmpty: 'Elija un PDF basado en texto para extraer el texto',
-    dropSub: 'Extrae el texto Unicode incrustado localmente con PDF.js · Sin subidas al servidor',
-    noTextTitle: 'No se encontró una capa de texto seleccionable:',
-    noTextBody:
-      'Este PDF parece contener imágenes escaneadas o trazados vectoriales delineados en lugar de una capa de texto incrustada. El reconocimiento óptico de caracteres (OCR) del lado del cliente no se realiza sin conexión.',
-    markersLabelBefore: 'Incluir marcadores de encabezado de página (',
-    markersCode: '--- Página N ---',
-    markersLabelAfter: ')',
-    copyText: 'Copiar texto',
-    downloadTxt: 'Descargar .txt',
-    outputAria: 'Salida de texto extraído del PDF',
-    pagesScanned: 'Páginas escaneadas:',
-    wordsExtracted: 'Palabras extraídas:',
-    textSize: 'Tamaño del texto:',
-  },
-  pt: {
-    pageMarker: (n: number) => `--- Página ${n} ---`,
-    dropExtracting: 'Extraindo a camada de texto do PDF...',
-    dropTitleFile: (name: string, pages: number) => `${name} (${pages} páginas)`,
-    dropTitleEmpty: 'Escolha um PDF baseado em texto para extrair o texto',
-    dropSub: 'Extrai o texto Unicode incorporado localmente via PDF.js · Zero envio ao servidor',
-    noTextTitle: 'Nenhuma camada de texto selecionável encontrada:',
-    noTextBody:
-      'Este PDF parece conter imagens digitalizadas ou caminhos vetoriais contornados em vez de uma camada de texto incorporada. O reconhecimento óptico de caracteres (OCR) no lado do cliente não é realizado offline.',
-    markersLabelBefore: 'Incluir marcadores de cabeçalho de página (',
-    markersCode: '--- Página N ---',
-    markersLabelAfter: ')',
-    copyText: 'Copiar texto',
-    downloadTxt: 'Baixar .txt',
-    outputAria: 'Saída de texto extraído do PDF',
-    pagesScanned: 'Páginas digitalizadas:',
-    wordsExtracted: 'Palavras extraídas:',
-    textSize: 'Tamanho do texto:',
-  },
-  fr: {
-    pageMarker: (n: number) => `--- Page ${n} ---`,
-    dropExtracting: 'Extraction de la couche de texte du PDF...',
-    dropTitleFile: (name: string, pages: number) => `${name} (${pages} pages)`,
-    dropTitleEmpty: 'Choisissez un PDF textuel pour extraire le texte',
-    dropSub: 'Extrait le texte Unicode intégré localement via PDF.js · Aucun envoi au serveur',
-    noTextTitle: 'Aucune couche de texte sélectionnable trouvée :',
-    noTextBody:
-      'Ce PDF semble contenir des images numérisées ou des tracés vectoriels détourés plutôt qu’une couche de texte intégrée. La reconnaissance optique de caractères (OCR) côté client n’est pas effectuée hors ligne.',
-    markersLabelBefore: 'Inclure les marqueurs d’en-tête de page (',
-    markersCode: '--- Page N ---',
-    markersLabelAfter: ')',
-    copyText: 'Copier le texte',
-    downloadTxt: 'Télécharger le .txt',
-    outputAria: 'Sortie de texte extrait du PDF',
-    pagesScanned: 'Pages analysées :',
-    wordsExtracted: 'Mots extraits :',
-    textSize: 'Taille du texte :',
-  },
-  de: {
-    pageMarker: (n: number) => `--- Seite ${n} ---`,
-    dropExtracting: 'PDF-Textebene wird extrahiert...',
-    dropTitleFile: (name: string, pages: number) => `${name} (${pages} Seiten)`,
-    dropTitleEmpty: 'Textbasierte PDF-Datei zum Extrahieren von Text auswählen',
-    dropSub: 'Extrahiert eingebetteten Unicode-Text lokal mit PDF.js · Kein Server-Upload',
-    noTextTitle: 'Keine auswählbare Textebene gefunden:',
-    noTextBody:
-      'Diese PDF scheint gescannte Bilder oder umgewandelte Vektorpfade statt einer eingebetteten Textebene zu enthalten. Eine clientseitige optische Zeichenerkennung (OCR) wird offline nicht durchgeführt.',
-    markersLabelBefore: 'Seitenkopf-Markierungen einfügen (',
-    markersCode: '--- Seite N ---',
-    markersLabelAfter: ')',
-    copyText: 'Text kopieren',
-    downloadTxt: '.txt herunterladen',
-    outputAria: 'Extrahierter PDF-Text (Ausgabe)',
-    pagesScanned: 'Gescannte Seiten:',
-    wordsExtracted: 'Extrahierte Wörter:',
-    textSize: 'Textgröße:',
-  },
-  it: {
-    pageMarker: (n: number) => `--- Pagina ${n} ---`,
-    dropExtracting: 'Estrazione del livello di testo del PDF...',
-    dropTitleFile: (name: string, pages: number) => `${name} (${pages} pagine)`,
-    dropTitleEmpty: 'Scegli un PDF con testo per estrarre il testo',
-    dropSub: 'Estrae il testo Unicode incorporato in locale con PDF.js · Nessun caricamento sul server',
-    noTextTitle: 'Nessun livello di testo selezionabile trovato:',
-    noTextBody:
-      'Questo PDF sembra contenere immagini acquisite o tracciati vettoriali convertiti in curve invece di un livello di testo incorporato. Il riconoscimento ottico dei caratteri (OCR) lato client non viene eseguito offline.',
-    markersLabelBefore: 'Includi marcatori di intestazione pagina (',
-    markersCode: '--- Pagina N ---',
-    markersLabelAfter: ')',
-    copyText: 'Copia testo',
-    downloadTxt: 'Scarica .txt',
-    outputAria: 'Output del testo PDF estratto',
-    pagesScanned: 'Pagine analizzate:',
-    wordsExtracted: 'Parole estratte:',
-    textSize: 'Dimensione testo:',
-  },
-  id: {
-    pageMarker: (n: number) => `--- Halaman ${n} ---`,
-    dropExtracting: 'Mengekstrak lapisan teks PDF...',
-    dropTitleFile: (name: string, pages: number) => `${name} (${pages} halaman)`,
-    dropTitleEmpty: 'Pilih PDF Berbasis Teks untuk Mengekstrak Teks',
-    dropSub: 'Mengekstrak teks Unicode yang tertanam secara lokal via PDF.js · Tanpa unggahan server',
-    noTextTitle: 'Tidak Ditemukan Lapisan Teks yang Dapat Dipilih:',
-    noTextBody:
-      'PDF ini tampaknya berisi gambar hasil pindaian atau jalur vektor bergaris, bukan lapisan teks yang tertanam. Pengenalan karakter optik (OCR) sisi klien tidak dilakukan secara offline.',
-    markersLabelBefore: 'Sertakan penanda header halaman (',
-    markersCode: '--- Halaman N ---',
-    markersLabelAfter: ')',
-    copyText: 'Salin Teks',
-    downloadTxt: 'Unduh .txt',
-    outputAria: 'Hasil teks PDF yang diekstrak',
-    pagesScanned: 'Halaman yang dipindai:',
-    wordsExtracted: 'Kata yang diekstrak:',
-    textSize: 'Ukuran teks:',
-  },
-  ru: {
-    pageMarker: (n: number) => `--- Страница ${n} ---`,
-    dropExtracting: 'Извлечение текстового слоя PDF...',
-    dropTitleFile: (name: string, pages: number) => `${name} (${pages} стр.)`,
-    dropTitleEmpty: 'Выберите текстовый PDF для извлечения текста',
-    dropSub: 'Извлекает встроенный текст Unicode локально через PDF.js · Без загрузки на сервер',
-    noTextTitle: 'Выбираемый текстовый слой не найден:',
-    noTextBody:
-      'Похоже, этот PDF содержит отсканированные изображения или векторные контуры, а не встроенный текстовый слой. Оптическое распознавание символов (OCR) на стороне клиента офлайн не выполняется.',
-    markersLabelBefore: 'Включать маркеры заголовков страниц (',
-    markersCode: '--- Страница N ---',
-    markersLabelAfter: ')',
-    copyText: 'Копировать текст',
-    downloadTxt: 'Скачать .txt',
-    outputAria: 'Вывод извлечённого текста PDF',
-    pagesScanned: 'Отсканировано страниц:',
-    wordsExtracted: 'Извлечено слов:',
-    textSize: 'Размер текста:',
-  },
-};
+  };
 
 export default function PdfTextExtractorTool() {
   const { locale, t } = useLocale();
-  const s = STRINGS[locale];
+  const s = useComponentStrings('pdf-text-extractor', STRINGS_EN);
+  const pdfS = useComponentStrings('pdf-utils', PDF_STRINGS_EN);
   const [fileName, setFileName] = useState('');
   const [pageCount, setPageCount] = useState(0);
   const [extractedText, setExtractedText] = useState('');
@@ -186,7 +53,7 @@ export default function PdfTextExtractorTool() {
     setIsExtracting(true);
 
     try {
-      const bytes = await readValidatedPdfBytes(file, locale);
+      const bytes = await readValidatedPdfBytes(file, pdfS);
       const pdf = await pdfjsLib.getDocument({ data: bytes.slice() }).promise;
       const pages: string[] = [];
 
@@ -217,7 +84,7 @@ export default function PdfTextExtractorTool() {
       setRawPages(pages);
       setExtractedText(buildOutput(pages, includePageMarkers));
     } catch (err) {
-      setError(formatFriendlyPdfError(err, file.name, locale));
+      setError(formatFriendlyPdfError(err, file.name, pdfS));
     } finally {
       setIsExtracting(false);
     }

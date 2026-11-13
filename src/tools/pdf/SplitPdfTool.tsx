@@ -5,13 +5,14 @@ import {
   formatBytes,
   formatFriendlyPdfError,
   parsePageRanges,
+  PDF_STRINGS_EN,
   readValidatedPdfBytes,
   triggerPdfDownload,
 } from './pdfUtils';
 import { useLocale } from '../../locales/LocaleContext';
+import { useComponentStrings } from '../../locales/componentStrings';
 
-const STRINGS = {
-  en: {
+const STRINGS_EN = {
     errBurst: (n: number) =>
       `Burst splitting downloads one file per page. For documents over 25 pages (${n} pages here), extract ranges instead so your browser does not block bulk downloads.`,
     exportedAll: (n: number) => `Exported ${n} single-page PDF files.`,
@@ -31,161 +32,14 @@ const STRINGS = {
     rangeHintAfter: ').',
     extracting: 'Extracting PDF...',
     splitBtn: 'Split & Download PDF',
-  },
-  es: {
-    errBurst: (n: number) =>
-      `La división por ráfaga descarga un archivo por página. Para documentos de más de 25 páginas (${n} páginas aquí), extraiga rangos para que su navegador no bloquee las descargas masivas.`,
-    exportedAll: (n: number) => `Se exportaron ${n} archivos PDF de una sola página.`,
-    errNoMatch: 'Ninguna página coincidió con esa selección (por ejemplo, Páginas pares requiere 2 o más páginas).',
-    extractedSuccess: (a: number, b: number, size: string) =>
-      `Se extrajeron ${a} de ${b} páginas (${size}).`,
-    dropTitleEmpty: 'Elija un archivo PDF para dividir o extraer',
-    dropTitleFile: (name: string, pages: number, size: string) => `${name} (${pages} páginas · ${size})`,
-    dropSub: 'Procesado localmente en memoria · Haga clic para reemplazar el documento',
-    modeRange: 'Extraer rangos de páginas',
-    modeOdd: 'Solo páginas impares',
-    modeEven: 'Solo páginas pares',
-    modeBurst: 'Dividir todas las páginas individuales',
-    labelRange: (n: number) => `Páginas para extraer (1–${n})`,
-    phRange: 'p. ej., 1-3, 5, 8-10',
-    rangeHintBefore: 'Use comas y guiones (por ejemplo ',
-    rangeHintAfter: ').',
-    extracting: 'Extrayendo PDF...',
-    splitBtn: 'Dividir y descargar PDF',
-  },
-  pt: {
-    errBurst: (n: number) =>
-      `A divisão em massa baixa um arquivo por página. Para documentos com mais de 25 páginas (${n} páginas aqui), extraia intervalos para que seu navegador não bloqueie downloads em massa.`,
-    exportedAll: (n: number) => `${n} arquivos PDF de uma página exportados.`,
-    errNoMatch: 'Nenhuma página correspondeu a essa seleção (por exemplo, Páginas pares exige 2 ou mais páginas).',
-    extractedSuccess: (a: number, b: number, size: string) =>
-      `${a} de ${b} páginas extraídas (${size}).`,
-    dropTitleEmpty: 'Escolha um arquivo PDF para dividir ou extrair',
-    dropTitleFile: (name: string, pages: number, size: string) => `${name} (${pages} páginas · ${size})`,
-    dropSub: 'Processado localmente na memória · Clique para substituir o documento',
-    modeRange: 'Extrair intervalos de páginas',
-    modeOdd: 'Somente páginas ímpares',
-    modeEven: 'Somente páginas pares',
-    modeBurst: 'Dividir todas as páginas individuais',
-    labelRange: (n: number) => `Páginas para extrair (1–${n})`,
-    phRange: 'ex.: 1-3, 5, 8-10',
-    rangeHintBefore: 'Use vírgulas e hifens (por exemplo ',
-    rangeHintAfter: ').',
-    extracting: 'Extraindo PDF...',
-    splitBtn: 'Dividir e baixar PDF',
-  },
-  fr: {
-    errBurst: (n: number) =>
-      `La division en masse télécharge un fichier par page. Pour les documents de plus de 25 pages (${n} pages ici), extrayez plutôt des plages afin que votre navigateur ne bloque pas les téléchargements en masse.`,
-    exportedAll: (n: number) => `${n} fichiers PDF d’une seule page exportés.`,
-    errNoMatch: 'Aucune page ne correspond à cette sélection (par exemple, Pages paires exige 2 pages ou plus).',
-    extractedSuccess: (a: number, b: number, size: string) =>
-      `${a} pages sur ${b} extraites (${size}).`,
-    dropTitleEmpty: 'Choisissez un fichier PDF à diviser ou à extraire',
-    dropTitleFile: (name: string, pages: number, size: string) => `${name} (${pages} pages · ${size})`,
-    dropSub: 'Traité localement en mémoire · Cliquez pour remplacer le document',
-    modeRange: 'Extraire des plages de pages',
-    modeOdd: 'Pages impaires uniquement',
-    modeEven: 'Pages paires uniquement',
-    modeBurst: 'Éclater toutes les pages individuelles',
-    labelRange: (n: number) => `Pages à extraire (1–${n})`,
-    phRange: 'p. ex. 1-3, 5, 8-10',
-    rangeHintBefore: 'Utilisez des virgules et des traits d’union (par exemple ',
-    rangeHintAfter: ').',
-    extracting: 'Extraction du PDF...',
-    splitBtn: 'Diviser et télécharger le PDF',
-  },
-  de: {
-    errBurst: (n: number) =>
-      `Beim Aufteilen in Einzelseiten wird eine Datei pro Seite heruntergeladen. Bei Dokumenten mit mehr als 25 Seiten (${n} Seiten hier) extrahieren Sie stattdessen Bereiche, damit Ihr Browser keine Massendownloads blockiert.`,
-    exportedAll: (n: number) => `${n} einseitige PDF-Dateien exportiert.`,
-    errNoMatch: 'Keine Seiten passen zu dieser Auswahl (z. B. erfordert „Gerade Seiten" mindestens 2 Seiten).',
-    extractedSuccess: (a: number, b: number, size: string) =>
-      `${a} von ${b} Seiten extrahiert (${size}).`,
-    dropTitleEmpty: 'PDF-Datei zum Teilen oder Extrahieren auswählen',
-    dropTitleFile: (name: string, pages: number, size: string) => `${name} (${pages} Seiten · ${size})`,
-    dropSub: 'Lokal im Speicher verarbeitet · Klicken zum Ersetzen des Dokuments',
-    modeRange: 'Seitenbereiche extrahieren',
-    modeOdd: 'Nur ungerade Seiten',
-    modeEven: 'Nur gerade Seiten',
-    modeBurst: 'Alle Einzelseiten extrahieren',
-    labelRange: (n: number) => `Zu extrahierende Seiten (1–${n})`,
-    phRange: 'z. B. 1-3, 5, 8-10',
-    rangeHintBefore: 'Verwenden Sie Kommas und Bindestriche (zum Beispiel ',
-    rangeHintAfter: ').',
-    extracting: 'PDF wird extrahiert...',
-    splitBtn: 'Teilen & PDF herunterladen',
-  },
-  it: {
-    errBurst: (n: number) =>
-      `La divisione in singole pagine scarica un file per pagina. Per documenti di oltre 25 pagine (${n} pagine qui), estrai invece degli intervalli, così il browser non blocca i download multipli.`,
-    exportedAll: (n: number) => `${n} file PDF di una pagina esportati.`,
-    errNoMatch: 'Nessuna pagina corrisponde alla selezione (ad esempio, «Pagine pari» richiede almeno 2 pagine).',
-    extractedSuccess: (a: number, b: number, size: string) =>
-      `${a} di ${b} pagine estratte (${size}).`,
-    dropTitleEmpty: 'Scegli un file PDF da dividere o da cui estrarre pagine',
-    dropTitleFile: (name: string, pages: number, size: string) => `${name} (${pages} pagine · ${size})`,
-    dropSub: 'Elaborato in locale, in memoria · Fai clic per sostituire il documento',
-    modeRange: 'Estrai intervalli di pagine',
-    modeOdd: 'Solo pagine dispari',
-    modeEven: 'Solo pagine pari',
-    modeBurst: 'Estrai tutte le singole pagine',
-    labelRange: (n: number) => `Pagine da estrarre (1–${n})`,
-    phRange: 'es. 1-3, 5, 8-10',
-    rangeHintBefore: 'Usa virgole e trattini (ad esempio ',
-    rangeHintAfter: ').',
-    extracting: 'Estrazione del PDF...',
-    splitBtn: 'Dividi e scarica PDF',
-  },
-  id: {
-    errBurst: (n: number) =>
-      `Pemisahan burst mengunduh satu file per halaman. Untuk dokumen lebih dari 25 halaman (${n} halaman di sini), ekstrak rentang sebagai gantinya agar browser Anda tidak memblokir unduhan massal.`,
-    exportedAll: (n: number) => `${n} file PDF satu halaman diekspor.`,
-    errNoMatch: 'Tidak ada halaman yang cocok dengan pilihan itu (misalnya, Halaman Genap membutuhkan 2+ halaman).',
-    extractedSuccess: (a: number, b: number, size: string) =>
-      `${a} dari ${b} halaman diekstrak (${size}).`,
-    dropTitleEmpty: 'Pilih File PDF untuk Dibagi atau Diekstrak',
-    dropTitleFile: (name: string, pages: number, size: string) => `${name} (${pages} halaman · ${size})`,
-    dropSub: 'Diproses secara lokal di memori · Klik untuk mengganti dokumen',
-    modeRange: 'Ekstrak Rentang Halaman',
-    modeOdd: 'Hanya Halaman Ganjil',
-    modeEven: 'Hanya Halaman Genap',
-    modeBurst: 'Pisahkan Semua Halaman Individu',
-    labelRange: (n: number) => `Halaman untuk Diekstrak (1–${n})`,
-    phRange: 'cth. 1-3, 5, 8-10',
-    rangeHintBefore: 'Gunakan koma dan tanda hubung (misalnya ',
-    rangeHintAfter: ').',
-    extracting: 'Mengekstrak PDF...',
-    splitBtn: 'Bagi & Unduh PDF',
-  },
-  ru: {
-    errBurst: (n: number) =>
-      `При разделении на отдельные страницы скачивается по одному файлу на страницу. Для документов больше 25 страниц (здесь ${n} страниц) извлекайте диапазоны, чтобы браузер не заблокировал массовые скачивания.`,
-    exportedAll: (n: number) => `Экспортировано ${n} одностраничных PDF-файлов.`,
-    errNoMatch: 'Подходящих страниц не найдено (например, для чётных страниц нужно 2+ страницы).',
-    extractedSuccess: (a: number, b: number, size: string) =>
-      `Извлечено страниц: ${a} из ${b} (${size}).`,
-    dropTitleEmpty: 'Выберите PDF-файл для разделения или извлечения',
-    dropTitleFile: (name: string, pages: number, size: string) => `${name} (${pages} стр. · ${size})`,
-    dropSub: 'Обрабатывается локально в памяти · Нажмите, чтобы заменить документ',
-    modeRange: 'Извлечь диапазоны страниц',
-    modeOdd: 'Только нечётные страницы',
-    modeEven: 'Только чётные страницы',
-    modeBurst: 'Разделить на все отдельные страницы',
-    labelRange: (n: number) => `Страницы для извлечения (1–${n})`,
-    phRange: 'напр. 1-3, 5, 8-10',
-    rangeHintBefore: 'Используйте запятые и дефисы (например, ',
-    rangeHintAfter: ').',
-    extracting: 'Извлечение PDF...',
-    splitBtn: 'Разделить и скачать PDF',
-  },
-};
+  };
 
 type SplitMode = 'range' | 'every-page' | 'odd' | 'even';
 
 export default function SplitPdfTool() {
   const { locale } = useLocale();
-  const s = STRINGS[locale];
+  const s = useComponentStrings('split-pdf', STRINGS_EN);
+  const pdfS = useComponentStrings('pdf-utils', PDF_STRINGS_EN);
   const [pdfBytes, setPdfBytes] = useState<Uint8Array | null>(null);
   const [fileName, setFileName] = useState('');
   const [fileSize, setFileSize] = useState(0);
@@ -203,7 +57,7 @@ export default function SplitPdfTool() {
     setStatusMessage('');
 
     try {
-      const bytes = await readValidatedPdfBytes(file, locale);
+      const bytes = await readValidatedPdfBytes(file, pdfS);
       const doc = await PDFDocument.load(bytes);
       const total = doc.getPageCount();
       setPdfBytes(bytes);
@@ -213,7 +67,7 @@ export default function SplitPdfTool() {
       setRangeInput(total > 1 ? `1-${Math.min(2, total)}` : '1');
     } catch (err) {
       setPdfBytes(null);
-      setError(formatFriendlyPdfError(err, file.name, locale));
+      setError(formatFriendlyPdfError(err, file.name, pdfS));
     }
   };
 
@@ -244,7 +98,7 @@ export default function SplitPdfTool() {
       } else {
         let indices: number[] = [];
         if (mode === 'range') {
-          const parsed = parsePageRanges(rangeInput, pageCount, locale);
+          const parsed = parsePageRanges(rangeInput, pageCount, pdfS);
           if (parsed.error) {
             setError(parsed.error);
             setIsProcessing(false);
@@ -273,7 +127,7 @@ export default function SplitPdfTool() {
         );
       }
     } catch (err) {
-      setError(formatFriendlyPdfError(err, fileName, locale));
+      setError(formatFriendlyPdfError(err, fileName, pdfS));
     } finally {
       setIsProcessing(false);
     }

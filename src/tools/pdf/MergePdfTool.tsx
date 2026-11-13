@@ -1,11 +1,11 @@
 import { ArrowDown, ArrowUp, FilePlus2, Layers, Trash2 } from 'lucide-react';
 import { PDFDocument } from 'pdf-lib';
 import { useState } from 'react';
-import { formatBytes, formatFriendlyPdfError, readValidatedPdfBytes, triggerPdfDownload } from './pdfUtils';
+import { formatBytes, formatFriendlyPdfError, PDF_STRINGS_EN, readValidatedPdfBytes, triggerPdfDownload } from './pdfUtils';
 import { useLocale } from '../../locales/LocaleContext';
+import { useComponentStrings } from '../../locales/componentStrings';
 
-const STRINGS = {
-  en: {
+const STRINGS_EN = {
     errRead: 'Unable to read selected PDF files.',
     errMin2: 'Add at least two PDF files to merge.',
     mergedSuccess: (n: number, pages: number, size: string) =>
@@ -25,155 +25,7 @@ const STRINGS = {
     outName: 'Output Filename',
     merging: 'Merging PDFs...',
     mergeBtn: (n: number) => `Merge ${n} PDFs & Download`,
-  },
-  es: {
-    errRead: 'No se pudieron leer los archivos PDF seleccionados.',
-    errMin2: 'Agregue al menos dos archivos PDF para combinar.',
-    mergedSuccess: (n: number, pages: number, size: string) =>
-      `Se combinaron ${n} PDF (${pages} páginas, ${size}) correctamente.`,
-    dropValidating: 'Validando archivos PDF...',
-    dropTitle: 'Seleccione o suelte varios archivos PDF',
-    dropSub: 'Combinación 100% en el navegador con pdf-lib · Solo PDF sin cifrar · Nunca se suben',
-    filesQueued: 'archivos en cola',
-    totalPagesLabel: 'páginas en total',
-    combinedSize: 'tamaño de entrada combinado',
-    clearQueue: 'Limpiar cola',
-    pageSingular: 'página',
-    pagePlural: 'páginas',
-    moveUp: (name: string) => `Mover ${name} hacia arriba`,
-    moveDown: (name: string) => `Mover ${name} hacia abajo`,
-    removeFile: (name: string) => `Eliminar ${name}`,
-    outName: 'Nombre del archivo de salida',
-    merging: 'Combinando PDF...',
-    mergeBtn: (n: number) => `Combinar ${n} PDF y descargar`,
-  },
-  pt: {
-    errRead: 'Não foi possível ler os arquivos PDF selecionados.',
-    errMin2: 'Adicione pelo menos dois arquivos PDF para mesclar.',
-    mergedSuccess: (n: number, pages: number, size: string) =>
-      `${n} PDFs mesclados (${pages} páginas, ${size}) com sucesso.`,
-    dropValidating: 'Validando arquivos PDF...',
-    dropTitle: 'Selecione ou solte vários arquivos PDF',
-    dropSub: 'Mesclagem 100% no navegador via pdf-lib · Somente PDFs sem criptografia · Nunca enviados',
-    filesQueued: 'arquivos na fila',
-    totalPagesLabel: 'páginas no total',
-    combinedSize: 'tamanho de entrada combinado',
-    clearQueue: 'Limpar fila',
-    pageSingular: 'página',
-    pagePlural: 'páginas',
-    moveUp: (name: string) => `Mover ${name} para cima`,
-    moveDown: (name: string) => `Mover ${name} para baixo`,
-    removeFile: (name: string) => `Remover ${name}`,
-    outName: 'Nome do arquivo de saída',
-    merging: 'Mesclando PDFs...',
-    mergeBtn: (n: number) => `Mesclar ${n} PDFs e baixar`,
-  },
-  fr: {
-    errRead: 'Impossible de lire les fichiers PDF sélectionnés.',
-    errMin2: 'Ajoutez au moins deux fichiers PDF à fusionner.',
-    mergedSuccess: (n: number, pages: number, size: string) =>
-      `${n} PDF fusionnés (${pages} pages, ${size}) avec succès.`,
-    dropValidating: 'Validation des fichiers PDF...',
-    dropTitle: 'Sélectionnez ou déposez plusieurs fichiers PDF',
-    dropSub: 'Fusion 100 % dans le navigateur via pdf-lib · PDF non chiffrés uniquement · Jamais téléversés',
-    filesQueued: 'fichiers en file d’attente',
-    totalPagesLabel: 'pages au total',
-    combinedSize: 'taille d’entrée combinée',
-    clearQueue: 'Vider la file',
-    pageSingular: 'page',
-    pagePlural: 'pages',
-    moveUp: (name: string) => `Déplacer ${name} vers le haut`,
-    moveDown: (name: string) => `Déplacer ${name} vers le bas`,
-    removeFile: (name: string) => `Supprimer ${name}`,
-    outName: 'Nom du fichier de sortie',
-    merging: 'Fusion des PDF...',
-    mergeBtn: (n: number) => `Fusionner ${n} PDF et télécharger`,
-  },
-  de: {
-    errRead: 'Die ausgewählten PDF-Dateien konnten nicht gelesen werden.',
-    errMin2: 'Fügen Sie zum Zusammenführen mindestens zwei PDF-Dateien hinzu.',
-    mergedSuccess: (n: number, pages: number, size: string) =>
-      `${n} PDFs zusammengeführt (${pages} Seiten, ${size}).`,
-    dropValidating: 'PDF-Dateien werden geprüft...',
-    dropTitle: 'Mehrere PDF-Dateien auswählen oder ablegen',
-    dropSub: '100 % browserbasiertes Zusammenführen mit pdf-lib · Nur unverschlüsselte PDFs · Kein Upload',
-    filesQueued: 'Dateien in der Warteschlange',
-    totalPagesLabel: 'Seiten gesamt',
-    combinedSize: 'Gesamtgröße der Eingaben',
-    clearQueue: 'Warteschlange leeren',
-    pageSingular: 'Seite',
-    pagePlural: 'Seiten',
-    moveUp: (name: string) => `${name} nach oben verschieben`,
-    moveDown: (name: string) => `${name} nach unten verschieben`,
-    removeFile: (name: string) => `${name} entfernen`,
-    outName: 'Dateiname der Ausgabe',
-    merging: 'PDFs werden zusammengeführt...',
-    mergeBtn: (n: number) => `${n} PDFs zusammenführen & herunterladen`,
-  },
-  it: {
-    errRead: 'Impossibile leggere i file PDF selezionati.',
-    errMin2: 'Aggiungi almeno due file PDF da unire.',
-    mergedSuccess: (n: number, pages: number, size: string) =>
-      `${n} PDF uniti (${pages} pagine, ${size}).`,
-    dropValidating: 'Verifica dei file PDF...',
-    dropTitle: 'Seleziona o trascina più file PDF',
-    dropSub: 'Unione 100% nel browser con pdf-lib · Solo PDF non crittografati · Nessun caricamento',
-    filesQueued: 'file in coda',
-    totalPagesLabel: 'pagine totali',
-    combinedSize: 'dimensione totale di input',
-    clearQueue: 'Svuota coda',
-    pageSingular: 'pagina',
-    pagePlural: 'pagine',
-    moveUp: (name: string) => `Sposta ${name} in alto`,
-    moveDown: (name: string) => `Sposta ${name} in basso`,
-    removeFile: (name: string) => `Rimuovi ${name}`,
-    outName: 'Nome file di output',
-    merging: 'Unione dei PDF...',
-    mergeBtn: (n: number) => `Unisci ${n} PDF e scarica`,
-  },
-  id: {
-    errRead: 'Tidak dapat membaca file PDF yang dipilih.',
-    errMin2: 'Tambahkan setidaknya dua file PDF untuk digabungkan.',
-    mergedSuccess: (n: number, pages: number, size: string) =>
-      `${n} PDF (${pages} halaman, ${size}) berhasil digabungkan dengan bersih.`,
-    dropValidating: 'Memvalidasi file PDF...',
-    dropTitle: 'Pilih atau Seret Beberapa File PDF',
-    dropSub: 'Penggabungan 100% sisi browser via pdf-lib · Hanya PDF tanpa enkripsi · Tidak pernah diunggah',
-    filesQueued: 'file dalam antrean',
-    totalPagesLabel: 'total halaman',
-    combinedSize: 'ukuran input gabungan',
-    clearQueue: 'Bersihkan antrean',
-    pageSingular: 'halaman',
-    pagePlural: 'halaman',
-    moveUp: (name: string) => `Pindahkan ${name} ke atas`,
-    moveDown: (name: string) => `Pindahkan ${name} ke bawah`,
-    removeFile: (name: string) => `Hapus ${name}`,
-    outName: 'Nama File Hasil',
-    merging: 'Menggabungkan PDF...',
-    mergeBtn: (n: number) => `Gabungkan ${n} PDF & Unduh`,
-  },
-  ru: {
-    errRead: 'Не удаётся прочитать выбранные PDF-файлы.',
-    errMin2: 'Добавьте не менее двух PDF-файлов для слияния.',
-    mergedSuccess: (n: number, pages: number, size: string) =>
-      `${n} PDF (${pages} стр., ${size}) успешно объединены.`,
-    dropValidating: 'Проверка PDF-файлов...',
-    dropTitle: 'Выберите или перетащите несколько PDF-файлов',
-    dropSub: 'Слияние на 100% в браузере через pdf-lib · Только незашифрованные PDF · Никогда не загружается',
-    filesQueued: 'файлов в очереди',
-    totalPagesLabel: 'всего страниц',
-    combinedSize: 'общий размер входных файлов',
-    clearQueue: 'Очистить очередь',
-    pageSingular: 'страница',
-    pagePlural: 'страниц',
-    moveUp: (name: string) => `Переместить ${name} вверх`,
-    moveDown: (name: string) => `Переместить ${name} вниз`,
-    removeFile: (name: string) => `Удалить ${name}`,
-    outName: 'Имя выходного файла',
-    merging: 'Слияние PDF...',
-    mergeBtn: (n: number) => `Объединить ${n} PDF и скачать`,
-  },
-};
+  };
 
 interface QueuedPdf {
   id: number;
@@ -185,7 +37,8 @@ interface QueuedPdf {
 
 export default function MergePdfTool() {
   const { locale } = useLocale();
-  const s = STRINGS[locale];
+  const s = useComponentStrings('merge-pdf', STRINGS_EN);
+  const pdfS = useComponentStrings('pdf-utils', PDF_STRINGS_EN);
   const [files, setFiles] = useState<QueuedPdf[]>([]);
   const [outputName, setOutputName] = useState('merged-document.pdf');
   const [isLoading, setIsLoading] = useState(false);
@@ -205,7 +58,7 @@ export default function MergePdfTool() {
 
       for (const file of Array.from(fileList)) {
         try {
-          const bytes = await readValidatedPdfBytes(file, locale);
+          const bytes = await readValidatedPdfBytes(file, pdfS);
           const doc = await PDFDocument.load(bytes);
           additions.push({
             id: nextId++,
@@ -215,7 +68,7 @@ export default function MergePdfTool() {
             bytes,
           });
         } catch (err) {
-          throw new Error(formatFriendlyPdfError(err, file.name, locale));
+          throw new Error(formatFriendlyPdfError(err, file.name, pdfS));
         }
       }
 
@@ -258,7 +111,7 @@ export default function MergePdfTool() {
         s.mergedSuccess(files.length, merged.getPageCount(), formatBytes(mergedBytes.byteLength, locale))
       );
     } catch (err) {
-      setError(formatFriendlyPdfError(err, undefined, locale));
+      setError(formatFriendlyPdfError(err, undefined, pdfS));
     } finally {
       setIsMerging(false);
     }

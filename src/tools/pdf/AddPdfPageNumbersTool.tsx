@@ -1,11 +1,11 @@
 import { FileUp, Hash } from 'lucide-react';
 import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
 import { useState } from 'react';
-import { formatBytes, formatFriendlyPdfError, readValidatedPdfBytes, triggerPdfDownload } from './pdfUtils';
+import { formatBytes, formatFriendlyPdfError, PDF_STRINGS_EN, readValidatedPdfBytes, triggerPdfDownload } from './pdfUtils';
 import { useLocale } from '../../locales/LocaleContext';
+import { useComponentStrings } from '../../locales/componentStrings';
 
-const STRINGS = {
-  en: {
+const STRINGS_EN = {
     errStart: 'Starting page number must be a whole number of 1 or higher.',
     stampedSuccess: (n: number, size: string) => `Stamped page numbers on ${n} page(s) (${size}).`,
     pageOfLabel: (cur: number, total: number) => `Page ${cur} of ${total}`,
@@ -29,190 +29,15 @@ const STRINGS = {
     skipCover: 'Skip cover page (start numbering on page 2)',
     numbering: 'Numbering Pages...',
     addBtn: 'Add Page Numbers & Download',
-  },
-  es: {
-    errStart: 'El número de página inicial debe ser un número entero de 1 o mayor.',
-    stampedSuccess: (n: number, size: string) => `Se estamparon números de página en ${n} página(s) (${size}).`,
-    pageOfLabel: (cur: number, total: number) => `Página ${cur} de ${total}`,
-    dropTitleEmpty: 'Elija un archivo PDF para agregar números de página',
-    dropTitleFile: (name: string, pages: number) => `${name} (${pages} páginas)`,
-    dropSub: 'Inserta etiquetas de página vectoriales nítidas en informes, contratos y paquetes',
-    labelPos: 'Posición',
-    optBottomCenter: 'Inferior centrada',
-    optBottomRight: 'Inferior derecha',
-    optBottomLeft: 'Inferior izquierda',
-    optTopRight: 'Superior derecha',
-    labelFmt: 'Formato de etiqueta',
-    optPageOf: 'Página 1 de N',
-    optSlash: '1 / N',
-    optNumberOnly: '1, 2, 3...',
-    labelStart: 'Número inicial',
-    labelSize: 'Tamaño de fuente (pt)',
-    opt9: '9 pt (sutil)',
-    opt11: '11 pt (estándar)',
-    opt14: '14 pt (grande)',
-    skipCover: 'Omitir la portada (comenzar la numeración en la página 2)',
-    numbering: 'Numerando páginas...',
-    addBtn: 'Agregar números de página y descargar',
-  },
-  pt: {
-    errStart: 'O número da página inicial deve ser um número inteiro de 1 ou maior.',
-    stampedSuccess: (n: number, size: string) => `Números de página estampados em ${n} página(s) (${size}).`,
-    pageOfLabel: (cur: number, total: number) => `Página ${cur} de ${total}`,
-    dropTitleEmpty: 'Escolha um arquivo PDF para adicionar números de página',
-    dropTitleFile: (name: string, pages: number) => `${name} (${pages} páginas)`,
-    dropSub: 'Insere rótulos de página vetoriais nítidos em relatórios, contratos e pacotes',
-    labelPos: 'Posição',
-    optBottomCenter: 'Inferior centralizada',
-    optBottomRight: 'Inferior direita',
-    optBottomLeft: 'Inferior esquerda',
-    optTopRight: 'Superior direita',
-    labelFmt: 'Formato do rótulo',
-    optPageOf: 'Página 1 de N',
-    optSlash: '1 / N',
-    optNumberOnly: '1, 2, 3...',
-    labelStart: 'Número inicial',
-    labelSize: 'Tamanho da fonte (pt)',
-    opt9: '9 pt (sutil)',
-    opt11: '11 pt (padrão)',
-    opt14: '14 pt (grande)',
-    skipCover: 'Pular a capa (começar a numeração na página 2)',
-    numbering: 'Numerando páginas...',
-    addBtn: 'Adicionar números de página e baixar',
-  },
-  fr: {
-    errStart: 'Le numéro de la première page doit être un nombre entier de 1 ou plus.',
-    stampedSuccess: (n: number, size: string) => `Numéros de page apposés sur ${n} page(s) (${size}).`,
-    pageOfLabel: (cur: number, total: number) => `Page ${cur} sur ${total}`,
-    dropTitleEmpty: 'Choisissez un fichier PDF pour ajouter des numéros de page',
-    dropTitleFile: (name: string, pages: number) => `${name} (${pages} pages)`,
-    dropSub: 'Insère des étiquettes de page vectorielles nettes dans les rapports, contrats et dossiers',
-    labelPos: 'Position',
-    optBottomCenter: 'Bas centré',
-    optBottomRight: 'Bas droit',
-    optBottomLeft: 'Bas gauche',
-    optTopRight: 'Haut droit',
-    labelFmt: 'Format de l’étiquette',
-    optPageOf: 'Page 1 sur N',
-    optSlash: '1 / N',
-    optNumberOnly: '1, 2, 3...',
-    labelStart: 'Numéro de départ',
-    labelSize: 'Taille de police (pt)',
-    opt9: '9 pt (discret)',
-    opt11: '11 pt (standard)',
-    opt14: '14 pt (grand)',
-    skipCover: 'Ignorer la page de couverture (commencer la numérotation à la page 2)',
-    numbering: 'Numérotation des pages...',
-    addBtn: 'Ajouter les numéros de page et télécharger',
-  },
-  de: {
-    errStart: 'Die Startseitenzahl muss eine ganze Zahl ab 1 sein.',
-    stampedSuccess: (n: number, size: string) => `Seitenzahlen auf ${n} Seite(n) gestempelt (${size}).`,
-    pageOfLabel: (cur: number, total: number) => `Seite ${cur} von ${total}`,
-    dropTitleEmpty: 'PDF-Datei zum Hinzufügen von Seitenzahlen auswählen',
-    dropTitleFile: (name: string, pages: number) => `${name} (${pages} Seiten)`,
-    dropSub: 'Fügt gestochen scharfe Vektor-Seitenlabels in Berichte, Verträge und Unterlagen ein',
-    labelPos: 'Position',
-    optBottomCenter: 'Unten mittig',
-    optBottomRight: 'Unten rechts',
-    optBottomLeft: 'Unten links',
-    optTopRight: 'Oben rechts',
-    labelFmt: 'Label-Format',
-    optPageOf: 'Seite 1 von N',
-    optSlash: '1 / N',
-    optNumberOnly: '1, 2, 3...',
-    labelStart: 'Startnummer',
-    labelSize: 'Schriftgröße (pt)',
-    opt9: '9 pt (dezent)',
-    opt11: '11 pt (Standard)',
-    opt14: '14 pt (groß)',
-    skipCover: 'Deckblatt überspringen (Nummerierung ab Seite 2)',
-    numbering: 'Seiten werden nummeriert...',
-    addBtn: 'Seitenzahlen hinzufügen & herunterladen',
-  },
-  it: {
-    errStart: 'Il numero della pagina iniziale deve essere un numero intero pari o superiore a 1.',
-    stampedSuccess: (n: number, size: string) => `Numeri di pagina aggiunti su ${n} pagina/e (${size}).`,
-    pageOfLabel: (cur: number, total: number) => `Pagina ${cur} di ${total}`,
-    dropTitleEmpty: 'Scegli un file PDF per aggiungere i numeri di pagina',
-    dropTitleFile: (name: string, pages: number) => `${name} (${pages} pagine)`,
-    dropSub: 'Inserisce etichette di pagina vettoriali nitide in report, contratti e fascicoli',
-    labelPos: 'Posizione',
-    optBottomCenter: 'In basso al centro',
-    optBottomRight: 'In basso a destra',
-    optBottomLeft: 'In basso a sinistra',
-    optTopRight: 'In alto a destra',
-    labelFmt: 'Formato etichetta',
-    optPageOf: 'Pagina 1 di N',
-    optSlash: '1 / N',
-    optNumberOnly: '1, 2, 3...',
-    labelStart: 'Numero iniziale',
-    labelSize: 'Dimensione carattere (pt)',
-    opt9: '9 pt (discreto)',
-    opt11: '11 pt (standard)',
-    opt14: '14 pt (grande)',
-    skipCover: 'Salta la copertina (la numerazione inizia da pagina 2)',
-    numbering: 'Numerazione delle pagine...',
-    addBtn: 'Aggiungi numeri di pagina e scarica',
-  },
-  id: {
-    errStart: 'Nomor halaman awal harus bilangan bulat 1 atau lebih.',
-    stampedSuccess: (n: number, size: string) => `Nomor halaman dicap pada ${n} halaman (${size}).`,
-    pageOfLabel: (cur: number, total: number) => `Halaman ${cur} dari ${total}`,
-    dropTitleEmpty: 'Pilih File PDF untuk Menambah Nomor Halaman',
-    dropTitleFile: (name: string, pages: number) => `${name} (${pages} halaman)`,
-    dropSub: 'Menyisipkan label halaman vektor yang tajam di seluruh laporan, kontrak, dan paket',
-    labelPos: 'Posisi',
-    optBottomCenter: 'Tengah Bawah',
-    optBottomRight: 'Kanan Bawah',
-    optBottomLeft: 'Kiri Bawah',
-    optTopRight: 'Kanan Atas',
-    labelFmt: 'Format Label',
-    optPageOf: 'Halaman 1 dari N',
-    optSlash: '1 / N',
-    optNumberOnly: '1, 2, 3...',
-    labelStart: 'Nomor Awal',
-    labelSize: 'Ukuran Font (pt)',
-    opt9: '9 pt (Halus)',
-    opt11: '11 pt (Standar)',
-    opt14: '14 pt (Besar)',
-    skipCover: 'Lewati halaman sampul (mulai penomoran pada halaman 2)',
-    numbering: 'Menomori Halaman...',
-    addBtn: 'Tambah Nomor Halaman & Unduh',
-  },
-  ru: {
-    errStart: 'Начальный номер страницы должен быть целым числом от 1 и выше.',
-    stampedSuccess: (n: number, size: string) => `Номера страниц проставлены на ${n} стр. (${size}).`,
-    pageOfLabel: (cur: number, total: number) => `Страница ${cur} из ${total}`,
-    dropTitleEmpty: 'Выберите PDF-файл для добавления номеров страниц',
-    dropTitleFile: (name: string, pages: number) => `${name} (${pages} стр.)`,
-    dropSub: 'Вставляет чёткие векторные подписи страниц в отчёты, договоры и пакеты',
-    labelPos: 'Положение',
-    optBottomCenter: 'Внизу по центру',
-    optBottomRight: 'Внизу справа',
-    optBottomLeft: 'Внизу слева',
-    optTopRight: 'Вверху справа',
-    labelFmt: 'Формат подписи',
-    optPageOf: 'Страница 1 из N',
-    optSlash: '1 / N',
-    optNumberOnly: '1, 2, 3...',
-    labelStart: 'Начальный номер',
-    labelSize: 'Размер шрифта (пт)',
-    opt9: '9 пт (незаметный)',
-    opt11: '11 пт (стандартный)',
-    opt14: '14 пт (крупный)',
-    skipCover: 'Пропустить обложку (начать нумерацию со страницы 2)',
-    numbering: 'Нумерация страниц...',
-    addBtn: 'Добавить номера страниц и скачать',
-  },
-};
+  };
 
 type PositionOption = 'bottom-center' | 'bottom-right' | 'bottom-left' | 'top-right';
 type FormatOption = 'page-of' | 'slash' | 'number-only';
 
 export default function AddPdfPageNumbersTool() {
   const { locale } = useLocale();
-  const s = STRINGS[locale];
+  const s = useComponentStrings('add-pdf-page-numbers', STRINGS_EN);
+  const pdfS = useComponentStrings('pdf-utils', PDF_STRINGS_EN);
   const [pdfBytes, setPdfBytes] = useState<Uint8Array | null>(null);
   const [fileName, setFileName] = useState('');
   const [pageCount, setPageCount] = useState(0);
@@ -233,14 +58,14 @@ export default function AddPdfPageNumbersTool() {
     setStatusMessage('');
 
     try {
-      const bytes = await readValidatedPdfBytes(file, locale);
+      const bytes = await readValidatedPdfBytes(file, pdfS);
       const doc = await PDFDocument.load(bytes);
       setPdfBytes(bytes);
       setFileName(file.name);
       setPageCount(doc.getPageCount());
     } catch (err) {
       setPdfBytes(null);
-      setError(formatFriendlyPdfError(err, file.name, locale));
+      setError(formatFriendlyPdfError(err, file.name, pdfS));
     }
   };
 
@@ -309,7 +134,7 @@ export default function AddPdfPageNumbersTool() {
         s.stampedSuccess(skipFirstPage ? Math.max(0, pageCount - 1) : pageCount, formatBytes(outBytes.byteLength, locale))
       );
     } catch (err) {
-      setError(formatFriendlyPdfError(err, fileName, locale));
+      setError(formatFriendlyPdfError(err, fileName, pdfS));
     } finally {
       setIsProcessing(false);
     }

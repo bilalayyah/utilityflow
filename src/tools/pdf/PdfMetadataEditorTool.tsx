@@ -1,11 +1,11 @@
 import { Eraser, FileCheck2, FileUp } from 'lucide-react';
 import { PDFDocument } from 'pdf-lib';
 import { useState } from 'react';
-import { formatBytes, formatFriendlyPdfError, readValidatedPdfBytes, triggerPdfDownload } from './pdfUtils';
+import { formatBytes, formatFriendlyPdfError, PDF_STRINGS_EN, readValidatedPdfBytes, triggerPdfDownload } from './pdfUtils';
 import { useLocale } from '../../locales/LocaleContext';
+import { useComponentStrings } from '../../locales/componentStrings';
 
-const STRINGS = {
-  en: {
+const STRINGS_EN = {
     clearedMsg: 'Cleared editable metadata fields. Click Save & Download PDF to apply.',
     savedSuccess: (size: string) => `Saved updated PDF metadata (${size}).`,
     dropTitleEmpty: 'Choose a PDF File to Inspect or Edit Metadata',
@@ -20,124 +20,12 @@ const STRINGS = {
     saving: 'Saving PDF...',
     saveBtn: 'Save Metadata & Download PDF',
     stripBtn: 'Strip All Metadata Fields',
-  },
-  es: {
-    clearedMsg: 'Se borraron los campos de metadatos editables. Haga clic en Guardar y descargar PDF para aplicar los cambios.',
-    savedSuccess: (size: string) => `Se guardaron los metadatos actualizados del PDF (${size}).`,
-    dropTitleEmpty: 'Elija un archivo PDF para inspeccionar o editar metadatos',
-    dropTitleFile: (name: string, pages: number, size: string) => `${name} (${pages} páginas · ${size})`,
-    dropSub: 'Inspeccione las propiedades del documento, limpie las etiquetas de autor/software o establezca títulos SEO limpios',
-    labelTitle: 'Título del documento',
-    labelAuthor: 'Autor',
-    labelSubject: 'Asunto / resumen',
-    labelKeywords: 'Palabras clave (separadas por comas)',
-    labelCreator: 'Aplicación creadora',
-    labelProducer: 'Productor del PDF',
-    saving: 'Guardando PDF...',
-    saveBtn: 'Guardar metadatos y descargar PDF',
-    stripBtn: 'Eliminar todos los campos de metadatos',
-  },
-  pt: {
-    clearedMsg: 'Campos de metadados editáveis limpos. Clique em Salvar e baixar PDF para aplicar.',
-    savedSuccess: (size: string) => `Metadados atualizados do PDF salvos (${size}).`,
-    dropTitleEmpty: 'Escolha um arquivo PDF para inspecionar ou editar metadados',
-    dropTitleFile: (name: string, pages: number, size: string) => `${name} (${pages} páginas · ${size})`,
-    dropSub: 'Inspecione as propriedades do documento, limpe tags de autor/software ou defina títulos de SEO limpos',
-    labelTitle: 'Título do documento',
-    labelAuthor: 'Autor',
-    labelSubject: 'Assunto / resumo',
-    labelKeywords: 'Palavras-chave (separadas por vírgula)',
-    labelCreator: 'Aplicativo criador',
-    labelProducer: 'Produtor do PDF',
-    saving: 'Salvando PDF...',
-    saveBtn: 'Salvar metadados e baixar PDF',
-    stripBtn: 'Remover todos os campos de metadados',
-  },
-  fr: {
-    clearedMsg: 'Champs de métadonnées modifiables effacés. Cliquez sur Enregistrer et télécharger le PDF pour appliquer.',
-    savedSuccess: (size: string) => `Métadonnées du PDF mises à jour et enregistrées (${size}).`,
-    dropTitleEmpty: 'Choisissez un fichier PDF pour inspecter ou modifier les métadonnées',
-    dropTitleFile: (name: string, pages: number, size: string) => `${name} (${pages} pages · ${size})`,
-    dropSub: 'Inspectez les propriétés du document, nettoyez les balises auteur/logiciel ou définissez des titres SEO propres',
-    labelTitle: 'Titre du document',
-    labelAuthor: 'Auteur',
-    labelSubject: 'Sujet / résumé',
-    labelKeywords: 'Mots-clés (séparés par des virgules)',
-    labelCreator: 'Application créatrice',
-    labelProducer: 'Producteur du PDF',
-    saving: 'Enregistrement du PDF...',
-    saveBtn: 'Enregistrer les métadonnées et télécharger le PDF',
-    stripBtn: 'Supprimer tous les champs de métadonnées',
-  },
-  de: {
-    clearedMsg: 'Bearbeitbare Metadatenfelder wurden geleert. Klicken Sie auf „Metadaten speichern & PDF herunterladen", um die Änderung zu übernehmen.',
-    savedSuccess: (size: string) => `Aktualisierte PDF-Metadaten gespeichert (${size}).`,
-    dropTitleEmpty: 'PDF-Datei zum Prüfen oder Bearbeiten von Metadaten auswählen',
-    dropTitleFile: (name: string, pages: number, size: string) => `${name} (${pages} Seiten · ${size})`,
-    dropSub: 'Dokumenteigenschaften prüfen, Autoren- und Software-Angaben bereinigen oder saubere SEO-Titel setzen',
-    labelTitle: 'Dokumenttitel',
-    labelAuthor: 'Autor',
-    labelSubject: 'Betreff / Zusammenfassung',
-    labelKeywords: 'Schlüsselwörter (durch Komma getrennt)',
-    labelCreator: 'Ersteller-Anwendung',
-    labelProducer: 'PDF-Ersteller',
-    saving: 'PDF wird gespeichert...',
-    saveBtn: 'Metadaten speichern & PDF herunterladen',
-    stripBtn: 'Alle Metadatenfelder entfernen',
-  },
-  it: {
-    clearedMsg: 'Campi di metadati modificabili svuotati. Fai clic su «Salva metadati e scarica PDF» per applicare le modifiche.',
-    savedSuccess: (size: string) => `Metadati PDF aggiornati salvati (${size}).`,
-    dropTitleEmpty: 'Scegli un file PDF per ispezionare o modificare i metadati',
-    dropTitleFile: (name: string, pages: number, size: string) => `${name} (${pages} pagine · ${size})`,
-    dropSub: 'Ispeziona le proprietà del documento, rimuovi i tag di autore e software o imposta titoli SEO puliti',
-    labelTitle: 'Titolo del documento',
-    labelAuthor: 'Autore',
-    labelSubject: 'Oggetto / Riepilogo',
-    labelKeywords: 'Parole chiave (separate da virgola)',
-    labelCreator: 'Applicazione di creazione',
-    labelProducer: 'Produttore PDF',
-    saving: 'Salvataggio del PDF...',
-    saveBtn: 'Salva metadati e scarica PDF',
-    stripBtn: 'Rimuovi tutti i campi di metadati',
-  },
-  id: {
-    clearedMsg: 'Bidang metadata yang dapat diedit dibersihkan. Klik Simpan & Unduh PDF untuk menerapkan.',
-    savedSuccess: (size: string) => `Metadata PDF yang diperbarui disimpan (${size}).`,
-    dropTitleEmpty: 'Pilih File PDF untuk Memeriksa atau Mengedit Metadata',
-    dropTitleFile: (name: string, pages: number, size: string) => `${name} (${pages} halaman · ${size})`,
-    dropSub: 'Periksa properti dokumen, bersihkan tag penulis/perangkat lunak, atau atur judul SEO yang bersih',
-    labelTitle: 'Judul Dokumen',
-    labelAuthor: 'Penulis',
-    labelSubject: 'Subjek / Ringkasan',
-    labelKeywords: 'Kata Kunci (dipisahkan koma)',
-    labelCreator: 'Aplikasi Pembuat',
-    labelProducer: 'Produsen PDF',
-    saving: 'Menyimpan PDF...',
-    saveBtn: 'Simpan Metadata & Unduh PDF',
-    stripBtn: 'Hapus Semua Bidang Metadata',
-  },
-  ru: {
-    clearedMsg: 'Редактируемые поля метаданных очищены. Нажмите «Сохранить и скачать PDF», чтобы применить.',
-    savedSuccess: (size: string) => `Обновлённые метаданные PDF сохранены (${size}).`,
-    dropTitleEmpty: 'Выберите PDF-файл для просмотра или редактирования метаданных',
-    dropTitleFile: (name: string, pages: number, size: string) => `${name} (${pages} стр. · ${size})`,
-    dropSub: 'Проверяйте свойства документа, очищайте теги автора/ПО или задавайте чистые SEO-заголовки',
-    labelTitle: 'Название документа',
-    labelAuthor: 'Автор',
-    labelSubject: 'Тема / краткое описание',
-    labelKeywords: 'Ключевые слова (через запятую)',
-    labelCreator: 'Приложение-создатель',
-    labelProducer: 'Производитель PDF',
-    saving: 'Сохранение PDF...',
-    saveBtn: 'Сохранить метаданные и скачать PDF',
-    stripBtn: 'Удалить все поля метаданных',
-  },
-};
+  };
 
 export default function PdfMetadataEditorTool() {
   const { locale } = useLocale();
-  const s = STRINGS[locale];
+  const s = useComponentStrings('pdf-metadata-editor', STRINGS_EN);
+  const pdfS = useComponentStrings('pdf-utils', PDF_STRINGS_EN);
   const [pdfBytes, setPdfBytes] = useState<Uint8Array | null>(null);
   const [fileName, setFileName] = useState('');
   const [pageCount, setPageCount] = useState(0);
@@ -160,7 +48,7 @@ export default function PdfMetadataEditorTool() {
     setStatusMessage('');
 
     try {
-      const bytes = await readValidatedPdfBytes(file, locale);
+      const bytes = await readValidatedPdfBytes(file, pdfS);
       const doc = await PDFDocument.load(bytes);
       const firstPage = doc.getPageCount() > 0 ? doc.getPage(0).getSize() : null;
 
@@ -179,7 +67,7 @@ export default function PdfMetadataEditorTool() {
       setProducer(doc.getProducer() ?? '');
     } catch (err) {
       setPdfBytes(null);
-      setError(formatFriendlyPdfError(err, file.name, locale));
+      setError(formatFriendlyPdfError(err, file.name, pdfS));
     }
   };
 
@@ -220,7 +108,7 @@ export default function PdfMetadataEditorTool() {
         s.savedSuccess(formatBytes(outBytes.byteLength, locale))
       );
     } catch (err) {
-      setError(formatFriendlyPdfError(err, fileName, locale));
+      setError(formatFriendlyPdfError(err, fileName, pdfS));
     } finally {
       setIsSaving(false);
     }

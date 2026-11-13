@@ -5,13 +5,14 @@ import {
   formatBytes,
   formatFriendlyPdfError,
   parsePageRanges,
+  PDF_STRINGS_EN,
   readValidatedPdfBytes,
   triggerPdfDownload,
 } from './pdfUtils';
 import { useLocale } from '../../locales/LocaleContext';
+import { useComponentStrings } from '../../locales/componentStrings';
 
-const STRINGS = {
-  en: {
+const STRINGS_EN = {
     errNoMatch: 'No matching pages found to rotate.',
     rotatedSuccess: (a: number, b: number, deg: number, size: string) =>
       `Rotated ${a} of ${b} pages by ${deg}° clockwise (${size}).`,
@@ -31,161 +32,14 @@ const STRINGS = {
     phRange: 'e.g. 1, 3-5',
     rotating: 'Rotating Pages...',
     rotateBtn: 'Apply Rotation & Download PDF',
-  },
-  es: {
-    errNoMatch: 'No se encontraron páginas coincidentes para rotar.',
-    rotatedSuccess: (a: number, b: number, deg: number, size: string) =>
-      `Se rotaron ${a} de ${b} páginas ${deg}° en sentido horario (${size}).`,
-    dropTitleEmpty: 'Elija un archivo PDF para rotar páginas',
-    dropTitleFile: (name: string, pages: number) => `${name} (${pages} páginas)`,
-    dropSub: 'Rote todas las páginas o rangos específicos localmente, sin subidas al servidor',
-    labelAngle: 'Ángulo de rotación',
-    opt90: '90° en sentido horario (derecha)',
-    opt270: '90° en sentido antihorario (izquierda / 270°)',
-    opt180: '180° boca abajo',
-    labelScope: 'Aplicar a',
-    optAll: (n: number) => `Todas las páginas (${n})`,
-    optRange: 'Rangos de páginas específicos',
-    optOdd: 'Solo páginas impares',
-    optEven: 'Solo páginas pares',
-    labelRangeInput: (n: number) => `Números / rangos de página (1–${n})`,
-    phRange: 'p. ej., 1, 3-5',
-    rotating: 'Rotando páginas...',
-    rotateBtn: 'Aplicar rotación y descargar PDF',
-  },
-  pt: {
-    errNoMatch: 'Nenhuma página correspondente encontrada para girar.',
-    rotatedSuccess: (a: number, b: number, deg: number, size: string) =>
-      `${a} de ${b} páginas giradas ${deg}° no sentido horário (${size}).`,
-    dropTitleEmpty: 'Escolha um arquivo PDF para girar páginas',
-    dropTitleFile: (name: string, pages: number) => `${name} (${pages} páginas)`,
-    dropSub: 'Gire todas as páginas ou intervalos específicos localmente, sem envios ao servidor',
-    labelAngle: 'Ângulo de rotação',
-    opt90: '90° no sentido horário (direita)',
-    opt270: '90° no sentido anti-horário (esquerda / 270°)',
-    opt180: '180° de cabeça para baixo',
-    labelScope: 'Aplicar a',
-    optAll: (n: number) => `Todas as páginas (${n})`,
-    optRange: 'Intervalos de páginas específicos',
-    optOdd: 'Somente páginas ímpares',
-    optEven: 'Somente páginas pares',
-    labelRangeInput: (n: number) => `Números / intervalos de página (1–${n})`,
-    phRange: 'ex.: 1, 3-5',
-    rotating: 'Girando páginas...',
-    rotateBtn: 'Aplicar rotação e baixar PDF',
-  },
-  fr: {
-    errNoMatch: 'Aucune page correspondante à faire pivoter.',
-    rotatedSuccess: (a: number, b: number, deg: number, size: string) =>
-      `${a} pages sur ${b} pivotées de ${deg}° dans le sens horaire (${size}).`,
-    dropTitleEmpty: 'Choisissez un fichier PDF pour faire pivoter les pages',
-    dropTitleFile: (name: string, pages: number) => `${name} (${pages} pages)`,
-    dropSub: 'Faites pivoter toutes les pages ou des plages spécifiques localement, sans envoi au serveur',
-    labelAngle: 'Angle de rotation',
-    opt90: '90° dans le sens horaire (droite)',
-    opt270: '90° dans le sens antihoraire (gauche / 270°)',
-    opt180: '180° à l’envers',
-    labelScope: 'Appliquer à',
-    optAll: (n: number) => `Toutes les pages (${n})`,
-    optRange: 'Plages de pages spécifiques',
-    optOdd: 'Pages impaires uniquement',
-    optEven: 'Pages paires uniquement',
-    labelRangeInput: (n: number) => `Numéros / plages de pages (1–${n})`,
-    phRange: 'p. ex. 1, 3-5',
-    rotating: 'Rotation des pages...',
-    rotateBtn: 'Appliquer la rotation et télécharger le PDF',
-  },
-  de: {
-    errNoMatch: 'Keine passenden Seiten zum Drehen gefunden.',
-    rotatedSuccess: (a: number, b: number, deg: number, size: string) =>
-      `${a} von ${b} Seiten um ${deg}° im Uhrzeigersinn gedreht (${size}).`,
-    dropTitleEmpty: 'PDF-Datei zum Drehen von Seiten auswählen',
-    dropTitleFile: (name: string, pages: number) => `${name} (${pages} Seiten)`,
-    dropSub: 'Alle Seiten oder bestimmte Seitenbereiche lokal drehen – ohne Server-Upload',
-    labelAngle: 'Drehwinkel',
-    opt90: '90° im Uhrzeigersinn (rechts)',
-    opt270: '90° gegen den Uhrzeigersinn (links / 270°)',
-    opt180: '180° auf dem Kopf',
-    labelScope: 'Anwenden auf',
-    optAll: (n: number) => `Alle Seiten (${n})`,
-    optRange: 'Bestimmte Seitenbereiche',
-    optOdd: 'Nur ungerade Seiten',
-    optEven: 'Nur gerade Seiten',
-    labelRangeInput: (n: number) => `Seitennummern / Bereiche (1–${n})`,
-    phRange: 'z. B. 1, 3-5',
-    rotating: 'Seiten werden gedreht...',
-    rotateBtn: 'Drehung anwenden & PDF herunterladen',
-  },
-  it: {
-    errNoMatch: 'Nessuna pagina corrispondente da ruotare.',
-    rotatedSuccess: (a: number, b: number, deg: number, size: string) =>
-      `${a} di ${b} pagine ruotate di ${deg}° in senso orario (${size}).`,
-    dropTitleEmpty: 'Scegli un file PDF per ruotare le pagine',
-    dropTitleFile: (name: string, pages: number) => `${name} (${pages} pagine)`,
-    dropSub: 'Ruota tutte le pagine o intervalli specifici in locale, senza caricamenti sul server',
-    labelAngle: 'Angolo di rotazione',
-    opt90: '90° in senso orario (destra)',
-    opt270: '90° in senso antiorario (sinistra / 270°)',
-    opt180: '180° capovolto',
-    labelScope: 'Applica a',
-    optAll: (n: number) => `Tutte le pagine (${n})`,
-    optRange: 'Intervalli di pagine specifici',
-    optOdd: 'Solo pagine dispari',
-    optEven: 'Solo pagine pari',
-    labelRangeInput: (n: number) => `Numeri di pagina / Intervalli (1–${n})`,
-    phRange: 'es. 1, 3-5',
-    rotating: 'Rotazione delle pagine...',
-    rotateBtn: 'Applica la rotazione e scarica il PDF',
-  },
-  id: {
-    errNoMatch: 'Tidak ditemukan halaman yang cocok untuk diputar.',
-    rotatedSuccess: (a: number, b: number, deg: number, size: string) =>
-      `${a} dari ${b} halaman diputar ${deg}° searah jarum jam (${size}).`,
-    dropTitleEmpty: 'Pilih File PDF untuk Memutar Halaman',
-    dropTitleFile: (name: string, pages: number) => `${name} (${pages} halaman)`,
-    dropSub: 'Putar semua halaman atau rentang halaman tertentu secara lokal tanpa unggahan server',
-    labelAngle: 'Sudut Rotasi',
-    opt90: '90° Searah Jarum Jam (Kanan)',
-    opt270: '90° Berlawanan Arah Jarum Jam (Kiri / 270°)',
-    opt180: '180° Terbalik',
-    labelScope: 'Terapkan Ke',
-    optAll: (n: number) => `Semua Halaman (${n})`,
-    optRange: 'Rentang Halaman Tertentu',
-    optOdd: 'Hanya Halaman Ganjil',
-    optEven: 'Hanya Halaman Genap',
-    labelRangeInput: (n: number) => `Nomor / Rentang Halaman (1–${n})`,
-    phRange: 'cth. 1, 3-5',
-    rotating: 'Memutar Halaman...',
-    rotateBtn: 'Terapkan Rotasi & Unduh PDF',
-  },
-  ru: {
-    errNoMatch: 'Подходящих страниц для поворота не найдено.',
-    rotatedSuccess: (a: number, b: number, deg: number, size: string) =>
-      `Повёрнуто страниц: ${a} из ${b} на ${deg}° по часовой стрелке (${size}).`,
-    dropTitleEmpty: 'Выберите PDF-файл для поворота страниц',
-    dropTitleFile: (name: string, pages: number) => `${name} (${pages} стр.)`,
-    dropSub: 'Поворачивайте все страницы или отдельные диапазоны локально, без загрузки на сервер',
-    labelAngle: 'Угол поворота',
-    opt90: '90° по часовой стрелке (вправо)',
-    opt270: '90° против часовой стрелки (влево / 270°)',
-    opt180: '180° вверх ногами',
-    labelScope: 'Применить к',
-    optAll: (n: number) => `Все страницы (${n})`,
-    optRange: 'Конкретные диапазоны страниц',
-    optOdd: 'Только нечётные страницы',
-    optEven: 'Только чётные страницы',
-    labelRangeInput: (n: number) => `Номера / диапазоны страниц (1–${n})`,
-    phRange: 'напр. 1, 3-5',
-    rotating: 'Поворот страниц...',
-    rotateBtn: 'Применить поворот и скачать PDF',
-  },
-};
+  };
 
 type Scope = 'all' | 'range' | 'odd' | 'even';
 
 export default function PdfPageRotatorTool() {
   const { locale } = useLocale();
-  const s = STRINGS[locale];
+  const s = useComponentStrings('pdf-page-rotator', STRINGS_EN);
+  const pdfS = useComponentStrings('pdf-utils', PDF_STRINGS_EN);
   const [pdfBytes, setPdfBytes] = useState<Uint8Array | null>(null);
   const [fileName, setFileName] = useState('');
   const [pageCount, setPageCount] = useState(0);
@@ -203,7 +57,7 @@ export default function PdfPageRotatorTool() {
     setStatusMessage('');
 
     try {
-      const bytes = await readValidatedPdfBytes(file, locale);
+      const bytes = await readValidatedPdfBytes(file, pdfS);
       const doc = await PDFDocument.load(bytes);
       setPdfBytes(bytes);
       setFileName(file.name);
@@ -211,7 +65,7 @@ export default function PdfPageRotatorTool() {
       setRangeInput('1');
     } catch (err) {
       setPdfBytes(null);
-      setError(formatFriendlyPdfError(err, file.name, locale));
+      setError(formatFriendlyPdfError(err, file.name, pdfS));
     }
   };
 
@@ -230,7 +84,7 @@ export default function PdfPageRotatorTool() {
       } else if (scope === 'even') {
         targetIndices = Array.from({ length: pageCount }, (_, i) => i).filter((i) => i % 2 === 1);
       } else {
-        const parsed = parsePageRanges(rangeInput, pageCount, locale);
+        const parsed = parsePageRanges(rangeInput, pageCount, pdfS);
         if (parsed.error) {
           setError(parsed.error);
           setIsProcessing(false);
@@ -259,7 +113,7 @@ export default function PdfPageRotatorTool() {
         s.rotatedSuccess(targetIndices.length, pageCount, rotationDelta, formatBytes(outBytes.byteLength, locale))
       );
     } catch (err) {
-      setError(formatFriendlyPdfError(err, fileName, locale));
+      setError(formatFriendlyPdfError(err, fileName, pdfS));
     } finally {
       setIsProcessing(false);
     }

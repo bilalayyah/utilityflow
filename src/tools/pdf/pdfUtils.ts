@@ -12,8 +12,7 @@ if (typeof window !== 'undefined' && !pdfjsLib.GlobalWorkerOptions.workerSrc) {
 
 export { pdfjsLib };
 
-const PDF_STRINGS = {
-  en: {
+export const PDF_STRINGS_EN = {
     noFile: 'No file was selected.',
     notPdf: (name: string) => `"${name}" does not appear to be a PDF file.`,
     empty: (name: string) => `"${name}" is empty or truncated.`,
@@ -31,141 +30,8 @@ const PDF_STRINGS = {
     encrypted:
       'This PDF is encrypted or password-protected. Unlock it before processing locally.',
     unable: 'Unable to process PDF file.',
-  },
-  es: {
-    noFile: 'No se seleccionó ningún archivo.',
-    notPdf: (name: string) => `"${name}" no parece ser un archivo PDF.`,
-    empty: (name: string) => `"${name}" está vacío o truncado.`,
-    noHeader: (name: string) =>
-      `"${name}" no tiene un encabezado %PDF válido y no se puede procesar.`,
-    enterRanges: 'Ingresa números de página o rangos como "1-3, 5".',
-    rangeOutside: (token: string, total: number) =>
-      `El rango "${token}" está fuera de los límites del documento (1–${total} páginas).`,
-    rangeReversed: (token: string) =>
-      `El rango "${token}" tiene una página inicial mayor que la final.`,
-    pageMissing: (page: number, total: number) =>
-      `La página ${page} no existe (el documento tiene ${total} páginas).`,
-    invalidSyntax: (token: string) =>
-      `Sintaxis de página no válida: "${token}". Usa números y rangos como "1-3, 5".`,
-    encrypted:
-      'Este PDF está cifrado o protegido con contraseña. Desbloquéalo antes de procesarlo localmente.',
-    unable: 'No se pudo procesar el archivo PDF.',
-  },
-  pt: {
-    noFile: 'Nenhum arquivo foi selecionado.',
-    notPdf: (name: string) => `"${name}" não parece ser um arquivo PDF.`,
-    empty: (name: string) => `"${name}" está vazio ou truncado.`,
-    noHeader: (name: string) =>
-      `"${name}" não tem um cabeçalho %PDF válido e não pode ser processado.`,
-    enterRanges: 'Insira números de página ou intervalos como "1-3, 5".',
-    rangeOutside: (token: string, total: number) =>
-      `O intervalo "${token}" está fora dos limites do documento (1–${total} páginas).`,
-    rangeReversed: (token: string) =>
-      `O intervalo "${token}" tem uma página inicial maior que a final.`,
-    pageMissing: (page: number, total: number) =>
-      `A página ${page} não existe (o documento tem ${total} páginas).`,
-    invalidSyntax: (token: string) =>
-      `Sintaxe de página inválida: "${token}". Use números e intervalos como "1-3, 5".`,
-    encrypted:
-      'Este PDF está criptografado ou protegido por senha. Desbloqueie-o antes de processá-lo localmente.',
-    unable: 'Não foi possível processar o arquivo PDF.',
-  },
-  fr: {
-    noFile: 'Aucun fichier n’a été sélectionné.',
-    notPdf: (name: string) => `"${name}" ne semble pas être un fichier PDF.`,
-    empty: (name: string) => `"${name}" est vide ou tronqué.`,
-    noHeader: (name: string) =>
-      `"${name}" n’a pas d’en-tête %PDF valide et ne peut pas être traité.`,
-    enterRanges: 'Saisissez des numéros de page ou des plages comme « 1-3, 5 ».',
-    rangeOutside: (token: string, total: number) =>
-      `La plage « ${token} » est hors des limites du document (1–${total} pages).`,
-    rangeReversed: (token: string) =>
-      `La plage « ${token} » a une page de début supérieure à sa page de fin.`,
-    pageMissing: (page: number, total: number) =>
-      `La page ${page} n’existe pas (le document a ${total} pages).`,
-    invalidSyntax: (token: string) =>
-      `Syntaxe de page non valide : « ${token} ». Utilisez des nombres et des plages comme « 1-3, 5 ».`,
-    encrypted:
-      'Ce PDF est chiffré ou protégé par mot de passe. Déverrouillez-le avant de le traiter localement.',
-    unable: 'Impossible de traiter le fichier PDF.',
-  },
-  de: {
-    noFile: 'Es wurde keine Datei ausgewählt.',
-    notPdf: (name: string) => `"${name}" scheint keine PDF-Datei zu sein.`,
-    empty: (name: string) => `"${name}" ist leer oder unvollständig.`,
-    noHeader: (name: string) =>
-      `"${name}" fehlt ein gültiger %PDF-Header und kann nicht verarbeitet werden.`,
-    enterRanges: 'Geben Sie Seitennummern oder Bereiche ein, z. B. „1-3, 5".',
-    rangeOutside: (token: string, total: number) =>
-      `Bereich „${token}" liegt außerhalb der Seitengrenzen des Dokuments (1–${total}).`,
-    rangeReversed: (token: string) =>
-      `Bereich „${token}": Die Startseite ist größer als die Endseite.`,
-    pageMissing: (page: number, total: number) =>
-      `Seite ${page} existiert nicht (das Dokument hat ${total} Seiten).`,
-    invalidSyntax: (token: string) =>
-      `Ungültige Seitensyntax „${token}". Verwenden Sie Zahlen und Bereiche wie „1-3, 5".`,
-    encrypted:
-      'Diese PDF ist verschlüsselt oder passwortgeschützt. Entsperren Sie sie, bevor Sie sie lokal verarbeiten.',
-    unable: 'PDF-Datei konnte nicht verarbeitet werden.',
-  },
-  it: {
-    noFile: 'Nessun file selezionato.',
-    notPdf: (name: string) => `"${name}" non sembra essere un file PDF.`,
-    empty: (name: string) => `"${name}" è vuoto o troncato.`,
-    noHeader: (name: string) =>
-      `"${name}" non ha un’intestazione %PDF valida e non può essere elaborato.`,
-    enterRanges: 'Inserisci numeri di pagina o intervalli come «1-3, 5».',
-    rangeOutside: (token: string, total: number) =>
-      `L’intervallo «${token}» è fuori dai limiti di pagina del documento (1–${total}).`,
-    rangeReversed: (token: string) =>
-      `L’intervallo «${token}» ha una pagina iniziale maggiore della pagina finale.`,
-    pageMissing: (page: number, total: number) =>
-      `La pagina ${page} non esiste (il documento ha ${total} pagine).`,
-    invalidSyntax: (token: string) =>
-      `Sintassi di pagina non valida «${token}». Usa numeri e intervalli come «1-3, 5».`,
-    encrypted:
-      'Questo PDF è crittografato o protetto da password. Sbloccalo prima di elaborarlo in locale.',
-    unable: 'Impossibile elaborare il file PDF.',
-  },
-  id: {
-    noFile: 'Tidak ada file yang dipilih.',
-    notPdf: (name: string) => `"${name}" tampaknya bukan file PDF.`,
-    empty: (name: string) => `"${name}" kosong atau terpotong.`,
-    noHeader: (name: string) =>
-      `"${name}" tidak memiliki header %PDF yang valid dan tidak dapat diproses.`,
-    enterRanges: 'Masukkan nomor halaman atau rentang seperti "1-3, 5".',
-    rangeOutside: (token: string, total: number) =>
-      `Rentang "${token}" berada di luar batas halaman 1–${total} dokumen.`,
-    rangeReversed: (token: string) =>
-      `Rentang "${token}" memiliki halaman awal yang lebih besar dari halaman akhirnya.`,
-    pageMissing: (page: number, total: number) =>
-      `Halaman ${page} tidak ada (dokumen memiliki ${total} halaman).`,
-    invalidSyntax: (token: string) =>
-      `Sintaks halaman tidak valid "${token}". Gunakan angka dan rentang seperti "1-3, 5".`,
-    encrypted:
-      'PDF ini terenkripsi atau dilindungi kata sandi. Buka kuncinya sebelum memproses secara lokal.',
-    unable: 'Tidak dapat memproses file PDF.',
-  },
-  ru: {
-    noFile: 'Файл не выбран.',
-    notPdf: (name: string) => `«${name}», по-видимому, не является PDF-файлом.`,
-    empty: (name: string) => `«${name}» пуст или обрезан.`,
-    noHeader: (name: string) =>
-      `В «${name}» отсутствует допустимый заголовок %PDF, обработка невозможна.`,
-    enterRanges: 'Введите номера страниц или диапазоны, например «1-3, 5».',
-    rangeOutside: (token: string, total: number) =>
-      `Диапазон «${token}» выходит за границы страниц документа 1–${total}.`,
-    rangeReversed: (token: string) =>
-      `У диапазона «${token}» начальная страница больше конечной.`,
-    pageMissing: (page: number, total: number) =>
-      `Страница ${page} не существует (в документе ${total} страниц).`,
-    invalidSyntax: (token: string) =>
-      `Недопустимый синтаксис страниц «${token}». Используйте числа и диапазоны, например «1-3, 5».`,
-    encrypted:
-      'Этот PDF зашифрован или защищён паролем. Разблокируйте его перед локальной обработкой.',
-    unable: 'Не удаётся обработать PDF-файл.',
-  },
-} as const;
+    allKeywords: ['all'],
+  } as const;
 
 export function formatBytes(bytes: number, locale: LocaleCode = 'en'): string {
   // localeTag maps 'pt' -> 'pt-BR' so numbers render the Brazilian way.
@@ -185,9 +51,9 @@ export function formatBytes(bytes: number, locale: LocaleCode = 'en'): string {
 
 export async function readValidatedPdfBytes(
   file: File,
-  locale: LocaleCode = 'en'
+  pdfStrings: typeof PDF_STRINGS_EN = PDF_STRINGS_EN
 ): Promise<Uint8Array> {
-  const s = PDF_STRINGS[locale];
+  const s = pdfStrings;
   if (!file) {
     throw new Error(s.noFile);
   }
@@ -228,23 +94,13 @@ export function triggerPdfDownload(bytes: Uint8Array, filename: string): void {
 export function parsePageRanges(
   input: string,
   totalPages: number,
-  locale: LocaleCode = 'en'
+  pdfStrings: typeof PDF_STRINGS_EN = PDF_STRINGS_EN
 ): { indices: number[]; error: string } {
-  const s = PDF_STRINGS[locale];
+  const s = pdfStrings;
   const trimmed = input.trim();
-  // "all" in English; "todas"/"todo" in Spanish; "todas"/"todos" in Portuguese; "toutes"/"tous" in French; "alle" in German; "tutte"/"tutti"/"tutto" in Italian.
-  const allKeyword =
-    locale === 'es'
-      ? ['all', 'todas', 'todo'].includes(trimmed.toLowerCase())
-      : locale === 'pt'
-        ? ['all', 'todas', 'todos'].includes(trimmed.toLowerCase())
-        : locale === 'fr'
-          ? ['all', 'toutes', 'tous'].includes(trimmed.toLowerCase())
-          : locale === 'de'
-            ? ['all', 'alle'].includes(trimmed.toLowerCase())
-            : locale === 'it'
-              ? ['all', 'tutte', 'tutti', 'tutto'].includes(trimmed.toLowerCase())
-              : trimmed.toLowerCase() === 'all';
+  // Localized "all" keywords live on the resolved strings object (allKeywords),
+  // so every locale keeps its keywords without this function needing a locale.
+  const allKeyword = (s.allKeywords as readonly string[]).includes(trimmed.toLowerCase());
   if (!trimmed || allKeyword) {
     return {
       indices: Array.from({ length: totalPages }, (_, i) => i),
@@ -308,9 +164,9 @@ export function parsePageRanges(
 export function formatFriendlyPdfError(
   err: unknown,
   filename?: string,
-  locale: LocaleCode = 'en'
+  pdfStrings: typeof PDF_STRINGS_EN = PDF_STRINGS_EN
 ): string {
-  const s = PDF_STRINGS[locale];
+  const s = pdfStrings;
   const msg = err instanceof Error ? err.message : String(err);
   const prefix = filename ? `${filename}: ` : '';
   if (/encrypt|password/i.test(msg)) {

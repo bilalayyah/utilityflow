@@ -1,11 +1,11 @@
 import { ArrowDown, ArrowUp, CopyPlus, FileDown, FileUp, Trash2 } from 'lucide-react';
 import { PDFDocument } from 'pdf-lib';
 import { useState } from 'react';
-import { formatBytes, formatFriendlyPdfError, pdfjsLib, readValidatedPdfBytes, triggerPdfDownload } from './pdfUtils';
+import { formatBytes, formatFriendlyPdfError, PDF_STRINGS_EN, pdfjsLib, readValidatedPdfBytes, triggerPdfDownload } from './pdfUtils';
 import { useLocale } from '../../locales/LocaleContext';
+import { useComponentStrings } from '../../locales/componentStrings';
 
-const STRINGS = {
-  en: {
+const STRINGS_EN = {
     errMin1: 'A PDF must retain at least 1 page.',
     savedSuccess: (n: number, size: string) => `Saved updated PDF with ${n} pages (${size}).`,
     loading: 'Loading PDF pages & previews...',
@@ -27,169 +27,7 @@ const STRINGS = {
     dupAria: (n: number) => `Duplicate page at position ${n}`,
     delTitle: 'Delete page',
     delAria: (n: number) => `Delete page at position ${n}`,
-  },
-  es: {
-    errMin1: 'Un PDF debe conservar al menos 1 página.',
-    savedSuccess: (n: number, size: string) => `Se guardó el PDF actualizado con ${n} páginas (${size}).`,
-    loading: 'Cargando páginas y vistas previas del PDF...',
-    dropTitleFile: (name: string, n: number) => `${name} (${n} páginas activas)`,
-    dropTitleEmpty: 'Elija un archivo PDF para reordenar o eliminar páginas',
-    dropSub: 'Mueva páginas, duplique hojas o elimine páginas no deseadas localmente',
-    outCount: 'Cantidad de páginas de salida:',
-    saving: 'Guardando PDF...',
-    saveBtn: 'Guardar PDF reordenado',
-    thumbAlt: (n: number) => `Página original ${n}`,
-    thumbFallback: (n: number) => `Pág. orig. ${n}`,
-    posLabel: (n: number) => `Pos. n.º ${n}`,
-    origLabel: (n: number) => `(Orig. ${n})`,
-    moveEarlierTitle: 'Mover antes',
-    moveEarlierAria: (n: number) => `Mover la posición ${n} antes`,
-    moveLaterTitle: 'Mover después',
-    moveLaterAria: (n: number) => `Mover la posición ${n} después`,
-    dupTitle: 'Duplicar página',
-    dupAria: (n: number) => `Duplicar la página en la posición ${n}`,
-    delTitle: 'Eliminar página',
-    delAria: (n: number) => `Eliminar la página en la posición ${n}`,
-  },
-  pt: {
-    errMin1: 'Um PDF deve manter pelo menos 1 página.',
-    savedSuccess: (n: number, size: string) => `PDF atualizado salvo com ${n} páginas (${size}).`,
-    loading: 'Carregando páginas e pré-visualizações do PDF...',
-    dropTitleFile: (name: string, n: number) => `${name} (${n} páginas ativas)`,
-    dropTitleEmpty: 'Escolha um arquivo PDF para reordenar ou excluir páginas',
-    dropSub: 'Mova páginas, duplique folhas ou remova páginas indesejadas localmente',
-    outCount: 'Contagem de páginas de saída:',
-    saving: 'Salvando PDF...',
-    saveBtn: 'Salvar PDF reordenado',
-    thumbAlt: (n: number) => `Página original ${n}`,
-    thumbFallback: (n: number) => `Pág. orig. ${n}`,
-    posLabel: (n: number) => `Pos. n.º ${n}`,
-    origLabel: (n: number) => `(Orig. ${n})`,
-    moveEarlierTitle: 'Mover para antes',
-    moveEarlierAria: (n: number) => `Mover a posição ${n} para antes`,
-    moveLaterTitle: 'Mover para depois',
-    moveLaterAria: (n: number) => `Mover a posição ${n} para depois`,
-    dupTitle: 'Duplicar página',
-    dupAria: (n: number) => `Duplicar a página na posição ${n}`,
-    delTitle: 'Excluir página',
-    delAria: (n: number) => `Excluir a página na posição ${n}`,
-  },
-  fr: {
-    errMin1: 'Un PDF doit conserver au moins 1 page.',
-    savedSuccess: (n: number, size: string) => `PDF mis à jour enregistré avec ${n} pages (${size}).`,
-    loading: 'Chargement des pages et des aperçus du PDF...',
-    dropTitleFile: (name: string, n: number) => `${name} (${n} pages actives)`,
-    dropTitleEmpty: 'Choisissez un fichier PDF pour réorganiser ou supprimer des pages',
-    dropSub: 'Déplacez des pages, dupliquez des feuilles ou supprimez les pages indésirables localement',
-    outCount: 'Nombre de pages de sortie :',
-    saving: 'Enregistrement du PDF...',
-    saveBtn: 'Enregistrer le PDF réorganisé',
-    thumbAlt: (n: number) => `Page d’origine ${n}`,
-    thumbFallback: (n: number) => `P. orig. ${n}`,
-    posLabel: (n: number) => `Pos. n° ${n}`,
-    origLabel: (n: number) => `(Orig. ${n})`,
-    moveEarlierTitle: 'Déplacer plus tôt',
-    moveEarlierAria: (n: number) => `Déplacer la position ${n} plus tôt`,
-    moveLaterTitle: 'Déplacer plus tard',
-    moveLaterAria: (n: number) => `Déplacer la position ${n} plus tard`,
-    dupTitle: 'Dupliquer la page',
-    dupAria: (n: number) => `Dupliquer la page à la position ${n}`,
-    delTitle: 'Supprimer la page',
-    delAria: (n: number) => `Supprimer la page à la position ${n}`,
-  },
-  de: {
-    errMin1: 'Ein PDF muss mindestens 1 Seite behalten.',
-    savedSuccess: (n: number, size: string) => `Aktualisiertes PDF mit ${n} Seiten gespeichert (${size}).`,
-    loading: 'PDF-Seiten & Vorschauen werden geladen...',
-    dropTitleFile: (name: string, n: number) => `${name} (${n} Seiten aktiv)`,
-    dropTitleEmpty: 'PDF-Datei zum Neuordnen oder Löschen von Seiten auswählen',
-    dropSub: 'Seiten lokal verschieben, duplizieren oder unerwünschte Seiten entfernen',
-    outCount: 'Seitenzahl der Ausgabe:',
-    saving: 'PDF wird gespeichert...',
-    saveBtn: 'Neu geordnetes PDF speichern',
-    thumbAlt: (n: number) => `Originalseite ${n}`,
-    thumbFallback: (n: number) => `Orig. S. ${n}`,
-    posLabel: (n: number) => `Pos. #${n}`,
-    origLabel: (n: number) => `(Orig. ${n})`,
-    moveEarlierTitle: 'Früher verschieben',
-    moveEarlierAria: (n: number) => `Position ${n} früher verschieben`,
-    moveLaterTitle: 'Später verschieben',
-    moveLaterAria: (n: number) => `Position ${n} später verschieben`,
-    dupTitle: 'Seite duplizieren',
-    dupAria: (n: number) => `Seite an Position ${n} duplizieren`,
-    delTitle: 'Seite löschen',
-    delAria: (n: number) => `Seite an Position ${n} löschen`,
-  },
-  it: {
-    errMin1: 'Un PDF deve conservare almeno 1 pagina.',
-    savedSuccess: (n: number, size: string) => `PDF aggiornato con ${n} pagine salvato (${size}).`,
-    loading: 'Caricamento delle pagine e delle anteprime del PDF...',
-    dropTitleFile: (name: string, n: number) => `${name} (${n} pagine attive)`,
-    dropTitleEmpty: 'Scegli un file PDF per riordinare o eliminare pagine',
-    dropSub: 'Sposta, duplica o rimuovi pagine indesiderate in locale',
-    outCount: 'Numero di pagine in output:',
-    saving: 'Salvataggio del PDF...',
-    saveBtn: 'Salva PDF riordinato',
-    thumbAlt: (n: number) => `Pagina originale ${n}`,
-    thumbFallback: (n: number) => `Orig. p. ${n}`,
-    posLabel: (n: number) => `Pos. #${n}`,
-    origLabel: (n: number) => `(Orig. ${n})`,
-    moveEarlierTitle: 'Sposta prima',
-    moveEarlierAria: (n: number) => `Sposta la posizione ${n} prima`,
-    moveLaterTitle: 'Sposta dopo',
-    moveLaterAria: (n: number) => `Sposta la posizione ${n} dopo`,
-    dupTitle: 'Duplica pagina',
-    dupAria: (n: number) => `Duplica la pagina alla posizione ${n}`,
-    delTitle: 'Elimina pagina',
-    delAria: (n: number) => `Elimina la pagina alla posizione ${n}`,
-  },
-  id: {
-    errMin1: 'PDF harus mempertahankan setidaknya 1 halaman.',
-    savedSuccess: (n: number, size: string) => `PDF yang diperbarui disimpan dengan ${n} halaman (${size}).`,
-    loading: 'Memuat halaman & pratinjau PDF...',
-    dropTitleFile: (name: string, n: number) => `${name} (${n} halaman aktif)`,
-    dropTitleEmpty: 'Pilih File PDF untuk Menyusun Ulang atau Menghapus Halaman',
-    dropSub: 'Pindahkan halaman, duplikasi lembar, atau hapus halaman yang tidak diinginkan secara lokal',
-    outCount: 'Jumlah halaman hasil:',
-    saving: 'Menyimpan PDF...',
-    saveBtn: 'Simpan PDF yang Disusun Ulang',
-    thumbAlt: (n: number) => `Halaman asli ${n}`,
-    thumbFallback: (n: number) => `Asli h.${n}`,
-    posLabel: (n: number) => `Pos #${n}`,
-    origLabel: (n: number) => `(Asli ${n})`,
-    moveEarlierTitle: 'Pindah lebih awal',
-    moveEarlierAria: (n: number) => `Pindahkan posisi ${n} lebih awal`,
-    moveLaterTitle: 'Pindah lebih akhir',
-    moveLaterAria: (n: number) => `Pindahkan posisi ${n} lebih akhir`,
-    dupTitle: 'Duplikasi halaman',
-    dupAria: (n: number) => `Duplikasi halaman di posisi ${n}`,
-    delTitle: 'Hapus halaman',
-    delAria: (n: number) => `Hapus halaman di posisi ${n}`,
-  },
-  ru: {
-    errMin1: 'В PDF должна остаться хотя бы 1 страница.',
-    savedSuccess: (n: number, size: string) => `Обновлённый PDF сохранён: ${n} стр. (${size}).`,
-    loading: 'Загрузка страниц и предпросмотров PDF...',
-    dropTitleFile: (name: string, n: number) => `${name} (активных страниц: ${n})`,
-    dropTitleEmpty: 'Выберите PDF-файл для переупорядочивания или удаления страниц',
-    dropSub: 'Перемещайте страницы, дублируйте листы или удаляйте ненужные страницы локально',
-    outCount: 'Количество страниц на выходе:',
-    saving: 'Сохранение PDF...',
-    saveBtn: 'Сохранить переупорядоченный PDF',
-    thumbAlt: (n: number) => `Исходная страница ${n}`,
-    thumbFallback: (n: number) => `Ориг. с.${n}`,
-    posLabel: (n: number) => `Поз. #${n}`,
-    origLabel: (n: number) => `(ориг. ${n})`,
-    moveEarlierTitle: 'Переместить раньше',
-    moveEarlierAria: (n: number) => `Переместить позицию ${n} раньше`,
-    moveLaterTitle: 'Переместить позже',
-    moveLaterAria: (n: number) => `Переместить позицию ${n} позже`,
-    dupTitle: 'Дублировать страницу',
-    dupAria: (n: number) => `Дублировать страницу на позиции ${n}`,
-    delTitle: 'Удалить страницу',
-    delAria: (n: number) => `Удалить страницу на позиции ${n}`,
-  },
-};
+  };
 
 interface PageItem {
   id: number;
@@ -201,7 +39,8 @@ interface PageItem {
 
 export default function ReorderDeletePdfPagesTool() {
   const { locale } = useLocale();
-  const s = STRINGS[locale];
+  const s = useComponentStrings('reorder-delete-pdf-pages', STRINGS_EN);
+  const pdfS = useComponentStrings('pdf-utils', PDF_STRINGS_EN);
   const [pdfBytes, setPdfBytes] = useState<Uint8Array | null>(null);
   const [fileName, setFileName] = useState('');
   const [pages, setPages] = useState<PageItem[]>([]);
@@ -217,7 +56,7 @@ export default function ReorderDeletePdfPagesTool() {
     setIsLoading(true);
 
     try {
-      const bytes = await readValidatedPdfBytes(file, locale);
+      const bytes = await readValidatedPdfBytes(file, pdfS);
       const libDoc = await PDFDocument.load(bytes);
       const rawPages = libDoc.getPages();
 
@@ -259,7 +98,7 @@ export default function ReorderDeletePdfPagesTool() {
     } catch (err) {
       setPdfBytes(null);
       setPages([]);
-      setError(formatFriendlyPdfError(err, file.name, locale));
+      setError(formatFriendlyPdfError(err, file.name, pdfS));
     } finally {
       setIsLoading(false);
     }
@@ -311,7 +150,7 @@ export default function ReorderDeletePdfPagesTool() {
         s.savedSuccess(pages.length, formatBytes(outBytes.byteLength, locale))
       );
     } catch (err) {
-      setError(formatFriendlyPdfError(err, fileName, locale));
+      setError(formatFriendlyPdfError(err, fileName, pdfS));
     } finally {
       setIsSaving(false);
     }

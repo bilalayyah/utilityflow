@@ -4,13 +4,14 @@ import {
   formatBytes,
   formatFriendlyPdfError,
   parsePageRanges,
+  PDF_STRINGS_EN,
   pdfjsLib,
   readValidatedPdfBytes,
 } from './pdfUtils';
 import { useLocale } from '../../locales/LocaleContext';
+import { useComponentStrings } from '../../locales/componentStrings';
 
-const STRINGS = {
-  en: {
+const STRINGS_EN = {
     errBatch: 'Render up to 20 pages per batch to keep browser canvas memory fast and responsive.',
     errCanvas: 'Canvas 2D context unavailable.',
     dropTitleEmpty: 'Choose a PDF to Render as Images',
@@ -28,141 +29,7 @@ const STRINGS = {
     renderBtn: 'Render PDF Pages to Images',
     pageAlt: (n: number) => `Page ${n} preview`,
     pageLabel: (n: number, w: number, h: number) => `Page ${n} · ${w}×${h}`,
-  },
-  es: {
-    errBatch: 'Renderice hasta 20 páginas por lote para mantener rápida y fluida la memoria del lienzo del navegador.',
-    errCanvas: 'El contexto 2D del lienzo no está disponible.',
-    dropTitleEmpty: 'Elija un PDF para convertir en imágenes',
-    dropTitleFile: (name: string, pages: number, size: string) => `${name} (${pages} páginas · ${size})`,
-    dropSub: 'Renderizado localmente con el lienzo de PDF.js · Salida PNG o JPG',
-    labelRange: 'Páginas («all» o un rango como 1-4, 6)',
-    labelFormat: 'Formato de imagen',
-    optPng: 'PNG (sin pérdida / texto nítido)',
-    optJpg: 'JPG (compacto, ideal para fotos)',
-    labelScale: 'Resolución de renderizado',
-    optScale1: '1.0× (72 DPI, vista previa rápida)',
-    optScale15: '1.5× (108 DPI, estándar)',
-    optScale2: '2.0× (144 DPI, nítido)',
-    rendering: 'Renderizando páginas del PDF...',
-    renderBtn: 'Renderizar páginas del PDF como imágenes',
-    pageAlt: (n: number) => `Vista previa de la página ${n}`,
-    pageLabel: (n: number, w: number, h: number) => `Página ${n} · ${w}×${h}`,
-  },
-  pt: {
-    errBatch: 'Renderize até 20 páginas por lote para manter a memória do canvas do navegador rápida e responsiva.',
-    errCanvas: 'Contexto 2D do canvas indisponível.',
-    dropTitleEmpty: 'Escolha um PDF para renderizar como imagens',
-    dropTitleFile: (name: string, pages: number, size: string) => `${name} (${pages} páginas · ${size})`,
-    dropSub: 'Renderizado localmente via canvas do PDF.js · Saída PNG ou JPG',
-    labelRange: 'Páginas ("all" ou intervalo como 1-4, 6)',
-    labelFormat: 'Formato de imagem',
-    optPng: 'PNG (sem perdas / texto nítido)',
-    optJpg: 'JPG (compacto, ideal para fotos)',
-    labelScale: 'Resolução de renderização',
-    optScale1: '1.0× (72 DPI, pré-visualização rápida)',
-    optScale15: '1.5× (108 DPI, padrão)',
-    optScale2: '2.0× (144 DPI, nítido)',
-    rendering: 'Renderizando páginas do PDF...',
-    renderBtn: 'Renderizar páginas do PDF como imagens',
-    pageAlt: (n: number) => `Pré-visualização da página ${n}`,
-    pageLabel: (n: number, w: number, h: number) => `Página ${n} · ${w}×${h}`,
-  },
-  fr: {
-    errBatch: 'Rendez jusqu’à 20 pages par lot pour garder la mémoire du canvas du navigateur rapide et réactive.',
-    errCanvas: 'Contexte 2D du canvas indisponible.',
-    dropTitleEmpty: 'Choisissez un PDF à rendre sous forme d’images',
-    dropTitleFile: (name: string, pages: number, size: string) => `${name} (${pages} pages · ${size})`,
-    dropSub: 'Rendu localement via le canvas PDF.js · Sortie PNG ou JPG',
-    labelRange: 'Pages (« all » ou plage comme 1-4, 6)',
-    labelFormat: 'Format d’image',
-    optPng: 'PNG (sans perte / texte net)',
-    optJpg: 'JPG (compact, idéal pour les photos)',
-    labelScale: 'Résolution de rendu',
-    optScale1: '1.0× (72 DPI, aperçu rapide)',
-    optScale15: '1.5× (108 DPI, standard)',
-    optScale2: '2.0× (144 DPI, net)',
-    rendering: 'Rendu des pages du PDF...',
-    renderBtn: 'Rendre les pages du PDF en images',
-    pageAlt: (n: number) => `Aperçu de la page ${n}`,
-    pageLabel: (n: number, w: number, h: number) => `Page ${n} · ${w}×${h}`,
-  },
-  de: {
-    errBatch: 'Rendern Sie maximal 20 Seiten pro Durchgang, damit der Browser-Canvas-Speicher schnell und reaktionsschnell bleibt.',
-    errCanvas: 'Canvas-2D-Kontext nicht verfügbar.',
-    dropTitleEmpty: 'PDF-Datei zum Rendern als Bilder auswählen',
-    dropTitleFile: (name: string, pages: number, size: string) => `${name} (${pages} Seiten · ${size})`,
-    dropSub: 'Lokal gerendert mit PDF.js-Canvas · Ausgabe als PNG oder JPG',
-    labelRange: 'Seiten („alle" oder Bereich wie 1-4, 6)',
-    labelFormat: 'Bildformat',
-    optPng: 'PNG (verlustfrei / scharfer Text)',
-    optJpg: 'JPG (kompakt / fotofreundlich)',
-    labelScale: 'Render-Auflösung',
-    optScale1: '1,0× (72 DPI schnelle Vorschau)',
-    optScale15: '1,5× (108 DPI Standard)',
-    optScale2: '2,0× (144 DPI scharf)',
-    rendering: 'PDF-Seiten werden gerendert...',
-    renderBtn: 'PDF-Seiten als Bilder rendern',
-    pageAlt: (n: number) => `Vorschau von Seite ${n}`,
-    pageLabel: (n: number, w: number, h: number) => `Seite ${n} · ${w}×${h}`,
-  },
-  it: {
-    errBatch: 'Converti fino a 20 pagine per batch per mantenere veloce e reattiva la memoria canvas del browser.',
-    errCanvas: 'Contesto Canvas 2D non disponibile.',
-    dropTitleEmpty: 'Scegli un PDF da convertire in immagini',
-    dropTitleFile: (name: string, pages: number, size: string) => `${name} (${pages} pagine · ${size})`,
-    dropSub: 'Conversione locale con canvas PDF.js · Output PNG o JPG',
-    labelRange: 'Pagine («tutte» o intervallo come 1-4, 6)',
-    labelFormat: 'Formato immagine',
-    optPng: 'PNG (senza perdita / testo nitido)',
-    optJpg: 'JPG (compatto, adatto alle foto)',
-    labelScale: 'Risoluzione di rendering',
-    optScale1: '1,0× (72 DPI anteprima rapida)',
-    optScale15: '1,5× (108 DPI standard)',
-    optScale2: '2,0× (144 DPI nitido)',
-    rendering: 'Rendering delle pagine PDF...',
-    renderBtn: 'Converti le pagine PDF in immagini',
-    pageAlt: (n: number) => `Anteprima della pagina ${n}`,
-    pageLabel: (n: number, w: number, h: number) => `Pagina ${n} · ${w}×${h}`,
-  },
-  id: {
-    errBatch: 'Render hingga 20 halaman per batch agar memori canvas browser tetap cepat dan responsif.',
-    errCanvas: 'Konteks Canvas 2D tidak tersedia.',
-    dropTitleEmpty: 'Pilih PDF untuk Dirender sebagai Gambar',
-    dropTitleFile: (name: string, pages: number, size: string) => `${name} (${pages} halaman · ${size})`,
-    dropSub: 'Dirender secara lokal via canvas PDF.js · Hasil PNG atau JPG',
-    labelRange: 'Halaman (“semua” atau rentang seperti 1-4, 6)',
-    labelFormat: 'Format Gambar',
-    optPng: 'PNG (Lossless / Teks Tajam)',
-    optJpg: 'JPG (Ringkas Ramah Foto)',
-    labelScale: 'Resolusi Render',
-    optScale1: '1,0× (Pratinjau Cepat 72 DPI)',
-    optScale15: '1,5× (Standar 108 DPI)',
-    optScale2: '2,0× (Tajam 144 DPI)',
-    rendering: 'Merender Halaman PDF...',
-    renderBtn: 'Render Halaman PDF ke Gambar',
-    pageAlt: (n: number) => `Pratinjau halaman ${n}`,
-    pageLabel: (n: number, w: number, h: number) => `Halaman ${n} · ${w}×${h}`,
-  },
-  ru: {
-    errBatch: 'Рендерите до 20 страниц за раз, чтобы память canvas браузера оставалась быстрой и отзывчивой.',
-    errCanvas: 'Контекст Canvas 2D недоступен.',
-    dropTitleEmpty: 'Выберите PDF для рендеринга в изображения',
-    dropTitleFile: (name: string, pages: number, size: string) => `${name} (${pages} стр. · ${size})`,
-    dropSub: 'Рендерится локально через canvas PDF.js · Вывод PNG или JPG',
-    labelRange: 'Страницы («все» или диапазон, например 1-4, 6)',
-    labelFormat: 'Формат изображения',
-    optPng: 'PNG (без потерь / чёткий текст)',
-    optJpg: 'JPG (компактный, для фото)',
-    labelScale: 'Разрешение рендеринга',
-    optScale1: '1,0× (быстрый предпросмотр 72 DPI)',
-    optScale15: '1,5× (стандарт 108 DPI)',
-    optScale2: '2,0× (чёткий 144 DPI)',
-    rendering: 'Рендеринг страниц PDF...',
-    renderBtn: 'Отрендерить страницы PDF в изображения',
-    pageAlt: (n: number) => `Предпросмотр страницы ${n}`,
-    pageLabel: (n: number, w: number, h: number) => `Страница ${n} · ${w}×${h}`,
-  },
-};
+  };
 
 interface RenderedPage {
   pageNumber: number;
@@ -173,7 +40,8 @@ interface RenderedPage {
 
 export default function PdfToImagesTool() {
   const { locale } = useLocale();
-  const s = STRINGS[locale];
+  const s = useComponentStrings('pdf-to-images', STRINGS_EN);
+  const pdfS = useComponentStrings('pdf-utils', PDF_STRINGS_EN);
   const [pdfBytes, setPdfBytes] = useState<Uint8Array | null>(null);
   const [fileName, setFileName] = useState('');
   const [pageCount, setPageCount] = useState(0);
@@ -191,7 +59,7 @@ export default function PdfToImagesTool() {
     setRendered([]);
 
     try {
-      const bytes = await readValidatedPdfBytes(file, locale);
+      const bytes = await readValidatedPdfBytes(file, pdfS);
       const loadingTask = pdfjsLib.getDocument({ data: bytes.slice() });
       const pdf = await loadingTask.promise;
       setPdfBytes(bytes);
@@ -200,7 +68,7 @@ export default function PdfToImagesTool() {
       setRangeInput(pdf.numPages > 10 ? '1-10' : 'all');
     } catch (err) {
       setPdfBytes(null);
-      setError(formatFriendlyPdfError(err, file.name, locale));
+      setError(formatFriendlyPdfError(err, file.name, pdfS));
     }
   };
 
@@ -209,7 +77,7 @@ export default function PdfToImagesTool() {
     setError('');
     setRendered([]);
 
-    const parsed = parsePageRanges(rangeInput, pageCount, locale);
+    const parsed = parsePageRanges(rangeInput, pageCount, pdfS);
     if (parsed.error) {
       setError(parsed.error);
       return;
@@ -250,7 +118,7 @@ export default function PdfToImagesTool() {
 
       setRendered(outputs);
     } catch (err) {
-      setError(formatFriendlyPdfError(err, fileName, locale));
+      setError(formatFriendlyPdfError(err, fileName, pdfS));
     } finally {
       setIsRendering(false);
     }
