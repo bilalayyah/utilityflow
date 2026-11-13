@@ -75,6 +75,42 @@ const STRINGS = {
     fitsBio: 'Convient à la bio Instagram de 150 caractères',
     captionLength: 'Longueur de la légende (au-delà de la limite de 150 de la bio)',
   },
+  de: {
+    sampleText:
+      'Wir entwickeln schnelle Browser-Tools für Maker & Teams.   \n\nJeden Dienstag gibt es neue Workflow-Tipps.\n\nProbieren Sie unsere kostenlosen Utilities über den Link unten aus!',
+    modeBraille: 'Unsichtbarer Abstandhalter (⠀ U+2800)',
+    modeDot: 'Minimaler Punkt-Abstandhalter (.)',
+    modeClean: 'Nur saubere Leerzeichen am Zeilenende',
+    collapse: 'Versehentliche doppelte Leerzeichen zusammenführen',
+    labelRaw: 'Entwurf für Caption oder Bio',
+    phRaw: 'Schreiben Sie Ihre Caption mit Leerzeilen, wo Absatzumbrüche sein sollen...',
+    tip: 'Tipp: Social-Apps lassen leere Absätze oft verschwinden, wenn am Ende der Zeile darüber Leerzeichen stehen.',
+    labelOut: 'Einfügefertige Ausgabe',
+    copyFormatted: 'Formatierte Caption kopieren',
+    charsLabel: 'Zeichen:',
+    linesLabel: 'Zeilen:',
+    blankLabel: 'Erhaltene Leerzeilen:',
+    fitsBio: 'Passt in die Instagram-Bio (150 Zeichen)',
+    captionLength: 'Caption-Länge (über dem Bio-Limit von 150)',
+  },
+  it: {
+    sampleText:
+      'Creiamo strumenti browser veloci per creator e team.   \n\nOgni martedì nuovi consigli sui flussi di lavoro.\n\nProva le nostre utility gratuite al link qui sotto!',
+    modeBraille: 'Spaziatore invisibile (⠀ U+2800)',
+    modeDot: 'Spaziatore minimo con punto (.)',
+    modeClean: 'Solo spazi finali puliti',
+    collapse: 'Unisci i doppi spazi accidentali',
+    labelRaw: 'Bozza di didascalia o bio',
+    phRaw: 'Scrivi la didascalia con righe vuote dove vuoi le interruzioni di paragrafo...',
+    tip: 'Suggerimento: le app social spesso eliminano i paragrafi vuoti quando ci sono spazi finali alla fine della riga sopra.',
+    labelOut: 'Output pronto da incollare',
+    copyFormatted: 'Copia didascalia formattata',
+    charsLabel: 'Caratteri:',
+    linesLabel: 'Righe:',
+    blankLabel: 'Interruzioni vuote mantenute:',
+    fitsBio: 'Entra nella bio Instagram di 150 caratteri',
+    captionLength: 'Lunghezza didascalia (oltre il limite bio di 150)',
+  },
 };
 
 type SpacerMode = 'braille' | 'dot' | 'clean-only';
