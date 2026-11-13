@@ -39,6 +39,42 @@ const STRINGS = {
     fitsBio: 'Cabe en la biografía de Instagram de 150 caracteres',
     captionLength: 'Longitud de descripción (supera el límite de 150 de la biografía)',
   },
+  pt: {
+    sampleText:
+      'Criando ferramentas rápidas no navegador para criadores e equipes.   \n\nNovas dicas de fluxo de trabalho toda terça-feira.\n\nExperimente as utilidades gratuitas no link abaixo!',
+    modeBraille: 'Espaçador invisível (⠀ U+2800)',
+    modeDot: 'Espaçador de ponto mínimo (.)',
+    modeClean: 'Apenas limpar espaços finais',
+    collapse: 'Recolher espaços duplos acidentais',
+    labelRaw: 'Rascunho de legenda ou bio',
+    phRaw: 'Escreva sua legenda com linhas em branco onde quiser quebras de parágrafo...',
+    tip: 'Dica: os apps de redes sociais costumam recolher parágrafos em branco quando há espaços finais no fim da linha acima.',
+    labelOut: 'Resultado pronto para colar',
+    copyFormatted: 'Copiar legenda formatada',
+    charsLabel: 'Caracteres:',
+    linesLabel: 'Linhas:',
+    blankLabel: 'Quebras em branco preservadas:',
+    fitsBio: 'Cabe na bio do Instagram de 150 caracteres',
+    captionLength: 'Tamanho da legenda (acima do limite de 150 da bio)',
+  },
+  fr: {
+    sampleText:
+      'Créer des outils de navigateur rapides pour les créateurs et les équipes.   \n\nNouveaux conseils de flux de travail chaque mardi.\n\nEssayez les utilitaires gratuits via le lien ci-dessous !',
+    modeBraille: 'Espaceur invisible (⠀ U+2800)',
+    modeDot: 'Espaceur point minimal (.)',
+    modeClean: 'Nettoyer uniquement les espaces finaux',
+    collapse: 'Réduire les doubles espaces accidentels',
+    labelRaw: 'Brouillon de légende ou de bio',
+    phRaw: 'Rédigez votre légende avec des lignes vides là où vous voulez des sauts de paragraphe...',
+    tip: 'Astuce : les applications sociales réduisent souvent les paragraphes vides lorsque des espaces traînent à la fin de la ligne précédente.',
+    labelOut: 'Résultat prêt à coller',
+    copyFormatted: 'Copier la légende formatée',
+    charsLabel: 'Caractères :',
+    linesLabel: 'Lignes :',
+    blankLabel: 'Sauts vides préservés :',
+    fitsBio: 'Convient à la bio Instagram de 150 caractères',
+    captionLength: 'Longueur de la légende (au-delà de la limite de 150 de la bio)',
+  },
 };
 
 type SpacerMode = 'braille' | 'dot' | 'clean-only';
