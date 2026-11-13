@@ -1,8 +1,8 @@
 import { useMemo, useState } from 'react';
 import { useLocale } from '../../locales/LocaleContext';
+import { useComponentStrings } from '../../locales/componentStrings';
 
-const STRINGS = {
-  en: {
+const STRINGS_EN = {
     errorAmount: 'Amount cannot be negative.',
     errorRate: 'Tax rate must be between 0% and 100%.',
     addTab: 'Add Tax (Net → Gross)',
@@ -14,99 +14,7 @@ const STRINGS = {
     netPrice: 'Net Price (Excl. Tax)',
     taxAmount: 'Tax Amount',
     grossPrice: 'Gross Price (Incl. Tax)',
-  },
-  es: {
-    errorAmount: 'El monto no puede ser negativo.',
-    errorRate: 'La tasa de impuesto debe estar entre 0% y 100%.',
-    addTab: 'Agregar impuesto (neto → bruto)',
-    removeTab: 'Extraer impuesto (bruto → neto)',
-    commonRates: 'Tasas comunes:',
-    netAmountLabel: 'Monto neto (sin impuesto) ($)',
-    grossAmountLabel: 'Monto bruto (con impuesto) ($)',
-    rateLabel: 'Tasa de IVA / impuesto sobre las ventas (%)',
-    netPrice: 'Precio neto (sin impuesto)',
-    taxAmount: 'Monto del impuesto',
-    grossPrice: 'Precio bruto (con impuesto)',
-  },
-  pt: {
-    errorAmount: 'O valor não pode ser negativo.',
-    errorRate: 'A alíquota de imposto deve estar entre 0% e 100%.',
-    addTab: 'Adicionar imposto (líquido → bruto)',
-    removeTab: 'Extrair imposto (bruto → líquido)',
-    commonRates: 'Alíquotas comuns:',
-    netAmountLabel: 'Valor líquido (sem imposto) ($)',
-    grossAmountLabel: 'Valor bruto (com imposto) ($)',
-    rateLabel: 'Alíquota de IVA / imposto sobre vendas (%)',
-    netPrice: 'Preço líquido (sem imposto)',
-    taxAmount: 'Valor do imposto',
-    grossPrice: 'Preço bruto (com imposto)',
-  },
-  fr: {
-    errorAmount: 'Le montant ne peut pas être négatif.',
-    errorRate: 'Le taux de taxe doit être compris entre 0 % et 100 %.',
-    addTab: 'Ajouter la taxe (net → brut)',
-    removeTab: 'Extraire la taxe (brut → net)',
-    commonRates: 'Taux courants :',
-    netAmountLabel: 'Montant net (hors taxe) ($)',
-    grossAmountLabel: 'Montant brut (TTC) ($)',
-    rateLabel: 'Taux de TVA / taxe de vente (%)',
-    netPrice: 'Prix net (HT)',
-    taxAmount: 'Montant de la taxe',
-    grossPrice: 'Prix brut (TTC)',
-  },
-  de: {
-    errorAmount: 'Der Betrag darf nicht negativ sein.',
-    errorRate: 'Der Steuersatz muss zwischen 0% und 100% liegen.',
-    addTab: 'Steuer hinzufügen (Netto → Brutto)',
-    removeTab: 'Steuer herausrechnen (Brutto → Netto)',
-    commonRates: 'Gängige Sätze:',
-    netAmountLabel: 'Nettobetrag (ohne Steuer) ($)',
-    grossAmountLabel: 'Bruttobetrag (inkl. Steuer) ($)',
-    rateLabel: 'MwSt.- / Umsatzsteuersatz (%)',
-    netPrice: 'Nettopreis (ohne Steuer)',
-    taxAmount: 'Steuerbetrag',
-    grossPrice: 'Bruttopreis (inkl. Steuer)',
-  },
-  it: {
-    errorAmount: 'L’importo non può essere negativo.',
-    errorRate: 'L’aliquota fiscale deve essere tra 0% e 100%.',
-    addTab: 'Aggiungi imposta (netto → lordo)',
-    removeTab: 'Scorpora imposta (lordo → netto)',
-    commonRates: 'Aliquote comuni:',
-    netAmountLabel: 'Importo netto (imposta esclusa) ($)',
-    grossAmountLabel: 'Importo lordo (imposta inclusa) ($)',
-    rateLabel: 'Aliquota IVA / imposta sulle vendite (%)',
-    netPrice: 'Prezzo netto (imposta escl.)',
-    taxAmount: 'Importo imposta',
-    grossPrice: 'Prezzo lordo (imposta incl.)',
-  },
-  id: {
-    errorAmount: 'Jumlah tidak boleh negatif.',
-    errorRate: 'Tarif pajak harus antara 0% dan 100%.',
-    addTab: 'Tambah Pajak (Netto → Bruto)',
-    removeTab: 'Ekstrak Pajak (Bruto → Netto)',
-    commonRates: 'Tarif umum:',
-    netAmountLabel: 'Jumlah Netto (Tidak Termasuk Pajak) ($)',
-    grossAmountLabel: 'Jumlah Bruto (Termasuk Pajak) ($)',
-    rateLabel: 'Tarif PPN / Pajak Penjualan (%)',
-    netPrice: 'Harga Netto (Tidak Termasuk Pajak)',
-    taxAmount: 'Jumlah Pajak',
-    grossPrice: 'Harga Bruto (Termasuk Pajak)',
-  },
-  ru: {
-    errorAmount: 'Сумма не может быть отрицательной.',
-    errorRate: 'Ставка налога должна быть от 0% до 100%.',
-    addTab: 'Добавить налог (нетто → брутто)',
-    removeTab: 'Выделить налог (брутто → нетто)',
-    commonRates: 'Распространённые ставки:',
-    netAmountLabel: 'Сумма нетто (без налога) ($)',
-    grossAmountLabel: 'Сумма брутто (с налогом) ($)',
-    rateLabel: 'Ставка НДС / налога с продаж (%)',
-    netPrice: 'Цена нетто (без налога)',
-    taxAmount: 'Сумма налога',
-    grossPrice: 'Цена брутто (с налогом)',
-  },
-};
+  };
 
 const RATE_PRESETS = [5, 7, 10, 15, 20, 21];
 
@@ -116,7 +24,7 @@ function money(n: number, locale: string): string {
 
 export default function VatTaxCalculatorTool() {
   const { locale, t } = useLocale();
-  const s = STRINGS[locale];
+  const s = useComponentStrings('vat-tax-calculator', STRINGS_EN);
   const [mode, setMode] = useState<'add' | 'remove'>('add');
   const [amount, setAmount] = useState('1000');
   const [taxRate, setTaxRate] = useState('20');
