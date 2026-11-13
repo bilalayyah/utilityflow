@@ -127,6 +127,44 @@ const PDF_STRINGS = {
       'Questo PDF è crittografato o protetto da password. Sbloccalo prima di elaborarlo in locale.',
     unable: 'Impossibile elaborare il file PDF.',
   },
+  id: {
+    noFile: 'Tidak ada file yang dipilih.',
+    notPdf: (name: string) => `"${name}" tampaknya bukan file PDF.`,
+    empty: (name: string) => `"${name}" kosong atau terpotong.`,
+    noHeader: (name: string) =>
+      `"${name}" tidak memiliki header %PDF yang valid dan tidak dapat diproses.`,
+    enterRanges: 'Masukkan nomor halaman atau rentang seperti "1-3, 5".',
+    rangeOutside: (token: string, total: number) =>
+      `Rentang "${token}" berada di luar batas halaman 1–${total} dokumen.`,
+    rangeReversed: (token: string) =>
+      `Rentang "${token}" memiliki halaman awal yang lebih besar dari halaman akhirnya.`,
+    pageMissing: (page: number, total: number) =>
+      `Halaman ${page} tidak ada (dokumen memiliki ${total} halaman).`,
+    invalidSyntax: (token: string) =>
+      `Sintaks halaman tidak valid "${token}". Gunakan angka dan rentang seperti "1-3, 5".`,
+    encrypted:
+      'PDF ini terenkripsi atau dilindungi kata sandi. Buka kuncinya sebelum memproses secara lokal.',
+    unable: 'Tidak dapat memproses file PDF.',
+  },
+  ru: {
+    noFile: 'Файл не выбран.',
+    notPdf: (name: string) => `«${name}», по-видимому, не является PDF-файлом.`,
+    empty: (name: string) => `«${name}» пуст или обрезан.`,
+    noHeader: (name: string) =>
+      `В «${name}» отсутствует допустимый заголовок %PDF, обработка невозможна.`,
+    enterRanges: 'Введите номера страниц или диапазоны, например «1-3, 5».',
+    rangeOutside: (token: string, total: number) =>
+      `Диапазон «${token}» выходит за границы страниц документа 1–${total}.`,
+    rangeReversed: (token: string) =>
+      `У диапазона «${token}» начальная страница больше конечной.`,
+    pageMissing: (page: number, total: number) =>
+      `Страница ${page} не существует (в документе ${total} страниц).`,
+    invalidSyntax: (token: string) =>
+      `Недопустимый синтаксис страниц «${token}». Используйте числа и диапазоны, например «1-3, 5».`,
+    encrypted:
+      'Этот PDF зашифрован или защищён паролем. Разблокируйте его перед локальной обработкой.',
+    unable: 'Не удаётся обработать PDF-файл.',
+  },
 } as const;
 
 export function formatBytes(bytes: number, locale: LocaleCode = 'en'): string {

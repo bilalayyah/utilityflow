@@ -137,6 +137,48 @@ const STRINGS = {
     extracting: 'Estrazione del PDF...',
     splitBtn: 'Dividi e scarica PDF',
   },
+  id: {
+    errBurst: (n: number) =>
+      `Pemisahan burst mengunduh satu file per halaman. Untuk dokumen lebih dari 25 halaman (${n} halaman di sini), ekstrak rentang sebagai gantinya agar browser Anda tidak memblokir unduhan massal.`,
+    exportedAll: (n: number) => `${n} file PDF satu halaman diekspor.`,
+    errNoMatch: 'Tidak ada halaman yang cocok dengan pilihan itu (misalnya, Halaman Genap membutuhkan 2+ halaman).',
+    extractedSuccess: (a: number, b: number, size: string) =>
+      `${a} dari ${b} halaman diekstrak (${size}).`,
+    dropTitleEmpty: 'Pilih File PDF untuk Dibagi atau Diekstrak',
+    dropTitleFile: (name: string, pages: number, size: string) => `${name} (${pages} halaman · ${size})`,
+    dropSub: 'Diproses secara lokal di memori · Klik untuk mengganti dokumen',
+    modeRange: 'Ekstrak Rentang Halaman',
+    modeOdd: 'Hanya Halaman Ganjil',
+    modeEven: 'Hanya Halaman Genap',
+    modeBurst: 'Pisahkan Semua Halaman Individu',
+    labelRange: (n: number) => `Halaman untuk Diekstrak (1–${n})`,
+    phRange: 'cth. 1-3, 5, 8-10',
+    rangeHintBefore: 'Gunakan koma dan tanda hubung (misalnya ',
+    rangeHintAfter: ').',
+    extracting: 'Mengekstrak PDF...',
+    splitBtn: 'Bagi & Unduh PDF',
+  },
+  ru: {
+    errBurst: (n: number) =>
+      `При разделении на отдельные страницы скачивается по одному файлу на страницу. Для документов больше 25 страниц (здесь ${n} страниц) извлекайте диапазоны, чтобы браузер не заблокировал массовые скачивания.`,
+    exportedAll: (n: number) => `Экспортировано ${n} одностраничных PDF-файлов.`,
+    errNoMatch: 'Подходящих страниц не найдено (например, для чётных страниц нужно 2+ страницы).',
+    extractedSuccess: (a: number, b: number, size: string) =>
+      `Извлечено страниц: ${a} из ${b} (${size}).`,
+    dropTitleEmpty: 'Выберите PDF-файл для разделения или извлечения',
+    dropTitleFile: (name: string, pages: number, size: string) => `${name} (${pages} стр. · ${size})`,
+    dropSub: 'Обрабатывается локально в памяти · Нажмите, чтобы заменить документ',
+    modeRange: 'Извлечь диапазоны страниц',
+    modeOdd: 'Только нечётные страницы',
+    modeEven: 'Только чётные страницы',
+    modeBurst: 'Разделить на все отдельные страницы',
+    labelRange: (n: number) => `Страницы для извлечения (1–${n})`,
+    phRange: 'напр. 1-3, 5, 8-10',
+    rangeHintBefore: 'Используйте запятые и дефисы (например, ',
+    rangeHintAfter: ').',
+    extracting: 'Извлечение PDF...',
+    splitBtn: 'Разделить и скачать PDF',
+  },
 };
 
 type SplitMode = 'range' | 'every-page' | 'odd' | 'even';
