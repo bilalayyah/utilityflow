@@ -38,9 +38,9 @@ export const AI_WRITING_ASSISTANT_TOOL: ToolDefinition = {
     'sentence simplifier',
   ],
   seo: {
-    title: 'Free AI Writing Assistant – Grammar, Rewriter & Tone Tool | UtilityFlow',
+    title: 'AI Writing Assistant – Grammar & Rewriter | UtilityFlow',
     description:
-      'Fix grammar, rewrite sentences, adjust tone, simplify or expand paragraphs, paraphrase text, and write emails free with no sign-up required.',
+      'Fix grammar, rewrite sentences, adjust tone, simplify or expand paragraphs, paraphrase text, and write clear emails free — no sign-up or account required.',
     primaryKeyword: 'ai writing assistant',
     secondaryKeywords: [
       'free grammar checker ai',
@@ -52,6 +52,7 @@ export const AI_WRITING_ASSISTANT_TOOL: ToolDefinition = {
       'free ai writing assistant without login',
       'make text more professional ai tool',
       'rewrite paragraph preserve meaning free',
+      'fix grammar and spelling online free',
     ],
     schemaApplicationCategory: 'UtilitiesApplication',
   },
@@ -69,9 +70,24 @@ export const AI_WRITING_ASSISTANT_TOOL: ToolDefinition = {
         'Select one of 10 writing tasks (such as Fix Grammar, Make Professional, Paraphrase, or Write an Email), match a tone from Professional to Simple, and pick your target output language.',
     },
     {
+      title: 'Click Generate to process your request',
+      description:
+        'Press Generate and wait a few seconds while the request is sent to Groq for inference. A progress indicator shows while your improved text is being produced.',
+    },
+    {
       title: 'Review and compare original vs. improved text',
       description:
-        'Click Generate to process your request, inspect side-by-side or word-level changes, then copy the result or download it as a TXT file.',
+        'Inspect the side-by-side view or word-level change highlights to see exactly what changed, and confirm names, numbers, and dates stayed intact.',
+    },
+    {
+      title: 'Copy or download the result',
+      description:
+        'Use the Copy button to move the improved text to your clipboard, or download it as a TXT file for use in your document or email client.',
+    },
+    {
+      title: 'Try another task or tone if needed',
+      description:
+        'If the result is not quite right, switch the task or tone and generate again — for example, try Make Simple after Make Professional — keeping in mind the daily free request limit.',
     },
   ],
   examples: [
@@ -128,6 +144,86 @@ export const AI_WRITING_ASSISTANT_TOOL: ToolDefinition = {
       answer:
         'Daily limits reset automatically at UTC midnight. In the meantime, all 85+ local browser utilities—including Word Counter, Readability Checker, and Text Diff Checker—work with no limits.',
     },
+    {
+      question: 'What writing tasks can the AI Writing Assistant handle?',
+      answer:
+        'It offers 10 tasks, including Fix Grammar, Make Professional, Paraphrase, Simplify, Expand, Summarize, Write an Email, Improve Clarity, Change Tone, and Correct Spelling.',
+    },
+    {
+      question: 'How long can my text be in the AI Writing Assistant?',
+      answer:
+        'Each request accepts up to 12,000 characters. For longer documents, split the text into sections and process them one at a time.',
+    },
+    {
+      question: 'Which tones can I choose for my rewritten text?',
+      answer:
+        'You can pick from 7 tone presets, including Professional, Friendly, Formal, Casual, Simple, Confident, and Concise, depending on your audience.',
+    },
+    {
+      question: 'Does the AI Writing Assistant send my text to an external service?',
+      answer:
+        'Yes. Your text is sent securely to Groq for AI inference through our backend worker, because the writing tasks need a language model. It is not stored or logged by UtilityFlow.',
+    },
+    {
+      question: 'Can the AI Writing Assistant write a full email from rough notes?',
+      answer:
+        'Yes. Choose the Write an Email task, paste your bullet points or rough notes, and it will structure them into a polite email with a subject line and greeting.',
+    },
+    {
+      question: 'Will the AI Writing Assistant change the meaning of my text?',
+      answer:
+        'It is instructed to preserve your original meaning, facts, names, dates, and numbers. Always review the side-by-side comparison before using the result.',
+    },
+    {
+      question: 'Can I use the AI Writing Assistant for academic essays?',
+      answer:
+        'Yes, it can fix grammar and improve clarity in essays and reports. Check your institution rules first, since some schools restrict AI-assisted writing.',
+    },
+    {
+      question: 'Does the AI Writing Assistant work in languages other than English?',
+      answer:
+        'Yes. You can choose a target output language, and the tool will produce the improved text in that language while keeping your facts unchanged.',
+    },
+    {
+      question: 'How do I see exactly what the AI changed in my text?',
+      answer:
+        'The result view highlights word-level changes and shows your original and improved text side by side, so you can accept or reject each edit mentally before copying.',
+    },
+    {
+      question: 'Can the AI Writing Assistant paraphrase text to avoid repetition?',
+      answer:
+        'Yes. The Paraphrase task rewrites sentences with different wording while keeping the same meaning, which is useful for varied drafts and summaries.',
+    },
+    {
+      question: 'What should I do if the generated text has an error?',
+      answer:
+        'Edit the result directly, or run the text again with a different task or tone. AI output can contain mistakes, so proofread important text before sending it.',
+    },
+    {
+      question: 'Is there a word limit per request in the AI Writing Assistant?',
+      answer:
+        'The limit is 12,000 characters per request, which covers roughly 1,800 to 2,000 English words. Shorter texts usually produce faster and more accurate results.',
+    },
+    {
+      question: 'How is the AI Writing Assistant different from the Word Counter?',
+      answer:
+        'Word Counter only measures words, characters, and reading time locally, while the AI Writing Assistant rewrites and improves your text using the Groq language model.',
+    },
+    {
+      question: 'Can the AI Writing Assistant make my text shorter or longer?',
+      answer:
+        'Yes. Use the Simplify task to shorten dense paragraphs, or the Expand task to add detail and explanation while keeping your original facts intact.',
+    },
+    {
+      question: 'Can I download my improved text as a file?',
+      answer:
+        'Yes. After generating, click the download option to save the improved text as a TXT file on your device.',
+    },
+    {
+      question: 'What happens if my request fails or times out?',
+      answer:
+        'Check your internet connection and try again. If the daily free limit is reached, the tool will tell you, and the limit resets at UTC midnight.',
+    },
   ],
   relatedToolSlugs: [
     'ai-text-summarizer',
@@ -160,11 +256,13 @@ export const AI_TEXT_SUMMARIZER_TOOL: ToolDefinition = {
     'paragraph summarizer',
     'simple language summary',
     'reading time calculator',
+    'summarize long text online',
+    'ai summary generator free',
   ],
   seo: {
-    title: 'Free AI Text Summarizer – Short, Medium & Long Summaries | UtilityFlow',
+    title: 'AI Text Summarizer – Short & Long Summaries | UtilityFlow',
     description:
-      'Summarize long articles, research notes, and reports into paragraphs, bullet points, or key takeaways free without signing up.',
+      'Summarize long articles, research notes, and reports into short paragraphs, bullet points, or key takeaways — free, fast, and with no sign-up required.',
     primaryKeyword: 'ai text summarizer',
     secondaryKeywords: [
       'free article summarizer',
@@ -176,6 +274,7 @@ export const AI_TEXT_SUMMARIZER_TOOL: ToolDefinition = {
       'free ai text summarizer without login',
       'summarize long article preserve numbers and facts',
       'short medium long text summarizer online',
+      'summarize research paper into bullet points',
     ],
     schemaApplicationCategory: 'UtilitiesApplication',
   },
@@ -193,9 +292,24 @@ export const AI_TEXT_SUMMARIZER_TOOL: ToolDefinition = {
         'Select Short, Medium, or Long (Detailed) compression, pick Paragraph, Bullet Points, Key Points, or Simple Language formatting, and choose an output language.',
     },
     {
-      title: 'Compare reading time and export',
+      title: 'Click Summarize to generate the summary',
       description:
-        'Click Summarize Text to view reading time saved, compare the summary alongside the original text, and copy or download the summary as TXT.',
+        'Press Summarize Text and wait a few seconds while your text is sent to Groq for AI inference. A progress indicator shows while the summary is being produced.',
+    },
+    {
+      title: 'Compare reading time and check the result',
+      description:
+        'Review the reading time saved, compare the summary alongside the original text, and verify that key names, numbers, and dates are still correct.',
+    },
+    {
+      title: 'Copy or download the summary',
+      description:
+        'Use the Copy button to move the summary to your clipboard, or download it as a TXT file for your notes, report, or study material.',
+    },
+    {
+      title: 'Try a different length or format if needed',
+      description:
+        'If the summary is too short or too detailed, switch the length or format and summarize again — for example, try Bullet Points after a Paragraph summary.',
     },
   ],
   examples: [
@@ -243,6 +357,86 @@ export const AI_TEXT_SUMMARIZER_TOOL: ToolDefinition = {
       answer:
         'The tool is completely free with no billing or sign-up. Visitors receive up to 5 free summaries per UTC day, and all 85 local browser tools remain unlimited.',
     },
+    {
+      question: 'What summary lengths does the AI Text Summarizer offer?',
+      answer:
+        'You can choose Short (10–20% of the original), Medium (30–40%), or Long (50–60%) summaries, depending on how much detail you want to keep.',
+    },
+    {
+      question: 'What summary formats can I choose from?',
+      answer:
+        'The tool offers Paragraph, Bullet Points, Key Points Extraction, and Simple Language formats, so you can match the summary to notes, reports, or study material.',
+    },
+    {
+      question: 'How long can the text I summarize be?',
+      answer:
+        'Each request accepts between 25 words and 25,000 characters. For longer documents, split them into sections and summarize each part separately.',
+    },
+    {
+      question: 'Does the AI Text Summarizer send my text to an external service?',
+      answer:
+        'Yes. Your text is sent securely to Groq for AI inference through our backend worker, because summarization needs a language model. It is not stored or logged by UtilityFlow.',
+    },
+    {
+      question: 'Can the AI Text Summarizer summarize meeting transcripts?',
+      answer:
+        'Yes. Paste the transcript and choose Key Points or Bullet Points format to extract decisions, action items, and main discussion points quickly.',
+    },
+    {
+      question: 'Will the summary keep the original facts and figures?',
+      answer:
+        'The summarizer is instructed to preserve names, statistics, dates, and factual relationships. Still, review the summary against the original for important documents.',
+    },
+    {
+      question: 'Can I summarize research papers with the AI Text Summarizer?',
+      answer:
+        'Yes. Paste the abstract or full text and use the Long format to keep methodology details and findings, or the Short format for a quick overview.',
+    },
+    {
+      question: 'Does the AI Text Summarizer work in languages other than English?',
+      answer:
+        'Yes. You can select an output language, and the summary will be produced in that language while keeping the original facts unchanged.',
+    },
+    {
+      question: 'How is reading time saved calculated in the AI Text Summarizer?',
+      answer:
+        'The tool compares the estimated reading time of your original text with the summary, using an average silent reading speed of 200 words per minute.',
+    },
+    {
+      question: 'Can the AI Text Summarizer create a simple-language version of a text?',
+      answer:
+        'Yes. Choose the Simple Language format to get a plain, easy-to-read version of complex or technical writing, useful for students and non-experts.',
+    },
+    {
+      question: 'What should I do if the summary misses an important point?',
+      answer:
+        'Try the Long format or Key Points format, which keep more detail. You can also split the text and summarize the missed section separately.',
+    },
+    {
+      question: 'Is the AI Text Summarizer good for studying and exam revision?',
+      answer:
+        'Yes. Summarize chapters or lecture notes into bullet points and key takeaways, then review the short version before exams to refresh the main ideas.',
+    },
+    {
+      question: 'How is the AI Text Summarizer different from the AI Writing Assistant?',
+      answer:
+        'The Summarizer condenses long text into shorter versions, while the Writing Assistant fixes grammar, rewrites sentences, and changes tone without shortening the text.',
+    },
+    {
+      question: 'What happens when I reach the daily summary limit?',
+      answer:
+        'The limit resets automatically at UTC midnight. Until then, you can use the local browser tools, such as Word Counter and Keyword Density Checker, without limits.',
+    },
+    {
+      question: 'Can the AI Text Summarizer handle PDFs or web pages directly?',
+      answer:
+        'No. Paste the text itself into the editor. For PDFs, use the PDF Text Extractor first to copy the text, then paste it into the summarizer.',
+    },
+    {
+      question: 'Does the AI Text Summarizer add new information to my summary?',
+      answer:
+        'No. It is instructed to summarize only what is in your text and not to add external claims, but you should still check the result for accuracy.',
+    },
   ],
   relatedToolSlugs: [
     'ai-writing-assistant',
@@ -273,11 +467,14 @@ export const AI_TOOL_FINDER_TOOL: ToolDefinition = {
     'find utility tool',
     'recommend online tool',
     'natural language tool search',
+    'find free tool online',
+    'utility tool recommender',
+    'search tools by task',
   ],
   seo: {
-    title: 'AI Smart Tool Finder – Find the Right Utility Tool | UtilityFlow',
+    title: 'AI Smart Tool Finder – Find the Right Tool | UtilityFlow',
     description:
-      'Describe what you need in plain language to discover the right browser or AI utility across UtilityFlow’s 88 live tools—fast, free, and without fabricated links.',
+      'Describe what you need in plain language to discover the right browser or AI utility across UtilityFlow’s 88 tools — fast, free, and without fabricated links.',
     primaryKeyword: 'ai smart tool finder',
     secondaryKeywords: [
       'online tool finder',
@@ -289,6 +486,7 @@ export const AI_TOOL_FINDER_TOOL: ToolDefinition = {
       'find free online tool for my task',
       'search utility tools by plain language problem',
       'ai tool discovery without login',
+      'which online tool do i need for pdf',
     ],
     schemaApplicationCategory: 'UtilitiesApplication',
   },
@@ -306,9 +504,24 @@ export const AI_TOOL_FINDER_TOOL: ToolDefinition = {
         'Narrow recommendations to Text & Writing, Developer, Calculators, Social Media, PDF, SEO, or Image & File tools—or search across all 87 tools at once.',
     },
     {
-      title: 'Inspect justifications and open the verified tool',
+      title: 'Run the search and review matches',
       description:
-        'Review why the top recommendation and alternatives match your goal, check supported formats, and click Open Tool to launch immediately.',
+        'Submit your request to get instant keyword matches, or use an AI-assisted search for semantic matching. Results are ranked by relevance to your task.',
+    },
+    {
+      title: 'Inspect justifications and alternatives',
+      description:
+        'Read the one-sentence justification for each recommendation and check the alternatives list to compare similar tools before choosing one.',
+    },
+    {
+      title: 'Open the verified tool',
+      description:
+        'Click Open Tool to launch the recommended tool immediately. Every link is verified against the live registry, so it always opens a real tool.',
+    },
+    {
+      title: 'Try a different wording if there is no match',
+      description:
+        'If the finder reports no exact match, rephrase your task with simpler words or a different category filter, and check the honest no-match note for the closest option.',
     },
   ],
   examples: [
@@ -353,6 +566,91 @@ export const AI_TOOL_FINDER_TOOL: ToolDefinition = {
       question: 'How many searches can I run for free?',
       answer:
         'Instant local keyword matching is unlimited, and visitors receive up to 10 free AI-assisted searches per UTC day with zero sign-up or payment required.',
+    },
+    {
+      question: 'How does the AI Smart Tool Finder understand my request?',
+      answer:
+        'It combines instant local keyword matching with Groq AI semantic ranking, so it understands plain English goals, synonyms, and natural phrasing — not just exact tool names.',
+    },
+    {
+      question: 'Which tools can the AI Smart Tool Finder recommend?',
+      answer:
+        'It searches the full UtilityFlow catalog of 88 tools: 85 browser tools across text, developer, calculator, social, PDF, SEO, and image categories, plus the AI Writing Assistant and AI Text Summarizer.',
+    },
+    {
+      question: 'Does the AI Smart Tool Finder send my search to an external service?',
+      answer:
+        'AI-assisted searches send your request text to Groq for semantic matching through our backend worker. Instant keyword matching runs locally in your browser and sends nothing.',
+    },
+    {
+      question: 'Can I search for a tool by file format, like PDF or PNG?',
+      answer:
+        'Yes. Mention the format in your request, for example "convert PDF into PNG", and the finder will recommend tools that support that format, such as PDF to Images.',
+    },
+    {
+      question: 'What does the AI Smart Tool Finder do if no tool matches my task?',
+      answer:
+        'It tells you honestly that no exact match exists and suggests the closest available tool, instead of inventing a tool or a broken link.',
+    },
+    {
+      question: 'Can I filter tool recommendations by category?',
+      answer:
+        'Yes. Use the category filter to limit results to Text & Writing, Developer, Calculators, Social Media, PDF, SEO, or Image & File tools before searching.',
+    },
+    {
+      question: 'How do the quick task presets work in the AI Smart Tool Finder?',
+      answer:
+        'Quick presets are one-click example requests, such as reducing an image to 100KB, that show you how to phrase a task and instantly return the matching tool.',
+    },
+    {
+      question: 'Why does each recommendation include a justification?',
+      answer:
+        'Each result shows a one-sentence explanation of why the tool matches your goal, including supported formats, so you can judge the fit before opening it.',
+    },
+    {
+      question: 'Can the AI Smart Tool Finder recommend AI tools too?',
+      answer:
+        'Yes. It can recommend the AI Writing Assistant for grammar and rewriting, and the AI Text Summarizer for condensing long text, when your task fits those tools.',
+    },
+    {
+      question: 'Is the AI Smart Tool Finder free to use?',
+      answer:
+        'Yes. Keyword matching is unlimited and free, and AI-assisted searches are free up to 10 per day per visitor, with no account, login, or payment required.',
+    },
+    {
+      question: 'What should I do if the top recommendation is not quite right?',
+      answer:
+        'Check the alternatives list below the top result, or rephrase your request with more detail — for example, name the file format or the exact output you need.',
+    },
+    {
+      question: 'Can I use the AI Smart Tool Finder to find a calculator?',
+      answer:
+        'Yes. Describe the calculation in plain words, such as "work out my monthly loan payment", and it will recommend the Loan EMI Calculator or a related calculator.',
+    },
+    {
+      question: 'How is the AI Smart Tool Finder different from the Tools directory page?',
+      answer:
+        'The Tools directory lists all 88 tools by category for browsing, while the Tool Finder matches your plain-language task to the best tool and explains why it fits.',
+    },
+    {
+      question: 'Can the AI Smart Tool Finder help with SEO tasks?',
+      answer:
+        'Yes. Ask for things like "check my meta description length" or "generate a sitemap", and it will point you to the Meta Tag Generator, XML Sitemap Generator, or On-Page SEO Checker.',
+    },
+    {
+      question: 'What happens when I reach the daily AI search limit?',
+      answer:
+        'The AI search limit resets at UTC midnight. Until then, instant keyword matching keeps working without limits, so you can still find tools by keywords.',
+    },
+    {
+      question: 'Can the AI Smart Tool Finder recommend tools for image editing?',
+      answer:
+        'Yes. Describe your image task, such as "compress this photo" or "resize an image", and it will recommend the Image Compressor, Image Resizer, or Image Format Converter.',
+    },
+    {
+      question: 'Are the links from the AI Smart Tool Finder always working?',
+      answer:
+        'Yes. Every recommendation is checked against the live tool registry before display, so links always open a real, working UtilityFlow tool page.',
     },
   ],
   relatedToolSlugs: [
