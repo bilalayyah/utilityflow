@@ -54,6 +54,32 @@ const STRINGS = {
     taxAmount: 'Montant de la taxe',
     grossPrice: 'Prix brut (TTC)',
   },
+  de: {
+    errorAmount: 'Der Betrag darf nicht negativ sein.',
+    errorRate: 'Der Steuersatz muss zwischen 0% und 100% liegen.',
+    addTab: 'Steuer hinzufügen (Netto → Brutto)',
+    removeTab: 'Steuer herausrechnen (Brutto → Netto)',
+    commonRates: 'Gängige Sätze:',
+    netAmountLabel: 'Nettobetrag (ohne Steuer) ($)',
+    grossAmountLabel: 'Bruttobetrag (inkl. Steuer) ($)',
+    rateLabel: 'MwSt.- / Umsatzsteuersatz (%)',
+    netPrice: 'Nettopreis (ohne Steuer)',
+    taxAmount: 'Steuerbetrag',
+    grossPrice: 'Bruttopreis (inkl. Steuer)',
+  },
+  it: {
+    errorAmount: 'L’importo non può essere negativo.',
+    errorRate: 'L’aliquota fiscale deve essere tra 0% e 100%.',
+    addTab: 'Aggiungi imposta (netto → lordo)',
+    removeTab: 'Scorpora imposta (lordo → netto)',
+    commonRates: 'Aliquote comuni:',
+    netAmountLabel: 'Importo netto (imposta esclusa) ($)',
+    grossAmountLabel: 'Importo lordo (imposta inclusa) ($)',
+    rateLabel: 'Aliquota IVA / imposta sulle vendite (%)',
+    netPrice: 'Prezzo netto (imposta escl.)',
+    taxAmount: 'Importo imposta',
+    grossPrice: 'Prezzo lordo (imposta incl.)',
+  },
 };
 
 const RATE_PRESETS = [5, 7, 10, 15, 20, 21];
