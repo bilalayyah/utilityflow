@@ -17,7 +17,7 @@
 import { getCategoryById } from '../registry/categories';
 import type { CategoryId, ToolCategory } from '../types/tool';
 
-export type LocaleCode = 'en' | 'es' | 'pt' | 'fr' | 'de' | 'it' | 'id' | 'ru' | 'ja' | 'ko';
+export type LocaleCode = 'en' | 'es' | 'pt' | 'fr' | 'de' | 'it' | 'id' | 'ru' | 'ja' | 'ko' | 'zh';
 
 /** Non-default locales (the ones that live under a /<code>/ prefix). */
 export type NonDefaultLocale = Exclude<LocaleCode, 'en'>;
@@ -43,6 +43,7 @@ export const SUPPORTED_LOCALES: LocaleInfo[] = [
   { code: 'ru', nativeName: 'Русский', pathPrefix: '/ru', htmlLang: 'ru' },
   { code: 'ja', nativeName: '日本語', pathPrefix: '/ja', htmlLang: 'ja' },
   { code: 'ko', nativeName: '한국어', pathPrefix: '/ko', htmlLang: 'ko' },
+  { code: 'zh', nativeName: '中文', pathPrefix: '/zh', htmlLang: 'zh-CN' },
 ];
 
 /** Literal 'en' type (not LocaleCode) so `locale === DEFAULT_LOCALE` narrows the type. */
@@ -85,6 +86,8 @@ export function localeTag(locale: LocaleCode): string {
       return 'ja';
     case 'ko':
       return 'ko';
+    case 'zh':
+      return 'zh-CN';
   }
 }
 
@@ -105,7 +108,7 @@ export function getLocaleFromPath(pathname: string): { locale: LocaleCode; restP
 
 /** Localized URL for a static page path (English path in, localized path out). */
 export const STATIC_PATHS: Record<string, Partial<Record<LocaleCode, string>>> = {
-  '/': { en: '/', es: '/es/', pt: '/pt/', fr: '/fr/', de: '/de/', it: '/it/', id: '/id/', ru: '/ru/', ja: '/ja/', ko: '/ko/' },
+  '/': { en: '/', es: '/es/', pt: '/pt/', fr: '/fr/', de: '/de/', it: '/it/', id: '/id/', ru: '/ru/', ja: '/ja/', ko: '/ko/', zh: '/zh/' },
   '/tools/': {
     en: '/tools/',
     es: '/es/todas-las-herramientas/',
@@ -117,9 +120,10 @@ export const STATIC_PATHS: Record<string, Partial<Record<LocaleCode, string>>> =
     ru: '/ru/vse-instrumenty/',
     ja: '/ja/tools/',
     ko: '/ko/tools/',
+    zh: '/zh/all-tools/',
   },
-  '/about/': { en: '/about/', es: '/es/acerca-de/', pt: '/pt/sobre/', fr: '/fr/a-propos/', de: '/de/ueber-uns/', it: '/it/chi-siamo/', id: '/id/tentang-kami/', ru: '/ru/o-nas/', ja: '/ja/watashitachi/', ko: '/ko/sogae/' },
-  '/contact/': { en: '/contact/', es: '/es/contacto/', pt: '/pt/contato/', fr: '/fr/contact/', de: '/de/kontakt/', it: '/it/contatti/', id: '/id/kontak/', ru: '/ru/kontakty/', ja: '/ja/otoiawase/', ko: '/ko/mun-ui/' },
+  '/about/': { en: '/about/', es: '/es/acerca-de/', pt: '/pt/sobre/', fr: '/fr/a-propos/', de: '/de/ueber-uns/', it: '/it/chi-siamo/', id: '/id/tentang-kami/', ru: '/ru/o-nas/', ja: '/ja/watashitachi/', ko: '/ko/sogae/', zh: '/zh/guanyu-women/' },
+  '/contact/': { en: '/contact/', es: '/es/contacto/', pt: '/pt/contato/', fr: '/fr/contact/', de: '/de/kontakt/', it: '/it/contatti/', id: '/id/kontak/', ru: '/ru/kontakty/', ja: '/ja/otoiawase/', ko: '/ko/mun-ui/', zh: '/zh/lianxi-women/' },
   '/privacy-policy/': {
     en: '/privacy-policy/',
     es: '/es/politica-de-privacidad/',
@@ -131,6 +135,7 @@ export const STATIC_PATHS: Record<string, Partial<Record<LocaleCode, string>>> =
     ru: '/ru/politika-konfidentsialnosti/',
     ja: '/ja/puraibashi-porishi/',
     ko: '/ko/peuraibeosi-jeongchaek/',
+    zh: '/zh/yinsi-zhengce/',
   },
   '/terms-of-service/': {
     en: '/terms-of-service/',
@@ -143,6 +148,7 @@ export const STATIC_PATHS: Record<string, Partial<Record<LocaleCode, string>>> =
     ru: '/ru/usloviya-ispolzovaniya/',
     ja: '/ja/riyo-kiyaku/',
     ko: '/ko/iyong-yagwan/',
+    zh: '/zh/shiyong-tiaokuan/',
   },
   '/ai-writing-assistant/': {
     en: '/ai-writing-assistant/',
@@ -155,6 +161,7 @@ export const STATIC_PATHS: Record<string, Partial<Record<LocaleCode, string>>> =
     ru: '/ru/ai-assistent-pisma/',
     ja: '/ja/ai-bunsho-sakusei/',
     ko: '/ko/ai-geul-sseugi/',
+    zh: '/zh/ai-xiezuo-zhushou/',
   },
   '/ai-text-summarizer/': {
     en: '/ai-text-summarizer/',
@@ -167,6 +174,7 @@ export const STATIC_PATHS: Record<string, Partial<Record<LocaleCode, string>>> =
     ru: '/ru/ai-summarizator-teksta/',
     ja: '/ja/ai-yoyaku/',
     ko: '/ko/ai-yoyak/',
+    zh: '/zh/ai-wenben-zhaiyao/',
   },
   '/ai-tool-finder/': {
     en: '/ai-tool-finder/',
@@ -179,6 +187,7 @@ export const STATIC_PATHS: Record<string, Partial<Record<LocaleCode, string>>> =
     ru: '/ru/ai-poisk-instrumentov/',
     ja: '/ja/ai-tsuru-kensaku/',
     ko: '/ko/ai-dogu-chatgi/',
+    zh: '/zh/ai-gongju-chazhao/',
   },
 };
 
@@ -269,6 +278,15 @@ export const CATEGORY_LOCALE_SLUGS: Record<NonDefaultLocale, Record<string, stri
     seo: 'seo-dogu',
     'image-file': 'imiji-pail-dogu',
   },
+  zh: {
+    'text-writing': 'wenben-gongju',
+    developer: 'kaifazhe-gongju',
+    calculators: 'jisuanqi',
+    'social-media': 'shejiao-meiti-gongju',
+    pdf: 'pdf-gongju',
+    seo: 'seo-gongju',
+    'image-file': 'tuxiang-wenjian-gongju',
+  },
 };
 
 /** Spanish slugs for the 7 categories, keyed by category id. Kept for the Phase 1 validator. */
@@ -285,6 +303,7 @@ export const CATEGORY_PATH_SEGMENT: Record<NonDefaultLocale, string> = {
   ru: 'kategoriya',
   ja: 'kategori',
   ko: 'kategori',
+  zh: 'fenlei',
 };
 
 /**
