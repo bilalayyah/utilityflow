@@ -2,7 +2,9 @@ import type { ToolFAQ } from '../types/tool';
 import type { LocaleCode, NonDefaultLocale } from './config';
 import { enStrings } from './en/ui';
 import { esStrings } from './es/ui';
+import { deStrings } from './de/ui';
 import { frStrings } from './fr/ui';
+import { itStrings } from './it/ui';
 import { ptStrings } from './pt/ui';
 import type { InfoSection, WhyChooseItem } from './types';
 
@@ -262,6 +264,8 @@ const LOCALIZED_STRINGS: Record<NonDefaultLocale, UiStrings> = {
   es: esStrings,
   pt: ptStrings,
   fr: frStrings,
+  de: deStrings,
+  it: itStrings,
 };
 
 export function getUiStrings(locale: LocaleCode): UiStrings {

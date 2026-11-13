@@ -4,8 +4,12 @@ import { TOOLS_REGISTRY, getToolBySlug } from '../registry/toolsRegistry';
 import type { LocaleCode, NonDefaultLocale } from './config';
 import { ES_CATEGORY_OVERRIDES } from './es/categories';
 import { ES_TOOL_OVERRIDES } from './es/tools';
+import { DE_CATEGORY_OVERRIDES } from './de/categories';
+import { DE_TOOL_OVERRIDES } from './de/tools';
 import { FR_CATEGORY_OVERRIDES } from './fr/categories';
 import { FR_TOOL_OVERRIDES } from './fr/tools';
+import { IT_CATEGORY_OVERRIDES } from './it/categories';
+import { IT_TOOL_OVERRIDES } from './it/tools';
 import { PT_CATEGORY_OVERRIDES } from './pt/categories';
 import { PT_TOOL_OVERRIDES } from './pt/tools';
 import type { CategoryLocaleOverride, ToolLocaleOverride } from './types';
@@ -25,12 +29,16 @@ const TOOL_OVERRIDES: Record<NonDefaultLocale, Record<string, ToolLocaleOverride
   es: ES_TOOL_OVERRIDES,
   pt: PT_TOOL_OVERRIDES,
   fr: FR_TOOL_OVERRIDES,
+  de: DE_TOOL_OVERRIDES,
+  it: IT_TOOL_OVERRIDES,
 };
 
 const CATEGORY_OVERRIDES: Record<NonDefaultLocale, Record<string, CategoryLocaleOverride>> = {
   es: ES_CATEGORY_OVERRIDES,
   pt: PT_CATEGORY_OVERRIDES,
   fr: FR_CATEGORY_OVERRIDES,
+  de: DE_CATEGORY_OVERRIDES,
+  it: IT_CATEGORY_OVERRIDES,
 };
 
 const TOOL_BY_ID = new Map<string, ToolDefinition>(

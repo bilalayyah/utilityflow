@@ -3,7 +3,7 @@
  *
  * Designed for 11 languages from the start: English (default) + es + pt + de +
  * fr + ja + id + it + ru + ko + zh. Phase 1 shipped en + es; Phase 2 adds
- * pt + fr. Later phases add a LocaleInfo entry, a locales/<code>.ts
+ * pt + fr; Phase 3 adds de + it. Later phases add a LocaleInfo entry, a locales/<code>.ts
  * dictionary, tool overrides and category overrides — no routing or component
  * rework required.
  *
@@ -17,7 +17,7 @@
 import { getCategoryById } from '../registry/categories';
 import type { CategoryId, ToolCategory } from '../types/tool';
 
-export type LocaleCode = 'en' | 'es' | 'pt' | 'fr';
+export type LocaleCode = 'en' | 'es' | 'pt' | 'fr' | 'de' | 'it';
 
 /** Non-default locales (the ones that live under a /<code>/ prefix). */
 export type NonDefaultLocale = Exclude<LocaleCode, 'en'>;
@@ -37,6 +37,8 @@ export const SUPPORTED_LOCALES: LocaleInfo[] = [
   { code: 'es', nativeName: 'Español', pathPrefix: '/es', htmlLang: 'es' },
   { code: 'pt', nativeName: 'Português', pathPrefix: '/pt', htmlLang: 'pt-BR' },
   { code: 'fr', nativeName: 'Français', pathPrefix: '/fr', htmlLang: 'fr' },
+  { code: 'de', nativeName: 'Deutsch', pathPrefix: '/de', htmlLang: 'de' },
+  { code: 'it', nativeName: 'Italiano', pathPrefix: '/it', htmlLang: 'it' },
 ];
 
 /** Literal 'en' type (not LocaleCode) so `locale === DEFAULT_LOCALE` narrows the type. */
@@ -67,6 +69,10 @@ export function localeTag(locale: LocaleCode): string {
       return 'pt-BR';
     case 'fr':
       return 'fr';
+    case 'de':
+      return 'de';
+    case 'it':
+      return 'it';
   }
 }
 
@@ -87,44 +93,56 @@ export function getLocaleFromPath(pathname: string): { locale: LocaleCode; restP
 
 /** Localized URL for a static page path (English path in, localized path out). */
 export const STATIC_PATHS: Record<string, Partial<Record<LocaleCode, string>>> = {
-  '/': { en: '/', es: '/es/', pt: '/pt/', fr: '/fr/' },
+  '/': { en: '/', es: '/es/', pt: '/pt/', fr: '/fr/', de: '/de/', it: '/it/' },
   '/tools/': {
     en: '/tools/',
     es: '/es/todas-las-herramientas/',
     pt: '/pt/todas-as-ferramentas/',
     fr: '/fr/tous-les-outils/',
+    de: '/de/alle-tools/',
+    it: '/it/tutti-gli-strumenti/',
   },
-  '/about/': { en: '/about/', es: '/es/acerca-de/', pt: '/pt/sobre/', fr: '/fr/a-propos/' },
-  '/contact/': { en: '/contact/', es: '/es/contacto/', pt: '/pt/contato/', fr: '/fr/contact/' },
+  '/about/': { en: '/about/', es: '/es/acerca-de/', pt: '/pt/sobre/', fr: '/fr/a-propos/', de: '/de/ueber-uns/', it: '/it/chi-siamo/' },
+  '/contact/': { en: '/contact/', es: '/es/contacto/', pt: '/pt/contato/', fr: '/fr/contact/', de: '/de/kontakt/', it: '/it/contatti/' },
   '/privacy-policy/': {
     en: '/privacy-policy/',
     es: '/es/politica-de-privacidad/',
     pt: '/pt/politica-de-privacidade/',
     fr: '/fr/politique-de-confidentialite/',
+    de: '/de/datenschutzerklaerung/',
+    it: '/it/informativa-sulla-privacy/',
   },
   '/terms-of-service/': {
     en: '/terms-of-service/',
     es: '/es/terminos-de-servicio/',
     pt: '/pt/termos-de-servico/',
     fr: '/fr/conditions-d-utilisation/',
+    de: '/de/nutzungsbedingungen/',
+    it: '/it/termini-di-servizio/',
   },
   '/ai-writing-assistant/': {
     en: '/ai-writing-assistant/',
     es: '/es/asistente-de-escritura-ia/',
     pt: '/pt/assistente-de-escrita-ia/',
     fr: '/fr/assistant-d-ecriture-ia/',
+    de: '/de/ki-schreibassistent/',
+    it: '/it/assistente-di-scrittura-ia/',
   },
   '/ai-text-summarizer/': {
     en: '/ai-text-summarizer/',
     es: '/es/resumidor-de-texto-ia/',
     pt: '/pt/resumidor-de-texto-ia/',
     fr: '/fr/resumeur-de-texte-ia/',
+    de: '/de/ki-text-zusammenfasser/',
+    it: '/it/riassuntore-di-testo-ia/',
   },
   '/ai-tool-finder/': {
     en: '/ai-tool-finder/',
     es: '/es/buscador-de-herramientas-ia/',
     pt: '/pt/buscador-de-ferramentas-ia/',
     fr: '/fr/chercheur-d-outils-ia/',
+    de: '/de/ki-tool-finder/',
+    it: '/it/cercatore-di-strumenti-ia/',
   },
 };
 
@@ -161,16 +179,36 @@ export const CATEGORY_LOCALE_SLUGS: Record<NonDefaultLocale, Record<string, stri
     seo: 'outils-seo',
     'image-file': 'outils-d-images-et-de-fichiers',
   },
+  de: {
+    'text-writing': 'text-und-schreibwerkzeuge',
+    developer: 'entwicklerwerkzeuge',
+    calculators: 'rechner',
+    'social-media': 'social-media-werkzeuge',
+    pdf: 'pdf-werkzeuge',
+    seo: 'seo-werkzeuge',
+    'image-file': 'bild-und-dateiwerkzeuge',
+  },
+  it: {
+    'text-writing': 'strumenti-di-testo-e-scrittura',
+    developer: 'strumenti-per-sviluppatori',
+    calculators: 'calcolatrici',
+    'social-media': 'strumenti-per-social-media',
+    pdf: 'strumenti-pdf',
+    seo: 'strumenti-seo',
+    'image-file': 'strumenti-per-immagini-e-file',
+  },
 };
 
 /** Spanish slugs for the 7 categories, keyed by category id. Kept for the Phase 1 validator. */
 export const CATEGORY_ES_SLUGS: Record<string, string> = CATEGORY_LOCALE_SLUGS.es;
 
-/** Category hub path segment per non-default locale ('categoria' / 'categorie'). */
+/** Category hub path segment per non-default locale ('categoria' / 'categorie' / 'kategorie'). */
 export const CATEGORY_PATH_SEGMENT: Record<NonDefaultLocale, string> = {
   es: 'categoria',
   pt: 'categoria',
   fr: 'categorie',
+  de: 'kategorie',
+  it: 'categoria',
 };
 
 /**
