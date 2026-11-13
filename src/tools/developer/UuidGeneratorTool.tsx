@@ -2,9 +2,9 @@ import { Download, RefreshCw } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
 import { useLocale } from '../../locales/LocaleContext';
+import { useComponentStrings } from '../../locales/componentStrings';
 
-const STRINGS = {
-  en: {
+const STRINGS_EN = {
     versionLabel: 'UUID Version',
     v4: 'v4 (Random)',
     v7: 'v7 (Time-ordered)',
@@ -15,92 +15,7 @@ const STRINGS = {
     wrapBraces: 'Wrap in {braces}',
     generatedLabel: 'Generated UUIDs',
     copyAll: 'Copy all',
-  },
-  es: {
-    versionLabel: 'Versión de UUID',
-    v4: 'v4 (Aleatoria)',
-    v7: 'v7 (Ordenada por tiempo)',
-    quantity: 'Cantidad (1–100)',
-    generate: 'Generar UUID',
-    uppercase: 'Mayúsculas',
-    includeHyphens: 'Incluir guiones',
-    wrapBraces: 'Encerrar entre {llaves}',
-    generatedLabel: 'UUID generados',
-    copyAll: 'Copiar todo',
-  },
-  pt: {
-    versionLabel: 'Versão do UUID',
-    v4: 'v4 (Aleatória)',
-    v7: 'v7 (Ordenada por tempo)',
-    quantity: 'Quantidade (1–100)',
-    generate: 'Gerar UUIDs',
-    uppercase: 'Maiúsculas',
-    includeHyphens: 'Incluir hifens',
-    wrapBraces: 'Envolver em {chaves}',
-    generatedLabel: 'UUIDs gerados',
-    copyAll: 'Copiar tudo',
-  },
-  fr: {
-    versionLabel: 'Version UUID',
-    v4: 'v4 (aléatoire)',
-    v7: 'v7 (ordonnée par le temps)',
-    quantity: 'Quantité (1–100)',
-    generate: 'Générer des UUID',
-    uppercase: 'Majuscules',
-    includeHyphens: 'Inclure les tirets',
-    wrapBraces: 'Entourer d\'{accolades}',
-    generatedLabel: 'UUID générés',
-    copyAll: 'Tout copier',
-  },
-  de: {
-    versionLabel: 'UUID-Version',
-    v4: 'v4 (zufällig)',
-    v7: 'v7 (zeitgeordnet)',
-    quantity: 'Anzahl (1–100)',
-    generate: 'UUIDs erzeugen',
-    uppercase: 'Großbuchstaben',
-    includeHyphens: 'Bindestriche einfügen',
-    wrapBraces: 'In {geschweifte Klammern} setzen',
-    generatedLabel: 'Erzeugte UUIDs',
-    copyAll: 'Alle kopieren',
-  },
-  it: {
-    versionLabel: 'Versione UUID',
-    v4: 'v4 (casuale)',
-    v7: 'v7 (ordinata per tempo)',
-    quantity: 'Quantità (1–100)',
-    generate: 'Genera UUID',
-    uppercase: 'Maiuscolo',
-    includeHyphens: 'Includi i trattini',
-    wrapBraces: 'Racchiudi tra {parentesi graffe}',
-    generatedLabel: 'UUID generati',
-    copyAll: 'Copia tutto',
-  },
-  id: {
-    versionLabel: 'Versi UUID',
-    v4: 'v4 (Acak)',
-    v7: 'v7 (Terurut waktu)',
-    quantity: 'Jumlah (1–100)',
-    generate: 'Buat UUID',
-    uppercase: 'Huruf besar',
-    includeHyphens: 'Sertakan tanda hubung',
-    wrapBraces: 'Bungkus dalam {braces}',
-    generatedLabel: 'UUID yang Dihasilkan',
-    copyAll: 'Salin semua',
-  },
-  ru: {
-    versionLabel: 'Версия UUID',
-    v4: 'v4 (случайный)',
-    v7: 'v7 (упорядоченный по времени)',
-    quantity: 'Количество (1–100)',
-    generate: 'Сгенерировать UUID',
-    uppercase: 'Верхний регистр',
-    includeHyphens: 'Включать дефисы',
-    wrapBraces: 'Обернуть в {braces}',
-    generatedLabel: 'Сгенерированные UUID',
-    copyAll: 'Копировать все',
-  },
-};
+  };
 
 function generateUuidV4(): string {
   if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
@@ -131,8 +46,8 @@ function generateUuidV7(): string {
 }
 
 export default function UuidGeneratorTool() {
-  const { locale, t } = useLocale();
-  const s = STRINGS[locale];
+  const { t } = useLocale();
+  const s = useComponentStrings('uuid-generator', STRINGS_EN);
   const [version, setVersion] = useState<'v4' | 'v7'>('v4');
   const [count, setCount] = useState(5);
   const [uppercase, setUppercase] = useState(false);

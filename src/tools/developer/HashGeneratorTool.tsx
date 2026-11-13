@@ -2,9 +2,9 @@ import { RotateCcw, Sparkles, Upload } from 'lucide-react';
 import { useEffect, useState, type ChangeEvent } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
 import { useLocale } from '../../locales/LocaleContext';
+import { useComponentStrings } from '../../locales/componentStrings';
 
-const STRINGS = {
-  en: {
+const STRINGS_EN = {
     textInputTab: 'Text Input',
     fileTab: 'Local File Checksum',
     uppercaseHex: 'Uppercase hex',
@@ -15,92 +15,7 @@ const STRINGS = {
     bytesLabel: 'bytes',
     cryptoUnavailable: 'Web Crypto hashing is unavailable.',
     sampleText: 'Hello, UtilityFlow!',
-  },
-  es: {
-    textInputTab: 'Entrada de texto',
-    fileTab: 'Checksum de archivo local',
-    uppercaseHex: 'Hex en mayúsculas',
-    inputLabel: 'Cadena de entrada (UTF-8)',
-    inputPlaceholder: 'Escribe texto para calcular los hashes SHA-1, SHA-256, SHA-384 y SHA-512...',
-    chooseFileLabel: 'Elegir archivo local para calcular el hash',
-    fileNoteDefault: 'El archivo se lee localmente en la memoria del navegador y nunca se sube.',
-    bytesLabel: 'bytes',
-    cryptoUnavailable: 'El hash con Web Crypto no está disponible.',
-    sampleText: '¡Hola, UtilityFlow!',
-  },
-  pt: {
-    textInputTab: 'Entrada de texto',
-    fileTab: 'Checksum de arquivo local',
-    uppercaseHex: 'Hex em maiúsculas',
-    inputLabel: 'String de entrada (UTF-8)',
-    inputPlaceholder: 'Digite texto para calcular os hashes SHA-1, SHA-256, SHA-384 e SHA-512...',
-    chooseFileLabel: 'Escolher arquivo local para gerar o hash',
-    fileNoteDefault: 'O arquivo é lido localmente na memória do navegador e nunca é enviado.',
-    bytesLabel: 'bytes',
-    cryptoUnavailable: 'O hash via Web Crypto não está disponível.',
-    sampleText: 'Olá, UtilityFlow!',
-  },
-  fr: {
-    textInputTab: 'Saisie de texte',
-    fileTab: 'Somme de contrôle du fichier local',
-    uppercaseHex: 'Hex en majuscules',
-    inputLabel: 'Chaîne d\'entrée (UTF-8)',
-    inputPlaceholder: 'Saisissez du texte pour calculer les hachages SHA-1, SHA-256, SHA-384 et SHA-512...',
-    chooseFileLabel: 'Choisir un fichier local à hacher',
-    fileNoteDefault: 'Le fichier est lu localement dans la mémoire du navigateur et n\'est jamais envoyé.',
-    bytesLabel: 'bytes',
-    cryptoUnavailable: 'Le hachage Web Crypto n\'est pas disponible.',
-    sampleText: 'Bonjour, UtilityFlow !',
-  },
-  de: {
-    textInputTab: 'Texteingabe',
-    fileTab: 'Lokale Datei-Prüfsumme',
-    uppercaseHex: 'Hexadezimal in Großbuchstaben',
-    inputLabel: 'Eingabezeichenkette (UTF-8)',
-    inputPlaceholder: 'Text eingeben, um SHA-1-, SHA-256-, SHA-384- und SHA-512-Hashes zu berechnen...',
-    chooseFileLabel: 'Lokale Datei zum Hashen auswählen',
-    fileNoteDefault: 'Die Datei wird lokal im Browser-Speicher gelesen und niemals hochgeladen.',
-    bytesLabel: 'Bytes',
-    cryptoUnavailable: 'Web-Crypto-Hashing ist nicht verfügbar.',
-    sampleText: 'Hallo, UtilityFlow!',
-  },
-  it: {
-    textInputTab: 'Input di testo',
-    fileTab: 'Checksum del file locale',
-    uppercaseHex: 'Esadecimale maiuscolo',
-    inputLabel: 'Stringa di input (UTF-8)',
-    inputPlaceholder: 'Inserisci il testo per calcolare gli hash SHA-1, SHA-256, SHA-384 e SHA-512...',
-    chooseFileLabel: 'Scegli un file locale da elaborare',
-    fileNoteDefault: 'Il file viene letto localmente nella memoria del browser e non viene mai caricato.',
-    bytesLabel: 'byte',
-    cryptoUnavailable: 'La funzione di hashing Web Crypto non è disponibile.',
-    sampleText: 'Ciao, UtilityFlow!',
-  },
-  id: {
-    textInputTab: 'Input Teks',
-    fileTab: 'Checksum File Lokal',
-    uppercaseHex: 'Hex huruf besar',
-    inputLabel: 'String Input (UTF-8)',
-    inputPlaceholder: 'Masukkan teks untuk menghitung hash SHA-1, SHA-256, SHA-384, dan SHA-512...',
-    chooseFileLabel: 'Pilih file lokal untuk di-hash',
-    fileNoteDefault: 'File dibaca secara lokal di memori browser dan tidak pernah diunggah.',
-    bytesLabel: 'byte',
-    cryptoUnavailable: 'Hashing Web Crypto tidak tersedia.',
-    sampleText: 'Halo, UtilityFlow!',
-  },
-  ru: {
-    textInputTab: 'Ввод текста',
-    fileTab: 'Контрольная сумма локального файла',
-    uppercaseHex: 'Hex в верхнем регистре',
-    inputLabel: 'Входная строка (UTF-8)',
-    inputPlaceholder: 'Введите текст для вычисления хешей SHA-1, SHA-256, SHA-384 и SHA-512...',
-    chooseFileLabel: 'Выберите локальный файл для хеширования',
-    fileNoteDefault: 'Файл читается локально в памяти браузера и никогда не загружается.',
-    bytesLabel: 'байт',
-    cryptoUnavailable: 'Хеширование Web Crypto недоступно.',
-    sampleText: 'Привет, UtilityFlow!',
-  },
-};
+  };
 
 type DigestAlgorithm = 'SHA-1' | 'SHA-256' | 'SHA-384' | 'SHA-512';
 
@@ -122,7 +37,7 @@ function bufferToBase64(buffer: ArrayBuffer): string {
 
 export default function HashGeneratorTool() {
   const { locale, t } = useLocale();
-  const s = STRINGS[locale];
+  const s = useComponentStrings('hash-generator', STRINGS_EN);
   const [inputMode, setInputMode] = useState<'text' | 'file'>('text');
   const [text, setText] = useState('UtilityFlow');
   const [fileName, setFileName] = useState('');

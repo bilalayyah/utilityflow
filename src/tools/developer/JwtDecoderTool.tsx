@@ -1,11 +1,10 @@
 import { Info, RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
-import type { LocaleCode } from '../../locales/config';
 import { useLocale } from '../../locales/LocaleContext';
+import { useComponentStrings } from '../../locales/componentStrings';
 
-const STRINGS = {
-  en: {
+const STRINGS_EN = {
     infoNote:
       'Decodes Base64Url header and payload locally in browser memory. Does not verify cryptographic signatures.',
     loadSampleJwt: 'Load sample JWT',
@@ -26,169 +25,14 @@ const STRINGS = {
     invalidB64Url: 'Invalid Base64Url segment length.',
     segmentCount: 'Expected 3 dot-separated JWT segments (header.payload.signature), found {count}.',
     parseFallback: 'Unable to parse JWT Base64Url JSON segments.',
-  },
-  es: {
-    infoNote:
-      'Decodifica el encabezado y el contenido (payload) Base64Url localmente en la memoria del navegador. No verifica las firmas criptográficas.',
-    loadSampleJwt: 'Cargar JWT de ejemplo',
-    inputLabel: 'Token JWT codificado',
-    inputPlaceholder: 'Pega un token JWT (eyJhbGciOi...) para inspeccionar su encabezado y sus claims...',
-    invalidJwt: 'JWT no válido:',
-    headerLabel: 'Encabezado (algoritmo y tipo)',
-    payloadLabel: 'Contenido (claims)',
-    copyHeader: 'Copiar encabezado',
-    copyPayload: 'Copiar contenido',
-    timestampTitle: 'Claims de marca de tiempo',
-    iatLabel: 'Emitido el (iat)',
-    nbfLabel: 'No válido antes de (nbf)',
-    expLabel: 'Vence el (exp)',
-    expired: 'Vencido',
-    active: 'Activo (aún no vencido)',
-    signatureLabel: 'Segmento de firma (Base64Url)',
-    invalidB64Url: 'Longitud de segmento Base64Url no válida.',
-    segmentCount: 'Se esperaban 3 segmentos JWT separados por puntos (header.payload.signature); se encontraron {count}.',
-    parseFallback: 'No se pudieron analizar los segmentos JSON Base64Url del JWT.',
-  },
-  pt: {
-    infoNote:
-      'Decodifica o cabeçalho e o payload Base64Url localmente na memória do navegador. Não verifica assinaturas criptográficas.',
-    loadSampleJwt: 'Carregar JWT de exemplo',
-    inputLabel: 'Token JWT codificado',
-    inputPlaceholder: 'Cole um token JWT (eyJhbGciOi...) para inspecionar seu cabeçalho e suas claims...',
-    invalidJwt: 'JWT inválido:',
-    headerLabel: 'Cabeçalho (algoritmo e tipo)',
-    payloadLabel: 'Payload (claims)',
-    copyHeader: 'Copiar cabeçalho',
-    copyPayload: 'Copiar payload',
-    timestampTitle: 'Claims de timestamp',
-    iatLabel: 'Emitido em (iat)',
-    nbfLabel: 'Válido a partir de (nbf)',
-    expLabel: 'Expira em (exp)',
-    expired: 'Expirado',
-    active: 'Ativo (ainda não expirado)',
-    signatureLabel: 'Segmento de assinatura (Base64Url)',
-    invalidB64Url: 'Comprimento de segmento Base64Url inválido.',
-    segmentCount: 'Esperados 3 segmentos JWT separados por pontos (header.payload.signature); encontrados {count}.',
-    parseFallback: 'Não foi possível analisar os segmentos JSON Base64Url do JWT.',
-  },
-  fr: {
-    infoNote:
-      'Décode l\'en-tête et la charge utile Base64Url localement dans la mémoire du navigateur. Ne vérifie pas les signatures cryptographiques.',
-    loadSampleJwt: 'Charger un JWT d\'exemple',
-    inputLabel: 'Jeton JWT encodé',
-    inputPlaceholder: 'Collez un jeton JWT (eyJhbGciOi...) pour inspecter son en-tête et ses claims...',
-    invalidJwt: 'JWT invalide :',
-    headerLabel: 'En-tête (algorithme et type)',
-    payloadLabel: 'Charge utile (claims)',
-    copyHeader: 'Copier l\'en-tête',
-    copyPayload: 'Copier la charge utile',
-    timestampTitle: 'Claims d\'horodatage',
-    iatLabel: 'Émis le (iat)',
-    nbfLabel: 'Valide à partir du (nbf)',
-    expLabel: 'Expire le (exp)',
-    expired: 'Expiré',
-    active: 'Actif (pas encore expiré)',
-    signatureLabel: 'Segment de signature (Base64Url)',
-    invalidB64Url: 'Longueur de segment Base64Url invalide.',
-    segmentCount: '3 segments JWT séparés par des points attendus (header.payload.signature), {count} trouvés.',
-    parseFallback: 'Impossible d\'analyser les segments JSON Base64Url du JWT.',
-  },
-  de: {
-    infoNote:
-      'Dekodiert Base64Url-Header und -Payload lokal im Browser-Speicher. Verifiziert keine kryptografischen Signaturen.',
-    loadSampleJwt: 'Beispiel-JWT laden',
-    inputLabel: 'Kodiertes JWT-Token',
-    inputPlaceholder: 'JWT-Token einfügen (eyJhbGciOi...), um Header und Claims zu prüfen...',
-    invalidJwt: 'Ungültiges JWT:',
-    headerLabel: 'Header (Algorithmus und Typ)',
-    payloadLabel: 'Payload (Claims)',
-    copyHeader: 'Header kopieren',
-    copyPayload: 'Payload kopieren',
-    timestampTitle: 'Zeitstempel-Claims',
-    iatLabel: 'Ausgestellt am (iat)',
-    nbfLabel: 'Gültig ab (nbf)',
-    expLabel: 'Läuft ab am (exp)',
-    expired: 'Abgelaufen',
-    active: 'Aktiv (noch nicht abgelaufen)',
-    signatureLabel: 'Signatursegment (Base64Url)',
-    invalidB64Url: 'Ungültige Länge des Base64Url-Segments.',
-    segmentCount: '3 durch Punkte getrennte JWT-Segmente (Header.Payload.Signatur) erwartet, {count} gefunden.',
-    parseFallback: 'JWT-Base64Url-JSON-Segmente konnten nicht geparst werden.',
-  },
-  it: {
-    infoNote:
-      'Decodifica header e payload Base64Url localmente nella memoria del browser. Non verifica le firme crittografiche.',
-    loadSampleJwt: 'Carica un JWT di esempio',
-    inputLabel: 'Token JWT codificato',
-    inputPlaceholder: 'Incolla un token JWT (eyJhbGciOi...) per ispezionarne header e claim...',
-    invalidJwt: 'JWT non valido:',
-    headerLabel: 'Header (algoritmo e tipo)',
-    payloadLabel: 'Payload (claim)',
-    copyHeader: 'Copia l\'header',
-    copyPayload: 'Copia il payload',
-    timestampTitle: 'Claim di marca temporale',
-    iatLabel: 'Emesso il (iat)',
-    nbfLabel: 'Valido da (nbf)',
-    expLabel: 'Scade il (exp)',
-    expired: 'Scaduto',
-    active: 'Attivo (non ancora scaduto)',
-    signatureLabel: 'Segmento della firma (Base64Url)',
-    invalidB64Url: 'Lunghezza del segmento Base64Url non valida.',
-    segmentCount: 'Previsti 3 segmenti JWT separati da punti (header.payload.signature), trovati {count}.',
-    parseFallback: 'Impossibile analizzare i segmenti JSON Base64Url del JWT.',
-  },
-  id: {
-    infoNote:
-      'Mendecode header dan payload Base64Url secara lokal di memori browser. Tidak memverifikasi tanda tangan kriptografi.',
-    loadSampleJwt: 'Muat contoh JWT',
-    inputLabel: 'Token JWT yang Di-encode',
-    inputPlaceholder: 'Tempel token JWT (eyJhbGciOi...) untuk memeriksa header dan klaimnya...',
-    invalidJwt: 'JWT Tidak Valid:',
-    headerLabel: 'Header (Algoritma & Tipe)',
-    payloadLabel: 'Payload (Klaim)',
-    copyHeader: 'Salin header',
-    copyPayload: 'Salin payload',
-    timestampTitle: 'Klaim Stempel Waktu',
-    iatLabel: 'Diterbitkan Pada (iat)',
-    nbfLabel: 'Tidak Sebelum (nbf)',
-    expLabel: 'Kedaluwarsa Pada (exp)',
-    expired: 'Kedaluwarsa',
-    active: 'Aktif (belum kedaluwarsa)',
-    signatureLabel: 'Segmen Tanda Tangan (Base64Url)',
-    invalidB64Url: 'Panjang segmen Base64Url tidak valid.',
-    segmentCount: 'Diharapkan 3 segmen JWT yang dipisahkan titik (header.payload.signature), ditemukan {count}.',
-    parseFallback: 'Tidak dapat mengurai segmen JSON Base64Url JWT.',
-  },
-  ru: {
-    infoNote:
-      'Декодирует заголовок и полезную нагрузку Base64Url локально в памяти браузера. Не проверяет криптографические подписи.',
-    loadSampleJwt: 'Загрузить пример JWT',
-    inputLabel: 'Закодированный JWT-токен',
-    inputPlaceholder: 'Вставьте JWT-токен (eyJhbGciOi...), чтобы проверить его заголовок и утверждения...',
-    invalidJwt: 'Недопустимый JWT:',
-    headerLabel: 'Заголовок (алгоритм и тип)',
-    payloadLabel: 'Полезная нагрузка (утверждения)',
-    copyHeader: 'Копировать заголовок',
-    copyPayload: 'Копировать полезную нагрузку',
-    timestampTitle: 'Утверждения с метками времени',
-    iatLabel: 'Выдан (iat)',
-    nbfLabel: 'Действителен с (nbf)',
-    expLabel: 'Истекает (exp)',
-    expired: 'Истёк',
-    active: 'Активен (ещё не истёк)',
-    signatureLabel: 'Сегмент подписи (Base64Url)',
-    invalidB64Url: 'Недопустимая длина сегмента Base64Url.',
-    segmentCount: 'Ожидалось 3 JWT-сегмента, разделённых точками (header.payload.signature), найдено: {count}.',
-    parseFallback: 'Не удаётся разобрать JSON-сегменты Base64Url JWT.',
-  },
-};
+  };
 
-function decodeBase64UrlToUtf8(segment: string, locale: LocaleCode): string {
+function decodeBase64UrlToUtf8(segment: string, invalidB64Url: string): string {
   let base64 = segment.replace(/-/g, '+').replace(/_/g, '/');
   const pad = base64.length % 4;
   if (pad === 2) base64 += '==';
   else if (pad === 3) base64 += '=';
-  else if (pad === 1) throw new Error(STRINGS[locale].invalidB64Url);
+  else if (pad === 1) throw new Error(invalidB64Url);
 
   const binary = atob(base64);
   const bytes = new Uint8Array(binary.length);
@@ -229,8 +73,8 @@ function formatClaimTimestamp(val: unknown): string | null {
 }
 
 export default function JwtDecoderTool() {
-  const { locale, t } = useLocale();
-  const s = STRINGS[locale];
+  const { t } = useLocale();
+  const s = useComponentStrings('jwt-decoder', STRINGS_EN);
   const [token, setToken] = useState('');
 
   const decoded = useMemo(() => {
@@ -252,8 +96,8 @@ export default function JwtDecoderTool() {
     }
 
     try {
-      const headerObj = JSON.parse(decodeBase64UrlToUtf8(parts[0], locale));
-      const payloadObj = JSON.parse(decodeBase64UrlToUtf8(parts[1], locale)) as Record<string, unknown>;
+      const headerObj = JSON.parse(decodeBase64UrlToUtf8(parts[0], s.invalidB64Url));
+      const payloadObj = JSON.parse(decodeBase64UrlToUtf8(parts[1], s.invalidB64Url)) as Record<string, unknown>;
       return {
         valid: true,
         error: '',
@@ -272,7 +116,7 @@ export default function JwtDecoderTool() {
         payloadObj: null,
       };
     }
-  }, [token, locale, s.segmentCount, s.parseFallback]);
+  }, [token, s.invalidB64Url, s.segmentCount, s.parseFallback]);
 
   const timeClaims = useMemo(() => {
     if (!decoded.payloadObj) return [];

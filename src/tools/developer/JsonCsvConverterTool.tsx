@@ -2,9 +2,9 @@ import { Download, RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
 import { useLocale } from '../../locales/LocaleContext';
+import { useComponentStrings } from '../../locales/componentStrings';
 
-const STRINGS = {
-  en: {
+const STRINGS_EN = {
     delimiterLabel: 'Delimiter:',
     commaOpt: 'Comma (,)',
     semicolonOpt: 'Semicolon (;)',
@@ -18,113 +18,7 @@ const STRINGS = {
     outputLabelJson: 'JSON Output',
     outputPlaceholder: 'Converted data appears here...',
     parseFallback: 'Unable to parse input format.',
-  },
-  es: {
-    delimiterLabel: 'Delimitador:',
-    commaOpt: 'Coma (,)',
-    semicolonOpt: 'Punto y coma (;)',
-    tabOpt: 'Tabulación (TSV)',
-    conversionError: 'Error de conversión:',
-    inputLabelJson: 'Entrada JSON',
-    inputLabelCsv: 'Entrada CSV',
-    inputPlaceholderJson: '[{"id": 1, "name": "Example"}]',
-    inputPlaceholderCsv: 'id,name\n1,Example',
-    outputLabelCsv: 'Salida CSV',
-    outputLabelJson: 'Salida JSON',
-    outputPlaceholder: 'Los datos convertidos aparecen aquí...',
-    parseFallback: 'No se pudo analizar el formato de entrada.',
-  },
-  pt: {
-    delimiterLabel: 'Delimitador:',
-    commaOpt: 'Vírgula (,)',
-    semicolonOpt: 'Ponto e vírgula (;)',
-    tabOpt: 'Tabulação (TSV)',
-    conversionError: 'Erro de conversão:',
-    inputLabelJson: 'Entrada JSON',
-    inputLabelCsv: 'Entrada CSV',
-    inputPlaceholderJson: '[{"id": 1, "name": "Example"}]',
-    inputPlaceholderCsv: 'id,name\n1,Example',
-    outputLabelCsv: 'Saída CSV',
-    outputLabelJson: 'Saída JSON',
-    outputPlaceholder: 'Os dados convertidos aparecem aqui...',
-    parseFallback: 'Não foi possível analisar o formato de entrada.',
-  },
-  fr: {
-    delimiterLabel: 'Délimiteur :',
-    commaOpt: 'Virgule (,)',
-    semicolonOpt: 'Point-virgule (;)',
-    tabOpt: 'Tabulation (TSV)',
-    conversionError: 'Erreur de conversion :',
-    inputLabelJson: 'Entrée JSON',
-    inputLabelCsv: 'Entrée CSV',
-    inputPlaceholderJson: '[{"id": 1, "name": "Example"}]',
-    inputPlaceholderCsv: 'id,name\n1,Example',
-    outputLabelCsv: 'Sortie CSV',
-    outputLabelJson: 'Sortie JSON',
-    outputPlaceholder: 'Les données converties apparaissent ici...',
-    parseFallback: 'Impossible d\'analyser le format d\'entrée.',
-  },
-  de: {
-    delimiterLabel: 'Trennzeichen:',
-    commaOpt: 'Komma (,)',
-    semicolonOpt: 'Semikolon (;)',
-    tabOpt: 'Tab (TSV)',
-    conversionError: 'Konvertierungsfehler:',
-    inputLabelJson: 'JSON-Eingabe',
-    inputLabelCsv: 'CSV-Eingabe',
-    inputPlaceholderJson: '[{"id": 1, "name": "Beispiel"}]',
-    inputPlaceholderCsv: 'id,name\n1,Beispiel',
-    outputLabelCsv: 'CSV-Ausgabe',
-    outputLabelJson: 'JSON-Ausgabe',
-    outputPlaceholder: 'Konvertierte Daten erscheinen hier...',
-    parseFallback: 'Eingabeformat konnte nicht geparst werden.',
-  },
-  it: {
-    delimiterLabel: 'Delimitatore:',
-    commaOpt: 'Virgola (,)',
-    semicolonOpt: 'Punto e virgola (;)',
-    tabOpt: 'Tab (TSV)',
-    conversionError: 'Errore di conversione:',
-    inputLabelJson: 'Input JSON',
-    inputLabelCsv: 'Input CSV',
-    inputPlaceholderJson: '[{"id": 1, "name": "Esempio"}]',
-    inputPlaceholderCsv: 'id,name\n1,Esempio',
-    outputLabelCsv: 'Output CSV',
-    outputLabelJson: 'Output JSON',
-    outputPlaceholder: 'I dati convertiti appariranno qui...',
-    parseFallback: 'Impossibile analizzare il formato di input.',
-  },
-  id: {
-    delimiterLabel: 'Pemisah:',
-    commaOpt: 'Koma (,)',
-    semicolonOpt: 'Titik koma (;)',
-    tabOpt: 'Tab (TSV)',
-    conversionError: 'Kesalahan konversi:',
-    inputLabelJson: 'Input JSON',
-    inputLabelCsv: 'Input CSV',
-    inputPlaceholderJson: '[{"id": 1, "name": "Example"}]',
-    inputPlaceholderCsv: 'id,name\n1,Example',
-    outputLabelCsv: 'Hasil CSV',
-    outputLabelJson: 'Hasil JSON',
-    outputPlaceholder: 'Data yang dikonversi muncul di sini...',
-    parseFallback: 'Tidak dapat mengurai format input.',
-  },
-  ru: {
-    delimiterLabel: 'Разделитель:',
-    commaOpt: 'Запятая (,)',
-    semicolonOpt: 'Точка с запятой (;)',
-    tabOpt: 'Табуляция (TSV)',
-    conversionError: 'Ошибка конвертации:',
-    inputLabelJson: 'Входной JSON',
-    inputLabelCsv: 'Входной CSV',
-    inputPlaceholderJson: '[{"id": 1, "name": "Example"}]',
-    inputPlaceholderCsv: 'id,name\n1,Example',
-    outputLabelCsv: 'Вывод CSV',
-    outputLabelJson: 'Вывод JSON',
-    outputPlaceholder: 'Здесь появятся преобразованные данные...',
-    parseFallback: 'Не удаётся разобрать формат ввода.',
-  },
-};
+  };
 
 const SAMPLE_JSON = `[
   { "id": 101, "name": "Alice Chen", "role": "Engineer", "active": true },
@@ -257,8 +151,8 @@ function csvToJson(csvStr: string, delimiter: string): string {
 }
 
 export default function JsonCsvConverterTool() {
-  const { locale, t } = useLocale();
-  const s = STRINGS[locale];
+  const { t } = useLocale();
+  const s = useComponentStrings('json-csv-converter', STRINGS_EN);
   const [direction, setDirection] = useState<'json-to-csv' | 'csv-to-json'>('json-to-csv');
   const [delimiter, setDelimiter] = useState<',' | ';' | '\t'>(',');
   const [input, setInput] = useState('');

@@ -1,9 +1,9 @@
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
 import { useLocale } from '../../locales/LocaleContext';
+import { useComponentStrings } from '../../locales/componentStrings';
 
-const STRINGS = {
-  en: {
+const STRINGS_EN = {
     pickColor: 'Pick color',
     colorPickerAria: 'Color picker',
     copyHex: 'Copy HEX',
@@ -20,134 +20,7 @@ const STRINGS = {
     aaLarge: 'AA Large Text (≥ 3.0:1)',
     pass: 'Pass',
     fail: 'Fail',
-  },
-  es: {
-    pickColor: 'Elegir color',
-    colorPickerAria: 'Selector de color',
-    copyHex: 'Copiar HEX',
-    copyRgb: 'Copiar RGB',
-    copyHsl: 'Copiar HSL',
-    contrastTitle: 'Verificación de la relación de contraste WCAG 2.1',
-    contrastDesc: 'Vista previa del primer plano ({color}) sobre cualquier color de fondo.',
-    backgroundLabel: 'Fondo:',
-    bgAria: 'Color de fondo para el contraste',
-    sampleTitle: 'Texto de ejemplo del cuerpo y la interfaz',
-    sampleSentence: 'El veloz murciélago hindú comía feliz cardillo y kiwi.',
-    aaNormal: 'Texto normal AA (≥ 4.5:1)',
-    aaaNormal: 'Texto normal AAA (≥ 7.0:1)',
-    aaLarge: 'Texto grande AA (≥ 3.0:1)',
-    pass: 'Aprobado',
-    fail: 'No aprobado',
-  },
-  pt: {
-    pickColor: 'Escolher cor',
-    colorPickerAria: 'Seletor de cor',
-    copyHex: 'Copiar HEX',
-    copyRgb: 'Copiar RGB',
-    copyHsl: 'Copiar HSL',
-    contrastTitle: 'Verificação da taxa de contraste WCAG 2.1',
-    contrastDesc: 'Prévia do primeiro plano ({color}) sobre qualquer cor de fundo.',
-    backgroundLabel: 'Fundo:',
-    bgAria: 'Cor de fundo para o contraste',
-    sampleTitle: 'Exemplo de texto do corpo e da interface',
-    sampleSentence: 'A rápida raposa marrom salta sobre o cão preguiçoso.',
-    aaNormal: 'Texto normal AA (≥ 4.5:1)',
-    aaaNormal: 'Texto normal AAA (≥ 7.0:1)',
-    aaLarge: 'Texto grande AA (≥ 3.0:1)',
-    pass: 'Aprovado',
-    fail: 'Reprovado',
-  },
-  fr: {
-    pickColor: 'Choisir une couleur',
-    colorPickerAria: 'Sélecteur de couleur',
-    copyHex: 'Copier HEX',
-    copyRgb: 'Copier RGB',
-    copyHsl: 'Copier HSL',
-    contrastTitle: 'Vérification du ratio de contraste WCAG 2.1',
-    contrastDesc: 'Aperçu du premier plan ({color}) sur n\'importe quelle couleur de fond.',
-    backgroundLabel: 'Fond :',
-    bgAria: 'Couleur de fond pour le contraste',
-    sampleTitle: 'Exemple de texte du corps et de l\'interface',
-    sampleSentence: 'Le renard brun rapide saute par-dessus le chien paresseux.',
-    aaNormal: 'Texte normal AA (≥ 4.5:1)',
-    aaaNormal: 'Texte normal AAA (≥ 7.0:1)',
-    aaLarge: 'Texte large AA (≥ 3.0:1)',
-    pass: 'Réussi',
-    fail: 'Échoué',
-  },
-  de: {
-    pickColor: 'Farbe wählen',
-    colorPickerAria: 'Farbauswahl',
-    copyHex: 'HEX kopieren',
-    copyRgb: 'RGB kopieren',
-    copyHsl: 'HSL kopieren',
-    contrastTitle: 'WCAG-2.1-Kontrastprüfung',
-    contrastDesc: 'Vorschau des Vordergrunds ({color}) auf einer beliebigen Hintergrundfarbe.',
-    backgroundLabel: 'Hintergrund:',
-    bgAria: 'Hintergrundfarbe für den Kontrast',
-    sampleTitle: 'Beispiel für Fließtext und UI-Text',
-    sampleSentence: 'Der schnelle braune Fuchs springt über den faulen Hund.',
-    aaNormal: 'AA Normaltext (≥ 4,5:1)',
-    aaaNormal: 'AAA Normaltext (≥ 7,0:1)',
-    aaLarge: 'AA Großtext (≥ 3,0:1)',
-    pass: 'Bestanden',
-    fail: 'Nicht bestanden',
-  },
-  it: {
-    pickColor: 'Scegli il colore',
-    colorPickerAria: 'Selettore di colore',
-    copyHex: 'Copia HEX',
-    copyRgb: 'Copia RGB',
-    copyHsl: 'Copia HSL',
-    contrastTitle: 'Verifica del rapporto di contrasto WCAG 2.1',
-    contrastDesc: 'Anteprima del colore di primo piano ({color}) su qualsiasi colore di sfondo.',
-    backgroundLabel: 'Sfondo:',
-    bgAria: 'Colore di sfondo per il contrasto',
-    sampleTitle: 'Testo di esempio per corpo e interfaccia',
-    sampleSentence: 'La rapida volpe marrone salta sopra il cane pigro.',
-    aaNormal: 'AA Testo normale (≥ 4,5:1)',
-    aaaNormal: 'AAA Testo normale (≥ 7,0:1)',
-    aaLarge: 'AA Testo grande (≥ 3,0:1)',
-    pass: 'Superato',
-    fail: 'Non superato',
-  },
-  id: {
-    pickColor: 'Pilih warna',
-    colorPickerAria: 'Pemilih warna',
-    copyHex: 'Salin HEX',
-    copyRgb: 'Salin RGB',
-    copyHsl: 'Salin HSL',
-    contrastTitle: 'Pemeriksaan Rasio Kontras WCAG 2.1',
-    contrastDesc: 'Pratinjau foreground ({color}) dengan warna latar apa pun.',
-    backgroundLabel: 'Latar:',
-    bgAria: 'Warna latar untuk kontras',
-    sampleTitle: 'Contoh Teks Isi & UI',
-    sampleSentence: 'Rubah cokelat yang cepat melompati anjing yang malas.',
-    aaNormal: 'AA Teks Normal (≥ 4,5:1)',
-    aaaNormal: 'AAA Teks Normal (≥ 7,0:1)',
-    aaLarge: 'AA Teks Besar (≥ 3,0:1)',
-    pass: 'Lolos',
-    fail: 'Gagal',
-  },
-  ru: {
-    pickColor: 'Выбрать цвет',
-    colorPickerAria: 'Выбор цвета',
-    copyHex: 'Копировать HEX',
-    copyRgb: 'Копировать RGB',
-    copyHsl: 'Копировать HSL',
-    contrastTitle: 'Проверка коэффициента контрастности WCAG 2.1',
-    contrastDesc: 'Предпросмотр переднего плана ({color}) на любом цвете фона.',
-    backgroundLabel: 'Фон:',
-    bgAria: 'Цвет фона для контраста',
-    sampleTitle: 'Образец основного текста и текста интерфейса',
-    sampleSentence: 'Съешь ещё этих мягких французских булок, да выпей чаю.',
-    aaNormal: 'AA обычный текст (≥ 4,5:1)',
-    aaaNormal: 'AAA обычный текст (≥ 7,0:1)',
-    aaLarge: 'AA крупный текст (≥ 3,0:1)',
-    pass: 'Пройдено',
-    fail: 'Не пройдено',
-  },
-};
+  };
 
 interface RGB {
   r: number;
@@ -272,8 +145,8 @@ function contrastRatio(c1: RGB, c2: RGB): number {
 }
 
 export default function ColorConverterTool() {
-  const { locale, t } = useLocale();
-  const s = STRINGS[locale];
+  const { t } = useLocale();
+  const s = useComponentStrings('color-converter', STRINGS_EN);
   const [hex, setHex] = useState('#2563eb');
   const [hexDraft, setHexDraft] = useState('#2563eb');
   const [bgHex, setBgHex] = useState('#ffffff');

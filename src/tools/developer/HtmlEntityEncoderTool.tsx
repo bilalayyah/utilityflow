@@ -2,9 +2,9 @@ import { ArrowLeftRight, RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
 import { useLocale } from '../../locales/LocaleContext';
+import { useComponentStrings } from '../../locales/componentStrings';
 
-const STRINGS = {
-  en: {
+const STRINGS_EN = {
     encodeTab: 'Encode Entities',
     decodeTab: 'Decode Entities',
     encodeNonAscii: 'Encode non-ASCII symbols (&#...;)',
@@ -16,99 +16,7 @@ const STRINGS = {
     outputLabelEncode: 'Encoded Entities',
     outputLabelDecode: 'Decoded Text',
     outputPlaceholder: 'Converted entities appear here...',
-  },
-  es: {
-    encodeTab: 'Codificar entidades',
-    decodeTab: 'Decodificar entidades',
-    encodeNonAscii: 'Codificar símbolos no ASCII (&#...;)',
-    swap: 'Intercambiar',
-    inputLabelEncode: 'HTML / texto sin formato',
-    inputLabelDecode: 'Cadena codificada en HTML',
-    inputPlaceholderEncode: '<p>Escribe etiquetas HTML o caracteres especiales...</p>',
-    inputPlaceholderDecode: '&lt;p&gt;Pega entidades codificadas...&lt;/p&gt;',
-    outputLabelEncode: 'Entidades codificadas',
-    outputLabelDecode: 'Texto decodificado',
-    outputPlaceholder: 'Las entidades convertidas aparecen aquí...',
-  },
-  pt: {
-    encodeTab: 'Codificar entidades',
-    decodeTab: 'Decodificar entidades',
-    encodeNonAscii: 'Codificar símbolos não ASCII (&#...;)',
-    swap: 'Trocar',
-    inputLabelEncode: 'HTML / texto bruto',
-    inputLabelDecode: 'String codificada em HTML',
-    inputPlaceholderEncode: '<p>Digite tags HTML ou caracteres especiais...</p>',
-    inputPlaceholderDecode: '&lt;p&gt;Cole entidades codificadas...&lt;/p&gt;',
-    outputLabelEncode: 'Entidades codificadas',
-    outputLabelDecode: 'Texto decodificado',
-    outputPlaceholder: 'As entidades convertidas aparecem aqui...',
-  },
-  fr: {
-    encodeTab: 'Encoder les entités',
-    decodeTab: 'Décoder les entités',
-    encodeNonAscii: 'Encoder les symboles non ASCII (&#...;)',
-    swap: 'Échanger',
-    inputLabelEncode: 'HTML / texte brut',
-    inputLabelDecode: 'Chaîne encodée en HTML',
-    inputPlaceholderEncode: '<p>Saisissez des balises HTML ou des caractères spéciaux...</p>',
-    inputPlaceholderDecode: '&lt;p&gt;Collez des entités encodées...&lt;/p&gt;',
-    outputLabelEncode: 'Entités encodées',
-    outputLabelDecode: 'Texte décodé',
-    outputPlaceholder: 'Les entités converties apparaissent ici...',
-  },
-  de: {
-    encodeTab: 'Entitäten kodieren',
-    decodeTab: 'Entitäten dekodieren',
-    encodeNonAscii: 'Nicht-ASCII-Zeichen kodieren (&#...;)',
-    swap: 'Tauschen',
-    inputLabelEncode: 'Rohes HTML / Text',
-    inputLabelDecode: 'HTML-kodierte Zeichenkette',
-    inputPlaceholderEncode: '<p>HTML-Tags oder Sonderzeichen hier eingeben...</p>',
-    inputPlaceholderDecode: '&lt;p&gt;Kodierte Entitäten hier einfügen...&lt;/p&gt;',
-    outputLabelEncode: 'Kodierte Entitäten',
-    outputLabelDecode: 'Dekodierter Text',
-    outputPlaceholder: 'Konvertierte Entitäten erscheinen hier...',
-  },
-  it: {
-    encodeTab: 'Codifica entità',
-    decodeTab: 'Decodifica entità',
-    encodeNonAscii: 'Codifica i simboli non ASCII (&#...;)',
-    swap: 'Scambia',
-    inputLabelEncode: 'HTML grezzo / Testo',
-    inputLabelDecode: 'Stringa con codifica HTML',
-    inputPlaceholderEncode: '<p>Inserisci tag HTML o caratteri speciali...</p>',
-    inputPlaceholderDecode: '&lt;p&gt;Incolla le entità codificate...&lt;/p&gt;',
-    outputLabelEncode: 'Entità codificate',
-    outputLabelDecode: 'Testo decodificato',
-    outputPlaceholder: 'Le entità convertite appariranno qui...',
-  },
-  id: {
-    encodeTab: 'Encode Entitas',
-    decodeTab: 'Decode Entitas',
-    encodeNonAscii: 'Encode simbol non-ASCII (&#...;)',
-    swap: 'Tukar',
-    inputLabelEncode: 'HTML / Teks Mentah',
-    inputLabelDecode: 'String yang Di-encode HTML',
-    inputPlaceholderEncode: '<p>Masukkan tag HTML atau karakter khusus...</p>',
-    inputPlaceholderDecode: '&lt;p&gt;Tempel entitas yang di-encode...&lt;/p&gt;',
-    outputLabelEncode: 'Entitas yang Di-encode',
-    outputLabelDecode: 'Teks yang Didecode',
-    outputPlaceholder: 'Entitas yang dikonversi muncul di sini...',
-  },
-  ru: {
-    encodeTab: 'Кодировать сущности',
-    decodeTab: 'Декодировать сущности',
-    encodeNonAscii: 'Кодировать не-ASCII символы (&#...;)',
-    swap: 'Поменять местами',
-    inputLabelEncode: 'Исходный HTML / текст',
-    inputLabelDecode: 'HTML-кодированная строка',
-    inputPlaceholderEncode: '<p>Введите HTML-теги или специальные символы...</p>',
-    inputPlaceholderDecode: '&lt;p&gt;Вставьте закодированные сущности...&lt;/p&gt;',
-    outputLabelEncode: 'Закодированные сущности',
-    outputLabelDecode: 'Декодированный текст',
-    outputPlaceholder: 'Здесь появятся преобразованные сущности...',
-  },
-};
+  };
 
 const SAMPLE_HTML = `<div class="notice">5 < 10 & "café" — ready!</div>`;
 
@@ -140,8 +48,8 @@ function decodeHtmlEntities(input: string): string {
 }
 
 export default function HtmlEntityEncoderTool() {
-  const { locale, t } = useLocale();
-  const s = STRINGS[locale];
+  const { t } = useLocale();
+  const s = useComponentStrings('html-entity-encoder', STRINGS_EN);
   const [mode, setMode] = useState<'encode' | 'decode'>('encode');
   const [encodeNonAscii, setEncodeNonAscii] = useState(true);
   const [input, setInput] = useState('');

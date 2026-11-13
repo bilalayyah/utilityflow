@@ -2,9 +2,9 @@ import { RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
 import { useLocale } from '../../locales/LocaleContext';
+import { useComponentStrings } from '../../locales/componentStrings';
 
-const STRINGS = {
-  en: {
+const STRINGS_EN = {
     beautify: 'Beautify',
     minify: 'Minify',
     uppercaseKw: 'UPPERCASE keywords',
@@ -17,106 +17,7 @@ const STRINGS = {
     outputLabel: 'Formatted SQL',
     outputPlaceholder: 'Formatted SQL appears here...',
     copySql: 'Copy SQL',
-  },
-  es: {
-    beautify: 'Dar formato',
-    minify: 'Minificar',
-    uppercaseKw: 'Palabras clave en MAYÚSCULAS',
-    lowercaseKw: 'minúsculas',
-    indentLabel: 'Sangría:',
-    indent2: '2 espacios',
-    indent4: '4 espacios',
-    inputLabel: 'Consulta SQL sin formato',
-    inputPlaceholder: 'Pega una consulta SQL (SELECT, INSERT, UPDATE, JOIN...)...',
-    outputLabel: 'SQL con formato',
-    outputPlaceholder: 'El SQL con formato aparece aquí...',
-    copySql: 'Copiar SQL',
-  },
-  pt: {
-    beautify: 'Formatar',
-    minify: 'Minificar',
-    uppercaseKw: 'Palavras-chave em MAIÚSCULAS',
-    lowercaseKw: 'minúsculas',
-    indentLabel: 'Recuo:',
-    indent2: '2 espaços',
-    indent4: '4 espaços',
-    inputLabel: 'Consulta SQL bruta',
-    inputPlaceholder: 'Cole uma consulta SQL (SELECT, INSERT, UPDATE, JOIN...)...',
-    outputLabel: 'SQL formatado',
-    outputPlaceholder: 'O SQL formatado aparece aqui...',
-    copySql: 'Copiar SQL',
-  },
-  fr: {
-    beautify: 'Embellir',
-    minify: 'Minifier',
-    uppercaseKw: 'Mots-clés en MAJUSCULES',
-    lowercaseKw: 'minuscules',
-    indentLabel: 'Indentation :',
-    indent2: '2 espaces',
-    indent4: '4 espaces',
-    inputLabel: 'Requête SQL brute',
-    inputPlaceholder: 'Collez une requête SQL (SELECT, INSERT, UPDATE, JOIN...)...',
-    outputLabel: 'SQL formaté',
-    outputPlaceholder: 'Le SQL formaté apparaît ici...',
-    copySql: 'Copier le SQL',
-  },
-  de: {
-    beautify: 'Formatieren',
-    minify: 'Minimieren',
-    uppercaseKw: 'Schlüsselwörter in GROSSBUCHSTABEN',
-    lowercaseKw: 'Kleinbuchstaben',
-    indentLabel: 'Einrückung:',
-    indent2: '2 Leerzeichen',
-    indent4: '4 Leerzeichen',
-    inputLabel: 'Rohe SQL-Abfrage',
-    inputPlaceholder: 'SQL-Abfrage einfügen (SELECT, INSERT, UPDATE, JOIN...)...',
-    outputLabel: 'Formatiertes SQL',
-    outputPlaceholder: 'Formatiertes SQL erscheint hier...',
-    copySql: 'SQL kopieren',
-  },
-  it: {
-    beautify: 'Formatta',
-    minify: 'Minimizza',
-    uppercaseKw: 'Parole chiave MAIUSCOLE',
-    lowercaseKw: 'minuscole',
-    indentLabel: 'Rientro:',
-    indent2: '2 spazi',
-    indent4: '4 spazi',
-    inputLabel: 'Query SQL grezza',
-    inputPlaceholder: 'Incolla una query SQL (SELECT, INSERT, UPDATE, JOIN...)...',
-    outputLabel: 'SQL formattato',
-    outputPlaceholder: 'L\'SQL formattato apparirà qui...',
-    copySql: 'Copia SQL',
-  },
-  id: {
-    beautify: 'Percantik',
-    minify: 'Minifikasi',
-    uppercaseKw: 'Kata kunci HURUF BESAR',
-    lowercaseKw: 'huruf kecil',
-    indentLabel: 'Indentasi:',
-    indent2: '2 spasi',
-    indent4: '4 spasi',
-    inputLabel: 'Kueri SQL Mentah',
-    inputPlaceholder: 'Tempel kueri SQL (SELECT, INSERT, UPDATE, JOIN...)...',
-    outputLabel: 'SQL yang Diformat',
-    outputPlaceholder: 'SQL yang diformat muncul di sini...',
-    copySql: 'Salin SQL',
-  },
-  ru: {
-    beautify: 'Форматировать',
-    minify: 'Минифицировать',
-    uppercaseKw: 'Ключевые слова ЗАГЛАВНЫМИ',
-    lowercaseKw: 'строчные',
-    indentLabel: 'Отступ:',
-    indent2: '2 пробела',
-    indent4: '4 пробела',
-    inputLabel: 'Исходный SQL-запрос',
-    inputPlaceholder: 'Вставьте SQL-запрос (SELECT, INSERT, UPDATE, JOIN...)...',
-    outputLabel: 'Отформатированный SQL',
-    outputPlaceholder: 'Здесь появится отформатированный SQL...',
-    copySql: 'Копировать SQL',
-  },
-};
+  };
 
 const SAMPLE_SQL = `select u.id, u.email, count(o.id) as order_count, sum(o.total) as revenue from users u left join orders o on o.user_id = u.id where u.active = 1 and o.created_at >= '2026-01-01' group by u.id, u.email having count(o.id) > 2 order by revenue desc limit 25;`;
 
@@ -388,8 +289,8 @@ function formatSql(
 }
 
 export default function SqlFormatterTool() {
-  const { locale, t } = useLocale();
-  const s = STRINGS[locale];
+  const { t } = useLocale();
+  const s = useComponentStrings('sql-formatter', STRINGS_EN);
   const [input, setInput] = useState('');
   const [mode, setMode] = useState<'beautify' | 'minify'>('beautify');
   const [keywordCase, setKeywordCase] = useState<'upper' | 'lower'>('upper');

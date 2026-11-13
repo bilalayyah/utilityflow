@@ -2,9 +2,9 @@ import { RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
 import { useLocale } from '../../locales/LocaleContext';
+import { useComponentStrings } from '../../locales/componentStrings';
 
-const STRINGS = {
-  en: {
+const STRINGS_EN = {
     minifyTab: 'Minify CSS',
     beautifyTab: 'Beautify CSS',
     inputLabel: 'Input CSS',
@@ -14,85 +14,7 @@ const STRINGS = {
     outputLabelBeautify: 'Beautified CSS',
     outputPlaceholder: 'Processed CSS appears here...',
     copyCss: 'Copy CSS',
-  },
-  es: {
-    minifyTab: 'Minificar CSS',
-    beautifyTab: 'Dar formato al CSS',
-    inputLabel: 'CSS de entrada',
-    bytesLabel: 'bytes',
-    inputPlaceholder: 'Pega reglas CSS u hojas de estilo aquí...',
-    outputLabelMinify: 'CSS minificado',
-    outputLabelBeautify: 'CSS con formato',
-    outputPlaceholder: 'El CSS procesado aparece aquí...',
-    copyCss: 'Copiar CSS',
-  },
-  pt: {
-    minifyTab: 'Minificar CSS',
-    beautifyTab: 'Formatar CSS',
-    inputLabel: 'CSS de entrada',
-    bytesLabel: 'bytes',
-    inputPlaceholder: 'Cole regras CSS ou folhas de estilo aqui...',
-    outputLabelMinify: 'CSS minificado',
-    outputLabelBeautify: 'CSS formatado',
-    outputPlaceholder: 'O CSS processado aparece aqui...',
-    copyCss: 'Copiar CSS',
-  },
-  fr: {
-    minifyTab: 'Minifier le CSS',
-    beautifyTab: 'Embellir le CSS',
-    inputLabel: 'CSS d\'entrée',
-    bytesLabel: 'bytes',
-    inputPlaceholder: 'Collez des règles CSS ou des feuilles de style ici...',
-    outputLabelMinify: 'CSS minifié',
-    outputLabelBeautify: 'CSS embelli',
-    outputPlaceholder: 'Le CSS traité apparaît ici...',
-    copyCss: 'Copier le CSS',
-  },
-  de: {
-    minifyTab: 'CSS minimieren',
-    beautifyTab: 'CSS formatieren',
-    inputLabel: 'Eingabe-CSS',
-    bytesLabel: 'Bytes',
-    inputPlaceholder: 'CSS-Regeln oder Stylesheets hier einfügen...',
-    outputLabelMinify: 'Minimiertes CSS',
-    outputLabelBeautify: 'Formatiertes CSS',
-    outputPlaceholder: 'Verarbeitetes CSS erscheint hier...',
-    copyCss: 'CSS kopieren',
-  },
-  it: {
-    minifyTab: 'Minimizza CSS',
-    beautifyTab: 'Formatta CSS',
-    inputLabel: 'CSS di input',
-    bytesLabel: 'byte',
-    inputPlaceholder: 'Incolla qui regole o fogli di stile CSS...',
-    outputLabelMinify: 'CSS minimizzato',
-    outputLabelBeautify: 'CSS formattato',
-    outputPlaceholder: 'Il CSS elaborato apparirà qui...',
-    copyCss: 'Copia CSS',
-  },
-  id: {
-    minifyTab: 'Minifikasi CSS',
-    beautifyTab: 'Percantik CSS',
-    inputLabel: 'CSS Input',
-    bytesLabel: 'byte',
-    inputPlaceholder: 'Tempel aturan CSS atau stylesheet di sini...',
-    outputLabelMinify: 'CSS yang Diminifikasi',
-    outputLabelBeautify: 'CSS yang Dipercantik',
-    outputPlaceholder: 'CSS yang diproses muncul di sini...',
-    copyCss: 'Salin CSS',
-  },
-  ru: {
-    minifyTab: 'Минифицировать CSS',
-    beautifyTab: 'Форматировать CSS',
-    inputLabel: 'Входной CSS',
-    bytesLabel: 'байт',
-    inputPlaceholder: 'Вставьте правила CSS или таблицы стилей...',
-    outputLabelMinify: 'Минифицированный CSS',
-    outputLabelBeautify: 'Отформатированный CSS',
-    outputPlaceholder: 'Здесь появится обработанный CSS...',
-    copyCss: 'Копировать CSS',
-  },
-};
+  };
 
 const SAMPLE_CSS = `/* Primary card surface */
 .utility-card {
@@ -216,7 +138,7 @@ function beautifyCss(css: string): string {
 
 export default function CssMinifierTool() {
   const { locale, t } = useLocale();
-  const s = STRINGS[locale];
+  const s = useComponentStrings('css-minifier', STRINGS_EN);
   const [input, setInput] = useState('');
   const [mode, setMode] = useState<'minify' | 'beautify'>('minify');
 

@@ -2,9 +2,9 @@ import { RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
 import { useLocale } from '../../locales/LocaleContext';
+import { useComponentStrings } from '../../locales/componentStrings';
 
-const STRINGS = {
-  en: {
+const STRINGS_EN = {
     minifyTab: 'Minify JS',
     beautifyTab: 'Beautify JS',
     indentLabel: 'Indent:',
@@ -17,106 +17,7 @@ const STRINGS = {
     outputLabelBeautify: 'Beautified Output',
     outputPlaceholder: 'Formatted JavaScript appears here...',
     copyCode: 'Copy code',
-  },
-  es: {
-    minifyTab: 'Minificar JS',
-    beautifyTab: 'Dar formato a JS',
-    indentLabel: 'Sangría:',
-    indent2: '2 espacios',
-    indent4: '4 espacios',
-    inputLabel: 'Entrada de JavaScript / TypeScript',
-    bytesLabel: 'bytes',
-    inputPlaceholder: 'Pega un fragmento de JavaScript o TypeScript...',
-    outputLabelMinify: 'Salida minificada',
-    outputLabelBeautify: 'Salida con formato',
-    outputPlaceholder: 'El JavaScript con formato aparece aquí...',
-    copyCode: 'Copiar código',
-  },
-  pt: {
-    minifyTab: 'Minificar JS',
-    beautifyTab: 'Formatar JS',
-    indentLabel: 'Recuo:',
-    indent2: '2 espaços',
-    indent4: '4 espaços',
-    inputLabel: 'Entrada de JavaScript / TypeScript',
-    bytesLabel: 'bytes',
-    inputPlaceholder: 'Cole um trecho de JavaScript ou TypeScript...',
-    outputLabelMinify: 'Saída minificada',
-    outputLabelBeautify: 'Saída formatada',
-    outputPlaceholder: 'O JavaScript formatado aparece aqui...',
-    copyCode: 'Copiar código',
-  },
-  fr: {
-    minifyTab: 'Minifier le JS',
-    beautifyTab: 'Formater le JS',
-    indentLabel: 'Indentation :',
-    indent2: '2 espaces',
-    indent4: '4 espaces',
-    inputLabel: 'Entrée JavaScript / TypeScript',
-    bytesLabel: 'bytes',
-    inputPlaceholder: 'Collez un extrait JavaScript ou TypeScript...',
-    outputLabelMinify: 'Sortie minifiée',
-    outputLabelBeautify: 'Sortie formatée',
-    outputPlaceholder: 'Le JavaScript formaté apparaît ici...',
-    copyCode: 'Copier le code',
-  },
-  de: {
-    minifyTab: 'JS minimieren',
-    beautifyTab: 'JS formatieren',
-    indentLabel: 'Einrückung:',
-    indent2: '2 Leerzeichen',
-    indent4: '4 Leerzeichen',
-    inputLabel: 'JavaScript-/TypeScript-Eingabe',
-    bytesLabel: 'Bytes',
-    inputPlaceholder: 'JavaScript- oder TypeScript-Snippet einfügen...',
-    outputLabelMinify: 'Minimierte Ausgabe',
-    outputLabelBeautify: 'Formatierte Ausgabe',
-    outputPlaceholder: 'Formatiertes JavaScript erscheint hier...',
-    copyCode: 'Code kopieren',
-  },
-  it: {
-    minifyTab: 'Minimizza JS',
-    beautifyTab: 'Formatta JS',
-    indentLabel: 'Rientro:',
-    indent2: '2 spazi',
-    indent4: '4 spazi',
-    inputLabel: 'Input JavaScript / TypeScript',
-    bytesLabel: 'byte',
-    inputPlaceholder: 'Incolla uno snippet JavaScript o TypeScript...',
-    outputLabelMinify: 'Output minimizzato',
-    outputLabelBeautify: 'Output formattato',
-    outputPlaceholder: 'Il JavaScript formattato apparirà qui...',
-    copyCode: 'Copia codice',
-  },
-  id: {
-    minifyTab: 'Minifikasi JS',
-    beautifyTab: 'Percantik JS',
-    indentLabel: 'Indentasi:',
-    indent2: '2 spasi',
-    indent4: '4 spasi',
-    inputLabel: 'Input JavaScript / TypeScript',
-    bytesLabel: 'byte',
-    inputPlaceholder: 'Tempel cuplikan JavaScript atau TypeScript...',
-    outputLabelMinify: 'Hasil yang Diminifikasi',
-    outputLabelBeautify: 'Hasil yang Dipercantik',
-    outputPlaceholder: 'JavaScript yang diformat muncul di sini...',
-    copyCode: 'Salin kode',
-  },
-  ru: {
-    minifyTab: 'Минифицировать JS',
-    beautifyTab: 'Форматировать JS',
-    indentLabel: 'Отступ:',
-    indent2: '2 пробела',
-    indent4: '4 пробела',
-    inputLabel: 'Входной JavaScript / TypeScript',
-    bytesLabel: 'байт',
-    inputPlaceholder: 'Вставьте фрагмент JavaScript или TypeScript...',
-    outputLabelMinify: 'Минифицированный вывод',
-    outputLabelBeautify: 'Отформатированный вывод',
-    outputPlaceholder: 'Здесь появится отформатированный JavaScript...',
-    copyCode: 'Копировать код',
-  },
-};
+  };
 
 const SAMPLE_JS = `// Compute discounted invoice total
 function calculateTotal(items, taxRate = 0.08) {
@@ -286,7 +187,7 @@ function processJavaScript(code: string, mode: 'minify' | 'beautify', indentWidt
 
 export default function JsFormatterTool() {
   const { locale, t } = useLocale();
-  const s = STRINGS[locale];
+  const s = useComponentStrings('js-formatter', STRINGS_EN);
   const [input, setInput] = useState('');
   const [mode, setMode] = useState<'beautify' | 'minify'>('minify');
   const [indentSize, setIndentSize] = useState<2 | 4>(2);

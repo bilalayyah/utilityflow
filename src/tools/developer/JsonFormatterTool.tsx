@@ -1,11 +1,10 @@
 import { Download, RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
-import type { LocaleCode } from '../../locales/config';
 import { useLocale } from '../../locales/LocaleContext';
+import { useComponentStrings } from '../../locales/componentStrings';
 
-const STRINGS = {
-  en: {
+const STRINGS_EN = {
     indent2: '2 Spaces',
     indent4: '4 Spaces',
     indentTab: 'Tab',
@@ -23,141 +22,7 @@ const STRINGS = {
     outputLabel: 'Formatted Output',
     outputPlaceholder: 'Formatted and validated JSON appears here...',
     copyJson: 'Copy JSON',
-  },
-  es: {
-    indent2: '2 espacios',
-    indent4: '4 espacios',
-    indentTab: 'Tabulación',
-    indentMinify: 'Minificar',
-    sortKeys: 'Ordenar claves A–Z',
-    validJson: 'JSON válido',
-    keysLabel: 'claves',
-    depthLabel: 'profundidad',
-    bytesLabel: 'bytes',
-    invalidJson: 'JSON no válido:',
-    invalidJsonSyntax: 'Sintaxis JSON no válida',
-    lineCol: 'Línea {line}, Columna {col}',
-    inputLabel: 'Entrada JSON sin formato',
-    inputPlaceholder: '{"hello": "world", "items": [1, 2, 3]}',
-    outputLabel: 'Salida con formato',
-    outputPlaceholder: 'El JSON con formato y validado aparece aquí...',
-    copyJson: 'Copiar JSON',
-  },
-  pt: {
-    indent2: '2 espaços',
-    indent4: '4 espaços',
-    indentTab: 'Tabulação',
-    indentMinify: 'Minificar',
-    sortKeys: 'Ordenar chaves A–Z',
-    validJson: 'JSON válido',
-    keysLabel: 'chaves',
-    depthLabel: 'profundidade',
-    bytesLabel: 'bytes',
-    invalidJson: 'JSON inválido:',
-    invalidJsonSyntax: 'Sintaxe JSON inválida',
-    lineCol: 'Linha {line}, Coluna {col}',
-    inputLabel: 'Entrada JSON bruta',
-    inputPlaceholder: '{"hello": "world", "items": [1, 2, 3]}',
-    outputLabel: 'Saída formatada',
-    outputPlaceholder: 'O JSON formatado e validado aparece aqui...',
-    copyJson: 'Copiar JSON',
-  },
-  fr: {
-    indent2: '2 espaces',
-    indent4: '4 espaces',
-    indentTab: 'Tabulation',
-    indentMinify: 'Minifier',
-    sortKeys: 'Trier les clés A–Z',
-    validJson: 'JSON valide',
-    keysLabel: 'clés',
-    depthLabel: 'profondeur',
-    bytesLabel: 'bytes',
-    invalidJson: 'JSON invalide :',
-    invalidJsonSyntax: 'Syntaxe JSON invalide',
-    lineCol: 'Ligne {line}, colonne {col}',
-    inputLabel: 'Entrée JSON brute',
-    inputPlaceholder: '{"hello": "world", "items": [1, 2, 3]}',
-    outputLabel: 'Sortie formatée',
-    outputPlaceholder: 'Le JSON formaté et validé apparaît ici...',
-    copyJson: 'Copier le JSON',
-  },
-  de: {
-    indent2: '2 Leerzeichen',
-    indent4: '4 Leerzeichen',
-    indentTab: 'Tab',
-    indentMinify: 'Minimieren',
-    sortKeys: 'Schlüssel A–Z sortieren',
-    validJson: 'Gültiges JSON',
-    keysLabel: 'Schlüssel',
-    depthLabel: 'Tiefe',
-    bytesLabel: 'Bytes',
-    invalidJson: 'Ungültiges JSON:',
-    invalidJsonSyntax: 'Ungültige JSON-Syntax',
-    lineCol: 'Zeile {line}, Spalte {col}',
-    inputLabel: 'Roh-JSON-Eingabe',
-    inputPlaceholder: '{"hello": "world", "items": [1, 2, 3]}',
-    outputLabel: 'Formatierte Ausgabe',
-    outputPlaceholder: 'Formatiertes und geprüftes JSON erscheint hier...',
-    copyJson: 'JSON kopieren',
-  },
-  it: {
-    indent2: '2 spazi',
-    indent4: '4 spazi',
-    indentTab: 'Tab',
-    indentMinify: 'Minimizza',
-    sortKeys: 'Ordina le chiavi A–Z',
-    validJson: 'JSON valido',
-    keysLabel: 'chiavi',
-    depthLabel: 'profondità',
-    bytesLabel: 'byte',
-    invalidJson: 'JSON non valido:',
-    invalidJsonSyntax: 'Sintassi JSON non valida',
-    lineCol: 'Riga {line}, colonna {col}',
-    inputLabel: 'Input JSON grezzo',
-    inputPlaceholder: '{"hello": "world", "items": [1, 2, 3]}',
-    outputLabel: 'Output formattato',
-    outputPlaceholder: 'Il JSON formattato e convalidato apparirà qui...',
-    copyJson: 'Copia JSON',
-  },
-  id: {
-    indent2: '2 Spasi',
-    indent4: '4 Spasi',
-    indentTab: 'Tab',
-    indentMinify: 'Minifikasi',
-    sortKeys: 'Urutkan kunci A–Z',
-    validJson: 'JSON Valid',
-    keysLabel: 'kunci',
-    depthLabel: 'kedalaman',
-    bytesLabel: 'byte',
-    invalidJson: 'JSON Tidak Valid:',
-    invalidJsonSyntax: 'Sintaks JSON tidak valid',
-    lineCol: 'Baris {line}, Kolom {col}',
-    inputLabel: 'Input JSON Mentah',
-    inputPlaceholder: '{"hello": "world", "items": [1, 2, 3]}',
-    outputLabel: 'Hasil yang Diformat',
-    outputPlaceholder: 'JSON yang diformat dan divalidasi muncul di sini...',
-    copyJson: 'Salin JSON',
-  },
-  ru: {
-    indent2: '2 пробела',
-    indent4: '4 пробела',
-    indentTab: 'Табуляция',
-    indentMinify: 'Минифицировать',
-    sortKeys: 'Сортировать ключи А–Я',
-    validJson: 'Корректный JSON',
-    keysLabel: 'ключей',
-    depthLabel: 'глубина',
-    bytesLabel: 'байт',
-    invalidJson: 'Недопустимый JSON:',
-    invalidJsonSyntax: 'Недопустимый синтаксис JSON',
-    lineCol: 'Строка {line}, столбец {col}',
-    inputLabel: 'Исходный JSON',
-    inputPlaceholder: '{"hello": "world", "items": [1, 2, 3]}',
-    outputLabel: 'Отформатированный вывод',
-    outputPlaceholder: 'Здесь появится отформатированный и проверенный JSON...',
-    copyJson: 'Копировать JSON',
-  },
-};
+  };
 
 const SAMPLE_JSON = `{
   "service": "utilityflow-api",
@@ -211,8 +76,7 @@ function measureJsonStats(value: unknown, depth = 0): { keys: number; maxDepth: 
   return { keys: 0, maxDepth: depth };
 }
 
-function getLineColFromSyntaxError(input: string, err: unknown, locale: LocaleCode): string {
-  const s = STRINGS[locale];
+function getLineColFromSyntaxError(input: string, err: unknown, s: typeof STRINGS_EN): string {
   const message = err instanceof Error ? err.message : s.invalidJsonSyntax;
   const posMatch = /position\s+(\d+)/i.exec(message);
   if (posMatch) {
@@ -228,7 +92,7 @@ function getLineColFromSyntaxError(input: string, err: unknown, locale: LocaleCo
 
 export default function JsonFormatterTool() {
   const { locale, t } = useLocale();
-  const s = STRINGS[locale];
+  const s = useComponentStrings('json-formatter', STRINGS_EN);
   const [input, setInput] = useState('');
   const [indent, setIndent] = useState<'2' | '4' | 'tab' | 'minify'>('2');
   const [sortKeys, setSortKeys] = useState(false);
@@ -255,12 +119,12 @@ export default function JsonFormatterTool() {
       return {
         valid: false,
         output: '',
-        error: getLineColFromSyntaxError(input, err, locale),
+        error: getLineColFromSyntaxError(input, err, s),
         keys: 0,
         maxDepth: 0,
       };
     }
-  }, [input, indent, sortKeys, locale]);
+  }, [input, indent, sortKeys, s.invalidJsonSyntax, s.lineCol]);
 
   const handleDownload = () => {
     if (!parsed.output) return;
