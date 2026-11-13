@@ -2,9 +2,9 @@ import { RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
 import { useLocale } from '../../locales/LocaleContext';
+import { useComponentStrings } from '../../locales/componentStrings';
 
-const STRINGS = {
-  en: {
+const STRINGS_EN = {
     find: 'Find',
     replaceWith: 'Replace with',
     findPlaceholder: 'Text to search for...',
@@ -22,141 +22,7 @@ const STRINGS = {
     sourcePlaceholder: 'Paste text to search and replace...',
     outputPlaceholder: 'Replaced text preview appears here...',
     copyResult: 'Copy result',
-  },
-  es: {
-    find: 'Buscar',
-    replaceWith: 'Reemplazar con',
-    findPlaceholder: 'Texto para buscar...',
-    replacePlaceholder: 'Texto de reemplazo...',
-    caseSensitive: 'Distinguir mayúsculas y minúsculas',
-    wholeWordOnly: 'Solo palabras completas',
-    useRegex: 'Usar expresión regular (RegExp)',
-    regexError: 'Error de regex:',
-    invalidRegex: 'Expresión regular no válida.',
-    sourceText: 'Texto original',
-    updatedOutput: 'Resultado actualizado',
-    match: 'coincidencia',
-    matches: 'coincidencias',
-    replaced: 'reemplazadas',
-    sourcePlaceholder: 'Pega el texto para buscar y reemplazar...',
-    outputPlaceholder: 'La vista previa del texto reemplazado aparece aquí...',
-    copyResult: 'Copiar resultado',
-  },
-  pt: {
-    find: 'Buscar',
-    replaceWith: 'Substituir por',
-    findPlaceholder: 'Texto a ser buscado...',
-    replacePlaceholder: 'Texto de substituição...',
-    caseSensitive: 'Diferenciar maiúsculas de minúsculas',
-    wholeWordOnly: 'Somente palavras inteiras',
-    useRegex: 'Usar expressão regular (RegExp)',
-    regexError: 'Erro de regex:',
-    invalidRegex: 'Expressão regular inválida.',
-    sourceText: 'Texto original',
-    updatedOutput: 'Saída atualizada',
-    match: 'correspondência',
-    matches: 'correspondências',
-    replaced: 'substituídas',
-    sourcePlaceholder: 'Cole o texto para buscar e substituir...',
-    outputPlaceholder: 'A prévia do texto substituído aparece aqui...',
-    copyResult: 'Copiar resultado',
-  },
-  fr: {
-    find: 'Rechercher',
-    replaceWith: 'Remplacer par',
-    findPlaceholder: 'Texte à rechercher...',
-    replacePlaceholder: 'Texte de remplacement...',
-    caseSensitive: 'Respecter la casse',
-    wholeWordOnly: 'Mots entiers uniquement',
-    useRegex: 'Utiliser une expression régulière (RegExp)',
-    regexError: 'Erreur regex :',
-    invalidRegex: 'Expression régulière invalide.',
-    sourceText: 'Texte source',
-    updatedOutput: 'Sortie mise à jour',
-    match: 'correspondance',
-    matches: 'correspondances',
-    replaced: 'remplacées',
-    sourcePlaceholder: 'Collez le texte à rechercher et remplacer...',
-    outputPlaceholder: 'L\'aperçu du texte remplacé apparaît ici...',
-    copyResult: 'Copier le résultat',
-  },
-  de: {
-    find: 'Suchen',
-    replaceWith: 'Ersetzen durch',
-    findPlaceholder: 'Zu suchender Text...',
-    replacePlaceholder: 'Ersatztext...',
-    caseSensitive: 'Groß-/Kleinschreibung beachten',
-    wholeWordOnly: 'Nur ganze Wörter',
-    useRegex: 'Regulären Ausdruck (RegExp) verwenden',
-    regexError: 'Regex-Fehler:',
-    invalidRegex: 'Ungültiger regulärer Ausdruck.',
-    sourceText: 'Quelltext',
-    updatedOutput: 'Aktualisierte Ausgabe',
-    match: 'Treffer',
-    matches: 'Treffer',
-    replaced: 'ersetzt',
-    sourcePlaceholder: 'Text zum Suchen und Ersetzen einfügen...',
-    outputPlaceholder: 'Vorschau des ersetzten Texts erscheint hier...',
-    copyResult: 'Ergebnis kopieren',
-  },
-  it: {
-    find: 'Trova',
-    replaceWith: 'Sostituisci con',
-    findPlaceholder: 'Testo da cercare...',
-    replacePlaceholder: 'Testo sostitutivo...',
-    caseSensitive: 'Distingui maiuscole/minuscole',
-    wholeWordOnly: 'Solo parole intere',
-    useRegex: 'Usa espressione regolare (RegExp)',
-    regexError: 'Errore regex:',
-    invalidRegex: 'Espressione regolare non valida.',
-    sourceText: 'Testo di origine',
-    updatedOutput: 'Output aggiornato',
-    match: 'corrispondenza',
-    matches: 'corrispondenze',
-    replaced: 'sostituite',
-    sourcePlaceholder: 'Incolla il testo da cercare e sostituire...',
-    outputPlaceholder: 'L\'anteprima del testo sostituito apparirà qui...',
-    copyResult: 'Copia il risultato',
-  },
-  id: {
-    find: 'Cari',
-    replaceWith: 'Ganti dengan',
-    findPlaceholder: 'Teks yang dicari...',
-    replacePlaceholder: 'Teks pengganti...',
-    caseSensitive: 'Peka huruf besar/kecil',
-    wholeWordOnly: 'Hanya kata utuh',
-    useRegex: 'Gunakan Ekspresi Reguler (RegExp)',
-    regexError: 'Kesalahan regex:',
-    invalidRegex: 'Ekspresi reguler tidak valid.',
-    sourceText: 'Teks Sumber',
-    updatedOutput: 'Hasil yang Diperbarui',
-    match: 'cocok',
-    matches: 'cocok',
-    replaced: 'diganti',
-    sourcePlaceholder: 'Tempel teks untuk dicari dan diganti...',
-    outputPlaceholder: 'Pratinjau teks yang diganti muncul di sini...',
-    copyResult: 'Salin hasil',
-  },
-  ru: {
-    find: 'Найти',
-    replaceWith: 'Заменить на',
-    findPlaceholder: 'Текст для поиска...',
-    replacePlaceholder: 'Текст для замены...',
-    caseSensitive: 'С учётом регистра',
-    wholeWordOnly: 'Только целое слово',
-    useRegex: 'Использовать регулярное выражение (RegExp)',
-    regexError: 'Ошибка регулярного выражения:',
-    invalidRegex: 'Недопустимое регулярное выражение.',
-    sourceText: 'Исходный текст',
-    updatedOutput: 'Обновлённый результат',
-    match: 'совпадение',
-    matches: 'совпадений',
-    replaced: 'заменено',
-    sourcePlaceholder: 'Вставьте текст для поиска и замены...',
-    outputPlaceholder: 'Здесь появится предпросмотр заменённого текста...',
-    copyResult: 'Копировать результат',
-  },
-};
+  };
 
 const SAMPLE_TEXT = `Order #1042 shipped via Express Courier.
 Order #1043 shipped via Standard Ground.
@@ -167,8 +33,8 @@ function escapeRegExp(str: string): string {
 }
 
 export default function FindAndReplaceTool() {
-  const { locale, t } = useLocale();
-  const s = STRINGS[locale];
+  const { t } = useLocale();
+  const s = useComponentStrings('find-and-replace', STRINGS_EN);
   const [text, setText] = useState('');
   const [findQuery, setFindQuery] = useState('');
   const [replaceWith, setReplaceWith] = useState('');

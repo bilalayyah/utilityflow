@@ -2,9 +2,9 @@ import { RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
 import { useLocale } from '../../locales/LocaleContext';
+import { useComponentStrings } from '../../locales/componentStrings';
 
-const STRINGS = {
-  en: {
+const STRINGS_EN = {
     sampleText: `First line of text
 Second line of text
 Third line of text`,
@@ -18,119 +18,13 @@ Third line of text`,
       { id: 'each-word', label: 'Reverse Each Word' },
       { id: 'lines', label: 'Reverse Line Order' },
     ],
-  },
-  es: {
-    sampleText: `Primera línea de texto
-Segunda línea de texto
-Tercera línea de texto`,
-    originalText: 'Texto original',
-    reversedOutput: 'Resultado invertido',
-    inputPlaceholder: 'Escribe texto o líneas para invertir...',
-    outputPlaceholder: 'El texto invertido aparece aquí...',
-    modes: [
-      { id: 'characters', label: 'Invertir caracteres' },
-      { id: 'words', label: 'Invertir orden de palabras' },
-      { id: 'each-word', label: 'Invertir cada palabra' },
-      { id: 'lines', label: 'Invertir orden de líneas' },
-    ],
-  },
-  pt: {
-    sampleText: `Primeira linha de texto
-Segunda linha de texto
-Terceira linha de texto`,
-    originalText: 'Texto original',
-    reversedOutput: 'Saída invertida',
-    inputPlaceholder: 'Digite texto ou linhas para inverter...',
-    outputPlaceholder: 'O texto invertido aparece aqui...',
-    modes: [
-      { id: 'characters', label: 'Inverter caracteres' },
-      { id: 'words', label: 'Inverter ordem das palavras' },
-      { id: 'each-word', label: 'Inverter cada palavra' },
-      { id: 'lines', label: 'Inverter ordem das linhas' },
-    ],
-  },
-  fr: {
-    sampleText: `Première ligne de texte
-Deuxième ligne de texte
-Troisième ligne de texte`,
-    originalText: 'Texte d\'origine',
-    reversedOutput: 'Sortie inversée',
-    inputPlaceholder: 'Saisissez du texte ou des lignes à inverser...',
-    outputPlaceholder: 'Le texte inversé apparaît ici...',
-    modes: [
-      { id: 'characters', label: 'Inverser les caractères' },
-      { id: 'words', label: 'Inverser l\'ordre des mots' },
-      { id: 'each-word', label: 'Inverser chaque mot' },
-      { id: 'lines', label: 'Inverser l\'ordre des lignes' },
-    ],
-  },
-  de: {
-    sampleText: `Erste Textzeile
-Zweite Textzeile
-Dritte Textzeile`,
-    originalText: 'Originaltext',
-    reversedOutput: 'Umgekehrte Ausgabe',
-    inputPlaceholder: 'Text oder Zeilen zum Umkehren eingeben...',
-    outputPlaceholder: 'Umgekehrter Text erscheint hier...',
-    modes: [
-      { id: 'characters', label: 'Zeichen umkehren' },
-      { id: 'words', label: 'Wortreihenfolge umkehren' },
-      { id: 'each-word', label: 'Jedes Wort umkehren' },
-      { id: 'lines', label: 'Zeilenreihenfolge umkehren' },
-    ],
-  },
-  it: {
-    sampleText: `Prima riga di testo
-Seconda riga di testo
-Terza riga di testo`,
-    originalText: 'Testo originale',
-    reversedOutput: 'Output invertito',
-    inputPlaceholder: 'Inserisci testo o righe da invertire...',
-    outputPlaceholder: 'Il testo invertito apparirà qui...',
-    modes: [
-      { id: 'characters', label: 'Inverti i caratteri' },
-      { id: 'words', label: 'Inverti ordine delle parole' },
-      { id: 'each-word', label: 'Inverti ogni parola' },
-      { id: 'lines', label: 'Inverti ordine delle righe' },
-    ],
-  },
-  id: {
-    sampleText: `Baris pertama teks
-Baris kedua teks
-Baris ketiga teks`,
-    originalText: 'Teks Asli',
-    reversedOutput: 'Hasil yang Dibalik',
-    inputPlaceholder: 'Masukkan teks atau baris untuk dibalik...',
-    outputPlaceholder: 'Teks yang dibalik muncul di sini...',
-    modes: [
-      { id: 'characters', label: 'Balik Karakter' },
-      { id: 'words', label: 'Balik Urutan Kata' },
-      { id: 'each-word', label: 'Balik Setiap Kata' },
-      { id: 'lines', label: 'Balik Urutan Baris' },
-    ],
-  },
-  ru: {
-    sampleText: `Первая строка текста
-Вторая строка текста
-Третья строка текста`,
-    originalText: 'Исходный текст',
-    reversedOutput: 'Перевёрнутый результат',
-    inputPlaceholder: 'Введите текст или строки для переворота...',
-    outputPlaceholder: 'Здесь появится перевёрнутый текст...',
-    modes: [
-      { id: 'characters', label: 'Перевернуть символы' },
-      { id: 'words', label: 'Перевернуть порядок слов' },
-      { id: 'each-word', label: 'Перевернуть каждое слово' },
-      { id: 'lines', label: 'Перевернуть порядок строк' },
-    ],
-  },
-};
+  };
 
 type ReverseMode = 'characters' | 'words' | 'each-word' | 'lines';
 
 export default function TextReverserTool() {
-  const { locale, t } = useLocale();
-  const s = STRINGS[locale];
+  const { t } = useLocale();
+  const s = useComponentStrings('text-reverser', STRINGS_EN);
   const [input, setInput] = useState('');
   const [mode, setMode] = useState<ReverseMode>('characters');
 

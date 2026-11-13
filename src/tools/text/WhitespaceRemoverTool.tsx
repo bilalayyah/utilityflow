@@ -2,9 +2,9 @@ import { RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
 import { useLocale } from '../../locales/LocaleContext';
+import { useComponentStrings } from '../../locales/componentStrings';
 
-const STRINGS = {
-  en: {
+const STRINGS_EN = {
     sampleText: `   First   line with   extra   spaces.   
 
    Second line   with   tabs	and   gaps.
@@ -25,168 +25,13 @@ Third   line here.   `,
     removed: 'removed',
     inputPlaceholder: 'Paste messy text with extra spaces, tabs, or blank lines...',
     outputPlaceholder: 'Cleaned output appears automatically...',
-  },
-  es: {
-    sampleText: `   Primera   línea con   espacios   de más.   
-
-   Segunda línea   con   tabulaciones	y   huecos.
-
-
-Tercera   línea aquí.   `,
-    collapseSpaces: 'Colapsar espacios múltiples',
-    trimEdges: 'Recortar bordes de línea',
-    tabsToSpaces: 'Convertir tabulaciones en espacios',
-    lineBreaks: 'Saltos de línea:',
-    keepBreaks: 'Mantener saltos de línea',
-    removeBlankLines: 'Eliminar líneas en blanco',
-    replaceWithSpaces: 'Reemplazar con espacios',
-    removeAllBreaks: 'Eliminar todos los saltos',
-    inputText: 'Texto de entrada',
-    chars: 'caracteres',
-    cleanedText: 'Texto limpio',
-    removed: 'eliminados',
-    inputPlaceholder: 'Pega texto desordenado con espacios de más, tabulaciones o líneas en blanco...',
-    outputPlaceholder: 'El resultado limpio aparece automáticamente...',
-  },
-  pt: {
-    sampleText: `   Primeira   linha com   espaços   extras.   
-
-   Segunda linha   com   tabs	e   lacunas.
-
-
-Terceira   linha aqui.   `,
-    collapseSpaces: 'Colapsar espaços múltiplos',
-    trimEdges: 'Recortar bordas de linha',
-    tabsToSpaces: 'Converter tabs em espaços',
-    lineBreaks: 'Quebras de linha:',
-    keepBreaks: 'Manter quebras de linha',
-    removeBlankLines: 'Remover linhas em branco',
-    replaceWithSpaces: 'Substituir por espaços',
-    removeAllBreaks: 'Remover todas as quebras',
-    inputText: 'Texto de entrada',
-    chars: 'caracteres',
-    cleanedText: 'Texto limpo',
-    removed: 'removidos',
-    inputPlaceholder: 'Cole texto desorganizado com espaços extras, tabs ou linhas em branco...',
-    outputPlaceholder: 'O resultado limpo aparece automaticamente...',
-  },
-  fr: {
-    sampleText: `   Première   ligne avec   des espaces   en trop.   
-
-   Deuxième ligne   avec   des tabulations	et   des écarts.
-
-
-Troisième   ligne ici.   `,
-    collapseSpaces: 'Réduire les espaces multiples',
-    trimEdges: 'Supprimer les espaces en bord de ligne',
-    tabsToSpaces: 'Convertir les tabulations en espaces',
-    lineBreaks: 'Sauts de ligne :',
-    keepBreaks: 'Conserver les sauts de ligne',
-    removeBlankLines: 'Supprimer les lignes vides',
-    replaceWithSpaces: 'Remplacer par des espaces',
-    removeAllBreaks: 'Supprimer tous les sauts',
-    inputText: 'Texte d\'entrée',
-    chars: 'caractères',
-    cleanedText: 'Texte nettoyé',
-    removed: 'supprimés',
-    inputPlaceholder: 'Collez du texte désordonné avec des espaces en trop, des tabulations ou des lignes vides...',
-    outputPlaceholder: 'Le résultat nettoyé apparaît automatiquement...',
-  },
-  de: {
-    sampleText: `   Erste   Zeile mit   extra   Leerzeichen.   
-
-   Zweite Zeile   mit   Tabs	und   Lücken.
-
-
-Dritte   Zeile hier.   `,
-    collapseSpaces: 'Mehrere Leerzeichen zusammenfassen',
-    trimEdges: 'Zeilenränder trimmen',
-    tabsToSpaces: 'Tabs in Leerzeichen umwandeln',
-    lineBreaks: 'Zeilenumbrüche:',
-    keepBreaks: 'Zeilenumbrüche beibehalten',
-    removeBlankLines: 'Leere Zeilen entfernen',
-    replaceWithSpaces: 'Durch Leerzeichen ersetzen',
-    removeAllBreaks: 'Alle Umbrüche entfernen',
-    inputText: 'Eingabetext',
-    chars: 'Zeichen',
-    cleanedText: 'Bereinigter Text',
-    removed: 'entfernt',
-    inputPlaceholder: 'Unordentlichen Text mit zusätzlichen Leerzeichen, Tabs oder Leerzeilen einfügen...',
-    outputPlaceholder: 'Bereinigte Ausgabe erscheint automatisch...',
-  },
-  it: {
-    sampleText: `   Prima   riga con   spazi   extra.   
-
-   Seconda riga   con   tabulazioni	e   spazi.
-
-
-Terza   riga qui.   `,
-    collapseSpaces: 'Unisci gli spazi multipli',
-    trimEdges: 'Taglia i bordi delle righe',
-    tabsToSpaces: 'Converti le tabulazioni in spazi',
-    lineBreaks: 'Interruzioni di riga:',
-    keepBreaks: 'Mantieni le interruzioni di riga',
-    removeBlankLines: 'Rimuovi le righe vuote',
-    replaceWithSpaces: 'Sostituisci con spazi',
-    removeAllBreaks: 'Rimuovi tutte le interruzioni',
-    inputText: 'Testo di input',
-    chars: 'caratteri',
-    cleanedText: 'Testo pulito',
-    removed: 'rimossi',
-    inputPlaceholder: 'Incolla testo disordinato con spazi extra, tabulazioni o righe vuote...',
-    outputPlaceholder: 'L\'output pulito apparirà automaticamente...',
-  },
-  id: {
-    sampleText: `   Baris   pertama dengan   spasi   berlebih.   
-
-   Baris kedua   dengan   tab	dan   celah.
-
-
-Baris   ketiga di sini.   `,
-    collapseSpaces: 'Gabungkan beberapa spasi',
-    trimEdges: 'Pangkas tepi baris',
-    tabsToSpaces: 'Ubah tab menjadi spasi',
-    lineBreaks: 'Jeda baris:',
-    keepBreaks: 'Pertahankan jeda baris',
-    removeBlankLines: 'Hapus baris kosong',
-    replaceWithSpaces: 'Ganti dengan spasi',
-    removeAllBreaks: 'Hapus semua jeda',
-    inputText: 'Teks Input',
-    chars: 'karakter',
-    cleanedText: 'Teks yang Dibersihkan',
-    removed: 'dihapus',
-    inputPlaceholder: 'Tempel teks berantakan dengan spasi berlebih, tab, atau baris kosong...',
-    outputPlaceholder: 'Hasil yang dibersihkan muncul secara otomatis...',
-  },
-  ru: {
-    sampleText: `   Первая   строка с   лишними   пробелами.   
-
-   Вторая строка   с   табуляцией	и   пробелами.
-
-
-Третья   строка здесь.   `,
-    collapseSpaces: 'Схлопывать несколько пробелов',
-    trimEdges: 'Обрезать края строк',
-    tabsToSpaces: 'Преобразовывать табуляцию в пробелы',
-    lineBreaks: 'Переносы строк:',
-    keepBreaks: 'Сохранять переносы строк',
-    removeBlankLines: 'Удалять пустые строки',
-    replaceWithSpaces: 'Заменить пробелами',
-    removeAllBreaks: 'Удалить все переносы',
-    inputText: 'Входной текст',
-    chars: 'симв.',
-    cleanedText: 'Очищенный текст',
-    removed: 'удалено',
-    inputPlaceholder: 'Вставьте неаккуратный текст с лишними пробелами, табуляцией или пустыми строками...',
-    outputPlaceholder: 'Очищенный результат появится автоматически...',
-  },
-};
+  };
 
 type LineBreakMode = 'keep' | 'collapse-blank' | 'remove-all' | 'to-spaces';
 
 export default function WhitespaceRemoverTool() {
   const { locale, t } = useLocale();
-  const s = STRINGS[locale];
+  const s = useComponentStrings('whitespace-remover', STRINGS_EN);
   const [input, setInput] = useState('');
   const [collapseSpaces, setCollapseSpaces] = useState(true);
   const [trimEdges, setTrimEdges] = useState(true);

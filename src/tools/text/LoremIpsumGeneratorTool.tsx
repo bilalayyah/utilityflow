@@ -2,9 +2,9 @@ import { RefreshCw } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
 import { useLocale } from '../../locales/LocaleContext';
+import { useComponentStrings } from '../../locales/componentStrings';
 
-const STRINGS = {
-  en: {
+const STRINGS_EN = {
     amount: 'Amount',
     unit: 'Unit',
     unitLabels: { paragraphs: 'paragraphs', sentences: 'sentences', words: 'words' },
@@ -15,92 +15,7 @@ const STRINGS = {
     regenerate: 'Regenerate',
     copyPlaceholder: 'Copy placeholder text',
     generatedText: 'Generated placeholder text',
-  },
-  es: {
-    amount: 'Cantidad',
-    unit: 'Unidad',
-    unitLabels: { paragraphs: 'párrafos', sentences: 'oraciones', words: 'palabras' },
-    startClassic: 'Empezar con «Lorem ipsum»',
-    wrapHtml: 'Envolver en etiquetas <p>',
-    words: 'palabras',
-    characters: 'caracteres',
-    regenerate: 'Regenerar',
-    copyPlaceholder: 'Copiar texto de relleno',
-    generatedText: 'Texto de relleno generado',
-  },
-  pt: {
-    amount: 'Quantidade',
-    unit: 'Unidade',
-    unitLabels: { paragraphs: 'parágrafos', sentences: 'frases', words: 'palavras' },
-    startClassic: 'Começar com “Lorem ipsum”',
-    wrapHtml: 'Envolver em tags <p>',
-    words: 'palavras',
-    characters: 'caracteres',
-    regenerate: 'Regenerar',
-    copyPlaceholder: 'Copiar texto de exemplo',
-    generatedText: 'Texto de exemplo gerado',
-  },
-  fr: {
-    amount: 'Quantité',
-    unit: 'Unité',
-    unitLabels: { paragraphs: 'paragraphes', sentences: 'phrases', words: 'mots' },
-    startClassic: 'Commencer par « Lorem ipsum »',
-    wrapHtml: 'Entourer de balises <p>',
-    words: 'mots',
-    characters: 'caractères',
-    regenerate: 'Régénérer',
-    copyPlaceholder: 'Copier le texte d\'exemple',
-    generatedText: 'Texte d\'exemple généré',
-  },
-  de: {
-    amount: 'Anzahl',
-    unit: 'Einheit',
-    unitLabels: { paragraphs: 'Absätze', sentences: 'Sätze', words: 'Wörter' },
-    startClassic: 'Mit „Lorem ipsum“ beginnen',
-    wrapHtml: 'In <p>-Tags einschließen',
-    words: 'Wörter',
-    characters: 'Zeichen',
-    regenerate: 'Neu erzeugen',
-    copyPlaceholder: 'Platzhaltertext kopieren',
-    generatedText: 'Erzeugter Platzhaltertext',
-  },
-  it: {
-    amount: 'Quantità',
-    unit: 'Unità',
-    unitLabels: { paragraphs: 'paragrafi', sentences: 'frasi', words: 'parole' },
-    startClassic: 'Inizia con “Lorem ipsum”',
-    wrapHtml: 'Racchiudi nei tag <p>',
-    words: 'parole',
-    characters: 'caratteri',
-    regenerate: 'Rigenera',
-    copyPlaceholder: 'Copia il testo segnaposto',
-    generatedText: 'Testo segnaposto generato',
-  },
-  id: {
-    amount: 'Jumlah',
-    unit: 'Satuan',
-    unitLabels: { paragraphs: 'paragraf', sentences: 'kalimat', words: 'kata' },
-    startClassic: 'Mulai dengan “Lorem ipsum”',
-    wrapHtml: 'Bungkus dengan tag <p>',
-    words: 'kata',
-    characters: 'karakter',
-    regenerate: 'Buat Ulang',
-    copyPlaceholder: 'Salin teks placeholder',
-    generatedText: 'Teks placeholder yang dihasilkan',
-  },
-  ru: {
-    amount: 'Количество',
-    unit: 'Единица',
-    unitLabels: { paragraphs: 'абзацев', sentences: 'предложений', words: 'слов' },
-    startClassic: 'Начать с «Lorem ipsum»',
-    wrapHtml: 'Обернуть в теги <p>',
-    words: 'слов',
-    characters: 'символов',
-    regenerate: 'Сгенерировать заново',
-    copyPlaceholder: 'Копировать текст-заполнитель',
-    generatedText: 'Сгенерированный текст-заполнитель',
-  },
-};
+  };
 
 type UnitType = 'paragraphs' | 'sentences' | 'words';
 
@@ -130,7 +45,7 @@ const WORD_POOL = CLASSIC_OPENING.concat(' ', SENTENCE_POOL.join(' '))
 
 export default function LoremIpsumGeneratorTool() {
   const { locale, t } = useLocale();
-  const s = STRINGS[locale];
+  const s = useComponentStrings('lorem-ipsum-generator', STRINGS_EN);
   const [unit, setUnit] = useState<UnitType>('paragraphs');
   const [count, setCount] = useState(3);
   const [startClassic, setStartClassic] = useState(true);

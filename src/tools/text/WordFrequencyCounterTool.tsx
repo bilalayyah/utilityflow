@@ -2,9 +2,9 @@ import { Download, RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
 import { useLocale } from '../../locales/LocaleContext';
+import { useComponentStrings } from '../../locales/componentStrings';
 
-const STRINGS = {
-  en: {
+const STRINGS_EN = {
     sampleText: `Technical SEO audits check crawlability, internal linking, and page speed. Fast pages improve user engagement and page speed signals across mobile search. Internal linking connects related guides and strengthens technical SEO structure.`,
     ngramLabels: { 1: '1-Word', 2: '2-Word Phrases', 3: '3-Word Phrases' },
     excludeStopWords: 'Exclude common stop words',
@@ -21,135 +21,7 @@ const STRINGS = {
     count: 'Count',
     density: 'Density',
     emptyState: 'Enter text above to inspect word counts and keyword density percentages.',
-  },
-  es: {
-    sampleText: `Las auditorías técnicas de SEO revisan la rastreabilidad, los enlaces internos y la velocidad de página. Las páginas rápidas mejoran la interacción del usuario y las señales de velocidad en la búsqueda móvil. Los enlaces internos conectan guías relacionadas y fortalecen la estructura técnica de SEO.`,
-    ngramLabels: { 1: '1 palabra', 2: 'Frases de 2 palabras', 3: 'Frases de 3 palabras' },
-    excludeStopWords: 'Excluir palabras vacías comunes',
-    minLength: 'Longitud mín.:',
-    textForAnalysis: 'Texto para el análisis de frecuencia',
-    placeholder:
-      'Pega textos de artículos, descripciones de productos o notas para contar términos repetidos y la densidad de palabras clave...',
-    totalWords: 'Total de palabras:',
-    uniqueTerms: 'Términos únicos:',
-    exportCsv: 'Exportar CSV',
-    copyCsv: 'Copiar CSV',
-    rank: '#',
-    termPhrase: 'Término / Frase',
-    count: 'Conteo',
-    density: 'Densidad',
-    emptyState:
-      'Escribe texto arriba para ver los conteos de palabras y los porcentajes de densidad de palabras clave.',
-  },
-  pt: {
-    sampleText: `Auditorias técnicas de SEO verificam rastreabilidade, links internos e velocidade da página. Páginas rápidas melhoram o engajamento do usuário e os sinais de velocidade de página na pesquisa móvel. Links internos conectam guias relacionados e fortalecem a estrutura técnica de SEO.`,
-    ngramLabels: { 1: '1 palavra', 2: 'Frases de 2 palavras', 3: 'Frases de 3 palavras' },
-    excludeStopWords: 'Excluir palavras vazias comuns',
-    minLength: 'Compr. mín.:',
-    textForAnalysis: 'Texto para análise de frequência',
-    placeholder:
-      'Cole textos de artigos, descrições de produtos ou notas para contar termos repetidos e densidade de palavras-chave...',
-    totalWords: 'Total de palavras:',
-    uniqueTerms: 'Termos únicos:',
-    exportCsv: 'Exportar CSV',
-    copyCsv: 'Copiar CSV',
-    rank: '#',
-    termPhrase: 'Termo / Frase',
-    count: 'Contagem',
-    density: 'Densidade',
-    emptyState: 'Digite texto acima para ver contagens de palavras e percentuais de densidade de palavras-chave.',
-  },
-  fr: {
-    sampleText: `Les audits SEO techniques vérifient l'explorabilité, les liens internes et la vitesse des pages. Les pages rapides améliorent l'engagement des utilisateurs et les signaux de vitesse des pages dans la recherche mobile. Les liens internes relient les guides associés et renforcent la structure SEO technique.`,
-    ngramLabels: { 1: '1 mot', 2: 'Expressions de 2 mots', 3: 'Expressions de 3 mots' },
-    excludeStopWords: 'Exclure les mots vides courants',
-    minLength: 'Longueur min. :',
-    textForAnalysis: 'Texte pour l\'analyse de fréquence',
-    placeholder:
-      'Collez des textes d\'articles, des descriptions de produits ou des notes pour compter les termes répétés et la densité des mots-clés...',
-    totalWords: 'Nombre total de mots :',
-    uniqueTerms: 'Termes uniques :',
-    exportCsv: 'Exporter CSV',
-    copyCsv: 'Copier CSV',
-    rank: '#',
-    termPhrase: 'Terme / Expression',
-    count: 'Nombre',
-    density: 'Densité',
-    emptyState: 'Saisissez du texte ci-dessus pour voir les nombres de mots et les pourcentages de densité des mots-clés.',
-  },
-  de: {
-    sampleText: `Technische SEO-Audits prüfen Crawlbarkeit, interne Verlinkung und Ladegeschwindigkeit. Schnelle Seiten verbessern Nutzerbindung und Ladegeschwindigkeitssignale in der mobilen Suche. Interne Verlinkung verbindet verwandte Anleitungen und stärkt die technische SEO-Struktur.`,
-    ngramLabels: { 1: '1 Wort', 2: '2-Wort-Phrasen', 3: '3-Wort-Phrasen' },
-    excludeStopWords: 'Gängige Stoppwörter ausschließen',
-    minLength: 'Mindestlänge:',
-    textForAnalysis: 'Text für die Häufigkeitsanalyse',
-    placeholder:
-      'Artikeltexte, Produktbeschreibungen oder Notizen einfügen, um wiederholte Begriffe und Keyword-Dichte zu zählen...',
-    totalWords: 'Wörter insgesamt:',
-    uniqueTerms: 'Einzigartige Begriffe:',
-    exportCsv: 'CSV exportieren',
-    copyCsv: 'CSV kopieren',
-    rank: '#',
-    termPhrase: 'Begriff / Phrase',
-    count: 'Anzahl',
-    density: 'Dichte',
-    emptyState: 'Text oben eingeben, um Wortzahlen und Keyword-Dichte-Prozentsätze zu sehen.',
-  },
-  it: {
-    sampleText: `Gli audit tecnici SEO controllano la crawlabilità, i link interni e la velocità delle pagine. Le pagine veloci migliorano il coinvolgimento degli utenti e i segnali di velocità nella ricerca mobile. I link interni collegano guide correlate e rafforzano la struttura tecnica SEO.`,
-    ngramLabels: { 1: '1 parola', 2: 'Frasi di 2 parole', 3: 'Frasi di 3 parole' },
-    excludeStopWords: 'Escludi le stop word comuni',
-    minLength: 'Lunghezza min.:',
-    textForAnalysis: 'Testo per l\'analisi di frequenza',
-    placeholder:
-      'Incolla testi di articoli, descrizioni di prodotti o note per contare i termini ripetuti e la densità delle parole chiave...',
-    totalWords: 'Parole totali:',
-    uniqueTerms: 'Termini univoci:',
-    exportCsv: 'Esporta CSV',
-    copyCsv: 'Copia CSV',
-    rank: '#',
-    termPhrase: 'Termine / Frase',
-    count: 'Conteggio',
-    density: 'Densità',
-    emptyState: 'Inserisci il testo qui sopra per visualizzare i conteggi delle parole e le percentuali di densità delle parole chiave.',
-  },
-  id: {
-    sampleText: `Audit SEO teknis memeriksa kemampuan perayapan, tautan internal, dan kecepatan halaman. Halaman yang cepat meningkatkan keterlibatan pengguna dan sinyal kecepatan halaman di pencarian seluler. Tautan internal menghubungkan panduan terkait dan memperkuat struktur SEO teknis.`,
-    ngramLabels: { 1: '1 Kata', 2: 'Frasa 2 Kata', 3: 'Frasa 3 Kata' },
-    excludeStopWords: 'Kecualikan kata henti umum',
-    minLength: 'Panjang min:',
-    textForAnalysis: 'Teks untuk analisis frekuensi',
-    placeholder:
-      'Tempel teks artikel, deskripsi produk, atau catatan untuk menghitung istilah yang berulang dan kepadatan kata kunci...',
-    totalWords: 'Total kata:',
-    uniqueTerms: 'Istilah unik:',
-    exportCsv: 'Ekspor CSV',
-    copyCsv: 'Salin CSV',
-    rank: '#',
-    termPhrase: 'Istilah / Frasa',
-    count: 'Jumlah',
-    density: 'Kepadatan',
-    emptyState: 'Masukkan teks di atas untuk memeriksa jumlah kata dan persentase kepadatan kata kunci.',
-  },
-  ru: {
-    sampleText: `Технические SEO-аудиты проверяют сканируемость, внутренние ссылки и скорость страниц. Быстрые страницы улучшают вовлечённость пользователей и сигналы скорости в мобильном поиске. Внутренние ссылки связывают связанные руководства и укрепляют структуру технического SEO.`,
-    ngramLabels: { 1: '1 слово', 2: 'Фразы из 2 слов', 3: 'Фразы из 3 слов' },
-    excludeStopWords: 'Исключать общие стоп-слова',
-    minLength: 'Мин. длина:',
-    textForAnalysis: 'Текст для анализа частотности',
-    placeholder:
-      'Вставьте текст статьи, описания товаров или заметки, чтобы подсчитать повторяющиеся термины и плотность ключевых слов...',
-    totalWords: 'Всего слов:',
-    uniqueTerms: 'Уникальных терминов:',
-    exportCsv: 'Экспорт CSV',
-    copyCsv: 'Копировать CSV',
-    rank: '#',
-    termPhrase: 'Термин / фраза',
-    count: 'Количество',
-    density: 'Плотность',
-    emptyState: 'Введите текст выше, чтобы увидеть подсчёт слов и процент плотности ключевых слов.',
-  },
-};
+  };
 
 const STOP_WORDS = new Set([
   'a', 'an', 'and', 'are', 'as', 'at', 'be', 'by', 'for', 'from', 'has', 'he',
@@ -158,8 +30,8 @@ const STOP_WORDS = new Set([
 ]);
 
 export default function WordFrequencyCounterTool() {
-  const { locale, t } = useLocale();
-  const s = STRINGS[locale];
+  const { t } = useLocale();
+  const s = useComponentStrings('word-frequency-counter', STRINGS_EN);
   const [text, setText] = useState('');
   const [ngramSize, setNgramSize] = useState<1 | 2 | 3>(1);
   const [ignoreStopWords, setIgnoreStopWords] = useState(true);

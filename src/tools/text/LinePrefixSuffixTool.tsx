@@ -2,9 +2,9 @@ import { RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
 import { useLocale } from '../../locales/LocaleContext';
+import { useComponentStrings } from '../../locales/componentStrings';
 
-const STRINGS = {
-  en: {
+const STRINGS_EN = {
     linePrefix: 'Line Prefix',
     lineSuffix: 'Line Suffix',
     startNumber: 'Start Number',
@@ -17,106 +17,7 @@ const STRINGS = {
     copyResult: 'Copy result',
     inputPlaceholder: 'Paste one value or line per row...',
     outputPlaceholder: 'Numbered or wrapped lines appear here...',
-  },
-  es: {
-    linePrefix: 'Prefijo de línea',
-    lineSuffix: 'Sufijo de línea',
-    startNumber: 'Número inicial',
-    numberSeparator: 'Separador de número',
-    addLineNumbers: 'Agregar números de línea',
-    zeroPad: 'Números con ceros a la izquierda (01, 02)',
-    skipEmptyLines: 'Omitir líneas vacías',
-    inputLines: 'Líneas de entrada',
-    formattedLines: 'Líneas con formato',
-    copyResult: 'Copiar resultado',
-    inputPlaceholder: 'Pega un valor o una línea por fila...',
-    outputPlaceholder: 'Las líneas numeradas o envueltas aparecen aquí...',
-  },
-  pt: {
-    linePrefix: 'Prefixo de linha',
-    lineSuffix: 'Sufixo de linha',
-    startNumber: 'Número inicial',
-    numberSeparator: 'Separador de número',
-    addLineNumbers: 'Adicionar números de linha',
-    zeroPad: 'Números com zeros à esquerda (01, 02)',
-    skipEmptyLines: 'Pular linhas vazias',
-    inputLines: 'Linhas de entrada',
-    formattedLines: 'Linhas formatadas',
-    copyResult: 'Copiar resultado',
-    inputPlaceholder: 'Cole um valor ou uma linha por linha...',
-    outputPlaceholder: 'As linhas numeradas ou envolvidas aparecem aqui...',
-  },
-  fr: {
-    linePrefix: 'Préfixe de ligne',
-    lineSuffix: 'Suffixe de ligne',
-    startNumber: 'Numéro de départ',
-    numberSeparator: 'Séparateur de numéro',
-    addLineNumbers: 'Ajouter des numéros de ligne',
-    zeroPad: 'Numéros avec zéros (01, 02)',
-    skipEmptyLines: 'Ignorer les lignes vides',
-    inputLines: 'Lignes d\'entrée',
-    formattedLines: 'Lignes formatées',
-    copyResult: 'Copier le résultat',
-    inputPlaceholder: 'Collez une valeur ou une ligne par ligne...',
-    outputPlaceholder: 'Les lignes numérotées ou entourées apparaissent ici...',
-  },
-  de: {
-    linePrefix: 'Zeilenpräfix',
-    lineSuffix: 'Zeilensuffix',
-    startNumber: 'Startnummer',
-    numberSeparator: 'Zahlentrennzeichen',
-    addLineNumbers: 'Zeilennummern hinzufügen',
-    zeroPad: 'Zahlen mit Nullen auffüllen (01, 02)',
-    skipEmptyLines: 'Leere Zeilen überspringen',
-    inputLines: 'Eingabezeilen',
-    formattedLines: 'Formatierte Zeilen',
-    copyResult: 'Ergebnis kopieren',
-    inputPlaceholder: 'Einen Wert oder eine Zeile pro Reihe einfügen...',
-    outputPlaceholder: 'Nummerierte oder umschlossene Zeilen erscheinen hier...',
-  },
-  it: {
-    linePrefix: 'Prefisso di riga',
-    lineSuffix: 'Suffisso di riga',
-    startNumber: 'Numero iniziale',
-    numberSeparator: 'Separatore dei numeri',
-    addLineNumbers: 'Aggiungi i numeri di riga',
-    zeroPad: 'Riempi con zeri (01, 02)',
-    skipEmptyLines: 'Salta le righe vuote',
-    inputLines: 'Righe di input',
-    formattedLines: 'Righe formattate',
-    copyResult: 'Copia il risultato',
-    inputPlaceholder: 'Incolla un valore o una riga per riga...',
-    outputPlaceholder: 'Le righe numerate o racchiuse appariranno qui...',
-  },
-  id: {
-    linePrefix: 'Awalan Baris',
-    lineSuffix: 'Akhiran Baris',
-    startNumber: 'Nomor Awal',
-    numberSeparator: 'Pemisah Angka',
-    addLineNumbers: 'Tambahkan nomor baris',
-    zeroPad: 'Tambahkan nol di depan angka (01, 02)',
-    skipEmptyLines: 'Lewati baris kosong',
-    inputLines: 'Baris Input',
-    formattedLines: 'Baris yang Diformat',
-    copyResult: 'Salin hasil',
-    inputPlaceholder: 'Tempel satu nilai atau baris per baris...',
-    outputPlaceholder: 'Baris bernomor atau terbungkus muncul di sini...',
-  },
-  ru: {
-    linePrefix: 'Префикс строки',
-    lineSuffix: 'Суффикс строки',
-    startNumber: 'Начальный номер',
-    numberSeparator: 'Разделитель номера',
-    addLineNumbers: 'Добавить номера строк',
-    zeroPad: 'Дополнять числа нулём (01, 02)',
-    skipEmptyLines: 'Пропускать пустые строки',
-    inputLines: 'Входные строки',
-    formattedLines: 'Отформатированные строки',
-    copyResult: 'Копировать результат',
-    inputPlaceholder: 'Вставьте по одному значению или строке в ряду...',
-    outputPlaceholder: 'Здесь появятся пронумерованные или обёрнутые строки...',
-  },
-};
+  };
 
 const SAMPLE_LINES = `tokyo
 london
@@ -124,8 +25,8 @@ berlin
 toronto`;
 
 export default function LinePrefixSuffixTool() {
-  const { locale, t } = useLocale();
-  const s = STRINGS[locale];
+  const { t } = useLocale();
+  const s = useComponentStrings('line-prefix-suffix', STRINGS_EN);
   const [input, setInput] = useState('');
   const [prefix, setPrefix] = useState("'");
   const [suffix, setSuffix] = useState("',");

@@ -2,9 +2,9 @@ import { Download, RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
 import { useLocale } from '../../locales/LocaleContext';
+import { useComponentStrings } from '../../locales/componentStrings';
 
-const STRINGS = {
-  en: {
+const STRINGS_EN = {
     sampleText: `UtilityFlow processes every text calculation right inside your browser. Whether you are drafting a blog article, tightening a product announcement, or checking an academic essay against a strict word limit, instant counts help you pace your message clearly.
 
 Short sentences improve scanning. Varying sentence length keeps longer guides engaging for readers across desktop and mobile screens.`,
@@ -26,173 +26,11 @@ Short sentences improve scanning. Varying sentence length keeps longer guides en
     chars: 'chars',
     mostFrequentWords: 'Most Frequent Words',
     emptyKeywords: 'Enter text above to inspect top repeated words.',
-  },
-  es: {
-    sampleText: `UtilityFlow procesa cada cálculo de texto directamente en tu navegador. Ya sea que estés redactando un artículo de blog, afinando un anuncio de producto o revisando un ensayo académico con un límite estricto de palabras, los conteos instantáneos te ayudan a organizar tu mensaje con claridad.
-
-Las oraciones cortas facilitan la lectura rápida. Variar la longitud de las oraciones mantiene las guías largas atractivas para los lectores en pantallas de escritorio y móviles.`,
-    words: 'Palabras',
-    characters: 'Caracteres',
-    noSpaces: 'Sin espacios',
-    sentences: 'Oraciones',
-    paragraphs: 'Párrafos',
-    readingTime: 'Tiempo de lectura',
-    downloadTxt: 'Descargar .txt',
-    copyText: 'Copiar texto',
-    textToCount: 'Texto para contar',
-    placeholder:
-      'Pega o escribe tu texto aquí para contar palabras, caracteres, oraciones y tiempo de lectura...',
-    deliveryTimingLines: 'Tiempo de entrega y líneas',
-    speakingTime: 'Tiempo de habla (130 ppm)',
-    totalLines: 'Total de líneas',
-    avgWordLength: 'Longitud promedio de palabra',
-    chars: 'caracteres',
-    mostFrequentWords: 'Palabras más frecuentes',
-    emptyKeywords: 'Escribe texto arriba para ver las palabras más repetidas.',
-  },
-  pt: {
-    sampleText: `O UtilityFlow processa cada cálculo de texto diretamente no seu navegador. Seja para redigir um artigo de blog, ajustar um anúncio de produto ou revisar um ensaio acadêmico com um limite rígido de palavras, as contagens instantâneas ajudam você a organizar sua mensagem com clareza.
-
-Frases curtas melhoram a leitura. Variar o tamanho das frases mantém guias longos interessantes para leitores em telas de desktop e dispositivos móveis.`,
-    words: 'Palavras',
-    characters: 'Caracteres',
-    noSpaces: 'Sem espaços',
-    sentences: 'Frases',
-    paragraphs: 'Parágrafos',
-    readingTime: 'Tempo de leitura',
-    downloadTxt: 'Baixar .txt',
-    copyText: 'Copiar texto',
-    textToCount: 'Texto para contar',
-    placeholder:
-      'Cole ou digite seu texto aqui para contar palavras, caracteres, frases e tempo de leitura...',
-    deliveryTimingLines: 'Tempo de entrega e linhas',
-    speakingTime: 'Tempo de fala (130 ppm)',
-    totalLines: 'Total de linhas',
-    avgWordLength: 'Comprimento médio da palavra',
-    chars: 'caracteres',
-    mostFrequentWords: 'Palavras mais frequentes',
-    emptyKeywords: 'Digite texto acima para ver as palavras mais repetidas.',
-  },
-  fr: {
-    sampleText: `UtilityFlow traite chaque calcul de texte directement dans votre navigateur. Que vous rédigiez un article de blog, peaufiniez une annonce produit ou vérifiiez un essai académique avec une limite stricte de mots, les comptes instantanés vous aident à rythmer votre message clairement.
-
-Les phrases courtes améliorent la lecture. Varier la longueur des phrases rend les guides longs attrayants pour les lecteurs sur ordinateur et mobile.`,
-    words: 'Mots',
-    characters: 'Caractères',
-    noSpaces: 'Sans espaces',
-    sentences: 'Phrases',
-    paragraphs: 'Paragraphes',
-    readingTime: 'Temps de lecture',
-    downloadTxt: 'Télécharger .txt',
-    copyText: 'Copier le texte',
-    textToCount: 'Texte à compter',
-    placeholder:
-      'Collez ou saisissez votre texte ici pour compter les mots, les caractères, les phrases et le temps de lecture...',
-    deliveryTimingLines: 'Temps de lecture et lignes',
-    speakingTime: 'Temps de parole (130 mpm)',
-    totalLines: 'Nombre total de lignes',
-    avgWordLength: 'Longueur moyenne des mots',
-    chars: 'caractères',
-    mostFrequentWords: 'Mots les plus fréquents',
-    emptyKeywords: 'Saisissez du texte ci-dessus pour voir les mots les plus répétés.',
-  },
-  de: {
-    sampleText: `UtilityFlow verarbeitet jede Textberechnung direkt in Ihrem Browser. Ob Sie einen Blogartikel entwerfen, eine Produktankündigung straffen oder einen akademischen Aufsatz anhand eines strengen Wortlimits prüfen – sofortige Zählungen helfen Ihnen, Ihre Botschaft klar zu gliedern.
-
-Kurze Sätze verbessern die Lesbarkeit. Unterschiedliche Satzlängen halten längere Anleitungen für Leser auf Desktop- und Mobilbildschirmen ansprechend.`,
-    words: 'Wörter',
-    characters: 'Zeichen',
-    noSpaces: 'Ohne Leerzeichen',
-    sentences: 'Sätze',
-    paragraphs: 'Absätze',
-    readingTime: 'Lesezeit',
-    downloadTxt: '.txt herunterladen',
-    copyText: 'Text kopieren',
-    textToCount: 'Zu zählender Text',
-    placeholder:
-      'Text hier einfügen oder eingeben, um Wörter, Zeichen, Sätze und Lesezeit zu zählen...',
-    deliveryTimingLines: 'Sprechzeit und Zeilen',
-    speakingTime: 'Sprechzeit (130 WpM)',
-    totalLines: 'Zeilen insgesamt',
-    avgWordLength: 'Durchschnittliche Wortlänge',
-    chars: 'Zeichen',
-    mostFrequentWords: 'Häufigste Wörter',
-    emptyKeywords: 'Text oben eingeben, um die häufigsten wiederholten Wörter zu sehen.',
-  },
-  it: {
-    sampleText: `UtilityFlow elabora ogni calcolo di testo direttamente nel browser. Che tu stia scrivendo un articolo di blog, perfezionando l\'annuncio di un prodotto o controllando un saggio accademico con un limite rigido di parole, i conteggi istantanei ti aiutano a organizzare il messaggio con chiarezza.
-
-Le frasi brevi migliorano la leggibilità. Variare la lunghezza delle frasi mantiene le guide lunghe coinvolgenti per i lettori su desktop e dispositivi mobili.`,
-    words: 'Parole',
-    characters: 'Caratteri',
-    noSpaces: 'Senza spazi',
-    sentences: 'Frasi',
-    paragraphs: 'Paragrafi',
-    readingTime: 'Tempo di lettura',
-    downloadTxt: 'Scarica .txt',
-    copyText: 'Copia il testo',
-    textToCount: 'Testo da contare',
-    placeholder:
-      'Incolla o digita qui il testo per contare parole, caratteri, frasi e tempo di lettura...',
-    deliveryTimingLines: 'Tempi di lettura e righe',
-    speakingTime: 'Tempo di lettura ad alta voce (130 ppm)',
-    totalLines: 'Righe totali',
-    avgWordLength: 'Lunghezza media delle parole',
-    chars: 'caratteri',
-    mostFrequentWords: 'Parole più frequenti',
-    emptyKeywords: 'Inserisci il testo qui sopra per vedere le parole più ripetute.',
-  },
-  id: {
-    sampleText: `UtilityFlow memproses setiap perhitungan teks langsung di browser Anda. Baik saat Anda menyusun artikel blog, menyempurnakan pengumuman produk, atau memeriksa esai akademis dengan batas kata yang ketat, hitungan instan membantu Anda mengatur pesan dengan jelas.
-
-Kalimat pendek memudahkan pemindaian. Memvariasikan panjang kalimat membuat panduan yang lebih panjang tetap menarik bagi pembaca di layar desktop dan seluler.`,
-    words: 'Kata',
-    characters: 'Karakter',
-    noSpaces: 'Tanpa Spasi',
-    sentences: 'Kalimat',
-    paragraphs: 'Paragraf',
-    readingTime: 'Waktu Baca',
-    downloadTxt: 'Unduh .txt',
-    copyText: 'Salin teks',
-    textToCount: 'Teks yang dihitung',
-    placeholder:
-      'Tempel atau ketik teks Anda di sini untuk menghitung kata, karakter, kalimat, dan waktu baca...',
-    deliveryTimingLines: 'Waktu Penyampaian & Baris',
-    speakingTime: 'Waktu berbicara (130 kpm)',
-    totalLines: 'Total baris',
-    avgWordLength: 'Rata-rata panjang kata',
-    chars: 'karakter',
-    mostFrequentWords: 'Kata yang Paling Sering Muncul',
-    emptyKeywords: 'Masukkan teks di atas untuk melihat kata yang paling sering diulang.',
-  },
-  ru: {
-    sampleText: `UtilityFlow выполняет все подсчёты текста прямо в вашем браузере. Составляете ли вы статью для блога, дорабатываете анонс продукта или проверяете научное эссе на соответствие строгому лимиту слов — мгновенные подсчёты помогут вам чётко выстроить сообщение.
-
-Короткие предложения легче читать. Разная длина предложений делает длинные руководства интересными для читателей на экранах компьютеров и мобильных устройств.`,
-    words: 'Слова',
-    characters: 'Символы',
-    noSpaces: 'Без пробелов',
-    sentences: 'Предложения',
-    paragraphs: 'Абзацы',
-    readingTime: 'Время чтения',
-    downloadTxt: 'Скачать .txt',
-    copyText: 'Копировать текст',
-    textToCount: 'Текст для подсчёта',
-    placeholder:
-      'Вставьте или введите текст, чтобы подсчитать слова, символы, предложения и время чтения...',
-    deliveryTimingLines: 'Время произнесения и строки',
-    speakingTime: 'Время произнесения (130 слов/мин)',
-    totalLines: 'Всего строк',
-    avgWordLength: 'Средняя длина слова',
-    chars: 'симв.',
-    mostFrequentWords: 'Самые частые слова',
-    emptyKeywords: 'Введите текст выше, чтобы увидеть самые повторяющиеся слова.',
-  },
-};
+  };
 
 export default function WordCounterTool() {
   const { locale, t } = useLocale();
-  const s = STRINGS[locale];
+  const s = useComponentStrings('word-counter', STRINGS_EN);
   const [text, setText] = useState('');
 
   const stats = useMemo(() => {

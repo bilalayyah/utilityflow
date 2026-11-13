@@ -2,49 +2,13 @@ import { RotateCcw, Sparkles } from 'lucide-react';
 import { useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
 import { useLocale } from '../../locales/LocaleContext';
+import { useComponentStrings } from '../../locales/componentStrings';
 
-const STRINGS = {
-  en: {
+const STRINGS_EN = {
     textToConvert: 'Text to convert case',
     placeholder: 'Type or paste text, then click any case conversion button below...',
     copyResult: 'Copy result',
-  },
-  es: {
-    textToConvert: 'Texto para convertir mayúsculas y minúsculas',
-    placeholder: 'Escribe o pega texto y luego haz clic en cualquier botón de conversión...',
-    copyResult: 'Copiar resultado',
-  },
-  pt: {
-    textToConvert: 'Texto para converter maiúsculas e minúsculas',
-    placeholder: 'Digite ou cole texto e clique em qualquer botão de conversão abaixo...',
-    copyResult: 'Copiar resultado',
-  },
-  fr: {
-    textToConvert: 'Texte à convertir (casse)',
-    placeholder: 'Saisissez ou collez du texte, puis cliquez sur un bouton de conversion ci-dessous...',
-    copyResult: 'Copier le résultat',
-  },
-  de: {
-    textToConvert: 'Text zur Umwandlung der Groß-/Kleinschreibung',
-    placeholder: 'Text eingeben oder einfügen und dann unten auf eine Umwandlungsschaltfläche klicken...',
-    copyResult: 'Ergebnis kopieren',
-  },
-  it: {
-    textToConvert: 'Testo da convertire',
-    placeholder: 'Digita o incolla il testo, poi fai clic su uno dei pulsanti di conversione qui sotto...',
-    copyResult: 'Copia il risultato',
-  },
-  id: {
-    textToConvert: 'Teks yang diubah hurufnya',
-    placeholder: 'Ketik atau tempel teks, lalu klik tombol konversi huruf di bawah...',
-    copyResult: 'Salin hasil',
-  },
-  ru: {
-    textToConvert: 'Текст для изменения регистра',
-    placeholder: 'Введите или вставьте текст, затем нажмите любую кнопку преобразования регистра ниже...',
-    copyResult: 'Копировать результат',
-  },
-};
+  };
 
 const SAMPLE_TEXT = 'welcome to utilityFlow: fast text_case formatting & clean URLs';
 
@@ -152,8 +116,8 @@ function toAlternatingCase(input: string): string {
 }
 
 export default function CaseConverterTool() {
-  const { locale, t } = useLocale();
-  const s = STRINGS[locale];
+  const { t } = useLocale();
+  const s = useComponentStrings('case-converter', STRINGS_EN);
   const [text, setText] = useState('');
 
   const applyTransform = (fn: (val: string) => string) => {

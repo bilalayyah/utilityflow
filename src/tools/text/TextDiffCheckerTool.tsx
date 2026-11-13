@@ -1,9 +1,9 @@
 import { RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { useLocale } from '../../locales/LocaleContext';
+import { useComponentStrings } from '../../locales/componentStrings';
 
-const STRINGS = {
-  en: {
+const STRINGS_EN = {
     ignoreWhitespace: 'Ignore whitespace',
     ignoreCase: 'Ignore case',
     originalText: 'Original Text',
@@ -15,100 +15,7 @@ const STRINGS = {
     removed: 'removed',
     unchanged: 'unchanged',
     emptyState: 'Enter text in both boxes above to compare line additions and removals.',
-  },
-  es: {
-    ignoreWhitespace: 'Ignorar espacios en blanco',
-    ignoreCase: 'Ignorar mayúsculas y minúsculas',
-    originalText: 'Texto original',
-    modifiedText: 'Texto modificado',
-    originalPlaceholder: 'Pega el texto original...',
-    modifiedPlaceholder: 'Pega el texto actualizado...',
-    lineComparison: 'Comparación de líneas',
-    added: 'agregadas',
-    removed: 'eliminadas',
-    unchanged: 'sin cambios',
-    emptyState:
-      'Escribe texto en ambos cuadros de arriba para comparar las líneas agregadas y eliminadas.',
-  },
-  pt: {
-    ignoreWhitespace: 'Ignorar espaços em branco',
-    ignoreCase: 'Ignorar maiúsculas e minúsculas',
-    originalText: 'Texto original',
-    modifiedText: 'Texto modificado',
-    originalPlaceholder: 'Cole o texto original...',
-    modifiedPlaceholder: 'Cole o texto atualizado...',
-    lineComparison: 'Comparação de linhas',
-    added: 'adicionadas',
-    removed: 'removidas',
-    unchanged: 'sem alterações',
-    emptyState: 'Digite texto nas duas caixas acima para comparar as linhas adicionadas e removidas.',
-  },
-  fr: {
-    ignoreWhitespace: 'Ignorer les espaces',
-    ignoreCase: 'Ignorer la casse',
-    originalText: 'Texte d\'origine',
-    modifiedText: 'Texte modifié',
-    originalPlaceholder: 'Collez le texte d\'origine...',
-    modifiedPlaceholder: 'Collez le texte mis à jour...',
-    lineComparison: 'Comparaison des lignes',
-    added: 'ajoutées',
-    removed: 'supprimées',
-    unchanged: 'inchangées',
-    emptyState: 'Saisissez du texte dans les deux zones ci-dessus pour comparer les lignes ajoutées et supprimées.',
-  },
-  de: {
-    ignoreWhitespace: 'Leerzeichen ignorieren',
-    ignoreCase: 'Groß-/Kleinschreibung ignorieren',
-    originalText: 'Originaltext',
-    modifiedText: 'Geänderter Text',
-    originalPlaceholder: 'Originaltext einfügen...',
-    modifiedPlaceholder: 'Aktualisierten Text einfügen...',
-    lineComparison: 'Zeilenvergleich',
-    added: 'hinzugefügt',
-    removed: 'entfernt',
-    unchanged: 'unverändert',
-    emptyState: 'Text in beide Felder oben eingeben, um hinzugefügte und entfernte Zeilen zu vergleichen.',
-  },
-  it: {
-    ignoreWhitespace: 'Ignora gli spazi',
-    ignoreCase: 'Ignora maiuscole/minuscole',
-    originalText: 'Testo originale',
-    modifiedText: 'Testo modificato',
-    originalPlaceholder: 'Incolla il testo originale...',
-    modifiedPlaceholder: 'Incolla il testo aggiornato...',
-    lineComparison: 'Confronto per righe',
-    added: 'aggiunte',
-    removed: 'rimosse',
-    unchanged: 'invariate',
-    emptyState: 'Inserisci il testo in entrambe le caselle qui sopra per confrontare righe aggiunte e rimosse.',
-  },
-  id: {
-    ignoreWhitespace: 'Abaikan spasi',
-    ignoreCase: 'Abaikan huruf besar/kecil',
-    originalText: 'Teks Asli',
-    modifiedText: 'Teks yang Diubah',
-    originalPlaceholder: 'Tempel teks asli...',
-    modifiedPlaceholder: 'Tempel teks yang diperbarui...',
-    lineComparison: 'Perbandingan Baris',
-    added: 'ditambahkan',
-    removed: 'dihapus',
-    unchanged: 'tidak berubah',
-    emptyState: 'Masukkan teks di kedua kotak di atas untuk membandingkan penambahan dan penghapusan baris.',
-  },
-  ru: {
-    ignoreWhitespace: 'Игнорировать пробелы',
-    ignoreCase: 'Игнорировать регистр',
-    originalText: 'Исходный текст',
-    modifiedText: 'Изменённый текст',
-    originalPlaceholder: 'Вставьте исходный текст...',
-    modifiedPlaceholder: 'Вставьте обновлённый текст...',
-    lineComparison: 'Сравнение строк',
-    added: 'добавлено',
-    removed: 'удалено',
-    unchanged: 'без изменений',
-    emptyState: 'Введите текст в оба поля выше, чтобы сравнить добавленные и удалённые строки.',
-  },
-};
+  };
 
 interface DiffLine {
   type: 'unchanged' | 'added' | 'removed';
@@ -190,8 +97,8 @@ function computeLineDiff(
 }
 
 export default function TextDiffCheckerTool() {
-  const { locale, t } = useLocale();
-  const s = STRINGS[locale];
+  const { t } = useLocale();
+  const s = useComponentStrings('text-diff-checker', STRINGS_EN);
   const [originalText, setOriginalText] = useState('');
   const [modifiedText, setModifiedText] = useState('');
   const [ignoreCase, setIgnoreCase] = useState(false);

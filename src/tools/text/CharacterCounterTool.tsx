@@ -2,9 +2,9 @@ import { RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
 import { useLocale } from '../../locales/LocaleContext';
+import { useComponentStrings } from '../../locales/componentStrings';
 
-const STRINGS = {
-  en: {
+const STRINGS_EN = {
     sampleText:
       'Write clear, concise copy that fits platform character limits without awkward truncation in search results or social feeds.',
     withSpaces: 'With Spaces',
@@ -30,197 +30,7 @@ const STRINGS = {
       { name: 'Instagram Caption Preview', note: 'Visible before "More" truncation' },
       { name: 'LinkedIn Post', note: 'Maximum standard feed update' },
     ],
-  },
-  es: {
-    sampleText:
-      'Escribe textos claros y concisos que se ajusten a los límites de caracteres de cada plataforma, sin cortes incómodos en los resultados de búsqueda ni en las redes sociales.',
-    withSpaces: 'Con espacios',
-    withoutSpaces: 'Sin espacios',
-    words: 'Palabras',
-    letters: 'Letras',
-    digits: 'Dígitos',
-    utf8Bytes: 'Bytes UTF-8',
-    copyText: 'Copiar texto',
-    textToMeasure: 'Texto para medir la longitud de caracteres',
-    placeholder:
-      'Escribe o pega texto para ver conteos exactos de caracteres, tamaño en bytes y límites de plataformas...',
-    whitespaceChars: 'Caracteres de espacio en blanco',
-    lines: 'Líneas',
-    platformLimitsTitle: 'Límites de caracteres de plataformas y SEO',
-    over: 'de más',
-    left: 'restantes',
-    platformLimits: [
-      { name: 'Título meta SEO', note: 'Longitud recomendada del título en Google' },
-      { name: 'Descripción meta SEO', note: 'Límite estándar del fragmento en escritorio' },
-      { name: 'Segmento SMS', note: 'Un solo mensaje SMS GSM-7' },
-      { name: 'Publicación de X / Twitter', note: 'Longitud estándar de publicación' },
-      { name: 'Vista previa de pie de foto de Instagram', note: 'Visible antes del corte de «Más»' },
-      { name: 'Publicación de LinkedIn', note: 'Actualización estándar máxima del feed' },
-    ],
-  },
-  pt: {
-    sampleText:
-      'Escreva textos claros e concisos que caibam nos limites de caracteres das plataformas, sem cortes estranhos nos resultados de pesquisa ou nas redes sociais.',
-    withSpaces: 'Com espaços',
-    withoutSpaces: 'Sem espaços',
-    words: 'Palavras',
-    letters: 'Letras',
-    digits: 'Dígitos',
-    utf8Bytes: 'Bytes UTF-8',
-    copyText: 'Copiar texto',
-    textToMeasure: 'Texto para medir o comprimento em caracteres',
-    placeholder:
-      'Digite ou cole texto para ver contagens exatas de caracteres, tamanho em bytes e limites de plataformas...',
-    whitespaceChars: 'Caracteres de espaço em branco',
-    lines: 'Linhas',
-    platformLimitsTitle: 'Limites de caracteres de plataformas e SEO',
-    over: 'acima',
-    left: 'restantes',
-    platformLimits: [
-      { name: 'Meta título SEO', note: 'Comprimento recomendado do título no Google' },
-      { name: 'Meta descrição SEO', note: 'Limite padrão do snippet em desktop' },
-      { name: 'Segmento SMS', note: 'Uma única mensagem SMS GSM-7' },
-      { name: 'Post no X / Twitter', note: 'Comprimento padrão de post' },
-      { name: 'Prévia da legenda do Instagram', note: 'Visível antes do corte em "Mais"' },
-      { name: 'Post no LinkedIn', note: 'Atualização padrão máxima do feed' },
-    ],
-  },
-  fr: {
-    sampleText:
-      'Rédigez des textes clairs et concis qui respectent les limites de caractères des plateformes, sans coupure gênante dans les résultats de recherche ou les flux sociaux.',
-    withSpaces: 'Avec espaces',
-    withoutSpaces: 'Sans espaces',
-    words: 'Mots',
-    letters: 'Lettres',
-    digits: 'Chiffres',
-    utf8Bytes: 'Octets UTF-8',
-    copyText: 'Copier le texte',
-    textToMeasure: 'Texte pour mesurer la longueur en caractères',
-    placeholder:
-      'Saisissez ou collez du texte pour voir les nombres exacts de caractères, la taille en octets et les limites des plateformes...',
-    whitespaceChars: 'Caractères d\'espacement',
-    lines: 'Lignes',
-    platformLimitsTitle: 'Limites de caractères des plateformes et du SEO',
-    over: 'en trop',
-    left: 'restants',
-    platformLimits: [
-      { name: 'Meta titre SEO', note: 'Longueur recommandée du titre Google' },
-      { name: 'Meta description SEO', note: 'Seuil standard de l\'extrait sur ordinateur' },
-      { name: 'Segment SMS', note: 'Un seul message SMS GSM-7' },
-      { name: 'Publication X / Twitter', note: 'Longueur standard de publication' },
-      { name: 'Aperçu de légende Instagram', note: 'Visible avant la troncature « Plus »' },
-      { name: 'Publication LinkedIn', note: 'Mise à jour standard maximale du fil' },
-    ],
-  },
-  de: {
-    sampleText:
-      'Schreiben Sie klare, prägnante Texte, die die Zeichenlimits der Plattformen einhalten, ohne dass sie in Suchergebnissen oder sozialen Feeds ungünstig abgeschnitten werden.',
-    withSpaces: 'Mit Leerzeichen',
-    withoutSpaces: 'Ohne Leerzeichen',
-    words: 'Wörter',
-    letters: 'Buchstaben',
-    digits: 'Ziffern',
-    utf8Bytes: 'UTF-8-Bytes',
-    copyText: 'Text kopieren',
-    textToMeasure: 'Text zur Messung der Zeichenlänge',
-    placeholder:
-      'Text eingeben oder einfügen, um exakte Zeichenzahlen, Bytegröße und Plattformlimits zu prüfen...',
-    whitespaceChars: 'Leerzeichen',
-    lines: 'Zeilen',
-    platformLimitsTitle: 'Zeichenlimits für Plattformen und SEO',
-    over: 'darüber',
-    left: 'übrig',
-    platformLimits: [
-      { name: 'SEO-Meta-Titel', note: 'Empfohlene Länge des Google-Titels in den Suchergebnissen' },
-      { name: 'SEO-Meta-Beschreibung', note: 'Standard-Schwellenwert für Snippets auf dem Desktop' },
-      { name: 'SMS-Segment', note: 'Eine einzelne GSM-7-SMS-Nachricht' },
-      { name: 'X-/Twitter-Beitrag', note: 'Standardlänge eines Beitrags' },
-      { name: 'Instagram-Bildunterschrift (Vorschau)', note: 'Sichtbar vor dem Kürzen mit „Mehr“' },
-      { name: 'LinkedIn-Beitrag', note: 'Maximale Standard-Feed-Aktualisierung' },
-    ],
-  },
-  it: {
-    sampleText:
-      'Scrivi testi chiari e concisi che rispettino i limiti di caratteri delle piattaforme, senza troncamenti scomodi nei risultati di ricerca o nei feed social.',
-    withSpaces: 'Con spazi',
-    withoutSpaces: 'Senza spazi',
-    words: 'Parole',
-    letters: 'Lettere',
-    digits: 'Cifre',
-    utf8Bytes: 'Byte UTF-8',
-    copyText: 'Copia il testo',
-    textToMeasure: 'Testo per misurare la lunghezza in caratteri',
-    placeholder:
-      'Digita o incolla il testo per controllare il numero esatto di caratteri, la dimensione in byte e i limiti delle piattaforme...',
-    whitespaceChars: 'Caratteri di spaziatura',
-    lines: 'Righe',
-    platformLimitsTitle: 'Limiti di caratteri per piattaforme e SEO',
-    over: 'in più',
-    left: 'rimasti',
-    platformLimits: [
-      { name: 'Meta title SEO', note: 'Lunghezza consigliata del titolo nei risultati Google' },
-      { name: 'Meta description SEO', note: 'Soglia standard dello snippet su desktop' },
-      { name: 'Segmento SMS', note: 'Un singolo messaggio SMS GSM-7' },
-      { name: 'Post su X / Twitter', note: 'Lunghezza standard di un post' },
-      { name: 'Anteprima didascalia Instagram', note: 'Visibile prima del troncamento con "Altro"' },
-      { name: 'Post su LinkedIn', note: 'Aggiornamento standard massimo del feed' },
-    ],
-  },
-  id: {
-    sampleText:
-      'Tulis teks yang jelas dan ringkas agar sesuai dengan batas karakter platform tanpa terpotong secara aneh di hasil pencarian atau feed media sosial.',
-    withSpaces: 'Dengan Spasi',
-    withoutSpaces: 'Tanpa Spasi',
-    words: 'Kata',
-    letters: 'Huruf',
-    digits: 'Angka',
-    utf8Bytes: 'Byte UTF-8',
-    copyText: 'Salin teks',
-    textToMeasure: 'Teks untuk mengukur panjang karakter',
-    placeholder:
-      'Ketik atau tempel teks untuk melihat jumlah karakter yang tepat, ukuran byte, dan batas platform...',
-    whitespaceChars: 'Karakter spasi',
-    lines: 'Baris',
-    platformLimitsTitle: 'Batas Karakter Platform & SEO',
-    over: 'lebih',
-    left: 'tersisa',
-    platformLimits: [
-      { name: 'Judul Meta SEO', note: 'Panjang judul SERP Google yang disarankan' },
-      { name: 'Deskripsi Meta SEO', note: 'Batas standar cuplikan desktop' },
-      { name: 'Segmen SMS', note: 'Satu pesan SMS GSM-7' },
-      { name: 'Postingan X / Twitter', note: 'Panjang postingan standar' },
-      { name: 'Pratinjau Caption Instagram', note: 'Terlihat sebelum pemotongan "Selengkapnya"' },
-      { name: 'Postingan LinkedIn', note: 'Pembaruan feed standar maksimum' },
-    ],
-  },
-  ru: {
-    sampleText:
-      'Пишите чёткий и лаконичный текст, который укладывается в ограничения символов платформ и не обрывается неловко в результатах поиска или лентах соцсетей.',
-    withSpaces: 'С пробелами',
-    withoutSpaces: 'Без пробелов',
-    words: 'Слова',
-    letters: 'Буквы',
-    digits: 'Цифры',
-    utf8Bytes: 'Байты UTF-8',
-    copyText: 'Копировать текст',
-    textToMeasure: 'Текст для измерения длины в символах',
-    placeholder:
-      'Введите или вставьте текст, чтобы узнать точное число символов, размер в байтах и лимиты платформ...',
-    whitespaceChars: 'Пробельные символы',
-    lines: 'Строки',
-    platformLimitsTitle: 'Лимиты символов платформ и SEO',
-    over: 'превышение',
-    left: 'осталось',
-    platformLimits: [
-      { name: 'SEO-заголовок Meta', note: 'Рекомендуемая длина заголовка в выдаче Google' },
-      { name: 'SEO-описание Meta', note: 'Стандартный порог сниппета на компьютере' },
-      { name: 'Сегмент SMS', note: 'Одно SMS-сообщение GSM-7' },
-      { name: 'Пост X / Twitter', note: 'Стандартная длина поста' },
-      { name: 'Предпросмотр подписи Instagram', note: 'Видно до обрезки «Ещё»' },
-      { name: 'Пост LinkedIn', note: 'Максимальное стандартное обновление ленты' },
-    ],
-  },
-};
+  };
 
 interface PlatformLimit {
   name: string;
@@ -232,7 +42,7 @@ const PLATFORM_LIMIT_NUMBERS = [60, 160, 160, 280, 125, 3000];
 
 export default function CharacterCounterTool() {
   const { locale, t } = useLocale();
-  const s = STRINGS[locale];
+  const s = useComponentStrings('character-counter', STRINGS_EN);
   const [text, setText] = useState('');
 
   const platformLimits: PlatformLimit[] = s.platformLimits.map((item, i) => ({

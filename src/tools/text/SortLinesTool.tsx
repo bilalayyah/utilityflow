@@ -2,9 +2,9 @@ import { RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
 import { useLocale } from '../../locales/LocaleContext';
+import { useComponentStrings } from '../../locales/componentStrings';
 
-const STRINGS = {
-  en: {
+const STRINGS_EN = {
     caseSensitive: 'Case-sensitive',
     ignoreBlankLines: 'Ignore blank lines',
     removeDuplicates: 'Remove duplicates',
@@ -22,141 +22,7 @@ const STRINGS = {
       { id: 'reverse-order', label: 'Reverse Order' },
       { id: 'shuffle', label: 'Shuffle' },
     ],
-  },
-  es: {
-    caseSensitive: 'Distinguir mayúsculas y minúsculas',
-    ignoreBlankLines: 'Ignorar líneas en blanco',
-    removeDuplicates: 'Eliminar duplicados',
-    inputLines: 'Líneas de entrada',
-    sortedLines: 'Líneas ordenadas',
-    copySorted: 'Copiar ordenadas',
-    inputPlaceholder: 'Escribe un elemento por línea...',
-    outputPlaceholder: 'El resultado ordenado aparece aquí...',
-    sortOptions: [
-      { id: 'alpha-asc', label: 'A → Z' },
-      { id: 'alpha-desc', label: 'Z → A' },
-      { id: 'natural', label: 'Natural (1, 2, 10)' },
-      { id: 'length-asc', label: 'Más cortas primero' },
-      { id: 'length-desc', label: 'Más largas primero' },
-      { id: 'reverse-order', label: 'Orden inverso' },
-      { id: 'shuffle', label: 'Mezclar' },
-    ],
-  },
-  pt: {
-    caseSensitive: 'Diferenciar maiúsculas de minúsculas',
-    ignoreBlankLines: 'Ignorar linhas em branco',
-    removeDuplicates: 'Remover duplicatas',
-    inputLines: 'Linhas de entrada',
-    sortedLines: 'Linhas ordenadas',
-    copySorted: 'Copiar ordenadas',
-    inputPlaceholder: 'Digite um item por linha...',
-    outputPlaceholder: 'O resultado ordenado aparece aqui...',
-    sortOptions: [
-      { id: 'alpha-asc', label: 'A → Z' },
-      { id: 'alpha-desc', label: 'Z → A' },
-      { id: 'natural', label: 'Natural (1, 2, 10)' },
-      { id: 'length-asc', label: 'Mais curtas primeiro' },
-      { id: 'length-desc', label: 'Mais longas primeiro' },
-      { id: 'reverse-order', label: 'Ordem inversa' },
-      { id: 'shuffle', label: 'Embaralhar' },
-    ],
-  },
-  fr: {
-    caseSensitive: 'Respecter la casse',
-    ignoreBlankLines: 'Ignorer les lignes vides',
-    removeDuplicates: 'Supprimer les doublons',
-    inputLines: 'Lignes d\'entrée',
-    sortedLines: 'Lignes triées',
-    copySorted: 'Copier les lignes triées',
-    inputPlaceholder: 'Saisissez un élément par ligne...',
-    outputPlaceholder: 'Le résultat trié apparaît ici...',
-    sortOptions: [
-      { id: 'alpha-asc', label: 'A → Z' },
-      { id: 'alpha-desc', label: 'Z → A' },
-      { id: 'natural', label: 'Naturel (1, 2, 10)' },
-      { id: 'length-asc', label: 'Les plus courtes d\'abord' },
-      { id: 'length-desc', label: 'Les plus longues d\'abord' },
-      { id: 'reverse-order', label: 'Ordre inverse' },
-      { id: 'shuffle', label: 'Mélanger' },
-    ],
-  },
-  de: {
-    caseSensitive: 'Groß-/Kleinschreibung beachten',
-    ignoreBlankLines: 'Leere Zeilen ignorieren',
-    removeDuplicates: 'Duplikate entfernen',
-    inputLines: 'Eingabezeilen',
-    sortedLines: 'Sortierte Zeilen',
-    copySorted: 'Sortierte kopieren',
-    inputPlaceholder: 'Ein Element pro Zeile eingeben...',
-    outputPlaceholder: 'Sortierte Ausgabe erscheint hier...',
-    sortOptions: [
-      { id: 'alpha-asc', label: 'A → Z' },
-      { id: 'alpha-desc', label: 'Z → A' },
-      { id: 'natural', label: 'Natürlich (1, 2, 10)' },
-      { id: 'length-asc', label: 'Kürzeste zuerst' },
-      { id: 'length-desc', label: 'Längste zuerst' },
-      { id: 'reverse-order', label: 'Umgekehrte Reihenfolge' },
-      { id: 'shuffle', label: 'Mischen' },
-    ],
-  },
-  it: {
-    caseSensitive: 'Distingui maiuscole/minuscole',
-    ignoreBlankLines: 'Ignora le righe vuote',
-    removeDuplicates: 'Rimuovi duplicati',
-    inputLines: 'Righe di input',
-    sortedLines: 'Righe ordinate',
-    copySorted: 'Copia ordinate',
-    inputPlaceholder: 'Inserisci un elemento per riga...',
-    outputPlaceholder: 'L\'output ordinato apparirà qui...',
-    sortOptions: [
-      { id: 'alpha-asc', label: 'A → Z' },
-      { id: 'alpha-desc', label: 'Z → A' },
-      { id: 'natural', label: 'Naturale (1, 2, 10)' },
-      { id: 'length-asc', label: 'Più corte prima' },
-      { id: 'length-desc', label: 'Più lunghe prima' },
-      { id: 'reverse-order', label: 'Ordine inverso' },
-      { id: 'shuffle', label: 'Mescola' },
-    ],
-  },
-  id: {
-    caseSensitive: 'Peka huruf besar/kecil',
-    ignoreBlankLines: 'Abaikan baris kosong',
-    removeDuplicates: 'Hapus duplikat',
-    inputLines: 'Baris Input',
-    sortedLines: 'Baris yang Diurutkan',
-    copySorted: 'Salin hasil urutan',
-    inputPlaceholder: 'Masukkan satu item per baris...',
-    outputPlaceholder: 'Hasil yang diurutkan muncul di sini...',
-    sortOptions: [
-      { id: 'alpha-asc', label: 'A → Z' },
-      { id: 'alpha-desc', label: 'Z → A' },
-      { id: 'natural', label: 'Alami (1, 2, 10)' },
-      { id: 'length-asc', label: 'Terpendek Dahulu' },
-      { id: 'length-desc', label: 'Terpanjang Dahulu' },
-      { id: 'reverse-order', label: 'Urutan Terbalik' },
-      { id: 'shuffle', label: 'Acak' },
-    ],
-  },
-  ru: {
-    caseSensitive: 'С учётом регистра',
-    ignoreBlankLines: 'Игнорировать пустые строки',
-    removeDuplicates: 'Удалять дубликаты',
-    inputLines: 'Входные строки',
-    sortedLines: 'Отсортированные строки',
-    copySorted: 'Копировать отсортированное',
-    inputPlaceholder: 'Введите по одному элементу в строке...',
-    outputPlaceholder: 'Здесь появится отсортированный результат...',
-    sortOptions: [
-      { id: 'alpha-asc', label: 'А → Я' },
-      { id: 'alpha-desc', label: 'Я → А' },
-      { id: 'natural', label: 'Естественная (1, 2, 10)' },
-      { id: 'length-asc', label: 'Сначала короткие' },
-      { id: 'length-desc', label: 'Сначала длинные' },
-      { id: 'reverse-order', label: 'Обратный порядок' },
-      { id: 'shuffle', label: 'Перемешать' },
-    ],
-  },
-};
+  };
 
 type SortMode =
   | 'alpha-asc'
@@ -176,8 +42,8 @@ Item 1
 Apricot`;
 
 export default function SortLinesTool() {
-  const { locale, t } = useLocale();
-  const s = STRINGS[locale];
+  const { t } = useLocale();
+  const s = useComponentStrings('sort-lines', STRINGS_EN);
   const [input, setInput] = useState('');
   const [mode, setMode] = useState<SortMode>('alpha-asc');
   const [caseSensitive, setCaseSensitive] = useState(false);

@@ -2,9 +2,9 @@ import { RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
 import { useLocale } from '../../locales/LocaleContext';
+import { useComponentStrings } from '../../locales/componentStrings';
 
-const STRINGS = {
-  en: {
+const STRINGS_EN = {
     caseSensitive: 'Case-sensitive',
     trimWhitespace: 'Trim whitespace',
     removeEmptyLines: 'Remove empty lines',
@@ -16,99 +16,7 @@ const STRINGS = {
     removed: 'removed',
     inputPlaceholder: 'Paste a list with one item per line...',
     outputPlaceholder: 'Deduplicated output will appear here...',
-  },
-  es: {
-    caseSensitive: 'Distinguir mayúsculas y minúsculas',
-    trimWhitespace: 'Recortar espacios en blanco',
-    removeEmptyLines: 'Eliminar líneas vacías',
-    sortAlphabetically: 'Ordenar alfabéticamente',
-    originalLines: 'Líneas originales',
-    lines: 'líneas',
-    uniqueLines: 'Líneas únicas',
-    unique: 'únicas',
-    removed: 'eliminadas',
-    inputPlaceholder: 'Pega una lista con un elemento por línea...',
-    outputPlaceholder: 'El resultado sin duplicados aparecerá aquí...',
-  },
-  pt: {
-    caseSensitive: 'Diferenciar maiúsculas de minúsculas',
-    trimWhitespace: 'Remover espaços em branco',
-    removeEmptyLines: 'Remover linhas vazias',
-    sortAlphabetically: 'Ordenar alfabeticamente',
-    originalLines: 'Linhas originais',
-    lines: 'linhas',
-    uniqueLines: 'Linhas únicas',
-    unique: 'únicas',
-    removed: 'removidas',
-    inputPlaceholder: 'Cole uma lista com um item por linha...',
-    outputPlaceholder: 'O resultado sem duplicatas aparecerá aqui...',
-  },
-  fr: {
-    caseSensitive: 'Respecter la casse',
-    trimWhitespace: 'Supprimer les espaces',
-    removeEmptyLines: 'Supprimer les lignes vides',
-    sortAlphabetically: 'Trier par ordre alphabétique',
-    originalLines: 'Lignes d\'origine',
-    lines: 'lignes',
-    uniqueLines: 'Lignes uniques',
-    unique: 'uniques',
-    removed: 'supprimées',
-    inputPlaceholder: 'Collez une liste avec un élément par ligne...',
-    outputPlaceholder: 'Le résultat sans doublons apparaîtra ici...',
-  },
-  de: {
-    caseSensitive: 'Groß-/Kleinschreibung beachten',
-    trimWhitespace: 'Leerzeichen entfernen',
-    removeEmptyLines: 'Leere Zeilen entfernen',
-    sortAlphabetically: 'Alphabetisch sortieren',
-    originalLines: 'Ursprüngliche Zeilen',
-    lines: 'Zeilen',
-    uniqueLines: 'Einzigartige Zeilen',
-    unique: 'einzigartig',
-    removed: 'entfernt',
-    inputPlaceholder: 'Liste mit einem Element pro Zeile einfügen...',
-    outputPlaceholder: 'Deduplizierte Ausgabe erscheint hier...',
-  },
-  it: {
-    caseSensitive: 'Distingui maiuscole/minuscole',
-    trimWhitespace: 'Elimina gli spazi',
-    removeEmptyLines: 'Rimuovi le righe vuote',
-    sortAlphabetically: 'Ordina alfabeticamente',
-    originalLines: 'Righe originali',
-    lines: 'righe',
-    uniqueLines: 'Righe univoche',
-    unique: 'univoche',
-    removed: 'rimosse',
-    inputPlaceholder: 'Incolla un elenco con un elemento per riga...',
-    outputPlaceholder: 'L\'output deduplicato apparirà qui...',
-  },
-  id: {
-    caseSensitive: 'Peka huruf besar/kecil',
-    trimWhitespace: 'Pangkas spasi',
-    removeEmptyLines: 'Hapus baris kosong',
-    sortAlphabetically: 'Urutkan menurut abjad',
-    originalLines: 'Baris Asli',
-    lines: 'baris',
-    uniqueLines: 'Baris Unik',
-    unique: 'unik',
-    removed: 'dihapus',
-    inputPlaceholder: 'Tempel daftar dengan satu item per baris...',
-    outputPlaceholder: 'Hasil yang dideduplikasi akan muncul di sini...',
-  },
-  ru: {
-    caseSensitive: 'С учётом регистра',
-    trimWhitespace: 'Обрезать пробелы',
-    removeEmptyLines: 'Удалять пустые строки',
-    sortAlphabetically: 'Сортировать по алфавиту',
-    originalLines: 'Исходные строки',
-    lines: 'строк',
-    uniqueLines: 'Уникальные строки',
-    unique: 'уникальных',
-    removed: 'удалено',
-    inputPlaceholder: 'Вставьте список — по одному элементу в строке...',
-    outputPlaceholder: 'Здесь появится результат без дубликатов...',
-  },
-};
+  };
 
 const SAMPLE_LINES = `apple@example.com
 banana@example.com
@@ -120,8 +28,8 @@ date@example.com
 cherry@example.com`;
 
 export default function RemoveDuplicateLinesTool() {
-  const { locale, t } = useLocale();
-  const s = STRINGS[locale];
+  const { t } = useLocale();
+  const s = useComponentStrings('remove-duplicate-lines', STRINGS_EN);
   const [input, setInput] = useState('');
   const [caseSensitive, setCaseSensitive] = useState(false);
   const [trimLines, setTrimLines] = useState(true);

@@ -2,9 +2,9 @@ import { Download, RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
 import { useLocale } from '../../locales/LocaleContext';
+import { useComponentStrings } from '../../locales/componentStrings';
 
-const STRINGS = {
-  en: {
+const STRINGS_EN = {
     sampleMarkdown: `# UtilityFlow Release Notes
 
 Welcome to **Markdown Previewer**, a fast client-side editor with live *HTML* export.
@@ -35,232 +35,7 @@ Learn more at [UtilityFlow](/tools/).`,
     compiledHtmlAria: 'Compiled HTML source',
     inputPlaceholder: 'Write Markdown (# Heading, **bold**, - list, [link](https://...))...',
     emptyPreview: 'Preview will appear as you type Markdown...',
-  },
-  es: {
-    sampleMarkdown: `# Notas de la versión de UtilityFlow
-
-Bienvenido a **Markdown Previewer**, un editor rápido del lado del cliente con exportación *HTML* en vivo.
-
-## Capacidades clave
-
-- Formato instantáneo para encabezados, listas y enlaces
-- Escape seguro de HTML sin subidas remotas
-- Copia y descarga de HTML sin procesar con un clic
-
-> Mantén la documentación cerca del trabajo y revisa la estructura antes de publicar.
-
-\`\`\`json
-{
-  "tool": "markdown-previewer",
-  "mode": "browser-side"
-}
-\`\`\`
-
-Obtén más información en [UtilityFlow](/tools/).`,
-    renderedPreview: 'Vista previa renderizada',
-    rawHtml: 'HTML sin procesar',
-    exportHtml: 'Exportar HTML',
-    copyHtml: 'Copiar HTML',
-    markdownSource: 'Fuente Markdown',
-    livePreview: 'Vista previa en vivo',
-    compiledHtml: 'HTML compilado',
-    compiledHtmlAria: 'Código fuente HTML compilado',
-    inputPlaceholder: 'Escribe Markdown (# Encabezado, **negrita**, - lista, [enlace](https://...))...',
-    emptyPreview: 'La vista previa aparecerá mientras escribes Markdown...',
-  },
-  pt: {
-    sampleMarkdown: `# Notas de lançamento do UtilityFlow
-
-Bem-vindo ao **Markdown Previewer**, um editor rápido no navegador com exportação *HTML* em tempo real.
-
-## Principais recursos
-
-- Formatação instantânea para títulos, listas e links
-- Escape seguro de HTML sem nenhum upload remoto
-- Cópia e download de HTML bruto com um clique
-
-> Mantenha a documentação perto do trabalho e revise a estrutura antes de publicar.
-
-\`\`\`json
-{
-  "tool": "markdown-previewer",
-  "mode": "browser-side"
-}
-\`\`\`
-
-Saiba mais em [UtilityFlow](/tools/).`,
-    renderedPreview: 'Prévia renderizada',
-    rawHtml: 'HTML bruto',
-    exportHtml: 'Exportar HTML',
-    copyHtml: 'Copiar HTML',
-    markdownSource: 'Fonte Markdown',
-    livePreview: 'Prévia ao vivo',
-    compiledHtml: 'HTML compilado',
-    compiledHtmlAria: 'Código-fonte HTML compilado',
-    inputPlaceholder: 'Escreva Markdown (# Título, **negrito**, - lista, [link](https://...))...',
-    emptyPreview: 'A prévia aparecerá conforme você digita Markdown...',
-  },
-  fr: {
-    sampleMarkdown: `# Notes de version d'UtilityFlow
-
-Bienvenue dans **Markdown Previewer**, un éditeur rapide côté client avec export *HTML* en direct.
-
-## Fonctionnalités clés
-
-- Mise en forme instantanée pour les titres, les listes et les liens
-- Échappement HTML sécurisé sans aucun envoi distant
-- Copie et téléchargement du HTML brut en un clic
-
-> Gardez la documentation près du travail et vérifiez la structure avant de publier.
-
-\`\`\`json
-{
-  "tool": "markdown-previewer",
-  "mode": "browser-side"
-}
-\`\`\`
-
-En savoir plus sur [UtilityFlow](/tools/).`,
-    renderedPreview: 'Aperçu rendu',
-    rawHtml: 'HTML brut',
-    exportHtml: 'Exporter le HTML',
-    copyHtml: 'Copier le HTML',
-    markdownSource: 'Source Markdown',
-    livePreview: 'Aperçu en direct',
-    compiledHtml: 'HTML compilé',
-    compiledHtmlAria: 'Code source HTML compilé',
-    inputPlaceholder: 'Écrivez du Markdown (# Titre, **gras**, - liste, [lien](https://...))...',
-    emptyPreview: 'L\'aperçu apparaîtra au fur et à mesure de votre saisie Markdown...',
-  },
-  de: {
-    sampleMarkdown: `# UtilityFlow Versionshinweise
-
-Willkommen beim **Markdown Previewer**, einem schnellen clientseitigen Editor mit Live-*HTML*-Export.
-
-## Hauptfunktionen
-
-- Sofortige Formatierung für Überschriften, Listen und Links
-- Sicheres HTML-Escaping ohne Remote-Uploads
-- HTML-Rohdaten mit einem Klick kopieren und herunterladen
-
-> Halten Sie die Dokumentation nah an der Arbeit und prüfen Sie die Struktur vor der Veröffentlichung.
-
-\`\`\`json
-{
-  "tool": "markdown-previewer",
-  "mode": "browser-side"
-}
-\`\`\`
-
-Mehr erfahren unter [UtilityFlow](/tools/).`,
-    renderedPreview: 'Gerenderte Vorschau',
-    rawHtml: 'Rohes HTML',
-    exportHtml: 'HTML exportieren',
-    copyHtml: 'HTML kopieren',
-    markdownSource: 'Markdown-Quelle',
-    livePreview: 'Live-Vorschau',
-    compiledHtml: 'Kompiliertes HTML',
-    compiledHtmlAria: 'Kompilierte HTML-Quelle',
-    inputPlaceholder: 'Markdown schreiben (# Überschrift, **fett**, - Liste, [Link](https://...))...',
-    emptyPreview: 'Die Vorschau erscheint, während Sie Markdown eingeben...',
-  },
-  it: {
-    sampleMarkdown: `# Note di rilascio di UtilityFlow
-
-Benvenuto in **Markdown Previewer**, un editor rapido lato client con esportazione *HTML* in tempo reale.
-
-## Funzionalità principali
-
-- Formattazione immediata di titoli, elenchi e link
-- Escape HTML sicuro senza caricamenti remoti
-- Copia e download dell\'HTML grezzo con un clic
-
-> Tieni la documentazione vicina al lavoro e controlla la struttura prima della pubblicazione.
-
-\`\`\`json
-{
-  "tool": "markdown-previewer",
-  "mode": "browser-side"
-}
-\`\`\`
-
-Scopri di più su [UtilityFlow](/tools/).`,
-    renderedPreview: 'Anteprima renderizzata',
-    rawHtml: 'HTML grezzo',
-    exportHtml: 'Esporta HTML',
-    copyHtml: 'Copia HTML',
-    markdownSource: 'Sorgente Markdown',
-    livePreview: 'Anteprima live',
-    compiledHtml: 'HTML compilato',
-    compiledHtmlAria: 'Sorgente HTML compilata',
-    inputPlaceholder: 'Scrivi Markdown (# Titolo, **grassetto**, - elenco, [link](https://...))...',
-    emptyPreview: 'L\'anteprima apparirà mentre scrivi Markdown...',
-  },
-  id: {
-    sampleMarkdown: `# Catatan Rilis UtilityFlow
-
-Selamat datang di **Markdown Previewer**, editor sisi klien yang cepat dengan ekspor *HTML* langsung.
-
-## Kemampuan Utama
-
-- Pemformatan instan untuk judul, daftar, dan tautan
-- Escaping HTML yang aman tanpa unggahan jarak jauh
-- Salin dan unduh HTML mentah dengan satu klik
-
-> Simpan dokumentasi dekat dengan pekerjaan dan pratinjau strukturnya sebelum menerbitkan.
-
-\`\`\`json
-{
-  "tool": "markdown-previewer",
-  "mode": "browser-side"
-}
-\`\`\`
-
-Pelajari lebih lanjut di [UtilityFlow](/tools/).`,
-    renderedPreview: 'Pratinjau yang Dirender',
-    rawHtml: 'HTML Mentah',
-    exportHtml: 'Ekspor HTML',
-    copyHtml: 'Salin HTML',
-    markdownSource: 'Sumber Markdown',
-    livePreview: 'Pratinjau Langsung',
-    compiledHtml: 'HTML yang Dikompilasi',
-    compiledHtmlAria: 'Sumber HTML yang dikompilasi',
-    inputPlaceholder: 'Tulis Markdown (# Judul, **tebal**, - daftar, [tautan](https://...))...',
-    emptyPreview: 'Pratinjau akan muncul saat Anda mengetik Markdown...',
-  },
-  ru: {
-    sampleMarkdown: `# Заметки о выпуске UtilityFlow
-
-Добро пожаловать в **Markdown Previewer** — быстрый редактор на стороне клиента с живым экспортом в *HTML*.
-
-## Основные возможности
-
-- Мгновенное форматирование заголовков, списков и ссылок
-- Безопасное экранирование HTML без загрузки на сервер
-- Копирование и скачивание исходного HTML в один клик
-
-> Держите документацию рядом с работой и проверяйте структуру перед публикацией.
-
-\`\`\`json
-{
-  "tool": "markdown-previewer",
-  "mode": "browser-side"
-}
-\`\`\`
-
-Подробнее — на [UtilityFlow](/tools/).`,
-    renderedPreview: 'Отрендеренный предпросмотр',
-    rawHtml: 'Исходный HTML',
-    exportHtml: 'Экспорт HTML',
-    copyHtml: 'Копировать HTML',
-    markdownSource: 'Исходник Markdown',
-    livePreview: 'Живой предпросмотр',
-    compiledHtml: 'Скомпилированный HTML',
-    compiledHtmlAria: 'Исходный код скомпилированного HTML',
-    inputPlaceholder: 'Напишите Markdown (# Заголовок, **жирный**, - список, [ссылка](https://...))...',
-    emptyPreview: 'Предпросмотр появится, когда вы начнёте вводить Markdown...',
-  },
-};
+  };
 
 function escapeHtml(text: string): string {
   return text
@@ -417,7 +192,7 @@ function markdownToHtml(markdown: string): string {
 
 export default function MarkdownPreviewerTool() {
   const { locale, t } = useLocale();
-  const s = STRINGS[locale];
+  const s = useComponentStrings('markdown-previewer', STRINGS_EN);
   const [markdown, setMarkdown] = useState(s.sampleMarkdown);
   const [viewMode, setViewMode] = useState<'preview' | 'html'>('preview');
 

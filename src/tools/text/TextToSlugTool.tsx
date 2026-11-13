@@ -2,9 +2,9 @@ import { RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
 import { useLocale } from '../../locales/LocaleContext';
+import { useComponentStrings } from '../../locales/componentStrings';
 
-const STRINGS = {
-  en: {
+const STRINGS_EN = {
     sampleTitles: `10 Best Ways to Format JSON Online!
 Café & Crème: Guide for 2026
 How to Build a Fast Static Site on Cloudflare Pages`,
@@ -17,106 +17,7 @@ How to Build a Fast Static Site on Cloudflare Pages`,
     generatedSlugs: 'Generated URL Slugs',
     copySlugs: 'Copy slugs',
     outputPlaceholder: 'clean-url-slugs-appear-here',
-  },
-  es: {
-    sampleTitles: `¡10 mejores formas de formatear JSON en línea!
-Café y crema: guía para 2026
-Cómo crear un sitio estático rápido en Cloudflare Pages`,
-    hyphen: 'Guion (-)',
-    underscore: 'Guion bajo (_)',
-    forceLowercase: 'Forzar minúsculas',
-    stripStopWords: 'Eliminar palabras vacías comunes',
-    titlesLabel: 'Títulos o frases (uno por línea para el modo por lotes)',
-    inputPlaceholder: 'Escribe un título de blog, un nombre de producto o una lista de encabezados...',
-    generatedSlugs: 'Slugs de URL generados',
-    copySlugs: 'Copiar slugs',
-    outputPlaceholder: 'los-slugs-de-url-limpios-aparecen-aqui',
-  },
-  pt: {
-    sampleTitles: `10 melhores formas de formatar JSON online!
-Café e creme: guia para 2026
-Como criar um site estático rápido no Cloudflare Pages`,
-    hyphen: 'Hífen (-)',
-    underscore: 'Sublinhado (_)',
-    forceLowercase: 'Forçar minúsculas',
-    stripStopWords: 'Remover palavras vazias comuns',
-    titlesLabel: 'Títulos ou frases (um por linha para o modo em lote)',
-    inputPlaceholder: 'Digite um título de blog, nome de produto ou lista de títulos...',
-    generatedSlugs: 'Slugs de URL gerados',
-    copySlugs: 'Copiar slugs',
-    outputPlaceholder: 'slugs-de-url-limpos-aparecem-aqui',
-  },
-  fr: {
-    sampleTitles: `10 meilleures façons de formater du JSON en ligne !
-Café et crème : guide pour 2026
-Comment créer un site statique rapide sur Cloudflare Pages`,
-    hyphen: 'Trait d\'union (-)',
-    underscore: 'Tiret bas (_)',
-    forceLowercase: 'Forcer les minuscules',
-    stripStopWords: 'Supprimer les mots vides courants',
-    titlesLabel: 'Titres ou phrases (un par ligne pour le mode par lot)',
-    inputPlaceholder: 'Saisissez un titre de blog, un nom de produit ou une liste de titres...',
-    generatedSlugs: 'Slugs d\'URL générés',
-    copySlugs: 'Copier les slugs',
-    outputPlaceholder: 'les-slugs-d-url-propres-apparaissent-ici',
-  },
-  de: {
-    sampleTitles: `10 beste Wege, JSON online zu formatieren!
-Café & Crème: Leitfaden für 2026
-So erstellen Sie eine schnelle statische Website mit Cloudflare Pages`,
-    hyphen: 'Bindestrich (-)',
-    underscore: 'Unterstrich (_)',
-    forceLowercase: 'Kleinbuchstaben erzwingen',
-    stripStopWords: 'Gängige Stoppwörter entfernen',
-    titlesLabel: 'Titel oder Phrasen (einer pro Zeile für den Stapelmodus)',
-    inputPlaceholder: 'Blogtitel, Produktname oder Liste von Überschriften eingeben...',
-    generatedSlugs: 'Erzeugte URL-Slugs',
-    copySlugs: 'Slugs kopieren',
-    outputPlaceholder: 'saubere-url-slugs-erscheinen-hier',
-  },
-  it: {
-    sampleTitles: `10 modi migliori per formattare JSON online!
-Café & Crème: guida per il 2026
-Come creare un sito statico veloce su Cloudflare Pages`,
-    hyphen: 'Trattino (-)',
-    underscore: 'Trattino basso (_)',
-    forceLowercase: 'Forza minuscole',
-    stripStopWords: 'Rimuovi le stop word comuni',
-    titlesLabel: 'Titoli o frasi (uno per riga per la modalità batch)',
-    inputPlaceholder: 'Inserisci il titolo di un blog, il nome di un prodotto o un elenco di titoli...',
-    generatedSlugs: 'Slug URL generati',
-    copySlugs: 'Copia gli slug',
-    outputPlaceholder: 'slug-url-puliti-appaiono-qui',
-  },
-  id: {
-    sampleTitles: `10 Cara Terbaik Memformat JSON Online!
-Café & Crème: Panduan untuk 2026
-Cara Membangun Situs Statis Cepat di Cloudflare Pages`,
-    hyphen: 'Tanda hubung (-)',
-    underscore: 'Garis bawah (_)',
-    forceLowercase: 'Paksa huruf kecil',
-    stripStopWords: 'Hapus kata henti umum',
-    titlesLabel: 'Judul atau Frasa (satu per baris untuk mode batch)',
-    inputPlaceholder: 'Masukkan judul blog, nama produk, atau daftar judul...',
-    generatedSlugs: 'Slug URL yang Dihasilkan',
-    copySlugs: 'Salin slug',
-    outputPlaceholder: 'slug-url-bersih-muncul-di-sini',
-  },
-  ru: {
-    sampleTitles: `10 лучших способов форматировать JSON онлайн!
-Café & Crème: руководство на 2026 год
-Как создать быстрый статический сайт на Cloudflare Pages`,
-    hyphen: 'Дефис (-)',
-    underscore: 'Подчёркивание (_)',
-    forceLowercase: 'Принудительно в нижний регистр',
-    stripStopWords: 'Удалять общие стоп-слова',
-    titlesLabel: 'Заголовки или фразы (по одному в строке для пакетного режима)',
-    inputPlaceholder: 'Введите заголовок блога, название продукта или список заголовков...',
-    generatedSlugs: 'Сгенерированные URL-слаги',
-    copySlugs: 'Копировать слаги',
-    outputPlaceholder: 'чистые-url-слаги-появятся-здесь',
-  },
-};
+  };
 
 const STOP_WORDS = new Set([
   'a', 'an', 'and', 'as', 'at', 'by', 'for', 'from', 'in', 'into', 'of', 'on', 'or', 'the', 'to', 'with',
@@ -146,8 +47,8 @@ function slugifyLine(
 }
 
 export default function TextToSlugTool() {
-  const { locale, t } = useLocale();
-  const s = STRINGS[locale];
+  const { t } = useLocale();
+  const s = useComponentStrings('text-to-slug', STRINGS_EN);
   const [input, setInput] = useState('');
   const [separator, setSeparator] = useState<'-' | '_'>('-');
   const [lowercase, setLowercase] = useState(true);
