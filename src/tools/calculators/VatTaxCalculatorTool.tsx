@@ -28,6 +28,32 @@ const STRINGS = {
     taxAmount: 'Monto del impuesto',
     grossPrice: 'Precio bruto (con impuesto)',
   },
+  pt: {
+    errorAmount: 'O valor não pode ser negativo.',
+    errorRate: 'A alíquota de imposto deve estar entre 0% e 100%.',
+    addTab: 'Adicionar imposto (líquido → bruto)',
+    removeTab: 'Extrair imposto (bruto → líquido)',
+    commonRates: 'Alíquotas comuns:',
+    netAmountLabel: 'Valor líquido (sem imposto) ($)',
+    grossAmountLabel: 'Valor bruto (com imposto) ($)',
+    rateLabel: 'Alíquota de IVA / imposto sobre vendas (%)',
+    netPrice: 'Preço líquido (sem imposto)',
+    taxAmount: 'Valor do imposto',
+    grossPrice: 'Preço bruto (com imposto)',
+  },
+  fr: {
+    errorAmount: 'Le montant ne peut pas être négatif.',
+    errorRate: 'Le taux de taxe doit être compris entre 0 % et 100 %.',
+    addTab: 'Ajouter la taxe (net → brut)',
+    removeTab: 'Extraire la taxe (brut → net)',
+    commonRates: 'Taux courants :',
+    netAmountLabel: 'Montant net (hors taxe) ($)',
+    grossAmountLabel: 'Montant brut (TTC) ($)',
+    rateLabel: 'Taux de TVA / taxe de vente (%)',
+    netPrice: 'Prix net (HT)',
+    taxAmount: 'Montant de la taxe',
+    grossPrice: 'Prix brut (TTC)',
+  },
 };
 
 const RATE_PRESETS = [5, 7, 10, 15, 20, 21];

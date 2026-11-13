@@ -1,6 +1,7 @@
 import { ArrowLeftRight } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { useLocale } from '../../locales/LocaleContext';
+import { localeTag, type LocaleCode } from '../../locales/config';
 
 const STRINGS = {
   en: {
@@ -73,6 +74,76 @@ const STRINGS = {
     resultingDate: 'Fecha resultante del calendario',
     isoPrefix: 'ISO 8601:',
   },
+  pt: {
+    errorInvalidDates: 'Selecione datas válidas de início e fim no calendário.',
+    errorInvalidBase: 'Insira uma data inicial válida do calendário.',
+    errorNonNegative: 'Insira números inteiros não negativos para anos, meses e dias.',
+    differenceTab: 'Diferença entre datas',
+    addSubtractTab: 'Somar / subtrair tempo',
+    startLabel: 'Data de início',
+    endLabel: 'Data de fim',
+    swapTitle: 'Trocar datas',
+    swapAria: 'Trocar data de início e data de fim',
+    includeEnd: 'Incluir a data de fim na contagem (+1 dia corrido)',
+    calendarDuration: 'Duração no calendário',
+    reversedRange: '(Intervalo invertido)',
+    totalSpan: 'Duração total:',
+    calendarDays: 'dias corridos',
+    weeksDays: 'Semanas e dias',
+    weekdays: 'Dias úteis (seg–sex)',
+    weekendDays: 'Dias de fim de semana (sáb–dom)',
+    totalHours: 'Total de horas',
+    yearsWord: 'anos',
+    monthsWord: 'meses',
+    daysWord: 'dias',
+    weeksAbbr: 'sem',
+    daysAbbr: 'd',
+    hoursAbbr: 'h',
+    referenceLabel: 'Data de referência',
+    operationLabel: 'Operação',
+    addOption: 'Somar (+)',
+    subtractOption: 'Subtrair (-)',
+    yearsLabel: 'Anos',
+    monthsLabel: 'Meses',
+    daysLabel: 'Dias',
+    resultingDate: 'Data resultante no calendário',
+    isoPrefix: 'ISO 8601:',
+  },
+  fr: {
+    errorInvalidDates: 'Veuillez sélectionner des dates de début et de fin valides.',
+    errorInvalidBase: 'Veuillez saisir une date de début valide.',
+    errorNonNegative: 'Saisissez des nombres entiers non négatifs pour les années, les mois et les jours.',
+    differenceTab: 'Différence entre deux dates',
+    addSubtractTab: 'Ajouter / soustraire du temps',
+    startLabel: 'Date de début',
+    endLabel: 'Date de fin',
+    swapTitle: 'Échanger les dates',
+    swapAria: 'Échanger les dates de début et de fin',
+    includeEnd: 'Inclure la date de fin dans le compte (+1 jour calendaire)',
+    calendarDuration: 'Durée calendaire',
+    reversedRange: '(Plage inversée)',
+    totalSpan: 'Durée totale :',
+    calendarDays: 'jours calendaires',
+    weeksDays: 'Semaines et jours',
+    weekdays: 'Jours ouvrés (lun–ven)',
+    weekendDays: 'Jours de week-end (sam–dim)',
+    totalHours: 'Total des heures',
+    yearsWord: 'ans',
+    monthsWord: 'mois',
+    daysWord: 'jours',
+    weeksAbbr: 'sem.',
+    daysAbbr: 'j',
+    hoursAbbr: 'h',
+    referenceLabel: 'Date de référence',
+    operationLabel: 'Opération',
+    addOption: 'Ajouter (+)',
+    subtractOption: 'Soustraire (-)',
+    yearsLabel: 'Années',
+    monthsLabel: 'Mois',
+    daysLabel: 'Jours',
+    resultingDate: 'Date calendaire résultante',
+    isoPrefix: 'ISO 8601:',
+  },
 };
 
 type Mode = 'difference' | 'add-subtract';
@@ -117,8 +188,8 @@ function countWeekdaysBetween(startUtc: Date, endUtc: Date, inclusive: boolean):
   return { weekdays, weekends };
 }
 
-function formatReadableUtc(date: Date, locale: string): string {
-  return date.toLocaleDateString(locale === 'es' ? 'es' : 'en-US', {
+function formatReadableUtc(date: Date, locale: LocaleCode): string {
+  return date.toLocaleDateString(localeTag(locale), {
     weekday: 'long',
     year: 'numeric',
     month: 'long',
@@ -332,7 +403,7 @@ export default function DateDifferenceCalculatorTool() {
                 <p className="mt-1 text-sm text-slate-600 tabular-nums">
                   {s.totalSpan}{' '}
                   <strong className="text-slate-900">
-                    {diffResult.data.totalDays.toLocaleString(locale)} {s.calendarDays}
+                    {diffResult.data.totalDays.toLocaleString(localeTag(locale))} {s.calendarDays}
                   </strong>
                 </p>
               </div>
@@ -341,7 +412,7 @@ export default function DateDifferenceCalculatorTool() {
                 <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
                   <dt className="text-xs text-slate-500">{s.weeksDays}</dt>
                   <dd className="mt-1 text-lg font-bold font-mono text-slate-900 tabular-nums">
-                    {diffResult.data.weeks.toLocaleString(locale)} {s.weeksAbbr}{' '}
+                    {diffResult.data.weeks.toLocaleString(localeTag(locale))} {s.weeksAbbr}{' '}
                     {diffResult.data.remainderDays}
                     {s.daysAbbr}
                   </dd>
@@ -349,19 +420,19 @@ export default function DateDifferenceCalculatorTool() {
                 <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
                   <dt className="text-xs text-slate-500">{s.weekdays}</dt>
                   <dd className="mt-1 text-lg font-bold font-mono text-slate-900 tabular-nums">
-                    {diffResult.data.weekdays.toLocaleString(locale)} {s.daysWord}
+                    {diffResult.data.weekdays.toLocaleString(localeTag(locale))} {s.daysWord}
                   </dd>
                 </div>
                 <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
                   <dt className="text-xs text-slate-500">{s.weekendDays}</dt>
                   <dd className="mt-1 text-lg font-bold font-mono text-slate-900 tabular-nums">
-                    {diffResult.data.weekends.toLocaleString(locale)} {s.daysWord}
+                    {diffResult.data.weekends.toLocaleString(localeTag(locale))} {s.daysWord}
                   </dd>
                 </div>
                 <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
                   <dt className="text-xs text-slate-500">{s.totalHours}</dt>
                   <dd className="mt-1 text-lg font-bold font-mono text-slate-900 tabular-nums">
-                    {diffResult.data.totalHours.toLocaleString(locale)} {s.hoursAbbr}
+                    {diffResult.data.totalHours.toLocaleString(localeTag(locale))} {s.hoursAbbr}
                   </dd>
                 </div>
               </dl>
