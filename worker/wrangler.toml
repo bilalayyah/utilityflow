@@ -2,6 +2,8 @@
 # Deploy separately from the Cloudflare Pages static frontend (dist/):
 #   cd worker && npx wrangler deploy
 #
+# 2026-11-13: dashboard bindings (AI_QUOTA_KV) and ALLOWED_ORIGINS are mirrored
+# here — keep this file in sync so Git-triggered deploys don't drop them.
 # Required free-tier Groq secret (never commit API keys to this file):
 #   npx wrangler secret put GROQ_API_KEY
 
