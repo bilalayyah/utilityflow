@@ -210,6 +210,54 @@ export default function App() {
             <Route path="/ru/:toolSlug" element={<ToolPage />} />
             <Route path="/ru/:toolSlug/" element={<ToolPage />} />
 
+            {/* Japanese (ja) routes — same components, locale from URL */}
+            <Route path="/ja" element={<HomePage />} />
+            <Route path="/ja/" element={<HomePage />} />
+            <Route path="/ja/tools" element={<ToolsDirectoryPage />} />
+            <Route path="/ja/tools/" element={<ToolsDirectoryPage />} />
+            <Route path="/ja/kategori/:categorySlug" element={<CategoryPage />} />
+            <Route path="/ja/kategori/:categorySlug/" element={<CategoryPage />} />
+            <Route path="/ja/ai-bunsho-sakusei" element={<AiWritingAssistantPage />} />
+            <Route path="/ja/ai-bunsho-sakusei/" element={<AiWritingAssistantPage />} />
+            <Route path="/ja/ai-yoyaku" element={<AiTextSummarizerPage />} />
+            <Route path="/ja/ai-yoyaku/" element={<AiTextSummarizerPage />} />
+            <Route path="/ja/ai-tsuru-kensaku" element={<AiToolFinderPage />} />
+            <Route path="/ja/ai-tsuru-kensaku/" element={<AiToolFinderPage />} />
+            <Route path="/ja/watashitachi" element={<AboutPage />} />
+            <Route path="/ja/watashitachi/" element={<AboutPage />} />
+            <Route path="/ja/otoiawase" element={<ContactPage />} />
+            <Route path="/ja/otoiawase/" element={<ContactPage />} />
+            <Route path="/ja/puraibashi-porishi" element={<PrivacyPolicyPage />} />
+            <Route path="/ja/puraibashi-porishi/" element={<PrivacyPolicyPage />} />
+            <Route path="/ja/riyo-kiyaku" element={<TermsOfServicePage />} />
+            <Route path="/ja/riyo-kiyaku/" element={<TermsOfServicePage />} />
+            <Route path="/ja/:toolSlug" element={<ToolPage />} />
+            <Route path="/ja/:toolSlug/" element={<ToolPage />} />
+
+            {/* Korean (ko) routes — same components, locale from URL */}
+            <Route path="/ko" element={<HomePage />} />
+            <Route path="/ko/" element={<HomePage />} />
+            <Route path="/ko/tools" element={<ToolsDirectoryPage />} />
+            <Route path="/ko/tools/" element={<ToolsDirectoryPage />} />
+            <Route path="/ko/kategori/:categorySlug" element={<CategoryPage />} />
+            <Route path="/ko/kategori/:categorySlug/" element={<CategoryPage />} />
+            <Route path="/ko/ai-geul-sseugi" element={<AiWritingAssistantPage />} />
+            <Route path="/ko/ai-geul-sseugi/" element={<AiWritingAssistantPage />} />
+            <Route path="/ko/ai-yoyak" element={<AiTextSummarizerPage />} />
+            <Route path="/ko/ai-yoyak/" element={<AiTextSummarizerPage />} />
+            <Route path="/ko/ai-dogu-chatgi" element={<AiToolFinderPage />} />
+            <Route path="/ko/ai-dogu-chatgi/" element={<AiToolFinderPage />} />
+            <Route path="/ko/sogae" element={<AboutPage />} />
+            <Route path="/ko/sogae/" element={<AboutPage />} />
+            <Route path="/ko/mun-ui" element={<ContactPage />} />
+            <Route path="/ko/mun-ui/" element={<ContactPage />} />
+            <Route path="/ko/peuraibeosi-jeongchaek" element={<PrivacyPolicyPage />} />
+            <Route path="/ko/peuraibeosi-jeongchaek/" element={<PrivacyPolicyPage />} />
+            <Route path="/ko/iyong-yagwan" element={<TermsOfServicePage />} />
+            <Route path="/ko/iyong-yagwan/" element={<TermsOfServicePage />} />
+            <Route path="/ko/:toolSlug" element={<ToolPage />} />
+            <Route path="/ko/:toolSlug/" element={<ToolPage />} />
+
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </SiteLayout>
