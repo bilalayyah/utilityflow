@@ -2,8 +2,17 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { SITE_CONFIG, STATIC_ROUTES, buildCanonicalUrl } from '../src/config/site';
-import { CATEGORY_ES_SLUGS, STATIC_PATHS } from '../src/locales/config';
+import type { LocaleCode } from '../src/locales/config';
+import {
+  CATEGORY_LOCALE_SLUGS,
+  CATEGORY_PATH_SEGMENT,
+  STATIC_PATHS,
+  SUPPORTED_LOCALES,
+} from '../src/locales/config';
+import { PT_TOOL_OVERRIDES } from '../src/locales/pt/tools';
+import { FR_TOOL_OVERRIDES } from '../src/locales/fr/tools';
 import { ES_TOOL_OVERRIDES } from '../src/locales/es/tools';
+import type { ToolLocaleOverride } from '../src/locales/types';
 import { CATEGORIES } from '../src/registry/categories';
 import { TOOLS_REGISTRY } from '../src/registry/toolsRegistry';
 
@@ -19,6 +28,12 @@ interface SitemapEntry {
   priority: string;
   alternates: SitemapAlternate[];
 }
+
+const TOOL_OVERRIDES_BY_LOCALE: Record<string, Record<string, ToolLocaleOverride>> = {
+  es: ES_TOOL_OVERRIDES,
+  pt: PT_TOOL_OVERRIDES,
+  fr: FR_TOOL_OVERRIDES,
+};
 
 function escapeXml(value: string): string {
   return value
@@ -39,52 +54,73 @@ function generateSitemap(): void {
   const today = new Date().toISOString().split('T')[0];
   const entries: SitemapEntry[] = [];
 
-  /** Push the EN entry and its ES twin, each carrying en/es/x-default alternates. */
-  const addBilingual = (
+  /**
+   * Push the EN entry and one twin per translated locale, each carrying
+   * hreflang alternates for every locale (en + translated + x-default).
+   * localizedPaths maps locale code -> localized path (EN path is the key).
+   */
+  const addMultilingual = (
     enPath: string,
-    esPath: string | undefined,
+    localizedPaths: Partial<Record<LocaleCode, string>>,
     changefreq: string,
     priority: string
   ) => {
-    const enUrl = buildCanonicalUrl(enPath, siteOrigin);
-    const esUrl = esPath ? buildCanonicalUrl(esPath, siteOrigin) : undefined;
-    const alternates: SitemapAlternate[] = [
-      { hreflang: 'en', href: enUrl },
-      ...(esUrl ? [{ hreflang: 'es', href: esUrl }] : []),
-      { hreflang: 'x-default', href: enUrl },
-    ];
-    entries.push({ loc: enUrl, lastmod: today, changefreq, priority, alternates });
-    if (esUrl) {
-      entries.push({ loc: esUrl, lastmod: today, changefreq, priority, alternates });
+    const urls: Partial<Record<LocaleCode, string>> = { en: enPath, ...localizedPaths };
+    const alternates: SitemapAlternate[] = [];
+    for (const locale of SUPPORTED_LOCALES) {
+      const path = urls[locale.code];
+      if (path) {
+        alternates.push({
+          hreflang: locale.code,
+          href: buildCanonicalUrl(path, siteOrigin),
+        });
+      }
+    }
+    alternates.push({ hreflang: 'x-default', href: buildCanonicalUrl(enPath, siteOrigin) });
+    for (const locale of SUPPORTED_LOCALES) {
+      const path = urls[locale.code];
+      if (!path) continue;
+      entries.push({
+        loc: buildCanonicalUrl(path, siteOrigin),
+        lastmod: today,
+        changefreq,
+        priority,
+        alternates,
+      });
     }
   };
 
   for (const route of STATIC_ROUTES) {
-    addBilingual(
-      route.path,
-      STATIC_PATHS[route.path]?.es,
-      route.changefreq,
-      route.priority
-    );
+    const localized: Partial<Record<LocaleCode, string>> = {};
+    for (const locale of SUPPORTED_LOCALES) {
+      if (locale.code === 'en') continue;
+      const p = STATIC_PATHS[route.path]?.[locale.code];
+      if (p) localized[locale.code] = p;
+    }
+    addMultilingual(route.path, localized, route.changefreq, route.priority);
   }
 
   for (const category of CATEGORIES) {
-    addBilingual(
-      `/category/${category.slug}/`,
-      `/es/categoria/${CATEGORY_ES_SLUGS[category.id]}/`,
-      'weekly',
-      '0.8'
-    );
+    const localized: Partial<Record<LocaleCode, string>> = {};
+    for (const locale of SUPPORTED_LOCALES) {
+      if (locale.code === 'en') continue;
+      const slug = CATEGORY_LOCALE_SLUGS[locale.code]?.[category.id];
+      if (slug) {
+        localized[locale.code] =
+          `${locale.pathPrefix}/${CATEGORY_PATH_SEGMENT[locale.code]}/${slug}/`;
+      }
+    }
+    addMultilingual(`/category/${category.slug}/`, localized, 'weekly', '0.8');
   }
 
   for (const tool of TOOLS_REGISTRY) {
-    const esSlug = ES_TOOL_OVERRIDES[tool.id]?.slug;
-    addBilingual(
-      `/${tool.slug}/`,
-      esSlug ? `/es/${esSlug}/` : undefined,
-      'weekly',
-      '0.8'
-    );
+    const localized: Partial<Record<LocaleCode, string>> = {};
+    for (const locale of SUPPORTED_LOCALES) {
+      if (locale.code === 'en') continue;
+      const slug = TOOL_OVERRIDES_BY_LOCALE[locale.code]?.[tool.id]?.slug;
+      if (slug) localized[locale.code] = `${locale.pathPrefix}/${slug}/`;
+    }
+    addMultilingual(`/${tool.slug}/`, localized, 'weekly', '0.8');
   }
 
   const xmlLines = [
@@ -127,9 +163,18 @@ function generateSitemap(): void {
   ].join('\n');
   writeFileSync(robotsPath, robotsContent, 'utf8');
 
-  const esCount = entries.filter((e) => e.loc.includes('/es/')).length;
+  const nonEnPrefixes = SUPPORTED_LOCALES.filter((l) => l.code !== 'en').map(
+    (l) => `${l.pathPrefix}/`
+  );
+  const counts = SUPPORTED_LOCALES.map((locale) => {
+    const n =
+      locale.code === 'en'
+        ? entries.filter((e) => !nonEnPrefixes.some((p) => e.loc.includes(p))).length
+        : entries.filter((e) => e.loc.includes(`${locale.pathPrefix}/`)).length;
+    return `${n} ${locale.code.toUpperCase()}`;
+  }).join(' + ');
   console.log(
-    `Generated sitemap.xml (${entries.length} URLs: ${entries.length - esCount} EN + ${esCount} ES, all with hreflang alternates)`
+    `Generated sitemap.xml (${entries.length} URLs: ${counts}, all with hreflang alternates)`
   );
 }
 
