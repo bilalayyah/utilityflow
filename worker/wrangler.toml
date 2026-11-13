@@ -15,8 +15,8 @@ GROQ_MODEL = "openai/gpt-oss-20b"
 GROQ_FALLBACK_MODEL = "llama-3.1-8b-instant"
 
 # Optional comma-separated allowed browser origins.
-# Leave empty until your production domain is live, or set your deployed origin before production launch.
-ALLOWED_ORIGINS = ""
+# Production site origin (utilityflow.online to be added once the domain is live).
+ALLOWED_ORIGINS = "https://utilityflow.pages.dev"
 
 # Strict free-tier usage guardrails
 GLOBAL_DAILY_CAP = "400"
@@ -26,8 +26,7 @@ FINDER_DAILY_LIMIT = "10"
 RATE_LIMIT_PER_MIN = "8"
 
 # Persistent distributed rate-limiting & daily quota counters (recommended for production):
-# 1. Create a KV namespace: npx wrangler kv namespace create AI_QUOTA_KV
-# 2. Uncomment the block below and replace with the returned namespace ID.
-# [[kv_namespaces]]
-# binding = "AI_QUOTA_KV"
-# id = "YOUR_KV_NAMESPACE_ID"
+# KV namespace AI_QUOTA_KV, created in the Cloudflare dashboard and bound there too.
+[[kv_namespaces]]
+binding = "AI_QUOTA_KV"
+id = "989371776fcd4711b2500415fa32bf0a"
