@@ -17,21 +17,30 @@ export const SOCIAL_TOOLS_PART_2: ToolDefinition[] = [
       'youtube chapter maker',
       'youtube time link generator',
       'video chapters formatter',
+      'youtube chapter timestamp maker',
+      'youtube description chapters tool',
+      'clickable youtube timestamp links',
+      'youtube chapter validator',
+      'video chapter timecode generator',
     ],
     seo: {
-      title: 'YouTube Timestamp & Chapter Generator – Jump Links | UtilityFlow',
+      title: 'YouTube Timestamp Generator – Chapter Links | UtilityFlow',
       description:
-        'Create sorted YouTube description chapters validated for 00:00 start, 3+ chapters, and 10-second spacing, plus instant clickable ?t= share links.',
+        'Create sorted YouTube chapters validated for a 00:00 start, 3+ chapters and 10-second spacing, plus clickable ?t= jump links for sharing anywhere online.',
       primaryKeyword: 'youtube timestamp generator',
       secondaryKeywords: [
         'youtube chapters formatter',
         'youtube timestamp url builder',
         'video chapter checklist',
+        'youtube chapter timecode tool',
+        'youtube description chapter maker',
       ],
       longTailKeywords: [
         'generate youtube video chapters description block online',
         'create clickable youtube timestamp jump links for chapters',
         'validate youtube chapter 10 second minimum rule',
+        'format youtube chapters starting at 00:00 with three chapters',
+        'build youtube timestamp links for video show notes',
       ],
       schemaApplicationCategory: 'UtilitiesApplication',
     },
@@ -49,9 +58,24 @@ export const SOCIAL_TOOLS_PART_2: ToolDefinition[] = [
           'Enter MM:SS or HH:MM:SS timestamps and chapter titles; click Sort Chronologically anytime if rows get out of order.',
       },
       {
-        title: 'Verify chapter spec check and copy',
+        title: 'Sort and check the chapter rules',
         description:
-          'Confirm there are no YouTube specification warnings (00:00 start, 3+ chapters, 10s minimum spacing) and copy the description block.',
+          'Sort the list chronologically and review the spec check for the 00:00 start, at least 3 chapters, and 10-second minimum spacing.',
+      },
+      {
+        title: 'Fix any warnings before copying',
+        description:
+          'If a warning appears, adjust the offending timestamp or title so every chapter passes YouTube’s rules before you export.',
+      },
+      {
+        title: 'Copy the description block and links',
+        description:
+          'Copy the formatted chapter block for your video description, and copy individual ?t= links for comments, show notes, or newsletters.',
+      },
+      {
+        title: 'Tip: test a link before publishing',
+        description:
+          'Open one generated ?t= link in a new tab to confirm it jumps to the right moment, especially after editing timestamps late.',
       },
     ],
     examples: [
@@ -90,6 +114,91 @@ export const SOCIAL_TOOLS_PART_2: ToolDefinition[] = [
         answer:
           'No. Everything parses and formats locally in your browser without requiring Google account OAuth or API keys.',
       },
+      {
+        question: 'Is the YouTube Timestamp Generator free to use?',
+        answer:
+          'Yes, it is free to use in your browser with no sign-up, and nothing is uploaded to a server.',
+      },
+      {
+        question: 'What is the minimum number of chapters YouTube requires?',
+        answer:
+          'YouTube needs at least 3 chapters in the description before it shows chapter markers on the progress bar.',
+      },
+      {
+        question: 'Why must the first YouTube chapter start at 00:00?',
+        answer:
+          'YouTube uses the first timestamp to anchor the chapter system, so a description that starts later will not generate chapters at all.',
+      },
+      {
+        question: 'What happens if two chapters are less than 10 seconds apart?',
+        answer:
+          'YouTube ignores chapters shorter than 10 seconds, so this tool flags the gap and you should move the later timestamp forward.',
+      },
+      {
+        question: 'Can I use the YouTube Timestamp Generator for Shorts?',
+        answer:
+          'Yes, you can paste a Shorts link and the tool will still generate ?t= jump links, though chapters themselves are mainly useful for longer videos.',
+      },
+      {
+        question: 'How do the ?t= jump links work?',
+        answer:
+          'Each link appends the chapter start time in seconds to the video URL, so clicking it opens the video at that exact moment.',
+      },
+      {
+        question: 'What YouTube URL formats does the timestamp generator accept?',
+        answer:
+          'It accepts standard youtube.com/watch links, shortened youtu.be links, live links, embed links, and Shorts links.',
+      },
+      {
+        question: 'Do chapters have to be in chronological order?',
+        answer:
+          'Yes, YouTube requires ascending order, and this tool can sort your rows chronologically with one click if they get mixed up.',
+      },
+      {
+        question: 'Can I add chapters to a video I did not upload?',
+        answer:
+          'You can generate timestamp links for any public video to share exact moments, but chapters only appear when the video owner adds them to the description.',
+      },
+      {
+        question: 'How many chapters can I add with this tool?',
+        answer:
+          'There is no fixed cap in the tool, but very long chapter lists become hard to read, so keep them focused on real sections of the video.',
+      },
+      {
+        question: 'Do I need to include chapter titles, or are times enough?',
+        answer:
+          'YouTube needs a title after each timestamp, so add a short descriptive label for every chapter you list.',
+      },
+      {
+        question: 'Can I use these timestamps in a podcast episode description?',
+        answer:
+          'Yes, the same 00:00 format works in podcast show notes and episode descriptions, and the ?t= links are handy for listeners.',
+      },
+      {
+        question: 'Why does the tool switch all timestamps to HH:MM:SS for long videos?',
+        answer:
+          'Mixed MM:SS and HH:MM:SS formats confuse viewers and parsers, so the tool keeps every timestamp in one consistent format.',
+      },
+      {
+        question: 'Is my video URL or chapter list uploaded anywhere?',
+        answer:
+          'No, all parsing and formatting happens locally in your browser, and your URLs and chapter titles never leave your device.',
+      },
+      {
+        question: 'Can I edit a chapter after adding it?',
+        answer:
+          'Yes, you can change any timestamp or title, re-sort the list, and re-check the spec warnings before copying the updated block.',
+      },
+      {
+        question: 'What should I do if a generated link opens at the wrong time?',
+        answer:
+          'Check that the timestamp was entered as minutes and seconds in the right order, then re-copy the link after correcting it.',
+      },
+      {
+        question: 'Do YouTube chapters help viewers find content faster?',
+        answer:
+          'Yes, chapters let viewers jump straight to the section they need, which makes long tutorials, reviews, and podcasts easier to navigate.',
+      },
     ],
     relatedToolSlugs: [
       'social-thumbnail-previewer',
@@ -114,21 +223,30 @@ export const SOCIAL_TOOLS_PART_2: ToolDefinition[] = [
       'thumbnail tester',
       'video title truncation preview',
       '16:9 thumbnail checker',
+      'youtube thumbnail size checker',
+      'thumbnail dark mode preview',
+      'youtube feed thumbnail preview',
+      'thumbnail safe zone checker',
+      'video thumbnail mockup tool',
     ],
     seo: {
-      title: 'YouTube & Social Thumbnail Previewer – Feed & Spec Check | UtilityFlow',
+      title: 'YouTube Thumbnail Previewer – Feed Check | UtilityFlow',
       description:
-        'Test how your local thumbnail image, title truncation, and timestamp badge overlap appear in Light and Dark desktop feeds without uploading files to any server.',
+        'Preview your thumbnail and title in Light and Dark YouTube feeds before publishing, with 16:9, 1280×720 and 2 MB spec checks — all locally, no upload ever.',
       primaryKeyword: 'youtube thumbnail previewer',
       secondaryKeywords: [
         'thumbnail feed preview',
         'youtube title length checker',
         'thumbnail safe zone tool',
+        'youtube thumbnail size checker',
+        'thumbnail dark mode preview',
       ],
       longTailKeywords: [
         'preview youtube thumbnail in dark mode feed before publishing',
         'check thumbnail bottom right timestamp badge overlap',
         'private client side thumbnail 1280x720 checker',
+        'test youtube thumbnail readability in sidebar size',
+        'check youtube thumbnail title truncation in feed',
       ],
       schemaApplicationCategory: 'MultimediaApplication',
     },
@@ -149,6 +267,21 @@ export const SOCIAL_TOOLS_PART_2: ToolDefinition[] = [
         title: 'Toggle Dark Mode & Safe Zone',
         description:
           'Switch between Light and Dark feeds and toggle the amber timestamp corner zone overlay before exporting.',
+      },
+      {
+        title: 'Compare feed and sidebar sizes',
+        description:
+          'Check the large desktop feed card and the compact sidebar thumbnail side by side to catch text that is unreadable at small sizes.',
+      },
+      {
+        title: 'Check the spec warnings',
+        description:
+          'Review the 1280×720 dimension, 16:9 aspect ratio, and 2 MB file-size checks, and fix any flagged issue in your image editor.',
+      },
+      {
+        title: 'Tip: fix text hidden by the badge',
+        description:
+          'If the duration badge covers important text or a face, move that element away from the bottom-right corner and re-upload the image.',
       },
     ],
     examples: [
@@ -187,6 +320,91 @@ export const SOCIAL_TOOLS_PART_2: ToolDefinition[] = [
         answer:
           'Suggested watch-page thumbnails appear much smaller (~168px wide), so verifying readability at compact scale prevents cluttered designs.',
       },
+      {
+        question: 'Is the YouTube Thumbnail Previewer free to use?',
+        answer:
+          'Yes, it is free to use in your browser with no account, and your thumbnail images are never uploaded anywhere.',
+      },
+      {
+        question: 'Which image formats can I preview with the thumbnail previewer?',
+        answer:
+          'You can load PNG, JPG, and WebP files, which are the same formats YouTube accepts for custom thumbnails.',
+      },
+      {
+        question: 'How does the thumbnail previewer check the 16:9 aspect ratio?',
+        answer:
+          'It reads the real pixel dimensions of your image and flags it if the width-to-height ratio does not match 16:9.',
+      },
+      {
+        question: 'What is the thumbnail safe zone in this previewer?',
+        answer:
+          'The safe zone overlay highlights the bottom-right corner where YouTube places the video duration badge, so you can keep faces and key text clear of it.',
+      },
+      {
+        question: 'Why should I preview my thumbnail in Dark Mode?',
+        answer:
+          'Many viewers browse YouTube in Dark Mode, and bright or low-contrast designs can look very different against a dark feed background.',
+      },
+      {
+        question: 'How does the previewer show title truncation?',
+        answer:
+          'It renders your title in a realistic feed card with the same two-line limit, so you can see exactly where YouTube cuts it off.',
+      },
+      {
+        question: 'What happens if my thumbnail is larger than 2 MB?',
+        answer:
+          'The tool flags the file size, and you should re-export it at higher compression or a smaller resolution until it is under 2 MB.',
+      },
+      {
+        question: 'Can I preview a thumbnail before my video is published?',
+        answer:
+          'Yes, that is the main use: test unreleased thumbnails locally so sponsor graphics and launch artwork stay private until release day.',
+      },
+      {
+        question: 'Why does my thumbnail look blurry in the sidebar preview?',
+        answer:
+          'Small sidebar thumbnails shrink your image a lot, so thin text and fine detail blur; use large bold text and simple shapes instead.',
+      },
+      {
+        question: 'Does the previewer change or compress my thumbnail image?',
+        answer:
+          'No, it only displays your file as-is and reports its dimensions and size; it never edits, resizes, or re-encodes the image.',
+      },
+      {
+        question: 'What is the minimum thumbnail width YouTube accepts?',
+        answer:
+          'YouTube requires a minimum width of 640 pixels, though 1280 pixels wide is recommended for a sharp HD result.',
+      },
+      {
+        question: 'Can I test different titles with the same thumbnail?',
+        answer:
+          'Yes, just edit the title field and the feed preview updates instantly, so you can compare phrasing without re-uploading the image.',
+      },
+      {
+        question: 'Why is my thumbnail text cut off in the feed preview?',
+        answer:
+          'Feed cards clamp titles to two lines, so move your most important words to the start of the title where they stay visible.',
+      },
+      {
+        question: 'Does the previewer work for thumbnails on other platforms?',
+        answer:
+          'It is built around YouTube feed layouts, but the size, contrast, and small-scale readability checks are useful for any video platform.',
+      },
+      {
+        question: 'How do I remove a loaded thumbnail image?',
+        answer:
+          'Load a different image to replace it, or close the tab; the in-memory object URL is revoked and nothing is stored.',
+      },
+      {
+        question: 'What should I do if the preview looks different from real YouTube?',
+        answer:
+          'YouTube tweaks its layout over time, so treat the preview as a close approximation and do a final check on a private or unlisted upload.',
+      },
+      {
+        question: 'Can the thumbnail previewer check a live YouTube video thumbnail?',
+        answer:
+          'No, it previews local image files only; to check a published video, download its thumbnail image first and load that file here.',
+      },
     ],
     relatedToolSlugs: [
       'youtube-timestamp-generator',
@@ -211,21 +429,30 @@ export const SOCIAL_TOOLS_PART_2: ToolDefinition[] = [
       'hashtag cleaner',
       'camelcase hashtag converter',
       'deduplicate hashtags',
+      'hashtag generator from keywords',
+      'instagram hashtag limit checker',
+      'hashtag case converter',
+      'clean hashtag list tool',
+      'hashtag group formatter',
     ],
     seo: {
-      title: 'Hashtag Formatter – CamelCase, Deduplicate & Tag Counter | UtilityFlow',
+      title: 'Hashtag Formatter – CamelCase & Tag Counter | UtilityFlow',
       description:
-        'Normalize keyword lists into clean #CamelCase or lowercase hashtags, remove duplicates, strip invalid punctuation, and verify Instagram’s 30-tag cap.',
+        'Normalize keyword lists into clean #CamelCase or lowercase hashtags, remove duplicates and invalid punctuation, and check the Instagram 30-tag cap free.',
       primaryKeyword: 'hashtag formatter',
       secondaryKeywords: [
         'camelcase hashtag generator',
         'duplicate hashtag remover',
         'instagram hashtag counter',
+        'hashtag case converter',
+        'hashtag list cleaner',
       ],
       longTailKeywords: [
         'convert keyword list into accessible camelcase hashtags',
         'remove duplicate hashtags and invalid punctuation online',
         'format hashtag groups with caption fold dot separators',
+        'check instagram 30 hashtag limit before posting',
+        'turn keywords into clean lowercase hashtags online',
       ],
       schemaApplicationCategory: 'UtilitiesApplication',
     },
@@ -243,9 +470,24 @@ export const SOCIAL_TOOLS_PART_2: ToolDefinition[] = [
           'Choose PascalCase (#CamelCase) for accessibility, lowercase, or Preserve Case, plus inline or line-separated output.',
       },
       {
+        title: 'Choose a caption separator style',
+        description:
+          'Pick a single-line block, vertical list, or dot-separated footer so the tags sit neatly below your caption text.',
+      },
+      {
+        title: 'Run the formatter',
+        description:
+          'The tool strips invalid punctuation, removes duplicates case-insensitively, and rebuilds every tag in your chosen case.',
+      },
+      {
         title: 'Check count and copy',
         description:
           'Verify duplicates removed and total tag count against Instagram’s 30-tag cap, then click Copy Hashtags.',
+      },
+      {
+        title: 'Tip: trim tags over the platform cap',
+        description:
+          'If the count exceeds 30, drop the least relevant tags first, since extra tags past the cap are ignored by Instagram.',
       },
     ],
     examples: [
@@ -284,6 +526,91 @@ export const SOCIAL_TOOLS_PART_2: ToolDefinition[] = [
         answer:
           'No. It deterministically cleans, formats, and deduplicates the exact tags you supply.',
       },
+      {
+        question: 'Is the Hashtag Formatter free to use?',
+        answer:
+          'Yes, it is free to use in your browser with no sign-up, and your tags are processed locally without being uploaded.',
+      },
+      {
+        question: 'What is the Instagram hashtag limit?',
+        answer:
+          'Instagram allows up to 30 hashtags per post, and this tool counts your tags so you can stay within that cap.',
+      },
+      {
+        question: 'How does the Hashtag Formatter remove duplicates?',
+        answer:
+          'It compares tags case-insensitively, so #ContentMarketing and #contentmarketing count as the same tag and only one is kept.',
+      },
+      {
+        question: 'Can I paste hashtags with or without the # symbol?',
+        answer:
+          'Yes, both work: the tool adds a # to plain keywords and keeps the ones you already typed with a #.',
+      },
+      {
+        question: 'What separators can I use between hashtags?',
+        answer:
+          'You can separate tags with commas, spaces, semicolons, or newlines, and the tool handles mixed separators in one paste.',
+      },
+      {
+        question: 'What is the difference between CamelCase and lowercase hashtags?',
+        answer:
+          'CamelCase capitalizes each word (#SocialMedia) for screen-reader accessibility, while lowercase (#socialmedia) is a stylistic choice that reads as one word.',
+      },
+      {
+        question: 'Does the Hashtag Formatter check if a hashtag is banned?',
+        answer:
+          'No, it does not check ban lists or live platform data; it only cleans and formats the tags you provide.',
+      },
+      {
+        question: 'Can I use the formatted hashtags on TikTok and X too?',
+        answer:
+          'Yes, the cleaned tags work on any platform, though each platform has its own limits, such as the 30-tag cap on Instagram.',
+      },
+      {
+        question: 'Why do some of my hashtags disappear after formatting?',
+        answer:
+          'Tags made only of punctuation or unsupported characters are removed, since they would not work as clickable hashtags anyway.',
+      },
+      {
+        question: 'What are dot-separated hashtag footers for?',
+        answer:
+          'Dot separators push hashtags below the caption fold on Instagram, keeping the visible caption clean while the tags still work.',
+      },
+      {
+        question: 'Can I format hashtags in a vertical list?',
+        answer:
+          'Yes, choose the line-separated layout to put one hashtag per line, which is handy for comments and caption footers.',
+      },
+      {
+        question: 'Does the Hashtag Formatter work with non-English words?',
+        answer:
+          'Yes, it keeps letters from other alphabets in the tag, as long as the platform supports them in hashtags.',
+      },
+      {
+        question: 'How many hashtags should I use per post?',
+        answer:
+          'There is no single right number; use tags that are genuinely relevant to the post, and let the counter keep you under the platform cap.',
+      },
+      {
+        question: 'Can I save a hashtag group for reuse?',
+        answer:
+          'The tool does not store groups, so copy the formatted block into your own notes or spreadsheet to reuse it later.',
+      },
+      {
+        question: 'Why does Preserve Case keep my original capitalization?',
+        answer:
+          'Preserve Case is for brand tags or acronyms you want exactly as typed, while the other modes standardize every tag the same way.',
+      },
+      {
+        question: 'Are my hashtags uploaded to a server?',
+        answer:
+          'No, all formatting happens locally in your browser, so your keyword lists and campaign tags never leave your device.',
+      },
+      {
+        question: 'What should I do if a formatted hashtag still does not work on a platform?',
+        answer:
+          'Check the platform’s own rules for that tag, since some platforms block certain words or limit tag length even when the format is clean.',
+      },
     ],
     relatedToolSlugs: [
       'bio-line-break-formatter',
@@ -308,21 +635,30 @@ export const SOCIAL_TOOLS_PART_2: ToolDefinition[] = [
       'social media post templates',
       'hook framework builder',
       'linkedin post formatter',
+      'instagram caption templates',
+      'pas copywriting template',
+      'social media hook generator',
+      'post structure templates',
+      'caption writing framework tool',
     ],
     seo: {
-      title: 'Caption & Hook Template Builder – Structured Post Formats | UtilityFlow',
+      title: 'Caption Template Builder – Hook & Post Formats | UtilityFlow',
       description:
-        'Assemble clean social media captions using deterministic Problem-Agitate-Solution, 3-Step Tutorial, Before-After-Bridge, and Checklist frameworks in your browser.',
+        'Assemble clean social media captions with PAS, Tutorial, Before-After-Bridge and Checklist templates — your own words, structured, with live character counts.',
       primaryKeyword: 'caption template builder',
       secondaryKeywords: [
         'social media caption frameworks',
         'linkedin post structure builder',
         'pas copywriting template',
+        'instagram caption templates',
+        'social media hook templates',
       ],
       longTailKeywords: [
         'build structured linkedin and instagram captions without ai',
         'problem agitate solution social post template builder',
         'check x and instagram character fit while drafting captions',
+        'before after bridge caption template for social posts',
+        'structured checklist caption template for linkedin posts',
       ],
       schemaApplicationCategory: 'UtilitiesApplication',
     },
@@ -340,9 +676,24 @@ export const SOCIAL_TOOLS_PART_2: ToolDefinition[] = [
           'Enter your authentic opening hook, problem context, bullet takeaways (one per line), call-to-action, and hashtags.',
       },
       {
+        title: 'Review the live preview',
+        description:
+          'Read the formatted post as it will appear, checking paragraph spacing and the order of hook, takeaways, and call-to-action.',
+      },
+      {
+        title: 'Check the character and word fit',
+        description:
+          'Watch the live counter against X’s 280-character limit and Instagram or LinkedIn limits, and trim lines that push you over.',
+      },
+      {
         title: 'Copy and verify length',
         description:
           'Preview the live formatted post, confirm character/word fit for X or Instagram/LinkedIn, and click Copy Caption.',
+      },
+      {
+        title: 'Tip: try the same notes in another template',
+        description:
+          'Switch templates without retyping to compare how your hook and points read as PAS, a tutorial, or a checklist before you post.',
       },
     ],
     examples: [
@@ -381,6 +732,91 @@ export const SOCIAL_TOOLS_PART_2: ToolDefinition[] = [
         answer:
           'Yes. If an app still collapses spacing on mobile, drop the copied caption into our Instagram & Bio Line Break Formatter for invisible spacers.',
       },
+      {
+        question: 'Is the Caption Template Builder free to use?',
+        answer:
+          'Yes, it is free to use in your browser with no sign-up, and your drafts are processed locally without being uploaded.',
+      },
+      {
+        question: 'What is the PAS template in the Caption Template Builder?',
+        answer:
+          'PAS stands for Problem–Agitate–Solution: name the reader’s problem, sharpen why it hurts, then present your solution and call-to-action.',
+      },
+      {
+        question: 'Which caption templates does this builder include?',
+        answer:
+          'It includes five templates: Problem–Agitate–Solution, Actionable Breakdown, Before–After–Bridge, Audit Checklist, and Myth vs. Reality.',
+      },
+      {
+        question: 'Can I use the Caption Template Builder for LinkedIn posts?',
+        answer:
+          'Yes, the structured hook, takeaways, and call-to-action layout works well for LinkedIn, and the live counter helps you stay within its limits.',
+      },
+      {
+        question: 'Can I use the Caption Template Builder for Instagram captions?',
+        answer:
+          'Yes, the templates format cleanly for Instagram captions, and you can add hashtags at the end of the built caption.',
+      },
+      {
+        question: 'What is the Before–After–Bridge caption template?',
+        answer:
+          'It shows the reader’s current situation, paints the improved after-state, then bridges the gap with your product, method, or advice.',
+      },
+      {
+        question: 'How does the character counter work in the caption builder?',
+        answer:
+          'It counts characters and words live as you type and flags when your draft passes limits like X’s 280 characters.',
+      },
+      {
+        question: 'Can I switch templates without losing my text?',
+        answer:
+          'Yes, switching templates reuses your existing hook, points, and call-to-action, so you can compare structures without retyping.',
+      },
+      {
+        question: 'Does the builder add hashtags automatically?',
+        answer:
+          'No, it only places the hashtags you enter yourself, so you control exactly which tags appear with each caption.',
+      },
+      {
+        question: 'What makes a good hook for a social media caption?',
+        answer:
+          'A good hook states a clear benefit, surprising fact, or relatable problem in one short line that makes the reader stop scrolling.',
+      },
+      {
+        question: 'Can I use the caption builder for X (Twitter) posts?',
+        answer:
+          'Yes, the counter warns you at 280 characters, so you can trim your hook and takeaways until the post fits a single tweet.',
+      },
+      {
+        question: 'What is the Myth vs. Reality caption template for?',
+        answer:
+          'It pairs a common misconception with the correct fact, which works well for educational posts and debunking bad advice in your niche.',
+      },
+      {
+        question: 'Can I edit the caption after copying it?',
+        answer:
+          'Yes, the copied text is plain text, so you can tweak wording, emojis, or line breaks in your scheduling app before publishing.',
+      },
+      {
+        question: 'Does the builder save my captions?',
+        answer:
+          'No, drafts live only in your browser tab, so copy finished captions to your own notes or scheduler before closing the page.',
+      },
+      {
+        question: 'What should I put in the call-to-action field?',
+        answer:
+          'Write one clear next step, such as commenting, saving the post, clicking your link, or following your account.',
+      },
+      {
+        question: 'Can I use the caption builder for product launch announcements?',
+        answer:
+          'Yes, the PAS or Before–After–Bridge templates are a good fit for launches: state the problem, show the result, and end with where to get it.',
+      },
+      {
+        question: 'Why does the builder not rewrite or improve my wording?',
+        answer:
+          'It is deliberately deterministic, so your voice and facts stay exactly as you wrote them instead of being replaced by generic generated copy.',
+      },
     ],
     relatedToolSlugs: [
       'social-character-limit-checker',
@@ -405,21 +841,30 @@ export const SOCIAL_TOOLS_PART_2: ToolDefinition[] = [
       'username syntax validator',
       'brand handle generator',
       'social username rules',
+      'username availability checker',
+      'cross platform handle checker',
+      'instagram username rules',
+      'x username character limit',
+      'brand name to handle converter',
     ],
     seo: {
-      title: 'Social Handle Formatter – Cross-Platform Username Rules | UtilityFlow',
+      title: 'Social Handle Formatter – Username Rules | UtilityFlow',
       description:
-        'Generate clean handle variations from a brand name, validate X, Instagram, TikTok, YouTube, Threads, and GitHub username rules, and open direct check URLs.',
+        'Generate clean handle variations from a brand name, validate X, Instagram, TikTok, YouTube, Threads and GitHub username rules, and open direct check URLs.',
       primaryKeyword: 'social handle formatter',
       secondaryKeywords: [
         'social media username rules',
         'brand handle variation generator',
         'youtube handle character rules',
+        'username availability checker',
+        'cross platform handle checker',
       ],
       longTailKeywords: [
         'check social media username character length and allowed symbols',
         'consistent brand handle suggestions across x instagram tiktok',
         'validate handle format for github youtube and threads',
+        'find brand handle variations when exact name is taken',
+        'check x 15 character username limit before choosing handle',
       ],
       schemaApplicationCategory: 'UtilitiesApplication',
     },
@@ -437,9 +882,24 @@ export const SOCIAL_TOOLS_PART_2: ToolDefinition[] = [
           'Click any variation pill or customize Active Handle to test prefixes/suffixes like get, use, hq, or studio.',
       },
       {
+        title: 'Review syntax compliance per platform',
+        description:
+          'Check the Valid format status for each candidate across X, Instagram, TikTok, YouTube, Threads, and GitHub.',
+      },
+      {
+        title: 'Fix invalid characters',
+        description:
+          'If a platform flags a handle, remove the disallowed character — for example, drop hyphens for X and Instagram, or underscores for GitHub.',
+      },
+      {
         title: 'Review syntax compliance and open URLs',
         description:
           'Check Valid format status across X, Instagram, TikTok, YouTube, Threads, and GitHub, then click Check URL to inspect live claim status.',
+      },
+      {
+        title: 'Tip: copy your shortlist before claiming',
+        description:
+          'Copy the handles that pass on every platform you care about, then claim them one by one, starting with the network where your audience is largest.',
       },
     ],
     examples: [
@@ -477,6 +937,91 @@ export const SOCIAL_TOOLS_PART_2: ToolDefinition[] = [
         question: 'Why does GitHub reject underscores in handles?',
         answer:
           'GitHub usernames only allow alphanumeric characters and single non-leading/non-trailing hyphens, whereas X and Instagram disallow hyphens.',
+      },
+      {
+        question: 'Is the Social Handle Formatter free to use?',
+        answer:
+          'Yes, it is free to use in your browser with no sign-up, and your brand names and handle ideas are processed locally without being uploaded.',
+      },
+      {
+        question: 'What is the maximum handle length on X?',
+        answer:
+          'X usernames can be at most 15 characters long, so this tool flags any candidate longer than that for X.',
+      },
+      {
+        question: 'How do I check if a social handle is actually available?',
+        answer:
+          'Click the Check URL link for each platform to open the live profile page; if the page shows a real profile, the handle is taken.',
+      },
+      {
+        question: 'Why do hyphens work on GitHub but not on X or Instagram?',
+        answer:
+          'Each platform sets its own allowed characters: GitHub permits hyphens, while X and Instagram only allow letters, numbers, and underscores.',
+      },
+      {
+        question: 'What handle prefixes should I try if my exact name is taken?',
+        answer:
+          'Common prefixes and suffixes include get, use, the, hq, studio, official, and app — the tool generates these variations for you to test.',
+      },
+      {
+        question: 'Can the Social Handle Formatter check YouTube handles?',
+        answer:
+          'Yes, it validates candidates against YouTube’s @handle character rules and gives you a direct link to check the handle’s live status.',
+      },
+      {
+        question: 'What is the minimum handle length on most platforms?',
+        answer:
+          'Most platforms require at least a few characters, and handles that work across X, Instagram, TikTok, YouTube, and Threads are usually 4–15 characters.',
+      },
+      {
+        question: 'Should my handle match on every social platform?',
+        answer:
+          'Matching handles make your brand easier to find and harder to impersonate, so aim for one handle that passes the rules on every platform you use.',
+      },
+      {
+        question: 'Can I use numbers in my social handle?',
+        answer:
+          'Yes, numbers are allowed on all six platforms this tool checks, though starting a handle with a number can look less clean.',
+      },
+      {
+        question: 'Why does the tool say my handle is valid but the platform rejects it?',
+        answer:
+          'Syntax validity is only one check; the platform may also reject a handle because it is already taken, reserved, or blocked for policy reasons.',
+      },
+      {
+        question: 'Does the Social Handle Formatter check Threads handles?',
+        answer:
+          'Yes, it validates candidates against Threads username rules alongside X, Instagram, TikTok, YouTube, and GitHub.',
+      },
+      {
+        question: 'Can I use dots or periods in a social handle?',
+        answer:
+          'Instagram allows periods in usernames, but X, TikTok, and GitHub do not, so a handle with dots will not match everywhere.',
+      },
+      {
+        question: 'How do I pick a handle for a new startup or podcast?',
+        answer:
+          'Enter your brand name, shortlist the variations that pass on every platform, then claim the same one everywhere before announcing it.',
+      },
+      {
+        question: 'Can I test a handle with underscores on GitHub?',
+        answer:
+          'You can test it, but GitHub will reject underscores, so the tool flags it as invalid for GitHub even if it passes on X and Instagram.',
+      },
+      {
+        question: 'Are my brand name ideas uploaded to a server?',
+        answer:
+          'No, all handle generation and validation happens locally in your browser, so your naming ideas never leave your device.',
+      },
+      {
+        question: 'What should I do if my ideal handle is taken on one platform?',
+        answer:
+          'Try a consistent prefix or suffix across all platforms instead of a different name on one network, so your brand stays easy to find.',
+      },
+      {
+        question: 'Can I copy a handle directly from the tool?',
+        answer:
+          'Yes, the tool includes one-click copying for the active handle, so you can paste it into sign-up forms without retyping.',
       },
     ],
     relatedToolSlugs: [
