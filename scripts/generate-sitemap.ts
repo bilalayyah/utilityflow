@@ -16,6 +16,8 @@ import { DE_TOOL_OVERRIDES } from '../src/locales/de/tools';
 import { ID_TOOL_OVERRIDES } from '../src/locales/id/tools';
 import { IT_TOOL_OVERRIDES } from '../src/locales/it/tools';
 import { RU_TOOL_OVERRIDES } from '../src/locales/ru/tools';
+import { JA_TOOL_OVERRIDES } from '../src/locales/ja/tools';
+import { KO_TOOL_OVERRIDES } from '../src/locales/ko/tools';
 import type { ToolLocaleOverride } from '../src/locales/types';
 import { CATEGORIES } from '../src/registry/categories';
 import { TOOLS_REGISTRY } from '../src/registry/toolsRegistry';
@@ -41,6 +43,8 @@ const TOOL_OVERRIDES_BY_LOCALE: Record<string, Record<string, ToolLocaleOverride
   it: IT_TOOL_OVERRIDES,
   id: ID_TOOL_OVERRIDES,
   ru: RU_TOOL_OVERRIDES,
+  ja: JA_TOOL_OVERRIDES,
+  ko: KO_TOOL_OVERRIDES,
 };
 
 function escapeXml(value: string): string {
