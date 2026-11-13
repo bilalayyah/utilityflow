@@ -56,6 +56,32 @@ const STRINGS = {
     outputLabelDecode: 'Texte décodé',
     outputPlaceholder: 'Les entités converties apparaissent ici...',
   },
+  de: {
+    encodeTab: 'Entitäten kodieren',
+    decodeTab: 'Entitäten dekodieren',
+    encodeNonAscii: 'Nicht-ASCII-Zeichen kodieren (&#...;)',
+    swap: 'Tauschen',
+    inputLabelEncode: 'Rohes HTML / Text',
+    inputLabelDecode: 'HTML-kodierte Zeichenkette',
+    inputPlaceholderEncode: '<p>HTML-Tags oder Sonderzeichen hier eingeben...</p>',
+    inputPlaceholderDecode: '&lt;p&gt;Kodierte Entitäten hier einfügen...&lt;/p&gt;',
+    outputLabelEncode: 'Kodierte Entitäten',
+    outputLabelDecode: 'Dekodierter Text',
+    outputPlaceholder: 'Konvertierte Entitäten erscheinen hier...',
+  },
+  it: {
+    encodeTab: 'Codifica entità',
+    decodeTab: 'Decodifica entità',
+    encodeNonAscii: 'Codifica i simboli non ASCII (&#...;)',
+    swap: 'Scambia',
+    inputLabelEncode: 'HTML grezzo / Testo',
+    inputLabelDecode: 'Stringa con codifica HTML',
+    inputPlaceholderEncode: '<p>Inserisci tag HTML o caratteri speciali...</p>',
+    inputPlaceholderDecode: '&lt;p&gt;Incolla le entità codificate...&lt;/p&gt;',
+    outputLabelEncode: 'Entità codificate',
+    outputLabelDecode: 'Testo decodificato',
+    outputPlaceholder: 'Le entità convertite appariranno qui...',
+  },
 };
 
 const SAMPLE_HTML = `<div class="notice">5 < 10 & "café" — ready!</div>`;

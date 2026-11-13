@@ -83,9 +83,49 @@ const STRINGS = {
     millisecondsLabel: 'Millisecondes',
     isoLabel2: 'ISO 8601',
   },
+  de: {
+    currentLabel: 'Aktueller Unix-Zeitstempel (Sekunden)',
+    useCurrent: 'Aktuelle Zeit verwenden',
+    copyEpoch: 'Epoch kopieren',
+    converter1Label: 'Unix-Zeitstempel → lesbares Datum',
+    epochPlaceholder: 'z. B. 1794544800',
+    unitAuto: 'automatisch',
+    unitSeconds: 'Sekunden',
+    unitMilliseconds: 'Millisekunden',
+    errorNotNumeric: 'Bitte einen gültigen numerischen Unix-Zeitstempel eingeben.',
+    errorOutOfRange: 'Der Zeitstempel liegt außerhalb des gültigen JavaScript-Date-Bereichs.',
+    isoLabel: 'ISO 8601 (UTC)',
+    localLabel: 'Ortszeit',
+    rfcLabel: 'RFC 2822 / GMT',
+    relativeLabel: 'Relativ',
+    converter2Label: 'Lokales Datum und Uhrzeit → Unix-Zeitstempel',
+    secondsLabel: 'Sekunden',
+    millisecondsLabel: 'Millisekunden',
+    isoLabel2: 'ISO 8601',
+  },
+  it: {
+    currentLabel: 'Timestamp Unix corrente (secondi)',
+    useCurrent: 'Usa l\'ora corrente',
+    copyEpoch: 'Copia l\'epoch',
+    converter1Label: 'Timestamp Unix → data leggibile',
+    epochPlaceholder: 'es. 1794544800',
+    unitAuto: 'auto',
+    unitSeconds: 'secondi',
+    unitMilliseconds: 'millisecondi',
+    errorNotNumeric: 'Inserisci un timestamp Unix numerico valido.',
+    errorOutOfRange: 'Il timestamp è fuori dall\'intervallo valido per Date in JavaScript.',
+    isoLabel: 'ISO 8601 (UTC)',
+    localLabel: 'Fuso orario locale',
+    rfcLabel: 'RFC 2822 / GMT',
+    relativeLabel: 'Relativo',
+    converter2Label: 'Data e ora locali → timestamp Unix',
+    secondsLabel: 'Secondi',
+    millisecondsLabel: 'Millisecondi',
+    isoLabel2: 'ISO 8601',
+  },
 };
 
-function formatRelative(ms: number, nowMs: number, locale: 'en' | 'es' | 'pt' | 'fr'): string {
+function formatRelative(ms: number, nowMs: number, locale: 'en' | 'es' | 'pt' | 'fr' | 'de' | 'it'): string {
   const diffSec = Math.round((ms - nowMs) / 1000);
   const abs = Math.abs(diffSec);
   if (locale === 'es') {
@@ -105,6 +145,18 @@ function formatRelative(ms: number, nowMs: number, locale: 'en' | 'es' | 'pt' | 
     if (abs < 3600) return diffSec >= 0 ? `dans ${Math.round(abs / 60)} min` : `il y a ${Math.round(abs / 60)} min`;
     if (abs < 86400) return diffSec >= 0 ? `dans ${Math.round(abs / 3600)} h` : `il y a ${Math.round(abs / 3600)} h`;
     return diffSec >= 0 ? `dans ${Math.round(abs / 86400)} j` : `il y a ${Math.round(abs / 86400)} j`;
+  }
+  if (locale === 'de') {
+    if (abs < 60) return diffSec >= 0 ? `in ${abs} s` : `vor ${abs} s`;
+    if (abs < 3600) return diffSec >= 0 ? `in ${Math.round(abs / 60)} Min.` : `vor ${Math.round(abs / 60)} Min.`;
+    if (abs < 86400) return diffSec >= 0 ? `in ${Math.round(abs / 3600)} Std.` : `vor ${Math.round(abs / 3600)} Std.`;
+    return diffSec >= 0 ? `in ${Math.round(abs / 86400)} T` : `vor ${Math.round(abs / 86400)} T`;
+  }
+  if (locale === 'it') {
+    if (abs < 60) return diffSec >= 0 ? `tra ${abs} s` : `${abs} s fa`;
+    if (abs < 3600) return diffSec >= 0 ? `tra ${Math.round(abs / 60)} min` : `${Math.round(abs / 60)} min fa`;
+    if (abs < 86400) return diffSec >= 0 ? `tra ${Math.round(abs / 3600)} h` : `${Math.round(abs / 3600)} h fa`;
+    return diffSec >= 0 ? `tra ${Math.round(abs / 86400)} g` : `${Math.round(abs / 86400)} g fa`;
   }
   const suffix = diffSec >= 0 ? 'from now' : 'ago';
   if (abs < 60) return `${abs}s ${suffix}`;

@@ -76,6 +76,42 @@ const STRINGS = {
     invalidLength: 'Longueur de chaîne Base64 invalide.',
     invalidInput: 'Entrée Base64 invalide ou séquence d\'octets UTF-8 mal formée.',
   },
+  de: {
+    encodeTab: 'In Base64 kodieren',
+    decodeTab: 'Base64 dekodieren',
+    urlSafe: 'URL-sicher (- und _)',
+    omitPadding: 'Abschließendes =-Padding weglassen',
+    swap: 'Tauschen',
+    decodeError: 'Dekodierungsfehler:',
+    inputLabelEncode: 'Klartext (UTF-8)',
+    inputLabelDecode: 'Base64-Zeichenkette',
+    inputPlaceholderEncode: 'Text oder JSON zum Kodieren eingeben...',
+    inputPlaceholderDecode: 'Standard- oder URL-sichere Base64-Zeichenkette einfügen...',
+    outputLabelEncode: 'Base64-Ausgabe',
+    outputLabelDecode: 'Dekodierter Text',
+    outputPlaceholder: 'Die konvertierte Ausgabe erscheint hier...',
+    copyOutput: 'Ausgabe kopieren',
+    invalidLength: 'Ungültige Länge der Base64-Zeichenkette.',
+    invalidInput: 'Ungültige Base64-Eingabe oder fehlerhafte UTF-8-Bytesequenz.',
+  },
+  it: {
+    encodeTab: 'Codifica in Base64',
+    decodeTab: 'Decodifica Base64',
+    urlSafe: 'URL-safe (- e _)',
+    omitPadding: 'Ometti il padding = finale',
+    swap: 'Scambia',
+    decodeError: 'Errore di decodifica:',
+    inputLabelEncode: 'Testo in chiaro (UTF-8)',
+    inputLabelDecode: 'Stringa Base64',
+    inputPlaceholderEncode: 'Inserisci testo o JSON da codificare...',
+    inputPlaceholderDecode: 'Incolla una stringa Base64 standard o URL-safe...',
+    outputLabelEncode: 'Output Base64',
+    outputLabelDecode: 'Testo decodificato',
+    outputPlaceholder: 'L\'output convertito apparirà qui...',
+    copyOutput: 'Copia l\'output',
+    invalidLength: 'Lunghezza della stringa Base64 non valida.',
+    invalidInput: 'Input Base64 non valido o sequenza di byte UTF-8 malformata.',
+  },
 };
 
 const SAMPLE_PLAIN = {
@@ -83,6 +119,8 @@ const SAMPLE_PLAIN = {
   es: 'UtilityFlow: codificación Base64 segura con UTF-8 ✓',
   pt: 'UtilityFlow: codificação Base64 segura com UTF-8 ✓',
   fr: 'UtilityFlow : encodage Base64 sûr en UTF-8 ✓',
+  de: 'UtilityFlow: UTF-8-sichere Base64-Kodierung ✓',
+  it: 'UtilityFlow: codifica Base64 sicura con UTF-8 ✓',
 } as const;
 
 function encodeUtf8Base64(text: string, urlSafe: boolean, omitPadding: boolean): string {
@@ -101,7 +139,7 @@ function encodeUtf8Base64(text: string, urlSafe: boolean, omitPadding: boolean):
   return base64;
 }
 
-function decodeUtf8Base64(raw: string, locale: 'en' | 'es' | 'pt' | 'fr'): string {
+function decodeUtf8Base64(raw: string, locale: 'en' | 'es' | 'pt' | 'fr' | 'de' | 'it'): string {
   let normalized = raw.trim().replace(/-/g, '+').replace(/_/g, '/');
   const mod = normalized.length % 4;
   if (mod === 2) normalized += '==';

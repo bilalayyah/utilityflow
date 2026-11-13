@@ -52,6 +52,30 @@ const STRINGS = {
     generatedLabel: 'UUID générés',
     copyAll: 'Tout copier',
   },
+  de: {
+    versionLabel: 'UUID-Version',
+    v4: 'v4 (zufällig)',
+    v7: 'v7 (zeitgeordnet)',
+    quantity: 'Anzahl (1–100)',
+    generate: 'UUIDs erzeugen',
+    uppercase: 'Großbuchstaben',
+    includeHyphens: 'Bindestriche einfügen',
+    wrapBraces: 'In {geschweifte Klammern} setzen',
+    generatedLabel: 'Erzeugte UUIDs',
+    copyAll: 'Alle kopieren',
+  },
+  it: {
+    versionLabel: 'Versione UUID',
+    v4: 'v4 (casuale)',
+    v7: 'v7 (ordinata per tempo)',
+    quantity: 'Quantità (1–100)',
+    generate: 'Genera UUID',
+    uppercase: 'Maiuscolo',
+    includeHyphens: 'Includi i trattini',
+    wrapBraces: 'Racchiudi tra {parentesi graffe}',
+    generatedLabel: 'UUID generati',
+    copyAll: 'Copia tutto',
+  },
 };
 
 function generateUuidV4(): string {

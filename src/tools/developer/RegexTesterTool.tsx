@@ -83,6 +83,46 @@ const STRINGS = {
     replacePlaceholder: 'p. ex. $1 [at] $2',
     invalidRegex: 'Expression régulière invalide.',
   },
+  de: {
+    patternLabel: 'Muster für regulären Ausdruck',
+    patternPlaceholder: 'Regex-Muster eingeben...',
+    flagsLabel: 'Flags:',
+    syntaxError: 'Syntaxfehler:',
+    testStringLabel: 'Testzeichenkette',
+    testPlaceholder: 'Beispieltext zum Testen des Musters hier einfügen...',
+    highlightedMatches: 'Hervorgehobene Treffer',
+    matchSingular: 'Treffer',
+    matchPlural: 'Treffer',
+    highlightEmpty: 'Treffer werden hier in Echtzeit hervorgehoben...',
+    capturedTitle: 'Erfasste Treffer',
+    matchLabel: 'Treffer',
+    indexLabel: 'Index',
+    groupsLabel: 'Gruppen:',
+    noMatches: 'Keine Treffer gefunden.',
+    replaceLabel: 'Vorschau der Ersetzungsvorlage',
+    replacePlaceholder: 'z. B. $1 [at] $2',
+    invalidRegex: 'Ungültiger regulärer Ausdruck.',
+  },
+  it: {
+    patternLabel: 'Pattern di espressione regolare',
+    patternPlaceholder: 'Inserisci il pattern regex...',
+    flagsLabel: 'Flag:',
+    syntaxError: 'Errore di sintassi:',
+    testStringLabel: 'Stringa di test',
+    testPlaceholder: 'Incolla il testo di esempio da testare con il pattern...',
+    highlightedMatches: 'Corrispondenze evidenziate',
+    matchSingular: 'corrispondenza',
+    matchPlural: 'corrispondenze',
+    highlightEmpty: 'Le corrispondenze verranno evidenziate qui in tempo reale...',
+    capturedTitle: 'Corrispondenze acquisite',
+    matchLabel: 'Corrispondenza',
+    indexLabel: 'indice',
+    groupsLabel: 'Gruppi:',
+    noMatches: 'Nessuna corrispondenza trovata.',
+    replaceLabel: 'Anteprima del modello di sostituzione',
+    replacePlaceholder: 'es. $1 [at] $2',
+    invalidRegex: 'Espressione regolare non valida.',
+  },
 };
 
 interface RegexMatchItem {
@@ -105,6 +145,12 @@ E-mail inválido: not-an-email@`,
   fr: `Contact principal : support@utilityflow.online
 Équipe de facturation : billing@example.org
 E-mail invalide : not-an-email@`,
+  de: `Hauptkontakt: support@utilityflow.online
+Abrechnungsteam: billing@example.org
+Ungültige E-Mail: not-an-email@`,
+  it: `Contatto principale: support@utilityflow.online
+Team di fatturazione: billing@example.org
+Email non valida: not-an-email@`,
 } as const;
 
 const FLAG_DEFS = {
@@ -130,6 +176,18 @@ const FLAG_DEFS = {
     { flag: 'g', label: 'g (global)' },
     { flag: 'i', label: 'i (ignorer la casse)' },
     { flag: 'm', label: 'm (multiligne)' },
+    { flag: 's', label: 's (dotAll)' },
+  ],
+  de: [
+    { flag: 'g', label: 'g (global)' },
+    { flag: 'i', label: 'i (Groß-/Kleinschreibung ignorieren)' },
+    { flag: 'm', label: 'm (mehrzeilig)' },
+    { flag: 's', label: 's (dotAll)' },
+  ],
+  it: [
+    { flag: 'g', label: 'g (global)' },
+    { flag: 'i', label: 'i (ignora maiuscole/minuscole)' },
+    { flag: 'm', label: 'm (multilinea)' },
     { flag: 's', label: 's (dotAll)' },
   ],
 } as const;

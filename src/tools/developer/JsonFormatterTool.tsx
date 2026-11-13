@@ -80,6 +80,44 @@ const STRINGS = {
     outputPlaceholder: 'Le JSON formaté et validé apparaît ici...',
     copyJson: 'Copier le JSON',
   },
+  de: {
+    indent2: '2 Leerzeichen',
+    indent4: '4 Leerzeichen',
+    indentTab: 'Tab',
+    indentMinify: 'Minimieren',
+    sortKeys: 'Schlüssel A–Z sortieren',
+    validJson: 'Gültiges JSON',
+    keysLabel: 'Schlüssel',
+    depthLabel: 'Tiefe',
+    bytesLabel: 'Bytes',
+    invalidJson: 'Ungültiges JSON:',
+    invalidJsonSyntax: 'Ungültige JSON-Syntax',
+    lineCol: 'Zeile {line}, Spalte {col}',
+    inputLabel: 'Roh-JSON-Eingabe',
+    inputPlaceholder: '{"hello": "world", "items": [1, 2, 3]}',
+    outputLabel: 'Formatierte Ausgabe',
+    outputPlaceholder: 'Formatiertes und geprüftes JSON erscheint hier...',
+    copyJson: 'JSON kopieren',
+  },
+  it: {
+    indent2: '2 spazi',
+    indent4: '4 spazi',
+    indentTab: 'Tab',
+    indentMinify: 'Minimizza',
+    sortKeys: 'Ordina le chiavi A–Z',
+    validJson: 'JSON valido',
+    keysLabel: 'chiavi',
+    depthLabel: 'profondità',
+    bytesLabel: 'byte',
+    invalidJson: 'JSON non valido:',
+    invalidJsonSyntax: 'Sintassi JSON non valida',
+    lineCol: 'Riga {line}, colonna {col}',
+    inputLabel: 'Input JSON grezzo',
+    inputPlaceholder: '{"hello": "world", "items": [1, 2, 3]}',
+    outputLabel: 'Output formattato',
+    outputPlaceholder: 'Il JSON formattato e convalidato apparirà qui...',
+    copyJson: 'Copia JSON',
+  },
 };
 
 const SAMPLE_JSON = `{
@@ -134,7 +172,7 @@ function measureJsonStats(value: unknown, depth = 0): { keys: number; maxDepth: 
   return { keys: 0, maxDepth: depth };
 }
 
-function getLineColFromSyntaxError(input: string, err: unknown, locale: 'en' | 'es' | 'pt' | 'fr'): string {
+function getLineColFromSyntaxError(input: string, err: unknown, locale: 'en' | 'es' | 'pt' | 'fr' | 'de' | 'it'): string {
   const s = STRINGS[locale];
   const message = err instanceof Error ? err.message : s.invalidJsonSyntax;
   const posMatch = /position\s+(\d+)/i.exec(message);
