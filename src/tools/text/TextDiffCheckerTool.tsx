@@ -56,6 +56,32 @@ const STRINGS = {
     unchanged: 'inchangées',
     emptyState: 'Saisissez du texte dans les deux zones ci-dessus pour comparer les lignes ajoutées et supprimées.',
   },
+  de: {
+    ignoreWhitespace: 'Leerzeichen ignorieren',
+    ignoreCase: 'Groß-/Kleinschreibung ignorieren',
+    originalText: 'Originaltext',
+    modifiedText: 'Geänderter Text',
+    originalPlaceholder: 'Originaltext einfügen...',
+    modifiedPlaceholder: 'Aktualisierten Text einfügen...',
+    lineComparison: 'Zeilenvergleich',
+    added: 'hinzugefügt',
+    removed: 'entfernt',
+    unchanged: 'unverändert',
+    emptyState: 'Text in beide Felder oben eingeben, um hinzugefügte und entfernte Zeilen zu vergleichen.',
+  },
+  it: {
+    ignoreWhitespace: 'Ignora gli spazi',
+    ignoreCase: 'Ignora maiuscole/minuscole',
+    originalText: 'Testo originale',
+    modifiedText: 'Testo modificato',
+    originalPlaceholder: 'Incolla il testo originale...',
+    modifiedPlaceholder: 'Incolla il testo aggiornato...',
+    lineComparison: 'Confronto per righe',
+    added: 'aggiunte',
+    removed: 'rimosse',
+    unchanged: 'invariate',
+    emptyState: 'Inserisci il testo in entrambe le caselle qui sopra per confrontare righe aggiunte e rimosse.',
+  },
 };
 
 interface DiffLine {

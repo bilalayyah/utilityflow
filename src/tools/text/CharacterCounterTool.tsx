@@ -112,6 +112,60 @@ const STRINGS = {
       { name: 'Publication LinkedIn', note: 'Mise à jour standard maximale du fil' },
     ],
   },
+  de: {
+    sampleText:
+      'Schreiben Sie klare, prägnante Texte, die die Zeichenlimits der Plattformen einhalten, ohne dass sie in Suchergebnissen oder sozialen Feeds ungünstig abgeschnitten werden.',
+    withSpaces: 'Mit Leerzeichen',
+    withoutSpaces: 'Ohne Leerzeichen',
+    words: 'Wörter',
+    letters: 'Buchstaben',
+    digits: 'Ziffern',
+    utf8Bytes: 'UTF-8-Bytes',
+    copyText: 'Text kopieren',
+    textToMeasure: 'Text zur Messung der Zeichenlänge',
+    placeholder:
+      'Text eingeben oder einfügen, um exakte Zeichenzahlen, Bytegröße und Plattformlimits zu prüfen...',
+    whitespaceChars: 'Leerzeichen',
+    lines: 'Zeilen',
+    platformLimitsTitle: 'Zeichenlimits für Plattformen und SEO',
+    over: 'darüber',
+    left: 'übrig',
+    platformLimits: [
+      { name: 'SEO-Meta-Titel', note: 'Empfohlene Länge des Google-Titels in den Suchergebnissen' },
+      { name: 'SEO-Meta-Beschreibung', note: 'Standard-Schwellenwert für Snippets auf dem Desktop' },
+      { name: 'SMS-Segment', note: 'Eine einzelne GSM-7-SMS-Nachricht' },
+      { name: 'X-/Twitter-Beitrag', note: 'Standardlänge eines Beitrags' },
+      { name: 'Instagram-Bildunterschrift (Vorschau)', note: 'Sichtbar vor dem Kürzen mit „Mehr“' },
+      { name: 'LinkedIn-Beitrag', note: 'Maximale Standard-Feed-Aktualisierung' },
+    ],
+  },
+  it: {
+    sampleText:
+      'Scrivi testi chiari e concisi che rispettino i limiti di caratteri delle piattaforme, senza troncamenti scomodi nei risultati di ricerca o nei feed social.',
+    withSpaces: 'Con spazi',
+    withoutSpaces: 'Senza spazi',
+    words: 'Parole',
+    letters: 'Lettere',
+    digits: 'Cifre',
+    utf8Bytes: 'Byte UTF-8',
+    copyText: 'Copia il testo',
+    textToMeasure: 'Testo per misurare la lunghezza in caratteri',
+    placeholder:
+      'Digita o incolla il testo per controllare il numero esatto di caratteri, la dimensione in byte e i limiti delle piattaforme...',
+    whitespaceChars: 'Caratteri di spaziatura',
+    lines: 'Righe',
+    platformLimitsTitle: 'Limiti di caratteri per piattaforme e SEO',
+    over: 'in più',
+    left: 'rimasti',
+    platformLimits: [
+      { name: 'Meta title SEO', note: 'Lunghezza consigliata del titolo nei risultati Google' },
+      { name: 'Meta description SEO', note: 'Soglia standard dello snippet su desktop' },
+      { name: 'Segmento SMS', note: 'Un singolo messaggio SMS GSM-7' },
+      { name: 'Post su X / Twitter', note: 'Lunghezza standard di un post' },
+      { name: 'Anteprima didascalia Instagram', note: 'Visibile prima del troncamento con "Altro"' },
+      { name: 'Post su LinkedIn', note: 'Aggiornamento standard massimo del feed' },
+    ],
+  },
 };
 
 interface PlatformLimit {

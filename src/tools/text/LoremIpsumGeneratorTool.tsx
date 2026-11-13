@@ -52,6 +52,30 @@ const STRINGS = {
     copyPlaceholder: 'Copier le texte d\'exemple',
     generatedText: 'Texte d\'exemple généré',
   },
+  de: {
+    amount: 'Anzahl',
+    unit: 'Einheit',
+    unitLabels: { paragraphs: 'Absätze', sentences: 'Sätze', words: 'Wörter' },
+    startClassic: 'Mit „Lorem ipsum“ beginnen',
+    wrapHtml: 'In <p>-Tags einschließen',
+    words: 'Wörter',
+    characters: 'Zeichen',
+    regenerate: 'Neu erzeugen',
+    copyPlaceholder: 'Platzhaltertext kopieren',
+    generatedText: 'Erzeugter Platzhaltertext',
+  },
+  it: {
+    amount: 'Quantità',
+    unit: 'Unità',
+    unitLabels: { paragraphs: 'paragrafi', sentences: 'frasi', words: 'parole' },
+    startClassic: 'Inizia con “Lorem ipsum”',
+    wrapHtml: 'Racchiudi nei tag <p>',
+    words: 'parole',
+    characters: 'caratteri',
+    regenerate: 'Rigenera',
+    copyPlaceholder: 'Copia il testo segnaposto',
+    generatedText: 'Testo segnaposto generato',
+  },
 };
 
 type UnitType = 'paragraphs' | 'sentences' | 'words';

@@ -56,6 +56,32 @@ const STRINGS = {
     inputPlaceholder: 'Collez une liste avec un élément par ligne...',
     outputPlaceholder: 'Le résultat sans doublons apparaîtra ici...',
   },
+  de: {
+    caseSensitive: 'Groß-/Kleinschreibung beachten',
+    trimWhitespace: 'Leerzeichen entfernen',
+    removeEmptyLines: 'Leere Zeilen entfernen',
+    sortAlphabetically: 'Alphabetisch sortieren',
+    originalLines: 'Ursprüngliche Zeilen',
+    lines: 'Zeilen',
+    uniqueLines: 'Einzigartige Zeilen',
+    unique: 'einzigartig',
+    removed: 'entfernt',
+    inputPlaceholder: 'Liste mit einem Element pro Zeile einfügen...',
+    outputPlaceholder: 'Deduplizierte Ausgabe erscheint hier...',
+  },
+  it: {
+    caseSensitive: 'Distingui maiuscole/minuscole',
+    trimWhitespace: 'Elimina gli spazi',
+    removeEmptyLines: 'Rimuovi le righe vuote',
+    sortAlphabetically: 'Ordina alfabeticamente',
+    originalLines: 'Righe originali',
+    lines: 'righe',
+    uniqueLines: 'Righe univoche',
+    unique: 'univoche',
+    removed: 'rimosse',
+    inputPlaceholder: 'Incolla un elenco con un elemento per riga...',
+    outputPlaceholder: 'L\'output deduplicato apparirà qui...',
+  },
 };
 
 const SAMPLE_LINES = `apple@example.com

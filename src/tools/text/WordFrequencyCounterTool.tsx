@@ -77,6 +77,42 @@ const STRINGS = {
     density: 'Densité',
     emptyState: 'Saisissez du texte ci-dessus pour voir les nombres de mots et les pourcentages de densité des mots-clés.',
   },
+  de: {
+    sampleText: `Technische SEO-Audits prüfen Crawlbarkeit, interne Verlinkung und Ladegeschwindigkeit. Schnelle Seiten verbessern Nutzerbindung und Ladegeschwindigkeitssignale in der mobilen Suche. Interne Verlinkung verbindet verwandte Anleitungen und stärkt die technische SEO-Struktur.`,
+    ngramLabels: { 1: '1 Wort', 2: '2-Wort-Phrasen', 3: '3-Wort-Phrasen' },
+    excludeStopWords: 'Gängige Stoppwörter ausschließen',
+    minLength: 'Mindestlänge:',
+    textForAnalysis: 'Text für die Häufigkeitsanalyse',
+    placeholder:
+      'Artikeltexte, Produktbeschreibungen oder Notizen einfügen, um wiederholte Begriffe und Keyword-Dichte zu zählen...',
+    totalWords: 'Wörter insgesamt:',
+    uniqueTerms: 'Einzigartige Begriffe:',
+    exportCsv: 'CSV exportieren',
+    copyCsv: 'CSV kopieren',
+    rank: '#',
+    termPhrase: 'Begriff / Phrase',
+    count: 'Anzahl',
+    density: 'Dichte',
+    emptyState: 'Text oben eingeben, um Wortzahlen und Keyword-Dichte-Prozentsätze zu sehen.',
+  },
+  it: {
+    sampleText: `Gli audit tecnici SEO controllano la crawlabilità, i link interni e la velocità delle pagine. Le pagine veloci migliorano il coinvolgimento degli utenti e i segnali di velocità nella ricerca mobile. I link interni collegano guide correlate e rafforzano la struttura tecnica SEO.`,
+    ngramLabels: { 1: '1 parola', 2: 'Frasi di 2 parole', 3: 'Frasi di 3 parole' },
+    excludeStopWords: 'Escludi le stop word comuni',
+    minLength: 'Lunghezza min.:',
+    textForAnalysis: 'Testo per l\'analisi di frequenza',
+    placeholder:
+      'Incolla testi di articoli, descrizioni di prodotti o note per contare i termini ripetuti e la densità delle parole chiave...',
+    totalWords: 'Parole totali:',
+    uniqueTerms: 'Termini univoci:',
+    exportCsv: 'Esporta CSV',
+    copyCsv: 'Copia CSV',
+    rank: '#',
+    termPhrase: 'Termine / Frase',
+    count: 'Conteggio',
+    density: 'Densità',
+    emptyState: 'Inserisci il testo qui sopra per visualizzare i conteggi delle parole e le percentuali di densità delle parole chiave.',
+  },
 };
 
 const STOP_WORDS = new Set([

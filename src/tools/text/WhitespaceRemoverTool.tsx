@@ -92,6 +92,50 @@ Troisième   ligne ici.   `,
     inputPlaceholder: 'Collez du texte désordonné avec des espaces en trop, des tabulations ou des lignes vides...',
     outputPlaceholder: 'Le résultat nettoyé apparaît automatiquement...',
   },
+  de: {
+    sampleText: `   Erste   Zeile mit   extra   Leerzeichen.   
+
+   Zweite Zeile   mit   Tabs	und   Lücken.
+
+
+Dritte   Zeile hier.   `,
+    collapseSpaces: 'Mehrere Leerzeichen zusammenfassen',
+    trimEdges: 'Zeilenränder trimmen',
+    tabsToSpaces: 'Tabs in Leerzeichen umwandeln',
+    lineBreaks: 'Zeilenumbrüche:',
+    keepBreaks: 'Zeilenumbrüche beibehalten',
+    removeBlankLines: 'Leere Zeilen entfernen',
+    replaceWithSpaces: 'Durch Leerzeichen ersetzen',
+    removeAllBreaks: 'Alle Umbrüche entfernen',
+    inputText: 'Eingabetext',
+    chars: 'Zeichen',
+    cleanedText: 'Bereinigter Text',
+    removed: 'entfernt',
+    inputPlaceholder: 'Unordentlichen Text mit zusätzlichen Leerzeichen, Tabs oder Leerzeilen einfügen...',
+    outputPlaceholder: 'Bereinigte Ausgabe erscheint automatisch...',
+  },
+  it: {
+    sampleText: `   Prima   riga con   spazi   extra.   
+
+   Seconda riga   con   tabulazioni	e   spazi.
+
+
+Terza   riga qui.   `,
+    collapseSpaces: 'Unisci gli spazi multipli',
+    trimEdges: 'Taglia i bordi delle righe',
+    tabsToSpaces: 'Converti le tabulazioni in spazi',
+    lineBreaks: 'Interruzioni di riga:',
+    keepBreaks: 'Mantieni le interruzioni di riga',
+    removeBlankLines: 'Rimuovi le righe vuote',
+    replaceWithSpaces: 'Sostituisci con spazi',
+    removeAllBreaks: 'Rimuovi tutte le interruzioni',
+    inputText: 'Testo di input',
+    chars: 'caratteri',
+    cleanedText: 'Testo pulito',
+    removed: 'rimossi',
+    inputPlaceholder: 'Incolla testo disordinato con spazi extra, tabulazioni o righe vuote...',
+    outputPlaceholder: 'L\'output pulito apparirà automaticamente...',
+  },
 };
 
 type LineBreakMode = 'keep' | 'collapse-blank' | 'remove-all' | 'to-spaces';

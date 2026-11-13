@@ -132,6 +132,70 @@ En savoir plus sur [UtilityFlow](/tools/).`,
     inputPlaceholder: 'Écrivez du Markdown (# Titre, **gras**, - liste, [lien](https://...))...',
     emptyPreview: 'L\'aperçu apparaîtra au fur et à mesure de votre saisie Markdown...',
   },
+  de: {
+    sampleMarkdown: `# UtilityFlow Versionshinweise
+
+Willkommen beim **Markdown Previewer**, einem schnellen clientseitigen Editor mit Live-*HTML*-Export.
+
+## Hauptfunktionen
+
+- Sofortige Formatierung für Überschriften, Listen und Links
+- Sicheres HTML-Escaping ohne Remote-Uploads
+- HTML-Rohdaten mit einem Klick kopieren und herunterladen
+
+> Halten Sie die Dokumentation nah an der Arbeit und prüfen Sie die Struktur vor der Veröffentlichung.
+
+\`\`\`json
+{
+  "tool": "markdown-previewer",
+  "mode": "browser-side"
+}
+\`\`\`
+
+Mehr erfahren unter [UtilityFlow](/tools/).`,
+    renderedPreview: 'Gerenderte Vorschau',
+    rawHtml: 'Rohes HTML',
+    exportHtml: 'HTML exportieren',
+    copyHtml: 'HTML kopieren',
+    markdownSource: 'Markdown-Quelle',
+    livePreview: 'Live-Vorschau',
+    compiledHtml: 'Kompiliertes HTML',
+    compiledHtmlAria: 'Kompilierte HTML-Quelle',
+    inputPlaceholder: 'Markdown schreiben (# Überschrift, **fett**, - Liste, [Link](https://...))...',
+    emptyPreview: 'Die Vorschau erscheint, während Sie Markdown eingeben...',
+  },
+  it: {
+    sampleMarkdown: `# Note di rilascio di UtilityFlow
+
+Benvenuto in **Markdown Previewer**, un editor rapido lato client con esportazione *HTML* in tempo reale.
+
+## Funzionalità principali
+
+- Formattazione immediata di titoli, elenchi e link
+- Escape HTML sicuro senza caricamenti remoti
+- Copia e download dell\'HTML grezzo con un clic
+
+> Tieni la documentazione vicina al lavoro e controlla la struttura prima della pubblicazione.
+
+\`\`\`json
+{
+  "tool": "markdown-previewer",
+  "mode": "browser-side"
+}
+\`\`\`
+
+Scopri di più su [UtilityFlow](/tools/).`,
+    renderedPreview: 'Anteprima renderizzata',
+    rawHtml: 'HTML grezzo',
+    exportHtml: 'Esporta HTML',
+    copyHtml: 'Copia HTML',
+    markdownSource: 'Sorgente Markdown',
+    livePreview: 'Anteprima live',
+    compiledHtml: 'HTML compilato',
+    compiledHtmlAria: 'Sorgente HTML compilata',
+    inputPlaceholder: 'Scrivi Markdown (# Titolo, **grassetto**, - elenco, [link](https://...))...',
+    emptyPreview: 'L\'anteprima apparirà mentre scrivi Markdown...',
+  },
 };
 
 function escapeHtml(text: string): string {

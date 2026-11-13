@@ -24,6 +24,16 @@ const STRINGS = {
     placeholder: 'Saisissez ou collez du texte, puis cliquez sur un bouton de conversion ci-dessous...',
     copyResult: 'Copier le résultat',
   },
+  de: {
+    textToConvert: 'Text zur Umwandlung der Groß-/Kleinschreibung',
+    placeholder: 'Text eingeben oder einfügen und dann unten auf eine Umwandlungsschaltfläche klicken...',
+    copyResult: 'Ergebnis kopieren',
+  },
+  it: {
+    textToConvert: 'Testo da convertire',
+    placeholder: 'Digita o incolla il testo, poi fai clic su uno dei pulsanti di conversione qui sotto...',
+    copyResult: 'Copia il risultato',
+  },
 };
 
 const SAMPLE_TEXT = 'welcome to utilityFlow: fast text_case formatting & clean URLs';

@@ -64,6 +64,36 @@ Troisième ligne de texte`,
       { id: 'lines', label: 'Inverser l\'ordre des lignes' },
     ],
   },
+  de: {
+    sampleText: `Erste Textzeile
+Zweite Textzeile
+Dritte Textzeile`,
+    originalText: 'Originaltext',
+    reversedOutput: 'Umgekehrte Ausgabe',
+    inputPlaceholder: 'Text oder Zeilen zum Umkehren eingeben...',
+    outputPlaceholder: 'Umgekehrter Text erscheint hier...',
+    modes: [
+      { id: 'characters', label: 'Zeichen umkehren' },
+      { id: 'words', label: 'Wortreihenfolge umkehren' },
+      { id: 'each-word', label: 'Jedes Wort umkehren' },
+      { id: 'lines', label: 'Zeilenreihenfolge umkehren' },
+    ],
+  },
+  it: {
+    sampleText: `Prima riga di testo
+Seconda riga di testo
+Terza riga di testo`,
+    originalText: 'Testo originale',
+    reversedOutput: 'Output invertito',
+    inputPlaceholder: 'Inserisci testo o righe da invertire...',
+    outputPlaceholder: 'Il testo invertito apparirà qui...',
+    modes: [
+      { id: 'characters', label: 'Inverti i caratteri' },
+      { id: 'words', label: 'Inverti ordine delle parole' },
+      { id: 'each-word', label: 'Inverti ogni parola' },
+      { id: 'lines', label: 'Inverti ordine delle righe' },
+    ],
+  },
 };
 
 type ReverseMode = 'characters' | 'words' | 'each-word' | 'lines';

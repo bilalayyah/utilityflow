@@ -96,6 +96,52 @@ Les phrases courtes améliorent la lecture. Varier la longueur des phrases rend 
     mostFrequentWords: 'Mots les plus fréquents',
     emptyKeywords: 'Saisissez du texte ci-dessus pour voir les mots les plus répétés.',
   },
+  de: {
+    sampleText: `UtilityFlow verarbeitet jede Textberechnung direkt in Ihrem Browser. Ob Sie einen Blogartikel entwerfen, eine Produktankündigung straffen oder einen akademischen Aufsatz anhand eines strengen Wortlimits prüfen – sofortige Zählungen helfen Ihnen, Ihre Botschaft klar zu gliedern.
+
+Kurze Sätze verbessern die Lesbarkeit. Unterschiedliche Satzlängen halten längere Anleitungen für Leser auf Desktop- und Mobilbildschirmen ansprechend.`,
+    words: 'Wörter',
+    characters: 'Zeichen',
+    noSpaces: 'Ohne Leerzeichen',
+    sentences: 'Sätze',
+    paragraphs: 'Absätze',
+    readingTime: 'Lesezeit',
+    downloadTxt: '.txt herunterladen',
+    copyText: 'Text kopieren',
+    textToCount: 'Zu zählender Text',
+    placeholder:
+      'Text hier einfügen oder eingeben, um Wörter, Zeichen, Sätze und Lesezeit zu zählen...',
+    deliveryTimingLines: 'Sprechzeit und Zeilen',
+    speakingTime: 'Sprechzeit (130 WpM)',
+    totalLines: 'Zeilen insgesamt',
+    avgWordLength: 'Durchschnittliche Wortlänge',
+    chars: 'Zeichen',
+    mostFrequentWords: 'Häufigste Wörter',
+    emptyKeywords: 'Text oben eingeben, um die häufigsten wiederholten Wörter zu sehen.',
+  },
+  it: {
+    sampleText: `UtilityFlow elabora ogni calcolo di testo direttamente nel browser. Che tu stia scrivendo un articolo di blog, perfezionando l\'annuncio di un prodotto o controllando un saggio accademico con un limite rigido di parole, i conteggi istantanei ti aiutano a organizzare il messaggio con chiarezza.
+
+Le frasi brevi migliorano la leggibilità. Variare la lunghezza delle frasi mantiene le guide lunghe coinvolgenti per i lettori su desktop e dispositivi mobili.`,
+    words: 'Parole',
+    characters: 'Caratteri',
+    noSpaces: 'Senza spazi',
+    sentences: 'Frasi',
+    paragraphs: 'Paragrafi',
+    readingTime: 'Tempo di lettura',
+    downloadTxt: 'Scarica .txt',
+    copyText: 'Copia il testo',
+    textToCount: 'Testo da contare',
+    placeholder:
+      'Incolla o digita qui il testo per contare parole, caratteri, frasi e tempo di lettura...',
+    deliveryTimingLines: 'Tempi di lettura e righe',
+    speakingTime: 'Tempo di lettura ad alta voce (130 ppm)',
+    totalLines: 'Righe totali',
+    avgWordLength: 'Lunghezza media delle parole',
+    chars: 'caratteri',
+    mostFrequentWords: 'Parole più frequenti',
+    emptyKeywords: 'Inserisci il testo qui sopra per vedere le parole più ripetute.',
+  },
 };
 
 export default function WordCounterTool() {
