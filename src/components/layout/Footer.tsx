@@ -1,9 +1,13 @@
 import { Link } from 'react-router-dom';
 import { SITE_CONFIG } from '../../config/site';
-import { CATEGORIES } from '../../registry/categories';
+import { useLocale } from '../../locales/LocaleContext';
+import { categoryHref, localizeStaticPath } from '../../locales/config';
+import { getLocalizedCategories } from '../../locales/tools';
 
 export function Footer() {
+  const { locale, t } = useLocale();
   const currentYear = new Date().getFullYear();
+  const categories = getLocalizedCategories(locale);
 
   return (
     <footer className="border-t border-slate-200 bg-slate-50 text-slate-600">
@@ -11,7 +15,7 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-12">
           <div className="lg:col-span-4 space-y-3">
             <Link
-              to="/"
+              to={localizeStaticPath('/', locale)}
               className="inline-flex items-center gap-2.5 text-lg font-bold tracking-tight text-slate-900"
             >
               <svg
@@ -31,11 +35,10 @@ export function Footer() {
               <span>{SITE_CONFIG.name}</span>
             </Link>
             <p className="text-sm leading-relaxed text-slate-600 max-w-sm">
-              A fast, browser-first collection of everyday utilities for writers, engineers,
-              marketers, and analysts. Built to run locally with minimal overhead.
+              {t.footer.tagline}
             </p>
             <p className="text-xs text-slate-500">
-              Contact:{' '}
+              {t.nav.contact}:{' '}
               <a
                 href={`mailto:${SITE_CONFIG.contactEmail}`}
                 className="text-slate-700 hover:text-indigo-600 underline-offset-4 hover:underline"
@@ -46,12 +49,12 @@ export function Footer() {
           </div>
 
           <div className="lg:col-span-4">
-            <h2 className="text-sm font-semibold text-slate-900 mb-3">Categories</h2>
+            <h2 className="text-sm font-semibold text-slate-900 mb-3">{t.footer.categories}</h2>
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 text-sm">
-              {CATEGORIES.map((category) => (
+              {categories.map((category) => (
                 <li key={category.id}>
                   <Link
-                    to={`/category/${category.slug}/`}
+                    to={categoryHref(category.id, locale)}
                     className="hover:text-slate-950 transition-colors underline-offset-4 hover:underline"
                   >
                     {category.name}
@@ -62,84 +65,84 @@ export function Footer() {
           </div>
 
           <div className="lg:col-span-2">
-            <h2 className="text-sm font-semibold text-slate-900 mb-3">Platform &amp; AI</h2>
+            <h2 className="text-sm font-semibold text-slate-900 mb-3">{t.footer.platformAi}</h2>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link
-                  to="/"
+                  to={localizeStaticPath('/', locale)}
                   className="hover:text-slate-950 transition-colors underline-offset-4 hover:underline"
                 >
-                  Home
+                  {t.footer.home}
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/tools/"
+                  to={localizeStaticPath('/tools/', locale)}
                   className="hover:text-slate-950 transition-colors underline-offset-4 hover:underline"
                 >
-                  All Tools Directory
+                  {t.footer.allToolsDirectory}
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/ai-writing-assistant/"
+                  to={localizeStaticPath('/ai-writing-assistant/', locale)}
                   className="hover:text-slate-950 transition-colors underline-offset-4 hover:underline"
                 >
-                  AI Writing Assistant
+                  {t.nav.aiWriting.label}
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/ai-text-summarizer/"
+                  to={localizeStaticPath('/ai-text-summarizer/', locale)}
                   className="hover:text-slate-950 transition-colors underline-offset-4 hover:underline"
                 >
-                  AI Text Summarizer
+                  {t.nav.aiSummarizer.label}
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/ai-tool-finder/"
+                  to={localizeStaticPath('/ai-tool-finder/', locale)}
                   className="hover:text-slate-950 transition-colors underline-offset-4 hover:underline"
                 >
-                  AI Smart Tool Finder
+                  {t.nav.aiFinder.label}
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/about/"
+                  to={localizeStaticPath('/about/', locale)}
                   className="hover:text-slate-950 transition-colors underline-offset-4 hover:underline"
                 >
-                  About Us
+                  {t.footer.aboutUs}
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/contact/"
+                  to={localizeStaticPath('/contact/', locale)}
                   className="hover:text-slate-950 transition-colors underline-offset-4 hover:underline"
                 >
-                  Contact
+                  {t.footer.contact}
                 </Link>
               </li>
             </ul>
           </div>
 
           <div className="lg:col-span-2">
-            <h2 className="text-sm font-semibold text-slate-900 mb-3">Legal</h2>
+            <h2 className="text-sm font-semibold text-slate-900 mb-3">{t.footer.legal}</h2>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link
-                  to="/privacy-policy/"
+                  to={localizeStaticPath('/privacy-policy/', locale)}
                   className="hover:text-slate-950 transition-colors underline-offset-4 hover:underline"
                 >
-                  Privacy Policy
+                  {t.footer.privacyPolicy}
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/terms-of-service/"
+                  to={localizeStaticPath('/terms-of-service/', locale)}
                   className="hover:text-slate-950 transition-colors underline-offset-4 hover:underline"
                 >
-                  Terms of Service
+                  {t.footer.termsOfService}
                 </Link>
               </li>
               <li>
@@ -147,7 +150,7 @@ export function Footer() {
                   href="/sitemap.xml"
                   className="hover:text-slate-950 transition-colors underline-offset-4 hover:underline"
                 >
-                  XML Sitemap
+                  {t.footer.xmlSitemap}
                 </a>
               </li>
             </ul>
@@ -156,9 +159,9 @@ export function Footer() {
 
         <div className="mt-10 border-t border-slate-200 pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs text-slate-500">
           <p>
-            © {currentYear} {SITE_CONFIG.name}. All rights reserved.
+            © {currentYear} {SITE_CONFIG.name}. {t.footer.rightsReserved}
           </p>
-          <p>Browser-side utilities · Deployed on Cloudflare Pages</p>
+          <p>{t.footer.deployedNote}</p>
         </div>
       </div>
     </footer>

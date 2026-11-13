@@ -1,5 +1,6 @@
 import { useEffect, type ReactNode } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useLocale } from '../../locales/LocaleContext';
 import { Footer } from './Footer';
 import { Header } from './Header';
 
@@ -9,6 +10,7 @@ interface SiteLayoutProps {
 
 export function SiteLayout({ children }: SiteLayoutProps) {
   const { pathname, hash } = useLocation();
+  const { t } = useLocale();
 
   useEffect(() => {
     if (hash) {
@@ -28,7 +30,7 @@ export function SiteLayout({ children }: SiteLayoutProps) {
         href="#main-content"
         className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-lg focus:bg-indigo-600 focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white"
       >
-        Skip to content
+        {t.nav.skipToContent}
       </a>
       <Header />
       <main id="main-content" className="flex-1">

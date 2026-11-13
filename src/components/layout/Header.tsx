@@ -1,34 +1,50 @@
 import { ChevronDown, Menu, Search, Sparkles, X } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { NAV_LINKS, SITE_CONFIG } from '../../config/site';
+import { SITE_CONFIG } from '../../config/site';
+import { LanguageSwitcher } from '../../locales/LanguageSwitcher';
+import { useLocale } from '../../locales/LocaleContext';
+import { localizeStaticPath } from '../../locales/config';
 import { ToolSearchBar } from '../tool/ToolSearchBar';
 import { ThemeToggle } from './ThemeToggle';
 
-const AI_NAV_ITEMS = [
-  {
-    label: 'AI Writing Assistant',
-    to: '/ai-writing-assistant/',
-    desc: 'Grammar, rewrite, tone & email drafting',
-  },
-  {
-    label: 'AI Text Summarizer',
-    to: '/ai-text-summarizer/',
-    desc: 'Short, medium & bulleted summaries',
-  },
-  {
-    label: 'AI Smart Tool Finder',
-    to: '/ai-tool-finder/',
-    desc: 'Find the right tool in plain English',
-  },
-] as const;
-
 export function Header() {
+  const { locale, t } = useLocale();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [aiMenuOpen, setAiMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const aiMenuRef = useRef<HTMLDivElement | null>(null);
   const location = useLocation();
+
+  const homePrefix = locale === 'es' ? '/es' : '';
+  const categoriesAnchor = `${homePrefix}/#categories`;
+  const aiAnchor = `${homePrefix}/#ai-tools`;
+
+  const AI_NAV_ITEMS = [
+    {
+      label: t.nav.aiWriting.label,
+      to: localizeStaticPath('/ai-writing-assistant/', locale),
+      desc: t.nav.aiWriting.desc,
+    },
+    {
+      label: t.nav.aiSummarizer.label,
+      to: localizeStaticPath('/ai-text-summarizer/', locale),
+      desc: t.nav.aiSummarizer.desc,
+    },
+    {
+      label: t.nav.aiFinder.label,
+      to: localizeStaticPath('/ai-tool-finder/', locale),
+      desc: t.nav.aiFinder.desc,
+    },
+  ] as const;
+
+  const NAV_ITEMS = [
+    { label: t.nav.tools, to: localizeStaticPath('/tools/', locale) },
+    { label: t.nav.categories, to: categoriesAnchor, anchor: true },
+    { label: t.nav.aiTools, to: aiAnchor, anchor: true, aiDropdown: true },
+    { label: t.nav.about, to: localizeStaticPath('/about/', locale) },
+    { label: t.nav.contact, to: localizeStaticPath('/contact/', locale) },
+  ] as const;
 
   useEffect(() => {
     setAiMenuOpen(false);
@@ -64,7 +80,7 @@ export function Header() {
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 sm:gap-8 px-4 sm:px-6 lg:px-8">
         {/* Zone 1: Single-element Brand Wordmark */}
         <Link
-          to="/"
+          to={localizeStaticPath('/', locale)}
           onClick={() => setMobileOpen(false)}
           className="inline-flex items-center gap-2.5 text-lg font-bold tracking-tight text-slate-900 whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 rounded-md"
         >
@@ -87,8 +103,8 @@ export function Header() {
 
         {/* Zone 2: Clean Single-Line Navigation Links */}
         <nav aria-label="Primary" className="hidden md:flex items-center gap-6 lg:gap-7">
-          {NAV_LINKS.map((item) => {
-            if (item.to === '/#ai-tools') {
+          {NAV_ITEMS.map((item) => {
+            if ('aiDropdown' in item && item.aiDropdown) {
               return (
                 <div key={item.to} ref={aiMenuRef} className="relative">
                   <button
@@ -115,7 +131,7 @@ export function Header() {
                   {aiMenuOpen && (
                     <div
                       role="menu"
-                      aria-label="Free AI Tools"
+                      aria-label={t.nav.freeAiTools}
                       className="absolute left-0 top-full mt-2 w-72 rounded-xl border border-slate-200 bg-white p-2 shadow-lg z-50"
                     >
                       {AI_NAV_ITEMS.map((ai) => (
@@ -133,11 +149,11 @@ export function Header() {
                       <div className="mt-1 pt-1 border-t border-slate-100">
                         <Link
                           role="menuitem"
-                          to="/#ai-tools"
+                          to={aiAnchor}
                           onClick={() => setAiMenuOpen(false)}
                           className="block rounded-lg px-3 py-2 text-xs font-semibold text-indigo-600 hover:bg-indigo-50"
                         >
-                          View AI section on Homepage →
+                          {t.nav.viewAiSection}
                         </Link>
                       </div>
                     </div>
@@ -147,7 +163,7 @@ export function Header() {
             }
 
             const isActive =
-              item.to !== '/#categories' &&
+              !('anchor' in item && item.anchor) &&
               (location.pathname === item.to ||
                 location.pathname === item.to.replace(/\/$/, ''));
             return (
@@ -166,35 +182,37 @@ export function Header() {
 
         {/* Header search (desktop): same live tool search as the homepage */}
         <div className="hidden lg:block w-60 xl:w-80 shrink-0">
-          <ToolSearchBar placeholder="Search 88 tools..." />
+          <ToolSearchBar placeholder={t.nav.searchPlaceholder} />
         </div>
 
-        {/* Zone 3: Theme Switcher + Primary Action + Mobile Drawer Toggle */}
+        {/* Zone 3: Language Switcher + Theme Switcher + Primary Action + Mobile Drawer Toggle */}
         <div className="flex items-center gap-2 sm:gap-3 shrink-0">
           <button
             type="button"
             aria-expanded={searchOpen}
-            aria-label={searchOpen ? 'Close search' : 'Search tools'}
+            aria-label={searchOpen ? t.nav.closeSearch : t.nav.searchTools}
             onClick={() => setSearchOpen((prev) => !prev)}
             className="inline-flex lg:hidden items-center justify-center rounded-lg border border-slate-200 p-2 text-slate-700 hover:bg-slate-50 hover:text-slate-900 min-h-[40px] min-w-[40px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 cursor-pointer"
           >
             <Search className="w-5 h-5" />
           </button>
 
+          <LanguageSwitcher />
+
           <ThemeToggle />
 
           <Link
-            to="/tools/"
+            to={localizeStaticPath('/tools/', locale)}
             className="hidden md:inline-flex items-center justify-center rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white transition-colors duration-150 hover:bg-indigo-700 whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:ring-offset-2"
           >
-            All Tools
+            {t.nav.allTools}
           </Link>
 
           <button
             type="button"
             aria-expanded={mobileOpen}
             aria-controls="mobile-navigation"
-            aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            aria-label={mobileOpen ? t.nav.closeMenu : t.nav.openMenu}
             onClick={() => setMobileOpen((prev) => !prev)}
             className="inline-flex md:hidden items-center justify-center rounded-lg border border-slate-200 p-2 text-slate-700 hover:bg-slate-50 hover:text-slate-900 min-h-[40px] min-w-[40px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 cursor-pointer"
           >
@@ -206,7 +224,7 @@ export function Header() {
       {/* Mobile search row (expandable) */}
       {searchOpen && (
         <div className="lg:hidden border-t border-slate-200 bg-white px-4 py-3">
-          <ToolSearchBar placeholder="Search 88 tools..." />
+          <ToolSearchBar placeholder={t.nav.searchPlaceholder} />
         </div>
       )}
 
@@ -217,7 +235,7 @@ export function Header() {
           aria-label="Mobile"
           className="md:hidden border-t border-slate-200 bg-white px-4 py-4 space-y-2"
         >
-          {NAV_LINKS.filter((item) => item.to !== '/#ai-tools').map((item) => (
+          {NAV_ITEMS.filter((item) => !('aiDropdown' in item && item.aiDropdown)).map((item) => (
             <Link
               key={item.to}
               to={item.to}
@@ -230,7 +248,7 @@ export function Header() {
 
           <div className="pt-2 border-t border-slate-100 space-y-1">
             <div className="px-3 py-1 text-xs font-semibold uppercase tracking-wider text-indigo-600">
-              Free AI Tools
+              {t.nav.freeAiTools}
             </div>
             {AI_NAV_ITEMS.map((ai) => (
               <Link
@@ -245,15 +263,19 @@ export function Header() {
           </div>
 
           <div className="pt-2 border-t border-slate-100">
+            <LanguageSwitcher variant="list" onSelect={() => setMobileOpen(false)} />
+          </div>
+
+          <div className="pt-2 border-t border-slate-100">
             <ThemeToggle variant="segmented" onSelect={() => setMobileOpen(false)} />
           </div>
           <div className="pt-2">
             <Link
-              to="/tools/"
+              to={localizeStaticPath('/tools/', locale)}
               onClick={() => setMobileOpen(false)}
               className="flex w-full items-center justify-center rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700 min-h-[44px]"
             >
-              All Tools
+              {t.nav.allTools}
             </Link>
           </div>
         </nav>
