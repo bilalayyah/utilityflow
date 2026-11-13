@@ -70,6 +70,18 @@ function formatRelative(ms: number, nowMs: number, locale: LocaleCode): string {
     if (abs < 86400) return diffSec >= 0 ? `через ${Math.round(abs / 3600)} ч` : `${Math.round(abs / 3600)} ч назад`;
     return diffSec >= 0 ? `через ${Math.round(abs / 86400)} дн` : `${Math.round(abs / 86400)} дн назад`;
   }
+  if (locale === 'ja') {
+    if (abs < 60) return diffSec >= 0 ? `${abs}秒後` : `${abs}秒前`;
+    if (abs < 3600) return diffSec >= 0 ? `${Math.round(abs / 60)}分後` : `${Math.round(abs / 60)}分前`;
+    if (abs < 86400) return diffSec >= 0 ? `${Math.round(abs / 3600)}時間後` : `${Math.round(abs / 3600)}時間前`;
+    return diffSec >= 0 ? `${Math.round(abs / 86400)}日後` : `${Math.round(abs / 86400)}日前`;
+  }
+  if (locale === 'ko') {
+    if (abs < 60) return diffSec >= 0 ? `${abs}초 후` : `${abs}초 전`;
+    if (abs < 3600) return diffSec >= 0 ? `${Math.round(abs / 60)}분 후` : `${Math.round(abs / 60)}분 전`;
+    if (abs < 86400) return diffSec >= 0 ? `${Math.round(abs / 3600)}시간 후` : `${Math.round(abs / 3600)}시간 전`;
+    return diffSec >= 0 ? `${Math.round(abs / 86400)}일 후` : `${Math.round(abs / 86400)}일 전`;
+  }
   const suffix = diffSec >= 0 ? 'from now' : 'ago';
   if (abs < 60) return `${abs}s ${suffix}`;
   if (abs < 3600) return `${Math.round(abs / 60)}m ${suffix}`;
