@@ -258,6 +258,30 @@ export default function App() {
             <Route path="/ko/:toolSlug" element={<ToolPage />} />
             <Route path="/ko/:toolSlug/" element={<ToolPage />} />
 
+            {/* Simplified Chinese (zh) routes — same components, locale from URL */}
+            <Route path="/zh" element={<HomePage />} />
+            <Route path="/zh/" element={<HomePage />} />
+            <Route path="/zh/all-tools" element={<ToolsDirectoryPage />} />
+            <Route path="/zh/all-tools/" element={<ToolsDirectoryPage />} />
+            <Route path="/zh/fenlei/:categorySlug" element={<CategoryPage />} />
+            <Route path="/zh/fenlei/:categorySlug/" element={<CategoryPage />} />
+            <Route path="/zh/ai-xiezuo-zhushou" element={<AiWritingAssistantPage />} />
+            <Route path="/zh/ai-xiezuo-zhushou/" element={<AiWritingAssistantPage />} />
+            <Route path="/zh/ai-wenben-zhaiyao" element={<AiTextSummarizerPage />} />
+            <Route path="/zh/ai-wenben-zhaiyao/" element={<AiTextSummarizerPage />} />
+            <Route path="/zh/ai-gongju-chazhao" element={<AiToolFinderPage />} />
+            <Route path="/zh/ai-gongju-chazhao/" element={<AiToolFinderPage />} />
+            <Route path="/zh/guanyu-women" element={<AboutPage />} />
+            <Route path="/zh/guanyu-women/" element={<AboutPage />} />
+            <Route path="/zh/lianxi-women" element={<ContactPage />} />
+            <Route path="/zh/lianxi-women/" element={<ContactPage />} />
+            <Route path="/zh/yinsi-zhengce" element={<PrivacyPolicyPage />} />
+            <Route path="/zh/yinsi-zhengce/" element={<PrivacyPolicyPage />} />
+            <Route path="/zh/shiyong-tiaokuan" element={<TermsOfServicePage />} />
+            <Route path="/zh/shiyong-tiaokuan/" element={<TermsOfServicePage />} />
+            <Route path="/zh/:toolSlug" element={<ToolPage />} />
+            <Route path="/zh/:toolSlug/" element={<ToolPage />} />
+
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </SiteLayout>
