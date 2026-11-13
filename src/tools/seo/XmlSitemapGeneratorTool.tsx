@@ -56,6 +56,32 @@ const STRINGS = {
     downloadXml: 'Télécharger le .xml',
     generatedAria: 'Sitemap XML généré',
   },
+  de: {
+    lastmodLabel: '<lastmod>-Datum (optional)',
+    changefreqLabel: '<changefreq>-Hinweis',
+    priorityLabel: 'Standard-<priority>',
+    omitTag: 'Tag weglassen',
+    deduplicateLabel: 'Exakte URLs deduplizieren',
+    urlsLabel: 'Canonical-URLs (eine vollständige https://-URL pro Zeile)',
+    skippedInvalid: '{n} ungültige URL-Zeile(n) übersprungen: ',
+    generatedLabel: 'Generierte sitemap.xml ({n} URLs)',
+    copyXml: 'XML kopieren',
+    downloadXml: '.xml herunterladen',
+    generatedAria: 'Generierte XML-Sitemap',
+  },
+  it: {
+    lastmodLabel: 'Data <lastmod> (facoltativo)',
+    changefreqLabel: 'Suggerimento <changefreq>',
+    priorityLabel: '<priority> predefinito',
+    omitTag: 'Ometti tag',
+    deduplicateLabel: 'Rimuovi URL duplicati esatti',
+    urlsLabel: 'URL canonical (un URL https:// completo per riga)',
+    skippedInvalid: '{n} riga/e di URL non valido saltata/e: ',
+    generatedLabel: 'sitemap.xml generata ({n} URL)',
+    copyXml: 'Copia XML',
+    downloadXml: 'Scarica .xml',
+    generatedAria: 'Sitemap XML generata',
+  },
 };
 
 function escapeXml(str: string): string {

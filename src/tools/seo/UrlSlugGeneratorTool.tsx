@@ -73,6 +73,42 @@ const STRINGS = {
     slugUrlHeader: 'Slug SEO et URL complète',
     copyHeader: 'Copier',
   },
+  de: {
+    sampleTitles:
+      'So erstellt man einen sauberen URL-Slug für technisches SEO!\n10 beste Café- & Produktivitätstools 2026\nXML-Sitemap- & Robots.txt-Komplettcheckliste',
+    domainLabel: 'Basis-Domain / Unterordner (für vollständige URL-Vorschau)',
+    separatorLabel: 'Worttrennzeichen',
+    hyphenOption: 'Bindestrich (-) — von Google empfohlen',
+    underscoreOption: 'Unterstrich (_)',
+    maxLengthLabel: 'Max. Slug-Länge ({n} Zeichen)',
+    stripStopWords: 'Optionale englische Stoppwörter entfernen (a, the, and, of, in, to)',
+    trailingSlash: 'Schrägstrich am Ende einfügen (/)',
+    titlesLabel: 'Seitenüberschriften / Titel (einer pro Zeile für Stapelverarbeitung)',
+    generatedLabel: 'Generierte SEO-Slugs ({n})',
+    copyAllSlugs: 'Alle Slugs kopieren',
+    copyAllUrls: 'Alle vollständigen URLs kopieren',
+    originalTitleHeader: 'Originaltitel',
+    slugUrlHeader: 'SEO-Slug & vollständige URL',
+    copyHeader: 'Kopieren',
+  },
+  it: {
+    sampleTitles:
+      'Come creare uno slug URL pulito per la SEO tecnica!\nI 10 migliori strumenti per caffè e produttività nel 2026\nChecklist completa di sitemap XML e robots.txt',
+    domainLabel: 'Dominio base / sottocartella (per anteprima URL completa)',
+    separatorLabel: 'Separatore di parole',
+    hyphenOption: 'Trattino (-) — consigliato da Google',
+    underscoreOption: 'Trattino basso (_)',
+    maxLengthLabel: 'Lunghezza max slug ({n} caratteri)',
+    stripStopWords: 'Rimuovi le stop word inglesi facoltative (a, the, and, of, in, to)',
+    trailingSlash: 'Includi barra finale (/)',
+    titlesLabel: 'Titoli di pagina (uno per riga per generazione in batch)',
+    generatedLabel: 'Slug SEO generati ({n})',
+    copyAllSlugs: 'Copia tutti gli slug',
+    copyAllUrls: 'Copia tutti gli URL completi',
+    originalTitleHeader: 'Titolo originale',
+    slugUrlHeader: 'Slug SEO e URL completo',
+    copyHeader: 'Copia',
+  },
 };
 
 const SEO_STOP_WORDS = new Set([
