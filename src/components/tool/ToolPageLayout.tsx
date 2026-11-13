@@ -2,7 +2,7 @@ import { Check, Info } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { buildCanonicalUrl } from '../../config/site';
 import { useLocale } from '../../locales/LocaleContext';
-import { categoryHref, localizeStaticPath } from '../../locales/config';
+import { categoryHref, localizeStaticPath, toolHref } from '../../locales/config';
 import { getToolAlternatePaths, toHreflangEntries } from '../../locales/routes';
 import { getLocalizedCategory } from '../../locales/tools';
 import { formatString } from '../../locales/ui';
@@ -35,7 +35,7 @@ export function buildHowToSchema(howToTitle: string, description: string, steps:
 export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
   const { locale, t } = useLocale();
   const category = getLocalizedCategory(tool.categoryId, locale);
-  const canonicalPath = locale === 'es' ? `/es/${tool.slug}/` : `/${tool.slug}/`;
+  const canonicalPath = toolHref(tool.slug, locale);
   const howToTitle = formatString(t.toolPage.howToUse, { name: tool.name });
 
   const breadcrumbItems: BreadcrumbItem[] = [
