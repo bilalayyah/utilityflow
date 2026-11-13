@@ -1,6 +1,6 @@
 import type { CategoryId } from '../types/tool';
 import { buildCanonicalUrl } from '../config/site';
-import type { LocaleCode } from './config';
+import type { LocaleCode, NonDefaultLocale } from './config';
 import {
   CATEGORY_PATH_SEGMENT,
   DEFAULT_LOCALE,
@@ -9,15 +9,12 @@ import {
   getLocaleInfo,
   isLocaleCode,
 } from './config';
-import { getCategoryById } from '../registry/categories';
-import {
-  getCategoryByLocalizedSlug,
-  getLocalizedCategory,
-  getLocalizedTool,
-  getToolById,
-  getToolByLocalizedSlug,
-  hasToolOverride,
-} from './tools';
+import { getCategoryById, getCategoryBySlug } from '../registry/categories';
+import { getToolBySlug } from '../registry/toolsRegistry';
+import { getToolById } from './tools';
+import { SLUG_MANIFEST } from './slugManifest';
+import { getActiveLocaleData } from './store';
+import type { LocaleData } from './types';
 
 /**
  * Cross-locale navigation: given the current pathname, build the equivalent
@@ -27,6 +24,15 @@ import {
  *
  * Alternate-path sets are Partial<Record<LocaleCode, string>>: 'en' is
  * always present; other locales appear only when translated.
+ *
+ * This module NEVER needs loaded locale data for its alternate-path
+ * getters: getToolAlternatePaths / getCategoryAlternatePaths read slugs
+ * from the static SLUG_MANIFEST (slugs only, bundled with the app).
+ * getLocalizedEquivalentPath resolves the SOURCE tool/category through the
+ * manifest too (invert slug -> id), and resolves the TARGET slug from the
+ * optional `targetData` when provided, else the store, else the manifest
+ * (the manifest is the last resort so a switch always lands on the right
+ * localized URL even before the target locale's data has been stored).
  */
 
 export type LocaleAlternatePaths = Partial<Record<LocaleCode, string>>;
@@ -40,9 +46,69 @@ function homePath(locale: LocaleCode): string {
   return locale === DEFAULT_LOCALE ? '/' : `${getLocaleInfo(locale).pathPrefix}/`;
 }
 
+/** Invert the manifest: localized tool slug -> English tool id (EN slugs resolve via the registry). */
+function resolveToolIdBySlug(slug: string, locale: LocaleCode): string | undefined {
+  const normalized = slug.replace(/^\/+|\/+$/g, '').toLowerCase();
+  if (locale !== DEFAULT_LOCALE) {
+    const entry = Object.entries(SLUG_MANIFEST[locale].tools).find(
+      ([, localizedSlug]) => localizedSlug.toLowerCase() === normalized
+    );
+    if (entry) return entry[0];
+  }
+  return getToolBySlug(normalized)?.id;
+}
+
+/** Invert the manifest: localized category slug -> category id (EN slugs resolve via the registry). */
+function resolveCategoryIdBySlug(slug: string, locale: LocaleCode): string | undefined {
+  const normalized = slug.replace(/^\/+|\/+$/g, '').toLowerCase();
+  if (locale !== DEFAULT_LOCALE) {
+    const entry = Object.entries(SLUG_MANIFEST[locale].categories).find(
+      ([, localizedSlug]) => localizedSlug.toLowerCase() === normalized
+    );
+    if (entry) return entry[0];
+  }
+  return getCategoryBySlug(normalized)?.id;
+}
+
+/** Localized tool slug for the target locale: targetData -> store -> manifest. */
+function targetToolSlug(
+  toolId: string,
+  targetLocale: LocaleCode,
+  targetData?: LocaleData
+): string | undefined {
+  if (targetLocale === DEFAULT_LOCALE) return getToolById(toolId)?.slug;
+  if (targetData && targetData.code === targetLocale) {
+    return targetData.toolOverrides[toolId]?.slug;
+  }
+  const storeData = getActiveLocaleData();
+  if (storeData.code === targetLocale) {
+    return storeData.toolOverrides[toolId]?.slug;
+  }
+  return SLUG_MANIFEST[targetLocale as NonDefaultLocale].tools[toolId];
+}
+
+/** Localized category slug for the target locale: targetData -> store -> manifest (falls back to the English slug, as before). */
+function targetCategorySlug(
+  categoryId: string,
+  targetLocale: LocaleCode,
+  targetData?: LocaleData
+): string {
+  const base = getCategoryById(categoryId as CategoryId);
+  if (targetLocale === DEFAULT_LOCALE) return base?.slug ?? categoryId;
+  if (targetData && targetData.code === targetLocale) {
+    return targetData.categoryOverrides[categoryId]?.slug ?? base?.slug ?? categoryId;
+  }
+  const storeData = getActiveLocaleData();
+  if (storeData.code === targetLocale) {
+    return storeData.categoryOverrides[categoryId]?.slug ?? base?.slug ?? categoryId;
+  }
+  return SLUG_MANIFEST[targetLocale as NonDefaultLocale].categories[categoryId] ?? base?.slug ?? categoryId;
+}
+
 export function getLocalizedEquivalentPath(
   pathname: string,
-  targetLocale: LocaleCode
+  targetLocale: LocaleCode,
+  targetData?: LocaleData
 ): string {
   const [pathPart, hash] = pathname.split('#');
   const path = normalize(pathPart || '/');
@@ -83,21 +149,17 @@ export function getLocalizedEquivalentPath(
       categorySegment === 'category'
         ? DEFAULT_LOCALE
         : (categorySegment as LocaleCode);
-    const category =
-      getCategoryByLocalizedSlug(slug, sourceLocale) ??
-      getCategoryByLocalizedSlug(slug, DEFAULT_LOCALE);
-    if (!category) return withHash(home);
+    const categoryId = resolveCategoryIdBySlug(slug, sourceLocale);
+    if (!categoryId) return withHash(home);
     // Always resolve through the English base record: a localized category
     // slug must never leak into another locale's URL.
-    const base = getCategoryById(category.id);
+    const base = getCategoryById(categoryId as CategoryId);
     if (!base) return withHash(home);
     if (targetLocale === DEFAULT_LOCALE) {
       return withHash(`/category/${base.slug}/`);
     }
-    const localized = getLocalizedCategory(base, targetLocale);
-    if (!localized) return withHash(home);
     return withHash(
-      `${getLocaleInfo(targetLocale).pathPrefix}/${CATEGORY_PATH_SEGMENT[targetLocale]}/${localized.slug}/`
+      `${getLocaleInfo(targetLocale).pathPrefix}/${CATEGORY_PATH_SEGMENT[targetLocale]}/${targetCategorySlug(base.id, targetLocale, targetData)}/`
     );
   }
 
@@ -113,39 +175,37 @@ export function getLocalizedEquivalentPath(
   if (toolSlug !== undefined) {
     const sourceLocale =
       segments.length === 2 ? (segments[0] as LocaleCode) : DEFAULT_LOCALE;
-    const tool =
-      getToolByLocalizedSlug(toolSlug, sourceLocale) ??
-      getToolByLocalizedSlug(toolSlug, DEFAULT_LOCALE);
-    if (!tool) return withHash(home);
-    const base = getToolById(tool.id);
+    const toolId = resolveToolIdBySlug(toolSlug, sourceLocale);
+    if (!toolId) return withHash(home);
+    const base = getToolById(toolId);
     if (!base) return withHash(home);
     if (targetLocale === DEFAULT_LOCALE) {
       return withHash(`/${base.slug}/`);
     }
-    if (!hasToolOverride(base.id, targetLocale)) return withHash(home);
-    return withHash(
-      `${getLocaleInfo(targetLocale).pathPrefix}/${getLocalizedTool(base, targetLocale).slug}/`
-    );
+    const localizedSlug = targetToolSlug(base.id, targetLocale, targetData);
+    if (!localizedSlug) return withHash(home);
+    return withHash(`${getLocaleInfo(targetLocale).pathPrefix}/${localizedSlug}/`);
   }
 
   return withHash(home);
 }
 
-/** Canonical paths for a tool in each locale (non-EN only when translated). */
+/** Canonical paths for a tool in each locale (non-EN only when translated). Static — reads SLUG_MANIFEST, needs no loaded locale data. */
 export function getToolAlternatePaths(toolId: string): LocaleAlternatePaths | undefined {
   const base = getToolById(toolId);
   if (!base) return undefined;
   const result: LocaleAlternatePaths = { en: `/${base.slug}/` };
   for (const locale of SUPPORTED_LOCALES) {
     if (locale.code === DEFAULT_LOCALE) continue;
-    if (hasToolOverride(toolId, locale.code)) {
-      result[locale.code] = `${locale.pathPrefix}/${getLocalizedTool(base, locale.code).slug}/`;
+    const slug = SLUG_MANIFEST[locale.code].tools[toolId];
+    if (slug) {
+      result[locale.code] = `${locale.pathPrefix}/${slug}/`;
     }
   }
   return result;
 }
 
-/** Canonical paths for a category in each locale (non-EN only when translated). */
+/** Canonical paths for a category in each locale (non-EN only when translated). Static — reads SLUG_MANIFEST, needs no loaded locale data. */
 export function getCategoryAlternatePaths(
   categoryId: string
 ): LocaleAlternatePaths | undefined {
@@ -154,10 +214,10 @@ export function getCategoryAlternatePaths(
   const result: LocaleAlternatePaths = { en: `/category/${base.slug}/` };
   for (const locale of SUPPORTED_LOCALES) {
     if (locale.code === DEFAULT_LOCALE) continue;
-    const localized = getLocalizedCategory(base, locale.code);
-    if (localized && localized.slug !== base.slug) {
+    const slug = SLUG_MANIFEST[locale.code].categories[categoryId];
+    if (slug && slug !== base.slug) {
       result[locale.code] =
-        `${locale.pathPrefix}/${CATEGORY_PATH_SEGMENT[locale.code]}/${localized.slug}/`;
+        `${locale.pathPrefix}/${CATEGORY_PATH_SEGMENT[locale.code]}/${slug}/`;
     }
   }
   return result;

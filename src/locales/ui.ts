@@ -1,14 +1,8 @@
 import type { ToolFAQ } from '../types/tool';
-import type { LocaleCode, NonDefaultLocale } from './config';
+import type { LocaleCode } from './config';
 import { enStrings } from './en/ui';
-import { esStrings } from './es/ui';
-import { deStrings } from './de/ui';
-import { frStrings } from './fr/ui';
-import { idStrings } from './id/ui';
-import { itStrings } from './it/ui';
-import { ptStrings } from './pt/ui';
-import { ruStrings } from './ru/ui';
-import type { InfoSection, WhyChooseItem } from './types';
+import { getActiveLocaleData } from './store';
+import type { InfoSection, LocaleData, WhyChooseItem } from './types';
 
 /**
  * Chrome dictionary: every user-facing string outside tool registry content
@@ -257,24 +251,19 @@ export interface UiStrings {
 }
 
 /**
- * Chrome dictionaries per non-default locale. A locale whose dictionary is
- * not registered here falls back to English — a partially translated locale
- * never breaks a page. Translators: replace the stub re-export in
- * locales/<code>/ui.ts with the real dictionary and register it here.
+ * Chrome dictionary for the requested locale. Locale data is NOT statically
+ * imported here anymore: the active locale's dictionary is loaded on demand
+ * (loader.ts) and held in store.ts. `data` is an OPTIONAL trailing
+ * parameter (default: the active data from the store). If locale === 'en',
+ * or the loaded data covers a different locale, English is returned — a
+ * partially translated locale never breaks a page.
  */
-const LOCALIZED_STRINGS: Record<NonDefaultLocale, UiStrings> = {
-  es: esStrings,
-  pt: ptStrings,
-  fr: frStrings,
-  de: deStrings,
-  it: itStrings,
-  id: idStrings,
-  ru: ruStrings,
-};
-
-export function getUiStrings(locale: LocaleCode): UiStrings {
-  if (locale === 'en') return enStrings;
-  return LOCALIZED_STRINGS[locale] ?? enStrings;
+export function getUiStrings(
+  locale: LocaleCode,
+  data: LocaleData = getActiveLocaleData()
+): UiStrings {
+  if (locale === 'en' || locale !== data.code) return enStrings;
+  return data.uiStrings;
 }
 
 /** Replace {placeholder} tokens in a dictionary template. */

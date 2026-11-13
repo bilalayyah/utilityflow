@@ -5,6 +5,8 @@ import type {
   ToolSEOConfig,
   ToolStep,
 } from '../types/tool';
+import type { LocaleCode } from './config';
+import type { UiStrings } from './ui';
 
 /**
  * Per-locale content override for one tool.
@@ -52,4 +54,30 @@ export interface InfoSection {
 export interface WhyChooseItem {
   title: string;
   description: string;
+}
+
+/**
+ * Per-component localized strings for one workbench component.
+ * `strings` overrides the component's English string table (merged over it);
+ * `tables` holds non-string lookup tables (e.g. IO-format maps) keyed by
+ * their English source string. Both are partial: missing keys fall back
+ * to the English values at render time.
+ */
+export interface ComponentLocaleData {
+  strings: Record<string, unknown>;
+  tables?: Record<string, unknown>;
+}
+
+/**
+ * Everything one locale needs at render time, loaded as a unit.
+ * English is the built-in default (empty overrides, enStrings, no component
+ * strings); every other locale is loaded on demand via loader.ts and held
+ * in store.ts as the active data.
+ */
+export interface LocaleData {
+  code: LocaleCode;
+  toolOverrides: Record<string, ToolLocaleOverride>;
+  categoryOverrides: Record<string, CategoryLocaleOverride>;
+  uiStrings: UiStrings;
+  componentStrings: Record<string, ComponentLocaleData>;
 }
