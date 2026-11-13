@@ -1,6 +1,48 @@
 import { RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    caseSensitive: 'Case-sensitive',
+    ignoreBlankLines: 'Ignore blank lines',
+    removeDuplicates: 'Remove duplicates',
+    inputLines: 'Input Lines',
+    sortedLines: 'Sorted Lines',
+    copySorted: 'Copy sorted',
+    inputPlaceholder: 'Enter one item per line...',
+    outputPlaceholder: 'Sorted output appears here...',
+    sortOptions: [
+      { id: 'alpha-asc', label: 'A → Z' },
+      { id: 'alpha-desc', label: 'Z → A' },
+      { id: 'natural', label: 'Natural (1, 2, 10)' },
+      { id: 'length-asc', label: 'Shortest First' },
+      { id: 'length-desc', label: 'Longest First' },
+      { id: 'reverse-order', label: 'Reverse Order' },
+      { id: 'shuffle', label: 'Shuffle' },
+    ],
+  },
+  es: {
+    caseSensitive: 'Distinguir mayúsculas y minúsculas',
+    ignoreBlankLines: 'Ignorar líneas en blanco',
+    removeDuplicates: 'Eliminar duplicados',
+    inputLines: 'Líneas de entrada',
+    sortedLines: 'Líneas ordenadas',
+    copySorted: 'Copiar ordenadas',
+    inputPlaceholder: 'Escribe un elemento por línea...',
+    outputPlaceholder: 'El resultado ordenado aparece aquí...',
+    sortOptions: [
+      { id: 'alpha-asc', label: 'A → Z' },
+      { id: 'alpha-desc', label: 'Z → A' },
+      { id: 'natural', label: 'Natural (1, 2, 10)' },
+      { id: 'length-asc', label: 'Más cortas primero' },
+      { id: 'length-desc', label: 'Más largas primero' },
+      { id: 'reverse-order', label: 'Orden inverso' },
+      { id: 'shuffle', label: 'Mezclar' },
+    ],
+  },
+};
 
 type SortMode =
   | 'alpha-asc'
@@ -20,6 +62,8 @@ Item 1
 Apricot`;
 
 export default function SortLinesTool() {
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
   const [input, setInput] = useState('');
   const [mode, setMode] = useState<SortMode>('alpha-asc');
   const [caseSensitive, setCaseSensitive] = useState(false);
@@ -83,15 +127,10 @@ export default function SortLinesTool() {
     return sorted.join('\n');
   }, [input, mode, caseSensitive, removeEmpty, deduplicate, shuffleSeed]);
 
-  const sortOptions: Array<{ id: SortMode; label: string }> = [
-    { id: 'alpha-asc', label: 'A → Z' },
-    { id: 'alpha-desc', label: 'Z → A' },
-    { id: 'natural', label: 'Natural (1, 2, 10)' },
-    { id: 'length-asc', label: 'Shortest First' },
-    { id: 'length-desc', label: 'Longest First' },
-    { id: 'reverse-order', label: 'Reverse Order' },
-    { id: 'shuffle', label: 'Shuffle' },
-  ];
+  const sortOptions: Array<{ id: SortMode; label: string }> = s.sortOptions as Array<{
+    id: SortMode;
+    label: string;
+  }>;
 
   return (
     <div className="space-y-5">
@@ -104,7 +143,7 @@ export default function SortLinesTool() {
               onChange={(e) => setCaseSensitive(e.target.checked)}
               className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-600"
             />
-            <span>Case-sensitive</span>
+            <span>{s.caseSensitive}</span>
           </label>
           <label className="inline-flex items-center gap-2 cursor-pointer">
             <input
@@ -113,7 +152,7 @@ export default function SortLinesTool() {
               onChange={(e) => setRemoveEmpty(e.target.checked)}
               className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-600"
             />
-            <span>Ignore blank lines</span>
+            <span>{s.ignoreBlankLines}</span>
           </label>
           <label className="inline-flex items-center gap-2 cursor-pointer">
             <input
@@ -122,7 +161,7 @@ export default function SortLinesTool() {
               onChange={(e) => setDeduplicate(e.target.checked)}
               className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-600"
             />
-            <span>Remove duplicates</span>
+            <span>{s.removeDuplicates}</span>
           </label>
         </div>
 
@@ -133,7 +172,7 @@ export default function SortLinesTool() {
             className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
           >
             <Sparkles className="w-3.5 h-3.5 text-indigo-600" aria-hidden="true" />
-            <span>Load sample</span>
+            <span>{t.common.loadSample}</span>
           </button>
           <button
             type="button"
@@ -142,7 +181,7 @@ export default function SortLinesTool() {
             className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 disabled:opacity-50 cursor-pointer"
           >
             <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
-            <span>Clear</span>
+            <span>{t.common.clear}</span>
           </button>
         </div>
       </div>
@@ -172,14 +211,14 @@ export default function SortLinesTool() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div>
           <label htmlFor="sort-input" className="block text-sm font-semibold text-slate-900 mb-1.5">
-            Input Lines
+            {s.inputLines}
           </label>
           <textarea
             id="sort-input"
             rows={10}
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Enter one item per line..."
+            placeholder={s.inputPlaceholder}
             className="w-full rounded-xl border border-slate-300 bg-white p-3.5 font-mono text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/20"
           />
         </div>
@@ -187,16 +226,16 @@ export default function SortLinesTool() {
         <div>
           <div className="flex items-center justify-between mb-1.5">
             <label htmlFor="sort-output" className="text-sm font-semibold text-slate-900">
-              Sorted Lines
+              {s.sortedLines}
             </label>
-            <CopyButton text={output} label="Copy sorted" />
+            <CopyButton text={output} label={s.copySorted} copiedLabel={t.common.copied} />
           </div>
           <textarea
             id="sort-output"
             rows={10}
             readOnly
             value={output}
-            placeholder="Sorted output appears here..."
+            placeholder={s.outputPlaceholder}
             className="w-full rounded-xl border border-slate-200 bg-slate-50 p-3.5 font-mono text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none"
           />
         </div>

@@ -1,12 +1,60 @@
 import { Download, RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { useLocale } from '../../locales/LocaleContext';
 
-const SAMPLE_TEXT = `UtilityFlow processes every text calculation right inside your browser. Whether you are drafting a blog article, tightening a product announcement, or checking an academic essay against a strict word limit, instant counts help you pace your message clearly.
+const STRINGS = {
+  en: {
+    sampleText: `UtilityFlow processes every text calculation right inside your browser. Whether you are drafting a blog article, tightening a product announcement, or checking an academic essay against a strict word limit, instant counts help you pace your message clearly.
 
-Short sentences improve scanning. Varying sentence length keeps longer guides engaging for readers across desktop and mobile screens.`;
+Short sentences improve scanning. Varying sentence length keeps longer guides engaging for readers across desktop and mobile screens.`,
+    words: 'Words',
+    characters: 'Characters',
+    noSpaces: 'No Spaces',
+    sentences: 'Sentences',
+    paragraphs: 'Paragraphs',
+    readingTime: 'Reading Time',
+    downloadTxt: 'Download .txt',
+    copyText: 'Copy text',
+    textToCount: 'Text to count',
+    placeholder:
+      'Paste or type your text here to count words, characters, sentences, and reading time...',
+    deliveryTimingLines: 'Delivery Timing & Lines',
+    speakingTime: 'Speaking time (130 wpm)',
+    totalLines: 'Total lines',
+    avgWordLength: 'Average word length',
+    chars: 'chars',
+    mostFrequentWords: 'Most Frequent Words',
+    emptyKeywords: 'Enter text above to inspect top repeated words.',
+  },
+  es: {
+    sampleText: `UtilityFlow procesa cada cálculo de texto directamente en tu navegador. Ya sea que estés redactando un artículo de blog, afinando un anuncio de producto o revisando un ensayo académico con un límite estricto de palabras, los conteos instantáneos te ayudan a organizar tu mensaje con claridad.
+
+Las oraciones cortas facilitan la lectura rápida. Variar la longitud de las oraciones mantiene las guías largas atractivas para los lectores en pantallas de escritorio y móviles.`,
+    words: 'Palabras',
+    characters: 'Caracteres',
+    noSpaces: 'Sin espacios',
+    sentences: 'Oraciones',
+    paragraphs: 'Párrafos',
+    readingTime: 'Tiempo de lectura',
+    downloadTxt: 'Descargar .txt',
+    copyText: 'Copiar texto',
+    textToCount: 'Texto para contar',
+    placeholder:
+      'Pega o escribe tu texto aquí para contar palabras, caracteres, oraciones y tiempo de lectura...',
+    deliveryTimingLines: 'Tiempo de entrega y líneas',
+    speakingTime: 'Tiempo de habla (130 ppm)',
+    totalLines: 'Total de líneas',
+    avgWordLength: 'Longitud promedio de palabra',
+    chars: 'caracteres',
+    mostFrequentWords: 'Palabras más frecuentes',
+    emptyKeywords: 'Escribe texto arriba para ver las palabras más repetidas.',
+  },
+};
 
 export default function WordCounterTool() {
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
   const [text, setText] = useState('');
 
   const stats = useMemo(() => {
@@ -81,37 +129,37 @@ export default function WordCounterTool() {
       {/* Live Metrics Grid */}
       <dl className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3">
         <div className="rounded-lg border border-slate-200 bg-slate-50 px-3.5 py-3">
-          <dt className="text-xs text-slate-500">Words</dt>
+          <dt className="text-xs text-slate-500">{s.words}</dt>
           <dd className="mt-1 text-2xl font-bold text-indigo-600 tabular-nums">
-            {stats.wordCount.toLocaleString()}
+            {stats.wordCount.toLocaleString(locale)}
           </dd>
         </div>
         <div className="rounded-lg border border-slate-200 bg-slate-50 px-3.5 py-3">
-          <dt className="text-xs text-slate-500">Characters</dt>
+          <dt className="text-xs text-slate-500">{s.characters}</dt>
           <dd className="mt-1 text-2xl font-bold text-slate-900 tabular-nums">
-            {stats.charsWithSpaces.toLocaleString()}
+            {stats.charsWithSpaces.toLocaleString(locale)}
           </dd>
         </div>
         <div className="rounded-lg border border-slate-200 bg-slate-50 px-3.5 py-3">
-          <dt className="text-xs text-slate-500">No Spaces</dt>
+          <dt className="text-xs text-slate-500">{s.noSpaces}</dt>
           <dd className="mt-1 text-2xl font-bold text-slate-900 tabular-nums">
-            {stats.charsWithoutSpaces.toLocaleString()}
+            {stats.charsWithoutSpaces.toLocaleString(locale)}
           </dd>
         </div>
         <div className="rounded-lg border border-slate-200 bg-slate-50 px-3.5 py-3">
-          <dt className="text-xs text-slate-500">Sentences</dt>
+          <dt className="text-xs text-slate-500">{s.sentences}</dt>
           <dd className="mt-1 text-2xl font-bold text-slate-900 tabular-nums">
-            {stats.sentences.toLocaleString()}
+            {stats.sentences.toLocaleString(locale)}
           </dd>
         </div>
         <div className="rounded-lg border border-slate-200 bg-slate-50 px-3.5 py-3">
-          <dt className="text-xs text-slate-500">Paragraphs</dt>
+          <dt className="text-xs text-slate-500">{s.paragraphs}</dt>
           <dd className="mt-1 text-2xl font-bold text-slate-900 tabular-nums">
-            {stats.paragraphs.toLocaleString()}
+            {stats.paragraphs.toLocaleString(locale)}
           </dd>
         </div>
         <div className="rounded-lg border border-slate-200 bg-slate-50 px-3.5 py-3">
-          <dt className="text-xs text-slate-500">Reading Time</dt>
+          <dt className="text-xs text-slate-500">{s.readingTime}</dt>
           <dd className="mt-1 text-2xl font-bold text-slate-900 tabular-nums">
             {formatDuration(stats.readingSeconds)}
           </dd>
@@ -123,11 +171,11 @@ export default function WordCounterTool() {
         <div className="flex flex-wrap items-center gap-2">
           <button
             type="button"
-            onClick={() => setText(SAMPLE_TEXT)}
+            onClick={() => setText(s.sampleText)}
             className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
           >
             <Sparkles className="w-3.5 h-3.5 text-indigo-600" aria-hidden="true" />
-            <span>Load sample</span>
+            <span>{t.common.loadSample}</span>
           </button>
           <button
             type="button"
@@ -136,7 +184,7 @@ export default function WordCounterTool() {
             className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 disabled:text-slate-400 disabled:bg-slate-50 disabled:cursor-not-allowed cursor-pointer"
           >
             <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
-            <span>Clear</span>
+            <span>{t.common.clear}</span>
           </button>
         </div>
 
@@ -148,23 +196,23 @@ export default function WordCounterTool() {
             className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 disabled:text-slate-400 disabled:bg-slate-50 disabled:cursor-not-allowed cursor-pointer"
           >
             <Download className="w-3.5 h-3.5" aria-hidden="true" />
-            <span>Download .txt</span>
+            <span>{s.downloadTxt}</span>
           </button>
-          <CopyButton text={text} label="Copy text" />
+          <CopyButton text={text} label={s.copyText} copiedLabel={t.common.copied} />
         </div>
       </div>
 
       {/* Textarea */}
       <div>
         <label htmlFor="word-counter-input" className="sr-only">
-          Text to count
+          {s.textToCount}
         </label>
         <textarea
           id="word-counter-input"
           rows={10}
           value={text}
           onChange={(e) => setText(e.target.value)}
-          placeholder="Paste or type your text here to count words, characters, sentences, and reading time..."
+          placeholder={s.placeholder}
           className="w-full rounded-xl border border-slate-300 bg-white p-4 text-sm sm:text-base leading-relaxed text-slate-900 placeholder:text-slate-400 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/20"
         />
       </div>
@@ -172,34 +220,34 @@ export default function WordCounterTool() {
       {/* Secondary Stats + Top Keywords */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
         <div className="rounded-lg border border-slate-200 bg-slate-50/70 p-4">
-          <h3 className="text-sm font-semibold text-slate-900 mb-2">Delivery Timing &amp; Lines</h3>
+          <h3 className="text-sm font-semibold text-slate-900 mb-2">{s.deliveryTimingLines}</h3>
           <dl className="space-y-1.5 text-sm">
             <div className="flex justify-between">
-              <dt className="text-slate-600">Speaking time (130 wpm)</dt>
+              <dt className="text-slate-600">{s.speakingTime}</dt>
               <dd className="font-mono font-medium text-slate-900 tabular-nums">
                 {formatDuration(stats.speakingSeconds)}
               </dd>
             </div>
             <div className="flex justify-between">
-              <dt className="text-slate-600">Total lines</dt>
+              <dt className="text-slate-600">{s.totalLines}</dt>
               <dd className="font-mono font-medium text-slate-900 tabular-nums">
-                {stats.lines.toLocaleString()}
+                {stats.lines.toLocaleString(locale)}
               </dd>
             </div>
             <div className="flex justify-between">
-              <dt className="text-slate-600">Average word length</dt>
+              <dt className="text-slate-600">{s.avgWordLength}</dt>
               <dd className="font-mono font-medium text-slate-900 tabular-nums">
                 {stats.wordCount > 0
                   ? (stats.charsWithoutSpaces / stats.wordCount).toFixed(1)
                   : '0.0'}{' '}
-                chars
+                {s.chars}
               </dd>
             </div>
           </dl>
         </div>
 
         <div className="rounded-lg border border-slate-200 bg-slate-50/70 p-4">
-          <h3 className="text-sm font-semibold text-slate-900 mb-2">Most Frequent Words</h3>
+          <h3 className="text-sm font-semibold text-slate-900 mb-2">{s.mostFrequentWords}</h3>
           {stats.topKeywords.length > 0 ? (
             <ul className="space-y-1.5 text-sm">
               {stats.topKeywords.map((item) => (
@@ -212,7 +260,7 @@ export default function WordCounterTool() {
               ))}
             </ul>
           ) : (
-            <p className="text-sm text-slate-500">Enter text above to inspect top repeated words.</p>
+            <p className="text-sm text-slate-500">{s.emptyKeywords}</p>
           )}
         </div>
       </div>

@@ -1,9 +1,64 @@
 import { RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { useLocale } from '../../locales/LocaleContext';
 
-const SAMPLE_TEXT =
-  'Write clear, concise copy that fits platform character limits without awkward truncation in search results or social feeds.';
+const STRINGS = {
+  en: {
+    sampleText:
+      'Write clear, concise copy that fits platform character limits without awkward truncation in search results or social feeds.',
+    withSpaces: 'With Spaces',
+    withoutSpaces: 'Without Spaces',
+    words: 'Words',
+    letters: 'Letters',
+    digits: 'Digits',
+    utf8Bytes: 'UTF-8 Bytes',
+    copyText: 'Copy text',
+    textToMeasure: 'Text to measure character length',
+    placeholder:
+      'Type or paste text to inspect exact character counts, byte size, and platform limits...',
+    whitespaceChars: 'Whitespace characters',
+    lines: 'Lines',
+    platformLimitsTitle: 'Platform & SEO Character Limits',
+    over: 'over',
+    left: 'left',
+    platformLimits: [
+      { name: 'SEO Meta Title', note: 'Recommended Google SERP title length' },
+      { name: 'SEO Meta Description', note: 'Standard desktop snippet threshold' },
+      { name: 'SMS Segment', note: 'Single GSM-7 SMS message' },
+      { name: 'X / Twitter Post', note: 'Standard post length' },
+      { name: 'Instagram Caption Preview', note: 'Visible before "More" truncation' },
+      { name: 'LinkedIn Post', note: 'Maximum standard feed update' },
+    ],
+  },
+  es: {
+    sampleText:
+      'Escribe textos claros y concisos que se ajusten a los límites de caracteres de cada plataforma, sin cortes incómodos en los resultados de búsqueda ni en las redes sociales.',
+    withSpaces: 'Con espacios',
+    withoutSpaces: 'Sin espacios',
+    words: 'Palabras',
+    letters: 'Letras',
+    digits: 'Dígitos',
+    utf8Bytes: 'Bytes UTF-8',
+    copyText: 'Copiar texto',
+    textToMeasure: 'Texto para medir la longitud de caracteres',
+    placeholder:
+      'Escribe o pega texto para ver conteos exactos de caracteres, tamaño en bytes y límites de plataformas...',
+    whitespaceChars: 'Caracteres de espacio en blanco',
+    lines: 'Líneas',
+    platformLimitsTitle: 'Límites de caracteres de plataformas y SEO',
+    over: 'de más',
+    left: 'restantes',
+    platformLimits: [
+      { name: 'Título meta SEO', note: 'Longitud recomendada del título en Google' },
+      { name: 'Descripción meta SEO', note: 'Límite estándar del fragmento en escritorio' },
+      { name: 'Segmento SMS', note: 'Un solo mensaje SMS GSM-7' },
+      { name: 'Publicación de X / Twitter', note: 'Longitud estándar de publicación' },
+      { name: 'Vista previa de pie de foto de Instagram', note: 'Visible antes del corte de «Más»' },
+      { name: 'Publicación de LinkedIn', note: 'Actualización estándar máxima del feed' },
+    ],
+  },
+};
 
 interface PlatformLimit {
   name: string;
@@ -11,17 +66,18 @@ interface PlatformLimit {
   note: string;
 }
 
-const PLATFORM_LIMITS: PlatformLimit[] = [
-  { name: 'SEO Meta Title', limit: 60, note: 'Recommended Google SERP title length' },
-  { name: 'SEO Meta Description', limit: 160, note: 'Standard desktop snippet threshold' },
-  { name: 'SMS Segment', limit: 160, note: 'Single GSM-7 SMS message' },
-  { name: 'X / Twitter Post', limit: 280, note: 'Standard post length' },
-  { name: 'Instagram Caption Preview', limit: 125, note: 'Visible before "More" truncation' },
-  { name: 'LinkedIn Post', limit: 3000, note: 'Maximum standard feed update' },
-];
+const PLATFORM_LIMIT_NUMBERS = [60, 160, 160, 280, 125, 3000];
 
 export default function CharacterCounterTool() {
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
   const [text, setText] = useState('');
+
+  const platformLimits: PlatformLimit[] = s.platformLimits.map((item, i) => ({
+    name: item.name,
+    limit: PLATFORM_LIMIT_NUMBERS[i],
+    note: item.note,
+  }));
 
   const metrics = useMemo(() => {
     const withSpaces = text.length;
@@ -49,39 +105,39 @@ export default function CharacterCounterTool() {
     <div className="space-y-6">
       <dl className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3">
         <div className="rounded-lg border border-slate-200 bg-slate-50 px-3.5 py-3">
-          <dt className="text-xs text-slate-500">With Spaces</dt>
+          <dt className="text-xs text-slate-500">{s.withSpaces}</dt>
           <dd className="mt-1 text-2xl font-bold text-indigo-600 tabular-nums">
-            {metrics.withSpaces.toLocaleString()}
+            {metrics.withSpaces.toLocaleString(locale)}
           </dd>
         </div>
         <div className="rounded-lg border border-slate-200 bg-slate-50 px-3.5 py-3">
-          <dt className="text-xs text-slate-500">Without Spaces</dt>
+          <dt className="text-xs text-slate-500">{s.withoutSpaces}</dt>
           <dd className="mt-1 text-2xl font-bold text-slate-900 tabular-nums">
-            {metrics.withoutSpaces.toLocaleString()}
+            {metrics.withoutSpaces.toLocaleString(locale)}
           </dd>
         </div>
         <div className="rounded-lg border border-slate-200 bg-slate-50 px-3.5 py-3">
-          <dt className="text-xs text-slate-500">Words</dt>
+          <dt className="text-xs text-slate-500">{s.words}</dt>
           <dd className="mt-1 text-2xl font-bold text-slate-900 tabular-nums">
-            {metrics.words.toLocaleString()}
+            {metrics.words.toLocaleString(locale)}
           </dd>
         </div>
         <div className="rounded-lg border border-slate-200 bg-slate-50 px-3.5 py-3">
-          <dt className="text-xs text-slate-500">Letters</dt>
+          <dt className="text-xs text-slate-500">{s.letters}</dt>
           <dd className="mt-1 text-2xl font-bold text-slate-900 tabular-nums">
-            {metrics.letters.toLocaleString()}
+            {metrics.letters.toLocaleString(locale)}
           </dd>
         </div>
         <div className="rounded-lg border border-slate-200 bg-slate-50 px-3.5 py-3">
-          <dt className="text-xs text-slate-500">Digits</dt>
+          <dt className="text-xs text-slate-500">{s.digits}</dt>
           <dd className="mt-1 text-2xl font-bold text-slate-900 tabular-nums">
-            {metrics.digits.toLocaleString()}
+            {metrics.digits.toLocaleString(locale)}
           </dd>
         </div>
         <div className="rounded-lg border border-slate-200 bg-slate-50 px-3.5 py-3">
-          <dt className="text-xs text-slate-500">UTF-8 Bytes</dt>
+          <dt className="text-xs text-slate-500">{s.utf8Bytes}</dt>
           <dd className="mt-1 text-2xl font-bold text-slate-900 tabular-nums">
-            {metrics.utf8Bytes.toLocaleString()}
+            {metrics.utf8Bytes.toLocaleString(locale)}
           </dd>
         </div>
       </dl>
@@ -90,11 +146,11 @@ export default function CharacterCounterTool() {
         <div className="flex items-center gap-2">
           <button
             type="button"
-            onClick={() => setText(SAMPLE_TEXT)}
+            onClick={() => setText(s.sampleText)}
             className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
           >
             <Sparkles className="w-3.5 h-3.5 text-indigo-600" aria-hidden="true" />
-            <span>Load sample</span>
+            <span>{t.common.loadSample}</span>
           </button>
           <button
             type="button"
@@ -103,38 +159,38 @@ export default function CharacterCounterTool() {
             className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 disabled:text-slate-400 disabled:bg-slate-50 disabled:cursor-not-allowed cursor-pointer"
           >
             <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
-            <span>Clear</span>
+            <span>{t.common.clear}</span>
           </button>
         </div>
 
-        <CopyButton text={text} label="Copy text" />
+        <CopyButton text={text} label={s.copyText} copiedLabel={t.common.copied} />
       </div>
 
       <div>
         <label htmlFor="character-counter-input" className="sr-only">
-          Text to measure character length
+          {s.textToMeasure}
         </label>
         <textarea
           id="character-counter-input"
           rows={8}
           value={text}
           onChange={(e) => setText(e.target.value)}
-          placeholder="Type or paste text to inspect exact character counts, byte size, and platform limits..."
+          placeholder={s.placeholder}
           className="w-full rounded-xl border border-slate-300 bg-white p-4 text-sm sm:text-base leading-relaxed text-slate-900 placeholder:text-slate-400 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/20"
         />
         <p className="mt-2 text-xs text-slate-500 tabular-nums">
-          Whitespace characters: {metrics.spacesOnly.toLocaleString()} · Lines:{' '}
-          {metrics.lines.toLocaleString()}
+          {s.whitespaceChars}: {metrics.spacesOnly.toLocaleString(locale)} · {s.lines}:{' '}
+          {metrics.lines.toLocaleString(locale)}
         </p>
       </div>
 
       {/* Platform Limit Progress Bars */}
       <div className="pt-2">
         <h3 className="text-sm font-semibold text-slate-900 mb-3">
-          Platform &amp; SEO Character Limits
+          {s.platformLimitsTitle}
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-          {PLATFORM_LIMITS.map((item) => {
+          {platformLimits.map((item) => {
             const count = metrics.withSpaces;
             const remaining = item.limit - count;
             const pct = Math.min(100, Math.round((count / item.limit) * 100));
@@ -152,7 +208,7 @@ export default function CharacterCounterTool() {
                       isOver ? 'text-red-600' : 'text-slate-700'
                     }`}
                   >
-                    {count} / {item.limit} ({isOver ? `${Math.abs(remaining)} over` : `${remaining} left`})
+                    {count} / {item.limit} ({isOver ? `${Math.abs(remaining)} ${s.over}` : `${remaining} ${s.left}`})
                   </span>
                 </div>
                 <div className="mt-2 h-2 w-full rounded-full bg-slate-200 overflow-hidden">

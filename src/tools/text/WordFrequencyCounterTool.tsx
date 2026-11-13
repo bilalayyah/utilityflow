@@ -1,6 +1,47 @@
 import { Download, RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    sampleText: `Technical SEO audits check crawlability, internal linking, and page speed. Fast pages improve user engagement and page speed signals across mobile search. Internal linking connects related guides and strengthens technical SEO structure.`,
+    ngramLabels: { 1: '1-Word', 2: '2-Word Phrases', 3: '3-Word Phrases' },
+    excludeStopWords: 'Exclude common stop words',
+    minLength: 'Min length:',
+    textForAnalysis: 'Text for frequency analysis',
+    placeholder:
+      'Paste article copy, product descriptions, or notes to count repeated terms and keyword density...',
+    totalWords: 'Total words:',
+    uniqueTerms: 'Unique terms:',
+    exportCsv: 'Export CSV',
+    copyCsv: 'Copy CSV',
+    rank: '#',
+    termPhrase: 'Term / Phrase',
+    count: 'Count',
+    density: 'Density',
+    emptyState: 'Enter text above to inspect word counts and keyword density percentages.',
+  },
+  es: {
+    sampleText: `Las auditorías técnicas de SEO revisan la rastreabilidad, los enlaces internos y la velocidad de página. Las páginas rápidas mejoran la interacción del usuario y las señales de velocidad en la búsqueda móvil. Los enlaces internos conectan guías relacionadas y fortalecen la estructura técnica de SEO.`,
+    ngramLabels: { 1: '1 palabra', 2: 'Frases de 2 palabras', 3: 'Frases de 3 palabras' },
+    excludeStopWords: 'Excluir palabras vacías comunes',
+    minLength: 'Longitud mín.:',
+    textForAnalysis: 'Texto para el análisis de frecuencia',
+    placeholder:
+      'Pega textos de artículos, descripciones de productos o notas para contar términos repetidos y la densidad de palabras clave...',
+    totalWords: 'Total de palabras:',
+    uniqueTerms: 'Términos únicos:',
+    exportCsv: 'Exportar CSV',
+    copyCsv: 'Copiar CSV',
+    rank: '#',
+    termPhrase: 'Término / Frase',
+    count: 'Conteo',
+    density: 'Densidad',
+    emptyState:
+      'Escribe texto arriba para ver los conteos de palabras y los porcentajes de densidad de palabras clave.',
+  },
+};
 
 const STOP_WORDS = new Set([
   'a', 'an', 'and', 'are', 'as', 'at', 'be', 'by', 'for', 'from', 'has', 'he',
@@ -8,9 +49,9 @@ const STOP_WORDS = new Set([
   'will', 'with', 'this', 'they', 'their', 'or', 'we', 'you', 'your', 'our',
 ]);
 
-const SAMPLE_TEXT = `Technical SEO audits check crawlability, internal linking, and page speed. Fast pages improve user engagement and page speed signals across mobile search. Internal linking connects related guides and strengthens technical SEO structure.`;
-
 export default function WordFrequencyCounterTool() {
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
   const [text, setText] = useState('');
   const [ngramSize, setNgramSize] = useState<1 | 2 | 3>(1);
   const [ignoreStopWords, setIgnoreStopWords] = useState(true);
@@ -97,7 +138,7 @@ export default function WordFrequencyCounterTool() {
                     : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
-                {size === 1 ? '1-Word' : size === 2 ? '2-Word Phrases' : '3-Word Phrases'}
+                {s.ngramLabels[size]}
               </button>
             ))}
           </div>
@@ -109,12 +150,12 @@ export default function WordFrequencyCounterTool() {
               onChange={(e) => setIgnoreStopWords(e.target.checked)}
               className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-600"
             />
-            <span>Exclude common stop words</span>
+            <span>{s.excludeStopWords}</span>
           </label>
 
           {ngramSize === 1 && (
             <label className="inline-flex items-center gap-2 text-sm text-slate-700">
-              <span>Min length:</span>
+              <span>{s.minLength}</span>
               <input
                 type="number"
                 min={1}
@@ -130,11 +171,11 @@ export default function WordFrequencyCounterTool() {
         <div className="flex items-center gap-2">
           <button
             type="button"
-            onClick={() => setText(SAMPLE_TEXT)}
+            onClick={() => setText(s.sampleText)}
             className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
           >
             <Sparkles className="w-3.5 h-3.5 text-indigo-600" aria-hidden="true" />
-            <span>Load sample</span>
+            <span>{t.common.loadSample}</span>
           </button>
           <button
             type="button"
@@ -143,21 +184,21 @@ export default function WordFrequencyCounterTool() {
             className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 disabled:opacity-50 cursor-pointer"
           >
             <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
-            <span>Clear</span>
+            <span>{t.common.clear}</span>
           </button>
         </div>
       </div>
 
       <div>
         <label htmlFor="freq-input" className="sr-only">
-          Text for frequency analysis
+          {s.textForAnalysis}
         </label>
         <textarea
           id="freq-input"
           rows={7}
           value={text}
           onChange={(e) => setText(e.target.value)}
-          placeholder="Paste article copy, product descriptions, or notes to count repeated terms and keyword density..."
+          placeholder={s.placeholder}
           className="w-full rounded-xl border border-slate-300 bg-white p-4 text-sm sm:text-base text-slate-900 placeholder:text-slate-400 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/20"
         />
       </div>
@@ -165,8 +206,8 @@ export default function WordFrequencyCounterTool() {
       <div className="rounded-xl border border-slate-200 overflow-hidden">
         <div className="flex flex-wrap items-center justify-between gap-3 bg-slate-50 px-4 py-3 border-b border-slate-200">
           <div className="text-xs sm:text-sm text-slate-600 tabular-nums">
-            Total words: <strong className="text-slate-900">{analysis.totalWords}</strong> · Unique
-            terms: <strong className="text-slate-900">{analysis.uniqueTerms}</strong>
+            {s.totalWords} <strong className="text-slate-900">{analysis.totalWords}</strong> · {s.uniqueTerms}{' '}
+            <strong className="text-slate-900">{analysis.uniqueTerms}</strong>
           </div>
           <div className="flex items-center gap-2">
             <button
@@ -176,9 +217,9 @@ export default function WordFrequencyCounterTool() {
               className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 disabled:opacity-50 cursor-pointer"
             >
               <Download className="w-3.5 h-3.5" aria-hidden="true" />
-              <span>Export CSV</span>
+              <span>{s.exportCsv}</span>
             </button>
-            <CopyButton text={csvContent} label="Copy CSV" disabled={analysis.rows.length === 0} />
+            <CopyButton text={csvContent} label={s.copyCsv} copiedLabel={t.common.copied} disabled={analysis.rows.length === 0} />
           </div>
         </div>
 
@@ -187,10 +228,10 @@ export default function WordFrequencyCounterTool() {
             <table className="w-full text-left text-sm">
               <thead className="bg-white border-b border-slate-200 text-xs text-slate-500 sticky top-0">
                 <tr>
-                  <th className="py-2.5 px-4 font-semibold">#</th>
-                  <th className="py-2.5 px-4 font-semibold">Term / Phrase</th>
-                  <th className="py-2.5 px-4 font-semibold text-right">Count</th>
-                  <th className="py-2.5 px-4 font-semibold text-right">Density</th>
+                  <th className="py-2.5 px-4 font-semibold">{s.rank}</th>
+                  <th className="py-2.5 px-4 font-semibold">{s.termPhrase}</th>
+                  <th className="py-2.5 px-4 font-semibold text-right">{s.count}</th>
+                  <th className="py-2.5 px-4 font-semibold text-right">{s.density}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 bg-white">
@@ -213,7 +254,7 @@ export default function WordFrequencyCounterTool() {
           </div>
         ) : (
           <div className="p-8 text-center text-sm text-slate-500 bg-white">
-            Enter text above to inspect word counts and keyword density percentages.
+            {s.emptyState}
           </div>
         )}
       </div>

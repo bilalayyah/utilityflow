@@ -1,6 +1,34 @@
 import { RefreshCw } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    amount: 'Amount',
+    unit: 'Unit',
+    unitLabels: { paragraphs: 'paragraphs', sentences: 'sentences', words: 'words' },
+    startClassic: 'Start with “Lorem ipsum”',
+    wrapHtml: 'Wrap in <p> tags',
+    words: 'words',
+    characters: 'characters',
+    regenerate: 'Regenerate',
+    copyPlaceholder: 'Copy placeholder text',
+    generatedText: 'Generated placeholder text',
+  },
+  es: {
+    amount: 'Cantidad',
+    unit: 'Unidad',
+    unitLabels: { paragraphs: 'párrafos', sentences: 'oraciones', words: 'palabras' },
+    startClassic: 'Empezar con «Lorem ipsum»',
+    wrapHtml: 'Envolver en etiquetas <p>',
+    words: 'palabras',
+    characters: 'caracteres',
+    regenerate: 'Regenerar',
+    copyPlaceholder: 'Copiar texto de relleno',
+    generatedText: 'Texto de relleno generado',
+  },
+};
 
 type UnitType = 'paragraphs' | 'sentences' | 'words';
 
@@ -29,6 +57,8 @@ const WORD_POOL = CLASSIC_OPENING.concat(' ', SENTENCE_POOL.join(' '))
   .filter(Boolean);
 
 export default function LoremIpsumGeneratorTool() {
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
   const [unit, setUnit] = useState<UnitType>('paragraphs');
   const [count, setCount] = useState(3);
   const [startClassic, setStartClassic] = useState(true);
@@ -95,7 +125,7 @@ export default function LoremIpsumGeneratorTool() {
         <div className="flex flex-wrap items-end gap-4">
           <div>
             <label htmlFor="lorem-count" className="block text-xs font-semibold text-slate-700 mb-1">
-              Amount
+              {s.amount}
             </label>
             <input
               id="lorem-count"
@@ -109,7 +139,7 @@ export default function LoremIpsumGeneratorTool() {
           </div>
 
           <div>
-            <span className="block text-xs font-semibold text-slate-700 mb-1">Unit</span>
+            <span className="block text-xs font-semibold text-slate-700 mb-1">{s.unit}</span>
             <div className="inline-flex rounded-lg bg-slate-100 p-1">
               {(['paragraphs', 'sentences', 'words'] as const).map((u) => (
                 <button
@@ -126,7 +156,7 @@ export default function LoremIpsumGeneratorTool() {
                       : 'text-slate-600 hover:text-slate-900'
                   }`}
                 >
-                  {u}
+                  {s.unitLabels[u]}
                 </button>
               ))}
             </div>
@@ -141,7 +171,7 @@ export default function LoremIpsumGeneratorTool() {
               onChange={(e) => setStartClassic(e.target.checked)}
               className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-600"
             />
-            <span>Start with &ldquo;Lorem ipsum&rdquo;</span>
+            <span>{s.startClassic}</span>
           </label>
           <label className="inline-flex items-center gap-2 cursor-pointer">
             <input
@@ -150,14 +180,14 @@ export default function LoremIpsumGeneratorTool() {
               onChange={(e) => setWrapHtml(e.target.checked)}
               className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-600"
             />
-            <span>Wrap in &lt;p&gt; tags</span>
+            <span>{s.wrapHtml}</span>
           </label>
         </div>
       </div>
 
       <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
         <span className="text-xs font-mono text-slate-500 tabular-nums">
-          {wordCount.toLocaleString()} words · {output.length.toLocaleString()} characters
+          {wordCount.toLocaleString(locale)} {s.words} · {output.length.toLocaleString(locale)} {s.characters}
         </span>
 
         <div className="flex items-center gap-2">
@@ -167,15 +197,15 @@ export default function LoremIpsumGeneratorTool() {
             className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
           >
             <RefreshCw className="w-3.5 h-3.5" aria-hidden="true" />
-            <span>Regenerate</span>
+            <span>{s.regenerate}</span>
           </button>
-          <CopyButton text={output} label="Copy placeholder text" />
+          <CopyButton text={output} label={s.copyPlaceholder} copiedLabel={t.common.copied} />
         </div>
       </div>
 
       <div>
         <label htmlFor="lorem-output" className="sr-only">
-          Generated placeholder text
+          {s.generatedText}
         </label>
         <textarea
           id="lorem-output"

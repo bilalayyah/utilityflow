@@ -1,6 +1,20 @@
 import { RotateCcw, Sparkles } from 'lucide-react';
 import { useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    textToConvert: 'Text to convert case',
+    placeholder: 'Type or paste text, then click any case conversion button below...',
+    copyResult: 'Copy result',
+  },
+  es: {
+    textToConvert: 'Texto para convertir mayúsculas y minúsculas',
+    placeholder: 'Escribe o pega texto y luego haz clic en cualquier botón de conversión...',
+    copyResult: 'Copiar resultado',
+  },
+};
 
 const SAMPLE_TEXT = 'welcome to utilityFlow: fast text_case formatting & clean URLs';
 
@@ -108,6 +122,8 @@ function toAlternatingCase(input: string): string {
 }
 
 export default function CaseConverterTool() {
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
   const [text, setText] = useState('');
 
   const applyTransform = (fn: (val: string) => string) => {
@@ -137,7 +153,7 @@ export default function CaseConverterTool() {
             className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
           >
             <Sparkles className="w-3.5 h-3.5 text-indigo-600" aria-hidden="true" />
-            <span>Load sample</span>
+            <span>{t.common.loadSample}</span>
           </button>
           <button
             type="button"
@@ -146,23 +162,23 @@ export default function CaseConverterTool() {
             className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 disabled:text-slate-400 disabled:bg-slate-50 disabled:cursor-not-allowed cursor-pointer"
           >
             <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
-            <span>Clear</span>
+            <span>{t.common.clear}</span>
           </button>
         </div>
 
-        <CopyButton text={text} label="Copy result" />
+        <CopyButton text={text} label={s.copyResult} copiedLabel={t.common.copied} />
       </div>
 
       <div>
         <label htmlFor="case-converter-input" className="sr-only">
-          Text to convert case
+          {s.textToConvert}
         </label>
         <textarea
           id="case-converter-input"
           rows={8}
           value={text}
           onChange={(e) => setText(e.target.value)}
-          placeholder="Type or paste text, then click any case conversion button below..."
+          placeholder={s.placeholder}
           className="w-full rounded-xl border border-slate-300 bg-white p-4 text-sm sm:text-base leading-relaxed text-slate-900 placeholder:text-slate-400 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/20"
         />
       </div>

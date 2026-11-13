@@ -1,6 +1,36 @@
 import { RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    caseSensitive: 'Case-sensitive',
+    trimWhitespace: 'Trim whitespace',
+    removeEmptyLines: 'Remove empty lines',
+    sortAlphabetically: 'Sort alphabetically',
+    originalLines: 'Original Lines',
+    lines: 'lines',
+    uniqueLines: 'Unique Lines',
+    unique: 'unique',
+    removed: 'removed',
+    inputPlaceholder: 'Paste a list with one item per line...',
+    outputPlaceholder: 'Deduplicated output will appear here...',
+  },
+  es: {
+    caseSensitive: 'Distinguir mayúsculas y minúsculas',
+    trimWhitespace: 'Recortar espacios en blanco',
+    removeEmptyLines: 'Eliminar líneas vacías',
+    sortAlphabetically: 'Ordenar alfabéticamente',
+    originalLines: 'Líneas originales',
+    lines: 'líneas',
+    uniqueLines: 'Líneas únicas',
+    unique: 'únicas',
+    removed: 'eliminadas',
+    inputPlaceholder: 'Pega una lista con un elemento por línea...',
+    outputPlaceholder: 'El resultado sin duplicados aparecerá aquí...',
+  },
+};
 
 const SAMPLE_LINES = `apple@example.com
 banana@example.com
@@ -12,6 +42,8 @@ date@example.com
 cherry@example.com`;
 
 export default function RemoveDuplicateLinesTool() {
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
   const [input, setInput] = useState('');
   const [caseSensitive, setCaseSensitive] = useState(false);
   const [trimLines, setTrimLines] = useState(true);
@@ -62,7 +94,7 @@ export default function RemoveDuplicateLinesTool() {
               onChange={(e) => setCaseSensitive(e.target.checked)}
               className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-600"
             />
-            <span>Case-sensitive</span>
+            <span>{s.caseSensitive}</span>
           </label>
           <label className="inline-flex items-center gap-2 cursor-pointer">
             <input
@@ -71,7 +103,7 @@ export default function RemoveDuplicateLinesTool() {
               onChange={(e) => setTrimLines(e.target.checked)}
               className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-600"
             />
-            <span>Trim whitespace</span>
+            <span>{s.trimWhitespace}</span>
           </label>
           <label className="inline-flex items-center gap-2 cursor-pointer">
             <input
@@ -80,7 +112,7 @@ export default function RemoveDuplicateLinesTool() {
               onChange={(e) => setRemoveEmpty(e.target.checked)}
               className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-600"
             />
-            <span>Remove empty lines</span>
+            <span>{s.removeEmptyLines}</span>
           </label>
           <label className="inline-flex items-center gap-2 cursor-pointer">
             <input
@@ -89,7 +121,7 @@ export default function RemoveDuplicateLinesTool() {
               onChange={(e) => setSortOutput(e.target.checked)}
               className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-600"
             />
-            <span>Sort alphabetically</span>
+            <span>{s.sortAlphabetically}</span>
           </label>
         </div>
 
@@ -100,7 +132,7 @@ export default function RemoveDuplicateLinesTool() {
             className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
           >
             <Sparkles className="w-3.5 h-3.5 text-indigo-600" aria-hidden="true" />
-            <span>Load sample</span>
+            <span>{t.common.loadSample}</span>
           </button>
           <button
             type="button"
@@ -109,7 +141,7 @@ export default function RemoveDuplicateLinesTool() {
             className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 disabled:opacity-50 cursor-pointer"
           >
             <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
-            <span>Clear</span>
+            <span>{t.common.clear}</span>
           </button>
         </div>
       </div>
@@ -118,10 +150,10 @@ export default function RemoveDuplicateLinesTool() {
         <div>
           <div className="flex items-center justify-between mb-1.5">
             <label htmlFor="dedupe-input" className="text-sm font-semibold text-slate-900">
-              Original Lines
+              {s.originalLines}
             </label>
             <span className="text-xs font-mono text-slate-500 tabular-nums">
-              {result.totalLines} lines
+              {result.totalLines} {s.lines}
             </span>
           </div>
           <textarea
@@ -129,7 +161,7 @@ export default function RemoveDuplicateLinesTool() {
             rows={10}
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Paste a list with one item per line..."
+            placeholder={s.inputPlaceholder}
             className="w-full rounded-xl border border-slate-300 bg-white p-3.5 font-mono text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/20"
           />
         </div>
@@ -137,13 +169,13 @@ export default function RemoveDuplicateLinesTool() {
         <div>
           <div className="flex items-center justify-between mb-1.5">
             <label htmlFor="dedupe-output" className="text-sm font-semibold text-slate-900">
-              Unique Lines
+              {s.uniqueLines}
             </label>
             <div className="flex items-center gap-3">
               <span className="text-xs font-mono text-slate-500 tabular-nums">
-                {result.uniqueCount} unique · {result.duplicatesRemoved} removed
+                {result.uniqueCount} {s.unique} · {result.duplicatesRemoved} {s.removed}
               </span>
-              <CopyButton text={result.output} label="Copy" />
+              <CopyButton text={result.output} label={t.common.copy} copiedLabel={t.common.copied} />
             </div>
           </div>
           <textarea
@@ -151,7 +183,7 @@ export default function RemoveDuplicateLinesTool() {
             rows={10}
             readOnly
             value={result.output}
-            placeholder="Deduplicated output will appear here..."
+            placeholder={s.outputPlaceholder}
             className="w-full rounded-xl border border-slate-200 bg-slate-50 p-3.5 font-mono text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none"
           />
         </div>

@@ -1,5 +1,36 @@
 import { RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    ignoreWhitespace: 'Ignore whitespace',
+    ignoreCase: 'Ignore case',
+    originalText: 'Original Text',
+    modifiedText: 'Modified Text',
+    originalPlaceholder: 'Paste original text...',
+    modifiedPlaceholder: 'Paste updated text...',
+    lineComparison: 'Line Comparison',
+    added: 'added',
+    removed: 'removed',
+    unchanged: 'unchanged',
+    emptyState: 'Enter text in both boxes above to compare line additions and removals.',
+  },
+  es: {
+    ignoreWhitespace: 'Ignorar espacios en blanco',
+    ignoreCase: 'Ignorar mayúsculas y minúsculas',
+    originalText: 'Texto original',
+    modifiedText: 'Texto modificado',
+    originalPlaceholder: 'Pega el texto original...',
+    modifiedPlaceholder: 'Pega el texto actualizado...',
+    lineComparison: 'Comparación de líneas',
+    added: 'agregadas',
+    removed: 'eliminadas',
+    unchanged: 'sin cambios',
+    emptyState:
+      'Escribe texto en ambos cuadros de arriba para comparar las líneas agregadas y eliminadas.',
+  },
+};
 
 interface DiffLine {
   type: 'unchanged' | 'added' | 'removed';
@@ -81,6 +112,8 @@ function computeLineDiff(
 }
 
 export default function TextDiffCheckerTool() {
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
   const [originalText, setOriginalText] = useState('');
   const [modifiedText, setModifiedText] = useState('');
   const [ignoreCase, setIgnoreCase] = useState(false);
@@ -116,7 +149,7 @@ export default function TextDiffCheckerTool() {
               onChange={(e) => setIgnoreWhitespace(e.target.checked)}
               className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-600"
             />
-            <span>Ignore whitespace</span>
+            <span>{s.ignoreWhitespace}</span>
           </label>
           <label className="inline-flex items-center gap-2 cursor-pointer">
             <input
@@ -125,7 +158,7 @@ export default function TextDiffCheckerTool() {
               onChange={(e) => setIgnoreCase(e.target.checked)}
               className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-600"
             />
-            <span>Ignore case</span>
+            <span>{s.ignoreCase}</span>
           </label>
         </div>
 
@@ -139,7 +172,7 @@ export default function TextDiffCheckerTool() {
             className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
           >
             <Sparkles className="w-3.5 h-3.5 text-indigo-600" aria-hidden="true" />
-            <span>Load sample</span>
+            <span>{t.common.loadSample}</span>
           </button>
           <button
             type="button"
@@ -151,7 +184,7 @@ export default function TextDiffCheckerTool() {
             className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 disabled:opacity-50 cursor-pointer"
           >
             <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
-            <span>Clear</span>
+            <span>{t.common.clear}</span>
           </button>
         </div>
       </div>
@@ -159,28 +192,28 @@ export default function TextDiffCheckerTool() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div>
           <label htmlFor="diff-original" className="block text-sm font-semibold text-slate-900 mb-1.5">
-            Original Text
+            {s.originalText}
           </label>
           <textarea
             id="diff-original"
             rows={8}
             value={originalText}
             onChange={(e) => setOriginalText(e.target.value)}
-            placeholder="Paste original text..."
+            placeholder={s.originalPlaceholder}
             className="w-full rounded-xl border border-slate-300 bg-white p-3.5 font-mono text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/20"
           />
         </div>
 
         <div>
           <label htmlFor="diff-modified" className="block text-sm font-semibold text-slate-900 mb-1.5">
-            Modified Text
+            {s.modifiedText}
           </label>
           <textarea
             id="diff-modified"
             rows={8}
             value={modifiedText}
             onChange={(e) => setModifiedText(e.target.value)}
-            placeholder="Paste updated text..."
+            placeholder={s.modifiedPlaceholder}
             className="w-full rounded-xl border border-slate-300 bg-white p-3.5 font-mono text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/20"
           />
         </div>
@@ -189,11 +222,11 @@ export default function TextDiffCheckerTool() {
       {/* Diff Output */}
       <div className="rounded-xl border border-slate-200 overflow-hidden">
         <div className="flex flex-wrap items-center justify-between gap-2 bg-slate-50 px-4 py-2.5 border-b border-slate-200 text-xs font-mono">
-          <span className="font-sans font-semibold text-slate-900">Line Comparison</span>
+          <span className="font-sans font-semibold text-slate-900">{s.lineComparison}</span>
           <div className="flex items-center gap-4 tabular-nums">
-            <span className="text-emerald-700">+ {counts.added} added</span>
-            <span className="text-red-700">- {counts.removed} removed</span>
-            <span className="text-slate-600">{counts.unchanged} unchanged</span>
+            <span className="text-emerald-700">+ {counts.added} {s.added}</span>
+            <span className="text-red-700">- {counts.removed} {s.removed}</span>
+            <span className="text-slate-600">{counts.unchanged} {s.unchanged}</span>
           </div>
         </div>
 
@@ -225,7 +258,7 @@ export default function TextDiffCheckerTool() {
           </div>
         ) : (
           <div className="p-8 text-center text-sm text-slate-500 bg-white">
-            Enter text in both boxes above to compare line additions and removals.
+            {s.emptyState}
           </div>
         )}
       </div>

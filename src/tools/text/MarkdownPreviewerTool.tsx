@@ -1,8 +1,11 @@
 import { Download, RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { useLocale } from '../../locales/LocaleContext';
 
-const SAMPLE_MARKDOWN = `# UtilityFlow Release Notes
+const STRINGS = {
+  en: {
+    sampleMarkdown: `# UtilityFlow Release Notes
 
 Welcome to **Markdown Previewer**, a fast client-side editor with live *HTML* export.
 
@@ -21,7 +24,51 @@ Welcome to **Markdown Previewer**, a fast client-side editor with live *HTML* ex
 }
 \`\`\`
 
-Learn more at [UtilityFlow](/tools/).`;
+Learn more at [UtilityFlow](/tools/).`,
+    renderedPreview: 'Rendered Preview',
+    rawHtml: 'Raw HTML',
+    exportHtml: 'Export HTML',
+    copyHtml: 'Copy HTML',
+    markdownSource: 'Markdown Source',
+    livePreview: 'Live Preview',
+    compiledHtml: 'Compiled HTML',
+    compiledHtmlAria: 'Compiled HTML source',
+    inputPlaceholder: 'Write Markdown (# Heading, **bold**, - list, [link](https://...))...',
+    emptyPreview: 'Preview will appear as you type Markdown...',
+  },
+  es: {
+    sampleMarkdown: `# Notas de la versión de UtilityFlow
+
+Bienvenido a **Markdown Previewer**, un editor rápido del lado del cliente con exportación *HTML* en vivo.
+
+## Capacidades clave
+
+- Formato instantáneo para encabezados, listas y enlaces
+- Escape seguro de HTML sin subidas remotas
+- Copia y descarga de HTML sin procesar con un clic
+
+> Mantén la documentación cerca del trabajo y revisa la estructura antes de publicar.
+
+\`\`\`json
+{
+  "tool": "markdown-previewer",
+  "mode": "browser-side"
+}
+\`\`\`
+
+Obtén más información en [UtilityFlow](/tools/).`,
+    renderedPreview: 'Vista previa renderizada',
+    rawHtml: 'HTML sin procesar',
+    exportHtml: 'Exportar HTML',
+    copyHtml: 'Copiar HTML',
+    markdownSource: 'Fuente Markdown',
+    livePreview: 'Vista previa en vivo',
+    compiledHtml: 'HTML compilado',
+    compiledHtmlAria: 'Código fuente HTML compilado',
+    inputPlaceholder: 'Escribe Markdown (# Encabezado, **negrita**, - lista, [enlace](https://...))...',
+    emptyPreview: 'La vista previa aparecerá mientras escribes Markdown...',
+  },
+};
 
 function escapeHtml(text: string): string {
   return text
@@ -177,14 +224,16 @@ function markdownToHtml(markdown: string): string {
 }
 
 export default function MarkdownPreviewerTool() {
-  const [markdown, setMarkdown] = useState(SAMPLE_MARKDOWN);
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
+  const [markdown, setMarkdown] = useState(s.sampleMarkdown);
   const [viewMode, setViewMode] = useState<'preview' | 'html'>('preview');
 
   const compiledHtml = useMemo(() => markdownToHtml(markdown), [markdown]);
 
   const handleDownloadHtml = () => {
     if (!compiledHtml) return;
-    const doc = `<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8" />\n<title>Markdown Export</title>\n</head>\n<body>\n${compiledHtml}\n</body>\n</html>`;
+    const doc = `<!doctype html>\n<html lang="${locale}">\n<head>\n<meta charset="utf-8" />\n<title>Markdown Export</title>\n</head>\n<body>\n${compiledHtml}\n</body>\n</html>`;
     const blob = new Blob([doc], { type: 'text/html;charset=utf-8' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
@@ -200,11 +249,11 @@ export default function MarkdownPreviewerTool() {
         <div className="flex items-center gap-2">
           <button
             type="button"
-            onClick={() => setMarkdown(SAMPLE_MARKDOWN)}
+            onClick={() => setMarkdown(s.sampleMarkdown)}
             className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
           >
             <Sparkles className="w-3.5 h-3.5 text-indigo-600" aria-hidden="true" />
-            <span>Load sample</span>
+            <span>{t.common.loadSample}</span>
           </button>
           <button
             type="button"
@@ -213,7 +262,7 @@ export default function MarkdownPreviewerTool() {
             className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 disabled:opacity-50 cursor-pointer"
           >
             <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
-            <span>Clear</span>
+            <span>{t.common.clear}</span>
           </button>
         </div>
 
@@ -226,7 +275,7 @@ export default function MarkdownPreviewerTool() {
                 viewMode === 'preview' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
               }`}
             >
-              Rendered Preview
+              {s.renderedPreview}
             </button>
             <button
               type="button"
@@ -235,7 +284,7 @@ export default function MarkdownPreviewerTool() {
                 viewMode === 'html' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
               }`}
             >
-              Raw HTML
+              {s.rawHtml}
             </button>
           </div>
           <button
@@ -245,30 +294,30 @@ export default function MarkdownPreviewerTool() {
             className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 disabled:opacity-50 cursor-pointer"
           >
             <Download className="w-3.5 h-3.5" aria-hidden="true" />
-            <span>Export HTML</span>
+            <span>{s.exportHtml}</span>
           </button>
-          <CopyButton text={compiledHtml} label="Copy HTML" />
+          <CopyButton text={compiledHtml} label={s.copyHtml} copiedLabel={t.common.copied} />
         </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div>
           <label htmlFor="md-editor" className="block text-sm font-semibold text-slate-900 mb-1.5">
-            Markdown Source
+            {s.markdownSource}
           </label>
           <textarea
             id="md-editor"
             rows={14}
             value={markdown}
             onChange={(e) => setMarkdown(e.target.value)}
-            placeholder="Write Markdown (# Heading, **bold**, - list, [link](https://...))..."
+            placeholder={s.inputPlaceholder}
             className="w-full rounded-xl border border-slate-300 bg-white p-4 font-mono text-xs sm:text-sm leading-relaxed text-slate-900 placeholder:text-slate-400 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/20"
           />
         </div>
 
         <div>
           <span className="block text-sm font-semibold text-slate-900 mb-1.5">
-            {viewMode === 'preview' ? 'Live Preview' : 'Compiled HTML'}
+            {viewMode === 'preview' ? s.livePreview : s.compiledHtml}
           </span>
           {viewMode === 'preview' ? (
             <div
@@ -276,14 +325,14 @@ export default function MarkdownPreviewerTool() {
               dangerouslySetInnerHTML={{
                 __html:
                   compiledHtml ||
-                  '<p class="text-slate-400">Preview will appear as you type Markdown...</p>',
+                  `<p class="text-slate-400">${s.emptyPreview}</p>`,
               }}
             />
           ) : (
             <textarea
               rows={14}
               readOnly
-              aria-label="Compiled HTML source"
+              aria-label={s.compiledHtmlAria}
               value={compiledHtml}
               className="w-full rounded-xl border border-slate-200 bg-slate-50 p-4 font-mono text-xs text-slate-800 focus:outline-none"
             />

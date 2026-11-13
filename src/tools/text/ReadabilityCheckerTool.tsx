@@ -1,9 +1,79 @@
 import { RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
+import { useLocale } from '../../locales/LocaleContext';
 
-const SAMPLE_TEXT = `Clear technical writing respects the reader's time. Use concrete nouns and active verbs whenever possible so complex instructions stay easy to follow.
+const STRINGS = {
+  en: {
+    sampleText: `Clear technical writing respects the reader's time. Use concrete nouns and active verbs whenever possible so complex instructions stay easy to follow.
 
-Long sentences packed with nested clauses force readers to re-read paragraphs. Breaking dense explanations into shorter steps makes documentation faster to scan and simpler to apply.`;
+Long sentences packed with nested clauses force readers to re-read paragraphs. Breaking dense explanations into shorter steps makes documentation faster to scan and simpler to apply.`,
+    level: 'Level:',
+    textToCheck: 'Text to check readability',
+    placeholder:
+      'Paste your article, essay, or landing page copy to compute Flesch Reading Ease and grade-level scores...',
+    fleschEase: 'Flesch Reading Ease',
+    fleschKincaid: 'Flesch-Kincaid Grade',
+    usGrade: 'US school grade level',
+    gunningFog: 'Gunning Fog Index',
+    yearsEducation: 'Years of education',
+    smog: 'SMOG Index',
+    polysyllable: 'Polysyllable complexity',
+    structuralBreakdown: 'Structural Breakdown',
+    wordsSentences: 'Words / Sentences',
+    avgSentenceLength: 'Avg. sentence length',
+    words: 'words',
+    avgSyllablesPerWord: 'Avg. syllables per word',
+    complexWords: 'Complex words (3+ syllables)',
+    longWordsDetected: 'Long Words Detected (3+ Syllables)',
+    noLongWords: 'No 3+ syllable words found in this passage.',
+    emptyState:
+      'Enter at least one sentence above to view readability formulas and structural ratios.',
+    levels: [
+      { level: 'Very Easy', audience: '5th grade (10–11 yrs)' },
+      { level: 'Easy', audience: '6th grade (11–12 yrs)' },
+      { level: 'Fairly Easy', audience: '7th grade (12–13 yrs)' },
+      { level: 'Standard', audience: '8th–9th grade (13–15 yrs)' },
+      { level: 'Fairly Difficult', audience: '10th–12th grade' },
+      { level: 'Difficult', audience: 'College level' },
+      { level: 'Very Difficult', audience: 'College graduate / specialist' },
+    ],
+  },
+  es: {
+    sampleText: `La redacción técnica clara respeta el tiempo del lector. Usa sustantivos concretos y verbos activos siempre que sea posible para que las instrucciones complejas sigan siendo fáciles de seguir.
+
+Las oraciones largas llenas de cláusulas anidadas obligan a los lectores a releer los párrafos. Dividir las explicaciones densas en pasos más cortos hace que la documentación sea más rápida de leer y más sencilla de aplicar.`,
+    level: 'Nivel:',
+    textToCheck: 'Texto para comprobar la legibilidad',
+    placeholder:
+      'Pega tu artículo, ensayo o texto de página de destino para calcular la facilidad de lectura Flesch y las puntuaciones de nivel escolar...',
+    fleschEase: 'Facilidad de lectura Flesch',
+    fleschKincaid: 'Grado Flesch-Kincaid',
+    usGrade: 'Nivel escolar de EE. UU.',
+    gunningFog: 'Índice Gunning Fog',
+    yearsEducation: 'Años de educación',
+    smog: 'Índice SMOG',
+    polysyllable: 'Complejidad polisilábica',
+    structuralBreakdown: 'Desglose estructural',
+    wordsSentences: 'Palabras / Oraciones',
+    avgSentenceLength: 'Longitud promedio de oración',
+    words: 'palabras',
+    avgSyllablesPerWord: 'Promedio de sílabas por palabra',
+    complexWords: 'Palabras complejas (3+ sílabas)',
+    longWordsDetected: 'Palabras largas detectadas (3+ sílabas)',
+    noLongWords: 'No se encontraron palabras de 3+ sílabas en este pasaje.',
+    emptyState:
+      'Escribe al menos una oración arriba para ver las fórmulas de legibilidad y las proporciones estructurales.',
+    levels: [
+      { level: 'Muy fácil', audience: '5.º grado (10–11 años)' },
+      { level: 'Fácil', audience: '6.º grado (11–12 años)' },
+      { level: 'Bastante fácil', audience: '7.º grado (12–13 años)' },
+      { level: 'Estándar', audience: '8.º–9.º grado (13–15 años)' },
+      { level: 'Bastante difícil', audience: '10.º–12.º grado' },
+      { level: 'Difícil', audience: 'Nivel universitario' },
+      { level: 'Muy difícil', audience: 'Posgrado / especialista' },
+    ],
+  },
+};
 
 function countSyllables(word: string): number {
   const cleaned = word.toLowerCase().replace(/[^a-z]/g, '');
@@ -17,17 +87,22 @@ function countSyllables(word: string): number {
   return vowelGroups ? Math.max(1, vowelGroups.length) : 1;
 }
 
-function interpretFleschEase(score: number): { level: string; audience: string } {
-  if (score >= 90) return { level: 'Very Easy', audience: '5th grade (10–11 yrs)' };
-  if (score >= 80) return { level: 'Easy', audience: '6th grade (11–12 yrs)' };
-  if (score >= 70) return { level: 'Fairly Easy', audience: '7th grade (12–13 yrs)' };
-  if (score >= 60) return { level: 'Standard', audience: '8th–9th grade (13–15 yrs)' };
-  if (score >= 50) return { level: 'Fairly Difficult', audience: '10th–12th grade' };
-  if (score >= 30) return { level: 'Difficult', audience: 'College level' };
-  return { level: 'Very Difficult', audience: 'College graduate / specialist' };
+function interpretFleschEase(
+  score: number,
+  levels: readonly { level: string; audience: string }[]
+): { level: string; audience: string } {
+  if (score >= 90) return levels[0];
+  if (score >= 80) return levels[1];
+  if (score >= 70) return levels[2];
+  if (score >= 60) return levels[3];
+  if (score >= 50) return levels[4];
+  if (score >= 30) return levels[5];
+  return levels[6];
 }
 
 export default function ReadabilityCheckerTool() {
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
   const [text, setText] = useState('');
 
   const analysis = useMemo(() => {
@@ -81,7 +156,7 @@ export default function ReadabilityCheckerTool() {
         ? 1.043 * Math.sqrt(complexWords * (30 / sentenceCount)) + 3.1291
         : 1.043 * Math.sqrt(complexWords * 10) + 3.1291;
 
-    const band = interpretFleschEase(fleschEase);
+    const band = interpretFleschEase(fleschEase, s.levels);
 
     return {
       wordCount,
@@ -97,7 +172,7 @@ export default function ReadabilityCheckerTool() {
       band,
       complexWordSamples,
     };
-  }, [text]);
+  }, [text, s.levels]);
 
   return (
     <div className="space-y-6">
@@ -105,11 +180,11 @@ export default function ReadabilityCheckerTool() {
         <div className="flex items-center gap-2">
           <button
             type="button"
-            onClick={() => setText(SAMPLE_TEXT)}
+            onClick={() => setText(s.sampleText)}
             className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
           >
             <Sparkles className="w-3.5 h-3.5 text-indigo-600" aria-hidden="true" />
-            <span>Load sample</span>
+            <span>{t.common.loadSample}</span>
           </button>
           <button
             type="button"
@@ -118,27 +193,27 @@ export default function ReadabilityCheckerTool() {
             className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 disabled:opacity-50 cursor-pointer"
           >
             <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
-            <span>Clear</span>
+            <span>{t.common.clear}</span>
           </button>
         </div>
 
         {analysis && (
           <span className="text-xs sm:text-sm font-medium text-slate-600">
-            Level: <strong className="text-slate-900">{analysis.band.level}</strong> ({analysis.band.audience})
+            {s.level} <strong className="text-slate-900">{analysis.band.level}</strong> ({analysis.band.audience})
           </span>
         )}
       </div>
 
       <div>
         <label htmlFor="readability-input" className="sr-only">
-          Text to check readability
+          {s.textToCheck}
         </label>
         <textarea
           id="readability-input"
           rows={8}
           value={text}
           onChange={(e) => setText(e.target.value)}
-          placeholder="Paste your article, essay, or landing page copy to compute Flesch Reading Ease and grade-level scores..."
+          placeholder={s.placeholder}
           className="w-full rounded-xl border border-slate-300 bg-white p-4 text-sm sm:text-base leading-relaxed text-slate-900 placeholder:text-slate-400 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/20"
         />
       </div>
@@ -147,59 +222,59 @@ export default function ReadabilityCheckerTool() {
         <>
           <dl className="grid grid-cols-2 lg:grid-cols-4 gap-3">
             <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
-              <dt className="text-xs text-slate-500">Flesch Reading Ease</dt>
+              <dt className="text-xs text-slate-500">{s.fleschEase}</dt>
               <dd className="mt-1 text-2xl font-bold text-indigo-600 tabular-nums">
                 {analysis.fleschEase.toFixed(1)}
               </dd>
               <dd className="mt-0.5 text-xs text-slate-600">{analysis.band.level}</dd>
             </div>
             <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
-              <dt className="text-xs text-slate-500">Flesch-Kincaid Grade</dt>
+              <dt className="text-xs text-slate-500">{s.fleschKincaid}</dt>
               <dd className="mt-1 text-2xl font-bold text-slate-900 tabular-nums">
                 {analysis.fleschKincaidGrade.toFixed(1)}
               </dd>
-              <dd className="mt-0.5 text-xs text-slate-600">US school grade level</dd>
+              <dd className="mt-0.5 text-xs text-slate-600">{s.usGrade}</dd>
             </div>
             <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
-              <dt className="text-xs text-slate-500">Gunning Fog Index</dt>
+              <dt className="text-xs text-slate-500">{s.gunningFog}</dt>
               <dd className="mt-1 text-2xl font-bold text-slate-900 tabular-nums">
                 {analysis.gunningFog.toFixed(1)}
               </dd>
-              <dd className="mt-0.5 text-xs text-slate-600">Years of education</dd>
+              <dd className="mt-0.5 text-xs text-slate-600">{s.yearsEducation}</dd>
             </div>
             <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
-              <dt className="text-xs text-slate-500">SMOG Index</dt>
+              <dt className="text-xs text-slate-500">{s.smog}</dt>
               <dd className="mt-1 text-2xl font-bold text-slate-900 tabular-nums">
                 {analysis.smog.toFixed(1)}
               </dd>
-              <dd className="mt-0.5 text-xs text-slate-600">Polysyllable complexity</dd>
+              <dd className="mt-0.5 text-xs text-slate-600">{s.polysyllable}</dd>
             </div>
           </dl>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="rounded-lg border border-slate-200 bg-white p-4">
-              <h3 className="text-sm font-semibold text-slate-900 mb-2">Structural Breakdown</h3>
+              <h3 className="text-sm font-semibold text-slate-900 mb-2">{s.structuralBreakdown}</h3>
               <dl className="space-y-1.5 text-sm">
                 <div className="flex justify-between">
-                  <dt className="text-slate-600">Words / Sentences</dt>
+                  <dt className="text-slate-600">{s.wordsSentences}</dt>
                   <dd className="font-mono text-slate-900 tabular-nums">
                     {analysis.wordCount} / {analysis.sentenceCount}
                   </dd>
                 </div>
                 <div className="flex justify-between">
-                  <dt className="text-slate-600">Avg. sentence length</dt>
+                  <dt className="text-slate-600">{s.avgSentenceLength}</dt>
                   <dd className="font-mono text-slate-900 tabular-nums">
-                    {analysis.avgWordsPerSentence.toFixed(1)} words
+                    {analysis.avgWordsPerSentence.toFixed(1)} {s.words}
                   </dd>
                 </div>
                 <div className="flex justify-between">
-                  <dt className="text-slate-600">Avg. syllables per word</dt>
+                  <dt className="text-slate-600">{s.avgSyllablesPerWord}</dt>
                   <dd className="font-mono text-slate-900 tabular-nums">
                     {analysis.avgSyllablesPerWord.toFixed(2)}
                   </dd>
                 </div>
                 <div className="flex justify-between">
-                  <dt className="text-slate-600">Complex words (3+ syllables)</dt>
+                  <dt className="text-slate-600">{s.complexWords}</dt>
                   <dd className="font-mono text-slate-900 tabular-nums">
                     {analysis.complexWords} (
                     {((analysis.complexWords / analysis.wordCount) * 100).toFixed(1)}%)
@@ -210,7 +285,7 @@ export default function ReadabilityCheckerTool() {
 
             <div className="rounded-lg border border-slate-200 bg-white p-4">
               <h3 className="text-sm font-semibold text-slate-900 mb-2">
-                Long Words Detected (3+ Syllables)
+                {s.longWordsDetected}
               </h3>
               {analysis.complexWordSamples.length > 0 ? (
                 <p className="text-sm font-mono text-slate-700 leading-relaxed">
@@ -218,7 +293,7 @@ export default function ReadabilityCheckerTool() {
                 </p>
               ) : (
                 <p className="text-sm text-slate-500">
-                  No 3+ syllable words found in this passage.
+                  {s.noLongWords}
                 </p>
               )}
             </div>
@@ -226,7 +301,7 @@ export default function ReadabilityCheckerTool() {
         </>
       ) : (
         <div className="rounded-lg border border-slate-200 bg-slate-50 p-6 text-center text-sm text-slate-500">
-          Enter at least one sentence above to view readability formulas and structural ratios.
+          {s.emptyState}
         </div>
       )}
     </div>
