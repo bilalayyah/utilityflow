@@ -1,4 +1,7 @@
 import type { ToolInventoryCandidate } from '../../worker/src/types';
+import type { LocaleCode } from '../locales/config';
+import { toolHref } from '../locales/config';
+import { getLocalizedCategory, getLocalizedTools } from '../locales/tools';
 import { getCategoryById } from './categories';
 import { TOOLS_REGISTRY } from './toolsRegistry';
 import type { CategoryId, ToolDefinition } from '../types/tool';
@@ -61,37 +64,66 @@ const SYNONYM_MAP: Record<string, string[]> = {
   seo: ['meta', 'opengraph', 'serp', 'robots', 'sitemap', 'schema', 'canonical'],
 };
 
-function inferIoFormats(tool: ToolDefinition): string | undefined {
+/**
+ * Input/output format hints shown by the AI Tool Finder. Matched on the
+ * stable English tool id (never the localized slug) so it works in every
+ * locale; the returned label is translated when locale is 'es'.
+ */
+function inferIoFormats(tool: ToolDefinition, locale: LocaleCode): string | undefined {
   const haystack = `${tool.slug} ${tool.name} ${tool.keywords.join(' ')}`.toLowerCase();
-  if (tool.slug === 'pdf-to-images') return 'Input: PDF · Output: PNG, JPG';
-  if (tool.slug === 'images-to-pdf') return 'Input: PNG, JPG, WebP · Output: PDF';
-  if (tool.slug === 'pdf-text-extractor') return 'Input: PDF · Output: Plain Text (.txt)';
-  if (tool.categoryId === 'pdf') return 'Input: PDF · Output: PDF';
-  if (haystack.includes('png') || haystack.includes('webp') || tool.slug.startsWith('image-')) {
-    return 'PNG, JPG, WebP';
+  let value: string | undefined;
+  if (tool.id === 'pdf-to-images') value = 'Input: PDF · Output: PNG, JPG';
+  else if (tool.id === 'images-to-pdf') value = 'Input: PNG, JPG, WebP · Output: PDF';
+  else if (tool.id === 'pdf-text-extractor') value = 'Input: PDF · Output: Plain Text (.txt)';
+  else if (tool.categoryId === 'pdf') value = 'Input: PDF · Output: PDF';
+  else if (haystack.includes('png') || haystack.includes('webp') || tool.categoryId === 'image-file') {
+    value = 'PNG, JPG, WebP';
   }
-  if (tool.slug === 'json-csv-converter') return 'JSON <-> CSV';
-  if (tool.slug.includes('json')) return 'JSON';
-  if (tool.slug.includes('markdown')) return 'Markdown -> HTML Preview';
-  if (tool.slug.includes('base64')) return 'Text / Bytes <-> Base64';
-  if (tool.slug === 'qr-code-generator') return 'Text / URL -> PNG, SVG QR';
-  if (tool.slug === 'qr-code-scanner') return 'QR Image / Camera -> Text, URL';
-  if (tool.slug.includes('color') || tool.slug === 'image-color-picker') {
-    return 'HEX, RGB, HSL, CMYK';
+  else if (tool.id === 'json-csv-converter') value = 'JSON <-> CSV';
+  else if (tool.id.includes('json')) value = 'JSON';
+  else if (tool.id.includes('markdown')) value = 'Markdown -> HTML Preview';
+  else if (tool.id.includes('base64')) value = 'Text / Bytes <-> Base64';
+  else if (tool.id === 'qr-code-generator') value = 'Text / URL -> PNG, SVG QR';
+  else if (tool.id === 'qr-code-scanner') value = 'QR Image / Camera -> Text, URL';
+  else if (tool.id.includes('color') || tool.id === 'image-color-picker') {
+    value = 'HEX, RGB, HSL, CMYK';
   }
-  if (tool.slug === 'ai-writing-assistant') return 'Text -> Edited Text / TXT';
-  if (tool.slug === 'ai-text-summarizer') return 'Long Text -> Summary / TXT';
-  return undefined;
+  else if (tool.id === 'ai-writing-assistant') value = 'Text -> Edited Text / TXT';
+  else if (tool.id === 'ai-text-summarizer') value = 'Long Text -> Summary / TXT';
+  if (!value) return undefined;
+  if (locale !== 'es') return value;
+  return IO_FORMATS_ES[value] ?? value;
 }
+
+const IO_FORMATS_ES: Record<string, string> = {
+  'Input: PDF · Output: PNG, JPG': 'Entrada: PDF · Salida: PNG, JPG',
+  'Input: PNG, JPG, WebP · Output: PDF': 'Entrada: PNG, JPG, WebP · Salida: PDF',
+  'Input: PDF · Output: Plain Text (.txt)': 'Entrada: PDF · Salida: texto sin formato (.txt)',
+  'Input: PDF · Output: PDF': 'Entrada: PDF · Salida: PDF',
+  'Markdown -> HTML Preview': 'Markdown -> vista previa HTML',
+  'Text / Bytes <-> Base64': 'Texto / bytes <-> Base64',
+  'Text / URL -> PNG, SVG QR': 'Texto / URL -> QR en PNG, SVG',
+  'QR Image / Camera -> Text, URL': 'Imagen QR / cámara -> texto, URL',
+  'Text -> Edited Text / TXT': 'Texto -> texto editado / TXT',
+  'Long Text -> Summary / TXT': 'Texto largo -> resumen / TXT',
+};
 
 /**
  * Dynamically builds the verified tool inventory from TOOLS_REGISTRY.
  * Excludes 'ai-tool-finder' itself so search results recommend actionable utility tools
  * across all 85 browser utilities + 2 AI writing/summarization tools (87 tools).
+ * Pass locale 'es' for Spanish names, descriptions, keywords and URLs.
  */
-export function buildStructuredToolInventory(): StructuredToolEntry[] {
-  return TOOLS_REGISTRY.filter((tool) => tool.slug !== 'ai-tool-finder').map((tool) => {
-    const category = getCategoryById(tool.categoryId);
+export function buildStructuredToolInventory(locale: LocaleCode = 'en'): StructuredToolEntry[] {
+  const tools =
+    locale === 'es'
+      ? getLocalizedTools('es')
+      : TOOLS_REGISTRY;
+  return tools.filter((tool) => tool.slug !== 'ai-tool-finder' && tool.id !== 'ai-tool-finder').map((tool) => {
+    const category =
+      locale === 'es'
+        ? getLocalizedCategory(tool.categoryId, 'es')
+        : getCategoryById(tool.categoryId);
     return {
       id: tool.id,
       slug: tool.slug,
@@ -99,9 +131,9 @@ export function buildStructuredToolInventory(): StructuredToolEntry[] {
       shortDescription: tool.shortDescription,
       categoryName: category ? category.name : 'Utility',
       categoryId: tool.categoryId,
-      url: `/${tool.slug}/`,
+      url: toolHref(tool.id, locale),
       keywords: Array.from(new Set([tool.seo.primaryKeyword, ...tool.keywords])),
-      ioFormats: inferIoFormats(tool),
+      ioFormats: inferIoFormats(tool, locale),
       requiresExternalApi: tool.requiresExternalApi,
       popular: Boolean(tool.popular),
     };
