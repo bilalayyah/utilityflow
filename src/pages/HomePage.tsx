@@ -42,7 +42,7 @@ export function HomePage() {
     });
   }, [directoryQuery, selectedCategory, categories]);
 
-  const homePath = locale === 'es' ? '/es/' : '/';
+  const homePath = localizeStaticPath('/', locale);
   const websiteSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',

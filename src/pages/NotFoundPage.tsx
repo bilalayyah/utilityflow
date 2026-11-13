@@ -4,7 +4,7 @@ import { CategoryIcon } from '../components/common/CategoryIcon';
 import { SeoHead } from '../components/seo/SeoHead';
 import { ToolSearchBar } from '../components/tool/ToolSearchBar';
 import { useLocale } from '../locales/LocaleContext';
-import { categoryHref, localizeStaticPath } from '../locales/config';
+import { categoryHref, getLocaleInfo, localizeStaticPath } from '../locales/config';
 import { getLocalizedCategories } from '../locales/tools';
 
 export function NotFoundPage() {
@@ -16,7 +16,7 @@ export function NotFoundPage() {
       <SeoHead
         title={t.notFound.seoTitle}
         description={t.notFound.seoDescription}
-        canonicalPath={locale === 'es' ? '/es/404/' : '/404/'}
+        canonicalPath={`${getLocaleInfo(locale).pathPrefix}/404/`}
         noIndex
       />
 

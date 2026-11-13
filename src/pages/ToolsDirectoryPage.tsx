@@ -44,9 +44,9 @@ export function ToolsDirectoryPage() {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
     name:
-      locale === 'es'
-        ? `${t.directory.title} | ${SITE_CONFIG.name}`
-        : `${SITE_CONFIG.name} Tools Directory`,
+      locale === 'en'
+        ? `${SITE_CONFIG.name} Tools Directory`
+        : `${t.directory.title} | ${SITE_CONFIG.name}`,
     url: buildCanonicalUrl(canonicalPath),
     description: t.directory.seoDescription,
   };
