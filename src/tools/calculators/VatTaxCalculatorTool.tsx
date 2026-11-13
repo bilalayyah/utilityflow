@@ -80,6 +80,32 @@ const STRINGS = {
     taxAmount: 'Importo imposta',
     grossPrice: 'Prezzo lordo (imposta incl.)',
   },
+  id: {
+    errorAmount: 'Jumlah tidak boleh negatif.',
+    errorRate: 'Tarif pajak harus antara 0% dan 100%.',
+    addTab: 'Tambah Pajak (Netto → Bruto)',
+    removeTab: 'Ekstrak Pajak (Bruto → Netto)',
+    commonRates: 'Tarif umum:',
+    netAmountLabel: 'Jumlah Netto (Tidak Termasuk Pajak) ($)',
+    grossAmountLabel: 'Jumlah Bruto (Termasuk Pajak) ($)',
+    rateLabel: 'Tarif PPN / Pajak Penjualan (%)',
+    netPrice: 'Harga Netto (Tidak Termasuk Pajak)',
+    taxAmount: 'Jumlah Pajak',
+    grossPrice: 'Harga Bruto (Termasuk Pajak)',
+  },
+  ru: {
+    errorAmount: 'Сумма не может быть отрицательной.',
+    errorRate: 'Ставка налога должна быть от 0% до 100%.',
+    addTab: 'Добавить налог (нетто → брутто)',
+    removeTab: 'Выделить налог (брутто → нетто)',
+    commonRates: 'Распространённые ставки:',
+    netAmountLabel: 'Сумма нетто (без налога) ($)',
+    grossAmountLabel: 'Сумма брутто (с налогом) ($)',
+    rateLabel: 'Ставка НДС / налога с продаж (%)',
+    netPrice: 'Цена нетто (без налога)',
+    taxAmount: 'Сумма налога',
+    grossPrice: 'Цена брутто (с налогом)',
+  },
 };
 
 const RATE_PRESETS = [5, 7, 10, 15, 20, 21];
