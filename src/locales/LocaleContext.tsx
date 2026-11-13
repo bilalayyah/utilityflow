@@ -5,6 +5,7 @@ import {
   DEFAULT_LOCALE,
   LOCALE_STORAGE_KEY,
   getLocaleFromPath,
+  getLocaleInfo,
   isLocaleCode,
 } from './config';
 import { getLocalizedEquivalentPath } from './routes';
@@ -45,7 +46,7 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
     if (location.pathname !== '/') return;
     const stored = readStoredLocale();
     if (stored && stored !== DEFAULT_LOCALE) {
-      navigate('/es/', { replace: true });
+      navigate(`${getLocaleInfo(stored).pathPrefix}/`, { replace: true });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -67,7 +68,7 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
   );
 
   useEffect(() => {
-    document.documentElement.lang = locale === 'es' ? 'es' : 'en';
+    document.documentElement.lang = getLocaleInfo(locale).htmlLang;
   }, [locale]);
 
   return <LocaleContext.Provider value={value}>{children}</LocaleContext.Provider>;

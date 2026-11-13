@@ -1,7 +1,9 @@
 import type { ToolFAQ } from '../types/tool';
-import type { LocaleCode } from './config';
+import type { LocaleCode, NonDefaultLocale } from './config';
 import { enStrings } from './en/ui';
 import { esStrings } from './es/ui';
+import { frStrings } from './fr/ui';
+import { ptStrings } from './pt/ui';
 import type { InfoSection, WhyChooseItem } from './types';
 
 /**
@@ -250,8 +252,21 @@ export interface UiStrings {
   };
 }
 
+/**
+ * Chrome dictionaries per non-default locale. A locale whose dictionary is
+ * not registered here falls back to English — a partially translated locale
+ * never breaks a page. Translators: replace the stub re-export in
+ * locales/<code>/ui.ts with the real dictionary and register it here.
+ */
+const LOCALIZED_STRINGS: Record<NonDefaultLocale, UiStrings> = {
+  es: esStrings,
+  pt: ptStrings,
+  fr: frStrings,
+};
+
 export function getUiStrings(locale: LocaleCode): UiStrings {
-  return locale === 'es' ? esStrings : enStrings;
+  if (locale === 'en') return enStrings;
+  return LOCALIZED_STRINGS[locale] ?? enStrings;
 }
 
 /** Replace {placeholder} tokens in a dictionary template. */

@@ -2,9 +2,10 @@
  * Central language configuration for UtilityFlow.
  *
  * Designed for 11 languages from the start: English (default) + es + pt + de +
- * fr + ja + id + it + ru + ko + zh. Phase 1 ships en + es only; later phases
- * add a LocaleInfo entry, a locales/<code>.ts dictionary, tool overrides and
- * category overrides — no routing or component rework required.
+ * fr + ja + id + it + ru + ko + zh. Phase 1 shipped en + es; Phase 2 adds
+ * pt + fr. Later phases add a LocaleInfo entry, a locales/<code>.ts
+ * dictionary, tool overrides and category overrides — no routing or component
+ * rework required.
  *
  * Rules:
  * - English URLs never change. Every other locale lives under /<code>/.
@@ -16,7 +17,10 @@
 import { getCategoryById } from '../registry/categories';
 import type { CategoryId, ToolCategory } from '../types/tool';
 
-export type LocaleCode = 'en' | 'es';
+export type LocaleCode = 'en' | 'es' | 'pt' | 'fr';
+
+/** Non-default locales (the ones that live under a /<code>/ prefix). */
+export type NonDefaultLocale = Exclude<LocaleCode, 'en'>;
 
 export interface LocaleInfo {
   code: LocaleCode;
@@ -31,9 +35,12 @@ export interface LocaleInfo {
 export const SUPPORTED_LOCALES: LocaleInfo[] = [
   { code: 'en', nativeName: 'English', pathPrefix: '', htmlLang: 'en' },
   { code: 'es', nativeName: 'Español', pathPrefix: '/es', htmlLang: 'es' },
+  { code: 'pt', nativeName: 'Português', pathPrefix: '/pt', htmlLang: 'pt-BR' },
+  { code: 'fr', nativeName: 'Français', pathPrefix: '/fr', htmlLang: 'fr' },
 ];
 
-export const DEFAULT_LOCALE: LocaleCode = 'en';
+/** Literal 'en' type (not LocaleCode) so `locale === DEFAULT_LOCALE` narrows the type. */
+export const DEFAULT_LOCALE: 'en' = 'en';
 
 export const LOCALE_STORAGE_KEY = 'utilityflow-locale';
 
@@ -43,6 +50,24 @@ export function isLocaleCode(value: string): value is LocaleCode {
 
 export function getLocaleInfo(code: LocaleCode): LocaleInfo {
   return SUPPORTED_LOCALES.find((locale) => locale.code === code) ?? SUPPORTED_LOCALES[0];
+}
+
+/**
+ * BCP 47 tag for Intl APIs (toLocaleString, toLocaleDateString, ...).
+ * pt-BR (Brazilian) rather than bare 'pt' so numbers/dates render the
+ * Brazilian way; en-US so English dates render the US way.
+ */
+export function localeTag(locale: LocaleCode): string {
+  switch (locale) {
+    case 'en':
+      return 'en-US';
+    case 'es':
+      return 'es';
+    case 'pt':
+      return 'pt-BR';
+    case 'fr':
+      return 'fr';
+  }
 }
 
 /**
@@ -62,26 +87,90 @@ export function getLocaleFromPath(pathname: string): { locale: LocaleCode; restP
 
 /** Localized URL for a static page path (English path in, localized path out). */
 export const STATIC_PATHS: Record<string, Partial<Record<LocaleCode, string>>> = {
-  '/': { en: '/', es: '/es/' },
-  '/tools/': { en: '/tools/', es: '/es/todas-las-herramientas/' },
-  '/about/': { en: '/about/', es: '/es/acerca-de/' },
-  '/contact/': { en: '/contact/', es: '/es/contacto/' },
-  '/privacy-policy/': { en: '/privacy-policy/', es: '/es/politica-de-privacidad/' },
-  '/terms-of-service/': { en: '/terms-of-service/', es: '/es/terminos-de-servicio/' },
-  '/ai-writing-assistant/': { en: '/ai-writing-assistant/', es: '/es/asistente-de-escritura-ia/' },
-  '/ai-text-summarizer/': { en: '/ai-text-summarizer/', es: '/es/resumidor-de-texto-ia/' },
-  '/ai-tool-finder/': { en: '/ai-tool-finder/', es: '/es/buscador-de-herramientas-ia/' },
+  '/': { en: '/', es: '/es/', pt: '/pt/', fr: '/fr/' },
+  '/tools/': {
+    en: '/tools/',
+    es: '/es/todas-las-herramientas/',
+    pt: '/pt/todas-as-ferramentas/',
+    fr: '/fr/tous-les-outils/',
+  },
+  '/about/': { en: '/about/', es: '/es/acerca-de/', pt: '/pt/sobre/', fr: '/fr/a-propos/' },
+  '/contact/': { en: '/contact/', es: '/es/contacto/', pt: '/pt/contato/', fr: '/fr/contact/' },
+  '/privacy-policy/': {
+    en: '/privacy-policy/',
+    es: '/es/politica-de-privacidad/',
+    pt: '/pt/politica-de-privacidade/',
+    fr: '/fr/politique-de-confidentialite/',
+  },
+  '/terms-of-service/': {
+    en: '/terms-of-service/',
+    es: '/es/terminos-de-servicio/',
+    pt: '/pt/termos-de-servico/',
+    fr: '/fr/conditions-d-utilisation/',
+  },
+  '/ai-writing-assistant/': {
+    en: '/ai-writing-assistant/',
+    es: '/es/asistente-de-escritura-ia/',
+    pt: '/pt/assistente-de-escrita-ia/',
+    fr: '/fr/assistant-d-ecriture-ia/',
+  },
+  '/ai-text-summarizer/': {
+    en: '/ai-text-summarizer/',
+    es: '/es/resumidor-de-texto-ia/',
+    pt: '/pt/resumidor-de-texto-ia/',
+    fr: '/fr/resumeur-de-texte-ia/',
+  },
+  '/ai-tool-finder/': {
+    en: '/ai-tool-finder/',
+    es: '/es/buscador-de-herramientas-ia/',
+    pt: '/pt/buscador-de-ferramentas-ia/',
+    fr: '/fr/chercheur-d-outils-ia/',
+  },
 };
 
-/** Spanish slugs for the 7 categories, keyed by category id. */
-export const CATEGORY_ES_SLUGS: Record<string, string> = {
-  'text-writing': 'herramientas-de-texto-y-escritura',
-  developer: 'herramientas-para-desarrolladores',
-  calculators: 'calculadoras',
-  'social-media': 'herramientas-de-redes-sociales',
-  pdf: 'herramientas-pdf',
-  seo: 'herramientas-seo',
-  'image-file': 'herramientas-de-imagenes-y-archivos',
+/**
+ * Per-locale category slugs, keyed by category id.
+ * es/pt use 'categoria' as the category path segment; fr uses 'categorie'
+ * (see CATEGORY_PATH_SEGMENT).
+ */
+export const CATEGORY_LOCALE_SLUGS: Record<NonDefaultLocale, Record<string, string>> = {
+  es: {
+    'text-writing': 'herramientas-de-texto-y-escritura',
+    developer: 'herramientas-para-desarrolladores',
+    calculators: 'calculadoras',
+    'social-media': 'herramientas-de-redes-sociales',
+    pdf: 'herramientas-pdf',
+    seo: 'herramientas-seo',
+    'image-file': 'herramientas-de-imagenes-y-archivos',
+  },
+  pt: {
+    'text-writing': 'ferramentas-de-texto-e-escrita',
+    developer: 'ferramentas-para-desenvolvedores',
+    calculators: 'calculadoras',
+    'social-media': 'ferramentas-de-redes-sociais',
+    pdf: 'ferramentas-pdf',
+    seo: 'ferramentas-seo',
+    'image-file': 'ferramentas-de-imagem-e-arquivos',
+  },
+  fr: {
+    'text-writing': 'outils-de-texte-et-d-ecriture',
+    developer: 'outils-pour-developpeurs',
+    calculators: 'calculatrices',
+    'social-media': 'outils-de-reseaux-sociaux',
+    pdf: 'outils-pdf',
+    seo: 'outils-seo',
+    'image-file': 'outils-d-images-et-de-fichiers',
+  },
+};
+
+/** Spanish slugs for the 7 categories, keyed by category id. Kept for the Phase 1 validator. */
+export const CATEGORY_ES_SLUGS: Record<string, string> = CATEGORY_LOCALE_SLUGS.es;
+
+/** Category hub path segment per non-default locale ('categoria' / 'categorie'). */
+export const CATEGORY_PATH_SEGMENT: Record<NonDefaultLocale, string> = {
+  es: 'categoria',
+  pt: 'categoria',
+  fr: 'categorie',
 };
 
 /**
@@ -106,16 +195,14 @@ export function categoryHref(
 ): string {
   const id = typeof category === 'string' ? category : category.id;
   const base = typeof category === 'string' ? getCategoryById(category) : category;
-  if (!base) return locale === 'es' ? '/es/' : '/';
-  if (locale === 'es') {
-    const esSlug = CATEGORY_ES_SLUGS[id] ?? base.slug;
-    return `/es/categoria/${esSlug}/`;
-  }
-  return `/category/${base.slug}/`;
+  if (!base) return locale === DEFAULT_LOCALE ? '/' : `${getLocaleInfo(locale).pathPrefix}/`;
+  if (locale === DEFAULT_LOCALE) return `/category/${base.slug}/`;
+  const slug = CATEGORY_LOCALE_SLUGS[locale][id] ?? base.slug;
+  return `${getLocaleInfo(locale).pathPrefix}/${CATEGORY_PATH_SEGMENT[locale]}/${slug}/`;
 }
 
 /** Localized tool page path for a (possibly localized) tool slug. */
 export function toolHref(slug: string, locale: LocaleCode): string {
-  if (locale === 'es') return `/es/${slug}/`;
-  return `/${slug}/`;
+  if (locale === DEFAULT_LOCALE) return `/${slug}/`;
+  return `${getLocaleInfo(locale).pathPrefix}/${slug}/`;
 }
