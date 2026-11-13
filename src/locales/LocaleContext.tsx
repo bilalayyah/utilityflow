@@ -98,10 +98,16 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
         } catch {
           // storage unavailable — navigation still works
         }
-        navigate(getLocalizedEquivalentPath(location.pathname, next, data));
+        navigate(
+          getLocalizedEquivalentPath(
+            `${location.pathname}${location.search}${location.hash}`,
+            next,
+            data
+          )
+        );
       },
     }),
-    [locale, localeData, location.pathname, navigate]
+    [locale, localeData, location.pathname, location.search, location.hash, navigate]
   );
 
   useEffect(() => {

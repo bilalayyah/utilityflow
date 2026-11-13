@@ -8,6 +8,7 @@ import {
   SUPPORTED_LOCALES,
   getLocaleInfo,
   isLocaleCode,
+  localeTag,
 } from './config';
 import { getCategoryById, getCategoryBySlug } from '../registry/categories';
 import { getToolBySlug } from '../registry/toolsRegistry';
@@ -110,9 +111,13 @@ export function getLocalizedEquivalentPath(
   targetLocale: LocaleCode,
   targetData?: LocaleData
 ): string {
-  const [pathPart, hash] = pathname.split('#');
+  // Preserve query string and hash across the switch (e.g. tool state in
+  // ?params must survive a language change).
+  const [beforeHash, hash] = pathname.split('#');
+  const [pathPart, search] = beforeHash.split('?');
   const path = normalize(pathPart || '/');
-  const withHash = (base: string) => (hash ? `${base}#${hash}` : base);
+  const withHash = (base: string) =>
+    `${base}${search ? `?${search}` : ''}${hash ? `#${hash}` : ''}`;
   const home = homePath(targetLocale);
 
   // Homepage (any locale's home in)
@@ -245,7 +250,8 @@ export interface HreflangEntry {
 /**
  * Convert a locale alternate-path set into absolute hreflang entries for
  * SeoHead (one entry per translated locale, in SUPPORTED_LOCALES order,
- * plus x-default → en).
+ * plus x-default → en). hreflang values use the regional tags from
+ * localeTag() (en-US, pt-BR, zh-CN) so they match <html lang>.
  */
 export function toHreflangEntries(
   alternates: LocaleAlternatePaths | undefined
@@ -255,7 +261,7 @@ export function toHreflangEntries(
   for (const locale of SUPPORTED_LOCALES) {
     const path = alternates[locale.code];
     if (path) {
-      entries.push({ hreflang: locale.code, href: buildCanonicalUrl(path) });
+      entries.push({ hreflang: localeTag(locale.code), href: buildCanonicalUrl(path) });
     }
   }
   entries.push({ hreflang: 'x-default', href: buildCanonicalUrl(alternates.en) });
