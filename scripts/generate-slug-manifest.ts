@@ -2,6 +2,9 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { NonDefaultLocale } from '../src/locales/config';
+import { SUPPORTED_LOCALES } from '../src/locales/config';
+import { CATEGORIES } from '../src/registry/categories';
+import { TOOLS_REGISTRY } from '../src/registry/toolsRegistry';
 import { ES_CATEGORY_OVERRIDES } from '../src/locales/es/categories';
 import { ES_TOOL_OVERRIDES } from '../src/locales/es/tools';
 import { DE_CATEGORY_OVERRIDES } from '../src/locales/de/categories';
@@ -72,6 +75,21 @@ function sortRecord(record: Record<string, string>): Record<string, string> {
 }
 
 function generateSlugManifest(): void {
+  // Loud completeness checks: a locale added to SUPPORTED_LOCALES without
+  // its override maps, or a locale that lost a tool/category, must fail
+  // the build instead of silently shipping a shrunken manifest (which
+  // would drop hreflang alternates and break the language switcher).
+  const nonDefaultLocales = SUPPORTED_LOCALES.filter(
+    (l) => l.code !== 'en'
+  ).map((l) => l.code) as NonDefaultLocale[];
+  for (const locale of nonDefaultLocales) {
+    if (!TOOL_OVERRIDES[locale] || !CATEGORY_OVERRIDES[locale]) {
+      throw new Error(
+        `Slug manifest incomplete: locale "${locale}" is in SUPPORTED_LOCALES but missing from TOOL_OVERRIDES/CATEGORY_OVERRIDES in scripts/generate-slug-manifest.ts.`
+      );
+    }
+  }
+
   const manifest: Record<
     NonDefaultLocale,
     { tools: Record<string, string>; categories: Record<string, string> }
@@ -90,6 +108,24 @@ function generateSlugManifest(): void {
       categories[categoryId] = override.slug;
     }
     manifest[locale] = { tools: sortRecord(tools), categories: sortRecord(categories) };
+  }
+
+  // Every locale must carry every tool and every category — exact counts,
+  // not approximate. A missing slug would silently drop that locale from
+  // hreflang sets and switcher equivalents.
+  for (const locale of nonDefaultLocales) {
+    const toolCount = Object.keys(manifest[locale].tools).length;
+    const categoryCount = Object.keys(manifest[locale].categories).length;
+    if (toolCount !== TOOLS_REGISTRY.length) {
+      throw new Error(
+        `Slug manifest incomplete for locale "${locale}": ${toolCount} tool slugs, expected ${TOOLS_REGISTRY.length}.`
+      );
+    }
+    if (categoryCount !== CATEGORIES.length) {
+      throw new Error(
+        `Slug manifest incomplete for locale "${locale}": ${categoryCount} category slugs, expected ${CATEGORIES.length}.`
+      );
+    }
   }
 
   const header = [

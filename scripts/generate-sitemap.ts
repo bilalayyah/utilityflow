@@ -8,6 +8,7 @@ import {
   CATEGORY_PATH_SEGMENT,
   STATIC_PATHS,
   SUPPORTED_LOCALES,
+  localeTag,
 } from '../src/locales/config';
 import { PT_TOOL_OVERRIDES } from '../src/locales/pt/tools';
 import { FR_TOOL_OVERRIDES } from '../src/locales/fr/tools';
@@ -59,12 +60,22 @@ function escapeXml(value: string): string {
 }
 
 function generateSitemap(): void {
-  const siteOrigin = (
-    process.env.VITE_SITE_URL ||
-    process.env.SITE_URL ||
-    SITE_CONFIG.defaultOrigin
-  ).replace(/\/+$/, '');
+  const envOrigin = (process.env.VITE_SITE_URL || process.env.SITE_URL || '').replace(
+    /\/+$/,
+    ''
+  );
+  // A stray env value must never silently re-domain the whole sitemap: the
+  // canonical origin is https://utilityflow.online, full stop.
+  if (envOrigin && envOrigin !== SITE_CONFIG.defaultOrigin) {
+    throw new Error(
+      `Refusing to generate sitemap: VITE_SITE_URL/SITE_URL is "${envOrigin}" but the canonical origin is "${SITE_CONFIG.defaultOrigin}". Unset the env var or set it to the canonical origin.`
+    );
+  }
+  const siteOrigin = envOrigin || SITE_CONFIG.defaultOrigin;
 
+  // lastmod is the GENERATION date, not a per-page content-change date:
+  // re-running the generator on a later date bumps all entries even if
+  // nothing changed. That is the documented semantics of this file.
   const today = new Date().toISOString().split('T')[0];
   const entries: SitemapEntry[] = [];
 
@@ -85,7 +96,8 @@ function generateSitemap(): void {
       const path = urls[locale.code];
       if (path) {
         alternates.push({
-          hreflang: locale.code,
+          // Regional tags (en-US, pt-BR, zh-CN) so hreflang matches <html lang>.
+          hreflang: localeTag(locale.code),
           href: buildCanonicalUrl(path, siteOrigin),
         });
       }
@@ -137,6 +149,39 @@ function generateSitemap(): void {
     addMultilingual(`/${tool.slug}/`, localized, 'weekly', '0.8');
   }
 
+  // Build-time completeness assertions: a silently incomplete sitemap
+  // (a locale dropped, a tool missing its slug) must fail the build
+  // instead of shipping. Every page exists in every locale, so the counts
+  // are exact, not approximate.
+  const expectedPages = STATIC_ROUTES.length + CATEGORIES.length + TOOLS_REGISTRY.length;
+  const expectedTotal = expectedPages * SUPPORTED_LOCALES.length;
+  if (entries.length !== expectedTotal) {
+    throw new Error(
+      `Sitemap incomplete: ${entries.length} URLs, expected ${expectedTotal} (${expectedPages} pages x ${SUPPORTED_LOCALES.length} locales). A page or locale is missing slugs — check the locale overrides.`
+    );
+  }
+  const nonEnPrefixes = SUPPORTED_LOCALES.filter((l) => l.code !== 'en').map(
+    (l) => `${l.pathPrefix}/`
+  );
+  for (const locale of SUPPORTED_LOCALES) {
+    const n =
+      locale.code === 'en'
+        ? entries.filter((e) => !nonEnPrefixes.some((p) => e.loc.includes(p))).length
+        : entries.filter((e) => e.loc.includes(`${locale.pathPrefix}/`)).length;
+    if (n !== expectedPages) {
+      throw new Error(
+        `Sitemap incomplete for locale ${locale.code}: ${n} URLs, expected ${expectedPages}.`
+      );
+    }
+  }
+  for (const entry of entries) {
+    if (entry.alternates.length !== SUPPORTED_LOCALES.length + 1) {
+      throw new Error(
+        `Sitemap entry ${entry.loc} has ${entry.alternates.length} hreflang alternates, expected ${SUPPORTED_LOCALES.length + 1} (${SUPPORTED_LOCALES.length} locales + x-default).`
+      );
+    }
+  }
+
   const xmlLines = [
     '<?xml version="1.0" encoding="UTF-8"?>',
     '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">',
@@ -177,9 +222,6 @@ function generateSitemap(): void {
   ].join('\n');
   writeFileSync(robotsPath, robotsContent, 'utf8');
 
-  const nonEnPrefixes = SUPPORTED_LOCALES.filter((l) => l.code !== 'en').map(
-    (l) => `${l.pathPrefix}/`
-  );
   const counts = SUPPORTED_LOCALES.map((locale) => {
     const n =
       locale.code === 'en'
