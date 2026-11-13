@@ -1,4 +1,5 @@
 import * as pdfjsLib from 'pdfjs-dist';
+import type { LocaleCode } from '../../locales/config';
 
 // Configure Vite-bundled local worker for pdfjs-dist so zero external CDN calls are required.
 if (typeof window !== 'undefined' && !pdfjsLib.GlobalWorkerOptions.workerSrc) {
@@ -10,30 +11,82 @@ if (typeof window !== 'undefined' && !pdfjsLib.GlobalWorkerOptions.workerSrc) {
 
 export { pdfjsLib };
 
-export function formatBytes(bytes: number): string {
+const PDF_STRINGS = {
+  en: {
+    noFile: 'No file was selected.',
+    notPdf: (name: string) => `"${name}" does not appear to be a PDF file.`,
+    empty: (name: string) => `"${name}" is empty or truncated.`,
+    noHeader: (name: string) =>
+      `"${name}" is missing a valid %PDF header and cannot be processed.`,
+    enterRanges: 'Enter page numbers or ranges such as "1-3, 5".',
+    rangeOutside: (token: string, total: number) =>
+      `Range "${token}" is outside the document's 1–${total} page bounds.`,
+    rangeReversed: (token: string) =>
+      `Range "${token}" has a start page greater than its end page.`,
+    pageMissing: (page: number, total: number) =>
+      `Page ${page} does not exist (document has ${total} pages).`,
+    invalidSyntax: (token: string) =>
+      `Invalid page syntax "${token}". Use numbers and ranges like "1-3, 5".`,
+    encrypted:
+      'This PDF is encrypted or password-protected. Unlock it before processing locally.',
+    unable: 'Unable to process PDF file.',
+  },
+  es: {
+    noFile: 'No se seleccionó ningún archivo.',
+    notPdf: (name: string) => `"${name}" no parece ser un archivo PDF.`,
+    empty: (name: string) => `"${name}" está vacío o truncado.`,
+    noHeader: (name: string) =>
+      `"${name}" no tiene un encabezado %PDF válido y no se puede procesar.`,
+    enterRanges: 'Ingresa números de página o rangos como "1-3, 5".',
+    rangeOutside: (token: string, total: number) =>
+      `El rango "${token}" está fuera de los límites del documento (1–${total} páginas).`,
+    rangeReversed: (token: string) =>
+      `El rango "${token}" tiene una página inicial mayor que la final.`,
+    pageMissing: (page: number, total: number) =>
+      `La página ${page} no existe (el documento tiene ${total} páginas).`,
+    invalidSyntax: (token: string) =>
+      `Sintaxis de página no válida: "${token}". Usa números y rangos como "1-3, 5".`,
+    encrypted:
+      'Este PDF está cifrado o protegido con contraseña. Desbloquéalo antes de procesarlo localmente.',
+    unable: 'No se pudo procesar el archivo PDF.',
+  },
+} as const;
+
+export function formatBytes(bytes: number, locale: LocaleCode = 'en'): string {
   if (!Number.isFinite(bytes) || bytes < 0) return '0 B';
-  if (bytes < 1024) return `${bytes} B`;
-  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
-  return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
+  if (bytes < 1024) return `${bytes.toLocaleString(locale)} B`;
+  if (bytes < 1024 * 1024)
+    return `${(bytes / 1024).toLocaleString(locale, {
+      minimumFractionDigits: 1,
+      maximumFractionDigits: 1,
+    })} KB`;
+  return `${(bytes / (1024 * 1024)).toLocaleString(locale, {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  })} MB`;
 }
 
-export async function readValidatedPdfBytes(file: File): Promise<Uint8Array> {
+export async function readValidatedPdfBytes(
+  file: File,
+  locale: LocaleCode = 'en'
+): Promise<Uint8Array> {
+  const s = PDF_STRINGS[locale];
   if (!file) {
-    throw new Error('No file was selected.');
+    throw new Error(s.noFile);
   }
   const lower = file.name.toLowerCase();
   if (file.type && file.type !== 'application/pdf' && !lower.endsWith('.pdf')) {
-    throw new Error(`"${file.name}" does not appear to be a PDF file.`);
+    throw new Error(s.notPdf(file.name));
   }
   const buffer = await file.arrayBuffer();
   const bytes = new Uint8Array(buffer);
   if (bytes.length < 5) {
-    throw new Error(`"${file.name}" is empty or truncated.`);
+    throw new Error(s.empty(file.name));
   }
   // Check for %PDF- header anywhere in the first 1024 bytes (per PDF spec allowance)
   const headerSlice = new TextDecoder('ascii').decode(bytes.subarray(0, Math.min(1024, bytes.length)));
   if (!headerSlice.includes('%PDF-')) {
-    throw new Error(`"${file.name}" is missing a valid %PDF header and cannot be processed.`);
+    throw new Error(s.noHeader(file.name));
   }
   return bytes;
 }
@@ -55,9 +108,19 @@ export function triggerPdfDownload(bytes: Uint8Array, filename: string): void {
 /**
  * Parses 1-indexed page expressions like "1-3, 5, 8-10" into sorted unique 0-based page indices.
  */
-export function parsePageRanges(input: string, totalPages: number): { indices: number[]; error: string } {
+export function parsePageRanges(
+  input: string,
+  totalPages: number,
+  locale: LocaleCode = 'en'
+): { indices: number[]; error: string } {
+  const s = PDF_STRINGS[locale];
   const trimmed = input.trim();
-  if (!trimmed || trimmed.toLowerCase() === 'all') {
+  // "all" in English; "todas"/"todo" in Spanish.
+  const allKeyword =
+    locale === 'es'
+      ? ['all', 'todas', 'todo'].includes(trimmed.toLowerCase())
+      : trimmed.toLowerCase() === 'all';
+  if (!trimmed || allKeyword) {
     return {
       indices: Array.from({ length: totalPages }, (_, i) => i),
       error: '',
@@ -66,7 +129,7 @@ export function parsePageRanges(input: string, totalPages: number): { indices: n
 
   const tokens = trimmed.split(',').map((t) => t.trim()).filter(Boolean);
   if (tokens.length === 0) {
-    return { indices: [], error: 'Enter page numbers or ranges such as "1-3, 5".' };
+    return { indices: [], error: s.enterRanges };
   }
 
   const chosen = new Set<number>();
@@ -78,13 +141,13 @@ export function parsePageRanges(input: string, totalPages: number): { indices: n
       if (start < 1 || end < 1 || start > totalPages || end > totalPages) {
         return {
           indices: [],
-          error: `Range "${token}" is outside the document's 1–${totalPages} page bounds.`,
+          error: s.rangeOutside(token, totalPages),
         };
       }
       if (start > end) {
         return {
           indices: [],
-          error: `Range "${token}" has a start page greater than its end page.`,
+          error: s.rangeReversed(token),
         };
       }
       for (let p = start; p <= end; p += 1) {
@@ -98,7 +161,7 @@ export function parsePageRanges(input: string, totalPages: number): { indices: n
       if (page < 1 || page > totalPages) {
         return {
           indices: [],
-          error: `Page ${page} does not exist (document has ${totalPages} pages).`,
+          error: s.pageMissing(page, totalPages),
         };
       }
       chosen.add(page - 1);
@@ -107,7 +170,7 @@ export function parsePageRanges(input: string, totalPages: number): { indices: n
 
     return {
       indices: [],
-      error: `Invalid page syntax "${token}". Use numbers and ranges like "1-3, 5".`,
+      error: s.invalidSyntax(token),
     };
   }
 
@@ -117,11 +180,16 @@ export function parsePageRanges(input: string, totalPages: number): { indices: n
   };
 }
 
-export function formatFriendlyPdfError(err: unknown, filename?: string): string {
+export function formatFriendlyPdfError(
+  err: unknown,
+  filename?: string,
+  locale: LocaleCode = 'en'
+): string {
+  const s = PDF_STRINGS[locale];
   const msg = err instanceof Error ? err.message : String(err);
   const prefix = filename ? `${filename}: ` : '';
   if (/encrypt|password/i.test(msg)) {
-    return `${prefix}This PDF is encrypted or password-protected. Unlock it before processing locally.`;
+    return `${prefix}${s.encrypted}`;
   }
-  return `${prefix}${msg || 'Unable to process PDF file.'}`;
+  return `${prefix}${msg || s.unable}`;
 }

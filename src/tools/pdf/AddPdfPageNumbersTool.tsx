@@ -2,11 +2,67 @@ import { FileUp, Hash } from 'lucide-react';
 import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
 import { useState } from 'react';
 import { formatBytes, formatFriendlyPdfError, readValidatedPdfBytes, triggerPdfDownload } from './pdfUtils';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    errStart: 'Starting page number must be a whole number of 1 or higher.',
+    stampedSuccess: (n: number, size: string) => `Stamped page numbers on ${n} page(s) (${size}).`,
+    pageOfLabel: (cur: number, total: number) => `Page ${cur} of ${total}`,
+    dropTitleEmpty: 'Choose a PDF File to Add Page Numbers',
+    dropTitleFile: (name: string, pages: number) => `${name} (${pages} pages)`,
+    dropSub: 'Inserts crisp vector page labels across reports, contracts, and packets',
+    labelPos: 'Position',
+    optBottomCenter: 'Bottom Center',
+    optBottomRight: 'Bottom Right',
+    optBottomLeft: 'Bottom Left',
+    optTopRight: 'Top Right',
+    labelFmt: 'Label Format',
+    optPageOf: 'Page 1 of N',
+    optSlash: '1 / N',
+    optNumberOnly: '1, 2, 3...',
+    labelStart: 'Start Number',
+    labelSize: 'Font Size (pt)',
+    opt9: '9 pt (Subtle)',
+    opt11: '11 pt (Standard)',
+    opt14: '14 pt (Large)',
+    skipCover: 'Skip cover page (start numbering on page 2)',
+    numbering: 'Numbering Pages...',
+    addBtn: 'Add Page Numbers & Download',
+  },
+  es: {
+    errStart: 'El número de página inicial debe ser un número entero de 1 o mayor.',
+    stampedSuccess: (n: number, size: string) => `Se estamparon números de página en ${n} página(s) (${size}).`,
+    pageOfLabel: (cur: number, total: number) => `Página ${cur} de ${total}`,
+    dropTitleEmpty: 'Elija un archivo PDF para agregar números de página',
+    dropTitleFile: (name: string, pages: number) => `${name} (${pages} páginas)`,
+    dropSub: 'Inserta etiquetas de página vectoriales nítidas en informes, contratos y paquetes',
+    labelPos: 'Posición',
+    optBottomCenter: 'Inferior centrada',
+    optBottomRight: 'Inferior derecha',
+    optBottomLeft: 'Inferior izquierda',
+    optTopRight: 'Superior derecha',
+    labelFmt: 'Formato de etiqueta',
+    optPageOf: 'Página 1 de N',
+    optSlash: '1 / N',
+    optNumberOnly: '1, 2, 3...',
+    labelStart: 'Número inicial',
+    labelSize: 'Tamaño de fuente (pt)',
+    opt9: '9 pt (sutil)',
+    opt11: '11 pt (estándar)',
+    opt14: '14 pt (grande)',
+    skipCover: 'Omitir la portada (comenzar la numeración en la página 2)',
+    numbering: 'Numerando páginas...',
+    addBtn: 'Agregar números de página y descargar',
+  },
+};
 
 type PositionOption = 'bottom-center' | 'bottom-right' | 'bottom-left' | 'top-right';
 type FormatOption = 'page-of' | 'slash' | 'number-only';
 
 export default function AddPdfPageNumbersTool() {
+  const { locale } = useLocale();
+  const s = STRINGS[locale];
   const [pdfBytes, setPdfBytes] = useState<Uint8Array | null>(null);
   const [fileName, setFileName] = useState('');
   const [pageCount, setPageCount] = useState(0);
@@ -27,14 +83,14 @@ export default function AddPdfPageNumbersTool() {
     setStatusMessage('');
 
     try {
-      const bytes = await readValidatedPdfBytes(file);
+      const bytes = await readValidatedPdfBytes(file, locale);
       const doc = await PDFDocument.load(bytes);
       setPdfBytes(bytes);
       setFileName(file.name);
       setPageCount(doc.getPageCount());
     } catch (err) {
       setPdfBytes(null);
-      setError(formatFriendlyPdfError(err, file.name));
+      setError(formatFriendlyPdfError(err, file.name, locale));
     }
   };
 
@@ -42,7 +98,7 @@ export default function AddPdfPageNumbersTool() {
     if (!pdfBytes || pageCount === 0) return;
     const startVal = Number(startNumber);
     if (!Number.isInteger(startVal) || startVal < 1) {
-      setError('Starting page number must be a whole number of 1 or higher.');
+      setError(s.errStart);
       return;
     }
 
@@ -65,7 +121,7 @@ export default function AddPdfPageNumbersTool() {
 
         let text = `${currentNum}`;
         if (labelFormat === 'page-of') {
-          text = `Page ${currentNum} of ${totalNum}`;
+          text = s.pageOfLabel(currentNum, totalNum);
         } else if (labelFormat === 'slash') {
           text = `${currentNum} / ${totalNum}`;
         }
@@ -100,10 +156,10 @@ export default function AddPdfPageNumbersTool() {
       const baseName = fileName.replace(/\.pdf$/i, '') || 'document';
       triggerPdfDownload(outBytes, `${baseName}-numbered.pdf`);
       setStatusMessage(
-        `Stamped page numbers on ${skipFirstPage ? Math.max(0, pageCount - 1) : pageCount} page(s) (${formatBytes(outBytes.byteLength)}).`
+        s.stampedSuccess(skipFirstPage ? Math.max(0, pageCount - 1) : pageCount, formatBytes(outBytes.byteLength, locale))
       );
     } catch (err) {
-      setError(formatFriendlyPdfError(err, fileName));
+      setError(formatFriendlyPdfError(err, fileName, locale));
     } finally {
       setIsProcessing(false);
     }
@@ -117,10 +173,10 @@ export default function AddPdfPageNumbersTool() {
       >
         <FileUp className="w-8 h-8 text-indigo-600 mb-2" />
         <span className="text-sm font-semibold text-slate-900">
-          {fileName ? `${fileName} (${pageCount} pages)` : 'Choose a PDF File to Add Page Numbers'}
+          {fileName ? s.dropTitleFile(fileName, pageCount) : s.dropTitleEmpty}
         </span>
         <span className="mt-1 text-xs text-slate-500">
-          Inserts crisp vector page labels across reports, contracts, and packets
+          {s.dropSub}
         </span>
         <input
           id="num-pdf-input"
@@ -151,7 +207,7 @@ export default function AddPdfPageNumbersTool() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div>
               <label htmlFor="num-pos" className="block text-xs font-semibold text-slate-800 mb-1.5">
-                Position
+                {s.labelPos}
               </label>
               <select
                 id="num-pos"
@@ -159,16 +215,16 @@ export default function AddPdfPageNumbersTool() {
                 onChange={(e) => setPosition(e.target.value as PositionOption)}
                 className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"
               >
-                <option value="bottom-center">Bottom Center</option>
-                <option value="bottom-right">Bottom Right</option>
-                <option value="bottom-left">Bottom Left</option>
-                <option value="top-right">Top Right</option>
+                <option value="bottom-center">{s.optBottomCenter}</option>
+                <option value="bottom-right">{s.optBottomRight}</option>
+                <option value="bottom-left">{s.optBottomLeft}</option>
+                <option value="top-right">{s.optTopRight}</option>
               </select>
             </div>
 
             <div>
               <label htmlFor="num-fmt" className="block text-xs font-semibold text-slate-800 mb-1.5">
-                Label Format
+                {s.labelFmt}
               </label>
               <select
                 id="num-fmt"
@@ -176,15 +232,15 @@ export default function AddPdfPageNumbersTool() {
                 onChange={(e) => setLabelFormat(e.target.value as FormatOption)}
                 className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"
               >
-                <option value="page-of">Page 1 of N</option>
-                <option value="slash">1 / N</option>
-                <option value="number-only">1, 2, 3...</option>
+                <option value="page-of">{s.optPageOf}</option>
+                <option value="slash">{s.optSlash}</option>
+                <option value="number-only">{s.optNumberOnly}</option>
               </select>
             </div>
 
             <div>
               <label htmlFor="num-start" className="block text-xs font-semibold text-slate-800 mb-1.5">
-                Start Number
+                {s.labelStart}
               </label>
               <input
                 id="num-start"
@@ -198,7 +254,7 @@ export default function AddPdfPageNumbersTool() {
 
             <div>
               <label htmlFor="num-size" className="block text-xs font-semibold text-slate-800 mb-1.5">
-                Font Size (pt)
+                {s.labelSize}
               </label>
               <select
                 id="num-size"
@@ -206,9 +262,9 @@ export default function AddPdfPageNumbersTool() {
                 onChange={(e) => setFontSize(Number(e.target.value))}
                 className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"
               >
-                <option value={9}>9 pt (Subtle)</option>
-                <option value={11}>11 pt (Standard)</option>
-                <option value={14}>14 pt (Large)</option>
+                <option value={9}>{s.opt9}</option>
+                <option value={11}>{s.opt11}</option>
+                <option value={14}>{s.opt14}</option>
               </select>
             </div>
           </div>
@@ -220,7 +276,7 @@ export default function AddPdfPageNumbersTool() {
               onChange={(e) => setSkipFirstPage(e.target.checked)}
               className="h-4 w-4 rounded border-slate-300 text-indigo-600"
             />
-            Skip cover page (start numbering on page 2)
+            {s.skipCover}
           </label>
 
           <div>
@@ -231,7 +287,7 @@ export default function AddPdfPageNumbersTool() {
               className="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700 disabled:opacity-50 cursor-pointer"
             >
               <Hash className="w-4 h-4" />
-              {isProcessing ? 'Numbering Pages...' : 'Add Page Numbers & Download'}
+              {isProcessing ? s.numbering : s.addBtn}
             </button>
           </div>
         </div>

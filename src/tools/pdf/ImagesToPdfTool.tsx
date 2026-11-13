@@ -2,6 +2,64 @@ import { ArrowDown, ArrowUp, FileOutput, ImagePlus, Trash2 } from 'lucide-react'
 import { PDFDocument } from 'pdf-lib';
 import { useEffect, useState } from 'react';
 import { formatBytes, triggerPdfDownload } from './pdfUtils';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    errDecode: (name: string) => `Unable to decode image "${name}".`,
+    errCanvas: 'Canvas 2D context unavailable.',
+    errConvert: (name: string) => `Failed converting "${name}" to PNG.`,
+    errNotImage: (name: string) => `"${name}" is not a supported image file (PNG, JPG, WebP).`,
+    errRead: (name: string) => `Unable to read "${name}".`,
+    errLoad: 'Unable to load image.',
+    errEmpty: 'Add at least one image first.',
+    errBuild: 'Failed converting images to PDF.',
+    createdSuccess: (n: number, size: string) => `Created ${n}-page PDF (${size}) cleanly.`,
+    dropTitle: 'Select PNG, JPG, or WebP Images',
+    dropSub: 'Convert screenshots, scans, or photos into a single PDF locally',
+    labelSize: 'PDF Page Size',
+    optA4: 'A4 Portrait (210 × 297 mm)',
+    optLetter: 'US Letter (8.5 × 11 in)',
+    optFit: 'Exact Image Dimensions',
+    labelMargin: 'Page Margin',
+    optMargin0: 'No Margin (0 pt)',
+    optMargin24: 'Standard Margin (24 pt)',
+    optMargin48: 'Wide Margin (48 pt)',
+    labelOut: 'Output Filename',
+    moveUp: (name: string) => `Move ${name} up`,
+    moveDown: (name: string) => `Move ${name} down`,
+    removeFile: (name: string) => `Remove ${name}`,
+    building: 'Generating PDF...',
+    convertBtn: (n: number) => `Convert ${n} Images to PDF`,
+  },
+  es: {
+    errDecode: (name: string) => `No se pudo decodificar la imagen «${name}».`,
+    errCanvas: 'El contexto 2D del lienzo no está disponible.',
+    errConvert: (name: string) => `No se pudo convertir «${name}» a PNG.`,
+    errNotImage: (name: string) => `«${name}» no es un archivo de imagen compatible (PNG, JPG, WebP).`,
+    errRead: (name: string) => `No se pudo leer «${name}».`,
+    errLoad: 'No se pudo cargar la imagen.',
+    errEmpty: 'Agregue al menos una imagen primero.',
+    errBuild: 'No se pudieron convertir las imágenes a PDF.',
+    createdSuccess: (n: number, size: string) => `Se creó un PDF de ${n} páginas (${size}) correctamente.`,
+    dropTitle: 'Seleccione imágenes PNG, JPG o WebP',
+    dropSub: 'Convierta capturas, escaneos o fotos en un solo PDF localmente',
+    labelSize: 'Tamaño de página del PDF',
+    optA4: 'A4 vertical (210 × 297 mm)',
+    optLetter: 'Carta de EE. UU. (8.5 × 11 pulg.)',
+    optFit: 'Dimensiones exactas de la imagen',
+    labelMargin: 'Margen de página',
+    optMargin0: 'Sin margen (0 pt)',
+    optMargin24: 'Margen estándar (24 pt)',
+    optMargin48: 'Margen amplio (48 pt)',
+    labelOut: 'Nombre del archivo de salida',
+    moveUp: (name: string) => `Mover ${name} hacia arriba`,
+    moveDown: (name: string) => `Mover ${name} hacia abajo`,
+    removeFile: (name: string) => `Eliminar ${name}`,
+    building: 'Generando PDF...',
+    convertBtn: (n: number) => `Convertir ${n} imágenes a PDF`,
+  },
+};
 
 type PageSizeOption = 'fit' | 'a4' | 'letter';
 
@@ -13,30 +71,9 @@ interface QueuedImage {
   height: number;
 }
 
-async function fileToPngBytesViaCanvas(file: File): Promise<Uint8Array> {
-  const bitmapUrl = URL.createObjectURL(file);
-  try {
-    const img = await new Promise<HTMLImageElement>((resolve, reject) => {
-      const el = new Image();
-      el.onload = () => resolve(el);
-      el.onerror = () => reject(new Error(`Unable to decode image "${file.name}".`));
-      el.src = bitmapUrl;
-    });
-    const canvas = document.createElement('canvas');
-    canvas.width = img.naturalWidth;
-    canvas.height = img.naturalHeight;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) throw new Error('Canvas 2D context unavailable.');
-    ctx.drawImage(img, 0, 0);
-    const pngBlob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, 'image/png'));
-    if (!pngBlob) throw new Error(`Failed converting "${file.name}" to PNG.`);
-    return new Uint8Array(await pngBlob.arrayBuffer());
-  } finally {
-    URL.revokeObjectURL(bitmapUrl);
-  }
-}
-
 export default function ImagesToPdfTool() {
+  const { locale } = useLocale();
+  const s = STRINGS[locale];
   const [images, setImages] = useState<QueuedImage[]>([]);
   const [pageSize, setPageSize] = useState<PageSizeOption>('a4');
   const [marginPt, setMarginPt] = useState(24);
@@ -52,6 +89,29 @@ export default function ImagesToPdfTool() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const fileToPngBytesViaCanvas = async (file: File): Promise<Uint8Array> => {
+    const bitmapUrl = URL.createObjectURL(file);
+    try {
+      const img = await new Promise<HTMLImageElement>((resolve, reject) => {
+        const el = new Image();
+        el.onload = () => resolve(el);
+        el.onerror = () => reject(new Error(s.errDecode(file.name)));
+        el.src = bitmapUrl;
+      });
+      const canvas = document.createElement('canvas');
+      canvas.width = img.naturalWidth;
+      canvas.height = img.naturalHeight;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) throw new Error(s.errCanvas);
+      ctx.drawImage(img, 0, 0);
+      const pngBlob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, 'image/png'));
+      if (!pngBlob) throw new Error(s.errConvert(file.name));
+      return new Uint8Array(await pngBlob.arrayBuffer());
+    } finally {
+      URL.revokeObjectURL(bitmapUrl);
+    }
+  };
+
   const handleSelectImages = async (fileList: FileList | null) => {
     if (!fileList || fileList.length === 0) return;
     setError('');
@@ -62,7 +122,7 @@ export default function ImagesToPdfTool() {
 
     for (const file of Array.from(fileList)) {
       if (!file.type.startsWith('image/')) {
-        setError(`"${file.name}" is not a supported image file (PNG, JPG, WebP).`);
+        setError(s.errNotImage(file.name));
         continue;
       }
       const previewUrl = URL.createObjectURL(file);
@@ -70,7 +130,7 @@ export default function ImagesToPdfTool() {
         const dims = await new Promise<{ w: number; h: number }>((resolve, reject) => {
           const el = new Image();
           el.onload = () => resolve({ w: el.naturalWidth, h: el.naturalHeight });
-          el.onerror = () => reject(new Error(`Unable to read "${file.name}".`));
+          el.onerror = () => reject(new Error(s.errRead(file.name)));
           el.src = previewUrl;
         });
         nextItems.push({
@@ -82,7 +142,7 @@ export default function ImagesToPdfTool() {
         });
       } catch (err) {
         URL.revokeObjectURL(previewUrl);
-        setError(err instanceof Error ? err.message : 'Unable to load image.');
+        setError(err instanceof Error ? err.message : s.errLoad);
       }
     }
 
@@ -106,7 +166,7 @@ export default function ImagesToPdfTool() {
 
   const handleBuildPdf = async () => {
     if (images.length === 0) {
-      setError('Add at least one image first.');
+      setError(s.errEmpty);
       return;
     }
     setError('');
@@ -159,10 +219,10 @@ export default function ImagesToPdfTool() {
       const outBytes = await pdfDoc.save();
       triggerPdfDownload(outBytes, outputName.trim() || 'images-bundle.pdf');
       setStatusMessage(
-        `Created ${images.length}-page PDF (${formatBytes(outBytes.byteLength)}) cleanly.`
+        s.createdSuccess(images.length, formatBytes(outBytes.byteLength, locale))
       );
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed converting images to PDF.');
+      setError(err instanceof Error ? err.message : s.errBuild);
     } finally {
       setIsBuilding(false);
     }
@@ -176,10 +236,10 @@ export default function ImagesToPdfTool() {
       >
         <ImagePlus className="w-8 h-8 text-indigo-600 mb-2" />
         <span className="text-sm font-semibold text-slate-900">
-          Select PNG, JPG, or WebP Images
+          {s.dropTitle}
         </span>
         <span className="mt-1 text-xs text-slate-500">
-          Convert screenshots, scans, or photos into a single PDF locally
+          {s.dropSub}
         </span>
         <input
           id="img2pdf-input"
@@ -211,7 +271,7 @@ export default function ImagesToPdfTool() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
               <label htmlFor="img2pdf-size" className="block text-xs font-semibold text-slate-800 mb-1.5">
-                PDF Page Size
+                {s.labelSize}
               </label>
               <select
                 id="img2pdf-size"
@@ -219,15 +279,15 @@ export default function ImagesToPdfTool() {
                 onChange={(e) => setPageSize(e.target.value as PageSizeOption)}
                 className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"
               >
-                <option value="a4">A4 Portrait (210 × 297 mm)</option>
-                <option value="letter">US Letter (8.5 × 11 in)</option>
-                <option value="fit">Exact Image Dimensions</option>
+                <option value="a4">{s.optA4}</option>
+                <option value="letter">{s.optLetter}</option>
+                <option value="fit">{s.optFit}</option>
               </select>
             </div>
 
             <div>
               <label htmlFor="img2pdf-margin" className="block text-xs font-semibold text-slate-800 mb-1.5">
-                Page Margin
+                {s.labelMargin}
               </label>
               <select
                 id="img2pdf-margin"
@@ -235,15 +295,15 @@ export default function ImagesToPdfTool() {
                 onChange={(e) => setMarginPt(Number(e.target.value))}
                 className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"
               >
-                <option value={0}>No Margin (0 pt)</option>
-                <option value={24}>Standard Margin (24 pt)</option>
-                <option value={48}>Wide Margin (48 pt)</option>
+                <option value={0}>{s.optMargin0}</option>
+                <option value={24}>{s.optMargin24}</option>
+                <option value={48}>{s.optMargin48}</option>
               </select>
             </div>
 
             <div>
               <label htmlFor="img2pdf-name" className="block text-xs font-semibold text-slate-800 mb-1.5">
-                Output Filename
+                {s.labelOut}
               </label>
               <input
                 id="img2pdf-name"
@@ -269,7 +329,7 @@ export default function ImagesToPdfTool() {
                       {idx + 1}. {item.file.name}
                     </div>
                     <div className="text-xs text-slate-500 font-mono tabular-nums">
-                      {item.width} × {item.height} px · {formatBytes(item.file.size)}
+                      {item.width} × {item.height} px · {formatBytes(item.file.size, locale)}
                     </div>
                   </div>
                 </div>
@@ -279,7 +339,7 @@ export default function ImagesToPdfTool() {
                     type="button"
                     disabled={idx === 0}
                     onClick={() => moveImage(idx, -1)}
-                    aria-label={`Move ${item.file.name} up`}
+                    aria-label={s.moveUp(item.file.name)}
                     className="rounded-md border border-slate-300 bg-white p-1.5 text-slate-700 hover:bg-slate-50 disabled:opacity-40 cursor-pointer"
                   >
                     <ArrowUp className="w-3.5 h-3.5" />
@@ -288,7 +348,7 @@ export default function ImagesToPdfTool() {
                     type="button"
                     disabled={idx === images.length - 1}
                     onClick={() => moveImage(idx, 1)}
-                    aria-label={`Move ${item.file.name} down`}
+                    aria-label={s.moveDown(item.file.name)}
                     className="rounded-md border border-slate-300 bg-white p-1.5 text-slate-700 hover:bg-slate-50 disabled:opacity-40 cursor-pointer"
                   >
                     <ArrowDown className="w-3.5 h-3.5" />
@@ -296,7 +356,7 @@ export default function ImagesToPdfTool() {
                   <button
                     type="button"
                     onClick={() => removeImage(item.id)}
-                    aria-label={`Remove ${item.file.name}`}
+                    aria-label={s.removeFile(item.file.name)}
                     className="rounded-md border border-slate-300 bg-white p-1.5 text-red-600 hover:bg-red-50 cursor-pointer"
                   >
                     <Trash2 className="w-3.5 h-3.5" />
@@ -313,7 +373,7 @@ export default function ImagesToPdfTool() {
             className="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700 disabled:opacity-50 cursor-pointer"
           >
             <FileOutput className="w-4 h-4" />
-            {isBuilding ? 'Generating PDF...' : `Convert ${images.length} Images to PDF`}
+            {isBuilding ? s.building : s.convertBtn(images.length)}
           </button>
         </div>
       )}

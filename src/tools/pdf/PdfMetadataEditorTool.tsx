@@ -2,8 +2,46 @@ import { Eraser, FileCheck2, FileUp } from 'lucide-react';
 import { PDFDocument } from 'pdf-lib';
 import { useState } from 'react';
 import { formatBytes, formatFriendlyPdfError, readValidatedPdfBytes, triggerPdfDownload } from './pdfUtils';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    clearedMsg: 'Cleared editable metadata fields. Click Save & Download PDF to apply.',
+    savedSuccess: (size: string) => `Saved updated PDF metadata (${size}).`,
+    dropTitleEmpty: 'Choose a PDF File to Inspect or Edit Metadata',
+    dropTitleFile: (name: string, pages: number, size: string) => `${name} (${pages} pages · ${size})`,
+    dropSub: 'Inspect document properties, sanitize author/software tags, or set clean SEO titles',
+    labelTitle: 'Document Title',
+    labelAuthor: 'Author',
+    labelSubject: 'Subject / Summary',
+    labelKeywords: 'Keywords (comma separated)',
+    labelCreator: 'Creator Application',
+    labelProducer: 'PDF Producer',
+    saving: 'Saving PDF...',
+    saveBtn: 'Save Metadata & Download PDF',
+    stripBtn: 'Strip All Metadata Fields',
+  },
+  es: {
+    clearedMsg: 'Se borraron los campos de metadatos editables. Haga clic en Guardar y descargar PDF para aplicar los cambios.',
+    savedSuccess: (size: string) => `Se guardaron los metadatos actualizados del PDF (${size}).`,
+    dropTitleEmpty: 'Elija un archivo PDF para inspeccionar o editar metadatos',
+    dropTitleFile: (name: string, pages: number, size: string) => `${name} (${pages} páginas · ${size})`,
+    dropSub: 'Inspeccione las propiedades del documento, limpie las etiquetas de autor/software o establezca títulos SEO limpios',
+    labelTitle: 'Título del documento',
+    labelAuthor: 'Autor',
+    labelSubject: 'Asunto / resumen',
+    labelKeywords: 'Palabras clave (separadas por comas)',
+    labelCreator: 'Aplicación creadora',
+    labelProducer: 'Productor del PDF',
+    saving: 'Guardando PDF...',
+    saveBtn: 'Guardar metadatos y descargar PDF',
+    stripBtn: 'Eliminar todos los campos de metadatos',
+  },
+};
 
 export default function PdfMetadataEditorTool() {
+  const { locale } = useLocale();
+  const s = STRINGS[locale];
   const [pdfBytes, setPdfBytes] = useState<Uint8Array | null>(null);
   const [fileName, setFileName] = useState('');
   const [pageCount, setPageCount] = useState(0);
@@ -26,7 +64,7 @@ export default function PdfMetadataEditorTool() {
     setStatusMessage('');
 
     try {
-      const bytes = await readValidatedPdfBytes(file);
+      const bytes = await readValidatedPdfBytes(file, locale);
       const doc = await PDFDocument.load(bytes);
       const firstPage = doc.getPageCount() > 0 ? doc.getPage(0).getSize() : null;
 
@@ -45,7 +83,7 @@ export default function PdfMetadataEditorTool() {
       setProducer(doc.getProducer() ?? '');
     } catch (err) {
       setPdfBytes(null);
-      setError(formatFriendlyPdfError(err, file.name));
+      setError(formatFriendlyPdfError(err, file.name, locale));
     }
   };
 
@@ -56,7 +94,7 @@ export default function PdfMetadataEditorTool() {
     setKeywords('');
     setCreator('');
     setProducer('');
-    setStatusMessage('Cleared editable metadata fields. Click Save & Download PDF to apply.');
+    setStatusMessage(s.clearedMsg);
   };
 
   const handleSave = async () => {
@@ -83,10 +121,10 @@ export default function PdfMetadataEditorTool() {
       const baseName = fileName.replace(/\.pdf$/i, '') || 'document';
       triggerPdfDownload(outBytes, `${baseName}-metadata.pdf`);
       setStatusMessage(
-        `Saved updated PDF metadata (${formatBytes(outBytes.byteLength)}).`
+        s.savedSuccess(formatBytes(outBytes.byteLength, locale))
       );
     } catch (err) {
-      setError(formatFriendlyPdfError(err, fileName));
+      setError(formatFriendlyPdfError(err, fileName, locale));
     } finally {
       setIsSaving(false);
     }
@@ -101,11 +139,11 @@ export default function PdfMetadataEditorTool() {
         <FileUp className="w-8 h-8 text-indigo-600 mb-2" />
         <span className="text-sm font-semibold text-slate-900">
           {fileName
-            ? `${fileName} (${pageCount} pages · ${firstPageSize})`
-            : 'Choose a PDF File to Inspect or Edit Metadata'}
+            ? s.dropTitleFile(fileName, pageCount, firstPageSize)
+            : s.dropTitleEmpty}
         </span>
         <span className="mt-1 text-xs text-slate-500">
-          Inspect document properties, sanitize author/software tags, or set clean SEO titles
+          {s.dropSub}
         </span>
         <input
           id="meta-pdf-input"
@@ -136,7 +174,7 @@ export default function PdfMetadataEditorTool() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label htmlFor="meta-title" className="block text-xs font-semibold text-slate-800 mb-1">
-                Document Title
+                {s.labelTitle}
               </label>
               <input
                 id="meta-title"
@@ -149,7 +187,7 @@ export default function PdfMetadataEditorTool() {
 
             <div>
               <label htmlFor="meta-author" className="block text-xs font-semibold text-slate-800 mb-1">
-                Author
+                {s.labelAuthor}
               </label>
               <input
                 id="meta-author"
@@ -162,7 +200,7 @@ export default function PdfMetadataEditorTool() {
 
             <div>
               <label htmlFor="meta-subject" className="block text-xs font-semibold text-slate-800 mb-1">
-                Subject / Summary
+                {s.labelSubject}
               </label>
               <input
                 id="meta-subject"
@@ -175,7 +213,7 @@ export default function PdfMetadataEditorTool() {
 
             <div>
               <label htmlFor="meta-keywords" className="block text-xs font-semibold text-slate-800 mb-1">
-                Keywords (comma separated)
+                {s.labelKeywords}
               </label>
               <input
                 id="meta-keywords"
@@ -188,7 +226,7 @@ export default function PdfMetadataEditorTool() {
 
             <div>
               <label htmlFor="meta-creator" className="block text-xs font-semibold text-slate-800 mb-1">
-                Creator Application
+                {s.labelCreator}
               </label>
               <input
                 id="meta-creator"
@@ -201,7 +239,7 @@ export default function PdfMetadataEditorTool() {
 
             <div>
               <label htmlFor="meta-producer" className="block text-xs font-semibold text-slate-800 mb-1">
-                PDF Producer
+                {s.labelProducer}
               </label>
               <input
                 id="meta-producer"
@@ -221,7 +259,7 @@ export default function PdfMetadataEditorTool() {
               className="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700 disabled:opacity-50 cursor-pointer"
             >
               <FileCheck2 className="w-4 h-4" />
-              {isSaving ? 'Saving PDF...' : 'Save Metadata & Download PDF'}
+              {isSaving ? s.saving : s.saveBtn}
             </button>
 
             <button
@@ -230,7 +268,7 @@ export default function PdfMetadataEditorTool() {
               className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
             >
               <Eraser className="w-4 h-4" />
-              Strip All Metadata Fields
+              {s.stripBtn}
             </button>
           </div>
         </div>

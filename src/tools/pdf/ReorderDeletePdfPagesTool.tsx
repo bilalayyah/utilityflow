@@ -2,6 +2,56 @@ import { ArrowDown, ArrowUp, CopyPlus, FileDown, FileUp, Trash2 } from 'lucide-r
 import { PDFDocument } from 'pdf-lib';
 import { useState } from 'react';
 import { formatBytes, formatFriendlyPdfError, pdfjsLib, readValidatedPdfBytes, triggerPdfDownload } from './pdfUtils';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    errMin1: 'A PDF must retain at least 1 page.',
+    savedSuccess: (n: number, size: string) => `Saved updated PDF with ${n} pages (${size}).`,
+    loading: 'Loading PDF pages & previews...',
+    dropTitleFile: (name: string, n: number) => `${name} (${n} pages active)`,
+    dropTitleEmpty: 'Choose a PDF File to Reorder or Delete Pages',
+    dropSub: 'Move pages, duplicate sheets, or remove unwanted pages locally',
+    outCount: 'Output page count:',
+    saving: 'Saving PDF...',
+    saveBtn: 'Save Reordered PDF',
+    thumbAlt: (n: number) => `Original page ${n}`,
+    thumbFallback: (n: number) => `Orig p.${n}`,
+    posLabel: (n: number) => `Pos #${n}`,
+    origLabel: (n: number) => `(Orig ${n})`,
+    moveEarlierTitle: 'Move earlier',
+    moveEarlierAria: (n: number) => `Move position ${n} earlier`,
+    moveLaterTitle: 'Move later',
+    moveLaterAria: (n: number) => `Move position ${n} later`,
+    dupTitle: 'Duplicate page',
+    dupAria: (n: number) => `Duplicate page at position ${n}`,
+    delTitle: 'Delete page',
+    delAria: (n: number) => `Delete page at position ${n}`,
+  },
+  es: {
+    errMin1: 'Un PDF debe conservar al menos 1 página.',
+    savedSuccess: (n: number, size: string) => `Se guardó el PDF actualizado con ${n} páginas (${size}).`,
+    loading: 'Cargando páginas y vistas previas del PDF...',
+    dropTitleFile: (name: string, n: number) => `${name} (${n} páginas activas)`,
+    dropTitleEmpty: 'Elija un archivo PDF para reordenar o eliminar páginas',
+    dropSub: 'Mueva páginas, duplique hojas o elimine páginas no deseadas localmente',
+    outCount: 'Cantidad de páginas de salida:',
+    saving: 'Guardando PDF...',
+    saveBtn: 'Guardar PDF reordenado',
+    thumbAlt: (n: number) => `Página original ${n}`,
+    thumbFallback: (n: number) => `Pág. orig. ${n}`,
+    posLabel: (n: number) => `Pos. n.º ${n}`,
+    origLabel: (n: number) => `(Orig. ${n})`,
+    moveEarlierTitle: 'Mover antes',
+    moveEarlierAria: (n: number) => `Mover la posición ${n} antes`,
+    moveLaterTitle: 'Mover después',
+    moveLaterAria: (n: number) => `Mover la posición ${n} después`,
+    dupTitle: 'Duplicar página',
+    dupAria: (n: number) => `Duplicar la página en la posición ${n}`,
+    delTitle: 'Eliminar página',
+    delAria: (n: number) => `Eliminar la página en la posición ${n}`,
+  },
+};
 
 interface PageItem {
   id: number;
@@ -12,6 +62,8 @@ interface PageItem {
 }
 
 export default function ReorderDeletePdfPagesTool() {
+  const { locale } = useLocale();
+  const s = STRINGS[locale];
   const [pdfBytes, setPdfBytes] = useState<Uint8Array | null>(null);
   const [fileName, setFileName] = useState('');
   const [pages, setPages] = useState<PageItem[]>([]);
@@ -27,7 +79,7 @@ export default function ReorderDeletePdfPagesTool() {
     setIsLoading(true);
 
     try {
-      const bytes = await readValidatedPdfBytes(file);
+      const bytes = await readValidatedPdfBytes(file, locale);
       const libDoc = await PDFDocument.load(bytes);
       const rawPages = libDoc.getPages();
 
@@ -69,7 +121,7 @@ export default function ReorderDeletePdfPagesTool() {
     } catch (err) {
       setPdfBytes(null);
       setPages([]);
-      setError(formatFriendlyPdfError(err, file.name));
+      setError(formatFriendlyPdfError(err, file.name, locale));
     } finally {
       setIsLoading(false);
     }
@@ -93,7 +145,7 @@ export default function ReorderDeletePdfPagesTool() {
 
   const deletePage = (id: number) => {
     if (pages.length <= 1) {
-      setError('A PDF must retain at least 1 page.');
+      setError(s.errMin1);
       return;
     }
     setError('');
@@ -118,10 +170,10 @@ export default function ReorderDeletePdfPagesTool() {
       const baseName = fileName.replace(/\.pdf$/i, '') || 'document';
       triggerPdfDownload(outBytes, `${baseName}-reordered.pdf`);
       setStatusMessage(
-        `Saved updated PDF with ${pages.length} pages (${formatBytes(outBytes.byteLength)}).`
+        s.savedSuccess(pages.length, formatBytes(outBytes.byteLength, locale))
       );
     } catch (err) {
-      setError(formatFriendlyPdfError(err, fileName));
+      setError(formatFriendlyPdfError(err, fileName, locale));
     } finally {
       setIsSaving(false);
     }
@@ -136,13 +188,13 @@ export default function ReorderDeletePdfPagesTool() {
         <FileUp className="w-8 h-8 text-indigo-600 mb-2" />
         <span className="text-sm font-semibold text-slate-900">
           {isLoading
-            ? 'Loading PDF pages & previews...'
+            ? s.loading
             : fileName
-            ? `${fileName} (${pages.length} pages active)`
-            : 'Choose a PDF File to Reorder or Delete Pages'}
+            ? s.dropTitleFile(fileName, pages.length)
+            : s.dropTitleEmpty}
         </span>
         <span className="mt-1 text-xs text-slate-500">
-          Move pages, duplicate sheets, or remove unwanted pages locally
+          {s.dropSub}
         </span>
         <input
           id="reorder-pdf-input"
@@ -172,7 +224,7 @@ export default function ReorderDeletePdfPagesTool() {
         <div className="space-y-4">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="text-xs text-slate-600 tabular-nums">
-              Output page count: <strong className="text-slate-900">{pages.length}</strong>
+              {s.outCount} <strong className="text-slate-900">{pages.length}</strong>
             </div>
             <button
               type="button"
@@ -181,7 +233,7 @@ export default function ReorderDeletePdfPagesTool() {
               className="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-700 disabled:opacity-50 cursor-pointer"
             >
               <FileDown className="w-4 h-4" />
-              {isSaving ? 'Saving PDF...' : 'Save Reordered PDF'}
+              {isSaving ? s.saving : s.saveBtn}
             </button>
           </div>
 
@@ -195,20 +247,20 @@ export default function ReorderDeletePdfPagesTool() {
                   {page.thumbUrl ? (
                     <img
                       src={page.thumbUrl}
-                      alt={`Original page ${page.originalIndex + 1}`}
+                      alt={s.thumbAlt(page.originalIndex + 1)}
                       className="max-h-full max-w-full object-contain"
                     />
                   ) : (
                     <span className="font-mono text-xs text-slate-500">
-                      Orig p.{page.originalIndex + 1}
+                      {s.thumbFallback(page.originalIndex + 1)}
                     </span>
                   )}
                 </div>
 
                 <div className="text-xs">
                   <div className="font-semibold text-slate-900 tabular-nums">
-                    Pos #{idx + 1}{' '}
-                    <span className="font-normal text-slate-500">(Orig {page.originalIndex + 1})</span>
+                    {s.posLabel(idx + 1)}{' '}
+                    <span className="font-normal text-slate-500">{s.origLabel(page.originalIndex + 1)}</span>
                   </div>
                   <div className="text-[11px] text-slate-400 font-mono tabular-nums">
                     {page.widthPt}×{page.heightPt} pt
@@ -221,8 +273,8 @@ export default function ReorderDeletePdfPagesTool() {
                       type="button"
                       disabled={idx === 0}
                       onClick={() => movePage(idx, -1)}
-                      title="Move earlier"
-                      aria-label={`Move position ${idx + 1} earlier`}
+                      title={s.moveEarlierTitle}
+                      aria-label={s.moveEarlierAria(idx + 1)}
                       className="rounded border border-slate-200 p-1 text-slate-700 hover:bg-slate-50 disabled:opacity-40 cursor-pointer"
                     >
                       <ArrowUp className="w-3.5 h-3.5" />
@@ -231,8 +283,8 @@ export default function ReorderDeletePdfPagesTool() {
                       type="button"
                       disabled={idx === pages.length - 1}
                       onClick={() => movePage(idx, 1)}
-                      title="Move later"
-                      aria-label={`Move position ${idx + 1} later`}
+                      title={s.moveLaterTitle}
+                      aria-label={s.moveLaterAria(idx + 1)}
                       className="rounded border border-slate-200 p-1 text-slate-700 hover:bg-slate-50 disabled:opacity-40 cursor-pointer"
                     >
                       <ArrowDown className="w-3.5 h-3.5" />
@@ -240,8 +292,8 @@ export default function ReorderDeletePdfPagesTool() {
                     <button
                       type="button"
                       onClick={() => duplicatePage(idx)}
-                      title="Duplicate page"
-                      aria-label={`Duplicate page at position ${idx + 1}`}
+                      title={s.dupTitle}
+                      aria-label={s.dupAria(idx + 1)}
                       className="rounded border border-slate-200 p-1 text-slate-700 hover:bg-slate-50 cursor-pointer"
                     >
                       <CopyPlus className="w-3.5 h-3.5" />
@@ -250,8 +302,8 @@ export default function ReorderDeletePdfPagesTool() {
                   <button
                     type="button"
                     onClick={() => deletePage(page.id)}
-                    title="Delete page"
-                    aria-label={`Delete page at position ${idx + 1}`}
+                    title={s.delTitle}
+                    aria-label={s.delAria(idx + 1)}
                     className="rounded border border-slate-200 p-1 text-red-600 hover:bg-red-50 cursor-pointer"
                   >
                     <Trash2 className="w-3.5 h-3.5" />

@@ -2,6 +2,52 @@ import { ArrowDown, ArrowUp, FilePlus2, Layers, Trash2 } from 'lucide-react';
 import { PDFDocument } from 'pdf-lib';
 import { useState } from 'react';
 import { formatBytes, formatFriendlyPdfError, readValidatedPdfBytes, triggerPdfDownload } from './pdfUtils';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    errRead: 'Unable to read selected PDF files.',
+    errMin2: 'Add at least two PDF files to merge.',
+    mergedSuccess: (n: number, pages: number, size: string) =>
+      `Merged ${n} PDFs (${pages} pages, ${size}) cleanly.`,
+    dropValidating: 'Validating PDF files...',
+    dropTitle: 'Select or Drop Multiple PDF Files',
+    dropSub: '100% browser-side merging via pdf-lib · Unencrypted PDFs only · Never uploaded',
+    filesQueued: 'files queued',
+    totalPagesLabel: 'total pages',
+    combinedSize: 'combined input size',
+    clearQueue: 'Clear queue',
+    pageSingular: 'page',
+    pagePlural: 'pages',
+    moveUp: (name: string) => `Move ${name} up`,
+    moveDown: (name: string) => `Move ${name} down`,
+    removeFile: (name: string) => `Remove ${name}`,
+    outName: 'Output Filename',
+    merging: 'Merging PDFs...',
+    mergeBtn: (n: number) => `Merge ${n} PDFs & Download`,
+  },
+  es: {
+    errRead: 'No se pudieron leer los archivos PDF seleccionados.',
+    errMin2: 'Agregue al menos dos archivos PDF para combinar.',
+    mergedSuccess: (n: number, pages: number, size: string) =>
+      `Se combinaron ${n} PDF (${pages} páginas, ${size}) correctamente.`,
+    dropValidating: 'Validando archivos PDF...',
+    dropTitle: 'Seleccione o suelte varios archivos PDF',
+    dropSub: 'Combinación 100% en el navegador con pdf-lib · Solo PDF sin cifrar · Nunca se suben',
+    filesQueued: 'archivos en cola',
+    totalPagesLabel: 'páginas en total',
+    combinedSize: 'tamaño de entrada combinado',
+    clearQueue: 'Limpiar cola',
+    pageSingular: 'página',
+    pagePlural: 'páginas',
+    moveUp: (name: string) => `Mover ${name} hacia arriba`,
+    moveDown: (name: string) => `Mover ${name} hacia abajo`,
+    removeFile: (name: string) => `Eliminar ${name}`,
+    outName: 'Nombre del archivo de salida',
+    merging: 'Combinando PDF...',
+    mergeBtn: (n: number) => `Combinar ${n} PDF y descargar`,
+  },
+};
 
 interface QueuedPdf {
   id: number;
@@ -12,6 +58,8 @@ interface QueuedPdf {
 }
 
 export default function MergePdfTool() {
+  const { locale } = useLocale();
+  const s = STRINGS[locale];
   const [files, setFiles] = useState<QueuedPdf[]>([]);
   const [outputName, setOutputName] = useState('merged-document.pdf');
   const [isLoading, setIsLoading] = useState(false);
@@ -31,7 +79,7 @@ export default function MergePdfTool() {
 
       for (const file of Array.from(fileList)) {
         try {
-          const bytes = await readValidatedPdfBytes(file);
+          const bytes = await readValidatedPdfBytes(file, locale);
           const doc = await PDFDocument.load(bytes);
           additions.push({
             id: nextId++,
@@ -41,13 +89,13 @@ export default function MergePdfTool() {
             bytes,
           });
         } catch (err) {
-          throw new Error(formatFriendlyPdfError(err, file.name));
+          throw new Error(formatFriendlyPdfError(err, file.name, locale));
         }
       }
 
       setFiles((prev) => [...prev, ...additions]);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Unable to read selected PDF files.');
+      setError(err instanceof Error ? err.message : s.errRead);
     } finally {
       setIsLoading(false);
     }
@@ -64,7 +112,7 @@ export default function MergePdfTool() {
 
   const handleMerge = async () => {
     if (files.length < 2) {
-      setError('Add at least two PDF files to merge.');
+      setError(s.errMin2);
       return;
     }
     setError('');
@@ -81,10 +129,10 @@ export default function MergePdfTool() {
       const mergedBytes = await merged.save();
       triggerPdfDownload(mergedBytes, outputName.trim() || 'merged-document.pdf');
       setStatusMessage(
-        `Merged ${files.length} PDFs (${merged.getPageCount()} pages, ${formatBytes(mergedBytes.byteLength)}) cleanly.`
+        s.mergedSuccess(files.length, merged.getPageCount(), formatBytes(mergedBytes.byteLength, locale))
       );
     } catch (err) {
-      setError(formatFriendlyPdfError(err));
+      setError(formatFriendlyPdfError(err, undefined, locale));
     } finally {
       setIsMerging(false);
     }
@@ -101,10 +149,10 @@ export default function MergePdfTool() {
       >
         <FilePlus2 className="w-8 h-8 text-indigo-600 mb-2" />
         <span className="text-sm font-semibold text-slate-900">
-          {isLoading ? 'Validating PDF files...' : 'Select or Drop Multiple PDF Files'}
+          {isLoading ? s.dropValidating : s.dropTitle}
         </span>
         <span className="mt-1 text-xs text-slate-500">
-          100% browser-side merging via pdf-lib · Unencrypted PDFs only · Never uploaded
+          {s.dropSub}
         </span>
         <input
           id="merge-pdf-input"
@@ -135,8 +183,8 @@ export default function MergePdfTool() {
         <div className="space-y-4">
           <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-slate-600 tabular-nums">
             <div>
-              <strong>{files.length}</strong> files queued · <strong>{totalPages}</strong> total pages ·{' '}
-              <strong>{formatBytes(totalSize)}</strong> combined input size
+              <strong>{files.length}</strong> {s.filesQueued} · <strong>{totalPages}</strong> {s.totalPagesLabel} ·{' '}
+              <strong>{formatBytes(totalSize, locale)}</strong> {s.combinedSize}
             </div>
             <button
               type="button"
@@ -146,7 +194,7 @@ export default function MergePdfTool() {
               }}
               className="text-red-700 hover:text-red-900 font-medium cursor-pointer"
             >
-              Clear queue
+              {s.clearQueue}
             </button>
           </div>
 
@@ -158,7 +206,7 @@ export default function MergePdfTool() {
                     {idx + 1}. {item.name}
                   </div>
                   <div className="text-xs text-slate-500 font-mono tabular-nums">
-                    {item.pageCount} {item.pageCount === 1 ? 'page' : 'pages'} · {formatBytes(item.sizeBytes)}
+                    {item.pageCount} {item.pageCount === 1 ? s.pageSingular : s.pagePlural} · {formatBytes(item.sizeBytes, locale)}
                   </div>
                 </div>
                 <div className="flex items-center gap-1.5">
@@ -166,7 +214,7 @@ export default function MergePdfTool() {
                     type="button"
                     disabled={idx === 0}
                     onClick={() => moveItem(idx, -1)}
-                    aria-label={`Move ${item.name} up`}
+                    aria-label={s.moveUp(item.name)}
                     className="rounded-md border border-slate-300 bg-white p-1.5 text-slate-700 hover:bg-slate-50 disabled:opacity-40 cursor-pointer"
                   >
                     <ArrowUp className="w-3.5 h-3.5" />
@@ -175,7 +223,7 @@ export default function MergePdfTool() {
                     type="button"
                     disabled={idx === files.length - 1}
                     onClick={() => moveItem(idx, 1)}
-                    aria-label={`Move ${item.name} down`}
+                    aria-label={s.moveDown(item.name)}
                     className="rounded-md border border-slate-300 bg-white p-1.5 text-slate-700 hover:bg-slate-50 disabled:opacity-40 cursor-pointer"
                   >
                     <ArrowDown className="w-3.5 h-3.5" />
@@ -183,7 +231,7 @@ export default function MergePdfTool() {
                   <button
                     type="button"
                     onClick={() => setFiles(files.filter((f) => f.id !== item.id))}
-                    aria-label={`Remove ${item.name}`}
+                    aria-label={s.removeFile(item.name)}
                     className="rounded-md border border-slate-300 bg-white p-1.5 text-red-600 hover:bg-red-50 cursor-pointer"
                   >
                     <Trash2 className="w-3.5 h-3.5" />
@@ -196,7 +244,7 @@ export default function MergePdfTool() {
           <div className="flex flex-col sm:flex-row gap-3 sm:items-end justify-between rounded-xl border border-slate-200 bg-slate-50 p-4">
             <div className="flex-1 max-w-sm">
               <label htmlFor="merge-outname" className="block text-xs font-semibold text-slate-800 mb-1">
-                Output Filename
+                {s.outName}
               </label>
               <input
                 id="merge-outname"
@@ -214,7 +262,7 @@ export default function MergePdfTool() {
               className="inline-flex items-center justify-center gap-2 rounded-lg bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700 disabled:opacity-50 cursor-pointer"
             >
               <Layers className="w-4 h-4" />
-              {isMerging ? 'Merging PDFs...' : `Merge ${files.length} PDFs & Download`}
+              {isMerging ? s.merging : s.mergeBtn(files.length)}
             </button>
           </div>
         </div>

@@ -7,6 +7,48 @@ import {
   pdfjsLib,
   readValidatedPdfBytes,
 } from './pdfUtils';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    errBatch: 'Render up to 20 pages per batch to keep browser canvas memory fast and responsive.',
+    errCanvas: 'Canvas 2D context unavailable.',
+    dropTitleEmpty: 'Choose a PDF to Render as Images',
+    dropTitleFile: (name: string, pages: number, size: string) => `${name} (${pages} pages · ${size})`,
+    dropSub: 'Rendered locally via PDF.js canvas · PNG or JPG output',
+    labelRange: 'Pages (“all” or range like 1-4, 6)',
+    labelFormat: 'Image Format',
+    optPng: 'PNG (Lossless / Crisp Text)',
+    optJpg: 'JPG (Compact Photo Friendly)',
+    labelScale: 'Render Resolution',
+    optScale1: '1.0× (72 DPI Fast Preview)',
+    optScale15: '1.5× (108 DPI Standard)',
+    optScale2: '2.0× (144 DPI Sharp)',
+    rendering: 'Rendering PDF Pages...',
+    renderBtn: 'Render PDF Pages to Images',
+    pageAlt: (n: number) => `Page ${n} preview`,
+    pageLabel: (n: number, w: number, h: number) => `Page ${n} · ${w}×${h}`,
+  },
+  es: {
+    errBatch: 'Renderice hasta 20 páginas por lote para mantener rápida y fluida la memoria del lienzo del navegador.',
+    errCanvas: 'El contexto 2D del lienzo no está disponible.',
+    dropTitleEmpty: 'Elija un PDF para convertir en imágenes',
+    dropTitleFile: (name: string, pages: number, size: string) => `${name} (${pages} páginas · ${size})`,
+    dropSub: 'Renderizado localmente con el lienzo de PDF.js · Salida PNG o JPG',
+    labelRange: 'Páginas («all» o un rango como 1-4, 6)',
+    labelFormat: 'Formato de imagen',
+    optPng: 'PNG (sin pérdida / texto nítido)',
+    optJpg: 'JPG (compacto, ideal para fotos)',
+    labelScale: 'Resolución de renderizado',
+    optScale1: '1.0× (72 DPI, vista previa rápida)',
+    optScale15: '1.5× (108 DPI, estándar)',
+    optScale2: '2.0× (144 DPI, nítido)',
+    rendering: 'Renderizando páginas del PDF...',
+    renderBtn: 'Renderizar páginas del PDF como imágenes',
+    pageAlt: (n: number) => `Vista previa de la página ${n}`,
+    pageLabel: (n: number, w: number, h: number) => `Página ${n} · ${w}×${h}`,
+  },
+};
 
 interface RenderedPage {
   pageNumber: number;
@@ -16,6 +58,8 @@ interface RenderedPage {
 }
 
 export default function PdfToImagesTool() {
+  const { locale } = useLocale();
+  const s = STRINGS[locale];
   const [pdfBytes, setPdfBytes] = useState<Uint8Array | null>(null);
   const [fileName, setFileName] = useState('');
   const [pageCount, setPageCount] = useState(0);
@@ -33,7 +77,7 @@ export default function PdfToImagesTool() {
     setRendered([]);
 
     try {
-      const bytes = await readValidatedPdfBytes(file);
+      const bytes = await readValidatedPdfBytes(file, locale);
       const loadingTask = pdfjsLib.getDocument({ data: bytes.slice() });
       const pdf = await loadingTask.promise;
       setPdfBytes(bytes);
@@ -42,7 +86,7 @@ export default function PdfToImagesTool() {
       setRangeInput(pdf.numPages > 10 ? '1-10' : 'all');
     } catch (err) {
       setPdfBytes(null);
-      setError(formatFriendlyPdfError(err, file.name));
+      setError(formatFriendlyPdfError(err, file.name, locale));
     }
   };
 
@@ -51,13 +95,13 @@ export default function PdfToImagesTool() {
     setError('');
     setRendered([]);
 
-    const parsed = parsePageRanges(rangeInput, pageCount);
+    const parsed = parsePageRanges(rangeInput, pageCount, locale);
     if (parsed.error) {
       setError(parsed.error);
       return;
     }
     if (parsed.indices.length > 20) {
-      setError('Render up to 20 pages per batch to keep browser canvas memory fast and responsive.');
+      setError(s.errBatch);
       return;
     }
 
@@ -74,7 +118,7 @@ export default function PdfToImagesTool() {
         canvas.width = Math.floor(viewport.width);
         canvas.height = Math.floor(viewport.height);
         const ctx = canvas.getContext('2d');
-        if (!ctx) throw new Error('Canvas 2D context unavailable.');
+        if (!ctx) throw new Error(s.errCanvas);
 
         if (format === 'image/jpeg') {
           ctx.fillStyle = '#ffffff';
@@ -92,7 +136,7 @@ export default function PdfToImagesTool() {
 
       setRendered(outputs);
     } catch (err) {
-      setError(formatFriendlyPdfError(err, fileName));
+      setError(formatFriendlyPdfError(err, fileName, locale));
     } finally {
       setIsRendering(false);
     }
@@ -109,10 +153,10 @@ export default function PdfToImagesTool() {
       >
         <FileUp className="w-8 h-8 text-indigo-600 mb-2" />
         <span className="text-sm font-semibold text-slate-900">
-          {fileName ? `${fileName} (${pageCount} pages · ${formatBytes(pdfBytes?.byteLength ?? 0)})` : 'Choose a PDF to Render as Images'}
+          {fileName ? s.dropTitleFile(fileName, pageCount, formatBytes(pdfBytes?.byteLength ?? 0, locale)) : s.dropTitleEmpty}
         </span>
         <span className="mt-1 text-xs text-slate-500">
-          Rendered locally via PDF.js canvas · PNG or JPG output
+          {s.dropSub}
         </span>
         <input
           id="pdf2img-input"
@@ -137,7 +181,7 @@ export default function PdfToImagesTool() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
               <label htmlFor="pdf2img-range" className="block text-xs font-semibold text-slate-800 mb-1.5">
-                Pages (&ldquo;all&rdquo; or range like 1-4, 6)
+                {s.labelRange}
               </label>
               <input
                 id="pdf2img-range"
@@ -150,7 +194,7 @@ export default function PdfToImagesTool() {
 
             <div>
               <label htmlFor="pdf2img-fmt" className="block text-xs font-semibold text-slate-800 mb-1.5">
-                Image Format
+                {s.labelFormat}
               </label>
               <select
                 id="pdf2img-fmt"
@@ -158,14 +202,14 @@ export default function PdfToImagesTool() {
                 onChange={(e) => setFormat(e.target.value as 'image/png' | 'image/jpeg')}
                 className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"
               >
-                <option value="image/png">PNG (Lossless / Crisp Text)</option>
-                <option value="image/jpeg">JPG (Compact Photo Friendly)</option>
+                <option value="image/png">{s.optPng}</option>
+                <option value="image/jpeg">{s.optJpg}</option>
               </select>
             </div>
 
             <div>
               <label htmlFor="pdf2img-scale" className="block text-xs font-semibold text-slate-800 mb-1.5">
-                Render Resolution
+                {s.labelScale}
               </label>
               <select
                 id="pdf2img-scale"
@@ -173,9 +217,9 @@ export default function PdfToImagesTool() {
                 onChange={(e) => setScale(Number(e.target.value))}
                 className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"
               >
-                <option value={1}>1.0× (72 DPI Fast Preview)</option>
-                <option value={1.5}>1.5× (108 DPI Standard)</option>
-                <option value={2}>2.0× (144 DPI Sharp)</option>
+                <option value={1}>{s.optScale1}</option>
+                <option value={1.5}>{s.optScale15}</option>
+                <option value={2}>{s.optScale2}</option>
               </select>
             </div>
           </div>
@@ -187,7 +231,7 @@ export default function PdfToImagesTool() {
             className="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700 disabled:opacity-50 cursor-pointer"
           >
             <ImageIcon className="w-4 h-4" />
-            {isRendering ? 'Rendering PDF Pages...' : 'Render PDF Pages to Images'}
+            {isRendering ? s.rendering : s.renderBtn}
           </button>
         </div>
       )}
@@ -199,13 +243,13 @@ export default function PdfToImagesTool() {
               <div className="aspect-[3/4] overflow-hidden rounded-lg border border-slate-200 bg-slate-50 flex items-center justify-center">
                 <img
                   src={item.dataUrl}
-                  alt={`Page ${item.pageNumber} preview`}
+                  alt={s.pageAlt(item.pageNumber)}
                   className="max-h-full max-w-full object-contain"
                 />
               </div>
               <div className="flex items-center justify-between gap-2 text-xs">
                 <span className="font-semibold text-slate-900 tabular-nums">
-                  Page {item.pageNumber} · {item.width}×{item.height}
+                  {s.pageLabel(item.pageNumber, item.width, item.height)}
                 </span>
                 <a
                   href={item.dataUrl}

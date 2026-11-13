@@ -8,10 +8,58 @@ import {
   readValidatedPdfBytes,
   triggerPdfDownload,
 } from './pdfUtils';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    errNoMatch: 'No matching pages found to rotate.',
+    rotatedSuccess: (a: number, b: number, deg: number, size: string) =>
+      `Rotated ${a} of ${b} pages by ${deg}° clockwise (${size}).`,
+    dropTitleEmpty: 'Choose a PDF File to Rotate Pages',
+    dropTitleFile: (name: string, pages: number) => `${name} (${pages} pages)`,
+    dropSub: 'Rotate all pages or specific page ranges locally without server uploads',
+    labelAngle: 'Rotation Angle',
+    opt90: '90° Clockwise (Right)',
+    opt270: '90° Counter-Clockwise (Left / 270°)',
+    opt180: '180° Upside Down',
+    labelScope: 'Apply To',
+    optAll: (n: number) => `All Pages (${n})`,
+    optRange: 'Specific Page Ranges',
+    optOdd: 'Odd Pages Only',
+    optEven: 'Even Pages Only',
+    labelRangeInput: (n: number) => `Page Numbers / Ranges (1–${n})`,
+    phRange: 'e.g. 1, 3-5',
+    rotating: 'Rotating Pages...',
+    rotateBtn: 'Apply Rotation & Download PDF',
+  },
+  es: {
+    errNoMatch: 'No se encontraron páginas coincidentes para rotar.',
+    rotatedSuccess: (a: number, b: number, deg: number, size: string) =>
+      `Se rotaron ${a} de ${b} páginas ${deg}° en sentido horario (${size}).`,
+    dropTitleEmpty: 'Elija un archivo PDF para rotar páginas',
+    dropTitleFile: (name: string, pages: number) => `${name} (${pages} páginas)`,
+    dropSub: 'Rote todas las páginas o rangos específicos localmente, sin subidas al servidor',
+    labelAngle: 'Ángulo de rotación',
+    opt90: '90° en sentido horario (derecha)',
+    opt270: '90° en sentido antihorario (izquierda / 270°)',
+    opt180: '180° boca abajo',
+    labelScope: 'Aplicar a',
+    optAll: (n: number) => `Todas las páginas (${n})`,
+    optRange: 'Rangos de páginas específicos',
+    optOdd: 'Solo páginas impares',
+    optEven: 'Solo páginas pares',
+    labelRangeInput: (n: number) => `Números / rangos de página (1–${n})`,
+    phRange: 'p. ej., 1, 3-5',
+    rotating: 'Rotando páginas...',
+    rotateBtn: 'Aplicar rotación y descargar PDF',
+  },
+};
 
 type Scope = 'all' | 'range' | 'odd' | 'even';
 
 export default function PdfPageRotatorTool() {
+  const { locale } = useLocale();
+  const s = STRINGS[locale];
   const [pdfBytes, setPdfBytes] = useState<Uint8Array | null>(null);
   const [fileName, setFileName] = useState('');
   const [pageCount, setPageCount] = useState(0);
@@ -29,7 +77,7 @@ export default function PdfPageRotatorTool() {
     setStatusMessage('');
 
     try {
-      const bytes = await readValidatedPdfBytes(file);
+      const bytes = await readValidatedPdfBytes(file, locale);
       const doc = await PDFDocument.load(bytes);
       setPdfBytes(bytes);
       setFileName(file.name);
@@ -37,7 +85,7 @@ export default function PdfPageRotatorTool() {
       setRangeInput('1');
     } catch (err) {
       setPdfBytes(null);
-      setError(formatFriendlyPdfError(err, file.name));
+      setError(formatFriendlyPdfError(err, file.name, locale));
     }
   };
 
@@ -56,7 +104,7 @@ export default function PdfPageRotatorTool() {
       } else if (scope === 'even') {
         targetIndices = Array.from({ length: pageCount }, (_, i) => i).filter((i) => i % 2 === 1);
       } else {
-        const parsed = parsePageRanges(rangeInput, pageCount);
+        const parsed = parsePageRanges(rangeInput, pageCount, locale);
         if (parsed.error) {
           setError(parsed.error);
           setIsProcessing(false);
@@ -66,7 +114,7 @@ export default function PdfPageRotatorTool() {
       }
 
       if (targetIndices.length === 0) {
-        setError('No matching pages found to rotate.');
+        setError(s.errNoMatch);
         setIsProcessing(false);
         return;
       }
@@ -82,10 +130,10 @@ export default function PdfPageRotatorTool() {
       const baseName = fileName.replace(/\.pdf$/i, '') || 'document';
       triggerPdfDownload(outBytes, `${baseName}-rotated.pdf`);
       setStatusMessage(
-        `Rotated ${targetIndices.length} of ${pageCount} pages by ${rotationDelta}° clockwise (${formatBytes(outBytes.byteLength)}).`
+        s.rotatedSuccess(targetIndices.length, pageCount, rotationDelta, formatBytes(outBytes.byteLength, locale))
       );
     } catch (err) {
-      setError(formatFriendlyPdfError(err, fileName));
+      setError(formatFriendlyPdfError(err, fileName, locale));
     } finally {
       setIsProcessing(false);
     }
@@ -99,10 +147,10 @@ export default function PdfPageRotatorTool() {
       >
         <FileUp className="w-8 h-8 text-indigo-600 mb-2" />
         <span className="text-sm font-semibold text-slate-900">
-          {fileName ? `${fileName} (${pageCount} pages)` : 'Choose a PDF File to Rotate Pages'}
+          {fileName ? s.dropTitleFile(fileName, pageCount) : s.dropTitleEmpty}
         </span>
         <span className="mt-1 text-xs text-slate-500">
-          Rotate all pages or specific page ranges locally without server uploads
+          {s.dropSub}
         </span>
         <input
           id="rotate-pdf-input"
@@ -133,7 +181,7 @@ export default function PdfPageRotatorTool() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label htmlFor="rot-angle" className="block text-xs font-semibold text-slate-800 mb-1.5">
-                Rotation Angle
+                {s.labelAngle}
               </label>
               <select
                 id="rot-angle"
@@ -141,15 +189,15 @@ export default function PdfPageRotatorTool() {
                 onChange={(e) => setRotationDelta(Number(e.target.value) as 90 | 180 | 270)}
                 className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm"
               >
-                <option value={90}>90° Clockwise (Right)</option>
-                <option value={270}>90° Counter-Clockwise (Left / 270°)</option>
-                <option value={180}>180° Upside Down</option>
+                <option value={90}>{s.opt90}</option>
+                <option value={270}>{s.opt270}</option>
+                <option value={180}>{s.opt180}</option>
               </select>
             </div>
 
             <div>
               <label htmlFor="rot-scope" className="block text-xs font-semibold text-slate-800 mb-1.5">
-                Apply To
+                {s.labelScope}
               </label>
               <select
                 id="rot-scope"
@@ -157,10 +205,10 @@ export default function PdfPageRotatorTool() {
                 onChange={(e) => setScope(e.target.value as Scope)}
                 className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm"
               >
-                <option value="all">All Pages ({pageCount})</option>
-                <option value="range">Specific Page Ranges</option>
-                <option value="odd">Odd Pages Only</option>
-                <option value="even">Even Pages Only</option>
+                <option value="all">{s.optAll(pageCount)}</option>
+                <option value="range">{s.optRange}</option>
+                <option value="odd">{s.optOdd}</option>
+                <option value="even">{s.optEven}</option>
               </select>
             </div>
           </div>
@@ -168,14 +216,14 @@ export default function PdfPageRotatorTool() {
           {scope === 'range' && (
             <div>
               <label htmlFor="rot-range" className="block text-xs font-semibold text-slate-800 mb-1.5">
-                Page Numbers / Ranges (1–{pageCount})
+                {s.labelRangeInput(pageCount)}
               </label>
               <input
                 id="rot-range"
                 type="text"
                 value={rangeInput}
                 onChange={(e) => setRangeInput(e.target.value)}
-                placeholder="e.g. 1, 3-5"
+                placeholder={s.phRange}
                 className="w-full max-w-md rounded-lg border border-slate-300 bg-white px-3 py-2 font-mono text-sm"
               />
             </div>
@@ -188,7 +236,7 @@ export default function PdfPageRotatorTool() {
             className="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700 disabled:opacity-50 cursor-pointer"
           >
             <RotateCw className="w-4 h-4" />
-            {isProcessing ? 'Rotating Pages...' : 'Apply Rotation & Download PDF'}
+            {isProcessing ? s.rotating : s.rotateBtn}
           </button>
         </div>
       )}

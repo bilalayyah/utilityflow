@@ -8,10 +8,58 @@ import {
   readValidatedPdfBytes,
   triggerPdfDownload,
 } from './pdfUtils';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    errBurst: (n: number) =>
+      `Burst splitting downloads one file per page. For documents over 25 pages (${n} pages here), extract ranges instead so your browser does not block bulk downloads.`,
+    exportedAll: (n: number) => `Exported ${n} single-page PDF files.`,
+    errNoMatch: 'No pages matched that selection (for example, Even Pages requires 2+ pages).',
+    extractedSuccess: (a: number, b: number, size: string) =>
+      `Extracted ${a} of ${b} pages (${size}).`,
+    dropTitleEmpty: 'Choose a PDF File to Split or Extract',
+    dropTitleFile: (name: string, pages: number, size: string) => `${name} (${pages} pages · ${size})`,
+    dropSub: 'Processed locally in memory · Click to replace document',
+    modeRange: 'Extract Page Ranges',
+    modeOdd: 'Odd Pages Only',
+    modeEven: 'Even Pages Only',
+    modeBurst: 'Burst All Individual Pages',
+    labelRange: (n: number) => `Pages to Extract (1–${n})`,
+    phRange: 'e.g. 1-3, 5, 8-10',
+    rangeHintBefore: 'Use commas and hyphens (for example ',
+    rangeHintAfter: ').',
+    extracting: 'Extracting PDF...',
+    splitBtn: 'Split & Download PDF',
+  },
+  es: {
+    errBurst: (n: number) =>
+      `La división por ráfaga descarga un archivo por página. Para documentos de más de 25 páginas (${n} páginas aquí), extraiga rangos para que su navegador no bloquee las descargas masivas.`,
+    exportedAll: (n: number) => `Se exportaron ${n} archivos PDF de una sola página.`,
+    errNoMatch: 'Ninguna página coincidió con esa selección (por ejemplo, Páginas pares requiere 2 o más páginas).',
+    extractedSuccess: (a: number, b: number, size: string) =>
+      `Se extrajeron ${a} de ${b} páginas (${size}).`,
+    dropTitleEmpty: 'Elija un archivo PDF para dividir o extraer',
+    dropTitleFile: (name: string, pages: number, size: string) => `${name} (${pages} páginas · ${size})`,
+    dropSub: 'Procesado localmente en memoria · Haga clic para reemplazar el documento',
+    modeRange: 'Extraer rangos de páginas',
+    modeOdd: 'Solo páginas impares',
+    modeEven: 'Solo páginas pares',
+    modeBurst: 'Dividir todas las páginas individuales',
+    labelRange: (n: number) => `Páginas para extraer (1–${n})`,
+    phRange: 'p. ej., 1-3, 5, 8-10',
+    rangeHintBefore: 'Use comas y guiones (por ejemplo ',
+    rangeHintAfter: ').',
+    extracting: 'Extrayendo PDF...',
+    splitBtn: 'Dividir y descargar PDF',
+  },
+};
 
 type SplitMode = 'range' | 'every-page' | 'odd' | 'even';
 
 export default function SplitPdfTool() {
+  const { locale } = useLocale();
+  const s = STRINGS[locale];
   const [pdfBytes, setPdfBytes] = useState<Uint8Array | null>(null);
   const [fileName, setFileName] = useState('');
   const [fileSize, setFileSize] = useState(0);
@@ -29,7 +77,7 @@ export default function SplitPdfTool() {
     setStatusMessage('');
 
     try {
-      const bytes = await readValidatedPdfBytes(file);
+      const bytes = await readValidatedPdfBytes(file, locale);
       const doc = await PDFDocument.load(bytes);
       const total = doc.getPageCount();
       setPdfBytes(bytes);
@@ -39,7 +87,7 @@ export default function SplitPdfTool() {
       setRangeInput(total > 1 ? `1-${Math.min(2, total)}` : '1');
     } catch (err) {
       setPdfBytes(null);
-      setError(formatFriendlyPdfError(err, file.name));
+      setError(formatFriendlyPdfError(err, file.name, locale));
     }
   };
 
@@ -55,9 +103,7 @@ export default function SplitPdfTool() {
 
       if (mode === 'every-page') {
         if (pageCount > 25) {
-          setError(
-            `Burst splitting downloads one file per page. For documents over 25 pages (${pageCount} pages here), extract ranges instead so your browser does not block bulk downloads.`
-          );
+          setError(s.errBurst(pageCount));
           setIsProcessing(false);
           return;
         }
@@ -68,11 +114,11 @@ export default function SplitPdfTool() {
           const out = await single.save();
           triggerPdfDownload(out, `${baseName}-page-${i + 1}.pdf`);
         }
-        setStatusMessage(`Exported ${pageCount} single-page PDF files.`);
+        setStatusMessage(s.exportedAll(pageCount));
       } else {
         let indices: number[] = [];
         if (mode === 'range') {
-          const parsed = parsePageRanges(rangeInput, pageCount);
+          const parsed = parsePageRanges(rangeInput, pageCount, locale);
           if (parsed.error) {
             setError(parsed.error);
             setIsProcessing(false);
@@ -86,7 +132,7 @@ export default function SplitPdfTool() {
         }
 
         if (indices.length === 0) {
-          setError('No pages matched that selection (for example, Even Pages requires 2+ pages).');
+          setError(s.errNoMatch);
           setIsProcessing(false);
           return;
         }
@@ -97,11 +143,11 @@ export default function SplitPdfTool() {
         const outBytes = await extracted.save();
         triggerPdfDownload(outBytes, `${baseName}-extracted.pdf`);
         setStatusMessage(
-          `Extracted ${indices.length} of ${pageCount} pages (${formatBytes(outBytes.byteLength)}).`
+          s.extractedSuccess(indices.length, pageCount, formatBytes(outBytes.byteLength, locale))
         );
       }
     } catch (err) {
-      setError(formatFriendlyPdfError(err, fileName));
+      setError(formatFriendlyPdfError(err, fileName, locale));
     } finally {
       setIsProcessing(false);
     }
@@ -115,10 +161,10 @@ export default function SplitPdfTool() {
       >
         <FileUp className="w-8 h-8 text-indigo-600 mb-2" />
         <span className="text-sm font-semibold text-slate-900">
-          {fileName ? `${fileName} (${pageCount} pages · ${formatBytes(fileSize)})` : 'Choose a PDF File to Split or Extract'}
+          {fileName ? s.dropTitleFile(fileName, pageCount, formatBytes(fileSize, locale)) : s.dropTitleEmpty}
         </span>
         <span className="mt-1 text-xs text-slate-500">
-          Processed locally in memory · Click to replace document
+          {s.dropSub}
         </span>
         <input
           id="split-pdf-input"
@@ -149,10 +195,10 @@ export default function SplitPdfTool() {
           <div className="flex flex-wrap gap-1.5 rounded-lg bg-slate-100 p-1.5">
             {(
               [
-                ['range', 'Extract Page Ranges'],
-                ['odd', 'Odd Pages Only'],
-                ['even', 'Even Pages Only'],
-                ['every-page', 'Burst All Individual Pages'],
+                ['range', s.modeRange],
+                ['odd', s.modeOdd],
+                ['even', s.modeEven],
+                ['every-page', s.modeBurst],
               ] as [SplitMode, string][]
             ).map(([id, label]) => (
               <button
@@ -171,18 +217,18 @@ export default function SplitPdfTool() {
           {mode === 'range' && (
             <div>
               <label htmlFor="split-range" className="block text-sm font-semibold text-slate-900 mb-1.5">
-                Pages to Extract (1–{pageCount})
+                {s.labelRange(pageCount)}
               </label>
               <input
                 id="split-range"
                 type="text"
                 value={rangeInput}
                 onChange={(e) => setRangeInput(e.target.value)}
-                placeholder="e.g. 1-3, 5, 8-10"
+                placeholder={s.phRange}
                 className="w-full max-w-md rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 font-mono text-sm"
               />
               <p className="mt-1 text-xs text-slate-500">
-                Use commas and hyphens (for example <code className="font-mono">1-3, 5</code>).
+                {s.rangeHintBefore}<code className="font-mono">1-3, 5</code>{s.rangeHintAfter}
               </p>
             </div>
           )}
@@ -194,7 +240,7 @@ export default function SplitPdfTool() {
             className="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700 disabled:opacity-50 cursor-pointer"
           >
             <Scissors className="w-4 h-4" />
-            {isProcessing ? 'Extracting PDF...' : 'Split & Download PDF'}
+            {isProcessing ? s.extracting : s.splitBtn}
           </button>
         </div>
       )}
