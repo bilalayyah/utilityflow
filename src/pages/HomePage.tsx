@@ -8,99 +8,50 @@ import { SeoHead } from '../components/seo/SeoHead';
 import { ToolCard } from '../components/tool/ToolCard';
 import { ToolSearchBar } from '../components/tool/ToolSearchBar';
 import { SITE_CONFIG, buildCanonicalUrl } from '../config/site';
+import { useLocale } from '../locales/LocaleContext';
+import { categoryHref, localizeStaticPath } from '../locales/config';
+import { getStaticAlternatePaths, toHreflangEntries } from '../locales/routes';
+import { getLocalizedCategories, getLocalizedTools, searchToolsLocalized } from '../locales/tools';
+import { formatString } from '../locales/ui';
 import { AI_TOOLS } from '../registry/aiTools';
-import { CATEGORIES, getCategoryById } from '../registry/categories';
-import { getAllTools, getPopularTools, searchTools } from '../registry/toolsRegistry';
-import type { CategoryId, ToolFAQ } from '../types/tool';
+import { CATEGORIES } from '../registry/categories';
+import { getPopularTools } from '../registry/toolsRegistry';
+import type { CategoryId } from '../types/tool';
 
-const HOMEPAGE_FAQS: ToolFAQ[] = [
-  {
-    question: 'Are UtilityFlow tools free to use without creating an account?',
-    answer:
-      'Yes. All 85 browser utilities and 3 AI tools on UtilityFlow are available free of charge with no registration, sign-in wall, credits, or subscription required.',
-  },
-  {
-    question: 'Does UtilityFlow upload my text, code, or files to a server?',
-    answer:
-      'All 85 core browser utilities run locally in your web browser without uploading inputs. Our 3 optional Free AI tools (AI Writing Assistant, AI Text Summarizer, and AI Smart Tool Finder) process prompts securely via server-side Groq inference without storing your text.',
-  },
-  {
-    question: 'How are the 88 tools organized across the platform?',
-    answer:
-      'UtilityFlow covers seven core categories (Text & Writing, Developer, Calculators, Social Media, PDFs, SEO, and Image & File tools) totaling 85 browser tools alongside 3 Free AI tools integrated into the platform.',
-  },
-  {
-    question: 'Can I bookmark or share a direct link to any specific tool?',
-    answer:
-      'Yes. Every tool and category receives its own permanent, clean URL (such as /word-counter/, /ai-writing-assistant/, or /category/developer-tools/) that loads directly and works across browser refreshes.',
-  },
-  {
-    question: 'Does UtilityFlow work smoothly on mobile phones and tablets?',
-    answer:
-      'Yes. All layouts, navigation controls, and interactive workspaces—including Light Mode and Dark Mode—are designed mobile-first with accessible touch targets and responsive grids.',
-  },
-];
-
-const WHY_CHOOSE_ITEMS = [
-  {
-    number: '01.',
-    title: 'Browser-first privacy',
-    description:
-      'Core calculations, string transforms, and formatting run directly in client memory so sensitive drafts and JSON payloads stay on your device.',
-    icon: Lock,
-  },
-  {
-    number: '02.',
-    title: 'Fast, lightweight delivery',
-    description:
-      'Code-split tool modules and minimal runtime dependencies keep initial page loads lean and Core Web Vitals responsive on any connection.',
-    icon: Zap,
-  },
-  {
-    number: '03.',
-    title: 'Permanent clean URLs',
-    description:
-      'Every utility lives at its own dedicated path with structured metadata, usage examples, and direct deep-link reliability across browser refreshes.',
-    icon: Layers,
-  },
-  {
-    number: '04.',
-    title: 'Predictable, verifiable results',
-    description:
-      'Tools focus on deterministic outputs, transparent instructions, and accessible controls without cluttered popups or misleading indicators.',
-    icon: ShieldCheck,
-  },
-];
+const WHY_ICONS = [Lock, Zap, Layers, ShieldCheck];
 
 export function HomePage() {
+  const { locale, t } = useLocale();
   const [selectedCategory, setSelectedCategory] = useState<CategoryId | 'all'>('all');
   const [directoryQuery, setDirectoryQuery] = useState('');
 
-  const allTools = getAllTools();
+  const allTools = getLocalizedTools(locale);
   const popularTools = getPopularTools(8);
+  const categories = getLocalizedCategories(locale);
 
   const filteredTools = useMemo(() => {
-    return searchTools(directoryQuery, selectedCategory);
-  }, [directoryQuery, selectedCategory]);
+    return searchToolsLocalized(directoryQuery, locale, selectedCategory);
+  }, [directoryQuery, selectedCategory, locale]);
 
   const filteredCategories = useMemo(() => {
     const q = directoryQuery.trim().toLowerCase();
-    return CATEGORIES.filter((cat) => {
+    return categories.filter((cat) => {
       if (selectedCategory !== 'all' && cat.id !== selectedCategory) return false;
       if (!q) return true;
       return [cat.name, cat.description, ...cat.sampleToolNames].join(' ').toLowerCase().includes(q);
     });
-  }, [directoryQuery, selectedCategory]);
+  }, [directoryQuery, selectedCategory, categories]);
 
+  const homePath = locale === 'es' ? '/es/' : '/';
   const websiteSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: SITE_CONFIG.name,
-    url: buildCanonicalUrl('/'),
-    description: SITE_CONFIG.description,
+    url: buildCanonicalUrl(homePath),
+    description: t.home.seoDescription,
     potentialAction: {
       '@type': 'SearchAction',
-      target: `${buildCanonicalUrl('/tools/')}?q={search_term_string}`,
+      target: `${buildCanonicalUrl(localizeStaticPath('/tools/', locale))}?q={search_term_string}`,
       'query-input': 'required name=search_term_string',
     },
   };
@@ -108,19 +59,12 @@ export function HomePage() {
   return (
     <>
       <SeoHead
-        title="UtilityFlow – Fast Browser-Based Online Utility Tools"
-        description="Free, fast, privacy-first online utility tools for text analysis, developer formatting, calculators, PDFs, SEO checks, and image workflows."
-        canonicalPath="/"
-        keywords={[
-          'online utility tools',
-          'browser tools',
-          'text tools',
-          'developer tools',
-          'online calculators',
-          'pdf tools',
-          'seo tools',
-        ]}
-        structuredData={[websiteSchema, buildFaqSchema(HOMEPAGE_FAQS)]}
+        title={t.home.seoTitle}
+        description={t.home.seoDescription}
+        canonicalPath={homePath}
+        keywords={t.home.seoKeywords}
+        structuredData={[websiteSchema, buildFaqSchema(t.home.faqs)]}
+        alternates={toHreflangEntries(getStaticAlternatePaths('/'))}
       />
 
       {/* Hero Section */}
@@ -128,15 +72,13 @@ export function HomePage() {
         <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
           <div className="max-w-3xl">
             <p className="text-xs sm:text-sm font-medium text-indigo-600 mb-3">
-              UtilityFlow Platform · 7 Core Categories · {allTools.length} Live Utilities
+              {formatString(t.home.eyebrow, { count: allTools.length })}
             </p>
             <h1 className="text-4xl sm:text-5xl lg:text-[3.5rem] font-bold tracking-tight text-slate-900 leading-[1.1] text-balance">
-              Practical online utilities built for speed and privacy.
+              {t.home.h1}
             </h1>
             <p className="mt-5 text-base sm:text-lg leading-relaxed text-slate-600 max-w-2xl">
-              {SITE_CONFIG.name} organizes 85 browser-first utilities plus free AI writing,
-              summarization, and smart tool discovery across text, developer, calculator, social
-              media, PDF, SEO, and image workflows.
+              {t.home.heroDescription}
             </p>
 
             <div className="mt-8">
@@ -148,33 +90,33 @@ export function HomePage() {
                 href="#categories"
                 className="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-indigo-700 whitespace-nowrap shrink-0"
               >
-                Explore Categories
+                {t.home.exploreCategories}
                 <ArrowRight className="w-4 h-4" aria-hidden="true" />
               </a>
               <Link
-                to="/tools/"
+                to={localizeStaticPath('/tools/', locale)}
                 className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-800 transition-colors hover:bg-slate-50 whitespace-nowrap shrink-0"
               >
-                Open Full Directory
+                {t.home.openDirectory}
               </Link>
               <Link
-                to="/ai-writing-assistant/"
+                to={localizeStaticPath('/ai-writing-assistant/', locale)}
                 className="inline-flex items-center gap-2 rounded-lg border border-indigo-200 bg-indigo-50 px-4 py-2.5 text-sm font-semibold text-indigo-700 transition-colors hover:bg-indigo-100 whitespace-nowrap shrink-0"
               >
                 <Sparkles className="w-4 h-4" aria-hidden="true" />
-                AI Writing
+                {t.home.aiWriting}
               </Link>
               <Link
-                to="/ai-text-summarizer/"
+                to={localizeStaticPath('/ai-text-summarizer/', locale)}
                 className="inline-flex items-center gap-2 rounded-lg border border-indigo-200 bg-indigo-50 px-4 py-2.5 text-sm font-semibold text-indigo-700 transition-colors hover:bg-indigo-100 whitespace-nowrap shrink-0"
               >
-                AI Summarizer
+                {t.home.aiSummarizer}
               </Link>
               <Link
-                to="/ai-tool-finder/"
+                to={localizeStaticPath('/ai-tool-finder/', locale)}
                 className="inline-flex items-center gap-2 rounded-lg border border-indigo-200 bg-indigo-50 px-4 py-2.5 text-sm font-semibold text-indigo-700 transition-colors hover:bg-indigo-100 whitespace-nowrap shrink-0"
               >
-                AI Tool Finder
+                {t.home.aiFinder}
               </Link>
             </div>
           </div>
@@ -182,26 +124,26 @@ export function HomePage() {
           {/* 4-column Platform Metrics Strip */}
           <dl className="mt-12 grid grid-cols-2 lg:grid-cols-4 gap-4 border-t border-slate-200 pt-8">
             <div>
-              <dt className="text-xs text-slate-500">Tool Categories</dt>
+              <dt className="text-xs text-slate-500">{t.home.metrics.toolCategories}</dt>
               <dd className="mt-1 text-2xl font-bold text-slate-900 tabular-nums">
                 {CATEGORIES.length}
               </dd>
             </div>
             <div>
-              <dt className="text-xs text-slate-500">Browser Utilities</dt>
+              <dt className="text-xs text-slate-500">{t.home.metrics.browserUtilities}</dt>
               <dd className="mt-1 text-2xl font-bold text-slate-900 tabular-nums">
                 {SITE_CONFIG.plannedTotalTools}
               </dd>
             </div>
             <div>
-              <dt className="text-xs text-slate-500">Live Tools</dt>
+              <dt className="text-xs text-slate-500">{t.home.metrics.liveTools}</dt>
               <dd className="mt-1 text-2xl font-bold text-slate-900 tabular-nums">
                 {allTools.length}
               </dd>
             </div>
             <div>
-              <dt className="text-xs text-slate-500">Account Required</dt>
-              <dd className="mt-1 text-2xl font-bold text-slate-900 tabular-nums">None</dd>
+              <dt className="text-xs text-slate-500">{t.home.metrics.accountRequired}</dt>
+              <dd className="mt-1 text-2xl font-bold text-slate-900 tabular-nums">{t.home.metrics.none}</dd>
             </div>
           </dl>
         </div>
@@ -218,14 +160,13 @@ export function HomePage() {
             <div>
               <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-600 mb-1">
                 <Sparkles className="w-3.5 h-3.5" aria-hidden="true" />
-                <span>Free AI Suite · Zero Login Required</span>
+                <span>{t.home.aiSpotlight.badge}</span>
               </div>
               <h2 id="ai-tools-heading" className="text-2xl sm:text-3xl font-bold text-slate-900">
-                Free AI Tools
+                {t.home.aiSpotlight.title}
               </h2>
               <p className="mt-1.5 text-sm sm:text-base text-slate-600">
-                Improve drafts, summarize long documents, or find the right tool in seconds with
-                zero sign-up.
+                {t.home.aiSpotlight.description}
               </p>
             </div>
           </div>
@@ -243,17 +184,17 @@ export function HomePage() {
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
           <div>
             <h2 id="popular-tools-heading" className="text-2xl sm:text-3xl font-bold text-slate-900">
-              Popular Tools
+              {t.home.popular.title}
             </h2>
             <p className="mt-1.5 text-sm sm:text-base text-slate-600">
-              Most-used everyday utilities across writing, development, and calculations.
+              {t.home.popular.description}
             </p>
           </div>
           <Link
-            to="/tools/"
+            to={localizeStaticPath('/tools/', locale)}
             className="text-sm font-semibold text-indigo-600 hover:text-indigo-700 underline-offset-4 hover:underline whitespace-nowrap shrink-0"
           >
-            View tools directory
+            {t.home.popular.viewDirectory}
           </Link>
         </div>
 
@@ -279,7 +220,7 @@ export function HomePage() {
               </p>
             </div>
             <Link
-              to="/category/text-writing-tools/"
+              to={categoryHref('text-writing', locale)}
               className="inline-flex items-center justify-center gap-2 rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white hover:bg-slate-800 transition-colors whitespace-nowrap shrink-0"
             >
               Preview Batch 1 Category
@@ -298,21 +239,20 @@ export function HomePage() {
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl mb-10">
             <h2 id="categories-heading" className="text-2xl sm:text-3xl font-bold text-slate-900">
-              Tool Categories
+              {t.home.categories.title}
             </h2>
             <p className="mt-2 text-sm sm:text-base text-slate-600">
-              Seven specialized suites engineered to cover writing, coding, math, publishing,
-              documents, search optimization, and media workflows.
+              {t.home.categories.description}
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {CATEGORIES.map((category) => {
-              const liveCount = allTools.filter((t) => t.categoryId === category.id).length;
+            {categories.map((category) => {
+              const liveCount = allTools.filter((tool) => tool.categoryId === category.id).length;
               return (
                 <Link
                   key={category.id}
-                  to={`/category/${category.slug}/`}
+                  to={categoryHref(category.id, locale)}
                   className="group flex flex-col justify-between rounded-xl border border-slate-200 bg-white p-6 transition-all duration-150 hover:border-indigo-300 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600"
                 >
                   <div>
@@ -322,10 +262,13 @@ export function HomePage() {
                           <CategoryIcon name={category.iconName} className="w-5 h-5" />
                         </div>
                         <span className="text-xs font-medium text-slate-500 tabular-nums">
-                          Batch {category.batch} ·{' '}
+                          {formatString(t.category.batchLabel, { batch: category.batch })} ·{' '}
                           {liveCount >= category.plannedToolCount
-                            ? `${liveCount} live`
-                            : `${liveCount}/${category.plannedToolCount} live`}
+                            ? formatString(t.category.toolsLive, { count: liveCount })
+                            : formatString(t.category.ofToolsLive, {
+                                count: liveCount,
+                                total: category.plannedToolCount,
+                              })}
                         </span>
                       </div>
                       <ArrowRight
@@ -343,7 +286,9 @@ export function HomePage() {
                   </div>
 
                   <p className="mt-5 pt-4 border-t border-slate-100 text-xs text-slate-500 truncate">
-                    Includes: {category.sampleToolNames.slice(0, 3).join(' · ')}
+                    {formatString(t.home.categories.includes, {
+                      names: category.sampleToolNames.slice(0, 3).join(' · '),
+                    })}
                   </p>
                 </Link>
               );
@@ -365,23 +310,23 @@ export function HomePage() {
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8">
           <div>
             <h2 id="directory-heading" className="text-2xl sm:text-3xl font-bold text-slate-900">
-              All Tools Directory
+              {t.home.directory.title}
             </h2>
             <p className="mt-1.5 text-sm sm:text-base text-slate-600">
-              Filter by category or keyword to jump directly to any live utility or category hub.
+              {t.home.directory.description}
             </p>
           </div>
 
           <div className="w-full lg:w-80">
             <label htmlFor="directory-filter-input" className="sr-only">
-              Filter directory
+              {t.home.directory.filterPlaceholder}
             </label>
             <input
               id="directory-filter-input"
               type="search"
               value={directoryQuery}
               onChange={(e) => setDirectoryQuery(e.target.value)}
-              placeholder="Filter categories or tools..."
+              placeholder={t.home.directory.filterPlaceholder}
               className="w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/20"
             />
           </div>
@@ -404,9 +349,9 @@ export function HomePage() {
                 : 'text-slate-600 hover:text-slate-900'
             }`}
           >
-            All Categories
+            {t.home.directory.allCategories}
           </button>
-          {CATEGORIES.map((category) => (
+          {categories.map((category) => (
             <button
               key={category.id}
               type="button"
@@ -436,7 +381,7 @@ export function HomePage() {
             {filteredCategories.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {filteredCategories.map((category) => {
-                  const categoryLiveTools = allTools.filter((t) => t.categoryId === category.id);
+                  const categoryLiveTools = allTools.filter((tool) => tool.categoryId === category.id);
                   return (
                     <div
                       key={category.id}
@@ -445,31 +390,34 @@ export function HomePage() {
                       <div>
                         <div className="flex items-center justify-between gap-3">
                           <Link
-                            to={`/category/${category.slug}/`}
+                            to={categoryHref(category.id, locale)}
                             className="inline-flex items-center gap-2 text-base font-bold text-slate-900 hover:text-indigo-700"
                           >
                             <CategoryIcon name={category.iconName} className="w-4 h-4 text-indigo-600" />
                             <span>{category.name}</span>
                           </Link>
                           <span className="text-xs font-mono text-slate-500 tabular-nums">
-                            Batch {category.batch} · {categoryLiveTools.length}/{category.plannedToolCount}
+                            {formatString(t.category.batchLabel, { batch: category.batch })} ·{' '}
+                            {categoryLiveTools.length}/{category.plannedToolCount}
                           </span>
                         </div>
                         <p className="mt-2 text-sm text-slate-600">
-                          Upcoming utilities: {category.sampleToolNames.join(', ')}
+                          {formatString(t.home.directory.upcomingUtilities, {
+                            names: category.sampleToolNames.join(', '),
+                          })}
                         </p>
                       </div>
                       <div className="flex items-center justify-between pt-3 border-t border-slate-100 text-xs">
                         <span className="text-slate-500">
                           {categoryLiveTools.length === 0
-                            ? `Scheduled in Batch ${category.batch}`
-                            : `${categoryLiveTools.length} tools active`}
+                            ? formatString(t.home.directory.scheduledInBatch, { batch: category.batch })
+                            : formatString(t.home.directory.toolsActive, { count: categoryLiveTools.length })}
                         </span>
                         <Link
-                          to={`/category/${category.slug}/`}
+                          to={categoryHref(category.id, locale)}
                           className="font-semibold text-indigo-600 hover:text-indigo-700"
                         >
-                          Open category page
+                          {t.home.directory.openCategory}
                         </Link>
                       </div>
                     </div>
@@ -479,7 +427,7 @@ export function HomePage() {
             ) : (
               <div className="rounded-xl border border-slate-200 bg-slate-50 p-8 text-center">
                 <p className="text-sm text-slate-600">
-                  No categories or tools matched &ldquo;{directoryQuery}&rdquo;.
+                  {formatString(t.home.directory.noMatch, { query: directoryQuery })}
                 </p>
                 <button
                   type="button"
@@ -489,7 +437,7 @@ export function HomePage() {
                   }}
                   className="mt-3 text-sm font-semibold text-indigo-600 hover:underline cursor-pointer"
                 >
-                  Reset filters
+                  {t.home.directory.resetFilters}
                 </button>
               </div>
             )}
@@ -505,24 +453,24 @@ export function HomePage() {
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl mb-10">
             <h2 id="why-choose-heading" className="text-2xl sm:text-3xl font-bold text-slate-900">
-              Why Choose {SITE_CONFIG.name}
+              {t.home.why.title}
             </h2>
             <p className="mt-2 text-sm sm:text-base text-slate-600">
-              Engineered as a clean, reliable alternative to ad-heavy utility sites.
+              {t.home.why.description}
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {WHY_CHOOSE_ITEMS.map((item) => {
-              const IconComponent = item.icon;
+            {t.home.why.items.map((item, index) => {
+              const IconComponent = WHY_ICONS[index] ?? ShieldCheck;
               return (
                 <div
-                  key={item.number}
+                  key={item.title}
                   className="rounded-xl border border-slate-200 bg-white p-6"
                 >
                   <div className="flex items-center justify-between gap-4 mb-3">
                     <span className="font-mono text-sm font-semibold text-indigo-600 tabular-nums">
-                      {item.number}
+                      {String(index + 1).padStart(2, '0')}.
                     </span>
                     <IconComponent className="w-5 h-5 text-slate-400" aria-hidden="true" />
                   </div>
@@ -541,18 +489,15 @@ export function HomePage() {
       <section aria-labelledby="home-faq-heading" className="mx-auto max-w-4xl px-4 py-14 sm:px-6 lg:px-8">
         <div className="mb-8">
           <h2 id="home-faq-heading" className="text-2xl sm:text-3xl font-bold text-slate-900">
-            Frequently Asked Questions
+            {t.home.faq.title}
           </h2>
           <p className="mt-2 text-sm sm:text-base text-slate-600">
-            Key details about how {SITE_CONFIG.name} operates and what to expect in upcoming batches.
+            {t.home.faq.description}
           </p>
         </div>
 
-        <FAQAccordion items={HOMEPAGE_FAQS} />
+        <FAQAccordion items={t.home.faqs} />
       </section>
     </>
   );
 }
-
-// Keep unused import guard clean if category lookup used in future edits
-export { getCategoryById };

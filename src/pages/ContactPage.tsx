@@ -3,6 +3,10 @@ import { useState, type FormEvent } from 'react';
 import { Breadcrumbs, buildBreadcrumbSchema } from '../components/common/Breadcrumbs';
 import { SeoHead } from '../components/seo/SeoHead';
 import { SITE_CONFIG } from '../config/site';
+import { useLocale } from '../locales/LocaleContext';
+import { localizeStaticPath } from '../locales/config';
+import { getStaticAlternatePaths, toHreflangEntries } from '../locales/routes';
+import { formatString } from '../locales/ui';
 import type { BreadcrumbItem } from '../types/tool';
 
 interface FormErrors {
@@ -15,29 +19,30 @@ interface FormErrors {
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export function ContactPage() {
+  const { locale, t } = useLocale();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [subject, setSubject] = useState('Tool suggestion');
+  const [subject, setSubject] = useState(t.contact.topics[0]);
   const [message, setMessage] = useState('');
   const [errors, setErrors] = useState<FormErrors>({});
   const [submitted, setSubmitted] = useState(false);
 
   const breadcrumbs: BreadcrumbItem[] = [
-    { label: 'Home', href: '/' },
-    { label: 'Contact' },
+    { label: t.footer.home, href: localizeStaticPath('/', locale) },
+    { label: t.nav.contact },
   ];
 
   const validate = (): FormErrors => {
     const next: FormErrors = {};
-    if (!name.trim()) next.name = 'Please enter your name.';
+    if (!name.trim()) next.name = t.contact.errors.name;
     if (!email.trim()) {
-      next.email = 'Please enter your email address.';
+      next.email = t.contact.errors.emailEmpty;
     } else if (!EMAIL_PATTERN.test(email.trim())) {
-      next.email = 'Please enter a valid email address.';
+      next.email = t.contact.errors.emailInvalid;
     }
-    if (!subject.trim()) next.subject = 'Please choose or enter a topic.';
+    if (!subject.trim()) next.subject = t.contact.errors.subject;
     if (message.trim().length < 10) {
-      next.message = 'Please include at least 10 characters in your message.';
+      next.message = t.contact.errors.message;
     }
     return next;
   };
@@ -53,7 +58,7 @@ export function ContactPage() {
   const handleReset = () => {
     setName('');
     setEmail('');
-    setSubject('Tool suggestion');
+    setSubject(t.contact.topics[0]);
     setMessage('');
     setErrors({});
     setSubmitted(false);
@@ -62,10 +67,11 @@ export function ContactPage() {
   return (
     <>
       <SeoHead
-        title="Contact UtilityFlow – Support, Bug Reports & Suggestions"
-        description="Get in touch with the UtilityFlow team to report an issue, suggest a new utility tool, or ask questions about privacy and terms."
-        canonicalPath="/contact/"
+        title={t.contact.seoTitle}
+        description={t.contact.seoDescription}
+        canonicalPath={localizeStaticPath('/contact/', locale)}
         structuredData={buildBreadcrumbSchema(breadcrumbs)}
+        alternates={toHreflangEntries(getStaticAlternatePaths('/contact/'))}
       />
 
       <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
@@ -73,11 +79,10 @@ export function ContactPage() {
 
         <header className="mb-10">
           <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900">
-            Contact Us
+            {t.contact.title}
           </h1>
           <p className="mt-3 text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl">
-            Send bug reports, tool suggestions, or general inquiries. We read every submission and
-            prioritize fixes that improve tool accuracy and accessibility.
+            {t.contact.intro}
           </p>
         </header>
 
@@ -90,13 +95,11 @@ export function ContactPage() {
               >
                 <div className="flex items-center gap-3 text-emerald-900">
                   <CheckCircle2 className="w-6 h-6 text-emerald-700 shrink-0" aria-hidden="true" />
-                  <h2 className="text-xl font-bold">Message prepared</h2>
+                  <h2 className="text-xl font-bold">{t.contact.successTitle}</h2>
                 </div>
                 <p className="text-sm leading-relaxed text-emerald-900">
-                  Thank you, <span className="font-semibold">{name}</span>. Your message regarding{' '}
-                  <span className="font-semibold">{subject}</span> has been validated. Because{' '}
-                  {SITE_CONFIG.name} runs as a static site without storing user submissions on a
-                  backend server, you can also send your message directly via your email client to{' '}
+                  {formatString(t.contact.successThanks, { name, subject })}{' '}
+                  {t.contact.successNote}{' '}
                   <a
                     href={`mailto:${SITE_CONFIG.contactEmail}?subject=${encodeURIComponent(
                       `[UtilityFlow] ${subject}`
@@ -114,7 +117,7 @@ export function ContactPage() {
                   onClick={handleReset}
                   className="rounded-lg border border-emerald-300 bg-white px-4 py-2 text-sm font-semibold text-emerald-900 hover:bg-emerald-100 transition-colors cursor-pointer"
                 >
-                  Send another message
+                  {t.contact.sendAnother}
                 </button>
               </div>
             ) : (
@@ -125,7 +128,7 @@ export function ContactPage() {
               >
                 <div>
                   <label htmlFor="contact-name" className="block text-sm font-semibold text-slate-900 mb-1.5">
-                    Name
+                    {t.contact.name}
                   </label>
                   <input
                     id="contact-name"
@@ -134,14 +137,14 @@ export function ContactPage() {
                     onChange={(e) => setName(e.target.value)}
                     aria-invalid={Boolean(errors.name)}
                     className="w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/20"
-                    placeholder="Alex Rivera"
+                    placeholder={t.contact.namePlaceholder}
                   />
                   {errors.name && <p className="mt-1.5 text-xs text-red-600">{errors.name}</p>}
                 </div>
 
                 <div>
                   <label htmlFor="contact-email" className="block text-sm font-semibold text-slate-900 mb-1.5">
-                    Email address
+                    {t.contact.email}
                   </label>
                   <input
                     id="contact-email"
@@ -150,14 +153,14 @@ export function ContactPage() {
                     onChange={(e) => setEmail(e.target.value)}
                     aria-invalid={Boolean(errors.email)}
                     className="w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/20"
-                    placeholder="you@example.com"
+                    placeholder={t.contact.emailPlaceholder}
                   />
                   {errors.email && <p className="mt-1.5 text-xs text-red-600">{errors.email}</p>}
                 </div>
 
                 <div>
                   <label htmlFor="contact-subject" className="block text-sm font-semibold text-slate-900 mb-1.5">
-                    Topic
+                    {t.contact.topic}
                   </label>
                   <select
                     id="contact-subject"
@@ -165,18 +168,18 @@ export function ContactPage() {
                     onChange={(e) => setSubject(e.target.value)}
                     className="w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/20"
                   >
-                    <option value="Tool suggestion">Tool suggestion</option>
-                    <option value="Bug report">Bug report</option>
-                    <option value="SEO or content correction">SEO or content correction</option>
-                    <option value="Privacy or legal inquiry">Privacy or legal inquiry</option>
-                    <option value="General question">General question</option>
+                    {t.contact.topics.map((topic) => (
+                      <option key={topic} value={topic}>
+                        {topic}
+                      </option>
+                    ))}
                   </select>
                   {errors.subject && <p className="mt-1.5 text-xs text-red-600">{errors.subject}</p>}
                 </div>
 
                 <div>
                   <label htmlFor="contact-message" className="block text-sm font-semibold text-slate-900 mb-1.5">
-                    Message
+                    {t.contact.message}
                   </label>
                   <textarea
                     id="contact-message"
@@ -185,7 +188,7 @@ export function ContactPage() {
                     onChange={(e) => setMessage(e.target.value)}
                     aria-invalid={Boolean(errors.message)}
                     className="w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/20"
-                    placeholder="Describe the tool, bug, or question in detail..."
+                    placeholder={t.contact.messagePlaceholder}
                   />
                   {errors.message && <p className="mt-1.5 text-xs text-red-600">{errors.message}</p>}
                 </div>
@@ -194,7 +197,7 @@ export function ContactPage() {
                   type="submit"
                   className="inline-flex items-center justify-center rounded-lg bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700 transition-colors cursor-pointer"
                 >
-                  Submit Message
+                  {t.contact.submit}
                 </button>
               </form>
             )}
@@ -204,10 +207,10 @@ export function ContactPage() {
             <div className="rounded-xl border border-slate-200 bg-slate-50 p-5 space-y-3">
               <div className="flex items-center gap-2 text-sm font-bold text-slate-900">
                 <Mail className="w-4 h-4 text-indigo-600" aria-hidden="true" />
-                <span>Direct Email</span>
+                <span>{t.contact.directEmail}</span>
               </div>
               <p className="text-sm text-slate-600 leading-relaxed">
-                Prefer to write directly? Email our team at:
+                {t.contact.directEmailText}
               </p>
               <a
                 href={`mailto:${SITE_CONFIG.contactEmail}`}

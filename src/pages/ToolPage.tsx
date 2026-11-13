@@ -1,25 +1,37 @@
 import { Suspense } from 'react';
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import { ToolPageLayout } from '../components/tool/ToolPageLayout';
-import { getToolBySlug } from '../registry/toolsRegistry';
+import { useLocale } from '../locales/LocaleContext';
+import { toolHref } from '../locales/config';
+import { formatString } from '../locales/ui';
+import { getLocalizedTool, getToolByLocalizedSlug } from '../locales/tools';
 import { NotFoundPage } from './NotFoundPage';
 
 export function ToolPage() {
+  const { locale, t } = useLocale();
   const { toolSlug = '' } = useParams<{ toolSlug: string }>();
-  const tool = getToolBySlug(toolSlug);
+  const tool = getToolByLocalizedSlug(toolSlug, locale);
 
   if (!tool) {
     return <NotFoundPage />;
   }
 
-  const ToolComponent = tool.component;
+  // Cross-locale slug guard: an English slug visited under /es/ (or vice
+  // versa) redirects to the correct localized URL instead of serving a
+  // duplicate page under the wrong slug.
+  const localized = getLocalizedTool(tool, locale);
+  if (localized.slug !== toolSlug) {
+    return <Navigate to={toolHref(localized.slug, locale)} replace />;
+  }
+
+  const ToolComponent = localized.component;
 
   return (
-    <ToolPageLayout tool={tool}>
+    <ToolPageLayout tool={localized}>
       <Suspense
         fallback={
           <div className="py-12 text-center text-sm text-slate-500">
-            Loading {tool.name} workspace...
+            {formatString(t.toolPage.loadingWorkspace, { name: localized.name })}
           </div>
         }
       >
