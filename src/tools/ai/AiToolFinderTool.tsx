@@ -14,7 +14,8 @@ import { useEffect, useMemo, useRef, useState, type FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import type { FindToolAiResult, FindToolRequest } from '../../../worker/src/types';
 import { fetchAiHealth, postAiJson, type AiErrorResponse, type QuotaStatus } from '../../config/ai';
-import { CATEGORIES } from '../../registry/categories';
+import { useLocale } from '../../locales/LocaleContext';
+import { getLocalizedCategories } from '../../locales/tools';
 import {
   buildAiCandidateSlice,
   buildStructuredToolInventory,
@@ -25,54 +26,198 @@ import type { CategoryId } from '../../types/tool';
 
 const MAX_QUERY_CHARS = 500;
 
+const STRINGS = {
+  en: {
+    quickTasks: [
+      {
+        label: 'Reduce image under 100KB',
+        query: 'I want to reduce my image size to 100KB.',
+        categoryId: 'image-file',
+      },
+      {
+        label: 'Convert PDF into images',
+        query: 'I need to convert a PDF into images.',
+        categoryId: 'pdf',
+      },
+      {
+        label: 'Count essay words',
+        query: 'I want to count words in my essay.',
+        categoryId: 'text-writing',
+      },
+      {
+        label: 'Generate a QR code',
+        query: 'I need to generate a QR code.',
+        categoryId: 'social-media',
+      },
+      {
+        label: 'Change image dimensions',
+        query: "I want to change an image's dimensions.",
+        categoryId: 'image-file',
+      },
+      {
+        label: 'Fix grammar & rewrite email',
+        query: 'I want AI to fix grammar mistakes and rewrite an email professionally.',
+        categoryId: 'text-writing',
+      },
+      {
+        label: 'Summarize a long article',
+        query: 'I need to summarize a long article into key bullet points.',
+        categoryId: 'text-writing',
+      },
+      {
+        label: 'PDF to Word check',
+        query: 'I need to convert a PDF to Word.',
+        categoryId: 'all',
+      },
+    ],
+    title: 'AI Smart Tool Finder',
+    searchesLine: 'Searches {count} real UtilityFlow tools (85 browser + 2 AI)',
+    aiSearchesToday: 'AI searches today:',
+    leftUnlimited: 'left · Instant local search unlimited',
+    quotaFallback: 'Up to 10 free AI searches / day · Unlimited local search',
+    backendBefore: 'AI semantic ranking requires ',
+    backendAfter:
+      ' on the server, while instant local keyword search across all {count} tools works right away.',
+    queryLabel: 'Describe what you want to do (plain language or keywords)',
+    queryPlaceholder:
+      'e.g. "I want to reduce my image size to 100KB" or "convert PDF into PNG"',
+    categoryLabel: 'Optional Task Category',
+    allCategories: 'All Categories ({count} tools)',
+    characters: 'characters',
+    findButton: 'Find Matching Tool',
+    findingButton: 'Finding Best Tool...',
+    tryTask: 'Try a Real Task or Select a Common Question',
+    loadingLine: "Matching your request against UtilityFlow's {count} verified tools...",
+    errorTitle: 'AI Semantic Ranking Unavailable',
+    retryAi: 'Retry AI',
+    describeError: 'Please describe the task or problem you want to solve (at least 2 characters).',
+    queryTooLongBefore: 'Query exceeds ',
+    queryTooLongAfter: ' characters. Please keep your description concise.',
+    unexpectedFormat:
+      'AI returned an unexpected format. Fast keyword matches from our real inventory are shown below.',
+    contactError:
+      'Temporary issue contacting AI ranking. Keyword search results remain active below.',
+    bestTool: 'Best Recommended Tool',
+    noExact: 'No Exact Matching Tool Currently Available',
+    noMatchFallback:
+      'UtilityFlow does not currently include a dedicated tool that directly performs "{query}". We never invent fake tools or links.',
+    relevantAlt: 'Relevant Alternatives',
+    relatedTools: 'Related Existing Tools (Partial Workflows Only)',
+    supportedPrefix: 'Supported: ',
+    openName: 'Open {name}',
+    matchedWith: 'Matched across verified UtilityFlow inventory using free-tier Groq model',
+    fallbackNote: ' (automatic fallback)',
+    instantMatches: 'Instant Keyword Matches ({count})',
+    matchedLocally: 'Matched locally from {count} tools',
+    matchedPrefix: 'Matched: ',
+    suggestionsTitle: 'Smart Suggestions',
+    suggestionsAll: 'Across Popular Tasks',
+    suggestionsCategory: 'in Selected Category',
+    clickOpen: 'Click any tool to open directly',
+    openToolArrow: 'Open tool →',
+    recommendationsAria: 'AI tool recommendations',
+    instantAria: 'Instant keyword matches',
+    suggestionsAria: 'Smart suggested tools on page load',
+  },
+  es: {
+    quickTasks: [
+      {
+        label: 'Reducir imagen a menos de 100 KB',
+        query: 'Quiero reducir el tamaño de mi imagen a 100 KB.',
+        categoryId: 'image-file',
+      },
+      {
+        label: 'Convertir PDF en imágenes',
+        query: 'Necesito convertir un PDF en imágenes.',
+        categoryId: 'pdf',
+      },
+      {
+        label: 'Contar palabras de un ensayo',
+        query: 'Quiero contar las palabras de mi ensayo.',
+        categoryId: 'text-writing',
+      },
+      {
+        label: 'Generar un código QR',
+        query: 'Necesito generar un código QR.',
+        categoryId: 'social-media',
+      },
+      {
+        label: 'Cambiar las dimensiones de una imagen',
+        query: 'Quiero cambiar las dimensiones de una imagen.',
+        categoryId: 'image-file',
+      },
+      {
+        label: 'Corregir gramática y reescribir correo',
+        query: 'Quiero que la IA corrija errores de gramática y reescriba un correo de forma profesional.',
+        categoryId: 'text-writing',
+      },
+      {
+        label: 'Resumir un artículo largo',
+        query: 'Necesito resumir un artículo largo en puntos clave.',
+        categoryId: 'text-writing',
+      },
+      {
+        label: 'Verificar PDF a Word',
+        query: 'Necesito convertir un PDF a Word.',
+        categoryId: 'all',
+      },
+    ],
+    title: 'Buscador inteligente de herramientas con IA',
+    searchesLine: 'Busca en {count} herramientas reales de UtilityFlow (85 de navegador + 2 de IA)',
+    aiSearchesToday: 'Búsquedas con IA hoy:',
+    leftUnlimited: 'restantes · Búsqueda local instantánea ilimitada',
+    quotaFallback: 'Hasta 10 búsquedas con IA gratis al día · Búsqueda local ilimitada',
+    backendBefore: 'La clasificación semántica con IA requiere ',
+    backendAfter:
+      ' en el servidor, mientras que la búsqueda local instantánea por palabras clave en las {count} herramientas funciona de inmediato.',
+    queryLabel: 'Describe lo que quieres hacer (en lenguaje sencillo o con palabras clave)',
+    queryPlaceholder:
+      'p. ej., "Quiero reducir el tamaño de mi imagen a 100 KB" o "convertir PDF a PNG"',
+    categoryLabel: 'Categoría de tarea opcional',
+    allCategories: 'Todas las categorías ({count} herramientas)',
+    characters: 'caracteres',
+    findButton: 'Encontrar herramienta',
+    findingButton: 'Buscando la mejor herramienta...',
+    tryTask: 'Prueba una tarea real o selecciona una pregunta común',
+    loadingLine: 'Comparando tu solicitud con las {count} herramientas verificadas de UtilityFlow...',
+    errorTitle: 'La clasificación semántica con IA no está disponible',
+    retryAi: 'Reintentar IA',
+    describeError: 'Describe la tarea o el problema que quieres resolver (al menos 2 caracteres).',
+    queryTooLongBefore: 'La consulta supera los ',
+    queryTooLongAfter: ' caracteres. Mantén tu descripción breve.',
+    unexpectedFormat:
+      'La IA devolvió un formato inesperado. A continuación se muestran las coincidencias rápidas por palabra clave de nuestro inventario real.',
+    contactError:
+      'Problema temporal al contactar con la clasificación de IA. Los resultados de la búsqueda por palabra clave siguen activos abajo.',
+    bestTool: 'Mejor herramienta recomendada',
+    noExact: 'No hay una herramienta exacta disponible actualmente',
+    noMatchFallback:
+      'UtilityFlow actualmente no incluye una herramienta dedicada que realice directamente "{query}". Nunca inventamos herramientas ni enlaces falsos.',
+    relevantAlt: 'Alternativas relevantes',
+    relatedTools: 'Herramientas existentes relacionadas (solo flujos de trabajo parciales)',
+    supportedPrefix: 'Formatos admitidos: ',
+    openName: 'Abrir {name}',
+    matchedWith: 'Encontrado en el inventario verificado de UtilityFlow con el modelo Groq de nivel gratuito',
+    fallbackNote: ' (cambio automático)',
+    instantMatches: 'Coincidencias instantáneas por palabra clave ({count})',
+    matchedLocally: 'Encontradas localmente entre {count} herramientas',
+    matchedPrefix: 'Coincidencias: ',
+    suggestionsTitle: 'Sugerencias inteligentes',
+    suggestionsAll: 'en tareas populares',
+    suggestionsCategory: 'en la categoría seleccionada',
+    clickOpen: 'Haz clic en una herramienta para abrirla directamente',
+    openToolArrow: 'Abrir herramienta →',
+    recommendationsAria: 'Recomendaciones de herramientas con IA',
+    instantAria: 'Coincidencias instantáneas por palabra clave',
+    suggestionsAria: 'Herramientas sugeridas al cargar la página',
+  },
+};
+
 interface QuickTaskPrompt {
   label: string;
   query: string;
   categoryId: CategoryId | 'all';
 }
-
-const QUICK_TASKS: QuickTaskPrompt[] = [
-  {
-    label: 'Reduce image under 100KB',
-    query: 'I want to reduce my image size to 100KB.',
-    categoryId: 'image-file',
-  },
-  {
-    label: 'Convert PDF into images',
-    query: 'I need to convert a PDF into images.',
-    categoryId: 'pdf',
-  },
-  {
-    label: 'Count essay words',
-    query: 'I want to count words in my essay.',
-    categoryId: 'text-writing',
-  },
-  {
-    label: 'Generate a QR code',
-    query: 'I need to generate a QR code.',
-    categoryId: 'social-media',
-  },
-  {
-    label: 'Change image dimensions',
-    query: "I want to change an image's dimensions.",
-    categoryId: 'image-file',
-  },
-  {
-    label: 'Fix grammar & rewrite email',
-    query: 'I want AI to fix grammar mistakes and rewrite an email professionally.',
-    categoryId: 'text-writing',
-  },
-  {
-    label: 'Summarize a long article',
-    query: 'I need to summarize a long article into key bullet points.',
-    categoryId: 'text-writing',
-  },
-  {
-    label: 'PDF to Word check',
-    query: 'I need to convert a PDF to Word.',
-    categoryId: 'all',
-  },
-];
 
 const INITIAL_SUGGESTION_SLUGS = [
   'ai-writing-assistant',
@@ -114,7 +259,9 @@ function parseAiFindResult(raw: string): FindToolAiResult | null {
 }
 
 export default function AiToolFinderTool() {
-  const inventory = useMemo(() => buildStructuredToolInventory(), []);
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
+  const inventory = useMemo(() => buildStructuredToolInventory(locale), [locale]);
   const inventoryBySlug = useMemo(() => {
     const map = new Map<string, StructuredToolEntry>();
     for (const item of inventory) {
@@ -212,14 +359,14 @@ export default function AiToolFinderTool() {
     if (trimmed.length < 2) {
       setAiError({
         code: 'BAD_REQUEST',
-        message: 'Please describe the task or problem you want to solve (at least 2 characters).',
+        message: s.describeError,
       });
       return;
     }
     if (trimmed.length > MAX_QUERY_CHARS) {
       setAiError({
         code: 'PAYLOAD_TOO_LARGE',
-        message: `Query exceeds ${MAX_QUERY_CHARS} characters. Please keep your description concise.`,
+        message: `${s.queryTooLongBefore}${MAX_QUERY_CHARS}${s.queryTooLongAfter}`,
       });
       return;
     }
@@ -253,8 +400,7 @@ export default function AiToolFinderTool() {
         } else {
           setAiError({
             code: 'SERVICE_UNAVAILABLE',
-            message:
-              'AI returned an unexpected format. Fast keyword matches from our real inventory are shown below.',
+            message: s.unexpectedFormat,
           });
         }
         setQuota(response.quota);
@@ -269,7 +415,7 @@ export default function AiToolFinderTool() {
       if (err instanceof DOMException && err.name === 'AbortError') return;
       setAiError({
         code: 'SERVICE_UNAVAILABLE',
-        message: 'Temporary issue contacting AI ranking. Keyword search results remain active below.',
+        message: s.contactError,
       });
     } finally {
       setLoadingAi(false);
@@ -306,26 +452,26 @@ export default function AiToolFinderTool() {
       <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-xs sm:text-sm">
         <div className="flex flex-wrap items-center gap-2 text-slate-700">
           <Compass className="w-4 h-4 text-indigo-600 shrink-0" aria-hidden="true" />
-          <span className="font-medium">AI Smart Tool Finder</span>
+          <span className="font-medium">{s.title}</span>
           <span className="text-slate-400" aria-hidden="true">
             ·
           </span>
           <span className="text-slate-600">
-            Searches {inventory.length} real UtilityFlow tools (85 browser + 2 AI)
+            {s.searchesLine.replace('{count}', String(inventory.length))}
           </span>
         </div>
 
         <div className="text-xs text-slate-600 tabular-nums">
           {quota ? (
             <span>
-              AI searches today:{' '}
+              {s.aiSearchesToday}{' '}
               <strong className="font-semibold text-slate-900">
                 {quota.remaining} / {quota.limit}
               </strong>{' '}
-              left · Instant local search unlimited
+              {s.leftUnlimited}
             </span>
           ) : (
-            <span>Up to 10 free AI searches / day · Unlimited local search</span>
+            <span>{s.quotaFallback}</span>
           )}
         </div>
       </div>
@@ -337,9 +483,8 @@ export default function AiToolFinderTool() {
         >
           <Info className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" aria-hidden="true" />
           <p>
-            AI semantic ranking requires <code className="font-mono text-xs">GROQ_API_KEY</code> on
-            the server, while instant local keyword search across all {inventory.length} tools works
-            right away.
+            {s.backendBefore} <code className="font-mono text-xs">GROQ_API_KEY</code>{' '}
+            {s.backendAfter.replace('{count}', String(inventory.length))}
           </p>
         </div>
       )}
@@ -352,7 +497,7 @@ export default function AiToolFinderTool() {
               htmlFor="ai-finder-query"
               className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5"
             >
-              Describe what you want to do (plain language or keywords)
+              {s.queryLabel}
             </label>
             <div className="relative">
               <Search
@@ -370,7 +515,7 @@ export default function AiToolFinderTool() {
                     setAiError(null);
                   }
                 }}
-                placeholder='e.g. "I want to reduce my image size to 100KB" or "convert PDF into PNG"'
+                placeholder={s.queryPlaceholder}
                 className="w-full rounded-xl border border-slate-300 bg-white py-3 pl-10 pr-4 text-sm sm:text-base text-slate-900 placeholder:text-slate-400 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/20"
               />
             </div>
@@ -381,7 +526,7 @@ export default function AiToolFinderTool() {
               htmlFor="ai-finder-category"
               className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5"
             >
-              Optional Task Category
+              {s.categoryLabel}
             </label>
             <select
               id="ai-finder-category"
@@ -389,8 +534,8 @@ export default function AiToolFinderTool() {
               onChange={(e) => setSelectedCategory(e.target.value as CategoryId | 'all')}
               className="w-full rounded-xl border border-slate-300 bg-white px-3 py-3 text-sm font-medium text-slate-900 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/20"
             >
-              <option value="all">All Categories ({inventory.length} tools)</option>
-              {CATEGORIES.map((cat) => (
+              <option value="all">{s.allCategories.replace('{count}', String(inventory.length))}</option>
+              {getLocalizedCategories(locale).map((cat) => (
                 <option key={cat.id} value={cat.id}>
                   {cat.name}
                 </option>
@@ -401,7 +546,7 @@ export default function AiToolFinderTool() {
 
         <div className="flex flex-wrap items-center justify-between gap-3">
           <span className="text-xs text-slate-500 tabular-nums">
-            {query.length} / {MAX_QUERY_CHARS} characters
+            {query.length} / {MAX_QUERY_CHARS} {s.characters}
           </span>
 
           <div className="flex flex-wrap items-center gap-2">
@@ -412,7 +557,7 @@ export default function AiToolFinderTool() {
                 className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3.5 py-2 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
               >
                 <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
-                <span>Reset</span>
+                <span>{t.common.reset}</span>
               </button>
             )}
 
@@ -424,12 +569,12 @@ export default function AiToolFinderTool() {
               {loadingAi ? (
                 <>
                   <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" />
-                  <span>Finding Best Tool...</span>
+                  <span>{s.findingButton}</span>
                 </>
               ) : (
                 <>
                   <Sparkles className="w-4 h-4" aria-hidden="true" />
-                  <span>Find Matching Tool</span>
+                  <span>{s.findButton}</span>
                 </>
               )}
             </button>
@@ -440,14 +585,20 @@ export default function AiToolFinderTool() {
       {/* Task Prompt Selector */}
       <div>
         <div className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2">
-          Try a Real Task or Select a Common Question
+          {s.tryTask}
         </div>
         <div className="flex flex-wrap gap-2">
-          {QUICK_TASKS.map((item) => (
+          {s.quickTasks.map((item) => (
             <button
               key={item.label}
               type="button"
-              onClick={() => handlePickQuickTask(item)}
+              onClick={() =>
+                handlePickQuickTask({
+                  label: item.label,
+                  query: item.query,
+                  categoryId: item.categoryId as CategoryId | 'all',
+                })
+              }
               className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-medium text-slate-700 transition-colors hover:border-indigo-300 hover:bg-indigo-50 hover:text-indigo-700 cursor-pointer"
             >
               {item.label}
@@ -464,7 +615,7 @@ export default function AiToolFinderTool() {
         >
           <div className="flex items-center gap-2 text-sm font-medium text-indigo-700">
             <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" />
-            <span>Matching your request against UtilityFlow&apos;s {inventory.length} verified tools...</span>
+            <span>{s.loadingLine.replace('{count}', String(inventory.length))}</span>
           </div>
           <div className="space-y-2 animate-pulse">
             <div className="h-4 rounded bg-slate-200 dark:bg-slate-700 w-2/3" />
@@ -482,7 +633,7 @@ export default function AiToolFinderTool() {
           <div className="flex items-start gap-2.5">
             <AlertCircle className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" aria-hidden="true" />
             <div>
-              <p className="font-semibold">AI Semantic Ranking Unavailable</p>
+              <p className="font-semibold">{s.errorTitle}</p>
               <p className="mt-0.5 text-xs sm:text-sm">{aiError.message}</p>
             </div>
           </div>
@@ -495,7 +646,7 @@ export default function AiToolFinderTool() {
                 className="inline-flex items-center gap-1.5 self-start sm:self-center rounded-lg border border-amber-300 bg-white px-3 py-1.5 text-xs font-semibold text-amber-900 hover:bg-amber-50 cursor-pointer shrink-0"
               >
                 <RefreshCw className="w-3.5 h-3.5" aria-hidden="true" />
-                <span>Retry AI</span>
+                <span>{s.retryAi}</span>
               </button>
             )}
         </div>
@@ -503,19 +654,19 @@ export default function AiToolFinderTool() {
 
       {/* Verified AI Recommendations */}
       {verifiedAiRecommendation && !loadingAi && (
-        <section aria-label="AI tool recommendations" className="space-y-4">
+        <section aria-label={s.recommendationsAria} className="space-y-4">
           {verifiedAiRecommendation.primaryEntry ? (
             <div className="rounded-xl border-2 border-indigo-200 bg-indigo-50/40 p-5 space-y-3">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-700 uppercase tracking-wider">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600" aria-hidden="true" />
-                  <span>Best Recommended Tool</span>
+                  <span>{s.bestTool}</span>
                 </div>
                 <span className="text-xs text-slate-500">
                   {verifiedAiRecommendation.primaryEntry.categoryName} ·{' '}
                   {verifiedAiRecommendation.primaryEntry.requiresExternalApi
-                    ? 'Free AI Tool'
-                    : 'Browser-side'}
+                    ? t.common.freeAiTool
+                    : t.common.browserSide}
                 </span>
               </div>
 
@@ -530,7 +681,7 @@ export default function AiToolFinderTool() {
                   </p>
                   {verifiedAiRecommendation.primaryEntry.ioFormats && (
                     <p className="text-xs text-slate-500 font-mono">
-                      Supported: {verifiedAiRecommendation.primaryEntry.ioFormats}
+                      {s.supportedPrefix}{verifiedAiRecommendation.primaryEntry.ioFormats}
                     </p>
                   )}
                 </div>
@@ -539,7 +690,7 @@ export default function AiToolFinderTool() {
                   to={verifiedAiRecommendation.primaryEntry.url}
                   className="inline-flex items-center justify-center gap-2 rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700 transition-colors whitespace-nowrap shrink-0"
                 >
-                  <span>Open Tool</span>
+                  <span>{t.common.openTool}</span>
                   <ArrowRight className="w-4 h-4" aria-hidden="true" />
                 </Link>
               </div>
@@ -548,11 +699,11 @@ export default function AiToolFinderTool() {
             <div className="rounded-xl border border-amber-200 bg-amber-50 p-5 space-y-2">
               <div className="flex items-center gap-2 text-sm font-bold text-amber-900">
                 <Info className="w-4 h-4 text-amber-700 shrink-0" aria-hidden="true" />
-                <span>No Exact Matching Tool Currently Available</span>
+                <span>{s.noExact}</span>
               </div>
               <p className="text-sm text-amber-900 leading-relaxed">
                 {verifiedAiRecommendation.noMatchMessage ||
-                  `UtilityFlow does not currently include a dedicated tool that directly performs "${submittedQuery}". We never invent fake tools or links.`}
+                  s.noMatchFallback.replace('{query}', submittedQuery)}
               </p>
             </div>
           )}
@@ -561,8 +712,8 @@ export default function AiToolFinderTool() {
             <div className="space-y-3">
               <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider">
                 {verifiedAiRecommendation.primaryEntry
-                  ? 'Relevant Alternatives'
-                  : 'Related Existing Tools (Partial Workflows Only)'}
+                  ? s.relevantAlt
+                  : s.relatedTools}
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {verifiedAiRecommendation.alternatives.map(({ entry, reason }) => (
@@ -582,7 +733,7 @@ export default function AiToolFinderTool() {
                       to={entry.url}
                       className="inline-flex items-center justify-between rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-semibold text-indigo-700 hover:border-indigo-300 hover:bg-indigo-50 transition-colors"
                     >
-                      <span>Open {entry.name}</span>
+                      <span>{s.openName.replace('{name}', entry.name)}</span>
                       <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
                     </Link>
                   </div>
@@ -593,9 +744,9 @@ export default function AiToolFinderTool() {
 
           {aiMeta && (
             <p className="text-xs text-slate-500">
-              Matched across verified UtilityFlow inventory using free-tier Groq model{' '}
+              {s.matchedWith}{' '}
               <code className="font-mono text-slate-700">{aiMeta.model}</code>
-              {aiMeta.fallbackUsed ? ' (automatic fallback)' : ''}.
+              {aiMeta.fallbackUsed ? s.fallbackNote : ''}.
             </p>
           )}
         </section>
@@ -603,12 +754,12 @@ export default function AiToolFinderTool() {
 
       {/* Fast Local Ranked Matches (while typing or after submit) */}
       {(query.trim().length >= 2 || hasSubmittedSearch) && localMatches.length > 0 && (
-        <section aria-label="Instant keyword matches" className="space-y-3 pt-2 border-t border-slate-200">
+        <section aria-label={s.instantAria} className="space-y-3 pt-2 border-t border-slate-200">
           <div className="flex items-center justify-between gap-2">
             <h3 className="text-sm font-bold text-slate-900">
-              Instant Keyword Matches ({localMatches.length})
+              {s.instantMatches.replace('{count}', String(localMatches.length))}
             </h3>
-            <span className="text-xs text-slate-500">Matched locally from {inventory.length} tools</span>
+            <span className="text-xs text-slate-500">{s.matchedLocally.replace('{count}', String(inventory.length))}</span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -633,7 +784,7 @@ export default function AiToolFinderTool() {
                 </div>
                 {matchedTerms.length > 0 && (
                   <p className="mt-2.5 pt-2 border-t border-slate-100 text-[11px] text-slate-500 truncate">
-                    Matched: {matchedTerms.join(', ')}
+                    {s.matchedPrefix}{matchedTerms.join(', ')}
                   </p>
                 )}
               </Link>
@@ -644,12 +795,13 @@ export default function AiToolFinderTool() {
 
       {/* Smart Initial Suggestions on Page Load */}
       {!hasSubmittedSearch && query.trim().length < 2 && (
-        <section aria-label="Smart suggested tools on page load" className="space-y-3 pt-2 border-t border-slate-200">
+        <section aria-label={s.suggestionsAria} className="space-y-3 pt-2 border-t border-slate-200">
           <div className="flex items-center justify-between gap-2">
             <h2 className="text-sm font-bold text-slate-900">
-              Smart Suggestions {selectedCategory === 'all' ? 'Across Popular Tasks' : 'in Selected Category'}
+              {s.suggestionsTitle}{' '}
+              {selectedCategory === 'all' ? s.suggestionsAll : s.suggestionsCategory}
             </h2>
-            <span className="text-xs text-slate-500">Click any tool to open directly</span>
+            <span className="text-xs text-slate-500">{s.clickOpen}</span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
@@ -673,7 +825,7 @@ export default function AiToolFinderTool() {
                   <p className="mt-1 text-xs text-slate-600 line-clamp-2">{entry.shortDescription}</p>
                 </div>
                 <div className="mt-2.5 pt-2 border-t border-slate-100 text-[11px] font-medium text-indigo-600">
-                  Open tool →
+                  {s.openToolArrow}
                 </div>
               </Link>
             ))}

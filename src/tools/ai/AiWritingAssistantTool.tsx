@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { useLocale } from '../../locales/LocaleContext';
 import {
   fetchAiHealth,
   postAiJson,
@@ -26,33 +27,232 @@ import {
 
 const MAX_CHARS = 12_000;
 
-interface TaskOption {
-  value: WritingTask;
-  label: string;
-  hint: string;
-}
+const STRINGS = {
+  en: {
+    tasks: {
+      'fix-grammar': { label: 'Fix Grammar', hint: 'Correct grammar & punctuation' },
+      'rewrite-text': { label: 'Rewrite Text', hint: 'Smooth flow & natural phrasing' },
+      'improve-writing': { label: 'Improve Writing', hint: 'Polish clarity & word choice' },
+      'make-professional': { label: 'Make Professional', hint: 'Workplace & executive clarity' },
+      'make-casual': { label: 'Make Casual', hint: 'Relaxed everyday voice' },
+      'simplify-text': { label: 'Simplify Text', hint: 'Clear, easy-to-read sentences' },
+      'expand-text': { label: 'Expand Text', hint: 'Add helpful detail grounded in input' },
+      paraphrase: { label: 'Paraphrase', hint: 'Fresh wording, same meaning' },
+      'fix-spelling': { label: 'Fix Spelling', hint: 'Fix typos & capitalization only' },
+      'write-email': { label: 'Write an Email', hint: 'Structured email with subject line' },
+    },
+    tones: {
+      professional: 'Professional',
+      friendly: 'Friendly',
+      formal: 'Formal',
+      casual: 'Casual',
+      academic: 'Academic',
+      persuasive: 'Persuasive',
+      simple: 'Simple',
+    },
+    languageLabels: {
+      'English (US)': 'English (US)',
+      'English (UK)': 'English (UK)',
+      Spanish: 'Spanish',
+      French: 'French',
+      German: 'German',
+      Portuguese: 'Portuguese',
+      Italian: 'Italian',
+      Dutch: 'Dutch',
+      Arabic: 'Arabic',
+      Hindi: 'Hindi',
+      Urdu: 'Urdu',
+      Turkish: 'Turkish',
+      Japanese: 'Japanese',
+      Korean: 'Korean',
+      'Chinese (Simplified)': 'Chinese (Simplified)',
+      'Same as original language': 'Same as original language',
+    },
+    samples: {
+      default:
+        'Hi team, i wanted to folow up on yesterday meeting and share the update timeline for our Q4 product launch. Their are still two items we need review before friday, so please let me know if any blockers comes up.',
+      'write-email':
+        'need to update client Daniel about the mobile app launch. testing finished today, 2 minor UI bugs left to fix tomorrow morning, ready for App Store submission on Friday afternoon. ask if Monday 10am works for handoff call.',
+      'fix-spelling':
+        'We are delited to anounce that the quarterly maintenence window went smothly with zero unplaned downtime across all servrs.',
+      'expand-text':
+        'Remote async standups save engineering time and let global teammates focus deeply without constant calendar interruptions.',
+    },
+    title: 'Free AI Writing Assistant',
+    noLogin: 'No login or card required',
+    allowanceBefore: 'Daily free allowance:',
+    allowanceAfter: 'left today',
+    allowanceFallback: 'Up to 5 free requests / day',
+    backendTitle: 'AI backend key is not active yet in this environment.',
+    backendSet: 'Set',
+    backendRest: 'on the server or Worker to enable live AI writing generation.',
+    stepTask: '1. Choose Writing Task (10 Modes)',
+    stepTone: '2. Tone',
+    stepLanguage: '3. Output Language',
+    stepText: '4. Your Original Text',
+    taskSelectorAria: 'Writing task selector',
+    placeholder:
+      'Type or paste your paragraph, message, notes, or email draft here (up to 12,000 characters)...',
+    word: 'word',
+    words: 'words',
+    characters: 'characters',
+    chars: 'chars',
+    tip: 'Tip: Press Ctrl + Enter to generate',
+    stop: 'Stop',
+    generating: 'Generating...',
+    applying: 'Applying',
+    tonePhrase: '{tone} tone',
+    applyingIn: 'in',
+    errorDailyLimit: 'Daily Free Limit Reached',
+    errorRateLimited: 'Please Slow Down Slightly',
+    errorGlobal: 'Platform Daily Capacity Reached',
+    errorGeneric: 'Unable to Complete Writing Request',
+    retry: 'Retry',
+    emptyError: 'Please enter or paste some text before clicking Generate.',
+    overLimitBefore: 'Input exceeds the ',
+    overLimitMiddle: ' character limit. Shorten your draft by ',
+    overLimitAfter: ' characters and try again.',
+    connectionError: 'Temporary connection issue while generating. Please try again.',
+    resultTitle: 'Improved Output',
+    copyResult: 'Copy result',
+    downloadTxt: 'Download TXT',
+    editOutput: 'Edit output further',
+    tabCompare: 'Original vs. Improved',
+    tabDiff: 'Highlight Changes',
+    tabResult: 'Result Only',
+    resultAria: 'Improved writing result and comparison',
+    originalText: 'Original Text',
+    improvedText: 'Improved Text',
+    removed: 'Removed',
+    added: 'Added / Updated',
+    processedWith: 'Processed with free-tier Groq model',
+    fallbackNote: ' (automatic model fallback)',
+    reviewNote: '. Always review final copy before sending.',
+  },
+  es: {
+    tasks: {
+      'fix-grammar': { label: 'Corregir gramática', hint: 'Corrige la gramática y la puntuación' },
+      'rewrite-text': { label: 'Reescribir texto', hint: 'Flujo fluido y fraseo natural' },
+      'improve-writing': { label: 'Mejorar redacción', hint: 'Pule la claridad y la elección de palabras' },
+      'make-professional': { label: 'Hacerlo profesional', hint: 'Claridad laboral y ejecutiva' },
+      'make-casual': { label: 'Hacerlo informal', hint: 'Tono relajado y cotidiano' },
+      'simplify-text': { label: 'Simplificar texto', hint: 'Oraciones claras y fáciles de leer' },
+      'expand-text': { label: 'Ampliar texto', hint: 'Agrega detalles útiles basados en el texto' },
+      paraphrase: { label: 'Parafrasear', hint: 'Nueva redacción, mismo significado' },
+      'fix-spelling': { label: 'Corregir ortografía', hint: 'Corrige solo errores tipográficos y mayúsculas' },
+      'write-email': { label: 'Escribir un correo', hint: 'Correo estructurado con asunto' },
+    },
+    tones: {
+      professional: 'Profesional',
+      friendly: 'Amistoso',
+      formal: 'Formal',
+      casual: 'Informal',
+      academic: 'Académico',
+      persuasive: 'Persuasivo',
+      simple: 'Sencillo',
+    },
+    languageLabels: {
+      'English (US)': 'Inglés (EE. UU.)',
+      'English (UK)': 'Inglés (Reino Unido)',
+      Spanish: 'Español',
+      French: 'Francés',
+      German: 'Alemán',
+      Portuguese: 'Portugués',
+      Italian: 'Italiano',
+      Dutch: 'Neerlandés',
+      Arabic: 'Árabe',
+      Hindi: 'Hindi',
+      Urdu: 'Urdu',
+      Turkish: 'Turco',
+      Japanese: 'Japonés',
+      Korean: 'Coreano',
+      'Chinese (Simplified)': 'Chino (simplificado)',
+      'Same as original language': 'Igual que el idioma original',
+    },
+    samples: {
+      default:
+        'Hola equipo, queria hacer seguimiento de la reunion de ayer y compartir la cronologia actualizada para el lanzamiento de nuestro producto del cuarto trimestre. Todavia hay dos puntos que nesecitamos revisar antes del viernes, asi que avisenme si surge algun inconveniente.',
+      'write-email':
+        'necesito avisar al cliente Daniel sobre el lanzamiento de la aplicacion movil. las pruebas terminaron hoy, quedan 2 errores menores de interfaz por corregir mañana por la mañana, y estara lista para enviar a la App Store el viernes por la tarde. preguntale si el lunes a las 10 a. m. le funciona para la llamada de entrega.',
+      'fix-spelling':
+        'Estamos encantados de anunciar que la ventana de mantenimiento trimestral transcurrio sin problemas y sin tiempo de inactividad no planeado en todos los servidores.',
+      'expand-text':
+        'Las reuniones breves asincronas a distancia ahorran tiempo a los ingenieros y permiten que los compañeros de todo el mundo se concentren sin interrupciones constantes del calendario.',
+    },
+    title: 'Asistente de escritura con IA gratuito',
+    noLogin: 'No requiere registro ni tarjeta',
+    allowanceBefore: 'Asignación gratuita diaria:',
+    allowanceAfter: 'restantes hoy',
+    allowanceFallback: 'Hasta 5 solicitudes gratuitas al día',
+    backendTitle: 'La clave del backend de IA aún no está activa en este entorno.',
+    backendSet: 'Configura',
+    backendRest: 'en el servidor o Worker para activar la generación de texto con IA.',
+    stepTask: '1. Elige la tarea de escritura (10 modos)',
+    stepTone: '2. Tono',
+    stepLanguage: '3. Idioma de salida',
+    stepText: '4. Tu texto original',
+    taskSelectorAria: 'Selector de tarea de escritura',
+    placeholder:
+      'Escribe o pega tu párrafo, mensaje, notas o borrador de correo aquí (hasta 12,000 caracteres)...',
+    word: 'palabra',
+    words: 'palabras',
+    characters: 'caracteres',
+    chars: 'caracteres',
+    tip: 'Consejo: pulsa Ctrl + Intro para generar',
+    stop: 'Detener',
+    generating: 'Generando...',
+    applying: 'Aplicando',
+    tonePhrase: 'tono {tone}',
+    applyingIn: 'en',
+    errorDailyLimit: 'Límite diario gratuito alcanzado',
+    errorRateLimited: 'Reduce un poco el ritmo',
+    errorGlobal: 'Capacidad diaria de la plataforma alcanzada',
+    errorGeneric: 'No se pudo completar la solicitud de escritura',
+    retry: 'Reintentar',
+    emptyError: 'Ingresa o pega un texto antes de hacer clic en Generar.',
+    overLimitBefore: 'La entrada supera el límite de ',
+    overLimitMiddle: ' caracteres. Acorta tu borrador en ',
+    overLimitAfter: ' caracteres e inténtalo de nuevo.',
+    connectionError: 'Problema temporal de conexión al generar. Inténtalo de nuevo.',
+    resultTitle: 'Resultado mejorado',
+    copyResult: 'Copiar resultado',
+    downloadTxt: 'Descargar TXT',
+    editOutput: 'Seguir editando el resultado',
+    tabCompare: 'Original vs. mejorado',
+    tabDiff: 'Resaltar cambios',
+    tabResult: 'Solo resultado',
+    resultAria: 'Resultado de escritura mejorado y comparación',
+    originalText: 'Texto original',
+    improvedText: 'Texto mejorado',
+    removed: 'Eliminado',
+    added: 'Agregado / actualizado',
+    processedWith: 'Procesado con el modelo Groq de nivel gratuito',
+    fallbackNote: ' (cambio automático de modelo)',
+    reviewNote: '. Revisa siempre el texto final antes de enviarlo.',
+  },
+};
 
-const WRITING_TASKS: TaskOption[] = [
-  { value: 'fix-grammar', label: 'Fix Grammar', hint: 'Correct grammar & punctuation' },
-  { value: 'rewrite-text', label: 'Rewrite Text', hint: 'Smooth flow & natural phrasing' },
-  { value: 'improve-writing', label: 'Improve Writing', hint: 'Polish clarity & word choice' },
-  { value: 'make-professional', label: 'Make Professional', hint: 'Workplace & executive clarity' },
-  { value: 'make-casual', label: 'Make Casual', hint: 'Relaxed everyday voice' },
-  { value: 'simplify-text', label: 'Simplify Text', hint: 'Clear, easy-to-read sentences' },
-  { value: 'expand-text', label: 'Expand Text', hint: 'Add helpful detail grounded in input' },
-  { value: 'paraphrase', label: 'Paraphrase', hint: 'Fresh wording, same meaning' },
-  { value: 'fix-spelling', label: 'Fix Spelling', hint: 'Fix typos & capitalization only' },
-  { value: 'write-email', label: 'Write an Email', hint: 'Structured email with subject line' },
+const WRITING_TASK_VALUES: WritingTask[] = [
+  'fix-grammar',
+  'rewrite-text',
+  'improve-writing',
+  'make-professional',
+  'make-casual',
+  'simplify-text',
+  'expand-text',
+  'paraphrase',
+  'fix-spelling',
+  'write-email',
 ];
 
-const WRITING_TONES: Array<{ value: WritingTone; label: string }> = [
-  { value: 'professional', label: 'Professional' },
-  { value: 'friendly', label: 'Friendly' },
-  { value: 'formal', label: 'Formal' },
-  { value: 'casual', label: 'Casual' },
-  { value: 'academic', label: 'Academic' },
-  { value: 'persuasive', label: 'Persuasive' },
-  { value: 'simple', label: 'Simple' },
+const WRITING_TONE_VALUES: WritingTone[] = [
+  'professional',
+  'friendly',
+  'formal',
+  'casual',
+  'academic',
+  'persuasive',
+  'simple',
 ];
 
 const LANGUAGES: string[] = [
@@ -73,18 +273,6 @@ const LANGUAGES: string[] = [
   'Chinese (Simplified)',
   'Same as original language',
 ];
-
-const SAMPLE_BY_TASK: Partial<Record<WritingTask, string>> = {
-  'write-email':
-    'need to update client Daniel about the mobile app launch. testing finished today, 2 minor UI bugs left to fix tomorrow morning, ready for App Store submission on Friday afternoon. ask if Monday 10am works for handoff call.',
-  'fix-spelling':
-    'We are delited to anounce that the quarterly maintenence window went smothly with zero unplaned downtime across all servrs.',
-  'expand-text':
-    'Remote async standups save engineering time and let global teammates focus deeply without constant calendar interruptions.',
-};
-
-const DEFAULT_SAMPLE =
-  'Hi team, i wanted to folow up on yesterday meeting and share the update timeline for our Q4 product launch. Their are still two items we need review before friday, so please let me know if any blockers comes up.';
 
 function countWords(value: string): number {
   const trimmed = value.trim();
@@ -164,6 +352,8 @@ function computeWordDiff(original: string, improved: string): DiffSegment[] {
 }
 
 export default function AiWritingAssistantTool() {
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
   const [text, setText] = useState('');
   const [task, setTask] = useState<WritingTask>('fix-grammar');
   const [tone, setTone] = useState<WritingTone>('professional');
@@ -219,7 +409,9 @@ export default function AiWritingAssistantTool() {
   }, [submittedOriginal, resultText, viewMode]);
 
   const handleLoadSample = () => {
-    setText(SAMPLE_BY_TASK[task] || DEFAULT_SAMPLE);
+    setText(
+      (s.samples as Partial<Record<WritingTask, string>>)[task] ?? s.samples.default
+    );
     setError(null);
   };
 
@@ -244,16 +436,16 @@ export default function AiWritingAssistantTool() {
     if (!trimmed) {
       setError({
         code: 'BAD_REQUEST',
-        message: 'Please enter or paste some text before clicking Generate.',
+        message: s.emptyError,
       });
       return;
     }
     if (text.length > MAX_CHARS) {
       setError({
         code: 'PAYLOAD_TOO_LARGE',
-        message: `Input exceeds the ${MAX_CHARS.toLocaleString()} character limit. Shorten your draft by ${(
+        message: `${s.overLimitBefore}${MAX_CHARS.toLocaleString(locale)}${s.overLimitMiddle}${(
           text.length - MAX_CHARS
-        ).toLocaleString()} characters and try again.`,
+        ).toLocaleString(locale)}${s.overLimitAfter}`,
       });
       return;
     }
@@ -299,7 +491,7 @@ export default function AiWritingAssistantTool() {
       }
       setError({
         code: 'SERVICE_UNAVAILABLE',
-        message: 'Temporary connection issue while generating. Please try again.',
+        message: s.connectionError,
       });
     } finally {
       setLoading(false);
@@ -325,8 +517,11 @@ export default function AiWritingAssistantTool() {
     setError(null);
   };
 
-  const activeTaskOption = WRITING_TASKS.find((t) => t.value === task) || WRITING_TASKS[0];
+  const activeTaskOption = { value: task, ...s.tasks[task] };
   const wordDelta = resultText ? outputWords - countWords(submittedOriginal) : 0;
+  const languageLabel =
+    (s.languageLabels as Record<string, string>)[language] ?? language;
+  const tonePhrase = s.tonePhrase.replace('{tone}', s.tones[tone]);
 
   return (
     <div className="space-y-6">
@@ -334,24 +529,24 @@ export default function AiWritingAssistantTool() {
       <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-xs sm:text-sm">
         <div className="flex flex-wrap items-center gap-2 text-slate-700">
           <Sparkles className="w-4 h-4 text-indigo-600 shrink-0" aria-hidden="true" />
-          <span className="font-medium">Free AI Writing Assistant</span>
+          <span className="font-medium">{s.title}</span>
           <span className="text-slate-400" aria-hidden="true">
             ·
           </span>
-          <span className="text-slate-600">No login or card required</span>
+          <span className="text-slate-600">{s.noLogin}</span>
         </div>
 
         <div className="flex flex-wrap items-center gap-3 text-xs text-slate-600 tabular-nums">
           {quota ? (
             <span>
-              Daily free allowance:{' '}
+              {s.allowanceBefore}{' '}
               <strong className="font-semibold text-slate-900">
                 {quota.remaining} / {quota.limit}
               </strong>{' '}
-              left today
+              {s.allowanceAfter}
             </span>
           ) : (
-            <span>Up to 5 free requests / day</span>
+            <span>{s.allowanceFallback}</span>
           )}
         </div>
       </div>
@@ -363,10 +558,10 @@ export default function AiWritingAssistantTool() {
         >
           <AlertCircle className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" aria-hidden="true" />
           <div>
-            <p className="font-semibold">AI backend key is not active yet in this environment.</p>
+            <p className="font-semibold">{s.backendTitle}</p>
             <p className="mt-0.5">
-              Set <code className="font-mono text-xs">GROQ_API_KEY</code> on the server or Worker to
-              enable live AI writing generation.
+              {s.backendSet} <code className="font-mono text-xs">GROQ_API_KEY</code>{' '}
+              {s.backendRest}
             </p>
           </div>
         </div>
@@ -379,7 +574,7 @@ export default function AiWritingAssistantTool() {
             htmlFor="ai-writing-task-select"
             className="text-xs font-semibold uppercase tracking-wider text-slate-500"
           >
-            1. Choose Writing Task (10 Modes)
+            {s.stepTask}
           </label>
           <span className="text-xs text-slate-500 hidden sm:inline">{activeTaskOption.hint}</span>
         </div>
@@ -392,9 +587,9 @@ export default function AiWritingAssistantTool() {
             onChange={(e) => setTask(e.target.value as WritingTask)}
             className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm font-medium text-slate-900 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/20"
           >
-            {WRITING_TASKS.map((opt) => (
-              <option key={opt.value} value={opt.value}>
-                {opt.label} — {opt.hint}
+            {WRITING_TASK_VALUES.map((value) => (
+              <option key={value} value={value}>
+                {s.tasks[value].label} — {s.tasks[value].hint}
               </option>
             ))}
           </select>
@@ -403,17 +598,18 @@ export default function AiWritingAssistantTool() {
         <div
           className="hidden sm:grid grid-cols-2 md:grid-cols-5 gap-2"
           role="radiogroup"
-          aria-label="Writing task selector"
+          aria-label={s.taskSelectorAria}
         >
-          {WRITING_TASKS.map((opt) => {
-            const selected = opt.value === task;
+          {WRITING_TASK_VALUES.map((value) => {
+            const opt = s.tasks[value];
+            const selected = value === task;
             return (
               <button
-                key={opt.value}
+                key={value}
                 type="button"
                 role="radio"
                 aria-checked={selected}
-                onClick={() => setTask(opt.value)}
+                onClick={() => setTask(value)}
                 className={`flex flex-col items-start rounded-lg border px-3 py-2 text-left transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 ${
                   selected
                     ? 'border-indigo-600 bg-indigo-50 text-indigo-800'
@@ -437,7 +633,7 @@ export default function AiWritingAssistantTool() {
             htmlFor="ai-writing-tone"
             className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5"
           >
-            2. Tone
+            {s.stepTone}
           </label>
           <select
             id="ai-writing-tone"
@@ -445,9 +641,9 @@ export default function AiWritingAssistantTool() {
             onChange={(e) => setTone(e.target.value as WritingTone)}
             className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-medium text-slate-900 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/20"
           >
-            {WRITING_TONES.map((t) => (
-              <option key={t.value} value={t.value}>
-                {t.label}
+            {WRITING_TONE_VALUES.map((value) => (
+              <option key={value} value={value}>
+                {s.tones[value]}
               </option>
             ))}
           </select>
@@ -458,7 +654,7 @@ export default function AiWritingAssistantTool() {
             htmlFor="ai-writing-language"
             className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5"
           >
-            3. Output Language
+            {s.stepLanguage}
           </label>
           <select
             id="ai-writing-language"
@@ -468,7 +664,7 @@ export default function AiWritingAssistantTool() {
           >
             {LANGUAGES.map((lang) => (
               <option key={lang} value={lang}>
-                {lang}
+                {(s.languageLabels as Record<string, string>)[lang] ?? lang}
               </option>
             ))}
           </select>
@@ -482,7 +678,7 @@ export default function AiWritingAssistantTool() {
             htmlFor="ai-writing-input"
             className="text-xs font-semibold uppercase tracking-wider text-slate-500"
           >
-            4. Your Original Text
+            {s.stepText}
           </label>
 
           <div className="flex flex-wrap items-center gap-2">
@@ -492,7 +688,7 @@ export default function AiWritingAssistantTool() {
               className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
             >
               <Sparkles className="w-3.5 h-3.5 text-indigo-600" aria-hidden="true" />
-              <span>Load sample</span>
+              <span>{t.common.loadSample}</span>
             </button>
             <button
               type="button"
@@ -501,7 +697,7 @@ export default function AiWritingAssistantTool() {
               className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-50 disabled:text-slate-400 disabled:bg-slate-50 disabled:cursor-not-allowed cursor-pointer"
             >
               <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
-              <span>Clear</span>
+              <span>{t.common.clear}</span>
             </button>
           </div>
         </div>
@@ -522,7 +718,7 @@ export default function AiWritingAssistantTool() {
               void handleGenerate();
             }
           }}
-          placeholder="Type or paste your paragraph, message, notes, or email draft here (up to 12,000 characters)..."
+          placeholder={s.placeholder}
           aria-describedby="ai-writing-counters"
           className={`w-full rounded-xl border bg-white p-4 text-sm sm:text-base leading-relaxed text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 ${
             isOverLimit
@@ -538,20 +734,20 @@ export default function AiWritingAssistantTool() {
             className="flex flex-wrap items-center gap-3 text-xs sm:text-sm text-slate-600 tabular-nums"
           >
             <span>
-              <strong className="font-semibold text-slate-900">{inputWords.toLocaleString()}</strong>{' '}
-              {inputWords === 1 ? 'word' : 'words'}
+              <strong className="font-semibold text-slate-900">{inputWords.toLocaleString(locale)}</strong>{' '}
+              {inputWords === 1 ? s.word : s.words}
             </span>
             <span className="text-slate-300" aria-hidden="true">
               |
             </span>
             <span className={isOverLimit ? 'font-semibold text-red-600' : ''}>
               <strong className={isOverLimit ? 'text-red-600' : 'font-semibold text-slate-900'}>
-                {inputChars.toLocaleString()}
+                {inputChars.toLocaleString(locale)}
               </strong>{' '}
-              / {MAX_CHARS.toLocaleString()} characters
+              / {MAX_CHARS.toLocaleString(locale)} {s.characters}
             </span>
             <span className="hidden md:inline text-xs text-slate-400">
-              Tip: Press Ctrl + Enter to generate
+              {s.tip}
             </span>
           </div>
 
@@ -563,7 +759,7 @@ export default function AiWritingAssistantTool() {
                 className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
               >
                 <Square className="w-3.5 h-3.5" aria-hidden="true" />
-                <span>Stop</span>
+                <span>{s.stop}</span>
               </button>
             )}
 
@@ -576,7 +772,7 @@ export default function AiWritingAssistantTool() {
               {loading ? (
                 <>
                   <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" />
-                  <span>Generating...</span>
+                  <span>{s.generating}</span>
                 </>
               ) : (
                 <>
@@ -598,7 +794,8 @@ export default function AiWritingAssistantTool() {
           <div className="flex items-center gap-2 text-sm font-medium text-indigo-700">
             <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" />
             <span>
-              Applying <strong>{activeTaskOption.label}</strong> ({tone} tone) in {language}...
+              {s.applying} <strong>{activeTaskOption.label}</strong> ({tonePhrase}){' '}
+              {s.applyingIn} {languageLabel}...
             </span>
           </div>
           <div className="space-y-2 animate-pulse">
@@ -620,12 +817,12 @@ export default function AiWritingAssistantTool() {
             <div>
               <p className="font-semibold">
                 {error.code === 'DAILY_LIMIT_REACHED'
-                  ? 'Daily Free Limit Reached'
+                  ? s.errorDailyLimit
                   : error.code === 'RATE_LIMITED'
-                  ? 'Please Slow Down Slightly'
+                  ? s.errorRateLimited
                   : error.code === 'GLOBAL_QUOTA_EXHAUSTED'
-                  ? 'Platform Daily Capacity Reached'
-                  : 'Unable to Complete Writing Request'}
+                  ? s.errorGlobal
+                  : s.errorGeneric}
               </p>
               <p className="mt-0.5 text-xs sm:text-sm">{error.message}</p>
             </div>
@@ -640,7 +837,7 @@ export default function AiWritingAssistantTool() {
               className="inline-flex items-center gap-1.5 self-start sm:self-center rounded-lg border border-red-300 bg-white px-3 py-1.5 text-xs font-semibold text-red-800 hover:bg-red-50 cursor-pointer shrink-0"
             >
               <RefreshCw className="w-3.5 h-3.5" aria-hidden="true" />
-              <span>Retry</span>
+              <span>{s.retry}</span>
             </button>
           )}
         </div>
@@ -649,25 +846,25 @@ export default function AiWritingAssistantTool() {
       {/* Result & Original vs Improved Comparison */}
       {resultText && !loading && (
         <section
-          aria-label="Improved writing result and comparison"
+          aria-label={s.resultAria}
           className="rounded-xl border border-slate-200 bg-slate-50/70 p-4 sm:p-5 space-y-4"
         >
           {/* Result Header + Actions */}
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="flex flex-wrap items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" aria-hidden="true" />
-              <h2 className="text-base font-bold text-slate-900">Improved Output</h2>
+              <h2 className="text-base font-bold text-slate-900">{s.resultTitle}</h2>
               <span className="text-xs text-slate-500 tabular-nums">
-                ({outputWords.toLocaleString()} words · {outputChars.toLocaleString()} chars
+                ({outputWords.toLocaleString(locale)} {s.words} · {outputChars.toLocaleString(locale)} {s.chars}
                 {wordDelta !== 0
-                  ? ` · ${wordDelta > 0 ? `+${wordDelta}` : wordDelta} words`
+                  ? ` · ${wordDelta > 0 ? `+${wordDelta}` : wordDelta} ${s.words}`
                   : ''}
                 )
               </span>
             </div>
 
             <div className="flex flex-wrap items-center gap-2">
-              <CopyButton text={resultText} label="Copy result" copiedLabel="Copied!" />
+              <CopyButton text={resultText} label={s.copyResult} copiedLabel={t.common.copied} />
 
               <button
                 type="button"
@@ -675,7 +872,7 @@ export default function AiWritingAssistantTool() {
                 className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 hover:text-slate-900 cursor-pointer"
               >
                 <Download className="w-3.5 h-3.5" aria-hidden="true" />
-                <span>Download TXT</span>
+                <span>{s.downloadTxt}</span>
               </button>
 
               <button
@@ -684,7 +881,7 @@ export default function AiWritingAssistantTool() {
                 className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 hover:text-slate-900 cursor-pointer"
               >
                 <ArrowLeftRight className="w-3.5 h-3.5" aria-hidden="true" />
-                <span>Edit output further</span>
+                <span>{s.editOutput}</span>
               </button>
             </div>
           </div>
@@ -701,7 +898,7 @@ export default function AiWritingAssistantTool() {
               }`}
             >
               <Columns2 className="w-3.5 h-3.5" aria-hidden="true" />
-              <span>Original vs. Improved</span>
+              <span>{s.tabCompare}</span>
             </button>
 
             <button
@@ -714,7 +911,7 @@ export default function AiWritingAssistantTool() {
               }`}
             >
               <ArrowLeftRight className="w-3.5 h-3.5" aria-hidden="true" />
-              <span>Highlight Changes</span>
+              <span>{s.tabDiff}</span>
             </button>
 
             <button
@@ -727,7 +924,7 @@ export default function AiWritingAssistantTool() {
               }`}
             >
               <FileText className="w-3.5 h-3.5" aria-hidden="true" />
-              <span>Result Only</span>
+              <span>{s.tabResult}</span>
             </button>
           </div>
 
@@ -736,9 +933,9 @@ export default function AiWritingAssistantTool() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               <div className="rounded-xl border border-slate-200 bg-white p-4">
                 <div className="flex items-center justify-between text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
-                  <span>Original Text</span>
+                  <span>{s.originalText}</span>
                   <span className="tabular-nums font-normal">
-                    {countWords(submittedOriginal).toLocaleString()} words
+                    {countWords(submittedOriginal).toLocaleString(locale)} {s.words}
                   </span>
                 </div>
                 <div className="whitespace-pre-wrap break-words text-sm leading-relaxed text-slate-600 max-h-96 overflow-y-auto">
@@ -748,9 +945,9 @@ export default function AiWritingAssistantTool() {
 
               <div className="rounded-xl border border-indigo-200 bg-white p-4">
                 <div className="flex items-center justify-between text-xs font-semibold text-indigo-700 uppercase tracking-wider mb-2">
-                  <span>Improved Text</span>
+                  <span>{s.improvedText}</span>
                   <span className="tabular-nums font-normal text-slate-500">
-                    {outputWords.toLocaleString()} words
+                    {outputWords.toLocaleString(locale)} {s.words}
                   </span>
                 </div>
                 <div className="whitespace-pre-wrap break-words text-sm leading-relaxed text-slate-900 max-h-96 overflow-y-auto">
@@ -765,11 +962,11 @@ export default function AiWritingAssistantTool() {
               <div className="flex flex-wrap items-center gap-4 text-xs text-slate-500">
                 <span className="inline-flex items-center gap-1.5">
                   <span className="inline-block w-3 h-3 rounded-xs bg-red-50 border border-red-200" />
-                  Removed
+                  {s.removed}
                 </span>
                 <span className="inline-flex items-center gap-1.5">
                   <span className="inline-block w-3 h-3 rounded-xs bg-emerald-50 border border-emerald-200" />
-                  Added / Updated
+                  {s.added}
                 </span>
               </div>
               <div className="whitespace-pre-wrap break-words text-sm leading-relaxed text-slate-900 max-h-96 overflow-y-auto">
@@ -810,10 +1007,9 @@ export default function AiWritingAssistantTool() {
 
           {resultMeta && (
             <p className="text-xs text-slate-500">
-              Processed with free-tier Groq model{' '}
+              {s.processedWith}{' '}
               <code className="font-mono text-slate-700">{resultMeta.model}</code>
-              {resultMeta.fallbackUsed ? ' (automatic model fallback)' : ''}. Always review final copy
-              before sending.
+              {resultMeta.fallbackUsed ? s.fallbackNote : ''}{s.reviewNote}
             </p>
           )}
         </section>

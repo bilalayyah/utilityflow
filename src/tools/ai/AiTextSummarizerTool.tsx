@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { useLocale } from '../../locales/LocaleContext';
 import {
   fetchAiHealth,
   postAiJson,
@@ -29,30 +30,227 @@ const MAX_CHARS = 25_000;
 const MIN_WORDS = 25;
 const MIN_CHARS = 120;
 
-interface LengthOption {
-  value: SummaryLength;
-  label: string;
-  ratio: string;
-}
+const STRINGS = {
+  en: {
+    lengthOptions: {
+      short: { label: 'Short', ratio: '~10–20% length' },
+      medium: { label: 'Medium', ratio: '~30–40% length' },
+      detailed: { label: 'Long (Detailed)', ratio: '~50–60% length' },
+    },
+    loadingLengthLabels: {
+      short: 'short',
+      medium: 'medium',
+      detailed: 'long',
+    },
+    formatOptions: {
+      paragraph: { label: 'Paragraph Summary', hint: 'Smooth cohesive prose' },
+      bullets: { label: 'Bullet Point Summary', hint: 'Clean scannable bullets' },
+      'key-points': { label: 'Key Points Extraction', hint: 'Numbered takeaways' },
+      simple: { label: 'Simple Language', hint: 'Plain everyday wording' },
+    },
+    loadingFormatLabels: {
+      paragraph: 'paragraph',
+      bullets: 'bullets',
+      'key-points': 'key-points',
+      simple: 'simple',
+    },
+    languageLabels: {
+      'Same as original language': 'Same as original language',
+      'English (US)': 'English (US)',
+      'English (UK)': 'English (UK)',
+      Spanish: 'Spanish',
+      French: 'French',
+      German: 'German',
+      Portuguese: 'Portuguese',
+      Italian: 'Italian',
+      Dutch: 'Dutch',
+      Arabic: 'Arabic',
+      Hindi: 'Hindi',
+      Urdu: 'Urdu',
+      Turkish: 'Turkish',
+      Japanese: 'Japanese',
+      Korean: 'Korean',
+      'Chinese (Simplified)': 'Chinese (Simplified)',
+    },
+    sampleArticle:
+      'In 2026, distributed product engineering teams increasingly rely on asynchronous written updates rather than daily status meetings to protect deep-focus development time. Across a six-month internal study of 140 engineers working across London, Berlin, and Toronto, teams that replaced three weekly sync calls with structured Tuesday and Thursday written digests reported a 28% reduction in calendar fragmentation and delivered sprint milestones 14% faster. Crucially, the study found that written updates only succeeded when engineers followed three consistent rules: stating concrete blockers at the top, linking directly to pull requests or issue IDs, and recording exact target dates instead of vague phrases like "soon". Managers still kept one live 25-minute weekly session dedicated exclusively to open architectural trade-offs and team check-ins, preserving interpersonal rapport without interrupting coding blocks.',
+    secUnit: 'sec',
+    minUnit: 'min',
+    title: 'Free AI Text Summarizer',
+    noAccount: 'No account, credits, or login required',
+    allowanceBefore: 'Daily free allowance:',
+    allowanceAfter: 'left today',
+    allowanceFallback: 'Up to 5 free summaries / day',
+    backendTitle: 'AI backend key is not active yet in this environment.',
+    backendEnsureBefore: 'Ensure',
+    backendEnsureAfter: 'is configured to run live AI summarization.',
+    stepLength: '1. Summary Length',
+    stepFormat: '2. Summary Format',
+    stepLanguage: '3. Output Language',
+    stepText: '4. Source Text to Summarize',
+    lengthAria: 'Summary length',
+    paste: 'Paste',
+    clipboardUnavailable:
+      'Browser clipboard read is unavailable here—use Ctrl/Cmd + V inside the editor.',
+    clipboardEmpty: 'Your clipboard does not contain any text right now.',
+    clipboardBlocked: 'Clipboard permission was blocked—paste directly using Ctrl/Cmd + V.',
+    placeholder:
+      'Paste an article, research notes, meeting transcript, or essay here (minimum 25 words / 120 characters, up to 25,000 characters)...',
+    word: 'word',
+    words: 'words',
+    chars: 'chars',
+    estRead: 'Est. read: ',
+    stop: 'Stop',
+    summarizing: 'Summarizing...',
+    summarizeButton: 'Summarize Text',
+    addMoreBefore: 'Add at least ',
+    addMoreMiddle: ' more words (minimum ',
+    addMoreAnd: ' words and ',
+    addMoreAfter: ' characters) so the AI can extract a meaningful summary.',
+    generatingSummary: 'Generating {length} summary ({format} format)...',
+    errorDailyLimit: 'Daily Free Summary Limit Reached',
+    errorRateLimited: 'Please Slow Down Slightly',
+    errorGlobal: 'Platform Daily Capacity Reached',
+    errorGeneric: 'Unable to Summarize Right Now',
+    retry: 'Retry',
+    emptyError: 'Please paste or type an article, report, or notes before summarizing.',
+    tooShortErrorBefore: 'Your text is too short to summarize meaningfully (',
+    tooShortErrorMiddle: ' words). Please enter at least ',
+    tooShortErrorAnd: ' words and ',
+    tooShortErrorAfter: ' characters.',
+    overLimitBefore: 'Input exceeds the ',
+    overLimitMiddle: ' character limit. Shorten your text by ',
+    overLimitAfter: ' characters and try again.',
+    connectionError: 'Temporary connection issue while summarizing. Please try again.',
+    resultTitle: 'Summary Result',
+    shorterSuffix: '% shorter',
+    copySummary: 'Copy summary',
+    downloadTxt: 'Download TXT',
+    originalRead: 'Original Read',
+    summaryRead: 'Summary Read',
+    compressionSaved: 'Compression & Time Saved',
+    savesPrefix: 'saves ~',
+    tabCompare: 'Original vs. Summary',
+    tabSummary: 'Summary Only',
+    resultAria: 'Generated summary and comparison',
+    originalText: 'Original Text',
+    summaryOutput: 'Summary Output',
+    summarizedWith: 'Summarized with free-tier Groq model',
+    fallbackNote: ' (automatic model fallback)',
+    preservedNote: '. Key names, dates, and figures are preserved strictly from your input.',
+  },
+  es: {
+    lengthOptions: {
+      short: { label: 'Corto', ratio: '~10–20% de la longitud' },
+      medium: { label: 'Medio', ratio: '~30–40% de la longitud' },
+      detailed: { label: 'Largo (detallado)', ratio: '~50–60% de la longitud' },
+    },
+    loadingLengthLabels: {
+      short: 'corto',
+      medium: 'mediano',
+      detailed: 'largo',
+    },
+    formatOptions: {
+      paragraph: { label: 'Resumen en párrafo', hint: 'Prosa fluida y cohesiva' },
+      bullets: { label: 'Resumen con viñetas', hint: 'Viñetas claras y fáciles de leer' },
+      'key-points': { label: 'Extracción de puntos clave', hint: 'Conclusiones numeradas' },
+      simple: { label: 'Lenguaje sencillo', hint: 'Palabras sencillas y cotidianas' },
+    },
+    loadingFormatLabels: {
+      paragraph: 'de párrafo',
+      bullets: 'con viñetas',
+      'key-points': 'de puntos clave',
+      simple: 'en lenguaje sencillo',
+    },
+    languageLabels: {
+      'Same as original language': 'Igual que el idioma original',
+      'English (US)': 'Inglés (EE. UU.)',
+      'English (UK)': 'Inglés (Reino Unido)',
+      Spanish: 'Español',
+      French: 'Francés',
+      German: 'Alemán',
+      Portuguese: 'Portugués',
+      Italian: 'Italiano',
+      Dutch: 'Neerlandés',
+      Arabic: 'Árabe',
+      Hindi: 'Hindi',
+      Urdu: 'Urdu',
+      Turkish: 'Turco',
+      Japanese: 'Japonés',
+      Korean: 'Coreano',
+      'Chinese (Simplified)': 'Chino (simplificado)',
+    },
+    sampleArticle:
+      'En 2026, los equipos de ingeniería de producto distribuidos dependen cada vez más de las actualizaciones escritas asíncronas en lugar de las reuniones diarias de estado para proteger el tiempo de desarrollo con concentración profunda. En un estudio interno de seis meses con 140 ingenieros en Londres, Berlín y Toronto, los equipos que reemplazaron tres llamadas semanales de sincronización por resúmenes escritos estructurados los martes y jueves reportaron una reducción del 28 % en la fragmentación del calendario y entregaron los hitos de los sprints un 14 % más rápido. Lo más importante es que el estudio concluyó que las actualizaciones escritas solo funcionaban cuando los ingenieros seguían tres reglas constantes: indicar los obstáculos concretos al principio, enlazar directamente con las solicitudes de incorporación de cambios (pull requests) o los ID de incidencias, y registrar fechas objetivo exactas en lugar de frases vagas como "pronto". Los gerentes mantuvieron una única sesión semanal en vivo de 25 minutos dedicada exclusivamente a los dilemas de arquitectura abiertos y a las revisiones del equipo, preservando la relación interpersonal sin interrumpir los bloques de programación.',
+    secUnit: 's',
+    minUnit: 'min',
+    title: 'Resumidor de texto con IA gratuito',
+    noAccount: 'No requiere cuenta, créditos ni registro',
+    allowanceBefore: 'Asignación gratuita diaria:',
+    allowanceAfter: 'restantes hoy',
+    allowanceFallback: 'Hasta 5 resúmenes gratuitos al día',
+    backendTitle: 'La clave del backend de IA aún no está activa en este entorno.',
+    backendEnsureBefore: 'Asegúrate de que',
+    backendEnsureAfter: 'esté configurado para ejecutar resúmenes con IA en vivo.',
+    stepLength: '1. Longitud del resumen',
+    stepFormat: '2. Formato del resumen',
+    stepLanguage: '3. Idioma de salida',
+    stepText: '4. Texto fuente para resumir',
+    lengthAria: 'Longitud del resumen',
+    paste: 'Pegar',
+    clipboardUnavailable:
+      'La lectura del portapapeles no está disponible aquí; usa Ctrl/Cmd + V dentro del editor.',
+    clipboardEmpty: 'Tu portapapeles no contiene ningún texto en este momento.',
+    clipboardBlocked: 'El permiso del portapapeles fue bloqueado; pega directamente con Ctrl/Cmd + V.',
+    placeholder:
+      'Pega un artículo, notas de investigación, la transcripción de una reunión o un ensayo aquí (mínimo 25 palabras / 120 caracteres, hasta 25,000 caracteres)...',
+    word: 'palabra',
+    words: 'palabras',
+    chars: 'caracteres',
+    estRead: 'Lectura est.: ',
+    stop: 'Detener',
+    summarizing: 'Resumiendo...',
+    summarizeButton: 'Resumir texto',
+    addMoreBefore: 'Agrega al menos ',
+    addMoreMiddle: ' palabras más (mínimo ',
+    addMoreAnd: ' palabras y ',
+    addMoreAfter: ' caracteres) para que la IA pueda extraer un resumen útil.',
+    generatingSummary: 'Generando un resumen {length} (formato {format})...',
+    errorDailyLimit: 'Límite diario gratuito de resúmenes alcanzado',
+    errorRateLimited: 'Reduce un poco el ritmo',
+    errorGlobal: 'Capacidad diaria de la plataforma alcanzada',
+    errorGeneric: 'No se pudo resumir en este momento',
+    retry: 'Reintentar',
+    emptyError: 'Pega o escribe un artículo, informe o notas antes de resumir.',
+    tooShortErrorBefore: 'Tu texto es demasiado corto para resumirlo de forma útil (',
+    tooShortErrorMiddle: ' palabras). Ingresa al menos ',
+    tooShortErrorAnd: ' palabras y ',
+    tooShortErrorAfter: ' caracteres.',
+    overLimitBefore: 'La entrada supera el límite de ',
+    overLimitMiddle: ' caracteres. Acorta tu texto en ',
+    overLimitAfter: ' caracteres e inténtalo de nuevo.',
+    connectionError: 'Problema temporal de conexión al resumir. Inténtalo de nuevo.',
+    resultTitle: 'Resultado del resumen',
+    shorterSuffix: '% más corto',
+    copySummary: 'Copiar resumen',
+    downloadTxt: 'Descargar TXT',
+    originalRead: 'Lectura original',
+    summaryRead: 'Lectura del resumen',
+    compressionSaved: 'Compresión y tiempo ahorrado',
+    savesPrefix: 'ahorra ~',
+    tabCompare: 'Original vs. resumen',
+    tabSummary: 'Solo resumen',
+    resultAria: 'Resumen generado y comparación',
+    originalText: 'Texto original',
+    summaryOutput: 'Resumen',
+    summarizedWith: 'Resumido con el modelo Groq de nivel gratuito',
+    fallbackNote: ' (cambio automático de modelo)',
+    preservedNote: '. Los nombres, fechas y cifras clave se conservan tal como aparecen en tu texto.',
+  },
+};
 
-const LENGTH_OPTIONS: LengthOption[] = [
-  { value: 'short', label: 'Short', ratio: '~10–20% length' },
-  { value: 'medium', label: 'Medium', ratio: '~30–40% length' },
-  { value: 'detailed', label: 'Long (Detailed)', ratio: '~50–60% length' },
-];
-
-interface FormatOption {
-  value: SummaryFormat;
-  label: string;
-  hint: string;
-}
-
-const FORMAT_OPTIONS: FormatOption[] = [
-  { value: 'paragraph', label: 'Paragraph Summary', hint: 'Smooth cohesive prose' },
-  { value: 'bullets', label: 'Bullet Point Summary', hint: 'Clean scannable bullets' },
-  { value: 'key-points', label: 'Key Points Extraction', hint: 'Numbered takeaways' },
-  { value: 'simple', label: 'Simple Language', hint: 'Plain everyday wording' },
-];
+const LENGTH_VALUES: SummaryLength[] = ['short', 'medium', 'detailed'];
+const FORMAT_VALUES: SummaryFormat[] = ['paragraph', 'bullets', 'key-points', 'simple'];
 
 const LANGUAGES: string[] = [
   'Same as original language',
@@ -73,9 +271,6 @@ const LANGUAGES: string[] = [
   'Chinese (Simplified)',
 ];
 
-const SAMPLE_ARTICLE =
-  'In 2026, distributed product engineering teams increasingly rely on asynchronous written updates rather than daily status meetings to protect deep-focus development time. Across a six-month internal study of 140 engineers working across London, Berlin, and Toronto, teams that replaced three weekly sync calls with structured Tuesday and Thursday written digests reported a 28% reduction in calendar fragmentation and delivered sprint milestones 14% faster. Crucially, the study found that written updates only succeeded when engineers followed three consistent rules: stating concrete blockers at the top, linking directly to pull requests or issue IDs, and recording exact target dates instead of vague phrases like "soon". Managers still kept one live 25-minute weekly session dedicated exclusively to open architectural trade-offs and team check-ins, preserving interpersonal rapport without interrupting coding blocks.';
-
 function countWords(value: string): number {
   const trimmed = value.trim();
   if (!trimmed) return 0;
@@ -88,15 +283,17 @@ function estimateReadingSeconds(wordCount: number): number {
   return Math.max(1, Math.round((wordCount / 200) * 60));
 }
 
-function formatDuration(totalSeconds: number): string {
-  if (totalSeconds <= 0) return '0 sec';
-  if (totalSeconds < 60) return `${totalSeconds} sec`;
+function formatDuration(totalSeconds: number, secUnit: string, minUnit: string): string {
+  if (totalSeconds <= 0) return `0 ${secUnit}`;
+  if (totalSeconds < 60) return `${totalSeconds} ${secUnit}`;
   const mins = Math.floor(totalSeconds / 60);
   const secs = totalSeconds % 60;
-  return secs > 0 ? `${mins} min ${secs} sec` : `${mins} min`;
+  return secs > 0 ? `${mins} ${minUnit} ${secs} ${secUnit}` : `${mins} ${minUnit}`;
 }
 
 export default function AiTextSummarizerTool() {
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
   const [text, setText] = useState('');
   const [length, setLength] = useState<SummaryLength>('medium');
   const [format, setFormat] = useState<SummaryFormat>('bullets');
@@ -165,7 +362,7 @@ export default function AiTextSummarizerTool() {
   const isOverLimit = inputChars > MAX_CHARS;
 
   const handleLoadSample = () => {
-    setText(SAMPLE_ARTICLE);
+    setText(s.sampleArticle);
     setError(null);
     setPasteHint(null);
   };
@@ -173,19 +370,19 @@ export default function AiTextSummarizerTool() {
   const handlePaste = async () => {
     setPasteHint(null);
     if (!navigator.clipboard?.readText) {
-      setPasteHint('Browser clipboard read is unavailable here—use Ctrl/Cmd + V inside the editor.');
+      setPasteHint(s.clipboardUnavailable);
       return;
     }
     try {
       const clip = await navigator.clipboard.readText();
       if (!clip.trim()) {
-        setPasteHint('Your clipboard does not contain any text right now.');
+        setPasteHint(s.clipboardEmpty);
         return;
       }
       setText(clip);
       setError(null);
     } catch {
-      setPasteHint('Clipboard permission was blocked—paste directly using Ctrl/Cmd + V.');
+      setPasteHint(s.clipboardBlocked);
     }
   };
 
@@ -211,25 +408,23 @@ export default function AiTextSummarizerTool() {
     if (!trimmed) {
       setError({
         code: 'BAD_REQUEST',
-        message: 'Please paste or type an article, report, or notes before summarizing.',
+        message: s.emptyError,
       });
       return;
     }
     if (countWords(trimmed) < MIN_WORDS || trimmed.length < MIN_CHARS) {
       setError({
         code: 'BAD_REQUEST',
-        message: `Your text is too short to summarize meaningfully (${countWords(
-          trimmed
-        )} words). Please enter at least ${MIN_WORDS} words and ${MIN_CHARS} characters.`,
+        message: `${s.tooShortErrorBefore}${countWords(trimmed)}${s.tooShortErrorMiddle}${MIN_WORDS}${s.tooShortErrorAnd}${MIN_CHARS}${s.tooShortErrorAfter}`,
       });
       return;
     }
     if (text.length > MAX_CHARS) {
       setError({
         code: 'PAYLOAD_TOO_LARGE',
-        message: `Input exceeds the ${MAX_CHARS.toLocaleString()} character limit. Shorten your text by ${(
+        message: `${s.overLimitBefore}${MAX_CHARS.toLocaleString(locale)}${s.overLimitMiddle}${(
           text.length - MAX_CHARS
-        ).toLocaleString()} characters and try again.`,
+        ).toLocaleString(locale)}${s.overLimitAfter}`,
       });
       return;
     }
@@ -276,7 +471,7 @@ export default function AiTextSummarizerTool() {
       }
       setError({
         code: 'SERVICE_UNAVAILABLE',
-        message: 'Temporary connection issue while summarizing. Please try again.',
+        message: s.connectionError,
       });
     } finally {
       setLoading(false);
@@ -296,30 +491,34 @@ export default function AiTextSummarizerTool() {
     URL.revokeObjectURL(url);
   };
 
+  const generatingLine = s.generatingSummary
+    .replace('{length}', s.loadingLengthLabels[length])
+    .replace('{format}', s.loadingFormatLabels[format]);
+
   return (
     <div className="space-y-6">
       {/* Top Status & Free Allowance Bar */}
       <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-xs sm:text-sm">
         <div className="flex flex-wrap items-center gap-2 text-slate-700">
           <ListChecks className="w-4 h-4 text-indigo-600 shrink-0" aria-hidden="true" />
-          <span className="font-medium">Free AI Text Summarizer</span>
+          <span className="font-medium">{s.title}</span>
           <span className="text-slate-400" aria-hidden="true">
             ·
           </span>
-          <span className="text-slate-600">No account, credits, or login required</span>
+          <span className="text-slate-600">{s.noAccount}</span>
         </div>
 
         <div className="text-xs text-slate-600 tabular-nums">
           {quota ? (
             <span>
-              Daily free allowance:{' '}
+              {s.allowanceBefore}{' '}
               <strong className="font-semibold text-slate-900">
                 {quota.remaining} / {quota.limit}
               </strong>{' '}
-              left today
+              {s.allowanceAfter}
             </span>
           ) : (
-            <span>Up to 5 free summaries / day</span>
+            <span>{s.allowanceFallback}</span>
           )}
         </div>
       </div>
@@ -331,10 +530,10 @@ export default function AiTextSummarizerTool() {
         >
           <AlertCircle className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" aria-hidden="true" />
           <div>
-            <p className="font-semibold">AI backend key is not active yet in this environment.</p>
+            <p className="font-semibold">{s.backendTitle}</p>
             <p className="mt-0.5">
-              Ensure <code className="font-mono text-xs">GROQ_API_KEY</code> is configured to run
-              live AI summarization.
+              {s.backendEnsureBefore} <code className="font-mono text-xs">GROQ_API_KEY</code>{' '}
+              {s.backendEnsureAfter}
             </p>
           </div>
         </div>
@@ -344,18 +543,19 @@ export default function AiTextSummarizerTool() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
         <div className="lg:col-span-5">
           <span className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2">
-            1. Summary Length
+            {s.stepLength}
           </span>
-          <div className="grid grid-cols-3 gap-2" role="radiogroup" aria-label="Summary length">
-            {LENGTH_OPTIONS.map((opt) => {
-              const selected = opt.value === length;
+          <div className="grid grid-cols-3 gap-2" role="radiogroup" aria-label={s.lengthAria}>
+            {LENGTH_VALUES.map((value) => {
+              const opt = s.lengthOptions[value];
+              const selected = value === length;
               return (
                 <button
-                  key={opt.value}
+                  key={value}
                   type="button"
                   role="radio"
                   aria-checked={selected}
-                  onClick={() => setLength(opt.value)}
+                  onClick={() => setLength(value)}
                   className={`flex flex-col items-start rounded-lg border px-3 py-2 text-left transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 ${
                     selected
                       ? 'border-indigo-600 bg-indigo-50 text-indigo-800'
@@ -375,7 +575,7 @@ export default function AiTextSummarizerTool() {
             htmlFor="ai-summary-format"
             className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2"
           >
-            2. Summary Format
+            {s.stepFormat}
           </label>
           <select
             id="ai-summary-format"
@@ -383,9 +583,9 @@ export default function AiTextSummarizerTool() {
             onChange={(e) => setFormat(e.target.value as SummaryFormat)}
             className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm font-medium text-slate-900 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/20"
           >
-            {FORMAT_OPTIONS.map((opt) => (
-              <option key={opt.value} value={opt.value}>
-                {opt.label} — {opt.hint}
+            {FORMAT_VALUES.map((value) => (
+              <option key={value} value={value}>
+                {s.formatOptions[value].label} — {s.formatOptions[value].hint}
               </option>
             ))}
           </select>
@@ -396,7 +596,7 @@ export default function AiTextSummarizerTool() {
             htmlFor="ai-summary-language"
             className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2"
           >
-            3. Output Language
+            {s.stepLanguage}
           </label>
           <select
             id="ai-summary-language"
@@ -406,7 +606,7 @@ export default function AiTextSummarizerTool() {
           >
             {LANGUAGES.map((lang) => (
               <option key={lang} value={lang}>
-                {lang}
+                {(s.languageLabels as Record<string, string>)[lang] ?? lang}
               </option>
             ))}
           </select>
@@ -420,7 +620,7 @@ export default function AiTextSummarizerTool() {
             htmlFor="ai-summarizer-input"
             className="text-xs font-semibold uppercase tracking-wider text-slate-500"
           >
-            4. Source Text to Summarize
+            {s.stepText}
           </label>
 
           <div className="flex flex-wrap items-center gap-2">
@@ -430,7 +630,7 @@ export default function AiTextSummarizerTool() {
               className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
             >
               <ClipboardPaste className="w-3.5 h-3.5 text-indigo-600" aria-hidden="true" />
-              <span>Paste</span>
+              <span>{s.paste}</span>
             </button>
             <button
               type="button"
@@ -438,7 +638,7 @@ export default function AiTextSummarizerTool() {
               className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
             >
               <Sparkles className="w-3.5 h-3.5 text-indigo-600" aria-hidden="true" />
-              <span>Load sample</span>
+              <span>{t.common.loadSample}</span>
             </button>
             <button
               type="button"
@@ -447,7 +647,7 @@ export default function AiTextSummarizerTool() {
               className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-50 disabled:text-slate-400 disabled:bg-slate-50 disabled:cursor-not-allowed cursor-pointer"
             >
               <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
-              <span>Clear</span>
+              <span>{t.common.clear}</span>
             </button>
           </div>
         </div>
@@ -474,7 +674,7 @@ export default function AiTextSummarizerTool() {
               void handleSummarize();
             }
           }}
-          placeholder="Paste an article, research notes, meeting transcript, or essay here (minimum 25 words / 120 characters, up to 25,000 characters)..."
+          placeholder={s.placeholder}
           aria-describedby="ai-summarizer-counters"
           className={`w-full rounded-xl border bg-white p-4 text-sm sm:text-base leading-relaxed text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 ${
             isOverLimit
@@ -490,24 +690,24 @@ export default function AiTextSummarizerTool() {
             className="flex flex-wrap items-center gap-3 text-xs sm:text-sm text-slate-600 tabular-nums"
           >
             <span>
-              <strong className="font-semibold text-slate-900">{inputWords.toLocaleString()}</strong>{' '}
-              {inputWords === 1 ? 'word' : 'words'}
+              <strong className="font-semibold text-slate-900">{inputWords.toLocaleString(locale)}</strong>{' '}
+              {inputWords === 1 ? s.word : s.words}
             </span>
             <span className="text-slate-300" aria-hidden="true">
               |
             </span>
             <span className={isOverLimit ? 'font-semibold text-red-600' : ''}>
               <strong className={isOverLimit ? 'text-red-600' : 'font-semibold text-slate-900'}>
-                {inputChars.toLocaleString()}
+                {inputChars.toLocaleString(locale)}
               </strong>{' '}
-              / {MAX_CHARS.toLocaleString()} chars
+              / {MAX_CHARS.toLocaleString(locale)} {s.chars}
             </span>
             <span className="text-slate-300" aria-hidden="true">
               |
             </span>
             <span className="inline-flex items-center gap-1">
               <Clock className="w-3.5 h-3.5 text-slate-400" aria-hidden="true" />
-              <span>Est. read: {formatDuration(inputReadingSec)}</span>
+              <span>{s.estRead}{formatDuration(inputReadingSec, s.secUnit, s.minUnit)}</span>
             </span>
           </div>
 
@@ -519,7 +719,7 @@ export default function AiTextSummarizerTool() {
                 className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
               >
                 <Square className="w-3.5 h-3.5" aria-hidden="true" />
-                <span>Stop</span>
+                <span>{s.stop}</span>
               </button>
             )}
 
@@ -532,12 +732,12 @@ export default function AiTextSummarizerTool() {
               {loading ? (
                 <>
                   <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" />
-                  <span>Summarizing...</span>
+                  <span>{s.summarizing}</span>
                 </>
               ) : (
                 <>
                   <ListChecks className="w-4 h-4" aria-hidden="true" />
-                  <span>Summarize Text</span>
+                  <span>{s.summarizeButton}</span>
                 </>
               )}
             </button>
@@ -546,8 +746,8 @@ export default function AiTextSummarizerTool() {
 
         {isTooShort && (
           <p className="mt-2 text-xs text-amber-700">
-            Add at least {Math.max(0, MIN_WORDS - inputWords)} more words (minimum {MIN_WORDS} words
-            and {MIN_CHARS} characters) so the AI can extract a meaningful summary.
+            {s.addMoreBefore}{Math.max(0, MIN_WORDS - inputWords)}{s.addMoreMiddle}{MIN_WORDS}
+            {s.addMoreAnd}{MIN_CHARS}{s.addMoreAfter}
           </p>
         )}
       </div>
@@ -560,9 +760,7 @@ export default function AiTextSummarizerTool() {
         >
           <div className="flex items-center gap-2 text-sm font-medium text-indigo-700">
             <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" />
-            <span>
-              Generating {length === 'detailed' ? 'long' : length} summary ({format} format)...
-            </span>
+            <span>{generatingLine}</span>
           </div>
           <div className="space-y-2 animate-pulse">
             <div className="h-3.5 rounded bg-slate-200 dark:bg-slate-700 w-10/12" />
@@ -583,12 +781,12 @@ export default function AiTextSummarizerTool() {
             <div>
               <p className="font-semibold">
                 {error.code === 'DAILY_LIMIT_REACHED'
-                  ? 'Daily Free Summary Limit Reached'
+                  ? s.errorDailyLimit
                   : error.code === 'RATE_LIMITED'
-                  ? 'Please Slow Down Slightly'
+                  ? s.errorRateLimited
                   : error.code === 'GLOBAL_QUOTA_EXHAUSTED'
-                  ? 'Platform Daily Capacity Reached'
-                  : 'Unable to Summarize Right Now'}
+                  ? s.errorGlobal
+                  : s.errorGeneric}
               </p>
               <p className="mt-0.5 text-xs sm:text-sm">{error.message}</p>
             </div>
@@ -603,7 +801,7 @@ export default function AiTextSummarizerTool() {
               className="inline-flex items-center gap-1.5 self-start sm:self-center rounded-lg border border-red-300 bg-white px-3 py-1.5 text-xs font-semibold text-red-800 hover:bg-red-50 cursor-pointer shrink-0"
             >
               <RefreshCw className="w-3.5 h-3.5" aria-hidden="true" />
-              <span>Retry</span>
+              <span>{s.retry}</span>
             </button>
           )}
         </div>
@@ -612,21 +810,21 @@ export default function AiTextSummarizerTool() {
       {/* Summary Result & Comparison */}
       {summaryText && !loading && (
         <section
-          aria-label="Generated summary and comparison"
+          aria-label={s.resultAria}
           className="rounded-xl border border-slate-200 bg-slate-50/70 p-4 sm:p-5 space-y-4"
         >
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="flex flex-wrap items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" aria-hidden="true" />
-              <h2 className="text-base font-bold text-slate-900">Summary Result</h2>
+              <h2 className="text-base font-bold text-slate-900">{s.resultTitle}</h2>
               <span className="text-xs text-slate-500 tabular-nums">
-                ({summaryWords.toLocaleString()} words · {summaryChars.toLocaleString()} chars ·{' '}
-                {savedPercent}% shorter)
+                ({summaryWords.toLocaleString(locale)} {s.words} · {summaryChars.toLocaleString(locale)} {s.chars} ·{' '}
+                {savedPercent}{s.shorterSuffix})
               </span>
             </div>
 
             <div className="flex flex-wrap items-center gap-2">
-              <CopyButton text={summaryText} label="Copy summary" copiedLabel="Copied!" />
+              <CopyButton text={summaryText} label={s.copySummary} copiedLabel={t.common.copied} />
 
               <button
                 type="button"
@@ -634,7 +832,7 @@ export default function AiTextSummarizerTool() {
                 className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 hover:text-slate-900 cursor-pointer"
               >
                 <Download className="w-3.5 h-3.5" aria-hidden="true" />
-                <span>Download TXT</span>
+                <span>{s.downloadTxt}</span>
               </button>
             </div>
           </div>
@@ -642,23 +840,23 @@ export default function AiTextSummarizerTool() {
           {/* Reading Time & Compression Stats */}
           <dl className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div className="rounded-lg border border-slate-200 bg-white px-3.5 py-2.5">
-              <dt className="text-[11px] uppercase tracking-wider text-slate-500">Original Read</dt>
+              <dt className="text-[11px] uppercase tracking-wider text-slate-500">{s.originalRead}</dt>
               <dd className="mt-0.5 text-sm font-bold text-slate-900 tabular-nums">
-                {originalWords.toLocaleString()} words · {formatDuration(originalReadingSec)}
+                {originalWords.toLocaleString(locale)} {s.words} · {formatDuration(originalReadingSec, s.secUnit, s.minUnit)}
               </dd>
             </div>
             <div className="rounded-lg border border-slate-200 bg-white px-3.5 py-2.5">
-              <dt className="text-[11px] uppercase tracking-wider text-slate-500">Summary Read</dt>
+              <dt className="text-[11px] uppercase tracking-wider text-slate-500">{s.summaryRead}</dt>
               <dd className="mt-0.5 text-sm font-bold text-indigo-600 tabular-nums">
-                {summaryWords.toLocaleString()} words · {formatDuration(summaryReadingSec)}
+                {summaryWords.toLocaleString(locale)} {s.words} · {formatDuration(summaryReadingSec, s.secUnit, s.minUnit)}
               </dd>
             </div>
             <div className="rounded-lg border border-emerald-200 bg-emerald-50 px-3.5 py-2.5">
               <dt className="text-[11px] uppercase tracking-wider text-emerald-700">
-                Compression &amp; Time Saved
+                {s.compressionSaved}
               </dt>
               <dd className="mt-0.5 text-sm font-bold text-emerald-800 tabular-nums">
-                {savedPercent}% shorter · saves ~{formatDuration(savedSeconds)}
+                {savedPercent}{s.shorterSuffix} · {s.savesPrefix}{formatDuration(savedSeconds, s.secUnit, s.minUnit)}
               </dd>
             </div>
           </dl>
@@ -675,7 +873,7 @@ export default function AiTextSummarizerTool() {
               }`}
             >
               <Columns2 className="w-3.5 h-3.5" aria-hidden="true" />
-              <span>Original vs. Summary</span>
+              <span>{s.tabCompare}</span>
             </button>
             <button
               type="button"
@@ -687,7 +885,7 @@ export default function AiTextSummarizerTool() {
               }`}
             >
               <FileText className="w-3.5 h-3.5" aria-hidden="true" />
-              <span>Summary Only</span>
+              <span>{s.tabSummary}</span>
             </button>
           </div>
 
@@ -695,9 +893,9 @@ export default function AiTextSummarizerTool() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               <div className="rounded-xl border border-slate-200 bg-white p-4">
                 <div className="flex items-center justify-between text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
-                  <span>Original Text</span>
+                  <span>{s.originalText}</span>
                   <span className="tabular-nums font-normal">
-                    {originalWords.toLocaleString()} words
+                    {originalWords.toLocaleString(locale)} {s.words}
                   </span>
                 </div>
                 <div className="whitespace-pre-wrap break-words text-sm leading-relaxed text-slate-600 max-h-96 overflow-y-auto">
@@ -707,9 +905,9 @@ export default function AiTextSummarizerTool() {
 
               <div className="rounded-xl border border-indigo-200 bg-white p-4">
                 <div className="flex items-center justify-between text-xs font-semibold text-indigo-700 uppercase tracking-wider mb-2">
-                  <span>Summary Output</span>
+                  <span>{s.summaryOutput}</span>
                   <span className="tabular-nums font-normal text-slate-500">
-                    {summaryWords.toLocaleString()} words
+                    {summaryWords.toLocaleString(locale)} {s.words}
                   </span>
                 </div>
                 <div className="whitespace-pre-wrap break-words text-sm leading-relaxed text-slate-900 max-h-96 overflow-y-auto">
@@ -727,10 +925,9 @@ export default function AiTextSummarizerTool() {
 
           {resultMeta && (
             <p className="text-xs text-slate-500">
-              Summarized with free-tier Groq model{' '}
+              {s.summarizedWith}{' '}
               <code className="font-mono text-slate-700">{resultMeta.model}</code>
-              {resultMeta.fallbackUsed ? ' (automatic model fallback)' : ''}. Key names, dates, and
-              figures are preserved strictly from your input.
+              {resultMeta.fallbackUsed ? s.fallbackNote : ''}{s.preservedNote}
             </p>
           )}
         </section>
