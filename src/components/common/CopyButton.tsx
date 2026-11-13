@@ -1,5 +1,6 @@
 import { Check, Copy } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { useLocale } from '../../locales/LocaleContext';
 
 interface CopyButtonProps {
   text: string;
@@ -11,11 +12,14 @@ interface CopyButtonProps {
 
 export function CopyButton({
   text,
-  label = 'Copy',
-  copiedLabel = 'Copied',
+  label,
+  copiedLabel,
   className = '',
   disabled = false,
 }: CopyButtonProps) {
+  const { t } = useLocale();
+  const effectiveLabel = label ?? t.common.copy;
+  const effectiveCopiedLabel = copiedLabel ?? t.common.copied;
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
@@ -63,7 +67,7 @@ export function CopyButton({
       ) : (
         <Copy className="w-3.5 h-3.5" aria-hidden="true" />
       )}
-      <span>{copied ? copiedLabel : label}</span>
+      <span>{copied ? effectiveCopiedLabel : effectiveLabel}</span>
     </button>
   );
 }
