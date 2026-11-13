@@ -1,6 +1,88 @@
 import { ArrowLeftRight, CheckCircle2, ImagePlus, XCircle } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    presetIndigo: 'Indigo on White',
+    presetSlate: 'Slate Ink',
+    presetEmerald: 'Emerald Badge',
+    presetDark: 'Dark Mode',
+    swapColors: 'Swap Colors',
+    fgTitle: 'Foreground / Text Color',
+    bgTitle: 'Background Color',
+    copyHex: 'Copy HEX',
+    pickerSuffix: 'picker',
+    hexInputSuffix: 'HEX input',
+    contrastRatioLabel: 'WCAG 2.1 Contrast Ratio',
+    checkAaNormal: 'WCAG AA Normal Text',
+    checkAaLarge: 'WCAG AA Large Text / UI',
+    checkAaaNormal: 'WCAG AAA Normal Text',
+    checkAaaLarge: 'WCAG AAA Large Text',
+    pass: 'PASS',
+    fail: 'FAIL',
+    livePreviewLabel: 'Live Accessibility Preview',
+    previewHeading: 'Clear typography remains effortless to read at any viewport size.',
+    previewBody:
+      'Normal body text (14–16 px) requires at least a 4.5:1 contrast ratio for WCAG Level AA and 7.0:1 for Level AAA. Large headings (18 pt+ or bold 14 pt+) require at least 3.0:1.',
+    outlinedControl: 'Outlined UI Control',
+    hexOnHex: '{fg} on {bg}',
+    extractTitle: 'Extract Color Palette from an Image',
+    extractBody:
+      'Upload a screenshot, logo, or photo to pull dominant HEX swatches directly into your contrast check.',
+    appliesToLabel: 'Click swatch applies to:',
+    foregroundBtn: 'Foreground',
+    backgroundBtn: 'Background',
+    selectImage: 'Select an image to extract swatches',
+    loadedReplace: 'Loaded: {name} (Upload another)',
+    selectImageError: 'Please select a PNG, JPG, WebP, or GIF image.',
+    unableToRead: 'Unable to read "{name}".',
+    canvasUnavailable: 'Canvas 2D context unavailable.',
+    transparentImage: 'The image appears completely transparent.',
+    unableToExtract: 'Unable to extract palette.',
+    areaPercent: '~{n}% area',
+  },
+  es: {
+    presetIndigo: 'Índigo sobre blanco',
+    presetSlate: 'Tinta pizarra',
+    presetEmerald: 'Insignia esmeralda',
+    presetDark: 'Modo oscuro',
+    swapColors: 'Intercambiar colores',
+    fgTitle: 'Color de primer plano / texto',
+    bgTitle: 'Color de fondo',
+    copyHex: 'Copiar HEX',
+    pickerSuffix: 'selector',
+    hexInputSuffix: 'entrada HEX',
+    contrastRatioLabel: 'Relación de contraste WCAG 2.1',
+    checkAaNormal: 'WCAG AA: texto normal',
+    checkAaLarge: 'WCAG AA: texto grande / IU',
+    checkAaaNormal: 'WCAG AAA: texto normal',
+    checkAaaLarge: 'WCAG AAA: texto grande',
+    pass: 'APROBADO',
+    fail: 'NO APROBADO',
+    livePreviewLabel: 'Vista previa de accesibilidad en vivo',
+    previewHeading: 'La tipografía clara sigue siendo fácil de leer en cualquier tamaño de pantalla.',
+    previewBody:
+      'El texto normal del cuerpo (14–16 px) requiere una relación de contraste de al menos 4.5:1 para el nivel AA de WCAG y de 7.0:1 para el nivel AAA. Los encabezados grandes (18 pt o más, o 14 pt en negrita) requieren al menos 3.0:1.',
+    outlinedControl: 'Control de interfaz con contorno',
+    hexOnHex: '{fg} sobre {bg}',
+    extractTitle: 'Extraer paleta de colores de una imagen',
+    extractBody:
+      'Sube una captura de pantalla, un logotipo o una foto para extraer las muestras HEX dominantes directamente en tu verificación de contraste.',
+    appliesToLabel: 'La muestra seleccionada se aplica a:',
+    foregroundBtn: 'Primer plano',
+    backgroundBtn: 'Fondo',
+    selectImage: 'Selecciona una imagen para extraer muestras',
+    loadedReplace: 'Cargado: {name} (subir otra)',
+    selectImageError: 'Selecciona una imagen PNG, JPG, WebP o GIF.',
+    unableToRead: 'No se pudo leer "{name}".',
+    canvasUnavailable: 'Contexto 2D de Canvas no disponible.',
+    transparentImage: 'La imagen parece completamente transparente.',
+    unableToExtract: 'No se pudo extraer la paleta.',
+    areaPercent: '~{n}% del área',
+  },
+};
 
 interface Rgb {
   r: number;
@@ -102,13 +184,15 @@ export function getContrastRatio(fgHex: string, bgHex: string): number {
 }
 
 const PRESET_PAIRS = [
-  { label: 'Indigo on White', fg: '#4F46E5', bg: '#FFFFFF' },
-  { label: 'Slate Ink', fg: '#0F172A', bg: '#F8FAFC' },
-  { label: 'Emerald Badge', fg: '#065F46', bg: '#ECFDF5' },
-  { label: 'Dark Mode', fg: '#F8FAFC', bg: '#0F172A' },
+  { key: 'presetIndigo' as const, fg: '#4F46E5', bg: '#FFFFFF' },
+  { key: 'presetSlate' as const, fg: '#0F172A', bg: '#F8FAFC' },
+  { key: 'presetEmerald' as const, fg: '#065F46', bg: '#ECFDF5' },
+  { key: 'presetDark' as const, fg: '#F8FAFC', bg: '#0F172A' },
 ];
 
 export default function ColorContrastCheckerTool() {
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
   const [fgHex, setFgHex] = useState('#1E1B4B');
   const [fgInput, setFgInput] = useState('#1E1B4B');
   const [bgHex, setBgHex] = useState('#FFFFFF');
@@ -155,7 +239,7 @@ export default function ColorContrastCheckerTool() {
     if (!file) return;
     setImageError('');
     if (!file.type.startsWith('image/')) {
-      setImageError('Please select a PNG, JPG, WebP, or GIF image.');
+      setImageError(s.selectImageError);
       return;
     }
 
@@ -164,7 +248,7 @@ export default function ColorContrastCheckerTool() {
       const img = await new Promise<HTMLImageElement>((resolve, reject) => {
         const el = new Image();
         el.onload = () => resolve(el);
-        el.onerror = () => reject(new Error(`Unable to read "${file.name}".`));
+        el.onerror = () => reject(new Error(s.unableToRead.replace('{name}', file.name)));
         el.src = url;
       });
 
@@ -175,7 +259,7 @@ export default function ColorContrastCheckerTool() {
       canvas.width = sampleW;
       canvas.height = sampleH;
       const ctx = canvas.getContext('2d');
-      if (!ctx) throw new Error('Canvas 2D context unavailable.');
+      if (!ctx) throw new Error(s.canvasUnavailable);
       ctx.drawImage(img, 0, 0, sampleW, sampleH);
 
       const { data } = ctx.getImageData(0, 0, sampleW, sampleH);
@@ -199,7 +283,7 @@ export default function ColorContrastCheckerTool() {
       }
 
       if (validPixels === 0) {
-        throw new Error('The image appears completely transparent.');
+        throw new Error(s.transparentImage);
       }
 
       const sorted = Array.from(buckets.values()).sort((a, b) => b.count - a.count);
@@ -230,17 +314,17 @@ export default function ColorContrastCheckerTool() {
       setPalette(swatches);
       setFileName(file.name);
     } catch (err) {
-      setImageError(err instanceof Error ? err.message : 'Unable to extract palette.');
+      setImageError(err instanceof Error ? err.message : s.unableToExtract);
     } finally {
       URL.revokeObjectURL(url);
     }
   };
 
   const checks = [
-    { label: 'WCAG AA Normal Text', threshold: 4.5, pass: ratio >= 4.5 },
-    { label: 'WCAG AA Large Text / UI', threshold: 3.0, pass: ratio >= 3.0 },
-    { label: 'WCAG AAA Normal Text', threshold: 7.0, pass: ratio >= 7.0 },
-    { label: 'WCAG AAA Large Text', threshold: 4.5, pass: ratio >= 4.5 },
+    { label: s.checkAaNormal, threshold: 4.5, pass: ratio >= 4.5 },
+    { label: s.checkAaLarge, threshold: 3.0, pass: ratio >= 3.0 },
+    { label: s.checkAaaNormal, threshold: 7.0, pass: ratio >= 7.0 },
+    { label: s.checkAaaLarge, threshold: 4.5, pass: ratio >= 4.5 },
   ];
 
   const fgRgbString = `rgb(${fgRgb.r}, ${fgRgb.g}, ${fgRgb.b})`;
@@ -254,7 +338,7 @@ export default function ColorContrastCheckerTool() {
         <div className="flex flex-wrap gap-2">
           {PRESET_PAIRS.map((pair) => (
             <button
-              key={pair.label}
+              key={pair.key}
               type="button"
               onClick={() => {
                 applyFg(pair.fg);
@@ -262,7 +346,7 @@ export default function ColorContrastCheckerTool() {
               }}
               className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-indigo-50 hover:text-indigo-700 cursor-pointer"
             >
-              {pair.label}
+              {s[pair.key]}
             </button>
           ))}
         </div>
@@ -273,7 +357,7 @@ export default function ColorContrastCheckerTool() {
           className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 cursor-pointer"
         >
           <ArrowLeftRight className="w-3.5 h-3.5" />
-          Swap Colors
+          {s.swapColors}
         </button>
       </div>
 
@@ -281,7 +365,7 @@ export default function ColorContrastCheckerTool() {
         {[
           {
             key: 'fg' as const,
-            title: 'Foreground / Text Color',
+            title: s.fgTitle,
             hex: fgHex,
             input: fgInput,
             setInput: setFgInput,
@@ -292,7 +376,7 @@ export default function ColorContrastCheckerTool() {
           },
           {
             key: 'bg' as const,
-            title: 'Background Color',
+            title: s.bgTitle,
             hex: bgHex,
             input: bgInput,
             setInput: setBgInput,
@@ -305,20 +389,20 @@ export default function ColorContrastCheckerTool() {
           <div key={panel.key} className="rounded-xl border border-slate-200 bg-slate-50 p-4 space-y-4">
             <div className="flex items-center justify-between gap-2">
               <h3 className="text-sm font-semibold text-slate-900">{panel.title}</h3>
-              <CopyButton text={panel.hex} label="Copy HEX" />
+              <CopyButton text={panel.hex} label={s.copyHex} copiedLabel={t.common.copied} />
             </div>
 
             <div className="flex items-center gap-3">
               <input
                 type="color"
-                aria-label={`${panel.title} picker`}
+                aria-label={`${panel.title} ${s.pickerSuffix}`}
                 value={panel.hex}
                 onChange={(e) => panel.apply(e.target.value.toUpperCase())}
                 className="h-11 w-14 rounded-lg border border-slate-300 bg-white p-1 cursor-pointer"
               />
               <input
                 type="text"
-                aria-label={`${panel.title} HEX input`}
+                aria-label={`${panel.title} ${s.hexInputSuffix}`}
                 value={panel.input}
                 onChange={(e) => {
                   const val = e.target.value;
@@ -365,7 +449,7 @@ export default function ColorContrastCheckerTool() {
         <div className="lg:col-span-5 rounded-xl border border-slate-200 bg-white p-5 flex flex-col justify-between space-y-4">
           <div>
             <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
-              WCAG 2.1 Contrast Ratio
+              {s.contrastRatioLabel}
             </p>
             <div className="mt-1 flex items-baseline gap-2 tabular-nums">
               <span className="text-4xl font-extrabold text-slate-900">{ratio.toFixed(2)}</span>
@@ -389,11 +473,11 @@ export default function ColorContrastCheckerTool() {
                 <span className="inline-flex items-center gap-1 font-bold">
                   {check.pass ? (
                     <>
-                      <CheckCircle2 className="w-3.5 h-3.5" /> PASS
+                      <CheckCircle2 className="w-3.5 h-3.5" /> {s.pass}
                     </>
                   ) : (
                     <>
-                      <XCircle className="w-3.5 h-3.5" /> FAIL
+                      <XCircle className="w-3.5 h-3.5" /> {s.fail}
                     </>
                   )}
                 </span>
@@ -407,24 +491,23 @@ export default function ColorContrastCheckerTool() {
           style={{ backgroundColor: bgHex, color: fgHex }}
         >
           <span className="text-xs font-bold uppercase tracking-wider opacity-85">
-            Live Accessibility Preview
+            {s.livePreviewLabel}
           </span>
           <h4 className="text-2xl font-bold leading-snug">
-            Clear typography remains effortless to read at any viewport size.
+            {s.previewHeading}
           </h4>
           <p className="text-sm leading-relaxed">
-            Normal body text (14–16 px) requires at least a 4.5:1 contrast ratio for WCAG Level AA
-            and 7.0:1 for Level AAA. Large headings (18 pt+ or bold 14 pt+) require at least 3.0:1.
+            {s.previewBody}
           </p>
           <div className="pt-2 flex flex-wrap gap-3 items-center">
             <span
               className="inline-block rounded-lg px-4 py-2 text-xs font-bold border"
               style={{ borderColor: fgHex }}
             >
-              Outlined UI Control
+              {s.outlinedControl}
             </span>
             <span className="text-xs font-mono">
-              {fgHex} on {bgHex}
+              {s.hexOnHex.replace('{fg}', fgHex).replace('{bg}', bgHex)}
             </span>
           </div>
         </div>
@@ -435,15 +518,15 @@ export default function ColorContrastCheckerTool() {
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
             <h3 className="text-sm font-semibold text-slate-900">
-              Extract Color Palette from an Image
+              {s.extractTitle}
             </h3>
             <p className="text-xs text-slate-600">
-              Upload a screenshot, logo, or photo to pull dominant HEX swatches directly into your contrast check.
+              {s.extractBody}
             </p>
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="text-xs text-slate-600">Click swatch applies to:</span>
+            <span className="text-xs text-slate-600">{s.appliesToLabel}</span>
             <button
               type="button"
               onClick={() => setPaletteTarget('fg')}
@@ -453,7 +536,7 @@ export default function ColorContrastCheckerTool() {
                   : 'border-slate-300 bg-white text-slate-700'
               }`}
             >
-              Foreground
+              {s.foregroundBtn}
             </button>
             <button
               type="button"
@@ -464,7 +547,7 @@ export default function ColorContrastCheckerTool() {
                   : 'border-slate-300 bg-white text-slate-700'
               }`}
             >
-              Background
+              {s.backgroundBtn}
             </button>
           </div>
         </div>
@@ -474,7 +557,7 @@ export default function ColorContrastCheckerTool() {
           className="flex items-center justify-center gap-2.5 rounded-lg border-2 border-dashed border-slate-300 bg-white px-4 py-4 text-sm font-medium text-slate-700 hover:border-indigo-400 cursor-pointer"
         >
           <ImagePlus className="w-5 h-5 text-indigo-600" />
-          <span>{fileName ? `Loaded: ${fileName} (Upload another)` : 'Select an image to extract swatches'}</span>
+          <span>{fileName ? s.loadedReplace.replace('{name}', fileName) : s.selectImage}</span>
           <input
             id="palette-upload"
             type="file"
@@ -512,7 +595,7 @@ export default function ColorContrastCheckerTool() {
                 <div className="mt-1.5 font-mono text-xs font-bold text-slate-900">
                   {swatch.hex}
                 </div>
-                <div className="text-[11px] text-slate-500">~{swatch.percent}% area</div>
+                <div className="text-[11px] text-slate-500">{s.areaPercent.replace('{n}', String(swatch.percent))}</div>
               </button>
             ))}
           </div>

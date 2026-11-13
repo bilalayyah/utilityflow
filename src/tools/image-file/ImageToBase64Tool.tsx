@@ -2,10 +2,62 @@ import { Download, ImagePlus } from 'lucide-react';
 import { useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
 import { formatBytes } from '../pdf/pdfUtils';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    encodeMode: 'Image → Base64 Data URI',
+    decodeMode: 'Base64 → Image Preview',
+    selectImageError: 'Select an image file (PNG, JPG, WebP, SVG, GIF, ICO).',
+    unableToRead: 'Unable to read "{name}".',
+    chooseImage: 'Choose an Image File to Encode',
+    fileWithSize: '{name} ({size})',
+    generatesNote: 'Generates Data URI, raw Base64, HTML <img>, and CSS background snippets',
+    binarySizeLabel: 'Binary File Size',
+    base64SizeLabel: 'Base64 URI Size (~33% larger)',
+    fullDataUriLabel: 'Full Data URI',
+    copyDataUri: 'Copy Data URI',
+    copyRawBase64: 'Copy Raw Base64',
+    copyImg: 'Copy <img>',
+    copyCss: 'Copy CSS',
+    encodedAria: 'Encoded Base64 Data URI',
+    encodedAlt: 'Encoded preview',
+    pasteLabel: 'Paste Base64 Image String or Data URI',
+    pastePlaceholder: 'data:image/png;base64,iVBORw0KGgo... or raw base64 string',
+    invalidPayload: 'The pasted Base64 text is not a valid encoded image payload.',
+    decodedAlt: 'Decoded Base64 preview',
+    downloadExt: 'Download .{ext}',
+  },
+  es: {
+    encodeMode: 'Imagen → URI de datos Base64',
+    decodeMode: 'Base64 → vista previa de imagen',
+    selectImageError: 'Selecciona un archivo de imagen (PNG, JPG, WebP, SVG, GIF, ICO).',
+    unableToRead: 'No se pudo leer "{name}".',
+    chooseImage: 'Elige un archivo de imagen para codificar',
+    fileWithSize: '{name} ({size})',
+    generatesNote: 'Genera URI de datos, Base64 sin procesar, fragmentos HTML <img> y de fondo CSS',
+    binarySizeLabel: 'Tamaño del archivo binario',
+    base64SizeLabel: 'Tamaño del URI Base64 (~33 % más grande)',
+    fullDataUriLabel: 'URI de datos completo',
+    copyDataUri: 'Copiar URI de datos',
+    copyRawBase64: 'Copiar Base64 sin procesar',
+    copyImg: 'Copiar <img>',
+    copyCss: 'Copiar CSS',
+    encodedAria: 'URI de datos Base64 codificado',
+    encodedAlt: 'Vista previa codificada',
+    pasteLabel: 'Pega una cadena de imagen Base64 o un URI de datos',
+    pastePlaceholder: 'data:image/png;base64,iVBORw0KGgo... o cadena base64 sin formato',
+    invalidPayload: 'El texto Base64 pegado no es una carga útil de imagen codificada válida.',
+    decodedAlt: 'Vista previa Base64 decodificada',
+    downloadExt: 'Descargar .{ext}',
+  },
+};
 
 type Mode = 'encode' | 'decode';
 
 export default function ImageToBase64Tool() {
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
   const [mode, setMode] = useState<Mode>('encode');
   const [fileName, setFileName] = useState('');
   const [originalSize, setOriginalSize] = useState(0);
@@ -18,7 +70,7 @@ export default function ImageToBase64Tool() {
   const handleFile = (file: File | undefined) => {
     if (!file) return;
     if (!file.type.startsWith('image/')) {
-      setError('Select an image file (PNG, JPG, WebP, SVG, GIF, ICO).');
+      setError(s.selectImageError);
       return;
     }
     setError('');
@@ -31,7 +83,7 @@ export default function ImageToBase64Tool() {
       setDataUri(result);
       setRawBase64(commaIdx >= 0 ? result.slice(commaIdx + 1) : result);
     };
-    reader.onerror = () => setError(`Unable to read "${file.name}".`);
+    reader.onerror = () => setError(s.unableToRead.replace('{name}', file.name));
     reader.readAsDataURL(file);
   };
 
@@ -67,7 +119,7 @@ export default function ImageToBase64Tool() {
             mode === 'encode' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
           }`}
         >
-          Image → Base64 Data URI
+          {s.encodeMode}
         </button>
         <button
           type="button"
@@ -76,7 +128,7 @@ export default function ImageToBase64Tool() {
             mode === 'decode' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
           }`}
         >
-          Base64 → Image Preview
+          {s.decodeMode}
         </button>
       </div>
 
@@ -94,10 +146,12 @@ export default function ImageToBase64Tool() {
           >
             <ImagePlus className="w-8 h-8 text-indigo-600 mb-2" />
             <span className="text-sm font-semibold text-slate-900">
-              {fileName ? `${fileName} (${formatBytes(originalSize)})` : 'Choose an Image File to Encode'}
+              {fileName
+                ? s.fileWithSize.replace('{name}', fileName).replace('{size}', formatBytes(originalSize, locale))
+                : s.chooseImage}
             </span>
             <span className="mt-1 text-xs text-slate-500">
-              Generates Data URI, raw Base64, HTML &lt;img&gt;, and CSS background snippets
+              {s.generatesNote}
             </span>
             <input
               id="i2b-input"
@@ -115,31 +169,31 @@ export default function ImageToBase64Tool() {
             <div className="space-y-4">
               <dl className="grid grid-cols-2 sm:grid-cols-3 gap-3 tabular-nums text-xs sm:text-sm">
                 <div className="rounded-lg border border-slate-200 bg-slate-50 p-3">
-                  <dt className="text-xs text-slate-500">Binary File Size</dt>
-                  <dd className="mt-1 font-mono font-bold text-slate-900">{formatBytes(originalSize)}</dd>
+                  <dt className="text-xs text-slate-500">{s.binarySizeLabel}</dt>
+                  <dd className="mt-1 font-mono font-bold text-slate-900">{formatBytes(originalSize, locale)}</dd>
                 </div>
                 <div className="rounded-lg border border-slate-200 bg-slate-50 p-3">
-                  <dt className="text-xs text-slate-500">Base64 URI Size (~33% larger)</dt>
-                  <dd className="mt-1 font-mono font-bold text-indigo-700">{formatBytes(dataUri.length)}</dd>
+                  <dt className="text-xs text-slate-500">{s.base64SizeLabel}</dt>
+                  <dd className="mt-1 font-mono font-bold text-indigo-700">{formatBytes(dataUri.length, locale)}</dd>
                 </div>
                 <div className="rounded-lg border border-slate-200 bg-white p-2 flex items-center justify-center col-span-2 sm:col-span-1">
-                  <img src={dataUri} alt="Encoded preview" className="max-h-14 max-w-full object-contain" />
+                  <img src={dataUri} alt={s.encodedAlt} className="max-h-14 max-w-full object-contain" />
                 </div>
               </dl>
 
               <div className="space-y-3">
                 <div>
                   <div className="flex flex-wrap items-center justify-between gap-2 mb-1.5">
-                    <span className="text-xs font-semibold text-slate-700">Full Data URI</span>
+                    <span className="text-xs font-semibold text-slate-700">{s.fullDataUriLabel}</span>
                     <div className="flex flex-wrap gap-2">
-                      <CopyButton text={dataUri} label="Copy Data URI" />
-                      <CopyButton text={rawBase64} label="Copy Raw Base64" />
-                      <CopyButton text={imgTagSnippet} label="Copy <img>" />
-                      <CopyButton text={cssSnippet} label="Copy CSS" />
+                      <CopyButton text={dataUri} label={s.copyDataUri} copiedLabel={t.common.copied} />
+                      <CopyButton text={rawBase64} label={s.copyRawBase64} copiedLabel={t.common.copied} />
+                      <CopyButton text={imgTagSnippet} label={s.copyImg} copiedLabel={t.common.copied} />
+                      <CopyButton text={cssSnippet} label={s.copyCss} copiedLabel={t.common.copied} />
                     </div>
                   </div>
                   <textarea
-                    aria-label="Encoded Base64 Data URI"
+                    aria-label={s.encodedAria}
                     rows={5}
                     readOnly
                     value={dataUri}
@@ -154,7 +208,7 @@ export default function ImageToBase64Tool() {
         <div className="space-y-4">
           <div>
             <label htmlFor="b2i-input" className="block text-sm font-semibold text-slate-900 mb-1.5">
-              Paste Base64 Image String or Data URI
+              {s.pasteLabel}
             </label>
             <textarea
               id="b2i-input"
@@ -164,7 +218,7 @@ export default function ImageToBase64Tool() {
                 setDecodeInput(e.target.value);
                 setDecodeError('');
               }}
-              placeholder="data:image/png;base64,iVBORw0KGgo... or raw base64 string"
+              placeholder={s.pastePlaceholder}
               className="w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 font-mono text-xs"
             />
           </div>
@@ -180,12 +234,10 @@ export default function ImageToBase64Tool() {
               <div className="rounded-lg border border-slate-200 bg-white p-2 flex items-center justify-center min-h-24 min-w-24 max-w-xs">
                 <img
                   src={normalizedDecodeUri}
-                  alt="Decoded Base64 preview"
+                  alt={s.decodedAlt}
                   onLoad={() => setDecodeError('')}
                   onError={() =>
-                    setDecodeError(
-                      'The pasted Base64 text is not a valid encoded image payload.'
-                    )
+                    setDecodeError(s.invalidPayload)
                   }
                   className="max-h-48 max-w-full object-contain"
                 />
@@ -196,7 +248,7 @@ export default function ImageToBase64Tool() {
                 className="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-700"
               >
                 <Download className="w-4 h-4" />
-                Download .{decodedExt.toUpperCase()}
+                {s.downloadExt.replace('{ext}', decodedExt.toUpperCase())}
               </a>
             </div>
           )}

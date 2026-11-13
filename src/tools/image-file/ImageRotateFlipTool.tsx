@@ -1,8 +1,48 @@
 import { Download, FlipHorizontal2, FlipVertical2, ImagePlus, RotateCcw, RotateCw } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { formatBytes } from '../pdf/pdfUtils';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    chooseImage: 'Choose an Image to Rotate, Flip, or Filter',
+    loadedReplace: '{name} (Click to replace)',
+    previewNote: 'Real-time HTML5 Canvas preview & pixel export',
+    selectImageError: 'Please select a PNG, JPG, WebP, or GIF image.',
+    failedLoading: 'Failed loading "{name}".',
+    rotateLeft: 'Rotate 90° Left',
+    rotateRight: 'Rotate 90° Right',
+    flipHorizontal: 'Flip Horizontal',
+    flipVertical: 'Flip Vertical',
+    brightnessLabel: 'Brightness: ',
+    contrastLabel: 'Contrast: ',
+    grayscaleLabel: 'Black & White (Grayscale)',
+    resetAll: 'Reset all',
+    exportFormatLabel: 'Export Format',
+    livePreview: 'Live Canvas Preview',
+  },
+  es: {
+    chooseImage: 'Elige una imagen para girar, voltear o aplicar filtros',
+    loadedReplace: '{name} (haz clic para reemplazar)',
+    previewNote: 'Vista previa en tiempo real con HTML5 Canvas y exportación por píxeles',
+    selectImageError: 'Selecciona una imagen PNG, JPG, WebP o GIF.',
+    failedLoading: 'No se pudo cargar "{name}".',
+    rotateLeft: 'Girar 90° a la izquierda',
+    rotateRight: 'Girar 90° a la derecha',
+    flipHorizontal: 'Voltear horizontalmente',
+    flipVertical: 'Voltear verticalmente',
+    brightnessLabel: 'Brillo: ',
+    contrastLabel: 'Contraste: ',
+    grayscaleLabel: 'Blanco y negro (escala de grises)',
+    resetAll: 'Restablecer todo',
+    exportFormatLabel: 'Formato de exportación',
+    livePreview: 'Vista previa en vivo del lienzo',
+  },
+};
 
 export default function ImageRotateFlipTool() {
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
   const [sourceFile, setSourceFile] = useState<File | null>(null);
   const [rotation, setRotation] = useState<0 | 90 | 180 | 270>(0);
   const [flipH, setFlipH] = useState(false);
@@ -81,19 +121,19 @@ export default function ImageRotateFlipTool() {
     };
     img.onerror = () => {
       URL.revokeObjectURL(srcUrl);
-      if (!cancelled) setError(`Failed loading "${sourceFile.name}".`);
+      if (!cancelled) setError(s.failedLoading.replace('{name}', sourceFile.name));
     };
     img.src = srcUrl;
 
     return () => {
       cancelled = true;
     };
-  }, [sourceFile, rotation, flipH, flipV, grayscale, brightness, contrast, outputMime]);
+  }, [sourceFile, rotation, flipH, flipV, grayscale, brightness, contrast, outputMime, locale]);
 
   const handleFile = (file: File | undefined) => {
     if (!file) return;
     if (!file.type.startsWith('image/')) {
-      setError('Please select a PNG, JPG, WebP, or GIF image.');
+      setError(s.selectImageError);
       return;
     }
     setError('');
@@ -117,10 +157,10 @@ export default function ImageRotateFlipTool() {
       >
         <ImagePlus className="w-8 h-8 text-indigo-600 mb-2" />
         <span className="text-sm font-semibold text-slate-900">
-          {sourceFile ? `${sourceFile.name} (Click to replace)` : 'Choose an Image to Rotate, Flip, or Filter'}
+          {sourceFile ? s.loadedReplace.replace('{name}', sourceFile.name) : s.chooseImage}
         </span>
         <span className="mt-1 text-xs text-slate-500">
-          Real-time HTML5 Canvas preview &amp; pixel export
+          {s.previewNote}
         </span>
         <input
           id="irf-input"
@@ -150,7 +190,7 @@ export default function ImageRotateFlipTool() {
                 className="inline-flex items-center justify-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 cursor-pointer"
               >
                 <RotateCcw className="w-4 h-4" />
-                Rotate 90° Left
+                {s.rotateLeft}
               </button>
               <button
                 type="button"
@@ -158,7 +198,7 @@ export default function ImageRotateFlipTool() {
                 className="inline-flex items-center justify-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 cursor-pointer"
               >
                 <RotateCw className="w-4 h-4" />
-                Rotate 90° Right
+                {s.rotateRight}
               </button>
               <button
                 type="button"
@@ -168,7 +208,7 @@ export default function ImageRotateFlipTool() {
                 }`}
               >
                 <FlipHorizontal2 className="w-4 h-4" />
-                Flip Horizontal
+                {s.flipHorizontal}
               </button>
               <button
                 type="button"
@@ -178,13 +218,14 @@ export default function ImageRotateFlipTool() {
                 }`}
               >
                 <FlipVertical2 className="w-4 h-4" />
-                Flip Vertical
+                {s.flipVertical}
               </button>
             </div>
 
             <div>
               <label htmlFor="irf-bright" className="block text-xs font-semibold text-slate-700 mb-1">
-                Brightness: <span className="font-mono">{brightness}%</span>
+                {s.brightnessLabel}
+                <span className="font-mono">{brightness}%</span>
               </label>
               <input
                 id="irf-bright"
@@ -199,7 +240,8 @@ export default function ImageRotateFlipTool() {
 
             <div>
               <label htmlFor="irf-cont" className="block text-xs font-semibold text-slate-700 mb-1">
-                Contrast: <span className="font-mono">{contrast}%</span>
+                {s.contrastLabel}
+                <span className="font-mono">{contrast}%</span>
               </label>
               <input
                 id="irf-cont"
@@ -220,7 +262,7 @@ export default function ImageRotateFlipTool() {
                   onChange={(e) => setGrayscale(e.target.checked)}
                   className="h-4 w-4 rounded border-slate-300 text-indigo-600"
                 />
-                Black &amp; White (Grayscale)
+                {s.grayscaleLabel}
               </label>
 
               <button
@@ -235,14 +277,14 @@ export default function ImageRotateFlipTool() {
                 }}
                 className="text-xs font-medium text-slate-600 hover:text-slate-900 cursor-pointer"
               >
-                Reset all
+                {s.resetAll}
               </button>
             </div>
 
             <div className="flex items-end gap-3 pt-2 border-t border-slate-200">
               <div className="flex-1">
                 <label htmlFor="irf-fmt" className="block text-xs font-semibold text-slate-700 mb-1">
-                  Export Format
+                  {s.exportFormatLabel}
                 </label>
                 <select
                   id="irf-fmt"
@@ -262,7 +304,7 @@ export default function ImageRotateFlipTool() {
                   className="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-700"
                 >
                   <Download className="w-4 h-4" />
-                  Download
+                  {t.common.download}
                 </a>
               )}
             </div>
@@ -270,10 +312,10 @@ export default function ImageRotateFlipTool() {
 
           <div className="lg:col-span-7 rounded-xl border border-slate-200 bg-slate-50 p-4 space-y-2">
             <div className="flex items-center justify-between text-xs text-slate-600 font-mono tabular-nums">
-              <span>Live Canvas Preview ({rotation}° · {flipH ? 'FlipH ' : ''}{flipV ? 'FlipV' : ''})</span>
+              <span>{s.livePreview} ({rotation}° · {flipH ? 'FlipH ' : ''}{flipV ? 'FlipV' : ''})</span>
               {outputDims && (
                 <span>
-                  {outputDims.w}×{outputDims.h} px · {formatBytes(outputSize)}
+                  {outputDims.w}×{outputDims.h} px · {formatBytes(outputSize, locale)}
                 </span>
               )}
             </div>

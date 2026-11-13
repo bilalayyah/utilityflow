@@ -1,6 +1,74 @@
 import { KeyRound, RefreshCw, ShieldCheck } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    strength: {
+      veryStrong: 'Very Strong',
+      strong: 'Strong',
+      moderate: 'Moderate',
+      weak: 'Weak',
+    },
+    randomPasswordMode: 'Random Password',
+    passphraseMode: 'Diceware Passphrase',
+    regenerate: 'Regenerate',
+    passwordLengthLabel: 'Password Length: ',
+    charsSuffix: ' chars',
+    batchCountLabel: 'Batch Count: ',
+    uppercaseLabel: 'Uppercase (A–Z)',
+    lowercaseLabel: 'Lowercase (a–z)',
+    numbersLabel: 'Numbers (0–9)',
+    symbolsLabel: 'Symbols (!@#$%...)',
+    excludeAmbiguousLabel: 'Exclude ambiguous (0, O, 1, l, I)',
+    wordCountLabel: 'Word Count: ',
+    wordSeparatorLabel: 'Word Separator',
+    hyphenOption: 'Hyphen (-)',
+    underscoreOption: 'Underscore (_)',
+    periodOption: 'Period (.)',
+    spaceOption: 'Space ( )',
+    capitalizeWordsLabel: 'Capitalize Words',
+    appendDigitLabel: 'Append 2-digit number',
+    selectGroupWarning: 'Select at least one character group to generate passwords.',
+    entropyBits: '~{n} bits of entropy',
+    poolSizeSuffix: ' · pool size {n}',
+    wordListSuffix: ' · {n}-word list',
+    copyAll: 'Copy All',
+  },
+  es: {
+    strength: {
+      veryStrong: 'Muy fuerte',
+      strong: 'Fuerte',
+      moderate: 'Moderada',
+      weak: 'Débil',
+    },
+    randomPasswordMode: 'Contraseña aleatoria',
+    passphraseMode: 'Frase de contraseña Diceware',
+    regenerate: 'Regenerar',
+    passwordLengthLabel: 'Longitud de la contraseña: ',
+    charsSuffix: ' caracteres',
+    batchCountLabel: 'Cantidad por lote: ',
+    uppercaseLabel: 'Mayúsculas (A–Z)',
+    lowercaseLabel: 'Minúsculas (a–z)',
+    numbersLabel: 'Números (0–9)',
+    symbolsLabel: 'Símbolos (!@#$%...)',
+    excludeAmbiguousLabel: 'Excluir caracteres ambiguos (0, O, 1, l, I)',
+    wordCountLabel: 'Cantidad de palabras: ',
+    wordSeparatorLabel: 'Separador de palabras',
+    hyphenOption: 'Guion (-)',
+    underscoreOption: 'Guion bajo (_)',
+    periodOption: 'Punto (.)',
+    spaceOption: 'Espacio ( )',
+    capitalizeWordsLabel: 'Palabras con mayúscula inicial',
+    appendDigitLabel: 'Agregar número de 2 dígitos',
+    selectGroupWarning: 'Selecciona al menos un grupo de caracteres para generar contraseñas.',
+    entropyBits: '~{n} bits de entropía',
+    poolSizeSuffix: ' · tamaño del conjunto: {n}',
+    wordListSuffix: ' · lista de {n} palabras',
+    copyAll: 'Copiar todo',
+  },
+};
 
 const UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const LOWERCASE = 'abcdefghijklmnopqrstuvwxyz';
@@ -74,14 +142,19 @@ function shuffleArray<T>(arr: T[]): T[] {
   return copy;
 }
 
-function strengthLabel(entropyBits: number): { label: string; colorClass: string } {
-  if (entropyBits >= 100) return { label: 'Very Strong', colorClass: 'text-emerald-700 bg-emerald-50 border-emerald-200' };
-  if (entropyBits >= 72) return { label: 'Strong', colorClass: 'text-indigo-700 bg-indigo-50 border-indigo-200' };
-  if (entropyBits >= 50) return { label: 'Moderate', colorClass: 'text-amber-700 bg-amber-50 border-amber-200' };
-  return { label: 'Weak', colorClass: 'text-rose-700 bg-rose-50 border-rose-200' };
+function strengthLabel(
+  entropyBits: number,
+  labels: typeof STRINGS.en.strength
+): { label: string; colorClass: string } {
+  if (entropyBits >= 100) return { label: labels.veryStrong, colorClass: 'text-emerald-700 bg-emerald-50 border-emerald-200' };
+  if (entropyBits >= 72) return { label: labels.strong, colorClass: 'text-indigo-700 bg-indigo-50 border-indigo-200' };
+  if (entropyBits >= 50) return { label: labels.moderate, colorClass: 'text-amber-700 bg-amber-50 border-amber-200' };
+  return { label: labels.weak, colorClass: 'text-rose-700 bg-rose-50 border-rose-200' };
 }
 
 export default function PasswordGeneratorTool() {
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
   const [mode, setMode] = useState<'password' | 'passphrase'>('password');
 
   // Password mode state
@@ -162,7 +235,7 @@ export default function PasswordGeneratorTool() {
 
   const activeItems = mode === 'password' ? passwordResult.items : passphraseResult.items;
   const activeEntropy = mode === 'password' ? passwordResult.entropyBits : passphraseResult.entropyBits;
-  const badge = strengthLabel(activeEntropy);
+  const badge = strengthLabel(activeEntropy, s.strength);
 
   return (
     <div className="space-y-6">
@@ -178,7 +251,7 @@ export default function PasswordGeneratorTool() {
             }`}
           >
             <KeyRound className="w-4 h-4" />
-            Random Password
+            {s.randomPasswordMode}
           </button>
           <button
             type="button"
@@ -190,7 +263,7 @@ export default function PasswordGeneratorTool() {
             }`}
           >
             <ShieldCheck className="w-4 h-4" />
-            Diceware Passphrase
+            {s.passphraseMode}
           </button>
         </div>
 
@@ -200,7 +273,7 @@ export default function PasswordGeneratorTool() {
           className="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-4 py-2 text-xs sm:text-sm font-semibold text-white hover:bg-indigo-700 cursor-pointer"
         >
           <RefreshCw className="w-4 h-4" />
-          Regenerate
+          {s.regenerate}
         </button>
       </div>
 
@@ -209,7 +282,8 @@ export default function PasswordGeneratorTool() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label htmlFor="pw-len" className="block text-xs font-semibold text-slate-800 mb-1.5">
-                Password Length: <span className="font-mono">{length} chars</span>
+                {s.passwordLengthLabel}
+                <span className="font-mono">{length}{s.charsSuffix}</span>
               </label>
               <input
                 id="pw-len"
@@ -224,7 +298,8 @@ export default function PasswordGeneratorTool() {
 
             <div>
               <label htmlFor="pw-count" className="block text-xs font-semibold text-slate-800 mb-1.5">
-                Batch Count: <span className="font-mono">{count}</span>
+                {s.batchCountLabel}
+                <span className="font-mono">{count}</span>
               </label>
               <input
                 id="pw-count"
@@ -241,23 +316,23 @@ export default function PasswordGeneratorTool() {
           <div className="flex flex-wrap gap-4 text-xs sm:text-sm text-slate-800">
             <label className="inline-flex items-center gap-2 cursor-pointer">
               <input type="checkbox" checked={useUpper} onChange={(e) => setUseUpper(e.target.checked)} className="rounded text-indigo-600" />
-              Uppercase (A–Z)
+              {s.uppercaseLabel}
             </label>
             <label className="inline-flex items-center gap-2 cursor-pointer">
               <input type="checkbox" checked={useLower} onChange={(e) => setUseLower(e.target.checked)} className="rounded text-indigo-600" />
-              Lowercase (a–z)
+              {s.lowercaseLabel}
             </label>
             <label className="inline-flex items-center gap-2 cursor-pointer">
               <input type="checkbox" checked={useDigits} onChange={(e) => setUseDigits(e.target.checked)} className="rounded text-indigo-600" />
-              Numbers (0–9)
+              {s.numbersLabel}
             </label>
             <label className="inline-flex items-center gap-2 cursor-pointer">
               <input type="checkbox" checked={useSymbols} onChange={(e) => setUseSymbols(e.target.checked)} className="rounded text-indigo-600" />
-              Symbols (!@#$%...)
+              {s.symbolsLabel}
             </label>
             <label className="inline-flex items-center gap-2 cursor-pointer">
               <input type="checkbox" checked={excludeAmbiguous} onChange={(e) => setExcludeAmbiguous(e.target.checked)} className="rounded text-indigo-600" />
-              Exclude ambiguous (0, O, 1, l, I)
+              {s.excludeAmbiguousLabel}
             </label>
           </div>
         </div>
@@ -266,7 +341,8 @@ export default function PasswordGeneratorTool() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
               <label htmlFor="pp-words" className="block text-xs font-semibold text-slate-800 mb-1.5">
-                Word Count: <span className="font-mono">{wordCount}</span>
+                {s.wordCountLabel}
+                <span className="font-mono">{wordCount}</span>
               </label>
               <input
                 id="pp-words"
@@ -281,7 +357,7 @@ export default function PasswordGeneratorTool() {
 
             <div>
               <label htmlFor="pp-sep" className="block text-xs font-semibold text-slate-800 mb-1.5">
-                Word Separator
+                {s.wordSeparatorLabel}
               </label>
               <select
                 id="pp-sep"
@@ -289,16 +365,17 @@ export default function PasswordGeneratorTool() {
                 onChange={(e) => setSeparator(e.target.value)}
                 className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"
               >
-                <option value="-">Hyphen (-)</option>
-                <option value="_">Underscore (_)</option>
-                <option value=".">Period (.)</option>
-                <option value=" ">Space ( )</option>
+                <option value="-">{s.hyphenOption}</option>
+                <option value="_">{s.underscoreOption}</option>
+                <option value=".">{s.periodOption}</option>
+                <option value=" ">{s.spaceOption}</option>
               </select>
             </div>
 
             <div>
               <label htmlFor="pp-count" className="block text-xs font-semibold text-slate-800 mb-1.5">
-                Batch Count: <span className="font-mono">{count}</span>
+                {s.batchCountLabel}
+                <span className="font-mono">{count}</span>
               </label>
               <input
                 id="pp-count"
@@ -320,7 +397,7 @@ export default function PasswordGeneratorTool() {
                 onChange={(e) => setCapitalizeWords(e.target.checked)}
                 className="rounded text-indigo-600"
               />
-              Capitalize Words
+              {s.capitalizeWordsLabel}
             </label>
             <label className="inline-flex items-center gap-2 cursor-pointer">
               <input
@@ -329,7 +406,7 @@ export default function PasswordGeneratorTool() {
                 onChange={(e) => setAppendDigit(e.target.checked)}
                 className="rounded text-indigo-600"
               />
-              Append 2-digit number
+              {s.appendDigitLabel}
             </label>
           </div>
         </div>
@@ -337,7 +414,7 @@ export default function PasswordGeneratorTool() {
 
       {activeItems.length === 0 ? (
         <div role="alert" className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
-          Select at least one character group to generate passwords.
+          {s.selectGroupWarning}
         </div>
       ) : (
         <div className="space-y-3">
@@ -347,11 +424,13 @@ export default function PasswordGeneratorTool() {
                 {badge.label}
               </span>
               <span className="font-mono text-slate-600 tabular-nums">
-                ~{activeEntropy.toFixed(1)} bits of entropy
-                {mode === 'password' ? ` · pool size ${passwordResult.poolSize}` : ` · ${DICEWARE_WORDS.length}-word list`}
+                {s.entropyBits.replace('{n}', activeEntropy.toFixed(1))}
+                {mode === 'password'
+                  ? s.poolSizeSuffix.replace('{n}', String(passwordResult.poolSize))
+                  : s.wordListSuffix.replace('{n}', String(DICEWARE_WORDS.length))}
               </span>
             </div>
-            <CopyButton text={activeItems.join('\n')} label="Copy All" />
+            <CopyButton text={activeItems.join('\n')} label={s.copyAll} copiedLabel={t.common.copied} />
           </div>
 
           <ul className="space-y-2">
@@ -363,7 +442,7 @@ export default function PasswordGeneratorTool() {
                 <code className="font-mono text-sm sm:text-base text-slate-900 break-all select-all">
                   {item}
                 </code>
-                <CopyButton text={item} />
+                <CopyButton text={item} label={t.common.copy} copiedLabel={t.common.copied} />
               </li>
             ))}
           </ul>

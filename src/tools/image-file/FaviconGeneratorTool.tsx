@@ -1,6 +1,78 @@
 import { Download, ImagePlus, Sparkles } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    sizeLabels: {
+      browserTab: '16×16 Browser Tab',
+      taskbar: '32×32 Taskbar / HiDPI',
+      desktopShortcut: '48×48 Desktop Shortcut',
+      appleTouch: '180×180 Apple Touch',
+      androidChrome: '192×192 Android Chrome',
+      pwaSplash: '512×512 PWA Splash',
+    },
+    monogramMode: 'Monogram Badge Builder',
+    imageMode: 'Upload Logo Image',
+    lettersLabel: 'Text / Initials (1–3 chars)',
+    cornerShapeLabel: 'Corner Shape',
+    roundedSquare: 'Rounded Square',
+    circle: 'Circle',
+    sharpSquare: 'Sharp Square',
+    square: 'Square',
+    bgColorLabel: 'Background Color',
+    textColorLabel: 'Text Color',
+    chooseLogo: 'Choose a PNG, JPG, WebP, or SVG logo',
+    loadedReplace: 'Loaded: {name} (Click to replace)',
+    cropMaskLabel: 'Crop Mask',
+    unableToRead: 'Unable to read "{name}".',
+    canvasUnavailable: 'Canvas 2D context unavailable.',
+    failedEncode: 'Failed to encode favicon PNG.',
+    unableToGenerate: 'Unable to generate favicons.',
+    icoBundleTitle: 'Multi-Size favicon.ico Bundle (16px + 32px + 48px)',
+    icoBundleBody: 'Standards-compliant binary .ico file ready for your website root /public/ folder',
+    downloadIco: 'Download favicon.ico',
+    faviconPreviewAlt: 'Favicon 32x32 preview',
+    iconAlt: 'Icon of {size}x{size}',
+    htmlTagsLabel: 'HTML <head> Link Tags',
+    copyHtml: 'Copy HTML',
+  },
+  es: {
+    sizeLabels: {
+      browserTab: '16×16 Pestaña del navegador',
+      taskbar: '32×32 Barra de tareas / HiDPI',
+      desktopShortcut: '48×48 Acceso directo de escritorio',
+      appleTouch: '180×180 Apple Touch',
+      androidChrome: '192×192 Android Chrome',
+      pwaSplash: '512×512 Pantalla de inicio de PWA',
+    },
+    monogramMode: 'Creador de insignias con monograma',
+    imageMode: 'Subir imagen del logotipo',
+    lettersLabel: 'Texto / iniciales (1–3 caracteres)',
+    cornerShapeLabel: 'Forma de las esquinas',
+    roundedSquare: 'Cuadrado redondeado',
+    circle: 'Círculo',
+    sharpSquare: 'Cuadrado con esquinas rectas',
+    square: 'Cuadrado',
+    bgColorLabel: 'Color de fondo',
+    textColorLabel: 'Color del texto',
+    chooseLogo: 'Elige un logotipo PNG, JPG, WebP o SVG',
+    loadedReplace: 'Cargado: {name} (haz clic para reemplazar)',
+    cropMaskLabel: 'Máscara de recorte',
+    unableToRead: 'No se pudo leer "{name}".',
+    canvasUnavailable: 'Contexto 2D de Canvas no disponible.',
+    failedEncode: 'No se pudo codificar el PNG del favicon.',
+    unableToGenerate: 'No se pudieron generar los favicons.',
+    icoBundleTitle: 'Paquete favicon.ico de varios tamaños (16 px + 32 px + 48 px)',
+    icoBundleBody: 'Archivo .ico binario conforme a los estándares, listo para la carpeta raíz /public/ de tu sitio web',
+    downloadIco: 'Descargar favicon.ico',
+    faviconPreviewAlt: 'Vista previa del favicon 32x32',
+    iconAlt: 'Icono de {size}x{size}',
+    htmlTagsLabel: 'Etiquetas de enlace HTML <head>',
+    copyHtml: 'Copiar HTML',
+  },
+};
 
 type SourceMode = 'monogram' | 'image';
 type BadgeShape = 'rounded' | 'circle' | 'square';
@@ -12,13 +84,13 @@ interface GeneratedIcon {
   url: string;
 }
 
-const TARGET_SIZES: { size: number; label: string; fileName: string }[] = [
-  { size: 16, label: '16×16 Browser Tab', fileName: 'favicon-16x16.png' },
-  { size: 32, label: '32×32 Taskbar / HiDPI', fileName: 'favicon-32x32.png' },
-  { size: 48, label: '48×48 Desktop Shortcut', fileName: 'favicon-48x48.png' },
-  { size: 180, label: '180×180 Apple Touch', fileName: 'apple-touch-icon.png' },
-  { size: 192, label: '192×192 Android Chrome', fileName: 'android-chrome-192x192.png' },
-  { size: 512, label: '512×512 PWA Splash', fileName: 'android-chrome-512x512.png' },
+const TARGET_SIZES: { size: number; labelKey: keyof typeof STRINGS.en.sizeLabels; fileName: string }[] = [
+  { size: 16, labelKey: 'browserTab', fileName: 'favicon-16x16.png' },
+  { size: 32, labelKey: 'taskbar', fileName: 'favicon-32x32.png' },
+  { size: 48, labelKey: 'desktopShortcut', fileName: 'favicon-48x48.png' },
+  { size: 180, labelKey: 'appleTouch', fileName: 'apple-touch-icon.png' },
+  { size: 192, labelKey: 'androidChrome', fileName: 'android-chrome-192x192.png' },
+  { size: 512, labelKey: 'pwaSplash', fileName: 'android-chrome-512x512.png' },
 ];
 
 /**
@@ -60,6 +132,8 @@ export function buildMultiSizeIco(entries: { size: number; pngBytes: Uint8Array 
 }
 
 export default function FaviconGeneratorTool() {
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
   const [sourceMode, setSourceMode] = useState<SourceMode>('monogram');
 
   // Monogram settings
@@ -100,7 +174,7 @@ export default function FaviconGeneratorTool() {
           loadedImg = await new Promise<HTMLImageElement>((resolve, reject) => {
             const el = new Image();
             el.onload = () => resolve(el);
-            el.onerror = () => reject(new Error(`Unable to read "${uploadedFile.name}".`));
+            el.onerror = () => reject(new Error(s.unableToRead.replace('{name}', uploadedFile.name)));
             el.src = tempImgUrl;
           });
         }
@@ -109,23 +183,23 @@ export default function FaviconGeneratorTool() {
         const icoFrames: { size: number; pngBytes: Uint8Array }[] = [];
 
         for (const target of TARGET_SIZES) {
-          const s = target.size;
+          const sz = target.size;
           const canvas = document.createElement('canvas');
-          canvas.width = s;
-          canvas.height = s;
+          canvas.width = sz;
+          canvas.height = sz;
           const ctx = canvas.getContext('2d');
-          if (!ctx) throw new Error('Canvas 2D context unavailable.');
+          if (!ctx) throw new Error(s.canvasUnavailable);
 
           // Shape clip mask
           ctx.save();
           if (shape === 'circle') {
             ctx.beginPath();
-            ctx.arc(s / 2, s / 2, s / 2, 0, Math.PI * 2);
+            ctx.arc(sz / 2, sz / 2, sz / 2, 0, Math.PI * 2);
             ctx.clip();
           } else if (shape === 'rounded') {
-            const radius = Math.round(s * 0.2);
+            const radius = Math.round(sz * 0.2);
             ctx.beginPath();
-            ctx.roundRect(0, 0, s, s, radius);
+            ctx.roundRect(0, 0, sz, sz, radius);
             ctx.clip();
           }
 
@@ -136,29 +210,29 @@ export default function FaviconGeneratorTool() {
             const sy = Math.floor((loadedImg.naturalHeight - side) / 2);
             ctx.imageSmoothingEnabled = true;
             ctx.imageSmoothingQuality = 'high';
-            ctx.drawImage(loadedImg, sx, sy, side, side, 0, 0, s, s);
+            ctx.drawImage(loadedImg, sx, sy, side, side, 0, 0, sz, sz);
           } else {
             ctx.fillStyle = bgColor;
-            ctx.fillRect(0, 0, s, s);
+            ctx.fillRect(0, 0, sz, sz);
             const text = (letters.trim() || 'U').slice(0, 3).toUpperCase();
             const fontScale = text.length === 1 ? 0.56 : text.length === 2 ? 0.44 : 0.34;
             ctx.fillStyle = fgColor;
-            ctx.font = `700 ${Math.round(s * fontScale)}px Inter, system-ui, -apple-system, sans-serif`;
+            ctx.font = `700 ${Math.round(sz * fontScale)}px Inter, system-ui, -apple-system, sans-serif`;
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
-            ctx.fillText(text, s / 2, s * 0.53);
+            ctx.fillText(text, sz / 2, sz * 0.53);
           }
           ctx.restore();
 
           const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, 'image/png'));
-          if (!blob) throw new Error('Failed to encode favicon PNG.');
+          if (!blob) throw new Error(s.failedEncode);
 
           const url = URL.createObjectURL(blob);
-          rendered.push({ ...target, url });
+          rendered.push({ size: target.size, label: s.sizeLabels[target.labelKey], fileName: target.fileName, url });
 
-          if (s === 16 || s === 32 || s === 48) {
+          if (sz === 16 || sz === 32 || sz === 48) {
             const ab = await blob.arrayBuffer();
-            icoFrames.push({ size: s, pngBytes: new Uint8Array(ab) });
+            icoFrames.push({ size: sz, pngBytes: new Uint8Array(ab) });
           }
         }
 
@@ -184,7 +258,7 @@ export default function FaviconGeneratorTool() {
         });
       } catch (err) {
         if (!cancelled) {
-          setError(err instanceof Error ? err.message : 'Unable to generate favicons.');
+          setError(err instanceof Error ? err.message : s.unableToGenerate);
         }
       } finally {
         if (tempImgUrl) URL.revokeObjectURL(tempImgUrl);
@@ -194,7 +268,7 @@ export default function FaviconGeneratorTool() {
     return () => {
       cancelled = true;
     };
-  }, [sourceMode, letters, bgColor, fgColor, shape, uploadedFile]);
+  }, [sourceMode, letters, bgColor, fgColor, shape, uploadedFile, locale]);
 
   const htmlSnippet = `<link rel="icon" href="/favicon.ico" sizes="any" />
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -214,7 +288,7 @@ export default function FaviconGeneratorTool() {
           }`}
         >
           <Sparkles className="w-4 h-4" />
-          Monogram Badge Builder
+          {s.monogramMode}
         </button>
         <button
           type="button"
@@ -226,7 +300,7 @@ export default function FaviconGeneratorTool() {
           }`}
         >
           <ImagePlus className="w-4 h-4" />
-          Upload Logo Image
+          {s.imageMode}
         </button>
       </div>
 
@@ -234,7 +308,7 @@ export default function FaviconGeneratorTool() {
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 rounded-xl border border-slate-200 bg-slate-50 p-4">
           <div>
             <label htmlFor="fav-letters" className="block text-xs font-semibold text-slate-800 mb-1.5">
-              Text / Initials (1–3 chars)
+              {s.lettersLabel}
             </label>
             <input
               id="fav-letters"
@@ -248,7 +322,7 @@ export default function FaviconGeneratorTool() {
 
           <div>
             <label htmlFor="fav-shape" className="block text-xs font-semibold text-slate-800 mb-1.5">
-              Corner Shape
+              {s.cornerShapeLabel}
             </label>
             <select
               id="fav-shape"
@@ -256,15 +330,15 @@ export default function FaviconGeneratorTool() {
               onChange={(e) => setShape(e.target.value as BadgeShape)}
               className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"
             >
-              <option value="rounded">Rounded Square</option>
-              <option value="circle">Circle</option>
-              <option value="square">Sharp Square</option>
+              <option value="rounded">{s.roundedSquare}</option>
+              <option value="circle">{s.circle}</option>
+              <option value="square">{s.sharpSquare}</option>
             </select>
           </div>
 
           <div>
             <label htmlFor="fav-bg" className="block text-xs font-semibold text-slate-800 mb-1.5">
-              Background Color
+              {s.bgColorLabel}
             </label>
             <div className="flex items-center gap-2">
               <input
@@ -280,7 +354,7 @@ export default function FaviconGeneratorTool() {
 
           <div>
             <label htmlFor="fav-fg" className="block text-xs font-semibold text-slate-800 mb-1.5">
-              Text Color
+              {s.textColorLabel}
             </label>
             <div className="flex items-center gap-2">
               <input
@@ -303,8 +377,8 @@ export default function FaviconGeneratorTool() {
             <ImagePlus className="w-5 h-5 text-indigo-600" />
             <span>
               {uploadedFile
-                ? `Loaded: ${uploadedFile.name} (Click to replace)`
-                : 'Choose a PNG, JPG, WebP, or SVG logo'}
+                ? s.loadedReplace.replace('{name}', uploadedFile.name)
+                : s.chooseLogo}
             </span>
             <input
               id="fav-upload"
@@ -321,7 +395,7 @@ export default function FaviconGeneratorTool() {
 
           <div>
             <label htmlFor="fav-img-shape" className="block text-xs font-semibold text-slate-800 mb-1.5">
-              Crop Mask
+              {s.cropMaskLabel}
             </label>
             <select
               id="fav-img-shape"
@@ -329,9 +403,9 @@ export default function FaviconGeneratorTool() {
               onChange={(e) => setShape(e.target.value as BadgeShape)}
               className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"
             >
-              <option value="rounded">Rounded Square</option>
-              <option value="circle">Circle</option>
-              <option value="square">Square</option>
+              <option value="rounded">{s.roundedSquare}</option>
+              <option value="circle">{s.circle}</option>
+              <option value="square">{s.square}</option>
             </select>
           </div>
         </div>
@@ -350,15 +424,15 @@ export default function FaviconGeneratorTool() {
               <div className="flex items-center gap-3">
                 <img
                   src={icons[1]?.url || icons[0].url}
-                  alt="Favicon 32x32 preview"
+                  alt={s.faviconPreviewAlt}
                   className="w-9 h-9 rounded border border-slate-200 bg-white p-0.5"
                 />
                 <div>
                   <h3 className="text-sm font-bold text-slate-900">
-                    Multi-Size favicon.ico Bundle (16px + 32px + 48px)
+                    {s.icoBundleTitle}
                   </h3>
                   <p className="text-xs text-slate-600">
-                    Standards-compliant binary .ico file ready for your website root /public/ folder
+                    {s.icoBundleBody}
                   </p>
                 </div>
               </div>
@@ -368,7 +442,7 @@ export default function FaviconGeneratorTool() {
                 className="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-4 py-2 text-xs sm:text-sm font-semibold text-white hover:bg-indigo-700"
               >
                 <Download className="w-4 h-4" />
-                Download favicon.ico
+                {s.downloadIco}
               </a>
             </div>
           )}
@@ -382,7 +456,7 @@ export default function FaviconGeneratorTool() {
                 <div className="h-16 flex items-center justify-center">
                   <img
                     src={ic.url}
-                    alt={`${ic.size}x${ic.size} icon`}
+                    alt={s.iconAlt.replace('{size}', String(ic.size))}
                     style={{ width: Math.min(56, Math.max(20, ic.size)), height: Math.min(56, Math.max(20, ic.size)) }}
                     className="object-contain"
                   />
@@ -406,9 +480,9 @@ export default function FaviconGeneratorTool() {
           <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 space-y-2">
             <div className="flex items-center justify-between gap-2">
               <span className="text-xs font-semibold text-slate-800">
-                HTML &lt;head&gt; Link Tags
+                {s.htmlTagsLabel}
               </span>
-              <CopyButton text={htmlSnippet} label="Copy HTML" />
+              <CopyButton text={htmlSnippet} label={s.copyHtml} copiedLabel={t.common.copied} />
             </div>
             <pre className="rounded-lg border border-slate-200 bg-white p-3 font-mono text-xs text-slate-800 overflow-x-auto">
               {htmlSnippet}

@@ -1,6 +1,70 @@
 import { Download, ImagePlus } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { formatBytes } from '../pdf/pdfUtils';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    chooseImage: 'Choose an Image to Compress (PNG / JPG / WebP)',
+    fileWithDims: '{name} ({w}×{h} · {size})',
+    processedLocally: 'Processed locally via HTML5 Canvas · Never uploaded to remote servers',
+    uploadImageError: 'Please upload a PNG, JPG, WebP, or GIF image file.',
+    unableToDecode: 'Unable to decode "{name}".',
+    canvasUnavailable: 'Canvas 2D context unavailable.',
+    compressionFailed: 'Compression failed in browser canvas.',
+    unableToCompress: 'Unable to compress image.',
+    unableToRead: 'Unable to read "{name}".',
+    invalidImage: 'Invalid image file.',
+    outputFormatLabel: 'Output Format',
+    webpOption: 'WebP (Smallest modern web size)',
+    jpgOption: 'JPG (Broadest compatibility)',
+    pngOption: 'PNG (Lossless transparency)',
+    maxWidthLabel: 'Max Width Cap',
+    keepOriginalWidth: 'Keep Original Width',
+    max1920: 'Max 1920 px (Full HD)',
+    max1280: 'Max 1280 px (Blog / Hero)',
+    max800: 'Max 800 px (Thumbnails)',
+    qualityLabel: 'Quality: ',
+    losslessPng: 'Lossless PNG',
+    originalLabel: 'Original',
+    compressedLabel: 'Compressed',
+    changeLabel: 'Change',
+    outputSummary: 'Output: {w} × {h} px · {ext}',
+    compressing: 'Compressing...',
+    downloadExt: 'Download .{ext}',
+    previewAlt: 'Compressed image preview',
+  },
+  es: {
+    chooseImage: 'Elige una imagen para comprimir (PNG / JPG / WebP)',
+    fileWithDims: '{name} ({w}×{h} · {size})',
+    processedLocally: 'Se procesa localmente con HTML5 Canvas · Nunca se sube a servidores remotos',
+    uploadImageError: 'Sube un archivo de imagen PNG, JPG, WebP o GIF.',
+    unableToDecode: 'No se pudo decodificar "{name}".',
+    canvasUnavailable: 'Contexto 2D de Canvas no disponible.',
+    compressionFailed: 'La compresión falló en el lienzo del navegador.',
+    unableToCompress: 'No se pudo comprimir la imagen.',
+    unableToRead: 'No se pudo leer "{name}".',
+    invalidImage: 'Archivo de imagen no válido.',
+    outputFormatLabel: 'Formato de salida',
+    webpOption: 'WebP (el tamaño web moderno más pequeño)',
+    jpgOption: 'JPG (la mayor compatibilidad)',
+    pngOption: 'PNG (transparencia sin pérdida)',
+    maxWidthLabel: 'Límite máximo de ancho',
+    keepOriginalWidth: 'Mantener el ancho original',
+    max1920: 'Máx. 1920 px (Full HD)',
+    max1280: 'Máx. 1280 px (blog / hero)',
+    max800: 'Máx. 800 px (miniaturas)',
+    qualityLabel: 'Calidad: ',
+    losslessPng: 'PNG sin pérdida',
+    originalLabel: 'Original',
+    compressedLabel: 'Comprimida',
+    changeLabel: 'Cambio',
+    outputSummary: 'Salida: {w} × {h} px · {ext}',
+    compressing: 'Comprimiendo...',
+    downloadExt: 'Descargar .{ext}',
+    previewAlt: 'Vista previa de la imagen comprimida',
+  },
+};
 
 type OutputMime = 'image/webp' | 'image/jpeg' | 'image/png';
 
@@ -12,6 +76,8 @@ interface CompressedPreview {
 }
 
 export default function ImageCompressorTool() {
+  const { locale } = useLocale();
+  const s = STRINGS[locale];
   const [sourceFile, setSourceFile] = useState<File | null>(null);
   const [sourceUrl, setSourceUrl] = useState('');
   const [sourceDims, setSourceDims] = useState<{ w: number; h: number } | null>(null);
@@ -46,7 +112,7 @@ export default function ImageCompressorTool() {
       const img = await new Promise<HTMLImageElement>((resolve, reject) => {
         const el = new Image();
         el.onload = () => resolve(el);
-        el.onerror = () => reject(new Error(`Unable to decode "${file.name}".`));
+        el.onerror = () => reject(new Error(s.unableToDecode.replace('{name}', file.name)));
         el.src = tmpUrl;
       });
 
@@ -57,7 +123,7 @@ export default function ImageCompressorTool() {
       canvas.width = targetW;
       canvas.height = targetH;
       const ctx = canvas.getContext('2d');
-      if (!ctx) throw new Error('Canvas 2D context unavailable.');
+      if (!ctx) throw new Error(s.canvasUnavailable);
 
       if (mime === 'image/jpeg') {
         ctx.fillStyle = '#ffffff';
@@ -70,7 +136,7 @@ export default function ImageCompressorTool() {
       const blob = await new Promise<Blob | null>((resolve) =>
         canvas.toBlob(resolve, mime, mime === 'image/png' ? undefined : qual / 100)
       );
-      if (!blob) throw new Error('Compression failed in browser canvas.');
+      if (!blob) throw new Error(s.compressionFailed);
 
       const outUrl = URL.createObjectURL(blob);
       setCompressed((prev) => {
@@ -78,7 +144,7 @@ export default function ImageCompressorTool() {
         return { url: outUrl, sizeBytes: blob.size, width: targetW, height: targetH };
       });
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Unable to compress image.');
+      setError(err instanceof Error ? err.message : s.unableToCompress);
     } finally {
       URL.revokeObjectURL(tmpUrl);
       setIsProcessing(false);
@@ -88,7 +154,7 @@ export default function ImageCompressorTool() {
   const handleFile = async (file: File | undefined) => {
     if (!file) return;
     if (!file.type.startsWith('image/')) {
-      setError('Please upload a PNG, JPG, WebP, or GIF image file.');
+      setError(s.uploadImageError);
       return;
     }
 
@@ -97,7 +163,7 @@ export default function ImageCompressorTool() {
       const dims = await new Promise<{ w: number; h: number }>((resolve, reject) => {
         const img = new Image();
         img.onload = () => resolve({ w: img.naturalWidth, h: img.naturalHeight });
-        img.onerror = () => reject(new Error(`Unable to read "${file.name}".`));
+        img.onerror = () => reject(new Error(s.unableToRead.replace('{name}', file.name)));
         img.src = nextSourceUrl;
       });
       setSourceUrl((prev) => {
@@ -109,7 +175,7 @@ export default function ImageCompressorTool() {
       await runCompression(file, outputMime, quality, maxWidth);
     } catch (err) {
       URL.revokeObjectURL(nextSourceUrl);
-      setError(err instanceof Error ? err.message : 'Invalid image file.');
+      setError(err instanceof Error ? err.message : s.invalidImage);
     }
   };
 
@@ -129,11 +195,15 @@ export default function ImageCompressorTool() {
         <ImagePlus className="w-8 h-8 text-indigo-600 mb-2" />
         <span className="text-sm font-semibold text-slate-900">
           {sourceFile
-            ? `${sourceFile.name} (${sourceDims?.w}×${sourceDims?.h} · ${formatBytes(sourceFile.size)})`
-            : 'Choose an Image to Compress (PNG / JPG / WebP)'}
+            ? s.fileWithDims
+                .replace('{name}', sourceFile.name)
+                .replace('{w}', String(sourceDims?.w))
+                .replace('{h}', String(sourceDims?.h))
+                .replace('{size}', formatBytes(sourceFile.size, locale))
+            : s.chooseImage}
         </span>
         <span className="mt-1 text-xs text-slate-500">
-          Processed locally via HTML5 Canvas · Never uploaded to remote servers
+          {s.processedLocally}
         </span>
         <input
           id="img-comp-input"
@@ -158,7 +228,7 @@ export default function ImageCompressorTool() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 items-end">
             <div>
               <label htmlFor="comp-fmt" className="block text-xs font-semibold text-slate-800 mb-1.5">
-                Output Format
+                {s.outputFormatLabel}
               </label>
               <select
                 id="comp-fmt"
@@ -170,15 +240,15 @@ export default function ImageCompressorTool() {
                 }}
                 className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"
               >
-                <option value="image/webp">WebP (Smallest modern web size)</option>
-                <option value="image/jpeg">JPG (Broadest compatibility)</option>
-                <option value="image/png">PNG (Lossless transparency)</option>
+                <option value="image/webp">{s.webpOption}</option>
+                <option value="image/jpeg">{s.jpgOption}</option>
+                <option value="image/png">{s.pngOption}</option>
               </select>
             </div>
 
             <div>
               <label htmlFor="comp-maxw" className="block text-xs font-semibold text-slate-800 mb-1.5">
-                Max Width Cap
+                {s.maxWidthLabel}
               </label>
               <select
                 id="comp-maxw"
@@ -190,16 +260,17 @@ export default function ImageCompressorTool() {
                 }}
                 className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"
               >
-                <option value={0}>Keep Original Width</option>
-                <option value={1920}>Max 1920 px (Full HD)</option>
-                <option value={1280}>Max 1280 px (Blog / Hero)</option>
-                <option value={800}>Max 800 px (Thumbnails)</option>
+                <option value={0}>{s.keepOriginalWidth}</option>
+                <option value={1920}>{s.max1920}</option>
+                <option value={1280}>{s.max1280}</option>
+                <option value={800}>{s.max800}</option>
               </select>
             </div>
 
             <div>
               <label htmlFor="comp-q" className="block text-xs font-semibold text-slate-800 mb-1.5">
-                Quality: <span className="font-mono">{outputMime === 'image/png' ? 'Lossless PNG' : `${quality}%`}</span>
+                {s.qualityLabel}
+                <span className="font-mono">{outputMime === 'image/png' ? s.losslessPng : `${quality}%`}</span>
               </label>
               <input
                 id="comp-q"
@@ -224,7 +295,7 @@ export default function ImageCompressorTool() {
               <div className="lg:col-span-5 aspect-video rounded-lg border border-slate-200 bg-white overflow-hidden flex items-center justify-center p-2">
                 <img
                   src={compressed.url}
-                  alt="Compressed image preview"
+                  alt={s.previewAlt}
                   className="max-h-full max-w-full object-contain"
                 />
               </div>
@@ -232,19 +303,19 @@ export default function ImageCompressorTool() {
               <div className="lg:col-span-7 space-y-4">
                 <dl className="grid grid-cols-3 gap-3 tabular-nums">
                   <div className="rounded-lg border border-slate-200 bg-white p-3">
-                    <dt className="text-xs text-slate-500">Original</dt>
+                    <dt className="text-xs text-slate-500">{s.originalLabel}</dt>
                     <dd className="mt-1 font-mono text-sm font-bold text-slate-900">
-                      {formatBytes(sourceFile.size)}
+                      {formatBytes(sourceFile.size, locale)}
                     </dd>
                   </div>
                   <div className="rounded-lg border border-slate-200 bg-white p-3">
-                    <dt className="text-xs text-slate-500">Compressed</dt>
+                    <dt className="text-xs text-slate-500">{s.compressedLabel}</dt>
                     <dd className="mt-1 font-mono text-sm font-bold text-indigo-700">
-                      {formatBytes(compressed.sizeBytes)}
+                      {formatBytes(compressed.sizeBytes, locale)}
                     </dd>
                   </div>
                   <div className="rounded-lg border border-slate-200 bg-white p-3">
-                    <dt className="text-xs text-slate-500">Change</dt>
+                    <dt className="text-xs text-slate-500">{s.changeLabel}</dt>
                     <dd
                       className={`mt-1 font-mono text-sm font-bold ${
                         savingsPct > 0 ? 'text-emerald-700' : 'text-amber-700'
@@ -257,7 +328,10 @@ export default function ImageCompressorTool() {
 
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <span className="text-xs text-slate-600 font-mono tabular-nums">
-                    Output: {compressed.width} × {compressed.height} px · {ext.toUpperCase()}
+                    {s.outputSummary
+                      .replace('{w}', String(compressed.width))
+                      .replace('{h}', String(compressed.height))
+                      .replace('{ext}', ext.toUpperCase())}
                   </span>
 
                   <a
@@ -266,7 +340,7 @@ export default function ImageCompressorTool() {
                     className="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-700"
                   >
                     <Download className="w-4 h-4" />
-                    {isProcessing ? 'Compressing...' : `Download .${ext.toUpperCase()}`}
+                    {isProcessing ? s.compressing : s.downloadExt.replace('{ext}', ext.toUpperCase())}
                   </a>
                 </div>
               </div>

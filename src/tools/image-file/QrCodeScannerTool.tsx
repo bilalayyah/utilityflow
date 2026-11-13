@@ -3,29 +3,134 @@ import { Camera, Download, QrCode, ScanLine, StopCircle, Upload } from 'lucide-r
 import QRCode from 'qrcode';
 import { useEffect, useRef, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    payloadKinds: {
+      websiteUrl: 'Website URL',
+      text: 'Text',
+      wifi: 'Wi-Fi Configuration',
+      vcard: 'vCard Contact',
+      email: 'Email Address',
+      phone: 'Phone Number',
+      plainText: 'Plain Text',
+    },
+    liveCameraCapture: 'Live Camera Capture',
+    scanMode: 'Scan / Decode QR Image',
+    vcardMode: 'vCard Contact QR Builder',
+    uploadQr: 'Upload QR Code Image',
+    uploadQrNote: 'PNG, JPG, WebP, or SVG screenshot · 100% client-side',
+    liveCameraTitle: 'Live Device Camera Scan',
+    liveCameraNote: 'Uses local camera feed only when permission is granted',
+    startCamera: 'Start Camera Scanner',
+    stopCamera: 'Stop Camera',
+    cameraHint: 'Point your camera at a QR code—capture stops automatically as soon as decoded.',
+    uploadImageError: 'Please upload a PNG, JPG, WebP, or SVG image containing a QR code.',
+    unableToLoad: 'Unable to load "{name}".',
+    noQrDetected:
+      'No QR code could be detected in this image. Ensure sharp focus, clear quiet-zone margins, and high contrast.',
+    unableToScan: 'Unable to scan image.',
+    cameraUnsupported: 'Camera scanning is not supported in this browser environment.',
+    cameraDenied:
+      'Camera permission was denied or no camera device is available. Upload a QR code image instead.',
+    decodedPayload: 'Decoded Payload · {kind}',
+    sourceLabel: 'Source: ',
+    copyPayload: 'Copy Payload',
+    decodedAria: 'Decoded QR text',
+    detectedLink: 'Detected web link: ',
+    uploadedPreviewAlt: 'Uploaded QR code preview',
+    firstNameLabel: 'First Name',
+    lastNameLabel: 'Last Name',
+    orgLabel: 'Organization',
+    jobTitleLabel: 'Job Title',
+    defaultJobTitle: 'Product Designer',
+    phoneLabel: 'Phone Number',
+    emailLabel: 'Email Address',
+    websiteLabel: 'Website URL',
+    rawVcardLabel: 'Raw vCard 3.0 Payload',
+    copyVcard: 'Copy vCard',
+    vcardQrAlt: 'Generated vCard QR Code',
+    downloadPng: 'Download PNG',
+    downloadSvg: 'Download SVG',
+  },
+  es: {
+    payloadKinds: {
+      websiteUrl: 'URL de sitio web',
+      text: 'Texto',
+      wifi: 'Configuración de Wi-Fi',
+      vcard: 'Contacto vCard',
+      email: 'Correo electrónico',
+      phone: 'Número de teléfono',
+      plainText: 'Texto sin formato',
+    },
+    liveCameraCapture: 'Captura con cámara en vivo',
+    scanMode: 'Escanear / decodificar imagen QR',
+    vcardMode: 'Generador de QR de contacto vCard',
+    uploadQr: 'Subir imagen de código QR',
+    uploadQrNote: 'Captura PNG, JPG, WebP o SVG · 100 % en el cliente',
+    liveCameraTitle: 'Escaneo con la cámara del dispositivo',
+    liveCameraNote: 'Usa la cámara local solo cuando se concede el permiso',
+    startCamera: 'Iniciar escáner de cámara',
+    stopCamera: 'Detener cámara',
+    cameraHint: 'Apunta la cámara a un código QR: la captura se detiene automáticamente al decodificarlo.',
+    uploadImageError: 'Sube una imagen PNG, JPG, WebP o SVG que contenga un código QR.',
+    unableToLoad: 'No se pudo cargar "{name}".',
+    noQrDetected:
+      'No se pudo detectar ningún código QR en esta imagen. Asegúrate de que esté bien enfocada, con márgenes de zona tranquila despejados y alto contraste.',
+    unableToScan: 'No se pudo escanear la imagen.',
+    cameraUnsupported: 'El escaneo con cámara no es compatible con este navegador.',
+    cameraDenied:
+      'El permiso de cámara fue denegado o no hay ningún dispositivo de cámara disponible. Sube una imagen de código QR.',
+    decodedPayload: 'Contenido decodificado · {kind}',
+    sourceLabel: 'Fuente: ',
+    copyPayload: 'Copiar contenido',
+    decodedAria: 'Texto QR decodificado',
+    detectedLink: 'Enlace web detectado: ',
+    uploadedPreviewAlt: 'Vista previa del código QR subido',
+    firstNameLabel: 'Nombre',
+    lastNameLabel: 'Apellido',
+    orgLabel: 'Organización',
+    jobTitleLabel: 'Cargo',
+    defaultJobTitle: 'Diseñador de producto',
+    phoneLabel: 'Número de teléfono',
+    emailLabel: 'Correo electrónico',
+    websiteLabel: 'URL del sitio web',
+    rawVcardLabel: 'Contenido vCard 3.0 sin procesar',
+    copyVcard: 'Copiar vCard',
+    vcardQrAlt: 'Código QR vCard generado',
+    downloadPng: 'Descargar PNG',
+    downloadSvg: 'Descargar SVG',
+  },
+};
 
 type Mode = 'scan' | 'vcard';
 
-function classifyPayload(text: string): { kind: string; safeHref: string | null } {
+function classifyPayload(
+  text: string,
+  kinds: typeof STRINGS.en.payloadKinds
+): { kind: string; safeHref: string | null } {
   const trimmed = text.trim();
   if (/^https?:\/\//i.test(trimmed)) {
     try {
       const u = new URL(trimmed);
       if (u.protocol === 'http:' || u.protocol === 'https:') {
-        return { kind: 'Website URL', safeHref: u.toString() };
+        return { kind: kinds.websiteUrl, safeHref: u.toString() };
       }
     } catch {
-      return { kind: 'Text', safeHref: null };
+      return { kind: kinds.text, safeHref: null };
     }
   }
-  if (/^WIFI:/i.test(trimmed)) return { kind: 'Wi-Fi Configuration', safeHref: null };
-  if (/^BEGIN:VCARD/i.test(trimmed)) return { kind: 'vCard Contact', safeHref: null };
-  if (/^mailto:/i.test(trimmed)) return { kind: 'Email Address', safeHref: null };
-  if (/^tel:/i.test(trimmed)) return { kind: 'Phone Number', safeHref: null };
-  return { kind: 'Plain Text', safeHref: null };
+  if (/^WIFI:/i.test(trimmed)) return { kind: kinds.wifi, safeHref: null };
+  if (/^BEGIN:VCARD/i.test(trimmed)) return { kind: kinds.vcard, safeHref: null };
+  if (/^mailto:/i.test(trimmed)) return { kind: kinds.email, safeHref: null };
+  if (/^tel:/i.test(trimmed)) return { kind: kinds.phone, safeHref: null };
+  return { kind: kinds.plainText, safeHref: null };
 }
 
 export default function QrCodeScannerTool() {
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
   const [mode, setMode] = useState<Mode>('scan');
 
   // Scanner state
@@ -43,7 +148,7 @@ export default function QrCodeScannerTool() {
   const [firstName, setFirstName] = useState('Jordan');
   const [lastName, setLastName] = useState('Taylor');
   const [org, setOrg] = useState('Northstar Studio');
-  const [jobTitle, setJobTitle] = useState('Product Designer');
+  const [jobTitle, setJobTitle] = useState(s.defaultJobTitle);
   const [phone, setPhone] = useState('+1-555-0148');
   const [email, setEmail] = useState('jordan@example.com');
   const [website, setWebsite] = useState('https://example.com');
@@ -82,7 +187,7 @@ export default function QrCodeScannerTool() {
     setDecodedText('');
 
     if (!file.type.startsWith('image/')) {
-      setScanError('Please upload a PNG, JPG, WebP, or SVG image containing a QR code.');
+      setScanError(s.uploadImageError);
       return;
     }
 
@@ -91,7 +196,7 @@ export default function QrCodeScannerTool() {
       const img = await new Promise<HTMLImageElement>((resolve, reject) => {
         const el = new Image();
         el.onload = () => resolve(el);
-        el.onerror = () => reject(new Error(`Unable to load "${file.name}".`));
+        el.onerror = () => reject(new Error(s.unableToLoad.replace('{name}', file.name)));
         el.src = objUrl;
       });
 
@@ -131,15 +236,13 @@ export default function QrCodeScannerTool() {
       setScanSourceName(file.name);
 
       if (!result || !result.data) {
-        setScanError(
-          'No QR code could be detected in this image. Ensure sharp focus, clear quiet-zone margins, and high contrast.'
-        );
+        setScanError(s.noQrDetected);
       } else {
         setDecodedText(result.data);
       }
     } catch (err) {
       URL.revokeObjectURL(objUrl);
-      setScanError(err instanceof Error ? err.message : 'Unable to scan image.');
+      setScanError(err instanceof Error ? err.message : s.unableToScan);
     }
   };
 
@@ -148,7 +251,7 @@ export default function QrCodeScannerTool() {
     setDecodedText('');
 
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-      setScanError('Camera scanning is not supported in this browser environment.');
+      setScanError(s.cameraUnsupported);
       return;
     }
 
@@ -181,7 +284,7 @@ export default function QrCodeScannerTool() {
                 const code = jsQR(imageData.data, w, h, { inversionAttempts: 'dontInvert' });
                 if (code && code.data) {
                   setDecodedText(code.data);
-                  setScanSourceName('Live Camera Capture');
+                  setScanSourceName(s.liveCameraCapture);
                   stopCamera();
                   return;
                 }
@@ -196,9 +299,7 @@ export default function QrCodeScannerTool() {
       window.setTimeout(attachAndScan, 40);
     } catch {
       stopCamera();
-      setScanError(
-        'Camera permission was denied or no camera device is available. Upload a QR code image instead.'
-      );
+      setScanError(s.cameraDenied);
     }
   };
 
@@ -240,7 +341,7 @@ export default function QrCodeScannerTool() {
     };
   }, [mode, vcardPayload]);
 
-  const decodedMeta = classifyPayload(decodedText);
+  const decodedMeta = classifyPayload(decodedText, s.payloadKinds);
 
   const downloadSvg = () => {
     if (!vcardSvg) return;
@@ -264,7 +365,7 @@ export default function QrCodeScannerTool() {
           }`}
         >
           <ScanLine className="w-4 h-4" />
-          Scan / Decode QR Image
+          {s.scanMode}
         </button>
         <button
           type="button"
@@ -277,7 +378,7 @@ export default function QrCodeScannerTool() {
           }`}
         >
           <QrCode className="w-4 h-4" />
-          vCard Contact QR Builder
+          {s.vcardMode}
         </button>
       </div>
 
@@ -290,10 +391,10 @@ export default function QrCodeScannerTool() {
             >
               <Upload className="w-7 h-7 text-indigo-600 mb-2" />
               <span className="text-sm font-semibold text-slate-900">
-                Upload QR Code Image
+                {s.uploadQr}
               </span>
               <span className="mt-1 text-xs text-slate-500">
-                PNG, JPG, WebP, or SVG screenshot · 100% client-side
+                {s.uploadQrNote}
               </span>
               <input
                 id="qr-scan-file"
@@ -310,10 +411,10 @@ export default function QrCodeScannerTool() {
             <div className="flex flex-col items-center justify-center rounded-xl border border-slate-200 bg-slate-50 px-5 py-7 text-center">
               <Camera className="w-7 h-7 text-indigo-600 mb-2" />
               <span className="text-sm font-semibold text-slate-900">
-                Live Device Camera Scan
+                {s.liveCameraTitle}
               </span>
               <span className="mt-1 text-xs text-slate-500 mb-3">
-                Uses local camera feed only when permission is granted
+                {s.liveCameraNote}
               </span>
               {!cameraActive ? (
                 <button
@@ -321,7 +422,7 @@ export default function QrCodeScannerTool() {
                   onClick={() => void startCameraScan()}
                   className="rounded-lg bg-indigo-600 px-4 py-2 text-xs font-semibold text-white hover:bg-indigo-700 cursor-pointer"
                 >
-                  Start Camera Scanner
+                  {s.startCamera}
                 </button>
               ) : (
                 <button
@@ -330,7 +431,7 @@ export default function QrCodeScannerTool() {
                   className="inline-flex items-center gap-1.5 rounded-lg bg-rose-600 px-4 py-2 text-xs font-semibold text-white hover:bg-rose-700 cursor-pointer"
                 >
                   <StopCircle className="w-4 h-4" />
-                  Stop Camera
+                  {s.stopCamera}
                 </button>
               )}
             </div>
@@ -345,7 +446,7 @@ export default function QrCodeScannerTool() {
                 className="mx-auto max-h-72 rounded-lg"
               />
               <p className="mt-2 text-xs text-slate-300">
-                Point your camera at a QR code—capture stops automatically as soon as decoded.
+                {s.cameraHint}
               </p>
             </div>
           )}
@@ -358,11 +459,11 @@ export default function QrCodeScannerTool() {
 
           {decodedText && (
             <div className="grid grid-cols-1 md:grid-cols-12 gap-5 rounded-xl border border-emerald-200 bg-emerald-50/50 p-4">
-              {previewUrl && scanSourceName !== 'Live Camera Capture' && (
+              {previewUrl && scanSourceName !== s.liveCameraCapture && (
                 <div className="md:col-span-4 rounded-lg border border-slate-200 bg-white p-2 flex items-center justify-center">
                   <img
                     src={previewUrl}
-                    alt="Uploaded QR code preview"
+                    alt={s.uploadedPreviewAlt}
                     className="max-h-44 object-contain"
                   />
                 </div>
@@ -370,7 +471,7 @@ export default function QrCodeScannerTool() {
 
               <div
                 className={`${
-                  previewUrl && scanSourceName !== 'Live Camera Capture'
+                  previewUrl && scanSourceName !== s.liveCameraCapture
                     ? 'md:col-span-8'
                     : 'md:col-span-12'
                 } space-y-3`}
@@ -378,26 +479,26 @@ export default function QrCodeScannerTool() {
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <div>
                     <span className="text-xs font-semibold uppercase tracking-wider text-emerald-700">
-                      Decoded Payload · {decodedMeta.kind}
+                      {s.decodedPayload.replace('{kind}', decodedMeta.kind)}
                     </span>
                     {scanSourceName && (
-                      <p className="text-xs text-slate-500">Source: {scanSourceName}</p>
+                      <p className="text-xs text-slate-500">{s.sourceLabel}{scanSourceName}</p>
                     )}
                   </div>
-                  <CopyButton text={decodedText} label="Copy Payload" />
+                  <CopyButton text={decodedText} label={s.copyPayload} copiedLabel={t.common.copied} />
                 </div>
 
                 <textarea
                   readOnly
                   rows={4}
                   value={decodedText}
-                  aria-label="Decoded QR text"
+                  aria-label={s.decodedAria}
                   className="w-full rounded-lg border border-slate-300 bg-white p-3 font-mono text-xs sm:text-sm text-slate-900"
                 />
 
                 {decodedMeta.safeHref && (
                   <div className="text-xs text-slate-700">
-                    Detected web link:{' '}
+                    {s.detectedLink}
                     <a
                       href={decodedMeta.safeHref}
                       rel="noopener noreferrer nofollow"
@@ -416,7 +517,7 @@ export default function QrCodeScannerTool() {
           <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-3.5">
             <div>
               <label htmlFor="vc-first" className="block text-xs font-semibold text-slate-800 mb-1">
-                First Name
+                {s.firstNameLabel}
               </label>
               <input
                 id="vc-first"
@@ -428,7 +529,7 @@ export default function QrCodeScannerTool() {
             </div>
             <div>
               <label htmlFor="vc-last" className="block text-xs font-semibold text-slate-800 mb-1">
-                Last Name
+                {s.lastNameLabel}
               </label>
               <input
                 id="vc-last"
@@ -440,7 +541,7 @@ export default function QrCodeScannerTool() {
             </div>
             <div>
               <label htmlFor="vc-org" className="block text-xs font-semibold text-slate-800 mb-1">
-                Organization
+                {s.orgLabel}
               </label>
               <input
                 id="vc-org"
@@ -452,7 +553,7 @@ export default function QrCodeScannerTool() {
             </div>
             <div>
               <label htmlFor="vc-title" className="block text-xs font-semibold text-slate-800 mb-1">
-                Job Title
+                {s.jobTitleLabel}
               </label>
               <input
                 id="vc-title"
@@ -464,7 +565,7 @@ export default function QrCodeScannerTool() {
             </div>
             <div>
               <label htmlFor="vc-phone" className="block text-xs font-semibold text-slate-800 mb-1">
-                Phone Number
+                {s.phoneLabel}
               </label>
               <input
                 id="vc-phone"
@@ -476,7 +577,7 @@ export default function QrCodeScannerTool() {
             </div>
             <div>
               <label htmlFor="vc-email" className="block text-xs font-semibold text-slate-800 mb-1">
-                Email Address
+                {s.emailLabel}
               </label>
               <input
                 id="vc-email"
@@ -488,7 +589,7 @@ export default function QrCodeScannerTool() {
             </div>
             <div className="sm:col-span-2">
               <label htmlFor="vc-web" className="block text-xs font-semibold text-slate-800 mb-1">
-                Website URL
+                {s.websiteLabel}
               </label>
               <input
                 id="vc-web"
@@ -500,8 +601,8 @@ export default function QrCodeScannerTool() {
             </div>
             <div className="sm:col-span-2">
               <div className="flex items-center justify-between mb-1">
-                <span className="text-xs font-semibold text-slate-700">Raw vCard 3.0 Payload</span>
-                <CopyButton text={vcardPayload} label="Copy vCard" />
+                <span className="text-xs font-semibold text-slate-700">{s.rawVcardLabel}</span>
+                <CopyButton text={vcardPayload} label={s.copyVcard} copiedLabel={t.common.copied} />
               </div>
               <pre className="rounded-lg border border-slate-200 bg-slate-50 p-3 font-mono text-xs text-slate-700 overflow-x-auto">
                 {vcardPayload}
@@ -512,7 +613,7 @@ export default function QrCodeScannerTool() {
           <div className="lg:col-span-5 rounded-xl border border-slate-200 bg-slate-50 p-5 flex flex-col items-center space-y-4">
             {vcardPngUrl && (
               <div className="qr-light-surface rounded-lg border border-slate-200 bg-white p-3">
-                <img src={vcardPngUrl} alt="Generated vCard QR Code" className="w-56 h-56" />
+                <img src={vcardPngUrl} alt={s.vcardQrAlt} className="w-56 h-56" />
               </div>
             )}
             <div className="flex flex-wrap justify-center gap-2.5">
@@ -523,7 +624,7 @@ export default function QrCodeScannerTool() {
                   className="inline-flex items-center gap-1.5 rounded-lg bg-indigo-600 px-3.5 py-2 text-xs font-semibold text-white hover:bg-indigo-700"
                 >
                   <Download className="w-4 h-4" />
-                  Download PNG
+                  {s.downloadPng}
                 </a>
               )}
               <button
@@ -532,7 +633,7 @@ export default function QrCodeScannerTool() {
                 className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3.5 py-2 text-xs font-semibold text-slate-800 hover:bg-slate-50 cursor-pointer"
               >
                 <Download className="w-4 h-4" />
-                Download SVG
+                {s.downloadSvg}
               </button>
             </div>
           </div>

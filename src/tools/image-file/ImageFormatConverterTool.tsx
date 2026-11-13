@@ -1,6 +1,46 @@
 import { Download, ImagePlus, RefreshCw } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { formatBytes } from '../pdf/pdfUtils';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    selectImages: 'Select One or Multiple Images to Convert',
+    imagesLoaded: '{n} image(s) loaded — Click to add or replace',
+    batchNote: 'Batch convert PNG, JPG, WebP, SVG, or GIF to PNG, JPG, or WebP locally',
+    convertToLabel: 'Convert To Format',
+    pngOption: 'PNG (.png — preserves transparency)',
+    qualityLabel: 'Lossy Quality: ',
+    lossless: 'Lossless',
+    alphaFillLabel: 'Alpha Fill',
+    converting: 'Converting...',
+    reconvert: 'Re-convert',
+    selectFilesError: 'Select one or more image files (PNG, JPG, WebP, SVG, GIF).',
+    couldNotDecode: 'Could not decode "{name}".',
+    canvasUnavailable: 'Canvas 2D unavailable.',
+    conversionFailed: 'Conversion failed for "{name}".',
+    batchFailed: 'Batch image conversion failed.',
+    downloadExt: 'Download .{ext}',
+  },
+  es: {
+    selectImages: 'Selecciona una o varias imágenes para convertir',
+    imagesLoaded: '{n} imagen(es) cargada(s): haz clic para agregar o reemplazar',
+    batchNote: 'Convierte por lotes PNG, JPG, WebP, SVG o GIF a PNG, JPG o WebP localmente',
+    convertToLabel: 'Convertir a formato',
+    pngOption: 'PNG (.png: conserva la transparencia)',
+    qualityLabel: 'Calidad con pérdida: ',
+    lossless: 'Sin pérdida',
+    alphaFillLabel: 'Relleno alfa',
+    converting: 'Convirtiendo...',
+    reconvert: 'Volver a convertir',
+    selectFilesError: 'Selecciona uno o más archivos de imagen (PNG, JPG, WebP, SVG, GIF).',
+    couldNotDecode: 'No se pudo decodificar "{name}".',
+    canvasUnavailable: 'Canvas 2D no disponible.',
+    conversionFailed: 'La conversión falló para "{name}".',
+    batchFailed: 'La conversión por lotes de imágenes falló.',
+    downloadExt: 'Descargar .{ext}',
+  },
+};
 
 type TargetMime = 'image/png' | 'image/jpeg' | 'image/webp';
 
@@ -16,6 +56,8 @@ interface ConvertedItem {
 }
 
 export default function ImageFormatConverterTool() {
+  const { locale } = useLocale();
+  const s = STRINGS[locale];
   const [targetMime, setTargetMime] = useState<TargetMime>('image/webp');
   const [quality, setQuality] = useState(90);
   const [jpgFillColor, setJpgFillColor] = useState('#ffffff');
@@ -47,7 +89,7 @@ export default function ImageFormatConverterTool() {
           const img = await new Promise<HTMLImageElement>((resolve, reject) => {
             const el = new Image();
             el.onload = () => resolve(el);
-            el.onerror = () => reject(new Error(`Could not decode "${file.name}".`));
+            el.onerror = () => reject(new Error(s.couldNotDecode.replace('{name}', file.name)));
             el.src = srcUrl;
           });
 
@@ -55,7 +97,7 @@ export default function ImageFormatConverterTool() {
           canvas.width = img.naturalWidth;
           canvas.height = img.naturalHeight;
           const ctx = canvas.getContext('2d');
-          if (!ctx) throw new Error('Canvas 2D unavailable.');
+          if (!ctx) throw new Error(s.canvasUnavailable);
 
           if (mime === 'image/jpeg') {
             ctx.fillStyle = fillHex;
@@ -66,7 +108,7 @@ export default function ImageFormatConverterTool() {
           const blob = await new Promise<Blob | null>((resolve) =>
             canvas.toBlob(resolve, mime, mime === 'image/png' ? undefined : qual / 100)
           );
-          if (!blob) throw new Error(`Conversion failed for "${file.name}".`);
+          if (!blob) throw new Error(s.conversionFailed.replace('{name}', file.name));
 
           nextResults.push({
             id: i + 1,
@@ -88,7 +130,7 @@ export default function ImageFormatConverterTool() {
         return nextResults;
       });
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Batch image conversion failed.');
+      setError(err instanceof Error ? err.message : s.batchFailed);
     } finally {
       setIsConverting(false);
     }
@@ -98,7 +140,7 @@ export default function ImageFormatConverterTool() {
     if (!fileList || fileList.length === 0) return;
     const valid = Array.from(fileList).filter((f) => f.type.startsWith('image/'));
     if (valid.length === 0) {
-      setError('Select one or more image files (PNG, JPG, WebP, SVG, GIF).');
+      setError(s.selectFilesError);
       return;
     }
     setSourceFiles(valid);
@@ -114,11 +156,11 @@ export default function ImageFormatConverterTool() {
         <ImagePlus className="w-8 h-8 text-indigo-600 mb-2" />
         <span className="text-sm font-semibold text-slate-900">
           {sourceFiles.length > 0
-            ? `${sourceFiles.length} image(s) loaded — Click to add or replace`
-            : 'Select One or Multiple Images to Convert'}
+            ? s.imagesLoaded.replace('{n}', String(sourceFiles.length))
+            : s.selectImages}
         </span>
         <span className="mt-1 text-xs text-slate-500">
-          Batch convert PNG, JPG, WebP, SVG, or GIF to PNG, JPG, or WebP locally
+          {s.batchNote}
         </span>
         <input
           id="ifc-input"
@@ -136,7 +178,7 @@ export default function ImageFormatConverterTool() {
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 items-end">
         <div>
           <label htmlFor="ifc-mime" className="block text-xs font-semibold text-slate-800 mb-1.5">
-            Convert To Format
+            {s.convertToLabel}
           </label>
           <select
             id="ifc-mime"
@@ -145,14 +187,15 @@ export default function ImageFormatConverterTool() {
             className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"
           >
             <option value="image/webp">WebP (.webp)</option>
-            <option value="image/png">PNG (.png — preserves transparency)</option>
+            <option value="image/png">{s.pngOption}</option>
             <option value="image/jpeg">JPG (.jpg)</option>
           </select>
         </div>
 
         <div>
           <label htmlFor="ifc-q" className="block text-xs font-semibold text-slate-800 mb-1.5">
-            Lossy Quality: <span className="font-mono">{targetMime === 'image/png' ? 'Lossless' : `${quality}%`}</span>
+            {s.qualityLabel}
+            <span className="font-mono">{targetMime === 'image/png' ? s.lossless : `${quality}%`}</span>
           </label>
           <input
             id="ifc-q"
@@ -171,7 +214,7 @@ export default function ImageFormatConverterTool() {
           {targetMime === 'image/jpeg' && (
             <div>
               <label htmlFor="ifc-bg" className="block text-xs font-semibold text-slate-800 mb-1">
-                Alpha Fill
+                {s.alphaFillLabel}
               </label>
               <input
                 id="ifc-bg"
@@ -189,7 +232,7 @@ export default function ImageFormatConverterTool() {
             className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-700 disabled:opacity-50 cursor-pointer"
           >
             <RefreshCw className={`w-4 h-4 ${isConverting ? 'animate-spin' : ''}`} />
-            {isConverting ? 'Converting...' : 'Re-convert'}
+            {isConverting ? s.converting : s.reconvert}
           </button>
         </div>
       </div>
@@ -217,7 +260,7 @@ export default function ImageFormatConverterTool() {
                       {base}.{item.ext}
                     </div>
                     <div className="text-xs text-slate-500 font-mono tabular-nums">
-                      {item.width}×{item.height} · {formatBytes(item.originalSize)} → {formatBytes(item.outputSize)}
+                      {item.width}×{item.height} · {formatBytes(item.originalSize, locale)} → {formatBytes(item.outputSize, locale)}
                     </div>
                   </div>
                 </div>
@@ -227,7 +270,7 @@ export default function ImageFormatConverterTool() {
                   className="inline-flex items-center gap-1.5 rounded-lg bg-indigo-50 px-3 py-1.5 text-xs font-semibold text-indigo-700 hover:bg-indigo-100"
                 >
                   <Download className="w-3.5 h-3.5" />
-                  Download .{item.ext.toUpperCase()}
+                  {s.downloadExt.replace('{ext}', item.ext.toUpperCase())}
                 </a>
               </li>
             );

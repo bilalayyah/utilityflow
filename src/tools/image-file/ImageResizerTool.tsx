@@ -1,17 +1,79 @@
 import { Download, ImagePlus } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { formatBytes } from '../pdf/pdfUtils';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    chooseImage: 'Choose an Image to Resize or Crop to Preset Dimensions',
+    fileWithDims: '{name} (Original: {w} × {h} px)',
+    supportsNote: 'Supports pixel resizing, aspect locking, and center-cropped social presets',
+    selectImageError: 'Select a PNG, JPG, WebP, or GIF image.',
+    unableToDecode: 'Unable to decode "{name}".',
+    unableToRead: 'Unable to read image.',
+    failedLoading: 'Failed loading image for resizing.',
+    canvasUnavailable: 'Canvas 2D unavailable.',
+    failedGenerating: 'Failed generating resized image.',
+    resizeFailed: 'Resize failed.',
+    quickPresets: 'Quick Presets:',
+    presetOg: 'OG Share (1200×630)',
+    presetYoutube: 'YouTube HD (1280×720)',
+    presetSquare: 'Square (1080×1080)',
+    presetAvatar: 'Avatar (512×512)',
+    widthLabel: 'Width (px)',
+    heightLabel: 'Height (px)',
+    fitModeLabel: 'Aspect Fit Mode',
+    coverCropOption: 'Center Cover Crop (No stretch)',
+    exactOption: 'Scale Exact Dimensions',
+    outputFormatLabel: 'Output Format',
+    lockAspect: 'Lock original aspect ratio when typing dimensions',
+    resizeButton: 'Resize to {w} × {h} px',
+    readySummary: 'Ready: {w} × {h} px ({ext})',
+    downloadResized: 'Download Resized .{ext}',
+    previewAlt: 'Resized image output',
+  },
+  es: {
+    chooseImage: 'Elige una imagen para redimensionar o recortar a dimensiones predefinidas',
+    fileWithDims: '{name} (original: {w} × {h} px)',
+    supportsNote: 'Admite redimensionado por píxeles, bloqueo de aspecto y preajustes sociales con recorte centrado',
+    selectImageError: 'Selecciona una imagen PNG, JPG, WebP o GIF.',
+    unableToDecode: 'No se pudo decodificar "{name}".',
+    unableToRead: 'No se pudo leer la imagen.',
+    failedLoading: 'No se pudo cargar la imagen para redimensionarla.',
+    canvasUnavailable: 'Canvas 2D no disponible.',
+    failedGenerating: 'No se pudo generar la imagen redimensionada.',
+    resizeFailed: 'El redimensionado falló.',
+    quickPresets: 'Preajustes rápidos:',
+    presetOg: 'OG para compartir (1200×630)',
+    presetYoutube: 'YouTube HD (1280×720)',
+    presetSquare: 'Cuadrado (1080×1080)',
+    presetAvatar: 'Avatar (512×512)',
+    widthLabel: 'Ancho (px)',
+    heightLabel: 'Alto (px)',
+    fitModeLabel: 'Modo de ajuste de aspecto',
+    coverCropOption: 'Recorte de cobertura centrado (sin estirar)',
+    exactOption: 'Escalar a dimensiones exactas',
+    outputFormatLabel: 'Formato de salida',
+    lockAspect: 'Bloquear la relación de aspecto original al escribir las dimensiones',
+    resizeButton: 'Redimensionar a {w} × {h} px',
+    readySummary: 'Lista: {w} × {h} px ({ext})',
+    downloadResized: 'Descargar redimensionada .{ext}',
+    previewAlt: 'Imagen redimensionada de salida',
+  },
+};
 
 type FitMode = 'contain-exact' | 'cover-crop';
 
 const PRESETS = [
-  { label: 'OG Share (1200×630)', w: 1200, h: 630 },
-  { label: 'YouTube HD (1280×720)', w: 1280, h: 720 },
-  { label: 'Square (1080×1080)', w: 1080, h: 1080 },
-  { label: 'Avatar (512×512)', w: 512, h: 512 },
+  { key: 'presetOg' as const, w: 1200, h: 630 },
+  { key: 'presetYoutube' as const, w: 1280, h: 720 },
+  { key: 'presetSquare' as const, w: 1080, h: 1080 },
+  { key: 'presetAvatar' as const, w: 512, h: 512 },
 ];
 
 export default function ImageResizerTool() {
+  const { locale } = useLocale();
+  const s = STRINGS[locale];
   const [sourceFile, setSourceFile] = useState<File | null>(null);
   const [naturalDims, setNaturalDims] = useState<{ w: number; h: number } | null>(null);
   const [targetW, setTargetW] = useState(1200);
@@ -33,7 +95,7 @@ export default function ImageResizerTool() {
   const handleFile = async (file: File | undefined) => {
     if (!file) return;
     if (!file.type.startsWith('image/')) {
-      setError('Select a PNG, JPG, WebP, or GIF image.');
+      setError(s.selectImageError);
       return;
     }
     setError('');
@@ -42,7 +104,7 @@ export default function ImageResizerTool() {
       const dims = await new Promise<{ w: number; h: number }>((resolve, reject) => {
         const img = new Image();
         img.onload = () => resolve({ w: img.naturalWidth, h: img.naturalHeight });
-        img.onerror = () => reject(new Error(`Unable to decode "${file.name}".`));
+        img.onerror = () => reject(new Error(s.unableToDecode.replace('{name}', file.name)));
         img.src = url;
       });
       setSourceFile(file);
@@ -51,7 +113,7 @@ export default function ImageResizerTool() {
       setTargetH(dims.h);
       setPreviewUrl('');
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Unable to read image.');
+      setError(err instanceof Error ? err.message : s.unableToRead);
     } finally {
       URL.revokeObjectURL(url);
     }
@@ -81,7 +143,7 @@ export default function ImageResizerTool() {
       const img = await new Promise<HTMLImageElement>((resolve, reject) => {
         const el = new Image();
         el.onload = () => resolve(el);
-        el.onerror = () => reject(new Error('Failed loading image for resizing.'));
+        el.onerror = () => reject(new Error(s.failedLoading));
         el.src = srcUrl;
       });
 
@@ -89,7 +151,7 @@ export default function ImageResizerTool() {
       canvas.width = targetW;
       canvas.height = targetH;
       const ctx = canvas.getContext('2d');
-      if (!ctx) throw new Error('Canvas 2D unavailable.');
+      if (!ctx) throw new Error(s.canvasUnavailable);
 
       if (outputMime === 'image/jpeg') {
         ctx.fillStyle = '#ffffff';
@@ -123,7 +185,7 @@ export default function ImageResizerTool() {
       const blob = await new Promise<Blob | null>((resolve) =>
         canvas.toBlob(resolve, outputMime, 0.92)
       );
-      if (!blob) throw new Error('Failed generating resized image.');
+      if (!blob) throw new Error(s.failedGenerating);
       const nextUrl = URL.createObjectURL(blob);
       setPreviewUrl((prev) => {
         if (prev) URL.revokeObjectURL(prev);
@@ -131,7 +193,7 @@ export default function ImageResizerTool() {
       });
       setOutputSize(blob.size);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Resize failed.');
+      setError(err instanceof Error ? err.message : s.resizeFailed);
     } finally {
       URL.revokeObjectURL(srcUrl);
     }
@@ -149,11 +211,14 @@ export default function ImageResizerTool() {
         <ImagePlus className="w-8 h-8 text-indigo-600 mb-2" />
         <span className="text-sm font-semibold text-slate-900">
           {sourceFile && naturalDims
-            ? `${sourceFile.name} (Original: ${naturalDims.w} × ${naturalDims.h} px)`
-            : 'Choose an Image to Resize or Crop to Preset Dimensions'}
+            ? s.fileWithDims
+                .replace('{name}', sourceFile.name)
+                .replace('{w}', String(naturalDims.w))
+                .replace('{h}', String(naturalDims.h))
+            : s.chooseImage}
         </span>
         <span className="mt-1 text-xs text-slate-500">
-          Supports pixel resizing, aspect locking, and center-cropped social presets
+          {s.supportsNote}
         </span>
         <input
           id="img-res-input"
@@ -176,10 +241,10 @@ export default function ImageResizerTool() {
       {sourceFile && (
         <div className="space-y-5">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xs font-semibold text-slate-500">Quick Presets:</span>
+            <span className="text-xs font-semibold text-slate-500">{s.quickPresets}</span>
             {PRESETS.map((p) => (
               <button
-                key={p.label}
+                key={p.key}
                 type="button"
                 onClick={() => {
                   setLockAspect(false);
@@ -188,7 +253,7 @@ export default function ImageResizerTool() {
                 }}
                 className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-medium text-slate-700 hover:border-indigo-300 cursor-pointer"
               >
-                {p.label}
+                {s[p.key]}
               </button>
             ))}
           </div>
@@ -196,7 +261,7 @@ export default function ImageResizerTool() {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 items-end">
             <div>
               <label htmlFor="res-w" className="block text-xs font-semibold text-slate-800 mb-1.5">
-                Width (px)
+                {s.widthLabel}
               </label>
               <input
                 id="res-w"
@@ -211,7 +276,7 @@ export default function ImageResizerTool() {
 
             <div>
               <label htmlFor="res-h" className="block text-xs font-semibold text-slate-800 mb-1.5">
-                Height (px)
+                {s.heightLabel}
               </label>
               <input
                 id="res-h"
@@ -226,7 +291,7 @@ export default function ImageResizerTool() {
 
             <div>
               <label htmlFor="res-fit" className="block text-xs font-semibold text-slate-800 mb-1.5">
-                Aspect Fit Mode
+                {s.fitModeLabel}
               </label>
               <select
                 id="res-fit"
@@ -234,14 +299,14 @@ export default function ImageResizerTool() {
                 onChange={(e) => setFitMode(e.target.value as FitMode)}
                 className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"
               >
-                <option value="cover-crop">Center Cover Crop (No stretch)</option>
-                <option value="contain-exact">Scale Exact Dimensions</option>
+                <option value="cover-crop">{s.coverCropOption}</option>
+                <option value="contain-exact">{s.exactOption}</option>
               </select>
             </div>
 
             <div>
               <label htmlFor="res-fmt" className="block text-xs font-semibold text-slate-800 mb-1.5">
-                Output Format
+                {s.outputFormatLabel}
               </label>
               <select
                 id="res-fmt"
@@ -264,7 +329,7 @@ export default function ImageResizerTool() {
                 onChange={(e) => setLockAspect(e.target.checked)}
                 className="h-4 w-4 rounded border-slate-300 text-indigo-600"
               />
-              Lock original aspect ratio when typing dimensions
+              {s.lockAspect}
             </label>
 
             <button
@@ -272,7 +337,7 @@ export default function ImageResizerTool() {
               onClick={() => void renderResized()}
               className="rounded-lg bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700 cursor-pointer"
             >
-              Resize to {targetW} × {targetH} px
+              {s.resizeButton.replace('{w}', String(targetW)).replace('{h}', String(targetH))}
             </button>
           </div>
 
@@ -281,14 +346,17 @@ export default function ImageResizerTool() {
               <div className="flex items-center gap-4 min-w-0">
                 <img
                   src={previewUrl}
-                  alt="Resized image output"
+                  alt={s.previewAlt}
                   className="h-20 w-28 rounded-lg border border-slate-200 bg-white object-contain shrink-0"
                 />
                 <div className="text-xs sm:text-sm">
                   <div className="font-semibold text-slate-900 tabular-nums">
-                    Ready: {targetW} × {targetH} px ({ext.toUpperCase()})
+                    {s.readySummary
+                      .replace('{w}', String(targetW))
+                      .replace('{h}', String(targetH))
+                      .replace('{ext}', ext.toUpperCase())}
                   </div>
-                  <div className="text-slate-600 font-mono tabular-nums">{formatBytes(outputSize)}</div>
+                  <div className="text-slate-600 font-mono tabular-nums">{formatBytes(outputSize, locale)}</div>
                 </div>
               </div>
 
@@ -298,7 +366,7 @@ export default function ImageResizerTool() {
                 className="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-700 shrink-0"
               >
                 <Download className="w-4 h-4" />
-                Download Resized .{ext.toUpperCase()}
+                {s.downloadResized.replace('{ext}', ext.toUpperCase())}
               </a>
             </div>
           )}
