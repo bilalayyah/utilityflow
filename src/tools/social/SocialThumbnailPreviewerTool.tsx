@@ -1,5 +1,73 @@
 import { ImagePlus, ShieldCheck } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    sampleTitle: 'How We Built 85 Fast Browser Utilities Without Tracking',
+    sampleChannel: 'UtilityFlow Studio',
+    sampleViews: '24K views · 2 days ago',
+    errNotImage: 'Please select a PNG, JPG, or WebP image file.',
+    errDecode: 'Could not decode this image file in the browser.',
+    previewEyebrow: '1280 × 720 PREVIEW',
+    emptyThumb: 'Upload your thumbnail image to inspect feed readability',
+    thumbAlt: 'Uploaded thumbnail preview',
+    safeZoneTitle: 'Timestamp badge overlap zone',
+    chooseThumb: 'Choose Local Thumbnail (PNG / JPG / WebP)',
+    replaceThumb: (name: string) => `Replace: ${name}`,
+    recommended: 'Recommended 1280×720 (16:9), under 2 MB · Never uploaded',
+    diagTitle: 'Image Spec Diagnostics',
+    dimLabel: 'Dimensions',
+    dimHdOk: '(HD OK)',
+    dimUnder: '(<1280px)',
+    aspectLabel: 'Aspect Ratio',
+    aspectMatch: '16:9 match',
+    aspectNo: 'Not 16:9 (may crop/letterbox)',
+    sizeLabel: 'File Size',
+    sizeOk: '(<2 MB OK)',
+    sizeOver: '(>2 MB limit)',
+    titleLabel: (len: number) => `Video Title (${len}/100 chars · ~60 visible on mobile)`,
+    channelLabel: 'Channel Name',
+    durationLabel: 'Duration',
+    darkMode: 'Dark Mode Feed Preview',
+    safeZone: 'Highlight Timestamp Corner Zone',
+    desktopCard: 'Desktop Home Feed Card',
+    sidebar: 'Desktop Watch Sidebar (Compact Recommended)',
+    untitled: 'Untitled video',
+  },
+  es: {
+    sampleTitle: 'Cómo creamos 85 utilidades rápidas en el navegador sin rastreo',
+    sampleChannel: 'UtilityFlow Studio',
+    sampleViews: '24K vistas · hace 2 días',
+    errNotImage: 'Seleccione un archivo de imagen PNG, JPG o WebP.',
+    errDecode: 'No se pudo decodificar este archivo de imagen en el navegador.',
+    previewEyebrow: 'VISTA PREVIA 1280 × 720',
+    emptyThumb: 'Suba la imagen de su miniatura para revisar la legibilidad en el feed',
+    thumbAlt: 'Vista previa de la miniatura subida',
+    safeZoneTitle: 'Zona de superposición de la insignia de marca de tiempo',
+    chooseThumb: 'Elegir miniatura local (PNG / JPG / WebP)',
+    replaceThumb: (name: string) => `Reemplazar: ${name}`,
+    recommended: 'Recomendado 1280×720 (16:9), menos de 2 MB · Nunca se sube',
+    diagTitle: 'Diagnóstico de especificaciones de imagen',
+    dimLabel: 'Dimensiones',
+    dimHdOk: '(HD correcto)',
+    dimUnder: '(<1280 px)',
+    aspectLabel: 'Relación de aspecto',
+    aspectMatch: 'Coincide con 16:9',
+    aspectNo: 'No es 16:9 (puede recortarse o mostrar bandas)',
+    sizeLabel: 'Tamaño del archivo',
+    sizeOk: '(<2 MB correcto)',
+    sizeOver: '(supera el límite de 2 MB)',
+    titleLabel: (len: number) => `Título del video (${len}/100 caracteres · ~60 visibles en el móvil)`,
+    channelLabel: 'Nombre del canal',
+    durationLabel: 'Duración',
+    darkMode: 'Vista previa del feed en modo oscuro',
+    safeZone: 'Resaltar la zona de esquina de la marca de tiempo',
+    desktopCard: 'Tarjeta del feed principal de escritorio',
+    sidebar: 'Barra lateral de visualización de escritorio (se recomienda compacta)',
+    untitled: 'Video sin título',
+  },
+};
 
 interface ImageInfo {
   width: number;
@@ -9,11 +77,13 @@ interface ImageInfo {
 }
 
 export default function SocialThumbnailPreviewerTool() {
+  const { locale } = useLocale();
+  const s = STRINGS[locale];
   const [imageUrl, setImageUrl] = useState<string>('');
   const [imageInfo, setImageInfo] = useState<ImageInfo | null>(null);
-  const [title, setTitle] = useState('How We Built 85 Fast Browser Utilities Without Tracking');
-  const [channel, setChannel] = useState('UtilityFlow Studio');
-  const [views, setViews] = useState('24K views · 2 days ago');
+  const [title, setTitle] = useState(s.sampleTitle);
+  const [channel, setChannel] = useState(s.sampleChannel);
+  const [views, setViews] = useState(s.sampleViews);
   const [duration, setDuration] = useState('12:48');
   const [darkTheme, setDarkTheme] = useState(false);
   const [showSafeZone, setShowSafeZone] = useState(true);
@@ -29,7 +99,7 @@ export default function SocialThumbnailPreviewerTool() {
     setUploadError('');
     if (!file) return;
     if (!file.type.startsWith('image/')) {
-      setUploadError('Please select a PNG, JPG, or WebP image file.');
+      setUploadError(s.errNotImage);
       return;
     }
 
@@ -49,7 +119,7 @@ export default function SocialThumbnailPreviewerTool() {
     };
     probe.onerror = () => {
       URL.revokeObjectURL(nextUrl);
-      setUploadError('Could not decode this image file in the browser.');
+      setUploadError(s.errDecode);
     };
     probe.src = nextUrl;
   };
@@ -66,14 +136,14 @@ export default function SocialThumbnailPreviewerTool() {
       {imageUrl ? (
         <img
           src={imageUrl}
-          alt="Uploaded thumbnail preview"
+          alt={s.thumbAlt}
           className="h-full w-full object-cover"
         />
       ) : (
         <div className="flex h-full w-full flex-col items-center justify-center p-4 text-center text-white/90">
-          <span className="text-xs font-semibold tracking-wide text-indigo-300">1280 × 720 PREVIEW</span>
+          <span className="text-xs font-semibold tracking-wide text-indigo-300">{s.previewEyebrow}</span>
           <span className={`mt-1 font-bold leading-tight ${compact ? 'text-xs' : 'text-base sm:text-lg'}`}>
-            Upload your thumbnail image to inspect feed readability
+            {s.emptyThumb}
           </span>
         </div>
       )}
@@ -88,7 +158,7 @@ export default function SocialThumbnailPreviewerTool() {
         <div
           aria-hidden="true"
           className="pointer-events-none absolute bottom-1 right-1 h-7 w-14 rounded border border-dashed border-amber-400 bg-amber-400/15"
-          title="Timestamp badge overlap zone"
+          title={s.safeZoneTitle}
         />
       )}
     </div>
@@ -104,10 +174,10 @@ export default function SocialThumbnailPreviewerTool() {
           >
             <ImagePlus className="w-7 h-7 text-indigo-600 mb-2" />
             <span className="text-sm font-semibold text-slate-900">
-              {imageInfo ? `Replace: ${imageInfo.fileName}` : 'Choose Local Thumbnail (PNG / JPG / WebP)'}
+              {imageInfo ? s.replaceThumb(imageInfo.fileName) : s.chooseThumb}
             </span>
             <span className="mt-1 text-xs text-slate-500">
-              Recommended 1280×720 (16:9), under 2 MB · Never uploaded
+              {s.recommended}
             </span>
             <input
               id="thumb-upload"
@@ -128,24 +198,24 @@ export default function SocialThumbnailPreviewerTool() {
             <div className="rounded-xl border border-slate-200 bg-white p-3.5 text-xs space-y-1.5 tabular-nums">
               <div className="font-semibold text-slate-900 flex items-center gap-1.5">
                 <ShieldCheck className="w-4 h-4 text-indigo-600" />
-                Image Spec Diagnostics
+                {s.diagTitle}
               </div>
               <div className="flex justify-between">
-                <span className="text-slate-500">Dimensions</span>
+                <span className="text-slate-500">{s.dimLabel}</span>
                 <span className={`font-mono font-semibold ${meetsHdWidth ? 'text-emerald-700' : 'text-amber-700'}`}>
-                  {imageInfo.width} × {imageInfo.height} px {meetsHdWidth ? '(HD OK)' : '(<1280px)'}
+                  {imageInfo.width} × {imageInfo.height} px {meetsHdWidth ? s.dimHdOk : s.dimUnder}
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-slate-500">Aspect Ratio</span>
+                <span className="text-slate-500">{s.aspectLabel}</span>
                 <span className={`font-mono font-semibold ${isSixteenByNine ? 'text-emerald-700' : 'text-amber-700'}`}>
-                  {isSixteenByNine ? '16:9 match' : 'Not 16:9 (may crop/letterbox)'}
+                  {isSixteenByNine ? s.aspectMatch : s.aspectNo}
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-slate-500">File Size</span>
+                <span className="text-slate-500">{s.sizeLabel}</span>
                 <span className={`font-mono font-semibold ${isUnderTwoMb ? 'text-emerald-700' : 'text-red-700'}`}>
-                  {(imageInfo.sizeBytes / 1024).toFixed(1)} KB {isUnderTwoMb ? '(<2 MB OK)' : '(>2 MB limit)'}
+                  {(imageInfo.sizeBytes / 1024).toFixed(1)} KB {isUnderTwoMb ? s.sizeOk : s.sizeOver}
                 </span>
               </div>
             </div>
@@ -154,7 +224,7 @@ export default function SocialThumbnailPreviewerTool() {
           <div className="space-y-3">
             <div>
               <label htmlFor="thumb-title" className="block text-xs font-semibold text-slate-800 mb-1">
-                Video Title ({title.length}/100 chars · ~60 visible on mobile)
+                {s.titleLabel(title.length)}
               </label>
               <input
                 id="thumb-title"
@@ -168,7 +238,7 @@ export default function SocialThumbnailPreviewerTool() {
             <div className="grid grid-cols-3 gap-2">
               <div className="col-span-2">
                 <label htmlFor="thumb-chan" className="block text-xs font-semibold text-slate-800 mb-1">
-                  Channel Name
+                  {s.channelLabel}
                 </label>
                 <input
                   id="thumb-chan"
@@ -180,7 +250,7 @@ export default function SocialThumbnailPreviewerTool() {
               </div>
               <div>
                 <label htmlFor="thumb-dur" className="block text-xs font-semibold text-slate-800 mb-1">
-                  Duration
+                  {s.durationLabel}
                 </label>
                 <input
                   id="thumb-dur"
@@ -200,7 +270,7 @@ export default function SocialThumbnailPreviewerTool() {
                   onChange={(e) => setDarkTheme(e.target.checked)}
                   className="h-4 w-4 rounded border-slate-300 text-indigo-600"
                 />
-                Dark Mode Feed Preview
+                {s.darkMode}
               </label>
               <label className="inline-flex items-center gap-2 text-xs font-medium text-slate-700 cursor-pointer">
                 <input
@@ -209,7 +279,7 @@ export default function SocialThumbnailPreviewerTool() {
                   onChange={(e) => setShowSafeZone(e.target.checked)}
                   className="h-4 w-4 rounded border-slate-300 text-indigo-600"
                 />
-                Highlight Timestamp Corner Zone
+                {s.safeZone}
               </label>
             </div>
           </div>
@@ -224,7 +294,7 @@ export default function SocialThumbnailPreviewerTool() {
         >
           <div>
             <div className={`text-xs font-semibold mb-2 ${darkTheme ? 'text-slate-400' : 'text-slate-500'}`}>
-              Desktop Home Feed Card
+              {s.desktopCard}
             </div>
             <div className="max-w-sm">
               {renderThumbBox(false)}
@@ -233,7 +303,7 @@ export default function SocialThumbnailPreviewerTool() {
                   {channel.trim().slice(0, 2).toUpperCase() || 'UH'}
                 </div>
                 <div className="min-w-0">
-                  <div className="text-sm font-semibold leading-snug line-clamp-2">{title || 'Untitled video'}</div>
+                  <div className="text-sm font-semibold leading-snug line-clamp-2">{title || s.untitled}</div>
                   <div className={`mt-1 text-xs ${darkTheme ? 'text-slate-400' : 'text-slate-500'}`}>
                     {channel} · {views}
                   </div>
@@ -244,12 +314,12 @@ export default function SocialThumbnailPreviewerTool() {
 
           <div className="pt-4 border-t border-slate-300/25">
             <div className={`text-xs font-semibold mb-2 ${darkTheme ? 'text-slate-400' : 'text-slate-500'}`}>
-              Desktop Watch Sidebar (Compact Recommended)
+              {s.sidebar}
             </div>
             <div className="flex gap-3 max-w-md items-start">
               <div className="w-40 shrink-0">{renderThumbBox(true)}</div>
               <div className="min-w-0">
-                <div className="text-xs font-semibold leading-snug line-clamp-2">{title || 'Untitled video'}</div>
+                <div className="text-xs font-semibold leading-snug line-clamp-2">{title || s.untitled}</div>
                 <div className={`mt-1 text-[11px] ${darkTheme ? 'text-slate-400' : 'text-slate-500'}`}>
                   {channel}
                 </div>

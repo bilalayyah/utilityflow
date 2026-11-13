@@ -1,26 +1,94 @@
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    surfaces: {
+      standardPost: 'Standard Post',
+      profileBio: 'Profile Bio',
+      caption: 'Caption',
+      feedPost: 'Feed Post',
+      videoCaption: 'Video Caption',
+      post: 'Post',
+      videoTitle: 'Video Title',
+      description: 'Description',
+    },
+    sampleText:
+      'Shipping faster starts with small daily improvements.\n\nTry our browser-based creator utilities at https://utilityflow.online/tools/ — no sign-up required.\n\n#CreatorTools #Workflow',
+    labelInput: 'Social Post / Bio Draft',
+    copyDraft: 'Copy Draft',
+    placeholder: 'Write or paste your social caption, post, bio, or YouTube title...',
+    charsLabel: 'Characters:',
+    wordsLabel: 'Words:',
+    hashtagsLabel: 'Hashtags:',
+    mentionsLabel: 'Mentions:',
+    urlsLabel: 'URLs detected:',
+    urlsWeighted: '(weighted 23 chars on X)',
+    overLimit: (n: number, loc: string) => `${n.toLocaleString(loc)} over limit`,
+    left: (n: number, loc: string) => `${n.toLocaleString(loc)} left`,
+    foldLabel: (n: number) => `Fold ~${n} ch`,
+    foldTitle: 'Feed Truncation / “See More” Fold Preview',
+    foldDesc: (limit: number, platform: string, surface: string) =>
+      `Preview what readers see before tapping “See more” (${limit} characters for ${platform} ${surface}).`,
+    selectAria: 'Choose truncation preview platform',
+    previewEmpty: 'Preview appears here...',
+  },
+  es: {
+    surfaces: {
+      standardPost: 'Publicación estándar',
+      profileBio: 'Biografía del perfil',
+      caption: 'Descripción',
+      feedPost: 'Publicación del feed',
+      videoCaption: 'Descripción del video',
+      post: 'Publicación',
+      videoTitle: 'Título del video',
+      description: 'Descripción',
+    },
+    sampleText:
+      'Enviar más rápido empieza con pequeñas mejoras diarias.\n\nPruebe nuestras utilidades para creadores en el navegador en https://utilityflow.online/tools/ — no necesita registrarse.\n\n#CreatorTools #Workflow',
+    labelInput: 'Borrador de publicación o biografía',
+    copyDraft: 'Copiar borrador',
+    placeholder: 'Escriba o pegue su descripción, publicación, biografía o título de YouTube...',
+    charsLabel: 'Caracteres:',
+    wordsLabel: 'Palabras:',
+    hashtagsLabel: 'Hashtags:',
+    mentionsLabel: 'Menciones:',
+    urlsLabel: 'URL detectadas:',
+    urlsWeighted: '(ponderadas en 23 caracteres en X)',
+    overLimit: (n: number, loc: string) => `${n.toLocaleString(loc)} sobre el límite`,
+    left: (n: number, loc: string) => `quedan ${n.toLocaleString(loc)}`,
+    foldLabel: (n: number) => `Pliegue ~${n} car.`,
+    foldTitle: 'Vista previa de truncamiento / pliegue de «Ver más»',
+    foldDesc: (limit: number, platform: string, surface: string) =>
+      `Vista previa de lo que ven los lectores antes de tocar «Ver más» (${limit} caracteres para ${platform} ${surface}).`,
+    selectAria: 'Elija la plataforma para la vista previa de truncamiento',
+    previewEmpty: 'La vista previa aparece aquí...',
+  },
+};
+
+type SurfaceKey = keyof typeof STRINGS.en.surfaces;
 
 interface PlatformSpec {
   id: string;
   platform: string;
-  surface: string;
+  surfaceKey: SurfaceKey;
   maxChars: number;
   foldChars?: number;
   urlWeight?: number;
 }
 
 const PLATFORMS: PlatformSpec[] = [
-  { id: 'x-post', platform: 'X (Twitter)', surface: 'Standard Post', maxChars: 280, urlWeight: 23 },
-  { id: 'x-bio', platform: 'X (Twitter)', surface: 'Profile Bio', maxChars: 160 },
-  { id: 'ig-cap', platform: 'Instagram', surface: 'Caption', maxChars: 2200, foldChars: 125 },
-  { id: 'ig-bio', platform: 'Instagram', surface: 'Profile Bio', maxChars: 150 },
-  { id: 'li-post', platform: 'LinkedIn', surface: 'Feed Post', maxChars: 3000, foldChars: 210 },
-  { id: 'tiktok-cap', platform: 'TikTok', surface: 'Video Caption', maxChars: 2200, foldChars: 100 },
-  { id: 'threads', platform: 'Threads', surface: 'Post', maxChars: 500 },
-  { id: 'bluesky', platform: 'Bluesky', surface: 'Post', maxChars: 300 },
-  { id: 'yt-title', platform: 'YouTube', surface: 'Video Title', maxChars: 100, foldChars: 70 },
-  { id: 'yt-desc', platform: 'YouTube', surface: 'Description', maxChars: 5000, foldChars: 157 },
+  { id: 'x-post', platform: 'X (Twitter)', surfaceKey: 'standardPost', maxChars: 280, urlWeight: 23 },
+  { id: 'x-bio', platform: 'X (Twitter)', surfaceKey: 'profileBio', maxChars: 160 },
+  { id: 'ig-cap', platform: 'Instagram', surfaceKey: 'caption', maxChars: 2200, foldChars: 125 },
+  { id: 'ig-bio', platform: 'Instagram', surfaceKey: 'profileBio', maxChars: 150 },
+  { id: 'li-post', platform: 'LinkedIn', surfaceKey: 'feedPost', maxChars: 3000, foldChars: 210 },
+  { id: 'tiktok-cap', platform: 'TikTok', surfaceKey: 'videoCaption', maxChars: 2200, foldChars: 100 },
+  { id: 'threads', platform: 'Threads', surfaceKey: 'post', maxChars: 500 },
+  { id: 'bluesky', platform: 'Bluesky', surfaceKey: 'post', maxChars: 300 },
+  { id: 'yt-title', platform: 'YouTube', surfaceKey: 'videoTitle', maxChars: 100, foldChars: 70 },
+  { id: 'yt-desc', platform: 'YouTube', surfaceKey: 'description', maxChars: 5000, foldChars: 157 },
 ];
 
 const URL_REGEX = /https?:\/\/[^\s]+/gi;
@@ -34,9 +102,9 @@ function measureForPlatform(text: string, spec: PlatformSpec): number {
 }
 
 export default function SocialCharacterLimitTool() {
-  const [text, setText] = useState(
-    'Shipping faster starts with small daily improvements.\n\nTry our browser-based creator utilities at https://utilityflow.online/tools/ — no sign-up required.\n\n#CreatorTools #Workflow'
-  );
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
+  const [text, setText] = useState(s.sampleText);
   const [previewId, setPreviewId] = useState('ig-cap');
 
   const stats = useMemo(() => {
@@ -67,16 +135,16 @@ export default function SocialCharacterLimitTool() {
       <div>
         <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
           <label htmlFor="scl-input" className="text-sm font-semibold text-slate-900">
-            Social Post / Bio Draft
+            {s.labelInput}
           </label>
           <div className="flex items-center gap-2">
-            <CopyButton text={text} label="Copy Draft" />
+            <CopyButton text={text} label={s.copyDraft} copiedLabel={t.common.copied} />
             <button
               type="button"
               onClick={() => setText('')}
               className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
             >
-              Clear
+              {t.common.clear}
             </button>
           </div>
         </div>
@@ -85,24 +153,24 @@ export default function SocialCharacterLimitTool() {
           rows={5}
           value={text}
           onChange={(e) => setText(e.target.value)}
-          placeholder="Write or paste your social caption, post, bio, or YouTube title..."
+          placeholder={s.placeholder}
           className="w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm leading-relaxed"
         />
         <div className="mt-2 flex flex-wrap gap-4 text-xs text-slate-600 tabular-nums">
           <span>
-            Characters: <strong className="text-slate-900">{stats.rawChars}</strong>
+            {s.charsLabel} <strong className="text-slate-900">{stats.rawChars}</strong>
           </span>
           <span>
-            Words: <strong className="text-slate-900">{stats.words}</strong>
+            {s.wordsLabel} <strong className="text-slate-900">{stats.words}</strong>
           </span>
           <span>
-            Hashtags: <strong className="text-slate-900">{stats.hashtags}</strong>
+            {s.hashtagsLabel} <strong className="text-slate-900">{stats.hashtags}</strong>
           </span>
           <span>
-            Mentions: <strong className="text-slate-900">{stats.mentions}</strong>
+            {s.mentionsLabel} <strong className="text-slate-900">{stats.mentions}</strong>
           </span>
           <span>
-            URLs detected: <strong className="text-slate-900">{stats.urls}</strong> (weighted 23 chars on X)
+            {s.urlsLabel} <strong className="text-slate-900">{stats.urls}</strong> {s.urlsWeighted}
           </span>
         </div>
       </div>
@@ -118,14 +186,14 @@ export default function SocialCharacterLimitTool() {
             <div className="flex items-center justify-between gap-2">
               <div>
                 <div className="text-sm font-bold text-slate-900">{spec.platform}</div>
-                <div className="text-xs text-slate-500">{spec.surface}</div>
+                <div className="text-xs text-slate-500">{s.surfaces[spec.surfaceKey]}</div>
               </div>
               <span
                 className={`font-mono text-xs font-semibold tabular-nums ${
                   over ? 'text-red-700' : 'text-slate-700'
                 }`}
               >
-                {used.toLocaleString()} / {spec.maxChars.toLocaleString()}
+                {used.toLocaleString(locale)} / {spec.maxChars.toLocaleString(locale)}
               </span>
             </div>
 
@@ -141,11 +209,11 @@ export default function SocialCharacterLimitTool() {
             <div className="mt-2 flex items-center justify-between text-xs tabular-nums">
               <span className={over ? 'text-red-700 font-semibold' : 'text-slate-600'}>
                 {over
-                  ? `${Math.abs(remaining).toLocaleString()} over limit`
-                  : `${remaining.toLocaleString()} left`}
+                  ? s.overLimit(Math.abs(remaining), locale)
+                  : s.left(remaining, locale)}
               </span>
               {spec.foldChars && (
-                <span className="text-slate-500">Fold ~{spec.foldChars} ch</span>
+                <span className="text-slate-500">{s.foldLabel(spec.foldChars)}</span>
               )}
             </div>
           </div>
@@ -155,28 +223,27 @@ export default function SocialCharacterLimitTool() {
       <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 space-y-3">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
-            <h3 className="text-sm font-bold text-slate-900">Feed Truncation / &ldquo;See More&rdquo; Fold Preview</h3>
+            <h3 className="text-sm font-bold text-slate-900">{s.foldTitle}</h3>
             <p className="text-xs text-slate-500">
-              Preview what readers see before tapping &ldquo;See more&rdquo; ({stats.foldLimit} characters for{' '}
-              {stats.activeSpec.platform} {stats.activeSpec.surface}).
+              {s.foldDesc(stats.foldLimit, stats.activeSpec.platform, s.surfaces[stats.activeSpec.surfaceKey])}
             </p>
           </div>
           <select
-            aria-label="Choose truncation preview platform"
+            aria-label={s.selectAria}
             value={previewId}
             onChange={(e) => setPreviewId(e.target.value)}
             className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium"
           >
             {PLATFORMS.map((p) => (
               <option key={p.id} value={p.id}>
-                {p.platform} — {p.surface}
+                {p.platform} — {s.surfaces[p.surfaceKey]}
               </option>
             ))}
           </select>
         </div>
 
         <div className="rounded-lg border border-slate-200 bg-white p-3.5 text-sm text-slate-800 whitespace-pre-wrap break-words">
-          {stats.truncatedPreview || <span className="text-slate-400">Preview appears here...</span>}
+          {stats.truncatedPreview || <span className="text-slate-400">{s.previewEmpty}</span>}
         </div>
       </div>
     </div>

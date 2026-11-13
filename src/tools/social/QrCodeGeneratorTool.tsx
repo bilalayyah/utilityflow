@@ -2,6 +2,78 @@ import { Download } from 'lucide-react';
 import QRCode from 'qrcode';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    tabUrl: 'Website URL',
+    tabText: 'Plain Text',
+    tabWifi: 'Wi-Fi Network',
+    tabEmail: 'Email Link',
+    tabPhone: 'Phone Number',
+    labelUrl: 'Destination URL',
+    labelText: 'Text Content',
+    labelSsid: 'Network Name (SSID)',
+    labelSecurity: 'Security Type',
+    optWpa: 'WPA / WPA2 / WPA3',
+    optWep: 'WEP',
+    optOpen: 'Open (No Password)',
+    labelWifiPass: 'Wi-Fi Password',
+    hiddenSsid: 'Hidden SSID network',
+    labelEmailTo: 'Recipient Email',
+    labelEmailSubject: 'Subject (Optional)',
+    labelPhone: 'Phone Number (E.164 format recommended)',
+    sizeLabel: (size: number) => `Size (${size}px)`,
+    labelEc: 'Error Correction',
+    labelFg: 'Foreground',
+    labelBg: 'Background',
+    quietZone: 'Quiet Zone Margin:',
+    modulesLabel: (margin: number) => `${margin} modules`,
+    encodedPayload: 'Encoded Payload String',
+    copyPayload: 'Copy Payload',
+    emptyError: 'Enter content above to generate a scannable QR code.',
+    encodeError: 'Unable to encode QR payload.',
+    qrAlt: 'Generated scannable QR code',
+    downloadPng: 'Download PNG',
+    downloadSvg: 'Download SVG',
+    copySvg: 'Copy SVG',
+    sampleText: 'Welcome to UtilityFlow!',
+  },
+  es: {
+    tabUrl: 'URL del sitio web',
+    tabText: 'Texto simple',
+    tabWifi: 'Red Wi-Fi',
+    tabEmail: 'Enlace de correo',
+    tabPhone: 'Número de teléfono',
+    labelUrl: 'URL de destino',
+    labelText: 'Contenido de texto',
+    labelSsid: 'Nombre de la red (SSID)',
+    labelSecurity: 'Tipo de seguridad',
+    optWpa: 'WPA / WPA2 / WPA3',
+    optWep: 'WEP',
+    optOpen: 'Abierta (sin contraseña)',
+    labelWifiPass: 'Contraseña de Wi-Fi',
+    hiddenSsid: 'Red con SSID oculto',
+    labelEmailTo: 'Correo del destinatario',
+    labelEmailSubject: 'Asunto (opcional)',
+    labelPhone: 'Número de teléfono (se recomienda el formato E.164)',
+    sizeLabel: (size: number) => `Tamaño (${size}px)`,
+    labelEc: 'Corrección de errores',
+    labelFg: 'Primer plano',
+    labelBg: 'Fondo',
+    quietZone: 'Margen de zona silenciosa:',
+    modulesLabel: (margin: number) => `${margin} módulos`,
+    encodedPayload: 'Cadena de datos codificada',
+    copyPayload: 'Copiar datos',
+    emptyError: 'Ingrese contenido arriba para generar un código QR escaneable.',
+    encodeError: 'No se pudo codificar el contenido del QR.',
+    qrAlt: 'Código QR escaneable generado',
+    downloadPng: 'Descargar PNG',
+    downloadSvg: 'Descargar SVG',
+    copySvg: 'Copiar SVG',
+    sampleText: '¡Bienvenido a UtilityFlow!',
+  },
+};
 
 type PayloadType = 'url' | 'text' | 'wifi' | 'email' | 'phone';
 type ErrorCorrection = 'L' | 'M' | 'Q' | 'H';
@@ -11,9 +83,11 @@ function escapeWifiField(val: string): string {
 }
 
 export default function QrCodeGeneratorTool() {
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
   const [payloadType, setPayloadType] = useState<PayloadType>('url');
   const [urlValue, setUrlValue] = useState('https://utilityflow.online/');
-  const [textValue, setTextValue] = useState('Welcome to UtilityFlow!');
+  const [textValue, setTextValue] = useState(s.sampleText);
   const [wifiSsid, setWifiSsid] = useState('GuestWiFi');
   const [wifiPassword, setWifiPassword] = useState('');
   const [wifiEncryption, setWifiEncryption] = useState<'WPA' | 'WEP' | 'nopass'>('WPA');
@@ -74,7 +148,7 @@ export default function QrCodeGeneratorTool() {
     if (!encodedPayload) {
       setSvgMarkup('');
       setPngDataUrl('');
-      setQrError('Enter content above to generate a scannable QR code.');
+      setQrError(s.emptyError);
       return;
     }
 
@@ -102,7 +176,7 @@ export default function QrCodeGeneratorTool() {
         if (!active) return;
         setSvgMarkup('');
         setPngDataUrl('');
-        setQrError(err instanceof Error ? err.message : 'Unable to encode QR payload.');
+        setQrError(err instanceof Error ? err.message : s.encodeError);
       });
 
     if (canvasRef.current) {
@@ -112,7 +186,7 @@ export default function QrCodeGeneratorTool() {
     return () => {
       active = false;
     };
-  }, [encodedPayload, ecLevel, margin, size, fgColor, bgColor]);
+  }, [encodedPayload, ecLevel, margin, size, fgColor, bgColor, s]);
 
   const downloadSvg = () => {
     if (!svgMarkup) return;
@@ -130,11 +204,11 @@ export default function QrCodeGeneratorTool() {
       <div className="flex flex-wrap gap-1.5 rounded-lg bg-slate-100 p-1.5">
         {(
           [
-            ['url', 'Website URL'],
-            ['text', 'Plain Text'],
-            ['wifi', 'Wi-Fi Network'],
-            ['email', 'Email Link'],
-            ['phone', 'Phone Number'],
+            ['url', s.tabUrl],
+            ['text', s.tabText],
+            ['wifi', s.tabWifi],
+            ['email', s.tabEmail],
+            ['phone', s.tabPhone],
           ] as [PayloadType, string][]
         ).map(([id, label]) => (
           <button
@@ -155,7 +229,7 @@ export default function QrCodeGeneratorTool() {
           {payloadType === 'url' && (
             <div>
               <label htmlFor="qr-url" className="block text-sm font-semibold text-slate-900 mb-1.5">
-                Destination URL
+                {s.labelUrl}
               </label>
               <input
                 id="qr-url"
@@ -171,7 +245,7 @@ export default function QrCodeGeneratorTool() {
           {payloadType === 'text' && (
             <div>
               <label htmlFor="qr-text" className="block text-sm font-semibold text-slate-900 mb-1.5">
-                Text Content
+                {s.labelText}
               </label>
               <textarea
                 id="qr-text"
@@ -187,7 +261,7 @@ export default function QrCodeGeneratorTool() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label htmlFor="qr-ssid" className="block text-sm font-semibold text-slate-900 mb-1.5">
-                  Network Name (SSID)
+                  {s.labelSsid}
                 </label>
                 <input
                   id="qr-ssid"
@@ -199,7 +273,7 @@ export default function QrCodeGeneratorTool() {
               </div>
               <div>
                 <label htmlFor="qr-enc" className="block text-sm font-semibold text-slate-900 mb-1.5">
-                  Security Type
+                  {s.labelSecurity}
                 </label>
                 <select
                   id="qr-enc"
@@ -207,15 +281,15 @@ export default function QrCodeGeneratorTool() {
                   onChange={(e) => setWifiEncryption(e.target.value as 'WPA' | 'WEP' | 'nopass')}
                   className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm"
                 >
-                  <option value="WPA">WPA / WPA2 / WPA3</option>
-                  <option value="WEP">WEP</option>
-                  <option value="nopass">Open (No Password)</option>
+                  <option value="WPA">{s.optWpa}</option>
+                  <option value="WEP">{s.optWep}</option>
+                  <option value="nopass">{s.optOpen}</option>
                 </select>
               </div>
               {wifiEncryption !== 'nopass' && (
                 <div>
                   <label htmlFor="qr-pass" className="block text-sm font-semibold text-slate-900 mb-1.5">
-                    Wi-Fi Password
+                    {s.labelWifiPass}
                   </label>
                   <input
                     id="qr-pass"
@@ -234,7 +308,7 @@ export default function QrCodeGeneratorTool() {
                     onChange={(e) => setWifiHidden(e.target.checked)}
                     className="h-4 w-4 rounded border-slate-300 text-indigo-600"
                   />
-                  Hidden SSID network
+                  {s.hiddenSsid}
                 </label>
               </div>
             </div>
@@ -244,7 +318,7 @@ export default function QrCodeGeneratorTool() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label htmlFor="qr-email" className="block text-sm font-semibold text-slate-900 mb-1.5">
-                  Recipient Email
+                  {s.labelEmailTo}
                 </label>
                 <input
                   id="qr-email"
@@ -256,7 +330,7 @@ export default function QrCodeGeneratorTool() {
               </div>
               <div>
                 <label htmlFor="qr-subj" className="block text-sm font-semibold text-slate-900 mb-1.5">
-                  Subject (Optional)
+                  {s.labelEmailSubject}
                 </label>
                 <input
                   id="qr-subj"
@@ -272,7 +346,7 @@ export default function QrCodeGeneratorTool() {
           {payloadType === 'phone' && (
             <div>
               <label htmlFor="qr-phone" className="block text-sm font-semibold text-slate-900 mb-1.5">
-                Phone Number (E.164 format recommended)
+                {s.labelPhone}
               </label>
               <input
                 id="qr-phone"
@@ -287,7 +361,7 @@ export default function QrCodeGeneratorTool() {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2 border-t border-slate-200">
             <div>
               <label htmlFor="qr-size" className="block text-xs font-semibold text-slate-700 mb-1">
-                Size ({size}px)
+                {s.sizeLabel(size)}
               </label>
               <input
                 id="qr-size"
@@ -303,7 +377,7 @@ export default function QrCodeGeneratorTool() {
 
             <div>
               <label htmlFor="qr-ec" className="block text-xs font-semibold text-slate-700 mb-1">
-                Error Correction
+                {s.labelEc}
               </label>
               <select
                 id="qr-ec"
@@ -320,7 +394,7 @@ export default function QrCodeGeneratorTool() {
 
             <div>
               <label htmlFor="qr-fg" className="block text-xs font-semibold text-slate-700 mb-1">
-                Foreground
+                {s.labelFg}
               </label>
               <input
                 id="qr-fg"
@@ -333,7 +407,7 @@ export default function QrCodeGeneratorTool() {
 
             <div>
               <label htmlFor="qr-bg" className="block text-xs font-semibold text-slate-700 mb-1">
-                Background
+                {s.labelBg}
               </label>
               <input
                 id="qr-bg"
@@ -347,7 +421,7 @@ export default function QrCodeGeneratorTool() {
 
           <div className="flex items-center gap-4">
             <label htmlFor="qr-margin" className="text-xs font-semibold text-slate-700">
-              Quiet Zone Margin: <span className="font-mono">{margin} modules</span>
+              {s.quietZone} <span className="font-mono">{s.modulesLabel(margin)}</span>
             </label>
             <input
               id="qr-margin"
@@ -363,8 +437,8 @@ export default function QrCodeGeneratorTool() {
           {encodedPayload && (
             <div className="rounded-lg border border-slate-200 bg-slate-50 p-3">
               <div className="flex items-center justify-between gap-2 mb-1">
-                <span className="text-xs font-semibold text-slate-500">Encoded Payload String</span>
-                <CopyButton text={encodedPayload} label="Copy Payload" />
+                <span className="text-xs font-semibold text-slate-500">{s.encodedPayload}</span>
+                <CopyButton text={encodedPayload} label={s.copyPayload} copiedLabel={t.common.copied} />
               </div>
               <code className="block text-xs font-mono text-slate-800 break-all">{encodedPayload}</code>
             </div>
@@ -380,7 +454,7 @@ export default function QrCodeGeneratorTool() {
                 {pngDataUrl && (
                   <img
                     src={pngDataUrl}
-                    alt="Generated scannable QR code"
+                    alt={s.qrAlt}
                     width={size}
                     height={size}
                     className="max-w-full h-auto block"
@@ -397,7 +471,7 @@ export default function QrCodeGeneratorTool() {
                     className="inline-flex items-center gap-1.5 rounded-lg bg-indigo-600 px-3.5 py-2 text-xs sm:text-sm font-semibold text-white hover:bg-indigo-700"
                   >
                     <Download className="w-4 h-4" />
-                    Download PNG
+                    {s.downloadPng}
                   </a>
                 )}
                 <button
@@ -407,9 +481,9 @@ export default function QrCodeGeneratorTool() {
                   className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3.5 py-2 text-xs sm:text-sm font-semibold text-slate-700 hover:bg-slate-50 cursor-pointer"
                 >
                   <Download className="w-4 h-4" />
-                  Download SVG
+                  {s.downloadSvg}
                 </button>
-                <CopyButton text={svgMarkup} label="Copy SVG" />
+                <CopyButton text={svgMarkup} label={s.copySvg} copiedLabel={t.common.copied} />
               </div>
             </>
           )}

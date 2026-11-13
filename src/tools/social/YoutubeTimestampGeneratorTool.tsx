@@ -1,6 +1,74 @@
 import { ArrowUpDown, Plus, Trash2 } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    sampleChapters: [
+      { id: 1, time: '00:00', title: 'Introduction & Overview' },
+      { id: 2, time: '01:15', title: 'Core Architecture Setup' },
+      { id: 3, time: '04:40', title: 'Live Demo & Common Pitfalls' },
+      { id: 4, time: '08:20', title: 'Summary & Next Steps' },
+    ],
+    newChapter: (n: number) => `Chapter ${n}`,
+    defaultChapterTitle: 'Chapter',
+    warnInvalid: 'One or more timestamps use invalid format (use MM:SS or HH:MM:SS).',
+    warnMin3: 'YouTube requires at least 3 timestamps in ascending order to enable Video Chapters.',
+    warnFirst: 'The first chapter must start at 00:00 for YouTube to recognize chapters.',
+    warnOrder: 'Chapters are out of chronological order (click Sort Chronologically).',
+    warnShort: (title: string) =>
+      `Chapter "${title}" is under 10 seconds after the previous chapter (YouTube minimum is 10s).`,
+    labelUrl: 'YouTube Video URL or Video ID (for direct `?t=` deep links)',
+    heading: 'Video Chapters',
+    sortBtn: 'Sort Chronologically',
+    addBtn: 'Add Chapter',
+    tsAria: (n: number) => `Chapter ${n} timestamp`,
+    titleAria: (n: number) => `Chapter ${n} title`,
+    phTitle: 'Chapter title',
+    removeAria: (n: number) => `Remove chapter ${n}`,
+    specTitle: 'YouTube Chapter Spec Check:',
+    descBlock: 'Description Chapter Block',
+    copyChapters: 'Copy Chapters',
+    emptyChapters: 'Add chapters above to generate your description block.',
+    shareTitle: 'Timestamped Share Links',
+    videoIdLabel: (id: string) => `(Video ID: ${id})`,
+    noVideoId: '(Enter valid YouTube URL above)',
+    noVideoHint: 'Paste a valid youtube.com or youtu.be URL to build clickable `?t=` jump links for each chapter.',
+  },
+  es: {
+    sampleChapters: [
+      { id: 1, time: '00:00', title: 'Introducción y panorama general' },
+      { id: 2, time: '01:15', title: 'Configuración de la arquitectura principal' },
+      { id: 3, time: '04:40', title: 'Demostración en vivo y errores comunes' },
+      { id: 4, time: '08:20', title: 'Resumen y próximos pasos' },
+    ],
+    newChapter: (n: number) => `Capítulo ${n}`,
+    defaultChapterTitle: 'Capítulo',
+    warnInvalid: 'Una o más marcas de tiempo usan un formato no válido (use MM:SS o HH:MM:SS).',
+    warnMin3: 'YouTube requiere al menos 3 marcas de tiempo en orden ascendente para activar los capítulos de video.',
+    warnFirst: 'El primer capítulo debe comenzar en 00:00 para que YouTube reconozca los capítulos.',
+    warnOrder: 'Los capítulos están fuera de orden cronológico (haga clic en Ordenar cronológicamente).',
+    warnShort: (title: string) =>
+      `El capítulo «${title}» dura menos de 10 segundos después del capítulo anterior (el mínimo de YouTube es 10 s).`,
+    labelUrl: 'URL del video de YouTube o ID del video (para enlaces directos con `?t=`)',
+    heading: 'Capítulos del video',
+    sortBtn: 'Ordenar cronológicamente',
+    addBtn: 'Agregar capítulo',
+    tsAria: (n: number) => `Marca de tiempo del capítulo ${n}`,
+    titleAria: (n: number) => `Título del capítulo ${n}`,
+    phTitle: 'Título del capítulo',
+    removeAria: (n: number) => `Eliminar capítulo ${n}`,
+    specTitle: 'Revisión de especificaciones de capítulos de YouTube:',
+    descBlock: 'Bloque de capítulos para la descripción',
+    copyChapters: 'Copiar capítulos',
+    emptyChapters: 'Agregue capítulos arriba para generar el bloque de descripción.',
+    shareTitle: 'Enlaces para compartir con marca de tiempo',
+    videoIdLabel: (id: string) => `(ID del video: ${id})`,
+    noVideoId: '(Ingrese una URL válida de YouTube arriba)',
+    noVideoHint: 'Pegue una URL válida de youtube.com o youtu.be para crear enlaces de salto `?t=` en los que se pueda hacer clic para cada capítulo.',
+  },
+};
 
 interface ChapterRow {
   id: number;
@@ -58,13 +126,10 @@ function extractYoutubeVideoId(rawUrl: string): string | null {
 }
 
 export default function YoutubeTimestampGeneratorTool() {
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
   const [videoUrl, setVideoUrl] = useState('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
-  const [chapters, setChapters] = useState<ChapterRow[]>([
-    { id: 1, time: '00:00', title: 'Introduction & Overview' },
-    { id: 2, time: '01:15', title: 'Core Architecture Setup' },
-    { id: 3, time: '04:40', title: 'Live Demo & Common Pitfalls' },
-    { id: 4, time: '08:20', title: 'Summary & Next Steps' },
-  ]);
+  const [chapters, setChapters] = useState<ChapterRow[]>(s.sampleChapters.map((c) => ({ ...c })));
 
   const videoId = useMemo(() => extractYoutubeVideoId(videoUrl), [videoUrl]);
 
@@ -80,23 +145,23 @@ export default function YoutubeTimestampGeneratorTool() {
 
     const warnings: string[] = [];
     if (parsed.some((c) => c.seconds === null)) {
-      warnings.push('One or more timestamps use invalid format (use MM:SS or HH:MM:SS).');
+      warnings.push(s.warnInvalid);
     }
     if (validParsed.length < 3) {
-      warnings.push('YouTube requires at least 3 timestamps in ascending order to enable Video Chapters.');
+      warnings.push(s.warnMin3);
     }
     if (validParsed.length > 0 && validParsed[0].seconds !== 0) {
-      warnings.push('The first chapter must start at 00:00 for YouTube to recognize chapters.');
+      warnings.push(s.warnFirst);
     }
 
     for (let i = 1; i < validParsed.length; i += 1) {
       const diff = validParsed[i].seconds - validParsed[i - 1].seconds;
       if (diff < 0) {
-        warnings.push('Chapters are out of chronological order (click Sort Chronologically).');
+        warnings.push(s.warnOrder);
         break;
       }
       if (diff < 10) {
-        warnings.push(`Chapter "${validParsed[i].title || i + 1}" is under 10 seconds after the previous chapter (YouTube minimum is 10s).`);
+        warnings.push(s.warnShort(validParsed[i].title || String(i + 1)));
         break;
       }
     }
@@ -109,12 +174,12 @@ export default function YoutubeTimestampGeneratorTool() {
     const shareLinks = validParsed.map((c) => ({
       id: c.id,
       timeLabel: formatTimestamp(c.seconds, useHours),
-      title: c.title.trim() || 'Chapter',
+      title: c.title.trim() || s.defaultChapterTitle,
       url: videoId ? `https://youtu.be/${videoId}?t=${c.seconds}` : '',
     }));
 
     return { warnings, formattedText, shareLinks };
-  }, [chapters, videoId]);
+  }, [chapters, videoId, s]);
 
   const sortChapters = () => {
     const sorted = [...chapters].sort((a, b) => {
@@ -129,14 +194,14 @@ export default function YoutubeTimestampGeneratorTool() {
     const lastValid = [...chapters].reverse().find((c) => parseTimestampSeconds(c.time) !== null);
     const nextSec = (lastValid ? parseTimestampSeconds(lastValid.time) ?? 0 : 0) + 60;
     const nextId = chapters.reduce((m, c) => Math.max(m, c.id), 0) + 1;
-    setChapters([...chapters, { id: nextId, time: formatTimestamp(nextSec), title: `Chapter ${nextId}` }]);
+    setChapters([...chapters, { id: nextId, time: formatTimestamp(nextSec), title: s.newChapter(nextId) }]);
   };
 
   return (
     <div className="space-y-6">
       <div>
         <label htmlFor="yt-url" className="block text-sm font-semibold text-slate-900 mb-1.5">
-          YouTube Video URL or Video ID (for direct `?t=` deep links)
+          {s.labelUrl}
         </label>
         <input
           id="yt-url"
@@ -150,7 +215,7 @@ export default function YoutubeTimestampGeneratorTool() {
 
       <div className="space-y-3">
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <h3 className="text-sm font-semibold text-slate-900">Video Chapters</h3>
+          <h3 className="text-sm font-semibold text-slate-900">{s.heading}</h3>
           <div className="flex items-center gap-2">
             <button
               type="button"
@@ -158,7 +223,7 @@ export default function YoutubeTimestampGeneratorTool() {
               className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
             >
               <ArrowUpDown className="w-3.5 h-3.5" />
-              Sort Chronologically
+              {s.sortBtn}
             </button>
             <button
               type="button"
@@ -166,7 +231,7 @@ export default function YoutubeTimestampGeneratorTool() {
               className="inline-flex items-center gap-1.5 rounded-lg border border-indigo-200 bg-indigo-50 px-3 py-1.5 text-xs font-semibold text-indigo-700 hover:bg-indigo-100 cursor-pointer"
             >
               <Plus className="w-3.5 h-3.5" />
-              Add Chapter
+              {s.addBtn}
             </button>
           </div>
         </div>
@@ -177,7 +242,7 @@ export default function YoutubeTimestampGeneratorTool() {
               <div className="col-span-4 sm:col-span-3">
                 <input
                   type="text"
-                  aria-label={`Chapter ${idx + 1} timestamp`}
+                  aria-label={s.tsAria(idx + 1)}
                   value={ch.time}
                   onChange={(e) =>
                     setChapters(chapters.map((row) => (row.id === ch.id ? { ...row, time: e.target.value } : row)))
@@ -189,12 +254,12 @@ export default function YoutubeTimestampGeneratorTool() {
               <div className="col-span-6 sm:col-span-8">
                 <input
                   type="text"
-                  aria-label={`Chapter ${idx + 1} title`}
+                  aria-label={s.titleAria(idx + 1)}
                   value={ch.title}
                   onChange={(e) =>
                     setChapters(chapters.map((row) => (row.id === ch.id ? { ...row, title: e.target.value } : row)))
                   }
-                  placeholder="Chapter title"
+                  placeholder={s.phTitle}
                   className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"
                 />
               </div>
@@ -203,7 +268,7 @@ export default function YoutubeTimestampGeneratorTool() {
                   type="button"
                   disabled={chapters.length <= 1}
                   onClick={() => setChapters(chapters.filter((row) => row.id !== ch.id))}
-                  aria-label={`Remove chapter ${idx + 1}`}
+                  aria-label={s.removeAria(idx + 1)}
                   className="rounded-lg border border-slate-300 bg-white p-2 text-slate-600 hover:bg-slate-50 disabled:opacity-40 cursor-pointer"
                 >
                   <Trash2 className="w-4 h-4" />
@@ -216,7 +281,7 @@ export default function YoutubeTimestampGeneratorTool() {
 
       {analysis.warnings.length > 0 && (
         <div className="rounded-xl border border-amber-200 bg-amber-50 p-4 text-xs sm:text-sm text-amber-900 space-y-1">
-          <div className="font-semibold">YouTube Chapter Spec Check:</div>
+          <div className="font-semibold">{s.specTitle}</div>
           <ul className="list-disc pl-5 space-y-0.5">
             {analysis.warnings.map((w) => (
               <li key={w}>{w}</li>
@@ -228,17 +293,17 @@ export default function YoutubeTimestampGeneratorTool() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
           <div className="flex items-center justify-between gap-2 mb-2">
-            <span className="text-xs font-semibold text-slate-700">Description Chapter Block</span>
-            <CopyButton text={analysis.formattedText} label="Copy Chapters" />
+            <span className="text-xs font-semibold text-slate-700">{s.descBlock}</span>
+            <CopyButton text={analysis.formattedText} label={s.copyChapters} copiedLabel={t.common.copied} />
           </div>
           <pre className="rounded-lg border border-slate-200 bg-white p-3 font-mono text-xs sm:text-sm text-slate-900 whitespace-pre-wrap">
-            {analysis.formattedText || 'Add chapters above to generate your description block.'}
+            {analysis.formattedText || s.emptyChapters}
           </pre>
         </div>
 
         <div className="rounded-xl border border-slate-200 bg-white p-4 space-y-2.5">
           <div className="text-xs font-semibold text-slate-700">
-            Timestamped Share Links {videoId ? `(Video ID: ${videoId})` : '(Enter valid YouTube URL above)'}
+            {s.shareTitle} {videoId ? s.videoIdLabel(videoId) : s.noVideoId}
           </div>
           {videoId ? (
             <div className="space-y-2 max-h-60 overflow-y-auto pr-1">
@@ -253,13 +318,13 @@ export default function YoutubeTimestampGeneratorTool() {
                     </div>
                     <div className="font-mono text-slate-500 truncate">{link.url}</div>
                   </div>
-                  <CopyButton text={link.url} label="Copy" />
+                  <CopyButton text={link.url} label={t.common.copy} copiedLabel={t.common.copied} />
                 </div>
               ))}
             </div>
           ) : (
             <p className="text-xs text-slate-500">
-              Paste a valid youtube.com or youtu.be URL to build clickable `?t=` jump links for each chapter.
+              {s.noVideoHint}
             </p>
           )}
         </div>

@@ -1,32 +1,124 @@
 import { Info } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { useLocale } from '../../locales/LocaleContext';
 
-type FrameworkId = 'pas' | 'bab' | 'tutorial' | 'checklist' | 'myth';
+const STRINGS = {
+  en: {
+    frameworkNames: {
+      pas: 'Problem → Agitate → Solution (PAS)',
+      tutorial: '3-Step Actionable Breakdown',
+      bab: 'Before → After → Bridge',
+      checklist: 'Launch / Audit Checklist',
+      myth: 'Common Myth vs. Practical Reality',
+    },
+    frameworkDescriptions: {
+      pas: 'Highlights a concrete pain point before delivering your workflow fix.',
+      tutorial: 'Numbered how-to structure suited for LinkedIn carousels and saves.',
+      bab: 'Contrasts old friction with the streamlined outcome.',
+      checklist: 'High-clarity verification list creators can bookmark.',
+      myth: 'Challenges outdated advice with direct, concise alternatives.',
+    },
+    frameworkLabels: {
+      fixesHeading: 'What actually fixes it:',
+      beforeLabel: 'Before: ',
+      afterLabel: 'After: ',
+      bridgeHeading: 'The bridge:',
+      mythLabel: 'Common myth: ',
+      worksHeading: 'What works in practice:',
+    },
+    sampleHook: 'Stop losing hours formatting campaign links by hand.',
+    sampleContext: 'Inconsistent UTM parameters and broken bio spacing silently distort analytics reports.',
+    samplePoints:
+      'Standardize lowercase utm_source and utm_medium tags\nValidate character folds before publishing\nKeep clean paragraph breaks without trailing spaces',
+    sampleCta: 'Bookmark this checklist for your next product launch.',
+    infoTitle: 'Deterministic Template Assembly:',
+    infoBody:
+      'This tool uses structured copywriting frameworks directly in your browser—no AI model or external API is used or implied.',
+    labelHook: 'Opening Hook (First 1–2 lines)',
+    labelContext: 'Context / Problem Statement',
+    labelPoints: 'Key Takeaways (One point per line)',
+    labelCta: 'Call-to-Action (CTA)',
+    labelTags: 'Hashtags',
+    previewTitle: 'Formatted Caption Preview',
+    copyCaption: 'Copy Caption',
+    charsLabel: 'Characters:',
+    wordsLabel: 'Words:',
+    fits: 'Fits',
+    threadNeeded: 'Thread needed',
+    tooLong: 'Too long',
+  },
+  es: {
+    frameworkNames: {
+      pas: 'Problema → Agitación → Solución (PAS)',
+      tutorial: 'Desglose práctico en 3 pasos',
+      bab: 'Antes → Después → Puente',
+      checklist: 'Lista de verificación de lanzamiento / auditoría',
+      myth: 'Mito común frente a realidad práctica',
+    },
+    frameworkDescriptions: {
+      pas: 'Destaca un problema concreto antes de ofrecer la solución de flujo de trabajo.',
+      tutorial: 'Estructura numerada de instrucciones, ideal para carruseles y guardados de LinkedIn.',
+      bab: 'Contrasta la fricción anterior con el resultado optimizado.',
+      checklist: 'Lista de verificación clara que los creadores pueden guardar.',
+      myth: 'Cuestiona consejos desactualizados con alternativas directas y concisas.',
+    },
+    frameworkLabels: {
+      fixesHeading: 'Lo que realmente lo soluciona:',
+      beforeLabel: 'Antes: ',
+      afterLabel: 'Después: ',
+      bridgeHeading: 'El puente:',
+      mythLabel: 'Mito común: ',
+      worksHeading: 'Lo que funciona en la práctica:',
+    },
+    sampleHook: 'Deje de perder horas formateando enlaces de campaña a mano.',
+    sampleContext: 'Los parámetros UTM inconsistentes y el espaciado roto de la biografía distorsionan silenciosamente los informes de análisis.',
+    samplePoints:
+      'Estandarice las etiquetas utm_source y utm_medium en minúsculas\nValide los pliegues de caracteres antes de publicar\nMantenga saltos de párrafo limpios sin espacios finales',
+    sampleCta: 'Guarde esta lista de verificación para su próximo lanzamiento de producto.',
+    infoTitle: 'Ensamblaje determinista de plantillas:',
+    infoBody:
+      'Esta herramienta usa marcos estructurados de redacción directamente en su navegador; no se usa ni se sugiere ningún modelo de IA ni API externa.',
+    labelHook: 'Gancho inicial (primeras 1–2 líneas)',
+    labelContext: 'Contexto / planteamiento del problema',
+    labelPoints: 'Puntos clave (un punto por línea)',
+    labelCta: 'Llamado a la acción (CTA)',
+    labelTags: 'Hashtags',
+    previewTitle: 'Vista previa de la descripción formateada',
+    copyCaption: 'Copiar descripción',
+    charsLabel: 'Caracteres:',
+    wordsLabel: 'Palabras:',
+    fits: 'Cabe',
+    threadNeeded: 'Se necesita un hilo',
+    tooLong: 'Demasiado largo',
+  },
+};
+
+type FrameworkId = keyof typeof STRINGS.en.frameworkNames;
+type FrameworkLabels = typeof STRINGS.en.frameworkLabels;
 
 interface FrameworkDef {
   id: FrameworkId;
-  name: string;
-  description: string;
-  build: (f: {
-    hook: string;
-    context: string;
-    points: string[];
-    cta: string;
-    tags: string;
-  }) => string;
+  build: (
+    f: {
+      hook: string;
+      context: string;
+      points: string[];
+      cta: string;
+      tags: string;
+    },
+    labels: FrameworkLabels
+  ) => string;
 }
 
 const FRAMEWORKS: FrameworkDef[] = [
   {
     id: 'pas',
-    name: 'Problem → Agitate → Solution (PAS)',
-    description: 'Highlights a concrete pain point before delivering your workflow fix.',
-    build: ({ hook, context, points, cta, tags }) =>
+    build: ({ hook, context, points, cta, tags }, labels) =>
       [
         hook,
         context ? `\n${context}` : '',
-        points.length > 0 ? `\nWhat actually fixes it:\n${points.map((p) => `• ${p}`).join('\n')}` : '',
+        points.length > 0 ? `\n${labels.fixesHeading}\n${points.map((p) => `• ${p}`).join('\n')}` : '',
         cta ? `\n${cta}` : '',
         tags ? `\n${tags}` : '',
       ]
@@ -35,8 +127,6 @@ const FRAMEWORKS: FrameworkDef[] = [
   },
   {
     id: 'tutorial',
-    name: '3-Step Actionable Breakdown',
-    description: 'Numbered how-to structure suited for LinkedIn carousels and saves.',
     build: ({ hook, context, points, cta, tags }) =>
       [
         hook,
@@ -52,15 +142,13 @@ const FRAMEWORKS: FrameworkDef[] = [
   },
   {
     id: 'bab',
-    name: 'Before → After → Bridge',
-    description: 'Contrasts old friction with the streamlined outcome.',
-    build: ({ hook, context, points, cta, tags }) =>
+    build: ({ hook, context, points, cta, tags }, labels) =>
       [
         hook,
-        context ? `\nBefore: ${context}` : '',
-        points[0] ? `\nAfter: ${points[0]}` : '',
+        context ? `\n${labels.beforeLabel}${context}` : '',
+        points[0] ? `\n${labels.afterLabel}${points[0]}` : '',
         points.length > 1
-          ? `\nThe bridge:\n${points
+          ? `\n${labels.bridgeHeading}\n${points
               .slice(1)
               .map((p) => `→ ${p}`)
               .join('\n')}`
@@ -73,8 +161,6 @@ const FRAMEWORKS: FrameworkDef[] = [
   },
   {
     id: 'checklist',
-    name: 'Launch / Audit Checklist',
-    description: 'High-clarity verification list creators can bookmark.',
     build: ({ hook, context, points, cta, tags }) =>
       [
         hook,
@@ -88,14 +174,12 @@ const FRAMEWORKS: FrameworkDef[] = [
   },
   {
     id: 'myth',
-    name: 'Common Myth vs. Practical Reality',
-    description: 'Challenges outdated advice with direct, concise alternatives.',
-    build: ({ hook, context, points, cta, tags }) =>
+    build: ({ hook, context, points, cta, tags }, labels) =>
       [
         hook,
-        context ? `\nCommon myth: ${context}` : '',
+        context ? `\n${labels.mythLabel}${context}` : '',
         points.length > 0
-          ? `\nWhat works in practice:\n${points.map((p) => `— ${p}`).join('\n')}`
+          ? `\n${labels.worksHeading}\n${points.map((p) => `— ${p}`).join('\n')}`
           : '',
         cta ? `\n${cta}` : '',
         tags ? `\n${tags}` : '',
@@ -106,15 +190,13 @@ const FRAMEWORKS: FrameworkDef[] = [
 ];
 
 export default function CaptionTemplateBuilderTool() {
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
   const [frameworkId, setFrameworkId] = useState<FrameworkId>('tutorial');
-  const [hook, setHook] = useState('Stop losing hours formatting campaign links by hand.');
-  const [context, setContext] = useState(
-    'Inconsistent UTM parameters and broken bio spacing silently distort analytics reports.'
-  );
-  const [pointsText, setPointsText] = useState(
-    'Standardize lowercase utm_source and utm_medium tags\nValidate character folds before publishing\nKeep clean paragraph breaks without trailing spaces'
-  );
-  const [cta, setCta] = useState('Bookmark this checklist for your next product launch.');
+  const [hook, setHook] = useState(s.sampleHook);
+  const [context, setContext] = useState(s.sampleContext);
+  const [pointsText, setPointsText] = useState(s.samplePoints);
+  const [cta, setCta] = useState(s.sampleCta);
   const [hashtags, setHashtags] = useState('#CreatorWorkflow #MarketingOps #Productivity');
 
   const activeFramework = FRAMEWORKS.find((f) => f.id === frameworkId) ?? FRAMEWORKS[0];
@@ -125,27 +207,30 @@ export default function CaptionTemplateBuilderTool() {
       .map((line) => line.trim())
       .filter(Boolean);
 
-    const output = activeFramework.build({
-      hook: hook.trim(),
-      context: context.trim(),
-      points,
-      cta: cta.trim(),
-      tags: hashtags.trim(),
-    });
+    const output = activeFramework.build(
+      {
+        hook: hook.trim(),
+        context: context.trim(),
+        points,
+        cta: cta.trim(),
+        tags: hashtags.trim(),
+      },
+      s.frameworkLabels
+    );
 
     return {
       output,
       chars: Array.from(output).length,
       words: output.trim() ? output.trim().split(/\s+/).length : 0,
     };
-  }, [activeFramework, hook, context, pointsText, cta, hashtags]);
+  }, [activeFramework, hook, context, pointsText, cta, hashtags, s]);
 
   return (
     <div className="space-y-6">
       <div className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-xs sm:text-sm text-slate-700 flex items-start gap-2.5">
         <Info className="w-4 h-4 shrink-0 text-indigo-600 mt-0.5" />
         <p>
-          <strong>Deterministic Template Assembly:</strong> This tool uses structured copywriting frameworks directly in your browser—no AI model or external API is used or implied.
+          <strong>{s.infoTitle}</strong> {s.infoBody}
         </p>
       </div>
 
@@ -159,18 +244,18 @@ export default function CaptionTemplateBuilderTool() {
               frameworkId === fw.id ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
             }`}
           >
-            {fw.name}
+            {s.frameworkNames[fw.id]}
           </button>
         ))}
       </div>
 
-      <p className="text-xs text-slate-600">{activeFramework.description}</p>
+      <p className="text-xs text-slate-600">{s.frameworkDescriptions[frameworkId]}</p>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
         <div className="space-y-3.5">
           <div>
             <label htmlFor="ctb-hook" className="block text-xs font-semibold text-slate-800 mb-1">
-              Opening Hook (First 1–2 lines)
+              {s.labelHook}
             </label>
             <input
               id="ctb-hook"
@@ -183,7 +268,7 @@ export default function CaptionTemplateBuilderTool() {
 
           <div>
             <label htmlFor="ctb-ctx" className="block text-xs font-semibold text-slate-800 mb-1">
-              Context / Problem Statement
+              {s.labelContext}
             </label>
             <textarea
               id="ctb-ctx"
@@ -196,7 +281,7 @@ export default function CaptionTemplateBuilderTool() {
 
           <div>
             <label htmlFor="ctb-pts" className="block text-xs font-semibold text-slate-800 mb-1">
-              Key Takeaways (One point per line)
+              {s.labelPoints}
             </label>
             <textarea
               id="ctb-pts"
@@ -209,7 +294,7 @@ export default function CaptionTemplateBuilderTool() {
 
           <div>
             <label htmlFor="ctb-cta" className="block text-xs font-semibold text-slate-800 mb-1">
-              Call-to-Action (CTA)
+              {s.labelCta}
             </label>
             <input
               id="ctb-cta"
@@ -222,7 +307,7 @@ export default function CaptionTemplateBuilderTool() {
 
           <div>
             <label htmlFor="ctb-tags" className="block text-xs font-semibold text-slate-800 mb-1">
-              Hashtags
+              {s.labelTags}
             </label>
             <input
               id="ctb-tags"
@@ -236,17 +321,17 @@ export default function CaptionTemplateBuilderTool() {
 
         <div className="rounded-xl border border-indigo-200 bg-indigo-50/40 p-4 space-y-3">
           <div className="flex items-center justify-between gap-2">
-            <span className="text-xs font-semibold text-indigo-800">Formatted Caption Preview</span>
-            <CopyButton text={compiled.output} label="Copy Caption" />
+            <span className="text-xs font-semibold text-indigo-800">{s.previewTitle}</span>
+            <CopyButton text={compiled.output} label={s.copyCaption} copiedLabel={t.common.copied} />
           </div>
           <pre className="rounded-lg border border-slate-200 bg-white p-4 font-sans text-sm leading-relaxed text-slate-900 whitespace-pre-wrap break-words min-h-64">
             {compiled.output}
           </pre>
           <div className="flex flex-wrap gap-4 text-xs text-slate-600 tabular-nums">
-            <span>Characters: <strong>{compiled.chars}</strong></span>
-            <span>Words: <strong>{compiled.words}</strong></span>
-            <span>X (280): {compiled.chars <= 280 ? 'Fits' : 'Thread needed'}</span>
-            <span>LinkedIn / IG: {compiled.chars <= 2200 ? 'Fits' : 'Too long'}</span>
+            <span>{s.charsLabel} <strong>{compiled.chars}</strong></span>
+            <span>{s.wordsLabel} <strong>{compiled.words}</strong></span>
+            <span>X (280): {compiled.chars <= 280 ? s.fits : s.threadNeeded}</span>
+            <span>LinkedIn / IG: {compiled.chars <= 2200 ? s.fits : s.tooLong}</span>
           </div>
         </div>
       </div>

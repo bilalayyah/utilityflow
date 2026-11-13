@@ -1,14 +1,82 @@
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { useLocale } from '../../locales/LocaleContext';
 
-const PRESETS = [
-  { label: 'Instagram Bio', source: 'instagram', medium: 'social', campaign: 'bio_link', content: 'profile' },
-  { label: 'LinkedIn Post', source: 'linkedin', medium: 'social', campaign: 'organic_post', content: 'feed' },
-  { label: 'Newsletter', source: 'newsletter', medium: 'email', campaign: 'weekly_digest', content: 'cta_button' },
-  { label: 'YouTube Description', source: 'youtube', medium: 'video', campaign: 'creator_channel', content: 'top_link' },
+const STRINGS = {
+  en: {
+    presets: {
+      instagramBio: 'Instagram Bio',
+      linkedinPost: 'LinkedIn Post',
+      newsletter: 'Newsletter',
+      youtubeDescription: 'YouTube Description',
+    },
+    presetsLabel: 'Quick Channel Presets:',
+    errorEmpty: 'Enter a destination website URL.',
+    errorInvalid: 'Enter a valid destination URL (for example https://example.com/landing).',
+    labelUrl: 'Website Destination URL *',
+    labelSource: 'Campaign Source (utm_source) *',
+    phSource: 'e.g. instagram, newsletter, google',
+    labelMedium: 'Campaign Medium (utm_medium) *',
+    phMedium: 'e.g. social, cpc, email, video',
+    labelCampaign: 'Campaign Name (utm_campaign)',
+    phCampaign: 'e.g. spring_launch',
+    labelContent: 'Campaign Content (utm_content)',
+    phContent: 'e.g. hero_banner, bio_button',
+    labelTerm: 'Campaign Term (utm_term)',
+    phTerm: 'Optional paid keyword or audience tag',
+    normalizeLabel: 'Force lowercase & convert spaces to underscores (`_`)',
+    generatedTitle: 'Generated Campaign URL',
+    copyUtm: 'Copy UTM URL',
+    thParam: 'Query Parameter',
+    thValue: 'Normalized Value',
+  },
+  es: {
+    presets: {
+      instagramBio: 'Biografía de Instagram',
+      linkedinPost: 'Publicación de LinkedIn',
+      newsletter: 'Boletín',
+      youtubeDescription: 'Descripción de YouTube',
+    },
+    presetsLabel: 'Preajustes rápidos de canal:',
+    errorEmpty: 'Ingrese la URL del sitio web de destino.',
+    errorInvalid: 'Ingrese una URL de destino válida (por ejemplo, https://example.com/landing).',
+    labelUrl: 'URL del sitio web de destino *',
+    labelSource: 'Fuente de la campaña (utm_source) *',
+    phSource: 'p. ej., instagram, newsletter, google',
+    labelMedium: 'Medio de la campaña (utm_medium) *',
+    phMedium: 'p. ej., social, cpc, email, video',
+    labelCampaign: 'Nombre de la campaña (utm_campaign)',
+    phCampaign: 'p. ej., spring_launch',
+    labelContent: 'Contenido de la campaña (utm_content)',
+    phContent: 'p. ej., hero_banner, bio_button',
+    labelTerm: 'Término de la campaña (utm_term)',
+    phTerm: 'Palabra clave pagada o etiqueta de audiencia opcional',
+    normalizeLabel: 'Forzar minúsculas y convertir espacios en guiones bajos (`_`)',
+    generatedTitle: 'URL de campaña generada',
+    copyUtm: 'Copiar URL UTM',
+    thParam: 'Parámetro de consulta',
+    thValue: 'Valor normalizado',
+  },
+};
+
+type PresetId = keyof typeof STRINGS.en.presets;
+
+const PRESETS: {
+  id: PresetId;
+  source: string;
+  medium: string;
+  campaign: string;
+  content: string;
+}[] = [
+  { id: 'instagramBio', source: 'instagram', medium: 'social', campaign: 'bio_link', content: 'profile' },
+  { id: 'linkedinPost', source: 'linkedin', medium: 'social', campaign: 'organic_post', content: 'feed' },
+  { id: 'newsletter', source: 'newsletter', medium: 'email', campaign: 'weekly_digest', content: 'cta_button' },
+  { id: 'youtubeDescription', source: 'youtube', medium: 'video', campaign: 'creator_channel', content: 'top_link' },
 ];
 
 export default function UtmLinkBuilderTool() {
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
   const [baseUrl, setBaseUrl] = useState('https://utilityflow.online/tools/');
   const [source, setSource] = useState('instagram');
   const [medium, setMedium] = useState('social');
@@ -30,7 +98,7 @@ export default function UtmLinkBuilderTool() {
   const result = useMemo(() => {
     const rawBase = baseUrl.trim();
     if (!rawBase) {
-      return { error: 'Enter a destination website URL.', finalUrl: '', params: [] as [string, string][] };
+      return { error: s.errorEmpty, finalUrl: '', params: [] as [string, string][] };
     }
 
     let parsed: URL;
@@ -39,7 +107,7 @@ export default function UtmLinkBuilderTool() {
       parsed = new URL(candidate);
     } catch {
       return {
-        error: 'Enter a valid destination URL (for example https://example.com/landing).',
+        error: s.errorInvalid,
         finalUrl: '',
         params: [] as [string, string][],
       };
@@ -66,15 +134,15 @@ export default function UtmLinkBuilderTool() {
       finalUrl: parsed.toString(),
       params: Array.from(parsed.searchParams.entries()),
     };
-  }, [baseUrl, source, medium, campaign, term, content, normalizeSlug]);
+  }, [baseUrl, source, medium, campaign, term, content, normalizeSlug, s]);
 
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-center gap-2">
-        <span className="text-xs font-semibold text-slate-500">Quick Channel Presets:</span>
+        <span className="text-xs font-semibold text-slate-500">{s.presetsLabel}</span>
         {PRESETS.map((preset) => (
           <button
-            key={preset.label}
+            key={preset.id}
             type="button"
             onClick={() => {
               setSource(preset.source);
@@ -84,7 +152,7 @@ export default function UtmLinkBuilderTool() {
             }}
             className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-medium text-slate-700 hover:border-indigo-300 hover:text-indigo-700 cursor-pointer"
           >
-            {preset.label}
+            {s.presets[preset.id]}
           </button>
         ))}
       </div>
@@ -92,7 +160,7 @@ export default function UtmLinkBuilderTool() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="md:col-span-2">
           <label htmlFor="utm-url" className="block text-sm font-semibold text-slate-900 mb-1.5">
-            Website Destination URL *
+            {s.labelUrl}
           </label>
           <input
             id="utm-url"
@@ -106,70 +174,70 @@ export default function UtmLinkBuilderTool() {
 
         <div>
           <label htmlFor="utm-source" className="block text-sm font-semibold text-slate-900 mb-1.5">
-            Campaign Source (utm_source) *
+            {s.labelSource}
           </label>
           <input
             id="utm-source"
             type="text"
             value={source}
             onChange={(e) => setSource(e.target.value)}
-            placeholder="e.g. instagram, newsletter, google"
+            placeholder={s.phSource}
             className="w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 font-mono text-sm"
           />
         </div>
 
         <div>
           <label htmlFor="utm-medium" className="block text-sm font-semibold text-slate-900 mb-1.5">
-            Campaign Medium (utm_medium) *
+            {s.labelMedium}
           </label>
           <input
             id="utm-medium"
             type="text"
             value={medium}
             onChange={(e) => setMedium(e.target.value)}
-            placeholder="e.g. social, cpc, email, video"
+            placeholder={s.phMedium}
             className="w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 font-mono text-sm"
           />
         </div>
 
         <div>
           <label htmlFor="utm-campaign" className="block text-sm font-semibold text-slate-900 mb-1.5">
-            Campaign Name (utm_campaign)
+            {s.labelCampaign}
           </label>
           <input
             id="utm-campaign"
             type="text"
             value={campaign}
             onChange={(e) => setCampaign(e.target.value)}
-            placeholder="e.g. spring_launch"
+            placeholder={s.phCampaign}
             className="w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 font-mono text-sm"
           />
         </div>
 
         <div>
           <label htmlFor="utm-content" className="block text-sm font-semibold text-slate-900 mb-1.5">
-            Campaign Content (utm_content)
+            {s.labelContent}
           </label>
           <input
             id="utm-content"
             type="text"
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            placeholder="e.g. hero_banner, bio_button"
+            placeholder={s.phContent}
             className="w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 font-mono text-sm"
           />
         </div>
 
         <div>
           <label htmlFor="utm-term" className="block text-sm font-semibold text-slate-900 mb-1.5">
-            Campaign Term (utm_term)
+            {s.labelTerm}
           </label>
           <input
             id="utm-term"
             type="text"
             value={term}
             onChange={(e) => setTerm(e.target.value)}
-            placeholder="Optional paid keyword or audience tag"
+            placeholder={s.phTerm}
             className="w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 font-mono text-sm"
           />
         </div>
@@ -182,7 +250,7 @@ export default function UtmLinkBuilderTool() {
               onChange={(e) => setNormalizeSlug(e.target.checked)}
               className="h-4 w-4 rounded border-slate-300 text-indigo-600"
             />
-            Force lowercase &amp; convert spaces to underscores (`_`)
+            {s.normalizeLabel}
           </label>
         </div>
       </div>
@@ -197,8 +265,8 @@ export default function UtmLinkBuilderTool() {
         <div className="space-y-4">
           <div className="rounded-xl border border-indigo-200 bg-indigo-50/70 p-4">
             <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
-              <span className="text-xs font-semibold text-indigo-700">Generated Campaign URL</span>
-              <CopyButton text={result.finalUrl} label="Copy UTM URL" />
+              <span className="text-xs font-semibold text-indigo-700">{s.generatedTitle}</span>
+              <CopyButton text={result.finalUrl} label={s.copyUtm} copiedLabel={t.common.copied} />
             </div>
             <div className="rounded-lg border border-indigo-100 bg-white p-3 font-mono text-xs sm:text-sm text-slate-900 break-all">
               {result.finalUrl}
@@ -210,8 +278,8 @@ export default function UtmLinkBuilderTool() {
               <table className="w-full text-left text-xs sm:text-sm">
                 <thead className="bg-slate-50 text-slate-500 border-b border-slate-200">
                   <tr>
-                    <th className="py-2 px-4 font-semibold">Query Parameter</th>
-                    <th className="py-2 px-4 font-semibold">Normalized Value</th>
+                    <th className="py-2 px-4 font-semibold">{s.thParam}</th>
+                    <th className="py-2 px-4 font-semibold">{s.thValue}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100 font-mono">

@@ -1,68 +1,130 @@
 import { ExternalLink, Info } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    ruleSummaries: {
+      x: '4–15 chars · letters, numbers, underscores',
+      instagram: '1–30 chars · letters, numbers, periods, underscores',
+      tiktok: '2–24 chars · letters, numbers, underscores, periods',
+      youtube: '3–30 chars · letters, numbers, _, -, .',
+      threads: '1–30 chars · shared Instagram namespace',
+      github: '1–39 chars · alphanumeric and single hyphens',
+    },
+    infoTitle: 'Rule Validator & Direct Check Links:',
+    infoBodyBefore:
+      "Validates handle syntax and character limits offline without guessing availability. Click any platform's",
+    infoEm: 'Open Profile URL',
+    infoBodyAfter: 'link to verify live claim status directly.',
+    labelBrand: 'Brand, Project, or Creator Name',
+    phBrand: 'e.g. Utility Hub',
+    labelActive: 'Active Handle to Validate',
+    copyAt: 'Copy @',
+    variationsTitle: 'Consistent Handle Variations:',
+    thPlatform: 'Platform',
+    thRules: 'Format Rules',
+    thStatus: 'Syntax Status',
+    thCheck: 'Manual Check',
+    valid: 'Valid format',
+    invalid: 'Invalid syntax/length',
+    checkUrl: 'Check URL',
+  },
+  es: {
+    ruleSummaries: {
+      x: '4–15 caracteres · letras, números, guiones bajos',
+      instagram: '1–30 caracteres · letras, números, puntos, guiones bajos',
+      tiktok: '2–24 caracteres · letras, números, guiones bajos, puntos',
+      youtube: '3–30 caracteres · letras, números, _, -, .',
+      threads: '1–30 caracteres · espacio de nombres compartido de Instagram',
+      github: '1–39 caracteres · alfanuméricos y guiones simples',
+    },
+    infoTitle: 'Validador de reglas y enlaces de verificación directa:',
+    infoBodyBefore:
+      'Valida la sintaxis del nombre de usuario y los límites de caracteres sin conexión, sin adivinar la disponibilidad. Haga clic en el enlace',
+    infoEm: 'Abrir URL del perfil',
+    infoBodyAfter: 'de cualquier plataforma para verificar en vivo si el nombre ya está en uso.',
+    labelBrand: 'Nombre de marca, proyecto o creador',
+    phBrand: 'p. ej., Utility Hub',
+    labelActive: 'Nombre de usuario activo para validar',
+    copyAt: 'Copiar @',
+    variationsTitle: 'Variaciones consistentes del nombre de usuario:',
+    thPlatform: 'Plataforma',
+    thRules: 'Reglas de formato',
+    thStatus: 'Estado de sintaxis',
+    thCheck: 'Verificación manual',
+    valid: 'Formato válido',
+    invalid: 'Sintaxis o longitud no válidas',
+    checkUrl: 'Verificar URL',
+  },
+};
+
+type PlatformId = keyof typeof STRINGS.en.ruleSummaries;
 
 interface PlatformRule {
+  id: PlatformId;
   platform: string;
   min: number;
   max: number;
   pattern: RegExp;
-  ruleSummary: string;
   buildUrl: (handle: string) => string;
 }
 
 const PLATFORM_RULES: PlatformRule[] = [
   {
+    id: 'x',
     platform: 'X (Twitter)',
     min: 4,
     max: 15,
     pattern: /^[a-z0-9_]+$/,
-    ruleSummary: '4–15 chars · letters, numbers, underscores',
     buildUrl: (h) => `https://x.com/${h}`,
   },
   {
+    id: 'instagram',
     platform: 'Instagram',
     min: 1,
     max: 30,
     pattern: /^(?!.*\.\.)(?!.*\.$)[a-z0-9._]+$/,
-    ruleSummary: '1–30 chars · letters, numbers, periods, underscores',
     buildUrl: (h) => `https://www.instagram.com/${h}/`,
   },
   {
+    id: 'tiktok',
     platform: 'TikTok',
     min: 2,
     max: 24,
     pattern: /^(?!.*\.$)[a-z0-9._]+$/,
-    ruleSummary: '2–24 chars · letters, numbers, underscores, periods',
     buildUrl: (h) => `https://www.tiktok.com/@${h}`,
   },
   {
+    id: 'youtube',
     platform: 'YouTube @handle',
     min: 3,
     max: 30,
     pattern: /^[a-z0-9._-]+$/,
-    ruleSummary: '3–30 chars · letters, numbers, _, -, .',
     buildUrl: (h) => `https://www.youtube.com/@${h}`,
   },
   {
+    id: 'threads',
     platform: 'Threads',
     min: 1,
     max: 30,
     pattern: /^(?!.*\.\.)(?!.*\.$)[a-z0-9._]+$/,
-    ruleSummary: '1–30 chars · shared Instagram namespace',
     buildUrl: (h) => `https://www.threads.net/@${h}`,
   },
   {
+    id: 'github',
     platform: 'GitHub',
     min: 1,
     max: 39,
     pattern: /^[a-z0-9]+(?:-[a-z0-9]+)*$/,
-    ruleSummary: '1–39 chars · alphanumeric and single hyphens',
     buildUrl: (h) => `https://github.com/${h}`,
   },
 ];
 
 export default function SocialHandleFormatterTool() {
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
   const [brandInput, setBrandInput] = useState('Utility Hub');
   const [selectedVariant, setSelectedVariant] = useState('');
 
@@ -118,14 +180,14 @@ export default function SocialHandleFormatterTool() {
       <div className="rounded-xl border border-amber-200 bg-amber-50/80 px-4 py-3 text-xs sm:text-sm text-amber-950 flex items-start gap-2.5">
         <Info className="w-4 h-4 shrink-0 text-amber-700 mt-0.5" />
         <p>
-          <strong>Rule Validator &amp; Direct Check Links:</strong> Validates handle syntax and character limits offline without guessing availability. Click any platform&apos;s <em>Open Profile URL</em> link to verify live claim status directly.
+          <strong>{s.infoTitle}</strong> {s.infoBodyBefore} <em>{s.infoEm}</em> {s.infoBodyAfter}
         </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <label htmlFor="shf-brand" className="block text-sm font-semibold text-slate-900 mb-1.5">
-            Brand, Project, or Creator Name
+            {s.labelBrand}
           </label>
           <input
             id="shf-brand"
@@ -135,14 +197,14 @@ export default function SocialHandleFormatterTool() {
               setBrandInput(e.target.value);
               setSelectedVariant('');
             }}
-            placeholder="e.g. Utility Hub"
+            placeholder={s.phBrand}
             className="w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm"
           />
         </div>
 
         <div>
           <label htmlFor="shf-active" className="block text-sm font-semibold text-slate-900 mb-1.5">
-            Active Handle to Validate
+            {s.labelActive}
           </label>
           <div className="flex gap-2">
             <input
@@ -153,14 +215,14 @@ export default function SocialHandleFormatterTool() {
               placeholder="utilityflow"
               className="w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 font-mono text-sm"
             />
-            <CopyButton text={activeHandle ? `@${activeHandle}` : ''} label="Copy @" />
+            <CopyButton text={activeHandle ? `@${activeHandle}` : ''} label={s.copyAt} copiedLabel={t.common.copied} />
           </div>
         </div>
       </div>
 
       {suggestions.length > 0 && (
         <div>
-          <div className="text-xs font-semibold text-slate-600 mb-2">Consistent Handle Variations:</div>
+          <div className="text-xs font-semibold text-slate-600 mb-2">{s.variationsTitle}</div>
           <div className="flex flex-wrap gap-2">
             {suggestions.map((variant) => (
               <button
@@ -184,24 +246,24 @@ export default function SocialHandleFormatterTool() {
         <table className="w-full text-left text-xs sm:text-sm">
           <thead className="bg-slate-50 text-slate-500 border-b border-slate-200">
             <tr>
-              <th className="py-2.5 px-4 font-semibold">Platform</th>
-              <th className="py-2.5 px-4 font-semibold">Format Rules</th>
-              <th className="py-2.5 px-4 font-semibold">Syntax Status</th>
-              <th className="py-2.5 px-4 font-semibold text-right">Manual Check</th>
+              <th className="py-2.5 px-4 font-semibold">{s.thPlatform}</th>
+              <th className="py-2.5 px-4 font-semibold">{s.thRules}</th>
+              <th className="py-2.5 px-4 font-semibold">{s.thStatus}</th>
+              <th className="py-2.5 px-4 font-semibold text-right">{s.thCheck}</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100">
             {validations.map((v) => (
               <tr key={v.platform}>
                 <td className="py-2.5 px-4 font-semibold text-slate-900">{v.platform}</td>
-                <td className="py-2.5 px-4 text-slate-600">{v.ruleSummary}</td>
+                <td className="py-2.5 px-4 text-slate-600">{s.ruleSummaries[v.id]}</td>
                 <td className="py-2.5 px-4">
                   <span
                     className={`font-semibold ${
                       v.valid ? 'text-emerald-700' : 'text-red-700'
                     }`}
                   >
-                    {v.valid ? 'Valid format' : 'Invalid syntax/length'}
+                    {v.valid ? s.valid : s.invalid}
                   </span>
                 </td>
                 <td className="py-2.5 px-4 text-right">
@@ -212,7 +274,7 @@ export default function SocialHandleFormatterTool() {
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1 text-indigo-600 hover:text-indigo-800 font-medium"
                     >
-                      Check URL
+                      {s.checkUrl}
                       <ExternalLink className="w-3.5 h-3.5" />
                     </a>
                   ) : (

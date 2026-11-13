@@ -1,12 +1,52 @@
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    sampleText:
+      'Building fast browser tools for makers & teams.   \n\nNew weekly workflow drops every Tuesday.\n\nTry free utilities at the link below!',
+    modeBraille: 'Invisible Spacer (⠀ U+2800)',
+    modeDot: 'Minimal Dot Spacer (.)',
+    modeClean: 'Clean Trailing Spaces Only',
+    collapse: 'Collapse accidental double spaces',
+    labelRaw: 'Draft Caption or Bio',
+    phRaw: 'Write your caption with blank lines where you want paragraph breaks...',
+    tip: 'Tip: Social apps often collapse blank paragraphs when trailing spaces sit at the end of the line above.',
+    labelOut: 'Ready-to-Paste Output',
+    copyFormatted: 'Copy Formatted Caption',
+    charsLabel: 'Characters:',
+    linesLabel: 'Lines:',
+    blankLabel: 'Blank breaks preserved:',
+    fitsBio: 'Fits Instagram 150-char bio',
+    captionLength: 'Caption length (>150 bio limit)',
+  },
+  es: {
+    sampleText:
+      'Creando herramientas rápidas en el navegador para creadores y equipos.   \n\nNuevos consejos de flujo de trabajo cada martes.\n\n¡Pruebe las utilidades gratuitas en el enlace de abajo!',
+    modeBraille: 'Espaciador invisible (⠀ U+2800)',
+    modeDot: 'Espaciador de punto mínimo (.)',
+    modeClean: 'Solo limpiar espacios finales',
+    collapse: 'Colapsar espacios dobles accidentales',
+    labelRaw: 'Borrador de descripción o biografía',
+    phRaw: 'Escriba su descripción con líneas en blanco donde quiera saltos de párrafo...',
+    tip: 'Consejo: las aplicaciones sociales suelen colapsar los párrafos en blanco cuando hay espacios finales al final de la línea anterior.',
+    labelOut: 'Resultado listo para pegar',
+    copyFormatted: 'Copiar descripción formateada',
+    charsLabel: 'Caracteres:',
+    linesLabel: 'Líneas:',
+    blankLabel: 'Saltos en blanco conservados:',
+    fitsBio: 'Cabe en la biografía de Instagram de 150 caracteres',
+    captionLength: 'Longitud de descripción (supera el límite de 150 de la biografía)',
+  },
+};
 
 type SpacerMode = 'braille' | 'dot' | 'clean-only';
 
 export default function BioLineBreakFormatterTool() {
-  const [rawText, setRawText] = useState(
-    'Building fast browser tools for makers & teams.   \n\nNew weekly workflow drops every Tuesday.\n\nTry free utilities at the link below!'
-  );
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
+  const [rawText, setRawText] = useState(s.sampleText);
   const [spacerMode, setSpacerMode] = useState<SpacerMode>('braille');
   const [stripEmojisExtraSpaces, setStripEmojisExtraSpaces] = useState(true);
 
@@ -46,9 +86,9 @@ export default function BioLineBreakFormatterTool() {
         <div className="inline-flex flex-wrap rounded-lg bg-slate-100 p-1">
           {(
             [
-              ['braille', 'Invisible Spacer (⠀ U+2800)'],
-              ['dot', 'Minimal Dot Spacer (.)'],
-              ['clean-only', 'Clean Trailing Spaces Only'],
+              ['braille', s.modeBraille],
+              ['dot', s.modeDot],
+              ['clean-only', s.modeClean],
             ] as [SpacerMode, string][]
           ).map(([id, label]) => (
             <button
@@ -71,34 +111,34 @@ export default function BioLineBreakFormatterTool() {
             onChange={(e) => setStripEmojisExtraSpaces(e.target.checked)}
             className="h-4 w-4 rounded border-slate-300 text-indigo-600"
           />
-          Collapse accidental double spaces
+          {s.collapse}
         </label>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div>
           <label htmlFor="bio-raw" className="block text-sm font-semibold text-slate-900 mb-1.5">
-            Draft Caption or Bio
+            {s.labelRaw}
           </label>
           <textarea
             id="bio-raw"
             rows={8}
             value={rawText}
             onChange={(e) => setRawText(e.target.value)}
-            placeholder="Write your caption with blank lines where you want paragraph breaks..."
+            placeholder={s.phRaw}
             className="w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm leading-relaxed"
           />
           <p className="mt-1.5 text-xs text-slate-500">
-            Tip: Social apps often collapse blank paragraphs when trailing spaces sit at the end of the line above.
+            {s.tip}
           </p>
         </div>
 
         <div>
           <div className="flex items-center justify-between gap-2 mb-1.5">
             <label htmlFor="bio-out" className="text-sm font-semibold text-slate-900">
-              Ready-to-Paste Output
+              {s.labelOut}
             </label>
-            <CopyButton text={formatted} label="Copy Formatted Caption" />
+            <CopyButton text={formatted} label={s.copyFormatted} copiedLabel={t.common.copied} />
           </div>
           <textarea
             id="bio-out"
@@ -108,11 +148,11 @@ export default function BioLineBreakFormatterTool() {
             className="w-full rounded-lg border border-slate-300 bg-slate-50 px-3.5 py-2.5 text-sm leading-relaxed text-slate-900"
           />
           <div className="mt-1.5 flex flex-wrap gap-4 text-xs text-slate-600 tabular-nums">
-            <span>Characters: {stats.charCount}</span>
-            <span>Lines: {stats.lineCount}</span>
-            <span>Blank breaks preserved: {stats.blankLinesPreserved}</span>
+            <span>{s.charsLabel} {stats.charCount}</span>
+            <span>{s.linesLabel} {stats.lineCount}</span>
+            <span>{s.blankLabel} {stats.blankLinesPreserved}</span>
             <span className={stats.charCount <= 150 ? 'text-emerald-700 font-medium' : 'text-slate-600'}>
-              {stats.charCount <= 150 ? 'Fits Instagram 150-char bio' : 'Caption length (>150 bio limit)'}
+              {stats.charCount <= 150 ? s.fitsBio : s.captionLength}
             </span>
           </div>
         </div>

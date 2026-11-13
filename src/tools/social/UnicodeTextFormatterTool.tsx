@@ -1,11 +1,81 @@
 import { AlertTriangle } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { useLocale } from '../../locales/LocaleContext';
+
+const STRINGS = {
+  en: {
+    styleNames: {
+      'sans-bold': 'Bold (Sans-Serif)',
+      'sans-italic': 'Italic (Sans-Serif)',
+      'sans-bold-italic': 'Bold Italic (Sans-Serif)',
+      'serif-bold': 'Bold (Serif)',
+      monospace: 'Monospace',
+      'double-struck': 'Double-Struck (Blackboard)',
+      'script-bold': 'Script Bold',
+      'fraktur-bold': 'Fraktur Bold',
+      'small-caps': 'Small Caps',
+      fullwidth: 'Fullwidth Aesthetic',
+    },
+    styleNotes: {
+      'sans-bold': 'High legibility for bio headers & post hooks',
+      'sans-italic': 'Subtle emphasis inside captions',
+      'sans-bold-italic': 'Strong callouts & section dividers',
+      'serif-bold': 'Editorial style emphasis',
+      monospace: 'Code handles, dates & technical tags',
+      'double-struck': 'Display accents',
+      'script-bold': 'Decorative bio signatures',
+      'fraktur-bold': 'Gothic display lettering',
+      'small-caps': 'Clean uppercase-look profile labels',
+      fullwidth: 'Wide-spaced retro social headers',
+    },
+    sampleText: 'New Creator Toolkit 2025',
+    accessibilityTitle: 'Accessibility Note:',
+    accessibilityBody:
+      'Stylized Unicode characters belong to mathematical symbol blocks, so screen readers may read them letter-by-letter or skip them, and some search indexes ignore them. Use sparingly for short highlights rather than full paragraphs.',
+    labelInput: 'Text to Stylize',
+    placeholder: 'Type a short headline, bio line, or CTA...',
+    previewEmpty: 'Preview',
+  },
+  es: {
+    styleNames: {
+      'sans-bold': 'Negrita (sans serif)',
+      'sans-italic': 'Cursiva (sans serif)',
+      'sans-bold-italic': 'Negrita cursiva (sans serif)',
+      'serif-bold': 'Negrita (serif)',
+      monospace: 'Monoespaciada',
+      'double-struck': 'Doble trazo (pizarra)',
+      'script-bold': 'Cursiva decorativa en negrita',
+      'fraktur-bold': 'Fraktur en negrita',
+      'small-caps': 'Versalitas',
+      fullwidth: 'Estética de ancho completo',
+    },
+    styleNotes: {
+      'sans-bold': 'Alta legibilidad para encabezados de biografía y ganchos de publicaciones',
+      'sans-italic': 'Énfasis sutil dentro de las descripciones',
+      'sans-bold-italic': 'Llamados fuertes y divisores de sección',
+      'serif-bold': 'Énfasis de estilo editorial',
+      monospace: 'Nombres de usuario de código, fechas y etiquetas técnicas',
+      'double-struck': 'Acentos de exhibición',
+      'script-bold': 'Firmas decorativas para biografías',
+      'fraktur-bold': 'Letras góticas de exhibición',
+      'small-caps': 'Etiquetas de perfil limpias con aspecto de mayúsculas',
+      fullwidth: 'Encabezados sociales retro con espaciado amplio',
+    },
+    sampleText: 'Nuevo kit de herramientas para creadores 2025',
+    accessibilityTitle: 'Nota de accesibilidad:',
+    accessibilityBody:
+      'Los caracteres Unicode estilizados pertenecen a bloques de símbolos matemáticos, por lo que los lectores de pantalla pueden leerlos letra por letra u omitirlos, y algunos índices de búsqueda los ignoran. Úselos con moderación para resaltar textos cortos, no para párrafos completos.',
+    labelInput: 'Texto para estilizar',
+    placeholder: 'Escriba un titular corto, una línea de biografía o un llamado a la acción...',
+    previewEmpty: 'Vista previa',
+  },
+};
+
+type StyleId = keyof typeof STRINGS.en.styleNames;
 
 interface StyleDef {
-  id: string;
-  name: string;
-  note: string;
+  id: StyleId;
   transform: (input: string) => string;
 }
 
@@ -43,38 +113,26 @@ const SMALL_CAPS_MAP: Record<string, string> = {
 const STYLES: StyleDef[] = [
   {
     id: 'sans-bold',
-    name: 'Bold (Sans-Serif)',
-    note: 'High legibility for bio headers & post hooks',
     transform: (s) => mapCodePoints(s, 0x1d5d4, 0x1d5ee, 0x1d7ec),
   },
   {
     id: 'sans-italic',
-    name: 'Italic (Sans-Serif)',
-    note: 'Subtle emphasis inside captions',
     transform: (s) => mapCodePoints(s, 0x1d608, 0x1d622),
   },
   {
     id: 'sans-bold-italic',
-    name: 'Bold Italic (Sans-Serif)',
-    note: 'Strong callouts & section dividers',
     transform: (s) => mapCodePoints(s, 0x1d63c, 0x1d656),
   },
   {
     id: 'serif-bold',
-    name: 'Bold (Serif)',
-    note: 'Editorial style emphasis',
     transform: (s) => mapCodePoints(s, 0x1d400, 0x1d41a, 0x1d7ce),
   },
   {
     id: 'monospace',
-    name: 'Monospace',
-    note: 'Code handles, dates & technical tags',
     transform: (s) => mapCodePoints(s, 0x1d670, 0x1d68a, 0x1d7f6),
   },
   {
     id: 'double-struck',
-    name: 'Double-Struck (Blackboard)',
-    note: 'Display accents',
     transform: (s) =>
       mapCodePoints(s, 0x1d538, 0x1d552, 0x1d7d8, {
         C: 'ℂ',
@@ -88,20 +146,14 @@ const STYLES: StyleDef[] = [
   },
   {
     id: 'script-bold',
-    name: 'Script Bold',
-    note: 'Decorative bio signatures',
     transform: (s) => mapCodePoints(s, 0x1d4d0, 0x1d4ea),
   },
   {
     id: 'fraktur-bold',
-    name: 'Fraktur Bold',
-    note: 'Gothic display lettering',
     transform: (s) => mapCodePoints(s, 0x1d56c, 0x1d586),
   },
   {
     id: 'small-caps',
-    name: 'Small Caps',
-    note: 'Clean uppercase-look profile labels',
     transform: (s) =>
       Array.from(s)
         .map((c) => SMALL_CAPS_MAP[c.toLowerCase()] ?? c)
@@ -109,8 +161,6 @@ const STYLES: StyleDef[] = [
   },
   {
     id: 'fullwidth',
-    name: 'Fullwidth Aesthetic',
-    note: 'Wide-spaced retro social headers',
     transform: (s) =>
       Array.from(s)
         .map((ch) => {
@@ -124,7 +174,9 @@ const STYLES: StyleDef[] = [
 ];
 
 export default function UnicodeTextFormatterTool() {
-  const [input, setInput] = useState('New Creator Toolkit 2025');
+  const { locale, t } = useLocale();
+  const s = STRINGS[locale];
+  const [input, setInput] = useState(s.sampleText);
 
   const outputs = useMemo(
     () =>
@@ -140,20 +192,20 @@ export default function UnicodeTextFormatterTool() {
       <div className="rounded-xl border border-amber-200 bg-amber-50/80 px-4 py-3 text-xs sm:text-sm text-amber-950 flex items-start gap-2.5">
         <AlertTriangle className="w-4 h-4 shrink-0 text-amber-700 mt-0.5" />
         <p>
-          <strong>Accessibility Note:</strong> Stylized Unicode characters belong to mathematical symbol blocks, so screen readers may read them letter-by-letter or skip them, and some search indexes ignore them. Use sparingly for short highlights rather than full paragraphs.
+          <strong>{s.accessibilityTitle}</strong> {s.accessibilityBody}
         </p>
       </div>
 
       <div>
         <label htmlFor="utf-input" className="block text-sm font-semibold text-slate-900 mb-1.5">
-          Text to Stylize
+          {s.labelInput}
         </label>
         <input
           id="utf-input"
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Type a short headline, bio line, or CTA..."
+          placeholder={s.placeholder}
           className="w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-base"
         />
       </div>
@@ -166,12 +218,12 @@ export default function UnicodeTextFormatterTool() {
           >
             <div>
               <div className="flex items-center justify-between gap-2 mb-1">
-                <span className="text-xs font-semibold text-slate-900">{item.name}</span>
-                <CopyButton text={item.value} label="Copy" />
+                <span className="text-xs font-semibold text-slate-900">{s.styleNames[item.id]}</span>
+                <CopyButton text={item.value} label={t.common.copy} copiedLabel={t.common.copied} />
               </div>
-              <p className="text-xs text-slate-500 mb-2">{item.note}</p>
+              <p className="text-xs text-slate-500 mb-2">{s.styleNotes[item.id]}</p>
               <div className="rounded-lg bg-slate-50 border border-slate-200 px-3 py-2.5 text-base text-slate-900 break-words">
-                {item.value || <span className="text-slate-400">Preview</span>}
+                {item.value || <span className="text-slate-400">{s.previewEmpty}</span>}
               </div>
             </div>
           </div>
