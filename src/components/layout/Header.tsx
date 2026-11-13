@@ -1,7 +1,8 @@
-import { ChevronDown, Menu, Sparkles, X } from 'lucide-react';
+import { ChevronDown, Menu, Search, Sparkles, X } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { NAV_LINKS, SITE_CONFIG } from '../../config/site';
+import { ToolSearchBar } from '../tool/ToolSearchBar';
 import { ThemeToggle } from './ThemeToggle';
 
 const AI_NAV_ITEMS = [
@@ -25,12 +26,14 @@ const AI_NAV_ITEMS = [
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [aiMenuOpen, setAiMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const aiMenuRef = useRef<HTMLDivElement | null>(null);
   const location = useLocation();
 
   useEffect(() => {
     setAiMenuOpen(false);
     setMobileOpen(false);
+    setSearchOpen(false);
   }, [location.pathname]);
 
   useEffect(() => {
@@ -161,8 +164,23 @@ export function Header() {
           })}
         </nav>
 
+        {/* Header search (desktop): same live tool search as the homepage */}
+        <div className="hidden lg:block w-60 xl:w-80 shrink-0">
+          <ToolSearchBar placeholder="Search 88 tools..." />
+        </div>
+
         {/* Zone 3: Theme Switcher + Primary Action + Mobile Drawer Toggle */}
         <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+          <button
+            type="button"
+            aria-expanded={searchOpen}
+            aria-label={searchOpen ? 'Close search' : 'Search tools'}
+            onClick={() => setSearchOpen((prev) => !prev)}
+            className="inline-flex lg:hidden items-center justify-center rounded-lg border border-slate-200 p-2 text-slate-700 hover:bg-slate-50 hover:text-slate-900 min-h-[40px] min-w-[40px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 cursor-pointer"
+          >
+            <Search className="w-5 h-5" />
+          </button>
+
           <ThemeToggle />
 
           <Link
@@ -184,6 +202,13 @@ export function Header() {
           </button>
         </div>
       </div>
+
+      {/* Mobile search row (expandable) */}
+      {searchOpen && (
+        <div className="lg:hidden border-t border-slate-200 bg-white px-4 py-3">
+          <ToolSearchBar placeholder="Search 88 tools..." />
+        </div>
+      )}
 
       {/* Mobile Navigation Drawer */}
       {mobileOpen && (
