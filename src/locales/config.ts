@@ -3,7 +3,7 @@
  *
  * Designed for 11 languages from the start: English (default) + es + pt + de +
  * fr + ja + id + it + ru + ko + zh. Phase 1 shipped en + es; Phase 2 adds
- * pt + fr; Phase 3 adds de + it; Phase 4 adds id + ru. Later phases add a LocaleInfo entry, a locales/<code>.ts
+ * pt + fr; Phase 3 adds de + it; Phase 4 adds id + ru; Phase 5 adds ja + ko. Later phases add a LocaleInfo entry, a locales/<code>.ts
  * dictionary, tool overrides and category overrides — no routing or component
  * rework required.
  *
@@ -17,7 +17,7 @@
 import { getCategoryById } from '../registry/categories';
 import type { CategoryId, ToolCategory } from '../types/tool';
 
-export type LocaleCode = 'en' | 'es' | 'pt' | 'fr' | 'de' | 'it' | 'id' | 'ru';
+export type LocaleCode = 'en' | 'es' | 'pt' | 'fr' | 'de' | 'it' | 'id' | 'ru' | 'ja' | 'ko';
 
 /** Non-default locales (the ones that live under a /<code>/ prefix). */
 export type NonDefaultLocale = Exclude<LocaleCode, 'en'>;
@@ -41,6 +41,8 @@ export const SUPPORTED_LOCALES: LocaleInfo[] = [
   { code: 'it', nativeName: 'Italiano', pathPrefix: '/it', htmlLang: 'it' },
   { code: 'id', nativeName: 'Bahasa Indonesia', pathPrefix: '/id', htmlLang: 'id' },
   { code: 'ru', nativeName: 'Русский', pathPrefix: '/ru', htmlLang: 'ru' },
+  { code: 'ja', nativeName: '日本語', pathPrefix: '/ja', htmlLang: 'ja' },
+  { code: 'ko', nativeName: '한국어', pathPrefix: '/ko', htmlLang: 'ko' },
 ];
 
 /** Literal 'en' type (not LocaleCode) so `locale === DEFAULT_LOCALE` narrows the type. */
@@ -79,6 +81,10 @@ export function localeTag(locale: LocaleCode): string {
       return 'id';
     case 'ru':
       return 'ru';
+    case 'ja':
+      return 'ja';
+    case 'ko':
+      return 'ko';
   }
 }
 
@@ -99,7 +105,7 @@ export function getLocaleFromPath(pathname: string): { locale: LocaleCode; restP
 
 /** Localized URL for a static page path (English path in, localized path out). */
 export const STATIC_PATHS: Record<string, Partial<Record<LocaleCode, string>>> = {
-  '/': { en: '/', es: '/es/', pt: '/pt/', fr: '/fr/', de: '/de/', it: '/it/', id: '/id/', ru: '/ru/' },
+  '/': { en: '/', es: '/es/', pt: '/pt/', fr: '/fr/', de: '/de/', it: '/it/', id: '/id/', ru: '/ru/', ja: '/ja/', ko: '/ko/' },
   '/tools/': {
     en: '/tools/',
     es: '/es/todas-las-herramientas/',
@@ -109,9 +115,11 @@ export const STATIC_PATHS: Record<string, Partial<Record<LocaleCode, string>>> =
     it: '/it/tutti-gli-strumenti/',
     id: '/id/semua-alat/',
     ru: '/ru/vse-instrumenty/',
+    ja: '/ja/tools/',
+    ko: '/ko/tools/',
   },
-  '/about/': { en: '/about/', es: '/es/acerca-de/', pt: '/pt/sobre/', fr: '/fr/a-propos/', de: '/de/ueber-uns/', it: '/it/chi-siamo/', id: '/id/tentang-kami/', ru: '/ru/o-nas/' },
-  '/contact/': { en: '/contact/', es: '/es/contacto/', pt: '/pt/contato/', fr: '/fr/contact/', de: '/de/kontakt/', it: '/it/contatti/', id: '/id/kontak/', ru: '/ru/kontakty/' },
+  '/about/': { en: '/about/', es: '/es/acerca-de/', pt: '/pt/sobre/', fr: '/fr/a-propos/', de: '/de/ueber-uns/', it: '/it/chi-siamo/', id: '/id/tentang-kami/', ru: '/ru/o-nas/', ja: '/ja/watashitachi/', ko: '/ko/sogae/' },
+  '/contact/': { en: '/contact/', es: '/es/contacto/', pt: '/pt/contato/', fr: '/fr/contact/', de: '/de/kontakt/', it: '/it/contatti/', id: '/id/kontak/', ru: '/ru/kontakty/', ja: '/ja/otoiawase/', ko: '/ko/mun-ui/' },
   '/privacy-policy/': {
     en: '/privacy-policy/',
     es: '/es/politica-de-privacidad/',
@@ -121,6 +129,8 @@ export const STATIC_PATHS: Record<string, Partial<Record<LocaleCode, string>>> =
     it: '/it/informativa-sulla-privacy/',
     id: '/id/kebijakan-privasi/',
     ru: '/ru/politika-konfidentsialnosti/',
+    ja: '/ja/puraibashi-porishi/',
+    ko: '/ko/peuraibeosi-jeongchaek/',
   },
   '/terms-of-service/': {
     en: '/terms-of-service/',
@@ -131,6 +141,8 @@ export const STATIC_PATHS: Record<string, Partial<Record<LocaleCode, string>>> =
     it: '/it/termini-di-servizio/',
     id: '/id/syarat-layanan/',
     ru: '/ru/usloviya-ispolzovaniya/',
+    ja: '/ja/riyo-kiyaku/',
+    ko: '/ko/iyong-yagwan/',
   },
   '/ai-writing-assistant/': {
     en: '/ai-writing-assistant/',
@@ -141,6 +153,8 @@ export const STATIC_PATHS: Record<string, Partial<Record<LocaleCode, string>>> =
     it: '/it/assistente-di-scrittura-ia/',
     id: '/id/asisten-penulisan-ai/',
     ru: '/ru/ai-assistent-pisma/',
+    ja: '/ja/ai-bunsho-sakusei/',
+    ko: '/ko/ai-geul-sseugi/',
   },
   '/ai-text-summarizer/': {
     en: '/ai-text-summarizer/',
@@ -151,6 +165,8 @@ export const STATIC_PATHS: Record<string, Partial<Record<LocaleCode, string>>> =
     it: '/it/riassuntore-di-testo-ia/',
     id: '/id/peringkas-teks-ai/',
     ru: '/ru/ai-summarizator-teksta/',
+    ja: '/ja/ai-yoyaku/',
+    ko: '/ko/ai-yoyak/',
   },
   '/ai-tool-finder/': {
     en: '/ai-tool-finder/',
@@ -161,6 +177,8 @@ export const STATIC_PATHS: Record<string, Partial<Record<LocaleCode, string>>> =
     it: '/it/cercatore-di-strumenti-ia/',
     id: '/id/pencari-alat-ai/',
     ru: '/ru/ai-poisk-instrumentov/',
+    ja: '/ja/ai-tsuru-kensaku/',
+    ko: '/ko/ai-dogu-chatgi/',
   },
 };
 
@@ -233,6 +251,24 @@ export const CATEGORY_LOCALE_SLUGS: Record<NonDefaultLocale, Record<string, stri
     seo: 'seo-instrumenty',
     'image-file': 'instrumenty-dlya-izobrazhenij-i-fajlov',
   },
+  ja: {
+    'text-writing': 'tekisuto-tsuru',
+    developer: 'kaihatsusha-tsuru',
+    calculators: 'keisanki',
+    'social-media': 'sosharu-media-tsuru',
+    pdf: 'pdf-tsuru',
+    seo: 'seo-tsuru',
+    'image-file': 'gazo-fairu-tsuru',
+  },
+  ko: {
+    'text-writing': 'tekseuteu-dogu',
+    developer: 'gaebalja-dogu',
+    calculators: 'gyesangi',
+    'social-media': 'sosyeol-midieo-dogu',
+    pdf: 'pdf-dogu',
+    seo: 'seo-dogu',
+    'image-file': 'imiji-pail-dogu',
+  },
 };
 
 /** Spanish slugs for the 7 categories, keyed by category id. Kept for the Phase 1 validator. */
@@ -247,6 +283,8 @@ export const CATEGORY_PATH_SEGMENT: Record<NonDefaultLocale, string> = {
   it: 'categoria',
   id: 'kategori',
   ru: 'kategoriya',
+  ja: 'kategori',
+  ko: 'kategori',
 };
 
 /**
