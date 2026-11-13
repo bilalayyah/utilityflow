@@ -114,6 +114,102 @@ export default function App() {
             <Route path="/fr/:toolSlug" element={<ToolPage />} />
             <Route path="/fr/:toolSlug/" element={<ToolPage />} />
 
+            {/* German (de) routes — same components, locale from URL */}
+            <Route path="/de" element={<HomePage />} />
+            <Route path="/de/" element={<HomePage />} />
+            <Route path="/de/alle-tools" element={<ToolsDirectoryPage />} />
+            <Route path="/de/alle-tools/" element={<ToolsDirectoryPage />} />
+            <Route path="/de/kategorie/:categorySlug" element={<CategoryPage />} />
+            <Route path="/de/kategorie/:categorySlug/" element={<CategoryPage />} />
+            <Route path="/de/ki-schreibassistent" element={<AiWritingAssistantPage />} />
+            <Route path="/de/ki-schreibassistent/" element={<AiWritingAssistantPage />} />
+            <Route path="/de/ki-text-zusammenfasser" element={<AiTextSummarizerPage />} />
+            <Route path="/de/ki-text-zusammenfasser/" element={<AiTextSummarizerPage />} />
+            <Route path="/de/ki-tool-finder" element={<AiToolFinderPage />} />
+            <Route path="/de/ki-tool-finder/" element={<AiToolFinderPage />} />
+            <Route path="/de/ueber-uns" element={<AboutPage />} />
+            <Route path="/de/ueber-uns/" element={<AboutPage />} />
+            <Route path="/de/kontakt" element={<ContactPage />} />
+            <Route path="/de/kontakt/" element={<ContactPage />} />
+            <Route path="/de/datenschutzerklaerung" element={<PrivacyPolicyPage />} />
+            <Route path="/de/datenschutzerklaerung/" element={<PrivacyPolicyPage />} />
+            <Route path="/de/nutzungsbedingungen" element={<TermsOfServicePage />} />
+            <Route path="/de/nutzungsbedingungen/" element={<TermsOfServicePage />} />
+            <Route path="/de/:toolSlug" element={<ToolPage />} />
+            <Route path="/de/:toolSlug/" element={<ToolPage />} />
+
+            {/* Italian (it) routes — same components, locale from URL */}
+            <Route path="/it" element={<HomePage />} />
+            <Route path="/it/" element={<HomePage />} />
+            <Route path="/it/tutti-gli-strumenti" element={<ToolsDirectoryPage />} />
+            <Route path="/it/tutti-gli-strumenti/" element={<ToolsDirectoryPage />} />
+            <Route path="/it/categoria/:categorySlug" element={<CategoryPage />} />
+            <Route path="/it/categoria/:categorySlug/" element={<CategoryPage />} />
+            <Route path="/it/assistente-di-scrittura-ia" element={<AiWritingAssistantPage />} />
+            <Route path="/it/assistente-di-scrittura-ia/" element={<AiWritingAssistantPage />} />
+            <Route path="/it/riassuntore-di-testo-ia" element={<AiTextSummarizerPage />} />
+            <Route path="/it/riassuntore-di-testo-ia/" element={<AiTextSummarizerPage />} />
+            <Route path="/it/cercatore-di-strumenti-ia" element={<AiToolFinderPage />} />
+            <Route path="/it/cercatore-di-strumenti-ia/" element={<AiToolFinderPage />} />
+            <Route path="/it/chi-siamo" element={<AboutPage />} />
+            <Route path="/it/chi-siamo/" element={<AboutPage />} />
+            <Route path="/it/contatti" element={<ContactPage />} />
+            <Route path="/it/contatti/" element={<ContactPage />} />
+            <Route path="/it/informativa-sulla-privacy" element={<PrivacyPolicyPage />} />
+            <Route path="/it/informativa-sulla-privacy/" element={<PrivacyPolicyPage />} />
+            <Route path="/it/termini-di-servizio" element={<TermsOfServicePage />} />
+            <Route path="/it/termini-di-servizio/" element={<TermsOfServicePage />} />
+            <Route path="/it/:toolSlug" element={<ToolPage />} />
+            <Route path="/it/:toolSlug/" element={<ToolPage />} />
+
+            {/* Indonesian (id) routes — same components, locale from URL */}
+            <Route path="/id" element={<HomePage />} />
+            <Route path="/id/" element={<HomePage />} />
+            <Route path="/id/semua-alat" element={<ToolsDirectoryPage />} />
+            <Route path="/id/semua-alat/" element={<ToolsDirectoryPage />} />
+            <Route path="/id/kategori/:categorySlug" element={<CategoryPage />} />
+            <Route path="/id/kategori/:categorySlug/" element={<CategoryPage />} />
+            <Route path="/id/asisten-penulisan-ai" element={<AiWritingAssistantPage />} />
+            <Route path="/id/asisten-penulisan-ai/" element={<AiWritingAssistantPage />} />
+            <Route path="/id/peringkas-teks-ai" element={<AiTextSummarizerPage />} />
+            <Route path="/id/peringkas-teks-ai/" element={<AiTextSummarizerPage />} />
+            <Route path="/id/pencari-alat-ai" element={<AiToolFinderPage />} />
+            <Route path="/id/pencari-alat-ai/" element={<AiToolFinderPage />} />
+            <Route path="/id/tentang-kami" element={<AboutPage />} />
+            <Route path="/id/tentang-kami/" element={<AboutPage />} />
+            <Route path="/id/kontak" element={<ContactPage />} />
+            <Route path="/id/kontak/" element={<ContactPage />} />
+            <Route path="/id/kebijakan-privasi" element={<PrivacyPolicyPage />} />
+            <Route path="/id/kebijakan-privasi/" element={<PrivacyPolicyPage />} />
+            <Route path="/id/syarat-layanan" element={<TermsOfServicePage />} />
+            <Route path="/id/syarat-layanan/" element={<TermsOfServicePage />} />
+            <Route path="/id/:toolSlug" element={<ToolPage />} />
+            <Route path="/id/:toolSlug/" element={<ToolPage />} />
+
+            {/* Russian (ru) routes — same components, locale from URL */}
+            <Route path="/ru" element={<HomePage />} />
+            <Route path="/ru/" element={<HomePage />} />
+            <Route path="/ru/vse-instrumenty" element={<ToolsDirectoryPage />} />
+            <Route path="/ru/vse-instrumenty/" element={<ToolsDirectoryPage />} />
+            <Route path="/ru/kategoriya/:categorySlug" element={<CategoryPage />} />
+            <Route path="/ru/kategoriya/:categorySlug/" element={<CategoryPage />} />
+            <Route path="/ru/ai-assistent-pisma" element={<AiWritingAssistantPage />} />
+            <Route path="/ru/ai-assistent-pisma/" element={<AiWritingAssistantPage />} />
+            <Route path="/ru/ai-summarizator-teksta" element={<AiTextSummarizerPage />} />
+            <Route path="/ru/ai-summarizator-teksta/" element={<AiTextSummarizerPage />} />
+            <Route path="/ru/ai-poisk-instrumentov" element={<AiToolFinderPage />} />
+            <Route path="/ru/ai-poisk-instrumentov/" element={<AiToolFinderPage />} />
+            <Route path="/ru/o-nas" element={<AboutPage />} />
+            <Route path="/ru/o-nas/" element={<AboutPage />} />
+            <Route path="/ru/kontakty" element={<ContactPage />} />
+            <Route path="/ru/kontakty/" element={<ContactPage />} />
+            <Route path="/ru/politika-konfidentsialnosti" element={<PrivacyPolicyPage />} />
+            <Route path="/ru/politika-konfidentsialnosti/" element={<PrivacyPolicyPage />} />
+            <Route path="/ru/usloviya-ispolzovaniya" element={<TermsOfServicePage />} />
+            <Route path="/ru/usloviya-ispolzovaniya/" element={<TermsOfServicePage />} />
+            <Route path="/ru/:toolSlug" element={<ToolPage />} />
+            <Route path="/ru/:toolSlug/" element={<ToolPage />} />
+
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </SiteLayout>
