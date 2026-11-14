@@ -600,8 +600,8 @@ export const FR_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
       description:
         'Générez jusqu’à 100 identifiants UUID v4 aléatoires ou UUID v7 ordonnés par temps (RFC 9562), avec majuscules et accolades en option, dans votre navigateur.',
       primaryKeyword: 'générateur uuid',
-      secondaryKeywords: ['générateur guid en ligne', 'générateur uuid v4', 'générateur uuid v7', 'générateur uuid en masse'],
-      longTailKeywords: ['générer des uuid v4 et v7 en masse en ligne', 'générateur uuid v7 ordonné par temps rfc 9562', 'générateur uuid sans traits d’union en majuscules', 'générer 100 uuid d’un coup en ligne gratuitement'],
+      secondaryKeywords: ['générateur guid en ligne', 'générateur uuid v4', 'créateur uuid v7', 'générer des uuid en masse gratuitement'],
+      longTailKeywords: ['générer des uuid v4 et v7 en masse en ligne', 'uuid v7 ordonné par temps rfc 9562', 'uuid sans traits d’union en majuscules', 'générer 100 uuid d’un coup en ligne gratuitement'],
       schemaApplicationCategory: 'DeveloperApplication',
     },
     intro:

@@ -29,9 +29,9 @@ export const FR_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
       primaryKeyword: 'calculatrice d’âge',
       secondaryKeywords: [
         'calculatrice d’âge chronologique',
-        'calculatrice d’âge anniversaire',
-        'calculatrice d’âge en jours',
-        'calculatrice d’âge exacte',
+        'quel âge ai-je selon ma date de naissance',
+        'âge en jours semaines et mois',
+        'calculer mon âge exact aujourd’hui',
       ],
       longTailKeywords: [
         'calculer âge exact en années mois et jours en ligne',
@@ -1380,7 +1380,7 @@ export const FR_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Puis-je utiliser des taux décimaux comme 7,25 % ou 8,875 % ?',
         answer:
-          'Oui. Le champ du taux accepte n’importe quel pourcentage décimal positif.',
+          'Oui. Le champ du taux accepte n’importe quel pourcentage décimal positif, donc des taux comme 7,25 % ou 8,875 % calculent la taxe et le total avec exactitude.',
       },
       {
         question: 'Que faire si mon reçu n’indique que le total brut ?',
@@ -1629,12 +1629,12 @@ export const FR_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
         'calculatrice de partage d’addition',
         'calculatrice de pourboire de service',
         'partage de pourboire au restaurant',
-        'calculatrice de pourboire par personne',
+        'pourboire par personne au restaurant',
       ],
       longTailKeywords: [
         'calculer pourboire de 18 ou 20 pour cent avant taxe en ligne',
         'partager l’addition du dîner et le pourboire entre amis',
-        'arrondir le total par personne calculatrice de pourboire',
+        'arrondir le total par personne au restaurant',
         'partager l’addition avec pourboire et taxe par personne',
       ],
       schemaApplicationCategory: 'UtilitiesApplication',

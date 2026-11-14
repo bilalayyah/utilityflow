@@ -427,7 +427,7 @@ export const FR_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
       title: 'Vérificateur de Limite de Caractères – Réseaux | UtilityFlow',
       description:
         'Vérifiez les limites de caractères et les aperçus de repli pour X, Instagram, LinkedIn, TikTok, Threads, Bluesky et YouTube — avec un comptage des émojis.',
-      primaryKeyword: 'vérificateur de limite de caractères sociaux',
+      primaryKeyword: 'vérificateur de limite de caractères',
       secondaryKeywords: [
         'compteur de publication x twitter',
         'vérificateur de longueur de légende instagram',
@@ -827,7 +827,7 @@ export const FR_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
       title: 'Formateur de Sauts de Ligne Bio – Instagram | UtilityFlow',
       description:
         'Gardez un espacement de paragraphe propre dans les légendes et bios Instagram, Threads et TikTok — supprimez les espaces de fin et copiez facilement en un clic.',
-      primaryKeyword: 'formateur de sauts de ligne pour bio',
+      primaryKeyword: 'formateur de sauts de ligne bio',
       secondaryKeywords: [
         'sauts de ligne de légende instagram',
         'espaceur invisible pour bio instagram',
@@ -2358,12 +2358,12 @@ export const FR_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Puis-je diviser un PDF numérisé ?',
         answer:
-          'Oui, les pages numérisées s’extraient exactement comme les pages de texte.',
+          'Oui, les pages numérisées s’extraient exactement comme les pages de texte, car la division copie des pages entières sans lire ni modifier leur contenu.',
       },
       {
         question: 'Le PDF extrait conservera-t-il sa qualité d’origine ?',
         answer:
-          'Oui, aucune recompression ni conversion en image n’a lieu pendant l’extraction.',
+          'Oui, aucune recompression ni conversion en image n’a lieu pendant l’extraction, donc chaque page extraite conserve la qualité exacte du PDF d’origine.',
       },
       {
         question: 'Comment éclater un PDF en fichiers d’une seule page ?',
@@ -2528,12 +2528,12 @@ export const FR_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Quels formats d’image puis-je convertir en PDF ?',
         answer:
-          'JPG, PNG et WebP sont pris en charge.',
+          'JPG, PNG et WebP sont pris en charge, vous pouvez donc convertir des photos, des captures d’écran et des images web en un seul PDF.',
       },
       {
         question: 'Puis-je convertir une seule image en PDF ?',
         answer:
-          'Oui, une image produit un PDF d’une page.',
+          'Oui, une image produit un PDF d’une page, ce qui convient bien pour partager une seule photo ou un document numérisé sous forme de fichier.',
       },
       {
         question: 'Puis-je réorganiser les images avant de les convertir en PDF ?',
@@ -2583,12 +2583,12 @@ export const FR_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Puis-je mélanger JPG, PNG et WebP dans un seul PDF ?',
         answer:
-          'Oui, vous pouvez combiner les trois formats dans un seul document.',
+          'Oui, vous pouvez combiner les trois formats dans un seul document, et les pages restent dans l’ordre où vous les avez disposées.',
       },
       {
         question: 'Les pages du PDF seront-elles dans le même ordre que mes images ?',
         answer:
-          'Oui, les pages suivent l’ordre affiché dans la liste des images.',
+          'Oui, les pages suivent l’ordre affiché dans la liste des images, alors réorganisez vos images d’abord si vous voulez une autre séquence de pages.',
       },
       {
         question: 'Puis-je définir un nom de fichier personnalisé pour le PDF ?',
@@ -2718,7 +2718,7 @@ export const FR_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Cela fonctionne-t-il sur les PDF protégés par mot de passe ?',
         answer:
-          'Les PDF chiffrés doivent être déverrouillés avant le rendu local.',
+          'Les PDF chiffrés doivent être déverrouillés avant le rendu local, car l’outil ne peut pas lire les pages d’un fichier encore verrouillé.',
       },
       {
         question: 'L’outil PDF en Images est-il gratuit ?',
@@ -2923,7 +2923,7 @@ export const FR_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'La rotation de pages PDF est-elle gratuite ?',
         answer:
-          'Oui, elle est gratuite, sans filigrane ni limite.',
+          'Oui, elle est gratuite, sans filigrane ni limite, et vous pouvez pivoter autant de PDF que nécessaire sans créer de compte.',
       },
       {
         question: 'Puis-je pivoter toutes les pages d’un PDF à la fois ?',
@@ -2958,7 +2958,7 @@ export const FR_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Puis-je pivoter un PDF protégé par mot de passe ?',
         answer:
-          'Non, les PDF chiffrés doivent d’abord être déverrouillés.',
+          'Non, les PDF chiffrés doivent d’abord être déverrouillés, car l’outil ne peut pas modifier les pages d’un fichier encore verrouillé.',
       },
       {
         question: 'La rotation de pages PDF envoie-t-elle mon fichier ?',
@@ -2968,7 +2968,7 @@ export const FR_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Puis-je pivoter des pages dans un PDF numérisé ?',
         answer:
-          'Oui, les pages numérisées pivotent comme les pages de texte.',
+          'Oui, les pages numérisées pivotent comme les pages de texte, car la rotation tourne toute l’image de la page sans lire son contenu.',
       },
       {
         question: 'La rotation corrigera-t-elle un PDF qui s’ouvre de travers dans chaque lecteur ?',
@@ -2993,7 +2993,7 @@ export const FR_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Puis-je utiliser la rotation de pages PDF sur mon téléphone ?',
         answer:
-          'Oui, elle fonctionne dans les navigateurs mobiles modernes.',
+          'Oui, elle fonctionne dans les navigateurs mobiles modernes, vous pouvez donc ouvrir un PDF sur votre téléphone et pivoter ses pages directement.',
       },
       {
         question: 'Le PDF pivoté s’imprimera-t-il correctement ?',
@@ -3230,9 +3230,9 @@ export const FR_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
       primaryKeyword: 'filigrane pdf',
       secondaryKeywords: [
         'ajouter tampon confidentiel à pdf',
-        'filigrane pdf dans le navigateur',
+        'ajouter un filigrane dans le navigateur',
         'outil de superposition brouillon pdf',
-        'filigrane pdf en ligne gratuit',
+        'tampon pdf gratuit en ligne',
       ],
       longTailKeywords: [
         'ajouter filigrane diagonal semi-transparent à pdf sans envoi',
@@ -3573,7 +3573,7 @@ export const FR_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Puis-je utiliser des chiffres romains pour les numéros de page ?',
         answer:
-          'Non. L’outil numérote les pages uniquement avec des chiffres arabes standard.',
+          'Non. L’outil numérote les pages uniquement avec des chiffres arabes standard, donc les formats comme les chiffres romains ne sont pas disponibles comme style de numérotation.',
       },
       {
         question: 'Puis-je ajouter des numéros de page à un PDF numérisé ?',

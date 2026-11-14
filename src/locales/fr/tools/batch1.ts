@@ -1168,7 +1168,7 @@ export const FR_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
     seo: {
       title: 'Trier les Lignes : ordre A-Z et naturel | UtilityFlow',
       description:
-        'Triez les lignes de A à Z, de Z à A, dans l’ordre numérique naturel, par longueur, à l’envers ou mélangées — avec déduplication en option dans votre navigateur.',
+        'Triez les lignes de A à Z, de Z à A, par ordre alphabétique ou naturel, par longueur, à l’envers ou mélangées — avec déduplication en option.',
       primaryKeyword: 'trier les lignes par ordre alphabétique',
       secondaryKeywords: ['mettre une liste par ordre alphabétique', 'trieur de lignes de texte', 'tri naturel en ligne', 'trier les lignes de a à z'],
       longTailKeywords: ['trier une liste par ordre alphabétique avec des nombres dans l’ordre naturel', 'trier les lignes par longueur du plus court au plus long', 'mettre par ordre alphabétique et supprimer les lignes en double', 'inverser l’ordre des lignes en ligne'],
@@ -1440,7 +1440,7 @@ export const FR_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Laisser « Remplacer par » vide supprime-t-il le texte trouvé ?',
         answer:
-          'Oui. Laisser le champ Remplacer vide supprime proprement chaque occurrence trouvée.',
+          'Oui. Laisser le champ Remplacer vide supprime proprement chaque occurrence trouvée, alors vérifiez l’aperçu d’abord pour éviter de supprimer un texte encore utile.',
       },
       {
         question: 'L’outil Rechercher et Remplacer est-il gratuit ?',
@@ -1740,7 +1740,7 @@ export const FR_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       description:
         'Générez du texte factice Lorem Ipsum par paragraphes, phrases ou nombre exact de mots, avec des balises HTML en option — sans inscription dans votre navigateur.',
       primaryKeyword: 'générateur de lorem ipsum',
-      secondaryKeywords: ['texte factice', 'générateur de texte factice', 'paragraphes lorem ipsum', 'générateur de texte factice'],
+      secondaryKeywords: ['texte factice', 'générateur de texte factice', 'paragraphes lorem ipsum', 'générateur de faux texte'],
       longTailKeywords: ['générer du lorem ipsum par nombre de mots', 'générateur de lorem ipsum avec balises html p', 'texte factice propre pour maquettes d’interface', 'générateur de lorem ipsum pour maquette de site web'],
       schemaApplicationCategory: 'UtilitiesApplication',
     },
@@ -1929,7 +1929,7 @@ export const FR_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       title: 'Vérificateur de Lisibilité : scores Flesch | UtilityFlow',
       description:
         'Vérifiez les scores Flesch Reading Ease, Flesch-Kincaid, Gunning Fog et SMOG avec notre vérificateur de lisibilité — gratuit et privé, dans votre navigateur.',
-      primaryKeyword: 'vérificateur de score de lisibilité',
+      primaryKeyword: 'vérificateur de lisibilité',
       secondaryKeywords: ['calculateur de flesch reading ease', 'vérificateur de niveau scolaire', 'outil de niveau de lecture', 'calculateur d’indice gunning fog'],
       longTailKeywords: ['vérifier le niveau flesch-kincaid en ligne', 'calculer les indices de lisibilité gunning fog et smog', 'améliorer le score de lisibilité d’un article dans le navigateur', 'quel est un bon score flesch reading ease'],
       schemaApplicationCategory: 'UtilitiesApplication',

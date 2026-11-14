@@ -818,7 +818,7 @@ export const FR_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
       title: 'Générateur de Schema – JSON-LD pour SEO | UtilityFlow',
       description:
         'Créez du JSON-LD Schema.org valide pour Article, FAQPage, Product, Organization et BreadcrumbList, avec échappement HTML sûr, copie de script et export .jsonld.',
-      primaryKeyword: 'générateur schema markup',
+      primaryKeyword: 'générateur de schema json-ld',
       secondaryKeywords: [
         'générateur json-ld en ligne',
         'outil données structurées faqpage',
@@ -2005,7 +2005,7 @@ export const FR_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
     seo: {
       title: 'Compresseur d’Images – PNG, JPG et WebP | UtilityFlow',
       description:
-        'Compressez des images dans votre navigateur : réglez la qualité, plafonnez la largeur, comparez les tailles avant et après, et téléchargez — sans envoi.',
+        'Compressez une image dans votre navigateur : réglez la qualité, plafonnez la largeur, comparez les tailles avant et après, et téléchargez — sans envoi.',
       primaryKeyword: 'compresseur image',
       secondaryKeywords: [
         'compresser png jpg webp en ligne',
@@ -2203,7 +2203,7 @@ export const FR_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
     seo: {
       title: 'Redimensionneur d’Images – Pixels Exacts | UtilityFlow',
       description:
-        'Redimensionnez des photos à des pixels exacts : préréglages, verrouillage du ratio, recadrage cover et export PNG, JPG ou WebP en privé dans votre navigateur.',
+        'Redimensionnez une image à des pixels exacts : préréglages, verrouillage du ratio, recadrage cover et export PNG, JPG ou WebP en privé dans votre navigateur.',
       primaryKeyword: 'redimensionneur image',
       secondaryKeywords: [
         'redimensionner photo en pixels exacts',
@@ -3391,7 +3391,7 @@ export const FR_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
     seo: {
       title: 'Générateur de Mots de Passe Sécurisés | UtilityFlow',
       description:
-        'Générez des mots de passe aléatoires forts et des passphrases Diceware mémorables localement dans votre navigateur avec Web Crypto, sans stockage ni envoi.',
+        'Générez un mot de passe aléatoire fort et des passphrases Diceware mémorables localement dans votre navigateur avec Web Crypto, sans stockage ni envoi.',
       primaryKeyword: 'générateur mot de passe',
       secondaryKeywords: [
         'générateur mot de passe sécurisé cryptographique',
