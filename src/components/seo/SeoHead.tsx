@@ -13,6 +13,8 @@ export interface SeoHeadProps {
   keywords?: string[];
   ogType?: 'website' | 'article';
   noIndex?: boolean;
+  /** Absolute og:image URL. Defaults to the site-wide /og-image.jpg. */
+  ogImage?: string;
   structuredData?: Record<string, unknown> | Array<Record<string, unknown>>;
   /** hreflang alternates (absolute URLs). Rendered as <link rel="alternate">. */
   alternates?: Array<{ hreflang: string; href: string }>;
@@ -76,6 +78,7 @@ export function SeoHead({
   keywords,
   ogType = 'website',
   noIndex = false,
+  ogImage,
   structuredData,
   alternates,
 }: SeoHeadProps) {
@@ -93,7 +96,7 @@ export function SeoHead({
     (l) => localeTag(l.code).replace('-', '_')
   );
   const serializedOgLocaleAlternates = ogLocaleAlternates.join(',');
-  const ogImageUrl = `${SITE_CONFIG.defaultOrigin}/og-image.jpg`;
+  const ogImageUrl = ogImage ?? `${SITE_CONFIG.defaultOrigin}/og-image.jpg`;
 
   useEffect(() => {
     document.title = title;
