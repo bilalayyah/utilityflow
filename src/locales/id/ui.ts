@@ -244,6 +244,17 @@ export const idStrings: UiStrings = {
     moreToolsIn: 'Alat lainnya di',
     willAppear: 'akan muncul di sini saat Batch {batch} dirilis.',
   },
+  comments: {
+    title: 'Komentar',
+    note: 'Bagikan pendapat Anda — tanpa perlu akun. Cukup tulis nama Anda dan kirim.',
+    namePlaceholder: 'Nama Anda',
+    commentPlaceholder: 'Tulis komentar…',
+    postButton: 'Kirim komentar',
+    posting: 'Mengirim…',
+    empty: 'Belum ada komentar — jadilah yang pertama berbagi pendapat.',
+    loadError: 'Komentar tidak dapat dimuat saat ini, tetapi Anda tetap dapat mengirim komentar di bawah.',
+    postError: 'Komentar Anda tidak dapat dikirim. Silakan coba lagi sebentar lagi.',
+  },
   search: {
     placeholder:
       'Cari alat atau kategori (mis., penghitung kata, JSON, PDF, kalkulator)...',
