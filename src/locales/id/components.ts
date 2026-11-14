@@ -1694,7 +1694,7 @@ export const idComponentStrings: Record<string, ComponentLocaleData> = {
         }
       ],
       "title": "Pencari Alat Cerdas AI",
-      "searchesLine": "Mencari di {count} alat UtilityFlow asli (85 browser + 2 AI)",
+      "searchesLine": "Mencari di {count} alat UtilityFlow asli (85 browser + 3 AI)",
       "aiSearchesToday": "Pencarian AI hari ini:",
       "leftUnlimited": "tersisa · Pencarian lokal instan tanpa batas",
       "quotaFallback": "Hingga 10 pencarian AI gratis / hari · Pencarian lokal tanpa batas",
