@@ -208,7 +208,7 @@ export const itStrings: UiStrings = {
     availableTools: 'Strumenti disponibili',
     categorySuites: 'Suite di categorie',
     visitHub: 'Visita l’hub {name}',
-    plannedToolsInclude: 'Strumenti previsti: {names}',
+    plannedToolsInclude: 'Strumenti di questa categoria: {names}',
     noMatch: 'Nessuna categoria o strumento corrisponde al tuo filtro.',
     clearFilters: 'Cancella i filtri',
   },
@@ -288,6 +288,19 @@ export const itStrings: UiStrings = {
       'Le attività online di routine — contare le parole, convalidare JSON, verificare i limiti di caratteri, calcolare le rate di un prestito o comprimere un’immagine — spesso costringono a passare da siti lenti, pieni di finestre invadenti, download confusi o registrazioni obbligatorie.',
     whyP2:
       'Il nostro obiettivo è semplice: dare a ogni utilità una pagina pulita e dedicata che si carica velocemente, spiega chiaramente come funziona lo strumento e viene eseguita direttamente nel tuo browser ogni volta che gli standard del web lo consentono.',
+    orgTitle: 'Chi gestisce UtilityFlow',
+    orgP1:
+      'UtilityFlow è un progetto indipendente creato e gestito da Bilal, un creatore che costruisce strumenti web gratuiti nel suo tempo libero. Dietro al sito non c’è nessuna azienda, nessun finanziamento di investitori e nessun team di dipendenti: ogni strumento, guida e pagina di aiuto è progettato, realizzato e testato da una sola persona. Il progetto è sostenuto dalla pubblicità mostrata sul sito, ed è proprio questo che mantiene gratuiti tutti gli 88 strumenti, senza account né abbonamenti. La riga nel piè di pagina nomina Shaheen, il cui incoraggiamento ha ispirato il progetto e il cui nome compare su ogni pagina come promemoria di dove è nata l’idea.',
+    orgP2:
+      'Poiché il progetto è piccolo e indipendente, le decisioni restano semplici: se uno strumento è lento, poco chiaro o sbagliato, viene corretto. I messaggi inviati dalla pagina Contatti arrivano direttamente alla persona che può modificare il codice, e i suggerimenti dei visitatori hanno già ispirato nuovi strumenti e miglioramenti in tutto il sito.',
+    howTitle: 'Come vengono creati e testati i nostri strumenti',
+    howP1:
+      'Ogni utilità nasce da un unico compito chiaro — contare parole, unire PDF, formattare JSON — ed è costruita come una pagina mirata che svolge bene quel compito. Ovunque gli standard del web lo consentono, il lavoro avviene interamente nel tuo browser, così i tuoi testi e i tuoi file non devono mai lasciare il tuo dispositivo. Ogni pagina di strumento spiega i passaggi con una breve guida, mostra esempi concreti e risponde alle domande più frequenti, così puoi valutare il risultato invece di fidarti di una scatola nera.',
+    howP2:
+      'Prima che uno strumento venga pubblicato, viene provato con input reali in un browser desktop e in uno mobile, compresi i casi limite come input vuoto, testi molto lunghi e tipi di file insoliti. Quando qualcosa si rompe o un calcolo sembra sbagliato, la correzione viene distribuita come aggiornamento del sito e la pagina viene ricontrollata. I tre strumenti IA opzionali sono gli unici che inviano testo a un server, e le loro pagine lo dicono chiaramente prima che tu li usi.',
+    whoTitle: 'A chi è rivolto UtilityFlow',
+    whoP1:
+      'UtilityFlow è pensato per chiunque abbia bisogno di una risposta rapida da uno strumento senza installare software né creare un account: studenti che controllano il numero di parole di un saggio, scrittori che formattano una bozza, sviluppatori che convalidano JSON o codificano un URL, marketer che verificano i limiti di caratteri e piccoli imprenditori che calcolano un prestito o uno sconto. Se un’attività richiede meno di un minuto, anche lo strumento dovrebbe richiederne meno di uno: è questo lo standard a cui è tenuta ogni pagina del sito.',
     principlesTitle: 'Principi fondamentali di ingegneria',
     principles: [
       {
@@ -325,6 +338,16 @@ export const itStrings: UiStrings = {
     title: 'Contattaci',
     intro:
       'Invia segnalazioni di bug, suggerimenti di strumenti o richieste generali. Leggiamo ogni messaggio e diamo priorità alle correzioni che migliorano la precisione degli strumenti e l’accessibilità.',
+    aboutTitle: 'Di cosa puoi scriverci',
+    aboutP1:
+      'Usa questo modulo per qualsiasi cosa riguardi il sito. Segnala un bug e dicci quale strumento stavi usando, cosa hai inserito e cosa ti aspettavi che succedesse: più dettagli includi, più velocemente il problema può essere riprodotto e corretto. Suggerisci un nuovo strumento e descrivi il compito che dovrebbe svolgere; le idee richieste da molti visitatori salgono in cima alla lista. Puoi anche segnalare un calcolo sbagliato, un’istruzione poco chiara o un errore di traduzione in qualsiasi pagina.',
+    aboutP2:
+      'Anche le domande su privacy e aspetti legali sono benvenute. Se un tuo commento deve essere rimosso, indica la pagina dello strumento e il nome usato e verrà eliminato. Per qualsiasi altra cosa — un’idea di collaborazione, una domanda per la stampa o un commento generale sul sito — funziona lo stesso modulo, oppure puoi scrivere direttamente all’indirizzo email indicato in questa pagina.',
+    responseTitle: 'Cosa succede dopo l’invio di un messaggio',
+    responseP1:
+      'Ogni messaggio viene letto dalla persona che crea e gestisce UtilityFlow: non c’è un servizio di assistenza né una coda di risposte automatiche. Le segnalazioni di bug e i risultati errati vengono controllati per primi, perché uno strumento rotto riguarda tutti quelli che lo usano. I suggerimenti di nuovi strumenti vengono raccolti e valutati in base a quante persone li userebbero e a quanto si adattano all’approccio del sito, che privilegia il browser.',
+    responseP2:
+      'Non serve un account per contattarci e useremo il tuo indirizzo email solo per rispondere al tuo messaggio. Se preferisci non usare il modulo, l’indirizzo email diretto in questa pagina raggiunge la stessa casella di posta.',
     name: 'Nome',
     email: 'Indirizzo email',
     topic: 'Argomento',
@@ -376,12 +399,14 @@ export const itStrings: UiStrings = {
         paragraphs: [
           'Testi, numeri, frammenti di codice e file inseriti nei nostri 85 strumenti nel browser vengono elaborati localmente nella sessione del browser, senza lasciare il tuo dispositivo.',
           'I nostri tre strumenti IA gratuiti (Assistente di scrittura IA, Riassuntore di testo IA e Cercatore di strumenti IA) inviano il testo inviato tramite il nostro backend protetto a Groq per l’inferenza in tempo reale. Non memorizziamo né registriamo le tue richieste, e i limiti giornalieri gratuiti utilizzano solo un hash SHA-256 datato in UTC, così gli indirizzi IP grezzi dei visitatori non vengono mai memorizzati.',
+          'I commenti pubblicati sotto i nostri strumenti richiedono solo un nome e il testo del commento. Il nome e il testo che invii vengono memorizzati sulla nostra piattaforma di hosting e mostrati pubblicamente nella pagina di quello strumento, insieme alla data. Non chiediamo un indirizzo email né un account per commentare e non usiamo i dati dei commenti per la pubblicità. Se vuoi far rimuovere un commento, contattaci indicando la pagina e il nome usato e lo elimineremo.',
         ],
       },
       {
         title: '3. Registri di hosting e telemetria tecnica',
         paragraphs: [
           'UtilityFlow è ospitato su Cloudflare Pages. Come i fornitori di hosting web standard, la nostra rete edge può elaborare automaticamente i metadati standard delle richieste HTTP (come indirizzo IP, user-agent del browser, URL richiesto e timestamp) per distribuire le pagine in modo affidabile, mitigare gli abusi e mantenere la sicurezza.',
+          'Non combiniamo i registri di hosting con altri dati per identificare singoli visitatori e non vendiamo né condividiamo i dati dei registri con gli inserzionisti. I registri esistono solo per mantenere il servizio attivo e sicuro.',
         ],
       },
       {
@@ -395,10 +420,35 @@ export const itStrings: UiStrings = {
         title: '5. Collegamenti esterni',
         paragraphs: [
           'La nostra documentazione o le pagine degli strumenti possono contenere collegamenti a siti web esterni. Non siamo responsabili delle pratiche sulla privacy o dei contenuti dei siti web di terze parti.',
+          'I collegamenti esterni si aprono in una nuova scheda ove possibile. Prima di inserire informazioni personali su un sito collegato, leggi l’informativa sulla privacy di quel sito.',
+        ],
+      },
+      {
+        title: '6. Conservazione dei dati',
+        paragraphs: [
+          'Le informazioni elaborate nel tuo browser non ci vengono mai inviate, quindi non c’è nulla da conservare. Il testo inviato agli strumenti IA opzionali viene elaborato per la richiesta e non viene memorizzato. I commenti vengono conservati finché non vengono eliminati, da noi o su tua richiesta. I registri di hosting e di sicurezza vengono conservati solo per il periodo limitato di cui il nostro fornitore di hosting ha bisogno per gestire e proteggere il servizio.',
+        ],
+      },
+      {
+        title: '7. I tuoi diritti e le tue scelte',
+        paragraphs: [
+          'Puoi disattivare la pubblicità personalizzata tramite le Impostazioni annunci di Google o la pagina di rinuncia di AboutAds.info collegata nella sezione 4, e puoi bloccare o eliminare i cookie nelle impostazioni del tuo browser in qualsiasi momento. Se hai pubblicato un commento, puoi chiederne la rimozione contattandoci. Poiché i nostri strumenti funzionano nel tuo browser e non teniamo account né profili, non esiste un file di dati personali da scaricare o correggere, ma qualsiasi domanda sui tuoi dati riceverà risposta se ci scrivi.',
+        ],
+      },
+      {
+        title: '8. Privacy dei minori',
+        paragraphs: [
+          'UtilityFlow è un sito di uso generale e non è rivolto a minori di 13 anni. Non raccogliamo consapevolmente informazioni personali da minori. Se sei un genitore o un tutore e ritieni che un minore abbia pubblicato un commento sul sito, contattaci e lo rimuoveremo.',
+        ],
+      },
+      {
+        title: '9. Modifiche alla presente Informativa',
+        paragraphs: [
+          'Potremmo aggiornare la presente Informativa sulla privacy quando aggiungiamo strumenti, cambiamo fornitori o modifichiamo il funzionamento del sito. La data di “Ultimo aggiornamento” in cima a questa pagina indica quando è stata rivista l’ultima volta. L’uso continuato del sito dopo una modifica significa che accetti l’informativa aggiornata.',
         ],
       },
     ],
-    contactTitle: '6. Contatti',
+    contactTitle: '10. Contatti',
     contactBefore:
       'Se hai domande su questa Informativa sulla privacy, contattaci tramite la nostra',
     contactLink: 'pagina Contatti',
@@ -417,12 +467,14 @@ export const itStrings: UiStrings = {
         title: '2. Uso consentito',
         paragraphs: [
           'Puoi utilizzare UtilityFlow per attività di produttività personali, educative e commerciali. Accetti di non automatizzare traffico abusivo, di non tentare di interrompere la distribuzione del sito, di non aggirare le protezioni di sicurezza e di non utilizzare alcuna utilità per attività illegali.',
+          'Puoi collegarti ai nostri strumenti e condividere i loro risultati. Non puoi presentare i nostri strumenti come tuoi, copiare il design o i contenuti del sito e ripubblicarli come servizio concorrente, né usare il sito in modo da trarre altri in inganno sull’origine di un risultato.',
         ],
       },
       {
         title: '3. Accuratezza e clausola di esclusione della responsabilità',
         paragraphs: [
           'Sebbene testiamo ogni utilità con cura, tutti gli strumenti, i calcoli, le conversioni e i controlli SEO sono forniti “così come sono” e “secondo disponibilità”. I risultati devono essere verificati in modo indipendente prima di prendere decisioni finanziarie, legali, mediche o di ingegneria di produzione.',
+          'I calcoli come le rate di un prestito, le stime fiscali e le conversioni di valuta sono aiuti per la pianificazione, non consulenza professionale. Le cifre possono cambiare in base a tassi, regole e arrotondamenti, quindi verifica i numeri importanti con un professionista qualificato o una fonte ufficiale prima di agire in base a essi.',
         ],
       },
       {
@@ -437,6 +489,24 @@ export const itStrings: UiStrings = {
           'Nella misura massima consentita dalla legge, UtilityFlow e i suoi collaboratori non saranno responsabili di alcun danno indiretto, incidentale, speciale o consequenziale derivante dall’uso o dall’impossibilità di usare questa piattaforma. UtilityFlow è un progetto indipendente e non è affiliato, approvato o collegato a YouTube, Instagram, Google o a qualsiasi altro marchio di terze parti menzionato su questo sito.',
         ],
       },
+      {
+        title: '6. Contenuti degli utenti e commenti',
+        paragraphs: [
+          'Mantieni la piena proprietà di tutto ciò che digiti nei nostri strumenti o pubblichi come commento. Pubblicando un commento, ci autorizzi a mostrarlo pubblicamente nella pagina dello strumento interessato. Non pubblicare nulla di illegale, fuorviante o dannoso per altri e non pubblicare informazioni personali altrui. Possiamo rimuovere senza preavviso i commenti che violano queste regole o che ci vengono segnalati.',
+        ],
+      },
+      {
+        title: '7. Servizi di terze parti',
+        paragraphs: [
+          'Alcune funzioni si basano su servizi indipendenti di terze parti: i tre strumenti IA inviano testo a Groq per l’elaborazione, il modulo di contatto è gestito da FormSubmit, il sito è ospitato su Cloudflare e la pubblicità è fornita da Google AdSense. Ciascuno di questi servizi ha i propri termini e la propria informativa sulla privacy, e il loro uso è regolato da quei documenti. UtilityFlow non è responsabile della disponibilità o delle pratiche dei servizi di terze parti.',
+        ],
+      },
+      {
+        title: '8. Disponibilità del servizio',
+        paragraphs: [
+          'UtilityFlow è un servizio gratuito e non garantiamo che ogni strumento sia sempre disponibile. Gli strumenti possono essere modificati, migliorati o rimossi e il sito può essere temporaneamente non disponibile per manutenzione. Ci impegniamo a mantenere il servizio attivo senza intoppi, ma non siamo responsabili di interruzioni o di perdite causate da periodi di inattività.',
+        ],
+      },
     ],
     acceptanceTitle: '1. Accettazione dei termini',
     acceptanceBefore:
@@ -444,7 +514,7 @@ export const itStrings: UiStrings = {
     acceptanceLink: 'Informativa sulla privacy',
     acceptanceAfter:
       '. Se non sei d’accordo con una parte di questi termini, ti preghiamo di interrompere l’uso del sito.',
-    changesTitle: '6. Modifiche e contatti',
+    changesTitle: '9. Modifiche e contatti',
     changesBefore:
       'Potremmo aggiornare questi Termini di servizio man mano che vengono pubblicati nuovi strumenti. Le domande possono essere rivolte alla nostra',
     changesLink: 'pagina Contatti',
