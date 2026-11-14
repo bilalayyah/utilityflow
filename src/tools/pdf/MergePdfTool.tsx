@@ -4,6 +4,10 @@ import { useState } from 'react';
 import { formatBytes, formatFriendlyPdfError, PDF_STRINGS_EN, readValidatedPdfBytes, triggerPdfDownload } from './pdfUtils';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
+import { PASTEL_PALETTES, pastelForKey } from '../../components/tool/pastel';
+
+const palette = pastelForKey('merge-pdf');
+const paletteAlt = PASTEL_PALETTES[(PASTEL_PALETTES.indexOf(palette) + 1) % PASTEL_PALETTES.length];
 
 const STRINGS_EN = {
     errRead: 'Unable to read selected PDF files.',
@@ -124,7 +128,7 @@ export default function MergePdfTool() {
     <div className="space-y-6">
       <label
         htmlFor="merge-pdf-input"
-        className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-indigo-300 bg-slate-50 px-6 py-8 text-center hover:border-indigo-400 hover:bg-indigo-50/40 cursor-pointer transition-colors"
+        className={`flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-indigo-300 ${palette.card} px-6 py-8 text-center hover:border-indigo-400 hover:bg-indigo-50/40 cursor-pointer transition-colors`}
       >
         <FilePlus2 className="w-8 h-8 text-indigo-600 mb-2" />
         <span className="text-sm font-semibold text-slate-900">
@@ -177,7 +181,7 @@ export default function MergePdfTool() {
             </button>
           </div>
 
-          <ul className="divide-y divide-slate-200 rounded-xl border border-slate-200 bg-white">
+          <ul className={`divide-y divide-slate-200 rounded-xl border border-slate-200 ${palette.card}`}>
             {files.map((item, idx) => (
               <li key={item.id} className="flex flex-wrap items-center justify-between gap-3 px-4 py-3">
                 <div className="min-w-0">
@@ -220,7 +224,7 @@ export default function MergePdfTool() {
             ))}
           </ul>
 
-          <div className="flex flex-col sm:flex-row gap-3 sm:items-end justify-between rounded-xl border border-slate-200 bg-slate-50 p-4">
+          <div className={`flex flex-col sm:flex-row gap-3 sm:items-end justify-between rounded-xl border border-slate-200 ${paletteAlt.card} p-4`}>
             <div className="flex-1 max-w-sm">
               <label htmlFor="merge-outname" className="block text-xs font-semibold text-slate-800 mb-1">
                 {s.outName}

@@ -4,6 +4,9 @@ import { useState } from 'react';
 import { formatBytes, formatFriendlyPdfError, PDF_STRINGS_EN, pdfjsLib, readValidatedPdfBytes, triggerPdfDownload } from './pdfUtils';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
+import { PASTEL_PALETTES, pastelForKey } from '../../components/tool/pastel';
+
+const palette = pastelForKey('reorder-delete-pdf-pages');
 
 const STRINGS_EN = {
     errMin1: 'A PDF must retain at least 1 page.',
@@ -160,7 +163,7 @@ export default function ReorderDeletePdfPagesTool() {
     <div className="space-y-6">
       <label
         htmlFor="reorder-pdf-input"
-        className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-indigo-300 bg-slate-50 px-6 py-8 text-center hover:border-indigo-400 hover:bg-indigo-50/40 cursor-pointer transition-colors"
+        className={`flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-indigo-300 ${palette.card} px-6 py-8 text-center hover:border-indigo-400 hover:bg-indigo-50/40 cursor-pointer transition-colors`}
       >
         <FileUp className="w-8 h-8 text-indigo-600 mb-2" />
         <span className="text-sm font-semibold text-slate-900">
@@ -218,7 +221,7 @@ export default function ReorderDeletePdfPagesTool() {
             {pages.map((page, idx) => (
               <div
                 key={page.id}
-                className="rounded-xl border border-slate-200 bg-white p-2.5 flex flex-col justify-between gap-2"
+                className={`rounded-xl border border-slate-200 ${PASTEL_PALETTES[idx % PASTEL_PALETTES.length].card} p-2.5 flex flex-col justify-between gap-2`}
               >
                 <div className="aspect-[3/4] rounded-md border border-slate-100 bg-slate-50 overflow-hidden flex items-center justify-center">
                   {page.thumbUrl ? (
