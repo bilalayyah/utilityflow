@@ -124,7 +124,7 @@ export default function MergePdfTool() {
     <div className="space-y-6">
       <label
         htmlFor="merge-pdf-input"
-        className="flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-slate-300 bg-slate-50 px-6 py-8 text-center hover:border-indigo-400 hover:bg-indigo-50/40 cursor-pointer transition-colors"
+        className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-indigo-300 bg-slate-50 px-6 py-8 text-center hover:border-indigo-400 hover:bg-indigo-50/40 cursor-pointer transition-colors"
       >
         <FilePlus2 className="w-8 h-8 text-indigo-600 mb-2" />
         <span className="text-sm font-semibold text-slate-900">
@@ -238,7 +238,7 @@ export default function MergePdfTool() {
               type="button"
               disabled={isMerging || files.length < 2}
               onClick={() => void handleMerge()}
-              className="inline-flex items-center justify-center gap-2 rounded-lg bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700 disabled:opacity-50 cursor-pointer"
+              className="inline-flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-indigo-600 to-violet-600 px-5 py-2.5 text-sm font-semibold text-white hover:from-indigo-700 hover:to-violet-700 disabled:opacity-50 cursor-pointer"
             >
               <Layers className="w-4 h-4" />
               {isMerging ? s.merging : s.mergeBtn(files.length)}

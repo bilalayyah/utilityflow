@@ -144,7 +144,7 @@ export default function AddPdfPageNumbersTool() {
     <div className="space-y-6">
       <label
         htmlFor="num-pdf-input"
-        className="flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-slate-300 bg-slate-50 px-6 py-8 text-center hover:border-indigo-400 hover:bg-indigo-50/40 cursor-pointer transition-colors"
+        className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-indigo-300 bg-slate-50 px-6 py-8 text-center hover:border-indigo-400 hover:bg-indigo-50/40 cursor-pointer transition-colors"
       >
         <FileUp className="w-8 h-8 text-indigo-600 mb-2" />
         <span className="text-sm font-semibold text-slate-900">
@@ -259,7 +259,7 @@ export default function AddPdfPageNumbersTool() {
               type="button"
               disabled={isProcessing}
               onClick={() => void handleApplyNumbers()}
-              className="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700 disabled:opacity-50 cursor-pointer"
+              className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-indigo-600 to-violet-600 px-5 py-2.5 text-sm font-semibold text-white hover:from-indigo-700 hover:to-violet-700 disabled:opacity-50 cursor-pointer"
             >
               <Hash className="w-4 h-4" />
               {isProcessing ? s.numbering : s.addBtn}
