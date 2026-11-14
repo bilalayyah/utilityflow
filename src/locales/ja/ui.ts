@@ -321,6 +321,8 @@ export const jaStrings: UiStrings = {
     topic: 'トピック',
     message: 'メッセージ',
     submit: 'メッセージを送信',
+    sending: '送信中…',
+    sendError: 'メッセージを送信できませんでした。もう一度お試しください。',
     namePlaceholder: 'Alex Rivera',
     emailPlaceholder: 'you@example.com',
     messagePlaceholder: 'ツール、バグ、質問について詳しく説明してください...',
@@ -338,11 +340,11 @@ export const jaStrings: UiStrings = {
       subject: 'トピックを選択または入力してください。',
       message: 'メッセージに10文字以上含めてください。',
     },
-    successTitle: 'メッセージを用意しました',
+    successTitle: 'メッセージを送信しました',
     successThanks:
-      'ありがとうございます、{name}さん。{subject}についてのメッセージは検証されました。',
+      'ありがとうございます、{name}さん。メッセージを送信しました。まもなくご連絡いたします。',
     successNote:
-      'UtilityFlowは、バックエンドサーバーにユーザーからの送信内容を保存しない静的サイトとして動作するため、メールクライアントから直接メッセージを送ることもできます。宛先：',
+      '追加でお伝えしたいことがございましたら、以下のメールアドレスまで直接ご連絡いただけます',
     sendAnother: '別のメッセージを送る',
     directEmail: '直接メール',
     directEmailText: '直接書きたい場合は、チームまでメールでご連絡ください：',
@@ -392,6 +394,8 @@ export const jaStrings: UiStrings = {
       'このプライバシーポリシーについて質問がある場合は、',
     contactLink: 'お問い合わせページ',
     contactMiddle: 'またはメールでご連絡ください',
+    optOutGoogleAds: 'Google 広告設定',
+    optOutAboutAds: 'AboutAds.info オプトアウト',
   },
   terms: {
     seoTitle: '利用規約 | UtilityFlow',
@@ -416,6 +420,7 @@ export const jaStrings: UiStrings = {
         title: '4. 知的財産',
         paragraphs: [
           'UtilityFlowのインターフェース、ブランドアセット、ドキュメント、ソースコードは、適用される知的財産法によって保護されています。クライアントサイドユーティリティを使って処理するテキスト、コード、文書、画像の完全な所有権は、あなたに帰属します。',
+          'UtilityFlowは独立したプロジェクトであり、YouTube、Instagram、Google、その他本サイトで言及されるいかなるサードパーティブランドとも提携しておらず、推奨も受けておらず、関係もありません。',
         ],
       },
       {
