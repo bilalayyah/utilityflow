@@ -51,7 +51,7 @@ export const itStrings: UiStrings = {
     termsOfService: 'Termini di servizio',
     xmlSitemap: 'Sitemap XML',
     rightsReserved: 'Tutti i diritti riservati.',
-    deployedNote: 'Utilità nel browser · Distribuito su Cloudflare Pages',
+    deployedNote: 'Crafted with ❤️ by Bilal, inspired by Shaheen.',
   },
   common: {
     copy: 'Copia',
