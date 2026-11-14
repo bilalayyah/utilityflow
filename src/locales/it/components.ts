@@ -1694,7 +1694,7 @@ export const itComponentStrings: Record<string, ComponentLocaleData> = {
         }
       ],
       "title": "Trova strumenti AI intelligente",
-      "searchesLine": "Cerca tra {count} strumenti reali di UtilityFlow (85 browser + 2 AI)",
+      "searchesLine": "Cerca tra {count} strumenti reali di UtilityFlow (85 browser + 3 AI)",
       "aiSearchesToday": "Ricerche AI oggi:",
       "leftUnlimited": "rimaste · Ricerca locale istantanea illimitata",
       "quotaFallback": "Fino a 10 ricerche AI gratuite / giorno · Ricerca locale illimitata",
