@@ -244,6 +244,17 @@ export const itStrings: UiStrings = {
     moreToolsIn: 'Altri strumenti in',
     willAppear: 'appariranno qui con il rilascio della fase {batch}.',
   },
+  comments: {
+    title: 'Commenti',
+    note: 'Condividi la tua opinione: nessun account necessario. Scrivi il tuo nome e pubblica.',
+    namePlaceholder: 'Il tuo nome',
+    commentPlaceholder: 'Scrivi un commento…',
+    postButton: 'Pubblica commento',
+    posting: 'Pubblicazione…',
+    empty: 'Ancora nessun commento. Sii la prima persona a condividere la tua opinione.',
+    loadError: 'Non è stato possibile caricare i commenti, ma puoi comunque pubblicarne uno qui sotto.',
+    postError: 'Non è stato possibile pubblicare il tuo commento. Riprova tra un momento.',
+  },
   search: {
     placeholder:
       'Cerca strumenti o categorie (es. contatore di parole, JSON, PDF, calcolatrici)...',
