@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { PASTEL_PALETTES, pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
 
@@ -34,6 +35,7 @@ function money(n: number, locale: string): string {
 export default function MortgageCalculatorTool() {
   const { locale, t } = useLocale();
   const s = useComponentStrings('mortgage-calculator', STRINGS_EN);
+  const palette = pastelForKey('mortgage-calculator');
   const [homePrice, setHomePrice] = useState('420000');
   const [downPaymentPct, setDownPaymentPct] = useState('20');
   const [interestRate, setInterestRate] = useState('6.25');
@@ -212,10 +214,10 @@ export default function MortgageCalculatorTool() {
 
       {calc.data && (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
-          <div className="lg:col-span-5 rounded-xl border border-indigo-200 bg-indigo-50/70 p-5 flex flex-col justify-between">
+          <div className={`lg:col-span-5 rounded-xl border border-indigo-200 ${palette.card} p-5 flex flex-col justify-between`}>
             <div>
-              <div className="text-xs font-semibold text-indigo-700">{s.estimatedMonthly}</div>
-              <div className="mt-1 text-3xl font-bold font-mono text-slate-900 tabular-nums">
+              <div className={`text-xs font-semibold ${palette.link}`}>{s.estimatedMonthly}</div>
+              <div className={`mt-1 text-3xl font-bold font-mono ${palette.link} tabular-nums`}>
                 ${money(calc.data.totalMonthly, locale)}
               </div>
             </div>
@@ -235,7 +237,7 @@ export default function MortgageCalculatorTool() {
             </dl>
           </div>
 
-          <div className="lg:col-span-7 rounded-xl border border-slate-200 bg-slate-50 p-5">
+          <div className={`lg:col-span-7 rounded-xl border border-slate-200 ${PASTEL_PALETTES[1].card} p-5`}>
             <h3 className="text-sm font-semibold text-slate-900 mb-3">{s.breakdownHeading}</h3>
             <dl className="divide-y divide-slate-200 text-sm font-mono tabular-nums">
               <div className="py-2 flex justify-between">

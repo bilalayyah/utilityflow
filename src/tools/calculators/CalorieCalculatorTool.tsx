@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { PASTEL_PALETTES, pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
 
@@ -58,6 +59,7 @@ const ACTIVITY_OPTIONS: { id: ActivityLevel; factor: number }[] = [
 export default function CalorieCalculatorTool() {
   const { locale, t } = useLocale();
   const s = useComponentStrings('calorie-calculator', STRINGS_EN);
+  const palette = pastelForKey('calorie-calculator');
   const [unitSystem, setUnitSystem] = useState<'metric' | 'imperial'>('metric');
   const [sex, setSex] = useState<'male' | 'female'>('male');
   const [age, setAge] = useState('30');
@@ -147,7 +149,7 @@ export default function CalorieCalculatorTool() {
             type="button"
             onClick={() => setUnitSystem('metric')}
             className={`rounded-md px-3.5 py-1.5 text-xs sm:text-sm font-medium cursor-pointer ${
-              unitSystem === 'metric' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+              unitSystem === 'metric' ? `${palette.soft} shadow-xs` : 'text-slate-600'
             }`}
           >
             {s.metricTab}
@@ -156,7 +158,7 @@ export default function CalorieCalculatorTool() {
             type="button"
             onClick={() => setUnitSystem('imperial')}
             className={`rounded-md px-3.5 py-1.5 text-xs sm:text-sm font-medium cursor-pointer ${
-              unitSystem === 'imperial' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+              unitSystem === 'imperial' ? `${palette.soft} shadow-xs` : 'text-slate-600'
             }`}
           >
             {s.imperialTab}
@@ -168,7 +170,7 @@ export default function CalorieCalculatorTool() {
             type="button"
             onClick={() => setSex('male')}
             className={`rounded-md px-3.5 py-1.5 text-xs sm:text-sm font-medium cursor-pointer ${
-              sex === 'male' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+              sex === 'male' ? `${palette.soft} shadow-xs` : 'text-slate-600'
             }`}
           >
             {s.maleTab}
@@ -177,7 +179,7 @@ export default function CalorieCalculatorTool() {
             type="button"
             onClick={() => setSex('female')}
             className={`rounded-md px-3.5 py-1.5 text-xs sm:text-sm font-medium cursor-pointer ${
-              sex === 'female' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+              sex === 'female' ? `${palette.soft} shadow-xs` : 'text-slate-600'
             }`}
           >
             {s.femaleTab}
@@ -310,9 +312,9 @@ export default function CalorieCalculatorTool() {
       {result.data && (
         <div className="space-y-4">
           <dl className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-            <div className="rounded-xl border border-indigo-200 bg-indigo-50/70 p-4">
-              <dt className="text-xs font-medium text-indigo-700">{s.maintenance}</dt>
-              <dd className="mt-1 text-2xl font-bold font-mono text-slate-900 tabular-nums">
+            <div className={`rounded-xl border border-indigo-200 ${palette.card} p-4`}>
+              <dt className={`text-xs font-medium ${palette.link}`}>{s.maintenance}</dt>
+              <dd className={`mt-1 text-2xl font-bold font-mono ${palette.link} tabular-nums`}>
                 {Math.round(result.data.tdee).toLocaleString(locale)} kcal
               </dd>
               <dd className="mt-1 text-xs text-slate-600 tabular-nums">
@@ -320,49 +322,49 @@ export default function CalorieCalculatorTool() {
               </dd>
             </div>
 
-            <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+            <div className={`rounded-xl border border-slate-200 ${PASTEL_PALETTES[1].card} p-4`}>
               <dt className="text-xs font-medium text-slate-500">{s.mildLoss}</dt>
-              <dd className="mt-1 text-xl font-bold font-mono text-slate-900 tabular-nums">
+              <dd className={`mt-1 text-xl font-bold font-mono ${PASTEL_PALETTES[1].link} tabular-nums`}>
                 {Math.round(result.data.mildLoss).toLocaleString(locale)} kcal/day
               </dd>
               <dd className="mt-1 text-xs text-slate-500">{s.mildLossNote}</dd>
             </div>
 
-            <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+            <div className={`rounded-xl border border-slate-200 ${PASTEL_PALETTES[2].card} p-4`}>
               <dt className="text-xs font-medium text-slate-500">{s.weightLoss}</dt>
-              <dd className="mt-1 text-xl font-bold font-mono text-slate-900 tabular-nums">
+              <dd className={`mt-1 text-xl font-bold font-mono ${PASTEL_PALETTES[2].link} tabular-nums`}>
                 {Math.round(result.data.weightLoss).toLocaleString(locale)} kcal/day
               </dd>
               <dd className="mt-1 text-xs text-slate-500">{s.weightLossNote}</dd>
             </div>
 
-            <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+            <div className={`rounded-xl border border-slate-200 ${PASTEL_PALETTES[3].card} p-4`}>
               <dt className="text-xs font-medium text-slate-500">{s.leanGain}</dt>
-              <dd className="mt-1 text-xl font-bold font-mono text-slate-900 tabular-nums">
+              <dd className={`mt-1 text-xl font-bold font-mono ${PASTEL_PALETTES[3].link} tabular-nums`}>
                 {Math.round(result.data.leanGain).toLocaleString(locale)} kcal/day
               </dd>
               <dd className="mt-1 text-xs text-slate-500">{s.leanGainNote}</dd>
             </div>
           </dl>
 
-          <div className="rounded-xl border border-slate-200 bg-white p-4">
+          <div className={`rounded-xl border border-slate-200 ${PASTEL_PALETTES[4].card} p-4`}>
             <div className="text-xs font-semibold text-slate-700 mb-2">{s.macroHeading}</div>
             <div className="grid grid-cols-3 gap-3 text-sm tabular-nums">
-              <div className="rounded-lg bg-slate-50 px-3 py-2">
+              <div className={`rounded-lg ${PASTEL_PALETTES[5].card} px-3 py-2`}>
                 <div className="text-xs text-slate-500">{s.protein}</div>
-                <div className="font-mono font-bold text-slate-900">
+                <div className={`font-mono font-bold ${PASTEL_PALETTES[5].link}`}>
                   {Math.round(result.data.proteinGrams)} {s.gramsPerDay}
                 </div>
               </div>
-              <div className="rounded-lg bg-slate-50 px-3 py-2">
+              <div className={`rounded-lg ${PASTEL_PALETTES[6].card} px-3 py-2`}>
                 <div className="text-xs text-slate-500">{s.carbs}</div>
-                <div className="font-mono font-bold text-slate-900">
+                <div className={`font-mono font-bold ${PASTEL_PALETTES[6].link}`}>
                   {Math.round(result.data.carbsGrams)} {s.gramsPerDay}
                 </div>
               </div>
-              <div className="rounded-lg bg-slate-50 px-3 py-2">
+              <div className={`rounded-lg ${PASTEL_PALETTES[7].card} px-3 py-2`}>
                 <div className="text-xs text-slate-500">{s.fat}</div>
-                <div className="font-mono font-bold text-slate-900">
+                <div className={`font-mono font-bold ${PASTEL_PALETTES[7].link}`}>
                   {Math.round(result.data.fatGrams)} {s.gramsPerDay}
                 </div>
               </div>

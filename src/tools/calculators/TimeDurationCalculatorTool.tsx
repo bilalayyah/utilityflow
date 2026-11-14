@@ -1,5 +1,6 @@
 import { Plus, Trash2 } from 'lucide-react';
 import { useMemo, useState } from 'react';
+import { PASTEL_PALETTES, pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
 
@@ -70,6 +71,7 @@ function formatHms(totalSeconds: number): string {
 export default function TimeDurationCalculatorTool() {
   const { locale, t } = useLocale();
   const s = useComponentStrings('time-duration-calculator', STRINGS_EN);
+  const palette = pastelForKey('time-duration-calculator');
   const [mode, setMode] = useState<Mode>('between');
   const [startTime, setStartTime] = useState('09:00:00');
   const [endTime, setEndTime] = useState('17:30:00');
@@ -167,7 +169,7 @@ export default function TimeDurationCalculatorTool() {
           type="button"
           onClick={() => setMode('between')}
           className={`rounded-md px-3.5 py-1.5 text-xs sm:text-sm font-medium cursor-pointer ${
-            mode === 'between' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+            mode === 'between' ? `${palette.soft} shadow-xs` : 'text-slate-600'
           }`}
         >
           {s.betweenTab}
@@ -176,7 +178,7 @@ export default function TimeDurationCalculatorTool() {
           type="button"
           onClick={() => setMode('sum')}
           className={`rounded-md px-3.5 py-1.5 text-xs sm:text-sm font-medium cursor-pointer ${
-            mode === 'sum' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+            mode === 'sum' ? `${palette.soft} shadow-xs` : 'text-slate-600'
           }`}
         >
           {s.sumTab}
@@ -248,29 +250,29 @@ export default function TimeDurationCalculatorTool() {
 
           {betweenResult.data && (
             <dl className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-              <div className="rounded-xl border border-indigo-200 bg-indigo-50/70 p-4">
-                <dt className="text-xs font-medium text-indigo-700">
+              <div className={`rounded-xl border border-indigo-200 ${palette.card} p-4`}>
+                <dt className={`text-xs font-medium ${palette.link}`}>
                   {s.netDuration} {betweenResult.data.overnightApplied ? s.overnightTag : ''}
                 </dt>
-                <dd className="mt-1 text-2xl font-bold font-mono text-slate-900 tabular-nums">
+                <dd className={`mt-1 text-2xl font-bold font-mono ${palette.link} tabular-nums`}>
                   {betweenResult.data.hms}
                 </dd>
               </div>
-              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+              <div className={`rounded-xl border border-slate-200 ${PASTEL_PALETTES[1].card} p-4`}>
                 <dt className="text-xs font-medium text-slate-500">{s.decimalHours}</dt>
-                <dd className="mt-1 text-xl font-bold font-mono text-slate-900 tabular-nums">
+                <dd className={`mt-1 text-xl font-bold font-mono ${PASTEL_PALETTES[1].link} tabular-nums`}>
                   {betweenResult.data.decimalHours.toFixed(2)} {s.hoursAbbr}
                 </dd>
               </div>
-              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+              <div className={`rounded-xl border border-slate-200 ${PASTEL_PALETTES[2].card} p-4`}>
                 <dt className="text-xs font-medium text-slate-500">{s.totalMinutes}</dt>
-                <dd className="mt-1 text-xl font-bold font-mono text-slate-900 tabular-nums">
+                <dd className={`mt-1 text-xl font-bold font-mono ${PASTEL_PALETTES[2].link} tabular-nums`}>
                   {Number(betweenResult.data.totalMinutes.toFixed(2)).toLocaleString(locale)} {s.minutesAbbr}
                 </dd>
               </div>
-              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+              <div className={`rounded-xl border border-slate-200 ${PASTEL_PALETTES[3].card} p-4`}>
                 <dt className="text-xs font-medium text-slate-500">{s.totalSeconds}</dt>
-                <dd className="mt-1 text-xl font-bold font-mono text-slate-900 tabular-nums">
+                <dd className={`mt-1 text-xl font-bold font-mono ${PASTEL_PALETTES[3].link} tabular-nums`}>
                   {betweenResult.data.totalSeconds.toLocaleString(locale)} {s.secondsAbbr}
                 </dd>
               </div>
@@ -280,8 +282,8 @@ export default function TimeDurationCalculatorTool() {
       ) : (
         <>
           <div className="space-y-3">
-            {rows.map((row) => (
-              <div key={row.id} className="grid grid-cols-12 gap-2 items-end rounded-lg border border-slate-200 bg-slate-50/70 p-3">
+            {rows.map((row, index) => (
+              <div key={row.id} className={`grid grid-cols-12 gap-2 items-end rounded-lg border border-slate-200 ${PASTEL_PALETTES[index % PASTEL_PALETTES.length].card} p-3`}>
                 <div className="col-span-12 sm:col-span-4">
                   <label className="block text-xs font-medium text-slate-600 mb-1">{s.labelHeader}</label>
                   <input
@@ -362,27 +364,27 @@ export default function TimeDurationCalculatorTool() {
 
           {sumResult.data && (
             <dl className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-              <div className="rounded-xl border border-indigo-200 bg-indigo-50/70 p-4">
-                <dt className="text-xs font-medium text-indigo-700">{s.combinedTime}</dt>
-                <dd className="mt-1 text-2xl font-bold font-mono text-slate-900 tabular-nums">
+              <div className={`rounded-xl border border-indigo-200 ${palette.card} p-4`}>
+                <dt className={`text-xs font-medium ${palette.link}`}>{s.combinedTime}</dt>
+                <dd className={`mt-1 text-2xl font-bold font-mono ${palette.link} tabular-nums`}>
                   {sumResult.data.hms}
                 </dd>
               </div>
-              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+              <div className={`rounded-xl border border-slate-200 ${PASTEL_PALETTES[1].card} p-4`}>
                 <dt className="text-xs font-medium text-slate-500">{s.decimalHours}</dt>
-                <dd className="mt-1 text-xl font-bold font-mono text-slate-900 tabular-nums">
+                <dd className={`mt-1 text-xl font-bold font-mono ${PASTEL_PALETTES[1].link} tabular-nums`}>
                   {sumResult.data.decimalHours.toFixed(2)} {s.hoursAbbr}
                 </dd>
               </div>
-              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+              <div className={`rounded-xl border border-slate-200 ${PASTEL_PALETTES[2].card} p-4`}>
                 <dt className="text-xs font-medium text-slate-500">{s.totalMinutes}</dt>
-                <dd className="mt-1 text-xl font-bold font-mono text-slate-900 tabular-nums">
+                <dd className={`mt-1 text-xl font-bold font-mono ${PASTEL_PALETTES[2].link} tabular-nums`}>
                   {Number(sumResult.data.totalMinutes.toFixed(2)).toLocaleString(locale)} {s.minutesAbbr}
                 </dd>
               </div>
-              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+              <div className={`rounded-xl border border-slate-200 ${PASTEL_PALETTES[3].card} p-4`}>
                 <dt className="text-xs font-medium text-slate-500">{s.dayEquivalent}</dt>
-                <dd className="mt-1 text-xl font-bold font-mono text-slate-900 tabular-nums">
+                <dd className={`mt-1 text-xl font-bold font-mono ${PASTEL_PALETTES[3].link} tabular-nums`}>
                   {sumResult.data.daysEquivalent.toFixed(3)} {s.daysAbbr}
                 </dd>
               </div>

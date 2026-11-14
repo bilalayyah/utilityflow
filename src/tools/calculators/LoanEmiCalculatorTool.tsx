@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { PASTEL_PALETTES, pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
 
@@ -45,6 +46,7 @@ function formatMoney(n: number, locale: string): string {
 export default function LoanEmiCalculatorTool() {
   const { locale, t } = useLocale();
   const s = useComponentStrings('loan-emi-calculator', STRINGS_EN);
+  const palette = pastelForKey('loan-emi-calculator');
   const [principal, setPrincipal] = useState('25000');
   const [annualRate, setAnnualRate] = useState('6.5');
   const [termValue, setTermValue] = useState('5');
@@ -178,9 +180,9 @@ export default function LoanEmiCalculatorTool() {
       {calculation.data && (
         <>
           <dl className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div className="rounded-xl border border-indigo-200 bg-indigo-50/70 p-4">
-              <dt className="text-xs font-medium text-indigo-700">{s.monthlyPayment}</dt>
-              <dd className="mt-1 text-2xl font-bold font-mono text-slate-900 tabular-nums">
+            <div className={`rounded-xl border border-indigo-200 ${palette.card} p-4`}>
+              <dt className={`text-xs font-medium ${palette.link}`}>{s.monthlyPayment}</dt>
+              <dd className={`mt-1 text-2xl font-bold font-mono ${palette.link} tabular-nums`}>
                 ${formatMoney(calculation.data.emi, locale)}
               </dd>
               <dd className="mt-1 text-xs text-slate-600 tabular-nums">
@@ -188,9 +190,9 @@ export default function LoanEmiCalculatorTool() {
               </dd>
             </div>
 
-            <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+            <div className={`rounded-xl border border-slate-200 ${PASTEL_PALETTES[1].card} p-4`}>
               <dt className="text-xs font-medium text-slate-500">{s.totalInterest}</dt>
-              <dd className="mt-1 text-2xl font-bold font-mono text-slate-900 tabular-nums">
+              <dd className={`mt-1 text-2xl font-bold font-mono ${PASTEL_PALETTES[1].link} tabular-nums`}>
                 ${formatMoney(calculation.data.totalInterest, locale)}
               </dd>
               <dd className="mt-1 text-xs text-slate-600 tabular-nums">
@@ -198,9 +200,9 @@ export default function LoanEmiCalculatorTool() {
               </dd>
             </div>
 
-            <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+            <div className={`rounded-xl border border-slate-200 ${PASTEL_PALETTES[2].card} p-4`}>
               <dt className="text-xs font-medium text-slate-500">{s.totalRepayment}</dt>
-              <dd className="mt-1 text-2xl font-bold font-mono text-slate-900 tabular-nums">
+              <dd className={`mt-1 text-2xl font-bold font-mono ${PASTEL_PALETTES[2].link} tabular-nums`}>
                 ${formatMoney(calculation.data.totalPayment, locale)}
               </dd>
               <dd className="mt-1 text-xs text-slate-600 tabular-nums">
@@ -239,7 +241,7 @@ export default function LoanEmiCalculatorTool() {
             {showSchedule && (
               <div className="mt-4 overflow-x-auto max-h-80 overflow-y-auto rounded-xl border border-slate-200">
                 <table className="w-full text-left text-xs sm:text-sm font-mono tabular-nums">
-                  <thead className="bg-slate-50 border-b border-slate-200 font-sans text-slate-600 sticky top-0">
+                  <thead className={`${palette.soft} border-b border-slate-200 font-sans text-slate-600 sticky top-0`}>
                     <tr>
                       <th className="py-2.5 px-3 font-semibold">{s.monthHeader}</th>
                       <th className="py-2.5 px-3 font-semibold text-right">{s.paymentHeader}</th>

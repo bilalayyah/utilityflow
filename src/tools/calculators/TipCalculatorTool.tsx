@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { PASTEL_PALETTES, pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
 
@@ -31,6 +32,7 @@ function money(n: number, locale: string): string {
 export default function TipCalculatorTool() {
   const { locale, t } = useLocale();
   const s = useComponentStrings('tip-calculator', STRINGS_EN);
+  const palette = pastelForKey('tip-calculator');
   const [billAmount, setBillAmount] = useState('84.50');
   const [tipPercent, setTipPercent] = useState('18');
   const [people, setPeople] = useState('2');
@@ -126,7 +128,7 @@ export default function TipCalculatorTool() {
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div className="flex flex-wrap items-center gap-1.5">
           <span className="text-xs font-semibold text-slate-600 mr-1">{s.presetsLabel}</span>
-          {TIP_PRESETS.map((p) => (
+          {TIP_PRESETS.map((p, index) => (
             <button
               key={p}
               type="button"
@@ -134,7 +136,7 @@ export default function TipCalculatorTool() {
               className={`rounded-md px-3 py-1.5 text-xs font-mono cursor-pointer ${
                 Number(tipPercent) === p
                   ? 'bg-gradient-to-r from-indigo-600 to-violet-600 text-white'
-                  : 'border border-slate-300 bg-white text-slate-700 hover:bg-slate-50'
+                  : `border border-slate-300 ${PASTEL_PALETTES[index % PASTEL_PALETTES.length].card} text-slate-700`
               }`}
             >
               {p}%
@@ -164,27 +166,27 @@ export default function TipCalculatorTool() {
 
       {calc.data && (
         <dl className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="rounded-xl border border-indigo-200 bg-indigo-50/70 p-4">
-            <dt className="text-xs font-medium text-indigo-700">{s.perPersonTotal}</dt>
-            <dd className="mt-1 text-2xl font-bold font-mono text-slate-900 tabular-nums">
+          <div className={`rounded-xl border border-indigo-200 ${palette.card} p-4`}>
+            <dt className={`text-xs font-medium ${palette.link}`}>{s.perPersonTotal}</dt>
+            <dd className={`mt-1 text-2xl font-bold font-mono ${palette.link} tabular-nums`}>
               ${money(calc.data.perPerson, locale)}
             </dd>
             <dd className="mt-0.5 text-xs text-slate-600 tabular-nums">
               {s.includes} ${money(calc.data.tipPerPerson, locale)} {s.tipEach}
             </dd>
           </div>
-          <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+          <div className={`rounded-xl border border-slate-200 ${PASTEL_PALETTES[1].card} p-4`}>
             <dt className="text-xs font-medium text-slate-500">{s.totalTip}</dt>
-            <dd className="mt-1 text-2xl font-bold font-mono text-slate-900 tabular-nums">
+            <dd className={`mt-1 text-2xl font-bold font-mono ${PASTEL_PALETTES[1].link} tabular-nums`}>
               ${money(calc.data.tipTotal, locale)}
             </dd>
             <dd className="mt-0.5 text-xs text-slate-500 tabular-nums">
               {s.effectiveRate} {calc.data.effectiveTipPct.toFixed(1)}%
             </dd>
           </div>
-          <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+          <div className={`rounded-xl border border-slate-200 ${PASTEL_PALETTES[2].card} p-4`}>
             <dt className="text-xs font-medium text-slate-500">{s.totalBill}</dt>
-            <dd className="mt-1 text-2xl font-bold font-mono text-slate-900 tabular-nums">
+            <dd className={`mt-1 text-2xl font-bold font-mono ${PASTEL_PALETTES[2].link} tabular-nums`}>
               ${money(calc.data.totalBill, locale)}
             </dd>
           </div>

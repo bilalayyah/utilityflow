@@ -1,6 +1,7 @@
 import { ArrowLeftRight } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
 
@@ -229,6 +230,7 @@ function formatConverted(val: number): string {
 export default function UnitConverterTool() {
   const { t } = useLocale();
   const s = useComponentStrings('unit-converter', STRINGS_EN);
+  const palette = pastelForKey('unit-converter');
   const [category, setCategory] = useState<CategoryKey>('length');
   const [fromId, setFromId] = useState('km');
   const [toId, setToId] = useState('mi');
@@ -288,7 +290,7 @@ export default function UnitConverterTool() {
             type="button"
             onClick={() => handleCategoryChange(key)}
             className={`rounded-md px-3 py-1.5 text-xs sm:text-sm font-medium cursor-pointer ${
-              category === key ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600 hover:text-slate-900'
+              category === key ? `${palette.soft} shadow-xs` : 'text-slate-600 hover:text-slate-900'
             }`}
           >
             {s.categoryNames[key]}
@@ -369,12 +371,12 @@ export default function UnitConverterTool() {
 
       {result.data && (
         <>
-          <div className="rounded-xl border border-indigo-200 bg-indigo-50/70 p-5 flex flex-wrap items-center justify-between gap-4">
+          <div className={`rounded-xl border border-indigo-200 ${palette.card} p-5 flex flex-wrap items-center justify-between gap-4`}>
             <div>
-              <div className="text-xs font-semibold text-indigo-700 mb-1">
+              <div className={`text-xs font-semibold ${palette.link} mb-1`}>
                 {unitLabel(result.data.fromUnit.id)} {s.toWord} {unitLabel(result.data.toUnit.id)}
               </div>
-              <div className="text-2xl sm:text-3xl font-bold font-mono text-slate-900 tabular-nums">
+              <div className={`text-2xl sm:text-3xl font-bold font-mono ${palette.link} tabular-nums`}>
                 {inputValue || 0} {result.data.fromUnit.symbol} = {result.data.formatted}{' '}
                 {result.data.toUnit.symbol}
               </div>
@@ -388,7 +390,7 @@ export default function UnitConverterTool() {
 
           <div className="rounded-xl border border-slate-200 overflow-x-auto">
             <table className="w-full text-left text-sm">
-              <thead className="bg-slate-50 text-xs text-slate-500 border-b border-slate-200">
+              <thead className={`${palette.soft} text-xs text-slate-500 border-b border-slate-200`}>
                 <tr>
                   <th className="py-2.5 px-4 font-semibold">{s.unitHeader}</th>
                   <th className="py-2.5 px-4 font-semibold">{s.symbolHeader}</th>

@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { PASTEL_PALETTES, pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
 
@@ -33,6 +34,7 @@ function money(n: number, locale: string): string {
 export default function DiscountMarginCalculatorTool() {
   const { locale, t } = useLocale();
   const s = useComponentStrings('discount-margin-calculator', STRINGS_EN);
+  const palette = pastelForKey('discount-margin-calculator');
   const [mode, setMode] = useState<'discount' | 'margin'>('discount');
 
   // Sale discount state
@@ -82,7 +84,7 @@ export default function DiscountMarginCalculatorTool() {
           type="button"
           onClick={() => setMode('discount')}
           className={`rounded-md px-3.5 py-1.5 text-xs sm:text-sm font-medium cursor-pointer ${
-            mode === 'discount' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+            mode === 'discount' ? `${palette.soft} shadow-xs` : 'text-slate-600'
           }`}
         >
           {s.discountTab}
@@ -91,7 +93,7 @@ export default function DiscountMarginCalculatorTool() {
           type="button"
           onClick={() => setMode('margin')}
           className={`rounded-md px-3.5 py-1.5 text-xs sm:text-sm font-medium cursor-pointer ${
-            mode === 'margin' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+            mode === 'margin' ? `${palette.soft} shadow-xs` : 'text-slate-600'
           }`}
         >
           {s.marginTab}
@@ -155,24 +157,24 @@ export default function DiscountMarginCalculatorTool() {
 
           {discountResult.data && (
             <dl className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div className="rounded-xl border border-indigo-200 bg-indigo-50/70 p-4">
-                <dt className="text-xs font-medium text-indigo-700">{s.finalPrice}</dt>
-                <dd className="mt-1 text-2xl font-bold font-mono text-slate-900 tabular-nums">
+              <div className={`rounded-xl border border-indigo-200 ${palette.card} p-4`}>
+                <dt className={`text-xs font-medium ${palette.link}`}>{s.finalPrice}</dt>
+                <dd className={`mt-1 text-2xl font-bold font-mono ${palette.link} tabular-nums`}>
                   ${money(discountResult.data.finalTotal, locale)}
                 </dd>
                 <dd className="mt-0.5 text-xs text-slate-600 tabular-nums">
                   {s.beforeTax} ${money(discountResult.data.salePrice, locale)}
                 </dd>
               </div>
-              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+              <div className={`rounded-xl border border-slate-200 ${PASTEL_PALETTES[1].card} p-4`}>
                 <dt className="text-xs font-medium text-slate-500">{s.youSave}</dt>
                 <dd className="mt-1 text-2xl font-bold font-mono text-emerald-700 tabular-nums">
                   ${money(discountResult.data.savings, locale)}
                 </dd>
               </div>
-              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+              <div className={`rounded-xl border border-slate-200 ${PASTEL_PALETTES[2].card} p-4`}>
                 <dt className="text-xs font-medium text-slate-500">{s.taxAdded}</dt>
-                <dd className="mt-1 text-2xl font-bold font-mono text-slate-900 tabular-nums">
+                <dd className={`mt-1 text-2xl font-bold font-mono ${PASTEL_PALETTES[2].link} tabular-nums`}>
                   ${money(discountResult.data.taxAmount, locale)}
                 </dd>
               </div>
@@ -220,8 +222,8 @@ export default function DiscountMarginCalculatorTool() {
 
           {marginResult.data && (
             <dl className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div className="rounded-xl border border-indigo-200 bg-indigo-50/70 p-4">
-                <dt className="text-xs font-medium text-indigo-700">{s.grossProfit}</dt>
+              <div className={`rounded-xl border border-indigo-200 ${palette.card} p-4`}>
+                <dt className={`text-xs font-medium ${palette.link}`}>{s.grossProfit}</dt>
                 <dd
                   className={`mt-1 text-2xl font-bold font-mono tabular-nums ${
                     marginResult.data.grossProfit >= 0 ? 'text-slate-900' : 'text-red-700'
@@ -230,16 +232,16 @@ export default function DiscountMarginCalculatorTool() {
                   ${money(marginResult.data.grossProfit, locale)}
                 </dd>
               </div>
-              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+              <div className={`rounded-xl border border-slate-200 ${PASTEL_PALETTES[1].card} p-4`}>
                 <dt className="text-xs font-medium text-slate-500">{s.profitMargin}</dt>
-                <dd className="mt-1 text-2xl font-bold font-mono text-slate-900 tabular-nums">
+                <dd className={`mt-1 text-2xl font-bold font-mono ${PASTEL_PALETTES[1].link} tabular-nums`}>
                   {marginResult.data.marginPct.toFixed(2)}%
                 </dd>
                 <dd className="mt-0.5 text-xs text-slate-500">{s.profitDivSelling}</dd>
               </div>
-              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+              <div className={`rounded-xl border border-slate-200 ${PASTEL_PALETTES[2].card} p-4`}>
                 <dt className="text-xs font-medium text-slate-500">{s.markup}</dt>
-                <dd className="mt-1 text-2xl font-bold font-mono text-slate-900 tabular-nums">
+                <dd className={`mt-1 text-2xl font-bold font-mono ${PASTEL_PALETTES[2].link} tabular-nums`}>
                   {marginResult.data.markupPct.toFixed(2)}%
                 </dd>
                 <dd className="mt-0.5 text-xs text-slate-500">{s.profitDivCost}</dd>

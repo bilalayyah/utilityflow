@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { PASTEL_PALETTES } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
 
@@ -84,7 +85,7 @@ export default function PercentageCalculatorTool() {
   return (
     <div className="space-y-6">
       {/* Card 1 */}
-      <section className="rounded-xl border border-slate-200 bg-slate-50/70 p-5 space-y-3">
+      <section className={`rounded-xl border border-slate-200 ${PASTEL_PALETTES[0].card} p-5 space-y-3`}>
         <h2 className="text-base font-bold text-slate-900">{s.heading1}</h2>
         <div className="flex flex-wrap items-center gap-3 text-sm">
           <span>{s.whatIs}</span>
@@ -109,7 +110,7 @@ export default function PercentageCalculatorTool() {
           <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-slate-200">
             <div className="text-sm text-slate-600 font-mono">
               {s.result}{' '}
-              <strong className="text-lg text-indigo-600 tabular-nums">{fmt(r1.value, locale)}</strong>{' '}
+              <strong className={`text-lg ${PASTEL_PALETTES[0].link} tabular-nums`}>{fmt(r1.value, locale)}</strong>{' '}
               <span className="text-xs text-slate-500">
                 ({s.formula}: ({m1Pct} ÷ 100) × {m1Base})
               </span>
@@ -126,7 +127,7 @@ export default function PercentageCalculatorTool() {
       </section>
 
       {/* Card 2 */}
-      <section className="rounded-xl border border-slate-200 bg-slate-50/70 p-5 space-y-3">
+      <section className={`rounded-xl border border-slate-200 ${PASTEL_PALETTES[1].card} p-5 space-y-3`}>
         <h2 className="text-base font-bold text-slate-900">{s.heading2}</h2>
         <div className="flex flex-wrap items-center gap-3 text-sm">
           <input
@@ -150,7 +151,7 @@ export default function PercentageCalculatorTool() {
           <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-slate-200">
             <div className="text-sm text-slate-600 font-mono">
               {s.result}{' '}
-              <strong className="text-lg text-indigo-600 tabular-nums">{fmt(r2.value, locale)}%</strong>{' '}
+              <strong className={`text-lg ${PASTEL_PALETTES[1].link} tabular-nums`}>{fmt(r2.value, locale)}%</strong>{' '}
               <span className="text-xs text-slate-500">
                 ({s.formula}: ({m2Part} ÷ {m2Whole}) × 100)
               </span>
@@ -167,7 +168,7 @@ export default function PercentageCalculatorTool() {
       </section>
 
       {/* Card 3 */}
-      <section className="rounded-xl border border-slate-200 bg-slate-50/70 p-5 space-y-3">
+      <section className={`rounded-xl border border-slate-200 ${PASTEL_PALETTES[2].card} p-5 space-y-3`}>
         <h2 className="text-base font-bold text-slate-900">{s.heading3}</h2>
         <div className="flex flex-wrap items-center gap-3 text-sm">
           <span>{s.fromWord}</span>

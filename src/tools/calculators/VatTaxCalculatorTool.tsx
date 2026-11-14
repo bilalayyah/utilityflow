@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { PASTEL_PALETTES, pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
 
@@ -25,6 +26,7 @@ function money(n: number, locale: string): string {
 export default function VatTaxCalculatorTool() {
   const { locale, t } = useLocale();
   const s = useComponentStrings('vat-tax-calculator', STRINGS_EN);
+  const palette = pastelForKey('vat-tax-calculator');
   const [mode, setMode] = useState<'add' | 'remove'>('add');
   const [amount, setAmount] = useState('1000');
   const [taxRate, setTaxRate] = useState('20');
@@ -61,7 +63,7 @@ export default function VatTaxCalculatorTool() {
             type="button"
             onClick={() => setMode('add')}
             className={`rounded-md px-3.5 py-1.5 text-xs sm:text-sm font-medium cursor-pointer ${
-              mode === 'add' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+              mode === 'add' ? `${palette.soft} shadow-xs` : 'text-slate-600'
             }`}
           >
             {s.addTab}
@@ -70,7 +72,7 @@ export default function VatTaxCalculatorTool() {
             type="button"
             onClick={() => setMode('remove')}
             className={`rounded-md px-3.5 py-1.5 text-xs sm:text-sm font-medium cursor-pointer ${
-              mode === 'remove' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+              mode === 'remove' ? `${palette.soft} shadow-xs` : 'text-slate-600'
             }`}
           >
             {s.removeTab}
@@ -79,7 +81,7 @@ export default function VatTaxCalculatorTool() {
 
         <div className="flex flex-wrap items-center gap-1.5">
           <span className="text-xs text-slate-500 mr-1">{s.commonRates}</span>
-          {RATE_PRESETS.map((preset) => (
+          {RATE_PRESETS.map((preset, index) => (
             <button
               key={preset}
               type="button"
@@ -87,7 +89,7 @@ export default function VatTaxCalculatorTool() {
               className={`rounded-md px-2.5 py-1 text-xs font-mono cursor-pointer ${
                 Number(taxRate) === preset
                   ? 'bg-gradient-to-r from-indigo-600 to-violet-600 text-white'
-                  : 'border border-slate-300 bg-white text-slate-700 hover:bg-slate-50'
+                  : `border border-slate-300 ${PASTEL_PALETTES[index % PASTEL_PALETTES.length].card} text-slate-700`
               }`}
             >
               {preset}%
@@ -137,23 +139,23 @@ export default function VatTaxCalculatorTool() {
 
       {calc.data && (
         <dl className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+          <div className={`rounded-xl border border-slate-200 ${PASTEL_PALETTES[0].card} p-4`}>
             <dt className="text-xs font-medium text-slate-500">{s.netPrice}</dt>
-            <dd className="mt-1 text-2xl font-bold font-mono text-slate-900 tabular-nums">
+            <dd className={`mt-1 text-2xl font-bold font-mono ${PASTEL_PALETTES[0].link} tabular-nums`}>
               ${money(calc.data.net, locale)}
             </dd>
           </div>
-          <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+          <div className={`rounded-xl border border-slate-200 ${PASTEL_PALETTES[1].card} p-4`}>
             <dt className="text-xs font-medium text-slate-500">
               {s.taxAmount} ({taxRate}%)
             </dt>
-            <dd className="mt-1 text-2xl font-bold font-mono text-indigo-600 tabular-nums">
+            <dd className={`mt-1 text-2xl font-bold font-mono ${PASTEL_PALETTES[1].link} tabular-nums`}>
               ${money(calc.data.tax, locale)}
             </dd>
           </div>
-          <div className="rounded-xl border border-indigo-200 bg-indigo-50/70 p-4">
-            <dt className="text-xs font-medium text-indigo-700">{s.grossPrice}</dt>
-            <dd className="mt-1 text-2xl font-bold font-mono text-slate-900 tabular-nums">
+          <div className={`rounded-xl border border-indigo-200 ${palette.card} p-4`}>
+            <dt className={`text-xs font-medium ${palette.link}`}>{s.grossPrice}</dt>
+            <dd className={`mt-1 text-2xl font-bold font-mono ${palette.link} tabular-nums`}>
               ${money(calc.data.gross, locale)}
             </dd>
           </div>

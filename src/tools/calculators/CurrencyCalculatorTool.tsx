@@ -1,5 +1,6 @@
 import { AlertCircle, ArrowLeftRight, RefreshCw } from 'lucide-react';
 import { useMemo, useState } from 'react';
+import { PASTEL_PALETTES, pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
 
@@ -76,6 +77,7 @@ const QUICK_AMOUNTS = [1, 10, 50, 100, 500, 1000];
 export default function CurrencyCalculatorTool() {
   const { locale, t } = useLocale();
   const s = useComponentStrings('currency-calculator', STRINGS_EN);
+  const palette = pastelForKey('currency-calculator');
   const [amount, setAmount] = useState('100');
   const [fromCurrency, setFromCurrency] = useState('USD');
   const [toCurrency, setToCurrency] = useState('EUR');
@@ -314,11 +316,11 @@ export default function CurrencyCalculatorTool() {
       {result.data && (
         <>
           <dl className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div className="rounded-xl border border-indigo-200 bg-indigo-50/70 p-5">
-              <dt className="text-xs font-medium text-indigo-700">
+            <div className={`rounded-xl border border-indigo-200 ${palette.card} p-5`}>
+              <dt className={`text-xs font-medium ${palette.link}`}>
                 {s.netConverted} ({toCurrency})
               </dt>
-              <dd className="mt-1 text-2xl sm:text-3xl font-bold font-mono text-slate-900 tabular-nums">
+              <dd className={`mt-1 text-2xl sm:text-3xl font-bold font-mono ${palette.link} tabular-nums`}>
                 {result.data.netConverted.toLocaleString(locale, {
                   minimumFractionDigits: 2,
                   maximumFractionDigits: 4,
@@ -330,9 +332,9 @@ export default function CurrencyCalculatorTool() {
               </dd>
             </div>
 
-            <div className="rounded-xl border border-slate-200 bg-slate-50 p-5">
+            <div className={`rounded-xl border border-slate-200 ${PASTEL_PALETTES[1].card} p-5`}>
               <dt className="text-xs font-medium text-slate-500">{s.grossBeforeFee}</dt>
-              <dd className="mt-1 text-xl font-bold font-mono text-slate-900 tabular-nums">
+              <dd className={`mt-1 text-xl font-bold font-mono ${PASTEL_PALETTES[1].link} tabular-nums`}>
                 {result.data.grossConverted.toLocaleString(locale, {
                   minimumFractionDigits: 2,
                   maximumFractionDigits: 4,
@@ -344,9 +346,9 @@ export default function CurrencyCalculatorTool() {
               </dd>
             </div>
 
-            <div className="rounded-xl border border-slate-200 bg-slate-50 p-5">
+            <div className={`rounded-xl border border-slate-200 ${PASTEL_PALETTES[2].card} p-5`}>
               <dt className="text-xs font-medium text-slate-500">{s.inverseRate}</dt>
-              <dd className="mt-1 text-xl font-bold font-mono text-slate-900 tabular-nums">
+              <dd className={`mt-1 text-xl font-bold font-mono ${PASTEL_PALETTES[2].link} tabular-nums`}>
                 {result.data.inverseRate.toFixed(6)} {fromCurrency}
               </dd>
               <dd className="mt-1 text-xs text-slate-500">
@@ -357,7 +359,7 @@ export default function CurrencyCalculatorTool() {
 
           <div className="rounded-xl border border-slate-200 overflow-x-auto">
             <table className="w-full text-left text-sm">
-              <thead className="bg-slate-50 text-xs text-slate-500 border-b border-slate-200">
+              <thead className={`${palette.soft} text-xs text-slate-500 border-b border-slate-200`}>
                 <tr>
                   <th className="py-2.5 px-4 font-semibold">
                     {fromCurrency} {s.amountHeaderSuffix}

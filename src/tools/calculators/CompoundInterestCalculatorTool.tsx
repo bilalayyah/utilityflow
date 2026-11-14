@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { PASTEL_PALETTES, pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
 
@@ -40,6 +41,7 @@ function money(n: number, locale: string): string {
 export default function CompoundInterestCalculatorTool() {
   const { locale, t } = useLocale();
   const s = useComponentStrings('compound-interest-calculator', STRINGS_EN);
+  const palette = pastelForKey('compound-interest-calculator');
   const [initialDeposit, setInitialDeposit] = useState('5000');
   const [monthlyContribution, setMonthlyContribution] = useState('250');
   const [annualRate, setAnnualRate] = useState('7');
@@ -188,19 +190,19 @@ export default function CompoundInterestCalculatorTool() {
       {result.data && (
         <>
           <dl className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div className="rounded-xl border border-indigo-200 bg-indigo-50/70 p-4">
-              <dt className="text-xs font-medium text-indigo-700">{s.futureBalance}</dt>
-              <dd className="mt-1 text-2xl font-bold font-mono text-slate-900 tabular-nums">
+            <div className={`rounded-xl border border-indigo-200 ${palette.card} p-4`}>
+              <dt className={`text-xs font-medium ${palette.link}`}>{s.futureBalance}</dt>
+              <dd className={`mt-1 text-2xl font-bold font-mono ${palette.link} tabular-nums`}>
                 ${money(result.data.endingBalance, locale)}
               </dd>
             </div>
-            <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+            <div className={`rounded-xl border border-slate-200 ${PASTEL_PALETTES[1].card} p-4`}>
               <dt className="text-xs font-medium text-slate-500">{s.totalContributed}</dt>
-              <dd className="mt-1 text-2xl font-bold font-mono text-slate-900 tabular-nums">
+              <dd className={`mt-1 text-2xl font-bold font-mono ${PASTEL_PALETTES[1].link} tabular-nums`}>
                 ${money(result.data.totalContributed, locale)}
               </dd>
             </div>
-            <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+            <div className={`rounded-xl border border-slate-200 ${PASTEL_PALETTES[2].card} p-4`}>
               <dt className="text-xs font-medium text-slate-500">{s.totalInterest}</dt>
               <dd className="mt-1 text-2xl font-bold font-mono text-emerald-700 tabular-nums">
                 +${money(result.data.totalInterest, locale)}
@@ -210,7 +212,7 @@ export default function CompoundInterestCalculatorTool() {
 
           <div className="overflow-x-auto max-h-72 overflow-y-auto rounded-xl border border-slate-200">
             <table className="w-full text-left text-xs sm:text-sm font-mono tabular-nums">
-              <thead className="bg-slate-50 border-b border-slate-200 font-sans text-slate-600 sticky top-0">
+              <thead className={`${palette.soft} border-b border-slate-200 font-sans text-slate-600 sticky top-0`}>
                 <tr>
                   <th className="py-2.5 px-3 font-semibold">{s.yearHeader}</th>
                   <th className="py-2.5 px-3 font-semibold text-right">{s.totalContributedHeader}</th>

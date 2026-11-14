@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
 
@@ -39,6 +40,7 @@ function money(n: number, locale: string): string {
 export default function SalaryCalculatorTool() {
   const { locale, t } = useLocale();
   const s = useComponentStrings('salary-calculator', STRINGS_EN);
+  const palette = pastelForKey('salary-calculator');
   const [amount, setAmount] = useState('45');
   const [period, setPeriod] = useState<PayPeriod>('hourly');
   const [hoursPerWeek, setHoursPerWeek] = useState('40');
@@ -189,7 +191,7 @@ export default function SalaryCalculatorTool() {
       {breakdown.rows && (
         <div className="overflow-x-auto rounded-xl border border-slate-200">
           <table className="w-full text-left text-sm font-mono tabular-nums">
-            <thead className="bg-slate-50 border-b border-slate-200 font-sans text-xs text-slate-600">
+            <thead className={`${palette.soft} border-b border-slate-200 font-sans text-xs text-slate-600`}>
               <tr>
                 <th className="py-3 px-4 font-semibold">{s.payPeriodHeader}</th>
                 <th className="py-3 px-4 font-semibold text-right">{s.grossPayHeader}</th>

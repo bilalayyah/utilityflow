@@ -1,5 +1,6 @@
 import { ArrowLeftRight } from 'lucide-react';
 import { useMemo, useState } from 'react';
+import { PASTEL_PALETTES, pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
 import { localeTag, type LocaleCode } from '../../locales/config';
@@ -95,6 +96,7 @@ function formatReadableUtc(date: Date, locale: LocaleCode): string {
 export default function DateDifferenceCalculatorTool() {
   const { locale, t } = useLocale();
   const s = useComponentStrings('date-difference-calculator', STRINGS_EN);
+  const palette = pastelForKey('date-difference-calculator');
   const [mode, setMode] = useState<Mode>('difference');
   const [startDate, setStartDate] = useState('2025-01-15');
   const [endDate, setEndDate] = useState('2025-11-12');
@@ -209,7 +211,7 @@ export default function DateDifferenceCalculatorTool() {
           type="button"
           onClick={() => setMode('difference')}
           className={`rounded-md px-3.5 py-1.5 text-xs sm:text-sm font-medium cursor-pointer ${
-            mode === 'difference' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+            mode === 'difference' ? `${palette.soft} shadow-xs` : 'text-slate-600'
           }`}
         >
           {s.differenceTab}
@@ -218,7 +220,7 @@ export default function DateDifferenceCalculatorTool() {
           type="button"
           onClick={() => setMode('add-subtract')}
           className={`rounded-md px-3.5 py-1.5 text-xs sm:text-sm font-medium cursor-pointer ${
-            mode === 'add-subtract' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+            mode === 'add-subtract' ? `${palette.soft} shadow-xs` : 'text-slate-600'
           }`}
         >
           {s.addSubtractTab}
@@ -286,11 +288,11 @@ export default function DateDifferenceCalculatorTool() {
 
           {diffResult.data && (
             <>
-              <div className="rounded-xl border border-indigo-200 bg-indigo-50/70 p-5">
-                <div className="text-xs font-semibold text-indigo-700 mb-1">
+              <div className={`rounded-xl border border-indigo-200 ${palette.card} p-5`}>
+                <div className={`text-xs font-semibold ${palette.link} mb-1`}>
                   {s.calendarDuration} {diffResult.data.inverted ? s.reversedRange : ''}
                 </div>
-                <div className="text-2xl sm:text-3xl font-bold text-slate-900 tabular-nums">
+                <div className={`text-2xl sm:text-3xl font-bold ${palette.link} tabular-nums`}>
                   {diffResult.data.years} {s.yearsWord}, {diffResult.data.months} {s.monthsWord},{' '}
                   {diffResult.data.days} {s.daysWord}
                 </div>
@@ -303,29 +305,29 @@ export default function DateDifferenceCalculatorTool() {
               </div>
 
               <dl className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-                <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+                <div className={`rounded-lg border border-slate-200 ${PASTEL_PALETTES[0].card} p-4`}>
                   <dt className="text-xs text-slate-500">{s.weeksDays}</dt>
-                  <dd className="mt-1 text-lg font-bold font-mono text-slate-900 tabular-nums">
+                  <dd className={`mt-1 text-lg font-bold font-mono ${PASTEL_PALETTES[0].link} tabular-nums`}>
                     {diffResult.data.weeks.toLocaleString(localeTag(locale))} {s.weeksAbbr}{' '}
                     {diffResult.data.remainderDays}
                     {s.daysAbbr}
                   </dd>
                 </div>
-                <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+                <div className={`rounded-lg border border-slate-200 ${PASTEL_PALETTES[1].card} p-4`}>
                   <dt className="text-xs text-slate-500">{s.weekdays}</dt>
-                  <dd className="mt-1 text-lg font-bold font-mono text-slate-900 tabular-nums">
+                  <dd className={`mt-1 text-lg font-bold font-mono ${PASTEL_PALETTES[1].link} tabular-nums`}>
                     {diffResult.data.weekdays.toLocaleString(localeTag(locale))} {s.daysWord}
                   </dd>
                 </div>
-                <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+                <div className={`rounded-lg border border-slate-200 ${PASTEL_PALETTES[2].card} p-4`}>
                   <dt className="text-xs text-slate-500">{s.weekendDays}</dt>
-                  <dd className="mt-1 text-lg font-bold font-mono text-slate-900 tabular-nums">
+                  <dd className={`mt-1 text-lg font-bold font-mono ${PASTEL_PALETTES[2].link} tabular-nums`}>
                     {diffResult.data.weekends.toLocaleString(localeTag(locale))} {s.daysWord}
                   </dd>
                 </div>
-                <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+                <div className={`rounded-lg border border-slate-200 ${PASTEL_PALETTES[3].card} p-4`}>
                   <dt className="text-xs text-slate-500">{s.totalHours}</dt>
-                  <dd className="mt-1 text-lg font-bold font-mono text-slate-900 tabular-nums">
+                  <dd className={`mt-1 text-lg font-bold font-mono ${PASTEL_PALETTES[3].link} tabular-nums`}>
                     {diffResult.data.totalHours.toLocaleString(localeTag(locale))} {s.hoursAbbr}
                   </dd>
                 </div>
@@ -414,9 +416,9 @@ export default function DateDifferenceCalculatorTool() {
           )}
 
           {offsetResult.data && (
-            <div className="rounded-xl border border-indigo-200 bg-indigo-50/70 p-5">
-              <div className="text-xs font-semibold text-indigo-700 mb-1">{s.resultingDate}</div>
-              <div className="text-2xl font-bold text-slate-900">{offsetResult.data.readable}</div>
+            <div className={`rounded-xl border border-indigo-200 ${palette.card} p-5`}>
+              <div className={`text-xs font-semibold ${palette.link} mb-1`}>{s.resultingDate}</div>
+              <div className={`text-2xl font-bold ${palette.link}`}>{offsetResult.data.readable}</div>
               <div className="mt-1 text-sm font-mono text-slate-600">
                 {s.isoPrefix} {offsetResult.data.iso}
               </div>

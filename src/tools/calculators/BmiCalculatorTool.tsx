@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { PASTEL_PALETTES, pastelForKey } from '../../components/tool/pastel';
 import { useComponentStrings } from '../../locales/componentStrings';
 
 const STRINGS_EN = {
@@ -40,6 +41,7 @@ function classifyBmi(bmi: number, cats: BmiCategories): { category: string; tone
 
 export default function BmiCalculatorTool() {
   const s = useComponentStrings('bmi-calculator', STRINGS_EN);
+  const palette = pastelForKey('bmi-calculator');
   const [unitSystem, setUnitSystem] = useState<'metric' | 'imperial'>('metric');
   const [heightCm, setHeightCm] = useState('175');
   const [weightKg, setWeightKg] = useState('70');
@@ -102,7 +104,7 @@ export default function BmiCalculatorTool() {
           type="button"
           onClick={() => setUnitSystem('metric')}
           className={`rounded-md px-3.5 py-1.5 text-xs sm:text-sm font-medium cursor-pointer ${
-            unitSystem === 'metric' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+            unitSystem === 'metric' ? `${palette.soft} shadow-xs` : 'text-slate-600'
           }`}
         >
           {s.metricTab}
@@ -111,7 +113,7 @@ export default function BmiCalculatorTool() {
           type="button"
           onClick={() => setUnitSystem('imperial')}
           className={`rounded-md px-3.5 py-1.5 text-xs sm:text-sm font-medium cursor-pointer ${
-            unitSystem === 'imperial' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+            unitSystem === 'imperial' ? `${palette.soft} shadow-xs` : 'text-slate-600'
           }`}
         >
           {s.imperialTab}
@@ -206,9 +208,9 @@ export default function BmiCalculatorTool() {
       {result.data && (
         <div className="space-y-4">
           <dl className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="rounded-xl border border-indigo-200 bg-indigo-50/70 p-5">
-              <dt className="text-xs font-medium text-indigo-700">{s.bmiLabel}</dt>
-              <dd className="mt-1 text-3xl font-bold font-mono text-slate-900 tabular-nums">
+            <div className={`rounded-xl border border-indigo-200 ${palette.card} p-5`}>
+              <dt className={`text-xs font-medium ${palette.link}`}>{s.bmiLabel}</dt>
+              <dd className={`mt-1 text-3xl font-bold font-mono ${palette.link} tabular-nums`}>
                 {result.data.bmi.toFixed(1)} <span className="text-sm font-normal">kg/m²</span>
               </dd>
               <dd className={`mt-1 text-sm font-semibold ${result.data.band.tone}`}>
@@ -216,9 +218,9 @@ export default function BmiCalculatorTool() {
               </dd>
             </div>
 
-            <div className="rounded-xl border border-slate-200 bg-slate-50 p-5">
+            <div className={`rounded-xl border border-slate-200 ${PASTEL_PALETTES[1].card} p-5`}>
               <dt className="text-xs font-medium text-slate-500">{s.healthyRange}</dt>
-              <dd className="mt-1 text-xl font-bold font-mono text-slate-900 tabular-nums">
+              <dd className={`mt-1 text-xl font-bold font-mono ${PASTEL_PALETTES[1].link} tabular-nums`}>
                 {unitSystem === 'metric'
                   ? `${result.data.minHealthyKg.toFixed(1)} – ${result.data.maxHealthyKg.toFixed(1)} kg`
                   : `${result.data.minHealthyLbs.toFixed(0)} – ${result.data.maxHealthyLbs.toFixed(0)} lbs`}
