@@ -262,7 +262,7 @@ export const IT_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         title: 'Codifica di una stringa UTF-8',
         input: 'UtilityFlow: UTF-8 ✓',
-        output: 'VXRpbGl0eUh1YjogVVRGLTggeKky',
+        output: 'VXRpbGl0eUZsb3c6IFVURi04IOKckw==',
         explanation:
           'Usa la serializzazione di byte UTF-8 di TextEncoder prima della conversione Base64.',
       },
