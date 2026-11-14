@@ -194,6 +194,17 @@ export interface UiStrings {
     whyTitle: string;
     whyP1: string;
     whyP2: string;
+    /** Fix #14: who runs the project (E-E-A-T). */
+    orgTitle: string;
+    orgP1: string;
+    orgP2: string;
+    /** Fix #12: how tools are built and tested. */
+    howTitle: string;
+    howP1: string;
+    howP2: string;
+    /** Fix #12: who the tools are for. */
+    whoTitle: string;
+    whoP1: string;
     principlesTitle: string;
     principles: WhyChooseItem[];
     categoriesTitle: string;
@@ -207,6 +218,13 @@ export interface UiStrings {
     seoDescription: string;
     title: string;
     intro: string;
+    /** Fix #12: what to write about + what happens next. */
+    aboutTitle: string;
+    aboutP1: string;
+    aboutP2: string;
+    responseTitle: string;
+    responseP1: string;
+    responseP2: string;
     name: string;
     email: string;
     topic: string;
