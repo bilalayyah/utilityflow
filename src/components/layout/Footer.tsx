@@ -10,7 +10,7 @@ export function Footer() {
   const categories = getLocalizedCategories(locale);
 
   return (
-    <footer className="border-t border-slate-200 bg-slate-50 text-slate-600">
+    <footer className="border-t border-indigo-100/70 dark:border-slate-800 bg-[#f6f6fb] dark:bg-[#0b0f17] text-slate-600">
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-12">
           <div className="lg:col-span-4 space-y-3">
@@ -26,7 +26,13 @@ export function Footer() {
                 aria-hidden="true"
                 className="shrink-0"
               >
-                <rect width="32" height="32" rx="7" fill="#2563EB" />
+                <defs>
+                  <linearGradient id="footer-logo-gradient" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stopColor="#4f46e5" />
+                    <stop offset="100%" stopColor="#7c3aed" />
+                  </linearGradient>
+                </defs>
+                <rect width="32" height="32" rx="7" fill="url(#footer-logo-gradient)" />
                 <rect x="7" y="7" width="8" height="8" rx="1.5" fill="#FFFFFF" />
                 <rect x="17" y="7" width="8" height="8" rx="1.5" fill="#93C5FD" />
                 <rect x="7" y="17" width="8" height="8" rx="1.5" fill="#93C5FD" />

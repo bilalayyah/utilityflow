@@ -76,7 +76,7 @@ export function Header() {
   );
 
   return (
-    <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur-sm">
+    <header className="sticky top-0 z-40 border-b border-indigo-100/70 dark:border-slate-800 bg-[#f6f6fb]/90 dark:bg-[#0b0f17]/90 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 sm:gap-8 px-4 sm:px-6 lg:px-8">
         {/* Zone 1: Single-element Brand Wordmark */}
         <Link
@@ -92,7 +92,13 @@ export function Header() {
             aria-hidden="true"
             className="shrink-0"
           >
-            <rect width="32" height="32" rx="7" fill="#2563EB" />
+            <defs>
+              <linearGradient id="header-logo-gradient" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stopColor="#4f46e5" />
+                <stop offset="100%" stopColor="#7c3aed" />
+              </linearGradient>
+            </defs>
+            <rect width="32" height="32" rx="7" fill="url(#header-logo-gradient)" />
             <rect x="7" y="7" width="8" height="8" rx="1.5" fill="#FFFFFF" />
             <rect x="17" y="7" width="8" height="8" rx="1.5" fill="#93C5FD" />
             <rect x="7" y="17" width="8" height="8" rx="1.5" fill="#93C5FD" />
@@ -203,7 +209,7 @@ export function Header() {
 
           <Link
             to={localizeStaticPath('/tools/', locale)}
-            className="hidden md:inline-flex items-center justify-center rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white transition-colors duration-150 hover:bg-indigo-700 whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:ring-offset-2"
+            className="hidden md:inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-indigo-600 to-violet-600 px-4 py-2 text-sm font-semibold text-white transition-colors duration-150 hover:from-indigo-700 hover:to-violet-700 whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:ring-offset-2"
           >
             {t.nav.allTools}
           </Link>
@@ -223,7 +229,7 @@ export function Header() {
 
       {/* Mobile search row (expandable) */}
       {searchOpen && (
-        <div className="lg:hidden border-t border-slate-200 bg-white px-4 py-3">
+        <div className="lg:hidden border-t border-slate-200 bg-[#f6f6fb] dark:bg-[#0b0f17] px-4 py-3">
           <ToolSearchBar placeholder={t.nav.searchPlaceholder} />
         </div>
       )}
@@ -233,7 +239,7 @@ export function Header() {
         <nav
           id="mobile-navigation"
           aria-label="Mobile"
-          className="md:hidden border-t border-slate-200 bg-white px-4 py-4 space-y-2"
+          className="md:hidden border-t border-slate-200 bg-[#f6f6fb] dark:bg-[#0b0f17] px-4 py-4 space-y-2"
         >
           {NAV_ITEMS.filter((item) => !('aiDropdown' in item && item.aiDropdown)).map((item) => (
             <Link
@@ -273,7 +279,7 @@ export function Header() {
             <Link
               to={localizeStaticPath('/tools/', locale)}
               onClick={() => setMobileOpen(false)}
-              className="flex w-full items-center justify-center rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700 min-h-[44px]"
+              className="flex w-full items-center justify-center rounded-lg bg-gradient-to-r from-indigo-600 to-violet-600 px-4 py-2.5 text-sm font-semibold text-white hover:from-indigo-700 hover:to-violet-700 min-h-[44px]"
             >
               {t.nav.allTools}
             </Link>
