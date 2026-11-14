@@ -365,7 +365,7 @@ export const SEO_TOOLS_PART_1: ToolDefinition[] = [
       {
         question: 'Does the SERP Snippet Preview upload my title or URL anywhere?',
         answer:
-          'No. All previewing and measuring happens locally in your browser.',
+          'No. All previewing and measuring happens locally in your browser, so your title, description, and URL never leave your device.',
       },
       {
         question: 'How do I copy the title and meta description after previewing?',

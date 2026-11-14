@@ -858,7 +858,7 @@ export const SEO_TOOLS_PART_2: ToolDefinition[] = [
       title: 'Robots Meta Tag & X-Robots-Tag Builder | UtilityFlow',
       description:
         'Create HTML robots meta tags and X-Robots-Tag headers with noindex, nofollow, max-snippet and max-image-preview — plus Cloudflare _headers output for any path.',
-      primaryKeyword: 'robots meta tag generator',
+      primaryKeyword: 'robots meta tag builder',
       secondaryKeywords: [
         'x-robots-tag header generator',
         'noindex meta tag maker',
