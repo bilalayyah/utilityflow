@@ -144,7 +144,7 @@ export default function UuidGeneratorTool() {
           <button
             type="button"
             onClick={() => regenerate(version, count)}
-            className="inline-flex items-center gap-1.5 rounded-lg bg-indigo-600 px-4 py-2 text-xs sm:text-sm font-semibold text-white hover:bg-indigo-700 transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-indigo-600 to-violet-600 px-4 py-2 text-xs sm:text-sm font-semibold text-white hover:from-indigo-700 hover:to-violet-700 transition-colors cursor-pointer"
           >
             <RefreshCw className="w-3.5 h-3.5" aria-hidden="true" />
             <span>{s.generate}</span>
