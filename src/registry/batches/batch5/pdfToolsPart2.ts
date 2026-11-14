@@ -32,13 +32,13 @@ export const PDF_TOOLS_PART_2: ToolDefinition[] = [
         'delete pages from pdf',
         'rearrange pdf online',
         'remove blank pdf pages',
-        'reorder pdf pages online',
+        'rearrange pdf pages online',
       ],
       longTailKeywords: [
         'visually reorder and remove pdf pages without server upload',
         'duplicate a page inside existing pdf in browser',
         'reorganize pdf page sequence free client side',
-        'reorder pdf pages online free in browser',
+        'rearrange pdf pages online free in browser',
       ],
       schemaApplicationCategory: 'UtilitiesApplication',
     },
@@ -309,7 +309,7 @@ export const PDF_TOOLS_PART_2: ToolDefinition[] = [
       {
         question: 'Does the watermark work on both portrait and landscape pages?',
         answer:
-          'Yes. Coordinates calculate dynamically from each individual page’s width and height.',
+          'Yes. Coordinates calculate dynamically from each individual page’s width and height, so the watermark lands in the same relative spot on every page.',
       },
       {
         question: 'Which characters are supported in the watermark string?',
@@ -573,7 +573,7 @@ export const PDF_TOOLS_PART_2: ToolDefinition[] = [
       {
         question: 'Can I use Roman numerals for page numbers?',
         answer:
-          'No. The tool numbers pages with standard Arabic numerals only.',
+          'No. The tool numbers pages with standard Arabic numerals only, so formats like Roman numerals are not available as a numbering style.',
       },
       {
         question: 'Can I add page numbers to a scanned PDF?',
@@ -1006,7 +1006,7 @@ export const PDF_TOOLS_PART_2: ToolDefinition[] = [
       {
         question: 'Does extracting text change my original PDF?',
         answer:
-          'No. Extraction is read-only; your original PDF file is never modified.',
+          'No. Extraction is read-only; your original PDF file is never modified, so you can safely extract text from any copy you open.',
       },
       {
         question: 'Can the PDF Text Extractor pull text from forms and annotations?',

@@ -365,12 +365,12 @@ export const PDF_TOOLS_PART_1: ToolDefinition[] = [
       {
         question: 'Can I split a scanned PDF?',
         answer:
-          'Yes, scanned pages extract exactly like text pages.',
+          'Yes, scanned pages extract exactly like text pages, because splitting copies whole pages without reading or changing their content.',
       },
       {
         question: 'Will the extracted PDF keep its original quality?',
         answer:
-          'Yes, no re-compression or rasterizing happens during extraction.',
+          'Yes, no re-compression or rasterizing happens during extraction, so each extracted page keeps the exact quality of the original PDF.',
       },
       {
         question: 'How do I burst a PDF into single-page files?',
@@ -534,7 +534,7 @@ export const PDF_TOOLS_PART_1: ToolDefinition[] = [
       {
         question: 'Are image thumbnails uploaded anywhere?',
         answer:
-          'No. Previews use temporary local Object URLs inside your browser tab.',
+          'No. Previews use temporary local Object URLs inside your browser tab, and those preview links disappear when you close the tab.',
       },
       {
         question: 'Is the Images to PDF tool free to use?',
@@ -544,12 +544,12 @@ export const PDF_TOOLS_PART_1: ToolDefinition[] = [
       {
         question: 'Which image formats can I convert to PDF?',
         answer:
-          'JPG, PNG, and WebP are supported.',
+          'JPG, PNG, and WebP are supported, so you can convert photos, screenshots, and web images into a single PDF.',
       },
       {
         question: 'Can I convert a single image to PDF?',
         answer:
-          'Yes, one image produces a one-page PDF.',
+          'Yes, one image produces a one-page PDF, which works well for sharing a single photo or scanned document as a file.',
       },
       {
         question: 'Can I reorder images before converting them to PDF?',
@@ -599,17 +599,17 @@ export const PDF_TOOLS_PART_1: ToolDefinition[] = [
       {
         question: 'Can I mix JPG, PNG, and WebP in one PDF?',
         answer:
-          'Yes, you can combine all three formats in a single document.',
+          'Yes, you can combine all three formats in a single document, and the pages stay in the order you arranged them.',
       },
       {
         question: 'Will the PDF pages be in the same order as my images?',
         answer:
-          'Yes, pages follow the order shown in the image list.',
+          'Yes, pages follow the order shown in the image list, so rearrange your images first if you want a different page sequence.',
       },
       {
         question: 'Can I set a custom filename for the PDF?',
         answer:
-          'Yes, enter your preferred filename before converting.',
+          'Yes, enter your preferred filename before converting, and the downloaded PDF will use that name instead of the default one.',
       },
       {
         question: 'Does the tool keep image transparency?',
@@ -741,7 +741,7 @@ export const PDF_TOOLS_PART_1: ToolDefinition[] = [
       {
         question: 'Does it work on password-protected PDFs?',
         answer:
-          'Encrypted PDFs must be unlocked before rendering locally.',
+          'Encrypted PDFs must be unlocked before rendering locally, because the tool cannot read pages from a file that is still locked.',
       },
       {
         question: 'Is the PDF to Images tool free to use?',
@@ -756,7 +756,7 @@ export const PDF_TOOLS_PART_1: ToolDefinition[] = [
       {
         question: 'Can I export only one page as an image?',
         answer:
-          'Yes, enter that page number in the page range field.',
+          'Yes, enter that page number in the page range field, and only that page will be rendered and downloaded as an image.',
       },
       {
         question: 'Can I export all pages of a PDF at once?',
@@ -821,7 +821,7 @@ export const PDF_TOOLS_PART_1: ToolDefinition[] = [
       {
         question: 'My rendered image looks blurry — what should I do?',
         answer:
-          'Re-render at 2.0× scale and choose PNG for text-heavy pages.',
+          'Re-render at 2.0× scale and choose PNG for text-heavy pages, since higher resolution keeps small text sharp instead of blurry.',
       },
       {
         question: 'Can I use the exported images commercially?',
@@ -953,7 +953,7 @@ export const PDF_TOOLS_PART_1: ToolDefinition[] = [
       {
         question: 'Is the PDF Page Rotator free to use?',
         answer:
-          'Yes, it is free with no watermarks or limits.',
+          'Yes, it is free with no watermarks or limits, and you can rotate as many PDFs as you need without creating an account.',
       },
       {
         question: 'Can I rotate all pages of a PDF at once?',
@@ -968,7 +968,7 @@ export const PDF_TOOLS_PART_1: ToolDefinition[] = [
       {
         question: 'What angles can I rotate PDF pages by?',
         answer:
-          '90° clockwise, 90° counter-clockwise, and 180°.',
+          'You can rotate 90° clockwise, 90° counter-clockwise, and 180°, so any sideways or upside-down page can be fixed in one click.',
       },
       {
         question: 'Can I rotate a PDF page by a custom angle like 45°?',
@@ -988,7 +988,7 @@ export const PDF_TOOLS_PART_1: ToolDefinition[] = [
       {
         question: 'Can I rotate a password-protected PDF?',
         answer:
-          'No, encrypted PDFs must be unlocked first.',
+          'No, encrypted PDFs must be unlocked first, because the tool cannot change pages in a file that is still locked.',
       },
       {
         question: 'Does the PDF Page Rotator upload my file?',
@@ -998,7 +998,7 @@ export const PDF_TOOLS_PART_1: ToolDefinition[] = [
       {
         question: 'Can I rotate pages in a scanned PDF?',
         answer:
-          'Yes, scanned pages rotate just like text pages.',
+          'Yes, scanned pages rotate just like text pages, because rotation turns the whole page image without reading its content.',
       },
       {
         question: 'Will rotating fix a PDF that opens sideways in every viewer?',
@@ -1023,7 +1023,7 @@ export const PDF_TOOLS_PART_1: ToolDefinition[] = [
       {
         question: 'Can I use the PDF Page Rotator on my phone?',
         answer:
-          'Yes, it works in modern mobile browsers.',
+          'Yes, it works in modern mobile browsers, so you can open a PDF on your phone and rotate its pages there.',
       },
       {
         question: 'Will the rotated PDF print correctly?',
