@@ -109,6 +109,7 @@ export interface UiStrings {
     why: { title: string; description: string; items: WhyChooseItem[] };
     faq: { title: string; description: string };
     faqs: ToolFAQ[];
+    trustLine: string;
   };
   directory: {
     seoTitle: string;
