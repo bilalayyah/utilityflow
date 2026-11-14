@@ -193,6 +193,7 @@ export const koStrings: UiStrings = {
           '네, 라이트 모드와 다크 모드를 포함한 모든 레이아웃, 탐색 컨트롤, 대화형 작업 공간은 접근 가능한 터치 대상과 반응형 그리드로 모바일 우선 설계되었습니다.',
       },
     ],
+    trustLine: '모든 도구는 무료 • 가입이 필요 없습니다 • 브라우저에서 바로 사용 가능',
   },
   directory: {
     seoTitle: '모든 온라인 유틸리티 도구 디렉터리 | UtilityFlow',
