@@ -1,8 +1,11 @@
 import { Download, RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
+
+const palette = pastelForKey('json-formatter');
 
 const STRINGS_EN = {
     indent2: '2 Spaces',
@@ -155,7 +158,7 @@ export default function JsonFormatterTool() {
                 type="button"
                 onClick={() => setIndent(opt.id)}
                 className={`rounded-md px-3 py-1.5 text-xs sm:text-sm font-medium cursor-pointer transition-colors ${
-                  indent === opt.id ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+                  indent === opt.id ? `${palette.soft} shadow-xs` : 'text-slate-600'
                 }`}
               >
                 {opt.label}

@@ -2,6 +2,10 @@ import { RotateCcw, Sparkles } from 'lucide-react';
 import { Fragment, useMemo, useState } from 'react';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings, useComponentTables } from '../../locales/componentStrings';
+import { PASTEL_PALETTES, pastelForKey } from '../../components/tool/pastel';
+
+const palette = pastelForKey('regex-tester');
+const paletteAlt = PASTEL_PALETTES[(PASTEL_PALETTES.indexOf(palette) + 1) % PASTEL_PALETTES.length];
 
 const STRINGS_EN = {
     patternLabel: 'Regular Expression Pattern',
@@ -239,7 +243,7 @@ export default function RegexTesterTool() {
 
       {/* Match Details & Replacement Preview */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <div className="rounded-xl border border-slate-200 bg-white p-4">
+        <div className={`rounded-xl border border-slate-200 ${palette.card} p-4`}>
           <h3 className="text-sm font-semibold text-slate-900 mb-2">{s.capturedTitle}</h3>
           {evaluation.matches.length > 0 ? (
             <div className="max-h-48 overflow-y-auto divide-y divide-slate-100 font-mono text-xs">
@@ -264,7 +268,7 @@ export default function RegexTesterTool() {
           )}
         </div>
 
-        <div className="rounded-xl border border-slate-200 bg-white p-4 space-y-2.5">
+        <div className={`rounded-xl border border-slate-200 ${paletteAlt.card} p-4 space-y-2.5`}>
           <label htmlFor="regex-replace" className="block text-sm font-semibold text-slate-900">
             {s.replaceLabel}
           </label>

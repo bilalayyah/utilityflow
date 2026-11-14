@@ -1,6 +1,7 @@
 import { ArrowLeftRight, RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings, useComponentTables } from '../../locales/componentStrings';
 
@@ -22,6 +23,8 @@ const STRINGS_EN = {
     invalidLength: 'Invalid Base64 string length.',
     invalidInput: 'Invalid Base64 input or malformed UTF-8 byte sequence.',
   };
+
+const palette = pastelForKey('base64-encoder-decoder');
 
 const SAMPLE_PLAIN_EN = 'UtilityFlow: UTF-8 safe Base64 encoding ✓' as const;
 
@@ -99,7 +102,7 @@ export default function Base64Tool() {
               type="button"
               onClick={() => setMode('encode')}
               className={`rounded-md px-3.5 py-1.5 text-xs sm:text-sm font-medium cursor-pointer ${
-                mode === 'encode' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+                mode === 'encode' ? `${palette.soft} shadow-xs` : 'text-slate-600'
               }`}
             >
               {s.encodeTab}
@@ -108,7 +111,7 @@ export default function Base64Tool() {
               type="button"
               onClick={() => setMode('decode')}
               className={`rounded-md px-3.5 py-1.5 text-xs sm:text-sm font-medium cursor-pointer ${
-                mode === 'decode' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+                mode === 'decode' ? `${palette.soft} shadow-xs` : 'text-slate-600'
               }`}
             >
               {s.decodeTab}

@@ -1,6 +1,7 @@
 import { Download, RefreshCw } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
 
@@ -16,6 +17,8 @@ const STRINGS_EN = {
     generatedLabel: 'Generated UUIDs',
     copyAll: 'Copy all',
   };
+
+const palette = pastelForKey('uuid-generator');
 
 function generateUuidV4(): string {
   if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
@@ -100,7 +103,7 @@ export default function UuidGeneratorTool() {
                   regenerate('v4', count);
                 }}
                 className={`rounded-md px-3 py-1.5 text-xs sm:text-sm font-medium cursor-pointer ${
-                  version === 'v4' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+                  version === 'v4' ? `${palette.soft} shadow-xs` : 'text-slate-600'
                 }`}
               >
                 {s.v4}
@@ -112,7 +115,7 @@ export default function UuidGeneratorTool() {
                   regenerate('v7', count);
                 }}
                 className={`rounded-md px-3 py-1.5 text-xs sm:text-sm font-medium cursor-pointer ${
-                  version === 'v7' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+                  version === 'v7' ? `${palette.soft} shadow-xs` : 'text-slate-600'
                 }`}
               >
                 {s.v7}

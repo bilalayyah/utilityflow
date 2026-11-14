@@ -1,8 +1,12 @@
 import { Info, RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { PASTEL_PALETTES, pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
+
+const palette = pastelForKey('jwt-decoder');
+const paletteAlt = PASTEL_PALETTES[(PASTEL_PALETTES.indexOf(palette) + 1) % PASTEL_PALETTES.length];
 
 const STRINGS_EN = {
     infoNote:
@@ -219,11 +223,11 @@ export default function JwtDecoderTool() {
           </div>
 
           {timeClaims.length > 0 && (
-            <div className="rounded-xl border border-slate-200 bg-white p-4">
+            <div className={`rounded-xl border border-slate-200 ${palette.card} p-4`}>
               <h3 className="text-sm font-semibold text-slate-900 mb-2.5">{s.timestampTitle}</h3>
               <dl className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
                 {timeClaims.map((claim) => (
-                  <div key={claim.key} className="rounded-lg bg-slate-50 border border-slate-200 p-3">
+                  <div key={claim.key} className={`rounded-lg ${PASTEL_PALETTES[timeClaims.indexOf(claim) % PASTEL_PALETTES.length].card} border border-slate-200 p-3`}>
                     <dt className="font-semibold text-slate-700">{claim.label}</dt>
                     <dd className="mt-1 font-mono text-slate-900 tabular-nums">{claim.formatted}</dd>
                     {claim.note && (
@@ -241,7 +245,7 @@ export default function JwtDecoderTool() {
             </div>
           )}
 
-          <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+          <div className={`rounded-xl border border-slate-200 ${paletteAlt.card} p-4`}>
             <span className="block text-xs font-semibold text-slate-700 mb-1">
               {s.signatureLabel}
             </span>

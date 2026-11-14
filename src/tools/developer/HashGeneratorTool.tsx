@@ -1,6 +1,7 @@
 import { RotateCcw, Sparkles, Upload } from 'lucide-react';
 import { useEffect, useState, type ChangeEvent } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { PASTEL_PALETTES, pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
 
@@ -16,6 +17,8 @@ const STRINGS_EN = {
     cryptoUnavailable: 'Web Crypto hashing is unavailable.',
     sampleText: 'Hello, UtilityFlow!',
   };
+
+const palette = pastelForKey('hash-generator');
 
 type DigestAlgorithm = 'SHA-1' | 'SHA-256' | 'SHA-384' | 'SHA-512';
 
@@ -113,7 +116,7 @@ export default function HashGeneratorTool() {
               type="button"
               onClick={() => setInputMode('text')}
               className={`rounded-md px-3.5 py-1.5 text-xs sm:text-sm font-medium cursor-pointer ${
-                inputMode === 'text' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+                inputMode === 'text' ? `${palette.soft} shadow-xs` : 'text-slate-600'
               }`}
             >
               {s.textInputTab}
@@ -122,7 +125,7 @@ export default function HashGeneratorTool() {
               type="button"
               onClick={() => setInputMode('file')}
               className={`rounded-md px-3.5 py-1.5 text-xs sm:text-sm font-medium cursor-pointer ${
-                inputMode === 'file' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+                inputMode === 'file' ? `${palette.soft} shadow-xs` : 'text-slate-600'
               }`}
             >
               {s.fileTab}
@@ -134,7 +137,7 @@ export default function HashGeneratorTool() {
               type="button"
               onClick={() => setEncoding('hex')}
               className={`rounded-md px-3 py-1.5 text-xs font-medium cursor-pointer ${
-                encoding === 'hex' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+                encoding === 'hex' ? `${palette.soft} shadow-xs` : 'text-slate-600'
               }`}
             >
               Hex
@@ -143,7 +146,7 @@ export default function HashGeneratorTool() {
               type="button"
               onClick={() => setEncoding('base64')}
               className={`rounded-md px-3 py-1.5 text-xs font-medium cursor-pointer ${
-                encoding === 'base64' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+                encoding === 'base64' ? `${palette.soft} shadow-xs` : 'text-slate-600'
               }`}
             >
               Base64
@@ -201,7 +204,7 @@ export default function HashGeneratorTool() {
           />
         </div>
       ) : (
-        <div className="rounded-2xl border border-dashed border-indigo-300 bg-slate-50 p-6 text-center">
+        <div className={`rounded-2xl border border-dashed border-indigo-300 ${palette.card} p-6 text-center`}>
           <Upload className="w-6 h-6 text-indigo-600 mx-auto mb-2" aria-hidden="true" />
           <label
             htmlFor="hash-file-input"
@@ -231,7 +234,7 @@ export default function HashGeneratorTool() {
         {ALGORITHMS.map((alg) => (
           <div
             key={alg}
-            className="rounded-xl border border-slate-200 bg-slate-50/70 p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+            className={`rounded-xl border border-slate-200 ${PASTEL_PALETTES[ALGORITHMS.indexOf(alg) % PASTEL_PALETTES.length].card} p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3`}
           >
             <div className="min-w-0 flex-1">
               <div className="text-xs font-semibold text-slate-600 mb-1">{alg}</div>

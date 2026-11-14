@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { PASTEL_PALETTES, pastelForKey } from '../../components/tool/pastel';
 import type { LocaleCode } from '../../locales/config';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings, useComponentTables } from '../../locales/componentStrings';
@@ -32,6 +33,9 @@ const STRINGS_EN = {
     dayBoth: 'on day {day} or {dow}',
     monthIn: ' in {months}',
   };
+
+const palette = pastelForKey('cron-expression-parser');
+const paletteAlt = PASTEL_PALETTES[(PASTEL_PALETTES.indexOf(palette) + 1) % PASTEL_PALETTES.length];
 
 const PRESETS_EN = [
     { label: 'Every 5 minutes', expr: '*/5 * * * *' },
@@ -341,13 +345,13 @@ export default function CronExpressionParserTool() {
         </div>
       ) : (
         <>
-          <div className="rounded-xl border border-indigo-200 bg-indigo-50/70 p-4">
+          <div className={`rounded-xl border border-slate-200 ${palette.card} p-4`}>
             <div className="text-xs font-semibold text-indigo-700 mb-1">{s.humanTitle}</div>
             <p className="text-base sm:text-lg font-semibold text-slate-900">{analysis.summary}</p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <div className="rounded-xl border border-slate-200 bg-white p-4">
+            <div className={`rounded-xl border border-slate-200 ${palette.card} p-4`}>
               <h3 className="text-sm font-semibold text-slate-900 mb-3">{s.breakdownTitle}</h3>
               <dl className="divide-y divide-slate-100 text-xs sm:text-sm">
                 {analysis.breakdown.map((item) => (
@@ -362,7 +366,7 @@ export default function CronExpressionParserTool() {
               </dl>
             </div>
 
-            <div className="rounded-xl border border-slate-200 bg-white p-4">
+            <div className={`rounded-xl border border-slate-200 ${paletteAlt.card} p-4`}>
               <h3 className="text-sm font-semibold text-slate-900 mb-3">
                 {s.nextRuns.replace('{count}', String(analysis.nextRuns.length))}
               </h3>

@@ -1,8 +1,11 @@
 import { Download, RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
+
+const palette = pastelForKey('json-csv-converter');
 
 const STRINGS_EN = {
     delimiterLabel: 'Delimiter:',
@@ -196,7 +199,7 @@ export default function JsonCsvConverterTool() {
               type="button"
               onClick={() => setDirection('json-to-csv')}
               className={`rounded-md px-3.5 py-1.5 text-xs sm:text-sm font-medium cursor-pointer ${
-                direction === 'json-to-csv' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+                direction === 'json-to-csv' ? `${palette.soft} shadow-xs` : 'text-slate-600'
               }`}
             >
               JSON → CSV
@@ -205,7 +208,7 @@ export default function JsonCsvConverterTool() {
               type="button"
               onClick={() => setDirection('csv-to-json')}
               className={`rounded-md px-3.5 py-1.5 text-xs sm:text-sm font-medium cursor-pointer ${
-                direction === 'csv-to-json' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+                direction === 'csv-to-json' ? `${palette.soft} shadow-xs` : 'text-slate-600'
               }`}
             >
               CSV → JSON

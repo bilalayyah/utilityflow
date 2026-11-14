@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { PASTEL_PALETTES, pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
 
@@ -21,6 +22,10 @@ const STRINGS_EN = {
     pass: 'Pass',
     fail: 'Fail',
   };
+
+const palette = pastelForKey('color-converter');
+const paletteAlt = PASTEL_PALETTES[(PASTEL_PALETTES.indexOf(palette) + 1) % PASTEL_PALETTES.length];
+const paletteAlt2 = PASTEL_PALETTES[(PASTEL_PALETTES.indexOf(palette) + 2) % PASTEL_PALETTES.length];
 
 interface RGB {
   r: number;
@@ -210,7 +215,7 @@ export default function ColorConverterTool() {
 
         {/* HEX / RGB / HSL Controls */}
         <div className="md:col-span-8 space-y-4">
-          <div className="rounded-xl border border-slate-200 bg-slate-50/70 p-4">
+          <div className={`rounded-xl border border-slate-200 ${palette.card} p-4`}>
             <div className="flex items-center justify-between gap-2 mb-2">
               <label htmlFor="color-hex" className="text-xs font-semibold text-slate-700">
                 HEX
@@ -226,7 +231,7 @@ export default function ColorConverterTool() {
             />
           </div>
 
-          <div className="rounded-xl border border-slate-200 bg-slate-50/70 p-4">
+          <div className={`rounded-xl border border-slate-200 ${paletteAlt.card} p-4`}>
             <div className="flex items-center justify-between gap-2 mb-2">
               <span className="text-xs font-semibold text-slate-700">RGB ({rgbCss})</span>
               <CopyButton text={rgbCss} label={s.copyRgb} copiedLabel={t.common.copied} />
@@ -248,7 +253,7 @@ export default function ColorConverterTool() {
             </div>
           </div>
 
-          <div className="rounded-xl border border-slate-200 bg-slate-50/70 p-4">
+          <div className={`rounded-xl border border-slate-200 ${paletteAlt2.card} p-4`}>
             <div className="flex items-center justify-between gap-2 mb-2">
               <span className="text-xs font-semibold text-slate-700">HSL ({hslCss})</span>
               <CopyButton text={hslCss} label={s.copyHsl} copiedLabel={t.common.copied} />
@@ -293,7 +298,7 @@ export default function ColorConverterTool() {
       </div>
 
       {/* WCAG Contrast Checker */}
-      <div className="rounded-xl border border-slate-200 bg-white p-5 space-y-4">
+      <div className={`rounded-xl border border-slate-200 ${palette.card} p-5 space-y-4`}>
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
             <h3 className="text-sm font-semibold text-slate-900">{s.contrastTitle}</h3>
@@ -328,19 +333,19 @@ export default function ColorConverterTool() {
         </div>
 
         <dl className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-          <div className="rounded-lg border border-slate-200 bg-slate-50 p-3 flex justify-between">
+          <div className={`rounded-lg border border-slate-200 ${paletteAlt.card} p-3 flex justify-between`}>
             <dt className="text-slate-600">{s.aaNormal}</dt>
             <dd className={`font-semibold ${ratio >= 4.5 ? 'text-emerald-700' : 'text-red-700'}`}>
               {ratio >= 4.5 ? s.pass : s.fail}
             </dd>
           </div>
-          <div className="rounded-lg border border-slate-200 bg-slate-50 p-3 flex justify-between">
+          <div className={`rounded-lg border border-slate-200 ${paletteAlt2.card} p-3 flex justify-between`}>
             <dt className="text-slate-600">{s.aaaNormal}</dt>
             <dd className={`font-semibold ${ratio >= 7.0 ? 'text-emerald-700' : 'text-red-700'}`}>
               {ratio >= 7.0 ? s.pass : s.fail}
             </dd>
           </div>
-          <div className="rounded-lg border border-slate-200 bg-slate-50 p-3 flex justify-between">
+          <div className={`rounded-lg border border-slate-200 ${palette.card} p-3 flex justify-between`}>
             <dt className="text-slate-600">{s.aaLarge}</dt>
             <dd className={`font-semibold ${ratio >= 3.0 ? 'text-emerald-700' : 'text-red-700'}`}>
               {ratio >= 3.0 ? s.pass : s.fail}

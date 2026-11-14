@@ -1,8 +1,13 @@
 import { useEffect, useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { PASTEL_PALETTES, pastelForKey } from '../../components/tool/pastel';
 import type { LocaleCode } from '../../locales/config';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
+
+const palette = pastelForKey('unix-timestamp-converter');
+const paletteAlt = PASTEL_PALETTES[(PASTEL_PALETTES.indexOf(palette) + 1) % PASTEL_PALETTES.length];
+const paletteAlt2 = PASTEL_PALETTES[(PASTEL_PALETTES.indexOf(palette) + 2) % PASTEL_PALETTES.length];
 
 const STRINGS_EN = {
     currentLabel: 'Current Unix Timestamp (Seconds)',
@@ -155,10 +160,10 @@ export default function UnixTimestampConverterTool() {
   return (
     <div className="space-y-6">
       {/* Live Current Epoch Banner */}
-      <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 flex flex-wrap items-center justify-between gap-4">
+      <div className={`rounded-xl border border-slate-200 ${palette.card} p-4 flex flex-wrap items-center justify-between gap-4`}>
         <div>
           <div className="text-xs font-medium text-slate-500">{s.currentLabel}</div>
-          <div className="mt-1 text-2xl font-bold font-mono text-indigo-600 tabular-nums">
+          <div className={`mt-1 text-2xl font-bold font-mono ${palette.link} tabular-nums`}>
             {currentSec}
           </div>
         </div>
@@ -175,7 +180,7 @@ export default function UnixTimestampConverterTool() {
       </div>
 
       {/* Converter 1: Timestamp -> Date */}
-      <div className="rounded-xl border border-slate-200 bg-white p-5 space-y-4">
+      <div className={`rounded-xl border border-slate-200 ${palette.card} p-5 space-y-4`}>
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div className="flex-1 min-w-[220px]">
             <label htmlFor="epoch-in" className="block text-sm font-semibold text-slate-900 mb-1.5">
@@ -198,7 +203,7 @@ export default function UnixTimestampConverterTool() {
                 type="button"
                 onClick={() => setUnit(u)}
                 className={`rounded-md px-3 py-1.5 text-xs font-medium capitalize cursor-pointer ${
-                  unit === u ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+                  unit === u ? `${palette.soft} shadow-xs` : 'text-slate-600'
                 }`}
               >
                 {unitLabels[u]}
@@ -215,25 +220,25 @@ export default function UnixTimestampConverterTool() {
 
         {parsedFromEpoch.date && (
           <dl className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm">
-            <div className="rounded-lg bg-slate-50 border border-slate-200 p-3">
+            <div className={`rounded-lg ${paletteAlt.card} border border-slate-200 p-3`}>
               <dt className="text-slate-500">{s.isoLabel}</dt>
               <dd className="mt-1 font-mono text-slate-900 break-all tabular-nums">
                 {parsedFromEpoch.date.toISOString()}
               </dd>
             </div>
-            <div className="rounded-lg bg-slate-50 border border-slate-200 p-3">
+            <div className={`rounded-lg ${paletteAlt2.card} border border-slate-200 p-3`}>
               <dt className="text-slate-500">{s.localLabel}</dt>
               <dd className="mt-1 font-mono text-slate-900 break-all tabular-nums">
                 {parsedFromEpoch.date.toLocaleString(locale)}
               </dd>
             </div>
-            <div className="rounded-lg bg-slate-50 border border-slate-200 p-3">
+            <div className={`rounded-lg ${palette.card} border border-slate-200 p-3`}>
               <dt className="text-slate-500">{s.rfcLabel}</dt>
               <dd className="mt-1 font-mono text-slate-900 break-all tabular-nums">
                 {parsedFromEpoch.date.toUTCString()}
               </dd>
             </div>
-            <div className="rounded-lg bg-slate-50 border border-slate-200 p-3">
+            <div className={`rounded-lg ${paletteAlt.card} border border-slate-200 p-3`}>
               <dt className="text-slate-500">{s.relativeLabel} ({unitLabels[parsedFromEpoch.detected as 'seconds' | 'milliseconds']})</dt>
               <dd className="mt-1 font-mono text-slate-900 tabular-nums">
                 {formatRelative(parsedFromEpoch.ms, nowMs, locale)}
@@ -244,7 +249,7 @@ export default function UnixTimestampConverterTool() {
       </div>
 
       {/* Converter 2: Date -> Timestamp */}
-      <div className="rounded-xl border border-slate-200 bg-white p-5 space-y-4">
+      <div className={`rounded-xl border border-slate-200 ${paletteAlt.card} p-5 space-y-4`}>
         <div>
           <label htmlFor="date-in" className="block text-sm font-semibold text-slate-900 mb-1.5">
             {s.converter2Label}
@@ -261,7 +266,7 @@ export default function UnixTimestampConverterTool() {
 
         {parsedFromDate && (
           <dl className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs sm:text-sm">
-            <div className="rounded-lg bg-slate-50 border border-slate-200 p-3 flex items-center justify-between gap-2">
+            <div className={`rounded-lg ${paletteAlt2.card} border border-slate-200 p-3 flex items-center justify-between gap-2`}>
               <div>
                 <dt className="text-slate-500">{s.secondsLabel}</dt>
                 <dd className="mt-0.5 font-mono font-semibold text-slate-900 tabular-nums">
@@ -270,7 +275,7 @@ export default function UnixTimestampConverterTool() {
               </div>
               <CopyButton text={String(parsedFromDate.seconds)} label={t.common.copy} copiedLabel={t.common.copied} />
             </div>
-            <div className="rounded-lg bg-slate-50 border border-slate-200 p-3 flex items-center justify-between gap-2">
+            <div className={`rounded-lg ${palette.card} border border-slate-200 p-3 flex items-center justify-between gap-2`}>
               <div>
                 <dt className="text-slate-500">{s.millisecondsLabel}</dt>
                 <dd className="mt-0.5 font-mono font-semibold text-slate-900 tabular-nums">
@@ -279,7 +284,7 @@ export default function UnixTimestampConverterTool() {
               </div>
               <CopyButton text={String(parsedFromDate.milliseconds)} label={t.common.copy} copiedLabel={t.common.copied} />
             </div>
-            <div className="rounded-lg bg-slate-50 border border-slate-200 p-3">
+            <div className={`rounded-lg ${paletteAlt.card} border border-slate-200 p-3`}>
               <dt className="text-slate-500">{s.isoLabel2}</dt>
               <dd className="mt-0.5 font-mono text-slate-900 break-all tabular-nums">
                 {parsedFromDate.iso}

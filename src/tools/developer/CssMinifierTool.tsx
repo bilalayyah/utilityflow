@@ -1,6 +1,7 @@
 import { RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
 
@@ -15,6 +16,8 @@ const STRINGS_EN = {
     outputPlaceholder: 'Processed CSS appears here...',
     copyCss: 'Copy CSS',
   };
+
+const palette = pastelForKey('css-minifier');
 
 const SAMPLE_CSS = `/* Primary card surface */
 .utility-card {
@@ -158,7 +161,7 @@ export default function CssMinifierTool() {
             type="button"
             onClick={() => setMode('minify')}
             className={`rounded-md px-3.5 py-1.5 text-xs sm:text-sm font-medium cursor-pointer ${
-              mode === 'minify' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+              mode === 'minify' ? `${palette.soft} shadow-xs` : 'text-slate-600'
             }`}
           >
             {s.minifyTab}
@@ -167,7 +170,7 @@ export default function CssMinifierTool() {
             type="button"
             onClick={() => setMode('beautify')}
             className={`rounded-md px-3.5 py-1.5 text-xs sm:text-sm font-medium cursor-pointer ${
-              mode === 'beautify' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+              mode === 'beautify' ? `${palette.soft} shadow-xs` : 'text-slate-600'
             }`}
           >
             {s.beautifyTab}

@@ -1,8 +1,11 @@
 import { RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
+
+const palette = pastelForKey('sql-formatter');
 
 const STRINGS_EN = {
     beautify: 'Beautify',
@@ -310,7 +313,7 @@ export default function SqlFormatterTool() {
               type="button"
               onClick={() => setMode('beautify')}
               className={`rounded-md px-3.5 py-1.5 text-xs sm:text-sm font-medium cursor-pointer ${
-                mode === 'beautify' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+                mode === 'beautify' ? `${palette.soft} shadow-xs` : 'text-slate-600'
               }`}
             >
               {s.beautify}
@@ -319,7 +322,7 @@ export default function SqlFormatterTool() {
               type="button"
               onClick={() => setMode('minify')}
               className={`rounded-md px-3.5 py-1.5 text-xs sm:text-sm font-medium cursor-pointer ${
-                mode === 'minify' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+                mode === 'minify' ? `${palette.soft} shadow-xs` : 'text-slate-600'
               }`}
             >
               {s.minify}
@@ -331,7 +334,7 @@ export default function SqlFormatterTool() {
               type="button"
               onClick={() => setKeywordCase('upper')}
               className={`rounded-md px-3 py-1.5 text-xs font-medium cursor-pointer ${
-                keywordCase === 'upper' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+                keywordCase === 'upper' ? `${palette.soft} shadow-xs` : 'text-slate-600'
               }`}
             >
               {s.uppercaseKw}
@@ -340,7 +343,7 @@ export default function SqlFormatterTool() {
               type="button"
               onClick={() => setKeywordCase('lower')}
               className={`rounded-md px-3 py-1.5 text-xs font-medium cursor-pointer ${
-                keywordCase === 'lower' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+                keywordCase === 'lower' ? `${palette.soft} shadow-xs` : 'text-slate-600'
               }`}
             >
               {s.lowercaseKw}

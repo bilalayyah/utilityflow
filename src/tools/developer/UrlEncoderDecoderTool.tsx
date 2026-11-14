@@ -1,8 +1,13 @@
 import { ArrowLeftRight, RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { PASTEL_PALETTES, pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
+
+const palette = pastelForKey('url-encoder-decoder');
+const paletteAlt = PASTEL_PALETTES[(PASTEL_PALETTES.indexOf(palette) + 1) % PASTEL_PALETTES.length];
+const paletteAlt2 = PASTEL_PALETTES[(PASTEL_PALETTES.indexOf(palette) + 2) % PASTEL_PALETTES.length];
 
 const STRINGS_EN = {
     encode: 'Encode',
@@ -81,7 +86,7 @@ export default function UrlEncoderDecoderTool() {
               type="button"
               onClick={() => setMode('encode')}
               className={`rounded-md px-3.5 py-1.5 text-xs sm:text-sm font-medium cursor-pointer ${
-                mode === 'encode' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+                mode === 'encode' ? `${palette.soft} shadow-xs` : 'text-slate-600'
               }`}
             >
               {s.encode}
@@ -90,7 +95,7 @@ export default function UrlEncoderDecoderTool() {
               type="button"
               onClick={() => setMode('decode')}
               className={`rounded-md px-3.5 py-1.5 text-xs sm:text-sm font-medium cursor-pointer ${
-                mode === 'decode' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+                mode === 'decode' ? `${palette.soft} shadow-xs` : 'text-slate-600'
               }`}
             >
               {s.decode}
@@ -102,7 +107,7 @@ export default function UrlEncoderDecoderTool() {
               type="button"
               onClick={() => setScope('component')}
               className={`rounded-md px-3 py-1.5 text-xs font-medium cursor-pointer ${
-                scope === 'component' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+                scope === 'component' ? `${palette.soft} shadow-xs` : 'text-slate-600'
               }`}
             >
               encodeURIComponent
@@ -111,7 +116,7 @@ export default function UrlEncoderDecoderTool() {
               type="button"
               onClick={() => setScope('full-uri')}
               className={`rounded-md px-3 py-1.5 text-xs font-medium cursor-pointer ${
-                scope === 'full-uri' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+                scope === 'full-uri' ? `${palette.soft} shadow-xs` : 'text-slate-600'
               }`}
             >
               {s.encodeUriPreserve}
@@ -200,29 +205,29 @@ export default function UrlEncoderDecoderTool() {
       </div>
 
       {parsedUrl && (
-        <div className="rounded-xl border border-slate-200 bg-slate-50/70 p-4 space-y-3">
+        <div className={`rounded-xl border border-slate-200 ${palette.card} p-4 space-y-3`}>
           <h3 className="text-sm font-semibold text-slate-900">{s.parsedTitle}</h3>
           <dl className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs font-mono">
-            <div className="rounded-lg bg-white border border-slate-200 p-2.5">
+            <div className={`rounded-lg ${paletteAlt.card} border border-slate-200 p-2.5`}>
               <dt className="font-sans text-slate-500 mb-0.5">{s.protocol}</dt>
               <dd className="text-slate-900 break-all">{parsedUrl.protocol}</dd>
             </div>
-            <div className="rounded-lg bg-white border border-slate-200 p-2.5">
+            <div className={`rounded-lg ${paletteAlt2.card} border border-slate-200 p-2.5`}>
               <dt className="font-sans text-slate-500 mb-0.5">{s.host}</dt>
               <dd className="text-slate-900 break-all">{parsedUrl.host}</dd>
             </div>
-            <div className="rounded-lg bg-white border border-slate-200 p-2.5">
+            <div className={`rounded-lg ${palette.card} border border-slate-200 p-2.5`}>
               <dt className="font-sans text-slate-500 mb-0.5">{s.pathname}</dt>
               <dd className="text-slate-900 break-all">{parsedUrl.pathname}</dd>
             </div>
-            <div className="rounded-lg bg-white border border-slate-200 p-2.5">
+            <div className={`rounded-lg ${paletteAlt.card} border border-slate-200 p-2.5`}>
               <dt className="font-sans text-slate-500 mb-0.5">{s.hash}</dt>
               <dd className="text-slate-900 break-all">{parsedUrl.hash}</dd>
             </div>
           </dl>
 
           {parsedUrl.params.length > 0 && (
-            <div className="overflow-x-auto rounded-lg border border-slate-200 bg-white">
+            <div className={`overflow-x-auto rounded-lg border border-slate-200 ${paletteAlt2.card}`}>
               <table className="w-full text-left text-xs font-mono">
                 <thead className="border-b border-slate-200 bg-slate-50 font-sans text-slate-600">
                   <tr>

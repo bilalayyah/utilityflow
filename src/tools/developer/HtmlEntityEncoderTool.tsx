@@ -1,6 +1,7 @@
 import { ArrowLeftRight, RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
 
@@ -17,6 +18,8 @@ const STRINGS_EN = {
     outputLabelDecode: 'Decoded Text',
     outputPlaceholder: 'Converted entities appear here...',
   };
+
+const palette = pastelForKey('html-entity-encoder');
 
 const SAMPLE_HTML = `<div class="notice">5 < 10 & "café" — ready!</div>`;
 
@@ -70,7 +73,7 @@ export default function HtmlEntityEncoderTool() {
               type="button"
               onClick={() => setMode('encode')}
               className={`rounded-md px-3.5 py-1.5 text-xs sm:text-sm font-medium cursor-pointer ${
-                mode === 'encode' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+                mode === 'encode' ? `${palette.soft} shadow-xs` : 'text-slate-600'
               }`}
             >
               {s.encodeTab}
@@ -79,7 +82,7 @@ export default function HtmlEntityEncoderTool() {
               type="button"
               onClick={() => setMode('decode')}
               className={`rounded-md px-3.5 py-1.5 text-xs sm:text-sm font-medium cursor-pointer ${
-                mode === 'decode' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+                mode === 'decode' ? `${palette.soft} shadow-xs` : 'text-slate-600'
               }`}
             >
               {s.decodeTab}
