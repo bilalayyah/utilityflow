@@ -53,7 +53,7 @@ export const ptStrings: UiStrings = {
     termsOfService: 'Termos de serviço',
     xmlSitemap: 'Mapa do site XML',
     rightsReserved: 'Todos os direitos reservados.',
-    deployedNote: 'Utilitários no navegador · Hospedado no Cloudflare Pages',
+    deployedNote: 'Crafted with ❤️ by Bilal, inspired by Shaheen.',
   },
   common: {
     copy: 'Copiar',
