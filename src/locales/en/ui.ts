@@ -49,7 +49,7 @@ export const enStrings: UiStrings = {
     termsOfService: 'Terms of Service',
     xmlSitemap: 'XML Sitemap',
     rightsReserved: 'All rights reserved.',
-    deployedNote: 'Browser-side utilities · Deployed on Cloudflare Pages',
+    deployedNote: 'Crafted with ❤️ by Bilal, inspired by Shaheen.',
   },
   common: {
     copy: 'Copy',
@@ -194,7 +194,7 @@ export const enStrings: UiStrings = {
     trustLine: 'All tools are free • No signup required • Works in your browser',
   },
   directory: {
-    seoTitle: 'All Online Utility Tools Directory | UtilityFlow',
+    seoTitle: 'Browse All 88 Free Online Utility Tools | UtilityFlow',
     seoDescription:
       'Browse and search all browser-based utilities and categories on UtilityFlow, organized for writing, development, calculators, PDFs, SEO, and images.',
     seoKeywords: ['utility tools directory', 'all online tools', 'free browser tools'],
@@ -336,17 +336,19 @@ export const enStrings: UiStrings = {
       subject: 'Please choose or enter a topic.',
       message: 'Please include at least 10 characters in your message.',
     },
-    successTitle: 'Message prepared',
+    successTitle: 'Message sent',
     successThanks:
-      'Thank you, {name}. Your message regarding {subject} has been validated.',
+      "Thank you, {name}. Your message has been sent and we'll get back to you soon.",
     successNote:
-      'Because UtilityFlow runs as a static site without storing user submissions on a backend server, you can also send your message directly via your email client to',
+      'If you need to add anything, you can also reach us directly at',
+    sending: 'Sending…',
+    sendError: 'Could not send your message. Please try again.',
     sendAnother: 'Send another message',
     directEmail: 'Direct Email',
     directEmailText: 'Prefer to write directly? Email our team at:',
   },
   privacy: {
-    seoTitle: 'Privacy Policy | UtilityFlow',
+    seoTitle: 'Privacy Policy – How We Protect Your Data | UtilityFlow',
     seoDescription:
       'Read the UtilityFlow Privacy Policy covering browser-side tool execution, cookies, server logs, and third-party advertising disclosures.',
     title: 'Privacy Policy',
@@ -390,9 +392,11 @@ export const enStrings: UiStrings = {
       'If you have questions about this Privacy Policy, please contact us via our',
     contactLink: 'Contact page',
     contactMiddle: 'or email',
+    optOutGoogleAds: 'Google Ads Settings',
+    optOutAboutAds: 'AboutAds.info opt-out',
   },
   terms: {
-    seoTitle: 'Terms of Service | UtilityFlow',
+    seoTitle: 'Terms of Service – Using UtilityFlow Tools | UtilityFlow',
     seoDescription:
       'Review the Terms of Service governing use of UtilityFlow browser utilities, intellectual property, accuracy disclaimers, and liability limits.',
     title: 'Terms of Service',
@@ -414,6 +418,7 @@ export const enStrings: UiStrings = {
         title: '4. Intellectual Property',
         paragraphs: [
           'The UtilityFlow interface, brand assets, documentation, and source code are protected by applicable intellectual property laws. You retain full ownership of any text, code, documents, or images you process using our client-side utilities.',
+          'UtilityFlow is an independent project and is not affiliated with, endorsed by, or connected to YouTube, Instagram, Google, or any other third-party brand named on this site.',
         ],
       },
       {
