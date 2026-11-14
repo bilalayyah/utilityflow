@@ -193,6 +193,7 @@ export const itStrings: UiStrings = {
           'Sì. Tutti i layout, i controlli di navigazione e gli spazi di lavoro interattivi — inclusi il tema chiaro e il tema scuro — sono progettati prima di tutto per i dispositivi mobili, con aree di tocco accessibili e griglie reattive.',
       },
     ],
+    trustLine: 'Tutti gli strumenti sono gratuiti • Nessuna registrazione richiesta • Funziona nel tuo browser',
   },
   directory: {
     seoTitle: 'Directory di tutti gli strumenti online | UtilityFlow',
