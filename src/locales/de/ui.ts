@@ -193,6 +193,7 @@ export const deStrings: UiStrings = {
           'Ja. Alle Layouts, Navigationssteuerelemente und interaktiven Arbeitsbereiche – einschließlich Hell- und Dunkelmodus – sind Mobile-First gestaltet, mit gut erreichbaren Touch-Zielen und responsiven Rastern.',
       },
     ],
+    trustLine: 'Alle Tools sind kostenlos • Keine Registrierung erforderlich • Läuft direkt in deinem Browser',
   },
   directory: {
     seoTitle: 'Alle Online-Utility-Tools im Verzeichnis | UtilityFlow',
