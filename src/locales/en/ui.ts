@@ -191,6 +191,7 @@ export const enStrings: UiStrings = {
           'Yes. All layouts, navigation controls, and interactive workspaces—including Light Mode and Dark Mode—are designed mobile-first with accessible touch targets and responsive grids.',
       },
     ],
+    trustLine: 'All tools are free • No signup required • Works in your browser',
   },
   directory: {
     seoTitle: 'All Online Utility Tools Directory | UtilityFlow',
