@@ -1,8 +1,12 @@
 import { Plus, Trash2 } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { PASTEL_PALETTES, pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
+
+const palette = pastelForKey('canonical-hreflang-generator');
+const paletteAlt = PASTEL_PALETTES[(PASTEL_PALETTES.indexOf(palette) + 1) % PASTEL_PALETTES.length];
 
 const STRINGS_EN = {
     hreflangMode: 'Canonical & Hreflang Tags',
@@ -117,7 +121,7 @@ export default function CanonicalHreflangGeneratorTool() {
           type="button"
           onClick={() => setMode('hreflang')}
           className={`rounded-md px-3.5 py-1.5 text-xs sm:text-sm font-medium cursor-pointer ${
-            mode === 'hreflang' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+            mode === 'hreflang' ? `${palette.soft} shadow-xs` : 'text-slate-600'
           }`}
         >
           {s.hreflangMode}
@@ -126,7 +130,7 @@ export default function CanonicalHreflangGeneratorTool() {
           type="button"
           onClick={() => setMode('redirects')}
           className={`rounded-md px-3.5 py-1.5 text-xs sm:text-sm font-medium cursor-pointer ${
-            mode === 'redirects' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+            mode === 'redirects' ? `${palette.soft} shadow-xs` : 'text-slate-600'
           }`}
         >
           {s.redirectsMode}
@@ -202,7 +206,7 @@ export default function CanonicalHreflangGeneratorTool() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 space-y-2.5">
+            <div className={`rounded-xl border border-slate-200 ${palette.card} p-4 space-y-2.5`}>
               <div className="flex items-center justify-between gap-2">
                 <span className="text-xs font-semibold text-slate-700">{s.htmlTagsLabel}</span>
                 <CopyButton text={hreflangOutput.html} label={s.copyHtml} copiedLabel={t.common.copied} />
@@ -212,7 +216,7 @@ export default function CanonicalHreflangGeneratorTool() {
               </pre>
             </div>
 
-            <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 space-y-2.5">
+            <div className={`rounded-xl border border-slate-200 ${paletteAlt.card} p-4 space-y-2.5`}>
               <div className="flex items-center justify-between gap-2">
                 <span className="text-xs font-semibold text-slate-700">{s.xmlSnippetLabel}</span>
                 <CopyButton text={hreflangOutput.xml} label={s.copyXml} copiedLabel={t.common.copied} />
@@ -239,7 +243,7 @@ export default function CanonicalHreflangGeneratorTool() {
                   type="button"
                   onClick={() => setRedirectFormat(id)}
                   className={`rounded-md px-3 py-1.5 text-xs font-medium cursor-pointer ${
-                    redirectFormat === id ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+                    redirectFormat === id ? `${palette.soft} shadow-xs` : 'text-slate-600'
                   }`}
                 >
                   {label}

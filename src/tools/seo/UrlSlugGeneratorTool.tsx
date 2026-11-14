@@ -1,7 +1,10 @@
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
+
+const palette = pastelForKey('url-slug-generator');
 
 const STRINGS_EN = {
     sampleTitles:
@@ -176,7 +179,7 @@ export default function UrlSlugGeneratorTool() {
             </div>
           </div>
 
-          <div className="rounded-xl border border-slate-200 overflow-x-auto">
+          <div className={`rounded-xl border border-slate-200 overflow-x-auto ${palette.card}`}>
             <table className="w-full text-left text-xs sm:text-sm">
               <thead className="bg-slate-50 text-slate-500 border-b border-slate-200">
                 <tr>

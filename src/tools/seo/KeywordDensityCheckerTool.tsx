@@ -2,6 +2,11 @@ import { Info } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
+import { PASTEL_PALETTES, pastelForKey } from '../../components/tool/pastel';
+
+const palette = pastelForKey('keyword-density-checker');
+const paletteAlt = PASTEL_PALETTES[(PASTEL_PALETTES.indexOf(palette) + 1) % PASTEL_PALETTES.length];
+const paletteAlt2 = PASTEL_PALETTES[(PASTEL_PALETTES.indexOf(palette) + 2) % PASTEL_PALETTES.length];
 
 const STRINGS_EN = {
     sampleContent:
@@ -116,7 +121,7 @@ export default function KeywordDensityCheckerTool() {
 
   return (
     <div className="space-y-6">
-      <div className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-xs sm:text-sm text-slate-700 flex items-start gap-2.5">
+      <div className={`rounded-xl border border-slate-200 ${palette.card} px-4 py-3 text-xs sm:text-sm text-slate-700 flex items-start gap-2.5`}>
         <Info className="w-4 h-4 shrink-0 text-indigo-600 mt-0.5" />
         <p>
           <strong>{s.guidanceTitle}</strong> {s.guidanceBody}
@@ -147,7 +152,7 @@ export default function KeywordDensityCheckerTool() {
                 type="button"
                 onClick={() => setNgramSize(n)}
                 className={`rounded-md px-3 py-1.5 text-xs font-medium cursor-pointer ${
-                  ngramSize === n ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+                  ngramSize === n ? `${palette.soft} shadow-xs` : 'text-slate-600'
                 }`}
               >
                 {n === 1 ? s.oneWord : n === 2 ? s.twoWord : s.threeWord}
@@ -192,37 +197,37 @@ export default function KeywordDensityCheckerTool() {
       </div>
 
       <dl className="grid grid-cols-2 lg:grid-cols-4 gap-3 tabular-nums">
-        <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+        <div className={`rounded-lg border border-slate-200 ${paletteAlt.card} p-4`}>
           <dt className="text-xs text-slate-500">{s.totalWords}</dt>
-          <dd className="mt-1 text-xl font-bold font-mono text-slate-900">
+          <dd className={`mt-1 text-xl font-bold font-mono ${paletteAlt.link}`}>
             {analysis.totalWords.toLocaleString(locale)}
           </dd>
         </div>
-        <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+        <div className={`rounded-lg border border-slate-200 ${paletteAlt2.card} p-4`}>
           <dt className="text-xs text-slate-500">{s.uniqueVocabulary}</dt>
-          <dd className="mt-1 text-xl font-bold font-mono text-slate-900">
+          <dd className={`mt-1 text-xl font-bold font-mono ${paletteAlt2.link}`}>
             {analysis.uniqueWords.toLocaleString(locale)}
           </dd>
         </div>
-        <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+        <div className={`rounded-lg border border-slate-200 ${palette.card} p-4`}>
           <dt className="text-xs text-slate-500">{s.readingTime}</dt>
-          <dd className="mt-1 text-xl font-bold font-mono text-slate-900">
+          <dd className={`mt-1 text-xl font-bold font-mono ${palette.link}`}>
             ~{analysis.readingMins} min
           </dd>
         </div>
-        <div className="rounded-lg border border-indigo-200 bg-indigo-50/70 p-4">
+        <div className={`rounded-lg border border-indigo-200 ${paletteAlt.card} p-4`}>
           <dt className="text-xs text-indigo-700 truncate">
             {s.targetPrefix}
             {targetKeyword.trim() || '—'}
           </dt>
-          <dd className="mt-1 text-xl font-bold font-mono text-slate-900">
+          <dd className={`mt-1 text-xl font-bold font-mono ${paletteAlt.link}`}>
             {s.hits.replace('{n}', String(analysis.targetHits)).replace('{d}', analysis.targetDensity.toFixed(2))}
           </dd>
         </div>
       </dl>
 
       {analysis.topTerms.length > 0 && (
-        <div className="rounded-xl border border-slate-200 overflow-x-auto">
+        <div className={`rounded-xl border border-slate-200 overflow-x-auto ${palette.card}`}>
           <table className="w-full text-left text-xs sm:text-sm">
             <thead className="bg-slate-50 text-slate-500 border-b border-slate-200">
               <tr>

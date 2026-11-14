@@ -1,8 +1,12 @@
 import { Download } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { PASTEL_PALETTES, pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
+
+const palette = pastelForKey('meta-tag-generator');
+const paletteAlt = PASTEL_PALETTES[(PASTEL_PALETTES.indexOf(palette) + 1) % PASTEL_PALETTES.length];
 
 const STRINGS_EN = {
     defaultTitle: 'UtilityFlow – Fast Browser-Based Online Utility Tools',
@@ -291,7 +295,7 @@ export default function MetaTagGeneratorTool() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
-        <div className="lg:col-span-7 rounded-xl border border-slate-200 bg-slate-50 p-4 space-y-3">
+        <div className={`lg:col-span-7 rounded-xl border border-slate-200 ${palette.card} p-4 space-y-3`}>
           <div className="flex flex-wrap items-center justify-between gap-2">
             <span className="text-xs font-semibold text-slate-700">{s.generatedTagsLabel}</span>
             <div className="flex items-center gap-2">
@@ -311,7 +315,7 @@ export default function MetaTagGeneratorTool() {
           </pre>
         </div>
 
-        <div className="lg:col-span-5 rounded-xl border border-slate-200 bg-white p-4 space-y-2.5">
+        <div className={`lg:col-span-5 rounded-xl border border-slate-200 ${paletteAlt.card} p-4 space-y-2.5`}>
           <div className="text-xs font-semibold text-slate-500">{s.socialPreviewLabel}</div>
           <div className="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
             <div className="aspect-[1.91/1] bg-gradient-to-br from-indigo-900 via-slate-900 to-slate-800 flex items-center justify-center p-4 text-center">

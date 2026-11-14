@@ -1,7 +1,12 @@
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { PASTEL_PALETTES, pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
+
+const palette = pastelForKey('robots-meta-tag-generator');
+const paletteAlt = PASTEL_PALETTES[(PASTEL_PALETTES.indexOf(palette) + 1) % PASTEL_PALETTES.length];
+const paletteAlt2 = PASTEL_PALETTES[(PASTEL_PALETTES.indexOf(palette) + 2) % PASTEL_PALETTES.length];
 
 const STRINGS_EN = {
     indexingLabel: 'Indexing Directive',
@@ -175,7 +180,7 @@ export default function RobotsMetaTagGeneratorTool() {
       </div>
 
       <div className="space-y-4">
-        <div className="rounded-xl border border-indigo-200 bg-indigo-50/60 p-4 space-y-2">
+        <div className={`rounded-xl border border-indigo-200 ${palette.card} p-4 space-y-2`}>
           <div className="flex items-center justify-between gap-2">
             <span className="text-xs font-semibold text-indigo-800">{s.htmlTagLabel}</span>
             <CopyButton text={htmlTag} label={s.copyHtmlTag} copiedLabel={t.common.copied} />
@@ -186,7 +191,7 @@ export default function RobotsMetaTagGeneratorTool() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 space-y-2">
+          <div className={`rounded-xl border border-slate-200 ${paletteAlt.card} p-4 space-y-2`}>
             <div className="flex items-center justify-between gap-2">
               <span className="text-xs font-semibold text-slate-700">{s.httpHeaderLabel}</span>
               <CopyButton text={httpHeader} label={s.copyHeader} copiedLabel={t.common.copied} />
@@ -196,7 +201,7 @@ export default function RobotsMetaTagGeneratorTool() {
             </code>
           </div>
 
-          <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 space-y-2">
+          <div className={`rounded-xl border border-slate-200 ${paletteAlt2.card} p-4 space-y-2`}>
             <div className="flex items-center justify-between gap-2">
               <div className="flex items-center gap-2">
                 <span className="text-xs font-semibold text-slate-700">{s.cloudflareHeadersLabel}</span>

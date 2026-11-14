@@ -1,8 +1,11 @@
 import { Download, Plus, Trash2 } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { PASTEL_PALETTES, pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
+
+const palette = pastelForKey('schema-markup-generator');
 
 const STRINGS_EN = {
     defaultHeadline: 'How to Build Fast Browser Utilities',
@@ -211,7 +214,7 @@ export default function SchemaMarkupGeneratorTool() {
             type="button"
             onClick={() => setSchemaType(type)}
             className={`rounded-md px-3 py-1.5 text-xs sm:text-sm font-medium cursor-pointer ${
-              schemaType === type ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+              schemaType === type ? `${palette.soft} shadow-xs` : 'text-slate-600'
             }`}
           >
             {type}
@@ -287,7 +290,7 @@ export default function SchemaMarkupGeneratorTool() {
           {schemaType === 'FAQPage' && (
             <div className="space-y-3">
               {faqs.map((item, idx) => (
-                <div key={item.id} className="rounded-lg border border-slate-200 bg-slate-50 p-3 space-y-2">
+                <div key={item.id} className={`rounded-lg border border-slate-200 ${PASTEL_PALETTES[idx % PASTEL_PALETTES.length].card} p-3 space-y-2`}>
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-semibold text-slate-700">{s.questionLabel.replace('{n}', String(idx + 1))}</span>
                     <button
@@ -470,7 +473,7 @@ export default function SchemaMarkupGeneratorTool() {
           )}
         </div>
 
-        <div className="lg:col-span-6 rounded-xl border border-slate-200 bg-slate-50 p-4 space-y-3">
+        <div className={`lg:col-span-6 rounded-xl border border-slate-200 ${palette.card} p-4 space-y-3`}>
           <div className="flex flex-wrap items-center justify-between gap-2">
             <span className="text-xs font-semibold text-slate-700">{s.jsonLdOutputLabel}</span>
             <div className="flex items-center gap-2">

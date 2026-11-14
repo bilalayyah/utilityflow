@@ -2,6 +2,10 @@ import { AlertCircle, CheckCircle2, XCircle } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
+import { PASTEL_PALETTES, pastelForKey } from '../../components/tool/pastel';
+
+const palette = pastelForKey('on-page-seo-checker');
+const paletteAlt = PASTEL_PALETTES[(PASTEL_PALETTES.indexOf(palette) + 1) % PASTEL_PALETTES.length];
 
 const STRINGS_EN = {
     auditTitle: 'Client-Side HTML Source Audit:',
@@ -187,10 +191,10 @@ export default function OnPageSeoCheckerTool() {
         <div className="lg:col-span-6 space-y-4">
           {audit ? (
             <>
-              <div className="rounded-xl border border-indigo-200 bg-indigo-50/70 p-4 flex items-center justify-between">
+              <div className={`rounded-xl border border-indigo-200 ${palette.card} p-4 flex items-center justify-between`}>
                 <div>
                   <div className="text-xs font-semibold text-indigo-700">{s.scoreLabel}</div>
-                  <div className="text-2xl font-bold text-slate-900 tabular-nums">
+                  <div className={`text-2xl font-bold ${palette.link} tabular-nums`}>
                     {s.checksPassed
                       .replace('{passed}', String(audit.passedCount))
                       .replace('{total}', String(audit.checks.length))}
@@ -232,7 +236,7 @@ export default function OnPageSeoCheckerTool() {
               </ul>
 
               {audit.headings.length > 0 && (
-                <div className="rounded-xl border border-slate-200 bg-white p-3.5">
+                <div className={`rounded-xl border border-slate-200 ${paletteAlt.card} p-3.5`}>
                   <div className="text-xs font-semibold text-slate-700 mb-2">
                     {s.headingOutline}
                   </div>
@@ -247,7 +251,7 @@ export default function OnPageSeoCheckerTool() {
               )}
             </>
           ) : (
-            <div className="rounded-xl border border-slate-200 bg-slate-50 p-6 text-sm text-slate-500 text-center">
+            <div className={`rounded-xl border border-slate-200 ${palette.card} p-6 text-sm text-slate-500 text-center`}>
               {s.emptyState}
             </div>
           )}

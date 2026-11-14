@@ -1,7 +1,10 @@
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
+
+const palette = pastelForKey('serp-snippet-preview');
 
 const STRINGS_EN = {
     defaultTitle: 'JSON Formatter & Validator – Pretty Print & Minify | UtilityFlow',
@@ -108,7 +111,7 @@ export default function SerpSnippetPreviewTool() {
             type="button"
             onClick={() => setDevice('desktop')}
             className={`rounded-md px-3.5 py-1.5 text-xs sm:text-sm font-medium cursor-pointer ${
-              device === 'desktop' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+              device === 'desktop' ? `${palette.soft} shadow-xs` : 'text-slate-600'
             }`}
           >
             {s.desktopSerp}
@@ -117,7 +120,7 @@ export default function SerpSnippetPreviewTool() {
             type="button"
             onClick={() => setDevice('mobile')}
             className={`rounded-md px-3.5 py-1.5 text-xs sm:text-sm font-medium cursor-pointer ${
-              device === 'mobile' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+              device === 'mobile' ? `${palette.soft} shadow-xs` : 'text-slate-600'
             }`}
           >
             {s.mobileSerp}
@@ -219,7 +222,7 @@ export default function SerpSnippetPreviewTool() {
         </div>
       </div>
 
-      <div className="rounded-xl border border-slate-200 bg-slate-50 p-5">
+      <div className={`rounded-xl border border-slate-200 ${palette.card} p-5`}>
         <div className="text-xs font-semibold text-slate-500 mb-3">
           {device === 'desktop' ? s.desktopSimulation : s.mobileSimulation}
         </div>

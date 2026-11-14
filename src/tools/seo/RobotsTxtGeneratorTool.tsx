@@ -1,8 +1,13 @@
 import { Download, Plus, Trash2 } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { PASTEL_PALETTES, pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
+
+const palette = pastelForKey('robots-txt-generator');
+const paletteAlt = PASTEL_PALETTES[(PASTEL_PALETTES.indexOf(palette) + 1) % PASTEL_PALETTES.length];
+const paletteAlt2 = PASTEL_PALETTES[(PASTEL_PALETTES.indexOf(palette) + 2) % PASTEL_PALETTES.length];
 
 const STRINGS_EN = {
     starterTemplates: 'Starter Templates:',
@@ -121,28 +126,28 @@ export default function RobotsTxtGeneratorTool() {
         <button
           type="button"
           onClick={() => applyPreset('open')}
-          className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-medium text-slate-700 hover:border-indigo-300 cursor-pointer"
+          className={`rounded-lg border border-slate-200 ${palette.card} px-3 py-1.5 text-xs font-medium text-slate-700 hover:border-indigo-300 cursor-pointer`}
         >
           {s.allowAll}
         </button>
         <button
           type="button"
           onClick={() => applyPreset('spa')}
-          className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-medium text-slate-700 hover:border-indigo-300 cursor-pointer"
+          className={`rounded-lg border border-slate-200 ${paletteAlt.card} px-3 py-1.5 text-xs font-medium text-slate-700 hover:border-indigo-300 cursor-pointer`}
         >
           {s.standardWebApp}
         </button>
         <button
           type="button"
           onClick={() => applyPreset('wordpress')}
-          className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-medium text-slate-700 hover:border-indigo-300 cursor-pointer"
+          className={`rounded-lg border border-slate-200 ${paletteAlt2.card} px-3 py-1.5 text-xs font-medium text-slate-700 hover:border-indigo-300 cursor-pointer`}
         >
           {s.wordpressClean}
         </button>
         <button
           type="button"
           onClick={() => applyPreset('block-all')}
-          className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-medium text-slate-700 hover:border-indigo-300 cursor-pointer"
+          className={`rounded-lg border border-slate-200 ${palette.card} px-3 py-1.5 text-xs font-medium text-slate-700 hover:border-indigo-300 cursor-pointer`}
         >
           {s.stagingBlockAll}
         </button>
@@ -244,7 +249,7 @@ export default function RobotsTxtGeneratorTool() {
           </div>
         </div>
 
-        <div className="lg:col-span-5 rounded-xl border border-slate-200 bg-slate-50 p-4 space-y-3">
+        <div className={`lg:col-span-5 rounded-xl border border-slate-200 ${palette.card} p-4 space-y-3`}>
           <div className="flex flex-wrap items-center justify-between gap-2">
             <span className="text-xs font-semibold text-slate-700">{s.generatedLabel}</span>
             <div className="flex items-center gap-2">
