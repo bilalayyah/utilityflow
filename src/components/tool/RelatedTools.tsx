@@ -5,6 +5,7 @@ import { getLocalizedCategory } from '../../locales/tools';
 import { formatString } from '../../locales/ui';
 import { getRelatedTools } from '../../registry/toolsRegistry';
 import type { ToolDefinition } from '../../types/tool';
+import { pastelForKey } from './pastel';
 import { ToolCard } from './ToolCard';
 
 interface RelatedToolsProps {
@@ -15,6 +16,7 @@ export function RelatedTools({ tool }: RelatedToolsProps) {
   const { locale, t } = useLocale();
   const related = getRelatedTools(tool, 4);
   const category = getLocalizedCategory(tool.categoryId, locale);
+  const palette = pastelForKey(tool.id);
 
   if (related.length === 0 && !category) {
     return null;
@@ -49,7 +51,7 @@ export function RelatedTools({ tool }: RelatedToolsProps) {
         </div>
       ) : (
         category && (
-          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5 text-sm text-slate-600 shadow-sm">
+          <div className={`rounded-2xl ${palette.card} p-5 text-sm text-slate-600 shadow-sm`}>
             {t.toolPage.moreToolsIn}{' '}
             <Link
               to={categoryHref(category.id, locale)}
