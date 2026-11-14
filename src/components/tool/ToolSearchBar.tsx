@@ -12,6 +12,7 @@ interface ToolSearchBarProps {
   onQueryChange?: (value: string) => void;
   showSuggestionsDropdown?: boolean;
   initialQuery?: string;
+  variant?: 'default' | 'hero';
 }
 
 export function ToolSearchBar({
@@ -19,6 +20,7 @@ export function ToolSearchBar({
   onQueryChange,
   showSuggestionsDropdown = true,
   initialQuery = '',
+  variant = 'default',
 }: ToolSearchBarProps) {
   const { locale, t } = useLocale();
   const [query, setQuery] = useState(initialQuery);
@@ -73,6 +75,8 @@ export function ToolSearchBar({
     focused &&
     trimmed.length > 0;
 
+  const isHero = variant === 'hero';
+
   return (
     <div className="relative w-full max-w-2xl">
       <form onSubmit={handleSubmit} role="search" aria-label={t.search.ariaLabel}>
@@ -89,24 +93,36 @@ export function ToolSearchBar({
             onChange={(e) => handleChange(e.target.value)}
             placeholder={effectivePlaceholder}
             aria-label={t.search.ariaLabel}
-            className="w-full rounded-xl border border-slate-300 bg-white py-3.5 pl-12 pr-28 text-sm sm:text-base text-slate-900 placeholder:text-slate-400 shadow-xs transition-colors focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/20"
+            className={
+              isHero
+                ? 'w-full rounded-2xl border border-slate-300 bg-white py-4 pl-12 pr-14 text-base text-slate-900 placeholder:text-slate-400 shadow-md transition-colors focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/20 dark:border-slate-700 dark:bg-slate-900 dark:text-white dark:placeholder:text-slate-500'
+                : 'w-full rounded-xl border border-slate-300 bg-white py-3.5 pl-12 pr-28 text-sm sm:text-base text-slate-900 placeholder:text-slate-400 shadow-xs transition-colors focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/20'
+            }
           />
           {query && (
             <button
               type="button"
               onClick={() => handleChange('')}
               aria-label={t.search.clearSearch}
-              className="absolute right-20 p-1.5 text-slate-400 hover:text-slate-700 rounded-md cursor-pointer"
+              className={`absolute p-1.5 text-slate-400 hover:text-slate-700 rounded-md cursor-pointer ${
+                isHero ? 'right-12' : 'right-20'
+              }`}
             >
               <X className="w-4 h-4" />
             </button>
           )}
-          <button
-            type="submit"
-            className="absolute right-2 rounded-lg bg-indigo-600 px-3.5 py-2 text-xs sm:text-sm font-semibold text-white transition-colors hover:bg-indigo-700 whitespace-nowrap shrink-0 cursor-pointer"
-          >
-            {t.common.search}
-          </button>
+          {isHero ? (
+            <kbd className="pointer-events-none absolute right-4 rounded-md border border-slate-200 bg-slate-50 px-2 py-0.5 text-xs font-semibold text-slate-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-400">
+              ⌘K
+            </kbd>
+          ) : (
+            <button
+              type="submit"
+              className="absolute right-2 rounded-lg bg-indigo-600 px-3.5 py-2 text-xs sm:text-sm font-semibold text-white transition-colors hover:bg-indigo-700 whitespace-nowrap shrink-0 cursor-pointer"
+            >
+              {t.common.search}
+            </button>
+          )}
         </div>
       </form>
 
