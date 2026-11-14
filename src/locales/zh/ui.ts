@@ -321,6 +321,8 @@ export const zhStrings: UiStrings = {
     topic: '主题',
     message: '留言',
     submit: '提交留言',
+    sending: '发送中…',
+    sendError: '无法发送您的留言。请重试。',
     namePlaceholder: 'Alex Rivera',
     emailPlaceholder: 'you@example.com',
     messagePlaceholder: '请详细描述相关工具、错误或问题...',
@@ -338,11 +340,11 @@ export const zhStrings: UiStrings = {
       subject: '请选择或输入主题。',
       message: '留言请至少包含 10 个字符。',
     },
-    successTitle: '留言已准备好',
+    successTitle: '消息已发送',
     successThanks:
-      '谢谢您，{name}。您关于 {subject} 的留言已通过验证。',
+      '谢谢您，{name}。您的消息已发送，我们会尽快回复您。',
     successNote:
-      '由于 UtilityFlow 是静态网站，不会在后端服务器上保存用户提交的内容，您也可以通过自己的邮件客户端直接发送留言至',
+      '如果您需要补充任何内容，也可以通过以下邮箱直接联系我们',
     sendAnother: '再发一条留言',
     directEmail: '直接发送邮件',
     directEmailText: '想直接写信？请通过以下邮箱联系我们的团队：',
@@ -392,6 +394,8 @@ export const zhStrings: UiStrings = {
       '如果您对本隐私政策有任何疑问，请通过我们的',
     contactLink: '联系页面',
     contactMiddle: '联系我们，或发送邮件至',
+    optOutGoogleAds: 'Google 广告设置',
+    optOutAboutAds: 'AboutAds.info 选择退出',
   },
   terms: {
     seoTitle: '服务条款 | UtilityFlow',
@@ -416,6 +420,7 @@ export const zhStrings: UiStrings = {
         title: '4. 知识产权',
         paragraphs: [
           'UtilityFlow 的界面、品牌资产、文档与源代码受相关知识产权法保护。您对使用我们客户端工具处理的任何文本、代码、文档或图片保留完整所有权。',
+          'UtilityFlow 是一个独立项目，与本网站提及的 YouTube、Instagram、Google 或任何其他第三方品牌均无关联，也未获得其认可或与之存在合作关系。',
         ],
       },
       {
