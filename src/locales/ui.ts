@@ -38,7 +38,7 @@ export interface UiStrings {
     tagline: string;
     categories: string;
     platformAi: string;
-    legal: string;
+    trustLegal: string;
     home: string;
     allToolsDirectory: string;
     aboutUs: string;
