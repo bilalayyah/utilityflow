@@ -131,7 +131,6 @@ export const deStrings: UiStrings = {
       noMatch: 'Keine Kategorie und kein Tool passt zu „{query}“.',
       resetFilters: 'Filter zurücksetzen',
       upcomingUtilities: 'Kommende Utilities: {names}',
-      scheduledInBatch: 'Geplant für Batch {batch}',
       toolsActive: '{count} Tools aktiv',
       openCategory: 'Kategorieseite öffnen',
     },
@@ -164,7 +163,7 @@ export const deStrings: UiStrings = {
     faq: {
       title: 'Häufige Fragen',
       description:
-        'Die wichtigsten Details zur Arbeitsweise von UtilityFlow und zu den kommenden Batches.',
+        'Die wichtigsten Details zur Arbeitsweise von UtilityFlow und was Sie von neuen Tools erwarten können.',
     },
     faqs: [
       {
@@ -214,16 +213,15 @@ export const deStrings: UiStrings = {
     clearFilters: 'Filter löschen',
   },
   category: {
-    batchLabel: 'Batch {batch}',
     plannedCount: '{count} geplante Tools',
     toolsCount: '{count} Tools',
     toolsLive: '{count} Tools live',
     ofToolsLive: '{count} von {total} Tools live',
     availableTools: 'Verfügbare {name}',
     exploreOther: 'Andere Kategorien entdecken',
-    scheduledTitle: 'Geplant für die Umsetzung in Batch {batch}',
+    scheduledTitle: 'Weitere Tools folgen in Kürze',
     scheduledDescription:
-      'Dieser Kategorie-Hub ist aktiv und in der {name}-Architektur indexiert. Eigene Tool-Seiten mit browserbasierter Funktionalität werden hier in Batch {batch} ergänzt.',
+      'Dieser Kategorie-Hub ist aktiv und in der {name}-Architektur indexiert. Eigene Tool-Seiten mit browserbasierter Funktionalität werden hier in Kürze ergänzt.',
     plannedToolsTitle: 'Geplante Tools in dieser Kategorie:',
   },
   toolPage: {
@@ -242,7 +240,7 @@ export const deStrings: UiStrings = {
     relatedDescription: 'Setzen Sie Ihren Workflow mit ergänzenden Utilities fort.',
     browseAll: 'Alle {name} durchsuchen',
     moreToolsIn: 'Weitere Tools in',
-    willAppear: 'erscheinen hier, sobald Batch {batch} veröffentlicht wird.',
+    willAppear: 'erscheinen hier in Kürze.',
   },
   comments: {
     title: 'Kommentare',
@@ -310,13 +308,13 @@ export const deStrings: UiStrings = {
       {
         title: 'Modulare Einführung',
         description:
-          'Tools werden in sieben Kategorie-Batches ausgeliefert und geprüft, sodass jedes Utility gründliche Funktionstests und Dokumentation erhält.',
+          'Tools werden nach Kategorie ausgeliefert und geprüft, sodass jedes Utility gründliche Funktionstests und Dokumentation erhält.',
       },
     ],
     categoriesTitle: 'Sieben geplante Tool-Kategorien',
     feedbackTitle: 'Feedback oder einen Wunsch?',
     feedbackBefore:
-      'Wenn Ihnen ein Grenzfall bei einer Berechnung, ein Barrierefreiheitsproblem auffällt oder Sie ein Utility für einen kommenden Batch vorschlagen möchten, wenden Sie sich über unsere',
+      'Wenn Ihnen ein Grenzfall bei einer Berechnung, ein Barrierefreiheitsproblem auffällt oder Sie ein neues Utility vorschlagen möchten, wenden Sie sich über unsere',
     feedbackLink: 'Kontaktseite',
     feedbackAfter: '.',
   },
@@ -449,7 +447,7 @@ export const deStrings: UiStrings = {
       '. Wenn Sie mit einem Teil dieser Bedingungen nicht einverstanden sind, nutzen Sie die Website bitte nicht weiter.',
     changesTitle: '6. Änderungen & Kontakt',
     changesBefore:
-      'Wir können diese Nutzungsbedingungen aktualisieren, sobald neue Tool-Batches veröffentlicht werden. Fragen richten Sie bitte an unsere',
+      'Wir können diese Nutzungsbedingungen aktualisieren, sobald neue Tools veröffentlicht werden. Fragen richten Sie bitte an unsere',
     changesLink: 'Kontaktseite',
     changesAfter: '.',
   },
