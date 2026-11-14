@@ -340,11 +340,13 @@ export const ptStrings: UiStrings = {
       subject: 'Escolha ou digite um assunto.',
       message: 'Inclua pelo menos 10 caracteres na sua mensagem.',
     },
-    successTitle: 'Mensagem preparada',
+    successTitle: 'Mensagem enviada',
     successThanks:
-      'Obrigado, {name}. Sua mensagem sobre {subject} foi validada.',
+      'Obrigado, {name}. Sua mensagem foi enviada e responderemos em breve.',
     successNote:
-      'Como o UtilityFlow funciona como um site estático, sem armazenar as mensagens dos usuários em um servidor, você também pode enviar sua mensagem diretamente pelo seu cliente de e-mail para',
+      'Se precisar acrescentar algo, você também pode falar conosco diretamente em',
+    sending: 'Enviando…',
+    sendError: 'Não foi possível enviar sua mensagem. Tente novamente.',
     sendAnother: 'Enviar outra mensagem',
     directEmail: 'E-mail direto',
     directEmailText: 'Prefere escrever diretamente? Envie um e-mail para nossa equipe em:',
@@ -394,6 +396,8 @@ export const ptStrings: UiStrings = {
       'Se você tiver dúvidas sobre esta Política de Privacidade, entre em contato conosco pela nossa',
     contactLink: 'página de contato',
     contactMiddle: 'ou pelo e-mail',
+    optOutGoogleAds: 'Configurações de anúncios do Google',
+    optOutAboutAds: 'Exclusão de publicidade no AboutAds.info',
   },
   terms: {
     seoTitle: 'Termos de serviço do UtilityFlow | Ferramentas online',
@@ -424,6 +428,7 @@ export const ptStrings: UiStrings = {
         title: '5. Limitação de responsabilidade',
         paragraphs: [
           'Na máxima medida permitida por lei, o UtilityFlow e seus colaboradores não serão responsáveis por quaisquer danos indiretos, incidentais, especiais ou consequentes decorrentes do uso, ou da incapacidade de uso, desta plataforma.',
+          'O UtilityFlow é um projeto independente e não é afiliado ao YouTube, Instagram, Google ou a qualquer outra marca de terceiros mencionada neste site, nem é endossado por elas ou está conectado a elas.',
         ],
       },
     ],
