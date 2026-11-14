@@ -51,7 +51,7 @@ export const zhStrings: UiStrings = {
     termsOfService: '服务条款',
     xmlSitemap: 'XML 站点地图',
     rightsReserved: '版权所有。',
-    deployedNote: '浏览器端工具 · 部署于 Cloudflare Pages',
+    deployedNote: 'Crafted with ❤️ by Bilal, inspired by Shaheen.',
   },
   common: {
     copy: '复制',
