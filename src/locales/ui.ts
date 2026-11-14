@@ -157,6 +157,17 @@ export interface UiStrings {
     moreToolsIn: string;
     willAppear: string;
   };
+  comments: {
+    title: string;
+    note: string;
+    namePlaceholder: string;
+    commentPlaceholder: string;
+    postButton: string;
+    posting: string;
+    empty: string;
+    loadError: string;
+    postError: string;
+  };
   search: {
     placeholder: string;
     search: string;
