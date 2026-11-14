@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { SiteLayout } from './components/layout/SiteLayout';
 import { LocaleProvider } from './locales/LocaleContext';
 import { AboutPage } from './pages/AboutPage';
+import { AdminCommentsPage } from './pages/AdminCommentsPage';
 import { AiTextSummarizerPage } from './pages/AiTextSummarizerPage';
 import { AiToolFinderPage } from './pages/AiToolFinderPage';
 import { AiWritingAssistantPage } from './pages/AiWritingAssistantPage';
@@ -21,6 +22,9 @@ export default function App() {
         <SiteLayout>
           <Routes>
             <Route path="/" element={<HomePage />} />
+            {/* Comments admin — not linked in the nav, not in the sitemap */}
+            <Route path="/admin/comments" element={<AdminCommentsPage />} />
+            <Route path="/admin/comments/" element={<AdminCommentsPage />} />
             <Route path="/tools" element={<ToolsDirectoryPage />} />
             <Route path="/tools/" element={<ToolsDirectoryPage />} />
             <Route path="/category/:categorySlug" element={<CategoryPage />} />
