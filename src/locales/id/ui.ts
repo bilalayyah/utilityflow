@@ -193,6 +193,7 @@ export const idStrings: UiStrings = {
           'Ya. Semua tata letak, kontrol navigasi, dan ruang kerja interaktif—termasuk Mode Terang dan Mode Gelap—dirancang mobile-first dengan target sentuh yang mudah diakses dan grid responsif.',
       },
     ],
+    trustLine: 'Semua alat gratis • Tanpa perlu mendaftar • Berjalan di browser Anda',
   },
   directory: {
     seoTitle: 'Direktori Semua Alat Utilitas Online | UtilityFlow',
