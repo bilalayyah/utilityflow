@@ -62,7 +62,7 @@ export default function TextReverserTool() {
               onClick={() => setMode(m.id)}
               className={`rounded-lg px-3 py-1.5 text-xs sm:text-sm font-medium transition-colors cursor-pointer whitespace-nowrap ${
                 mode === m.id
-                  ? 'bg-indigo-600 text-white'
+                  ? 'bg-gradient-to-r from-indigo-600 to-violet-600 text-white'
                   : 'border border-slate-300 bg-white text-slate-700 hover:bg-slate-50'
               }`}
             >
