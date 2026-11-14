@@ -381,7 +381,7 @@ export const CALC_TOOLS_PART_2: ToolDefinition[] = [
       {
         question: 'Can I use decimal rates like 7.25% or 8.875%?',
         answer:
-          'Yes. The rate field accepts any positive decimal percentage.',
+          'Yes. The rate field accepts any positive decimal percentage, so rates like 7.25% or 8.875% calculate the tax and total exactly.',
       },
       {
         question: 'What if my receipt only shows the gross total?',

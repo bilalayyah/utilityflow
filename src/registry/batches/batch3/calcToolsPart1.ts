@@ -32,11 +32,11 @@ export const CALC_TOOLS_PART_1: ToolDefinition[] = [
         'Calculate your exact age from your date of birth in years, months, days, weeks and total days, plus a countdown to your next birthday — free, in your browser.',
       primaryKeyword: 'age calculator',
       secondaryKeywords: [
-        'chronological age calculator',
-        'birthday age calculator',
-        'age in days calculator',
-        'exact age calculator',
-        'age calculator by date of birth',
+        'chronological age in years months and days',
+        'birthday age checker',
+        'age in days',
+        'exact age by birth date',
+        'date of birth age checker',
       ],
       longTailKeywords: [
         'calculate exact age in years months and days online',
