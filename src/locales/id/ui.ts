@@ -131,7 +131,6 @@ export const idStrings: UiStrings = {
       noMatch: 'Tidak ada kategori atau alat yang cocok dengan "{query}".',
       resetFilters: 'Atur ulang filter',
       upcomingUtilities: 'Utilitas mendatang: {names}',
-      scheduledInBatch: 'Dijadwalkan di Batch {batch}',
       toolsActive: '{count} alat aktif',
       openCategory: 'Buka halaman kategori',
     },
@@ -164,7 +163,7 @@ export const idStrings: UiStrings = {
     faq: {
       title: 'Pertanyaan yang Sering Diajukan',
       description:
-        'Detail penting tentang cara UtilityFlow beroperasi dan apa yang diharapkan dalam batch mendatang.',
+        'Detail penting tentang cara UtilityFlow beroperasi dan apa yang diharapkan dari alat baru.',
     },
     faqs: [
       {
@@ -214,16 +213,15 @@ export const idStrings: UiStrings = {
     clearFilters: 'Hapus filter',
   },
   category: {
-    batchLabel: 'Batch {batch}',
     plannedCount: '{count} alat direncanakan',
     toolsCount: '{count} alat',
     toolsLive: '{count} alat aktif',
     ofToolsLive: '{count} dari {total} alat aktif',
     availableTools: '{name} Tersedia',
     exploreOther: 'Jelajahi Kategori Lain',
-    scheduledTitle: 'Dijadwalkan untuk Implementasi Batch {batch}',
+    scheduledTitle: 'Alat lainnya segera hadir',
     scheduledDescription:
-      'Hub kategori ini aktif dan terindeks dalam arsitektur {name}. Halaman alat individual khusus dengan fungsionalitas berbasis browser akan ditambahkan di sini selama Batch {batch}.',
+      'Hub kategori ini aktif dan terindeks dalam arsitektur {name}. Halaman alat individual khusus dengan fungsionalitas berbasis browser akan segera ditambahkan di sini.',
     plannedToolsTitle: 'Alat yang direncanakan dalam kategori ini:',
   },
   toolPage: {
@@ -242,7 +240,7 @@ export const idStrings: UiStrings = {
     relatedDescription: 'Lanjutkan alur kerja Anda dengan utilitas pelengkap.',
     browseAll: 'Jelajahi semua {name}',
     moreToolsIn: 'Alat lainnya di',
-    willAppear: 'akan muncul di sini saat Batch {batch} dirilis.',
+    willAppear: 'akan segera muncul di sini.',
   },
   comments: {
     title: 'Komentar',
@@ -310,13 +308,13 @@ export const idStrings: UiStrings = {
       {
         title: 'Peluncuran Modular',
         description:
-          'Alat dikirim dan diverifikasi dalam tujuh batch kategori sehingga setiap utilitas menerima pengujian fungsional dan dokumentasi yang menyeluruh.',
+          'Alat dikirim dan diverifikasi berdasarkan kategori sehingga setiap utilitas menerima pengujian fungsional dan dokumentasi yang menyeluruh.',
       },
     ],
     categoriesTitle: 'Tujuh Kategori Alat yang Direncanakan',
     feedbackTitle: 'Punya Umpan Balik atau Permintaan?',
     feedbackBefore:
-      'Jika Anda melihat kasus tepi perhitungan, masalah aksesibilitas, atau ingin menyarankan utilitas untuk batch mendatang, hubungi kami melalui',
+      'Jika Anda melihat kasus tepi perhitungan, masalah aksesibilitas, atau ingin menyarankan utilitas baru, hubungi kami melalui',
     feedbackLink: 'Halaman kontak',
     feedbackAfter: '.',
   },
@@ -449,7 +447,7 @@ export const idStrings: UiStrings = {
       '. Jika Anda tidak setuju dengan bagian mana pun dari syarat ini, silakan berhenti menggunakan situs web ini.',
     changesTitle: '6. Perubahan & Kontak',
     changesBefore:
-      'Kami dapat memperbarui Syarat Layanan ini saat batch alat baru dirilis. Pertanyaan dapat ditujukan ke',
+      'Kami dapat memperbarui Syarat Layanan ini saat alat baru dirilis. Pertanyaan dapat ditujukan ke',
     changesLink: 'Halaman kontak',
     changesAfter: '.',
   },
