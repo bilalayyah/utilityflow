@@ -195,6 +195,7 @@ export const ptStrings: UiStrings = {
           'Sim. Todos os layouts, controles de navegação e espaços de trabalho interativos — incluindo modo claro e modo escuro — foram projetados com foco em dispositivos móveis, com alvos de toque acessíveis e grades responsivas.',
       },
     ],
+    trustLine: 'Todas as ferramentas são gratuitas • Não é preciso criar conta • Funciona no seu navegador',
   },
   directory: {
     seoTitle: 'Diretório completo de ferramentas online | UtilityFlow',
