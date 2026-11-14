@@ -131,7 +131,6 @@ export const frStrings: UiStrings = {
       noMatch: 'Aucune catégorie ni aucun outil ne correspond à « {query} ».',
       resetFilters: 'Réinitialiser les filtres',
       upcomingUtilities: 'Prochains utilitaires : {names}',
-      scheduledInBatch: 'Prévu dans le lot {batch}',
       toolsActive: '{count} outils actifs',
       openCategory: 'Ouvrir la page de la catégorie',
     },
@@ -164,7 +163,7 @@ export const frStrings: UiStrings = {
     faq: {
       title: 'Questions fréquentes',
       description:
-        'Les points essentiels sur le fonctionnement de UtilityFlow et ce qu’il faut attendre des prochains lots.',
+        'Les points essentiels sur le fonctionnement de UtilityFlow et ce qu’il faut attendre des nouveaux outils.',
     },
     faqs: [
       {
@@ -214,16 +213,15 @@ export const frStrings: UiStrings = {
     clearFilters: 'Effacer les filtres',
   },
   category: {
-    batchLabel: 'Lot {batch}',
     plannedCount: '{count} outils prévus',
     toolsCount: '{count} outils',
     toolsLive: '{count} outils en ligne',
     ofToolsLive: '{count} outils sur {total} en ligne',
     availableTools: '{name} disponibles',
     exploreOther: 'Explorer les autres catégories',
-    scheduledTitle: 'Prévu pour le lot {batch}',
+    scheduledTitle: 'D’autres outils arrivent bientôt',
     scheduledDescription:
-      'Ce hub de catégorie est actif et indexé dans l’architecture {name}. Des pages d’outils individuelles avec des fonctionnalités côté navigateur seront ajoutées ici lors du lot {batch}.',
+      'Ce hub de catégorie est actif et indexé dans l’architecture {name}. Des pages d’outils individuelles avec des fonctionnalités côté navigateur seront ajoutées ici prochainement.',
     plannedToolsTitle: 'Outils prévus dans cette catégorie :',
   },
   toolPage: {
@@ -242,7 +240,7 @@ export const frStrings: UiStrings = {
     relatedDescription: 'Poursuivez votre flux de travail avec des utilitaires complémentaires.',
     browseAll: 'Parcourir tous les {name}',
     moreToolsIn: 'Plus d’outils dans',
-    willAppear: 'apparaîtront ici avec la sortie du lot {batch}.',
+    willAppear: 'apparaîtront ici bientôt.',
   },
   comments: {
     title: 'Commentaires',
@@ -310,13 +308,13 @@ export const frStrings: UiStrings = {
       {
         title: 'Déploiement modulaire',
         description:
-          'Les outils sont livrés et vérifiés en sept lots par catégorie, pour que chaque utilitaire bénéficie de tests fonctionnels approfondis et d’une documentation complète.',
+          'Les outils sont livrés et vérifiés par catégorie, pour que chaque utilitaire bénéficie de tests fonctionnels approfondis et d’une documentation complète.',
       },
     ],
     categoriesTitle: 'Sept catégories d’outils prévues',
     feedbackTitle: 'Un commentaire ou une demande ?',
     feedbackBefore:
-      'Si vous remarquez un cas limite de calcul, un problème d’accessibilité, ou si vous souhaitez suggérer un utilitaire pour un prochain lot, contactez-nous via notre',
+      'Si vous remarquez un cas limite de calcul, un problème d’accessibilité, ou si vous souhaitez suggérer un nouvel utilitaire, contactez-nous via notre',
     feedbackLink: 'page Contact',
     feedbackAfter: '.',
   },
@@ -449,7 +447,7 @@ export const frStrings: UiStrings = {
       '. Si vous n’êtes pas d’accord avec une partie de ces conditions, veuillez cesser d’utiliser le site.',
     changesTitle: '6. Modifications et contact',
     changesBefore:
-      'Nous pouvons mettre à jour ces conditions d’utilisation à mesure que de nouveaux lots d’outils sont publiés. Les questions peuvent être adressées à notre',
+      'Nous pouvons mettre à jour ces conditions d’utilisation à mesure que de nouveaux outils sont publiés. Les questions peuvent être adressées à notre',
     changesLink: 'page Contact',
     changesAfter: '.',
   },
