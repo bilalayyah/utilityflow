@@ -30,6 +30,19 @@
 // instead of sequentially after it. If the chunk cannot be resolved,
 // the preload is skipped silently — never a broken link, never a
 // failed build.
+//
+// Fix #10b (DE tool-page LCP — live PSI 7.6-8.9s vs local 3.6s): the
+// tool's own chunk is ALSO lazy-loaded — ToolPage renders only after
+// the locale data resolves, and only then does React.lazy() fire the
+// dynamic import of the tool component, so the tool chunk downloads
+// sequentially AFTER the locale chunk (one more RTT + queueing on Slow
+// 4G, then parse + render before the workspace — the LCP element — can
+// paint). Tool pages therefore also preload their tool chunk (see
+// toolChunkFile below). The component file name comes from the lazy
+// loader's own source (component._payload._result.toString() contains
+// the import('.../<ComponentName>') call), so the mapping is derived
+// from the real registry data, never hand-maintained. If it cannot be
+// resolved, the preload is skipped silently, same as the locale chunk.
 // NOTE: route-level lazy loading was tried and REVERTED (measured
 // locally: it saved only ~15 KB gzip on the initial bundle but cost
 // tool pages ~250 ms of extra Suspense round-trip, so word-counter
@@ -76,7 +89,7 @@ import { PT_TOOL_OVERRIDES } from '../src/locales/pt/tools';
 import { RU_TOOL_OVERRIDES } from '../src/locales/ru/tools';
 import { ZH_TOOL_OVERRIDES } from '../src/locales/zh/tools';
 import type { ToolLocaleOverride } from '../src/locales/types';
-import type { BreadcrumbItem, CategoryId } from '../src/types/tool';
+import type { BreadcrumbItem, CategoryId, ToolDefinition } from '../src/types/tool';
 
 const ORIGIN = SITE_CONFIG.defaultOrigin;
 
@@ -576,6 +589,46 @@ function localeChunkFile(distDir: string, locale: LocaleCode, marker?: string): 
   return `assets/${withMarker[0]}`;
 }
 
+// ---------------------------------------------------------------------------
+// Fix #10b — tool-chunk modulepreload for tool pages.
+//
+// The tool component is React.lazy(() => import('.../<Name>Tool')) in the
+// registry, so Vite emits one chunk per tool named `<Name>Tool-<hash>.js`.
+// The component file name is read from the lazy loader's own source text
+// (React.lazy keeps the loader as _payload._result; its toString() still
+// contains the import('.../<Name>Tool') call under tsx), so the mapping
+// is derived from the real registry — no hand-maintained list, and a
+// rename in the registry is picked up automatically. The chunk is found
+// by scanning dist/assets for exactly one `<Name>Tool-<hash>.js` match;
+// anything else (no match, ambiguous) skips the preload silently.
+// ---------------------------------------------------------------------------
+
+function toolComponentBasename(tool: ToolDefinition): string | null {
+  const lazyComp = tool.component as unknown as {
+    _payload?: { _result?: unknown };
+  };
+  const loader = lazyComp?._payload?._result;
+  if (typeof loader !== 'function') return null;
+  const src = Function.prototype.toString.call(loader);
+  const m = src.match(/import\(["']([^"']+)["']\)/);
+  if (!m) return null;
+  const parts = m[1].split('/');
+  const base = parts[parts.length - 1];
+  return base ? base : null;
+}
+
+function toolChunkFile(distDir: string, tool: ToolDefinition): string | null {
+  const base = toolComponentBasename(tool);
+  if (!base) return null;
+  const assetsDir = resolve(distDir, 'assets');
+  if (!existsSync(assetsDir)) return null;
+  const escaped = base.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const pattern = new RegExp(`^${escaped}-[A-Za-z0-9_-]+\\.js$`);
+  const matches = readdirSync(assetsDir).filter((name) => pattern.test(name));
+  if (matches.length !== 1) return null;
+  return `assets/${matches[0]}`;
+}
+
 function filePathForRoute(distDir: string, routePath: string): string {
   if (routePath === '/') return resolve(distDir, 'index.html');
   const cleaned = routePath.replace(/^\/+|\/+$/g, '');
@@ -617,6 +670,23 @@ async function prerender(): Promise<void> {
       if (chunk) files.push(chunk);
     }
     localePreloadCache.set(locale, files);
+    return files;
+  }
+
+  // Fix #10b: per-tool chunk preload (see toolChunkFile above). Cached per
+  // tool id; resolvedToolIds tracks coverage for the final log line.
+  const toolPreloadCache = new Map<string, string[]>();
+  const resolvedToolIds = new Set<string>();
+  function toolPreloadFor(tool: ToolDefinition): string[] {
+    const cached = toolPreloadCache.get(tool.id);
+    if (cached) return cached;
+    const files: string[] = [];
+    const chunk = toolChunkFile(distDir, tool);
+    if (chunk) {
+      files.push(chunk);
+      resolvedToolIds.add(tool.id);
+    }
+    toolPreloadCache.set(tool.id, files);
     return files;
   }
 
@@ -682,7 +752,9 @@ async function prerender(): Promise<void> {
         path: localized,
         locale,
         props: toolSeo(tool.id, t, locale, data),
-        preloadFiles: preloadFor(locale, t.nav.allTools),
+        // Fix #10b: tool chunk preload rides along with the locale preload
+        // (EN tool pages get the tool chunk only — they need no locale).
+        preloadFiles: [...preloadFor(locale, t.nav.allTools), ...toolPreloadFor(tool)],
       });
       knownRoutes.add(localized);
     }
@@ -772,8 +844,22 @@ async function prerender(): Promise<void> {
     'utf8'
   );
 
+  // Fix #10b coverage: every tool page should carry its tool-chunk
+  // preload (88 tools x 11 locales = 968 pages). Warn — do not fail the
+  // build — if any tool's chunk could not be resolved.
+  const missingTools = TOOLS_REGISTRY.filter((tool) => !resolvedToolIds.has(tool.id)).map(
+    (tool) => tool.id
+  );
+  if (missingTools.length > 0) {
+    console.warn(
+      `WARNING: tool-chunk preload missing for ${missingTools.length} tool(s): ${missingTools.join(', ')}`
+    );
+  }
   console.log(
     `Prerendered ${written} pages (+ admin x2) into dist/; known-routes.ts written (${routesSorted.length} routes).`
+  );
+  console.log(
+    `Preloads: locale chunks for ${[...localePreloadCache.values()].filter((f) => f.length > 0).length}/10 non-EN locales; tool chunks for ${resolvedToolIds.size}/${TOOLS_REGISTRY.length} tools.`
   );
 }
 
