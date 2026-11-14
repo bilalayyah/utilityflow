@@ -409,7 +409,7 @@ export const DE_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       title: 'Groß-/Kleinschreibung: Text umwandeln | UtilityFlow',
       description:
         'Wandeln Sie Text zwischen Großbuchstaben, Kleinbuchstaben, Titel-Schreibweise, Satzschreibweise, camelCase, snake_case und kebab-case um – mit einem Klick.',
-      primaryKeyword: 'gross kleinschreibung konverter',
+      primaryKeyword: 'groß kleinschreibung umwandeln',
       secondaryKeywords: ['titel schreibweise konverter', 'satzschreibweise tool', 'text schreibweise ändern', 'grossbuchstaben in kleinbuchstaben'],
       longTailKeywords: ['text in grossbuchstaben in satzschreibweise umwandeln', 'zeichenkette in camelcase und snake_case umwandeln', 'titel grossschreibung tool online', 'grossbuchstaben in kleinbuchstaben online kostenlos ändern'],
       schemaApplicationCategory: 'UtilitiesApplication',
@@ -530,7 +530,7 @@ export const DE_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Funktioniert der Konverter mit Zahlen und Symbolen?',
         answer:
-          'Ja. Zahlen, Satzzeichen und Symbole bleiben unverändert; nur Buchstaben werden umgewandelt.',
+          'Ja. Zahlen, Satzzeichen und Symbole bleiben unverändert; nur Buchstaben werden umgewandelt. Das ist praktisch, wenn Ihr Text etwa Jahreszahlen, Preise oder Sonderzeichen enthält, die beim Wechsel der Schreibweise exakt erhalten bleiben sollen.',
       },
       {
         question: 'Kann ich einen ganzen Absatz auf einmal umwandeln?',
@@ -979,7 +979,7 @@ export const DE_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       title: 'Leerzeichen entfernen: Text bereinigen | UtilityFlow',
       description:
         'Entfernen Sie überflüssige Leerzeichen, Tabs, Leerzeilen und defekte PDF-Zeilenumbrüche in Ihrem Browser – schnell, kostenlos und privat, ohne Anmeldung.',
-      primaryKeyword: 'leerzeichen entferner',
+      primaryKeyword: 'leerzeichen entfernen',
       secondaryKeywords: ['überflüssige leerzeichen entfernen', 'zeilenumbrüche entfernen', 'text leerzeichen bereinigen', 'leerzeilen entfernen'],
       longTailKeywords: ['überflüssige leerzeichen und leerzeilen online entfernen', 'zeilenumbrüche beim kopieren aus pdf korrigieren', 'tabs und mehrere leerzeichen in ein leerzeichen umwandeln', 'nachgestellte leerzeichen aus kopiertem text entfernen'],
       schemaApplicationCategory: 'UtilitiesApplication',
@@ -1169,7 +1169,7 @@ export const DE_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       title: 'Zeilen sortieren: A–Z & natürlich sortieren | UtilityFlow',
       description:
         'Sortieren Sie Zeilen von A bis Z, von Z bis A, in natürlicher Zahlenreihenfolge, nach Länge, umgekehrt oder gemischt – mit optionaler Deduplizierung im Browser.',
-      primaryKeyword: 'zeilen alphabetisch sortieren',
+      primaryKeyword: 'zeilen sortieren',
       secondaryKeywords: ['liste alphabetisch ordnen', 'textzeilen sortierer', 'natürlich sortieren online', 'zeilen a bis z sortieren'],
       longTailKeywords: ['liste alphabetisch sortieren mit zahlen in natürlicher reihenfolge', 'zeilen nach länge von kurz nach lang sortieren', 'alphabetisch ordnen und doppelte zeilen entfernen', 'zeilenreihenfolge online umkehren'],
       schemaApplicationCategory: 'UtilitiesApplication',
@@ -1445,7 +1445,7 @@ export const DE_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Ist das Suchen-und-Ersetzen-Tool kostenlos?',
         answer:
-          'Ja. Das Suchen-und-Ersetzen-Tool ist vollständig kostenlos, ohne Anmeldung und ohne Konto.',
+          'Ja. Das Suchen-und-Ersetzen-Tool ist vollständig kostenlos, ohne Anmeldung und ohne Konto. Sie können beliebig viele Ersetzungen in beliebig langen Texten durchführen, direkt im Browser und ohne versteckte Limits.',
       },
       {
         question: 'Verlässt mein Text den Browser, wenn ich Suchen und Ersetzen nutze?',
@@ -1549,7 +1549,7 @@ export const DE_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       title: 'Text umkehren: Wörter & Zeilen spiegeln | UtilityFlow',
       description:
         'Zeichen umkehren, Wortreihenfolge drehen, jedes Wort spiegeln oder Zeilenreihenfolge invertieren – sofort, Unicode-sicher, kostenlos und privat im Browser.',
-      primaryKeyword: 'text umkehrer',
+      primaryKeyword: 'text umkehren',
       secondaryKeywords: ['text online umkehren', 'wortreihenfolge umkehren', 'zeilen invertieren', 'text spiegeln online'],
       longTailKeywords: ['jedes wort in einem satz online umkehren', 'reihenfolge der zeilen in textdatei umkehren', 'unicode sicherer string umkehrer', 'textzeichen online umkehren'],
       schemaApplicationCategory: 'UtilitiesApplication',
@@ -1635,7 +1635,7 @@ export const DE_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Ist der Text-Umkehrer kostenlos?',
         answer:
-          'Ja. Der Text-Umkehrer ist vollständig kostenlos, ohne Anmeldung und ohne Konto.',
+          'Ja. Der Text-Umkehrer ist vollständig kostenlos, ohne Anmeldung und ohne Konto. Alle Umkehrmodi – Zeichen, Wörter und Zeilen – stehen sofort zur Verfügung, ohne dass Sie sich registrieren müssen.',
       },
       {
         question: 'Verlässt mein Text den Browser, wenn ich den Text-Umkehrer nutze?',
@@ -1740,7 +1740,7 @@ export const DE_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       description:
         'Erstellen Sie Lorem-Ipsum-Platzhaltertext nach Absätzen, Sätzen oder exakter Wortzahl, mit optionalen HTML-Absatz-Tags für Mockups und Layouts – ohne Anmeldung.',
       primaryKeyword: 'lorem ipsum generator',
-      secondaryKeywords: ['platzhaltertext', 'blindtext generator', 'lorem ipsum absätze', 'blindtext generator'],
+      secondaryKeywords: ['platzhaltertext', 'blindtext generator', 'lorem ipsum absätze', 'lorem ipsum blindtext'],
       longTailKeywords: ['lorem ipsum nach wortzahl erstellen', 'lorem ipsum generator mit html p tags', 'sauberer platzhaltertext für ui mockups', 'lorem ipsum generator für website mockup'],
       schemaApplicationCategory: 'UtilitiesApplication',
     },
@@ -1825,7 +1825,7 @@ export const DE_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Ist der Lorem-Ipsum-Generator kostenlos?',
         answer:
-          'Ja. Der Lorem-Ipsum-Generator ist vollständig kostenlos, ohne Anmeldung und ohne Konto.',
+          'Ja. Der Lorem-Ipsum-Generator ist vollständig kostenlos, ohne Anmeldung und ohne Konto. Sie können so viele Absätze, Sätze oder Wörter erzeugen, wie Sie für Ihre Mockups brauchen, ohne jede Begrenzung.',
       },
       {
         question: 'Brauche ich ein Konto oder eine Internetverbindung, um Lorem Ipsum zu erzeugen?',
@@ -2020,7 +2020,7 @@ export const DE_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Ist die Lesbarkeitsprüfung kostenlos?',
         answer:
-          'Ja. Die Lesbarkeitsprüfung ist vollständig kostenlos, ohne Anmeldung und ohne Konto.',
+          'Ja. Die Lesbarkeitsprüfung ist vollständig kostenlos, ohne Anmeldung und ohne Konto. Sie können beliebig viele Texte prüfen und erhalten jedes Mal sofort die Flesch-Kincaid-Werte und eine verständliche Einordnung.',
       },
       {
         question: 'Was ist das Flesch-Kincaid Grade Level?',
@@ -2119,7 +2119,7 @@ export const DE_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       title: 'Worthäufigkeit: Keyword-Dichte prüfen | UtilityFlow',
       description:
         'Analysieren Sie Worthäufigkeit und Keyword-Dichte für 1-, 2- und 3-Wort-Phrasen mit Prozenten, Stoppwort-Filter und CSV-Export – kostenlos und privat.',
-      primaryKeyword: 'worthäufigkeit zähler',
+      primaryKeyword: 'worthäufigkeit prüfen',
       secondaryKeywords: ['keyword dichte prüfer', 'phrasen häufigkeit analysator', 'wortvorkommen tool', 'ngram häufigkeit zähler'],
       longTailKeywords: ['worthäufigkeit und dichte prozent online zählen', '2 wort und 3 wort phrasen in text analysieren', 'worthäufigkeit tabelle als csv exportieren', 'keyword stuffing in artikelentwurf prüfen'],
       schemaApplicationCategory: 'UtilitiesApplication',
@@ -2210,7 +2210,7 @@ export const DE_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Ist der Worthäufigkeitszähler kostenlos?',
         answer:
-          'Ja. Der Worthäufigkeitszähler ist vollständig kostenlos, ohne Anmeldung und ohne Konto.',
+          'Ja. Der Worthäufigkeitszähler ist vollständig kostenlos, ohne Anmeldung und ohne Konto. Sie können beliebig viele Texte analysieren, Worthäufigkeiten und Keyword-Dichte prüfen und die Ergebnisse als CSV exportieren.',
       },
       {
         question: 'Was ist Keyword-Dichte und warum ist sie wichtig?',
@@ -2309,7 +2309,7 @@ export const DE_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       title: 'Text-zu-Slug: SEO-freundliche URLs erstellen | UtilityFlow',
       description:
         'Wandeln Sie Titel und Überschriften in SEO-freundliche URL-Slugs um – mit Umlaut-Transliteration, Bindestrich- oder Unterstrich-Trennzeichen und Stapelmodus.',
-      primaryKeyword: 'text zu slug konverter',
+      primaryKeyword: 'text zu slug',
       secondaryKeywords: ['url slug generator', 'slugify string', 'sauberer url generator', 'titel zu slug tool'],
       longTailKeywords: ['artikeltitel in seo freundlichen url slug umwandeln', 'mehrere überschriften stapelweise in slugs umwandeln', 'slugify umlaute in ascii online', 'bindestrich oder unterstrich slug trennzeichen'],
       schemaApplicationCategory: 'UtilitiesApplication',
@@ -2400,7 +2400,7 @@ export const DE_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Ist der Text-zu-Slug-Konverter kostenlos?',
         answer:
-          'Ja. Der Text-zu-Slug-Konverter ist vollständig kostenlos, ohne Anmeldung und ohne Konto.',
+          'Ja. Der Text-zu-Slug-Konverter ist vollständig kostenlos, ohne Anmeldung und ohne Konto. Auch der Stapelmodus für viele Titel auf einmal ist ohne jede Begrenzung nutzbar.',
       },
       {
         question: 'Was macht einen Slug SEO-freundlich?',
@@ -2415,12 +2415,12 @@ export const DE_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Warum sind Slugs kleingeschrieben?',
         answer:
-          'Weil URLs groß-/kleinschreibungsempfindlich sind; Kleinschreibung verhindert doppelte URLs und Verwechslungen.',
+          'Weil URLs groß-/kleinschreibungsempfindlich sind; Kleinschreibung verhindert doppelte URLs und Verwechslungen. Einheitlich kleingeschriebene Slugs sind außerdem leichter zu tippen, zu teilen und in Suchergebnissen zu lesen.',
       },
       {
         question: 'Was passiert mit Zahlen in einem Slug?',
         answer:
-          'Zahlen bleiben erhalten, zum Beispiel wird „Leitfaden für 2026“ zu „leitfaden-fuer-2026“.',
+          'Zahlen bleiben erhalten, zum Beispiel wird „Leitfaden für 2026“ zu „leitfaden-fuer-2026“. Umlaute werden dabei transliteriert, also ä zu ae, damit der Slug in jeder URL sicher funktioniert.',
       },
       {
         question: 'Wie werden Sonderzeichen in Slugs behandelt?',
@@ -2445,7 +2445,7 @@ export const DE_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Kann ich viele Titel auf einmal umwandeln?',
         answer:
-          'Ja. Der Stapelmodus verarbeitet mehrere Titel zeilenweise in einem Durchgang.',
+          'Ja. Der Stapelmodus verarbeitet mehrere Titel zeilenweise in einem Durchgang. Geben Sie einfach einen Titel pro Zeile ein und erhalten Sie für jede Zeile sofort den passenden Slug.',
       },
       {
         question: 'Lädt der Text-zu-Slug-Konverter meine Titel hoch?',
@@ -2460,7 +2460,7 @@ export const DE_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Kann ich Slugs auch für Dateinamen nutzen?',
         answer:
-          'Ja. Slugs eignen sich hervorragend als saubere, URL- und dateisystemsichere Dateinamen.',
+          'Ja. Slugs eignen sich hervorragend als saubere, URL- und dateisystemsichere Dateinamen. Sie enthalten nur Kleinbuchstaben, Ziffern und Bindestriche, also keine Zeichen, die Dateisysteme oder URLs stören.',
       },
       {
         question: 'Was ist der Unterschied zwischen einem Slug und einer URL?',
@@ -2590,7 +2590,7 @@ export const DE_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Ist die Markdown-Vorschau kostenlos?',
         answer:
-          'Ja. Die Markdown-Vorschau ist vollständig kostenlos, ohne Anmeldung und ohne Konto.',
+          'Ja. Die Markdown-Vorschau ist vollständig kostenlos, ohne Anmeldung und ohne Konto. Sie können beliebig lange Markdown-Dokumente schreiben und live in der Vorschau prüfen, ohne dass etwas gespeichert wird.',
       },
       {
         question: 'Welche Markdown-Syntax unterstützt die Vorschau?',
@@ -2635,7 +2635,7 @@ export const DE_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Wie füge ich ein Bild in Markdown ein?',
         answer:
-          'Nutzen Sie die Syntax ![Alt-Text](bild-url), zum Beispiel ![Logo](https://beispiel.de/logo.png).',
+          'Nutzen Sie die Syntax ![Alt-Text](bild-url), zum Beispiel ![Logo](https://beispiel.de/logo.png). Der Text in den eckigen Klammern wird zum Alt-Text des Bildes, die URL in den runden Klammern zeigt auf die Bilddatei.',
       },
       {
         question: 'Warum wird mein Codeblock nicht gerendert?',
@@ -2689,7 +2689,7 @@ export const DE_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       title: 'Zeilennummern & Präfix/Suffix hinzufügen | UtilityFlow',
       description:
         'Fügen Sie jeder Textzeile Zeilennummern, eigene Präfixe und Suffixe hinzu – für Listen, SQL-Abfragen und Code-Arrays, kostenlos und privat im Browser.',
-      primaryKeyword: 'präfix und suffix zu zeilen hinzufügen',
+      primaryKeyword: 'präfix suffix hinzufügen',
       secondaryKeywords: ['zeilennummern online hinzufügen', 'zeilen präfix suffix tool', 'zeilen in anführungszeichen setzen', 'stapel zeilen formatierer'],
       longTailKeywords: ['jede zeile in einfache anführungszeichen und komma für sql setzen', 'nummerierte liste präfix zu textzeilen hinzufügen', 'präfix und suffix stapelweise an jede zeile anhängen', 'zeilennummern ab null hinzufügen'],
       schemaApplicationCategory: 'UtilitiesApplication',
@@ -2780,7 +2780,7 @@ export const DE_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Ist das Tool für Zeilenpräfix und -suffix kostenlos?',
         answer:
-          'Ja. Das Tool ist vollständig kostenlos, ohne Anmeldung und ohne Konto.',
+          'Ja. Das Tool ist vollständig kostenlos, ohne Anmeldung und ohne Konto. Sie können beliebig viele Zeilen mit Präfixen, Suffixen oder Zeilennummern versehen, ohne sich zu registrieren.',
       },
       {
         question: 'Kann ich ein Präfix ohne Suffix hinzufügen?',

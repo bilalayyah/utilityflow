@@ -675,7 +675,7 @@ export const DE_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Werden diese UUIDs mit Math.random() erzeugt?',
         answer:
-          'Nein. Jede UUID nutzt kryptografisch starken Zufall aus der Web-Crypto-API.',
+          'Nein. Jede UUID nutzt kryptografisch starken Zufall aus der Web-Crypto-API. Dadurch sind die erzeugten IDs für Session-Token, Datenbankschlüssel und andere sicherheitsrelevante Zwecke deutlich besser geeignet als einfache Zufallszahlen.',
       },
       {
         question: 'Wie erhalte ich eine 32-stellige Hexadezimal-ID ohne Bindestriche?',
@@ -1070,7 +1070,7 @@ export const DE_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Ist der JWT-Dekodierer kostenlos?',
         answer:
-          'Ja. Der JWT-Dekodierer ist vollständig kostenlos, ohne Anmeldung und ohne Konto.',
+          'Ja. Der JWT-Dekodierer ist vollständig kostenlos, ohne Anmeldung und ohne Konto. Sie können beliebig viele Tokens dekodieren; die Prüfung der Signatur erfolgt lokal im Browser, ohne dass Ihr Token den Rechner verlässt.',
       },
       {
         question: 'Kann ich ein JWT ohne den Signierschlüssel dekodieren?',
@@ -1260,7 +1260,7 @@ export const DE_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Ist der Hash-Generator kostenlos?',
         answer:
-          'Ja. Der Hash-Generator ist vollständig kostenlos, ohne Anmeldung und ohne Konto.',
+          'Ja. Der Hash-Generator ist vollständig kostenlos, ohne Anmeldung und ohne Konto. Sie können beliebig viele Texte hashen und zwischen Algorithmen wie MD5, SHA-1 und SHA-256 wechseln, ohne jede Begrenzung.',
       },
       {
         question: 'Was ist der Unterschied zwischen SHA-1, SHA-256, SHA-384 und SHA-512?',
@@ -1315,7 +1315,7 @@ export const DE_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Wie lang ist ein SHA-256-Hash in Hex-Zeichen?',
         answer:
-          'Ein SHA-256-Hash hat 256 Bit und wird als 64 Hexadezimalzeichen dargestellt.',
+          'Ein SHA-256-Hash hat 256 Bit und wird als 64 Hexadezimalzeichen dargestellt. Jedes Hex-Zeichen steht dabei für vier Bit, sodass der Hash immer exakt 64 Zeichen lang ist, egal wie lang der Eingabetext war.',
       },
       {
         question: 'Funktioniert der Hash-Generator offline?',
@@ -1359,7 +1359,7 @@ export const DE_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
       title: 'HTML-Entities: Zeichen escapen & dekodieren | UtilityFlow',
       description:
         'Kodieren Sie reservierte HTML-Zeichen und Nicht-ASCII-Symbole als Entities oder dekodieren Sie benannte und numerische Entities zurück in Klartext – gratis.',
-      primaryKeyword: 'html entity kodierer',
+      primaryKeyword: 'html entities kodieren',
       secondaryKeywords: ['html escape tool', 'html entity dekodierer', 'html entities dekodieren', 'html zeichen kodieren'],
       longTailKeywords: ['html tags für code snippets online escapen', 'benannte und numerische html entities dekodieren', 'sonderzeichen in html entities umwandeln', 'html anführungszeichen und kaufmännisches und escapen'],
       schemaApplicationCategory: 'DeveloperApplication',
@@ -1440,7 +1440,7 @@ export const DE_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Verarbeitet der Dekodierer hexadezimale Entities wie &#x27;?',
         answer:
-          'Ja. Der Dekodierer verarbeitet benannte, dezimale (&#39;) und hexadezimale (&#x27;) Entities.',
+          'Ja. Der Dekodierer verarbeitet benannte, dezimale (&#39;) und hexadezimale (&#x27;) Entities. Alle drei Schreibweisen werden zuverlässig zurück in das jeweilige Originalzeichen umgewandelt.',
       },
       {
         question: 'Was ist eine HTML-Entity?',
@@ -1450,7 +1450,7 @@ export const DE_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Ist der HTML-Entity-Kodierer kostenlos?',
         answer:
-          'Ja. Der HTML-Entity-Kodierer ist vollständig kostenlos, ohne Anmeldung und ohne Konto.',
+          'Ja. Der HTML-Entity-Kodierer ist vollständig kostenlos, ohne Anmeldung und ohne Konto. Kodieren und Dekodieren funktionieren unbegrenzt oft, komplett lokal in Ihrem Browser.',
       },
       {
         question: 'Warum muss ich HTML-Zeichen überhaupt escapen?',
@@ -1485,7 +1485,7 @@ export const DE_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Was ist die HTML-Entity für ein geschütztes Leerzeichen?',
         answer:
-          'Das geschützte Leerzeichen ist &nbsp; bzw. numerisch &#160;.',
+          'Das geschützte Leerzeichen ist &nbsp; bzw. numerisch &#160;. Es verhindert einen Zeilenumbruch an dieser Stelle und hält zum Beispiel eine Zahl und ihre Einheit wie „10&nbsp;kg“ zusammen.',
       },
       {
         question: 'Wie escape ich Anführungszeichen innerhalb eines HTML-Attributs?',
@@ -1525,7 +1525,7 @@ export const DE_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Was ist die HTML-Entity für das Kaufmännische Und?',
         answer:
-          'Das Kaufmännische Und (&) ist &amp; bzw. numerisch &#38;.',
+          'Das Kaufmännische Und (&) ist &amp; bzw. numerisch &#38;. Im HTML-Quelltext müssen Sie es immer als Entity schreiben, weil ein rohes & sonst als Beginn einer anderen Entity interpretiert werden könnte.',
       },
     ],
   },
@@ -1640,7 +1640,7 @@ export const DE_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Ist der JSON-zu-CSV-Konverter kostenlos?',
         answer:
-          'Ja. Der JSON-zu-CSV-Konverter ist vollständig kostenlos, ohne Anmeldung und ohne Konto.',
+          'Ja. Der JSON-zu-CSV-Konverter ist vollständig kostenlos, ohne Anmeldung und ohne Konto. Sie können beliebig große JSON-Daten umwandeln und die fertige CSV sofort herunterladen.',
       },
       {
         question: 'Kann ich ein einzelnes JSON-Objekt statt eines Arrays umwandeln?',
@@ -1665,7 +1665,7 @@ export const DE_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Was passiert mit leeren oder null-Werten bei JSON zu CSV?',
         answer:
-          'Leere oder null-Werte werden als leere Zellen in der CSV ausgegeben.',
+          'Leere oder null-Werte werden als leere Zellen in der CSV ausgegeben. So bleibt die Spaltenstruktur Ihrer Tabelle erhalten und die Datei lässt sich in Excel oder Google Tabellen problemlos weiterverarbeiten.',
       },
       {
         question: 'Kann ich CSV mit diesem Tool zurück in JSON umwandeln?',
@@ -1830,7 +1830,7 @@ export const DE_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Ist der Unix-Zeitstempel-Konverter kostenlos?',
         answer:
-          'Ja. Der Unix-Zeitstempel-Konverter ist vollständig kostenlos, ohne Anmeldung und ohne Konto.',
+          'Ja. Der Unix-Zeitstempel-Konverter ist vollständig kostenlos, ohne Anmeldung und ohne Konto. Sie können beliebig viele Zeitstempel in beide Richtungen umrechnen, ohne sich anzumelden.',
       },
       {
         question: 'Was ist der Unterschied zwischen Unix-Sekunden und Millisekunden?',
@@ -2015,7 +2015,7 @@ export const DE_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Ist der SQL-Formatierer kostenlos?',
         answer:
-          'Ja. Der SQL-Formatierer ist vollständig kostenlos, ohne Anmeldung und ohne Konto.',
+          'Ja. Der SQL-Formatierer ist vollständig kostenlos, ohne Anmeldung und ohne Konto. Auch lange Abfragen mit mehreren Klauseln lassen sich ohne jede Begrenzung formatieren.',
       },
       {
         question: 'Sendet der SQL-Formatierer meine Abfragen an einen Server?',
@@ -2035,7 +2035,7 @@ export const DE_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Kann ich DDL-Anweisungen wie CREATE TABLE formatieren?',
         answer:
-          'Ja. CREATE-TABLE- und andere DDL-Anweisungen werden mit Klauselumbrüchen und Einrückung strukturiert.',
+          'Ja. CREATE-TABLE- und andere DDL-Anweisungen werden mit Klauselumbrüchen und Einrückung strukturiert. So bleiben auch komplexe Tabellendefinitionen mit vielen Spalten gut lesbar.',
       },
       {
         question: 'Welche Einrückungsoptionen bietet der SQL-Formatierer?',
@@ -2085,12 +2085,12 @@ export const DE_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Kann ich den SQL-Formatierer auf dem Handy nutzen?',
         answer:
-          'Ja. Er funktioniert in jedem modernen mobilen Browser mit denselben Formatierungsoptionen.',
+          'Ja. Er funktioniert in jedem modernen mobilen Browser mit denselben Formatierungsoptionen. Die Oberfläche passt sich dem kleinen Bildschirm an, sodass Sie auch unterwegs Abfragen formatieren können.',
       },
       {
         question: 'Behält der SQL-Formatierer Zeilenumbrüche innerhalb von String-Literalen?',
         answer:
-          'Ja. Zeilenumbrüche innerhalb von Zeichenketten in Anführungszeichen werden nicht verändert.',
+          'Ja. Zeilenumbrüche innerhalb von Zeichenketten in Anführungszeichen werden nicht verändert. Der Formatierer erkennt String-Literale und fasst ihren Inhalt nicht an, damit Ihre Abfrage weiterhin exakt denselben Text liefert.',
       },
       {
         question: 'Wie kann ich die Schlüsselwort-Großschreibung in meinem Team mit dem SQL-Formatierer standardisieren?',
@@ -2190,7 +2190,7 @@ export const DE_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Bricht die CSS-Minifizierung Leerzeichen innerhalb von content: "..."-Zeichenketten?',
         answer:
-          'Nein. Der Tokenizer erkennt zitierte Zeichenketten und lässt Leerzeichen darin unberührt.',
+          'Nein. Der Tokenizer erkennt zitierte Zeichenketten und lässt Leerzeichen darin unberührt. Nur überflüssige Leerzeichen außerhalb von Zeichenketten werden entfernt, sodass Ihre content-Werte exakt so bleiben, wie Sie sie geschrieben haben.',
       },
       {
         question: 'Warum entfernt Minimieren das letzte Semikolon vor „}“?',
@@ -2200,12 +2200,12 @@ export const DE_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Unterstützt es verschachtelte @media-Blöcke im Verschönern-Modus?',
         answer:
-          'Ja. Verschachtelte @media-Blöcke und andere At-Regeln werden mit korrekter Einrückung erweitert.',
+          'Ja. Verschachtelte @media-Blöcke und andere At-Regeln werden mit korrekter Einrückung erweitert. So bleibt auch modernes, verschachteltes CSS nach dem Verschönern sauber strukturiert und leicht lesbar.',
       },
       {
         question: 'Ist der CSS-Minifier kostenlos?',
         answer:
-          'Ja. Der CSS-Minifier ist vollständig kostenlos, ohne Anmeldung und ohne Konto.',
+          'Ja. Der CSS-Minifier ist vollständig kostenlos, ohne Anmeldung und ohne Konto. Sie können beliebig große Stylesheets minimieren oder verschönern, ohne dass eine Datei Ihren Browser verlässt.',
       },
       {
         question: 'Lädt der CSS-Minifier mein Stylesheet irgendwo hoch?',
@@ -2245,7 +2245,7 @@ export const DE_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Verarbeitet der CSS-Minifier @keyframes und @font-face?',
         answer:
-          'Ja. @keyframes- und @font-face-Blöcke werden korrekt minimiert und verschönert.',
+          'Ja. @keyframes- und @font-face-Blöcke werden korrekt minimiert und verschönert. Animationen und eingebettete Schriften bleiben dabei voll funktionsfähig, weil der Minifier ihre innere Struktur respektiert.',
       },
       {
         question: 'Was ist der Unterschied zwischen Minimieren und Verschönern im CSS-Minifier?',
@@ -2265,7 +2265,7 @@ export const DE_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Ist der angezeigte Byte-Ersparnis-Prozentsatz des CSS-Minifiers exakt?',
         answer:
-          'Ja. Er wird aus den exakten Eingabe- und Ausgabe-Bytegrößen berechnet.',
+          'Ja. Er wird aus den exakten Eingabe- und Ausgabe-Bytegrößen berechnet. Die Anzeige vergleicht die tatsächliche Bytezahl vor und nach der Minifizierung, nicht eine Schätzung.',
       },
       {
         question: 'Kann ich den CSS-Minifier für Inline-<style>-Ausschnitte nutzen?',
@@ -2275,7 +2275,7 @@ export const DE_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Unterstützt der CSS-Minifier modernes CSS wie Grid und Nesting?',
         answer:
-          'Ja. Grid-Eigenschaften und verschachtelte Regeln werden unterstützt und korrekt verarbeitet.',
+          'Ja. Grid-Eigenschaften und verschachtelte Regeln werden unterstützt und korrekt verarbeitet. Auch Container-Queries und andere neue CSS-Funktionen überstehen die Minifizierung ohne Veränderung ihrer Bedeutung.',
       },
       {
         question: 'Was passiert, wenn mein CSS einen Syntaxfehler hat?',
@@ -2285,7 +2285,7 @@ export const DE_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Kann ich CSS auf dem Handy minimieren?',
         answer:
-          'Ja. Der CSS-Minifier funktioniert in jedem modernen mobilen Browser.',
+          'Ja. Der CSS-Minifier funktioniert in jedem modernen mobilen Browser. Die Oberfläche ist für kleine Bildschirme optimiert, sodass Sie Stylesheets auch unterwegs minimieren oder verschönern können.',
       },
     ],
   },
@@ -2395,7 +2395,7 @@ export const DE_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Ist der JavaScript-Minifier kostenlos?',
         answer:
-          'Ja. Der JavaScript-Minifier ist vollständig kostenlos, ohne Anmeldung und ohne Konto.',
+          'Ja. Der JavaScript-Minifier ist vollständig kostenlos, ohne Anmeldung und ohne Konto. Sie können beliebig viel Code minimieren oder formatieren, komplett lokal und ohne Upload.',
       },
       {
         question: 'Lädt der JavaScript-Minifier meinen Code auf einen Server hoch?',
@@ -2415,7 +2415,7 @@ export const DE_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Entfernt der JavaScript-Minifier console.log-Anweisungen?',
         answer:
-          'Nein. console.log-Anweisungen bleiben erhalten; das Tool entfernt nur Kommentare und Leerzeichen.',
+          'Nein. console.log-Anweisungen bleiben erhalten; das Tool entfernt nur Kommentare und Leerzeichen. Ihr Code verhält sich nach der Minifizierung also exakt so wie vorher, inklusive aller Debug-Ausgaben.',
       },
       {
         question: 'Kann ich minimierten Code aus einem Produktions-Bundle verschönern?',
@@ -2435,7 +2435,7 @@ export const DE_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Kann ich ES6-Code mit Arrow-Funktionen und Klassen minimieren?',
         answer:
-          'Ja. Moderne ES6-Syntax wie Arrow-Funktionen, Klassen und Destructuring wird unterstützt.',
+          'Ja. Moderne ES6-Syntax wie Arrow-Funktionen, Klassen und Destructuring wird unterstützt. Der Minifier versteht die aktuelle JavaScript-Syntax und verändert weder die Logik noch die Bedeutung Ihres Codes.',
       },
       {
         question: 'Unterstützt der JavaScript-Minifier JSX- oder React-Code?',
@@ -2455,7 +2455,7 @@ export const DE_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Behält der JavaScript-Minifier reguläre Ausdrücke?',
         answer:
-          'Ja. Reguläre Ausdrücke werden vom Tokenizer erkannt und bleiben unverändert.',
+          'Ja. Reguläre Ausdrücke werden vom Tokenizer erkannt und bleiben unverändert. Das ist wichtig, weil schon ein verändertes Zeichen in einem Muster die Suche komplett verändern könnte.',
       },
       {
         question: 'Was passiert, wenn mein JavaScript einen Syntaxfehler hat?',
@@ -2475,7 +2475,7 @@ export const DE_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Kann ich JavaScript auf dem Handy formatieren?',
         answer:
-          'Ja. Der JavaScript-Minifier funktioniert in jedem modernen mobilen Browser.',
+          'Ja. Der JavaScript-Minifier funktioniert in jedem modernen mobilen Browser. Sie können Code unterwegs einfügen, minimieren oder formatieren, ohne einen Desktop-Rechner zu brauchen.',
       },
     ],
   },
@@ -2585,7 +2585,7 @@ export const DE_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Ist der Cron-Ausdruck-Parser kostenlos?',
         answer:
-          'Ja. Der Cron-Ausdruck-Parser ist vollständig kostenlos, ohne Anmeldung und ohne Konto.',
+          'Ja. Der Cron-Ausdruck-Parser ist vollständig kostenlos, ohne Anmeldung und ohne Konto. Sie können beliebig viele Cron-Ausdrücke prüfen und sich die nächsten Ausführungszeiten anzeigen lassen.',
       },
       {
         question: 'Was ist ein Cron-Ausdruck?',
@@ -2650,7 +2650,7 @@ export const DE_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Unterstützt der Cron-Ausdruck-Parser Sekunden oder 6-Felder-Ausdrücke?',
         answer:
-          'Nein. Sekunden werden nicht unterstützt; der Parser erwartet genau fünf Felder.',
+          'Nein. Sekunden werden nicht unterstützt; der Parser erwartet genau fünf Felder. Klassische Cron-Ausdrücke bestehen aus Minute, Stunde, Tag, Monat und Wochentag, und genau dieses Format wird geprüft.',
       },
       {
         question: 'Kann ich Cron-Läufe für einen bestimmten Datumsbereich in der Vorschau ansehen?',
@@ -2765,7 +2765,7 @@ export const DE_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Kann ich 3-stellige Kurz-HEX-Codes wie #09f eingeben?',
         answer:
-          'Ja. Kurzcodes wie #09f werden automatisch zu #0099FF erweitert.',
+          'Ja. Kurzcodes wie #09f werden automatisch zu #0099FF erweitert. Jede Ziffer wird dabei verdoppelt, sodass aus dem Kurzcode der vollständige sechsstellige HEX-Wert entsteht.',
       },
       {
         question: 'Warum macht HSL das Anpassen von Themes einfacher als RGB?',
@@ -2775,7 +2775,7 @@ export const DE_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Ist der Farb-Konverter kostenlos?',
         answer:
-          'Ja. Der Farb-Konverter ist vollständig kostenlos, ohne Anmeldung und ohne Konto.',
+          'Ja. Der Farb-Konverter ist vollständig kostenlos, ohne Anmeldung und ohne Konto. Sie können beliebig viele Farben zwischen HEX, RGB, HSL und anderen Formaten umrechnen.',
       },
       {
         question: 'Speichert der Farb-Konverter meine Farben?',
@@ -2855,7 +2855,7 @@ export const DE_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Kann ich den Farb-Konverter auf dem Handy nutzen?',
         answer:
-          'Ja. Der Farb-Konverter funktioniert in jedem modernen mobilen Browser.',
+          'Ja. Der Farb-Konverter funktioniert in jedem modernen mobilen Browser. Die Farbauswahl und alle Umrechnungsfelder passen sich dem kleinen Bildschirm an.',
       },
     ],
   },

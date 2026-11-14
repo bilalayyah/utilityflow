@@ -224,7 +224,7 @@ export const DE_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
       title: 'Suchergebnis-Vorschau – Pixelbreite prüfen | UtilityFlow',
       description:
         'Sieh dir dein Google-Suchergebnis-Snippet auf Desktop und Handy an – mit echter Pixelbreitenprüfung des Titels, Keyword-Hervorhebung und Warnung vor Kürzung.',
-      primaryKeyword: 'serp snippet vorschau',
+      primaryKeyword: 'suchergebnis vorschau',
       secondaryKeywords: [
         'google serp simulator',
         'seo titel pixelbreite prüfen',
@@ -358,7 +358,7 @@ export const DE_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Lädt die SERP-Snippet-Vorschau meinen Titel oder meine URL irgendwo hoch?',
         answer:
-          'Nein. Vorschau und Messung laufen komplett lokal in deinem Browser.',
+          'Nein. Vorschau und Messung laufen komplett lokal in deinem Browser. Titel, Beschreibung und URL werden nur auf deinem Gerät verarbeitet und niemals an einen Server gesendet.',
       },
       {
         question: 'Wie kopiere ich Titel und Meta-Description nach der Vorschau?',
@@ -1412,7 +1412,7 @@ export const DE_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
       title: 'Canonical & Hreflang – 301-Weiterleitungen | UtilityFlow',
       description:
         'Erstelle Hreflang- und Canonical-Tags für mehrsprachige Seiten plus 301-Weiterleitungsregeln für Cloudflare Pages, Apache und Nginx – kopierfertig zum Einsatz.',
-      primaryKeyword: 'hreflang generator',
+      primaryKeyword: 'canonical hreflang',
       secondaryKeywords: [
         'canonical link tag generator',
         '301 weiterleitung config erstellen',
@@ -1610,7 +1610,7 @@ export const DE_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
       title: 'On-Page-SEO-Prüfer – HTML-Audit-Tool | UtilityFlow',
       description:
         'Füge beliebigen Seiten-HTML-Quelltext ein, um Titel, Meta-Description, Überschriften, Canonical, Bild-Alt-Texte, Links und JSON-LD zu prüfen – kostenlos.',
-      primaryKeyword: 'on page seo checker',
+      primaryKeyword: 'on page seo prüfer',
       secondaryKeywords: [
         'html quelltext seo audit',
         'h1 h2 überschriften struktur prüfen',
@@ -2006,7 +2006,7 @@ export const DE_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
       title: 'Bild-Kompressor – PNG, JPG & WebP verkleinern | UtilityFlow',
       description:
         'Komprimiere Bilder in deinem Browser mit dem Bild-Kompressor. Stelle Qualität ein, begrenze die Breite, vergleiche Vorher-Nachher-Größen und lade herunter.',
-      primaryKeyword: 'bild komprimieren',
+      primaryKeyword: 'bild kompressor',
       secondaryKeywords: [
         'png jpg webp online komprimieren',
         'foto dateigröße kostenlos verringern',
@@ -2150,7 +2150,7 @@ export const DE_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Erhält mein komprimiertes Bild ein Wasserzeichen?',
         answer:
-          'Nein, heruntergeladene Bilder enthalten niemals Wasserzeichen oder Branding.',
+          'Nein, heruntergeladene Bilder enthalten niemals Wasserzeichen oder Branding. Der Bild-Kompressor verändert nur Dateigröße und Qualität, fügt aber keine sichtbaren Markierungen hinzu.',
       },
       {
         question: 'Was ist das beste Format zum Komprimieren von Screenshots?',
@@ -2204,7 +2204,7 @@ export const DE_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
       title: 'Bildgröße anpassen – Exakte Pixel, Zuschnitt | UtilityFlow',
       description:
         'Passe Fotos mit dem Bildgrößen-Anpasser auf exakte Pixel an. Sperre das Seitenverhältnis, schneide per Cover-Zuschnitt zu und exportiere PNG, JPG oder WebP.',
-      primaryKeyword: 'bild größe ändern',
+      primaryKeyword: 'bildgröße anpassen',
       secondaryKeywords: [
         'foto auf exakte pixel skalieren',
         'seitenverhältnis cover zuschnitt tool',
@@ -2373,7 +2373,7 @@ export const DE_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Wie skaliere ich ein Bild für YouTube-Thumbnails?',
         answer:
-          'Wähle die YouTube-HD-Vorlage (1280×720), damit dein Thumbnail der empfohlenen 16:9-Größe entspricht.',
+          'Wähle die YouTube-HD-Vorlage (1280×720), damit dein Thumbnail der empfohlenen 16:9-Größe entspricht. Die Vorlage stellt Breite, Höhe und Seitenverhältnis automatisch ein, sodass du nur noch exportieren musst.',
       },
       {
         question: 'Warum ist meine skalierte Bilddatei immer noch groß?',
@@ -2576,7 +2576,7 @@ export const DE_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Enthalten umgewandelte Bilder Wasserzeichen?',
         answer:
-          'Nein, umgewandelte Dateien sind saubere Kopien ohne hinzugefügte Wasserzeichen oder Branding.',
+          'Nein, umgewandelte Dateien sind saubere Kopien ohne hinzugefügte Wasserzeichen oder Branding. Der Format-Konverter ändert nur das Dateiformat; Ihr Bild selbst bleibt unverändert.',
       },
     ],
   },
@@ -2996,7 +2996,7 @@ export const DE_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
       title: 'Farbkontrast-Prüfer – WCAG 2.1 AA/AAA | UtilityFlow',
       description:
         'Prüfe WCAG-2.1-AA- und AAA-Kontrastverhältnisse für Text- und Hintergrund-Farbpaare, wandle HEX, RGB und HSL um und extrahiere Paletten aus Bildern – kostenlos.',
-      primaryKeyword: 'farbkontrast prüfen',
+      primaryKeyword: 'farbkontrast prüfer',
       secondaryKeywords: [
         'wcag aa aaa kontrastverhältnis rechner',
         'farbpalette aus bild extrahieren',
@@ -3194,7 +3194,7 @@ export const DE_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
       title: 'QR-Code-Leser – QR-Bilder & vCards dekodieren | UtilityFlow',
       description:
         'Scanne und dekodiere QR-Codes aus Screenshots, Fotos oder deiner Webcam im Browser oder erstelle einen herunterladbaren vCard-Kontakt-QR-Code als PNG und SVG.',
-      primaryKeyword: 'qr code scanner',
+      primaryKeyword: 'qr code leser',
       secondaryKeywords: [
         'qr code bild leser online',
         'qr aus screenshot kostenlos scannen',
@@ -3590,7 +3590,7 @@ export const DE_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
       title: 'Datei-Hash-Prüfer – SHA-256-Checksummen | UtilityFlow',
       description:
         'Berechne SHA-256-, SHA-512-, SHA-384- und SHA-1-Digests für jede lokale Datei in deinem Browser und vergleiche sie mit Checksummen – ohne Uploads, kostenlos.',
-      primaryKeyword: 'datei hash prüfen',
+      primaryKeyword: 'datei hash prüfer',
       secondaryKeywords: [
         'sha256 checksumme rechner datei',
         'sha256sum datei online verifizieren',
@@ -3679,7 +3679,7 @@ export const DE_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Möchtest du stattdessen rohe Text-Strings hashen?',
         answer:
-          'Sieh dir unser Hash-Generator-Tool in den Entwickler-Tools für sofortiges UTF-8-Text-Hashing an.',
+          'Sieh dir unser Hash-Generator-Tool in den Entwickler-Tools für sofortiges UTF-8-Text-Hashing an. Dort können Sie beliebige Texte direkt hashen, während der Datei-Hash-Prüfer für lokale Dateien gedacht ist.',
       },
       {
         question: 'Ist der Datei-Hash-Prüfer kostenlos?',
