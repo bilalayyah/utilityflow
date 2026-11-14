@@ -93,7 +93,7 @@ export function SeoHead({
     (l) => localeTag(l.code).replace('-', '_')
   );
   const serializedOgLocaleAlternates = ogLocaleAlternates.join(',');
-  const ogImageUrl = `${SITE_CONFIG.defaultOrigin}/og-image.png`;
+  const ogImageUrl = `${SITE_CONFIG.defaultOrigin}/og-image.jpg`;
 
   useEffect(() => {
     document.title = title;
