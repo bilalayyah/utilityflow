@@ -337,7 +337,7 @@ export default function FaviconGeneratorTool() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 items-center rounded-xl border border-slate-200 bg-slate-50 p-4">
           <label
             htmlFor="fav-upload"
-            className="sm:col-span-2 flex items-center justify-center gap-2.5 rounded-lg border-2 border-dashed border-slate-300 bg-white px-4 py-5 text-sm font-medium text-slate-700 hover:border-indigo-400 cursor-pointer"
+            className="sm:col-span-2 flex items-center justify-center gap-2.5 rounded-2xl border-2 border-dashed border-indigo-300 bg-white px-4 py-5 text-sm font-medium text-slate-700 hover:border-indigo-400 cursor-pointer"
           >
             <ImagePlus className="w-5 h-5 text-indigo-600" />
             <span>
@@ -404,7 +404,7 @@ export default function FaviconGeneratorTool() {
               <a
                 href={icoUrl}
                 download="favicon.ico"
-                className="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-4 py-2 text-xs sm:text-sm font-semibold text-white hover:bg-indigo-700"
+                className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-indigo-600 to-violet-600 px-4 py-2 text-xs sm:text-sm font-semibold text-white hover:from-indigo-700 hover:to-violet-700"
               >
                 <Download className="w-4 h-4" />
                 {s.downloadIco}

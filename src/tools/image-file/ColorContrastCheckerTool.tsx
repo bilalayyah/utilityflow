@@ -492,7 +492,7 @@ export default function ColorContrastCheckerTool() {
               onClick={() => setPaletteTarget('fg')}
               className={`rounded-lg px-2.5 py-1 text-xs font-semibold border cursor-pointer ${
                 paletteTarget === 'fg'
-                  ? 'border-indigo-600 bg-indigo-600 text-white'
+                  ? 'border-indigo-600 bg-gradient-to-r from-indigo-600 to-violet-600 text-white'
                   : 'border-slate-300 bg-white text-slate-700'
               }`}
             >
@@ -503,7 +503,7 @@ export default function ColorContrastCheckerTool() {
               onClick={() => setPaletteTarget('bg')}
               className={`rounded-lg px-2.5 py-1 text-xs font-semibold border cursor-pointer ${
                 paletteTarget === 'bg'
-                  ? 'border-indigo-600 bg-indigo-600 text-white'
+                  ? 'border-indigo-600 bg-gradient-to-r from-indigo-600 to-violet-600 text-white'
                   : 'border-slate-300 bg-white text-slate-700'
               }`}
             >
@@ -514,7 +514,7 @@ export default function ColorContrastCheckerTool() {
 
         <label
           htmlFor="palette-upload"
-          className="flex items-center justify-center gap-2.5 rounded-lg border-2 border-dashed border-slate-300 bg-white px-4 py-4 text-sm font-medium text-slate-700 hover:border-indigo-400 cursor-pointer"
+          className="flex items-center justify-center gap-2.5 rounded-2xl border-2 border-dashed border-indigo-300 bg-white px-4 py-4 text-sm font-medium text-slate-700 hover:border-indigo-400 cursor-pointer"
         >
           <ImagePlus className="w-5 h-5 text-indigo-600" />
           <span>{fileName ? s.loadedReplace.replace('{name}', fileName) : s.selectImage}</span>
