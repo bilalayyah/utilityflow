@@ -203,6 +203,8 @@ export interface UiStrings {
     topic: string;
     message: string;
     submit: string;
+    sending?: string;
+    sendError?: string;
     namePlaceholder: string;
     emailPlaceholder: string;
     messagePlaceholder: string;
@@ -232,6 +234,8 @@ export interface UiStrings {
     contactBefore: string;
     contactLink: string;
     contactMiddle: string;
+    optOutGoogleAds?: string;
+    optOutAboutAds?: string;
   };
   terms: {
     seoTitle: string;
