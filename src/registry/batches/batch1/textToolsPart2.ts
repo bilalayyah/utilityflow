@@ -510,7 +510,7 @@ export const TEXT_TOOLS_PART_2: ToolDefinition[] = [
       {
         question: 'Does leaving "Replace with" empty delete matched text?',
         answer:
-          'Yes. Leaving the Replace field blank removes every matched occurrence cleanly.',
+          'Yes. Leaving the Replace field blank removes every matched occurrence cleanly, so check the preview first to avoid deleting text you still need.',
       },
       {
         question: 'Is the Find & Replace tool free to use?',
