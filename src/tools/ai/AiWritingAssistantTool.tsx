@@ -665,7 +665,7 @@ export default function AiWritingAssistantTool() {
               type="button"
               onClick={() => void handleGenerate()}
               disabled={loading || isEmpty || isOverLimit}
-              className="inline-flex items-center justify-center gap-2 rounded-lg bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-xs transition-colors hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer min-h-[42px]"
+              className="inline-flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-indigo-600 to-violet-600 px-5 py-2.5 text-sm font-semibold text-white shadow-xs transition-colors hover:from-indigo-700 hover:to-violet-700 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer min-h-[42px]"
             >
               {loading ? (
                 <>

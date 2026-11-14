@@ -471,7 +471,7 @@ export default function AiToolFinderTool() {
             <button
               type="submit"
               disabled={loadingAi || query.trim().length < 2}
-              className="inline-flex items-center justify-center gap-2 rounded-lg bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-xs transition-colors hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer min-h-[42px]"
+              className="inline-flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-indigo-600 to-violet-600 px-5 py-2.5 text-sm font-semibold text-white shadow-xs transition-colors hover:from-indigo-700 hover:to-violet-700 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer min-h-[42px]"
             >
               {loadingAi ? (
                 <>
@@ -595,7 +595,7 @@ export default function AiToolFinderTool() {
 
                 <Link
                   to={verifiedAiRecommendation.primaryEntry.url}
-                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700 transition-colors whitespace-nowrap shrink-0"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-indigo-600 to-violet-600 px-4 py-2.5 text-sm font-semibold text-white hover:from-indigo-700 hover:to-violet-700 transition-colors whitespace-nowrap shrink-0"
                 >
                   <span>{t.common.openTool}</span>
                   <ArrowRight className="w-4 h-4" aria-hidden="true" />
