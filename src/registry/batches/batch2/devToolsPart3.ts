@@ -911,7 +911,7 @@ export const DEV_TOOLS_PART_3: ToolDefinition[] = [
       {
         question: 'Can I enter 3-digit shorthand HEX codes like #09f?',
         answer:
-          'Yes. Three-character HEX codes expand automatically to their 6-character equivalents.',
+          'Yes. Three-character HEX codes expand automatically to their 6-character equivalents, so #09f becomes #0099ff and converts exactly like a full code.',
       },
       {
         question: 'Why does HSL make adjusting themes easier than RGB?',
