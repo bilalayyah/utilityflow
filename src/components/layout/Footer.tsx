@@ -10,7 +10,7 @@ export function Footer() {
   const categories = getLocalizedCategories(locale);
 
   return (
-    <footer className="border-t border-indigo-100/70 dark:border-slate-800 bg-[#f6f6fb] dark:bg-[#0b0f17] text-slate-600">
+    <footer className="border-t border-indigo-100/70 dark:border-slate-800 bg-gradient-to-br from-violet-100/80 via-indigo-100/50 to-sky-100/80 dark:from-violet-950/50 dark:via-[#0b0f17] dark:to-sky-950/50 text-slate-600">
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-12">
           <div className="lg:col-span-4 space-y-3">
@@ -61,7 +61,7 @@ export function Footer() {
                 <li key={category.id}>
                   <Link
                     to={categoryHref(category.id, locale)}
-                    className="hover:text-slate-950 transition-colors underline-offset-4 hover:underline"
+                    className="hover:text-indigo-700 transition-colors underline-offset-4 hover:underline"
                   >
                     {category.name}
                   </Link>
@@ -76,7 +76,7 @@ export function Footer() {
               <li>
                 <Link
                   to={localizeStaticPath('/', locale)}
-                  className="hover:text-slate-950 transition-colors underline-offset-4 hover:underline"
+                  className="hover:text-indigo-700 transition-colors underline-offset-4 hover:underline"
                 >
                   {t.footer.home}
                 </Link>
@@ -84,7 +84,7 @@ export function Footer() {
               <li>
                 <Link
                   to={localizeStaticPath('/tools/', locale)}
-                  className="hover:text-slate-950 transition-colors underline-offset-4 hover:underline"
+                  className="hover:text-indigo-700 transition-colors underline-offset-4 hover:underline"
                 >
                   {t.footer.allToolsDirectory}
                 </Link>
@@ -92,7 +92,7 @@ export function Footer() {
               <li>
                 <Link
                   to={localizeStaticPath('/ai-writing-assistant/', locale)}
-                  className="hover:text-slate-950 transition-colors underline-offset-4 hover:underline"
+                  className="hover:text-indigo-700 transition-colors underline-offset-4 hover:underline"
                 >
                   {t.nav.aiWriting.label}
                 </Link>
@@ -100,7 +100,7 @@ export function Footer() {
               <li>
                 <Link
                   to={localizeStaticPath('/ai-text-summarizer/', locale)}
-                  className="hover:text-slate-950 transition-colors underline-offset-4 hover:underline"
+                  className="hover:text-indigo-700 transition-colors underline-offset-4 hover:underline"
                 >
                   {t.nav.aiSummarizer.label}
                 </Link>
@@ -108,7 +108,7 @@ export function Footer() {
               <li>
                 <Link
                   to={localizeStaticPath('/ai-tool-finder/', locale)}
-                  className="hover:text-slate-950 transition-colors underline-offset-4 hover:underline"
+                  className="hover:text-indigo-700 transition-colors underline-offset-4 hover:underline"
                 >
                   {t.nav.aiFinder.label}
                 </Link>
@@ -116,7 +116,7 @@ export function Footer() {
               <li>
                 <Link
                   to={localizeStaticPath('/about/', locale)}
-                  className="hover:text-slate-950 transition-colors underline-offset-4 hover:underline"
+                  className="hover:text-indigo-700 transition-colors underline-offset-4 hover:underline"
                 >
                   {t.footer.aboutUs}
                 </Link>
@@ -124,7 +124,7 @@ export function Footer() {
               <li>
                 <Link
                   to={localizeStaticPath('/contact/', locale)}
-                  className="hover:text-slate-950 transition-colors underline-offset-4 hover:underline"
+                  className="hover:text-indigo-700 transition-colors underline-offset-4 hover:underline"
                 >
                   {t.footer.contact}
                 </Link>
@@ -138,7 +138,7 @@ export function Footer() {
               <li>
                 <Link
                   to={localizeStaticPath('/privacy-policy/', locale)}
-                  className="hover:text-slate-950 transition-colors underline-offset-4 hover:underline"
+                  className="hover:text-indigo-700 transition-colors underline-offset-4 hover:underline"
                 >
                   {t.footer.privacyPolicy}
                 </Link>
@@ -146,7 +146,7 @@ export function Footer() {
               <li>
                 <Link
                   to={localizeStaticPath('/terms-of-service/', locale)}
-                  className="hover:text-slate-950 transition-colors underline-offset-4 hover:underline"
+                  className="hover:text-indigo-700 transition-colors underline-offset-4 hover:underline"
                 >
                   {t.footer.termsOfService}
                 </Link>
@@ -154,7 +154,7 @@ export function Footer() {
               <li>
                 <a
                   href="/sitemap.xml"
-                  className="hover:text-slate-950 transition-colors underline-offset-4 hover:underline"
+                  className="hover:text-indigo-700 transition-colors underline-offset-4 hover:underline"
                 >
                   {t.footer.xmlSitemap}
                 </a>

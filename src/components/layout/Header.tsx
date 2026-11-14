@@ -76,7 +76,7 @@ export function Header() {
   );
 
   return (
-    <header className="sticky top-0 z-40 border-b border-indigo-100/70 dark:border-slate-800 bg-[#f6f6fb]/90 dark:bg-[#0b0f17]/90 backdrop-blur-md">
+    <header className="sticky top-0 z-40 border-b border-indigo-100/70 dark:border-slate-800 bg-gradient-to-r from-violet-200 via-indigo-200 to-sky-200 dark:from-violet-950/70 dark:via-indigo-950/60 dark:to-sky-950/70 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 sm:gap-8 px-4 sm:px-6 lg:px-8">
         {/* Zone 1: Single-element Brand Wordmark */}
         <Link
@@ -229,7 +229,7 @@ export function Header() {
 
       {/* Mobile search row (expandable) */}
       {searchOpen && (
-        <div className="lg:hidden border-t border-slate-200 bg-[#f6f6fb] dark:bg-[#0b0f17] px-4 py-3">
+        <div className="lg:hidden border-t border-indigo-100/70 dark:border-slate-800 bg-gradient-to-r from-violet-200 via-indigo-200 to-sky-200 dark:from-violet-950/70 dark:via-indigo-950/60 dark:to-sky-950/70 px-4 py-3">
           <ToolSearchBar placeholder={t.nav.searchPlaceholder} />
         </div>
       )}
@@ -239,7 +239,7 @@ export function Header() {
         <nav
           id="mobile-navigation"
           aria-label="Mobile"
-          className="md:hidden border-t border-slate-200 bg-[#f6f6fb] dark:bg-[#0b0f17] px-4 py-4 space-y-2"
+          className="md:hidden border-t border-indigo-100/70 dark:border-slate-800 bg-gradient-to-b from-violet-200 via-indigo-200 to-sky-200 dark:from-violet-950/70 dark:via-indigo-950/60 dark:to-sky-950/70 px-4 py-4 space-y-2"
         >
           {NAV_ITEMS.filter((item) => !('aiDropdown' in item && item.aiDropdown)).map((item) => (
             <Link
