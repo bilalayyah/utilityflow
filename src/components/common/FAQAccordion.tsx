@@ -29,14 +29,21 @@ export function FAQAccordion({ items, defaultOpenIndex = 0 }: FAQAccordionProps)
   if (items.length === 0) return null;
 
   return (
-    <div className="divide-y divide-slate-200 border-y border-slate-200">
+    <div className="space-y-2.5">
       {items.map((item, index) => {
         const isOpen = openIndex === index;
         const triggerId = `${baseId}-trigger-${index}`;
         const panelId = `${baseId}-panel-${index}`;
 
         return (
-          <div key={item.question} className="py-1">
+          <div
+            key={item.question}
+            className={`rounded-2xl border px-4 transition-colors ${
+              isOpen
+                ? 'border-indigo-200 bg-indigo-50/70 shadow-sm'
+                : 'border-slate-200 bg-white'
+            }`}
+          >
             <h3>
               <button
                 id={triggerId}
@@ -44,7 +51,7 @@ export function FAQAccordion({ items, defaultOpenIndex = 0 }: FAQAccordionProps)
                 aria-expanded={isOpen}
                 aria-controls={panelId}
                 onClick={() => setOpenIndex(isOpen ? null : index)}
-                className="flex w-full items-center justify-between gap-4 py-4 text-left text-base font-semibold text-slate-900 hover:text-indigo-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 rounded-md cursor-pointer"
+                className="flex w-full items-center justify-between gap-4 py-4 text-left text-base font-semibold text-slate-900 hover:text-indigo-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 rounded-xl cursor-pointer"
               >
                 <span>{item.question}</span>
                 <ChevronDown
@@ -60,7 +67,7 @@ export function FAQAccordion({ items, defaultOpenIndex = 0 }: FAQAccordionProps)
                 id={panelId}
                 role="region"
                 aria-labelledby={triggerId}
-                className="pb-4 pr-8 text-sm sm:text-base leading-relaxed text-slate-600"
+                className="pb-5 pr-8 text-sm sm:text-base leading-relaxed text-slate-600"
               >
                 {item.answer}
               </div>

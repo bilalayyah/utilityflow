@@ -54,12 +54,12 @@ export function CopyButton({
       type="button"
       onClick={handleCopy}
       disabled={isDisabled}
-      className={`inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs sm:text-sm font-medium transition-colors whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 ${
+      className={`inline-flex items-center gap-1.5 rounded-xl border px-3 py-1.5 text-xs sm:text-sm font-medium transition-colors whitespace-nowrap shrink-0 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 ${
         isDisabled
           ? 'border-slate-200 bg-slate-50 text-slate-400 cursor-not-allowed'
           : copied
           ? 'border-emerald-300 bg-emerald-50 text-emerald-800 cursor-pointer'
-          : 'border-slate-300 bg-white text-slate-700 hover:bg-slate-50 hover:text-slate-900 cursor-pointer'
+          : 'border-slate-200 bg-white text-slate-700 hover:border-indigo-300 hover:bg-indigo-50/40 hover:text-indigo-700 cursor-pointer'
       } ${className}`}
     >
       {copied ? (
