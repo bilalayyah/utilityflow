@@ -50,7 +50,7 @@ export const esStrings: UiStrings = {
     termsOfService: 'Términos de servicio',
     xmlSitemap: 'Mapa del sitio XML',
     rightsReserved: 'Todos los derechos reservados.',
-    deployedNote: 'Utilidades del navegador · Publicado en Cloudflare Pages',
+    deployedNote: 'Crafted with ❤️ by Bilal, inspired by Shaheen.',
   },
   common: {
     copy: 'Copiar',
