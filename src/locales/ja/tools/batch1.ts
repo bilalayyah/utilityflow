@@ -2573,7 +2573,7 @@ export const JA_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'リンクはどう書きますか？',
         answer:
-          '[表示テキスト](https://example.com)のように書くとリンクになります。',
+          'リンクは [表示テキスト](https://example.com) のように書きます。角かっこに読者に見せたい文字を、丸かっこにリンク先のURLを入れると、プレビューではクリックできるリンクとして表示されます。',
       },
       {
         question: '画像はどう書きますか？',
@@ -2608,12 +2608,12 @@ export const JA_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: '引用はどう書きますか？',
         answer:
-          '行の先頭に>を書くと引用ブロックになります。',
+          '行の先頭に > を書くと、その行が引用ブロックになります。複数行にわたって引用したい場合は、各行の先頭に > を付けてください。プレビューでは左側に縦線の付いた引用段落として表示されます。',
       },
       {
         question: '区切り線はどう書きますか？',
         answer:
-          '---や***を1行に書くと水平線が表示されます。',
+          '--- や *** を1行だけの行に書くと、プレビューに水平線が表示されます。前後に空行を入れておくと、上下の段落がはっきり分かれて見やすくなります。',
       },
       {
         question: 'MarkdownプレビューはGitHub Flavored Markdownに対応していますか？',

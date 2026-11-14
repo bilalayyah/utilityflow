@@ -2502,7 +2502,7 @@ export const JA_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: "どの形式からどの形式へ変換できますか？",
         answer:
-          "PNG、JPG、WebP、GIF、SVGのファイルを、PNG、JPG、WebPの出力に変換できます。",
+          'PNG、JPG、WebP、GIF、SVGのファイルを、PNG、JPG、WebPの出力に変換できます。変換はすべてブラウザ内で行われ、JPEGに変換する際は透明部分を指定した背景色で塗りつぶすことができます。',
       },
       {
         question: "PNGをWebPに変換する理由は何ですか？",
@@ -2770,7 +2770,7 @@ export const JA_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: "どの画像形式を回転・反転できますか？",
         answer:
-          "PNG、JPG、WebP、GIFの画像を編集でき、PNG、JPG、WebPとしてエクスポートできます。",
+          'PNG、JPG、WebP、GIFの画像を編集でき、PNG、JPG、WebPとしてエクスポートできます。回転や反転はブラウザ内のCanvasで処理され、透明な画像はPNGやWebPで書き出すことで透明部分を保ったまま保存できます。',
       },
       {
         question: "画像の回転と反転を一度に行えますか？",
