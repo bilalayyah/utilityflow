@@ -51,7 +51,7 @@ export const frStrings: UiStrings = {
     termsOfService: 'Conditions d’utilisation',
     xmlSitemap: 'Plan du site XML',
     rightsReserved: 'Tous droits réservés.',
-    deployedNote: 'Crafted with ❤️ by Bilal, inspired by Shaheen.',
+    deployedNote: 'Crafted with ❤️ by Bilal inspired by Shaheen',
   },
   common: {
     copy: 'Copier',
