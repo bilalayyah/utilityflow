@@ -169,7 +169,7 @@ export const IMAGE_FILE_TOOLS_PART_1: ToolDefinition[] = [
       {
         question: 'Will my compressed image have a watermark?',
         answer:
-          'No, downloaded images never include watermarks or branding.',
+          'No, downloaded images never include watermarks or branding, so the compressed file looks exactly like your original image, only smaller.',
       },
       {
         question: 'What is the best format for compressing screenshots?',
@@ -861,14 +861,14 @@ export const IMAGE_FILE_TOOLS_PART_1: ToolDefinition[] = [
         'data uri image encoder',
         'base64 to image preview',
         'inline svg or png in css',
-        'image to base64 online free',
+        'online base64 image encoder free',
         'encode image as data uri',
       ],
       longTailKeywords: [
         'convert png icon to css background-image data uri offline',
         'decode raw base64 string into downloadable image preview',
         'compare image binary byte size vs base64 string size',
-        'encode small logo image to base64 for html email',
+        'encode small logo picture as base64 for html email',
       ],
       schemaApplicationCategory: 'DeveloperApplication',
     },
