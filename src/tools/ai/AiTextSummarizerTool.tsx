@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { PASTEL_PALETTES, pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
 import {
@@ -30,6 +31,10 @@ import {
 const MAX_CHARS = 25_000;
 const MIN_WORDS = 25;
 const MIN_CHARS = 120;
+
+const palette = pastelForKey('ai-text-summarizer');
+const paletteAlt = PASTEL_PALETTES[(PASTEL_PALETTES.indexOf(palette) + 1) % PASTEL_PALETTES.length];
+const paletteAlt2 = PASTEL_PALETTES[(PASTEL_PALETTES.indexOf(palette) + 2) % PASTEL_PALETTES.length];
 
 const STRINGS_EN = {
     lengthOptions: {
@@ -389,7 +394,7 @@ export default function AiTextSummarizerTool() {
   return (
     <div className="space-y-6">
       {/* Top Status & Free Allowance Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-xs sm:text-sm">
+      <div className={`flex flex-wrap items-center justify-between gap-3 rounded-xl border border-slate-200 ${palette.card} px-4 py-3 text-xs sm:text-sm`}>
         <div className="flex flex-wrap items-center gap-2 text-slate-700">
           <ListChecks className="w-4 h-4 text-indigo-600 shrink-0" aria-hidden="true" />
           <span className="font-medium">{s.title}</span>
@@ -449,7 +454,7 @@ export default function AiTextSummarizerTool() {
                   onClick={() => setLength(value)}
                   className={`flex flex-col items-start rounded-lg border px-3 py-2 text-left transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 ${
                     selected
-                      ? 'border-indigo-600 bg-indigo-50 text-indigo-800'
+                      ? `${palette.soft} border-indigo-600`
                       : 'border-slate-200 bg-white text-slate-800 hover:border-indigo-300 hover:bg-slate-50'
                   }`}
                 >
@@ -647,7 +652,7 @@ export default function AiTextSummarizerTool() {
       {loading && (
         <div
           aria-live="polite"
-          className="rounded-xl border border-indigo-200 bg-indigo-50/40 p-5 space-y-3"
+          className={`rounded-xl border border-indigo-200 ${palette.card} p-5 space-y-3`}
         >
           <div className="flex items-center gap-2 text-sm font-medium text-indigo-700">
             <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" />
@@ -702,7 +707,7 @@ export default function AiTextSummarizerTool() {
       {summaryText && !loading && (
         <section
           aria-label={s.resultAria}
-          className="rounded-xl border border-slate-200 bg-slate-50/70 p-4 sm:p-5 space-y-4"
+          className={`rounded-xl border border-slate-200 ${palette.card} p-4 sm:p-5 space-y-4`}
         >
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="flex flex-wrap items-center gap-2">
@@ -730,15 +735,15 @@ export default function AiTextSummarizerTool() {
 
           {/* Reading Time & Compression Stats */}
           <dl className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            <div className="rounded-lg border border-slate-200 bg-white px-3.5 py-2.5">
+            <div className={`rounded-lg border border-slate-200 ${paletteAlt.card} px-3.5 py-2.5`}>
               <dt className="text-[11px] uppercase tracking-wider text-slate-500">{s.originalRead}</dt>
               <dd className="mt-0.5 text-sm font-bold text-slate-900 tabular-nums">
                 {originalWords.toLocaleString(locale)} {s.words} · {formatDuration(originalReadingSec, s.secUnit, s.minUnit)}
               </dd>
             </div>
-            <div className="rounded-lg border border-slate-200 bg-white px-3.5 py-2.5">
+            <div className={`rounded-lg border border-slate-200 ${paletteAlt2.card} px-3.5 py-2.5`}>
               <dt className="text-[11px] uppercase tracking-wider text-slate-500">{s.summaryRead}</dt>
-              <dd className="mt-0.5 text-sm font-bold text-indigo-600 tabular-nums">
+              <dd className={`mt-0.5 text-sm font-bold ${paletteAlt2.link} tabular-nums`}>
                 {summaryWords.toLocaleString(locale)} {s.words} · {formatDuration(summaryReadingSec, s.secUnit, s.minUnit)}
               </dd>
             </div>
@@ -759,7 +764,7 @@ export default function AiTextSummarizerTool() {
               onClick={() => setViewMode('compare')}
               className={`inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-semibold transition-colors cursor-pointer ${
                 viewMode === 'compare'
-                  ? 'bg-white text-slate-900 shadow-xs'
+                  ? `${palette.soft} shadow-xs`
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
@@ -771,7 +776,7 @@ export default function AiTextSummarizerTool() {
               onClick={() => setViewMode('summary')}
               className={`inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-semibold transition-colors cursor-pointer ${
                 viewMode === 'summary'
-                  ? 'bg-white text-slate-900 shadow-xs'
+                  ? `${palette.soft} shadow-xs`
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
@@ -782,7 +787,7 @@ export default function AiTextSummarizerTool() {
 
           {viewMode === 'compare' ? (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              <div className="rounded-xl border border-slate-200 bg-white p-4">
+              <div className={`rounded-xl border border-slate-200 ${paletteAlt.card} p-4`}>
                 <div className="flex items-center justify-between text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
                   <span>{s.originalText}</span>
                   <span className="tabular-nums font-normal">
@@ -794,7 +799,7 @@ export default function AiTextSummarizerTool() {
                 </div>
               </div>
 
-              <div className="rounded-xl border border-indigo-200 bg-white p-4">
+              <div className={`rounded-xl border border-indigo-200 ${palette.card} p-4`}>
                 <div className="flex items-center justify-between text-xs font-semibold text-indigo-700 uppercase tracking-wider mb-2">
                   <span>{s.summaryOutput}</span>
                   <span className="tabular-nums font-normal text-slate-500">
@@ -807,7 +812,7 @@ export default function AiTextSummarizerTool() {
               </div>
             </div>
           ) : (
-            <div className="rounded-xl border border-indigo-200 bg-white p-4">
+            <div className={`rounded-xl border border-indigo-200 ${palette.card} p-4`}>
               <div className="whitespace-pre-wrap break-words text-sm sm:text-base leading-relaxed text-slate-900 max-h-[28rem] overflow-y-auto">
                 {summaryText}
               </div>

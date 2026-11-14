@@ -16,6 +16,7 @@ import type { FindToolAiResult, FindToolRequest } from '../../../worker/src/type
 import { fetchAiHealth, postAiJson, type AiErrorResponse, type QuotaStatus } from '../../config/ai';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
+import { PASTEL_PALETTES, pastelForKey } from '../../components/tool/pastel';
 import { getLocalizedCategories } from '../../locales/tools';
 import {
   buildAiCandidateSlice,
@@ -26,6 +27,8 @@ import {
 import type { CategoryId } from '../../types/tool';
 
 const MAX_QUERY_CHARS = 500;
+
+const palette = pastelForKey('ai-tool-finder');
 
 const STRINGS_EN = {
     quickTasks: [
@@ -356,7 +359,7 @@ export default function AiToolFinderTool() {
   return (
     <div className="space-y-6">
       {/* Top Status & Free Allowance Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-xs sm:text-sm">
+      <div className={`flex flex-wrap items-center justify-between gap-3 rounded-xl border border-slate-200 ${palette.card} px-4 py-3 text-xs sm:text-sm`}>
         <div className="flex flex-wrap items-center gap-2 text-slate-700">
           <Compass className="w-4 h-4 text-indigo-600 shrink-0" aria-hidden="true" />
           <span className="font-medium">{s.title}</span>
@@ -506,7 +509,7 @@ export default function AiToolFinderTool() {
                   categoryId: item.categoryId as CategoryId | 'all',
                 })
               }
-              className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-medium text-slate-700 transition-colors hover:border-indigo-300 hover:bg-indigo-50 hover:text-indigo-700 cursor-pointer"
+              className={`rounded-lg border border-slate-200 ${PASTEL_PALETTES[s.quickTasks.indexOf(item) % PASTEL_PALETTES.length].card} px-3 py-1.5 text-xs font-medium text-slate-700 transition-colors hover:border-indigo-300 hover:bg-indigo-50 hover:text-indigo-700 cursor-pointer`}
             >
               {item.label}
             </button>
@@ -518,7 +521,7 @@ export default function AiToolFinderTool() {
       {loadingAi && (
         <div
           aria-live="polite"
-          className="rounded-xl border border-indigo-200 bg-indigo-50/40 p-5 space-y-3"
+          className={`rounded-xl border border-indigo-200 ${palette.card} p-5 space-y-3`}
         >
           <div className="flex items-center gap-2 text-sm font-medium text-indigo-700">
             <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" />
@@ -563,7 +566,7 @@ export default function AiToolFinderTool() {
       {verifiedAiRecommendation && !loadingAi && (
         <section aria-label={s.recommendationsAria} className="space-y-4">
           {verifiedAiRecommendation.primaryEntry ? (
-            <div className="rounded-xl border-2 border-indigo-200 bg-indigo-50/40 p-5 space-y-3">
+            <div className={`rounded-xl border-2 border-indigo-200 ${palette.card} p-5 space-y-3`}>
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-700 uppercase tracking-wider">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600" aria-hidden="true" />
@@ -626,7 +629,7 @@ export default function AiToolFinderTool() {
                 {verifiedAiRecommendation.alternatives.map(({ entry, reason }) => (
                   <div
                     key={entry.slug}
-                    className="flex flex-col justify-between rounded-xl border border-slate-200 bg-white p-4 gap-3"
+                    className={`flex flex-col justify-between rounded-xl border border-slate-200 ${PASTEL_PALETTES[verifiedAiRecommendation.alternatives.findIndex((a) => a.entry.slug === entry.slug) % PASTEL_PALETTES.length].card} p-4 gap-3`}
                   >
                     <div className="space-y-1.5">
                       <div className="text-xs text-slate-500">{entry.categoryName}</div>
@@ -674,7 +677,7 @@ export default function AiToolFinderTool() {
               <Link
                 key={entry.slug}
                 to={entry.url}
-                className="group flex flex-col justify-between rounded-xl border border-slate-200 bg-white p-4 hover:border-indigo-300 hover:shadow-xs transition-all"
+                className={`group flex flex-col justify-between rounded-xl border border-slate-200 ${PASTEL_PALETTES[localMatches.findIndex((m) => m.entry.slug === entry.slug) % PASTEL_PALETTES.length].card} p-4 hover:border-indigo-300 hover:shadow-xs transition-all`}
               >
                 <div>
                   <div className="flex items-center justify-between gap-2 text-xs text-slate-500 mb-1.5">
@@ -716,7 +719,7 @@ export default function AiToolFinderTool() {
               <Link
                 key={entry.slug}
                 to={entry.url}
-                className="group flex flex-col justify-between rounded-xl border border-slate-200 bg-white p-4 hover:border-indigo-300 hover:shadow-xs transition-all"
+                className={`group flex flex-col justify-between rounded-xl border border-slate-200 ${PASTEL_PALETTES[initialSuggestions.indexOf(entry) % PASTEL_PALETTES.length].card} p-4 hover:border-indigo-300 hover:shadow-xs transition-all`}
               >
                 <div>
                   <div className="flex items-center justify-between gap-2 text-xs text-slate-500 mb-1.5">
