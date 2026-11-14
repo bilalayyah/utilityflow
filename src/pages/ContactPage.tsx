@@ -29,6 +29,8 @@ export function ContactPage() {
   const [message, setMessage] = useState('');
   const [errors, setErrors] = useState<FormErrors>({});
   const [submitted, setSubmitted] = useState(false);
+  const [isSending, setIsSending] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const breadcrumbs: BreadcrumbItem[] = [
     { label: t.footer.home, href: localizeStaticPath('/', locale) },
@@ -50,12 +52,42 @@ export function ContactPage() {
     return next;
   };
 
-  const handleSubmit = (event: FormEvent) => {
+  const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     const validationErrors = validate();
     setErrors(validationErrors);
     if (Object.keys(validationErrors).length > 0) return;
-    setSubmitted(true);
+    setSubmitError(null);
+    setIsSending(true);
+    try {
+      // Send the message via FormSubmit (free) — every submission is emailed
+      // to bilalayyah@gmail.com. No backend needed.
+      const formData = new FormData();
+      formData.append('name', name.trim());
+      formData.append('email', email.trim());
+      formData.append('subject', subject);
+      formData.append('message', message.trim());
+      formData.append('_subject', `UtilityFlow contact: ${subject}`);
+      formData.append('_template', 'table');
+      formData.append('_captcha', 'false');
+
+      const response = await fetch('https://formsubmit.co/ajax/bilalayyah@gmail.com', {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: formData,
+      });
+      if (!response.ok) {
+        throw new Error('Failed to send message. Please try again.');
+      }
+      setSubmitted(true);
+    } catch {
+      setSubmitError(
+        (t.contact as { sendError?: string }).sendError ??
+          'Could not send your message. Please try again.'
+      );
+    } finally {
+      setIsSending(false);
+    }
   };
 
   const handleReset = () => {
@@ -65,6 +97,7 @@ export function ContactPage() {
     setMessage('');
     setErrors({});
     setSubmitted(false);
+    setSubmitError(null);
   };
 
   return (
@@ -196,11 +229,20 @@ export function ContactPage() {
                   {errors.message && <p className="mt-1.5 text-xs text-red-600">{errors.message}</p>}
                 </div>
 
+                {submitError && (
+                  <p role="alert" className="mt-1.5 text-xs text-red-600">
+                    {submitError}
+                  </p>
+                )}
+
                 <button
                   type="submit"
+                  disabled={isSending}
                   className="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:from-indigo-700 hover:to-violet-700 cursor-pointer"
                 >
-                  {t.contact.submit}
+                  {isSending
+                    ? (t.contact as { sending?: string }).sending ?? 'Sending…'
+                    : t.contact.submit}
                 </button>
               </form>
             )}

@@ -38,7 +38,7 @@ export function PrivacyPolicyPage() {
         </header>
 
         <div className={`space-y-8 text-base leading-relaxed text-slate-700 rounded-2xl ${privacyPalette.card} p-6 sm:p-8 shadow-sm`}>
-          {t.privacy.sections.map((section) => (
+          {t.privacy.sections.map((section, sectionIndex) => (
             <section key={section.title}>
               <h2 className="text-xl font-bold text-slate-900 mb-2">{section.title}</h2>
               {section.paragraphs.map((paragraph, index) => (
@@ -46,6 +46,29 @@ export function PrivacyPolicyPage() {
                   {paragraph}
                 </p>
               ))}
+              {sectionIndex === 3 && (
+                <p className="mt-3">
+                  <a
+                    href="https://adssettings.google.com"
+                    target="_blank"
+                    rel="noopener"
+                    className="font-semibold text-indigo-600 hover:underline"
+                  >
+                    {(t.privacy as { optOutGoogleAds?: string }).optOutGoogleAds ??
+                      'Google Ads Settings'}
+                  </a>
+                  {' · '}
+                  <a
+                    href="https://optout.aboutads.info"
+                    target="_blank"
+                    rel="noopener"
+                    className="font-semibold text-indigo-600 hover:underline"
+                  >
+                    {(t.privacy as { optOutAboutAds?: string }).optOutAboutAds ??
+                      'AboutAds.info opt-out'}
+                  </a>
+                </p>
+              )}
             </section>
           ))}
 
