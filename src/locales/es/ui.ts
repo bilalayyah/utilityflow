@@ -50,7 +50,7 @@ export const esStrings: UiStrings = {
     termsOfService: 'Términos de servicio',
     xmlSitemap: 'Mapa del sitio XML',
     rightsReserved: 'Todos los derechos reservados.',
-    deployedNote: 'Crafted with ❤️ by Bilal, inspired by Shaheen.',
+    deployedNote: 'Crafted with ❤️ by Bilal inspired by Shaheen',
   },
   common: {
     copy: 'Copiar',
