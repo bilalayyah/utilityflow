@@ -244,6 +244,17 @@ export const frStrings: UiStrings = {
     moreToolsIn: 'Plus d’outils dans',
     willAppear: 'apparaîtront ici avec la sortie du lot {batch}.',
   },
+  comments: {
+    title: 'Commentaires',
+    note: 'Partagez votre avis : aucun compte requis. Écrivez simplement votre nom et publiez.',
+    namePlaceholder: 'Votre nom',
+    commentPlaceholder: 'Écrire un commentaire…',
+    postButton: 'Publier le commentaire',
+    posting: 'Publication…',
+    empty: 'Aucun commentaire pour le moment. Soyez la première personne à partager votre avis.',
+    loadError: 'Impossible de charger les commentaires pour le moment, mais vous pouvez en publier un ci-dessous.',
+    postError: "Votre commentaire n'a pas pu être publié. Veuillez réessayer dans un instant.",
+  },
   search: {
     placeholder:
       'Rechercher des outils ou des catégories (p. ex. compteur de mots, JSON, PDF, calculatrices)…',
