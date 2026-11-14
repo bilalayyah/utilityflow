@@ -42,7 +42,7 @@ export const jaStrings: UiStrings = {
       'ライター、エンジニア、マーケター、アナリストのための、高速でブラウザ中心の日常ユーティリティ集です。ローカルで動作し、負荷を最小限に抑えて構築されています。',
     categories: 'カテゴリ',
     platformAi: 'プラットフォームとAI',
-    legal: '法的情報',
+    trustLegal: '信頼と法的情報',
     home: 'ホーム',
     allToolsDirectory: 'すべてのツールディレクトリ',
     aboutUs: '私たちについて',
