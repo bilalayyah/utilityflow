@@ -1,7 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
-  <rect width="32" height="32" rx="8" fill="#2563EB"/>
-  <rect x="7" y="7" width="8" height="8" rx="2" fill="#FFFFFF"/>
-  <rect x="17" y="7" width="8" height="8" rx="2" fill="#93C5FD"/>
-  <rect x="7" y="17" width="8" height="8" rx="2" fill="#93C5FD"/>
-  <rect x="17" y="17" width="8" height="8" rx="2" fill="#FFFFFF"/>
+  <defs>
+    <linearGradient id="logo-gradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4f46e5"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+  </defs>
+  <rect width="32" height="32" rx="7" fill="url(#logo-gradient)"/>
+  <rect x="7" y="7" width="8" height="8" rx="1.5" fill="#FFFFFF"/>
+  <rect x="17" y="7" width="8" height="8" rx="1.5" fill="#93C5FD"/>
+  <rect x="7" y="17" width="8" height="8" rx="1.5" fill="#93C5FD"/>
+  <rect x="17" y="17" width="8" height="8" rx="1.5" fill="#FFFFFF"/>
 </svg>
