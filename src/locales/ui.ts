@@ -102,7 +102,6 @@ export interface UiStrings {
       noMatch: string;
       resetFilters: string;
       upcomingUtilities: string;
-      scheduledInBatch: string;
       toolsActive: string;
       openCategory: string;
     };
@@ -128,7 +127,6 @@ export interface UiStrings {
     clearFilters: string;
   };
   category: {
-    batchLabel: string;
     plannedCount: string;
     toolsCount: string;
     toolsLive: string;
