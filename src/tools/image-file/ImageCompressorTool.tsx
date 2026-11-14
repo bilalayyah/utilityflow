@@ -3,6 +3,11 @@ import { useEffect, useState } from 'react';
 import { formatBytes } from '../pdf/pdfUtils';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
+import { PASTEL_PALETTES, pastelForKey } from '../../components/tool/pastel';
+
+const palette = pastelForKey('image-compressor');
+const paletteAlt = PASTEL_PALETTES[(PASTEL_PALETTES.indexOf(palette) + 1) % PASTEL_PALETTES.length];
+const paletteAlt2 = PASTEL_PALETTES[(PASTEL_PALETTES.indexOf(palette) + 2) % PASTEL_PALETTES.length];
 
 const STRINGS_EN = {
     chooseImage: 'Choose an Image to Compress (PNG / JPG / WebP)',
@@ -159,7 +164,7 @@ export default function ImageCompressorTool() {
     <div className="space-y-6">
       <label
         htmlFor="img-comp-input"
-        className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-indigo-300 bg-slate-50 px-6 py-8 text-center hover:border-indigo-400 hover:bg-indigo-50/40 cursor-pointer transition-colors"
+        className={`flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-indigo-300 ${palette.card} px-6 py-8 text-center hover:border-indigo-400 hover:bg-indigo-50/40 cursor-pointer transition-colors`}
       >
         <ImagePlus className="w-8 h-8 text-indigo-600 mb-2" />
         <span className="text-sm font-semibold text-slate-900">
@@ -260,7 +265,7 @@ export default function ImageCompressorTool() {
           </div>
 
           {compressed && (
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-center rounded-xl border border-slate-200 bg-slate-50 p-4">
+            <div className={`grid grid-cols-1 lg:grid-cols-12 gap-5 items-center rounded-xl border border-slate-200 ${palette.card} p-4`}>
               <div className="lg:col-span-5 aspect-video rounded-lg border border-slate-200 bg-white overflow-hidden flex items-center justify-center p-2">
                 <img
                   src={compressed.url}
@@ -271,19 +276,19 @@ export default function ImageCompressorTool() {
 
               <div className="lg:col-span-7 space-y-4">
                 <dl className="grid grid-cols-3 gap-3 tabular-nums">
-                  <div className="rounded-lg border border-slate-200 bg-white p-3">
+                  <div className={`rounded-lg border border-slate-200 ${paletteAlt.card} p-3`}>
                     <dt className="text-xs text-slate-500">{s.originalLabel}</dt>
                     <dd className="mt-1 font-mono text-sm font-bold text-slate-900">
                       {formatBytes(sourceFile.size, locale)}
                     </dd>
                   </div>
-                  <div className="rounded-lg border border-slate-200 bg-white p-3">
+                  <div className={`rounded-lg border border-slate-200 ${paletteAlt2.card} p-3`}>
                     <dt className="text-xs text-slate-500">{s.compressedLabel}</dt>
-                    <dd className="mt-1 font-mono text-sm font-bold text-indigo-700">
+                    <dd className={`mt-1 font-mono text-sm font-bold ${paletteAlt2.link}`}>
                       {formatBytes(compressed.sizeBytes, locale)}
                     </dd>
                   </div>
-                  <div className="rounded-lg border border-slate-200 bg-white p-3">
+                  <div className={`rounded-lg border border-slate-200 ${palette.card} p-3`}>
                     <dt className="text-xs text-slate-500">{s.changeLabel}</dt>
                     <dd
                       className={`mt-1 font-mono text-sm font-bold ${

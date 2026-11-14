@@ -3,8 +3,12 @@ import { Camera, Download, QrCode, ScanLine, StopCircle, Upload } from 'lucide-r
 import QRCode from 'qrcode';
 import { useEffect, useRef, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { PASTEL_PALETTES, pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
+
+const palette = pastelForKey('qr-code-scanner');
+const paletteAlt = PASTEL_PALETTES[(PASTEL_PALETTES.indexOf(palette) + 1) % PASTEL_PALETTES.length];
 
 const STRINGS_EN = {
     payloadKinds: {
@@ -312,7 +316,7 @@ export default function QrCodeScannerTool() {
           type="button"
           onClick={() => setMode('scan')}
           className={`inline-flex items-center gap-2 rounded-lg px-4 py-2 text-xs sm:text-sm font-semibold cursor-pointer ${
-            mode === 'scan' ? 'bg-white text-indigo-700 shadow-sm' : 'text-slate-600 hover:text-slate-900'
+            mode === 'scan' ? `${palette.soft} shadow-sm` : 'text-slate-600 hover:text-slate-900'
           }`}
         >
           <ScanLine className="w-4 h-4" />
@@ -325,7 +329,7 @@ export default function QrCodeScannerTool() {
             setMode('vcard');
           }}
           className={`inline-flex items-center gap-2 rounded-lg px-4 py-2 text-xs sm:text-sm font-semibold cursor-pointer ${
-            mode === 'vcard' ? 'bg-white text-indigo-700 shadow-sm' : 'text-slate-600 hover:text-slate-900'
+            mode === 'vcard' ? `${palette.soft} shadow-sm` : 'text-slate-600 hover:text-slate-900'
           }`}
         >
           <QrCode className="w-4 h-4" />
@@ -338,7 +342,7 @@ export default function QrCodeScannerTool() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <label
               htmlFor="qr-scan-file"
-              className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-indigo-300 bg-slate-50 px-5 py-7 text-center hover:border-indigo-400 hover:bg-indigo-50/40 cursor-pointer transition-colors"
+              className={`flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-indigo-300 ${palette.card} px-5 py-7 text-center hover:border-indigo-400 hover:bg-indigo-50/40 cursor-pointer transition-colors`}
             >
               <Upload className="w-7 h-7 text-indigo-600 mb-2" />
               <span className="text-sm font-semibold text-slate-900">
@@ -359,7 +363,7 @@ export default function QrCodeScannerTool() {
               />
             </label>
 
-            <div className="flex flex-col items-center justify-center rounded-xl border border-slate-200 bg-slate-50 px-5 py-7 text-center">
+            <div className={`flex flex-col items-center justify-center rounded-xl border border-slate-200 ${paletteAlt.card} px-5 py-7 text-center`}>
               <Camera className="w-7 h-7 text-indigo-600 mb-2" />
               <span className="text-sm font-semibold text-slate-900">
                 {s.liveCameraTitle}
@@ -561,7 +565,7 @@ export default function QrCodeScannerTool() {
             </div>
           </div>
 
-          <div className="lg:col-span-5 rounded-xl border border-slate-200 bg-slate-50 p-5 flex flex-col items-center space-y-4">
+          <div className={`lg:col-span-5 rounded-xl border border-slate-200 ${palette.card} p-5 flex flex-col items-center space-y-4`}>
             {vcardPngUrl && (
               <div className="qr-light-surface rounded-lg border border-slate-200 bg-white p-3">
                 <img src={vcardPngUrl} alt={s.vcardQrAlt} className="w-56 h-56" />

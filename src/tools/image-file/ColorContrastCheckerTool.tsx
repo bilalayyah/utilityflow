@@ -1,8 +1,12 @@
 import { ArrowLeftRight, CheckCircle2, ImagePlus, XCircle } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { PASTEL_PALETTES, pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
+
+const pastel = pastelForKey('color-contrast-checker');
+const pastelAlt = PASTEL_PALETTES[(PASTEL_PALETTES.indexOf(pastel) + 1) % PASTEL_PALETTES.length];
 
 const STRINGS_EN = {
     presetIndigo: 'Indigo on White',
@@ -346,7 +350,7 @@ export default function ColorContrastCheckerTool() {
             hslString: bgHslString,
           },
         ].map((panel) => (
-          <div key={panel.key} className="rounded-xl border border-slate-200 bg-slate-50 p-4 space-y-4">
+          <div key={panel.key} className={`rounded-xl border border-slate-200 ${panel.key === 'fg' ? pastel.card : pastelAlt.card} p-4 space-y-4`}>
             <div className="flex items-center justify-between gap-2">
               <h3 className="text-sm font-semibold text-slate-900">{panel.title}</h3>
               <CopyButton text={panel.hex} label={s.copyHex} copiedLabel={t.common.copied} />
@@ -406,13 +410,13 @@ export default function ColorContrastCheckerTool() {
 
       {/* Contrast Ratio & WCAG Scorecard */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
-        <div className="lg:col-span-5 rounded-xl border border-slate-200 bg-white p-5 flex flex-col justify-between space-y-4">
+        <div className={`lg:col-span-5 rounded-xl border border-slate-200 ${pastel.card} p-5 flex flex-col justify-between space-y-4`}>
           <div>
             <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
               {s.contrastRatioLabel}
             </p>
             <div className="mt-1 flex items-baseline gap-2 tabular-nums">
-              <span className="text-4xl font-extrabold text-slate-900">{ratio.toFixed(2)}</span>
+              <span className={`text-4xl font-extrabold ${pastel.link}`}>{ratio.toFixed(2)}</span>
               <span className="text-lg font-semibold text-slate-500">: 1</span>
             </div>
           </div>
@@ -474,7 +478,7 @@ export default function ColorContrastCheckerTool() {
       </div>
 
       {/* Image Palette Extractor */}
-      <div className="rounded-xl border border-slate-200 bg-slate-50 p-5 space-y-4">
+      <div className={`rounded-xl border border-slate-200 ${pastelAlt.card} p-5 space-y-4`}>
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
             <h3 className="text-sm font-semibold text-slate-900">
@@ -514,7 +518,7 @@ export default function ColorContrastCheckerTool() {
 
         <label
           htmlFor="palette-upload"
-          className="flex items-center justify-center gap-2.5 rounded-2xl border-2 border-dashed border-indigo-300 bg-white px-4 py-4 text-sm font-medium text-slate-700 hover:border-indigo-400 cursor-pointer"
+          className={`flex items-center justify-center gap-2.5 rounded-2xl border-2 border-dashed border-indigo-300 ${pastel.card} px-4 py-4 text-sm font-medium text-slate-700 hover:border-indigo-400 cursor-pointer`}
         >
           <ImagePlus className="w-5 h-5 text-indigo-600" />
           <span>{fileName ? s.loadedReplace.replace('{name}', fileName) : s.selectImage}</span>

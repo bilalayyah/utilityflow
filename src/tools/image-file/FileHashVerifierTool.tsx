@@ -1,9 +1,13 @@
 import { CheckCircle2, FileCheck2, Upload, XCircle } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { PASTEL_PALETTES, pastelForKey } from '../../components/tool/pastel';
 import { formatBytes } from '../pdf/pdfUtils';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
+
+const palette = pastelForKey('file-hash-verifier');
+const paletteAlt = PASTEL_PALETTES[(PASTEL_PALETTES.indexOf(palette) + 1) % PASTEL_PALETTES.length];
 
 const STRINGS_EN = {
     chooseFile: 'Choose Any File to Compute Cryptographic Checksums',
@@ -125,7 +129,7 @@ export default function FileHashVerifierTool() {
     <div className="space-y-6">
       <label
         htmlFor="file-hash-input"
-        className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-indigo-300 bg-slate-50 px-6 py-8 text-center hover:border-indigo-400 hover:bg-indigo-50/40 cursor-pointer transition-colors"
+        className={`flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-indigo-300 ${palette.card} px-6 py-8 text-center hover:border-indigo-400 hover:bg-indigo-50/40 cursor-pointer transition-colors`}
       >
         <Upload className="w-8 h-8 text-indigo-600 mb-2" />
         <span className="text-sm font-semibold text-slate-900">
@@ -161,7 +165,7 @@ export default function FileHashVerifierTool() {
 
       {file && hashes && (
         <div className="space-y-5">
-          <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-xs text-slate-700">
+          <div className={`flex flex-wrap items-center justify-between gap-3 rounded-xl border border-slate-200 ${palette.card} px-4 py-3 text-xs text-slate-700`}>
             <div className="flex flex-wrap gap-x-5 gap-y-1">
               <span>
                 <strong>{s.fileLabel}</strong> {file.name}
@@ -196,7 +200,7 @@ export default function FileHashVerifierTool() {
             ].map((row) => (
               <div
                 key={row.label}
-                className="rounded-xl border border-slate-200 bg-white p-3.5 space-y-1.5"
+                className={`rounded-xl border border-slate-200 ${PASTEL_PALETTES[[s.sha256Label, s.sha512Label, s.sha384Label, s.sha1Label].indexOf(row.label) % PASTEL_PALETTES.length].card} p-3.5 space-y-1.5`}
               >
                 <div className="flex items-center justify-between gap-2">
                   <span className="text-xs font-semibold text-slate-800">{row.label}</span>
@@ -210,7 +214,7 @@ export default function FileHashVerifierTool() {
           </div>
 
           {/* Expected Checksum Comparator */}
-          <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 space-y-3">
+          <div className={`rounded-xl border border-slate-200 ${paletteAlt.card} p-4 space-y-3`}>
             <label htmlFor="expected-hash" className="block text-sm font-semibold text-slate-900">
               {s.verifyLabel}
             </label>

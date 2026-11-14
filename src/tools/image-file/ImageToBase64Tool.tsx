@@ -1,9 +1,14 @@
 import { Download, ImagePlus } from 'lucide-react';
 import { useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { PASTEL_PALETTES, pastelForKey } from '../../components/tool/pastel';
 import { formatBytes } from '../pdf/pdfUtils';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
+
+const palette = pastelForKey('image-to-base64');
+const paletteAlt = PASTEL_PALETTES[(PASTEL_PALETTES.indexOf(palette) + 1) % PASTEL_PALETTES.length];
+const paletteAlt2 = PASTEL_PALETTES[(PASTEL_PALETTES.indexOf(palette) + 2) % PASTEL_PALETTES.length];
 
 const STRINGS_EN = {
     encodeMode: 'Image → Base64 Data URI',
@@ -92,7 +97,7 @@ export default function ImageToBase64Tool() {
           type="button"
           onClick={() => setMode('encode')}
           className={`rounded-md px-3.5 py-1.5 text-xs sm:text-sm font-medium cursor-pointer ${
-            mode === 'encode' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+            mode === 'encode' ? `${palette.soft} shadow-xs` : 'text-slate-600'
           }`}
         >
           {s.encodeMode}
@@ -101,7 +106,7 @@ export default function ImageToBase64Tool() {
           type="button"
           onClick={() => setMode('decode')}
           className={`rounded-md px-3.5 py-1.5 text-xs sm:text-sm font-medium cursor-pointer ${
-            mode === 'decode' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+            mode === 'decode' ? `${palette.soft} shadow-xs` : 'text-slate-600'
           }`}
         >
           {s.decodeMode}
@@ -118,7 +123,7 @@ export default function ImageToBase64Tool() {
         <div className="space-y-5">
           <label
             htmlFor="i2b-input"
-            className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-indigo-300 bg-slate-50 px-6 py-8 text-center hover:border-indigo-400 hover:bg-indigo-50/40 cursor-pointer transition-colors"
+            className={`flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-indigo-300 ${palette.card} px-6 py-8 text-center hover:border-indigo-400 hover:bg-indigo-50/40 cursor-pointer transition-colors`}
           >
             <ImagePlus className="w-8 h-8 text-indigo-600 mb-2" />
             <span className="text-sm font-semibold text-slate-900">
@@ -144,13 +149,13 @@ export default function ImageToBase64Tool() {
           {dataUri && (
             <div className="space-y-4">
               <dl className="grid grid-cols-2 sm:grid-cols-3 gap-3 tabular-nums text-xs sm:text-sm">
-                <div className="rounded-lg border border-slate-200 bg-slate-50 p-3">
+                <div className={`rounded-lg border border-slate-200 ${paletteAlt.card} p-3`}>
                   <dt className="text-xs text-slate-500">{s.binarySizeLabel}</dt>
                   <dd className="mt-1 font-mono font-bold text-slate-900">{formatBytes(originalSize, locale)}</dd>
                 </div>
-                <div className="rounded-lg border border-slate-200 bg-slate-50 p-3">
+                <div className={`rounded-lg border border-slate-200 ${paletteAlt2.card} p-3`}>
                   <dt className="text-xs text-slate-500">{s.base64SizeLabel}</dt>
-                  <dd className="mt-1 font-mono font-bold text-indigo-700">{formatBytes(dataUri.length, locale)}</dd>
+                  <dd className={`mt-1 font-mono font-bold ${paletteAlt2.link}`}>{formatBytes(dataUri.length, locale)}</dd>
                 </div>
                 <div className="rounded-lg border border-slate-200 bg-white p-2 flex items-center justify-center col-span-2 sm:col-span-1">
                   <img src={dataUri} alt={s.encodedAlt} className="max-h-14 max-w-full object-contain" />
@@ -206,7 +211,7 @@ export default function ImageToBase64Tool() {
           )}
 
           {normalizedDecodeUri && !decodeError && (
-            <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className={`rounded-xl border border-slate-200 ${palette.card} p-4 flex flex-col sm:flex-row items-center justify-between gap-4`}>
               <div className="rounded-lg border border-slate-200 bg-white p-2 flex items-center justify-center min-h-24 min-w-24 max-w-xs">
                 <img
                   src={normalizedDecodeUri}

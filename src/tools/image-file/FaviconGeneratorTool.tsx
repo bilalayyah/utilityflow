@@ -1,8 +1,12 @@
 import { Download, ImagePlus, Sparkles } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { PASTEL_PALETTES, pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
+
+const palette = pastelForKey('favicon-generator');
+const paletteAlt = PASTEL_PALETTES[(PASTEL_PALETTES.indexOf(palette) + 1) % PASTEL_PALETTES.length];
 
 const STRINGS_EN = {
     sizeLabels: {
@@ -248,7 +252,7 @@ export default function FaviconGeneratorTool() {
           onClick={() => setSourceMode('monogram')}
           className={`inline-flex items-center gap-1.5 rounded-lg px-4 py-2 text-xs sm:text-sm font-semibold cursor-pointer ${
             sourceMode === 'monogram'
-              ? 'bg-white text-indigo-700 shadow-sm'
+              ? `${palette.soft} shadow-sm`
               : 'text-slate-600 hover:text-slate-900'
           }`}
         >
@@ -260,7 +264,7 @@ export default function FaviconGeneratorTool() {
           onClick={() => setSourceMode('image')}
           className={`inline-flex items-center gap-1.5 rounded-lg px-4 py-2 text-xs sm:text-sm font-semibold cursor-pointer ${
             sourceMode === 'image'
-              ? 'bg-white text-indigo-700 shadow-sm'
+              ? `${palette.soft} shadow-sm`
               : 'text-slate-600 hover:text-slate-900'
           }`}
         >
@@ -270,7 +274,7 @@ export default function FaviconGeneratorTool() {
       </div>
 
       {sourceMode === 'monogram' ? (
-        <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 rounded-xl border border-slate-200 bg-slate-50 p-4">
+        <div className={`grid grid-cols-1 sm:grid-cols-4 gap-4 rounded-xl border border-slate-200 ${palette.card} p-4`}>
           <div>
             <label htmlFor="fav-letters" className="block text-xs font-semibold text-slate-800 mb-1.5">
               {s.lettersLabel}
@@ -334,10 +338,10 @@ export default function FaviconGeneratorTool() {
           </div>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 items-center rounded-xl border border-slate-200 bg-slate-50 p-4">
+        <div className={`grid grid-cols-1 sm:grid-cols-3 gap-4 items-center rounded-xl border border-slate-200 ${paletteAlt.card} p-4`}>
           <label
             htmlFor="fav-upload"
-            className="sm:col-span-2 flex items-center justify-center gap-2.5 rounded-2xl border-2 border-dashed border-indigo-300 bg-white px-4 py-5 text-sm font-medium text-slate-700 hover:border-indigo-400 cursor-pointer"
+            className={`sm:col-span-2 flex items-center justify-center gap-2.5 rounded-2xl border-2 border-dashed border-indigo-300 ${palette.card} px-4 py-5 text-sm font-medium text-slate-700 hover:border-indigo-400 cursor-pointer`}
           >
             <ImagePlus className="w-5 h-5 text-indigo-600" />
             <span>
@@ -385,7 +389,7 @@ export default function FaviconGeneratorTool() {
       {icons.length > 0 && (
         <div className="space-y-5">
           {icoUrl && (
-            <div className="flex flex-wrap items-center justify-between gap-4 rounded-xl border border-indigo-200 bg-indigo-50/70 p-4">
+            <div className={`flex flex-wrap items-center justify-between gap-4 rounded-xl border border-indigo-200 ${palette.card} p-4`}>
               <div className="flex items-center gap-3">
                 <img
                   src={icons[1]?.url || icons[0].url}
@@ -416,7 +420,7 @@ export default function FaviconGeneratorTool() {
             {icons.map((ic) => (
               <div
                 key={ic.size}
-                className="rounded-xl border border-slate-200 bg-white p-3.5 flex flex-col items-center text-center justify-between gap-3"
+                className={`rounded-xl border border-slate-200 ${PASTEL_PALETTES[icons.indexOf(ic) % PASTEL_PALETTES.length].card} p-3.5 flex flex-col items-center text-center justify-between gap-3`}
               >
                 <div className="h-16 flex items-center justify-center">
                   <img
@@ -442,7 +446,7 @@ export default function FaviconGeneratorTool() {
             ))}
           </div>
 
-          <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 space-y-2">
+          <div className={`rounded-xl border border-slate-200 ${paletteAlt.card} p-4 space-y-2`}>
             <div className="flex items-center justify-between gap-2">
               <span className="text-xs font-semibold text-slate-800">
                 {s.htmlTagsLabel}

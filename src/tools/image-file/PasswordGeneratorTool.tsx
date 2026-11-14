@@ -1,8 +1,12 @@
 import { KeyRound, RefreshCw, ShieldCheck } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { PASTEL_PALETTES, pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
+
+const palette = pastelForKey('password-generator');
+const paletteAlt = PASTEL_PALETTES[(PASTEL_PALETTES.indexOf(palette) + 1) % PASTEL_PALETTES.length];
 
 const STRINGS_EN = {
     strength: {
@@ -213,7 +217,7 @@ export default function PasswordGeneratorTool() {
             onClick={() => setMode('password')}
             className={`inline-flex items-center gap-1.5 rounded-lg px-4 py-2 text-xs sm:text-sm font-semibold cursor-pointer ${
               mode === 'password'
-                ? 'bg-white text-indigo-700 shadow-sm'
+                ? `${palette.soft} shadow-sm`
                 : 'text-slate-600 hover:text-slate-900'
             }`}
           >
@@ -225,7 +229,7 @@ export default function PasswordGeneratorTool() {
             onClick={() => setMode('passphrase')}
             className={`inline-flex items-center gap-1.5 rounded-lg px-4 py-2 text-xs sm:text-sm font-semibold cursor-pointer ${
               mode === 'passphrase'
-                ? 'bg-white text-indigo-700 shadow-sm'
+                ? `${palette.soft} shadow-sm`
                 : 'text-slate-600 hover:text-slate-900'
             }`}
           >
@@ -245,7 +249,7 @@ export default function PasswordGeneratorTool() {
       </div>
 
       {mode === 'password' ? (
-        <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 space-y-4">
+        <div className={`rounded-xl border border-slate-200 ${palette.card} p-4 space-y-4`}>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label htmlFor="pw-len" className="block text-xs font-semibold text-slate-800 mb-1.5">
@@ -304,7 +308,7 @@ export default function PasswordGeneratorTool() {
           </div>
         </div>
       ) : (
-        <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 space-y-4">
+        <div className={`rounded-xl border border-slate-200 ${paletteAlt.card} p-4 space-y-4`}>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
               <label htmlFor="pp-words" className="block text-xs font-semibold text-slate-800 mb-1.5">
@@ -404,7 +408,7 @@ export default function PasswordGeneratorTool() {
             {activeItems.map((item, idx) => (
               <li
                 key={`${idx}-${item}`}
-                className="flex items-center justify-between gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3"
+                className={`flex items-center justify-between gap-3 rounded-xl border border-slate-200 ${PASTEL_PALETTES[idx % PASTEL_PALETTES.length].card} px-4 py-3`}
               >
                 <code className="font-mono text-sm sm:text-base text-slate-900 break-all select-all">
                   {item}

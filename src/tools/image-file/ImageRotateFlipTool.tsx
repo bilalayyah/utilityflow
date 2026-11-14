@@ -3,6 +3,9 @@ import { useEffect, useRef, useState } from 'react';
 import { formatBytes } from '../pdf/pdfUtils';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
+import { pastelForKey } from '../../components/tool/pastel';
+
+const palette = pastelForKey('image-rotate-flip');
 
 const STRINGS_EN = {
     chooseImage: 'Choose an Image to Rotate, Flip, or Filter',
@@ -135,7 +138,7 @@ export default function ImageRotateFlipTool() {
     <div className="space-y-6">
       <label
         htmlFor="irf-input"
-        className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-indigo-300 bg-slate-50 px-6 py-8 text-center hover:border-indigo-400 hover:bg-indigo-50/40 cursor-pointer transition-colors"
+        className={`flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-indigo-300 ${palette.card} px-6 py-8 text-center hover:border-indigo-400 hover:bg-indigo-50/40 cursor-pointer transition-colors`}
       >
         <ImagePlus className="w-8 h-8 text-indigo-600 mb-2" />
         <span className="text-sm font-semibold text-slate-900">
@@ -186,7 +189,7 @@ export default function ImageRotateFlipTool() {
                 type="button"
                 onClick={() => setFlipH(!flipH)}
                 className={`inline-flex items-center justify-center gap-1.5 rounded-lg border px-3 py-2 text-xs font-semibold cursor-pointer ${
-                  flipH ? 'border-indigo-600 bg-indigo-50 text-indigo-800' : 'border-slate-300 bg-white text-slate-700'
+                  flipH ? `${palette.soft} border-indigo-600` : 'border-slate-300 bg-white text-slate-700'
                 }`}
               >
                 <FlipHorizontal2 className="w-4 h-4" />
@@ -196,7 +199,7 @@ export default function ImageRotateFlipTool() {
                 type="button"
                 onClick={() => setFlipV(!flipV)}
                 className={`inline-flex items-center justify-center gap-1.5 rounded-lg border px-3 py-2 text-xs font-semibold cursor-pointer ${
-                  flipV ? 'border-indigo-600 bg-indigo-50 text-indigo-800' : 'border-slate-300 bg-white text-slate-700'
+                  flipV ? `${palette.soft} border-indigo-600` : 'border-slate-300 bg-white text-slate-700'
                 }`}
               >
                 <FlipVertical2 className="w-4 h-4" />
@@ -292,7 +295,7 @@ export default function ImageRotateFlipTool() {
             </div>
           </div>
 
-          <div className="lg:col-span-7 rounded-xl border border-slate-200 bg-slate-50 p-4 space-y-2">
+          <div className={`lg:col-span-7 rounded-xl border border-slate-200 ${palette.card} p-4 space-y-2`}>
             <div className="flex items-center justify-between text-xs text-slate-600 font-mono tabular-nums">
               <span>{s.livePreview} ({rotation}° · {flipH ? 'FlipH ' : ''}{flipV ? 'FlipV' : ''})</span>
               {outputDims && (
