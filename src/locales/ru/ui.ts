@@ -51,7 +51,7 @@ export const ruStrings: UiStrings = {
     termsOfService: 'Условия использования',
     xmlSitemap: 'XML-карта сайта',
     rightsReserved: 'Все права защищены.',
-    deployedNote: 'Crafted with ❤️ by Bilal, inspired by Shaheen.',
+    deployedNote: 'Crafted with ❤️ by Bilal inspired by Shaheen',
   },
   common: {
     copy: 'Копировать',
