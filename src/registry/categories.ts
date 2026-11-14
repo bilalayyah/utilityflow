@@ -14,7 +14,7 @@ export const CATEGORIES: ToolCategory[] = [
     plannedToolCount: 15,
     iconName: 'FileText',
     seo: {
-      title: 'Text & Writing Tools – Free Online Word & String Utilities | UtilityFlow',
+      title: 'Text & Writing Tools – Word & String Utilities | UtilityFlow',
       description:
         'Explore browser-based text and writing tools including word counters, case converters, line sorters, and text cleaners with instant local processing.',
       keywords: [
@@ -46,7 +46,7 @@ export const CATEGORIES: ToolCategory[] = [
     plannedToolCount: 15,
     iconName: 'Code2',
     seo: {
-      title: 'Developer Tools – JSON, Regex, Encoding & Hash Utilities | UtilityFlow',
+      title: 'Developer Tools – JSON, Regex & Encoding | UtilityFlow',
       description:
         'Client-side developer utilities for formatting JSON, testing regex, encoding Base64 and URLs, inspecting JWTs, and generating UUIDs safely.',
       keywords: [
@@ -78,7 +78,7 @@ export const CATEGORIES: ToolCategory[] = [
     plannedToolCount: 15,
     iconName: 'Calculator',
     seo: {
-      title: 'Online Calculators – Finance, Date, Math & Unit Tools | UtilityFlow',
+      title: 'Online Calculators – Finance, Date & Math | UtilityFlow',
       description:
         'Use fast, transparent online calculators for age, percentages, loan repayments, margins, and unit conversions with instant results.',
       keywords: [
@@ -110,7 +110,7 @@ export const CATEGORIES: ToolCategory[] = [
     plannedToolCount: 10,
     iconName: 'Share2',
     seo: {
-      title: 'Social Media Tools – QR Codes, UTM Builders & Post Helpers | UtilityFlow',
+      title: 'Social Media Tools – QR, UTM & Post Helpers | UtilityFlow',
       description:
         'Create UTM links, generate QR codes, check social character limits, and format hashtags and bios with clean browser-side utilities.',
       keywords: [
@@ -142,7 +142,7 @@ export const CATEGORIES: ToolCategory[] = [
     plannedToolCount: 10,
     iconName: 'FileSpreadsheet',
     seo: {
-      title: 'PDF Tools – Private Browser-Based PDF Utilities | UtilityFlow',
+      title: 'PDF Tools – Private Browser-Based Utilities | UtilityFlow',
       description:
         'Merge, split, rotate, and convert PDF files locally in your browser without uploading sensitive documents to third-party servers.',
       keywords: [
@@ -174,7 +174,7 @@ export const CATEGORIES: ToolCategory[] = [
     plannedToolCount: 10,
     iconName: 'SearchCheck',
     seo: {
-      title: 'SEO Tools – SERP Previews, Meta Generators & Slug Builders | UtilityFlow',
+      title: 'SEO Tools – SERP, Meta & Slug Utilities | UtilityFlow',
       description:
         'Optimize pages with free SEO utilities including SERP snippet previews, meta tag generators, robots.txt builders, and keyword density checkers.',
       keywords: [
@@ -206,7 +206,7 @@ export const CATEGORIES: ToolCategory[] = [
     plannedToolCount: 10,
     iconName: 'Image',
     seo: {
-      title: 'Image & File Tools – Compression, Resizing, QR & File Utilities | UtilityFlow',
+      title: 'Image & File Tools – Compress, Resize, Convert | UtilityFlow',
       description:
         'Compress, resize, rotate, and convert images between PNG, JPG, and WebP locally, verify file checksums, scan QR codes, check WCAG contrast, and build favicons.',
       keywords: [

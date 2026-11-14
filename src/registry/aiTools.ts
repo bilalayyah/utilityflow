@@ -458,7 +458,7 @@ export const AI_TOOL_FINDER_TOOL: ToolDefinition = {
   processingMode: 'api',
   requiresExternalApi: true,
   apiNotice:
-    '100% free with no login, subscription, or credits. Searches our verified inventory of 85 browser tools + 2 AI tools (up to 10 AI searches/day + unlimited instant keyword matching).',
+    '100% free with no login, subscription, or credits. Searches our verified inventory of 85 browser tools + 3 AI tools (up to 10 AI searches/day + unlimited instant keyword matching).',
   popular: true,
   featured: true,
   keywords: [
@@ -501,7 +501,7 @@ export const AI_TOOL_FINDER_TOOL: ToolDefinition = {
     {
       title: 'Filter by category if needed',
       description:
-        'Narrow recommendations to Text & Writing, Developer, Calculators, Social Media, PDF, SEO, or Image & File tools—or search across all 87 tools at once.',
+        'Narrow recommendations to Text & Writing, Developer, Calculators, Social Media, PDF, SEO, or Image & File tools—or search across all 88 tools at once.',
     },
     {
       title: 'Run the search and review matches',
