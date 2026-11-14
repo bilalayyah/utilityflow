@@ -86,7 +86,7 @@ export default function VatTaxCalculatorTool() {
               onClick={() => setTaxRate(String(preset))}
               className={`rounded-md px-2.5 py-1 text-xs font-mono cursor-pointer ${
                 Number(taxRate) === preset
-                  ? 'bg-indigo-600 text-white'
+                  ? 'bg-gradient-to-r from-indigo-600 to-violet-600 text-white'
                   : 'border border-slate-300 bg-white text-slate-700 hover:bg-slate-50'
               }`}
             >

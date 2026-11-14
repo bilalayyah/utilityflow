@@ -133,7 +133,7 @@ export default function TipCalculatorTool() {
               onClick={() => setTipPercent(String(p))}
               className={`rounded-md px-3 py-1.5 text-xs font-mono cursor-pointer ${
                 Number(tipPercent) === p
-                  ? 'bg-indigo-600 text-white'
+                  ? 'bg-gradient-to-r from-indigo-600 to-violet-600 text-white'
                   : 'border border-slate-300 bg-white text-slate-700 hover:bg-slate-50'
               }`}
             >
