@@ -1,6 +1,7 @@
 import { Check, Info } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { buildCanonicalUrl } from '../../config/site';
+import { getOgImageForPage } from '../../config/ogImages';
 import { useLocale } from '../../locales/LocaleContext';
 import { categoryHref, localizeStaticPath, toolHref } from '../../locales/config';
 import { getToolAlternatePaths, toHreflangEntries } from '../../locales/routes';
@@ -88,6 +89,7 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
           ...tool.seo.secondaryKeywords,
           ...tool.seo.longTailKeywords,
         ]}
+        ogImage={getOgImageForPage('tool', tool.id)}
         structuredData={structuredData}
         alternates={toHreflangEntries(getToolAlternatePaths(tool.id))}
       />
