@@ -71,8 +71,6 @@ export function CategoryPage() {
         <header className="mx-auto max-w-3xl text-center mb-10">
           <div className="flex items-center justify-center gap-2.5 text-xs font-medium text-slate-500 mb-3">
             <CategoryIcon name={category.iconName} className="w-4 h-4 text-indigo-600" />
-            <span>{formatString(t.category.batchLabel, { batch: category.batch })}</span>
-            <span aria-hidden="true">·</span>
             <span className="tabular-nums">
               {tools.length >= category.plannedToolCount
                 ? formatString(t.category.toolsLive, { count: tools.length })
@@ -107,12 +105,11 @@ export function CategoryPage() {
             className={`rounded-2xl ${categoryPalette.card} p-6 sm:p-8 mb-10 shadow-sm`}
           >
             <h2 className="text-lg font-bold text-slate-900">
-              {formatString(t.category.scheduledTitle, { batch: category.batch })}
+              {t.category.scheduledTitle}
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-slate-600 max-w-2xl">
               {formatString(t.category.scheduledDescription, {
                 name: category.name,
-                batch: category.batch,
               })}
             </p>
 
@@ -160,7 +157,6 @@ export function CategoryPage() {
                         {item.name}
                       </div>
                       <div className="text-xs text-slate-500 tabular-nums">
-                        {formatString(t.category.batchLabel, { batch: item.batch })} ·{' '}
                         {formatString(t.category.plannedCount, { count: item.plannedToolCount })}
                       </div>
                     </div>

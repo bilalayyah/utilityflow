@@ -174,7 +174,6 @@ export function ToolsDirectoryPage() {
                           <h3 className="text-lg font-bold text-slate-900">{category.name}</h3>
                         </div>
                         <span className="text-xs font-mono text-slate-500 tabular-nums">
-                          {formatString(t.category.batchLabel, { batch: category.batch })} ·{' '}
                           {liveInCategory.length >= category.plannedToolCount
                             ? formatString(t.category.toolsLive, { count: liveInCategory.length })
                             : `${liveInCategory.length}/${category.plannedToolCount}`}

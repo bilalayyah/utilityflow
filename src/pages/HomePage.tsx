@@ -237,19 +237,18 @@ export function HomePage() {
                 Phase 0 · Platform Foundation Ready
               </p>
               <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
-                Tool slots are initialized and awaiting Batch 1 rollout
+                Tool slots are initialized and ready
               </h3>
               <p className="mt-1.5 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
                 The routing architecture, shared tool layout, central registry, and SEO pipeline
-                are live. Popular tools will automatically populate here starting with Batch 1 (Text
-                &amp; Writing Tools).
+                are live. Popular tools will automatically populate here.
               </p>
             </div>
             <Link
               to={categoryHref('text-writing', locale)}
               className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white hover:bg-slate-800 transition-colors whitespace-nowrap shrink-0 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200"
             >
-              Preview Batch 1 Category
+              Preview Text & Writing Tools
               <ArrowRight className="w-4 h-4" aria-hidden="true" />
             </Link>
           </div>
@@ -289,7 +288,6 @@ export function HomePage() {
                           <CategoryIcon name={category.iconName} className="w-5 h-5" />
                         </div>
                         <span className="text-xs font-medium text-slate-600 dark:text-slate-300 tabular-nums">
-                          {formatString(t.category.batchLabel, { batch: category.batch })} ·{' '}
                           {liveCount >= category.plannedToolCount
                             ? formatString(t.category.toolsLive, { count: liveCount })
                             : formatString(t.category.ofToolsLive, {
@@ -425,7 +423,6 @@ export function HomePage() {
                             <span>{category.name}</span>
                           </Link>
                           <span className="text-xs font-mono text-slate-500 dark:text-slate-400 tabular-nums">
-                            {formatString(t.category.batchLabel, { batch: category.batch })} ·{' '}
                             {categoryLiveTools.length}/{category.plannedToolCount}
                           </span>
                         </div>
@@ -437,9 +434,7 @@ export function HomePage() {
                       </div>
                       <div className="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-800 text-xs">
                         <span className="text-slate-500 dark:text-slate-400">
-                          {categoryLiveTools.length === 0
-                            ? formatString(t.home.directory.scheduledInBatch, { batch: category.batch })
-                            : formatString(t.home.directory.toolsActive, { count: categoryLiveTools.length })}
+                          {formatString(t.home.directory.toolsActive, { count: categoryLiveTools.length })}
                         </span>
                         <Link
                           to={categoryHref(category.id, locale)}

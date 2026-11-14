@@ -72,7 +72,6 @@ export function AboutPage() {
                   >
                     <span className="font-semibold text-slate-900">{category.name}</span>
                     <span className="font-mono text-xs text-slate-500 tabular-nums">
-                      {formatString(t.category.batchLabel, { batch: category.batch })} ·{' '}
                       {formatString(t.category.toolsCount, { count: category.plannedToolCount })}
                     </span>
                   </Link>
