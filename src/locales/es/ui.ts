@@ -192,6 +192,7 @@ export const esStrings: UiStrings = {
           'Sí. Todos los diseños, controles de navegación y espacios de trabajo interactivos —incluidos el modo claro y el modo oscuro— están diseñados con un enfoque móvil primero, con objetivos táctiles accesibles y cuadrículas adaptables.',
       },
     ],
+    trustLine: 'Todas las herramientas son gratuitas • No es necesario registrarse • Funciona en tu navegador',
   },
   directory: {
     seoTitle: 'Directorio de todas las herramientas de utilidad online | UtilityFlow',
