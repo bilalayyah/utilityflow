@@ -338,11 +338,13 @@ export const frStrings: UiStrings = {
       subject: 'Veuillez choisir ou saisir un sujet.',
       message: 'Veuillez inclure au moins 10 caractères dans votre message.',
     },
-    successTitle: 'Message préparé',
+    successTitle: 'Message envoyé',
     successThanks:
-      'Merci, {name}. Votre message concernant {subject} a été validé.',
+      'Merci, {name}. Votre message a été envoyé et nous vous répondrons bientôt.',
     successNote:
-      'Comme UtilityFlow fonctionne comme un site statique sans stocker les messages des utilisateurs sur un serveur, vous pouvez aussi envoyer votre message directement via votre client de messagerie à',
+      'Si vous souhaitez ajouter quelque chose, vous pouvez aussi nous joindre directement à',
+    sending: 'Envoi en cours…',
+    sendError: 'Impossible d’envoyer votre message. Veuillez réessayer.',
     sendAnother: 'Envoyer un autre message',
     directEmail: 'E-mail direct',
     directEmailText: 'Vous préférez écrire directement ? Envoyez un e-mail à notre équipe à :',
@@ -392,6 +394,8 @@ export const frStrings: UiStrings = {
       'Si vous avez des questions sur cette politique de confidentialité, contactez-nous via notre',
     contactLink: 'page Contact',
     contactMiddle: 'ou par e-mail',
+    optOutGoogleAds: 'Paramètres des annonces Google',
+    optOutAboutAds: 'Refus de publicité sur AboutAds.info',
   },
   terms: {
     seoTitle: 'Conditions d’utilisation | Outils en ligne UtilityFlow',
@@ -422,6 +426,7 @@ export const frStrings: UiStrings = {
         title: '5. Limitation de responsabilité',
         paragraphs: [
           'Dans la mesure maximale autorisée par la loi, UtilityFlow et ses contributeurs ne sauraient être tenus responsables des dommages indirects, accessoires, spéciaux ou consécutifs résultant de votre utilisation ou de votre incapacité à utiliser cette plateforme.',
+          'UtilityFlow est un projet indépendant et n’est affilié à YouTube, Instagram, Google ni à aucune autre marque tierce mentionnée sur ce site, ni approuvé par elles, ni lié à elles.',
         ],
       },
     ],
