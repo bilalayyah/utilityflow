@@ -135,7 +135,7 @@ export default function SocialThumbnailPreviewerTool() {
         <div className="lg:col-span-5 space-y-4">
           <label
             htmlFor="thumb-upload"
-            className="flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-slate-300 bg-slate-50 px-4 py-6 text-center hover:border-indigo-400 hover:bg-indigo-50/40 cursor-pointer transition-colors"
+            className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-indigo-300 bg-slate-50 px-4 py-6 text-center hover:border-indigo-400 hover:bg-indigo-50/40 cursor-pointer transition-colors"
           >
             <ImagePlus className="w-7 h-7 text-indigo-600 mb-2" />
             <span className="text-sm font-semibold text-slate-900">
@@ -264,7 +264,7 @@ export default function SocialThumbnailPreviewerTool() {
             <div className="max-w-sm">
               {renderThumbBox(false)}
               <div className="mt-2.5 flex gap-3">
-                <div className="h-9 w-9 shrink-0 rounded-full bg-indigo-600 text-white flex items-center justify-center text-xs font-bold">
+                <div className="h-9 w-9 shrink-0 rounded-full bg-gradient-to-r from-indigo-600 to-violet-600 text-white flex items-center justify-center text-xs font-bold">
                   {channel.trim().slice(0, 2).toUpperCase() || 'UH'}
                 </div>
                 <div className="min-w-0">
