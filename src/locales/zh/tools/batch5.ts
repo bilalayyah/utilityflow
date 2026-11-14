@@ -314,7 +314,7 @@ export const ZH_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: "这个工具会从谷歌获取实时排名吗？",
         answer:
-          "不会。它是纯粹在浏览器内运行的离线SERP摘要模拟器。",
+          '不会。它是纯粹在浏览器内运行的离线 SERP 摘要模拟器，不会连接谷歌，也不会获取任何实时排名数据。工具只根据您输入的标题、网址与描述，用字体度量模拟搜索结果卡片的显示效果。',
       },
       {
         question: "SERP摘要预览工具免费吗？",
@@ -359,7 +359,7 @@ export const ZH_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: "SERP摘要预览工具会把我的标题或链接上传到别处吗？",
         answer:
-          "不会。所有预览和测量都在浏览器本地完成。",
+          '不会。所有预览与像素宽度测量都在浏览器本地完成，标题、网址与描述不会上传到任何服务器。您可以放心输入未发布的页面标题来检查显示效果。',
       },
       {
         question: "预览后如何复制标题和元描述？",
@@ -705,7 +705,7 @@ export const ZH_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: "robots.txt必须放在哪里？",
         answer:
-          "必须放在主机的根路径（https://yourdomain.com/robots.txt），并返回HTTP 200状态。",
+          'robots.txt 必须放在网站主机的根路径，例如 https://yourdomain.com/robots.txt，并且访问时要返回 HTTP 200 状态。放在子目录里的 robots.txt 不会被抓取程序读取，因此一定要确认根路径可以访问。',
       },
       {
         question: "谷歌会遵守Crawl-delay吗？",
@@ -790,7 +790,7 @@ export const ZH_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: "能为Googlebot和Bingbot写不同的robots.txt规则吗？",
         answer:
-          "可以。为每个抓取程序分别创建User-agent分组，各自写上Allow和Disallow行。",
+          '可以。为 Googlebot 和 Bingbot 各自创建一个 User-agent 分组，在每个分组里分别写上 Allow 和 Disallow 行。不同抓取程序会只遵守与自己名字匹配的分组，因此可以为它们设置不同的抓取范围。',
       },
       {
         question: "在Cloudflare Pages或静态网站上，robots.txt放在哪里？",
@@ -918,7 +918,7 @@ export const ZH_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: "结构化数据标记生成器支持哪些Schema.org类型？",
         answer:
-          "支持Article、FAQPage、Product、Organization和BreadcrumbList，覆盖了最常见的富媒体搜索结果使用场景。",
+          '支持 Article、FAQPage、Product、Organization 和 BreadcrumbList 五种类型，覆盖了最常见的富媒体搜索结果使用场景。选好类型后按提示填写字段，工具会生成对应的 JSON-LD 代码块。',
       },
       {
         question: "JSON-LD和Microdata有什么区别？",
@@ -928,7 +928,7 @@ export const ZH_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: "如何把生成的JSON-LD添加到网站上？",
         answer:
-          "复制完整的<script type=\"application/ld+json\">代码块，粘贴到对应页面的<head>中。",
+          '复制工具生成的完整 <script type="application/ld+json"> 代码块，粘贴到对应页面的 <head> 中。保存并发布页面后，可以用谷歌的富媒体搜索结果测试工具检查标记是否被正确识别。',
       },
       {
         question: "生成后如何测试结构化数据标记？",
@@ -1309,7 +1309,7 @@ export const ZH_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: "关键词密度检查器免费吗？",
         answer:
-          "是的，完全免费，无需注册，可以分析任意数量的草稿。",
+          '是的，完全免费，无需注册。您可以粘贴任意数量的内容草稿进行分析，工具会在浏览器本地统计目标短语的出现次数与 N 元词组频率，帮助发现无意中的过度重复。',
       },
       {
         question: "关键词密度到底是什么？",
@@ -1705,7 +1705,7 @@ export const ZH_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: "页面SEO检查器免费吗？",
         answer:
-          "是的，完全免费，无需注册，可以审核任意数量的页面。",
+          '是的，完全免费，无需注册。您可以粘贴任意数量页面的 HTML 源代码进行审核，工具会在浏览器本地检查标题、元描述、标题层级与链接，文件不会上传。',
       },
       {
         question: "标题标签的理想长度是多少？",
@@ -2106,7 +2106,7 @@ export const ZH_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: "可以压缩哪些格式的图片？",
         answer:
-          "可以压缩PNG、JPG、WebP和GIF图片，并将结果下载为WebP、JPG或PNG。",
+          '可以压缩 PNG、JPG、WebP 和 GIF 图片，并将结果下载为 WebP、JPG 或 PNG。压缩在浏览器本地完成，您可以调整质量滑块，在文件大小与画质之间找到合适的平衡。',
       },
       {
         question: "图片压缩器能把我的照片缩小多少？",
@@ -2151,7 +2151,7 @@ export const ZH_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: "压缩后的图片会有水印吗？",
         answer:
-          "不会，下载的图片绝不包含水印或品牌标识。",
+          '不会。下载的图片绝不包含水印或品牌标识，压缩只会减小文件体积，不会在图片上叠加任何标记。处理后的图片可以直接用在网站、邮件或社交媒体上。',
       },
       {
         question: "压缩截图的最佳格式是什么？",
@@ -2329,7 +2329,7 @@ export const ZH_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: "可以调整哪些格式的图片？",
         answer:
-          "可以调整PNG、JPG、WebP和GIF图片，并导出为PNG、JPG或WebP。",
+          '可以调整 PNG、JPG、WebP 和 GIF 图片，并导出为 PNG、JPG 或 WebP。调整在浏览器本地通过 Canvas 高质量重采样完成，导出格式可以在下载前自由选择。',
       },
       {
         question: "调整大小会让图片变模糊吗？",
@@ -2369,12 +2369,12 @@ export const ZH_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: "图片尺寸调整工具能处理的最大图片有多大？",
         answer:
-          "输入每边上限为8000像素，以保持在浏览器Canvas内存限制内。",
+          '输入的图片每边上限为 8000 像素，这是为了保持在浏览器 Canvas 的内存限制内，避免标签页崩溃。如果图片超过这个尺寸，请先用其他工具缩小，再上传调整。',
       },
       {
         question: "如何为YouTube缩略图调整图片大小？",
         answer:
-          "选择YouTube高清预设（1280×720），缩略图即可符合推荐的16:9尺寸。",
+          '选择 YouTube 高清预设（1280×720），图片就会按 16:9 的比例调整为 YouTube 推荐的缩略图尺寸。预设会自动设置好宽高，您只需上传图片并下载结果即可。',
       },
       {
         question: "为什么调整后的图片文件仍然很大？",
@@ -2502,7 +2502,7 @@ export const ZH_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: "可以转换哪些格式？输出哪些格式？",
         answer:
-          "可以将PNG、JPG、WebP、GIF和SVG文件转换为PNG、JPG或WebP输出。",
+          '可以将 PNG、JPG、WebP、GIF 和 SVG 文件转换为 PNG、JPG 或 WebP 输出。转换在浏览器本地批量完成，转成 JPEG 时透明区域会按您选择的背景色填充。',
       },
       {
         question: "为什么要把PNG转换为WebP？",
@@ -2695,7 +2695,7 @@ export const ZH_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: "旋转图片工具免费吗？",
         answer:
-          "是的，完全免费，无需注册，没有水印，也没有数量限制。",
+          '是的，完全免费，无需注册，也没有水印与数量限制。所有旋转、翻转与滤镜处理都通过浏览器本地的 Canvas 完成，图片不会上传，您可以处理任意多张照片。',
       },
       {
         question: "如何把图片旋转90度？",
@@ -2725,12 +2725,12 @@ export const ZH_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: "旋转图片会改变尺寸吗？",
         answer:
-          "旋转90度或270度会交换宽高，旋转180度则尺寸不变。",
+          '旋转 90 度或 270 度会交换图片的宽与高，例如横向照片会变成竖向；旋转 180 度则宽高不变，只是上下颠倒。工具会按您选择的角度实时预览，确认后再导出。',
       },
       {
         question: "能把照片变成黑白吗？",
         answer:
-          "可以，开启灰度开关即可立即把照片转换为黑白。",
+          '可以。开启灰度开关，照片会立即转换为黑白效果，预览中可以直接看到结果。灰度处理在本地 Canvas 中完成，原始文件不会被修改，确认效果后再导出即可。',
       },
       {
         question: "如何提亮较暗的照片？",
@@ -2740,7 +2740,7 @@ export const ZH_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: "旋转PNG后能保留透明度吗？",
         answer:
-          "可以，导出为PNG或WebP即可在旋转或翻转后保留透明区域。",
+          '可以。导出为 PNG 或 WebP 即可在旋转或翻转后保留透明区域，因为这两种格式支持透明通道。如果导出为 JPG，透明部分会被填充为背景色，透明度就无法保留。',
       },
       {
         question: "编辑后的照片会被上传到服务器吗？",
@@ -2770,7 +2770,7 @@ export const ZH_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: "可以旋转和翻转哪些格式的图片？",
         answer:
-          "可以编辑PNG、JPG、WebP和GIF图片，并导出为PNG、JPG或WebP。",
+          '可以编辑 PNG、JPG、WebP 和 GIF 图片，并导出为 PNG、JPG 或 WebP。编辑通过浏览器本地的 Canvas 变换完成，导出前可以选择想要的格式，透明图片建议导出为 PNG 或 WebP。',
       },
       {
         question: "能一次完成旋转和翻转吗？",
@@ -2913,7 +2913,7 @@ export const ZH_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: "能把JPG转换为Base64吗？",
         answer:
-          "可以，JPG、PNG、WebP、SVG、GIF和ICO文件都可以编码为Base64 Data URI。",
+          '可以。JPG、PNG、WebP、SVG、GIF 和 ICO 文件都可以编码为 Base64 Data URI。编码在浏览器本地完成，生成的结果可以直接复制为 HTML 的 <img> 标签或 CSS 背景图使用。',
       },
       {
         question: "如何在HTML中使用Base64图片？",
@@ -3685,7 +3685,7 @@ export const ZH_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: "文件哈希验证器免费吗？",
         answer:
-          "是的，完全免费，无需注册，可以验证任意数量的文件。",
+          '是的，完全免费，无需注册。您可以验证任意数量的文件，工具会在本地用 Web Crypto 计算 SHA-256 等摘要，并即时与您提供的预期校验和比对，文件不会上传。',
       },
       {
         question: "验证时我的文件会被上传到别处吗？",

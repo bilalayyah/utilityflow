@@ -860,7 +860,7 @@ export const ZH_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: '如何让“.”匹配换行符？',
         answer:
-          '启用 s（dotAll）标志后，点元字符“.”也可以匹配换行符。',
+          '启用 s（dotAll）标志后，点元字符“.”也可以匹配换行符。默认情况下“.”会匹配除换行以外的所有字符，因此跨行匹配时需要先打开这个开关，再在测试区查看高亮的匹配结果。',
       },
       {
         question: '正则表达式测试工具免费吗？',

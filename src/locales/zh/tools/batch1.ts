@@ -292,7 +292,7 @@ export const ZH_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: '字符计数器会统计换行吗？',
         answer:
-          '会的。换行会计入“带空格”指标，不计入“不带空格”指标。',
+          '会的。换行符会计入“带空格”的字符总数，但不会计入“不带空格”的统计，这样您可以同时看到两种口径的结果。实时进度条也会据此判断文本是否超出搜索引擎摘要或社交帖子的长度限制。',
       },
       {
         question: '超出平台限制进度条会怎样？',
@@ -550,7 +550,7 @@ export const ZH_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: '转换后换行会怎样？',
         answer:
-          '换行会原样保留，因此多行文本转换后结构不变。',
+          '转换只改变字母的大小写形式，不会动文本的结构。换行符和空行都会原样保留，因此多行标题、列表或代码片段转换后段落划分仍然不变。',
       },
       {
         question: '大小写转换工具会保存或上传我的文本吗？',
@@ -1249,7 +1249,7 @@ export const ZH_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: '排序时大小写如何处理？',
         answer:
-          '默认不区分大小写比较，因此“Apple”和“apple”会排在相同位置。',
+          '默认按不区分大小写的方式比较，因此“Apple”和“apple”会被视为相同的值并排在一起。如果您的列表区分大小写含义，请先统一大小写再排序，以免同形异义的行被混在一起。',
       },
       {
         question: '可以在排序的同时删除重复行吗？',
@@ -1299,7 +1299,7 @@ export const ZH_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: '排序使用稳定排序吗？',
         answer:
-          '是的。值相同的行会保持原有的相对顺序完成排序。',
+          '是的，排序是稳定的。值完全相同的行会保持它们原来的相对顺序，不会被随机打乱，因此重复出现的内容仍按输入时的先后顺序排列。',
       },
       {
         question: '可以排序 CSV 的某一列吗？',
@@ -1625,7 +1625,7 @@ export const ZH_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: '含表情符号的文本可以反转吗？',
         answer:
-          '可以。表情符号会被当作一个字符处理，并正确反转。',
+          '可以。表情符号会被当作一个完整的字符来处理，而不是拆成多个编码单元，因此反转后表情本身不会变成乱码。整段文本的字符顺序会倒过来，表情在新位置上仍能正常显示。',
       },
       {
         question: '反转后的文本可以恢复吗？',
@@ -2256,7 +2256,7 @@ export const ZH_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: '数字也会被当作单词统计吗？',
         answer:
-          '会的。由空格分隔的数字也会作为一个单位统计。',
+          '会的。只要是由空格分隔开的独立单位，数字也会被当作一个词统计进去，例如年份或编号都会出现在频率表中。如果只想看文字词的分布，可以先把纯数字行从文本中去掉。',
       },
       {
         question: '词频统计工具支持英文以外的语言吗？',
@@ -2375,7 +2375,7 @@ export const ZH_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: '“&”如何转换？',
         answer:
-          '“&”会展开为“and”，例如“Café & Crème”会变成“cafe-and-creme”。',
+          '“&”会被展开为单词“and”，而不是直接删掉，例如“Café & Crème”会变成“cafe-and-creme”。这样生成的链接读起来更自然，也保留了原标题中“和”的含义。',
       },
       {
         question: '中文标题也能转换为链接吗？',
@@ -2395,7 +2395,7 @@ export const ZH_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: '符号会怎样处理？',
         answer:
-          '“!”“?”“:”等符号会被去除，只有“&”例外，会展开为“and”。',
+          '“!”“?”“:”这类标点符号会被直接去除，不会出现在最终链接中。只有“&”是例外，它会被展开为“and”。生成后的链接只保留小写字母、数字和连字符，干净且适合直接用作网址。',
       },
       {
         question: '可以一次转换多个标题吗？',
@@ -2410,7 +2410,7 @@ export const ZH_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: '数字会保留在链接中吗？',
         answer:
-          '会的。数字会原样保留，例如“2026 Guide”会变成“2026-guide”。',
+          '会的。数字会原样保留在链接中，例如“2026 Guide”会变成“2026-guide”。年份、版本号或编号因此不会丢失，读者仍能从链接中看出文章对应的年份或版本。',
       },
       {
         question: '文本转链接工具会保存或上传我的文本吗？',
@@ -2563,7 +2563,7 @@ export const ZH_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: '粗体和斜体怎么写？',
         answer:
-          '**文本**是粗体，*文本*是斜体，两者也可以组合使用。',
+          '用两个星号把文字包起来就是粗体，例如 **文本**；用一个星号包起来就是斜体，例如 *文本*。两者也可以组合使用，例如 ***文本*** 会同时显示为粗体斜体，预览中会立即看到效果。',
       },
       {
         question: '列表怎么写？',
@@ -2573,7 +2573,7 @@ export const ZH_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: '链接怎么写？',
         answer:
-          '写成 [显示文本](https://example.com) 的形式就是链接。',
+          '链接写成 [显示文本](https://example.com) 的形式，方括号里是读者看到的文字，圆括号里是目标网址。预览会把这段语法渲染成可点击的链接，您可以直接点击检查地址是否正确。',
       },
       {
         question: '图片怎么写？',
@@ -2608,12 +2608,12 @@ export const ZH_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: '引用怎么写？',
         answer:
-          '行首写 > 就是引用块。',
+          '在行首写一个大于号 >，后面跟上文字，就是引用块。引用可以连续写多行，每行开头都加上 >，预览中会显示为带左侧竖线的引用段落。',
       },
       {
         question: '分隔线怎么写？',
         answer:
-          '单独一行写 --- 或 *** 就会显示水平线。',
+          '单独一行写 --- 或 ***，就会在预览中显示一条水平分隔线。这行前后最好各留一个空行，这样分隔线能把上下两段内容清楚地区分开。',
       },
       {
         question: 'Markdown 预览工具支持 GitHub 风格的 Markdown 吗？',
@@ -2771,7 +2771,7 @@ export const ZH_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: '行首行尾添加工具支持中文文本吗？',
         answer:
-          '支持。中文行同样可以添加行首行尾文本。',
+          '支持。中文行和英文行一样，都可以在行首和行尾添加指定文本，例如给每行加上引号或逗号。处理时按行切分，不会打乱中文标点或段落结构。',
       },
       {
         question: '行首行尾添加工具会保存或上传我的文本吗？',
@@ -2821,7 +2821,7 @@ export const ZH_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: '编号从 1 开始吗？',
         answer:
-          '是的。行号从 1 开始，按顺序为每行编号。',
+          '是的。行号从 1 开始，按顺序为每行依次编号，第一行是 1，第二行是 2，以此类推。导出后的每行都会带上对应的序号，方便对照与引用。',
       },
       {
         question: '行首行尾添加工具可以制作 HTML 列表吗？',
