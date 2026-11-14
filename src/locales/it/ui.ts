@@ -42,7 +42,7 @@ export const itStrings: UiStrings = {
       'Una raccolta veloce di utilità quotidiane nel browser per scrittori, ingegneri, marketer e analisti. Pensata per funzionare in locale con il minimo carico.',
     categories: 'Categorie',
     platformAi: 'Piattaforma e IA',
-    legal: 'Note legali',
+    trustLegal: 'Fiducia e Note legali',
     home: 'Home',
     allToolsDirectory: 'Directory di tutti gli strumenti',
     aboutUs: 'Chi siamo',
