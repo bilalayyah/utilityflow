@@ -167,7 +167,17 @@ export function Footer() {
           <p>
             © {currentYear} {SITE_CONFIG.name}. {t.footer.rightsReserved}
           </p>
-          <p>{t.footer.deployedNote}</p>
+          <p>
+            {t.footer.deployedNote.split(/(Bilal|Shaheen)/g).map((part, index) =>
+              part === 'Bilal' || part === 'Shaheen' ? (
+                <span key={index} className="font-script text-base">
+                  {part}
+                </span>
+              ) : (
+                <span key={index}>{part}</span>
+              ),
+            )}
+          </p>
         </div>
       </div>
     </footer>
