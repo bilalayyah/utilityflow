@@ -208,7 +208,7 @@ export const idStrings: UiStrings = {
     availableTools: 'Alat Tersedia',
     categorySuites: 'Suite Kategori',
     visitHub: 'Kunjungi hub {name}',
-    plannedToolsInclude: 'Alat yang direncanakan meliputi: {names}',
+    plannedToolsInclude: 'Alat dalam kategori ini meliputi: {names}',
     noMatch: 'Tidak ada kategori atau alat yang cocok dengan filter Anda.',
     clearFilters: 'Hapus filter',
   },
@@ -288,6 +288,19 @@ export const idStrings: UiStrings = {
       'Tugas online rutin—menghitung kata, memvalidasi JSON, memeriksa batas karakter, menghitung pembayaran pinjaman, atau mengompresi gambar—sering memaksa orang ke situs lambat yang penuh overlay mengganggu, unduhan membingungkan, atau pendaftaran wajib.',
     whyP2:
       'Tujuan kami sederhana: memberikan setiap utilitas halaman khusus yang bersih, memuat dengan cepat, menjelaskan dengan jelas cara kerja alat, dan berjalan langsung di dalam browser Anda kapan pun standar web memungkinkan.',
+    orgTitle: 'Siapa yang Menjalankan UtilityFlow',
+    orgP1:
+      'UtilityFlow adalah proyek independen yang dibuat dan dikelola oleh Bilal, seorang pembuat yang membangun alat web gratis di waktu luangnya. Tidak ada perusahaan di balik situs ini, tidak ada pendanaan investor, dan tidak ada tim karyawan — setiap alat, panduan, dan halaman bantuan dirancang, dibangun, dan diuji oleh satu orang. Proyek ini didukung oleh iklan yang ditampilkan di situs, yang membuat ke-88 alat tetap gratis digunakan tanpa akun atau langganan. Kredit di footer menyebut Shaheen, yang dorongannya menginspirasi proyek ini dan yang namanya muncul di setiap halaman sebagai pengingat dari mana ide ini bermula.',
+    orgP2:
+      'Karena proyek ini kecil dan independen, keputusan tetap sederhana: jika sebuah alat lambat, membingungkan, atau salah, alat itu diperbaiki. Umpan balik yang dikirim melalui halaman kontak langsung sampai ke orang yang dapat mengubah kodenya, dan saran dari pengunjung telah membentuk alat baru serta berbagai perbaikan di seluruh situs.',
+    howTitle: 'Cara Alat Kami Dibangun dan Diuji',
+    howP1:
+      'Setiap utilitas berawal dari satu tugas yang jelas — menghitung kata, menggabungkan PDF, memformat JSON — dan dibangun sebagai halaman yang fokus untuk melakukan tugas itu dengan baik. Di mana pun standar web memungkinkan, pekerjaan berlangsung sepenuhnya di dalam browser Anda, sehingga teks dan file Anda tidak perlu meninggalkan perangkat Anda. Setiap halaman alat menjelaskan langkah-langkahnya dengan panduan singkat, menunjukkan contoh yang sudah dikerjakan, dan menjawab pertanyaan yang paling sering diajukan, sehingga Anda dapat menilai hasilnya sendiri alih-alih mempercayai kotak hitam.',
+    howP2:
+      'Sebelum sebuah alat diluncurkan, alat itu diuji dengan input nyata di browser desktop dan seluler, termasuk kasus tepi seperti input kosong, teks yang sangat panjang, dan jenis file yang tidak biasa. Ketika sesuatu rusak atau perhitungan tampak salah, perbaikannya dikirim sebagai pembaruan situs dan halaman tersebut diperiksa ulang. Tiga alat AI opsional adalah satu-satunya yang mengirim teks ke server, dan halaman mereka mengatakannya dengan jelas sebelum Anda menggunakannya.',
+    whoTitle: 'Untuk Siapa UtilityFlow Dibuat',
+    whoP1:
+      'UtilityFlow dibuat untuk siapa pun yang membutuhkan jawaban cepat dari sebuah alat tanpa memasang perangkat lunak atau membuat akun: pelajar yang memeriksa jumlah kata esai, penulis yang memformat draf, developer yang memvalidasi JSON atau mengenkode URL, pemasar yang memeriksa batas karakter, dan pemilik usaha kecil yang menghitung pinjaman atau diskon. Jika sebuah tugas memakan waktu kurang dari satu menit, alat untuk tugas itu juga seharusnya memakan waktu kurang dari satu menit — itulah standar yang berlaku untuk setiap halaman di situs ini.',
     principlesTitle: 'Prinsip Rekayasa Inti',
     principles: [
       {
@@ -325,6 +338,16 @@ export const idStrings: UiStrings = {
     title: 'Hubungi Kami',
     intro:
       'Kirim laporan bug, saran alat, atau pertanyaan umum. Kami membaca setiap kiriman dan memprioritaskan perbaikan yang meningkatkan akurasi alat dan aksesibilitas.',
+    aboutTitle: 'Apa yang Dapat Anda Tulis',
+    aboutP1:
+      'Gunakan formulir ini untuk apa pun yang terkait dengan situs. Laporkan bug dan beri tahu kami alat apa yang Anda gunakan, apa yang Anda masukkan, dan apa yang Anda harapkan terjadi — semakin detail informasi yang Anda sertakan, semakin cepat masalah dapat direproduksi dan diperbaiki. Sarankan alat baru dan jelaskan tugas yang seharusnya dilakukan alat itu; ide yang banyak diminta pengunjung akan menjadi prioritas. Anda juga dapat menunjukkan perhitungan yang salah, petunjuk yang membingungkan, atau kesalahan terjemahan di halaman mana pun.',
+    aboutP2:
+      'Pertanyaan privasi dan hukum juga kami sambut. Jika komentar yang Anda posting perlu dihapus, sertakan halaman alat dan nama yang Anda gunakan, dan komentar itu akan diturunkan. Untuk hal lain — ide kemitraan, pertanyaan pers, atau komentar umum tentang situs — formulir yang sama dapat digunakan, atau Anda dapat mengirim email langsung menggunakan alamat di halaman ini.',
+    responseTitle: 'Apa yang Terjadi Setelah Anda Mengirim Pesan',
+    responseP1:
+      'Setiap pesan dibaca oleh orang yang membangun dan mengelola UtilityFlow — tidak ada meja bantuan dan tidak ada antrean balasan otomatis. Laporan bug dan hasil yang salah diperiksa terlebih dahulu, karena alat yang rusak memengaruhi semua orang yang menggunakannya. Saran alat dikumpulkan dan ditimbang berdasarkan berapa banyak orang yang akan menggunakannya dan seberapa cocok alat itu dengan pendekatan situs yang mengutamakan browser.',
+    responseP2:
+      'Anda tidak memerlukan akun untuk menghubungi kami, dan kami hanya akan menggunakan alamat email Anda untuk membalas pesan Anda. Jika Anda lebih suka tidak menggunakan formulir, alamat email langsung di halaman ini menuju ke kotak masuk yang sama.',
     name: 'Nama',
     email: 'Alamat email',
     topic: 'Topik',
@@ -376,12 +399,14 @@ export const idStrings: UiStrings = {
         paragraphs: [
           'Teks, angka, cuplikan kode, dan file yang dimasukkan ke dalam 85 alat berbasis browser kami diproses secara lokal di dalam sesi browser Anda tanpa meninggalkan perangkat Anda.',
           'Tiga alat AI Gratis opsional kami (Asisten Penulisan AI, Perangkum Teks AI, dan Pencari Alat Cerdas AI) mengirim teks yang dikirimkan melalui backend kami yang terlindungi ke Groq untuk inferensi waktu nyata. Kami tidak menyimpan atau mencatat prompt Anda, dan batas laju harian gratis hanya menggunakan hash SHA-256 bertanggal UTC sehingga alamat IP mentah pengunjung tidak pernah disimpan.',
+          'Komentar yang diposting di bawah alat kami hanya meminta nama dan teks komentar. Nama dan teks yang Anda kirimkan disimpan di platform hosting kami dan ditampilkan secara publik di halaman alat tersebut, beserta tanggalnya. Kami tidak meminta alamat email atau akun untuk berkomentar, dan kami tidak menggunakan data komentar untuk iklan. Jika Anda ingin sebuah komentar dihapus, hubungi kami dengan menyebutkan halaman dan nama yang digunakan, dan kami akan menghapusnya.',
         ],
       },
       {
         title: '3. Log Hosting & Telemetri Teknis',
         paragraphs: [
           'UtilityFlow dihosting di Cloudflare Pages. Seperti penyedia hosting web standar, jaringan edge kami dapat secara otomatis memproses metadata permintaan HTTP standar (seperti alamat IP, user-agent browser, URL yang diminta, dan stempel waktu) untuk mengirimkan halaman secara andal, mengurangi penyalahgunaan, dan menjaga keamanan.',
+          'Kami tidak menggabungkan log hosting dengan data lain untuk mengidentifikasi pengunjung secara individual, dan kami tidak menjual atau membagikan data log kepada pengiklan. Log hanya ada untuk menjaga layanan tetap berjalan dan aman.',
         ],
       },
       {
@@ -395,10 +420,35 @@ export const idStrings: UiStrings = {
         title: '5. Tautan Eksternal',
         paragraphs: [
           'Dokumentasi atau halaman alat kami dapat menautkan ke situs web eksternal. Kami tidak bertanggung jawab atas praktik privasi atau konten situs web pihak ketiga.',
+          'Tautan eksternal dibuka di tab baru jika memungkinkan. Sebelum memasukkan informasi pribadi di situs yang ditautkan, harap tinjau kebijakan privasi situs tersebut.',
+        ],
+      },
+      {
+        title: '6. Penyimpanan Data',
+        paragraphs: [
+          'Informasi yang diproses di browser Anda tidak pernah dikirim kepada kami, jadi tidak ada yang perlu disimpan. Teks yang dikirim ke alat AI opsional diproses untuk permintaan tersebut dan tidak disimpan. Komentar disimpan hingga dihapus, baik oleh kami maupun atas permintaan Anda. Log hosting dan catatan keamanan hanya disimpan selama periode terbatas yang dibutuhkan penyedia hosting kami untuk mengoperasikan dan melindungi layanan.',
+        ],
+      },
+      {
+        title: '7. Hak dan Pilihan Anda',
+        paragraphs: [
+          'Anda dapat menonaktifkan iklan yang dipersonalisasi melalui Google Ads Settings atau halaman opt-out AboutAds.info yang ditautkan di bagian 4, dan Anda dapat memblokir atau menghapus cookie di pengaturan browser Anda kapan saja. Jika Anda pernah memposting komentar, Anda dapat meminta penghapusannya dengan menghubungi kami. Karena alat kami berjalan di browser Anda dan kami tidak menyimpan akun atau profil, tidak ada berkas data pribadi yang dapat diunduh atau dikoreksi — tetapi pertanyaan apa pun tentang data Anda akan dijawab jika Anda menulis kepada kami.',
+        ],
+      },
+      {
+        title: '8. Privasi Anak',
+        paragraphs: [
+          'UtilityFlow adalah situs untuk keperluan umum dan tidak ditujukan untuk anak di bawah 13 tahun. Kami tidak dengan sengaja mengumpulkan informasi pribadi dari anak-anak. Jika Anda adalah orang tua atau wali dan yakin seorang anak telah memposting komentar di situs ini, hubungi kami dan kami akan menghapusnya.',
+        ],
+      },
+      {
+        title: '9. Perubahan pada Kebijakan Ini',
+        paragraphs: [
+          'Kami dapat memperbarui Kebijakan Privasi ini ketika kami menambahkan alat, mengganti penyedia, atau menyesuaikan cara kerja situs. Tanggal "Terakhir diperbarui" di bagian atas halaman ini menunjukkan kapan kebijakan ini terakhir direvisi. Terus menggunakan situs setelah perubahan berarti Anda menerima kebijakan yang diperbarui.',
         ],
       },
     ],
-    contactTitle: '6. Kontak',
+    contactTitle: '10. Kontak',
     contactBefore:
       'Jika Anda memiliki pertanyaan tentang Kebijakan Privasi ini, silakan hubungi kami melalui',
     contactLink: 'Halaman kontak',
@@ -417,12 +467,14 @@ export const idStrings: UiStrings = {
         title: '2. Penggunaan yang Diizinkan',
         paragraphs: [
           'Anda dapat menggunakan UtilityFlow untuk tugas produktivitas pribadi, pendidikan, dan komersial. Anda setuju untuk tidak mengotomatisasi lalu lintas yang kasar, mencoba mengganggu pengiriman situs, merekayasa balik perlindungan keamanan, atau menggunakan utilitas apa pun untuk aktivitas yang melanggar hukum.',
+          'Anda dapat menautkan ke alat kami dan membagikan hasilnya. Anda tidak boleh menampilkan alat kami sebagai milik Anda, menyalin desain atau konten situs dan menerbitkannya ulang sebagai layanan pesaing, atau menggunakan situs dengan cara yang menyesatkan orang lain tentang asal suatu hasil.',
         ],
       },
       {
         title: '3. Akurasi & Penafian Informasi',
         paragraphs: [
           'Meskipun kami menguji setiap utilitas dengan cermat, semua alat, perhitungan, konversi, dan pemeriksaan SEO disediakan "sebagaimana adanya" dan "sebagaimana tersedia". Keluaran harus diverifikasi secara independen sebelum membuat keputusan keuangan, hukum, medis, atau rekayasa produksi.',
+          'Perhitungan seperti pembayaran pinjaman, estimasi pajak, dan konversi mata uang adalah alat bantu perencanaan, bukan nasihat profesional. Angka dapat berubah mengikuti tarif, aturan, dan pembulatan, jadi konfirmasikan angka penting dengan profesional yang berkualifikasi atau sumber resmi sebelum bertindak berdasarkan angka tersebut.',
         ],
       },
       {
@@ -438,6 +490,24 @@ export const idStrings: UiStrings = {
           'Sejauh maksimum yang diizinkan oleh hukum, UtilityFlow dan kontributornya tidak bertanggung jawab atas kerusakan tidak langsung, insidental, khusus, atau konsekuensial yang timbul dari penggunaan Anda, atau ketidakmampuan Anda menggunakan, platform ini.',
         ],
       },
+      {
+        title: '6. Konten Pengguna dan Komentar',
+        paragraphs: [
+          'Anda tetap memiliki kepemilikan penuh atas apa pun yang Anda ketik ke dalam alat kami atau posting sebagai komentar. Dengan memposting komentar, Anda memberi kami izin untuk menampilkannya secara publik di halaman alat yang relevan. Jangan memposting apa pun yang melanggar hukum, menyesatkan, atau membahayakan orang lain, dan jangan memposting informasi pribadi orang lain. Kami dapat menghapus komentar yang melanggar aturan ini atau yang dilaporkan kepada kami, tanpa pemberitahuan.',
+        ],
+      },
+      {
+        title: '7. Layanan Pihak Ketiga',
+        paragraphs: [
+          'Beberapa fitur bergantung pada layanan pihak ketiga yang independen: ketiga alat AI mengirim teks ke Groq untuk diproses, formulir kontak dikirimkan oleh FormSubmit, situs dihosting di Cloudflare, dan iklan disajikan oleh Google AdSense. Masing-masing layanan ini memiliki syarat dan kebijakan privasinya sendiri, dan penggunaan Anda atas layanan tersebut diatur oleh dokumen-dokumen itu. UtilityFlow tidak bertanggung jawab atas ketersediaan atau praktik layanan pihak ketiga.',
+        ],
+      },
+      {
+        title: '8. Ketersediaan Layanan',
+        paragraphs: [
+          'UtilityFlow adalah layanan gratis dan kami tidak menjamin bahwa setiap alat akan selalu tersedia. Alat dapat diubah, ditingkatkan, atau dihapus, dan situs dapat sementara tidak tersedia untuk pemeliharaan. Kami berusaha menjaga layanan tetap berjalan dengan lancar, tetapi kami tidak bertanggung jawab atas gangguan atau kerugian apa pun yang disebabkan oleh waktu henti.',
+        ],
+      },
     ],
     acceptanceTitle: '1. Penerimaan Syarat',
     acceptanceBefore:
@@ -445,7 +515,7 @@ export const idStrings: UiStrings = {
     acceptanceLink: 'Kebijakan Privasi',
     acceptanceAfter:
       '. Jika Anda tidak setuju dengan bagian mana pun dari syarat ini, silakan berhenti menggunakan situs web ini.',
-    changesTitle: '6. Perubahan & Kontak',
+    changesTitle: '9. Perubahan & Kontak',
     changesBefore:
       'Kami dapat memperbarui Syarat Layanan ini saat alat baru dirilis. Pertanyaan dapat ditujukan ke',
     changesLink: 'Halaman kontak',
