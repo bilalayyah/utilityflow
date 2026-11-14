@@ -51,7 +51,7 @@ export function AboutPage() {
             <h2 className="text-xl font-bold text-slate-900 mb-3">{t.about.principlesTitle}</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {t.about.principles.map((principle) => (
-                <div key={principle.title} className="rounded-xl border border-slate-200 bg-slate-50 p-5">
+                <div key={principle.title} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
                   <h3 className="text-base font-semibold text-slate-900">{principle.title}</h3>
                   <p className="mt-1.5 text-sm text-slate-600">{principle.description}</p>
                 </div>
@@ -66,7 +66,7 @@ export function AboutPage() {
                 <li key={category.id}>
                   <Link
                     to={categoryHref(category.id, locale)}
-                    className="flex items-center justify-between rounded-lg border border-slate-200 bg-white px-4 py-3 hover:border-indigo-300 transition-colors"
+                    className="flex items-center justify-between rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-sm hover:border-indigo-300 transition-colors"
                   >
                     <span className="font-semibold text-slate-900">{category.name}</span>
                     <span className="font-mono text-xs text-slate-500 tabular-nums">
@@ -79,7 +79,7 @@ export function AboutPage() {
             </ul>
           </section>
 
-          <section className="rounded-xl border border-slate-200 bg-slate-50 p-6">
+          <section className="rounded-2xl border border-indigo-100 bg-indigo-50/70 p-6 shadow-sm">
             <h2 className="text-lg font-bold text-slate-900 mb-2">{t.about.feedbackTitle}</h2>
             <p className="text-sm text-slate-600">
               {t.about.feedbackBefore}{' '}

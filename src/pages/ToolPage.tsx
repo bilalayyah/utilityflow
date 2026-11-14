@@ -30,7 +30,7 @@ export function ToolPage() {
     <ToolPageLayout tool={localized}>
       <Suspense
         fallback={
-          <div className="py-12 text-center text-sm text-slate-500">
+          <div className="rounded-2xl border border-slate-200 bg-white p-12 text-center text-sm text-slate-500 shadow-sm">
             {formatString(t.toolPage.loadingWorkspace, { name: localized.name })}
           </div>
         }

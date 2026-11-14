@@ -5,6 +5,7 @@ import { Breadcrumbs, buildBreadcrumbSchema } from '../components/common/Breadcr
 import { CategoryIcon } from '../components/common/CategoryIcon';
 import { SeoHead } from '../components/seo/SeoHead';
 import { ToolCard } from '../components/tool/ToolCard';
+import { pastelForKey } from '../components/tool/pastel';
 import { SITE_CONFIG, buildCanonicalUrl } from '../config/site';
 import { useLocale } from '../locales/LocaleContext';
 import { categoryHref, localizeStaticPath } from '../locales/config';
@@ -65,7 +66,7 @@ export function ToolsDirectoryPage() {
       <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
         <Breadcrumbs items={breadcrumbs} className="mb-6" />
 
-        <header className="max-w-3xl mb-8">
+        <header className="mx-auto max-w-3xl text-center mb-8">
           <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900">
             {t.directory.title}
           </h1>
@@ -85,7 +86,7 @@ export function ToolsDirectoryPage() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder={t.directory.searchPlaceholder}
-              className="w-full rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/20"
+              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm text-slate-900 shadow-sm placeholder:text-slate-400 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/20"
             />
           </div>
 
@@ -100,17 +101,17 @@ export function ToolsDirectoryPage() {
         <div
           role="tablist"
           aria-label="Filter by category"
-          className="flex items-center gap-1.5 overflow-x-auto rounded-lg bg-slate-100 p-1 mb-8"
+          className="flex items-center gap-2 overflow-x-auto pb-1 mb-8"
         >
           <button
             type="button"
             role="tab"
             aria-selected={categoryFilter === 'all'}
             onClick={() => setCategoryFilter('all')}
-            className={`px-3 py-1.5 text-xs sm:text-sm font-medium rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
+            className={`px-4 py-2 text-xs sm:text-sm font-medium rounded-full transition-colors whitespace-nowrap shrink-0 cursor-pointer shadow-sm ${
               categoryFilter === 'all'
-                ? 'bg-white text-slate-900 shadow-xs'
-                : 'text-slate-600 hover:text-slate-900'
+                ? 'bg-gradient-to-r from-indigo-600 to-violet-600 text-white'
+                : 'border border-slate-200 bg-white text-slate-600 hover:border-indigo-300 hover:text-indigo-700'
             }`}
           >
             {t.directory.all} ({allTools.length})
@@ -124,10 +125,10 @@ export function ToolsDirectoryPage() {
                 role="tab"
                 aria-selected={categoryFilter === category.id}
                 onClick={() => setCategoryFilter(category.id)}
-                className={`px-3 py-1.5 text-xs sm:text-sm font-medium rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
+                className={`px-4 py-2 text-xs sm:text-sm font-medium rounded-full transition-colors whitespace-nowrap shrink-0 cursor-pointer shadow-sm ${
                   categoryFilter === category.id
-                    ? 'bg-white text-slate-900 shadow-xs'
-                    : 'text-slate-600 hover:text-slate-900'
+                    ? 'bg-gradient-to-r from-indigo-600 to-violet-600 text-white'
+                    : 'border border-slate-200 bg-white text-slate-600 hover:border-indigo-300 hover:text-indigo-700'
                 }`}
               >
                 {category.shortName} ({count})
@@ -155,15 +156,20 @@ export function ToolsDirectoryPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {visibleCategories.map((category) => {
                 const liveInCategory = allTools.filter((tool) => tool.categoryId === category.id);
+                const palette = pastelForKey(`cat:${category.id}`);
                 return (
                   <div
                     key={category.id}
-                    className="rounded-xl border border-slate-200 bg-white p-6 flex flex-col justify-between"
+                    className={`rounded-2xl ${palette.card} p-6 flex flex-col justify-between shadow-sm transition hover:-translate-y-0.5 hover:shadow-md`}
                   >
                     <div>
                       <div className="flex items-center justify-between gap-3 mb-3">
                         <div className="flex items-center gap-2.5">
-                          <CategoryIcon name={category.iconName} className="w-5 h-5 text-indigo-600" />
+                          <span
+                            className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full ${palette.icon}`}
+                          >
+                            <CategoryIcon name={category.iconName} className="w-5 h-5" />
+                          </span>
                           <h3 className="text-lg font-bold text-slate-900">{category.name}</h3>
                         </div>
                         <span className="text-xs font-mono text-slate-500 tabular-nums">
@@ -180,10 +186,10 @@ export function ToolsDirectoryPage() {
                         })}
                       </p>
                     </div>
-                    <div className="mt-5 pt-4 border-t border-slate-100">
+                    <div className="mt-5 pt-4 border-t border-white/60">
                       <Link
                         to={categoryHref(category.id, locale)}
-                        className="text-sm font-semibold text-indigo-600 hover:text-indigo-700"
+                        className={`text-sm font-semibold ${palette.link} hover:underline underline-offset-4`}
                       >
                         {formatString(t.directory.visitHub, { name: category.name })}
                       </Link>
@@ -193,7 +199,7 @@ export function ToolsDirectoryPage() {
               })}
             </div>
           ) : (
-            <div className="rounded-xl border border-slate-200 bg-slate-50 p-8 text-center text-sm text-slate-600">
+            <div className="rounded-2xl border border-slate-200 bg-white p-8 text-center text-sm text-slate-600 shadow-sm">
               {t.directory.noMatch}{' '}
               <button
                 type="button"
