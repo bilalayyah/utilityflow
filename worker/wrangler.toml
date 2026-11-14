@@ -17,8 +17,8 @@ GROQ_MODEL = "openai/gpt-oss-20b"
 GROQ_FALLBACK_MODEL = "llama-3.1-8b-instant"
 
 # Optional comma-separated allowed browser origins.
-# Production site origin (utilityflow.online to be added once the domain is live).
-ALLOWED_ORIGINS = "https://utilityflow.pages.dev"
+# Production site origins (utilityflow.online added 2026-11-14 when the domain went live).
+ALLOWED_ORIGINS = "https://utilityflow.pages.dev,https://utilityflow.online"
 
 # Strict free-tier usage guardrails
 GLOBAL_DAILY_CAP = "400"
