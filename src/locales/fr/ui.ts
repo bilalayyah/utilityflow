@@ -193,6 +193,7 @@ export const frStrings: UiStrings = {
           'Oui. Toutes les mises en page, les contrôles de navigation et les espaces de travail interactifs — y compris le mode clair et le mode sombre — sont conçus d’abord pour le mobile, avec des cibles tactiles accessibles et des grilles adaptatives.',
       },
     ],
+    trustLine: 'Tous les outils sont gratuits • Aucune inscription requise • Fonctionne dans votre navigateur',
   },
   directory: {
     seoTitle: 'Annuaire de tous les outils en ligne | UtilityFlow',
