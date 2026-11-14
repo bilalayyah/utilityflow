@@ -338,11 +338,14 @@ export const deStrings: UiStrings = {
       subject: 'Bitte wählen Sie ein Thema oder geben Sie eines ein.',
       message: 'Bitte geben Sie in Ihrer Nachricht mindestens 10 Zeichen ein.',
     },
-    successTitle: 'Nachricht vorbereitet',
+    successTitle: 'Nachricht gesendet',
     successThanks:
-      'Vielen Dank, {name}. Ihre Nachricht zum Thema {subject} wurde geprüft.',
+      'Vielen Dank, {name}. Ihre Nachricht wurde gesendet und wir melden uns bald bei Ihnen.',
+    sending: 'Wird gesendet …',
+    sendError:
+      'Ihre Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es erneut.',
     successNote:
-      'Da UtilityFlow als statische Website läuft und Nutzereinsendungen nicht auf einem Backend-Server speichert, können Sie Ihre Nachricht auch direkt über Ihren E-Mail-Client an',
+      'Wenn Sie noch etwas ergänzen möchten, können Sie uns auch direkt erreichen unter',
     sendAnother: 'Weitere Nachricht senden',
     directEmail: 'Direkte E-Mail',
     directEmailText: 'Lieber direkt schreiben? E-Mail an unser Team:',
@@ -392,9 +395,11 @@ export const deStrings: UiStrings = {
       'Wenn Sie Fragen zu dieser Datenschutzerklärung haben, kontaktieren Sie uns über unsere',
     contactLink: 'Kontaktseite',
     contactMiddle: 'oder per E-Mail',
+    optOutGoogleAds: 'Google Ads Settings',
+    optOutAboutAds: 'AboutAds.info – Abmeldung',
   },
   terms: {
-    seoTitle: 'Nutzungsbedingungen für Online-Tools | UtilityFlow',
+    seoTitle: 'Nutzungsbedingungen – Regeln für Online-Tools | UtilityFlow',
     seoDescription:
       'Lesen Sie die Nutzungsbedingungen für die Nutzung der Browser-Tools von UtilityFlow: geistiges Eigentum, Haftungsausschluss für Ergebnisse und Haftungsgrenzen.',
     title: 'Nutzungsbedingungen',
@@ -415,7 +420,7 @@ export const deStrings: UiStrings = {
       {
         title: '4. Geistiges Eigentum',
         paragraphs: [
-          'Die UtilityFlow-Oberfläche, Markenelemente, Dokumentation und der Quellcode sind durch geltende Gesetze zum geistigen Eigentum geschützt. Sie behalten das volle Eigentum an allen Texten, Code, Dokumenten oder Bildern, die Sie mit unseren clientseitigen Utilities verarbeiten.',
+          'Die UtilityFlow-Oberfläche, Markenelemente, Dokumentation und der Quellcode sind durch geltende Gesetze zum geistigen Eigentum geschützt. Sie behalten das volle Eigentum an allen Texten, Code, Dokumenten oder Bildern, die Sie mit unseren clientseitigen Utilities verarbeiten. UtilityFlow ist ein unabhängiges Projekt und ist nicht mit YouTube, Instagram, Google oder einer anderen auf dieser Website genannten Marke Dritter verbunden, wird von diesen nicht unterstützt und steht in keiner Verbindung zu ihnen.',
         ],
       },
       {
