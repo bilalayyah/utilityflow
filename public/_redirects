@@ -1,3 +1,14 @@
+# Cloudflare Pages redirects (Audit Fix #2)
+# Known dead/guessed URLs 301 to their real pages (both slash forms —
+# the middleware in functions/_middleware.ts carries the same three
+# redirects as a safety net in case it runs before _redirects).
+/privacy/ /privacy-policy/ 301
+/privacy /privacy-policy/ 301
+/pdf-merger/ /merge-pdf/ 301
+/pdf-merger /merge-pdf/ 301
+/categories/text-writing/ /category/text-writing-tools/ 301
+/categories/text-writing /category/text-writing-tools/ 301
+
 # Cloudflare Pages SPA fallback configuration
 # Static assets (robots.txt, sitemap.xml, /assets/*) are served before this rule.
 /* /index.html 200
