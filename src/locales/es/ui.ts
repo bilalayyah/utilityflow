@@ -76,9 +76,9 @@ export const esStrings: UiStrings = {
     externalApi: 'API externa',
   },
   home: {
-    seoTitle: 'UtilityFlow – Herramientas de utilidad online rápidas en el navegador',
+    seoTitle: 'UtilityFlow – Herramientas online rápidas en el navegador',
     seoDescription:
-      'Herramientas de utilidad online gratuitas, rápidas y centradas en la privacidad para análisis de texto, formato para desarrolladores, calculadoras, PDF, revisiones de SEO y flujos de trabajo con imágenes.',
+      'Herramientas online gratuitas, rápidas y privadas para texto, desarrollo, calculadoras, PDF, SEO e imágenes, en tu navegador.',
     seoKeywords: [
       'herramientas en línea',
       'herramientas de navegador',
@@ -195,9 +195,9 @@ export const esStrings: UiStrings = {
     trustLine: 'Todas las herramientas son gratuitas • No es necesario registrarse • Funciona en tu navegador',
   },
   directory: {
-    seoTitle: 'Directorio de todas las herramientas de utilidad online | UtilityFlow',
+    seoTitle: 'Directorio de todas las herramientas online | UtilityFlow',
     seoDescription:
-      'Explora y busca todas las utilidades basadas en el navegador y las categorías de UtilityFlow, organizadas para escritura, desarrollo, calculadoras, PDF, SEO e imágenes.',
+      'Explora todas las utilidades y categorías de UtilityFlow, organizadas para escritura, desarrollo, calculadoras, PDF, SEO e imágenes.',
     seoKeywords: [
       'directorio de herramientas',
       'todas las herramientas en línea',
@@ -271,9 +271,9 @@ export const esStrings: UiStrings = {
     browseCategories: 'Explorar las categorías',
   },
   about: {
-    seoTitle: 'Acerca de UtilityFlow – Plataforma de herramientas online en el navegador',
+    seoTitle: 'Acerca de UtilityFlow – Herramientas en el navegador',
     seoDescription:
-      'Descubre cómo UtilityFlow crea utilidades rápidas y centradas en la privacidad para el navegador en siete categorías, sin cuentas, desorden ni subidas de datos innecesarias.',
+      'Descubre cómo UtilityFlow crea utilidades rápidas y privadas para el navegador en siete categorías, sin cuentas ni subidas de datos.',
     title: 'Acerca de UtilityFlow',
     intro:
       'UtilityFlow es una plataforma web independiente que crea 85 utilidades enfocadas y confiables para el navegador, para el trabajo digital cotidiano.',
@@ -313,7 +313,7 @@ export const esStrings: UiStrings = {
     feedbackAfter: '.',
   },
   contact: {
-    seoTitle: 'Contactar con UtilityFlow – Soporte, informes de errores y sugerencias',
+    seoTitle: 'Contactar con UtilityFlow – Soporte, errores y sugerencias',
     seoDescription:
       'Ponte en contacto con el equipo de UtilityFlow para informar un problema, sugerir una nueva herramienta de utilidad o preguntar sobre privacidad y términos.',
     title: 'Contáctanos',
@@ -341,19 +341,21 @@ export const esStrings: UiStrings = {
       subject: 'Elige o escribe un tema.',
       message: 'Incluye al menos 10 caracteres en tu mensaje.',
     },
-    successTitle: 'Mensaje preparado',
+    successTitle: 'Mensaje enviado',
     successThanks:
-      'Gracias, {name}. Tu mensaje sobre {subject} ha sido validado.',
+      'Gracias, {name}. Tu mensaje ha sido enviado y te responderemos pronto.',
     successNote:
-      'Como UtilityFlow funciona como un sitio estático sin almacenar los mensajes de los usuarios en un servidor backend, también puedes enviar tu mensaje directamente desde tu cliente de correo a',
+      'Si necesitas añadir algo más, también puedes contactarnos directamente en',
+    sending: 'Enviando…',
+    sendError: 'No se pudo enviar tu mensaje. Inténtalo de nuevo.',
     sendAnother: 'Enviar otro mensaje',
     directEmail: 'Correo directo',
     directEmailText: '¿Prefieres escribir directamente? Envía un correo a nuestro equipo a:',
   },
   privacy: {
-    seoTitle: 'Política de privacidad | UtilityFlow',
+    seoTitle: 'Política de privacidad – Tus datos y cookies | UtilityFlow',
     seoDescription:
-      'Lee la Política de privacidad de UtilityFlow sobre la ejecución de herramientas en el navegador, cookies, registros del servidor y divulgaciones de publicidad de terceros.',
+      'Lee la Política de privacidad de UtilityFlow: herramientas en el navegador, cookies, registros del servidor y publicidad de terceros.',
     title: 'Política de privacidad',
     lastUpdated: 'Última actualización: noviembre de 2026',
     sections: [
@@ -395,11 +397,13 @@ export const esStrings: UiStrings = {
       'Si tienes preguntas sobre esta Política de privacidad, contáctanos a través de nuestra',
     contactLink: 'página de contacto',
     contactMiddle: 'o envía un correo a',
+    optOutGoogleAds: 'Configuración de anuncios de Google',
+    optOutAboutAds: 'Exclusión de publicidad en AboutAds.info',
   },
   terms: {
-    seoTitle: 'Términos de servicio | UtilityFlow',
+    seoTitle: 'Términos de servicio – Uso de las herramientas | UtilityFlow',
     seoDescription:
-      'Revisa los Términos de servicio que rigen el uso de las utilidades del navegador de UtilityFlow, la propiedad intelectual, las exenciones de responsabilidad sobre la precisión y los límites de responsabilidad.',
+      'Revisa los Términos de servicio de UtilityFlow: uso de las utilidades, propiedad intelectual, exenciones de responsabilidad y límites de responsabilidad.',
     title: 'Términos de servicio',
     lastUpdated: 'Última actualización: noviembre de 2026',
     sections: [
@@ -425,6 +429,7 @@ export const esStrings: UiStrings = {
         title: '5. Limitación de responsabilidad',
         paragraphs: [
           'En la máxima medida permitida por la ley, UtilityFlow y sus colaboradores no serán responsables de ningún daño indirecto, incidental, especial o consecuente que surja de tu uso o de tu incapacidad para usar esta plataforma.',
+          'UtilityFlow es un proyecto independiente y no está afiliado a YouTube, Instagram, Google ni a ninguna otra marca de terceros mencionada en este sitio, ni cuenta con su respaldo ni está conectado con ellas.',
         ],
       },
     ],
