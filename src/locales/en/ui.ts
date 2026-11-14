@@ -129,7 +129,6 @@ export const enStrings: UiStrings = {
       noMatch: 'No categories or tools matched "{query}".',
       resetFilters: 'Reset filters',
       upcomingUtilities: 'Upcoming utilities: {names}',
-      scheduledInBatch: 'Scheduled in Batch {batch}',
       toolsActive: '{count} tools active',
       openCategory: 'Open category page',
     },
@@ -162,7 +161,7 @@ export const enStrings: UiStrings = {
     faq: {
       title: 'Frequently Asked Questions',
       description:
-        'Key details about how UtilityFlow operates and what to expect in upcoming batches.',
+        'Key details about how UtilityFlow operates and what to expect as new tools arrive.',
     },
     faqs: [
       {
@@ -212,16 +211,15 @@ export const enStrings: UiStrings = {
     clearFilters: 'Clear filters',
   },
   category: {
-    batchLabel: 'Batch {batch}',
     plannedCount: '{count} planned tools',
     toolsCount: '{count} tools',
     toolsLive: '{count} tools live',
     ofToolsLive: '{count} of {total} tools live',
     availableTools: 'Available {name}',
     exploreOther: 'Explore Other Categories',
-    scheduledTitle: 'Scheduled for Batch {batch} Implementation',
+    scheduledTitle: 'More tools coming soon',
     scheduledDescription:
-      'This category hub is active and indexed in the {name} architecture. Dedicated individual tool pages with browser-side functionality will be added here during Batch {batch}.',
+      'This category hub is active and indexed in the {name} architecture. Dedicated individual tool pages with browser-side functionality will be added here soon.',
     plannedToolsTitle: 'Planned tools in this category:',
   },
   toolPage: {
@@ -240,7 +238,7 @@ export const enStrings: UiStrings = {
     relatedDescription: 'Continue your workflow with complementary utilities.',
     browseAll: 'Browse all {name}',
     moreToolsIn: 'More tools in',
-    willAppear: 'will appear here as Batch {batch} is released.',
+    willAppear: 'will appear here soon.',
   },
   comments: {
     title: 'Comments',
@@ -308,13 +306,13 @@ export const enStrings: UiStrings = {
       {
         title: 'Modular Rollout',
         description:
-          'Tools are shipped and verified in seven category batches so each utility receives thorough functional testing and documentation.',
+          'Tools are shipped and verified by category so each utility receives thorough functional testing and documentation.',
       },
     ],
     categoriesTitle: 'Seven Planned Tool Categories',
     feedbackTitle: 'Have Feedback or a Request?',
     feedbackBefore:
-      'If you notice a calculation edge case, accessibility issue, or would like to suggest a utility for an upcoming batch, reach out through our',
+      'If you notice a calculation edge case, accessibility issue, or would like to suggest a new utility, reach out through our',
     feedbackLink: 'Contact page',
     feedbackAfter: '.',
   },
@@ -447,7 +445,7 @@ export const enStrings: UiStrings = {
       '. If you do not agree with any part of these terms, please discontinue using the website.',
     changesTitle: '6. Changes & Contact',
     changesBefore:
-      'We may update these Terms of Service as new tool batches are released. Questions can be directed to our',
+      'We may update these Terms of Service as new tools are released. Questions can be directed to our',
     changesLink: 'Contact page',
     changesAfter: '.',
   },
