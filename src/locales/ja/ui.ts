@@ -131,7 +131,6 @@ export const jaStrings: UiStrings = {
       noMatch: '「{query}」に一致するカテゴリやツールがありません。',
       resetFilters: 'フィルターをリセット',
       upcomingUtilities: '近日公開のユーティリティ：{names}',
-      scheduledInBatch: 'バッチ{batch}で予定',
       toolsActive: '{count}のツールが有効',
       openCategory: 'カテゴリページを開く',
     },
@@ -164,7 +163,7 @@ export const jaStrings: UiStrings = {
     faq: {
       title: 'よくある質問',
       description:
-        'UtilityFlowの動作方法と、今後のバッチで期待できることについての重要な詳細です。',
+        'UtilityFlowの動作方法と、新しいツールに期待できることについての重要な詳細です。',
     },
     faqs: [
       {
@@ -214,16 +213,15 @@ export const jaStrings: UiStrings = {
     clearFilters: 'フィルターをクリア',
   },
   category: {
-    batchLabel: 'バッチ{batch}',
     plannedCount: '{count}のツールが予定されています',
     toolsCount: '{count}のツール',
     toolsLive: '{count}のツールが有効',
     ofToolsLive: '{total}中{count}のツールが有効',
     availableTools: '利用可能な{name}',
     exploreOther: '他のカテゴリを探す',
-    scheduledTitle: 'バッチ{batch}の実装に向けて予定されています',
+    scheduledTitle: '近日公開予定のツール',
     scheduledDescription:
-      'このカテゴリハブは{name}アーキテクチャ内で有効で、インデックスされています。ブラウザサイド機能を備えた専用の個別ツールページは、バッチ{batch}の期間中にここへ追加されます。',
+      'このカテゴリハブは{name}アーキテクチャ内で有効で、インデックスされています。ブラウザサイド機能を備えた専用の個別ツールページは近日ここへ追加されます。',
     plannedToolsTitle: 'このカテゴリで予定されているツール：',
   },
   toolPage: {
@@ -242,7 +240,7 @@ export const jaStrings: UiStrings = {
     relatedDescription: '補完的なユーティリティでワークフローを続けましょう。',
     browseAll: 'すべての{name}を閲覧',
     moreToolsIn: 'その他のツール',
-    willAppear: 'バッチ{batch}の公開時にここに表示されます。',
+    willAppear: '近日ここに表示されます。',
   },
   comments: {
     title: 'コメント',
@@ -310,13 +308,13 @@ export const jaStrings: UiStrings = {
       {
         title: 'モジュール式の公開',
         description:
-          'ツールは7つのカテゴリバッチで出荷・検証されるため、すべてのユーティリティが徹底した機能テストとドキュメントを受けます。',
+          'ツールはカテゴリごとに公開・検証されるため、すべてのユーティリティが徹底した機能テストとドキュメントを受けます。',
       },
     ],
     categoriesTitle: '予定されている7つのツールカテゴリ',
     feedbackTitle: 'フィードバックやリクエストはありますか？',
     feedbackBefore:
-      '計算のエッジケース、アクセシビリティの問題に気づいた場合や、今後のバッチ向けユーティリティの提案がある場合は、',
+      '計算のエッジケース、アクセシビリティの問題に気づいた場合や、新しいユーティリティの提案がある場合は、',
     feedbackLink: 'お問い合わせページ',
     feedbackAfter: 'からご連絡ください。',
   },
@@ -449,7 +447,7 @@ export const jaStrings: UiStrings = {
       'に拘束されることに同意するものとします。本規約のいずれかの部分に同意できない場合は、ウェブサイトの利用を中止してください。',
     changesTitle: '6. 変更とお問い合わせ',
     changesBefore:
-      '新しいツールバッチの公開に伴い、本利用規約を更新する場合があります。質問は',
+      '新しいツールの公開に伴い、本利用規約を更新する場合があります。質問は',
     changesLink: 'お問い合わせページ',
     changesAfter: 'までお寄せください。',
   },
