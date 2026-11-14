@@ -131,7 +131,6 @@ export const zhStrings: UiStrings = {
       noMatch: '没有与“{query}”匹配的分类或工具。',
       resetFilters: '重置筛选',
       upcomingUtilities: '即将上线：{names}',
-      scheduledInBatch: '计划于第 {batch} 批上线',
       toolsActive: '已有 {count} 个工具上线',
       openCategory: '打开分类页面',
     },
@@ -164,7 +163,7 @@ export const zhStrings: UiStrings = {
     faq: {
       title: '常见问题',
       description:
-        '关于 UtilityFlow 如何运作，以及后续批次有哪些值得期待的内容。',
+        '关于 UtilityFlow 如何运作，以及新工具有哪些值得期待的内容。',
     },
     faqs: [
       {
@@ -214,16 +213,15 @@ export const zhStrings: UiStrings = {
     clearFilters: '清除筛选',
   },
   category: {
-    batchLabel: '第 {batch} 批',
     plannedCount: '计划 {count} 个工具',
     toolsCount: '{count} 个工具',
     toolsLive: '已有 {count} 个工具上线',
     ofToolsLive: '共 {total} 个工具，已上线 {count} 个',
     availableTools: '可用的 {name}',
     exploreOther: '浏览其他分类',
-    scheduledTitle: '计划于第 {batch} 批实施',
+    scheduledTitle: '更多工具即将推出',
     scheduledDescription:
-      '该分类中心已在 {name} 架构中上线并收录。具备浏览器端功能的专属工具页面将于第 {batch} 批期间在此添加。',
+      '该分类中心已在 {name} 架构中上线并收录。具备浏览器端功能的专属工具页面即将在此添加。',
     plannedToolsTitle: '该分类计划中的工具：',
   },
   toolPage: {
@@ -242,7 +240,7 @@ export const zhStrings: UiStrings = {
     relatedDescription: '使用互补工具继续您的工作流程。',
     browseAll: '浏览全部 {name}',
     moreToolsIn: '更多工具',
-    willAppear: '将于第 {batch} 批发布时在此显示。',
+    willAppear: '即将在此显示。',
   },
   comments: {
     title: '评论',
@@ -310,13 +308,13 @@ export const zhStrings: UiStrings = {
       {
         title: '模块化发布',
         description:
-          '工具按七个分类批次发布与验证，确保每个工具都经过充分的功能测试并配有完善的文档。',
+          '工具按分类发布与验证，确保每个工具都经过充分的功能测试并配有完善的文档。',
       },
     ],
     categoriesTitle: '计划中的七大工具分类',
     feedbackTitle: '有反馈或建议吗？',
     feedbackBefore:
-      '如果您发现计算的边界情况、无障碍问题，或想为后续批次推荐某个工具，请通过我们的',
+      '如果您发现计算的边界情况、无障碍问题，或想推荐某个新工具，请通过我们的',
     feedbackLink: '联系页面',
     feedbackAfter: '与我们联系。',
   },
@@ -449,7 +447,7 @@ export const zhStrings: UiStrings = {
       '。如果您不同意其中任何部分，请停止使用本网站。',
     changesTitle: '6. 变更与联系方式',
     changesBefore:
-      '随着新工具批次的发布，我们可能会更新本服务条款。如有疑问，可通过我们的',
+      '随着新工具的发布，我们可能会更新本服务条款。如有疑问，可通过我们的',
     changesLink: '联系页面',
     changesAfter: '联系我们。',
   },
