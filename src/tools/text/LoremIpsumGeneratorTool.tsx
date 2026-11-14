@@ -1,6 +1,7 @@
 import { RefreshCw } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
 
@@ -46,6 +47,7 @@ const WORD_POOL = CLASSIC_OPENING.concat(' ', SENTENCE_POOL.join(' '))
 export default function LoremIpsumGeneratorTool() {
   const { locale, t } = useLocale();
   const s = useComponentStrings('lorem-ipsum-generator', STRINGS_EN);
+  const palette = pastelForKey('lorem-ipsum-generator');
   const [unit, setUnit] = useState<UnitType>('paragraphs');
   const [count, setCount] = useState(3);
   const [startClassic, setStartClassic] = useState(true);
@@ -139,7 +141,7 @@ export default function LoremIpsumGeneratorTool() {
                   }}
                   className={`rounded-md px-3 py-1.5 text-xs sm:text-sm font-medium capitalize transition-colors cursor-pointer ${
                     unit === u
-                      ? 'bg-white text-slate-900 shadow-xs'
+                      ? `${palette.soft} shadow-xs`
                       : 'text-slate-600 hover:text-slate-900'
                   }`}
                 >

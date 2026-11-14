@@ -1,6 +1,7 @@
 import { Download, RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
 
@@ -193,6 +194,7 @@ function markdownToHtml(markdown: string): string {
 export default function MarkdownPreviewerTool() {
   const { locale, t } = useLocale();
   const s = useComponentStrings('markdown-previewer', STRINGS_EN);
+  const palette = pastelForKey('markdown-previewer');
   const [markdown, setMarkdown] = useState(s.sampleMarkdown);
   const [viewMode, setViewMode] = useState<'preview' | 'html'>('preview');
 
@@ -239,7 +241,7 @@ export default function MarkdownPreviewerTool() {
               type="button"
               onClick={() => setViewMode('preview')}
               className={`rounded-md px-3 py-1 text-xs font-medium cursor-pointer ${
-                viewMode === 'preview' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+                viewMode === 'preview' ? `${palette.soft} shadow-xs` : 'text-slate-600'
               }`}
             >
               {s.renderedPreview}
@@ -248,7 +250,7 @@ export default function MarkdownPreviewerTool() {
               type="button"
               onClick={() => setViewMode('html')}
               className={`rounded-md px-3 py-1 text-xs font-medium cursor-pointer ${
-                viewMode === 'html' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+                viewMode === 'html' ? `${palette.soft} shadow-xs` : 'text-slate-600'
               }`}
             >
               {s.rawHtml}
@@ -288,7 +290,7 @@ export default function MarkdownPreviewerTool() {
           </span>
           {viewMode === 'preview' ? (
             <div
-              className="h-[344px] overflow-y-auto rounded-xl border border-slate-200 bg-white p-4 text-sm"
+              className={`h-[344px] overflow-y-auto rounded-xl border border-slate-200 ${palette.card} p-4 text-sm`}
               dangerouslySetInnerHTML={{
                 __html:
                   compiledHtml ||

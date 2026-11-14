@@ -1,6 +1,7 @@
 import { RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { PASTEL_PALETTES } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
 
@@ -76,39 +77,39 @@ export default function CharacterCounterTool() {
   return (
     <div className="space-y-6">
       <dl className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3">
-        <div className="rounded-lg border border-slate-200 bg-slate-50 px-3.5 py-3">
+        <div className={`rounded-lg border border-slate-200 ${PASTEL_PALETTES[0].card} px-3.5 py-3`}>
           <dt className="text-xs text-slate-500">{s.withSpaces}</dt>
-          <dd className="mt-1 text-2xl font-bold text-indigo-600 tabular-nums">
+          <dd className={`mt-1 text-2xl font-bold ${PASTEL_PALETTES[0].link} tabular-nums`}>
             {metrics.withSpaces.toLocaleString(locale)}
           </dd>
         </div>
-        <div className="rounded-lg border border-slate-200 bg-slate-50 px-3.5 py-3">
+        <div className={`rounded-lg border border-slate-200 ${PASTEL_PALETTES[1].card} px-3.5 py-3`}>
           <dt className="text-xs text-slate-500">{s.withoutSpaces}</dt>
-          <dd className="mt-1 text-2xl font-bold text-slate-900 tabular-nums">
+          <dd className={`mt-1 text-2xl font-bold ${PASTEL_PALETTES[1].link} tabular-nums`}>
             {metrics.withoutSpaces.toLocaleString(locale)}
           </dd>
         </div>
-        <div className="rounded-lg border border-slate-200 bg-slate-50 px-3.5 py-3">
+        <div className={`rounded-lg border border-slate-200 ${PASTEL_PALETTES[2].card} px-3.5 py-3`}>
           <dt className="text-xs text-slate-500">{s.words}</dt>
-          <dd className="mt-1 text-2xl font-bold text-slate-900 tabular-nums">
+          <dd className={`mt-1 text-2xl font-bold ${PASTEL_PALETTES[2].link} tabular-nums`}>
             {metrics.words.toLocaleString(locale)}
           </dd>
         </div>
-        <div className="rounded-lg border border-slate-200 bg-slate-50 px-3.5 py-3">
+        <div className={`rounded-lg border border-slate-200 ${PASTEL_PALETTES[3].card} px-3.5 py-3`}>
           <dt className="text-xs text-slate-500">{s.letters}</dt>
-          <dd className="mt-1 text-2xl font-bold text-slate-900 tabular-nums">
+          <dd className={`mt-1 text-2xl font-bold ${PASTEL_PALETTES[3].link} tabular-nums`}>
             {metrics.letters.toLocaleString(locale)}
           </dd>
         </div>
-        <div className="rounded-lg border border-slate-200 bg-slate-50 px-3.5 py-3">
+        <div className={`rounded-lg border border-slate-200 ${PASTEL_PALETTES[4].card} px-3.5 py-3`}>
           <dt className="text-xs text-slate-500">{s.digits}</dt>
-          <dd className="mt-1 text-2xl font-bold text-slate-900 tabular-nums">
+          <dd className={`mt-1 text-2xl font-bold ${PASTEL_PALETTES[4].link} tabular-nums`}>
             {metrics.digits.toLocaleString(locale)}
           </dd>
         </div>
-        <div className="rounded-lg border border-slate-200 bg-slate-50 px-3.5 py-3">
+        <div className={`rounded-lg border border-slate-200 ${PASTEL_PALETTES[5].card} px-3.5 py-3`}>
           <dt className="text-xs text-slate-500">{s.utf8Bytes}</dt>
-          <dd className="mt-1 text-2xl font-bold text-slate-900 tabular-nums">
+          <dd className={`mt-1 text-2xl font-bold ${PASTEL_PALETTES[5].link} tabular-nums`}>
             {metrics.utf8Bytes.toLocaleString(locale)}
           </dd>
         </div>
@@ -162,7 +163,8 @@ export default function CharacterCounterTool() {
           {s.platformLimitsTitle}
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-          {platformLimits.map((item) => {
+          {platformLimits.map((item, index) => {
+            const palette = PASTEL_PALETTES[index % PASTEL_PALETTES.length];
             const count = metrics.withSpaces;
             const remaining = item.limit - count;
             const pct = Math.min(100, Math.round((count / item.limit) * 100));
@@ -171,7 +173,7 @@ export default function CharacterCounterTool() {
             return (
               <div
                 key={item.name}
-                className="rounded-lg border border-slate-200 bg-slate-50/70 p-3.5"
+                className={`rounded-lg border border-slate-200 ${palette.card} p-3.5`}
               >
                 <div className="flex items-center justify-between gap-2 text-sm">
                   <span className="font-semibold text-slate-900">{item.name}</span>

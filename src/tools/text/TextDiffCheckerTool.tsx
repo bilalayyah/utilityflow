@@ -1,5 +1,6 @@
 import { RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
+import { pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
 
@@ -99,6 +100,7 @@ function computeLineDiff(
 export default function TextDiffCheckerTool() {
   const { t } = useLocale();
   const s = useComponentStrings('text-diff-checker', STRINGS_EN);
+  const palette = pastelForKey('text-diff-checker');
   const [originalText, setOriginalText] = useState('');
   const [modifiedText, setModifiedText] = useState('');
   const [ignoreCase, setIgnoreCase] = useState(false);
@@ -206,7 +208,7 @@ export default function TextDiffCheckerTool() {
 
       {/* Diff Output */}
       <div className="rounded-xl border border-slate-200 overflow-hidden">
-        <div className="flex flex-wrap items-center justify-between gap-2 bg-slate-50 px-4 py-2.5 border-b border-slate-200 text-xs font-mono">
+        <div className={`flex flex-wrap items-center justify-between gap-2 ${palette.soft} px-4 py-2.5 border-b border-slate-200 text-xs font-mono`}>
           <span className="font-sans font-semibold text-slate-900">{s.lineComparison}</span>
           <div className="flex items-center gap-4 tabular-nums">
             <span className="text-emerald-700">+ {counts.added} {s.added}</span>

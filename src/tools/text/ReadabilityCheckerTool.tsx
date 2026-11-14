@@ -1,5 +1,6 @@
 import { RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
+import { PASTEL_PALETTES, pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
 
@@ -185,30 +186,30 @@ export default function ReadabilityCheckerTool() {
       {analysis ? (
         <>
           <dl className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-            <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+            <div className={`rounded-lg border border-slate-200 ${PASTEL_PALETTES[0].card} p-4`}>
               <dt className="text-xs text-slate-500">{s.fleschEase}</dt>
-              <dd className="mt-1 text-2xl font-bold text-indigo-600 tabular-nums">
+              <dd className={`mt-1 text-2xl font-bold ${PASTEL_PALETTES[0].link} tabular-nums`}>
                 {analysis.fleschEase.toFixed(1)}
               </dd>
               <dd className="mt-0.5 text-xs text-slate-600">{analysis.band.level}</dd>
             </div>
-            <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+            <div className={`rounded-lg border border-slate-200 ${PASTEL_PALETTES[1].card} p-4`}>
               <dt className="text-xs text-slate-500">{s.fleschKincaid}</dt>
-              <dd className="mt-1 text-2xl font-bold text-slate-900 tabular-nums">
+              <dd className={`mt-1 text-2xl font-bold ${PASTEL_PALETTES[1].link} tabular-nums`}>
                 {analysis.fleschKincaidGrade.toFixed(1)}
               </dd>
               <dd className="mt-0.5 text-xs text-slate-600">{s.usGrade}</dd>
             </div>
-            <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+            <div className={`rounded-lg border border-slate-200 ${PASTEL_PALETTES[2].card} p-4`}>
               <dt className="text-xs text-slate-500">{s.gunningFog}</dt>
-              <dd className="mt-1 text-2xl font-bold text-slate-900 tabular-nums">
+              <dd className={`mt-1 text-2xl font-bold ${PASTEL_PALETTES[2].link} tabular-nums`}>
                 {analysis.gunningFog.toFixed(1)}
               </dd>
               <dd className="mt-0.5 text-xs text-slate-600">{s.yearsEducation}</dd>
             </div>
-            <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+            <div className={`rounded-lg border border-slate-200 ${PASTEL_PALETTES[3].card} p-4`}>
               <dt className="text-xs text-slate-500">{s.smog}</dt>
-              <dd className="mt-1 text-2xl font-bold text-slate-900 tabular-nums">
+              <dd className={`mt-1 text-2xl font-bold ${PASTEL_PALETTES[3].link} tabular-nums`}>
                 {analysis.smog.toFixed(1)}
               </dd>
               <dd className="mt-0.5 text-xs text-slate-600">{s.polysyllable}</dd>
@@ -216,7 +217,7 @@ export default function ReadabilityCheckerTool() {
           </dl>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="rounded-lg border border-slate-200 bg-white p-4">
+            <div className={`rounded-lg border border-slate-200 ${PASTEL_PALETTES[4].card} p-4`}>
               <h3 className="text-sm font-semibold text-slate-900 mb-2">{s.structuralBreakdown}</h3>
               <dl className="space-y-1.5 text-sm">
                 <div className="flex justify-between">
@@ -247,7 +248,7 @@ export default function ReadabilityCheckerTool() {
               </dl>
             </div>
 
-            <div className="rounded-lg border border-slate-200 bg-white p-4">
+            <div className={`rounded-lg border border-slate-200 ${PASTEL_PALETTES[5].card} p-4`}>
               <h3 className="text-sm font-semibold text-slate-900 mb-2">
                 {s.longWordsDetected}
               </h3>
@@ -264,7 +265,7 @@ export default function ReadabilityCheckerTool() {
           </div>
         </>
       ) : (
-        <div className="rounded-lg border border-slate-200 bg-slate-50 p-6 text-center text-sm text-slate-500">
+        <div className={`rounded-lg border border-slate-200 ${pastelForKey('readability-checker').card} p-6 text-center text-sm text-slate-500`}>
           {s.emptyState}
         </div>
       )}

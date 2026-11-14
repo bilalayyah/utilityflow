@@ -1,6 +1,7 @@
 import { Download, RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { PASTEL_PALETTES } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
 
@@ -104,39 +105,39 @@ export default function WordCounterTool() {
     <div className="space-y-6">
       {/* Live Metrics Grid */}
       <dl className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3">
-        <div className="rounded-lg border border-slate-200 bg-slate-50 px-3.5 py-3">
+        <div className={`rounded-lg border border-slate-200 ${PASTEL_PALETTES[0].card} px-3.5 py-3`}>
           <dt className="text-xs text-slate-500">{s.words}</dt>
-          <dd className="mt-1 text-2xl font-bold text-indigo-600 tabular-nums">
+          <dd className={`mt-1 text-2xl font-bold ${PASTEL_PALETTES[0].link} tabular-nums`}>
             {stats.wordCount.toLocaleString(locale)}
           </dd>
         </div>
-        <div className="rounded-lg border border-slate-200 bg-slate-50 px-3.5 py-3">
+        <div className={`rounded-lg border border-slate-200 ${PASTEL_PALETTES[1].card} px-3.5 py-3`}>
           <dt className="text-xs text-slate-500">{s.characters}</dt>
-          <dd className="mt-1 text-2xl font-bold text-slate-900 tabular-nums">
+          <dd className={`mt-1 text-2xl font-bold ${PASTEL_PALETTES[1].link} tabular-nums`}>
             {stats.charsWithSpaces.toLocaleString(locale)}
           </dd>
         </div>
-        <div className="rounded-lg border border-slate-200 bg-slate-50 px-3.5 py-3">
+        <div className={`rounded-lg border border-slate-200 ${PASTEL_PALETTES[2].card} px-3.5 py-3`}>
           <dt className="text-xs text-slate-500">{s.noSpaces}</dt>
-          <dd className="mt-1 text-2xl font-bold text-slate-900 tabular-nums">
+          <dd className={`mt-1 text-2xl font-bold ${PASTEL_PALETTES[2].link} tabular-nums`}>
             {stats.charsWithoutSpaces.toLocaleString(locale)}
           </dd>
         </div>
-        <div className="rounded-lg border border-slate-200 bg-slate-50 px-3.5 py-3">
+        <div className={`rounded-lg border border-slate-200 ${PASTEL_PALETTES[3].card} px-3.5 py-3`}>
           <dt className="text-xs text-slate-500">{s.sentences}</dt>
-          <dd className="mt-1 text-2xl font-bold text-slate-900 tabular-nums">
+          <dd className={`mt-1 text-2xl font-bold ${PASTEL_PALETTES[3].link} tabular-nums`}>
             {stats.sentences.toLocaleString(locale)}
           </dd>
         </div>
-        <div className="rounded-lg border border-slate-200 bg-slate-50 px-3.5 py-3">
+        <div className={`rounded-lg border border-slate-200 ${PASTEL_PALETTES[4].card} px-3.5 py-3`}>
           <dt className="text-xs text-slate-500">{s.paragraphs}</dt>
-          <dd className="mt-1 text-2xl font-bold text-slate-900 tabular-nums">
+          <dd className={`mt-1 text-2xl font-bold ${PASTEL_PALETTES[4].link} tabular-nums`}>
             {stats.paragraphs.toLocaleString(locale)}
           </dd>
         </div>
-        <div className="rounded-lg border border-slate-200 bg-slate-50 px-3.5 py-3">
+        <div className={`rounded-lg border border-slate-200 ${PASTEL_PALETTES[5].card} px-3.5 py-3`}>
           <dt className="text-xs text-slate-500">{s.readingTime}</dt>
-          <dd className="mt-1 text-2xl font-bold text-slate-900 tabular-nums">
+          <dd className={`mt-1 text-2xl font-bold ${PASTEL_PALETTES[5].link} tabular-nums`}>
             {formatDuration(stats.readingSeconds)}
           </dd>
         </div>
@@ -195,7 +196,7 @@ export default function WordCounterTool() {
 
       {/* Secondary Stats + Top Keywords */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
-        <div className="rounded-lg border border-slate-200 bg-slate-50/70 p-4">
+        <div className={`rounded-lg border border-slate-200 ${PASTEL_PALETTES[6].card} p-4`}>
           <h3 className="text-sm font-semibold text-slate-900 mb-2">{s.deliveryTimingLines}</h3>
           <dl className="space-y-1.5 text-sm">
             <div className="flex justify-between">
@@ -222,7 +223,7 @@ export default function WordCounterTool() {
           </dl>
         </div>
 
-        <div className="rounded-lg border border-slate-200 bg-slate-50/70 p-4">
+        <div className={`rounded-lg border border-slate-200 ${PASTEL_PALETTES[7].card} p-4`}>
           <h3 className="text-sm font-semibold text-slate-900 mb-2">{s.mostFrequentWords}</h3>
           {stats.topKeywords.length > 0 ? (
             <ul className="space-y-1.5 text-sm">

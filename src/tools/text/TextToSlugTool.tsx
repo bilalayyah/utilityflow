@@ -1,6 +1,7 @@
 import { RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
 
@@ -49,6 +50,7 @@ function slugifyLine(
 export default function TextToSlugTool() {
   const { t } = useLocale();
   const s = useComponentStrings('text-to-slug', STRINGS_EN);
+  const palette = pastelForKey('text-to-slug');
   const [input, setInput] = useState('');
   const [separator, setSeparator] = useState<'-' | '_'>('-');
   const [lowercase, setLowercase] = useState(true);
@@ -72,7 +74,7 @@ export default function TextToSlugTool() {
               type="button"
               onClick={() => setSeparator('-')}
               className={`rounded-md px-3 py-1.5 text-xs sm:text-sm font-medium cursor-pointer ${
-                separator === '-' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+                separator === '-' ? `${palette.soft} shadow-xs` : 'text-slate-600'
               }`}
             >
               {s.hyphen}
@@ -81,7 +83,7 @@ export default function TextToSlugTool() {
               type="button"
               onClick={() => setSeparator('_')}
               className={`rounded-md px-3 py-1.5 text-xs sm:text-sm font-medium cursor-pointer ${
-                separator === '_' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+                separator === '_' ? `${palette.soft} shadow-xs` : 'text-slate-600'
               }`}
             >
               {s.underscore}

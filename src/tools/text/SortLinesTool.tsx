@@ -1,6 +1,7 @@
 import { RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { PASTEL_PALETTES } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
 
@@ -167,7 +168,7 @@ export default function SortLinesTool() {
       </div>
 
       <div className="flex flex-wrap gap-2">
-        {sortOptions.map((option) => (
+        {sortOptions.map((option, index) => (
           <button
             key={option.id}
             type="button"
@@ -180,7 +181,7 @@ export default function SortLinesTool() {
             className={`rounded-lg px-3 py-1.5 text-xs sm:text-sm font-medium transition-colors cursor-pointer whitespace-nowrap ${
               mode === option.id
                 ? 'bg-gradient-to-r from-indigo-600 to-violet-600 text-white'
-                : 'border border-slate-300 bg-white text-slate-700 hover:bg-slate-50'
+                : `border border-slate-300 ${PASTEL_PALETTES[index % PASTEL_PALETTES.length].card} text-slate-700`
             }`}
           >
             {option.label}

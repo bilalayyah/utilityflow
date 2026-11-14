@@ -1,6 +1,7 @@
 import { Download, RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
 
@@ -32,6 +33,7 @@ const STOP_WORDS = new Set([
 export default function WordFrequencyCounterTool() {
   const { t } = useLocale();
   const s = useComponentStrings('word-frequency-counter', STRINGS_EN);
+  const palette = pastelForKey('word-frequency-counter');
   const [text, setText] = useState('');
   const [ngramSize, setNgramSize] = useState<1 | 2 | 3>(1);
   const [ignoreStopWords, setIgnoreStopWords] = useState(true);
@@ -114,7 +116,7 @@ export default function WordFrequencyCounterTool() {
                 onClick={() => setNgramSize(size)}
                 className={`rounded-md px-3 py-1.5 text-xs sm:text-sm font-medium transition-colors cursor-pointer ${
                   ngramSize === size
-                    ? 'bg-white text-slate-900 shadow-xs'
+                    ? `${palette.soft} shadow-xs`
                     : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
@@ -184,7 +186,7 @@ export default function WordFrequencyCounterTool() {
       </div>
 
       <div className="rounded-xl border border-slate-200 overflow-hidden">
-        <div className="flex flex-wrap items-center justify-between gap-3 bg-slate-50 px-4 py-3 border-b border-slate-200">
+        <div className={`flex flex-wrap items-center justify-between gap-3 ${palette.soft} px-4 py-3 border-b border-slate-200`}>
           <div className="text-xs sm:text-sm text-slate-600 tabular-nums">
             {s.totalWords} <strong className="text-slate-900">{analysis.totalWords}</strong> · {s.uniqueTerms}{' '}
             <strong className="text-slate-900">{analysis.uniqueTerms}</strong>

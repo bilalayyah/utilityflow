@@ -1,6 +1,7 @@
 import { RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { PASTEL_PALETTES } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
 
@@ -140,7 +141,7 @@ export default function WhitespaceRemoverTool() {
 
       <div className="flex flex-wrap items-center gap-2">
         <span className="text-xs font-semibold text-slate-600 mr-1">{s.lineBreaks}</span>
-        {lineBreakModes.map((mode) => (
+        {lineBreakModes.map((mode, index) => (
           <button
             key={mode.id}
             type="button"
@@ -148,7 +149,7 @@ export default function WhitespaceRemoverTool() {
             className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors cursor-pointer ${
               lineBreakMode === mode.id
                 ? 'bg-gradient-to-r from-indigo-600 to-violet-600 text-white'
-                : 'border border-slate-300 bg-white text-slate-700 hover:bg-slate-50'
+                : `border border-slate-300 ${PASTEL_PALETTES[index % PASTEL_PALETTES.length].card} text-slate-700`
             }`}
           >
             {mode.label}
