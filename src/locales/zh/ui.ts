@@ -51,7 +51,7 @@ export const zhStrings: UiStrings = {
     termsOfService: '服务条款',
     xmlSitemap: 'XML 站点地图',
     rightsReserved: '版权所有。',
-    deployedNote: 'Crafted with ❤️ by Bilal, inspired by Shaheen.',
+    deployedNote: 'Crafted with ❤️ by Bilal inspired by Shaheen',
   },
   common: {
     copy: '复制',
