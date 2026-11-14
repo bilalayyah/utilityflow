@@ -1,5 +1,5 @@
 interface AdSlotProps {
-  slotId: 'directory-top' | 'tool-below-workspace' | 'tool-below-guide' | 'category-mid';
+  slotId: 'directory-top' | 'home-mid' | 'tool-below-workspace' | 'tool-below-guide' | 'category-mid';
   format?: 'horizontal' | 'rectangle';
   className?: string;
 }
