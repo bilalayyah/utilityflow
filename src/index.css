@@ -9,7 +9,7 @@
 }
 
 :root {
-  --bg-canvas: #ffffff;
+  --bg-canvas: #f6f6fb;
   --bg-surface: #ffffff;
   --bg-surface-95: rgba(255, 255, 255, 0.95);
   --bg-surface-90: rgba(255, 255, 255, 0.9);
@@ -33,6 +33,9 @@
   --accent-text-hover: #4338ca;
   --accent-surface: #eef2ff;
   --accent-border: #c7d2fe;
+  /* Primary gradient (indigo-600 -> violet-600) for buttons / active pills */
+  --accent-gradient-from: #4f46e5;
+  --accent-gradient-to: #7c3aed;
 }
 
 html.dark {
@@ -61,6 +64,8 @@ html.dark {
   --accent-text-hover: #a5b4fc;
   --accent-surface: rgba(99, 102, 241, 0.14);
   --accent-border: rgba(129, 140, 248, 0.35);
+  --accent-gradient-from: #6366f1;
+  --accent-gradient-to: #8b5cf6;
 }
 
 @layer base {
