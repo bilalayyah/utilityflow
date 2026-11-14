@@ -51,7 +51,7 @@ export const idStrings: UiStrings = {
     termsOfService: 'Syarat Layanan',
     xmlSitemap: 'Peta Situs XML',
     rightsReserved: 'Hak cipta dilindungi.',
-    deployedNote: 'Crafted with ❤️ by Bilal, inspired by Shaheen.',
+    deployedNote: 'Crafted with ❤️ by Bilal inspired by Shaheen',
   },
   common: {
     copy: 'Salin',
