@@ -40,7 +40,7 @@ export const enStrings: UiStrings = {
       'A fast, browser-first collection of everyday utilities for writers, engineers, marketers, and analysts. Built to run locally with minimal overhead.',
     categories: 'Categories',
     platformAi: 'Platform & AI',
-    legal: 'Legal',
+    trustLegal: 'Trust & Legal',
     home: 'Home',
     allToolsDirectory: 'All Tools Directory',
     aboutUs: 'About Us',
