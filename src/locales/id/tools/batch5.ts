@@ -358,7 +358,7 @@ export const ID_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: "Apakah Pratinjau Snippet SERP mengunggah judul atau URL saya ke mana pun?",
         answer:
-          "Tidak. Semua pratinjau dan pengukuran dilakukan lokal di browser Anda.",
+          "Tidak. Semua pratinjau dan pengukuran dilakukan lokal di browser Anda. Alat ini hanya menampilkan simulasi tampilan hasil pencarian tanpa mengambil data peringkat dari Google.",
       },
       {
         question: "Bagaimana cara menyalin judul dan meta description setelah pratinjau?",
@@ -927,7 +927,7 @@ export const ID_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: "Bagaimana cara menambahkan JSON-LD yang dihasilkan ke website saya?",
         answer:
-          "Salin blok lengkap <script type=\"application/ld+json\"> lalu tempel ke dalam <head> halaman yang sesuai.",
+          "Salin blok lengkap <script type=\"application/ld+json\"> lalu tempel ke dalam <head> halaman yang sesuai. Setelah ditempel, validasi markup dengan Rich Results Test untuk memastikan Google dapat membacanya dengan benar.",
       },
       {
         question: "Bagaimana cara menguji markup schema saya setelah dibuat?",
@@ -1411,7 +1411,7 @@ export const ID_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
     seo: {
       title: "Canonical, Hreflang & Pengalihan 301 | UtilityFlow",
       description:
-        "Buat tag hreflang dan canonical untuk halaman multibahasa, plus aturan pengalihan 301 untuk Cloudflare Pages, Apache, dan Nginx — siap salin dan terapkan.",
+        "Generator tag hreflang dan canonical untuk halaman multibahasa, plus aturan pengalihan 301 untuk Cloudflare Pages, Apache, dan Nginx.",
       primaryKeyword: "generator hreflang",
       secondaryKeywords: [
         "generator tag tautan canonical",
@@ -2150,7 +2150,7 @@ export const ID_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: "Apakah gambar saya yang dikompres akan memiliki watermark?",
         answer:
-          "Tidak, gambar yang diunduh tidak pernah menyertakan watermark atau branding.",
+          "Tidak, gambar yang diunduh tidak pernah menyertakan watermark atau branding. Semua kompresi berjalan lokal di browser Anda, jadi hasil unduhan tetap bersih tanpa logo tambahan apa pun.",
       },
       {
         question: "Format apa yang terbaik untuk mengompres tangkapan layar?",

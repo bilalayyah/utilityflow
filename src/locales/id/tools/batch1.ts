@@ -2445,7 +2445,7 @@ export const ID_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Apa perbedaan antara slug dan URL?',
         answer:
-          'Slug adalah ekor URL yang bisa dibaca, seperti "panduan-kompresor-gambar" dalam contoh.com/panduan-kompresor-gambar.',
+          'Slug adalah ekor URL yang bisa dibaca, seperti "panduan-kompresor-gambar" dalam contoh.com/panduan-kompresor-gambar. Slug ini membantu pembaca dan mesin pencari memahami isi halaman sebelum membukanya.',
       },
       {
         question: 'Apakah slug memengaruhi peringkat pencarian?',
