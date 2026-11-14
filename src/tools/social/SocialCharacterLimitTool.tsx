@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { PASTEL_PALETTES, pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
 
@@ -72,6 +73,7 @@ function measureForPlatform(text: string, spec: PlatformSpec): number {
 export default function SocialCharacterLimitTool() {
   const { locale, t } = useLocale();
   const s = useComponentStrings('social-character-limit-checker', STRINGS_EN);
+  const palette = pastelForKey('social-character-limit-checker');
   const [text, setText] = useState(s.sampleText);
   const [previewId, setPreviewId] = useState('ig-cap');
 
@@ -144,11 +146,13 @@ export default function SocialCharacterLimitTool() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-        {stats.rows.map(({ spec, used, remaining, pct, over }) => (
+        {stats.rows.map(({ spec, used, remaining, pct, over }, index) => (
           <div
             key={spec.id}
             className={`rounded-xl border p-4 ${
-              over ? 'border-red-300 bg-red-50/50' : 'border-slate-200 bg-white'
+              over
+                ? 'border-red-300 bg-red-50/50'
+                : `border-slate-200 ${PASTEL_PALETTES[index % PASTEL_PALETTES.length].card}`
             }`}
           >
             <div className="flex items-center justify-between gap-2">
@@ -188,7 +192,7 @@ export default function SocialCharacterLimitTool() {
         ))}
       </div>
 
-      <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 space-y-3">
+      <div className={`rounded-xl border border-slate-200 ${palette.card} p-4 space-y-3`}>
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
             <h3 className="text-sm font-bold text-slate-900">{s.foldTitle}</h3>

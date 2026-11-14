@@ -1,6 +1,7 @@
 import { ArrowUpDown, Plus, Trash2 } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { PASTEL_PALETTES, pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
 
@@ -95,6 +96,7 @@ function extractYoutubeVideoId(rawUrl: string): string | null {
 export default function YoutubeTimestampGeneratorTool() {
   const { t } = useLocale();
   const s = useComponentStrings('youtube-timestamp-generator', STRINGS_EN);
+  const palette = pastelForKey('youtube-timestamp-generator');
   const [videoUrl, setVideoUrl] = useState('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
   const [chapters, setChapters] = useState<ChapterRow[]>(s.sampleChapters.map((c) => ({ ...c })));
 
@@ -258,7 +260,7 @@ export default function YoutubeTimestampGeneratorTool() {
       )}
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+        <div className={`rounded-xl border border-slate-200 ${palette.card} p-4`}>
           <div className="flex items-center justify-between gap-2 mb-2">
             <span className="text-xs font-semibold text-slate-700">{s.descBlock}</span>
             <CopyButton text={analysis.formattedText} label={s.copyChapters} copiedLabel={t.common.copied} />
@@ -268,16 +270,16 @@ export default function YoutubeTimestampGeneratorTool() {
           </pre>
         </div>
 
-        <div className="rounded-xl border border-slate-200 bg-white p-4 space-y-2.5">
+        <div className={`rounded-xl border border-slate-200 ${PASTEL_PALETTES[1].card} p-4 space-y-2.5`}>
           <div className="text-xs font-semibold text-slate-700">
             {s.shareTitle} {videoId ? s.videoIdLabel(videoId) : s.noVideoId}
           </div>
           {videoId ? (
             <div className="space-y-2 max-h-60 overflow-y-auto pr-1">
-              {analysis.shareLinks.map((link) => (
+              {analysis.shareLinks.map((link, index) => (
                 <div
                   key={link.id}
-                  className="flex items-center justify-between gap-2 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-xs"
+                  className={`flex items-center justify-between gap-2 rounded-lg border border-slate-200 ${PASTEL_PALETTES[(index + 2) % PASTEL_PALETTES.length].card} px-3 py-2 text-xs`}
                 >
                   <div className="min-w-0">
                     <div className="font-semibold text-slate-900 truncate">

@@ -2,6 +2,7 @@ import { Download } from 'lucide-react';
 import QRCode from 'qrcode';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
 
@@ -50,6 +51,7 @@ function escapeWifiField(val: string): string {
 export default function QrCodeGeneratorTool() {
   const { t } = useLocale();
   const s = useComponentStrings('qr-code-generator', STRINGS_EN);
+  const palette = pastelForKey('qr-code-generator');
   const [payloadType, setPayloadType] = useState<PayloadType>('url');
   const [urlValue, setUrlValue] = useState('https://utilityflow.online/');
   const [textValue, setTextValue] = useState(s.sampleText);
@@ -181,7 +183,7 @@ export default function QrCodeGeneratorTool() {
             type="button"
             onClick={() => setPayloadType(id)}
             className={`rounded-md px-3 py-1.5 text-xs sm:text-sm font-medium cursor-pointer ${
-              payloadType === id ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+              payloadType === id ? `${palette.soft} shadow-xs` : 'text-slate-600'
             }`}
           >
             {label}
@@ -400,7 +402,7 @@ export default function QrCodeGeneratorTool() {
           </div>
 
           {encodedPayload && (
-            <div className="rounded-lg border border-slate-200 bg-slate-50 p-3">
+            <div className={`rounded-lg border border-slate-200 ${palette.soft} p-3`}>
               <div className="flex items-center justify-between gap-2 mb-1">
                 <span className="text-xs font-semibold text-slate-500">{s.encodedPayload}</span>
                 <CopyButton text={encodedPayload} label={s.copyPayload} copiedLabel={t.common.copied} />
@@ -410,7 +412,7 @@ export default function QrCodeGeneratorTool() {
           )}
         </div>
 
-        <div className="lg:col-span-5 flex flex-col items-center rounded-xl border border-slate-200 bg-slate-50 p-6">
+        <div className={`lg:col-span-5 flex flex-col items-center rounded-xl border border-slate-200 ${palette.card} p-6`}>
           {qrError ? (
             <div className="text-sm text-slate-600 py-12 text-center">{qrError}</div>
           ) : (

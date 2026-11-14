@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
 
@@ -27,6 +28,7 @@ type SpacerMode = 'braille' | 'dot' | 'clean-only';
 export default function BioLineBreakFormatterTool() {
   const { t } = useLocale();
   const s = useComponentStrings('bio-line-break-formatter', STRINGS_EN);
+  const palette = pastelForKey('bio-line-break-formatter');
   const [rawText, setRawText] = useState(s.sampleText);
   const [spacerMode, setSpacerMode] = useState<SpacerMode>('braille');
   const [stripEmojisExtraSpaces, setStripEmojisExtraSpaces] = useState(true);
@@ -77,7 +79,7 @@ export default function BioLineBreakFormatterTool() {
               type="button"
               onClick={() => setSpacerMode(id)}
               className={`rounded-md px-3 py-1.5 text-xs sm:text-sm font-medium cursor-pointer ${
-                spacerMode === id ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+                spacerMode === id ? `${palette.soft} shadow-xs` : 'text-slate-600'
               }`}
             >
               {label}

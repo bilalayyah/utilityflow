@@ -1,6 +1,7 @@
 import { AlertTriangle } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { PASTEL_PALETTES } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
 
@@ -177,10 +178,10 @@ export default function UnicodeTextFormatterTool() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-        {outputs.map((item) => (
+        {outputs.map((item, index) => (
           <div
             key={item.id}
-            className="rounded-xl border border-slate-200 bg-white p-4 flex flex-col justify-between gap-3"
+            className={`rounded-xl border border-slate-200 ${PASTEL_PALETTES[index % PASTEL_PALETTES.length].card} p-4 flex flex-col justify-between gap-3`}
           >
             <div>
               <div className="flex items-center justify-between gap-2 mb-1">

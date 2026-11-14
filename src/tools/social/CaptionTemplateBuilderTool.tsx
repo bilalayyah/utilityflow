@@ -1,6 +1,7 @@
 import { Info } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
 
@@ -147,6 +148,7 @@ const FRAMEWORKS: FrameworkDef[] = [
 export default function CaptionTemplateBuilderTool() {
   const { t } = useLocale();
   const s = useComponentStrings('caption-template-builder', STRINGS_EN);
+  const palette = pastelForKey('caption-template-builder');
   const [frameworkId, setFrameworkId] = useState<FrameworkId>('tutorial');
   const [hook, setHook] = useState(s.sampleHook);
   const [context, setContext] = useState(s.sampleContext);
@@ -182,7 +184,7 @@ export default function CaptionTemplateBuilderTool() {
 
   return (
     <div className="space-y-6">
-      <div className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-xs sm:text-sm text-slate-700 flex items-start gap-2.5">
+      <div className={`rounded-xl border border-slate-200 ${palette.soft} px-4 py-3 text-xs sm:text-sm text-slate-700 flex items-start gap-2.5`}>
         <Info className="w-4 h-4 shrink-0 text-indigo-600 mt-0.5" />
         <p>
           <strong>{s.infoTitle}</strong> {s.infoBody}
@@ -196,7 +198,7 @@ export default function CaptionTemplateBuilderTool() {
             type="button"
             onClick={() => setFrameworkId(fw.id)}
             className={`rounded-md px-3 py-1.5 text-xs sm:text-sm font-medium cursor-pointer ${
-              frameworkId === fw.id ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+              frameworkId === fw.id ? `${palette.soft} shadow-xs` : 'text-slate-600'
             }`}
           >
             {s.frameworkNames[fw.id]}
@@ -274,9 +276,9 @@ export default function CaptionTemplateBuilderTool() {
           </div>
         </div>
 
-        <div className="rounded-xl border border-indigo-200 bg-indigo-50/40 p-4 space-y-3">
+        <div className={`rounded-xl border border-indigo-200 ${palette.card} p-4 space-y-3`}>
           <div className="flex items-center justify-between gap-2">
-            <span className="text-xs font-semibold text-indigo-800">{s.previewTitle}</span>
+            <span className={`text-xs font-semibold ${palette.link}`}>{s.previewTitle}</span>
             <CopyButton text={compiled.output} label={s.copyCaption} copiedLabel={t.common.copied} />
           </div>
           <pre className="rounded-lg border border-slate-200 bg-white p-4 font-sans text-sm leading-relaxed text-slate-900 whitespace-pre-wrap break-words min-h-64">

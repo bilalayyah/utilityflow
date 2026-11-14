@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { PASTEL_PALETTES } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
 
@@ -175,25 +176,25 @@ export default function HashtagFormatterTool() {
       </div>
 
       <dl className="grid grid-cols-2 lg:grid-cols-4 gap-3 text-sm tabular-nums">
-        <div className="rounded-lg border border-slate-200 bg-slate-50 p-3.5">
+        <div className={`rounded-lg border border-slate-200 ${PASTEL_PALETTES[0].card} p-3.5`}>
           <dt className="text-xs text-slate-500">{s.statClean}</dt>
           <dd className={`mt-1 text-xl font-bold font-mono ${result.tags.length > 30 ? 'text-red-700' : 'text-slate-900'}`}>
             {result.tags.length}
           </dd>
         </div>
-        <div className="rounded-lg border border-slate-200 bg-slate-50 p-3.5">
+        <div className={`rounded-lg border border-slate-200 ${PASTEL_PALETTES[1].card} p-3.5`}>
           <dt className="text-xs text-slate-500">{s.statDupes}</dt>
-          <dd className="mt-1 text-xl font-bold font-mono text-slate-900">{result.duplicatesRemoved}</dd>
+          <dd className={`mt-1 text-xl font-bold font-mono ${PASTEL_PALETTES[1].link}`}>{result.duplicatesRemoved}</dd>
         </div>
-        <div className="rounded-lg border border-slate-200 bg-slate-50 p-3.5">
+        <div className={`rounded-lg border border-slate-200 ${PASTEL_PALETTES[2].card} p-3.5`}>
           <dt className="text-xs text-slate-500">{s.statIgMax}</dt>
           <dd className={`mt-1 text-sm font-semibold ${result.tags.length <= 30 ? 'text-emerald-700' : 'text-red-700'}`}>
             {result.tags.length <= 30 ? s.statWithin : s.statExceeds}
           </dd>
         </div>
-        <div className="rounded-lg border border-slate-200 bg-slate-50 p-3.5">
+        <div className={`rounded-lg border border-slate-200 ${PASTEL_PALETTES[3].card} p-3.5`}>
           <dt className="text-xs text-slate-500">{s.statChars}</dt>
-          <dd className="mt-1 text-xl font-bold font-mono text-slate-900">{result.charCount}</dd>
+          <dd className={`mt-1 text-xl font-bold font-mono ${PASTEL_PALETTES[3].link}`}>{result.charCount}</dd>
         </div>
       </dl>
     </div>

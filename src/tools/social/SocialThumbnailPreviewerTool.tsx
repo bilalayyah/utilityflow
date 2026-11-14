@@ -1,5 +1,6 @@
 import { ImagePlus, ShieldCheck } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { pastelForKey } from '../../components/tool/pastel';
 import { useComponentStrings } from '../../locales/componentStrings';
 
 const STRINGS_EN = {
@@ -44,6 +45,7 @@ interface ImageInfo {
 
 export default function SocialThumbnailPreviewerTool() {
   const s = useComponentStrings('social-thumbnail-previewer', STRINGS_EN);
+  const palette = pastelForKey('social-thumbnail-previewer');
   const [imageUrl, setImageUrl] = useState<string>('');
   const [imageInfo, setImageInfo] = useState<ImageInfo | null>(null);
   const [title, setTitle] = useState(s.sampleTitle);
@@ -135,7 +137,7 @@ export default function SocialThumbnailPreviewerTool() {
         <div className="lg:col-span-5 space-y-4">
           <label
             htmlFor="thumb-upload"
-            className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-indigo-300 bg-slate-50 px-4 py-6 text-center hover:border-indigo-400 hover:bg-indigo-50/40 cursor-pointer transition-colors"
+            className={`flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-indigo-300 ${palette.card} px-4 py-6 text-center hover:border-indigo-400 hover:bg-indigo-50/40 cursor-pointer transition-colors`}
           >
             <ImagePlus className="w-7 h-7 text-indigo-600 mb-2" />
             <span className="text-sm font-semibold text-slate-900">
@@ -160,7 +162,7 @@ export default function SocialThumbnailPreviewerTool() {
           )}
 
           {imageInfo && (
-            <div className="rounded-xl border border-slate-200 bg-white p-3.5 text-xs space-y-1.5 tabular-nums">
+            <div className={`rounded-xl border border-slate-200 ${palette.card} p-3.5 text-xs space-y-1.5 tabular-nums`}>
               <div className="font-semibold text-slate-900 flex items-center gap-1.5">
                 <ShieldCheck className="w-4 h-4 text-indigo-600" />
                 {s.diagTitle}
@@ -254,7 +256,7 @@ export default function SocialThumbnailPreviewerTool() {
           className={`lg:col-span-7 rounded-xl border p-5 space-y-6 transition-colors ${
             darkTheme
               ? 'border-slate-800 bg-slate-950 text-slate-100'
-              : 'social-light-preview border-slate-200 bg-slate-50 text-slate-900'
+              : `social-light-preview border-slate-200 ${palette.card} text-slate-900`
           }`}
         >
           <div>

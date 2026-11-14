@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { PASTEL_PALETTES, pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
 
@@ -49,6 +50,7 @@ const PRESETS: {
 export default function UtmLinkBuilderTool() {
   const { t } = useLocale();
   const s = useComponentStrings('utm-link-builder', STRINGS_EN);
+  const palette = pastelForKey('utm-link-builder');
   const [baseUrl, setBaseUrl] = useState('https://utilityflow.online/tools/');
   const [source, setSource] = useState('instagram');
   const [medium, setMedium] = useState('social');
@@ -112,7 +114,7 @@ export default function UtmLinkBuilderTool() {
     <div className="space-y-6">
       <div className="flex flex-wrap items-center gap-2">
         <span className="text-xs font-semibold text-slate-500">{s.presetsLabel}</span>
-        {PRESETS.map((preset) => (
+        {PRESETS.map((preset, index) => (
           <button
             key={preset.id}
             type="button"
@@ -122,7 +124,7 @@ export default function UtmLinkBuilderTool() {
               setCampaign(preset.campaign);
               setContent(preset.content);
             }}
-            className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-medium text-slate-700 hover:border-indigo-300 hover:text-indigo-700 cursor-pointer"
+            className={`rounded-lg border border-slate-200 ${PASTEL_PALETTES[index % PASTEL_PALETTES.length].card} px-3 py-1.5 text-xs font-medium text-slate-700 hover:border-indigo-300 hover:text-indigo-700 cursor-pointer`}
           >
             {s.presets[preset.id]}
           </button>
@@ -235,9 +237,9 @@ export default function UtmLinkBuilderTool() {
 
       {result.finalUrl && (
         <div className="space-y-4">
-          <div className="rounded-xl border border-indigo-200 bg-indigo-50/70 p-4">
+          <div className={`rounded-xl border border-indigo-200 ${palette.card} p-4`}>
             <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
-              <span className="text-xs font-semibold text-indigo-700">{s.generatedTitle}</span>
+              <span className={`text-xs font-semibold ${palette.link}`}>{s.generatedTitle}</span>
               <CopyButton text={result.finalUrl} label={s.copyUtm} copiedLabel={t.common.copied} />
             </div>
             <div className="rounded-lg border border-indigo-100 bg-white p-3 font-mono text-xs sm:text-sm text-slate-900 break-all">
@@ -248,7 +250,7 @@ export default function UtmLinkBuilderTool() {
           {result.params.length > 0 && (
             <div className="rounded-xl border border-slate-200 overflow-x-auto">
               <table className="w-full text-left text-xs sm:text-sm">
-                <thead className="bg-slate-50 text-slate-500 border-b border-slate-200">
+                <thead className={`${palette.soft} text-slate-500 border-b border-slate-200`}>
                   <tr>
                     <th className="py-2 px-4 font-semibold">{s.thParam}</th>
                     <th className="py-2 px-4 font-semibold">{s.thValue}</th>

@@ -1,6 +1,7 @@
 import { ExternalLink, Info } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { PASTEL_PALETTES, pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
 
@@ -97,6 +98,7 @@ const PLATFORM_RULES: PlatformRule[] = [
 export default function SocialHandleFormatterTool() {
   const { t } = useLocale();
   const s = useComponentStrings('social-handle-formatter', STRINGS_EN);
+  const palette = pastelForKey('social-handle-formatter');
   const [brandInput, setBrandInput] = useState('Utility Hub');
   const [selectedVariant, setSelectedVariant] = useState('');
 
@@ -196,7 +198,7 @@ export default function SocialHandleFormatterTool() {
         <div>
           <div className="text-xs font-semibold text-slate-600 mb-2">{s.variationsTitle}</div>
           <div className="flex flex-wrap gap-2">
-            {suggestions.map((variant) => (
+            {suggestions.map((variant, index) => (
               <button
                 key={variant}
                 type="button"
@@ -204,7 +206,7 @@ export default function SocialHandleFormatterTool() {
                 className={`rounded-lg border px-3 py-1.5 font-mono text-xs cursor-pointer ${
                   activeHandle === variant
                     ? 'border-indigo-600 bg-indigo-50 text-indigo-800 font-semibold'
-                    : 'border-slate-200 bg-slate-50 text-slate-700 hover:border-indigo-300'
+                    : `border-slate-200 ${PASTEL_PALETTES[index % PASTEL_PALETTES.length].card} text-slate-700 hover:border-indigo-300`
                 }`}
               >
                 @{variant}
@@ -216,7 +218,7 @@ export default function SocialHandleFormatterTool() {
 
       <div className="rounded-xl border border-slate-200 overflow-x-auto">
         <table className="w-full text-left text-xs sm:text-sm">
-          <thead className="bg-slate-50 text-slate-500 border-b border-slate-200">
+          <thead className={`${palette.soft} text-slate-500 border-b border-slate-200`}>
             <tr>
               <th className="py-2.5 px-4 font-semibold">{s.thPlatform}</th>
               <th className="py-2.5 px-4 font-semibold">{s.thRules}</th>
