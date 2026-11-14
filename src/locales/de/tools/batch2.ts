@@ -262,7 +262,7 @@ export const DE_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         title: 'UTF-8-Zeichenkette kodieren',
         input: 'UtilityFlow: UTF-8 ✓',
-        output: 'VXRpbGl0eUh1YjogVVRGLTggeKky',
+        output: 'VXRpbGl0eUZsb3c6IFVURi04IOKckw==',
         explanation:
           'Verwendet die UTF-8-Byte-Serialisierung von TextEncoder vor der Base64-Umwandlung.',
       },
