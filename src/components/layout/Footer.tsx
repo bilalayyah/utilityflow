@@ -75,14 +75,6 @@ export function Footer() {
             <ul className="space-y-2 text-sm">
               <li>
                 <Link
-                  to={localizeStaticPath('/', locale)}
-                  className="hover:text-indigo-700 transition-colors underline-offset-4 hover:underline"
-                >
-                  {t.footer.home}
-                </Link>
-              </li>
-              <li>
-                <Link
                   to={localizeStaticPath('/tools/', locale)}
                   className="hover:text-indigo-700 transition-colors underline-offset-4 hover:underline"
                 >
@@ -113,6 +105,20 @@ export function Footer() {
                   {t.nav.aiFinder.label}
                 </Link>
               </li>
+            </ul>
+          </div>
+
+          <div className="lg:col-span-2">
+            <h2 className="text-sm font-semibold text-slate-900 mb-3">{t.footer.trustLegal}</h2>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <Link
+                  to={localizeStaticPath('/', locale)}
+                  className="hover:text-indigo-700 transition-colors underline-offset-4 hover:underline"
+                >
+                  {t.footer.home}
+                </Link>
+              </li>
               <li>
                 <Link
                   to={localizeStaticPath('/about/', locale)}
@@ -129,12 +135,6 @@ export function Footer() {
                   {t.footer.contact}
                 </Link>
               </li>
-            </ul>
-          </div>
-
-          <div className="lg:col-span-2">
-            <h2 className="text-sm font-semibold text-slate-900 mb-3">{t.footer.legal}</h2>
-            <ul className="space-y-2 text-sm">
               <li>
                 <Link
                   to={localizeStaticPath('/privacy-policy/', locale)}
