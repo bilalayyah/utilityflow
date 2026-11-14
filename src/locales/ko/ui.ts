@@ -42,7 +42,7 @@ export const koStrings: UiStrings = {
       '작가, 엔지니어, 마케터, 분석가를 위한 빠르고 브라우저 중심의 일상 유틸리티 모음입니다. 최소한의 부담으로 로컬에서 실행되도록 만들었습니다.',
     categories: '카테고리',
     platformAi: '플랫폼·AI',
-    legal: '법적 고지',
+    trustLegal: '신뢰 및 법적 고지',
     home: '홈',
     allToolsDirectory: '모든 도구 디렉터리',
     aboutUs: '소개',
