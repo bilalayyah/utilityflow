@@ -3,8 +3,11 @@ export const SITE_CONFIG = {
   tagline: 'Fast, browser-first online utilities with zero sign-up.',
   description:
     'Free, fast, privacy-first online utility tools for text analysis, developer formatting, calculators, PDFs, SEO checks, and image workflows.',
-  contactEmail: 'hello@utilityflow.online',
+  contactEmail: 'bilalayyah@gmail.com',
   defaultOrigin: 'https://utilityflow.online',
+  // Browser-only tools (85). The site total is 88 tools (85 browser + 3 AI);
+  // HomePage renders this as the "Browser Utilities" metric, while "Live Tools"
+  // shows allTools.length (88). Do not "fix" this to 88.
   plannedTotalTools: 85,
   totalBatches: 7,
 } as const;
