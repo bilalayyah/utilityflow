@@ -131,7 +131,6 @@ export const koStrings: UiStrings = {
       noMatch: '"{query}"와 일치하는 카테고리나 도구가 없습니다.',
       resetFilters: '필터 초기화',
       upcomingUtilities: '예정된 유틸리티: {names}',
-      scheduledInBatch: '배치 {batch}에 예정됨',
       toolsActive: '{count}개 도구 활성',
       openCategory: '카테고리 페이지 열기',
     },
@@ -164,7 +163,7 @@ export const koStrings: UiStrings = {
     faq: {
       title: '자주 묻는 질문',
       description:
-        'UtilityFlow의 운영 방식과 향후 배치에서 기대할 수 있는 내용에 대한 핵심 정보입니다.',
+        'UtilityFlow의 운영 방식과 새로운 도구에서 기대할 수 있는 내용에 대한 핵심 정보입니다.',
     },
     faqs: [
       {
@@ -214,16 +213,15 @@ export const koStrings: UiStrings = {
     clearFilters: '필터 지우기',
   },
   category: {
-    batchLabel: '배치 {batch}',
     plannedCount: '{count}개 도구 예정',
     toolsCount: '{count}개 도구',
     toolsLive: '{count}개 도구 라이브',
     ofToolsLive: '전체 {total}개 중 {count}개 도구 라이브',
     availableTools: '사용 가능한 {name}',
     exploreOther: '다른 카테고리 살펴보기',
-    scheduledTitle: '배치 {batch} 구현 예정',
+    scheduledTitle: '더 많은 도구가 곧 출시됩니다',
     scheduledDescription:
-      '이 카테고리 허브는 활성화되어 {name} 아키텍처에 인덱싱되어 있습니다. 브라우저 측 기능을 갖춘 전용 개별 도구 페이지는 배치 {batch} 기간에 여기에 추가됩니다.',
+      '이 카테고리 허브는 활성화되어 {name} 아키텍처에 인덱싱되어 있습니다. 브라우저 측 기능을 갖춘 전용 개별 도구 페이지는 곧 여기에 추가됩니다.',
     plannedToolsTitle: '이 카테고리의 예정된 도구:',
   },
   toolPage: {
@@ -242,7 +240,7 @@ export const koStrings: UiStrings = {
     relatedDescription: '보완적인 유틸리티로 워크플로를 이어가세요.',
     browseAll: '모든 {name} 둘러보기',
     moreToolsIn: '다음 카테고리의 도구 더 보기',
-    willAppear: '배치 {batch}가 출시되면 여기에 표시됩니다.',
+    willAppear: '곧 여기에 표시됩니다.',
   },
   comments: {
     title: '댓글',
@@ -310,13 +308,13 @@ export const koStrings: UiStrings = {
       {
         title: '모듈식 출시',
         description:
-          '도구는 7개 카테고리 배치로 출시되고 검증되므로 각 유틸리티가 철저한 기능 테스트와 문서를 받습니다.',
+          '도구는 카테고리별로 출시되고 검증되므로 각 유틸리티가 철저한 기능 테스트와 문서를 받습니다.',
       },
     ],
     categoriesTitle: '예정된 7개 도구 카테고리',
     feedbackTitle: '피드백이나 요청이 있으신가요?',
     feedbackBefore:
-      '계산 엣지 케이스나 접근성 문제를 발견하거나 향후 배치에 추가할 유틸리티를 제안하고 싶으시면 저희',
+      '계산 엣지 케이스나 접근성 문제를 발견하거나 새로운 유틸리티를 제안하고 싶으시면 저희',
     feedbackLink: '문의 페이지',
     feedbackAfter: '를 통해 연락해 주세요.',
   },
@@ -448,7 +446,7 @@ export const koStrings: UiStrings = {
       '에 동의하게 됩니다. 약관의 어떤 부분에도 동의하지 않으면 웹사이트 사용을 중단해 주세요.',
     changesTitle: '6. 변경 및 문의',
     changesBefore:
-      '새 도구 배치가 출시되면 본 이용약관을 업데이트할 수 있습니다. 질문은 저희',
+      '새 도구가 출시되면 본 이용약관을 업데이트할 수 있습니다. 질문은 저희',
     changesLink: '문의 페이지',
     changesAfter: '로 보내 주세요.',
   },
