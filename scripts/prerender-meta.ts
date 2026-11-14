@@ -23,8 +23,20 @@
 //
 // Also writes functions/known-routes.ts (KNOWN_ROUTES set, used by the
 // Cloudflare Pages Functions middleware for 404 handling — Fix #2).
+//
+// Fix #10 (mobile LCP): injects a per-route <link rel="modulepreload">
+// for the route's locale chunk on non-EN pages (see localeChunkFile
+// below). The chunk then downloads in parallel with the entry bundle
+// instead of sequentially after it. If the chunk cannot be resolved,
+// the preload is skipped silently — never a broken link, never a
+// failed build.
+// NOTE: route-level lazy loading was tried and REVERTED (measured
+// locally: it saved only ~15 KB gzip on the initial bundle but cost
+// tool pages ~250 ms of extra Suspense round-trip, so word-counter
+// LCP got worse, 2,248 ms -> 2,504 ms). Do not reintroduce lazy()
+// page splits without re-measuring LCP on home + a tool page.
 
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { SITE_CONFIG, STATIC_ROUTES, buildCanonicalUrl } from '../src/config/site';
@@ -242,6 +254,8 @@ interface PageSeo {
   path: string;
   locale: LocaleCode;
   props: SeoHeadProps;
+  /** Fix #10: locale chunk to modulepreload in this page's head (non-EN only). */
+  preloadFiles: string[];
 }
 
 function buildOrganizationSchema(homePath: string): Record<string, unknown> {
@@ -498,7 +512,7 @@ const SEO_TAG_PATTERNS: RegExp[] = [
   /<script[^>]*data-seo-jsonld[^>]*>[\s\S]*?<\/script>/g,
 ];
 
-function prerenderHead(shell: string, seo: SeoHeadProps): string {
+function prerenderHead(shell: string, seo: SeoHeadProps, preloadFiles: string[] = []): string {
   const headMatch = shell.match(/<head>([\s\S]*?)<\/head>/);
   if (!headMatch) throw new Error('Shell has no <head> block');
   let head = headMatch[1];
@@ -514,7 +528,52 @@ function prerenderHead(shell: string, seo: SeoHeadProps): string {
     .filter((line) => line.trim() !== '')
     .join('\n');
   head = head.replace(/<title>[\s\S]*?<\/title>/, () => renderSeoHead(seo));
+  // Fix #10: preload the route's locale chunk so it downloads in parallel
+  // with the entry bundle (appended at the end of <head>, after the SEO
+  // block — the preload scanner still finds it before the body script).
+  if (preloadFiles.length > 0) {
+    head +=
+      '\n' +
+      preloadFiles
+        .map((file) => `    <link rel="modulepreload" href="/${escapeAttr(file)}" />`)
+        .join('\n');
+  }
   return shell.replace(/<head>[\s\S]*?<\/head>/, () => `<head>${head}\n  </head>`);
+}
+
+// ---------------------------------------------------------------------------
+// Fix #10 — locale-chunk modulepreload for non-EN routes.
+//
+// A non-EN page cannot render until its locale chunk arrives
+// (LocaleProvider waits for loadLocaleData), and that chunk is large
+// (768 KB-1.4 MB, ~220-290 KB gzip). Loaded on demand it downloads
+// sequentially AFTER the entry bundle; preloaded in <head> it downloads
+// in parallel with the entry instead. The chunk file is found by scanning
+// dist/assets for `<locale>-<hash>.js` (exactly one match required -
+// otherwise the preload is skipped, never a broken link).
+// ---------------------------------------------------------------------------
+
+function localeChunkFile(distDir: string, locale: LocaleCode, marker?: string): string | null {
+  const assetsDir = resolve(distDir, 'assets');
+  if (!existsSync(assetsDir)) return null;
+  const pattern = new RegExp(`^${locale}-[A-Za-z0-9_-]+\.js$`);
+  const matches = readdirSync(assetsDir).filter((name) => pattern.test(name));
+  if (matches.length === 0) return null;
+  if (matches.length === 1) return `assets/${matches[0]}`;
+  // Ambiguous: the `es-` prefix also matches the pdf-lib chunk
+  // (es-BJUdrXYB.js, named after pdf-lib's ES-module build). Disambiguate
+  // by content — the real locale chunk contains the locale's own UI
+  // strings; the library chunk does not. Exactly one match required.
+  if (!marker) return null;
+  const withMarker = matches.filter((name) => {
+    try {
+      return readFileSync(resolve(assetsDir, name), 'utf8').includes(marker);
+    } catch {
+      return false;
+    }
+  });
+  if (withMarker.length !== 1) return null;
+  return `assets/${withMarker[0]}`;
 }
 
 function filePathForRoute(distDir: string, routePath: string): string {
@@ -545,6 +604,22 @@ async function prerender(): Promise<void> {
   const pages: PageSeo[] = [];
   const knownRoutes = new Set<string>();
 
+  // Fix #10: per-locale modulepreload (see localeChunkFile above).
+  // EN routes need nothing extra (English data is built into the entry);
+  // every non-EN route preloads its locale chunk.
+  const localePreloadCache = new Map<LocaleCode, string[]>();
+  function preloadFor(locale: LocaleCode, marker?: string): string[] {
+    const cached = localePreloadCache.get(locale);
+    if (cached) return cached;
+    const files: string[] = [];
+    if (locale !== 'en') {
+      const chunk = localeChunkFile(distDir, locale, marker);
+      if (chunk) files.push(chunk);
+    }
+    localePreloadCache.set(locale, files);
+    return files;
+  }
+
   for (const localeInfo of SUPPORTED_LOCALES) {
     const locale = localeInfo.code;
     const data: LocaleData = await loadLocaleData(locale);
@@ -557,14 +632,28 @@ async function prerender(): Promise<void> {
           ? localizeStaticPath('/', locale)
           : STATIC_PATHS[route.path]?.[locale] ?? route.path;
       let props: SeoHeadProps;
-      if (route.path === '/') props = homeSeo(t, locale);
-      else if (route.path === '/tools/') props = directorySeo(t, locale);
-      else if (route.path === '/about/') props = staticPageSeo('about', t, locale);
-      else if (route.path === '/contact/') props = staticPageSeo('contact', t, locale);
-      else if (route.path === '/privacy-policy/')
+      let preloadFiles: string[] = [];
+      if (route.path === '/') {
+        props = homeSeo(t, locale);
+        // Home is eager, but non-EN home still needs its locale chunk.
+        preloadFiles = preloadFor(locale, t.nav.allTools);
+      } else if (route.path === '/tools/') {
+        props = directorySeo(t, locale);
+        preloadFiles = preloadFor(locale, t.nav.allTools);
+      } else if (route.path === '/about/') {
+        props = staticPageSeo('about', t, locale);
+        preloadFiles = preloadFor(locale, t.nav.allTools);
+      } else if (route.path === '/contact/') {
+        props = staticPageSeo('contact', t, locale);
+        preloadFiles = preloadFor(locale, t.nav.allTools);
+      } else if (route.path === '/privacy-policy/') {
         props = staticPageSeo('privacy', t, locale);
-      else props = staticPageSeo('terms', t, locale);
-      pages.push({ path: localized, locale, props });
+        preloadFiles = preloadFor(locale, t.nav.allTools);
+      } else {
+        props = staticPageSeo('terms', t, locale);
+        preloadFiles = preloadFor(locale, t.nav.allTools);
+      }
+      pages.push({ path: localized, locale, props, preloadFiles });
       knownRoutes.add(localized);
     }
 
@@ -574,7 +663,12 @@ async function prerender(): Promise<void> {
         locale === 'en'
           ? `/category/${category.slug}/`
           : `${localeInfo.pathPrefix}/${CATEGORY_PATH_SEGMENT[locale]}/${CATEGORY_LOCALE_SLUGS[locale][category.id]}/`;
-      pages.push({ path: localized, locale, props: categorySeo(category.id, t, locale, data) });
+      pages.push({
+        path: localized,
+        locale,
+        props: categorySeo(category.id, t, locale, data),
+        preloadFiles: preloadFor(locale, t.nav.allTools),
+      });
       knownRoutes.add(localized);
     }
 
@@ -584,7 +678,12 @@ async function prerender(): Promise<void> {
         locale === 'en'
           ? `/${tool.slug}/`
           : `${localeInfo.pathPrefix}/${TOOL_OVERRIDES_BY_LOCALE[locale]?.[tool.id]?.slug ?? tool.slug}/`;
-      pages.push({ path: localized, locale, props: toolSeo(tool.id, t, locale, data) });
+      pages.push({
+        path: localized,
+        locale,
+        props: toolSeo(tool.id, t, locale, data),
+        preloadFiles: preloadFor(locale, t.nav.allTools),
+      });
       knownRoutes.add(localized);
     }
   }
@@ -617,7 +716,7 @@ async function prerender(): Promise<void> {
   // Write one file per route.
   let written = 0;
   for (const page of pages) {
-    const html = prerenderHead(shell, page.props);
+    const html = prerenderHead(shell, page.props, page.preloadFiles);
     const withLang = html.replace('<html lang="en">', () => `<html lang="${escapeAttr(getLocaleInfo(page.locale).htmlLang)}">`);
     const outPath = filePathForRoute(distDir, page.path);
     mkdirSync(dirname(outPath), { recursive: true });
