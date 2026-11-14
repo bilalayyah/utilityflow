@@ -246,6 +246,17 @@ export const ptStrings: UiStrings = {
     moreToolsIn: 'Mais ferramentas em',
     willAppear: 'aparecerão aqui quando o lote {batch} for lançado.',
   },
+  comments: {
+    title: 'Comentários',
+    note: 'Compartilhe sua opinião: não é preciso criar conta. Basta escrever seu nome e publicar.',
+    namePlaceholder: 'Seu nome',
+    commentPlaceholder: 'Escreva um comentário…',
+    postButton: 'Publicar comentário',
+    posting: 'Publicando…',
+    empty: 'Ainda não há comentários. Seja a primeira pessoa a compartilhar sua opinião.',
+    loadError: 'Não foi possível carregar os comentários agora, mas você ainda pode publicar um abaixo.',
+    postError: 'Não foi possível publicar seu comentário. Tente novamente em instantes.',
+  },
   search: {
     placeholder:
       'Pesquisar ferramentas ou categorias (ex.: contador de palavras, JSON, PDF, calculadoras)...',
