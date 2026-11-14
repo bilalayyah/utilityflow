@@ -41,7 +41,7 @@ export const esStrings: UiStrings = {
       'Una colección rápida de utilidades cotidianas, pensadas para el navegador, para escritores, ingenieros, especialistas en marketing y analistas. Diseñada para ejecutarse localmente con el mínimo consumo de recursos.',
     categories: 'Categorías',
     platformAi: 'Plataforma e IA',
-    legal: 'Legal',
+    trustLegal: 'Confianza y Legal',
     home: 'Inicio',
     allToolsDirectory: 'Directorio de todas las herramientas',
     aboutUs: 'Sobre nosotros',
