@@ -1158,7 +1158,7 @@ export const PT_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       title: 'Ordenar Linhas: Ordem Alfabética A-Z e Natural | UtilityFlow',
       description:
         'Ordene linhas de A a Z, de Z a A, em ordem numérica natural, por tamanho, ao contrário ou embaralhadas, com remoção de duplicatas e de linhas em branco.',
-      primaryKeyword: 'ordenar linhas alfabeticamente',
+      primaryKeyword: 'ordenar linhas em ordem alfabética',
       secondaryKeywords: ['alfabetizar lista', 'ordenador de linhas de texto', 'ordenação natural online', 'ordenar linhas de a a z'],
       longTailKeywords: ['ordenar lista alfabeticamente com números em ordem natural', 'ordenar linhas por tamanho do menor para o maior', 'alfabetizar e remover linhas duplicadas', 'inverter ordem das linhas online'],
       schemaApplicationCategory: 'UtilitiesApplication',
@@ -2482,7 +2482,7 @@ export const PT_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       description:
         'Escreva Markdown e veja a renderização ao vivo, inspecione o HTML compilado e copie ou baixe um documento HTML limpo — grátis, no seu navegador e sem cadastro.',
       primaryKeyword: 'visualizador de markdown',
-      secondaryKeywords: ['conversor de markdown para html', 'editor de markdown online', 'visualizador de markdown', 'editor de markdown ao vivo'],
+      secondaryKeywords: ['conversor de markdown para html', 'editor de markdown online', 'pré-visualização de markdown online', 'editor de markdown ao vivo'],
       longTailKeywords: ['visualizador de markdown ao vivo com exportação de html', 'converter readme markdown em html online', 'editor de markdown no navegador sem enviar arquivos', 'pré-visualizar readme do github antes de commitar'],
       schemaApplicationCategory: 'UtilitiesApplication',
     },

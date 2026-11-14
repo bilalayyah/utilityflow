@@ -358,7 +358,7 @@ export const PT_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'A Pré-visualização de Snippet SERP envia meu título ou minha URL para algum lugar?',
         answer:
-          'Não. Toda a pré-visualização e medição acontece localmente no seu navegador.',
+          'Não. Toda a pré-visualização e medição acontece localmente no seu navegador, por isso seu título, sua descrição e sua URL nunca saem do seu dispositivo.',
       },
       {
         question: 'Como copio o título e a meta descrição depois de ver a pré-visualização?',
@@ -927,7 +927,7 @@ export const PT_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Como adiciono o JSON-LD gerado ao meu site?',
         answer:
-          'Copie o bloco completo <script type="application/ld+json"> e cole-o no <head> da página correspondente.',
+          'Copie o bloco completo <script type="application/ld+json"> e cole-o no <head> da página correspondente, salvando o arquivo antes de testar o resultado no validador do Google.',
       },
       {
         question: 'Como testo minha marcação de schema depois de gerá-la?',
@@ -1411,7 +1411,7 @@ export const PT_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
     seo: {
       title: 'Canônica, Hreflang e Redirecionamento 301 | UtilityFlow',
       description:
-        'Gere tags hreflang e canônicas para páginas multilíngues e regras 301 para Cloudflare Pages, Apache e Nginx — prontas para copiar e publicar no navegador.',
+        'Este gerador cria tags hreflang e canônicas para páginas multilíngues e regras 301 para Cloudflare Pages, Apache e Nginx — prontas para copiar.',
       primaryKeyword: 'gerador de hreflang',
       secondaryKeywords: [
         'gerador de tag de link canônico',
@@ -2150,7 +2150,7 @@ export const PT_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Minha imagem comprimida vai ter marca d’água?',
         answer:
-          'Não, as imagens baixadas nunca incluem marcas d’água ou logotipos.',
+          'Não, as imagens baixadas nunca incluem marcas d’água ou logotipos, por isso o arquivo comprimido fica exatamente igual à sua imagem original, apenas menor.',
       },
       {
         question: 'Qual é o melhor formato para comprimir capturas de tela?',
@@ -2995,7 +2995,7 @@ export const PT_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
     seo: {
       title: 'Verificador de Contraste – WCAG 2.1 AA/AAA | UtilityFlow',
       description:
-        'Verifique proporções de contraste WCAG 2.1 AA e AAA para pares de texto e fundo, converta HEX, RGB e HSL e extraia paletas de imagens — grátis, no navegador.',
+        'Verifique proporções de contraste WCAG 2.1 AA e AAA para pares de cores de texto e fundo, converta HEX, RGB e HSL e extraia paletas — grátis, no navegador.',
       primaryKeyword: 'verificador de contraste de cores',
       secondaryKeywords: [
         'calculadora de proporção de contraste wcag aa aaa',

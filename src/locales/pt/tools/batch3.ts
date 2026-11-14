@@ -32,9 +32,9 @@ export const PT_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
       primaryKeyword: 'calculadora de idade',
       secondaryKeywords: [
         'calculadora de idade cronológica',
-        'calculadora de idade de aniversário',
-        'calculadora de idade em dias',
-        'calculadora de idade exata',
+        'quantos anos tenho pela data de nascimento',
+        'idade em dias semanas e meses',
+        'calcular minha idade exata hoje',
       ],
       longTailKeywords: [
         'calcular idade exata em anos meses e dias online',
@@ -1373,7 +1373,7 @@ export const PT_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Posso usar taxas decimais como 7,25% ou 8,875%?',
         answer:
-          'Sim. O campo de taxa aceita qualquer porcentagem decimal positiva.',
+          'Sim. O campo de taxa aceita qualquer porcentagem decimal positiva, por isso taxas como 7,25% ou 8,875% calculam o imposto e o total com exatidão.',
       },
       {
         question: 'E se meu recibo mostrar só o total bruto?',
@@ -2406,7 +2406,7 @@ export const PT_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
     seo: {
       title: 'Calculadora de Duração – Horas e Folhas | UtilityFlow',
       description:
-        'Calcule horas, minutos e segundos entre horários, desconte pausas não remuneradas, lide com turnos noturnos ou some folhas de ponto em horas decimais.',
+        'Calcule o tempo decorrido em horas, minutos e segundos, desconte pausas não remuneradas, lide com turnos noturnos ou some folhas de ponto.',
       primaryKeyword: 'calculadora de duração de tempo',
       secondaryKeywords: [
         'calculadora de horas de trabalho',

@@ -424,7 +424,7 @@ export const PT_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
     seo: {
       title: 'Verificador de Limite de Caracteres – Redes | UtilityFlow',
       description:
-        'Confira limites de caracteres e prévias de corte do feed para X, Instagram, LinkedIn, TikTok, Threads e YouTube — com contagem de emojis e links, grátis.',
+        'Confira limites de caracteres e o corte do feed em redes sociais como X, Instagram, LinkedIn, TikTok, Threads e YouTube, com contagem de emojis e links, grátis.',
       primaryKeyword: 'verificador de limite de caracteres para redes sociais',
       secondaryKeywords: [
         'contador de posts do x twitter',
@@ -820,7 +820,7 @@ export const PT_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
     seo: {
       title: 'Formatador de Quebras de Linha – Legendas | UtilityFlow',
       description:
-        'Mantenha o espaçamento de parágrafos em legendas e bios do Instagram e TikTok — remova espaços finais, some espaçadores invisíveis e copie com um clique.',
+        'Mantenha o espaçamento de parágrafos na sua bio e em legendas do Instagram e TikTok — remova espaços finais, some espaçadores invisíveis e copie com um clique.',
       primaryKeyword: 'formatador de quebras de linha para bio',
       secondaryKeywords: [
         'quebras de linha de legenda do instagram',
@@ -1018,7 +1018,7 @@ export const PT_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
     seo: {
       title: 'Marcas de Tempo do YouTube – Capítulos | UtilityFlow',
       description:
-        'Crie capítulos ordenados do YouTube validados para início em 00:00, 3+ capítulos e 10 segundos de intervalo, com links ?t= clicáveis para compartilhar online.',
+        'Este gerador cria capítulos ordenados do YouTube validados para início em 00:00, 3+ capítulos e 10 segundos de intervalo, com links ?t= clicáveis.',
       primaryKeyword: 'gerador de marcas de tempo do youtube',
       secondaryKeywords: [
         'formatador de capítulos do youtube',
@@ -2341,7 +2341,7 @@ export const PT_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'O PDF extraído manterá sua qualidade original?',
         answer:
-          'Sim, nenhuma recompressão ou rasterização acontece durante a extração.',
+          'Sim, nenhuma recompressão ou rasterização acontece durante a extração, por isso cada página extraída mantém a qualidade exata do PDF original.',
       },
       {
         question: 'Como divido um PDF em arquivos de uma página?',
@@ -2504,12 +2504,12 @@ export const PT_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Quais formatos de imagem posso converter para PDF?',
         answer:
-          'JPG, PNG e WebP são suportados.',
+          'JPG, PNG e WebP são suportados, por isso você pode converter fotos, capturas de tela e imagens da web em um único PDF.',
       },
       {
         question: 'Posso converter uma única imagem para PDF?',
         answer:
-          'Sim, uma imagem produz um PDF de uma página.',
+          'Sim, uma imagem produz um PDF de uma página, o que funciona bem para compartilhar uma única foto ou um documento digitalizado como arquivo.',
       },
       {
         question: 'Posso reordenar imagens antes de convertê-las para PDF?',
@@ -2559,17 +2559,17 @@ export const PT_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Posso misturar JPG, PNG e WebP em um PDF?',
         answer:
-          'Sim, você pode combinar os três formatos em um único documento.',
+          'Sim, você pode combinar os três formatos em um único documento, e as páginas permanecem na ordem em que você as organizou.',
       },
       {
         question: 'As páginas do PDF estarão na mesma ordem que minhas imagens?',
         answer:
-          'Sim, as páginas seguem a ordem mostrada na lista de imagens.',
+          'Sim, as páginas seguem a ordem mostrada na lista de imagens, por isso reorganize suas imagens antes se quiser uma sequência de páginas diferente.',
       },
       {
         question: 'Posso definir um nome de arquivo personalizado para o PDF?',
         answer:
-          'Sim, digite seu nome de arquivo preferido antes de converter.',
+          'Sim, digite seu nome de arquivo preferido antes de converter, e o PDF baixado usará esse nome em vez do nome padrão.',
       },
       {
         question: 'A ferramenta mantém a transparência da imagem?',
@@ -2692,7 +2692,7 @@ export const PT_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Isto funciona em PDFs protegidos por senha?',
         answer:
-          'PDFs criptografados devem ser desbloqueados antes de renderizar localmente.',
+          'PDFs criptografados devem ser desbloqueados antes de renderizar localmente, porque a ferramenta não consegue ler as páginas de um arquivo que ainda está bloqueado.',
       },
       {
         question: 'A ferramenta PDF para Imagens é gratuita?',
@@ -2895,7 +2895,7 @@ export const PT_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'O Rotacionador de Páginas de PDF é gratuito?',
         answer:
-          'Sim, é gratuito, sem marcas d’água nem limites.',
+          'Sim, é gratuito, sem marcas d’água nem limites, e você pode girar quantos PDFs precisar sem criar uma conta.',
       },
       {
         question: 'Posso girar todas as páginas de um PDF de uma vez?',
@@ -2910,7 +2910,7 @@ export const PT_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Em quais ângulos posso girar páginas de PDF?',
         answer:
-          '90° no sentido horário, 90° no sentido anti-horário e 180°.',
+          'Você pode girar 90° no sentido horário, 90° no sentido anti-horário e 180°, por isso qualquer página de lado ou de cabeça para baixo pode ser corrigida com um clique.',
       },
       {
         question: 'Posso girar uma página de PDF em um ângulo personalizado como 45°?',
@@ -2930,7 +2930,7 @@ export const PT_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Posso girar um PDF protegido por senha?',
         answer:
-          'Não, PDFs criptografados devem ser desbloqueados primeiro.',
+          'Não, PDFs criptografados devem ser desbloqueados primeiro, porque a ferramenta não consegue alterar as páginas de um arquivo que ainda está bloqueado.',
       },
       {
         question: 'O Rotacionador de Páginas de PDF envia meu arquivo?',
@@ -2940,7 +2940,7 @@ export const PT_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Posso girar páginas em um PDF digitalizado?',
         answer:
-          'Sim, as páginas digitalizadas giram como as páginas de texto.',
+          'Sim, as páginas digitalizadas giram como as páginas de texto, porque a rotação gira toda a imagem da página sem ler o seu conteúdo.',
       },
       {
         question: 'A rotação corrige um PDF que abre de lado em todos os visualizadores?',
@@ -2965,7 +2965,7 @@ export const PT_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Posso usar o Rotacionador de Páginas de PDF no meu celular?',
         answer:
-          'Sim, ele funciona em navegadores modernos de celular.',
+          'Sim, ele funciona em navegadores modernos de celular, por isso você pode abrir um PDF no celular e girar as páginas por lá.',
       },
       {
         question: 'O PDF girado vai imprimir corretamente?',
@@ -3539,7 +3539,7 @@ export const PT_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Posso usar algarismos romanos para números de página?',
         answer:
-          'Não. A ferramenta numera as páginas só com algarismos arábicos padrão.',
+          'Não. A ferramenta numera as páginas só com algarismos arábicos padrão, por isso formatos como os algarismos romanos não estão disponíveis como estilo de numeração.',
       },
       {
         question: 'Posso adicionar números de página a um PDF digitalizado?',

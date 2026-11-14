@@ -594,8 +594,8 @@ export const PT_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
       description:
         'Gere até 100 identificadores UUID v4 aleatórios ou UUID v7 ordenados por tempo da RFC 9562, com opções de maiúsculas, hífen e chaves, no seu navegador.',
       primaryKeyword: 'gerador de uuid',
-      secondaryKeywords: ['gerador de guid online', 'gerador de uuid v4', 'gerador de uuid v7', 'gerador de uuid em massa'],
-      longTailKeywords: ['gerar uuid v4 e v7 em massa online', 'gerador de uuid v7 ordenado por tempo rfc 9562', 'gerador de uuid sem hífen em maiúsculas', 'gerar 100 uuids de uma vez online grátis'],
+      secondaryKeywords: ['gerador de guid online', 'gerador de uuid v4', 'criador de uuid v7', 'gerar uuid em massa grátis'],
+      longTailKeywords: ['gerar uuid v4 e v7 em massa online', 'uuid v7 ordenado por tempo rfc 9562', 'uuid sem hífen em maiúsculas', 'gerar 100 uuids de uma vez online grátis'],
       schemaApplicationCategory: 'DeveloperApplication',
     },
     intro:
@@ -668,7 +668,7 @@ export const PT_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Esses UUIDs são gerados com Math.random()?',
         answer:
-          'Não. Cada UUID usa aleatoriedade criptograficamente forte da API Web Crypto.',
+          'Não. Cada UUID usa aleatoriedade criptograficamente forte da API Web Crypto, por isso os valores gerados são imprevisíveis e seguros para identificadores únicos.',
       },
       {
         question: 'Como obtenho um ID hexadecimal de 32 caracteres sem traços?',
@@ -1348,7 +1348,7 @@ export const PT_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
     seo: {
       title: 'Entidades HTML: Codifique e Decodifique Online | UtilityFlow',
       description:
-        'Codifique caracteres HTML reservados e símbolos não ASCII em entidades, ou decodifique entidades de volta para texto simples. Grátis, local e instantâneo.',
+        'Este codificador transforma caracteres HTML e símbolos não ASCII em entidades, ou decodifica entidades para texto simples. Grátis, local e instantâneo.',
       primaryKeyword: 'codificador de entidades html',
       secondaryKeywords: ['ferramenta de escape html', 'decodificador de entidades html', 'desfazer escape html', 'codificar caracteres html'],
       longTailKeywords: ['escape tags html para trechos de código online', 'decodificar entidades html nomeadas e numéricas', 'converter caracteres especiais em entidades html', 'escape aspas e e comerciais html online'],
@@ -2482,7 +2482,7 @@ export const PT_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
     seo: {
       title: 'Analisador Cron: Traduza Expressões e Agende | UtilityFlow',
       description:
-        'Analise expressões cron de 5 campos em português simples, inspecione cada campo, teste presets comuns e pré-visualize as próximas 8 execuções — grátis.',
+        'Analise uma expressão cron de 5 campos em português simples, inspecione cada campo, teste presets comuns e pré-visualize as próximas 8 execuções — grátis.',
       primaryKeyword: 'analisador de expressão cron',
       secondaryKeywords: ['alternativa ao crontab guru', 'prévia de agendamento cron', 'construtor de cron', 'testador de expressão cron'],
       longTailKeywords: ['traduzir expressão cron de 5 campos para português simples', 'calcular próximos 8 timestamps de execução cron', 'testar expressões cron de dia da semana e passo online', 'expressão cron todos os dias úteis às 9h exemplo'],
