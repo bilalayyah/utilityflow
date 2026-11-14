@@ -291,7 +291,7 @@ export const DEV_TOOLS_PART_1: ToolDefinition[] = [
       {
         title: 'UTF-8 string encoding',
         input: 'UtilityFlow: UTF-8 ✓',
-        output: 'VXRpbGl0eUh1YjogVVRGLTggeKky',
+        output: 'VXRpbGl0eUZsb3c6IFVURi04IOKckw==',
         explanation: 'Uses TextEncoder UTF-8 byte serialization before Base64 conversion.',
       },
     ],
