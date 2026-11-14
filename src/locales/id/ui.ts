@@ -42,7 +42,7 @@ export const idStrings: UiStrings = {
       'Koleksi utilitas sehari-hari yang cepat dan berbasis browser untuk penulis, insinyur, pemasar, dan analis. Dibangun untuk berjalan secara lokal dengan beban minimal.',
     categories: 'Kategori',
     platformAi: 'Platform & AI',
-    legal: 'Hukum',
+    trustLegal: 'Kepercayaan & Hukum',
     home: 'Beranda',
     allToolsDirectory: 'Direktori Semua Alat',
     aboutUs: 'Tentang Kami',
