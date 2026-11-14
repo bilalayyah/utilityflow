@@ -206,7 +206,7 @@ export const enStrings: UiStrings = {
     availableTools: 'Available Tools',
     categorySuites: 'Category Suites',
     visitHub: 'Visit {name} hub',
-    plannedToolsInclude: 'Planned tools include: {names}',
+    plannedToolsInclude: 'Tools in this category include: {names}',
     noMatch: 'No categories or tools matched your filter.',
     clearFilters: 'Clear filters',
   },
@@ -286,6 +286,19 @@ export const enStrings: UiStrings = {
       'Routine online tasks—counting words, validating JSON, checking character limits, computing loan payments, or compressing an image—often force people onto slow sites packed with intrusive overlays, confusing downloads, or mandatory sign-ups.',
     whyP2:
       'Our goal is straightforward: give every utility a clean, dedicated page that loads quickly, explains clearly how the tool works, and executes directly inside your browser whenever web standards allow.',
+    orgTitle: 'Who Runs UtilityFlow',
+    orgP1:
+      'UtilityFlow is an independent project created and maintained by Bilal, a maker who builds free web tools in his spare time. There is no company behind the site, no investor funding, and no team of employees — every tool, guide, and help page is designed, built, and tested by one person. The project is supported by the advertising shown on the site, which is what keeps all 88 tools free to use without accounts or subscriptions. The footer credit names Shaheen, whose encouragement inspired the project and whose name appears on every page as a reminder of where the idea began.',
+    orgP2:
+      'Because the project is small and independent, decisions stay simple: if a tool is slow, confusing, or wrong, it gets fixed. Feedback sent through the contact page goes directly to the person who can change the code, and suggestions from visitors have already shaped new tools and improvements across the site.',
+    howTitle: 'How Our Tools Are Built and Tested',
+    howP1:
+      'Each utility starts as a single clear job — count words, merge PDFs, format JSON — and is built as a focused page that does that job well. Wherever web standards allow, the work happens entirely inside your browser, so your text and files never need to leave your device. Every tool page explains its steps with a short guide, shows worked examples, and answers the questions people ask most often, so you can judge the result instead of trusting a black box.',
+    howP2:
+      'Before a tool goes live it is run through real inputs in a desktop and a mobile browser, including edge cases such as empty input, very large text, and unusual file types. When something breaks or a calculation looks wrong, the fix is shipped as a site update and the page is re-checked. The three optional AI tools are the only ones that send text to a server, and their pages say so plainly before you use them.',
+    whoTitle: 'Who UtilityFlow Is For',
+    whoP1:
+      'UtilityFlow is built for anyone who needs a quick answer from a tool without installing software or creating an account: students checking an essay word count, writers formatting a draft, developers validating JSON or encoding a URL, marketers checking character limits, and small business owners calculating a loan or a discount. If a task takes less than a minute, the tool for it should take less than a minute too — that is the standard every page on this site is held to.',
     principlesTitle: 'Core Engineering Principles',
     principles: [
       {
@@ -323,6 +336,16 @@ export const enStrings: UiStrings = {
     title: 'Contact Us',
     intro:
       'Send bug reports, tool suggestions, or general inquiries. We read every submission and prioritize fixes that improve tool accuracy and accessibility.',
+    aboutTitle: 'What You Can Write About',
+    aboutP1:
+      'Use this form for anything related to the site. Report a bug and tell us which tool you were using, what you entered, and what you expected to happen — the more detail you include, the faster the problem can be reproduced and fixed. Suggest a new tool and describe the job it should do; ideas that many visitors ask for move to the top of the list. You can also point out a wrong calculation, a confusing instruction, or a translation mistake on any page.',
+    aboutP2:
+      'Privacy and legal questions are welcome too. If a comment you posted needs to be removed, include the tool page and the name you used, and it will be taken down. For anything else — a partnership idea, a press question, or a general comment about the site — the same form works, or you can email directly using the address on this page.',
+    responseTitle: 'What Happens After You Send a Message',
+    responseP1:
+      'Every message is read by the person who builds and maintains UtilityFlow — there is no support desk and no automated reply queue. Bug reports and wrong results are checked first, because a broken tool affects everyone who uses it. Tool suggestions are collected and weighed against how many people would use them and how well they fit the site’s browser-first approach.',
+    responseP2:
+      'You do not need an account to contact us, and we will only use your email address to reply to your message. If you would rather not use the form, the direct email address on this page reaches the same inbox.',
     name: 'Name',
     email: 'Email address',
     topic: 'Topic',
@@ -374,12 +397,14 @@ export const enStrings: UiStrings = {
         paragraphs: [
           'Text, numbers, code snippets, and files entered into our 85 browser-based tools are processed locally within your browser session without leaving your device.',
           'Our three optional Free AI tools (AI Writing Assistant, AI Text Summarizer, and AI Smart Tool Finder) send submitted text through our protected backend to Groq for real-time inference. We do not store or log your prompts, and free daily rate limits use only a UTC-dated SHA-256 hash so raw visitor IP addresses are never stored.',
+          'Comments posted under our tools ask only for a name and the comment text. The name and text you submit are stored on our hosting platform and shown publicly on that tool’s page, together with the date. We do not ask for an email address or an account to comment, and we do not use comment data for advertising. If you would like a comment removed, contact us with the page and the name used and we will delete it.',
         ],
       },
       {
         title: '3. Hosting Logs & Technical Telemetry',
         paragraphs: [
           'UtilityFlow is hosted on Cloudflare Pages. Like standard web hosting providers, our edge network may automatically process standard HTTP request metadata (such as IP address, browser user-agent, requested URL, and timestamp) to deliver pages reliably, mitigate abuse, and maintain security.',
+          'We do not combine hosting logs with any other data to identify individual visitors, and we do not sell or share log data with advertisers. Logs exist only to keep the service running and secure.',
         ],
       },
       {
@@ -393,10 +418,35 @@ export const enStrings: UiStrings = {
         title: '5. External Links',
         paragraphs: [
           'Our documentation or tool pages may link to external websites. We are not responsible for the privacy practices or content of third-party websites.',
+          'External links open in a new tab where possible. Before entering personal information on any linked site, please review that site’s own privacy policy.',
+        ],
+      },
+      {
+        title: '6. Data Retention',
+        paragraphs: [
+          'Information processed in your browser is never sent to us, so there is nothing to retain. Text sent to the optional AI tools is processed for the request and is not stored. Comments are kept until they are deleted, either by us or at your request. Hosting logs and security records are kept only for the limited period our hosting provider needs to operate and protect the service.',
+        ],
+      },
+      {
+        title: '7. Your Rights and Choices',
+        paragraphs: [
+          'You can switch off personalized advertising through Google Ads Settings or the AboutAds.info opt-out page linked in section 4, and you can block or delete cookies in your browser settings at any time. If you posted a comment, you can ask for it to be removed by contacting us. Because our tools run in your browser and we do not keep accounts or profiles, there is no personal data file to download or correct — but any question about your data will be answered if you write to us.',
+        ],
+      },
+      {
+        title: '8. Children’s Privacy',
+        paragraphs: [
+          'UtilityFlow is a general-purpose site and is not directed at children under 13. We do not knowingly collect personal information from children. If you are a parent or guardian and believe a child has posted a comment on the site, contact us and we will remove it.',
+        ],
+      },
+      {
+        title: '9. Changes to This Policy',
+        paragraphs: [
+          'We may update this Privacy Policy when we add tools, change providers, or adjust how the site works. The “Last updated” date at the top of this page shows when it was last revised. Continued use of the site after a change means you accept the updated policy.',
         ],
       },
     ],
-    contactTitle: '6. Contact',
+    contactTitle: '10. Contact',
     contactBefore:
       'If you have questions about this Privacy Policy, please contact us via our',
     contactLink: 'Contact page',
@@ -415,12 +465,14 @@ export const enStrings: UiStrings = {
         title: '2. Permitted Use',
         paragraphs: [
           'You may use UtilityFlow for personal, educational, and commercial productivity tasks. You agree not to automate abusive traffic, attempt to disrupt site delivery, reverse-engineer security protections, or use any utility for unlawful activities.',
+          'You may link to our tools and share their results. You may not present our tools as your own, copy the site’s design or content and republish it as a competing service, or use the site in a way that misleads others about where a result came from.',
         ],
       },
       {
         title: '3. Accuracy & Informational Disclaimer',
         paragraphs: [
           'While we test every utility carefully, all tools, calculations, conversions, and SEO checks are provided on an “as is” and “as available” basis. Outputs should be independently verified before making financial, legal, medical, or production engineering decisions.',
+          'Calculations such as loan payments, tax estimates, and currency conversions are planning aids, not professional advice. Figures can change with rates, rules, and rounding, so confirm important numbers with a qualified professional or an official source before acting on them.',
         ],
       },
       {
@@ -436,6 +488,24 @@ export const enStrings: UiStrings = {
           'To the maximum extent permitted by law, UtilityFlow and its contributors shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of, or inability to use, this platform.',
         ],
       },
+      {
+        title: '6. User Content and Comments',
+        paragraphs: [
+          'You keep full ownership of anything you type into our tools or post as a comment. By posting a comment, you give us permission to display it publicly on the relevant tool page. Do not post anything unlawful, misleading, or harmful to others, and do not post someone else’s personal information. We may remove comments that break these rules or that are reported to us, without notice.',
+        ],
+      },
+      {
+        title: '7. Third-Party Services',
+        paragraphs: [
+          'Some features rely on independent third-party services: the three AI tools send text to Groq for processing, the contact form is delivered by FormSubmit, the site is hosted on Cloudflare, and advertising is served by Google AdSense. Each of these services has its own terms and privacy policy, and your use of them is governed by those documents. UtilityFlow is not responsible for the availability or practices of third-party services.',
+        ],
+      },
+      {
+        title: '8. Service Availability',
+        paragraphs: [
+          'UtilityFlow is a free service and we do not guarantee that every tool will always be available. Tools may be changed, improved, or removed, and the site may be temporarily unavailable for maintenance. We aim to keep the service running smoothly, but we are not liable for interruptions or for any loss caused by downtime.',
+        ],
+      },
     ],
     acceptanceTitle: '1. Acceptance of Terms',
     acceptanceBefore:
@@ -443,7 +513,7 @@ export const enStrings: UiStrings = {
     acceptanceLink: 'Privacy Policy',
     acceptanceAfter:
       '. If you do not agree with any part of these terms, please discontinue using the website.',
-    changesTitle: '6. Changes & Contact',
+    changesTitle: '9. Changes & Contact',
     changesBefore:
       'We may update these Terms of Service as new tools are released. Questions can be directed to our',
     changesLink: 'Contact page',
