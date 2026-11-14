@@ -242,6 +242,17 @@ export const enStrings: UiStrings = {
     moreToolsIn: 'More tools in',
     willAppear: 'will appear here as Batch {batch} is released.',
   },
+  comments: {
+    title: 'Comments',
+    note: 'Share your thoughts — no account needed. Just write your name and post.',
+    namePlaceholder: 'Your name',
+    commentPlaceholder: 'Write a comment…',
+    postButton: 'Post comment',
+    posting: 'Posting…',
+    empty: 'No comments yet — be the first to share your thoughts.',
+    loadError: "Comments couldn't be loaded right now, but you can still post one below.",
+    postError: "Your comment couldn't be posted. Please try again in a moment.",
+  },
   search: {
     placeholder:
       'Search tools or categories (e.g., word counter, JSON, PDF, calculators)...',
