@@ -193,6 +193,7 @@ export const zhStrings: UiStrings = {
           '是的。包括浅色模式与深色模式在内的所有布局、导航控件与交互工作区均采用移动优先设计，触摸目标易于点击，网格布局可自适应屏幕。',
       },
     ],
+    trustLine: '所有工具均免费 • 无需注册 • 直接在浏览器中使用',
   },
   directory: {
     seoTitle: '全部在线实用工具目录 | UtilityFlow',
