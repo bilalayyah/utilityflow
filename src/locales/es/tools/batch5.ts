@@ -2151,7 +2151,7 @@ export const ES_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: '¿Mi imagen comprimida tendrá una marca de agua?',
         answer:
-          'No, las imágenes descargadas nunca incluyen marcas de agua ni branding.',
+          'No, las imágenes descargadas nunca incluyen marcas de agua ni branding, así que el archivo comprimido se ve exactamente igual que tu imagen original, solo que más pequeño.',
       },
       {
         question: '¿Cuál es el mejor formato para comprimir capturas de pantalla?',
@@ -3195,7 +3195,7 @@ export const ES_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
       title: 'Escáner de Códigos QR y Generador de vCard | UtilityFlow',
       description:
         'Escanee y decodifique códigos QR de capturas, fotos o su cámara web en su navegador, o cree un código QR de contacto vCard descargable en PNG y SVG, gratis.',
-      primaryKeyword: 'escaneador de codigos qr',
+      primaryKeyword: 'escáner de códigos qr',
       secondaryKeywords: [
         'lector de imagen de codigo qr en linea',
         'escanear qr de captura de pantalla gratis',

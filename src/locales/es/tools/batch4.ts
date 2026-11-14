@@ -426,7 +426,7 @@ export const ES_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
     seo: {
       title: 'Contador de caracteres para redes sociales | UtilityFlow',
       description:
-        'Revisa límites de caracteres y el pliegue del feed en X, Instagram, LinkedIn, TikTok, Threads, Bluesky y YouTube, con conteo de emojis y enlaces, gratis.',
+        'Revisa el límite de caracteres y el pliegue del feed en X, Instagram, LinkedIn, TikTok, Threads, Bluesky y YouTube, con conteo de emojis y enlaces, gratis.',
       primaryKeyword: 'contador de limite de caracteres para redes sociales',
       secondaryKeywords: [
         'contador de publicaciones de x twitter',
@@ -826,7 +826,7 @@ export const ES_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
     seo: {
       title: 'Formateador de saltos de línea para bios | UtilityFlow',
       description:
-        'Mantén un espaciado limpio entre párrafos en descripciones y bios de Instagram, Threads y TikTok: elimina espacios finales y agrega espaciadores invisibles.',
+        'Mantén un espaciado limpio entre párrafos en tu bio y descripciones de Instagram, Threads y TikTok: elimina espacios finales y agrega espaciadores invisibles.',
       primaryKeyword: 'formateador de saltos de linea para bio',
       secondaryKeywords: [
         'saltos de linea en descripciones de instagram',
@@ -2363,7 +2363,7 @@ export const ES_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: '¿El PDF extraído mantendrá su calidad original?',
         answer:
-          'Sí, no ocurre recompresión ni conversión a imágenes durante la extracción.',
+          'Sí, no ocurre recompresión ni conversión a imágenes durante la extracción, así que cada página extraída conserva la calidad exacta del PDF original.',
       },
       {
         question: '¿Cómo divido un PDF en archivos de una página?',
@@ -2528,12 +2528,12 @@ export const ES_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: '¿Qué formatos de imagen puedo convertir a PDF?',
         answer:
-          'Se admiten JPG, PNG y WebP.',
+          'Se admiten JPG, PNG y WebP, así que puedes convertir fotos, capturas de pantalla e imágenes web en un solo PDF.',
       },
       {
         question: '¿Puedo convertir una sola imagen a PDF?',
         answer:
-          'Sí, una imagen produce un PDF de una página.',
+          'Sí, una imagen produce un PDF de una página, lo que funciona bien para compartir una sola foto o un documento escaneado como archivo.',
       },
       {
         question: '¿Puedo reordenar las imágenes antes de convertirlas a PDF?',
@@ -2583,7 +2583,7 @@ export const ES_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: '¿Puedo mezclar JPG, PNG y WebP en un solo PDF?',
         answer:
-          'Sí, puedes combinar los tres formatos en un solo documento.',
+          'Sí, puedes combinar los tres formatos en un solo documento, y las páginas se mantienen en el orden en que las organizaste.',
       },
       {
         question: '¿Las páginas del PDF estarán en el mismo orden que mis imágenes?',
@@ -2593,7 +2593,7 @@ export const ES_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: '¿Puedo definir un nombre de archivo personalizado para el PDF?',
         answer:
-          'Sí, escribe tu nombre de archivo preferido antes de convertir.',
+          'Sí, escribe tu nombre de archivo preferido antes de convertir, y el PDF descargado usará ese nombre en lugar del nombre predeterminado.',
       },
       {
         question: '¿La herramienta conserva la transparencia de las imágenes?',
@@ -2718,7 +2718,7 @@ export const ES_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: '¿Funciona con PDF protegidos con contraseña?',
         answer:
-          'Los PDF cifrados deben desbloquearse antes de convertirlos localmente.',
+          'Los PDF cifrados deben desbloquearse antes de convertirlos localmente, porque la herramienta no puede leer las páginas de un archivo que sigue bloqueado.',
       },
       {
         question: '¿La herramienta PDF a imágenes es gratis?',
@@ -2923,7 +2923,7 @@ export const ES_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: '¿El Rotador de páginas PDF es gratis?',
         answer:
-          'Sí, es gratis, sin marcas de agua ni límites.',
+          'Sí, es gratis, sin marcas de agua ni límites, y puedes rotar todos los PDF que necesites sin crear una cuenta.',
       },
       {
         question: '¿Puedo rotar todas las páginas de un PDF a la vez?',
@@ -2938,7 +2938,7 @@ export const ES_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: '¿Con qué ángulos puedo rotar las páginas PDF?',
         answer:
-          '90° en sentido horario, 90° en sentido antihorario y 180°.',
+          'Puedes rotar 90° en sentido horario, 90° en sentido antihorario y 180°, así que cualquier página de lado o al revés se corrige con un clic.',
       },
       {
         question: '¿Puedo rotar una página PDF en un ángulo personalizado como 45°?',
@@ -2958,7 +2958,7 @@ export const ES_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: '¿Puedo rotar un PDF protegido con contraseña?',
         answer:
-          'No, los PDF cifrados deben desbloquearse primero.',
+          'No, los PDF cifrados deben desbloquearse primero, porque la herramienta no puede cambiar las páginas de un archivo que sigue bloqueado.',
       },
       {
         question: '¿El Rotador de páginas PDF sube mi archivo?',
@@ -2968,7 +2968,7 @@ export const ES_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: '¿Puedo rotar páginas en un PDF escaneado?',
         answer:
-          'Sí, las páginas escaneadas rotan igual que las páginas de texto.',
+          'Sí, las páginas escaneadas rotan igual que las páginas de texto, porque la rotación gira toda la imagen de la página sin leer su contenido.',
       },
       {
         question: '¿La rotación corregirá un PDF que se abre de lado en todos los visores?',
@@ -2993,7 +2993,7 @@ export const ES_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: '¿Puedo usar el Rotador de páginas PDF en mi teléfono?',
         answer:
-          'Sí, funciona en navegadores móviles modernos.',
+          'Sí, funciona en navegadores móviles modernos, así que puedes abrir un PDF en tu teléfono y rotar sus páginas allí.',
       },
       {
         question: '¿El PDF rotado se imprimirá correctamente?',
@@ -3573,7 +3573,7 @@ export const ES_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: '¿Puedo usar números romanos para los números de página?',
         answer:
-          'No. La herramienta numera las páginas solo con números arábigos estándar.',
+          'No. La herramienta numera las páginas solo con números arábigos estándar, así que formatos como los números romanos no están disponibles como estilo de numeración.',
       },
       {
         question: '¿Puedo agregar números de página a un PDF escaneado?',

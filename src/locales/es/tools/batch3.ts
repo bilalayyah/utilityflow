@@ -29,9 +29,9 @@ export const ES_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
       primaryKeyword: 'calculadora de edad',
       secondaryKeywords: [
         'calculadora de edad cronológica',
-        'calculadora de edad de cumpleaños',
-        'calculadora de edad en días',
-        'calculadora de edad exacta',
+        'cuántos años tengo por fecha de nacimiento',
+        'edad en días semanas y meses',
+        'calcular mi edad exacta hoy',
       ],
       longTailKeywords: [
         'calcular edad exacta en años meses y días en línea',
@@ -423,7 +423,7 @@ export const ES_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
     seo: {
       title: 'Calculadora de Préstamos y EMI – Cuota Mensual | UtilityFlow',
       description:
-        'Calcula las cuotas mensuales iguales (EMI), el costo total de intereses y las tablas completas de amortización de capital e intereses para préstamos en línea.',
+        'Calcula las cuotas mensuales iguales (EMI), el costo total de intereses y las tablas completas de amortización de capital e intereses para un préstamo en línea.',
       primaryKeyword: 'calculadora emi de préstamo',
       secondaryKeywords: [
         'calculadora de pago mensual de préstamo',
@@ -1370,7 +1370,7 @@ export const ES_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: '¿Puedo usar tasas decimales como 7,25% u 8,875%?',
         answer:
-          'Sí. El campo de tasa acepta cualquier porcentaje decimal positivo.',
+          'Sí. El campo de tasa acepta cualquier porcentaje decimal positivo, así que tasas como 7,25 % u 8,875 % calculan el impuesto y el total con exactitud.',
       },
       {
         question: '¿Qué pasa si mi recibo solo muestra el total bruto?',
@@ -2403,7 +2403,7 @@ export const ES_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
     seo: {
       title: 'Calculadora de Duración – Horas y Hojas | UtilityFlow',
       description:
-        'Calcula horas, minutos y segundos transcurridos entre horas del reloj, descuenta descansos sin goce, maneja turnos nocturnos o suma filas de hoja de horas.',
+        'Calcula el tiempo transcurrido en horas, minutos y segundos, descuenta descansos sin goce, maneja turnos nocturnos o suma filas de hoja de horas.',
       primaryKeyword: 'calculadora de duración de tiempo',
       secondaryKeywords: [
         'calculadora de horas de trabajo',

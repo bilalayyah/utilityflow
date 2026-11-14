@@ -624,12 +624,12 @@ export const ES_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
       secondaryKeywords: [
         'generador guid en linea',
         'generador uuid v4',
-        'generador uuid v7',
-        'generador uuid en lote',
+        'creador de uuid v7',
+        'crear uuid en lote gratis',
       ],
       longTailKeywords: [
         'generar uuid v4 y v7 en lote en linea',
-        'generador uuid v7 ordenado por tiempo rfc 9562',
+        'uuid v7 ordenado por tiempo rfc 9562',
         'generador uuid sin guiones en mayusculas',
         'generar 100 uuid a la vez en linea gratis',
       ],
@@ -1808,7 +1808,7 @@ export const ES_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
       title: 'Convertidor de Tiempo Unix a Fecha Online | UtilityFlow',
       description:
         'Convierte marcas de tiempo Unix en segundos o milisegundos a ISO 8601, UTC, RFC 2822 y hora local, o convierte cualquier fecha a tiempo Unix. Gratis y rápido.',
-      primaryKeyword: 'convertidor de marca de tiempo unix',
+      primaryKeyword: 'convertidor de tiempo unix',
       secondaryKeywords: [
         'convertidor epoch',
         'tiempo unix a fecha',

@@ -1914,7 +1914,7 @@ export const ES_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       title: 'Verificador de Legibilidad Flesch-Kincaid | UtilityFlow',
       description:
         'Verifica los puntajes Flesch Reading Ease, Flesch-Kincaid, Gunning Fog y SMOG con nuestro verificador de legibilidad: gratis, privado, en tu navegador.',
-      primaryKeyword: 'verificador de puntaje de legibilidad',
+      primaryKeyword: 'verificador de legibilidad',
       secondaryKeywords: ['calculadora de flesch reading ease', 'verificador de nivel de grado', 'herramienta de nivel de lectura', 'calculadora de índice gunning fog'],
       longTailKeywords: ['verificar nivel de grado flesch kincaid online', 'calcular índice gunning fog y smog de legibilidad', 'mejorar puntaje de legibilidad de artículo en el navegador', 'qué es un buen puntaje flesch reading ease'],
       schemaApplicationCategory: 'UtilitiesApplication',
@@ -2485,7 +2485,7 @@ export const ES_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       description:
         'Escribe Markdown y míralo renderizarse en vivo, inspecciona el código HTML compilado y copia o descarga un documento HTML independiente y limpio, gratis.',
       primaryKeyword: 'visor de markdown',
-      secondaryKeywords: ['convertidor de markdown a html', 'editor de markdown online', 'visor de markdown', 'editor de markdown en vivo'],
+      secondaryKeywords: ['convertidor de markdown a html', 'editor de markdown online', 'vista previa de markdown online', 'editor de markdown en vivo'],
       longTailKeywords: ['visor de markdown en vivo con exportación html', 'convertir readme de markdown a html online', 'editor de markdown en el navegador sin subir archivos', 'vista previa de readme de github antes de confirmar'],
       schemaApplicationCategory: 'UtilitiesApplication',
     },
