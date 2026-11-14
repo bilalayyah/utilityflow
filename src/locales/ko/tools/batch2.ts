@@ -2440,7 +2440,7 @@ export const KO_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'JS 포맷터는 ES6 모듈도 처리하나요?',
         answer:
-          '네. import와 export 구문도 포맷됩니다.',
+          '네. import와 export 구문이 포함된 ES6 모듈도 포맷됩니다. 모듈 문법은 그대로 유지되며 들여쓰기와 줄바꿈만 정리되므로, 포맷한 코드를 바로 프로젝트에 붙여넣어 사용할 수 있습니다.',
       },
       {
         question: '압축된 코드에 소스 맵이 필요한가요?',
