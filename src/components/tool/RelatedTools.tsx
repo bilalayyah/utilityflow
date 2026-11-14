@@ -49,7 +49,7 @@ export function RelatedTools({ tool }: RelatedToolsProps) {
         </div>
       ) : (
         category && (
-          <div className="rounded-xl border border-slate-200 bg-slate-50 p-5 text-sm text-slate-600">
+          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5 text-sm text-slate-600 shadow-sm">
             {t.toolPage.moreToolsIn}{' '}
             <Link
               to={categoryHref(category.id, locale)}

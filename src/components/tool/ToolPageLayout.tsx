@@ -90,8 +90,10 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
         <Breadcrumbs items={breadcrumbItems} className="mb-6" />
 
         <header className="max-w-3xl mb-8">
-          <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500 mb-2">
-            <span>{category ? category.name : 'Utility'}</span>
+          <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500 mb-3">
+            <span className="rounded-full bg-indigo-50 px-2.5 py-0.5 font-semibold text-indigo-700">
+              {category ? category.name : 'Utility'}
+            </span>
             <span aria-hidden="true">·</span>
             <span>
               {tool.id.startsWith('ai-')
@@ -109,7 +111,7 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
           </p>
 
           {tool.requiresExternalApi && tool.apiNotice && (
-            <div className="mt-4 flex items-start gap-2.5 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+            <div className="mt-4 flex items-start gap-2.5 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
               <Info className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" aria-hidden="true" />
               <p>{tool.apiNotice}</p>
             </div>
@@ -119,7 +121,7 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
         {/* Interactive Tool Workbench */}
         <section
           aria-label={`${tool.name} workspace`}
-          className="rounded-xl border border-slate-200 bg-white p-4 sm:p-6 shadow-xs"
+          className="rounded-2xl border border-slate-200/70 bg-white p-4 sm:p-6 shadow-sm"
         >
           {children}
         </section>
@@ -139,7 +141,7 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
                   {tool.instructions.map((step, index) => (
                     <li
                       key={step.title}
-                      className="flex gap-4 rounded-xl border border-slate-200 bg-slate-50/60 p-4"
+                      className="flex gap-4 rounded-2xl border border-indigo-100 bg-indigo-50/70 p-4 shadow-sm"
                     >
                       <span className="font-mono text-sm font-semibold text-indigo-600 tabular-nums shrink-0 mt-0.5">
                         {String(index + 1).padStart(2, '0')}.
@@ -165,17 +167,17 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
                   {tool.examples.map((example) => (
                     <div
                       key={example.title}
-                      className="rounded-xl border border-slate-200 bg-white p-5 space-y-3"
+                      className="rounded-2xl border border-slate-200 bg-white p-5 space-y-3 shadow-sm"
                     >
                       <h3 className="text-base font-semibold text-slate-900">{example.title}</h3>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-mono">
-                        <div className="rounded-lg bg-slate-50 border border-slate-200 p-3">
+                        <div className="rounded-xl bg-slate-50 border border-slate-200 p-3">
                           <div className="font-sans font-semibold text-slate-500 mb-1">{t.toolPage.input}</div>
                           <pre className="whitespace-pre-wrap break-words text-slate-800">
                             {example.input}
                           </pre>
                         </div>
-                        <div className="rounded-lg bg-slate-50 border border-slate-200 p-3">
+                        <div className="rounded-xl bg-slate-50 border border-slate-200 p-3">
                           <div className="font-sans font-semibold text-slate-500 mb-1">{t.toolPage.output}</div>
                           <pre className="whitespace-pre-wrap break-words text-slate-800">
                             {example.output}
@@ -203,7 +205,7 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
 
           <aside className="lg:col-span-4 space-y-8">
             {tool.benefits.length > 0 && (
-              <section className="rounded-xl border border-slate-200 bg-slate-50 p-5">
+              <section className="rounded-2xl border border-indigo-100 bg-indigo-50/70 p-5 shadow-sm">
                 <h2 className="text-lg font-bold text-slate-900 mb-3">{t.toolPage.keyBenefits}</h2>
                 <ul className="space-y-2.5 text-sm text-slate-700">
                   {tool.benefits.map((benefit) => (
@@ -220,7 +222,7 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
             )}
 
             {tool.useCases.length > 0 && (
-              <section className="rounded-xl border border-slate-200 bg-white p-5">
+              <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
                 <h2 className="text-lg font-bold text-slate-900 mb-3">{t.toolPage.commonUseCases}</h2>
                 <ul className="space-y-2 text-sm text-slate-600 list-disc pl-4">
                   {tool.useCases.map((useCase) => (
