@@ -244,6 +244,17 @@ export const deStrings: UiStrings = {
     moreToolsIn: 'Weitere Tools in',
     willAppear: 'erscheinen hier, sobald Batch {batch} veröffentlicht wird.',
   },
+  comments: {
+    title: 'Kommentare',
+    note: 'Teilen Sie Ihre Meinung – kein Konto nötig. Schreiben Sie einfach Ihren Namen und posten Sie.',
+    namePlaceholder: 'Ihr Name',
+    commentPlaceholder: 'Kommentar schreiben…',
+    postButton: 'Kommentar posten',
+    posting: 'Wird gepostet…',
+    empty: 'Noch keine Kommentare – teilen Sie als Erste/r Ihre Meinung.',
+    loadError: 'Kommentare konnten gerade nicht geladen werden, Sie können unten trotzdem einen posten.',
+    postError: 'Ihr Kommentar konnte nicht gepostet werden. Bitte versuchen Sie es gleich erneut.',
+  },
   search: {
     placeholder:
       'Tools oder Kategorien suchen (z. B. Wortzähler, JSON, PDF, Rechner) …',
