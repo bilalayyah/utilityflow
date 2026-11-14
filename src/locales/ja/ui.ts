@@ -51,7 +51,7 @@ export const jaStrings: UiStrings = {
     termsOfService: '利用規約',
     xmlSitemap: 'XMLサイトマップ',
     rightsReserved: '全著作権所有。',
-    deployedNote: 'ブラウザサイドのユーティリティ · Cloudflare Pagesでホスティング',
+    deployedNote: 'Crafted with ❤️ by Bilal, inspired by Shaheen.',
   },
   common: {
     copy: 'コピー',
