@@ -131,7 +131,6 @@ export const itStrings: UiStrings = {
       noMatch: 'Nessuna categoria o strumento corrisponde a "{query}".',
       resetFilters: 'Reimposta i filtri',
       upcomingUtilities: 'Utilità in arrivo: {names}',
-      scheduledInBatch: 'Previsto nella fase {batch}',
       toolsActive: '{count} strumenti attivi',
       openCategory: 'Apri la pagina della categoria',
     },
@@ -164,7 +163,7 @@ export const itStrings: UiStrings = {
     faq: {
       title: 'Domande frequenti',
       description:
-        'I punti essenziali su come funziona UtilityFlow e cosa aspettarsi dalle prossime fasi.',
+        'I punti essenziali su come funziona UtilityFlow e cosa aspettarsi dai nuovi strumenti.',
     },
     faqs: [
       {
@@ -214,16 +213,15 @@ export const itStrings: UiStrings = {
     clearFilters: 'Cancella i filtri',
   },
   category: {
-    batchLabel: 'Fase {batch}',
     plannedCount: '{count} strumenti previsti',
     toolsCount: '{count} strumenti',
     toolsLive: '{count} strumenti attivi',
     ofToolsLive: '{count} di {total} strumenti attivi',
     availableTools: '{name} disponibili',
     exploreOther: 'Esplora le altre categorie',
-    scheduledTitle: 'Previsto per la fase {batch}',
+    scheduledTitle: 'Altri strumenti in arrivo',
     scheduledDescription:
-      'Questo hub di categoria è attivo e indicizzato nell’architettura {name}. Le singole pagine degli strumenti con funzionalità nel browser saranno aggiunte qui durante la fase {batch}.',
+      'Questo hub di categoria è attivo e indicizzato nell’architettura {name}. Le singole pagine degli strumenti con funzionalità nel browser saranno aggiunte qui a breve.',
     plannedToolsTitle: 'Strumenti previsti in questa categoria:',
   },
   toolPage: {
@@ -242,7 +240,7 @@ export const itStrings: UiStrings = {
     relatedDescription: 'Continua il tuo flusso di lavoro con utilità complementari.',
     browseAll: 'Sfoglia tutti gli {name}',
     moreToolsIn: 'Altri strumenti in',
-    willAppear: 'appariranno qui con il rilascio della fase {batch}.',
+    willAppear: 'appariranno qui a breve.',
   },
   comments: {
     title: 'Commenti',
@@ -310,13 +308,13 @@ export const itStrings: UiStrings = {
       {
         title: 'Rilascio modulare',
         description:
-          'Gli strumenti vengono distribuiti e verificati in sette fasi per categoria, così ogni utilità riceve test funzionali approfonditi e una documentazione completa.',
+          'Gli strumenti vengono distribuiti e verificati per categoria, così ogni utilità riceve test funzionali approfonditi e una documentazione completa.',
       },
     ],
     categoriesTitle: 'Sette categorie di strumenti previste',
     feedbackTitle: 'Hai commenti o richieste?',
     feedbackBefore:
-      'Se noti un caso limite di calcolo, un problema di accessibilità, o vuoi suggerire un’utilità per una prossima fase, contattaci tramite la nostra',
+      'Se noti un caso limite di calcolo, un problema di accessibilità, o vuoi suggerire una nuova utilità, contattaci tramite la nostra',
     feedbackLink: 'pagina Contatti',
     feedbackAfter: '.',
   },
@@ -448,7 +446,7 @@ export const itStrings: UiStrings = {
       '. Se non sei d’accordo con una parte di questi termini, ti preghiamo di interrompere l’uso del sito.',
     changesTitle: '6. Modifiche e contatti',
     changesBefore:
-      'Potremmo aggiornare questi Termini di servizio man mano che vengono pubblicate nuove fasi di strumenti. Le domande possono essere rivolte alla nostra',
+      'Potremmo aggiornare questi Termini di servizio man mano che vengono pubblicati nuovi strumenti. Le domande possono essere rivolte alla nostra',
     changesLink: 'pagina Contatti',
     changesAfter: '.',
   },
