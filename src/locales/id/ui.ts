@@ -321,6 +321,8 @@ export const idStrings: UiStrings = {
     topic: 'Topik',
     message: 'Pesan',
     submit: 'Kirim Pesan',
+    sending: 'Mengirim…',
+    sendError: 'Pesan Anda tidak dapat dikirim. Silakan coba lagi.',
     namePlaceholder: 'Alex Rivera',
     emailPlaceholder: 'you@example.com',
     messagePlaceholder: 'Jelaskan alat, bug, atau pertanyaan secara detail...',
@@ -338,17 +340,17 @@ export const idStrings: UiStrings = {
       subject: 'Silakan pilih atau masukkan topik.',
       message: 'Silakan sertakan setidaknya 10 karakter dalam pesan Anda.',
     },
-    successTitle: 'Pesan disiapkan',
+    successTitle: 'Pesan terkirim',
     successThanks:
-      'Terima kasih, {name}. Pesan Anda tentang {subject} telah divalidasi.',
+      'Terima kasih, {name}. Pesan Anda telah terkirim dan kami akan segera menghubungi Anda kembali.',
     successNote:
-      'Karena UtilityFlow berjalan sebagai situs statis tanpa menyimpan kiriman pengguna di server backend, Anda juga dapat mengirim pesan Anda langsung melalui klien email Anda ke',
+      'Jika Anda perlu menambahkan sesuatu, Anda juga dapat menghubungi kami langsung di',
     sendAnother: 'Kirim pesan lain',
     directEmail: 'Email Langsung',
     directEmailText: 'Lebih suka menulis langsung? Kirim email ke tim kami di:',
   },
   privacy: {
-    seoTitle: 'Kebijakan Privasi | UtilityFlow',
+    seoTitle: 'Kebijakan Privasi – Data Anda di UtilityFlow | UtilityFlow',
     seoDescription:
       'Baca Kebijakan Privasi UtilityFlow tentang eksekusi alat sisi browser, cookie, log server, dan pengungkapan iklan pihak ketiga.',
     title: 'Kebijakan Privasi',
@@ -392,9 +394,11 @@ export const idStrings: UiStrings = {
       'Jika Anda memiliki pertanyaan tentang Kebijakan Privasi ini, silakan hubungi kami melalui',
     contactLink: 'Halaman kontak',
     contactMiddle: 'atau email',
+    optOutGoogleAds: 'Google Ads Settings',
+    optOutAboutAds: 'Opt-out AboutAds.info',
   },
   terms: {
-    seoTitle: 'Syarat Layanan | UtilityFlow',
+    seoTitle: 'Syarat Layanan – Ketentuan Alat UtilityFlow | UtilityFlow',
     seoDescription:
       'Tinjau Syarat Layanan yang mengatur penggunaan utilitas browser UtilityFlow, kekayaan intelektual, penafian akurasi, dan batasan tanggung jawab.',
     title: 'Syarat Layanan',
@@ -416,6 +420,7 @@ export const idStrings: UiStrings = {
         title: '4. Kekayaan Intelektual',
         paragraphs: [
           'Antarmuka, aset merek, dokumentasi, dan kode sumber UtilityFlow dilindungi oleh hukum kekayaan intelektual yang berlaku. Anda tetap memiliki kepemilikan penuh atas teks, kode, dokumen, atau gambar apa pun yang Anda proses menggunakan utilitas sisi klien kami.',
+          'UtilityFlow adalah proyek independen dan tidak berafiliasi dengan, didukung oleh, atau terhubung dengan YouTube, Instagram, Google, atau merek pihak ketiga lainnya yang disebutkan di situs ini.',
         ],
       },
       {
