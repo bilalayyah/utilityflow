@@ -170,7 +170,7 @@ export function Footer() {
           <p>
             {t.footer.deployedNote.split(/(Bilal|Shaheen)/g).map((part, index) =>
               part === 'Bilal' || part === 'Shaheen' ? (
-                <span key={index} className="font-script text-base">
+                <span key={index} className="font-script text-base pr-1">
                   {part}
                 </span>
               ) : (
