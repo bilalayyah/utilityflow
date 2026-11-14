@@ -59,6 +59,20 @@ export function HomePage() {
     },
   };
 
+  // Fix #14 (E-E-A-T): Organization schema — who is behind the site.
+  const organizationSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: SITE_CONFIG.name,
+    url: buildCanonicalUrl(homePath),
+    logo: 'https://utilityflow.online/og-image.jpg',
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'customer service',
+      email: SITE_CONFIG.contactEmail,
+    },
+  };
+
   const heroPills: Array<{ id: CategoryId | 'all'; label: string }> = [
     { id: 'all', label: t.home.directory.allCategories },
     ...categories.map((category) => ({ id: category.id as CategoryId, label: category.shortName })),
@@ -71,7 +85,7 @@ export function HomePage() {
         description={t.home.seoDescription}
         canonicalPath={homePath}
         keywords={t.home.seoKeywords}
-        structuredData={[websiteSchema, buildFaqSchema(t.home.faqs)]}
+        structuredData={[websiteSchema, organizationSchema, buildFaqSchema(t.home.faqs)]}
         alternates={toHreflangEntries(getStaticAlternatePaths('/'))}
       />
 

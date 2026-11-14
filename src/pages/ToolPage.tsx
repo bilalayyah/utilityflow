@@ -32,7 +32,17 @@ export function ToolPage() {
     <ToolPageLayout tool={localized}>
       <Suspense
         fallback={
-          <div className={`rounded-2xl ${palette.card} p-12 text-center text-sm text-slate-500 shadow-sm`}>
+          // CLS guard (Audit Fix #11): the lazy tool chunk arrives late on
+          // slow networks, and the loaded workspace (700–1,300px on mobile)
+          // is far taller than this fallback (~120px). Without reserved
+          // space the whole guide section below jumps down (measured CLS
+          // 0.291 on /word-counter/ mobile, Slow 4G). The min-height
+          // reserves typical workspace space so the swap barely moves
+          // anything; the text is vertically centred in the reserved box.
+          // Desktop workspaces are shorter, so the reserve is smaller there.
+          <div
+            className={`rounded-2xl ${palette.card} p-12 text-center text-sm text-slate-500 shadow-sm min-h-[680px] lg:min-h-[480px] flex items-center justify-center`}
+          >
             {formatString(t.toolPage.loadingWorkspace, { name: localized.name })}
           </div>
         }

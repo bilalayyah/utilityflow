@@ -266,6 +266,20 @@ export function ContactPage() {
             </div>
           </aside>
         </div>
+
+        <div className="mt-12 space-y-10 text-base leading-relaxed text-slate-700">
+          <section>
+            <h2 className="text-xl font-bold text-slate-900 mb-3">{t.contact.aboutTitle}</h2>
+            <p>{t.contact.aboutP1}</p>
+            <p className="mt-3">{t.contact.aboutP2}</p>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-bold text-slate-900 mb-3">{t.contact.responseTitle}</h2>
+            <p>{t.contact.responseP1}</p>
+            <p className="mt-3">{t.contact.responseP2}</p>
+          </section>
+        </div>
       </div>
     </>
   );

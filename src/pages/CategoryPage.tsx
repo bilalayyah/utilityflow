@@ -7,6 +7,7 @@ import { SeoHead } from '../components/seo/SeoHead';
 import { ToolCard } from '../components/tool/ToolCard';
 import { PASTEL_PALETTES, pastelForKey } from '../components/tool/pastel';
 import { buildCanonicalUrl } from '../config/site';
+import { getOgImageForPage } from '../config/ogImages';
 import { useLocale } from '../locales/LocaleContext';
 import { categoryHref, localizeStaticPath } from '../locales/config';
 import { getCategoryAlternatePaths, toHreflangEntries } from '../locales/routes';
@@ -61,6 +62,7 @@ export function CategoryPage() {
         description={category.seo.description}
         canonicalPath={canonicalPath}
         keywords={category.seo.keywords}
+        ogImage={getOgImageForPage('category', category.id)}
         structuredData={[collectionSchema, buildBreadcrumbSchema(breadcrumbs)]}
         alternates={toHreflangEntries(getCategoryAlternatePaths(category.id))}
       />

@@ -102,9 +102,9 @@ export function AdminCommentsPage() {
   return (
     <>
       <SeoHead
-        title="Comments admin — UtilityFlow"
-        description="Moderate comments across UtilityFlow tool pages."
-        canonicalPath="/admin/comments"
+        title="Comments Admin – Moderate UtilityFlow Comments"
+        description="Review the newest comments across all UtilityFlow tool pages and delete spam. Admin-only page, not linked or indexed."
+        canonicalPath="/admin/comments/"
         noIndex
       />
       <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 sm:py-10">

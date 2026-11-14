@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { Breadcrumbs, buildBreadcrumbSchema } from '../components/common/Breadcrumbs';
 import { SeoHead } from '../components/seo/SeoHead';
 import { PASTEL_PALETTES, pastelForKey } from '../components/tool/pastel';
-import { SITE_CONFIG } from '../config/site';
+import { SITE_CONFIG, buildCanonicalUrl } from '../config/site';
 import { useLocale } from '../locales/LocaleContext';
 import { categoryHref, localizeStaticPath } from '../locales/config';
 import { getStaticAlternatePaths, toHreflangEntries } from '../locales/routes';
@@ -20,13 +20,27 @@ export function AboutPage() {
     { label: t.nav.about },
   ];
 
+  // Fix #14 (E-E-A-T): Organization schema — who is behind the site.
+  const organizationSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: SITE_CONFIG.name,
+    url: buildCanonicalUrl(localizeStaticPath('/', locale)),
+    logo: 'https://utilityflow.online/og-image.jpg',
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'customer service',
+      email: SITE_CONFIG.contactEmail,
+    },
+  };
+
   return (
     <>
       <SeoHead
         title={t.about.seoTitle}
         description={t.about.seoDescription}
         canonicalPath={localizeStaticPath('/about/', locale)}
-        structuredData={buildBreadcrumbSchema(breadcrumbs)}
+        structuredData={[buildBreadcrumbSchema(breadcrumbs), organizationSchema]}
         alternates={toHreflangEntries(getStaticAlternatePaths('/about/'))}
       />
 
@@ -47,6 +61,23 @@ export function AboutPage() {
             <h2 className="text-xl font-bold text-slate-900 mb-3">{t.about.whyTitle}</h2>
             <p>{t.about.whyP1}</p>
             <p className="mt-3">{t.about.whyP2}</p>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-bold text-slate-900 mb-3">{t.about.orgTitle}</h2>
+            <p>{t.about.orgP1}</p>
+            <p className="mt-3">{t.about.orgP2}</p>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-bold text-slate-900 mb-3">{t.about.howTitle}</h2>
+            <p>{t.about.howP1}</p>
+            <p className="mt-3">{t.about.howP2}</p>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-bold text-slate-900 mb-3">{t.about.whoTitle}</h2>
+            <p>{t.about.whoP1}</p>
           </section>
 
           <section>
