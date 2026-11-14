@@ -216,7 +216,7 @@ export const IT_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
       'convertitore base64',
     ],
     seo: {
-      title: 'Codificatore Base64: UTF-8 e URL sicuri | UtilityFlow',
+      title: 'Codificatore e Decodificatore Base64 | UtilityFlow',
       description:
         'Codifica testo UTF-8 in Base64 o decodifica Base64 in testo leggibile, con opzioni sicure per gli URL, localmente senza invio, gratis nel tuo browser.',
       primaryKeyword: 'codificatore decodificatore base64',
@@ -600,8 +600,8 @@ export const IT_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
       description:
         'Genera fino a 100 identificativi UUID v4 casuali o UUID v7 ordinati per tempo (RFC 9562), con maiuscole e parentesi graffe opzionali, nel tuo browser.',
       primaryKeyword: 'generatore uuid',
-      secondaryKeywords: ['generatore guid online', 'generatore uuid v4', 'generatore uuid v7', 'generatore uuid in massa'],
-      longTailKeywords: ['generare uuid v4 e v7 in massa online', 'generatore uuid v7 ordinato per tempo rfc 9562', 'generatore uuid senza trattini in maiuscolo', 'generare 100 uuid in una volta online gratis'],
+      secondaryKeywords: ['generatore guid online', 'generatore uuid v4', 'uuid v7 ordinati per tempo', 'crea uuid in blocco online'],
+      longTailKeywords: ['generare uuid v4 e v7 in massa online', 'uuid v7 ordinati per tempo secondo rfc 9562', 'uuid senza trattini in maiuscolo', 'generare 100 uuid in una volta online gratis'],
       schemaApplicationCategory: 'DeveloperApplication',
     },
     intro:
@@ -675,7 +675,7 @@ export const IT_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Questi UUID vengono generati con Math.random()?',
         answer:
-          'No. Ogni UUID usa casualità crittograficamente forte proveniente dall’API Web Crypto.',
+          'No. Ogni UUID usa casualità crittograficamente forte proveniente dall’API Web Crypto, quindi i valori generati sono imprevedibili e sicuri per identificatori univoci.',
       },
       {
         question: 'Come ottengo un identificativo esadecimale di 32 caratteri senza trattini?',

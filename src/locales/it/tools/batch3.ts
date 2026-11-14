@@ -1380,7 +1380,7 @@ export const IT_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Posso usare aliquote decimali come 7,25 % o 8,875 %?',
         answer:
-          'Sì. Il campo del tasso accetta qualsiasi percentuale decimale positiva.',
+          'Sì. Il campo del tasso accetta qualsiasi percentuale decimale positiva, quindi aliquote come 7,25 % o 8,875 % calcolano l’imposta e il totale con esattezza.',
       },
       {
         question: 'Che cosa fare se la mia ricevuta indica solo il totale lordo?',

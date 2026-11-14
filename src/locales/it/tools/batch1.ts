@@ -598,10 +598,10 @@ export const IT_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
     seo: {
       title: 'Rimuovi le Righe Duplicate: deduplica | UtilityFlow',
       description:
-        'Rimuovi le righe ripetute da elenchi, email, URL o log all’istante, con rimozione degli spazi e ordinamento opzionale, gratis online senza registrazione.',
+        'Rimuovere le righe ripetute da elenchi, email, URL o log all’istante, con rimozione degli spazi e ordinamento opzionale, gratis online senza registrazione.',
       primaryKeyword: 'rimuovere le righe duplicate',
-      secondaryKeywords: ['rimuovere le righe duplicate', 'deduplicare un elenco di testo', 'strumento righe uniche', 'rimuovere le voci duplicate'],
-      longTailKeywords: ['rimuovere le righe duplicate mantenendo l’ordine originale', 'deduplicare un elenco di email ignorando le maiuscole', 'pulire le righe ripetute di un testo online', 'rimuovere i duplicati da un elenco di email online gratis'],
+      secondaryKeywords: ['deduplica righe di testo online', 'deduplicare un elenco di testo', 'strumento righe uniche', 'rimuovere le voci duplicate'],
+      longTailKeywords: ['deduplicare un elenco mantenendo l’ordine originale', 'deduplicare un elenco di email ignorando le maiuscole', 'pulire le righe ripetute di un testo online', 'rimuovere i duplicati da un elenco di email online gratis'],
       schemaApplicationCategory: 'UtilitiesApplication',
     },
     intro:
@@ -1166,7 +1166,7 @@ export const IT_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       'invertire l’ordine delle righe',
     ],
     seo: {
-      title: 'Ordina le Righe: ordine A-Z e naturale | UtilityFlow',
+      title: 'Ordinare Righe Alfabeticamente: A-Z e Naturale | UtilityFlow',
       description:
         'Ordina le righe dalla A alla Z, dalla Z alla A, in ordine numerico naturale, per lunghezza, al contrario o mescolate — con deduplicazione opzionale nel browser.',
       primaryKeyword: 'ordinare le righe alfabeticamente',
@@ -1440,7 +1440,7 @@ export const IT_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Lasciare «Sostituisci con» vuoto elimina il testo trovato?',
         answer:
-          'Sì. Lasciare vuoto il campo Sostituisci rimuove correttamente ogni occorrenza trovata.',
+          'Sì. Lasciare vuoto il campo Sostituisci rimuove correttamente ogni occorrenza trovata, quindi controlla prima l’anteprima per evitare di eliminare testo che ti serve ancora.',
       },
       {
         question: 'Lo strumento Trova e Sostituisci è gratis?',
@@ -1740,7 +1740,7 @@ export const IT_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       description:
         'Genera testo fittizio Lorem Ipsum per paragrafi, frasi o numero esatto di parole, con tag HTML opzionali — senza registrazione, gratis nel tuo browser.',
       primaryKeyword: 'generatore di lorem ipsum',
-      secondaryKeywords: ['testo fittizio', 'generatore di testo fittizio', 'paragrafi lorem ipsum', 'generatore di testo fittizio'],
+      secondaryKeywords: ['testo fittizio', 'generatore di testo fittizio', 'paragrafi lorem ipsum', 'creatore di paragrafi fittizi'],
       longTailKeywords: ['generare lorem ipsum per numero di parole', 'generatore di lorem ipsum con tag html p', 'testo fittizio pulito per mockup di interfaccia', 'generatore di lorem ipsum per mockup di sito web'],
       schemaApplicationCategory: 'UtilitiesApplication',
     },
@@ -1928,7 +1928,7 @@ export const IT_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
     seo: {
       title: 'Verifica Leggibilità: punteggi Flesch | UtilityFlow',
       description:
-        'Verifica i punteggi Flesch Reading Ease, Flesch-Kincaid, Gunning Fog e SMOG con la nostra verifica di leggibilità — gratis e privata, nel tuo browser.',
+        'Verifica il punteggio Flesch Reading Ease, Flesch-Kincaid, Gunning Fog e SMOG con la nostra verifica di leggibilità — gratis e privata, nel tuo browser.',
       primaryKeyword: 'verifica punteggio di leggibilità',
       secondaryKeywords: ['calcolatore flesch reading ease', 'verifica livello scolastico', 'strumento livello di lettura', 'calcolatore indice gunning fog'],
       longTailKeywords: ['verificare il livello flesch-kincaid online', 'calcolare gli indici di leggibilità gunning fog e smog', 'migliorare il punteggio di leggibilità di un articolo nel browser', 'qual è un buon punteggio flesch reading ease'],
@@ -2688,7 +2688,7 @@ export const IT_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
     seo: {
       title: 'Aggiungi Prefisso e Suffisso alle Righe | UtilityFlow',
       description:
-        'Aggiungi numeri di riga, prefissi e suffissi personalizzati a ogni riga di testo per elenchi, SQL e codice — gratis e senza registrazione, nel tuo browser.',
+        'Aggiungere numeri di riga, prefissi e suffissi personalizzati a ogni riga di testo per elenchi, SQL e codice — gratis e senza registrazione, nel tuo browser.',
       primaryKeyword: 'aggiungere prefisso e suffisso alle righe',
       secondaryKeywords: ['aggiungere numeri di riga online', 'strumento prefisso suffisso riga', 'racchiudere le righe tra virgolette', 'formattatore di righe in massa'],
       longTailKeywords: ['racchiudere ogni riga tra virgolette singole e virgola per sql', 'aggiungere un prefisso di elenco numerato alle righe di testo', 'aggiungere testo prima e dopo ogni riga in massa', 'aggiungere numeri di riga a partire da zero'],

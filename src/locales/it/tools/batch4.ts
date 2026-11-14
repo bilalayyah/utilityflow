@@ -2363,7 +2363,7 @@ export const IT_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Il PDF estratto conserverà la sua qualità originale?',
         answer:
-          'Sì, nessuna ricompressione né conversione in immagine avviene durante l’estrazione.',
+          'Sì, nessuna ricompressione né conversione in immagine avviene durante l’estrazione, quindi ogni pagina estratta conserva la qualità esatta del PDF originale.',
       },
       {
         question: 'Come esplodere un PDF in file di una sola pagina?',
@@ -2528,12 +2528,12 @@ export const IT_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Quali formati di immagine posso convertire in PDF?',
         answer:
-          'JPG, PNG e WebP sono supportati.',
+          'JPG, PNG e WebP sono supportati, quindi puoi convertire foto, screenshot e immagini web in un unico PDF.',
       },
       {
         question: 'Posso convertire una sola immagine in PDF?',
         answer:
-          'Sì, un’immagine produce un PDF di una pagina.',
+          'Sì, un’immagine produce un PDF di una pagina, il che è utile per condividere una sola foto o un documento scansionato come file.',
       },
       {
         question: 'Posso riordinare le immagini prima di convertirle in PDF?',
@@ -2583,17 +2583,17 @@ export const IT_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Posso mescolare JPG, PNG e WebP in un unico PDF?',
         answer:
-          'Sì, puoi combinare i tre formati in un unico documento.',
+          'Sì, puoi combinare i tre formati in un unico documento, e le pagine restano nell’ordine in cui le hai disposte.',
       },
       {
         question: 'Le pagine del PDF saranno nello stesso ordine delle mie immagini?',
         answer:
-          'Sì, le pagine seguono l’ordine mostrato nella lista delle immagini.',
+          'Sì, le pagine seguono l’ordine mostrato nella lista delle immagini, quindi riordina prima le immagini se vuoi una sequenza di pagine diversa.',
       },
       {
         question: 'Posso definire un nome di file personalizzato per il PDF?',
         answer:
-          'Sì, inserisci il nome di file che preferisci prima di convertire.',
+          'Sì, inserisci il nome di file che preferisci prima di convertire, e il PDF scaricato userà quel nome al posto di quello predefinito.',
       },
       {
         question: 'Lo strumento conserva la trasparenza delle immagini?',
@@ -2718,7 +2718,7 @@ export const IT_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Funziona sui PDF protetti da password?',
         answer:
-          'I PDF cifrati devono essere sbloccati prima del rendering locale.',
+          'I PDF cifrati devono essere sbloccati prima del rendering locale, perché lo strumento non può leggere le pagine di un file ancora bloccato.',
       },
       {
         question: 'Lo strumento PDF in Immagini è gratuito?',
@@ -2923,7 +2923,7 @@ export const IT_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'La rotazione di pagine PDF è gratuita?',
         answer:
-          'Sì, è gratuita, senza filigrana né limiti.',
+          'Sì, è gratuita, senza filigrana né limiti, e puoi ruotare tutti i PDF che ti servono senza creare un account.',
       },
       {
         question: 'Posso ruotare tutte le pagine di un PDF contemporaneamente?',
@@ -2938,7 +2938,7 @@ export const IT_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Con quali angoli posso ruotare le pagine PDF?',
         answer:
-          '90° in senso orario, 90° in senso antiorario e 180°.',
+          'Puoi ruotare di 90° in senso orario, 90° in senso antiorario e 180°, così qualsiasi pagina laterale o capovolta si corregge con un clic.',
       },
       {
         question: 'Posso ruotare una pagina PDF di un angolo personalizzato come 45°?',
@@ -2958,7 +2958,7 @@ export const IT_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Posso ruotare un PDF protetto da password?',
         answer:
-          'No, i PDF cifrati devono prima essere sbloccati.',
+          'No, i PDF cifrati devono prima essere sbloccati, perché lo strumento non può modificare le pagine di un file ancora bloccato.',
       },
       {
         question: 'La rotazione di pagine PDF invia il mio file?',
@@ -2968,7 +2968,7 @@ export const IT_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Posso ruotare pagine in un PDF scansionato?',
         answer:
-          'Sì, le pagine scansionate ruotano come le pagine di testo.',
+          'Sì, le pagine scansionate ruotano come le pagine di testo, perché la rotazione ruota l’intera immagine della pagina senza leggerne il contenuto.',
       },
       {
         question: 'La rotazione correggerà un PDF che si apre storto in ogni lettore?',
@@ -2993,7 +2993,7 @@ export const IT_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Posso usare la rotazione di pagine PDF sul mio telefono?',
         answer:
-          'Sì, funziona nei browser mobili moderni.',
+          'Sì, funziona nei browser mobili moderni, quindi puoi aprire un PDF sul telefono e ruotarne le pagine direttamente lì.',
       },
       {
         question: 'Il PDF ruotato si stamperà correttamente?',
@@ -3226,11 +3226,11 @@ export const IT_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
     seo: {
       title: 'Filigrana PDF – Aggiungi Timbri Gratis | UtilityFlow',
       description:
-        'Aggiungi una filigrana PDF ai tuoi documenti nel tuo browser: testo diagonale o centrato, dimensione, opacità, angolo e colore, senza invio — gratis e privato.',
+        'Aggiungi una filigrana ai tuoi PDF nel tuo browser: testo diagonale o centrato, dimensione, opacità, angolo e colore, senza invio — gratis e privato.',
       primaryKeyword: 'filigrana pdf',
       secondaryKeywords: [
         'aggiungi timbro riservato a pdf',
-        'filigrana pdf nel browser',
+        'timbro pdf nel browser',
         'strumento di sovrapposizione bozza pdf',
         'filigrana pdf online gratis',
       ],
@@ -3573,7 +3573,7 @@ export const IT_BATCH_4_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Posso usare cifre romane per i numeri di pagina?',
         answer:
-          'No. Lo strumento numera le pagine solo con cifre arabe standard.',
+          'No. Lo strumento numera le pagine solo con cifre arabe standard, quindi formati come le cifre romane non sono disponibili come stile di numerazione.',
       },
       {
         question: 'Posso aggiungere numeri di pagina a un PDF scansionato?',

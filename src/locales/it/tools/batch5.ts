@@ -362,7 +362,7 @@ export const IT_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'L’Anteprima Snippet SERP carica il mio titolo o URL da qualche parte?',
         answer:
-          'No. Tutte le anteprime e le misurazioni avvengono localmente nel browser.',
+          'No. Tutte le anteprime e le misurazioni avvengono localmente nel browser, quindi il tuo titolo, la tua descrizione e il tuo URL non lasciano mai il tuo dispositivo.',
       },
       {
         question: 'Come copio titolo e meta description dopo l’anteprima?',
@@ -937,7 +937,7 @@ export const IT_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Come aggiungo il JSON-LD generato al mio sito web?',
         answer:
-          'Copia il blocco completo <script type="application/ld+json"> e incollalo nel <head> della pagina corrispondente.',
+          'Copia il blocco completo <script type="application/ld+json"> e incollalo nel <head> della pagina corrispondente, salvando il file prima di testare il risultato nel validatore di Google.',
       },
       {
         question: 'Come testo il mio markup schema dopo averlo generato?',
@@ -2172,7 +2172,7 @@ export const IT_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'La mia immagine compressa avrà un watermark?',
         answer:
-          'No, le immagini scaricate non includono mai watermark o branding.',
+          'No, le immagini scaricate non includono mai watermark o branding, quindi il file compresso sembra esattamente come la tua immagine originale, solo più piccolo.',
       },
       {
         question: 'Qual è il formato migliore per comprimere le schermate?',
@@ -2625,7 +2625,7 @@ export const IT_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
     seo: {
       title: 'Ruota Immagini Online – Specchia e Filtra Foto | UtilityFlow',
       description:
-        'Ruota immagini online di 90, 180 o 270 gradi, specchia foto in orizzontale o verticale e regola luminosità, contrasto e scala di grigi — gratis nel browser.',
+        'Ruota un’immagine online di 90, 180 o 270 gradi, specchia foto in orizzontale o verticale e regola luminosità, contrasto e scala di grigi — gratis nel browser.',
       primaryKeyword: 'ruota immagine online',
       secondaryKeywords: [
         'specchia immagine orizzontale verticale',
@@ -2722,7 +2722,7 @@ export const IT_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         question: 'Lo strumento di rotazione immagini è gratuito?',
         answer:
-          'Sì, è completamente gratuito senza registrazione, senza watermark e senza limiti.',
+          'Sì, è completamente gratuito senza registrazione, senza watermark e senza limiti, e puoi ruotare o capovolgere tutte le immagini che vuoi senza creare un account.',
       },
       {
         question: 'Come ruoto un’immagine di 90 gradi?',
