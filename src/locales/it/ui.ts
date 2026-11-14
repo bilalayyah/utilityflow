@@ -321,6 +321,8 @@ export const itStrings: UiStrings = {
     topic: 'Argomento',
     message: 'Messaggio',
     submit: 'Invia messaggio',
+    sending: 'Invio in corso…',
+    sendError: 'Non è stato possibile inviare il messaggio. Riprova.',
     namePlaceholder: 'Alex Rivera',
     emailPlaceholder: 'you@example.com',
     messagePlaceholder: 'Descrivi lo strumento, il bug o la domanda in dettaglio...',
@@ -338,11 +340,11 @@ export const itStrings: UiStrings = {
       subject: 'Scegli o inserisci un argomento.',
       message: 'Includi almeno 10 caratteri nel tuo messaggio.',
     },
-    successTitle: 'Messaggio preparato',
+    successTitle: 'Messaggio inviato',
     successThanks:
-      'Grazie, {name}. Il tuo messaggio riguardante {subject} è stato convalidato.',
+      'Grazie, {name}. Il tuo messaggio è stato inviato e ti risponderemo presto.',
     successNote:
-      'Poiché UtilityFlow funziona come sito statico senza memorizzare i messaggi degli utenti su un server backend, puoi anche inviare il tuo messaggio direttamente tramite il tuo client email a',
+      'Se hai bisogno di aggiungere altro, puoi anche contattarci direttamente a',
     sendAnother: 'Invia un altro messaggio',
     directEmail: 'Email diretta',
     directEmailText: 'Preferisci scrivere direttamente? Scrivi al nostro team a:',
@@ -392,6 +394,8 @@ export const itStrings: UiStrings = {
       'Se hai domande su questa Informativa sulla privacy, contattaci tramite la nostra',
     contactLink: 'pagina Contatti',
     contactMiddle: 'o via email',
+    optOutGoogleAds: 'Google Ads Settings',
+    optOutAboutAds: 'Rinuncia su AboutAds.info',
   },
   terms: {
     seoTitle: 'Termini di servizio | Strumenti online UtilityFlow',
@@ -421,7 +425,7 @@ export const itStrings: UiStrings = {
       {
         title: '5. Limitazione di responsabilità',
         paragraphs: [
-          'Nella misura massima consentita dalla legge, UtilityFlow e i suoi collaboratori non saranno responsabili di alcun danno indiretto, incidentale, speciale o consequenziale derivante dall’uso o dall’impossibilità di usare questa piattaforma.',
+          'Nella misura massima consentita dalla legge, UtilityFlow e i suoi collaboratori non saranno responsabili di alcun danno indiretto, incidentale, speciale o consequenziale derivante dall’uso o dall’impossibilità di usare questa piattaforma. UtilityFlow è un progetto indipendente e non è affiliato, approvato o collegato a YouTube, Instagram, Google o a qualsiasi altro marchio di terze parti menzionato su questo sito.',
         ],
       },
     ],
