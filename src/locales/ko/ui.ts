@@ -244,6 +244,17 @@ export const koStrings: UiStrings = {
     moreToolsIn: '다음 카테고리의 도구 더 보기',
     willAppear: '배치 {batch}가 출시되면 여기에 표시됩니다.',
   },
+  comments: {
+    title: '댓글',
+    note: '의견을 공유하세요. 계정이 필요 없습니다. 이름만 쓰고 게시하면 됩니다.',
+    namePlaceholder: '이름',
+    commentPlaceholder: '댓글 쓰기…',
+    postButton: '댓글 게시',
+    posting: '게시 중…',
+    empty: '아직 댓글이 없습니다. 가장 먼저 의견을 공유해 보세요.',
+    loadError: '댓글을 불러올 수 없지만 아래에서 댓글을 작성할 수 있습니다.',
+    postError: '댓글을 게시할 수 없습니다. 잠시 후 다시 시도해 주세요.',
+  },
   search: {
     placeholder:
       '도구나 카테고리 검색(예: 단어 카운터, JSON, PDF, 계산기)...',
