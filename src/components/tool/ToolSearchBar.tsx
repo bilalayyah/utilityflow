@@ -161,7 +161,6 @@ export function ToolSearchBar({
                     <div>
                       <div className="font-medium text-slate-900">{cat.name}</div>
                       <div className="text-xs text-slate-500">
-                        {formatString(t.category.batchLabel, { batch: cat.batch })} ·{' '}
                         {formatString(t.category.plannedCount, { count: cat.plannedToolCount })}
                       </div>
                     </div>

@@ -59,7 +59,7 @@ export function RelatedTools({ tool }: RelatedToolsProps) {
             >
               {category.name}
             </Link>{' '}
-            {formatString(t.toolPage.willAppear, { batch: category.batch })}
+            {t.toolPage.willAppear}
           </div>
         )
       )}
