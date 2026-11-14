@@ -10,6 +10,7 @@ import type { BreadcrumbItem, ToolDefinition, ToolStep } from '../../types/tool'
 import { AdSlot } from '../common/AdSlot';
 import { Breadcrumbs, buildBreadcrumbSchema } from '../common/Breadcrumbs';
 import { FAQAccordion, buildFaqSchema } from '../common/FAQAccordion';
+import { CommentsSection } from '../comments/CommentsSection';
 import { SeoHead } from '../seo/SeoHead';
 import { PASTEL_PALETTES, pastelForKey } from './pastel';
 import { RelatedTools } from './RelatedTools';
@@ -255,6 +256,11 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
 
         <div className="mt-12">
           <RelatedTools tool={tool} />
+        </div>
+
+        {/* Anonymous comments — one thread per tool page, all languages */}
+        <div className="mt-12">
+          <CommentsSection />
         </div>
       </article>
     </>
