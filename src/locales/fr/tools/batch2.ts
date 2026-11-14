@@ -262,7 +262,7 @@ export const FR_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
       {
         title: 'Encodage d’une chaîne UTF-8',
         input: 'UtilityFlow: UTF-8 ✓',
-        output: 'VXRpbGl0eUh1YjogVVRGLTggeKky',
+        output: 'VXRpbGl0eUZsb3c6IFVURi04IOKckw==',
         explanation:
           'Utilise la sérialisation d’octets UTF-8 de TextEncoder avant la conversion Base64.',
       },
