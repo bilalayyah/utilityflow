@@ -42,7 +42,7 @@ export const frStrings: UiStrings = {
       'Une collection rapide d’utilitaires du quotidien, exécutés dans le navigateur, pour les rédacteurs, les ingénieurs, les spécialistes du marketing et les analystes. Conçue pour fonctionner localement, avec un minimum de ressources.',
     categories: 'Catégories',
     platformAi: 'Plateforme et IA',
-    legal: 'Mentions légales',
+    trustLegal: 'Confiance & Légal',
     home: 'Accueil',
     allToolsDirectory: 'Annuaire de tous les outils',
     aboutUs: 'À propos de nous',
