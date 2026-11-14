@@ -51,7 +51,7 @@ export const koStrings: UiStrings = {
     termsOfService: '이용약관',
     xmlSitemap: 'XML 사이트맵',
     rightsReserved: '모든 권리 보유.',
-    deployedNote: 'Crafted with ❤️ by Bilal, inspired by Shaheen.',
+    deployedNote: 'Crafted with ❤️ by Bilal inspired by Shaheen',
   },
   common: {
     copy: '복사',
