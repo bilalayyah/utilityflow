@@ -53,7 +53,6 @@ const SAMPLE_HTML = `<!doctype html>
   <main>
     <h1>On-Page SEO Audit Checklist</h1>
     <h2>Core Metadata Verification</h2>
-    <img src="/diagram.png" alt="On-page HTML DOM structure diagram" />
     <h2>Internal &amp; Outbound Links</h2>
     <p>Visit our <a href="/tools/">tools directory</a> or <a href="https://developers.google.com/search" rel="noopener">Search Central docs</a>.</p>
   </main>
