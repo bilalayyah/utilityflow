@@ -130,7 +130,6 @@ export const esStrings: UiStrings = {
       noMatch: 'Ninguna categoría o herramienta coincide con "{query}".',
       resetFilters: 'Restablecer filtros',
       upcomingUtilities: 'Próximas utilidades: {names}',
-      scheduledInBatch: 'Programada en el lote {batch}',
       toolsActive: '{count} herramientas activas',
       openCategory: 'Abrir página de categoría',
     },
@@ -163,7 +162,7 @@ export const esStrings: UiStrings = {
     faq: {
       title: 'Preguntas frecuentes',
       description:
-        'Detalles clave sobre cómo funciona UtilityFlow y qué esperar de los próximos lotes.',
+        'Detalles clave sobre cómo funciona UtilityFlow y qué esperar de las nuevas herramientas.',
     },
     faqs: [
       {
@@ -217,16 +216,15 @@ export const esStrings: UiStrings = {
     clearFilters: 'Limpiar filtros',
   },
   category: {
-    batchLabel: 'Lote {batch}',
     plannedCount: '{count} herramientas planificadas',
     toolsCount: '{count} herramientas',
     toolsLive: '{count} herramientas en vivo',
     ofToolsLive: '{count} de {total} herramientas en vivo',
     availableTools: '{name} disponibles',
     exploreOther: 'Explorar otras categorías',
-    scheduledTitle: 'Programado para la implementación del lote {batch}',
+    scheduledTitle: 'Más herramientas próximamente',
     scheduledDescription:
-      'Este centro de categoría está activo e indexado en la arquitectura de {name}. Las páginas individuales de herramientas con funcionalidad del navegador se agregarán aquí durante el lote {batch}.',
+      'Este centro de categoría está activo e indexado en la arquitectura de {name}. Las páginas individuales de herramientas con funcionalidad del navegador se agregarán aquí próximamente.',
     plannedToolsTitle: 'Herramientas planificadas en esta categoría:',
   },
   toolPage: {
@@ -245,7 +243,7 @@ export const esStrings: UiStrings = {
     relatedDescription: 'Continúa tu flujo de trabajo con utilidades complementarias.',
     browseAll: 'Explorar todas las {name}',
     moreToolsIn: 'Más herramientas en',
-    willAppear: 'aparecerán aquí cuando se publique el lote {batch}.',
+    willAppear: 'aparecerán aquí próximamente.',
   },
   comments: {
     title: 'Comentarios',
@@ -313,13 +311,13 @@ export const esStrings: UiStrings = {
       {
         title: 'Lanzamiento modular',
         description:
-          'Las herramientas se publican y verifican en siete lotes por categoría, de modo que cada utilidad recibe pruebas funcionales y documentación exhaustivas.',
+          'Las herramientas se publican y verifican por categoría, de modo que cada utilidad recibe pruebas funcionales y documentación exhaustivas.',
       },
     ],
     categoriesTitle: 'Siete categorías de herramientas planificadas',
     feedbackTitle: '¿Tienes comentarios o una solicitud?',
     feedbackBefore:
-      'Si notas un caso límite en un cálculo, un problema de accesibilidad o quieres sugerir una utilidad para un próximo lote, comunícate a través de nuestra',
+      'Si notas un caso límite en un cálculo, un problema de accesibilidad o quieres sugerir una nueva utilidad, comunícate a través de nuestra',
     feedbackLink: 'página de contacto',
     feedbackAfter: '.',
   },
@@ -452,7 +450,7 @@ export const esStrings: UiStrings = {
       '. Si no estás de acuerdo con alguna parte de estos términos, deja de usar el sitio web.',
     changesTitle: '6. Cambios y contacto',
     changesBefore:
-      'Es posible que actualicemos estos Términos de servicio a medida que se publiquen nuevos lotes de herramientas. Las preguntas pueden dirigirse a nuestra',
+      'Es posible que actualicemos estos Términos de servicio a medida que se publiquen nuevas herramientas. Las preguntas pueden dirigirse a nuestra',
     changesLink: 'página de contacto',
     changesAfter: '.',
   },
