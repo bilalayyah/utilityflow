@@ -21,6 +21,7 @@ export function ToolsDirectoryPage() {
 
   const allTools = getLocalizedTools(locale);
   const categories = getLocalizedCategories(locale);
+  const directoryPalette = pastelForKey('directory');
   const filteredTools = useMemo(
     () => searchToolsLocalized(query, locale, categoryFilter),
     [query, categoryFilter, locale]
@@ -199,7 +200,7 @@ export function ToolsDirectoryPage() {
               })}
             </div>
           ) : (
-            <div className="rounded-2xl border border-slate-200 bg-white p-8 text-center text-sm text-slate-600 shadow-sm">
+            <div className={`rounded-2xl ${directoryPalette.card} p-8 text-center text-sm text-slate-600 shadow-sm`}>
               {t.directory.noMatch}{' '}
               <button
                 type="button"

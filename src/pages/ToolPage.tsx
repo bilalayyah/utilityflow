@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import { ToolPageLayout } from '../components/tool/ToolPageLayout';
+import { pastelForKey } from '../components/tool/pastel';
 import { useLocale } from '../locales/LocaleContext';
 import { toolHref } from '../locales/config';
 import { formatString } from '../locales/ui';
@@ -25,12 +26,13 @@ export function ToolPage() {
   }
 
   const ToolComponent = localized.component;
+  const palette = pastelForKey(localized.id);
 
   return (
     <ToolPageLayout tool={localized}>
       <Suspense
         fallback={
-          <div className="rounded-2xl border border-slate-200 bg-white p-12 text-center text-sm text-slate-500 shadow-sm">
+          <div className={`rounded-2xl ${palette.card} p-12 text-center text-sm text-slate-500 shadow-sm`}>
             {formatString(t.toolPage.loadingWorkspace, { name: localized.name })}
           </div>
         }

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Breadcrumbs, buildBreadcrumbSchema } from '../components/common/Breadcrumbs';
 import { SeoHead } from '../components/seo/SeoHead';
+import { pastelForKey } from '../components/tool/pastel';
 import { SITE_CONFIG } from '../config/site';
 import { useLocale } from '../locales/LocaleContext';
 import { localizeStaticPath } from '../locales/config';
@@ -9,6 +10,7 @@ import type { BreadcrumbItem } from '../types/tool';
 
 export function PrivacyPolicyPage() {
   const { locale, t } = useLocale();
+  const privacyPalette = pastelForKey('privacy');
 
   const breadcrumbs: BreadcrumbItem[] = [
     { label: t.footer.home, href: localizeStaticPath('/', locale) },
@@ -35,7 +37,7 @@ export function PrivacyPolicyPage() {
           <p className="mt-2 text-sm text-slate-500">{t.privacy.lastUpdated}</p>
         </header>
 
-        <div className="space-y-8 text-base leading-relaxed text-slate-700 rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm">
+        <div className={`space-y-8 text-base leading-relaxed text-slate-700 rounded-2xl ${privacyPalette.card} p-6 sm:p-8 shadow-sm`}>
           {t.privacy.sections.map((section) => (
             <section key={section.title}>
               <h2 className="text-xl font-bold text-slate-900 mb-2">{section.title}</h2>

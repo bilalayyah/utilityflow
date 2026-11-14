@@ -5,7 +5,7 @@ import { Breadcrumbs, buildBreadcrumbSchema } from '../components/common/Breadcr
 import { CategoryIcon } from '../components/common/CategoryIcon';
 import { SeoHead } from '../components/seo/SeoHead';
 import { ToolCard } from '../components/tool/ToolCard';
-import { pastelForKey } from '../components/tool/pastel';
+import { PASTEL_PALETTES, pastelForKey } from '../components/tool/pastel';
 import { buildCanonicalUrl } from '../config/site';
 import { useLocale } from '../locales/LocaleContext';
 import { categoryHref, localizeStaticPath } from '../locales/config';
@@ -38,6 +38,7 @@ export function CategoryPage() {
   const otherCategories = getLocalizedCategories(locale).filter(
     (item) => item.id !== category.id
   );
+  const categoryPalette = pastelForKey('category');
 
   const breadcrumbs: BreadcrumbItem[] = [
     { label: t.footer.home, href: localizeStaticPath('/', locale) },
@@ -103,7 +104,7 @@ export function CategoryPage() {
         ) : (
           <section
             aria-label="Category rollout status"
-            className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 mb-10 shadow-sm"
+            className={`rounded-2xl ${categoryPalette.card} p-6 sm:p-8 mb-10 shadow-sm`}
           >
             <h2 className="text-lg font-bold text-slate-900">
               {formatString(t.category.scheduledTitle, { batch: category.batch })}
@@ -120,10 +121,10 @@ export function CategoryPage() {
                 {t.category.plannedToolsTitle}
               </h3>
               <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 text-sm text-slate-700">
-                {category.sampleToolNames.map((name) => (
+                {category.sampleToolNames.map((name, index) => (
                   <li
                     key={name}
-                    className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-slate-800 shadow-sm"
+                    className={`rounded-xl ${PASTEL_PALETTES[index % PASTEL_PALETTES.length].card} px-3 py-2 text-slate-800 shadow-sm`}
                   >
                     {name}
                   </li>

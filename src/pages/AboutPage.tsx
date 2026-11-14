@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Breadcrumbs, buildBreadcrumbSchema } from '../components/common/Breadcrumbs';
 import { SeoHead } from '../components/seo/SeoHead';
+import { PASTEL_PALETTES, pastelForKey } from '../components/tool/pastel';
 import { SITE_CONFIG } from '../config/site';
 import { useLocale } from '../locales/LocaleContext';
 import { categoryHref, localizeStaticPath } from '../locales/config';
@@ -12,6 +13,7 @@ import type { BreadcrumbItem } from '../types/tool';
 export function AboutPage() {
   const { locale, t } = useLocale();
   const categories = getLocalizedCategories(locale);
+  const aboutPalette = pastelForKey('about');
 
   const breadcrumbs: BreadcrumbItem[] = [
     { label: t.footer.home, href: localizeStaticPath('/', locale) },
@@ -50,8 +52,8 @@ export function AboutPage() {
           <section>
             <h2 className="text-xl font-bold text-slate-900 mb-3">{t.about.principlesTitle}</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {t.about.principles.map((principle) => (
-                <div key={principle.title} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+              {t.about.principles.map((principle, index) => (
+                <div key={principle.title} className={`rounded-2xl ${PASTEL_PALETTES[index % PASTEL_PALETTES.length].card} p-5 shadow-sm`}>
                   <h3 className="text-base font-semibold text-slate-900">{principle.title}</h3>
                   <p className="mt-1.5 text-sm text-slate-600">{principle.description}</p>
                 </div>
@@ -62,11 +64,11 @@ export function AboutPage() {
           <section>
             <h2 className="text-xl font-bold text-slate-900 mb-3">{t.about.categoriesTitle}</h2>
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-sm">
-              {categories.map((category) => (
+              {categories.map((category, index) => (
                 <li key={category.id}>
                   <Link
                     to={categoryHref(category.id, locale)}
-                    className="flex items-center justify-between rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-sm hover:border-indigo-300 transition-colors"
+                    className={`flex items-center justify-between rounded-xl ${PASTEL_PALETTES[index % PASTEL_PALETTES.length].card} px-4 py-3 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md`}
                   >
                     <span className="font-semibold text-slate-900">{category.name}</span>
                     <span className="font-mono text-xs text-slate-500 tabular-nums">
@@ -79,11 +81,11 @@ export function AboutPage() {
             </ul>
           </section>
 
-          <section className="rounded-2xl border border-indigo-100 bg-indigo-50/70 p-6 shadow-sm">
+          <section className={`rounded-2xl ${aboutPalette.card} p-6 shadow-sm`}>
             <h2 className="text-lg font-bold text-slate-900 mb-2">{t.about.feedbackTitle}</h2>
             <p className="text-sm text-slate-600">
               {t.about.feedbackBefore}{' '}
-              <Link to={localizeStaticPath('/contact/', locale)} className="font-semibold text-indigo-600 hover:underline">
+              <Link to={localizeStaticPath('/contact/', locale)} className={`font-semibold ${aboutPalette.link} hover:underline`}>
                 {t.about.feedbackLink}
               </Link>
               {t.about.feedbackAfter}

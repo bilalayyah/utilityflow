@@ -7,7 +7,7 @@ import { FAQAccordion, buildFaqSchema } from '../components/common/FAQAccordion'
 import { SeoHead } from '../components/seo/SeoHead';
 import { ToolCard } from '../components/tool/ToolCard';
 import { ToolSearchBar } from '../components/tool/ToolSearchBar';
-import { pastelForKey } from '../components/tool/pastel';
+import { PASTEL_PALETTES, pastelForKey } from '../components/tool/pastel';
 import { SITE_CONFIG, buildCanonicalUrl } from '../config/site';
 import { useLocale } from '../locales/LocaleContext';
 import { categoryHref, localizeStaticPath } from '../locales/config';
@@ -29,6 +29,8 @@ export function HomePage() {
   const allTools = getLocalizedTools(locale);
   const popularTools = getPopularTools(8);
   const categories = getLocalizedCategories(locale);
+  const directoryPalette = pastelForKey('directory');
+  const popularPalette = pastelForKey('popular');
 
   const filteredTools = useMemo(() => {
     return searchToolsLocalized(directoryQuery, locale, selectedCategory);
@@ -229,9 +231,9 @@ export function HomePage() {
             ))}
           </div>
         ) : (
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+          <div className={`rounded-2xl ${popularPalette.card} p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-sm dark:border-slate-800 dark:bg-slate-900`}>
             <div className="max-w-2xl">
-              <p className="text-xs font-semibold text-indigo-600 dark:text-indigo-400 mb-1">
+              <p className={`text-xs font-semibold ${popularPalette.link} mb-1`}>
                 Phase 0 · Platform Foundation Ready
               </p>
               <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
@@ -405,12 +407,13 @@ export function HomePage() {
           <div className="space-y-4">
             {filteredCategories.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {filteredCategories.map((category) => {
+                {filteredCategories.map((category, index) => {
                   const categoryLiveTools = allTools.filter((tool) => tool.categoryId === category.id);
+                  const palette = PASTEL_PALETTES[index % PASTEL_PALETTES.length];
                   return (
                     <div
                       key={category.id}
-                      className="rounded-2xl border border-slate-200 bg-white p-5 flex flex-col justify-between gap-4 shadow-sm dark:border-slate-800 dark:bg-slate-900"
+                      className={`rounded-2xl ${palette.card} p-5 flex flex-col justify-between gap-4 shadow-sm dark:border-slate-800 dark:bg-slate-900`}
                     >
                       <div>
                         <div className="flex items-center justify-between gap-3">
@@ -418,7 +421,7 @@ export function HomePage() {
                             to={categoryHref(category.id, locale)}
                             className="inline-flex items-center gap-2 text-base font-bold text-slate-900 hover:text-indigo-700 dark:text-white dark:hover:text-indigo-300"
                           >
-                            <CategoryIcon name={category.iconName} className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
+                            <CategoryIcon name={category.iconName} className={`w-4 h-4 ${palette.link}`} />
                             <span>{category.name}</span>
                           </Link>
                           <span className="text-xs font-mono text-slate-500 dark:text-slate-400 tabular-nums">
@@ -440,7 +443,7 @@ export function HomePage() {
                         </span>
                         <Link
                           to={categoryHref(category.id, locale)}
-                          className="font-semibold text-indigo-600 hover:text-indigo-700 dark:text-indigo-400 dark:hover:text-indigo-300"
+                          className={`font-semibold ${palette.link} hover:underline underline-offset-4`}
                         >
                           {t.home.directory.openCategory}
                         </Link>
@@ -450,7 +453,7 @@ export function HomePage() {
                 })}
               </div>
             ) : (
-              <div className="rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-sm dark:border-slate-800 dark:bg-slate-900">
+              <div className={`rounded-2xl ${directoryPalette.card} p-8 text-center shadow-sm dark:border-slate-800 dark:bg-slate-900`}>
                 <p className="text-sm text-slate-600 dark:text-slate-300">
                   {formatString(t.home.directory.noMatch, { query: directoryQuery })}
                 </p>
@@ -488,16 +491,17 @@ export function HomePage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {t.home.why.items.map((item, index) => {
               const IconComponent = WHY_ICONS[index] ?? ShieldCheck;
+              const palette = PASTEL_PALETTES[index % PASTEL_PALETTES.length];
               return (
                 <div
                   key={item.title}
-                  className="rounded-2xl border border-slate-200/70 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900"
+                  className={`rounded-2xl ${palette.card} p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900`}
                 >
                   <div className="flex items-center justify-between gap-4 mb-3">
-                    <span className="font-mono text-sm font-semibold text-indigo-600 dark:text-indigo-400 tabular-nums">
+                    <span className={`font-mono text-sm font-semibold ${palette.link} tabular-nums`}>
                       {String(index + 1).padStart(2, '0')}.
                     </span>
-                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-50 text-indigo-600 dark:bg-indigo-500/20 dark:text-indigo-300">
+                    <span className={`flex h-10 w-10 items-center justify-center rounded-full ${palette.icon}`}>
                       <IconComponent className="w-5 h-5" aria-hidden="true" />
                     </span>
                   </div>

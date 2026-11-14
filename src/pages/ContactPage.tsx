@@ -2,6 +2,7 @@ import { CheckCircle2, Mail } from 'lucide-react';
 import { useState, type FormEvent } from 'react';
 import { Breadcrumbs, buildBreadcrumbSchema } from '../components/common/Breadcrumbs';
 import { SeoHead } from '../components/seo/SeoHead';
+import { pastelForKey } from '../components/tool/pastel';
 import { SITE_CONFIG } from '../config/site';
 import { useLocale } from '../locales/LocaleContext';
 import { localizeStaticPath } from '../locales/config';
@@ -20,6 +21,8 @@ const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export function ContactPage() {
   const { locale, t } = useLocale();
+  const contactPalette = pastelForKey('contact');
+  const contactInfoPalette = pastelForKey('contact-info');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [subject, setSubject] = useState(t.contact.topics[0]);
@@ -124,7 +127,7 @@ export function ContactPage() {
               <form
                 onSubmit={handleSubmit}
                 noValidate
-                className="rounded-2xl border border-slate-200 bg-white p-6 space-y-5 shadow-sm"
+                className={`rounded-2xl ${contactPalette.card} p-6 space-y-5 shadow-sm`}
               >
                 <div>
                   <label htmlFor="contact-name" className="block text-sm font-semibold text-slate-900 mb-1.5">
@@ -204,7 +207,7 @@ export function ContactPage() {
           </div>
 
           <aside className="lg:col-span-4 space-y-5">
-            <div className="rounded-2xl border border-slate-200 bg-white p-5 space-y-3 shadow-sm">
+            <div className={`rounded-2xl ${contactInfoPalette.card} p-5 space-y-3 shadow-sm`}>
               <div className="flex items-center gap-2 text-sm font-bold text-slate-900">
                 <Mail className="w-4 h-4 text-indigo-600" aria-hidden="true" />
                 <span>{t.contact.directEmail}</span>
