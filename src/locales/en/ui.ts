@@ -49,7 +49,7 @@ export const enStrings: UiStrings = {
     termsOfService: 'Terms of Service',
     xmlSitemap: 'XML Sitemap',
     rightsReserved: 'All rights reserved.',
-    deployedNote: 'Crafted with ❤️ by Bilal, inspired by Shaheen.',
+    deployedNote: 'Crafted with ❤️ by Bilal inspired by Shaheen',
   },
   common: {
     copy: 'Copy',
