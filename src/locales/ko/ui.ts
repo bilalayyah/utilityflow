@@ -321,6 +321,8 @@ export const koStrings: UiStrings = {
     topic: '주제',
     message: '메시지',
     submit: '메시지 보내기',
+    sending: '보내는 중…',
+    sendError: '메시지를 보낼 수 없습니다. 다시 시도해 주세요.',
     namePlaceholder: 'Alex Rivera',
     emailPlaceholder: 'you@example.com',
     messagePlaceholder: '도구, 버그, 질문을 자세히 설명해 주세요...',
@@ -338,11 +340,11 @@ export const koStrings: UiStrings = {
       subject: '주제를 선택하거나 입력해 주세요.',
       message: '메시지에 최소 10자를 포함해 주세요.',
     },
-    successTitle: '메시지가 준비되었습니다',
+    successTitle: '메시지가 전송되었습니다',
     successThanks:
-      '감사합니다, {name}님. {subject}에 대한 메시지가 검증되었습니다.',
+      '감사합니다, {name}님. 메시지가 전송되었으며 곧 답변드리겠습니다.',
     successNote:
-      'UtilityFlow는 백엔드 서버에 사용자 제출 내용을 저장하지 않고 정적 사이트로 운영되므로, 이메일 클라이언트로 직접 메시지를 보내실 수도 있습니다.',
+      '추가로 전달하실 내용이 있으시면 다음 주소로 직접 연락해 주세요',
     sendAnother: '다른 메시지 보내기',
     directEmail: '직접 이메일',
     directEmailText: '직접 작성하고 싶으신가요? 팀에 이메일로 보내 주세요:',
@@ -392,6 +394,8 @@ export const koStrings: UiStrings = {
       '이 개인정보처리방침에 대해 질문이 있으시면 저희',
     contactLink: '문의 페이지',
     contactMiddle: '또는 이메일로 연락해 주세요',
+    optOutGoogleAds: 'Google Ads Settings',
+    optOutAboutAds: 'AboutAds.info 옵트아웃',
   },
   terms: {
     seoTitle: '이용약관 | UtilityFlow',
@@ -421,7 +425,7 @@ export const koStrings: UiStrings = {
       {
         title: '5. 책임 제한',
         paragraphs: [
-          '법이 허용하는 최대 범위 내에서 UtilityFlow와 그 기여자는 플랫폼 사용 또는 사용 불가로 인해 발생하는 간접적, 우발적, 특별, 결과적 손해에 대해 책임을 지지 않습니다.',
+          '법이 허용하는 최대 범위 내에서 UtilityFlow와 그 기여자는 플랫폼 사용 또는 사용 불가로 인해 발생하는 간접적, 우발적, 특별, 결과적 손해에 대해 책임을 지지 않습니다. UtilityFlow는 독립적인 프로젝트이며, 이 사이트에 언급된 YouTube, Instagram, Google 또는 기타 제3자 브랜드와 제휴, 보증, 연결 관계가 없습니다.',
         ],
       },
     ],
