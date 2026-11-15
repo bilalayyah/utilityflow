@@ -76,6 +76,19 @@ function upsertOgLocaleAlternates(locales: string[]): void {
   }
 }
 
+/**
+ * Mirror of scripts/prerender-meta.ts escapeJsonLd: a raw "</script>" inside
+ * a JSON-LD string value terminates the script element when the DOM is
+ * serialized / re-parsed (Google's renderer), breaking the whole block —
+ * this is what flagged /schema-markup-generator/ as unparsable in Search
+ * Console ("Bad escape sequence in string"). Escaping "<" as \u003c keeps
+ * the parsed JSON identical and makes the client output byte-identical to
+ * the prerendered output.
+ */
+function escapeJsonLd(serialized: string): string {
+  return serialized.replace(/</g, '\\u003c');
+}
+
 export function SeoHead({
   title,
   description,
@@ -141,7 +154,7 @@ export function SeoHead({
         const script = document.createElement('script');
         script.type = 'application/ld+json';
         script.setAttribute('data-seo-jsonld', 'true');
-        script.textContent = JSON.stringify(item);
+        script.textContent = escapeJsonLd(JSON.stringify(item));
         document.head.appendChild(script);
       });
     }
