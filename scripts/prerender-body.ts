@@ -115,9 +115,9 @@ function toolCards(tools: ToolDefinition[], locale: LocaleCode): string {
 }
 
 /** FAQ list: question as <h3>, answer as <p> (FAQAccordion renders only the first answer open; static shows all).
- * When `linkify` is given (tool pages, M-5), answers carry contextual
- * internal links; questions stay plain text. Without it (home page) the
- * answers are plain escaped text as before. */
+ * When `linkify` is given (tool pages, M-5; category pages, O-1), answers
+ * carry contextual internal links; questions stay plain text. Without it
+ * (home page) the answers are plain escaped text as before. */
 function faqList(
   items: Array<{ question: string; answer: string }>,
   linkify?: (text: string) => string
@@ -446,6 +446,15 @@ export function renderCategoryBody(
   const tools = getLocalizedTools(locale, data).filter(
     (tool) => tool.categoryId === category.id
   );
+  // O-1: same M-5 linkifier the React page uses, so the static HTML
+  // crawlers see matches the post-mount React render exactly. The map is
+  // built from the localized light records for this locale. No
+  // excludeToolId: a category page has no single "current tool".
+  // JSON-LD (scripts/prerender-meta.ts categorySeo) keeps using the raw
+  // strings — never the linkified output.
+  const toolNameEntries = buildToolNameEntries(getLocalizedTools(locale, data), locale);
+  const linkifyCategoryFaq = (text: string): string =>
+    linkifyToolNames(text, toolNameEntries);
   const otherCategories = getLocalizedCategories(locale, data).filter(
     (item) => item.id !== category.id
   );
@@ -486,7 +495,7 @@ export function renderCategoryBody(
   if ((category.faqs ?? []).length > 0) {
     parts.push('<section class="mb-12">');
     parts.push(`<h2 class="${H2_SM}">${escapeText(t.toolPage.faqs)}</h2>`);
-    parts.push(faqList(category.faqs ?? []));
+    parts.push(faqList(category.faqs ?? [], linkifyCategoryFaq));
     parts.push('</section>');
   }
   parts.push('<section class="pt-10 border-t border-slate-200">');

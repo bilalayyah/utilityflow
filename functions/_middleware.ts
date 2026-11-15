@@ -129,6 +129,28 @@ function rewrite404Head(html: string): string {
   return html.slice(0, start) + openTag + head + '</head>' + html.slice(start + headMatch[0].length);
 }
 
+// O-2: strip the home hero H1 from the 404 body. The SPA shell returned
+// by context.next() is the HOME prerender, so its body carries the home
+// hero H1 ("Practical online utilities built for speed and privacy.") —
+// wrong on a 404 URL for any crawler that reads the body. Remove ONLY
+// that one <h1> element (matched by its exact text, class-agnostic so it
+// survives rebuilds); everything else in the body — including the #root
+// mount div and the surrounding prerendered markup — stays verbatim so
+// React still mounts and renders the client-side 404 page. Fallback: if
+// the element markup ever changes shape, remove the bare text so the
+// hero sentence can never leak into a 404 body. Applied ONLY in the
+// unknown-path branch below; known routes are untouched.
+const HOME_HERO_H1_TEXT = 'Practical online utilities built for speed and privacy.';
+
+function stripHomeHeroH1(html: string): string {
+  const stripped = html.replace(
+    /<h1[^>]*>Practical online utilities built for speed and privacy\.<\/h1>/i,
+    '',
+  );
+  if (stripped !== html) return stripped;
+  return html.split(HOME_HERO_H1_TEXT).join('');
+}
+
 export async function onRequest(context: MiddlewareContext): Promise<Response> {
   const { request } = context;
   const method = request.method.toUpperCase();
@@ -197,12 +219,14 @@ export async function onRequest(context: MiddlewareContext): Promise<Response> {
   // let edge caches keep the 404 around). The shell's <head> is rewritten
   // to a dedicated 404 head (M-1) so crawlers never see the home page's
   // SEO tags on a 404 URL; the functional head tags stay verbatim so the
-  // client-side 404 page still renders. The rewritten body differs in
-  // length, so drop the shell's stale content-length header.
+  // client-side 404 page still renders. O-2: the home hero H1 is also
+  // stripped from the body (stripHomeHeroH1) so the 404 body carries no
+  // home content. The rewritten body differs in length, so drop the
+  // shell's stale content-length header.
   const res = await context.next();
   const headers = new Headers(res.headers);
   headers.set('cache-control', 'no-store');
   headers.delete('content-length');
   const shell = await res.text();
-  return new Response(rewrite404Head(shell), { status: 404, headers });
+  return new Response(stripHomeHeroH1(rewrite404Head(shell)), { status: 404, headers });
 }

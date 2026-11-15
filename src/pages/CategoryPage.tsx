@@ -1,4 +1,5 @@
 import { ArrowRight } from 'lucide-react';
+import { useMemo } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { AdSlot } from '../components/common/AdSlot';
 import { Breadcrumbs, buildBreadcrumbSchema } from '../components/common/Breadcrumbs';
@@ -14,6 +15,7 @@ import { categoryHref, localizeStaticPath } from '../locales/config';
 import { getCategoryAlternatePaths, toHreflangEntries } from '../locales/routes';
 import { getCategoryByLocalizedSlug, getLocalizedCategories, getLocalizedCategory, getLocalizedTools } from '../locales/tools';
 import { formatString } from '../locales/ui';
+import { buildToolNameEntries, linkifyToolNames } from '../utils/linkifyToolNames';
 import type { BreadcrumbItem } from '../types/tool';
 import { NotFoundPage } from './NotFoundPage';
 
@@ -36,6 +38,19 @@ export function CategoryPage() {
   const tools = getLocalizedTools(locale).filter(
     (tool) => tool.categoryId === category.id
   );
+  // O-1: same M-5 linkifier as tool pages, applied to category FAQ
+  // answers so named tools become real links. No excludeToolId: a
+  // category page has no single "current tool" — every named tool in the
+  // category is a legitimate link target. The entry map comes from the
+  // light locale records (getLocalizedTools — names/slugs already in the
+  // locale chunk), NOT from detail modules, so this adds no detail
+  // payload to the bundle. JSON-LD keeps using the raw strings.
+  const toolNameEntries = useMemo(
+    () => buildToolNameEntries(getLocalizedTools(locale), locale),
+    [locale]
+  );
+  const linkifyCategoryFaq = (text: string): string =>
+    linkifyToolNames(text, toolNameEntries);
   const canonicalPath = categoryHref(category.id, locale);
   const otherCategories = getLocalizedCategories(locale).filter(
     (item) => item.id !== category.id
@@ -148,7 +163,12 @@ export function CategoryPage() {
             <h2 id="category-faq-heading" className="text-xl font-bold text-slate-900 mb-5">
               {t.toolPage.faqs}
             </h2>
-            <FAQAccordion items={category.faqs} />
+            <FAQAccordion
+              items={category.faqs}
+              renderAnswer={(answer) => (
+                <span dangerouslySetInnerHTML={{ __html: linkifyCategoryFaq(answer) }} />
+              )}
+            />
           </section>
         )}
 
