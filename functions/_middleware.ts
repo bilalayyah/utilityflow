@@ -9,8 +9,14 @@
 //   _redirects carries the same rules, but whether _redirects or Functions
 //   runs first is not guaranteed, so both layers redirect them.
 // - Everything else passes through untouched: /api/*, /assets/*, /og/*,
-//   files with an extension, sitemap/robots/ads.txt, favicon, og-image,
-//   and the Google/Yandex verification files.
+//   files with an extension, sitemap/robots/ads.txt, favicon, og-image.
+// - EXCEPTION: the Google/Yandex verification files are NOT passed
+//   through. Cloudflare Pages always 308-redirects *.html URLs to the
+//   extensionless URL (no setting disables it), and the extensionless
+//   path then 404s — so these files can never return 200 as static
+//   assets. The middleware serves their exact bytes directly instead:
+//   a Function-served response bypasses Pages' static-asset routing
+//   (and _redirects), so no 308 happens.
 
 import { KNOWN_ROUTES } from './known-routes';
 
@@ -22,9 +28,17 @@ const PASSTHROUGH_EXACT = new Set([
   '/ads.txt',
   '/favicon.svg',
   '/og-image.jpg',
-  '/googlec9e8a7a2828e1238.html',
-  '/yandex_1e4f4374733f0a22.html',
 ]);
+
+// Search-engine verification files — byte-identical to the files in
+// public/ (same names). NO trailing newline on either file. Keep both in
+// sync if the verification files ever change.
+const VERIFICATION_FILES: Record<string, string> = {
+  '/googlec9e8a7a2828e1238.html':
+    'google-site-verification: googlec9e8a7a2828e1238.html',
+  '/yandex_1e4f4374733f0a22.html':
+    '<html>\n    <head>\n        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">\n    </head>\n    <body>Verification: 1e4f4374733f0a22</body>\n</html>',
+};
 
 // Same three redirects as public/_redirects (both slash forms).
 const LEGACY_REDIRECTS: Record<string, string> = {
@@ -59,6 +73,15 @@ export async function onRequest(context: MiddlewareContext): Promise<Response> {
 
   const url = new URL(request.url);
   const pathname = url.pathname;
+
+  // Verification files: serve exact bytes directly (see note above).
+  const verification = VERIFICATION_FILES[pathname];
+  if (verification !== undefined) {
+    return new Response(verification, {
+      status: 200,
+      headers: { 'content-type': 'text/html; charset=UTF-8' },
+    });
+  }
 
   if (PASSTHROUGH_EXACT.has(pathname)) return context.next();
   if (PASSTHROUGH_PREFIXES.some((prefix) => pathname.startsWith(prefix))) {
