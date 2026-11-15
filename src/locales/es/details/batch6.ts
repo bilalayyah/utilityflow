@@ -973,7 +973,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: '¿Cuál es la diferencia entre un slug y un enlace permanente?',
         answer:
-          'El slug es la parte final legible de una URL, como "best-cafe-tools", mientras que el enlace permanente es la URL completa, incluido el dominio y las carpetas.',
+          'El slug es la parte final legible de una URL, como "best-cafe-tools", mientras que el enlace permanente es la URL completa, incluido el dominio y las carpetas. Para una conversión rápida de texto para desarrolladores con separadores de guion bajo, consulta Convertidor de Texto a Slug.',
       },
     ],
   },
@@ -1060,7 +1060,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: '¿Qué es exactamente la densidad de palabras clave?',
         answer:
-          'La densidad de palabras clave es la frecuencia con la que aparece una palabra o frase como porcentaje del total de palabras de un texto. Una frase usada 5 veces en 500 palabras tiene una densidad del 1%.',
+          'La densidad de palabras clave es la frecuencia con la que aparece una palabra o frase como porcentaje del total de palabras de un texto. Una frase usada 5 veces en 500 palabras tiene una densidad del 1%. Para tablas completas de frecuencia con exportación CSV, consulta Contador de Frecuencia de Palabras.',
       },
       {
         question: '¿Qué cuenta como relleno de palabras clave?',

@@ -198,7 +198,7 @@ export const IT_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
   },
   'url-slug-generator': {
     slug: 'generatore-di-slug-url',
-    name: 'Generatore di Slug URL e Ottimizzatore di Percorsi SEO',
+    name: 'Generatore di Slug URL',
     shortDescription:
       'Converti i titoli degli articoli in slug URL SEO puliti, con traslitterazione degli accenti, in batch e con filtro delle stop word.',
     keywords: [
@@ -236,7 +236,7 @@ export const IT_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
   },
   'keyword-density-checker': {
     slug: 'verificatore-di-densita-parole-chiave',
-    name: 'Verificatore di Densità delle Parole Chiave e Analizzatore di Contenuti',
+    name: 'Verificatore di Densità delle Parole Chiave',
     shortDescription:
       'Verifica conteggio parole, densità della parola chiave di destinazione, tempo di lettura e frequenza delle frasi di 1, 2 e 3 parole in locale.',
     keywords: [

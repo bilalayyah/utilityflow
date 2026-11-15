@@ -198,7 +198,7 @@ export const ID_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
   },
   "url-slug-generator": {
     slug: "generator-slug-url",
-    name: "Generator Slug URL & Pengoptimal Jalur SEO",
+    name: "Generator Slug URL",
     shortDescription:
       "Ubah judul artikel menjadi slug URL SEO yang bersih dengan transliterasi aksen secara massal, lengkap dengan penyaringan stop word.",
     keywords: [
@@ -236,7 +236,7 @@ export const ID_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
   },
   "keyword-density-checker": {
     slug: "pemeriksa-kepadatan-kata-kunci",
-    name: "Pemeriksa Kepadatan Kata Kunci & Penganalisis Konten",
+    name: "Pemeriksa Kepadatan Kata Kunci",
     shortDescription:
       "Audit jumlah kata, kepadatan kata kunci target, waktu baca, dan frekuensi frasa 1, 2, dan 3 kata teratas secara lokal.",
     keywords: [

@@ -213,7 +213,7 @@ export const koStrings: UiStrings = {
     clearFilters: '필터 지우기',
   },
   category: {
-    plannedCount: '{count}개 도구 예정',
+    plannedCount: '{count}개 도구',
     toolsCount: '{count}개 도구',
     toolsLive: '{count}개 도구 라이브',
     ofToolsLive: '전체 {total}개 중 {count}개 도구 라이브',
@@ -222,7 +222,7 @@ export const koStrings: UiStrings = {
     scheduledTitle: '더 많은 도구가 곧 출시됩니다',
     scheduledDescription:
       '이 카테고리 허브는 활성화되어 {name} 아키텍처에 인덱싱되어 있습니다. 브라우저 측 기능을 갖춘 전용 개별 도구 페이지는 곧 여기에 추가됩니다.',
-    plannedToolsTitle: '이 카테고리의 예정된 도구:',
+    plannedToolsTitle: '이 카테고리의 도구:',
   },
   toolPage: {
     howToUse: '{name} 사용 방법',
@@ -324,7 +324,7 @@ export const koStrings: UiStrings = {
           '도구는 카테고리별로 출시되고 검증되므로 각 유틸리티가 철저한 기능 테스트와 문서를 받습니다.',
       },
     ],
-    categoriesTitle: '예정된 7개 도구 카테고리',
+    categoriesTitle: '7개 도구 카테고리',
     feedbackTitle: '피드백이나 요청이 있으신가요?',
     feedbackBefore:
       '계산 엣지 케이스나 접근성 문제를 발견하거나 새로운 유틸리티를 제안하고 싶으시면 저희',

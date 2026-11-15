@@ -52,9 +52,9 @@ export const TEXT_TOOLS_PART_3: ToolDefinition[] = [
   {
     id: 'word-frequency-counter',
     slug: 'word-frequency-counter',
-    name: 'Word Frequency & Keyword Density Counter',
+    name: 'Word Frequency Counter',
     shortDescription:
-      'Analyze 1-word, 2-word, and 3-word phrase frequencies and density percentages with CSV export.',
+      'Count 1-word, 2-word and 3-word phrase frequencies with stop-word filtering and one-click CSV export for spreadsheets.',
     categoryId: 'text-writing',
     batch: 1,
     processingMode: 'browser',
@@ -62,26 +62,26 @@ export const TEXT_TOOLS_PART_3: ToolDefinition[] = [
     popular: false,
     keywords: [
       'word frequency counter',
-      'keyword density checker',
+      'phrase frequency counter',
       'ngram counter',
       'word repetition analyzer',
       'phrase frequency analyzer',
-      'keyword density calculator',
+      'word count frequency tool',
       'count repeated words online',
       'word occurrence counter',
       'text frequency analysis',
     ],
     seo: {
-      title: 'Word Frequency Counter & Keyword Density | UtilityFlow',
+      title: 'Word Frequency Counter – N-gram & CSV Export | UtilityFlow',
       description:
-        'Analyse word frequency and keyword density for 1, 2 and 3-word phrases with percentages, stop-word filtering and CSV export — free, private, in your browser.',
+        'Count how often 1-, 2- and 3-word phrases appear in any text, with stop-word filtering and one-click CSV export for spreadsheets — free, in your browser.',
       primaryKeyword: 'word frequency counter',
-      secondaryKeywords: ['keyword density checker', 'phrase frequency analyzer', 'word occurrence tool', 'ngram frequency counter', 'keyword density calculator'],
+      secondaryKeywords: ['word frequency analyzer', 'phrase frequency analyzer', 'word occurrence tool', 'ngram frequency counter', 'phrase frequency counter'],
       longTailKeywords: [
         'count word frequency and density percentage online',
         'analyze 2 word and 3 word phrases in text',
         'export word frequency table to csv',
-        'check keyword stuffing in article draft',
+        'analyze repeated phrases in long article drafts',
         'find most repeated words in text',
       ],
       schemaApplicationCategory: 'UtilitiesApplication',
@@ -101,7 +101,7 @@ export const TEXT_TOOLS_PART_3: ToolDefinition[] = [
     slug: 'text-to-slug',
     name: 'Text to Slug Converter',
     shortDescription:
-      'Convert titles and headings into clean, SEO-friendly URL slugs with accent transliteration and batch mode.',
+      'Convert any text into clean URL slugs for code, file names and database keys, with accent transliteration and batch mode.',
     categoryId: 'text-writing',
     batch: 1,
     processingMode: 'browser',
@@ -109,7 +109,7 @@ export const TEXT_TOOLS_PART_3: ToolDefinition[] = [
     popular: false,
     keywords: [
       'text to slug',
-      'url slug generator',
+      'slugify text online',
       'slugify online',
       'seo url formatter',
       'slug converter',
@@ -119,11 +119,11 @@ export const TEXT_TOOLS_PART_3: ToolDefinition[] = [
       'batch slug generator',
     ],
     seo: {
-      title: 'Text to Slug Converter – Clean SEO URLs | UtilityFlow',
+      title: 'Text to Slug Converter – Developer Slugify | UtilityFlow',
       description:
-        'Turn titles and headings into clean, SEO-friendly URL slugs with accent transliteration, hyphen or underscore separators and batch line mode — free and private.',
+        'Convert any text into clean URL slugs for code, file names and database keys — with accent transliteration, underscore separators and batch line mode.',
       primaryKeyword: 'text to slug converter',
-      secondaryKeywords: ['url slug generator', 'slugify string', 'clean url generator', 'title to slug tool', 'seo slug maker'],
+      secondaryKeywords: ['slugify text', 'slugify string', 'clean url generator', 'title to slug tool', 'seo slug maker'],
       longTailKeywords: [
         'convert article title to seo friendly url slug',
         'batch convert multiple headings to slugs',

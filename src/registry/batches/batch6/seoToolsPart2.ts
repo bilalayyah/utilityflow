@@ -5,7 +5,7 @@ export const SEO_TOOLS_PART_2: ToolDefinition[] = [
   {
     id: 'url-slug-generator',
     slug: 'url-slug-generator',
-    name: 'URL Slug & SEO Path Optimizer',
+    name: 'URL Slug Generator',
     shortDescription:
       'Convert article headlines into clean, accented-transliterated SEO URL slugs in batch with stop-word filtering.',
     categoryId: 'seo',
@@ -58,7 +58,7 @@ export const SEO_TOOLS_PART_2: ToolDefinition[] = [
   {
     id: 'keyword-density-checker',
     slug: 'keyword-density-checker',
-    name: 'Keyword Density & Content Analyzer',
+    name: 'Keyword Density Checker',
     shortDescription:
       'Audit word counts, target keyword density, reading time, and top 1-, 2-, and 3-word phrase frequency locally.',
     categoryId: 'seo',
@@ -87,7 +87,7 @@ export const SEO_TOOLS_PART_2: ToolDefinition[] = [
         '2 word 3 word ngram counter',
         'check keyword repetition online',
         'target keyword density calculator',
-        'content word frequency tool',
+        'seo keyword audit tool',
       ],
       longTailKeywords: [
         'analyze pasted html content for keyword density without upload',

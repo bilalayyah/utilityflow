@@ -213,7 +213,7 @@ export const jaStrings: UiStrings = {
     clearFilters: 'フィルターをクリア',
   },
   category: {
-    plannedCount: '{count}のツールが予定されています',
+    plannedCount: '{count}のツール',
     toolsCount: '{count}のツール',
     toolsLive: '{count}のツールが有効',
     ofToolsLive: '{total}中{count}のツールが有効',
@@ -222,7 +222,7 @@ export const jaStrings: UiStrings = {
     scheduledTitle: '近日公開予定のツール',
     scheduledDescription:
       'このカテゴリハブは{name}アーキテクチャ内で有効で、インデックスされています。ブラウザサイド機能を備えた専用の個別ツールページは近日ここへ追加されます。',
-    plannedToolsTitle: 'このカテゴリで予定されているツール：',
+    plannedToolsTitle: 'このカテゴリのツール：',
   },
   toolPage: {
     howToUse: '{name}の使い方',
@@ -324,7 +324,7 @@ export const jaStrings: UiStrings = {
           'ツールはカテゴリごとに公開・検証されるため、すべてのユーティリティが徹底した機能テストとドキュメントを受けます。',
       },
     ],
-    categoriesTitle: '予定されている7つのツールカテゴリ',
+    categoriesTitle: '7つのツールカテゴリ',
     feedbackTitle: 'フィードバックやリクエストはありますか？',
     feedbackBefore:
       '計算のエッジケース、アクセシビリティの問題に気づいた場合や、新しいユーティリティの提案がある場合は、',

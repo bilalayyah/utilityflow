@@ -199,7 +199,7 @@ export const JA_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
   },
   "url-slug-generator": {
     slug: "url-suraggu-jenereta",
-    name: "URLスラッグ＆SEOパス最適化ツール",
+    name: "URLスラッグジェネレーター",
     shortDescription:
       "記事の見出しを、アクセント文字を変換したきれいなSEO用URLスラッグに一括変換します。ストップワードのフィルタリングに対応しています。",
     keywords: [
@@ -237,7 +237,7 @@ export const JA_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
   },
   "keyword-density-checker": {
     slug: "kiwado-mitsudo-chekka",
-    name: "キーワード密度＆コンテンツ分析ツール",
+    name: "キーワード密度チェッカー",
     shortDescription:
       "単語数、狙うキーワードの密度、読書時間、上位の1語・2語・3語フレーズの頻度を、ローカルで監査します。",
     keywords: [

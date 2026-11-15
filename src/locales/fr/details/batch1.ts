@@ -1889,7 +1889,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'À quoi sert un Compteur de Fréquence de Mots ?',
         answer:
-          'Il compte la fréquence d’apparition de chaque mot ou expression dans un texte pour que vous puissiez repérer les répétitions, vérifier l’équilibre des mots-clés et trouver des thèmes récurrents.',
+          'Il compte la fréquence d’apparition de chaque mot ou expression dans un texte pour que vous puissiez repérer les répétitions, vérifier l’équilibre des mots-clés et trouver des thèmes récurrents. Pour auditer un mot-clé cible dans un brouillon, voir Vérificateur de Densité de Mots-Clés.',
       },
       {
         question: 'Le Compteur de Fréquence de Mots est-il gratuit ?',
@@ -2053,7 +2053,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'Qu’est-ce qu’un Convertisseur de Texte en Slug ?',
         answer:
-          'Il transforme un titre ou une expression en un slug propre et sûr pour les URL en le mettant en minuscules, en supprimant la ponctuation et en remplaçant les espaces par des traits d’union ou des underscores.',
+          'Il transforme un titre ou une expression en un slug propre et sûr pour les URL en le mettant en minuscules, en supprimant la ponctuation et en remplaçant les espaces par des traits d’union ou des underscores. Pour des slugs d’URL par lots avec aperçu du domaine et troncature propre, voir Générateur de Slug URL.',
       },
       {
         question: 'Le Convertisseur de Texte en Slug est-il gratuit ?',

@@ -322,25 +322,25 @@ export const KO_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
     slug: 'daneo-bindo-kaunteo',
     name: '단어 빈도 카운터',
     shortDescription:
-      '1단어, 2단어, 3단어 구의 빈도와 밀도 비율을 분석하고 CSV로 내보냅니다.',
+      '1단어, 2단어, 3단어 구의 빈도를 세고 불용어를 걸러 한 번의 클릭으로 CSV로 내보냅니다.',
     keywords: [
       '단어 빈도 카운터',
-      '키워드 밀도 측정',
+      '구 빈도 카운터',
       '단어 사용 빈도 분석',
-      '키워드 밀도 계산기',
+      '단어 빈도 분석 도구',
       '구 빈도 분석',
       '텍스트 키워드 분석',
       '단어 반복 횟수 세기',
-      'SEO 키워드 밀도',
+      '텍스트 빈도 분석',
       '온라인 단어 빈도',
     ],
     seo: {
-      title: '단어 빈도 카운터: 키워드 밀도를 분석하는 무료 온라인 분석 도구 | UtilityFlow',
+      title: '단어 빈도 카운터: 빈도 분석과 CSV 내보내기 | UtilityFlow',
       description:
-        '1단어, 2단어, 3단어 구의 빈도와 밀도 비율을 분석하세요. 자주 반복되는 키워드를 찾고 CSV로 내보내 SEO와 글 다듬기에 활용할 수 있으며 무료입니다. SEO 글의 키워드 밀도를 점검할 때 유용하며, 입력한 텍스트는 브라우저 안에서만 안전하게 처리됩니다. 무료로 바로 써 보세요.',
+        '어떤 텍스트에서든 1단어, 2단어, 3단어 구가 얼마나 자주 나오는지 세고, 불용어를 걸러 한 번의 클릭으로 CSV로 내보내세요. 자주 반복되는 표현을 한눈에 확인하고 스프레드시트에서 분석할 수 있으며, 브라우저에서 무료로 처리됩니다.',
       primaryKeyword: '단어 빈도 카운터',
-      secondaryKeywords: ['키워드 밀도 측정', '단어 빈도 분석', '키워드 밀도 계산기', '구 빈도 분석'],
-      longTailKeywords: ['텍스트 키워드 밀도 온라인 분석', '2단어 3단어 구 빈도 확인', 'SEO 키워드 반복 횟수 측정', '단어 빈도 CSV 내보내기'],
+      secondaryKeywords: ['텍스트 단어 빈도 분석', '단어 빈도 분석', '구 빈도 분석 도구', '구 빈도 분석'],
+      longTailKeywords: ['텍스트 단어 빈도 온라인 분석', '2단어 3단어 구 빈도 확인', 'SEO 구 반복 횟수 측정', '단어 빈도 CSV 내보내기'],
       schemaApplicationCategory: 'UtilitiesApplication',
     },
     intro:
@@ -350,10 +350,10 @@ export const KO_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
     slug: 'tekseuteu-seulleogeu-byeonhwangi',
     name: '텍스트 슬러그 변환기',
     shortDescription:
-      '제목과 헤딩을 악센트 음역과 일괄 모드를 이용해 깔끔하고 SEO 친화적인 URL 슬러그로 변환합니다.',
+      '어떤 텍스트든 악센트 음역과 일괄 모드를 이용해 코드, 파일 이름, 데이터베이스 키에 쓸 수 있는 깔끔한 URL 슬러그로 변환합니다.',
     keywords: [
       '텍스트 슬러그 변환기',
-      'URL 슬러그 생성기',
+      '텍스트 슬러그화 온라인',
       '슬러그 만들기',
       'SEO 슬러그 생성',
       '제목 슬러그 변환',
@@ -363,11 +363,11 @@ export const KO_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       '블로그 URL 슬러그',
     ],
     seo: {
-      title: '텍스트 슬러그 변환기: SEO 친화적 URL을 생성하는 무료 도구 | UtilityFlow',
+      title: '텍스트 슬러그 변환기: 개발자용 무료 변환 | UtilityFlow',
       description:
-        '제목과 헤딩을 깔끔한 SEO 친화적 URL 슬러그로 변환하세요. 악센트 음역, 단어 연결, 일괄 모드를 브라우저에서 바로 사용할 수 있으며 회원가입이 필요 없습니다. 블로그 포스트와 기사 페이지의 URL을 만들 때 유용하며, 입력한 제목은 브라우저 안에서만 처리됩니다.',
+        '어떤 텍스트든 코드, 파일 이름, 데이터베이스 키에 쓸 수 있는 깔끔한 URL 슬러그로 변환하세요. 악센트 음역, 언더스코어 구분자, 일괄 모드를 브라우저에서 무료로 사용할 수 있으며, 생성된 슬러그는 바로 복사해서 쓸 수 있습니다.',
       primaryKeyword: '텍스트 슬러그 변환기',
-      secondaryKeywords: ['URL 슬러그 생성기', '슬러그 만들기', 'SEO 슬러그 생성', '온라인 슬러그 생성기'],
+      secondaryKeywords: ['텍스트 슬러그화', '슬러그 만들기', 'SEO 슬러그 생성', '온라인 슬러그 생성기'],
       longTailKeywords: ['제목을 SEO 친화적 URL 슬러그로 변환', '악센트 포함 제목 슬러그 생성', '여러 제목 일괄 슬러그 변환', '블로그 포스트 URL 슬러그 만들기'],
       schemaApplicationCategory: 'UtilitiesApplication',
     },

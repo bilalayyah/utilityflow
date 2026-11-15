@@ -211,7 +211,7 @@ export const enStrings: UiStrings = {
     clearFilters: 'Clear filters',
   },
   category: {
-    plannedCount: '{count} planned tools',
+    plannedCount: '{count} tools',
     toolsCount: '{count} tools',
     toolsLive: '{count} tools live',
     ofToolsLive: '{count} of {total} tools live',
@@ -220,7 +220,7 @@ export const enStrings: UiStrings = {
     scheduledTitle: 'More tools coming soon',
     scheduledDescription:
       'This category hub is active and indexed in the {name} architecture. Dedicated individual tool pages with browser-side functionality will be added here soon.',
-    plannedToolsTitle: 'Planned tools in this category:',
+    plannedToolsTitle: 'Tools in this category:',
   },
   toolPage: {
     howToUse: 'How to Use {name}',
@@ -322,7 +322,7 @@ export const enStrings: UiStrings = {
           'Tools are shipped and verified by category so each utility receives thorough functional testing and documentation.',
       },
     ],
-    categoriesTitle: 'Seven Planned Tool Categories',
+    categoriesTitle: 'Seven Tool Categories',
     feedbackTitle: 'Have Feedback or a Request?',
     feedbackBefore:
       'If you notice a calculation edge case, accessibility issue, or would like to suggest a new utility, reach out through our',

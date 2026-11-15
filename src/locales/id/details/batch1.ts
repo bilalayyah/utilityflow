@@ -1870,7 +1870,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'Untuk apa Penghitung Frekuensi Kata digunakan?',
         answer:
-          'Alat ini menghitung seberapa sering setiap kata atau frasa muncul dalam sebuah teks sehingga Anda bisa menemukan pengulangan, memeriksa keseimbangan kata kunci, dan menemukan tema yang berulang.',
+          'Alat ini menghitung seberapa sering setiap kata atau frasa muncul dalam sebuah teks sehingga Anda bisa menemukan pengulangan, memeriksa keseimbangan kata kunci, dan menemukan tema yang berulang. Untuk mengaudit kata kunci target dalam draf, lihat Pemeriksa Kepadatan Kata Kunci.',
       },
       {
         question: 'Apakah Penghitung Frekuensi Kata gratis digunakan?',
@@ -2033,7 +2033,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'Apa itu Pengubah Teks ke Slug?',
         answer:
-          'Alat ini mengubah judul atau frasa menjadi slug yang bersih dan aman untuk URL dengan mengubahnya menjadi huruf kecil, menghapus tanda baca, dan mengganti spasi dengan strip atau garis bawah.',
+          'Alat ini mengubah judul atau frasa menjadi slug yang bersih dan aman untuk URL dengan mengubahnya menjadi huruf kecil, menghapus tanda baca, dan mengganti spasi dengan strip atau garis bawah. Untuk slug URL massal dengan pratinjau domain dan pemotongan di batas kata, lihat Generator Slug URL.',
       },
       {
         question: 'Apakah Pengubah Teks ke Slug gratis digunakan?',

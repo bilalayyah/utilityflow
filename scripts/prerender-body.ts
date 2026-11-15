@@ -49,6 +49,7 @@ import { AI_TOOLS } from '../src/registry/aiTools';
 import { CATEGORIES } from '../src/registry/categories';
 import { getPopularTools, getRelatedTools } from '../src/registry/toolsRegistry';
 import type { ToolCategory, ToolDefinition } from '../src/types/tool';
+import { buildToolNameEntries, linkifyToolNames } from '../src/utils/linkifyToolNames';
 
 // ---------------------------------------------------------------------------
 // Escaping (same rules as prerender-meta.ts).
@@ -113,14 +114,20 @@ function toolCards(tools: ToolDefinition[], locale: LocaleCode): string {
   );
 }
 
-/** FAQ list: question as <h3>, answer as <p> (FAQAccordion renders only the first answer open; static shows all). */
-function faqList(items: Array<{ question: string; answer: string }>): string {
+/** FAQ list: question as <h3>, answer as <p> (FAQAccordion renders only the first answer open; static shows all).
+ * When `linkify` is given (tool pages, M-5), answers carry contextual
+ * internal links; questions stay plain text. Without it (home page) the
+ * answers are plain escaped text as before. */
+function faqList(
+  items: Array<{ question: string; answer: string }>,
+  linkify?: (text: string) => string
+): string {
   return items
     .map(
       (faq) =>
         `<div class="rounded-2xl bg-white px-4 py-4 shadow-sm mb-2.5">` +
         `<h3 class="text-base font-semibold text-slate-900">${escapeText(faq.question)}</h3>` +
-        `<p class="mt-1.5 text-sm sm:text-base leading-relaxed text-slate-600">${escapeText(faq.answer)}</p>` +
+        `<p class="mt-1.5 text-sm sm:text-base leading-relaxed text-slate-600">${linkify ? linkify(faq.answer) : escapeText(faq.answer)}</p>` +
         `</div>`
     )
     .join('');
@@ -151,6 +158,15 @@ export function renderToolBody(
   const related = getRelatedTools(tool, 4).map((item) =>
     getLocalizedTool(item, locale, data)
   );
+  // M-5: contextual internal links in guide prose — same linkifier the
+  // React page uses (src/utils/linkifyToolNames.ts), so the static HTML
+  // crawlers see matches the post-mount React render exactly. The map is
+  // built from the localized light records for this locale; the current
+  // tool is excluded inside the linkifier (a tool never links to itself).
+  // JSON-LD (scripts/prerender-meta.ts) keeps using the raw strings.
+  const toolNameEntries = buildToolNameEntries(getLocalizedTools(locale, data), locale);
+  const linkifyGuideText = (text: string): string =>
+    linkifyToolNames(text, toolNameEntries, { excludeToolId: tool.id });
   const parts: string[] = [];
   parts.push(openMain());
   parts.push('<article>');
@@ -197,7 +213,7 @@ export function renderToolBody(
       parts.push(
         `<li class="rounded-2xl bg-white p-4 shadow-sm"><p class="font-mono text-sm font-semibold text-indigo-600">${String(index + 1).padStart(2, '0')}.</p>` +
           `<h3 class="text-base font-semibold text-slate-900">${escapeText(step.title)}</h3>` +
-          `<p class="mt-1 text-sm leading-relaxed text-slate-600">${escapeText(step.description)}</p></li>`
+          `<p class="mt-1 text-sm leading-relaxed text-slate-600">${linkifyGuideText(step.description)}</p></li>`
       );
     }
     parts.push('</ol></section>');
@@ -217,7 +233,7 @@ export function renderToolBody(
           `<pre class="mt-1 whitespace-pre-wrap break-words text-xs font-mono rounded-xl bg-slate-50 border border-slate-200 p-3 text-slate-800">${escapeText(example.output)}</pre>`
       );
       if (example.explanation) {
-        parts.push(`<p class="mt-3 text-sm text-slate-600">${escapeText(example.explanation)}</p>`);
+        parts.push(`<p class="mt-3 text-sm text-slate-600">${linkifyGuideText(example.explanation)}</p>`);
       }
       parts.push('</div>');
     }
@@ -228,7 +244,7 @@ export function renderToolBody(
     parts.push(`<h2 class="${H2}">${escapeText(t.toolPage.keyBenefits)}</h2>`);
     parts.push('<ul class="space-y-2.5 text-sm text-slate-700">');
     for (const benefit of tool.benefits ?? []) {
-      parts.push(`<li>${escapeText(benefit)}</li>`);
+      parts.push(`<li>${linkifyGuideText(benefit)}</li>`);
     }
     parts.push('</ul></section>');
   }
@@ -237,14 +253,14 @@ export function renderToolBody(
     parts.push(`<h2 class="${H2}">${escapeText(t.toolPage.commonUseCases)}</h2>`);
     parts.push('<ul class="space-y-2 text-sm text-slate-600 list-disc pl-4">');
     for (const useCase of tool.useCases ?? []) {
-      parts.push(`<li>${escapeText(useCase)}</li>`);
+      parts.push(`<li>${linkifyGuideText(useCase)}</li>`);
     }
     parts.push('</ul></section>');
   }
   if ((tool.faqs ?? []).length > 0) {
     parts.push('<section>');
     parts.push(`<h2 class="${H2}">${escapeText(t.toolPage.faqs)}</h2>`);
-    parts.push(faqList(tool.faqs ?? []));
+    parts.push(faqList(tool.faqs ?? [], linkifyGuideText));
     parts.push('</section>');
   }
   parts.push('</div>');

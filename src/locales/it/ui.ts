@@ -213,7 +213,7 @@ export const itStrings: UiStrings = {
     clearFilters: 'Cancella i filtri',
   },
   category: {
-    plannedCount: '{count} strumenti previsti',
+    plannedCount: '{count} strumenti',
     toolsCount: '{count} strumenti',
     toolsLive: '{count} strumenti attivi',
     ofToolsLive: '{count} di {total} strumenti attivi',
@@ -222,7 +222,7 @@ export const itStrings: UiStrings = {
     scheduledTitle: 'Altri strumenti in arrivo',
     scheduledDescription:
       'Questo hub di categoria è attivo e indicizzato nell’architettura {name}. Le singole pagine degli strumenti con funzionalità nel browser saranno aggiunte qui a breve.',
-    plannedToolsTitle: 'Strumenti previsti in questa categoria:',
+    plannedToolsTitle: 'Strumenti in questa categoria:',
   },
   toolPage: {
     howToUse: 'Come usare {name}',
@@ -324,7 +324,7 @@ export const itStrings: UiStrings = {
           'Gli strumenti vengono distribuiti e verificati per categoria, così ogni utilità riceve test funzionali approfonditi e una documentazione completa.',
       },
     ],
-    categoriesTitle: 'Sette categorie di strumenti previste',
+    categoriesTitle: 'Sette categorie di strumenti',
     feedbackTitle: 'Hai commenti o richieste?',
     feedbackBefore:
       'Se noti un caso limite di calcolo, un problema di accessibilità, o vuoi suggerire una nuova utilità, contattaci tramite la nostra',

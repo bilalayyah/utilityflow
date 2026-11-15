@@ -937,7 +937,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'What is the difference between a slug and a permalink?',
         answer:
-          'The slug is the readable last part of a URL, like "best-cafe-tools", while the permalink is the complete URL including the domain and any folders.',
+          'The slug is the readable last part of a URL, like "best-cafe-tools", while the permalink is the complete URL including the domain and any folders. For quick developer text conversion with underscore separators, see Text to Slug Converter.',
       },
     ],
   },
@@ -1018,7 +1018,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'What exactly is keyword density?',
         answer:
-          'Keyword density is how often a word or phrase appears as a percentage of the total words in a text. A phrase used 5 times in 500 words has a density of 1%.',
+          'Keyword density is how often a word or phrase appears as a percentage of the total words in a text. A phrase used 5 times in 500 words has a density of 1%. For full frequency tables with CSV export, see Word Frequency Counter.',
       },
       {
         question: 'What counts as keyword stuffing?',

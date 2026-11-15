@@ -215,7 +215,7 @@ export const ptStrings: UiStrings = {
     clearFilters: 'Limpar filtros',
   },
   category: {
-    plannedCount: '{count} ferramentas planejadas',
+    plannedCount: '{count} ferramentas',
     toolsCount: '{count} ferramentas',
     toolsLive: '{count} ferramentas ativas',
     ofToolsLive: '{count} de {total} ferramentas ativas',
@@ -224,7 +224,7 @@ export const ptStrings: UiStrings = {
     scheduledTitle: 'Mais ferramentas em breve',
     scheduledDescription:
       'Este centro de categoria está ativo e indexado na arquitetura {name}. Páginas individuais de ferramentas com funcionalidade no navegador serão adicionadas aqui em breve.',
-    plannedToolsTitle: 'Ferramentas planejadas nesta categoria:',
+    plannedToolsTitle: 'Ferramentas nesta categoria:',
   },
   toolPage: {
     howToUse: 'Como usar {name}',
@@ -326,7 +326,7 @@ export const ptStrings: UiStrings = {
           'As ferramentas são entregues e verificadas por categoria, para que cada utilitário receba testes funcionais e documentação completos.',
       },
     ],
-    categoriesTitle: 'Sete categorias de ferramentas planejadas',
+    categoriesTitle: 'Sete categorias de ferramentas',
     feedbackTitle: 'Tem feedback ou uma sugestão?',
     feedbackBefore:
       'Se você notar um caso extremo de cálculo, um problema de acessibilidade ou quiser sugerir um novo utilitário, fale conosco pela nossa',

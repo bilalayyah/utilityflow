@@ -199,7 +199,7 @@ export const ZH_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
   },
   "url-slug-generator": {
     slug: "url-bieming-shengchengqi",
-    name: "URL别名与SEO路径优化工具",
+    name: "URL别名生成器",
     shortDescription:
       "将文章标题批量转换为整洁的SEO友好型URL别名，支持带重音字符转写和停用词过滤。",
     keywords: [
@@ -237,7 +237,7 @@ export const ZH_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
   },
   "keyword-density-checker": {
     slug: "guanjianzi-midu-jianchaqi",
-    name: "关键词密度与内容分析工具",
+    name: "关键词密度检查器",
     shortDescription:
       "在本地审核字数、目标关键词密度、阅读时长，以及出现频率最高的1词、2词和3词短语。",
     keywords: [

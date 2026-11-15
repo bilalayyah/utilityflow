@@ -213,7 +213,7 @@ export const deStrings: UiStrings = {
     clearFilters: 'Filter löschen',
   },
   category: {
-    plannedCount: '{count} geplante Tools',
+    plannedCount: '{count} Tools',
     toolsCount: '{count} Tools',
     toolsLive: '{count} Tools live',
     ofToolsLive: '{count} von {total} Tools live',
@@ -222,7 +222,7 @@ export const deStrings: UiStrings = {
     scheduledTitle: 'Weitere Tools folgen in Kürze',
     scheduledDescription:
       'Dieser Kategorie-Hub ist aktiv und in der {name}-Architektur indexiert. Eigene Tool-Seiten mit browserbasierter Funktionalität werden hier in Kürze ergänzt.',
-    plannedToolsTitle: 'Geplante Tools in dieser Kategorie:',
+    plannedToolsTitle: 'Tools in dieser Kategorie:',
   },
   toolPage: {
     howToUse: 'So verwenden Sie {name}',
@@ -324,7 +324,7 @@ export const deStrings: UiStrings = {
           'Tools werden nach Kategorie ausgeliefert und geprüft, sodass jedes Utility gründliche Funktionstests und Dokumentation erhält.',
       },
     ],
-    categoriesTitle: 'Sieben geplante Tool-Kategorien',
+    categoriesTitle: 'Sieben Tool-Kategorien',
     feedbackTitle: 'Feedback oder einen Wunsch?',
     feedbackBefore:
       'Wenn Ihnen ein Grenzfall bei einer Berechnung, ein Barrierefreiheitsproblem auffällt oder Sie ein neues Utility vorschlagen möchten, wenden Sie sich über unsere',

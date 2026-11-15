@@ -198,7 +198,7 @@ export const RU_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
   },
   "url-slug-generator": {
     slug: "generator-url-slagov",
-    name: "Генератор URL-слагов и оптимизатор SEO-путей",
+    name: "Генератор URL-слагов",
     shortDescription:
       "Превращайте заголовки статей в чистые SEO-слаги URL с транслитерацией диакритики пакетно, с фильтрацией стоп-слов.",
     keywords: [
@@ -236,7 +236,7 @@ export const RU_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
   },
   "keyword-density-checker": {
     slug: "proverka-plotnosti-klyuchevykh-slov",
-    name: "Проверка плотности ключевых слов и анализ контента",
+    name: "Проверка плотности ключевых слов",
     shortDescription:
       "Проверяйте число слов, плотность целевых ключевых слов, время чтения и частоту фраз из 1, 2 и 3 слов локально.",
     keywords: [

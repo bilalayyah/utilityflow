@@ -66,6 +66,63 @@ function redirectTo(url: URL, pathname: string): Response {
   return Response.redirect(target.toString(), 301);
 }
 
+// M-1: dedicated 404 <head> for unknown paths. The SPA shell returned by
+// context.next() is the HOME prerender, so its raw HTML carries the home
+// title, `index, follow`, home canonical, hreflang links and home JSON-LD
+// — all wrong on a 404 URL. Rewrite ONLY the <head>: swap in a 404 title /
+// description / `noindex, follow`, and strip every SEO tag that points at
+// the home page (canonical, hreflang, keywords, og:*, twitter:*, JSON-LD).
+// The functional head tags are kept verbatim — theme inline script, fonts
+// preconnect + stylesheet, AdSense script, gtag inline stub, entry module
+// script, modulepreload links, CSS link — so the client-side 404 page
+// still renders. No asset hashes are hardcoded: everything below is a
+// targeted string replacement/removal on the shell HTML at runtime, so it
+// survives rebuilds. Matching is attribute-order agnostic.
+const NOT_FOUND_TITLE = 'Page Not Found (404) | UtilityFlow';
+const NOT_FOUND_DESCRIPTION =
+  "The page you're looking for doesn't exist or was moved. Browse all 88 free UtilityFlow tools instead.";
+
+function rewrite404Head(html: string): string {
+  const headMatch = html.match(/<head[^>]*>([\s\S]*?)<\/head>/i);
+  if (!headMatch) return html;
+  let head = headMatch[1];
+
+  // Title: replace if present, otherwise insert at the top of <head>.
+  const titleTag = `<title>${NOT_FOUND_TITLE}</title>`;
+  if (/<title>[\s\S]*?<\/title>/i.test(head)) {
+    head = head.replace(/<title>[\s\S]*?<\/title>/i, titleTag);
+  } else {
+    head = `${titleTag}\n    ${head}`;
+  }
+
+  // Description + robots: replace if present, otherwise insert after <title>.
+  const descriptionTag = `<meta name="description" content="${NOT_FOUND_DESCRIPTION}" />`;
+  if (/<meta[^>]*\bname="description"[^>]*>/i.test(head)) {
+    head = head.replace(/<meta[^>]*\bname="description"[^>]*>/i, descriptionTag);
+  } else {
+    head = head.replace(/<\/title>/i, `</title>\n    ${descriptionTag}`);
+  }
+  const robotsTag = '<meta name="robots" content="noindex, follow" />';
+  if (/<meta[^>]*\bname="robots"[^>]*>/i.test(head)) {
+    head = head.replace(/<meta[^>]*\bname="robots"[^>]*>/i, robotsTag);
+  } else {
+    head = head.replace(/<\/title>/i, `</title>\n    ${robotsTag}`);
+  }
+
+  // Strip every SEO tag that belongs to the home page (no canonical at
+  // all on a 404 — there is no /404/ page to point at).
+  head = head.replace(/<link[^>]*\brel="canonical"[^>]*>/gi, '');
+  head = head.replace(/<link[^>]*\brel="alternate"[^>]*>/gi, '');
+  head = head.replace(/<meta[^>]*\bname="keywords"[^>]*>/gi, '');
+  head = head.replace(/<meta[^>]*\bproperty="og:[^"]*"[^>]*>/gi, '');
+  head = head.replace(/<meta[^>]*\bname="twitter:[^"]*"[^>]*>/gi, '');
+  head = head.replace(/<script[^>]*\btype="application\/ld\+json"[^>]*>[\s\S]*?<\/script>/gi, '');
+
+  const openTag = headMatch[0].slice(0, headMatch[0].indexOf(headMatch[1]));
+  const start = headMatch.index!;
+  return html.slice(0, start) + openTag + head + '</head>' + html.slice(start + headMatch[0].length);
+}
+
 export async function onRequest(context: MiddlewareContext): Promise<Response> {
   const { request } = context;
   const method = request.method.toUpperCase();
@@ -105,9 +162,15 @@ export async function onRequest(context: MiddlewareContext): Promise<Response> {
   }
 
   // Unknown path: serve the SPA shell with a real 404 status (and don't
-  // let edge caches keep the 404 around).
+  // let edge caches keep the 404 around). The shell's <head> is rewritten
+  // to a dedicated 404 head (M-1) so crawlers never see the home page's
+  // SEO tags on a 404 URL; the functional head tags stay verbatim so the
+  // client-side 404 page still renders. The rewritten body differs in
+  // length, so drop the shell's stale content-length header.
   const res = await context.next();
   const headers = new Headers(res.headers);
   headers.set('cache-control', 'no-store');
-  return new Response(res.body, { status: 404, headers });
+  headers.delete('content-length');
+  const shell = await res.text();
+  return new Response(rewrite404Head(shell), { status: 404, headers });
 }

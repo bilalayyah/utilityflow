@@ -1,5 +1,5 @@
 import { Check, Info } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import type { ReactNode } from 'react';
 import { buildCanonicalUrl } from '../../config/site';
 import { getOgImageForPage } from '../../config/ogImages';
@@ -7,9 +7,10 @@ import { loadToolDetail } from '../../locales/details';
 import { useLocale } from '../../locales/LocaleContext';
 import { categoryHref, localizeStaticPath, toolHref } from '../../locales/config';
 import { getToolAlternatePaths, toHreflangEntries } from '../../locales/routes';
-import { getLocalizedCategory } from '../../locales/tools';
+import { getLocalizedCategory, getLocalizedTools } from '../../locales/tools';
 import { formatString } from '../../locales/ui';
 import type { BreadcrumbItem, ToolDefinition, ToolDetail, ToolStep } from '../../types/tool';
+import { buildToolNameEntries, linkifyToolNames } from '../../utils/linkifyToolNames';
 import { AdSlot } from '../common/AdSlot';
 import { Breadcrumbs, buildBreadcrumbSchema } from '../common/Breadcrumbs';
 import { FAQAccordion, buildFaqSchema } from '../common/FAQAccordion';
@@ -74,6 +75,17 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
   const category = getLocalizedCategory(tool.categoryId, locale);
   const canonicalPath = toolHref(tool.slug, locale);
   const howToTitle = formatString(t.toolPage.howToUse, { name: tool.name });
+  // M-5: contextual internal links in guide prose. The entry map comes
+  // from the light locale records (getLocalizedTools — names/slugs already
+  // in the locale chunk), NOT from detail modules, so this adds no detail
+  // payload to the bundle. The current tool is excluded inside the
+  // linkifier (a tool never links to itself).
+  const toolNameEntries = useMemo(
+    () => buildToolNameEntries(getLocalizedTools(locale), locale),
+    [locale]
+  );
+  const linkifyGuideText = (text: string): string =>
+    linkifyToolNames(text, toolNameEntries, { excludeToolId: tool.id });
   // Pastel redesign: the tool's own palette tints the workbench shell and
   // sidebar panels; a second deterministic palette tints the use-cases panel.
   const palette = pastelForKey(tool.id);
@@ -194,9 +206,10 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
                         </span>
                         <div>
                           <h3 className="text-base font-semibold text-slate-900">{step.title}</h3>
-                          <p className="mt-1 text-sm leading-relaxed text-slate-600">
-                            {step.description}
-                          </p>
+                          <p
+                            className="mt-1 text-sm leading-relaxed text-slate-600"
+                            dangerouslySetInnerHTML={{ __html: linkifyGuideText(step.description) }}
+                          />
                         </div>
                       </li>
                     );
@@ -238,7 +251,10 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
                           </div>
                         </div>
                         {example.explanation && (
-                          <p className="text-sm text-slate-600">{example.explanation}</p>
+                          <p
+                            className="text-sm text-slate-600"
+                            dangerouslySetInnerHTML={{ __html: linkifyGuideText(example.explanation) }}
+                          />
                         )}
                       </div>
                     );
@@ -252,7 +268,7 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
                 <h2 id="tool-faq-heading" className="text-2xl font-bold text-slate-900 mb-4">
                   {t.toolPage.faqs}
                 </h2>
-                <FAQAccordion items={fullTool.faqs} />
+                <FAQAccordion items={fullTool.faqs} renderAnswer={(answer) => <span dangerouslySetInnerHTML={{ __html: linkifyGuideText(answer) }} />} />
               </section>
             )}
           </div>
@@ -268,7 +284,7 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
                         className={`w-4 h-4 shrink-0 mt-0.5 ${palette.link}`}
                         aria-hidden="true"
                       />
-                      <span>{benefit}</span>
+                      <span dangerouslySetInnerHTML={{ __html: linkifyGuideText(benefit) }} />
                     </li>
                   ))}
                 </ul>
@@ -280,7 +296,10 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
                 <h2 className="text-lg font-bold text-slate-900 mb-3">{t.toolPage.commonUseCases}</h2>
                 <ul className="space-y-2 text-sm text-slate-600 list-disc pl-4">
                   {fullTool.useCases.map((useCase) => (
-                    <li key={useCase}>{useCase}</li>
+                    <li
+                      key={useCase}
+                      dangerouslySetInnerHTML={{ __html: linkifyGuideText(useCase) }}
+                    />
                   ))}
                 </ul>
               </section>

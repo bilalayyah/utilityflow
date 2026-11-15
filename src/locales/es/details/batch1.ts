@@ -1874,7 +1874,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: '¿Para qué se usa un Contador de Frecuencia de Palabras?',
         answer:
-          'Cuenta cuántas veces aparece cada palabra o frase en un texto para que puedas detectar repeticiones, verificar el equilibrio de palabras clave y encontrar temas recurrentes.',
+          'Cuenta cuántas veces aparece cada palabra o frase en un texto para que puedas detectar repeticiones, verificar el equilibrio de palabras clave y encontrar temas recurrentes. Para auditar una palabra clave objetivo en un borrador, consulta Verificador de Densidad de Palabras Clave.',
       },
       {
         question: '¿El Contador de Frecuencia de Palabras es gratis?',
@@ -2038,7 +2038,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: '¿Qué es un Convertidor de Texto a Slug?',
         answer:
-          'Convierte un título o frase en un slug limpio y seguro para URL poniéndolo en minúsculas, eliminando la puntuación y reemplazando los espacios con guiones o guiones bajos.',
+          'Convierte un título o frase en un slug limpio y seguro para URL poniéndolo en minúsculas, eliminando la puntuación y reemplazando los espacios con guiones o guiones bajos. Para slugs de URL por lotes con vista previa del dominio y truncado en límites de palabra, consulta Generador de Slugs URL.',
       },
       {
         question: '¿El Convertidor de Texto a Slug es gratis?',

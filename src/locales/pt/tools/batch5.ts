@@ -198,7 +198,7 @@ export const PT_BATCH_5_OVERRIDES: Record<string, ToolLocaleOverride> = {
   },
   'url-slug-generator': {
     slug: 'gerador-de-slug-de-url',
-    name: 'Gerador de Slug de URL e Otimizador de SEO',
+    name: 'Gerador de Slug de URL',
     shortDescription:
       'Converta títulos de artigos em slugs de URL de SEO limpos, com transliteração de acentos, em lote e com filtragem de stop words.',
     keywords: [

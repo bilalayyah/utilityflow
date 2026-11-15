@@ -319,27 +319,27 @@ export const ID_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
   },
   'word-frequency-counter': {
     slug: 'penghitung-frekuensi-kata',
-    name: 'Penghitung Frekuensi Kata & Kepadatan Kata Kunci',
+    name: 'Penghitung Frekuensi Kata',
     shortDescription:
-      'Analisis frekuensi frasa 1 kata, 2 kata, dan 3 kata serta persentase kepadatannya dengan ekspor CSV.',
+      'Hitung frekuensi frasa 1, 2, dan 3 kata dengan penyaringan kata henti dan ekspor CSV sekali klik untuk spreadsheet.',
     keywords: [
       'penghitung frekuensi kata',
-      'pemeriksa kepadatan kata kunci',
+      'penghitung frekuensi frasa',
       'penghitung ngram',
       'analisis pengulangan kata',
       'analisis frekuensi frasa',
-      'kalkulator kepadatan kata kunci',
+      'alat frekuensi kata',
       'hitung kata berulang online',
       'penghitung kemunculan kata',
       'analisis frekuensi teks',
     ],
     seo: {
-      title: 'Penghitung Frekuensi Kata & Kepadatan | UtilityFlow',
+      title: 'Penghitung Frekuensi Kata & Ekspor CSV | UtilityFlow',
       description:
-        'Analisis frekuensi kata dan kepadatan kata kunci untuk frasa 1, 2, dan 3 kata dengan persentase, penyaringan kata henti, dan ekspor CSV — gratis, di browser.',
+        'Hitung seberapa sering frasa 1, 2, dan 3 kata muncul dalam teks apa pun, dengan penyaringan kata henti dan ekspor CSV sekali klik untuk spreadsheet.',
       primaryKeyword: 'penghitung frekuensi kata',
-      secondaryKeywords: ['pemeriksa kepadatan kata kunci', 'analisis frekuensi frasa', 'alat kemunculan kata', 'penghitung frekuensi ngram'],
-      longTailKeywords: ['hitung frekuensi kata dan persentase kepadatan online', 'analisis frasa 2 kata dan 3 kata dalam teks', 'ekspor tabel frekuensi kata ke csv', 'cek penjejalan kata kunci dalam draf artikel'],
+      secondaryKeywords: ['penganalisis frekuensi kata', 'analisis frekuensi frasa', 'alat kemunculan kata', 'penghitung frekuensi ngram'],
+      longTailKeywords: ['hitung frekuensi kata dan persentase kepadatan online', 'analisis frasa 2 kata dan 3 kata dalam teks', 'ekspor tabel frekuensi kata ke csv', 'temukan frasa berulang dalam teks online'],
       schemaApplicationCategory: 'UtilitiesApplication',
     },
     intro:
@@ -349,10 +349,10 @@ export const ID_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
     slug: 'teks-ke-slug',
     name: 'Pengubah Teks ke Slug',
     shortDescription:
-      'Ubah judul dan heading menjadi slug URL yang bersih dan ramah SEO dengan transliterasi aksen dan mode massal.',
+      'Ubah teks apa pun menjadi slug URL yang bersih untuk kode, nama file, dan kunci database, dengan transliterasi aksen dan mode massal.',
     keywords: [
       'teks ke slug',
-      'generator slug url',
+      'slugify teks online',
       'slugify online',
       'pemformat url seo',
       'konverter slug',
@@ -362,11 +362,11 @@ export const ID_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       'generator slug massal',
     ],
     seo: {
-      title: 'Pengubah Teks ke Slug – URL SEO Bersih | UtilityFlow',
+      title: 'Pengubah Teks ke Slug untuk Developer | UtilityFlow',
       description:
-        'Ubah judul dan heading menjadi slug URL yang bersih dan ramah SEO dengan transliterasi aksen, pemisah strip atau garis bawah, dan mode baris massal — gratis.',
+        'Ubah teks apa pun menjadi slug URL yang bersih untuk kode, nama file, dan kunci database — dengan transliterasi aksen, pemisah garis bawah, dan mode massal.',
       primaryKeyword: 'pengubah teks ke slug',
-      secondaryKeywords: ['generator slug url', 'slugify string', 'generator url bersih', 'alat judul ke slug'],
+      secondaryKeywords: ['slugify teks', 'slugify string', 'generator url bersih', 'alat judul ke slug'],
       longTailKeywords: ['ubah judul artikel jadi slug url ramah seo', 'ubah banyak judul jadi slug secara massal', 'slugify karakter beraksen jadi ascii online', 'pemisah slug strip atau garis bawah'],
       schemaApplicationCategory: 'UtilitiesApplication',
     },

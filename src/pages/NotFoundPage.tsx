@@ -17,7 +17,9 @@ export function NotFoundPage() {
       <SeoHead
         title={t.notFound.seoTitle}
         description={t.notFound.seoDescription}
-        canonicalPath={`${getLocaleInfo(locale).pathPrefix}/404/`}
+        // L-1/L-2: canonical is the home page — there is no /404/ page,
+        // so a /404/ canonical would point at a URL that itself 404s.
+        canonicalPath={`${getLocaleInfo(locale).pathPrefix}/`}
         noIndex
       />
 

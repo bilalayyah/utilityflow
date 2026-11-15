@@ -973,7 +973,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'Quelle est la différence entre un slug et un permalien ?',
         answer:
-          'Le slug est la dernière partie lisible d’une URL, comme « best-cafe-tools », tandis que le permalien est l’URL complète, domaine et dossiers inclus.',
+          'Le slug est la dernière partie lisible d’une URL, comme « best-cafe-tools », tandis que le permalien est l’URL complète, domaine et dossiers inclus. Pour une conversion rapide de texte pour développeurs avec des underscores, voir Convertisseur de Texte en Slug.',
       },
     ],
   },
@@ -1060,7 +1060,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'Qu’est-ce que la densité de mots-clés exactement ?',
         answer:
-          'La densité de mots-clés est la fréquence d’apparition d’un mot ou d’une expression en pourcentage du nombre total de mots d’un texte. Une expression utilisée 5 fois dans 500 mots a une densité de 1 %.',
+          'La densité de mots-clés est la fréquence d’apparition d’un mot ou d’une expression en pourcentage du nombre total de mots d’un texte. Une expression utilisée 5 fois dans 500 mots a une densité de 1 %. Pour des tableaux de fréquence complets avec export CSV, voir Compteur de Fréquence de Mots.',
       },
       {
         question: 'Qu’est-ce que le bourrage de mots-clés ?',

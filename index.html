@@ -44,9 +44,26 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      id="utilityflow-fonts"
       href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=Great+Vibes&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
       rel="stylesheet"
+      media="print"
     />
+    <!-- M-7: load Google Fonts without render-blocking. The stylesheet
+         above starts as media="print" (fetched in parallel by the preload
+         scanner, NOT render-blocking); this inline script swaps it to
+         media="all" as soon as it is ready. No inline onload attribute is
+         used because CSP script-src has no 'unsafe-inline'. Do NOT move
+         this script (its CSP sha256 hash lives in public/_headers). -->
+    <script>
+      (function () {
+        var link = document.getElementById('utilityflow-fonts');
+        if (!link) return;
+        var apply = function () { link.media = 'all'; };
+        if (link.sheet) { apply(); } else { link.addEventListener('load', apply); }
+        window.addEventListener('load', apply);
+      })();
+    </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5754238751997058"
      crossorigin="anonymous"></script>
     <!-- Google Analytics 4 (Audit Fix #6) — Measurement ID G-EEF32XG70M.

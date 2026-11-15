@@ -1816,7 +1816,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'What is a Word Frequency Counter used for?',
         answer:
-          'It counts how often each word or phrase appears in a text so you can spot repetition, check keyword balance and find recurring themes.',
+          'It counts how often each word or phrase appears in a text so you can spot repetition, check keyword balance and find recurring themes. To audit a target keyword in a draft, see Keyword Density Checker.',
       },
       {
         question: 'Is the Word Frequency Counter free to use?',
@@ -1973,7 +1973,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'What is a Text to Slug Converter?',
         answer:
-          'It turns a title or phrase into a clean, URL-safe slug by lowercasing it, removing punctuation and replacing spaces with hyphens or underscores.',
+          'It turns a title or phrase into a clean, URL-safe slug by lowercasing it, removing punctuation and replacing spaces with hyphens or underscores. For bulk URL slugs with domain preview and word-boundary truncation, see URL Slug Generator.',
       },
       {
         question: 'Is the Text to Slug Converter free to use?',

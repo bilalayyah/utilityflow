@@ -319,27 +319,27 @@ export const ES_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
   },
   'word-frequency-counter': {
     slug: 'contador-de-frecuencia-de-palabras',
-    name: 'Contador de Frecuencia de Palabras y Densidad de Palabras Clave',
+    name: 'Contador de Frecuencia de Palabras',
     shortDescription:
-      'Analiza frecuencias de frases de 1, 2 y 3 palabras y porcentajes de densidad con exportación a CSV.',
+      'Cuenta frecuencias de frases de 1, 2 y 3 palabras con filtro de palabras vacías y exportación CSV en un clic para hojas de cálculo.',
     keywords: [
       'contador de frecuencia de palabras',
-      'verificador de densidad de palabras clave',
+      'contador de frecuencia de frases',
       'contador de ngramas',
       'analizador de repetición de palabras',
       'analizador de frecuencia de frases',
-      'calculadora de densidad de palabras clave',
+      'herramienta de frecuencia de palabras',
       'contar palabras repetidas online',
       'contador de ocurrencias de palabras',
       'análisis de frecuencia de texto',
     ],
     seo: {
-      title: 'Contador de Frecuencia de Palabras Online | UtilityFlow',
+      title: 'Contador de Frecuencia de Palabras y CSV | UtilityFlow',
       description:
-        'Analiza la frecuencia de palabras y la densidad de frases de 1, 2 y 3 palabras con porcentajes, filtro de palabras vacías y exportación CSV, gratis y privado.',
+        'Cuenta la frecuencia de frases de 1, 2 y 3 palabras en cualquier texto, con filtro de palabras vacías y exportación CSV en un clic para hojas de cálculo.',
       primaryKeyword: 'contador de frecuencia de palabras',
-      secondaryKeywords: ['verificador de densidad de palabras clave', 'analizador de frecuencia de frases', 'herramienta de ocurrencia de palabras', 'contador de frecuencia de ngramas'],
-      longTailKeywords: ['contar frecuencia de palabras y porcentaje de densidad online', 'analizar frases de 2 y 3 palabras en texto', 'exportar tabla de frecuencia de palabras a csv', 'verificar relleno de palabras clave en borrador de artículo'],
+      secondaryKeywords: ['analizador de frecuencia de palabras', 'analizador de frecuencia de frases', 'herramienta de ocurrencia de palabras', 'contador de frecuencia de ngramas'],
+      longTailKeywords: ['contar frecuencia de palabras y porcentaje de densidad online', 'analizar frases de 2 y 3 palabras en texto', 'exportar tabla de frecuencia de palabras a csv', 'analizar frases repetidas en borradores largos'],
       schemaApplicationCategory: 'UtilitiesApplication',
     },
     intro:
@@ -349,10 +349,10 @@ export const ES_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
     slug: 'convertidor-de-texto-a-slug',
     name: 'Convertidor de Texto a Slug',
     shortDescription:
-      'Convierte títulos y encabezados en slugs de URL limpios y optimizados para SEO, con transliteración de acentos y modo por lotes.',
+      'Convierte cualquier texto en slugs de URL limpios para código, nombres de archivo y claves de base de datos, con transliteración de acentos y modo por lotes.',
     keywords: [
       'texto a slug',
-      'generador de slug de url',
+      'slugify texto online',
       'slugify online',
       'formateador de url seo',
       'convertidor de slug',
@@ -362,11 +362,11 @@ export const ES_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       'generador de slug por lotes',
     ],
     seo: {
-      title: 'Convertidor de Texto a Slug para SEO | UtilityFlow',
+      title: 'Convertidor de Texto a Slug: Desarrollador | UtilityFlow',
       description:
-        'Convierte títulos y encabezados en slugs de URL limpios y optimizados para SEO, con transliteración de acentos, separadores y modo por lotes, sin registro.',
+        'Convierte cualquier texto en slugs de URL limpios para código, nombres de archivo y claves de base de datos, con transliteración de acentos y modo por lotes.',
       primaryKeyword: 'convertidor de texto a slug',
-      secondaryKeywords: ['generador de slug de url', 'slugify de texto', 'generador de url limpia', 'herramienta de título a slug'],
+      secondaryKeywords: ['slugify texto', 'slugify de texto', 'generador de url limpia', 'herramienta de título a slug'],
       longTailKeywords: ['convertir título de artículo a slug de url optimizado para seo', 'convertir varios encabezados a slugs por lotes', 'convertir caracteres acentuados a ascii para slug online', 'separador de slug con guion o guion bajo'],
       schemaApplicationCategory: 'UtilitiesApplication',
     },

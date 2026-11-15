@@ -1,11 +1,18 @@
 import { ChevronDown } from 'lucide-react';
 import { useId, useState } from 'react';
+import type { ReactNode } from 'react';
 import type { ToolFAQ } from '../../types/tool';
 import { PASTEL_PALETTES } from '../tool/pastel';
 
 interface FAQAccordionProps {
   items: ToolFAQ[];
   defaultOpenIndex?: number | null;
+  // M-5: optional answer renderer. When provided (tool pages), the answer
+  // is rendered from the linkifier's escaped HTML so named sibling tools
+  // become real links. When omitted (e.g. HomePage), answers render as
+  // plain text exactly as before. The JSON-LD (buildFaqSchema) always uses
+  // the raw strings — never the rendered output.
+  renderAnswer?: (answer: string) => ReactNode;
 }
 
 export function buildFaqSchema(items: ToolFAQ[]) {
@@ -23,7 +30,7 @@ export function buildFaqSchema(items: ToolFAQ[]) {
   };
 }
 
-export function FAQAccordion({ items, defaultOpenIndex = 0 }: FAQAccordionProps) {
+export function FAQAccordion({ items, defaultOpenIndex = 0, renderAnswer }: FAQAccordionProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(defaultOpenIndex);
   const baseId = useId();
 
@@ -71,7 +78,7 @@ export function FAQAccordion({ items, defaultOpenIndex = 0 }: FAQAccordionProps)
                 aria-labelledby={triggerId}
                 className="pb-5 pr-8 text-sm sm:text-base leading-relaxed text-slate-600"
               >
-                {item.answer}
+                {renderAnswer ? renderAnswer(item.answer) : item.answer}
               </div>
             )}
           </div>

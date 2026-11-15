@@ -319,27 +319,27 @@ export const DE_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
   },
   'word-frequency-counter': {
     slug: 'worthaeufigkeit-zaehler',
-    name: 'Worthäufigkeits- & Keyword-Dichte-Zähler',
+    name: 'Worthäufigkeits-Zähler',
     shortDescription:
-      'Analysieren Sie die Häufigkeit von 1-Wort-, 2-Wort- und 3-Wort-Phrasen und Dichteprozente mit CSV-Export.',
+      'Zählen Sie die Häufigkeit von 1-, 2- und 3-Wort-Phrasen mit Stoppwort-Filter und CSV-Export per Klick für Tabellenkalkulationen.',
     keywords: [
       'worthäufigkeit zähler',
-      'keyword dichte prüfer',
+      'phrasen häufigkeit zähler',
       'ngram zähler',
       'wortwiederholung analysator',
       'phrasen häufigkeit analysator',
-      'keyword dichte rechner',
+      'wort häufigkeit tool',
       'wiederholte wörter online zählen',
       'wortvorkommen zähler',
       'text häufigkeitsanalyse',
     ],
     seo: {
-      title: 'Worthäufigkeit: Keyword-Dichte prüfen | UtilityFlow',
+      title: 'Worthäufigkeit zählen & als CSV exportieren | UtilityFlow',
       description:
-        'Analysieren Sie Worthäufigkeit und Keyword-Dichte für 1-, 2- und 3-Wort-Phrasen mit Prozenten, Stoppwort-Filter und CSV-Export – kostenlos und privat.',
+        'Zählen Sie, wie oft 1-, 2- und 3-Wort-Phrasen in einem Text vorkommen – mit Stoppwort-Filter und CSV-Export per Klick, kostenlos im Browser.',
       primaryKeyword: 'worthäufigkeit prüfen',
-      secondaryKeywords: ['keyword dichte prüfer', 'phrasen häufigkeit analysator', 'wortvorkommen tool', 'ngram häufigkeit zähler'],
-      longTailKeywords: ['worthäufigkeit und dichte prozent online zählen', '2 wort und 3 wort phrasen in text analysieren', 'worthäufigkeit tabelle als csv exportieren', 'keyword stuffing in artikelentwurf prüfen'],
+      secondaryKeywords: ['wort häufigkeit analysator', 'phrasen häufigkeit analysator', 'wortvorkommen tool', 'ngram häufigkeit zähler'],
+      longTailKeywords: ['worthäufigkeit und dichte prozent online zählen', '2 wort und 3 wort phrasen in text analysieren', 'worthäufigkeit tabelle als csv exportieren', 'wiederholte phrasen in text finden online'],
       schemaApplicationCategory: 'UtilitiesApplication',
     },
     intro:
@@ -349,10 +349,10 @@ export const DE_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
     slug: 'text-zu-slug',
     name: 'Text-zu-Slug-Konverter',
     shortDescription:
-      'Wandeln Sie Titel und Überschriften in saubere, SEO-freundliche URL-Slugs um – mit Umlaut-Transliteration und Stapelmodus.',
+      'Wandeln Sie beliebigen Text in saubere URL-Slugs für Code, Dateinamen und Datenbankschlüssel um – mit Umlaut-Transliteration und Stapelmodus.',
     keywords: [
       'text zu slug',
-      'url slug generator',
+      'text slugify online',
       'slugify online',
       'seo url formatter',
       'slug konverter',
@@ -362,11 +362,11 @@ export const DE_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       'stapel slug generator',
     ],
     seo: {
-      title: 'Text-zu-Slug: SEO-freundliche URLs erstellen | UtilityFlow',
+      title: 'Text-zu-Slug-Konverter für Entwickler | UtilityFlow',
       description:
-        'Wandeln Sie Titel und Überschriften in SEO-freundliche URL-Slugs um – mit Umlaut-Transliteration, Bindestrich- oder Unterstrich-Trennzeichen und Stapelmodus.',
+        'Wandeln Sie beliebigen Text in saubere URL-Slugs für Code und Dateinamen um – mit Umlaut-Transliteration, Unterstrich-Trennzeichen und Stapelmodus.',
       primaryKeyword: 'text zu slug',
-      secondaryKeywords: ['url slug generator', 'slugify string', 'sauberer url generator', 'titel zu slug tool'],
+      secondaryKeywords: ['slugify text', 'slugify string', 'sauberer url generator', 'titel zu slug tool'],
       longTailKeywords: ['artikeltitel in seo freundlichen url slug umwandeln', 'mehrere überschriften stapelweise in slugs umwandeln', 'slugify umlaute in ascii online', 'bindestrich oder unterstrich slug trennzeichen'],
       schemaApplicationCategory: 'UtilitiesApplication',
     },

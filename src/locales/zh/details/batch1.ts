@@ -1855,7 +1855,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: '词频统计工具统计什么？',
         answer:
-          '统计文章中每个单词的出现次数；此外还会显示 2 词和 3 词短语的频率，便于发现重复的表达。',
+          '统计文章中每个单词的出现次数；此外还会显示 2 词和 3 词短语的频率，便于发现重复的表达。 如需审核草稿中的目标关键词，请查看关键词密度检查器。',
       },
       {
         question: '什么是关键词密度？',
@@ -2018,7 +2018,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: '什么是链接（slug）？',
         answer:
-          '网址末尾使用的易读且适合 SEO 的字符串，例如“/how-to-make-coffee”中由小写字母和连字符组成的部分。',
+          '网址末尾使用的易读且适合 SEO 的字符串，例如“/how-to-make-coffee”中由小写字母和连字符组成的部分。 如需批量生成带域名预览的URL别名，请查看URL别名生成器。',
       },
       {
         question: '文本转链接工具免费吗？',

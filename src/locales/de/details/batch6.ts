@@ -973,7 +973,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'Was ist der Unterschied zwischen einem Slug und einem Permalink?',
         answer:
-          'Der Slug ist der lesbare letzte Teil einer URL, etwa „beste-cafe-tools“, während der Permalink die vollständige URL inklusive Domain und Ordner ist.',
+          'Der Slug ist der lesbare letzte Teil einer URL, etwa „beste-cafe-tools“, während der Permalink die vollständige URL inklusive Domain und Ordner ist. Für schnelle Textumwandlung für Entwickler mit Unterstrich-Trennzeichen siehe Text-zu-Slug-Konverter.',
       },
     ],
   },
@@ -1060,7 +1060,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'Was genau ist Keyword-Dichte?',
         answer:
-          'Keyword-Dichte ist, wie oft ein Wort oder eine Phrase als Prozentsatz der Gesamtwörter in einem Text vorkommt. Eine Phrase, die in 500 Wörtern 5-mal vorkommt, hat eine Dichte von 1 %.',
+          'Keyword-Dichte ist, wie oft ein Wort oder eine Phrase als Prozentsatz der Gesamtwörter in einem Text vorkommt. Eine Phrase, die in 500 Wörtern 5-mal vorkommt, hat eine Dichte von 1 %. Für vollständige Häufigkeitstabellen mit CSV-Export siehe Worthäufigkeits-Zähler.',
       },
       {
         question: 'Was gilt als Keyword-Stuffing?',

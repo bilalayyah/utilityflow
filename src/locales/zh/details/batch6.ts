@@ -973,7 +973,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: "别名和固定链接有什么区别？",
         answer:
-          "别名是URL末尾易读的部分，例如“best-cafe-tools”，而固定链接是包含域名和文件夹的完整链接。",
+          "别名是URL末尾易读的部分，例如“best-cafe-tools”，而固定链接是包含域名和文件夹的完整链接。 如需用下划线分隔符快速转换开发者文本，请查看文本转链接工具。",
       },
     ],
   },
@@ -1060,7 +1060,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: "关键词密度到底是什么？",
         answer:
-          "关键词密度是指某个词或短语的出现次数占文本总字数的百分比。500词中出现5次的短语，密度就是1%。",
+          "关键词密度是指某个词或短语的出现次数占文本总字数的百分比。500词中出现5次的短语，密度就是1%。 如需查看支持CSV导出的完整频率表，请查看词频统计工具。",
       },
       {
         question: "什么是关键词堆砌？",

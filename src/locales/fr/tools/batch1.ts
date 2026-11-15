@@ -319,27 +319,27 @@ export const FR_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
   },
   'word-frequency-counter': {
     slug: 'compteur-de-frequence-de-mots',
-    name: 'Compteur de Fréquence de Mots et de Densité',
+    name: 'Compteur de Fréquence de Mots',
     shortDescription:
-      'Analysez les fréquences des expressions de 1, 2 et 3 mots et les pourcentages de densité avec export CSV.',
+      'Comptez les fréquences des expressions de 1, 2 et 3 mots avec filtrage des mots vides et export CSV en un clic pour vos tableurs.',
     keywords: [
       'compteur de fréquence de mots',
-      'vérificateur de densité de mots-clés',
+      'compteur de fréquence d’expressions',
       'compteur de n-grammes',
       'analyseur de répétition de mots',
       'analyseur de fréquence d’expressions',
-      'calculateur de densité de mots-clés',
+      'outil de fréquence de mots',
       'compter les mots répétés en ligne',
       'compteur d’occurrences de mots',
       'analyse de fréquence de texte',
     ],
     seo: {
-      title: 'Compteur de Fréquence de Mots et Densité | UtilityFlow',
+      title: 'Compteur de Fréquence de Mots et Export CSV | UtilityFlow',
       description:
-        'Analysez la fréquence des mots et la densité des mots-clés pour les expressions de 1, 2 et 3 mots, avec filtrage des mots vides et export CSV, en ligne.',
+        'Comptez la fréquence des expressions de 1, 2 et 3 mots dans n’importe quel texte, avec filtrage des mots vides et export CSV en un clic pour vos tableurs.',
       primaryKeyword: 'compteur de fréquence de mots',
-      secondaryKeywords: ['vérificateur de densité de mots-clés', 'analyseur de fréquence d’expressions', 'outil d’occurrences de mots', 'compteur de fréquence de n-grammes'],
-      longTailKeywords: ['compter la fréquence des mots et le pourcentage de densité en ligne', 'analyser les expressions de 2 et 3 mots dans un texte', 'exporter le tableau de fréquence des mots en csv', 'vérifier le bourrage de mots-clés dans un brouillon d’article'],
+      secondaryKeywords: ['analyseur de fréquence de mots', 'analyseur de fréquence d’expressions', 'outil d’occurrences de mots', 'compteur de fréquence de n-grammes'],
+      longTailKeywords: ['compter la fréquence des mots et le pourcentage de densité en ligne', 'analyser les expressions de 2 et 3 mots dans un texte', 'exporter le tableau de fréquence des mots en csv', 'analyser les expressions répétées dans les longs brouillons'],
       schemaApplicationCategory: 'UtilitiesApplication',
     },
     intro:
@@ -349,10 +349,10 @@ export const FR_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
     slug: 'convertisseur-texte-en-slug',
     name: 'Convertisseur de Texte en Slug',
     shortDescription:
-      'Convertissez des titres et des rubriques en slugs d’URL propres et adaptés au SEO, avec translittération des accents et mode par lot.',
+      'Convertissez n’importe quel texte en slugs d’URL propres pour le code, les noms de fichiers et les clés de base de données, avec translittération des accents et mode par lot.',
     keywords: [
       'texte en slug',
-      'générateur de slug d’url',
+      'slugifier texte en ligne',
       'slugifier en ligne',
       'formateur d’url seo',
       'convertisseur de slug',
@@ -362,11 +362,11 @@ export const FR_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
       'générateur de slug par lot',
     ],
     seo: {
-      title: 'Convertisseur Texte en Slug : URL SEO propres | UtilityFlow',
+      title: 'Convertisseur Texte en Slug : Développeur | UtilityFlow',
       description:
-        'Transformez des titres en slugs d’URL propres et adaptés au SEO, avec translittération des accents et mode par lot — gratuit et privé, dans votre navigateur.',
+        'Convertissez n’importe quel texte en slugs d’URL propres pour le code et les noms de fichiers, avec translittération des accents, underscores et mode par lot.',
       primaryKeyword: 'convertisseur de texte en slug',
-      secondaryKeywords: ['générateur de slug d’url', 'slugifier une chaîne', 'générateur d’url propre', 'outil de titre en slug'],
+      secondaryKeywords: ['slugifier du texte', 'slugifier une chaîne', 'générateur d’url propre', 'outil de titre en slug'],
       longTailKeywords: ['convertir un titre d’article en slug d’url adapté au seo', 'convertir plusieurs titres en slugs par lot', 'slugifier les caractères accentués en ascii en ligne', 'générer un slug à partir d’un nom de produit'],
       schemaApplicationCategory: 'UtilitiesApplication',
     },

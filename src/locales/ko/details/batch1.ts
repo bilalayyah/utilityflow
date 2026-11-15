@@ -1887,7 +1887,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: '빈도 표를 CSV로 내보낼 수 있나요?',
         answer:
-          '네. 내보내기 버튼으로 단어, 횟수, 밀도 비율이 담긴 CSV 파일을 저장해 스프레드시트에서 분석할 수 있습니다.',
+          '네. 내보내기 버튼으로 단어, 횟수, 밀도 비율이 담긴 CSV 파일을 저장해 스프레드시트에서 분석할 수 있습니다. 초안에서 목표 키워드를 감사하려면 키워드 밀도 검사기를 참고하세요.',
       },
       {
         question: '단어 빈도 분석은 SEO에 어떻게 도움이 되나요?',
@@ -2014,7 +2014,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'URL 슬러그란 무엇인가요?',
         answer:
-          'URL에서 도메인 뒤에 오는 부분을 말합니다. 예를 들어 example.com/blog/hello-world에서 "hello-world"가 슬러그입니다. 소문자와 하이픈으로 구성되는 것이 일반적입니다.',
+          'URL에서 도메인 뒤에 오는 부분을 말합니다. 예를 들어 example.com/blog/hello-world에서 "hello-world"가 슬러그입니다. 소문자와 하이픈으로 구성되는 것이 일반적입니다. 도메인 미리보기와 함께 URL 슬러그를 대량으로 만들려면 URL 슬러그 생성기를 참고하세요.',
       },
       {
         question: '슬러그가 SEO에 중요한 이유는 무엇인가요?',

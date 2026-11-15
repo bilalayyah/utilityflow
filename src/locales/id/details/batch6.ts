@@ -973,7 +973,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: "Apa perbedaan antara slug dan permalink?",
         answer:
-          "Slug adalah bagian akhir URL yang mudah dibaca, seperti 'best-cafe-tools', sedangkan permalink adalah URL lengkap termasuk domain dan folder apa pun.",
+          "Slug adalah bagian akhir URL yang mudah dibaca, seperti 'best-cafe-tools', sedangkan permalink adalah URL lengkap termasuk domain dan folder apa pun. Untuk konversi teks cepat bagi developer dengan pemisah garis bawah, lihat Pengubah Teks ke Slug.",
       },
     ],
   },
@@ -1060,7 +1060,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: "Apa sebenarnya kepadatan kata kunci?",
         answer:
-          "Kepadatan kata kunci adalah seberapa sering sebuah kata atau frasa muncul sebagai persentase dari total kata dalam sebuah teks. Frasa yang dipakai 5 kali dalam 500 kata memiliki kepadatan 1%.",
+          "Kepadatan kata kunci adalah seberapa sering sebuah kata atau frasa muncul sebagai persentase dari total kata dalam sebuah teks. Frasa yang dipakai 5 kali dalam 500 kata memiliki kepadatan 1%. Untuk tabel frekuensi lengkap dengan ekspor CSV, lihat Penghitung Frekuensi Kata.",
       },
       {
         question: "Apa yang dimaksud penjejalan kata kunci?",

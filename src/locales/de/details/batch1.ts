@@ -1889,7 +1889,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'Wozu wird ein Worthäufigkeitszähler verwendet?',
         answer:
-          'Er zeigt, welche Wörter und Phrasen in einem Text am häufigsten vorkommen, um Keyword-Balance, Wiederholungen und Themen zu prüfen.',
+          'Er zeigt, welche Wörter und Phrasen in einem Text am häufigsten vorkommen, um Keyword-Balance, Wiederholungen und Themen zu prüfen. Um ein Ziel-Keyword in einem Entwurf zu prüfen, siehe Keyword-Dichte-Prüfer.',
       },
       {
         question: 'Ist der Worthäufigkeitszähler kostenlos?',
@@ -2053,7 +2053,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'Was ist ein Text-zu-Slug-Konverter?',
         answer:
-          'Er wandelt Titel und Überschriften in kurze, URL-sichere Zeichenketten (Slugs) um, die als Teil einer Webadresse verwendet werden.',
+          'Er wandelt Titel und Überschriften in kurze, URL-sichere Zeichenketten (Slugs) um, die als Teil einer Webadresse verwendet werden. Für URL-Slugs im Stapel mit Domain-Vorschau und Kürzung an Wortgrenzen siehe URL-Slug-Generator.',
       },
       {
         question: 'Ist der Text-zu-Slug-Konverter kostenlos?',

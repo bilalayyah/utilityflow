@@ -213,7 +213,7 @@ export const zhStrings: UiStrings = {
     clearFilters: '清除筛选',
   },
   category: {
-    plannedCount: '计划 {count} 个工具',
+    plannedCount: '{count} 个工具',
     toolsCount: '{count} 个工具',
     toolsLive: '已有 {count} 个工具上线',
     ofToolsLive: '共 {total} 个工具，已上线 {count} 个',
@@ -222,7 +222,7 @@ export const zhStrings: UiStrings = {
     scheduledTitle: '更多工具即将推出',
     scheduledDescription:
       '该分类中心已在 {name} 架构中上线并收录。具备浏览器端功能的专属工具页面即将在此添加。',
-    plannedToolsTitle: '该分类计划中的工具：',
+    plannedToolsTitle: '该分类的工具：',
   },
   toolPage: {
     howToUse: '{name} 使用方法',
@@ -324,7 +324,7 @@ export const zhStrings: UiStrings = {
           '工具按分类发布与验证，确保每个工具都经过充分的功能测试并配有完善的文档。',
       },
     ],
-    categoriesTitle: '计划中的七大工具分类',
+    categoriesTitle: '七大工具分类',
     feedbackTitle: '有反馈或建议吗？',
     feedbackBefore:
       '如果您发现计算的边界情况、无障碍问题，或想推荐某个新工具，请通过我们的',

@@ -1889,7 +1889,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'A cosa serve un Contatore di Frequenza delle Parole?',
         answer:
-          'Conta la frequenza con cui ogni parola o espressione appare in un testo in modo che tu possa individuare le ripetizioni, verificare l’equilibrio delle parole chiave e trovare temi ricorrenti.',
+          'Conta la frequenza con cui ogni parola o espressione appare in un testo in modo che tu possa individuare le ripetizioni, verificare l’equilibrio delle parole chiave e trovare temi ricorrenti. Per verificare una parola chiave di destinazione in una bozza, vedi Verificatore di Densità delle Parole Chiave.',
       },
       {
         question: 'Il Contatore di Frequenza delle Parole è gratis?',
@@ -2053,7 +2053,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'Che cos’è un Convertitore di Testo in Slug?',
         answer:
-          'Trasforma un titolo o un’espressione in uno slug pulito e sicuro per gli URL mettendolo in minuscolo, rimuovendo la punteggiatura e sostituendo gli spazi con trattini o underscore.',
+          'Trasforma un titolo o un’espressione in uno slug pulito e sicuro per gli URL mettendolo in minuscolo, rimuovendo la punteggiatura e sostituendo gli spazi con trattini o underscore. Per slug di URL in blocco con anteprima del dominio e troncamento pulito, vedi Generatore di Slug URL.',
       },
       {
         question: 'Il Convertitore di Testo in Slug è gratis?',

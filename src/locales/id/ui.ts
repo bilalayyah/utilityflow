@@ -213,7 +213,7 @@ export const idStrings: UiStrings = {
     clearFilters: 'Hapus filter',
   },
   category: {
-    plannedCount: '{count} alat direncanakan',
+    plannedCount: '{count} alat',
     toolsCount: '{count} alat',
     toolsLive: '{count} alat aktif',
     ofToolsLive: '{count} dari {total} alat aktif',
@@ -222,7 +222,7 @@ export const idStrings: UiStrings = {
     scheduledTitle: 'Alat lainnya segera hadir',
     scheduledDescription:
       'Hub kategori ini aktif dan terindeks dalam arsitektur {name}. Halaman alat individual khusus dengan fungsionalitas berbasis browser akan segera ditambahkan di sini.',
-    plannedToolsTitle: 'Alat yang direncanakan dalam kategori ini:',
+    plannedToolsTitle: 'Alat dalam kategori ini:',
   },
   toolPage: {
     howToUse: 'Cara Menggunakan {name}',
@@ -324,7 +324,7 @@ export const idStrings: UiStrings = {
           'Alat dikirim dan diverifikasi berdasarkan kategori sehingga setiap utilitas menerima pengujian fungsional dan dokumentasi yang menyeluruh.',
       },
     ],
-    categoriesTitle: 'Tujuh Kategori Alat yang Direncanakan',
+    categoriesTitle: 'Tujuh Kategori Alat',
     feedbackTitle: 'Punya Umpan Balik atau Permintaan?',
     feedbackBefore:
       'Jika Anda melihat kasus tepi perhitungan, masalah aksesibilitas, atau ingin menyarankan utilitas baru, hubungi kami melalui',

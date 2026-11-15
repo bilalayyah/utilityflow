@@ -973,7 +973,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'Qual é a diferença entre um slug e um permalink?',
         answer:
-          'O slug é a parte final legível de uma URL, como "best-cafe-tools", enquanto o permalink é a URL completa, incluindo o domínio e as pastas.',
+          'O slug é a parte final legível de uma URL, como "best-cafe-tools", enquanto o permalink é a URL completa, incluindo o domínio e as pastas. Para uma conversão rápida de texto para programadores com separadores de underline, veja Conversor de Texto para Slug.',
       },
     ],
   },
@@ -1060,7 +1060,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'O que é exatamente a densidade de palavras-chave?',
         answer:
-          'A densidade de palavras-chave é a frequência com que uma palavra ou frase aparece como porcentagem do total de palavras de um texto. Uma frase usada 5 vezes em 500 palavras tem densidade de 1%.',
+          'A densidade de palavras-chave é a frequência com que uma palavra ou frase aparece como porcentagem do total de palavras de um texto. Uma frase usada 5 vezes em 500 palavras tem densidade de 1%. Para tabelas completas de frequência com exportação CSV, veja Contador de Frequência de Palavras.',
       },
       {
         question: 'O que conta como preenchimento de palavras-chave?',
