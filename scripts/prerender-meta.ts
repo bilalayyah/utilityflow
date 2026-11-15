@@ -7,8 +7,11 @@
 // Reads dist/index.html (the SPA shell) and writes one prerendered
 // dist/<route>/index.html per route (for `/`, it overwrites dist/index.html).
 // Each file is the shell with ONLY the SEO head replaced by the route-correct
-// head; the body, JS bundle, CSS, fonts and the AdSense script are untouched,
-// so the app boots exactly as before for real users.
+// head AND the empty `<div id="root">` filled with a static <main> rendered
+// from the locale data (Audit Fix H-1, see scripts/prerender-body.ts); the
+// JS bundle, CSS, fonts and the AdSense script are untouched, so the app
+// boots exactly as before for real users — createRoot() replaces the static
+// <main> on mount.
 //
 // The SEO head mirrors src/components/seo/SeoHead.tsx exactly (same tags,
 // same order, same values). The per-page props mirror each page's SeoHead
@@ -66,6 +69,7 @@ import {
   toolHref,
 } from '../src/locales/config';
 import { loadLocaleData } from '../src/locales/loader';
+import { loadLocaleDetails } from '../src/locales/details';
 import {
   getCategoryAlternatePaths,
   getStaticAlternatePaths,
@@ -73,6 +77,14 @@ import {
   toHreflangEntries,
 } from '../src/locales/routes';
 import { getLocalizedCategory, getLocalizedTool } from '../src/locales/tools';
+import {
+  injectStaticBody,
+  renderCategoryBody,
+  renderDirectoryBody,
+  renderHomeBody,
+  renderStaticBody,
+  renderToolBody,
+} from './prerender-body';
 import { formatString } from '../src/locales/ui';
 import type { LocaleCode } from '../src/locales/config';
 import type { LocaleData } from '../src/locales/types';
@@ -89,7 +101,7 @@ import { PT_TOOL_OVERRIDES } from '../src/locales/pt/tools';
 import { RU_TOOL_OVERRIDES } from '../src/locales/ru/tools';
 import { ZH_TOOL_OVERRIDES } from '../src/locales/zh/tools';
 import type { ToolLocaleOverride } from '../src/locales/types';
-import type { BreadcrumbItem, CategoryId, ToolDefinition } from '../src/types/tool';
+import type { BreadcrumbItem, CategoryId, ToolDefinition, ToolDetail } from '../src/types/tool';
 
 const ORIGIN = SITE_CONFIG.defaultOrigin;
 
@@ -267,6 +279,8 @@ interface PageSeo {
   path: string;
   locale: LocaleCode;
   props: SeoHeadProps;
+  /** Fix H-1: static <main> injected inside <div id="root">. */
+  body: string;
   /** Fix #10: locale chunk to modulepreload in this page's head (non-EN only). */
   preloadFiles: string[];
 }
@@ -430,15 +444,38 @@ function categorySeo(
   };
 }
 
+/**
+ * H-3 (page weight): merge a light tool record with its per-batch detail
+ * record for prerendering. A missing detail record is a hard error — the
+ * prerendered page must carry the full guide, exactly as before the split.
+ */
+function withDetail(
+  light: ToolDefinition,
+  details: Record<string, ToolDetail>,
+  locale: LocaleCode
+): ToolDefinition {
+  const detail = details[light.id];
+  if (!detail) throw new Error(`Missing detail for tool ${light.id} (${locale})`);
+  return { ...light, ...detail };
+}
+
 function toolSeo(
   toolId: string,
   t: LocaleData['uiStrings'],
   locale: LocaleCode,
-  data: LocaleData
+  data: LocaleData,
+  details: Record<string, ToolDetail>
 ): SeoHeadProps {
   const base = TOOLS_REGISTRY.find((tool) => tool.id === toolId);
   if (!base) throw new Error(`Tool not found: ${toolId}`);
-  const tool = getLocalizedTool(base, locale, data);
+  const light = getLocalizedTool(base, locale, data);
+  // H-3 (page weight): the guide fields live in the per-batch detail
+  // modules; prerender merges them back so the static HTML + HowTo/FAQ
+  // JSON-LD are identical to before the split. A missing detail record is
+  // a hard error — never silently ship a tool page without its guide.
+  const detail = details[toolId];
+  if (!detail) throw new Error(`Missing detail for tool ${toolId} (${locale})`);
+  const tool: ToolDefinition = { ...light, ...detail };
   const canonicalPath = toolHref(tool.slug, locale);
   const category = getLocalizedCategory(tool.categoryId, locale, data);
   const howToTitle = formatString(t.toolPage.howToUse, { name: tool.name });
@@ -467,10 +504,10 @@ function toolSeo(
   const structuredData: Array<Record<string, unknown>> = [
     softwareSchema,
     buildBreadcrumbSchema(breadcrumbItems),
-    ...(tool.instructions.length > 0
-      ? [buildHowToSchema(howToTitle, tool.seo.description, tool.instructions)]
+    ...((tool.instructions ?? []).length > 0
+      ? [buildHowToSchema(howToTitle, tool.seo.description, tool.instructions ?? [])]
       : []),
-    ...(tool.faqs.length > 0 ? [buildFaqSchema(tool.faqs)] : []),
+    ...((tool.faqs ?? []).length > 0 ? [buildFaqSchema(tool.faqs ?? [])] : []),
   ];
   return {
     title: tool.seo.title,
@@ -693,6 +730,9 @@ async function prerender(): Promise<void> {
   for (const localeInfo of SUPPORTED_LOCALES) {
     const locale = localeInfo.code;
     const data: LocaleData = await loadLocaleData(locale);
+    // H-3: bulk-load this locale's per-batch detail modules once, so every
+    // tool page prerenders with its full guide (HowTo/FAQ JSON-LD + body).
+    const details = await loadLocaleDetails(locale);
     const t = data.uiStrings;
 
     // Static routes (home, directory, about, contact, privacy, terms).
@@ -702,28 +742,35 @@ async function prerender(): Promise<void> {
           ? localizeStaticPath('/', locale)
           : STATIC_PATHS[route.path]?.[locale] ?? route.path;
       let props: SeoHeadProps;
+      let body: string;
       let preloadFiles: string[] = [];
       if (route.path === '/') {
         props = homeSeo(t, locale);
+        body = renderHomeBody(t, locale, data);
         // Home is eager, but non-EN home still needs its locale chunk.
         preloadFiles = preloadFor(locale, t.nav.allTools);
       } else if (route.path === '/tools/') {
         props = directorySeo(t, locale);
+        body = renderDirectoryBody(t, locale, data);
         preloadFiles = preloadFor(locale, t.nav.allTools);
       } else if (route.path === '/about/') {
         props = staticPageSeo('about', t, locale);
+        body = renderStaticBody('about', t, locale, data);
         preloadFiles = preloadFor(locale, t.nav.allTools);
       } else if (route.path === '/contact/') {
         props = staticPageSeo('contact', t, locale);
+        body = renderStaticBody('contact', t, locale, data);
         preloadFiles = preloadFor(locale, t.nav.allTools);
       } else if (route.path === '/privacy-policy/') {
         props = staticPageSeo('privacy', t, locale);
+        body = renderStaticBody('privacy', t, locale, data);
         preloadFiles = preloadFor(locale, t.nav.allTools);
       } else {
         props = staticPageSeo('terms', t, locale);
+        body = renderStaticBody('terms', t, locale, data);
         preloadFiles = preloadFor(locale, t.nav.allTools);
       }
-      pages.push({ path: localized, locale, props, preloadFiles });
+      pages.push({ path: localized, locale, props, body, preloadFiles });
       knownRoutes.add(localized);
     }
 
@@ -733,10 +780,13 @@ async function prerender(): Promise<void> {
         locale === 'en'
           ? `/category/${category.slug}/`
           : `${localeInfo.pathPrefix}/${CATEGORY_PATH_SEGMENT[locale]}/${CATEGORY_LOCALE_SLUGS[locale][category.id]}/`;
+      const localizedCategory = getLocalizedCategory(category.id, locale, data);
+      if (!localizedCategory) throw new Error(`Category not found: ${category.id}`);
       pages.push({
         path: localized,
         locale,
         props: categorySeo(category.id, t, locale, data),
+        body: renderCategoryBody(localizedCategory, t, locale, data),
         preloadFiles: preloadFor(locale, t.nav.allTools),
       });
       knownRoutes.add(localized);
@@ -751,7 +801,8 @@ async function prerender(): Promise<void> {
       pages.push({
         path: localized,
         locale,
-        props: toolSeo(tool.id, t, locale, data),
+        props: toolSeo(tool.id, t, locale, data, details),
+        body: renderToolBody(withDetail(getLocalizedTool(tool, locale, data), details, locale), t, locale, data),
         // Fix #10b: tool chunk preload rides along with the locale preload
         // (EN tool pages get the tool chunk only — they need no locale).
         preloadFiles: [...preloadFor(locale, t.nav.allTools), ...toolPreloadFor(tool)],
@@ -778,6 +829,13 @@ async function prerender(): Promise<void> {
     if (!page.props.title || !page.props.description) {
       throw new Error(`Missing title/description for ${page.path}`);
     }
+    // Fix H-1: every page must carry a static body with exactly one <h1>.
+    if (!page.body.includes('data-prerendered-body="true"') || !page.body.includes('<h1')) {
+      throw new Error(`Missing static body/H1 for ${page.path}`);
+    }
+    if ((page.body.match(/<h1/g) ?? []).length !== 1) {
+      throw new Error(`Static body for ${page.path} must contain exactly one <h1>`);
+    }
     if (page.props.alternates && page.props.alternates.length !== SUPPORTED_LOCALES.length + 1) {
       throw new Error(
         `${page.path} has ${page.props.alternates.length} hreflang alternates, expected ${SUPPORTED_LOCALES.length + 1}.`
@@ -787,8 +845,10 @@ async function prerender(): Promise<void> {
 
   // Write one file per route.
   let written = 0;
+  let bodyBytes = 0;
   for (const page of pages) {
-    const html = prerenderHead(shell, page.props, page.preloadFiles);
+    const html = injectStaticBody(prerenderHead(shell, page.props, page.preloadFiles), page.body);
+    bodyBytes += page.body.length;
     const withLang = html.replace('<html lang="en">', () => `<html lang="${escapeAttr(getLocaleInfo(page.locale).htmlLang)}">`);
     const outPath = filePathForRoute(distDir, page.path);
     mkdirSync(dirname(outPath), { recursive: true });
@@ -801,6 +861,8 @@ async function prerender(): Promise<void> {
 
   // Admin files: /admin/comments/ -> dist/admin/comments/index.html and
   // /admin/comments (slash-less) -> dist/admin/comments.html (same head).
+  // No static body: the admin page is noindex, unlinked and not in the
+  // sitemap, so it keeps the empty SPA root.
   const adminHtml = prerenderHead(shell, adminProps);
   const adminDir = resolve(distDir, 'admin', 'comments');
   mkdirSync(adminDir, { recursive: true });
@@ -857,6 +919,9 @@ async function prerender(): Promise<void> {
   }
   console.log(
     `Prerendered ${written} pages (+ admin x2) into dist/; known-routes.ts written (${routesSorted.length} routes).`
+  );
+  console.log(
+    `Static bodies (Fix H-1): ${(bodyBytes / 1024 / 1024).toFixed(1)} MB total across ${written} pages.`
   );
   console.log(
     `Preloads: locale chunks for ${[...localePreloadCache.values()].filter((f) => f.length > 0).length}/10 non-EN locales; tool chunks for ${resolvedToolIds.size}/${TOOLS_REGISTRY.length} tools.`

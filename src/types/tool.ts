@@ -39,6 +39,24 @@ export interface ToolSEOConfig {
   schemaApplicationCategory?: string;
 }
 
+/**
+ * Below-the-fold guide content for one tool (H-3 page-weight split).
+ *
+ * The light record (ToolDefinition / ToolLocaleOverride without these
+ * fields) ships in the entry + locale chunks on EVERY page; the detail
+ * lives in a per-batch detail module and loads only on the tool's own
+ * page, after first paint (see src/locales/details.ts). `intro` and
+ * `apiNotice` stay light — they render above the fold (header), so
+ * loading them late would shift the workspace (CLS).
+ */
+export interface ToolDetail {
+  instructions: ToolStep[];
+  examples: ToolExample[];
+  benefits: string[];
+  useCases: string[];
+  faqs: ToolFAQ[];
+}
+
 export interface ToolDefinition {
   id: string;
   slug: string;
@@ -54,11 +72,12 @@ export interface ToolDefinition {
   keywords: string[];
   seo: ToolSEOConfig;
   intro: string;
-  instructions: ToolStep[];
-  examples: ToolExample[];
-  benefits: string[];
-  useCases: string[];
-  faqs: ToolFAQ[];
+  /** Below-the-fold guide content — absent on light records (see ToolDetail). */
+  instructions?: ToolStep[];
+  examples?: ToolExample[];
+  benefits?: string[];
+  useCases?: string[];
+  faqs?: ToolFAQ[];
   relatedToolSlugs: string[];
   component: LazyExoticComponent<ComponentType<Record<string, never>>>;
 }

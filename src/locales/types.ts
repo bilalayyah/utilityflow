@@ -13,6 +13,12 @@ import type { UiStrings } from './ui';
  * The English ToolDefinition stays the source of truth for ids, component,
  * category, batch, processing mode, popularity flags and relatedToolSlugs.
  * A locale override replaces only the user-facing, localizable fields.
+ *
+ * H-3 page-weight split: the guide fields (instructions, examples,
+ * benefits, useCases, faqs) live in a per-batch detail module, NOT in the
+ * locale chunk — see src/locales/details.ts. Light override records omit
+ * them; they are merged back on the tool's own page (ToolPageLayout) and
+ * at prerender time (scripts/prerender-meta.ts).
  */
 export interface ToolLocaleOverride {
   slug: string;
@@ -21,11 +27,11 @@ export interface ToolLocaleOverride {
   keywords: string[];
   seo: ToolSEOConfig;
   intro: string;
-  instructions: ToolStep[];
-  examples: ToolExample[];
-  benefits: string[];
-  useCases: string[];
-  faqs: ToolFAQ[];
+  instructions?: ToolStep[];
+  examples?: ToolExample[];
+  benefits?: string[];
+  useCases?: string[];
+  faqs?: ToolFAQ[];
   /** Only for tools that carry an apiNotice in English (3 AI tools + currency converter). */
   apiNotice?: string;
 }

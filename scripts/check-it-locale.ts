@@ -9,6 +9,7 @@
 import { TOOLS_REGISTRY } from '../src/registry/toolsRegistry';
 import { CATEGORIES } from '../src/registry/categories';
 import { IT_TOOL_OVERRIDES } from '../src/locales/it/tools';
+import { EN_DETAILS, LOCALE_DETAILS } from './detail-data';
 import { IT_CATEGORY_OVERRIDES } from '../src/locales/it/categories';
 import { enStrings } from '../src/locales/en/ui';
 import { itStrings } from '../src/locales/it/ui';
@@ -73,6 +74,8 @@ let fieldBad = 0;
 for (const tool of TOOLS_REGISTRY) {
   const ov = IT_TOOL_OVERRIDES[tool.id];
   if (!ov) continue;
+  const detail = LOCALE_DETAILS.it[tool.id];
+  if (!detail) { fail(`${tool.id}: missing it detail`); fieldBad++; continue; }
   const problems: string[] = [];
   const nonEmpty = (v: unknown) => typeof v === 'string' && v.trim().length > 0;
   if (!nonEmpty(ov.name)) problems.push('name empty');
@@ -86,21 +89,21 @@ for (const tool of TOOLS_REGISTRY) {
   if (ov.seo.secondaryKeywords.length !== 4) problems.push(`secondaryKeywords=${ov.seo.secondaryKeywords.length}`);
   if (ov.seo.longTailKeywords.length !== 4) problems.push(`longTailKeywords=${ov.seo.longTailKeywords.length}`);
   if (!nonEmpty(ov.seo.primaryKeyword)) problems.push('primaryKeyword empty');
-  if (ov.instructions.length !== 6) problems.push(`instructions=${ov.instructions.length}`);
-  if (ov.instructions.some((s) => !nonEmpty(s.title) || !nonEmpty(s.description))) problems.push('empty instruction');
-  if (ov.examples.length !== 2) problems.push(`examples=${ov.examples.length}`);
-  if (ov.examples.some((e) => !nonEmpty(e.title) || !nonEmpty(e.input) || !nonEmpty(e.output))) problems.push('empty example');
-  if (ov.benefits.length !== 4 || ov.benefits.some((b) => !nonEmpty(b))) problems.push('benefits!=4 or empty');
-  if (ov.useCases.length !== 4 || ov.useCases.some((u) => !nonEmpty(u))) problems.push('useCases!=4 or empty');
-  if (ov.faqs.length !== 20) problems.push(`faqs=${ov.faqs.length}`);
-  faqTotal += ov.faqs.length;
+  if (detail.instructions.length !== 6) problems.push(`instructions=${detail.instructions.length}`);
+  if (detail.instructions.some((s) => !nonEmpty(s.title) || !nonEmpty(s.description))) problems.push('empty instruction');
+  if (detail.examples.length !== 2) problems.push(`examples=${detail.examples.length}`);
+  if (detail.examples.some((e) => !nonEmpty(e.title) || !nonEmpty(e.input) || !nonEmpty(e.output))) problems.push('empty example');
+  if (detail.benefits.length !== 4 || detail.benefits.some((b) => !nonEmpty(b))) problems.push('benefits!=4 or empty');
+  if (detail.useCases.length !== 4 || detail.useCases.some((u) => !nonEmpty(u))) problems.push('useCases!=4 or empty');
+  if (detail.faqs.length !== 20) problems.push(`faqs=${detail.faqs.length}`);
+  faqTotal += detail.faqs.length;
   const qSeen = new Set<string>();
-  for (const f of ov.faqs) {
+  for (const f of detail.faqs) {
     if (!nonEmpty(f.question) || !nonEmpty(f.answer)) problems.push('empty faq');
     if (qSeen.has(f.question)) problems.push(`duplicate faq question: "${f.question.slice(0, 40)}"`);
     qSeen.add(f.question);
     // FAQ identical to its English twin = untranslated
-    const enFaq = tool.faqs.find((ef) => ef.question === f.question);
+    const enFaq = EN_DETAILS[tool.id].faqs.find((ef) => ef.question === f.question);
     if (enFaq && enFaq.answer === f.answer) problems.push(`faq untranslated: "${f.question.slice(0, 40)}"`);
   }
   if (problems.length) { fieldBad++; fail(`${tool.id}: ${problems.join('; ')}`); }

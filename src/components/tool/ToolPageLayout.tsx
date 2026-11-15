@@ -1,13 +1,15 @@
 import { Check, Info } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
 import { buildCanonicalUrl } from '../../config/site';
 import { getOgImageForPage } from '../../config/ogImages';
+import { loadToolDetail } from '../../locales/details';
 import { useLocale } from '../../locales/LocaleContext';
 import { categoryHref, localizeStaticPath, toolHref } from '../../locales/config';
 import { getToolAlternatePaths, toHreflangEntries } from '../../locales/routes';
 import { getLocalizedCategory } from '../../locales/tools';
 import { formatString } from '../../locales/ui';
-import type { BreadcrumbItem, ToolDefinition, ToolStep } from '../../types/tool';
+import type { BreadcrumbItem, ToolDefinition, ToolDetail, ToolStep } from '../../types/tool';
 import { AdSlot } from '../common/AdSlot';
 import { Breadcrumbs, buildBreadcrumbSchema } from '../common/Breadcrumbs';
 import { FAQAccordion, buildFaqSchema } from '../common/FAQAccordion';
@@ -37,6 +39,38 @@ export function buildHowToSchema(howToTitle: string, description: string, steps:
 
 export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
   const { locale, t } = useLocale();
+  // H-3 (page weight): the guide fields (instructions, examples, benefits,
+  // useCases, faqs) are NOT in the locale chunk — they load from the
+  // tool's per-batch detail module after first paint, so they never block
+  // LCP. The header (name/intro/apiNotice) and workbench use the light
+  // record only. While detail loads, the guide sections stay hidden via
+  // their existing `length > 0` guards (no layout shift: they sit below
+  // the fold). A failed load just hides the guide — never an error state.
+  const [detail, setDetail] = useState<ToolDetail | null>(null);
+  useEffect(() => {
+    let cancelled = false;
+    setDetail(null);
+    loadToolDetail(locale, tool.id, tool.batch)
+      .then((loaded) => {
+        if (!cancelled) setDetail(loaded);
+      })
+      .catch(() => {
+        // Detail is below-the-fold content; hide the guide, keep the page.
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [locale, tool.id, tool.batch]);
+  const fullTool: ToolDefinition & ToolDetail = {
+    ...tool,
+    // Spread alone does not narrow the optional detail fields to required,
+    // so assign them explicitly (empty arrays until the detail loads).
+    instructions: detail?.instructions ?? [],
+    examples: detail?.examples ?? [],
+    benefits: detail?.benefits ?? [],
+    useCases: detail?.useCases ?? [],
+    faqs: detail?.faqs ?? [],
+  };
   const category = getLocalizedCategory(tool.categoryId, locale);
   const canonicalPath = toolHref(tool.slug, locale);
   const howToTitle = formatString(t.toolPage.howToUse, { name: tool.name });
@@ -72,10 +106,10 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
   const structuredData = [
     softwareSchema,
     buildBreadcrumbSchema(breadcrumbItems),
-    ...(tool.instructions.length > 0
-      ? [buildHowToSchema(howToTitle, tool.seo.description, tool.instructions)]
+    ...(fullTool.instructions.length > 0
+      ? [buildHowToSchema(howToTitle, tool.seo.description, fullTool.instructions)]
       : []),
-    ...(tool.faqs.length > 0 ? [buildFaqSchema(tool.faqs)] : []),
+    ...(fullTool.faqs.length > 0 ? [buildFaqSchema(fullTool.faqs)] : []),
   ];
 
   return (
@@ -140,13 +174,13 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
         {/* Structured Educational & SEO Guide Sections */}
         <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-10">
           <div className="lg:col-span-8 space-y-12">
-            {tool.instructions.length > 0 && (
+            {fullTool.instructions.length > 0 && (
               <section aria-labelledby="how-to-use-heading">
                 <h2 id="how-to-use-heading" className="text-2xl font-bold text-slate-900 mb-4">
                   {howToTitle}
                 </h2>
                 <ol className="space-y-4">
-                  {tool.instructions.map((step, index) => {
+                  {fullTool.instructions.map((step, index) => {
                     const stepPalette = PASTEL_PALETTES[index % PASTEL_PALETTES.length];
                     return (
                       <li
@@ -171,13 +205,13 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
               </section>
             )}
 
-            {tool.examples.length > 0 && (
+            {fullTool.examples.length > 0 && (
               <section aria-labelledby="examples-heading">
                 <h2 id="examples-heading" className="text-2xl font-bold text-slate-900 mb-4">
                   {t.toolPage.practicalExamples}
                 </h2>
                 <div className="space-y-4">
-                  {tool.examples.map((example, index) => {
+                  {fullTool.examples.map((example, index) => {
                     const examplePalette = PASTEL_PALETTES[index % PASTEL_PALETTES.length];
                     return (
                       <div
@@ -213,22 +247,22 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
               </section>
             )}
 
-            {tool.faqs.length > 0 && (
+            {fullTool.faqs.length > 0 && (
               <section aria-labelledby="tool-faq-heading">
                 <h2 id="tool-faq-heading" className="text-2xl font-bold text-slate-900 mb-4">
                   {t.toolPage.faqs}
                 </h2>
-                <FAQAccordion items={tool.faqs} />
+                <FAQAccordion items={fullTool.faqs} />
               </section>
             )}
           </div>
 
           <aside className="lg:col-span-4 space-y-8">
-            {tool.benefits.length > 0 && (
+            {fullTool.benefits.length > 0 && (
               <section className={`rounded-2xl ${palette.card} p-5 shadow-sm`}>
                 <h2 className="text-lg font-bold text-slate-900 mb-3">{t.toolPage.keyBenefits}</h2>
                 <ul className="space-y-2.5 text-sm text-slate-700">
-                  {tool.benefits.map((benefit) => (
+                  {fullTool.benefits.map((benefit) => (
                     <li key={benefit} className="flex items-start gap-2.5">
                       <Check
                         className={`w-4 h-4 shrink-0 mt-0.5 ${palette.link}`}
@@ -241,11 +275,11 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
               </section>
             )}
 
-            {tool.useCases.length > 0 && (
+            {fullTool.useCases.length > 0 && (
               <section className={`rounded-2xl ${useCasesPalette.card} p-5 shadow-sm`}>
                 <h2 className="text-lg font-bold text-slate-900 mb-3">{t.toolPage.commonUseCases}</h2>
                 <ul className="space-y-2 text-sm text-slate-600 list-disc pl-4">
-                  {tool.useCases.map((useCase) => (
+                  {fullTool.useCases.map((useCase) => (
                     <li key={useCase}>{useCase}</li>
                   ))}
                 </ul>

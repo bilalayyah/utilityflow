@@ -49,8 +49,12 @@
     />
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5754238751997058"
      crossorigin="anonymous"></script>
-    <!-- Google Analytics 4 (Audit Fix #6) — Measurement ID G-EEF32XG70M -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EEF32XG70M"></script>
+    <!-- Google Analytics 4 (Audit Fix #6) — Measurement ID G-EEF32XG70M.
+         H-3: gtag.js itself is deferred (loaded from main.tsx after first
+         paint via requestIdleCallback); only this inline config stub stays
+         in <head>. It queues calls in dataLayer until gtag.js arrives, so
+         the config/page_view still fires. Do NOT move this stub (its CSP
+         sha256 hash lives in public/_headers). -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
