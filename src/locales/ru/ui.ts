@@ -53,6 +53,12 @@ export const ruStrings: UiStrings = {
     rightsReserved: 'Все права защищены.',
     deployedNote: 'Crafted with ❤️ by Bilal inspired by Shaheen',
   },
+  consent: {
+    message: 'Мы используем файлы cookie и аналитику, чтобы понимать, как используется сайт, и улучшать его. Вы можете принять или отклонить.',
+    accept: 'Принять',
+    decline: 'Отклонить',
+    cookieSettings: 'Настройки cookie',
+  },
   common: {
     copy: 'Копировать',
     copied: 'Скопировано',

@@ -53,6 +53,12 @@ export const frStrings: UiStrings = {
     rightsReserved: 'Tous droits réservés.',
     deployedNote: 'Crafted with ❤️ by Bilal inspired by Shaheen',
   },
+  consent: {
+    message: 'Nous utilisons des cookies et des analyses pour comprendre comment le site est utilisé et l’améliorer. Vous pouvez accepter ou refuser.',
+    accept: 'Accepter',
+    decline: 'Refuser',
+    cookieSettings: 'Paramètres des cookies',
+  },
   common: {
     copy: 'Copier',
     copied: 'Copié',

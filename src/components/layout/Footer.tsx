@@ -3,6 +3,7 @@ import { SITE_CONFIG } from '../../config/site';
 import { useLocale } from '../../locales/LocaleContext';
 import { categoryHref, localizeStaticPath } from '../../locales/config';
 import { getLocalizedCategories } from '../../locales/tools';
+import { requestConsentBanner } from '../../utils/consent';
 
 export function Footer() {
   const { locale, t } = useLocale();
@@ -158,6 +159,15 @@ export function Footer() {
                 >
                   {t.footer.xmlSitemap}
                 </a>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => requestConsentBanner()}
+                  className="hover:text-indigo-700 transition-colors underline-offset-4 hover:underline"
+                >
+                  {t.consent.cookieSettings}
+                </button>
               </li>
             </ul>
           </div>

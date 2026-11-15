@@ -51,6 +51,12 @@ export const enStrings: UiStrings = {
     rightsReserved: 'All rights reserved.',
     deployedNote: 'Crafted with ❤️ by Bilal inspired by Shaheen',
   },
+  consent: {
+    message: 'We use cookies and analytics to understand how the site is used and to improve it. You can accept or decline.',
+    accept: 'Accept',
+    decline: 'Decline',
+    cookieSettings: 'Cookie settings',
+  },
   common: {
     copy: 'Copy',
     copied: 'Copied',

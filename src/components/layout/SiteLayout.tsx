@@ -1,6 +1,7 @@
 import { useEffect, type ReactNode } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useLocale } from '../../locales/LocaleContext';
+import { ConsentBanner } from '../common/ConsentBanner';
 import { Footer } from './Footer';
 import { Header } from './Header';
 
@@ -37,6 +38,7 @@ export function SiteLayout({ children }: SiteLayoutProps) {
         {children}
       </main>
       <Footer />
+      <ConsentBanner />
     </div>
   );
 }

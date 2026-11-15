@@ -53,6 +53,12 @@ export const zhStrings: UiStrings = {
     rightsReserved: '版权所有。',
     deployedNote: 'Crafted with ❤️ by Bilal inspired by Shaheen',
   },
+  consent: {
+    message: '我们使用 Cookie 和分析来了解网站的使用情况并加以改进。您可以接受或拒绝。',
+    accept: '接受',
+    decline: '拒绝',
+    cookieSettings: 'Cookie 设置',
+  },
   common: {
     copy: '复制',
     copied: '已复制',

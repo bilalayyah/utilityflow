@@ -53,6 +53,12 @@ export const idStrings: UiStrings = {
     rightsReserved: 'Hak cipta dilindungi.',
     deployedNote: 'Crafted with ❤️ by Bilal inspired by Shaheen',
   },
+  consent: {
+    message: 'Kami menggunakan cookie dan analitik untuk memahami cara situs digunakan dan meningkatkannya. Anda dapat menerima atau menolak.',
+    accept: 'Terima',
+    decline: 'Tolak',
+    cookieSettings: 'Pengaturan cookie',
+  },
   common: {
     copy: 'Salin',
     copied: 'Disalin',

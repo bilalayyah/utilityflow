@@ -49,6 +49,12 @@ export interface UiStrings {
     rightsReserved: string;
     deployedNote: string;
   };
+  consent: {
+    message: string;
+    accept: string;
+    decline: string;
+    cookieSettings: string;
+  };
   common: {
     copy: string;
     copied: string;

@@ -53,6 +53,12 @@ export const jaStrings: UiStrings = {
     rightsReserved: '全著作権所有。',
     deployedNote: 'Crafted with ❤️ by Bilal inspired by Shaheen',
   },
+  consent: {
+    message: '当サイトでは、利用状況の把握と改善のためCookieと分析を使用しています。承諾することも拒否することもできます。',
+    accept: '承諾する',
+    decline: '拒否する',
+    cookieSettings: 'Cookieの設定',
+  },
   common: {
     copy: 'コピー',
     copied: 'コピーしました',

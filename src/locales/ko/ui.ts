@@ -53,6 +53,12 @@ export const koStrings: UiStrings = {
     rightsReserved: '모든 권리 보유.',
     deployedNote: 'Crafted with ❤️ by Bilal inspired by Shaheen',
   },
+  consent: {
+    message: '이 사이트는 이용 현황을 파악하고 개선하기 위해 쿠키와 분석을 사용합니다. 수락하거나 거부할 수 있습니다.',
+    accept: '수락',
+    decline: '거부',
+    cookieSettings: '쿠키 설정',
+  },
   common: {
     copy: '복사',
     copied: '복사됨',

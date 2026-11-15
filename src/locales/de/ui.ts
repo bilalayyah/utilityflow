@@ -53,6 +53,12 @@ export const deStrings: UiStrings = {
     rightsReserved: 'Alle Rechte vorbehalten.',
     deployedNote: 'Crafted with ❤️ by Bilal inspired by Shaheen',
   },
+  consent: {
+    message: 'Wir verwenden Cookies und Analysen, um zu verstehen, wie die Website genutzt wird, und sie zu verbessern. Sie können zustimmen oder ablehnen.',
+    accept: 'Zustimmen',
+    decline: 'Ablehnen',
+    cookieSettings: 'Cookie-Einstellungen',
+  },
   common: {
     copy: 'Kopieren',
     copied: 'Kopiert',
