@@ -188,6 +188,10 @@ export function renderToolBody(
   );
   parts.push(`<h1 class="${H1}">${escapeText(tool.name)}</h1>`);
   parts.push(`<p class="${BODY_P}">${escapeText(tool.intro)}</p>`);
+  // L-12: author byline + last-updated line (E-E-A-T).
+  parts.push(
+    `<p class="mt-3 text-xs text-slate-500">${escapeText(t.toolPage.bylineAuthor)} · ${escapeText(t.toolPage.lastUpdated)}</p>`
+  );
   if (tool.requiresExternalApi && tool.apiNotice) {
     parts.push(
       `<p class="mt-4 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">${escapeText(tool.apiNotice)}</p>`
@@ -465,6 +469,10 @@ export function renderCategoryBody(
   parts.push(`<p class="text-xs font-medium text-slate-500 mb-3">${escapeText(countLabel)}</p>`);
   parts.push(`<h1 class="${H1}">${escapeText(category.name)}</h1>`);
   parts.push(`<p class="${BODY_P}">${escapeText(category.longDescription)}</p>`);
+  // L-15: short intro paragraph (complements longDescription).
+  if (category.intro) {
+    parts.push(`<p class="${BODY_P}">${escapeText(category.intro)}</p>`);
+  }
   parts.push('</header>');
   if (tools.length > 0) {
     parts.push('<section class="mb-12">');
@@ -472,6 +480,13 @@ export function renderCategoryBody(
       `<h2 class="${H2_SM}">${escapeText(formatString(t.category.availableTools, { name: category.name }))}</h2>`
     );
     parts.push(toolCards(tools, locale));
+    parts.push('</section>');
+  }
+  // L-15: short FAQ (3–5 Q&As) about this category.
+  if ((category.faqs ?? []).length > 0) {
+    parts.push('<section class="mb-12">');
+    parts.push(`<h2 class="${H2_SM}">${escapeText(t.toolPage.faqs)}</h2>`);
+    parts.push(faqList(category.faqs ?? []));
     parts.push('</section>');
   }
   parts.push('<section class="pt-10 border-t border-slate-200">');
@@ -613,8 +628,11 @@ export function renderStaticBody(
         parts.push(`<p class="mt-3">${escapeText(paragraph)}</p>`);
       }
       if (sectionIndex === 3) {
+        // L-2: the optout.aboutads.info link was removed — it persistently
+        // returns HTTP 429 (rate-limited) from multiple networks. Google
+        // Ads Settings already covers opt-out.
         parts.push(
-          `<p class="mt-3"><a href="https://adssettings.google.com" target="_blank" rel="noopener" class="${LINK}">${escapeText(t.privacy.optOutGoogleAds ?? 'Google Ads Settings')}</a> · <a href="https://optout.aboutads.info" target="_blank" rel="noopener" class="${LINK}">${escapeText(t.privacy.optOutAboutAds ?? 'AboutAds.info opt-out')}</a></p>`
+          `<p class="mt-3"><a href="https://adssettings.google.com" target="_blank" rel="noopener" class="${LINK}">${escapeText(t.privacy.optOutGoogleAds ?? 'Google Ads Settings')}</a></p>`
         );
       }
       parts.push('</section>');

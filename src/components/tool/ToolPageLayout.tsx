@@ -1,5 +1,5 @@
 import { Check, Info } from 'lucide-react';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import type { ReactNode } from 'react';
 import { buildCanonicalUrl } from '../../config/site';
 import { getOgImageForPage } from '../../config/ogImages';
@@ -11,6 +11,7 @@ import { getLocalizedCategory, getLocalizedTools } from '../../locales/tools';
 import { formatString } from '../../locales/ui';
 import type { BreadcrumbItem, ToolDefinition, ToolDetail, ToolStep } from '../../types/tool';
 import { buildToolNameEntries, linkifyToolNames } from '../../utils/linkifyToolNames';
+import { trackEvent } from '../../utils/analytics';
 import { AdSlot } from '../common/AdSlot';
 import { Breadcrumbs, buildBreadcrumbSchema } from '../common/Breadcrumbs';
 import { FAQAccordion, buildFaqSchema } from '../common/FAQAccordion';
@@ -62,6 +63,16 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
       cancelled = true;
     };
   }, [locale, tool.id, tool.batch]);
+  // L-21: GA4 conversion event — one tool_use per tool page view (tool id
+  // + name as params). The ref guards StrictMode double-mounts in dev
+  // (production mounts once); keyed by tool.id so navigating between
+  // tools fires once per tool.
+  const toolUseFiredRef = useRef<string | null>(null);
+  useEffect(() => {
+    if (toolUseFiredRef.current === tool.id) return;
+    toolUseFiredRef.current = tool.id;
+    trackEvent('tool_use', { tool_id: tool.id, tool_name: tool.name });
+  }, [tool.id, tool.name]);
   const fullTool: ToolDefinition & ToolDetail = {
     ...tool,
     // Spread alone does not narrow the optional detail fields to required,
@@ -135,7 +146,7 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
           ...tool.seo.secondaryKeywords,
           ...tool.seo.longTailKeywords,
         ]}
-        ogImage={getOgImageForPage('tool', tool.id)}
+        ogImage={getOgImageForPage('tool', tool.id, locale)}
         structuredData={structuredData}
         alternates={toHreflangEntries(getToolAlternatePaths(tool.id))}
       />
@@ -162,6 +173,11 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
           </h1>
           <p className="mt-3 text-base sm:text-lg leading-relaxed text-slate-600">
             {tool.intro}
+          </p>
+
+          {/* L-12: author byline + last-updated line (E-E-A-T). */}
+          <p className="mt-3 text-xs text-slate-500">
+            {t.toolPage.bylineAuthor} · {t.toolPage.lastUpdated}
           </p>
 
           {tool.requiresExternalApi && tool.apiNotice && (

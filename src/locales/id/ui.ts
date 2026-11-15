@@ -241,6 +241,8 @@ export const idStrings: UiStrings = {
     browseAll: 'Jelajahi semua {name}',
     moreToolsIn: 'Alat lainnya di',
     willAppear: 'akan segera muncul di sini.',
+    bylineAuthor: 'Oleh Bilal',
+    lastUpdated: 'Terakhir diperbarui: November 2026',
   },
   comments: {
     title: 'Komentar',

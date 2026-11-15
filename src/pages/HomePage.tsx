@@ -60,12 +60,18 @@ export function HomePage() {
   };
 
   // Fix #14 (E-E-A-T): Organization schema — who is behind the site.
+  // L-12: founder (Bilal) — the person behind the site, named in the
+  // footer ("Crafted with ❤️ by Bilal inspired by Shaheen").
   const organizationSchema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: SITE_CONFIG.name,
     url: buildCanonicalUrl(homePath),
     logo: 'https://utilityflow.online/og-image.jpg',
+    founder: {
+      '@type': 'Person',
+      name: 'Bilal',
+    },
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'customer service',

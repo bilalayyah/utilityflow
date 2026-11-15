@@ -241,6 +241,8 @@ export const jaStrings: UiStrings = {
     browseAll: 'すべての{name}を閲覧',
     moreToolsIn: 'その他のツール',
     willAppear: '近日ここに表示されます。',
+    bylineAuthor: '著者：Bilal',
+    lastUpdated: '最終更新：2026年11月',
   },
   comments: {
     title: 'コメント',

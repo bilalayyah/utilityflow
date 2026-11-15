@@ -3,6 +3,7 @@ import { Link, Navigate, useParams } from 'react-router-dom';
 import { AdSlot } from '../components/common/AdSlot';
 import { Breadcrumbs, buildBreadcrumbSchema } from '../components/common/Breadcrumbs';
 import { CategoryIcon } from '../components/common/CategoryIcon';
+import { FAQAccordion } from '../components/common/FAQAccordion';
 import { SeoHead } from '../components/seo/SeoHead';
 import { ToolCard } from '../components/tool/ToolCard';
 import { PASTEL_PALETTES, pastelForKey } from '../components/tool/pastel';
@@ -62,7 +63,7 @@ export function CategoryPage() {
         description={category.seo.description}
         canonicalPath={canonicalPath}
         keywords={category.seo.keywords}
-        ogImage={getOgImageForPage('category', category.id)}
+        ogImage={getOgImageForPage('category', category.id, locale)}
         structuredData={[collectionSchema, buildBreadcrumbSchema(breadcrumbs)]}
         alternates={toHreflangEntries(getCategoryAlternatePaths(category.id))}
       />
@@ -88,6 +89,12 @@ export function CategoryPage() {
           <p className="mt-3 text-base sm:text-lg leading-relaxed text-slate-600">
             {category.longDescription}
           </p>
+          {/* L-15: short intro paragraph (complements longDescription). */}
+          {category.intro && (
+            <p className="mt-3 text-base leading-relaxed text-slate-600">
+              {category.intro}
+            </p>
+          )}
         </header>
 
         {tools.length > 0 ? (
@@ -134,6 +141,16 @@ export function CategoryPage() {
         )}
 
         <AdSlot slotId="category-mid" format="horizontal" />
+
+        {/* L-15: short FAQ (3–5 Q&As) about this category. */}
+        {category.faqs && category.faqs.length > 0 && (
+          <section aria-labelledby="category-faq-heading" className="mb-12">
+            <h2 id="category-faq-heading" className="text-xl font-bold text-slate-900 mb-5">
+              {t.toolPage.faqs}
+            </h2>
+            <FAQAccordion items={category.faqs} />
+          </section>
+        )}
 
         <section aria-labelledby="other-categories-heading" className="pt-10 border-t border-slate-200">
           <h2 id="other-categories-heading" className="text-xl font-bold text-slate-900 mb-5">

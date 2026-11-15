@@ -154,6 +154,9 @@ export interface UiStrings {
     browseAll: string;
     moreToolsIn: string;
     willAppear: string;
+    /** L-12: tool-page byline ("By Bilal") + last-updated line. */
+    bylineAuthor: string;
+    lastUpdated: string;
   };
   comments: {
     title: string;

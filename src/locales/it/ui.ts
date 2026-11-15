@@ -241,6 +241,8 @@ export const itStrings: UiStrings = {
     browseAll: 'Sfoglia tutti gli {name}',
     moreToolsIn: 'Altri strumenti in',
     willAppear: 'appariranno qui a breve.',
+    bylineAuthor: 'Di Bilal',
+    lastUpdated: 'Ultimo aggiornamento: novembre 2026',
   },
   comments: {
     title: 'Commenti',

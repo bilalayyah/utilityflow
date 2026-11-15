@@ -92,6 +92,39 @@ export function localeTag(locale: LocaleCode): string {
 }
 
 /**
+ * L-13: og:locale tag (Open Graph locale, underscore + region).
+ * Unlike localeTag (BCP 47, bare for most locales), og:locale is always
+ * normalised to language_REGION form (de_DE, es_ES, ...) so it matches
+ * the hreflang region codes and is consistent across all 11 locales.
+ */
+export function ogLocaleTag(locale: LocaleCode): string {
+  switch (locale) {
+    case 'en':
+      return 'en_US';
+    case 'es':
+      return 'es_ES';
+    case 'pt':
+      return 'pt_BR';
+    case 'fr':
+      return 'fr_FR';
+    case 'de':
+      return 'de_DE';
+    case 'it':
+      return 'it_IT';
+    case 'id':
+      return 'id_ID';
+    case 'ru':
+      return 'ru_RU';
+    case 'ja':
+      return 'ja_JP';
+    case 'ko':
+      return 'ko_KR';
+    case 'zh':
+      return 'zh_CN';
+  }
+}
+
+/**
  * Split a pathname into its locale and the locale-neutral remainder.
  * '/es/contador-de-palabras/' -> { locale: 'es', restPath: '/contador-de-palabras/' }
  * '/word-counter/'            -> { locale: 'en', restPath: '/word-counter/' }

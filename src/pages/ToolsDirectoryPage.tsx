@@ -7,6 +7,7 @@ import { SeoHead } from '../components/seo/SeoHead';
 import { ToolCard } from '../components/tool/ToolCard';
 import { pastelForKey } from '../components/tool/pastel';
 import { SITE_CONFIG, buildCanonicalUrl } from '../config/site';
+import { getOgImageForPage } from '../config/ogImages';
 import { useLocale } from '../locales/LocaleContext';
 import { categoryHref, localizeStaticPath } from '../locales/config';
 import { getStaticAlternatePaths, toHreflangEntries } from '../locales/routes';
@@ -60,6 +61,7 @@ export function ToolsDirectoryPage() {
         description={t.directory.seoDescription}
         canonicalPath={canonicalPath}
         keywords={t.directory.seoKeywords}
+        ogImage={getOgImageForPage('static', 'tools', locale)}
         structuredData={[collectionSchema, buildBreadcrumbSchema(breadcrumbs)]}
         alternates={toHreflangEntries(getStaticAlternatePaths('/tools/'))}
       />

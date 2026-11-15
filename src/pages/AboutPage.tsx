@@ -21,17 +21,32 @@ export function AboutPage() {
   ];
 
   // Fix #14 (E-E-A-T): Organization schema — who is behind the site.
+  // L-12: founder (Bilal) — the person behind the site, named in the
+  // footer ("Crafted with ❤️ by Bilal inspired by Shaheen").
   const organizationSchema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: SITE_CONFIG.name,
     url: buildCanonicalUrl(localizeStaticPath('/', locale)),
     logo: 'https://utilityflow.online/og-image.jpg',
+    founder: {
+      '@type': 'Person',
+      name: 'Bilal',
+    },
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'customer service',
       email: SITE_CONFIG.contactEmail,
     },
+  };
+
+  // L-7: AboutPage schema (in addition to BreadcrumbList + Organization).
+  const aboutPageSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    name: t.about.seoTitle,
+    url: buildCanonicalUrl(localizeStaticPath('/about/', locale)),
+    description: t.about.seoDescription,
   };
 
   return (
@@ -40,7 +55,7 @@ export function AboutPage() {
         title={t.about.seoTitle}
         description={t.about.seoDescription}
         canonicalPath={localizeStaticPath('/about/', locale)}
-        structuredData={[buildBreadcrumbSchema(breadcrumbs), organizationSchema]}
+        structuredData={[buildBreadcrumbSchema(breadcrumbs), organizationSchema, aboutPageSchema]}
         alternates={toHreflangEntries(getStaticAlternatePaths('/about/'))}
       />
 

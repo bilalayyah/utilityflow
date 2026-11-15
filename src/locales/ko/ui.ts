@@ -241,6 +241,8 @@ export const koStrings: UiStrings = {
     browseAll: '모든 {name} 둘러보기',
     moreToolsIn: '다음 카테고리의 도구 더 보기',
     willAppear: '곧 여기에 표시됩니다.',
+    bylineAuthor: '작성자: Bilal',
+    lastUpdated: '마지막 업데이트: 2026년 11월',
   },
   comments: {
     title: '댓글',

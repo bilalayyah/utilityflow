@@ -4,12 +4,18 @@
 // - Unknown page paths get a real HTTP 404 status (SPA shell body, so the
 //   client-side 404 page still renders) instead of the fallback's 200.
 // - Known routes requested without a trailing slash 301 to the slash
-//   version (except `/` and `/admin/comments`, which is slash-less by design).
+//   version (except `/`). L-4: /admin/comments is a known route in both
+//   forms, but the slash-less form 301s to /admin/comments/ like any
+//   other known route.
 // - The three known dead/guessed URLs 301 to their real pages here too:
 //   _redirects carries the same rules, but whether _redirects or Functions
 //   runs first is not guaranteed, so both layers redirect them.
-// - Everything else passes through untouched: /api/*, /assets/*, /og/*,
-//   files with an extension, sitemap/robots/ads.txt, favicon, og-image.
+// - Everything else passes through untouched: /api/*, /assets/*, files
+//   with an extension, sitemap/robots/ads.txt, favicon, og-image.
+// - L-14: /og/* is NOT a blind passthrough. Real images return 200; a
+//   guessed /og/* path that Pages would serve the SPA fallback for
+//   (text/html) gets a plain 404 instead, so crawlers never see a 200
+//   for a non-existent OG image.
 // - EXCEPTION: the Google/Yandex verification files are NOT passed
 //   through. Cloudflare Pages always 308-redirects *.html URLs to the
 //   extensionless URL (no setting disables it), and the extensionless
@@ -141,6 +147,29 @@ export async function onRequest(context: MiddlewareContext): Promise<Response> {
   }
 
   if (PASSTHROUGH_EXACT.has(pathname)) return context.next();
+
+  // L-14: /og/* — real images pass through, guessed paths 404. Pages
+  // serves the SPA fallback (text/html) for a missing /og/* file, so
+  // check what context.next() actually returned: image/* means the
+  // file exists, text/html means the fallback fired and the file does
+  // not exist. No hardcoded file list — existence is decided by the
+  // response content-type. /og-image.jpg (root) is unaffected: it is
+  // in PASSTHROUGH_EXACT above and its path does not start with /og/.
+  if (pathname.startsWith('/og/')) {
+    const res = await context.next();
+    const contentType = res.headers.get('content-type') ?? '';
+    if (contentType.includes('text/html')) {
+      return new Response('Not Found', {
+        status: 404,
+        headers: {
+          'content-type': 'text/plain; charset=utf-8',
+          'cache-control': 'no-store',
+        },
+      });
+    }
+    return res;
+  }
+
   if (PASSTHROUGH_PREFIXES.some((prefix) => pathname.startsWith(prefix))) {
     return context.next();
   }
@@ -149,17 +178,20 @@ export async function onRequest(context: MiddlewareContext): Promise<Response> {
   const legacy = LEGACY_REDIRECTS[pathname];
   if (legacy) return redirectTo(url, legacy);
 
-  if (KNOWN_ROUTES.has(pathname)) return context.next();
-
   // Known route without trailing slash -> 301 to the slash version.
+  // Runs BEFORE the KNOWN_ROUTES passthrough below: '/admin/comments'
+  // is itself a known route (both forms are listed), so the passthrough
+  // would swallow it before this check ever ran (L-4). The only other
+  // slash-less known route is '/', which is excluded here.
   if (
     pathname !== '/' &&
-    pathname !== '/admin/comments' &&
     !pathname.endsWith('/') &&
     KNOWN_ROUTES.has(`${pathname}/`)
   ) {
     return redirectTo(url, `${pathname}/`);
   }
+
+  if (KNOWN_ROUTES.has(pathname)) return context.next();
 
   // Unknown path: serve the SPA shell with a real 404 status (and don't
   // let edge caches keep the 404 around). The shell's <head> is rewritten

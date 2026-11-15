@@ -95,6 +95,10 @@ export interface ToolCategory {
   shortName: string;
   description: string;
   longDescription: string;
+  /** L-15: short intro paragraph shown under longDescription on the category page. */
+  intro?: string;
+  /** L-15: short FAQ (3–5 Q&As) shown on the category page. */
+  faqs?: Array<{ question: string; answer: string }>;
   batch: BatchNumber;
   plannedToolCount: number;
   iconName:

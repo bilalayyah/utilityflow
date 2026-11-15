@@ -77,9 +77,9 @@ export const zhStrings: UiStrings = {
     externalApi: '外部 API',
   },
   home: {
-    seoTitle: 'UtilityFlow——快速的浏览器在线实用工具平台',
+    seoTitle: 'UtilityFlow——免费快速的浏览器在线实用工具平台，88个工具',
     seoDescription:
-      '免费、快速、注重隐私的在线实用工具，涵盖文本分析、开发者排版、计算器、PDF、SEO 检查与图片处理流程。',
+      '免费、快速、注重隐私的在线实用工具平台：88个浏览器工具，涵盖文本分析、开发者排版、计算器、PDF、SEO检查与图片处理流程，无需上传、无需注册，即开即用。',
     seoKeywords: [
       '在线实用工具',
       '浏览器工具',
@@ -241,6 +241,8 @@ export const zhStrings: UiStrings = {
     browseAll: '浏览全部 {name}',
     moreToolsIn: '更多工具',
     willAppear: '即将在此显示。',
+    bylineAuthor: '作者：Bilal',
+    lastUpdated: '最后更新：2026年11月',
   },
   comments: {
     title: '评论',

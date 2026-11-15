@@ -3,13 +3,18 @@ import { SITE_CONFIG, buildCanonicalUrl } from '../../config/site';
 import {
   SUPPORTED_LOCALES,
   getLocaleFromPath,
-  localeTag,
+  ogLocaleTag,
 } from '../../locales/config';
 
 export interface SeoHeadProps {
   title: string;
   description: string;
   canonicalPath: string;
+  /**
+   * L-8: retained for API compatibility — the meta keywords tag is NO
+   * LONGER rendered (Google ignores meta keywords; the tag was a stuffed
+   * phrase list). Callers may still pass keywords; they are ignored.
+   */
   keywords?: string[];
   ogType?: 'website' | 'article';
   noIndex?: boolean;
@@ -75,7 +80,6 @@ export function SeoHead({
   title,
   description,
   canonicalPath,
-  keywords,
   ogType = 'website',
   noIndex = false,
   ogImage,
@@ -84,16 +88,16 @@ export function SeoHead({
 }: SeoHeadProps) {
   const canonicalUrl = buildCanonicalUrl(canonicalPath);
   const serializedSchema = structuredData ? JSON.stringify(structuredData) : '';
-  const serializedKeywords = keywords?.join(', ') || '';
   const serializedAlternates = alternates ? JSON.stringify(alternates) : '';
   // The page locale is read from its own localized canonical path (every
   // SeoHead caller passes a locale-aware path), so no caller changes are
-  // needed to keep og:locale in sync. og:locale uses underscores
-  // (pt_BR, zh_CN) while html lang / hreflang use hyphens.
+  // needed to keep og:locale in sync. L-13: og:locale uses ogLocaleTag
+  // (always language_REGION, e.g. de_DE) while html lang / hreflang use
+  // hyphens.
   const { locale } = getLocaleFromPath(canonicalPath);
-  const ogLocale = localeTag(locale).replace('-', '_');
-  const ogLocaleAlternates = SUPPORTED_LOCALES.filter((l) => l.code !== locale).map(
-    (l) => localeTag(l.code).replace('-', '_')
+  const ogLocale = ogLocaleTag(locale);
+  const ogLocaleAlternates = SUPPORTED_LOCALES.filter((l) => l.code !== locale).map((l) =>
+    ogLocaleTag(l.code)
   );
   const serializedOgLocaleAlternates = ogLocaleAlternates.join(',');
   const ogImageUrl = ogImage ?? `${SITE_CONFIG.defaultOrigin}/og-image.jpg`;
@@ -102,9 +106,8 @@ export function SeoHead({
     document.title = title;
 
     upsertMeta('name', 'description', description);
-    if (serializedKeywords) {
-      upsertMeta('name', 'keywords', serializedKeywords);
-    }
+    // L-8: meta keywords tag removed (Google ignores it; it was a stuffed
+    // phrase list). The `keywords` prop is accepted but no longer rendered.
     upsertMeta('name', 'robots', noIndex ? 'noindex, follow' : 'index, follow');
 
     upsertCanonical(canonicalUrl);
@@ -118,6 +121,10 @@ export function SeoHead({
     upsertMeta('property', 'og:locale', ogLocale);
     upsertOgLocaleAlternates(ogLocaleAlternates);
     upsertMeta('property', 'og:image', ogImageUrl);
+    // L-11: og:image dimensions + alt (all OG images are 1200×630).
+    upsertMeta('property', 'og:image:width', '1200');
+    upsertMeta('property', 'og:image:height', '630');
+    upsertMeta('property', 'og:image:alt', title);
 
     upsertMeta('name', 'twitter:card', 'summary_large_image');
     upsertMeta('name', 'twitter:title', title);
@@ -143,7 +150,7 @@ export function SeoHead({
       const cleanupScripts = document.head.querySelectorAll('script[data-seo-jsonld="true"]');
       cleanupScripts.forEach((node) => node.remove());
     };
-  }, [title, description, canonicalUrl, serializedKeywords, ogType, noIndex, serializedSchema, serializedAlternates, structuredData, alternates, ogLocale, serializedOgLocaleAlternates, ogImageUrl]);
+  }, [title, description, canonicalUrl, ogType, noIndex, serializedSchema, serializedAlternates, structuredData, alternates, ogLocale, serializedOgLocaleAlternates, ogImageUrl]);
 
   return null;
 }

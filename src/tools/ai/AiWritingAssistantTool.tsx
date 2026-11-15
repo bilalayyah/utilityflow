@@ -26,6 +26,7 @@ import {
   type WritingTask,
   type WritingTone,
 } from '../../config/ai';
+import { trackEvent } from '../../utils/analytics';
 
 const MAX_CHARS = 12_000;
 
@@ -375,6 +376,8 @@ export default function AiWritingAssistantTool() {
       if (response.ok) {
         setSubmittedOriginal(text);
         setResultText(response.data);
+        // L-21: GA4 conversion event — AI generation completed.
+        trackEvent('ai_tool_submit', { tool: 'ai-writing-assistant' });
         setResultMeta({
           model: response.model,
           fallbackUsed: response.fallbackUsed,

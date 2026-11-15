@@ -15,6 +15,26 @@ export const FR_CATEGORY_OVERRIDES: Record<string, CategoryLocaleOverride> = {
       'Analysez le nombre de mots, mettez en forme le texte, nettoyez les espaces, convertissez la casse et inspectez la lisibilité directement dans votre navigateur.',
     longDescription:
       'Des utilitaires précis d’écriture et de manipulation de chaînes, conçus pour les rédacteurs, les éditeurs, les équipes de contenu et les étudiants. Chaque opération de texte s’exécute instantanément sur votre appareil, sans envoyer vos brouillons vers des serveurs distants.',
+    intro:
+      'Choisissez un outil ci-dessous, collez ou tapez votre texte, et le résultat apparaît immédiatement. Rien à installer, rien à envoyer : vos brouillons restent sur votre appareil, car chaque outil fonctionne entièrement dans votre navigateur.',
+    faqs: [
+      {
+        question: 'Les outils de texte et d’écriture sont-ils gratuits ?',
+        answer: 'Oui, ils sont tous gratuits, sans inscription et sans compte.',
+      },
+      {
+        question: 'Mon texte quitte-t-il mon navigateur ?',
+        answer: 'Non. Chaque outil fonctionne à 100 % dans votre navigateur, donc le texte que vous collez ou tapez n’est jamais envoyé vers un serveur ni stocké où que ce soit.',
+      },
+      {
+        question: 'Dois-je créer un compte ?',
+        answer: 'Non. Vous pouvez ouvrir n’importe quel outil et commencer à l’utiliser tout de suite : pas de compte, pas d’e-mail, pas d’installation.',
+      },
+      {
+        question: 'Quel outil utiliser pour compter les mots de mon texte ?',
+        answer: 'Utilisez le Compteur de mots. Collez-y votre texte et il affiche instantanément le nombre de mots et de caractères.',
+      },
+    ],
     seo: {
       title: 'Outils de texte et d’écriture en ligne | UtilityFlow',
       description:
@@ -43,6 +63,26 @@ export const FR_CATEGORY_OVERRIDES: Record<string, CategoryLocaleOverride> = {
       'Mettez en forme du JSON, encodez en Base64, testez des expressions régulières, décodez des JWT et générez des hachages sans aller-retour vers un serveur.',
     longDescription:
       'Des utilitaires d’ingénierie du quotidien, conçus pour déboguer vite et transformer les données proprement. Collez vos charges utiles, inspectez les formats structurés et validez la syntaxe localement, pour que les jetons sensibles et les extraits de configuration ne quittent jamais votre machine.',
+    intro:
+      'Choisissez l’outil dont vous avez besoin, collez votre code ou vos données et inspectez le résultat instantanément. Tout est traité sur votre propre appareil, donc les jetons, les charges utiles et les extraits de configuration ne quittent jamais votre machine.',
+    faqs: [
+      {
+        question: 'Les outils pour développeurs sont-ils gratuits ?',
+        answer: 'Oui, ils sont tous gratuits, sans inscription et sans compte.',
+      },
+      {
+        question: 'Puis-je coller un jeton ou une clé API dans ces outils en toute sécurité ?',
+        answer: 'Oui. Des outils comme le décodeur JWT et l’encodeur Base64 fonctionnent entièrement dans votre navigateur, donc le texte que vous collez n’est jamais envoyé vers un serveur.',
+      },
+      {
+        question: 'Dois-je créer un compte ?',
+        answer: 'Non. Vous pouvez ouvrir n’importe quel outil et commencer à l’utiliser tout de suite : pas de compte, pas d’e-mail, pas d’installation.',
+      },
+      {
+        question: 'Quel outil utiliser pour vérifier si mon JSON est valide ?',
+        answer: 'Utilisez le Formateur et validateur JSON. Collez-y votre JSON et il mettra le code en forme et affichera les erreurs.',
+      },
+    ],
     seo: {
       title: 'Outils développeurs : JSON, regex, Base64, JWT | UtilityFlow',
       description:
@@ -71,6 +111,26 @@ export const FR_CATEGORY_OVERRIDES: Record<string, CategoryLocaleOverride> = {
       'Calculez des âges, des pourcentages, des échéanciers de prêt, des IMC, des conversions d’unités et des marges commerciales avec une précision déterministe.',
     longDescription:
       'Des calculatrices précises pour les finances, les dates, la santé et les mathématiques, conçues pour la clarté. Consultez des détails étape par étape, des sorties tabulaires propres et des recalculs instantanés lorsque vous ajustez les entrées.',
+    intro:
+      'Sélectionnez une calculatrice, saisissez vos chiffres, et le résultat se met à jour instantanément lorsque vous modifiez les entrées. Aucune inscription n’est nécessaire, et rien de ce que vous saisissez n’est envoyé où que ce soit : chaque calcul s’effectue dans votre navigateur.',
+    faqs: [
+      {
+        question: 'Les calculatrices sont-elles gratuites ?',
+        answer: 'Oui, ils sont tous gratuits, sans inscription et sans compte.',
+      },
+      {
+        question: 'Les données que je saisis quittent-elles mon navigateur ?',
+        answer: 'Non. Chaque calcul s’effectue à 100 % dans votre navigateur, donc les chiffres que vous saisissez ne sont jamais envoyés vers un serveur ni stockés où que ce soit.',
+      },
+      {
+        question: 'Les calculatrices fonctionnent-elles sur mobile ?',
+        answer: 'Oui. Elles fonctionnent dans n’importe quel navigateur moderne, vous pouvez donc les utiliser sur votre téléphone, votre tablette ou votre ordinateur.',
+      },
+      {
+        question: 'Quelle calculatrice utiliser pour une mensualité de prêt ?',
+        answer: 'Utilisez la Calculatrice de prêt et EMI. Saisissez le montant du prêt, le taux d’intérêt et la durée pour voir la mensualité et un échéancier complet.',
+      },
+    ],
     seo: {
       title: 'Calculatrices en ligne : finances et dates | UtilityFlow',
       description:
@@ -99,6 +159,26 @@ export const FR_CATEGORY_OVERRIDES: Record<string, CategoryLocaleOverride> = {
       'Créez des liens de suivi UTM, prévisualisez la longueur de vos publications, générez des codes QR et mettez en forme des légendes pour les réseaux sociaux modernes.',
     longDescription:
       'Des aides pratiques de marketing et de publication pour les créateurs, les équipes de croissance et les gestionnaires de communauté. Standardisez les paramètres de suivi de vos campagnes, vérifiez les limites de caractères des plateformes et générez des codes QR scannables quand vous en avez besoin.',
+    intro:
+      'Ouvrez un outil ci-dessous, saisissez votre lien ou votre texte, et copiez le résultat directement dans votre publication ou votre campagne. Tout fonctionne dans votre navigateur, donc vos liens et légendes ne sont jamais envoyés vers un serveur.',
+    faqs: [
+      {
+        question: 'Les outils de réseaux sociaux sont-ils gratuits ?',
+        answer: 'Oui, ils sont tous gratuits, sans inscription et sans compte.',
+      },
+      {
+        question: 'Ce que je saisis est-il envoyé vers un serveur ?',
+        answer: 'Non. Chaque outil fonctionne à 100 % dans votre navigateur, donc vos liens, légendes et textes ne quittent jamais votre appareil.',
+      },
+      {
+        question: 'Dois-je créer un compte ?',
+        answer: 'Non. Vous pouvez ouvrir n’importe quel outil et commencer à l’utiliser tout de suite : pas de compte, pas d’e-mail, pas d’installation.',
+      },
+      {
+        question: 'Quel outil crée un code QR pour mon lien ?',
+        answer: 'Utilisez le Générateur de codes QR. Saisissez votre lien et il crée un code QR scannable que vous pouvez télécharger et partager.',
+      },
+    ],
     seo: {
       title: 'Outils de réseaux sociaux : QR, UTM, hashtags | UtilityFlow',
       description:
@@ -127,6 +207,26 @@ export const FR_CATEGORY_OVERRIDES: Record<string, CategoryLocaleOverride> = {
       'Fusionnez, divisez, réorganisez, ajoutez des filigranes et convertissez des documents PDF dans votre navigateur, sans envoyer vos fichiers privés.',
     longDescription:
       'Des flux de travail documentaires conçus pour la confidentialité. Traitez contrats, factures et dossiers d’étude directement dans la mémoire du client avec WebAssembly et les API canvas du navigateur, plutôt que sur des serveurs de fichiers distants.',
+    intro:
+      'Choisissez un outil, sélectionnez votre fichier PDF, et le résultat est prêt dans votre navigateur en quelques instants. Vos documents ne quittent jamais votre appareil : ils sont traités localement, et non envoyés vers un serveur.',
+    faqs: [
+      {
+        question: 'Les outils PDF sont-ils gratuits ?',
+        answer: 'Oui, ils sont tous gratuits, sans inscription et sans compte.',
+      },
+      {
+        question: 'Mes fichiers PDF sont-ils envoyés quelque part ?',
+        answer: 'Non. Vos fichiers sont traités directement dans votre navigateur, donc ils ne quittent jamais votre appareil et ne sont jamais stockés sur un serveur.',
+      },
+      {
+        question: 'Les outils PDF fonctionnent-ils sur mobile ?',
+        answer: 'Oui. Elles fonctionnent dans n’importe quel navigateur moderne, vous pouvez donc les utiliser sur votre téléphone, votre tablette ou votre ordinateur.',
+      },
+      {
+        question: 'Quel outil combine plusieurs fichiers PDF en un seul ?',
+        answer: 'Utilisez Fusionner des PDF. Sélectionnez les fichiers à combiner et il les assemble en un seul document PDF.',
+      },
+    ],
     seo: {
       title: 'Outils PDF : fusionner, diviser, convertir | UtilityFlow',
       description:
@@ -155,6 +255,26 @@ export const FR_CATEGORY_OVERRIDES: Record<string, CategoryLocaleOverride> = {
       'Prévisualisez des extraits SERP, générez des balises OpenGraph, créez des fichiers robots.txt et des sitemaps XML, et inspectez la densité des mots-clés.',
     longDescription:
       'Des utilitaires techniques et d’optimisation sur la page pour les éditeurs, les fondateurs indépendants et les spécialistes SEO. Validez la longueur des titres, rédigez des métadonnées structurées et créez des slugs d’URL propres en quelques secondes.',
+    intro:
+      'Choisissez un outil, saisissez le titre, l’URL ou le contenu de votre page, et vérifiez le résultat instantanément. Toutes les vérifications s’effectuent dans votre navigateur, donc vos pages non publiées et vos brouillons restent privés.',
+    faqs: [
+      {
+        question: 'Les outils SEO sont-ils gratuits ?',
+        answer: 'Oui, ils sont tous gratuits, sans inscription et sans compte.',
+      },
+      {
+        question: 'Mon contenu quitte-t-il mon navigateur ?',
+        answer: 'Non. Chaque outil fonctionne à 100 % dans votre navigateur, donc les titres, URL et contenus que vous saisissez ne sont jamais envoyés vers un serveur ni stockés où que ce soit.',
+      },
+      {
+        question: 'Dois-je créer un compte ?',
+        answer: 'Non. Vous pouvez ouvrir n’importe quel outil et commencer à l’utiliser tout de suite : pas de compte, pas d’e-mail, pas d’installation.',
+      },
+      {
+        question: 'Quel outil prévisualise l’apparence de ma page dans les résultats de recherche ?',
+        answer: 'Utilisez l’Aperçu d’extrait SERP. Saisissez votre titre et votre description pour voir comment votre page peut apparaître dans les résultats de recherche Google.',
+      },
+    ],
     seo: {
       title: 'Outils SEO : aperçus SERP et balises méta | UtilityFlow',
       description:
@@ -183,6 +303,26 @@ export const FR_CATEGORY_OVERRIDES: Record<string, CategoryLocaleOverride> = {
       'Compressez des images, redimensionnez-les, convertissez PNG/JPG/WebP, testez le contraste WCAG, scannez des codes QR, calculez des hachages de fichiers et créez des favicons localement.',
     longDescription:
       'Des utilitaires rapides de médias, de cryptographie et de fichiers, propulsés par HTML5 Canvas, l’API Web Crypto et les API de fichiers côté client. Optimisez les ressources web pour les Core Web Vitals, vérifiez les sommes de contrôle SHA-256 des fichiers, extrayez les palettes d’images et générez des favicons sans envoyer de fichiers.',
+    intro:
+      'Sélectionnez un outil ci-dessous, choisissez votre fichier, et obtenez votre résultat tout de suite. Vos images et fichiers ne quittent jamais votre appareil : tout est traité localement dans votre navigateur.',
+    faqs: [
+      {
+        question: 'Les outils d’images et de fichiers sont-ils gratuits ?',
+        answer: 'Oui, ils sont tous gratuits, sans inscription et sans compte.',
+      },
+      {
+        question: 'Mes images sont-elles envoyées vers un serveur ?',
+        answer: 'Non. Vos fichiers sont traités directement dans votre navigateur, donc ils ne quittent jamais votre appareil et ne sont jamais stockés sur un serveur.',
+      },
+      {
+        question: 'Les outils fonctionnent-ils sur mobile ?',
+        answer: 'Oui. Elles fonctionnent dans n’importe quel navigateur moderne, vous pouvez donc les utiliser sur votre téléphone, votre tablette ou votre ordinateur.',
+      },
+      {
+        question: 'Quel outil utiliser pour réduire la taille d’un fichier image ?',
+        answer: 'Utilisez le Compresseur d’images. Choisissez votre image et il réduit la taille du fichier tout en la gardant prête pour le web.',
+      },
+    ],
     seo: {
       title: 'Outils d’images : compresser et convertir | UtilityFlow',
       description:

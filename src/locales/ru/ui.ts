@@ -241,6 +241,8 @@ export const ruStrings: UiStrings = {
     browseAll: 'Просмотреть все: {name}',
     moreToolsIn: 'Ещё инструменты в категории',
     willAppear: 'скоро появятся здесь.',
+    bylineAuthor: 'Автор: Bilal',
+    lastUpdated: 'Последнее обновление: ноябрь 2026',
   },
   comments: {
     title: 'Комментарии',

@@ -35,12 +35,40 @@ const OG_IMAGE_MAP: Record<string, string> = {
   'category:pdf': '/og/pdf.jpg',
   'category:seo': '/og/seo.jpg',
   'category:image-file': '/og/image-file.jpg',
+  // L-9: tools directory page (/tools/ + its 11 locale versions).
+  'static:tools': '/og/tools.jpg',
+};
+
+// L-10: localised OG images — BOUNDED to DE + ES, top 3 tools only.
+// Keys are '<kind>:<id>' -> locale -> site-relative path. Any other
+// locale (or a tool without a localised image) falls back to the
+// English image in OG_IMAGE_MAP above.
+const LOCALISED_OG_IMAGES: Record<string, Record<string, string>> = {
+  'tool:word-counter': {
+    de: '/og/de/word-counter.jpg',
+    es: '/og/es/word-counter.jpg',
+  },
+  'tool:merge-pdf': {
+    de: '/og/de/merge-pdf.jpg',
+    es: '/og/es/merge-pdf.jpg',
+  },
+  'tool:image-compressor': {
+    de: '/og/de/image-compressor.jpg',
+    es: '/og/es/image-compressor.jpg',
+  },
 };
 
 export function getOgImageForPage(
   kind: 'tool' | 'category' | 'static',
-  id: string
+  id: string,
+  locale?: string
 ): string {
-  const path = OG_IMAGE_MAP[`${kind}:${id}`];
+  const key = `${kind}:${id}`;
+  // L-10: prefer a localised image when one exists for this locale.
+  if (locale) {
+    const localised = LOCALISED_OG_IMAGES[key]?.[locale];
+    if (localised) return `${SITE_CONFIG.defaultOrigin}${localised}`;
+  }
+  const path = OG_IMAGE_MAP[key];
   return path ? `${SITE_CONFIG.defaultOrigin}${path}` : DEFAULT_OG_IMAGE;
 }

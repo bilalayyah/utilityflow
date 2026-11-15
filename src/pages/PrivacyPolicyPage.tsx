@@ -57,16 +57,6 @@ export function PrivacyPolicyPage() {
                     {(t.privacy as { optOutGoogleAds?: string }).optOutGoogleAds ??
                       'Google Ads Settings'}
                   </a>
-                  {' · '}
-                  <a
-                    href="https://optout.aboutads.info"
-                    target="_blank"
-                    rel="noopener"
-                    className="font-semibold text-indigo-600 hover:underline"
-                  >
-                    {(t.privacy as { optOutAboutAds?: string }).optOutAboutAds ??
-                      'AboutAds.info opt-out'}
-                  </a>
                 </p>
               )}
             </section>

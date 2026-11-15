@@ -241,6 +241,8 @@ export const deStrings: UiStrings = {
     browseAll: 'Alle {name} durchsuchen',
     moreToolsIn: 'Weitere Tools in',
     willAppear: 'erscheinen hier in Kürze.',
+    bylineAuthor: 'Von Bilal',
+    lastUpdated: 'Zuletzt aktualisiert: November 2026',
   },
   comments: {
     title: 'Kommentare',

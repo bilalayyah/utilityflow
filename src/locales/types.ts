@@ -46,6 +46,10 @@ export interface CategoryLocaleOverride {
   shortName: string;
   description: string;
   longDescription: string;
+  /** L-15: short intro paragraph (translated). */
+  intro?: string;
+  /** L-15: short FAQ (3–5 Q&As, translated). */
+  faqs?: Array<{ question: string; answer: string }>;
   seo: CategorySEOConfig;
   sampleToolNames: string[];
 }

@@ -152,6 +152,8 @@ export function getLocalizedCategory(
     shortName: override.shortName,
     description: override.description,
     longDescription: override.longDescription,
+    intro: override.intro ?? base.intro,
+    faqs: override.faqs ?? base.faqs,
     seo: override.seo,
     sampleToolNames: override.sampleToolNames,
   };

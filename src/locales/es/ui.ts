@@ -244,6 +244,8 @@ export const esStrings: UiStrings = {
     browseAll: 'Explorar todas las {name}',
     moreToolsIn: 'Más herramientas en',
     willAppear: 'aparecerán aquí próximamente.',
+    bylineAuthor: 'Por Bilal',
+    lastUpdated: 'Última actualización: noviembre de 2026',
   },
   comments: {
     title: 'Comentarios',

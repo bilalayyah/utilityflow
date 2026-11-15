@@ -239,6 +239,8 @@ export const enStrings: UiStrings = {
     browseAll: 'Browse all {name}',
     moreToolsIn: 'More tools in',
     willAppear: 'will appear here soon.',
+    bylineAuthor: 'By Bilal',
+    lastUpdated: 'Last updated: November 2026',
   },
   comments: {
     title: 'Comments',

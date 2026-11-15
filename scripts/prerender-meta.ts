@@ -66,6 +66,7 @@ import {
   getLocaleInfo,
   localeTag,
   localizeStaticPath,
+  ogLocaleTag,
   toolHref,
 } from '../src/locales/config';
 import { loadLocaleData } from '../src/locales/loader';
@@ -221,17 +222,17 @@ interface SeoHeadProps {
 
 function renderSeoHead(props: SeoHeadProps): string {
   const canonicalUrl = buildCanonicalUrl(props.canonicalPath, ORIGIN);
-  const ogLocale = localeTag(props.locale).replace('-', '_');
-  const ogLocaleAlternates = SUPPORTED_LOCALES.filter((l) => l.code !== props.locale).map(
-    (l) => localeTag(l.code).replace('-', '_')
+  // L-13: og:locale uses ogLocaleTag (always language_REGION, e.g. de_DE).
+  const ogLocale = ogLocaleTag(props.locale);
+  const ogLocaleAlternates = SUPPORTED_LOCALES.filter((l) => l.code !== props.locale).map((l) =>
+    ogLocaleTag(l.code)
   );
   const ogImageUrl = props.ogImage ?? `${ORIGIN}/og-image.jpg`;
   const lines: string[] = [];
   lines.push(`    <title>${escapeText(props.title)}</title>`);
   lines.push(`    <meta name="description" content="${escapeAttr(props.description)}" />`);
-  if (props.keywords && props.keywords.length > 0) {
-    lines.push(`    <meta name="keywords" content="${escapeAttr(props.keywords.join(', '))}" />`);
-  }
+  // L-8: meta keywords tag removed (Google ignores it; it was a stuffed
+  // phrase list). The `keywords` prop is accepted but no longer rendered.
   lines.push(
     `    <meta name="robots" content="${props.noIndex ? 'noindex, follow' : 'index, follow'}" />`
   );
@@ -253,6 +254,10 @@ function renderSeoHead(props: SeoHeadProps): string {
     lines.push(`    <meta property="og:locale:alternate" content="${escapeAttr(alt)}" />`);
   }
   lines.push(`    <meta property="og:image" content="${escapeAttr(ogImageUrl)}" />`);
+  // L-11: og:image dimensions + alt (all OG images are 1200×630).
+  lines.push(`    <meta property="og:image:width" content="1200" />`);
+  lines.push(`    <meta property="og:image:height" content="630" />`);
+  lines.push(`    <meta property="og:image:alt" content="${escapeAttr(props.title)}" />`);
   lines.push(`    <meta name="twitter:card" content="summary_large_image" />`);
   lines.push(`    <meta name="twitter:title" content="${escapeAttr(props.title)}" />`);
   lines.push(`    <meta name="twitter:description" content="${escapeAttr(props.description)}" />`);
@@ -287,12 +292,18 @@ interface PageSeo {
 
 function buildOrganizationSchema(homePath: string): Record<string, unknown> {
   // Fix #14: mirrors the Organization schema in HomePage/AboutPage.
+  // L-12: founder (Bilal) added — the person behind the site, named in
+  // the footer ("Crafted with ❤️ by Bilal inspired by Shaheen").
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: SITE_CONFIG.name,
     url: buildCanonicalUrl(homePath, ORIGIN),
     logo: 'https://utilityflow.online/og-image.jpg',
+    founder: {
+      '@type': 'Person',
+      name: 'Bilal',
+    },
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'customer service',
@@ -349,6 +360,8 @@ function directorySeo(t: LocaleData['uiStrings'], locale: LocaleCode): SeoHeadPr
     keywords: t.directory.seoKeywords,
     structuredData: [collectionSchema, buildBreadcrumbSchema(breadcrumbs)],
     alternates: toHreflangEntries(getStaticAlternatePaths('/tools/')),
+    // L-9: the tools directory has its own OG image (/og/tools.jpg).
+    ogImage: getOgImageForPage('static', 'tools', locale),
     locale,
   };
 }
@@ -397,15 +410,42 @@ function staticPageSeo(
     { label: cfg.crumbLabel(t) },
   ];
   const breadcrumbSchema = buildBreadcrumbSchema(breadcrumbs);
+  // L-7: AboutPage / ContactPage schema (in addition to BreadcrumbList;
+  // About also carries the Organization schema, as before).
+  const pageSchema: Record<string, unknown> | null =
+    key === 'about'
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'AboutPage',
+          name: cfg.seoTitle(t),
+          url: buildCanonicalUrl(canonicalPath, ORIGIN),
+          description: cfg.seoDescription(t),
+        }
+      : key === 'contact'
+        ? {
+            '@context': 'https://schema.org',
+            '@type': 'ContactPage',
+            name: cfg.seoTitle(t),
+            url: buildCanonicalUrl(canonicalPath, ORIGIN),
+            description: cfg.seoDescription(t),
+          }
+        : null;
+  const structuredData: Record<string, unknown> | Array<Record<string, unknown>> =
+    key === 'about'
+      ? [
+          breadcrumbSchema,
+          buildOrganizationSchema(localizeStaticPath('/', locale)),
+          pageSchema as Record<string, unknown>,
+        ]
+      : pageSchema
+        ? [breadcrumbSchema, pageSchema]
+        : breadcrumbSchema;
   return {
     title: cfg.seoTitle(t),
     description: cfg.seoDescription(t),
     canonicalPath,
     // Fix #14: About also carries the Organization schema (mirrors AboutPage).
-    structuredData:
-      key === 'about'
-        ? [breadcrumbSchema, buildOrganizationSchema(localizeStaticPath('/', locale))]
-        : breadcrumbSchema,
+    structuredData,
     alternates: toHreflangEntries(getStaticAlternatePaths(cfg.enPath)),
     locale,
   };
@@ -437,9 +477,14 @@ function categorySeo(
     description: category.seo.description,
     canonicalPath,
     keywords: category.seo.keywords,
-    structuredData: [collectionSchema, buildBreadcrumbSchema(breadcrumbs)],
+    structuredData: [
+      collectionSchema,
+      buildBreadcrumbSchema(breadcrumbs),
+      // L-15: category FAQPage schema (mirrors the FAQ section on the page).
+      ...((category.faqs ?? []).length > 0 ? [buildFaqSchema(category.faqs ?? [])] : []),
+    ],
     alternates: toHreflangEntries(getCategoryAlternatePaths(category.id)),
-    ogImage: getOgImageForPage('category', category.id),
+    ogImage: getOgImageForPage('category', category.id, locale),
     locale,
   };
 }
@@ -520,7 +565,7 @@ function toolSeo(
     ],
     structuredData,
     alternates: toHreflangEntries(getToolAlternatePaths(tool.id)),
-    ogImage: getOgImageForPage('tool', tool.id),
+    ogImage: getOgImageForPage('tool', tool.id, locale),
     locale,
   };
 }

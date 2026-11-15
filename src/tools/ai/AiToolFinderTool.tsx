@@ -14,6 +14,7 @@ import { useEffect, useMemo, useRef, useState, type FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import type { FindToolAiResult, FindToolRequest } from '../../../worker/src/types';
 import { fetchAiHealth, postAiJson, type AiErrorResponse, type QuotaStatus } from '../../config/ai';
+import { trackEvent } from '../../utils/analytics';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
 import { PASTEL_PALETTES, pastelForKey } from '../../components/tool/pastel';
@@ -303,6 +304,8 @@ export default function AiToolFinderTool() {
         const parsed = parseAiFindResult(response.data);
         if (parsed) {
           setAiResult(parsed);
+          // L-21: GA4 conversion event — AI tool-find completed.
+          trackEvent('ai_tool_submit', { tool: 'ai-tool-finder' });
           setAiMeta({
             model: response.model,
             fallbackUsed: response.fallbackUsed,

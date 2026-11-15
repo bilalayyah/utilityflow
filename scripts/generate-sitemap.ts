@@ -213,9 +213,15 @@ function generateSitemap(): void {
   writeFileSync(sitemapPath, xmlLines.join('\n'), 'utf8');
 
   const robotsPath = resolve(publicDir, 'robots.txt');
+  // L-5: Disallow /admin/ (belt-and-braces alongside the admin page's
+  // noindex — crawlers should not fetch the admin page or its data).
+  // NOTE: this script REWRITES public/robots.txt on every build, so the
+  // Disallow must live here — editing public/robots.txt by hand is lost
+  // on the next build.
   const robotsContent = [
     'User-agent: *',
     'Allow: /',
+    'Disallow: /admin/',
     '',
     `Sitemap: ${siteOrigin}/sitemap.xml`,
     '',

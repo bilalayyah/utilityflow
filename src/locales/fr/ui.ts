@@ -241,6 +241,8 @@ export const frStrings: UiStrings = {
     browseAll: 'Parcourir tous les {name}',
     moreToolsIn: 'Plus d’outils dans',
     willAppear: 'apparaîtront ici bientôt.',
+    bylineAuthor: 'Par Bilal',
+    lastUpdated: 'Dernière mise à jour : novembre 2026',
   },
   comments: {
     title: 'Commentaires',

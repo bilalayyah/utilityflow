@@ -15,6 +15,26 @@ export const IT_CATEGORY_OVERRIDES: Record<string, CategoryLocaleOverride> = {
       'Analizza il numero di parole, formatta il testo, pulisci gli spazi, converti maiuscole e minuscole e controlla la leggibilità direttamente nel tuo browser.',
     longDescription:
       'Utilità precise di scrittura e manipolazione delle stringhe, pensate per scrittori, editor, team di contenuti e studenti. Ogni operazione di testo viene eseguita istantaneamente sul tuo dispositivo, senza caricare le bozze su server remoti.',
+    intro:
+      'Scegli uno strumento qui sotto, incolla o digita il testo e il risultato appare subito. Non c’è nulla da installare e nulla da caricare: le tue bozze restano sul tuo dispositivo, perché ogni strumento funziona interamente nel tuo browser.',
+    faqs: [
+      {
+        question: 'Gli strumenti di testo e scrittura sono gratuiti?',
+        answer: 'Sì, sono tutti gratuiti, senza registrazione e senza account.',
+      },
+      {
+        question: 'Il mio testo lascia il mio browser?',
+        answer: 'No. Ogni strumento funziona al 100% nel tuo browser, quindi il testo che incolli o digiti non viene mai caricato su un server né salvato da nessuna parte.',
+      },
+      {
+        question: 'Devo creare un account?',
+        answer: 'No. Puoi aprire qualsiasi strumento e iniziare subito a usarlo: nessun account, nessuna email, nessuna installazione.',
+      },
+      {
+        question: 'Quale strumento devo usare per contare le parole del mio testo?',
+        answer: 'Usa il Contatore di Parole. Incolla il testo e mostra subito il numero di parole e di caratteri.',
+      },
+    ],
     seo: {
       title: 'Strumenti di testo e scrittura online | UtilityFlow',
       description:
@@ -43,6 +63,26 @@ export const IT_CATEGORY_OVERRIDES: Record<string, CategoryLocaleOverride> = {
       'Formatta JSON, codifica Base64, testa espressioni regolari, decodifica JWT e genera hash senza alcun passaggio dal server.',
     longDescription:
       'Utilità quotidiane di ingegneria, pensate per il debug rapido e la trasformazione pulita dei dati. Incolla i payload, ispeziona i formati strutturati e convalida la sintassi in locale, così token sensibili e frammenti di configurazione non lasciano mai la tua macchina.',
+    intro:
+      'Scegli lo strumento che ti serve, incolla il codice o i dati e controlla il risultato all’istante. Tutto viene elaborato sul tuo dispositivo, quindi token, payload e frammenti di configurazione non lasciano mai la tua macchina.',
+    faqs: [
+      {
+        question: 'Gli strumenti per sviluppatori sono gratuiti?',
+        answer: 'Sì, sono tutti gratuiti, senza registrazione e senza account.',
+      },
+      {
+        question: 'Posso incollare un token o una chiave API in questi strumenti in sicurezza?',
+        answer: 'Sì. Strumenti come il decodificatore JWT e il codificatore Base64 funzionano interamente nel tuo browser, quindi il testo che incolli non viene mai inviato a un server.',
+      },
+      {
+        question: 'Devo creare un account?',
+        answer: 'No. Puoi aprire qualsiasi strumento e iniziare subito a usarlo: nessun account, nessuna email, nessuna installazione.',
+      },
+      {
+        question: 'Quale strumento devo usare per verificare se il mio JSON è valido?',
+        answer: 'Usa il Formattatore e Validatore JSON. Incolla il JSON e formatterà il codice mostrando eventuali errori.',
+      },
+    ],
     seo: {
       title: 'Strumenti per sviluppatori: JSON, regex, Base64, JWT',
       description:
@@ -71,6 +111,26 @@ export const IT_CATEGORY_OVERRIDES: Record<string, CategoryLocaleOverride> = {
       'Calcola età, percentuali, piani di rimborso dei prestiti, BMI, conversioni di unità e margini aziendali con precisione deterministica.',
     longDescription:
       'Calcolatrici accurate per finanza, date, salute e matematica, progettate per la chiarezza. Consulta suddivisioni passo passo, output tabellari puliti e ricalcoli istantanei mentre regoli i dati inseriti.',
+    intro:
+      'Seleziona una calcolatrice, inserisci i tuoi numeri e il risultato si aggiorna all’istante mentre modifichi i dati. Non serve registrarsi e nulla di ciò che inserisci viene inviato da nessuna parte: ogni calcolo avviene nel tuo browser.',
+    faqs: [
+      {
+        question: 'Le calcolatrici sono gratuite?',
+        answer: 'Sì, sono tutti gratuiti, senza registrazione e senza account.',
+      },
+      {
+        question: 'I dati che inserisco lasciano il mio browser?',
+        answer: 'No. Ogni calcolo avviene al 100% nel tuo browser, quindi i numeri che inserisci non vengono mai caricati su un server né salvati da nessuna parte.',
+      },
+      {
+        question: 'Le calcolatrici funzionano su dispositivi mobili?',
+        answer: 'Sì. Funzionano in qualsiasi browser moderno, quindi puoi usarle su telefono, tablet o computer.',
+      },
+      {
+        question: 'Quale calcolatrice devo usare per la rata mensile di un prestito?',
+        answer: 'Usa la Calcolatrice di Prestito e Rata EMI. Inserisci l’importo del prestito, il tasso di interesse e la durata per vedere la rata mensile e un piano di rimborso completo.',
+      },
+    ],
     seo: {
       title: 'Calcolatrici online: finanza, date, matematica e unità',
       description:
@@ -99,6 +159,26 @@ export const IT_CATEGORY_OVERRIDES: Record<string, CategoryLocaleOverride> = {
       'Crea link di tracciamento UTM, visualizza l’anteprima della lunghezza dei post, genera codici QR e formatta didascalie per i canali social moderni.',
     longDescription:
       'Utilità pratiche di marketing e pubblicazione per creator, team di crescita e community manager. Standardizza i parametri di tracciamento delle campagne, verifica i limiti di caratteri delle piattaforme e genera codici QR scansionabili quando ne hai bisogno.',
+    intro:
+      'Apri uno strumento qui sotto, inserisci il tuo link o testo e copia il risultato direttamente nel tuo post o nella tua campagna. Tutto funziona nel tuo browser, quindi i tuoi link e le tue didascalie non vengono mai caricati su un server.',
+    faqs: [
+      {
+        question: 'Gli strumenti per social media sono gratuiti?',
+        answer: 'Sì, sono tutti gratuiti, senza registrazione e senza account.',
+      },
+      {
+        question: 'Ciò che inserisco viene caricato su un server?',
+        answer: 'No. Ogni strumento funziona al 100% nel tuo browser, quindi i tuoi link, le tue didascalie e il tuo testo non lasciano mai il tuo dispositivo.',
+      },
+      {
+        question: 'Devo creare un account?',
+        answer: 'No. Puoi aprire qualsiasi strumento e iniziare subito a usarlo: nessun account, nessuna email, nessuna installazione.',
+      },
+      {
+        question: 'Quale strumento crea un codice QR per il mio link?',
+        answer: 'Usa il Generatore di Codice QR. Inserisci il tuo link e crea un codice QR scansionabile che puoi scaricare e condividere.',
+      },
+    ],
     seo: {
       title: 'Strumenti per social media: codici QR, UTM e hashtag',
       description:
@@ -127,6 +207,26 @@ export const IT_CATEGORY_OVERRIDES: Record<string, CategoryLocaleOverride> = {
       'Unisci, dividi, riordina, aggiungi filigrane e converti documenti PDF nel tuo browser, senza caricare file privati.',
     longDescription:
       'Flussi di lavoro documentali progettati per la riservatezza. Elabora contratti, fatture e pacchetti di studio direttamente nella memoria del client con WebAssembly e le API canvas del browser, anziché su server di file remoti.',
+    intro:
+      'Scegli uno strumento, seleziona il tuo file PDF e il risultato è pronto nel tuo browser in pochi istanti. I tuoi documenti non lasciano mai il tuo dispositivo: vengono elaborati in locale, non caricati su alcun server.',
+    faqs: [
+      {
+        question: 'Gli strumenti PDF sono gratuiti?',
+        answer: 'Sì, sono tutti gratuiti, senza registrazione e senza account.',
+      },
+      {
+        question: 'I miei file PDF vengono caricati da qualche parte?',
+        answer: 'No. I tuoi file vengono elaborati direttamente nel tuo browser, quindi non lasciano mai il tuo dispositivo e non vengono mai salvati su un server.',
+      },
+      {
+        question: 'Gli strumenti PDF funzionano su dispositivi mobili?',
+        answer: 'Sì. Funzionano in qualsiasi browser moderno, quindi puoi usarle su telefono, tablet o computer.',
+      },
+      {
+        question: 'Quale strumento unisce più file PDF in uno solo?',
+        answer: 'Usa Unisci PDF. Seleziona i file che vuoi unire e li unisce in un unico documento PDF.',
+      },
+    ],
     seo: {
       title: 'Strumenti PDF: unire, dividere e convertire | UtilityFlow',
       description:
@@ -155,6 +255,26 @@ export const IT_CATEGORY_OVERRIDES: Record<string, CategoryLocaleOverride> = {
       'Visualizza l’anteprima degli snippet SERP, genera tag OpenGraph, crea file robots.txt e sitemap XML e controlla la densità delle parole chiave.',
     longDescription:
       'Utilità tecniche e di ottimizzazione on-page per editori, fondatori indipendenti e specialisti SEO. Convalida la lunghezza dei titoli, componi metadati strutturati e crea slug URL puliti in pochi secondi.',
+    intro:
+      'Scegli uno strumento, inserisci il titolo, l’URL o il contenuto della tua pagina e verifica subito il risultato. Tutti i controlli avvengono nel tuo browser, quindi le tue pagine non pubblicate e le tue bozze restano private.',
+    faqs: [
+      {
+        question: 'Gli strumenti SEO sono gratuiti?',
+        answer: 'Sì, sono tutti gratuiti, senza registrazione e senza account.',
+      },
+      {
+        question: 'I miei contenuti lasciano il mio browser?',
+        answer: 'No. Ogni strumento funziona al 100% nel tuo browser, quindi i titoli, gli URL e i contenuti che inserisci non vengono mai caricati su un server né salvati da nessuna parte.',
+      },
+      {
+        question: 'Devo creare un account?',
+        answer: 'No. Puoi aprire qualsiasi strumento e iniziare subito a usarlo: nessun account, nessuna email, nessuna installazione.',
+      },
+      {
+        question: 'Quale strumento mostra in anteprima come apparirà la mia pagina nei risultati di ricerca?',
+        answer: 'Usa l’Anteprima Snippet SERP. Inserisci titolo e descrizione per vedere come la tua pagina potrebbe apparire nei risultati di ricerca Google.',
+      },
+    ],
     seo: {
       title: 'Strumenti SEO: anteprime SERP e meta tag | UtilityFlow',
       description:
@@ -183,6 +303,26 @@ export const IT_CATEGORY_OVERRIDES: Record<string, CategoryLocaleOverride> = {
       'Comprimi immagini, ridimensiona le dimensioni, converti PNG/JPG/WebP, testa il contrasto WCAG, scansiona codici QR, calcola hash di file e crea favicon in locale.',
     longDescription:
       'Utilità veloci per media, crittografia e file, basate su HTML5 Canvas, Web Crypto API e API di file lato client. Ottimizza le risorse web per i Core Web Vitals, verifica i checksum SHA-256 dei file, estrai le palette delle immagini e genera favicon senza caricare file.',
+    intro:
+      'Seleziona uno strumento qui sotto, scegli il tuo file e ottieni subito il risultato. Le tue immagini e i tuoi file non lasciano mai il tuo dispositivo: tutto viene elaborato in locale nel tuo browser.',
+    faqs: [
+      {
+        question: 'Gli strumenti per immagini e file sono gratuiti?',
+        answer: 'Sì, sono tutti gratuiti, senza registrazione e senza account.',
+      },
+      {
+        question: 'Le mie immagini vengono caricate su un server?',
+        answer: 'No. I tuoi file vengono elaborati direttamente nel tuo browser, quindi non lasciano mai il tuo dispositivo e non vengono mai salvati su un server.',
+      },
+      {
+        question: 'Gli strumenti funzionano su dispositivi mobili?',
+        answer: 'Sì. Funzionano in qualsiasi browser moderno, quindi puoi usarle su telefono, tablet o computer.',
+      },
+      {
+        question: 'Quale strumento devo usare per rendere più piccolo un file immagine?',
+        answer: 'Usa il Compressore di Immagini. Scegli la tua immagine e riduce le dimensioni del file mantenendola pronta per il web.',
+      },
+    ],
     seo: {
       title: 'Strumenti per immagini e file: comprimere e convertire',
       description:

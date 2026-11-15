@@ -3,7 +3,8 @@ import { useState, type FormEvent } from 'react';
 import { Breadcrumbs, buildBreadcrumbSchema } from '../components/common/Breadcrumbs';
 import { SeoHead } from '../components/seo/SeoHead';
 import { pastelForKey } from '../components/tool/pastel';
-import { SITE_CONFIG } from '../config/site';
+import { SITE_CONFIG, buildCanonicalUrl } from '../config/site';
+import { trackEvent } from '../utils/analytics';
 import { useLocale } from '../locales/LocaleContext';
 import { localizeStaticPath } from '../locales/config';
 import { getStaticAlternatePaths, toHreflangEntries } from '../locales/routes';
@@ -36,6 +37,15 @@ export function ContactPage() {
     { label: t.footer.home, href: localizeStaticPath('/', locale) },
     { label: t.nav.contact },
   ];
+
+  // L-7: ContactPage schema (in addition to BreadcrumbList).
+  const contactPageSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    name: t.contact.seoTitle,
+    url: buildCanonicalUrl(localizeStaticPath('/contact/', locale)),
+    description: t.contact.seoDescription,
+  };
 
   const validate = (): FormErrors => {
     const next: FormErrors = {};
@@ -80,6 +90,8 @@ export function ContactPage() {
         throw new Error('Failed to send message. Please try again.');
       }
       setSubmitted(true);
+      // L-21: GA4 conversion event — contact form successfully sent.
+      trackEvent('contact_submit', { subject });
     } catch {
       setSubmitError(
         (t.contact as { sendError?: string }).sendError ??
@@ -106,7 +118,7 @@ export function ContactPage() {
         title={t.contact.seoTitle}
         description={t.contact.seoDescription}
         canonicalPath={localizeStaticPath('/contact/', locale)}
-        structuredData={buildBreadcrumbSchema(breadcrumbs)}
+        structuredData={[buildBreadcrumbSchema(breadcrumbs), contactPageSchema]}
         alternates={toHreflangEntries(getStaticAlternatePaths('/contact/'))}
       />
 

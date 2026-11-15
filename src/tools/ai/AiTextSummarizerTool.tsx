@@ -27,6 +27,7 @@ import {
   type SummaryFormat,
   type SummaryLength,
 } from '../../config/ai';
+import { trackEvent } from '../../utils/analytics';
 
 const MAX_CHARS = 25_000;
 const MIN_WORDS = 25;
@@ -349,6 +350,8 @@ export default function AiTextSummarizerTool() {
       if (response.ok) {
         setSubmittedOriginal(text);
         setSummaryText(response.data);
+        // L-21: GA4 conversion event — AI summarization completed.
+        trackEvent('ai_tool_submit', { tool: 'ai-text-summarizer' });
         setResultMeta({
           model: response.model,
           fallbackUsed: response.fallbackUsed,

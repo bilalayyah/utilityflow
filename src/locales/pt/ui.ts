@@ -243,6 +243,8 @@ export const ptStrings: UiStrings = {
     browseAll: 'Navegar por todas as {name}',
     moreToolsIn: 'Mais ferramentas em',
     willAppear: 'aparecerão aqui em breve.',
+    bylineAuthor: 'Por Bilal',
+    lastUpdated: 'Última atualização: novembro de 2026',
   },
   comments: {
     title: 'Comentários',
