@@ -222,6 +222,20 @@ export const STATIC_PATHS: Record<string, Partial<Record<LocaleCode, string>>> =
     ko: '/ko/ai-dogu-chatgi/',
     zh: '/zh/ai-gongju-chazhao/',
   },
+  /** Blog home — the segment is "blog" in every locale. */
+  '/blog/': {
+    en: '/blog/',
+    es: '/es/blog/',
+    pt: '/pt/blog/',
+    fr: '/fr/blog/',
+    de: '/de/blog/',
+    it: '/it/blog/',
+    id: '/id/blog/',
+    ru: '/ru/blog/',
+    ja: '/ja/blog/',
+    ko: '/ko/blog/',
+    zh: '/zh/blog/',
+  },
 };
 
 /**
@@ -371,4 +385,36 @@ export function categoryHref(
 export function toolHref(slug: string, locale: LocaleCode): string {
   if (locale === DEFAULT_LOCALE) return `/${slug}/`;
   return `${getLocaleInfo(locale).pathPrefix}/${slug}/`;
+}
+
+/** Blog home path for a locale ("blog" in every locale). */
+export function blogHref(locale: LocaleCode): string {
+  if (locale === DEFAULT_LOCALE) return '/blog/';
+  return `${getLocaleInfo(locale).pathPrefix}/blog/`;
+}
+
+/** Localized blog article path for a (possibly localized) article slug. */
+export function articleHref(slug: string, locale: LocaleCode): string {
+  if (locale === DEFAULT_LOCALE) return `/blog/${slug}/`;
+  return `${getLocaleInfo(locale).pathPrefix}/blog/${slug}/`;
+}
+
+/**
+ * Localized blog category path. EN: /blog/category/<en-slug>/.
+ * Localized: /<locale>/blog/category/<localized-slug>/ — the segment word
+ * "category" is English in every locale (like "blog"), while the category
+ * slug itself is localized. This keeps blog categories distinct from tool
+ * category routes (/<locale>/<segment>/<slug>/), which would otherwise
+ * collide.
+ */
+export function blogCategoryHref(
+  category: ToolCategory | CategoryId,
+  locale: LocaleCode
+): string {
+  const id = typeof category === 'string' ? category : category.id;
+  const base = typeof category === 'string' ? getCategoryById(category) : category;
+  if (!base) return locale === DEFAULT_LOCALE ? '/blog/' : `${getLocaleInfo(locale).pathPrefix}/blog/`;
+  if (locale === DEFAULT_LOCALE) return `/blog/category/${base.slug}/`;
+  const slug = CATEGORY_LOCALE_SLUGS[locale][id] ?? base.slug;
+  return `${getLocaleInfo(locale).pathPrefix}/blog/category/${slug}/`;
 }

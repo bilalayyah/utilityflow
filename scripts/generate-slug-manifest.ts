@@ -25,7 +25,18 @@ import { KO_CATEGORY_OVERRIDES } from '../src/locales/ko/categories';
 import { KO_TOOL_OVERRIDES } from '../src/locales/ko/tools';
 import { ZH_CATEGORY_OVERRIDES } from '../src/locales/zh/categories';
 import { ZH_TOOL_OVERRIDES } from '../src/locales/zh/tools';
-import type { CategoryLocaleOverride, ToolLocaleOverride } from '../src/locales/types';
+import { BLOG_ARTICLES } from '../src/registry/blogArticles';
+import { ES_ARTICLE_OVERRIDES } from '../src/locales/es/blog';
+import { DE_ARTICLE_OVERRIDES } from '../src/locales/de/blog';
+import { FR_ARTICLE_OVERRIDES } from '../src/locales/fr/blog';
+import { ID_ARTICLE_OVERRIDES } from '../src/locales/id/blog';
+import { IT_ARTICLE_OVERRIDES } from '../src/locales/it/blog';
+import { PT_ARTICLE_OVERRIDES } from '../src/locales/pt/blog';
+import { RU_ARTICLE_OVERRIDES } from '../src/locales/ru/blog';
+import { JA_ARTICLE_OVERRIDES } from '../src/locales/ja/blog';
+import { KO_ARTICLE_OVERRIDES } from '../src/locales/ko/blog';
+import { ZH_ARTICLE_OVERRIDES } from '../src/locales/zh/blog';
+import type { ArticleLocaleOverride, CategoryLocaleOverride, ToolLocaleOverride } from '../src/locales/types';
 
 /**
  * Generates src/locales/slugManifest.ts — the static slug-only map used by
@@ -68,6 +79,23 @@ const CATEGORY_OVERRIDES: Record<
   zh: ZH_CATEGORY_OVERRIDES,
 };
 
+/** Blog article overrides (Batch 2). Empty until Batch 4 (localization). */
+const ARTICLE_OVERRIDES: Record<
+  NonDefaultLocale,
+  Record<string, ArticleLocaleOverride>
+> = {
+  es: ES_ARTICLE_OVERRIDES,
+  pt: PT_ARTICLE_OVERRIDES,
+  fr: FR_ARTICLE_OVERRIDES,
+  de: DE_ARTICLE_OVERRIDES,
+  it: IT_ARTICLE_OVERRIDES,
+  id: ID_ARTICLE_OVERRIDES,
+  ru: RU_ARTICLE_OVERRIDES,
+  ja: JA_ARTICLE_OVERRIDES,
+  ko: KO_ARTICLE_OVERRIDES,
+  zh: ZH_ARTICLE_OVERRIDES,
+};
+
 function sortRecord(record: Record<string, string>): Record<string, string> {
   return Object.fromEntries(
     Object.entries(record).sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0))
@@ -83,19 +111,27 @@ function generateSlugManifest(): void {
     (l) => l.code !== 'en'
   ).map((l) => l.code) as NonDefaultLocale[];
   for (const locale of nonDefaultLocales) {
-    if (!TOOL_OVERRIDES[locale] || !CATEGORY_OVERRIDES[locale]) {
+    if (!TOOL_OVERRIDES[locale] || !CATEGORY_OVERRIDES[locale] || !ARTICLE_OVERRIDES[locale]) {
       throw new Error(
-        `Slug manifest incomplete: locale "${locale}" is in SUPPORTED_LOCALES but missing from TOOL_OVERRIDES/CATEGORY_OVERRIDES in scripts/generate-slug-manifest.ts.`
+        `Slug manifest incomplete: locale "${locale}" is in SUPPORTED_LOCALES but missing from TOOL_OVERRIDES/CATEGORY_OVERRIDES/ARTICLE_OVERRIDES in scripts/generate-slug-manifest.ts.`
       );
     }
   }
 
   const manifest: Record<
     NonDefaultLocale,
-    { tools: Record<string, string>; categories: Record<string, string> }
+    {
+      tools: Record<string, string>;
+      categories: Record<string, string>;
+      articles: Record<string, string>;
+    }
   > = {} as Record<
     NonDefaultLocale,
-    { tools: Record<string, string>; categories: Record<string, string> }
+    {
+      tools: Record<string, string>;
+      categories: Record<string, string>;
+      articles: Record<string, string>;
+    }
   >;
 
   for (const locale of Object.keys(TOOL_OVERRIDES) as NonDefaultLocale[]) {
@@ -107,7 +143,17 @@ function generateSlugManifest(): void {
     for (const [categoryId, override] of Object.entries(CATEGORY_OVERRIDES[locale])) {
       categories[categoryId] = override.slug;
     }
-    manifest[locale] = { tools: sortRecord(tools), categories: sortRecord(categories) };
+    // Article slugs: only for articles actually published in that locale
+    // (an article id appears here only when its translation exists).
+    const articles: Record<string, string> = {};
+    for (const [articleId, override] of Object.entries(ARTICLE_OVERRIDES[locale])) {
+      articles[articleId] = override.slug;
+    }
+    manifest[locale] = {
+      tools: sortRecord(tools),
+      categories: sortRecord(categories),
+      articles: sortRecord(articles),
+    };
   }
 
   // Every locale must carry every tool and every category — exact counts,
@@ -126,6 +172,18 @@ function generateSlugManifest(): void {
         `Slug manifest incomplete for locale "${locale}": ${categoryCount} category slugs, expected ${CATEGORIES.length}.`
       );
     }
+    // Article slugs are NOT exact-count: an article appears in a locale
+    // only when its translation is published there. But every manifest
+    // article slug must belong to a published article (no stale/orphan
+    // slugs for drafts or removed articles).
+    for (const articleId of Object.keys(manifest[locale].articles)) {
+      const article = BLOG_ARTICLES.find((a) => a.id === articleId);
+      if (!article || article.status !== 'published') {
+        throw new Error(
+          `Slug manifest has an orphan article slug for locale "${locale}": "${articleId}" is not a published article.`
+        );
+      }
+    }
   }
 
   const header = [
@@ -134,10 +192,10 @@ function generateSlugManifest(): void {
     ' * Do NOT edit by hand; re-run the generator (it is the first step of',
     ' * `npm run build`, so it never goes stale).',
     ' *',
-    ' * Slugs ONLY: tool id -> localized slug and category id -> localized',
-    ' * slug per non-default locale. No names, descriptions, FAQs or UI',
-    ' * strings — routes.ts uses this for cross-locale navigation without',
-    ' * loading any locale data.',
+    ' * Slugs ONLY: tool id -> localized slug, category id -> localized',
+    ' * slug, and article id -> localized slug per non-default locale. No',
+    ' * names, descriptions, FAQs or UI strings — routes.ts uses this for',
+    ' * cross-locale navigation without loading any locale data.',
     ' */',
     '',
     "import type { NonDefaultLocale } from './config';",
@@ -145,6 +203,8 @@ function generateSlugManifest(): void {
     'export interface SlugManifestEntry {',
     '  tools: Record<string, string>;',
     '  categories: Record<string, string>;',
+    '  /** Article id -> localized slug. Only articles published in that locale. */',
+    '  articles: Record<string, string>;',
     '}',
     '',
     'export const SLUG_MANIFEST: Record<NonDefaultLocale, SlugManifestEntry> = ',
@@ -168,8 +228,12 @@ function generateSlugManifest(): void {
     (sum, entry) => sum + Object.keys(entry.categories).length,
     0
   );
+  const articleCount = Object.values(manifest).reduce(
+    (sum, entry) => sum + Object.keys(entry.articles).length,
+    0
+  );
   console.log(
-    `Generated slugManifest.ts (${Object.keys(manifest).length} locales, ${toolCount} tool slugs, ${categoryCount} category slugs)`
+    `Generated slugManifest.ts (${Object.keys(manifest).length} locales, ${toolCount} tool slugs, ${categoryCount} category slugs, ${articleCount} article slugs)`
   );
 }
 

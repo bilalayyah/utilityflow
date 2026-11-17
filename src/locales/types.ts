@@ -54,6 +54,23 @@ export interface CategoryLocaleOverride {
   sampleToolNames: string[];
 }
 
+/**
+ * Per-locale content override for one blog article.
+ * The English BlogArticle stays the source of truth for id, toolId,
+ * categoryId, type, status, publishedAt and relatedToolIds. A locale
+ * override replaces only the user-facing, localizable fields. An entry
+ * exists only when that translation is actually published — never an
+ * empty/placeholder entry.
+ */
+export interface ArticleLocaleOverride {
+  slug: string;
+  title: string;
+  description: string;
+  body: string;
+  faqs?: Array<{ q: string; a: string }>;
+  readingMinutes: number;
+}
+
 /** A titled section of a legal / informational page. */
 export interface InfoSection {
   title: string;
@@ -88,6 +105,8 @@ export interface LocaleData {
   code: LocaleCode;
   toolOverrides: Record<string, ToolLocaleOverride>;
   categoryOverrides: Record<string, CategoryLocaleOverride>;
+  /** Blog article overrides, keyed by article id. Only published translations. Empty until Batch 4. */
+  articleOverrides: Record<string, ArticleLocaleOverride>;
   uiStrings: UiStrings;
   componentStrings: Record<string, ComponentLocaleData>;
 }

@@ -29,9 +29,13 @@
 //   sections <h2>, items <h3>.
 // - When a React page's content changes, update the matching builder here.
 
-import { SITE_CONFIG } from '../src/config/site';
+import { SITE_CONFIG, buildCanonicalUrl } from '../src/config/site';
 import {
+  articleHref,
+  blogCategoryHref,
+  blogHref,
   categoryHref,
+  localeTag,
   localizeStaticPath,
   toolHref,
 } from '../src/locales/config';
@@ -41,15 +45,26 @@ import {
   getLocalizedCategory,
   getLocalizedTool,
   getLocalizedTools,
+  getToolById,
 } from '../src/locales/tools';
 import type { LocaleData } from '../src/locales/types';
 import { formatString } from '../src/locales/ui';
 import type { UiStrings } from '../src/locales/ui';
 import { AI_TOOLS } from '../src/registry/aiTools';
+import {
+  getBlogArticlesForCategory,
+  getBlogArticlesForTool,
+  getBlogArticlePrevNext,
+  getBlogArticleVersion,
+  getPublishedBlogArticles,
+  getRelatedBlogArticles,
+} from '../src/registry/blogArticles';
 import { CATEGORIES } from '../src/registry/categories';
 import { getPopularTools, getRelatedTools } from '../src/registry/toolsRegistry';
 import type { ToolCategory, ToolDefinition } from '../src/types/tool';
+import type { BlogArticle, BlogArticleLocaleVersion } from '../src/types/blog';
 import { buildToolNameEntries, linkifyToolNames } from '../src/utils/linkifyToolNames';
+import { pastelForKey } from '../src/components/tool/pastel';
 
 // ---------------------------------------------------------------------------
 // Escaping (same rules as prerender-meta.ts).
@@ -268,6 +283,22 @@ export function renderToolBody(
     parts.push('</section>');
   }
   parts.push('</div>');
+
+  // Batch 2: "Related articles" — mirrors ToolRelatedArticles in
+  // ToolPageLayout (renders nothing when the tool has no published
+  // articles in this locale).
+  const toolArticles = getBlogArticlesForTool(tool.id, locale, data);
+  if (toolArticles.length > 0) {
+    parts.push('<section aria-labelledby="related-articles-heading" class="mt-10">');
+    parts.push(
+      `<h2 id="related-articles-heading" class="text-2xl font-bold tracking-tight text-slate-900">${escapeText(t.blog.relatedArticles)}</h2>`
+    );
+    parts.push(blogCards(toolArticles, t, locale, data, 'mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3'));
+    parts.push(
+      `<p class="mt-6"><a href="${escapeAttr(blogHref(locale))}" class="font-semibold text-indigo-700 hover:underline">${escapeText(t.blog.allArticles)} →</a></p>`
+    );
+    parts.push('</section>');
+  }
 
   if (related.length > 0 || category) {
     parts.push('<section class="mt-12 pt-10 border-t border-slate-200">');
@@ -498,6 +529,21 @@ export function renderCategoryBody(
     parts.push(faqList(category.faqs ?? [], linkifyCategoryFaq));
     parts.push('</section>');
   }
+  // Batch 2: "Guides in this category" — mirrors CategoryGuides in
+  // CategoryPage (renders nothing when the category has no published
+  // articles in this locale).
+  const categoryArticles = getBlogArticlesForCategory(category.id, locale, data);
+  if (categoryArticles.length > 0) {
+    parts.push('<section aria-labelledby="category-guides-heading" class="mb-12">');
+    parts.push(
+      `<h2 id="category-guides-heading" class="text-xl font-bold text-slate-900 mb-5">${escapeText(t.blog.guidesInCategory)}</h2>`
+    );
+    parts.push(blogCards(categoryArticles, t, locale, data, 'grid gap-6 sm:grid-cols-2 lg:grid-cols-3'));
+    parts.push(
+      `<p class="mt-6"><a href="${escapeAttr(blogCategoryHref(category.id, locale))}" class="font-semibold text-indigo-700 hover:underline">${escapeText(t.blog.allArticles)} →</a></p>`
+    );
+    parts.push('</section>');
+  }
   parts.push('<section class="pt-10 border-t border-slate-200">');
   parts.push(`<h2 class="${H2_SM}">${escapeText(t.category.exploreOther)}</h2>`);
   parts.push('<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">');
@@ -687,6 +733,454 @@ export function renderStaticBody(
     `<p>${escapeText(t.terms.changesBefore)} <a href="${escapeAttr(localizeStaticPath('/contact/', locale))}" class="${LINK}">${escapeText(t.terms.changesLink)}</a>${escapeText(t.terms.changesAfter)}</p>`
   );
   parts.push('</section></div></main>');
+  return parts.join('');
+}
+
+// ---------------------------------------------------------------------------
+// Blog — home / category / article (mirrors BlogHomePage.tsx,
+// BlogCategoryPage.tsx, ArticlePage.tsx). Batch 2: the registry is empty,
+// so home/category render their empty states; the article builder is
+// exercised by the temporary test article (see blog-project/batch2-report.md)
+// and by Batch 3 content.
+//
+// Rules (same as the rest of this file): every string from locale data /
+// registries, never invented; escape every interpolated string EXCEPT the
+// article body HTML, which is trusted registry content rendered verbatim
+// (mirrors React's dangerouslySetInnerHTML in ArticlePage). Batch 3 bodies
+// must not contain an <h1> — the page title is the one <h1> and the
+// prerender assertion fails the build if a second one appears.
+// ---------------------------------------------------------------------------
+
+/** One blog card: category chip + title link + description + date/reading time (mirrors BlogCard.tsx). */
+function blogCard(
+  article: BlogArticle,
+  version: BlogArticleLocaleVersion,
+  t: UiStrings,
+  locale: LocaleCode,
+  data: LocaleData
+): string {
+  const category = getLocalizedCategory(article.categoryId, locale, data);
+  const palette = pastelForKey(`blog:${article.id}`);
+  const publishedDate = new Date(article.publishedAt).toLocaleDateString(
+    localeTag(locale),
+    { year: 'numeric', month: 'long', day: 'numeric' }
+  );
+  return (
+    `<article class="group flex flex-col rounded-2xl ${palette.card} p-5 shadow-sm transition-all duration-150 hover:-translate-y-0.5 hover:shadow-md">` +
+    (category
+      ? `<a href="${escapeAttr(blogCategoryHref(category.id, locale))}" class="mb-2 w-fit rounded-full bg-white/70 px-2.5 py-0.5 text-xs font-semibold text-slate-700 transition-colors hover:text-indigo-700">${escapeText(category.name)}</a>`
+      : '') +
+    `<h3 class="text-lg font-bold leading-snug text-slate-900"><a href="${escapeAttr(articleHref(version.slug, locale))}" class="transition-colors hover:text-indigo-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 rounded-sm">${escapeText(version.title)}</a></h3>` +
+    `<p class="mt-2 text-sm leading-relaxed text-slate-700/90 line-clamp-3">${escapeText(version.description)}</p>` +
+    `<div class="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-slate-500">` +
+    `<time datetime="${escapeAttr(article.publishedAt)}">${escapeText(publishedDate)}</time>` +
+    `<span aria-hidden="true">·</span>` +
+    `<span>${escapeText(formatString(t.blog.readingTime, { minutes: version.readingMinutes }))}</span>` +
+    `</div></article>`
+  );
+}
+
+function blogCards(
+  articles: BlogArticle[],
+  t: UiStrings,
+  locale: LocaleCode,
+  data: LocaleData,
+  gridClass = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'
+): string {
+  const cards: string[] = [];
+  for (const article of articles) {
+    const version = getBlogArticleVersion(article, locale, data);
+    if (!version) continue;
+    cards.push(blogCard(article, version, t, locale, data));
+  }
+  return `<div class="${gridClass}">` + cards.join('') + `</div>`;
+}
+
+/** Category nav: "All articles" + one link per category (mirrors BlogCategoryNav.tsx). The React page renders a CategoryIcon inside each link; the static version keeps the link text only. */
+function blogCategoryNav(
+  t: UiStrings,
+  locale: LocaleCode,
+  data: LocaleData,
+  currentCategoryId?: string
+): string {
+  const categories = getLocalizedCategories(locale, data);
+  const parts: string[] = [];
+  parts.push('<section aria-labelledby="blog-categories-heading" class="mb-12">');
+  parts.push(`<h2 id="blog-categories-heading" class="text-xl font-bold text-slate-900 mb-5">${escapeText(t.blog.browseByCategory)}</h2>`);
+  parts.push('<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">');
+  const allClass =
+    currentCategoryId === undefined
+      ? 'bg-indigo-600 text-white'
+      : 'bg-white border border-slate-200 text-slate-800 hover:border-indigo-300 hover:text-indigo-700';
+  parts.push(
+    `<a href="${escapeAttr(blogHref(locale))}"${currentCategoryId === undefined ? ' aria-current="page"' : ''} class="flex items-center gap-2.5 rounded-2xl px-3.5 py-3 text-sm font-semibold shadow-sm transition hover:-translate-y-0.5 hover:shadow-md ${allClass}">${escapeText(t.blog.allArticles)}</a>`
+  );
+  for (const category of categories) {
+    const palette = pastelForKey(`cat:${category.id}`);
+    const isCurrent = category.id === currentCategoryId;
+    const cls = isCurrent ? 'bg-indigo-600 text-white' : `${palette.card} text-slate-800`;
+    parts.push(
+      `<a href="${escapeAttr(blogCategoryHref(category.id, locale))}"${isCurrent ? ' aria-current="page"' : ''} class="flex items-center gap-2.5 rounded-2xl px-3.5 py-3 text-sm font-semibold shadow-sm transition hover:-translate-y-0.5 hover:shadow-md ${cls}"><span class="min-w-0 truncate">${escapeText(category.name)}</span></a>`
+    );
+  }
+  parts.push('</div></section>');
+  return parts.join('');
+}
+
+/** Static search input mirroring BlogSearch (hero variant). Non-functional pre-JS; React replaces it on mount. */
+function blogSearchInput(t: UiStrings): string {
+  return (
+    `<div class="relative w-full max-w-2xl">` +
+    `<form role="search" aria-label="${escapeAttr(t.blog.searchArticles)}">` +
+    `<div class="relative flex items-center">` +
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="pointer-events-none absolute left-4 w-5 h-5 text-slate-400" aria-hidden="true"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>` +
+    `<input type="search" placeholder="${escapeAttr(t.blog.searchPlaceholder)}" aria-label="${escapeAttr(t.blog.searchArticles)}" class="w-full rounded-2xl border border-slate-300 bg-white py-4 pl-12 pr-14 text-base text-slate-900 placeholder:text-slate-400 shadow-md transition-colors focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/20" />` +
+    `<kbd class="pointer-events-none absolute right-4 rounded-md border border-slate-200 bg-slate-50 px-2 py-0.5 text-xs font-semibold text-slate-500">⌘K</kbd>` +
+    `</div></form></div>`
+  );
+}
+
+/** First <p> of the body as plain text, for the lede paragraph. Pure replica of ArticlePage.extractFirstParagraph. */
+function extractFirstParagraph(body: string): string | undefined {
+  const match = /<p\b[^>]*>([\s\S]*?)<\/p>/i.exec(body);
+  if (!match) return undefined;
+  const text = match[1].replace(/<[^>]*>/g, '').trim();
+  return text === '' ? undefined : text;
+}
+
+/**
+ * Extract H2/H3 headings (with ids) from an article body HTML string.
+ * Pure replica of src/components/blog/ArticleTOC.tsx extractHeadingsFromBody
+ * (kept in sync by hand — the component file pulls in React/LocaleContext,
+ * which this Node script must not import).
+ */
+interface TocHeading {
+  id: string;
+  text: string;
+  level: 2 | 3;
+}
+
+function extractHeadings(body: string): TocHeading[] {
+  const headings: TocHeading[] = [];
+  const pattern = /<h([23])\b([^>]*)>([\s\S]*?)<\/h\1>/gi;
+  let match: RegExpExecArray | null;
+  while ((match = pattern.exec(body)) !== null) {
+    const level = Number(match[1]) as 2 | 3;
+    const attrs = match[2];
+    const idMatch = /id="([^"]+)"/i.exec(attrs) ?? /id='([^']+)'/i.exec(attrs);
+    if (!idMatch) continue;
+    const text = match[3]
+      .replace(/<[^>]*>/g, '')
+      .replace(/&amp;/g, '&')
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/&quot;/g, '"')
+      .replace(/&#39;/g, "'")
+      .trim();
+    if (!text) continue;
+    headings.push({ id: idMatch[1], text, level });
+  }
+  return headings;
+}
+
+// ---------------------------------------------------------------------------
+// Blog home — 11 locales (mirrors BlogHomePage.tsx).
+// ---------------------------------------------------------------------------
+
+export function renderBlogHomeBody(
+  t: UiStrings,
+  locale: LocaleCode,
+  data: LocaleData
+): string {
+  const articles = getPublishedBlogArticles()
+    .filter((article) => getBlogArticleVersion(article, locale, data) !== undefined)
+    .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
+  const featured = articles.slice(0, 3);
+  const parts: string[] = [];
+  parts.push(openMain());
+  parts.push(
+    breadcrumbs(
+      [
+        { label: t.footer.home, href: localizeStaticPath('/', locale) },
+        { label: t.nav.blog },
+      ],
+      locale
+    )
+  );
+  parts.push('<header class="mx-auto max-w-3xl text-center mb-10">');
+  parts.push(`<h1 class="${H1}">${escapeText(t.blog.title)}</h1>`);
+  parts.push(`<p class="mt-3 text-base sm:text-lg leading-relaxed text-slate-600">${escapeText(t.blog.description)}</p>`);
+  parts.push('<div class="mt-6 flex justify-center">');
+  parts.push(blogSearchInput(t));
+  parts.push('</div></header>');
+  parts.push(blogCategoryNav(t, locale, data));
+  if (featured.length > 0) {
+    parts.push('<section aria-labelledby="featured-articles-heading" class="mb-12">');
+    parts.push(`<h2 id="featured-articles-heading" class="text-xl font-bold text-slate-900 mb-5">${escapeText(t.blog.featured)}</h2>`);
+    parts.push(blogCards(featured, t, locale, data));
+    parts.push('</section>');
+  }
+  parts.push('<section aria-labelledby="latest-articles-heading">');
+  parts.push(
+    `<h2 id="latest-articles-heading" class="text-xl font-bold text-slate-900 mb-5">${escapeText(t.blog.latest)} <span class="text-base font-semibold text-slate-500">(${articles.length})</span></h2>`
+  );
+  if (articles.length > 0) {
+    parts.push(blogCards(articles, t, locale, data));
+  } else {
+    parts.push('<div class="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm text-center">');
+    parts.push(`<h3 class="text-lg font-bold text-slate-900">${escapeText(t.blog.noArticlesYet)}</h3>`);
+    parts.push(
+      `<p class="mt-2 text-sm leading-relaxed text-slate-600 max-w-xl mx-auto">${escapeText(t.blog.noArticlesYetDescription)}</p>`
+    );
+    parts.push('</div>');
+  }
+  parts.push('</section></main>');
+  return parts.join('');
+}
+
+// ---------------------------------------------------------------------------
+// Blog category — 7 categories x 11 locales (mirrors BlogCategoryPage.tsx).
+// `category` must already be localized for `locale`.
+// ---------------------------------------------------------------------------
+
+export function renderBlogCategoryBody(
+  category: ToolCategory,
+  t: UiStrings,
+  locale: LocaleCode,
+  data: LocaleData
+): string {
+  const articles = getBlogArticlesForCategory(category.id, locale, data);
+  const parts: string[] = [];
+  parts.push(openMain());
+  parts.push(
+    breadcrumbs(
+      [
+        { label: t.footer.home, href: localizeStaticPath('/', locale) },
+        { label: t.nav.blog, href: blogHref(locale) },
+        { label: category.name },
+      ],
+      locale
+    )
+  );
+  parts.push('<header class="mx-auto max-w-3xl text-center mb-10">');
+  parts.push(`<h1 class="${H1}">${escapeText(category.name)}</h1>`);
+  parts.push(`<p class="${BODY_P}">${escapeText(category.longDescription)}</p>`);
+  if (category.intro) {
+    parts.push(`<p class="${BODY_P}">${escapeText(category.intro)}</p>`);
+  }
+  parts.push(
+    `<p class="mt-5"><a href="${escapeAttr(categoryHref(category.id, locale))}" class="inline-flex items-center gap-1.5 text-sm font-semibold text-indigo-600 hover:text-indigo-700 underline-offset-4 hover:underline">${escapeText(formatString(t.toolPage.browseAll, { name: category.name }))}</a></p>`
+  );
+  parts.push('</header>');
+  parts.push('<section aria-labelledby="category-articles-heading" class="mb-12">');
+  parts.push(
+    `<h2 id="category-articles-heading" class="text-xl font-bold text-slate-900 mb-5">${escapeText(t.blog.guidesInCategory)} <span class="text-base font-semibold text-slate-500">(${articles.length})</span></h2>`
+  );
+  if (articles.length > 0) {
+    parts.push(blogCards(articles, t, locale, data));
+  } else {
+    parts.push('<div class="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm text-center">');
+    parts.push(`<h3 class="text-lg font-bold text-slate-900">${escapeText(t.blog.noArticlesYet)}</h3>`);
+    parts.push(
+      `<p class="mt-2 text-sm leading-relaxed text-slate-600 max-w-xl mx-auto">${escapeText(t.blog.noArticlesYetDescription)}</p>`
+    );
+    parts.push('</div>');
+  }
+  parts.push('</section>');
+  parts.push(blogCategoryNav(t, locale, data, category.id));
+  parts.push('</main>');
+  return parts.join('');
+}
+
+// ---------------------------------------------------------------------------
+// Article pages — one per published locale (mirrors ArticlePage.tsx).
+// `version` must be the locale version for `locale` (never undefined here —
+// the prerender only generates files for locales where the article is
+// published). The body HTML is trusted registry content, injected verbatim.
+// ---------------------------------------------------------------------------
+
+export function renderArticleBody(
+  article: BlogArticle,
+  version: BlogArticleLocaleVersion,
+  t: UiStrings,
+  locale: LocaleCode,
+  data: LocaleData
+): string {
+  const category = getLocalizedCategory(article.categoryId, locale, data);
+  const headings = extractHeadings(version.body);
+  const lede = extractFirstParagraph(version.body) ?? version.description;
+  const dateTag = localeTag(locale);
+  const publishedDate = new Date(article.publishedAt).toLocaleDateString(dateTag, {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+  const updatedDate = article.updatedAt
+    ? new Date(article.updatedAt).toLocaleDateString(dateTag, {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      })
+    : undefined;
+  const faqs = version.faqs.map((faq) => ({ question: faq.q, answer: faq.a }));
+  const primaryTool = getToolById(article.toolId);
+  const localizedPrimaryTool = primaryTool
+    ? getLocalizedTool(primaryTool, locale, data)
+    : undefined;
+  const relatedTools = article.relatedToolIds
+    .map((id) => getToolById(id))
+    .filter(
+      (tool): tool is ToolDefinition => tool !== undefined && tool.id !== article.toolId
+    )
+    .map((tool) => getLocalizedTool(tool, locale, data));
+  const related = getRelatedBlogArticles(article, locale, 4, data);
+  const { prev, next } = getBlogArticlePrevNext(article, locale, data);
+  const prevVersion = prev ? getBlogArticleVersion(prev, locale, data) : undefined;
+  const nextVersion = next ? getBlogArticleVersion(next, locale, data) : undefined;
+  const ctaPalette = pastelForKey(`blog:${article.id}`);
+  const canonicalPath = articleHref(version.slug, locale);
+  const canonicalUrl = buildCanonicalUrl(canonicalPath, SITE_CONFIG.defaultOrigin);
+  const shareXUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(canonicalUrl)}&text=${encodeURIComponent(version.title)}`;
+  const shareFacebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(canonicalUrl)}`;
+
+  const parts: string[] = [];
+  parts.push(openMain());
+  parts.push(
+    breadcrumbs(
+      [
+        { label: t.footer.home, href: localizeStaticPath('/', locale) },
+        { label: t.nav.blog, href: blogHref(locale) },
+        ...(category
+          ? [{ label: category.name, href: blogCategoryHref(category.id, locale) }]
+          : []),
+        { label: version.title },
+      ],
+      locale
+    )
+  );
+  parts.push('<header class="max-w-3xl mb-8">');
+  if (category) {
+    parts.push(
+      `<p class="mb-3"><a href="${escapeAttr(blogCategoryHref(category.id, locale))}" class="rounded-full bg-indigo-100 px-2.5 py-0.5 text-xs font-semibold text-indigo-800 transition-colors hover:text-indigo-700">${escapeText(category.name)}</a></p>`
+    );
+  }
+  parts.push(`<h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 text-balance">${escapeText(version.title)}</h1>`);
+  parts.push(`<p class="mt-3 text-base sm:text-lg leading-relaxed text-slate-600">${escapeText(lede)}</p>`);
+  parts.push(
+    `<p class="mt-3 text-xs text-slate-500">${escapeText(t.blog.byEditorial)} · ${escapeText(formatString(t.blog.publishedOn, { date: publishedDate }))}${updatedDate ? ` · ${escapeText(formatString(t.blog.updatedOn, { date: updatedDate }))}` : ''} · ${escapeText(formatString(t.blog.readingTime, { minutes: version.readingMinutes }))}</p>`
+  );
+  parts.push('</header>');
+
+  parts.push('<div class="grid grid-cols-1 lg:grid-cols-12 gap-10">');
+  parts.push('<div class="lg:col-span-8 space-y-12">');
+  // Body HTML: trusted registry content, injected verbatim (same class
+  // string as ArticlePage's dangerouslySetInnerHTML <article>).
+  parts.push(
+    `<article class="text-slate-700 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-slate-900 [&_h2]:mt-10 [&_h2]:mb-4 [&_h3]:text-xl [&_h3]:font-bold [&_h3]:text-slate-900 [&_h3]:mt-8 [&_h3]:mb-3 [&_p]:text-base [&_p]:leading-relaxed [&_p]:mb-4 [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mb-4 [&_ul]:space-y-2 [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:mb-4 [&_ol]:space-y-2 [&_a]:text-indigo-600 [&_a]:underline [&_a]:underline-offset-4 [&_a:hover]:text-indigo-700 [&_strong]:font-semibold [&_strong]:text-slate-900 [&_code]:rounded [&_code]:bg-slate-100 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-sm [&_code]:font-mono">${version.body}</article>`
+  );
+
+  if (faqs.length > 0) {
+    parts.push('<section aria-labelledby="article-faq-heading">');
+    parts.push(`<h2 id="article-faq-heading" class="text-2xl font-bold text-slate-900 mb-4">${escapeText(t.toolPage.faqs)}</h2>`);
+    parts.push(faqList(faqs));
+    parts.push('</section>');
+  }
+
+  if (localizedPrimaryTool) {
+    parts.push(
+      `<section aria-labelledby="article-cta-heading" class="rounded-2xl ${ctaPalette.card} p-6 shadow-sm">` +
+        `<h2 id="article-cta-heading" class="text-xl font-bold text-slate-900">${escapeText(localizedPrimaryTool.name)}</h2>` +
+        `<p class="mt-2 text-sm leading-relaxed text-slate-700">${escapeText(localizedPrimaryTool.shortDescription)}</p>` +
+        `<p class="mt-4"><a href="${escapeAttr(toolHref(localizedPrimaryTool.slug, locale))}" class="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-indigo-700">${escapeText(t.blog.tryTool)}</a></p>` +
+        `</section>`
+    );
+  }
+
+  if (related.length > 0) {
+    parts.push('<section aria-labelledby="related-articles-heading">');
+    parts.push(`<h2 id="related-articles-heading" class="text-xl sm:text-2xl font-bold text-slate-900 mb-5">${escapeText(t.blog.relatedArticles)}</h2>`);
+    parts.push(blogCards(related, t, locale, data, 'grid grid-cols-1 sm:grid-cols-2 gap-4'));
+    parts.push('</section>');
+  }
+
+  if (relatedTools.length > 0) {
+    parts.push('<section aria-labelledby="article-related-tools-heading">');
+    parts.push(`<h2 id="article-related-tools-heading" class="text-xl sm:text-2xl font-bold text-slate-900 mb-5">${escapeText(t.blog.relatedTools)}</h2>`);
+    parts.push(toolCards(relatedTools, locale));
+    parts.push('</section>');
+  }
+
+  if (prevVersion || nextVersion) {
+    parts.push(`<nav aria-label="${escapeAttr(t.blog.relatedArticles)}" class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-10 border-t border-slate-200">`);
+    if (prevVersion && prev) {
+      parts.push(
+        `<a href="${escapeAttr(articleHref(prevVersion.slug, locale))}" class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">` +
+          `<span class="flex items-center gap-1.5 text-xs font-semibold text-slate-500">${escapeText(t.blog.prevArticle)}</span>` +
+          `<span class="mt-1.5 block text-sm font-semibold text-slate-900">${escapeText(prevVersion.title)}</span></a>`
+      );
+    } else {
+      parts.push('<span />');
+    }
+    if (nextVersion && next) {
+      parts.push(
+        `<a href="${escapeAttr(articleHref(nextVersion.slug, locale))}" class="rounded-2xl border border-slate-200 bg-white p-4 text-right shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">` +
+          `<span class="flex items-center justify-end gap-1.5 text-xs font-semibold text-slate-500">${escapeText(t.blog.nextArticle)}</span>` +
+          `<span class="mt-1.5 block text-sm font-semibold text-slate-900">${escapeText(nextVersion.title)}</span></a>`
+      );
+    } else {
+      parts.push('<span />');
+    }
+    parts.push('</nav>');
+  }
+
+  parts.push('<section aria-labelledby="article-share-heading" class="pt-10 border-t border-slate-200">');
+  parts.push(`<h2 id="article-share-heading" class="text-xl font-bold text-slate-900 mb-4">${escapeText(t.blog.share)}</h2>`);
+  parts.push('<div class="flex flex-wrap gap-3">');
+  parts.push(
+    `<button type="button" class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-800 shadow-sm transition-colors hover:border-indigo-300 hover:text-indigo-700 cursor-pointer">${escapeText(t.common.copy)}</button>`
+  );
+  parts.push(
+    `<a href="${escapeAttr(shareXUrl)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-800 shadow-sm transition-colors hover:border-indigo-300 hover:text-indigo-700">X</a>`
+  );
+  parts.push(
+    `<a href="${escapeAttr(shareFacebookUrl)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-800 shadow-sm transition-colors hover:border-indigo-300 hover:text-indigo-700">Facebook</a>`
+  );
+  parts.push('</div></section>');
+  parts.push('</div>');
+
+  if (headings.length > 0) {
+    parts.push('<aside class="order-first lg:order-last lg:col-span-4">');
+    parts.push('<div class="lg:sticky lg:top-6">');
+    parts.push(`<nav aria-label="${escapeAttr(t.blog.tableOfContents)}" class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">`);
+    parts.push(`<h2 class="text-base font-bold text-slate-900">${escapeText(t.blog.tableOfContents)}</h2>`);
+    parts.push('<ul class="mt-3 space-y-2">');
+    for (const heading of headings) {
+      parts.push(
+        `<li class="${heading.level === 3 ? 'pl-4' : ''}"><a href="#${escapeAttr(heading.id)}" class="text-sm leading-snug text-slate-600 transition-colors hover:text-indigo-700 hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 rounded-sm">${escapeText(heading.text)}</a></li>`
+      );
+    }
+    parts.push('</ul></nav></div></aside>');
+  } else {
+    parts.push('<aside class="order-first lg:order-last lg:col-span-4"></aside>');
+  }
+  parts.push('</div>');
+
+  if (primaryTool) {
+    const primaryRelated = getRelatedTools(primaryTool, 4).map((item) =>
+      getLocalizedTool(item, locale, data)
+    );
+    if (primaryRelated.length > 0) {
+      parts.push('<section class="mt-12">');
+      parts.push(`<h2 class="${H2}">${escapeText(t.toolPage.relatedTitle)}</h2>`);
+      parts.push(toolCards(primaryRelated, locale));
+      parts.push('</section>');
+    }
+  }
+
+  parts.push(
+    `<p class="mt-12"><a href="${escapeAttr(blogHref(locale))}" class="inline-flex items-center gap-2 text-sm font-semibold text-indigo-600 hover:text-indigo-700 underline-offset-4 hover:underline">${escapeText(t.blog.backToBlog)}</a></p>`
+  );
+  parts.push('</main>');
   return parts.join('');
 }
 

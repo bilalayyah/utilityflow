@@ -19,6 +19,7 @@ export interface UiStrings {
     aiTools: string;
     about: string;
     contact: string;
+    blog: string;
     allTools: string;
     freeAiTools: string;
     viewAiSection: string;
@@ -41,6 +42,7 @@ export interface UiStrings {
     trustLegal: string;
     home: string;
     allToolsDirectory: string;
+    blog: string;
     aboutUs: string;
     contact: string;
     privacyPolicy: string;
@@ -163,6 +165,36 @@ export interface UiStrings {
     /** L-12: tool-page byline ("By Bilal") + last-updated line. */
     bylineAuthor: string;
     lastUpdated: string;
+  };
+  blog: {
+    seoTitle: string;
+    seoDescription: string;
+    title: string;
+    description: string;
+    searchPlaceholder: string;
+    searchArticles: string;
+    noResults: string;
+    featured: string;
+    latest: string;
+    browseByCategory: string;
+    relatedArticles: string;
+    relatedTools: string;
+    readingTime: string;
+    publishedOn: string;
+    updatedOn: string;
+    byEditorial: string;
+    tableOfContents: string;
+    prevArticle: string;
+    nextArticle: string;
+    share: string;
+    tryTool: string;
+    guidesInCategory: string;
+    noArticlesYet: string;
+    noArticlesYetDescription: string;
+    backToBlog: string;
+    allArticles: string;
+    notAvailableInLanguage: string;
+    minRead: string;
   };
   comments: {
     title: string;

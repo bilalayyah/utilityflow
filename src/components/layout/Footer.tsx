@@ -106,6 +106,14 @@ export function Footer() {
                   {t.nav.aiFinder.label}
                 </Link>
               </li>
+              <li>
+                <Link
+                  to={localizeStaticPath('/blog/', locale)}
+                  className="hover:text-indigo-700 transition-colors underline-offset-4 hover:underline"
+                >
+                  {t.footer.blog}
+                </Link>
+              </li>
             </ul>
           </div>
 

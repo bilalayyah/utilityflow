@@ -35,7 +35,7 @@ export const CATEGORIES: ToolCategory[] = [
       },
     ],
     batch: 1,
-    plannedToolCount: 15,
+    plannedToolCount: 18,
     iconName: 'FileText',
     seo: {
       title: 'Text & Writing Tools – Word & String Utilities | UtilityFlow',

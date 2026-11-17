@@ -42,6 +42,7 @@ export function Header() {
     { label: t.nav.tools, to: localizeStaticPath('/tools/', locale) },
     { label: t.nav.categories, to: categoriesAnchor, anchor: true },
     { label: t.nav.aiTools, to: aiAnchor, anchor: true, aiDropdown: true },
+    { label: t.nav.blog, to: localizeStaticPath('/blog/', locale) },
     { label: t.nav.about, to: localizeStaticPath('/about/', locale) },
     { label: t.nav.contact, to: localizeStaticPath('/contact/', locale) },
   ] as const;

@@ -6,6 +6,9 @@ import { AdminCommentsPage } from './pages/AdminCommentsPage';
 import { AiTextSummarizerPage } from './pages/AiTextSummarizerPage';
 import { AiToolFinderPage } from './pages/AiToolFinderPage';
 import { AiWritingAssistantPage } from './pages/AiWritingAssistantPage';
+import { ArticlePage } from './pages/ArticlePage';
+import { BlogCategoryPage } from './pages/BlogCategoryPage';
+import { BlogHomePage } from './pages/BlogHomePage';
 import { CategoryPage } from './pages/CategoryPage';
 import { ContactPage } from './pages/ContactPage';
 import { HomePage } from './pages/HomePage';
@@ -43,6 +46,12 @@ export default function App() {
             <Route path="/privacy-policy/" element={<PrivacyPolicyPage />} />
             <Route path="/terms-of-service" element={<TermsOfServicePage />} />
             <Route path="/terms-of-service/" element={<TermsOfServicePage />} />
+                        <Route path="/blog" element={<BlogHomePage />} />
+            <Route path="/blog/" element={<BlogHomePage />} />
+            <Route path="/blog/category/:categorySlug" element={<BlogCategoryPage />} />
+            <Route path="/blog/category/:categorySlug/" element={<BlogCategoryPage />} />
+            <Route path="/blog/:articleSlug" element={<ArticlePage />} />
+            <Route path="/blog/:articleSlug/" element={<ArticlePage />} />
             <Route path="/:toolSlug" element={<ToolPage />} />
             <Route path="/:toolSlug/" element={<ToolPage />} />
 
@@ -67,6 +76,12 @@ export default function App() {
             <Route path="/es/politica-de-privacidad/" element={<PrivacyPolicyPage />} />
             <Route path="/es/terminos-de-servicio" element={<TermsOfServicePage />} />
             <Route path="/es/terminos-de-servicio/" element={<TermsOfServicePage />} />
+                        <Route path="/es/blog" element={<BlogHomePage />} />
+            <Route path="/es/blog/" element={<BlogHomePage />} />
+            <Route path="/es/blog/category/:categorySlug" element={<BlogCategoryPage />} />
+            <Route path="/es/blog/category/:categorySlug/" element={<BlogCategoryPage />} />
+            <Route path="/es/blog/:articleSlug" element={<ArticlePage />} />
+            <Route path="/es/blog/:articleSlug/" element={<ArticlePage />} />
             <Route path="/es/:toolSlug" element={<ToolPage />} />
             <Route path="/es/:toolSlug/" element={<ToolPage />} />
 
@@ -91,6 +106,12 @@ export default function App() {
             <Route path="/pt/politica-de-privacidade/" element={<PrivacyPolicyPage />} />
             <Route path="/pt/termos-de-servico" element={<TermsOfServicePage />} />
             <Route path="/pt/termos-de-servico/" element={<TermsOfServicePage />} />
+                        <Route path="/pt/blog" element={<BlogHomePage />} />
+            <Route path="/pt/blog/" element={<BlogHomePage />} />
+            <Route path="/pt/blog/category/:categorySlug" element={<BlogCategoryPage />} />
+            <Route path="/pt/blog/category/:categorySlug/" element={<BlogCategoryPage />} />
+            <Route path="/pt/blog/:articleSlug" element={<ArticlePage />} />
+            <Route path="/pt/blog/:articleSlug/" element={<ArticlePage />} />
             <Route path="/pt/:toolSlug" element={<ToolPage />} />
             <Route path="/pt/:toolSlug/" element={<ToolPage />} />
 
@@ -115,6 +136,12 @@ export default function App() {
             <Route path="/fr/politique-de-confidentialite/" element={<PrivacyPolicyPage />} />
             <Route path="/fr/conditions-d-utilisation" element={<TermsOfServicePage />} />
             <Route path="/fr/conditions-d-utilisation/" element={<TermsOfServicePage />} />
+                        <Route path="/fr/blog" element={<BlogHomePage />} />
+            <Route path="/fr/blog/" element={<BlogHomePage />} />
+            <Route path="/fr/blog/category/:categorySlug" element={<BlogCategoryPage />} />
+            <Route path="/fr/blog/category/:categorySlug/" element={<BlogCategoryPage />} />
+            <Route path="/fr/blog/:articleSlug" element={<ArticlePage />} />
+            <Route path="/fr/blog/:articleSlug/" element={<ArticlePage />} />
             <Route path="/fr/:toolSlug" element={<ToolPage />} />
             <Route path="/fr/:toolSlug/" element={<ToolPage />} />
 
@@ -139,6 +166,12 @@ export default function App() {
             <Route path="/de/datenschutzerklaerung/" element={<PrivacyPolicyPage />} />
             <Route path="/de/nutzungsbedingungen" element={<TermsOfServicePage />} />
             <Route path="/de/nutzungsbedingungen/" element={<TermsOfServicePage />} />
+                        <Route path="/de/blog" element={<BlogHomePage />} />
+            <Route path="/de/blog/" element={<BlogHomePage />} />
+            <Route path="/de/blog/category/:categorySlug" element={<BlogCategoryPage />} />
+            <Route path="/de/blog/category/:categorySlug/" element={<BlogCategoryPage />} />
+            <Route path="/de/blog/:articleSlug" element={<ArticlePage />} />
+            <Route path="/de/blog/:articleSlug/" element={<ArticlePage />} />
             <Route path="/de/:toolSlug" element={<ToolPage />} />
             <Route path="/de/:toolSlug/" element={<ToolPage />} />
 
@@ -163,6 +196,12 @@ export default function App() {
             <Route path="/it/informativa-sulla-privacy/" element={<PrivacyPolicyPage />} />
             <Route path="/it/termini-di-servizio" element={<TermsOfServicePage />} />
             <Route path="/it/termini-di-servizio/" element={<TermsOfServicePage />} />
+                        <Route path="/it/blog" element={<BlogHomePage />} />
+            <Route path="/it/blog/" element={<BlogHomePage />} />
+            <Route path="/it/blog/category/:categorySlug" element={<BlogCategoryPage />} />
+            <Route path="/it/blog/category/:categorySlug/" element={<BlogCategoryPage />} />
+            <Route path="/it/blog/:articleSlug" element={<ArticlePage />} />
+            <Route path="/it/blog/:articleSlug/" element={<ArticlePage />} />
             <Route path="/it/:toolSlug" element={<ToolPage />} />
             <Route path="/it/:toolSlug/" element={<ToolPage />} />
 
@@ -187,6 +226,12 @@ export default function App() {
             <Route path="/id/kebijakan-privasi/" element={<PrivacyPolicyPage />} />
             <Route path="/id/syarat-layanan" element={<TermsOfServicePage />} />
             <Route path="/id/syarat-layanan/" element={<TermsOfServicePage />} />
+                        <Route path="/id/blog" element={<BlogHomePage />} />
+            <Route path="/id/blog/" element={<BlogHomePage />} />
+            <Route path="/id/blog/category/:categorySlug" element={<BlogCategoryPage />} />
+            <Route path="/id/blog/category/:categorySlug/" element={<BlogCategoryPage />} />
+            <Route path="/id/blog/:articleSlug" element={<ArticlePage />} />
+            <Route path="/id/blog/:articleSlug/" element={<ArticlePage />} />
             <Route path="/id/:toolSlug" element={<ToolPage />} />
             <Route path="/id/:toolSlug/" element={<ToolPage />} />
 
@@ -211,6 +256,12 @@ export default function App() {
             <Route path="/ru/politika-konfidentsialnosti/" element={<PrivacyPolicyPage />} />
             <Route path="/ru/usloviya-ispolzovaniya" element={<TermsOfServicePage />} />
             <Route path="/ru/usloviya-ispolzovaniya/" element={<TermsOfServicePage />} />
+                        <Route path="/ru/blog" element={<BlogHomePage />} />
+            <Route path="/ru/blog/" element={<BlogHomePage />} />
+            <Route path="/ru/blog/category/:categorySlug" element={<BlogCategoryPage />} />
+            <Route path="/ru/blog/category/:categorySlug/" element={<BlogCategoryPage />} />
+            <Route path="/ru/blog/:articleSlug" element={<ArticlePage />} />
+            <Route path="/ru/blog/:articleSlug/" element={<ArticlePage />} />
             <Route path="/ru/:toolSlug" element={<ToolPage />} />
             <Route path="/ru/:toolSlug/" element={<ToolPage />} />
 
@@ -235,6 +286,12 @@ export default function App() {
             <Route path="/ja/puraibashi-porishi/" element={<PrivacyPolicyPage />} />
             <Route path="/ja/riyo-kiyaku" element={<TermsOfServicePage />} />
             <Route path="/ja/riyo-kiyaku/" element={<TermsOfServicePage />} />
+                        <Route path="/ja/blog" element={<BlogHomePage />} />
+            <Route path="/ja/blog/" element={<BlogHomePage />} />
+            <Route path="/ja/blog/category/:categorySlug" element={<BlogCategoryPage />} />
+            <Route path="/ja/blog/category/:categorySlug/" element={<BlogCategoryPage />} />
+            <Route path="/ja/blog/:articleSlug" element={<ArticlePage />} />
+            <Route path="/ja/blog/:articleSlug/" element={<ArticlePage />} />
             <Route path="/ja/:toolSlug" element={<ToolPage />} />
             <Route path="/ja/:toolSlug/" element={<ToolPage />} />
 
@@ -259,6 +316,12 @@ export default function App() {
             <Route path="/ko/peuraibeosi-jeongchaek/" element={<PrivacyPolicyPage />} />
             <Route path="/ko/iyong-yagwan" element={<TermsOfServicePage />} />
             <Route path="/ko/iyong-yagwan/" element={<TermsOfServicePage />} />
+                        <Route path="/ko/blog" element={<BlogHomePage />} />
+            <Route path="/ko/blog/" element={<BlogHomePage />} />
+            <Route path="/ko/blog/category/:categorySlug" element={<BlogCategoryPage />} />
+            <Route path="/ko/blog/category/:categorySlug/" element={<BlogCategoryPage />} />
+            <Route path="/ko/blog/:articleSlug" element={<ArticlePage />} />
+            <Route path="/ko/blog/:articleSlug/" element={<ArticlePage />} />
             <Route path="/ko/:toolSlug" element={<ToolPage />} />
             <Route path="/ko/:toolSlug/" element={<ToolPage />} />
 
@@ -283,6 +346,12 @@ export default function App() {
             <Route path="/zh/yinsi-zhengce/" element={<PrivacyPolicyPage />} />
             <Route path="/zh/shiyong-tiaokuan" element={<TermsOfServicePage />} />
             <Route path="/zh/shiyong-tiaokuan/" element={<TermsOfServicePage />} />
+                        <Route path="/zh/blog" element={<BlogHomePage />} />
+            <Route path="/zh/blog/" element={<BlogHomePage />} />
+            <Route path="/zh/blog/category/:categorySlug" element={<BlogCategoryPage />} />
+            <Route path="/zh/blog/category/:categorySlug/" element={<BlogCategoryPage />} />
+            <Route path="/zh/blog/:articleSlug" element={<ArticlePage />} />
+            <Route path="/zh/blog/:articleSlug/" element={<ArticlePage />} />
             <Route path="/zh/:toolSlug" element={<ToolPage />} />
             <Route path="/zh/:toolSlug/" element={<ToolPage />} />
 

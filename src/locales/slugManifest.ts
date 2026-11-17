@@ -3,10 +3,10 @@
  * Do NOT edit by hand; re-run the generator (it is the first step of
  * `npm run build`, so it never goes stale).
  *
- * Slugs ONLY: tool id -> localized slug and category id -> localized
- * slug per non-default locale. No names, descriptions, FAQs or UI
- * strings — routes.ts uses this for cross-locale navigation without
- * loading any locale data.
+ * Slugs ONLY: tool id -> localized slug, category id -> localized
+ * slug, and article id -> localized slug per non-default locale. No
+ * names, descriptions, FAQs or UI strings — routes.ts uses this for
+ * cross-locale navigation without loading any locale data.
  */
 
 import type { NonDefaultLocale } from './config';
@@ -14,6 +14,8 @@ import type { NonDefaultLocale } from './config';
 export interface SlugManifestEntry {
   tools: Record<string, string>;
   categories: Record<string, string>;
+  /** Article id -> localized slug. Only articles published in that locale. */
+  articles: Record<string, string>;
 }
 
 export const SLUG_MANIFEST: Record<NonDefaultLocale, SlugManifestEntry> = {
@@ -116,7 +118,8 @@ export const SLUG_MANIFEST: Record<NonDefaultLocale, SlugManifestEntry> = {
       "seo": "herramientas-seo",
       "social-media": "herramientas-de-redes-sociales",
       "text-writing": "herramientas-de-texto-y-escritura"
-    }
+    },
+    "articles": {}
   },
   "pt": {
     "tools": {
@@ -217,7 +220,8 @@ export const SLUG_MANIFEST: Record<NonDefaultLocale, SlugManifestEntry> = {
       "seo": "ferramentas-seo",
       "social-media": "ferramentas-de-redes-sociais",
       "text-writing": "ferramentas-de-texto-e-escrita"
-    }
+    },
+    "articles": {}
   },
   "fr": {
     "tools": {
@@ -318,7 +322,8 @@ export const SLUG_MANIFEST: Record<NonDefaultLocale, SlugManifestEntry> = {
       "seo": "outils-seo",
       "social-media": "outils-de-reseaux-sociaux",
       "text-writing": "outils-de-texte-et-d-ecriture"
-    }
+    },
+    "articles": {}
   },
   "de": {
     "tools": {
@@ -419,7 +424,8 @@ export const SLUG_MANIFEST: Record<NonDefaultLocale, SlugManifestEntry> = {
       "seo": "seo-werkzeuge",
       "social-media": "social-media-werkzeuge",
       "text-writing": "text-und-schreibwerkzeuge"
-    }
+    },
+    "articles": {}
   },
   "it": {
     "tools": {
@@ -520,7 +526,8 @@ export const SLUG_MANIFEST: Record<NonDefaultLocale, SlugManifestEntry> = {
       "seo": "strumenti-seo",
       "social-media": "strumenti-per-social-media",
       "text-writing": "strumenti-di-testo-e-scrittura"
-    }
+    },
+    "articles": {}
   },
   "id": {
     "tools": {
@@ -621,7 +628,8 @@ export const SLUG_MANIFEST: Record<NonDefaultLocale, SlugManifestEntry> = {
       "seo": "alat-seo",
       "social-media": "alat-media-sosial",
       "text-writing": "alat-teks-dan-penulisan"
-    }
+    },
+    "articles": {}
   },
   "ru": {
     "tools": {
@@ -722,7 +730,8 @@ export const SLUG_MANIFEST: Record<NonDefaultLocale, SlugManifestEntry> = {
       "seo": "seo-instrumenty",
       "social-media": "instrumenty-dlya-sotsialnyh-setej",
       "text-writing": "instrumenty-dlya-teksta-i-pisma"
-    }
+    },
+    "articles": {}
   },
   "ja": {
     "tools": {
@@ -823,7 +832,8 @@ export const SLUG_MANIFEST: Record<NonDefaultLocale, SlugManifestEntry> = {
       "seo": "seo-tsuru",
       "social-media": "sosharu-media-tsuru",
       "text-writing": "tekisuto-tsuru"
-    }
+    },
+    "articles": {}
   },
   "ko": {
     "tools": {
@@ -924,7 +934,8 @@ export const SLUG_MANIFEST: Record<NonDefaultLocale, SlugManifestEntry> = {
       "seo": "seo-dogu",
       "social-media": "sosyeol-midieo-dogu",
       "text-writing": "tekseuteu-dogu"
-    }
+    },
+    "articles": {}
   },
   "zh": {
     "tools": {
@@ -1025,6 +1036,7 @@ export const SLUG_MANIFEST: Record<NonDefaultLocale, SlugManifestEntry> = {
       "seo": "seo-gongju",
       "social-media": "shejiao-meiti-gongju",
       "text-writing": "wenben-gongju"
-    }
+    },
+    "articles": {}
   }
 };

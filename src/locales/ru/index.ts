@@ -2,6 +2,7 @@ import { RU_TOOL_OVERRIDES } from './tools';
 import { RU_CATEGORY_OVERRIDES } from './categories';
 import { ruStrings } from './ui';
 import { ruComponentStrings } from './components';
+import { RU_ARTICLE_OVERRIDES } from './blog';
 import type { LocaleData } from '../types';
 
 /**
@@ -14,6 +15,7 @@ const data: LocaleData = {
   code: 'ru',
   toolOverrides: RU_TOOL_OVERRIDES,
   categoryOverrides: RU_CATEGORY_OVERRIDES,
+  articleOverrides: RU_ARTICLE_OVERRIDES,
   uiStrings: ruStrings,
   componentStrings: ruComponentStrings,
 };

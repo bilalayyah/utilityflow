@@ -2,6 +2,7 @@ import { JA_TOOL_OVERRIDES } from './tools';
 import { JA_CATEGORY_OVERRIDES } from './categories';
 import { jaStrings } from './ui';
 import { jaComponentStrings } from './components';
+import { JA_ARTICLE_OVERRIDES } from './blog';
 import type { LocaleData } from '../types';
 
 /**
@@ -14,6 +15,7 @@ const data: LocaleData = {
   code: 'ja',
   toolOverrides: JA_TOOL_OVERRIDES,
   categoryOverrides: JA_CATEGORY_OVERRIDES,
+  articleOverrides: JA_ARTICLE_OVERRIDES,
   uiStrings: jaStrings,
   componentStrings: jaComponentStrings,
 };

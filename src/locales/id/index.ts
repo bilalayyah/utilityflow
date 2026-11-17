@@ -2,6 +2,7 @@ import { ID_TOOL_OVERRIDES } from './tools';
 import { ID_CATEGORY_OVERRIDES } from './categories';
 import { idStrings } from './ui';
 import { idComponentStrings } from './components';
+import { ID_ARTICLE_OVERRIDES } from './blog';
 import type { LocaleData } from '../types';
 
 /**
@@ -14,6 +15,7 @@ const data: LocaleData = {
   code: 'id',
   toolOverrides: ID_TOOL_OVERRIDES,
   categoryOverrides: ID_CATEGORY_OVERRIDES,
+  articleOverrides: ID_ARTICLE_OVERRIDES,
   uiStrings: idStrings,
   componentStrings: idComponentStrings,
 };

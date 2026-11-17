@@ -17,6 +17,7 @@ import { Breadcrumbs, buildBreadcrumbSchema } from '../common/Breadcrumbs';
 import { FAQAccordion, buildFaqSchema } from '../common/FAQAccordion';
 import { CommentsSection } from '../comments/CommentsSection';
 import { SeoHead } from '../seo/SeoHead';
+import { ToolRelatedArticles } from '../blog/ToolRelatedArticles';
 import { PASTEL_PALETTES, pastelForKey } from './pastel';
 import { RelatedTools } from './RelatedTools';
 
@@ -324,6 +325,10 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
         </div>
 
         <AdSlot slotId="tool-below-guide" format="horizontal" />
+
+        <div className="mt-12">
+          <ToolRelatedArticles toolId={tool.id} locale={locale} />
+        </div>
 
         <div className="mt-12">
           <RelatedTools tool={tool} />

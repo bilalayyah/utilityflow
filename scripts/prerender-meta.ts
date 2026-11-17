@@ -1,7 +1,10 @@
 // scripts/prerender-meta.ts
 //
-// Build-time prerendering of <head> for all 1,111 routes (Audit Fix #1;
+// Build-time prerendering of <head> for all 1,199 routes (Audit Fix #1;
 // also fixes #7, the shell canonical that pointed every page at the homepage).
+// Blog (Batch 2): +11 blog homes + 77 blog categories = 1,199 (no articles
+// yet — the registry is empty; articles add one file per published locale
+// when Batch 3 lands, and the sitemap/prerender counts grow with them).
 //
 // Runs AFTER `vite build` (see the `build` script in package.json).
 // Reads dist/index.html (the SPA shell) and writes one prerendered
@@ -22,10 +25,15 @@
 // Fix #22 updates the admin title/description).
 //
 // Route enumeration mirrors scripts/generate-sitemap.ts (STATIC_ROUTES +
-// CATEGORIES + TOOLS_REGISTRY, 101 pages x 11 locales = 1,111 URLs).
+// CATEGORIES + TOOLS_REGISTRY + blog home + blog categories + published
+// articles, 109 base pages x 11 locales + article URLs = 1,199 in Batch 2).
 //
 // Also writes functions/known-routes.ts (KNOWN_ROUTES set, used by the
 // Cloudflare Pages Functions middleware for 404 handling — Fix #2).
+// Blog note: KNOWN_ROUTES also carries the EN-slug article URL under every
+// non-EN locale (no prerendered file — the SPA fallback serves it, so the
+// ArticlePage cross-locale redirect / not-yet-translated notice can render
+// instead of a middleware 404).
 //
 // Fix #10 (mobile LCP): injects a per-route <link rel="modulepreload">
 // for the route's locale chunk on non-EN pages (see localeChunkFile
@@ -56,12 +64,15 @@ import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { SITE_CONFIG, STATIC_ROUTES, buildCanonicalUrl } from '../src/config/site';
-import { getOgImageForPage } from '../src/config/ogImages';
+import { DEFAULT_OG_IMAGE, getOgImageForPage } from '../src/config/ogImages';
 import {
   CATEGORY_LOCALE_SLUGS,
   CATEGORY_PATH_SEGMENT,
   STATIC_PATHS,
   SUPPORTED_LOCALES,
+  articleHref,
+  blogCategoryHref,
+  blogHref,
   categoryHref,
   getLocaleInfo,
   localeTag,
@@ -72,14 +83,20 @@ import {
 import { loadLocaleData } from '../src/locales/loader';
 import { loadLocaleDetails } from '../src/locales/details';
 import {
+  getArticleAlternatePaths,
+  getBlogCategoryAlternatePaths,
   getCategoryAlternatePaths,
   getStaticAlternatePaths,
   getToolAlternatePaths,
   toHreflangEntries,
 } from '../src/locales/routes';
+import { SLUG_MANIFEST } from '../src/locales/slugManifest';
 import { getLocalizedCategory, getLocalizedTool } from '../src/locales/tools';
 import {
   injectStaticBody,
+  renderArticleBody,
+  renderBlogCategoryBody,
+  renderBlogHomeBody,
   renderCategoryBody,
   renderDirectoryBody,
   renderHomeBody,
@@ -87,9 +104,10 @@ import {
   renderToolBody,
 } from './prerender-body';
 import { formatString } from '../src/locales/ui';
-import type { LocaleCode } from '../src/locales/config';
+import type { LocaleCode, NonDefaultLocale } from '../src/locales/config';
 import type { LocaleData } from '../src/locales/types';
 import { CATEGORIES } from '../src/registry/categories';
+import { getBlogArticleById, getBlogArticleVersion, getPublishedBlogArticles } from '../src/registry/blogArticles';
 import { TOOLS_REGISTRY } from '../src/registry/toolsRegistry';
 import { DE_TOOL_OVERRIDES } from '../src/locales/de/tools';
 import { ES_TOOL_OVERRIDES } from '../src/locales/es/tools';
@@ -288,6 +306,8 @@ interface PageSeo {
   body: string;
   /** Fix #10: locale chunk to modulepreload in this page's head (non-EN only). */
   preloadFiles: string[];
+  /** Blog article pages: hreflang covers published locales only (2–12 entries), not all 11 + x-default. */
+  isArticle?: boolean;
 }
 
 function buildOrganizationSchema(homePath: string): Record<string, unknown> {
@@ -485,6 +505,125 @@ function categorySeo(
     ],
     alternates: toHreflangEntries(getCategoryAlternatePaths(category.id)),
     ogImage: getOgImageForPage('category', category.id, locale),
+    locale,
+  };
+}
+
+/**
+ * Blog home — mirrors BlogHomePage.tsx SeoHead call.
+ * Alternates come from STATIC_PATHS ('/blog/' is a static route).
+ */
+function blogHomeSeo(t: LocaleData['uiStrings'], locale: LocaleCode): SeoHeadProps {
+  const canonicalPath = blogHref(locale);
+  const breadcrumbs: BreadcrumbItem[] = [
+    { label: t.footer.home, href: localizeStaticPath('/', locale) },
+    { label: t.nav.blog },
+  ];
+  const blogSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    name: t.blog.title,
+    url: buildCanonicalUrl(canonicalPath, ORIGIN),
+    description: t.blog.seoDescription,
+  };
+  return {
+    title: t.blog.seoTitle,
+    description: t.blog.seoDescription,
+    canonicalPath,
+    ogType: 'website',
+    structuredData: [blogSchema, buildBreadcrumbSchema(breadcrumbs)],
+    alternates: toHreflangEntries(getStaticAlternatePaths('/blog/')),
+    locale,
+  };
+}
+
+/**
+ * Blog category — mirrors BlogCategoryPage.tsx SeoHead call.
+ * The title is built from the localized category name (same template as
+ * the page: "<Category> Guides | UtilityFlow Blog").
+ */
+function blogCategorySeo(
+  categoryId: string,
+  t: LocaleData['uiStrings'],
+  locale: LocaleCode,
+  data: LocaleData
+): SeoHeadProps {
+  const category = getLocalizedCategory(categoryId as CategoryId, locale, data);
+  if (!category) throw new Error(`Category not found: ${categoryId}`);
+  const canonicalPath = blogCategoryHref(category.id, locale);
+  const breadcrumbs: BreadcrumbItem[] = [
+    { label: t.footer.home, href: localizeStaticPath('/', locale) },
+    { label: t.nav.blog, href: blogHref(locale) },
+    { label: category.name },
+  ];
+  const collectionSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: category.name,
+    url: buildCanonicalUrl(canonicalPath, ORIGIN),
+    description: category.longDescription,
+  };
+  return {
+    title: `${category.name} Guides | UtilityFlow Blog`,
+    description: category.longDescription,
+    canonicalPath,
+    ogType: 'website',
+    structuredData: [collectionSchema, buildBreadcrumbSchema(breadcrumbs)],
+    alternates: toHreflangEntries(getBlogCategoryAlternatePaths(category.id)),
+    ogImage: getOgImageForPage('category', category.id, locale),
+    locale,
+  };
+}
+
+/**
+ * Article — mirrors ArticlePage.tsx SeoHead call (published version).
+ * Hreflang covers ONLY the locales where the article is published
+ * (getArticleAlternatePaths reads the slug manifest), plus x-default → EN.
+ * The BlogPosting image is the default OG image (same as the page).
+ */
+function articleSeo(
+  articleId: string,
+  t: LocaleData['uiStrings'],
+  locale: LocaleCode,
+  data: LocaleData
+): SeoHeadProps {
+  const article = getBlogArticleById(articleId);
+  if (!article) throw new Error(`Article not found: ${articleId}`);
+  const version = getBlogArticleVersion(article, locale, data);
+  if (!version) throw new Error(`Article ${articleId} not published in ${locale}`);
+  const canonicalPath = articleHref(version.slug, locale);
+  const category = getLocalizedCategory(article.categoryId as CategoryId, locale, data);
+  const breadcrumbs: BreadcrumbItem[] = [
+    { label: t.footer.home, href: localizeStaticPath('/', locale) },
+    { label: t.nav.blog, href: blogHref(locale) },
+    ...(category
+      ? [{ label: category.name, href: blogCategoryHref(category.id, locale) }]
+      : []),
+    { label: version.title },
+  ];
+  const blogPostingSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: version.title,
+    description: version.description,
+    datePublished: article.publishedAt,
+    ...(article.updatedAt ? { dateModified: article.updatedAt } : {}),
+    author: { '@type': 'Organization', name: 'UtilityFlow' },
+    mainEntityOfPage: buildCanonicalUrl(canonicalPath, ORIGIN),
+    image: DEFAULT_OG_IMAGE,
+  };
+  const faqs = version.faqs.map((faq) => ({ question: faq.q, answer: faq.a }));
+  return {
+    title: version.title,
+    description: version.description,
+    canonicalPath,
+    ogType: 'article',
+    structuredData: [
+      blogPostingSchema,
+      buildBreadcrumbSchema(breadcrumbs),
+      ...(faqs.length > 0 ? [buildFaqSchema(faqs)] : []),
+    ],
+    alternates: toHreflangEntries(getArticleAlternatePaths(article.id)),
     locale,
   };
 }
@@ -854,17 +993,82 @@ async function prerender(): Promise<void> {
       });
       knownRoutes.add(localized);
     }
+
+    // Blog home (Batch 2: renders the empty state — no articles yet).
+    pages.push({
+      path: blogHref(locale),
+      locale,
+      props: blogHomeSeo(t, locale),
+      body: renderBlogHomeBody(t, locale, data),
+      preloadFiles: preloadFor(locale, t.nav.allTools),
+    });
+    knownRoutes.add(blogHref(locale));
+
+    // Blog categories (7 categories x 11 locales).
+    for (const category of CATEGORIES) {
+      const localizedCategory = getLocalizedCategory(category.id, locale, data);
+      if (!localizedCategory) throw new Error(`Category not found: ${category.id}`);
+      pages.push({
+        path: blogCategoryHref(category.id, locale),
+        locale,
+        props: blogCategorySeo(category.id, t, locale, data),
+        body: renderBlogCategoryBody(localizedCategory, t, locale, data),
+        preloadFiles: preloadFor(locale, t.nav.allTools),
+      });
+      knownRoutes.add(blogCategoryHref(category.id, locale));
+    }
+
+    // Blog articles — one file per locale where the article is published.
+    // (Batch 2: the registry is empty, so this loop adds nothing yet.)
+    for (const article of getPublishedBlogArticles()) {
+      const version = getBlogArticleVersion(article, locale, data);
+      if (!version) continue;
+      pages.push({
+        path: articleHref(version.slug, locale),
+        locale,
+        props: articleSeo(article.id, t, locale, data),
+        body: renderArticleBody(article, version, t, locale, data),
+        preloadFiles: preloadFor(locale, t.nav.allTools),
+        isArticle: true,
+      });
+      knownRoutes.add(articleHref(version.slug, locale));
+    }
+  }
+
+  // Blog article EN-slug URLs under every non-EN locale: no prerendered
+  // file (the SPA fallback serves them), but they must reach the SPA so
+  // the ArticlePage cross-locale redirect (published locale) / notice
+  // (unpublished locale) can render instead of a middleware 404.
+  for (const article of getPublishedBlogArticles()) {
+    for (const info of SUPPORTED_LOCALES) {
+      if (info.code === 'en') continue;
+      knownRoutes.add(`${info.pathPrefix}/blog/${article.en.slug}/`);
+    }
   }
 
   // Admin page (not in the sitemap; noindex; EN only).
   const adminProps = adminSeo();
 
   // Assertions before writing anything.
-  const expectedPages = STATIC_ROUTES.length + CATEGORIES.length + TOOLS_REGISTRY.length;
-  const expectedTotal = expectedPages * SUPPORTED_LOCALES.length;
+  // Base pages per locale: static routes + tool categories + tools + blog
+  // home (1) + blog categories (7). Articles add one file per locale
+  // where the article is published — counted from the slug manifest
+  // (EN: every published article; non-EN: the manifest articles map),
+  // which cross-checks the registry + overrides the loop reads.
+  const basePages =
+    STATIC_ROUTES.length + CATEGORIES.length + TOOLS_REGISTRY.length + 1 + CATEGORIES.length;
+  const publishedArticles = getPublishedBlogArticles();
+  const articleUrls =
+    publishedArticles.length +
+    SUPPORTED_LOCALES.filter((l) => l.code !== 'en').reduce(
+      (sum, l) =>
+        sum + Object.keys(SLUG_MANIFEST[l.code as NonDefaultLocale].articles ?? {}).length,
+      0
+    );
+  const expectedTotal = basePages * SUPPORTED_LOCALES.length + articleUrls;
   if (pages.length !== expectedTotal) {
     throw new Error(
-      `Prerender incomplete: ${pages.length} pages, expected ${expectedTotal} (${expectedPages} pages x ${SUPPORTED_LOCALES.length} locales).`
+      `Prerender incomplete: ${pages.length} pages, expected ${expectedTotal} (${basePages} base pages x ${SUPPORTED_LOCALES.length} locales + ${articleUrls} article URLs).`
     );
   }
   const seen = new Set<string>();
@@ -881,10 +1085,25 @@ async function prerender(): Promise<void> {
     if ((page.body.match(/<h1/g) ?? []).length !== 1) {
       throw new Error(`Static body for ${page.path} must contain exactly one <h1>`);
     }
-    if (page.props.alternates && page.props.alternates.length !== SUPPORTED_LOCALES.length + 1) {
-      throw new Error(
-        `${page.path} has ${page.props.alternates.length} hreflang alternates, expected ${SUPPORTED_LOCALES.length + 1}.`
-      );
+    if (page.props.alternates) {
+      const altCount = page.props.alternates.length;
+      if (page.isArticle) {
+        // Articles: hreflang covers published locales only (2–12),
+        // always including en-US + x-default.
+        if (altCount < 2 || altCount > SUPPORTED_LOCALES.length + 1) {
+          throw new Error(
+            `${page.path} has ${altCount} hreflang alternates, expected 2–${SUPPORTED_LOCALES.length + 1} (published locales only).`
+          );
+        }
+        const langs = new Set(page.props.alternates.map((a) => a.hreflang));
+        if (!langs.has('en-US') || !langs.has('x-default')) {
+          throw new Error(`${page.path} hreflang must include en-US and x-default.`);
+        }
+      } else if (altCount !== SUPPORTED_LOCALES.length + 1) {
+        throw new Error(
+          `${page.path} has ${altCount} hreflang alternates, expected ${SUPPORTED_LOCALES.length + 1}.`
+        );
+      }
     }
   }
 
@@ -900,8 +1119,8 @@ async function prerender(): Promise<void> {
     writeFileSync(outPath, withLang, 'utf8');
     written++;
   }
-  if (written !== 1111) {
-    throw new Error(`Prerender wrote ${written} files, expected 1111.`);
+  if (written !== expectedTotal) {
+    throw new Error(`Prerender wrote ${written} files, expected ${expectedTotal}.`);
   }
 
   // Admin files: /admin/comments/ -> dist/admin/comments/index.html and
@@ -920,8 +1139,8 @@ async function prerender(): Promise<void> {
   const sitemapPath = resolve(__dirname, '../public/sitemap.xml');
   const sitemap = readFileSync(sitemapPath, 'utf8');
   const locs = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
-  if (locs.length !== 1111) {
-    throw new Error(`Sitemap has ${locs.length} URLs, expected 1111.`);
+  if (locs.length !== expectedTotal) {
+    throw new Error(`Sitemap has ${locs.length} URLs, expected ${expectedTotal}.`);
   }
   for (const loc of locs) {
     const url = new URL(loc);
@@ -940,7 +1159,8 @@ async function prerender(): Promise<void> {
     [
       '// AUTO-GENERATED by scripts/prerender-meta.ts (run at build time).',
       '// Do not edit by hand — it is regenerated on every build.',
-      '// All known page routes (1,111 sitemap URLs + /admin/comments x2).',
+      '// All known page routes (1,199 sitemap URLs + /admin/comments x2 +',
+      '// article EN-slug fallback URLs under non-EN locales, no files).',
       '// Used by functions/_middleware.ts to return a real 404 for unknown paths.',
       '',
       'export const KNOWN_ROUTES: ReadonlySet<string> = new Set([',

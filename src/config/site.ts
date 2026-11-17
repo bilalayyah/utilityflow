@@ -25,6 +25,7 @@ export const NAV_LINKS = [
   { label: 'Tools', to: '/tools/' },
   { label: 'Categories', to: '/#categories' },
   { label: 'AI Tools', to: '/#ai-tools' },
+  { label: 'Blog', to: '/blog/' },
   { label: 'About', to: '/about/' },
   { label: 'Contact', to: '/contact/' },
 ] as const;

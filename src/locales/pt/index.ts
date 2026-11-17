@@ -2,6 +2,7 @@ import { PT_TOOL_OVERRIDES } from './tools';
 import { PT_CATEGORY_OVERRIDES } from './categories';
 import { ptStrings } from './ui';
 import { ptComponentStrings } from './components';
+import { PT_ARTICLE_OVERRIDES } from './blog';
 import type { LocaleData } from '../types';
 
 /**
@@ -14,6 +15,7 @@ const data: LocaleData = {
   code: 'pt',
   toolOverrides: PT_TOOL_OVERRIDES,
   categoryOverrides: PT_CATEGORY_OVERRIDES,
+  articleOverrides: PT_ARTICLE_OVERRIDES,
   uiStrings: ptStrings,
   componentStrings: ptComponentStrings,
 };

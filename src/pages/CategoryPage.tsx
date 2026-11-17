@@ -4,6 +4,7 @@ import { Link, Navigate, useParams } from 'react-router-dom';
 import { AdSlot } from '../components/common/AdSlot';
 import { Breadcrumbs, buildBreadcrumbSchema } from '../components/common/Breadcrumbs';
 import { CategoryIcon } from '../components/common/CategoryIcon';
+import { CategoryGuides } from '../components/blog/CategoryGuides';
 import { FAQAccordion } from '../components/common/FAQAccordion';
 import { SeoHead } from '../components/seo/SeoHead';
 import { ToolCard } from '../components/tool/ToolCard';
@@ -171,6 +172,8 @@ export function CategoryPage() {
             />
           </section>
         )}
+
+        <CategoryGuides categoryId={category.id} locale={locale} />
 
         <section aria-labelledby="other-categories-heading" className="pt-10 border-t border-slate-200">
           <h2 id="other-categories-heading" className="text-xl font-bold text-slate-900 mb-5">

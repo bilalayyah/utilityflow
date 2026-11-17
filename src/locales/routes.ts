@@ -11,6 +11,10 @@ import {
   localeTag,
 } from './config';
 import { getCategoryById, getCategoryBySlug } from '../registry/categories';
+import {
+  getBlogArticleById,
+  getBlogArticleBySlug,
+} from '../registry/blogArticles';
 import { getToolBySlug } from '../registry/toolsRegistry';
 import { getToolById } from './tools';
 import { SLUG_MANIFEST } from './slugManifest';
@@ -57,6 +61,37 @@ function resolveToolIdBySlug(slug: string, locale: LocaleCode): string | undefin
     if (entry) return entry[0];
   }
   return getToolBySlug(normalized)?.id;
+}
+
+/** Invert the manifest: localized article slug -> article id (EN slugs resolve via the registry). */
+function resolveBlogArticleIdBySlug(slug: string, locale: LocaleCode): string | undefined {
+  const normalized = slug.replace(/^\/+|\/+$/g, '').toLowerCase();
+  if (locale !== DEFAULT_LOCALE) {
+    const entry = Object.entries(SLUG_MANIFEST[locale].articles ?? {}).find(
+      ([, localizedSlug]) => localizedSlug.toLowerCase() === normalized
+    );
+    if (entry) return entry[0];
+  }
+  return getBlogArticleBySlug(normalized, DEFAULT_LOCALE)?.id;
+}
+
+/** Localized article slug for the target locale: targetData -> store -> manifest. Undefined when not published there. */
+function targetBlogArticleSlug(
+  articleId: string,
+  targetLocale: LocaleCode,
+  targetData?: LocaleData
+): string | undefined {
+  if (targetLocale === DEFAULT_LOCALE) {
+    return getBlogArticleById(articleId)?.en.slug;
+  }
+  if (targetData && targetData.code === targetLocale) {
+    return targetData.articleOverrides[articleId]?.slug;
+  }
+  const storeData = getActiveLocaleData();
+  if (storeData.code === targetLocale) {
+    return storeData.articleOverrides[articleId]?.slug;
+  }
+  return SLUG_MANIFEST[targetLocale as NonDefaultLocale].articles?.[articleId];
 }
 
 /** Invert the manifest: localized category slug -> category id (EN slugs resolve via the registry). */
@@ -168,6 +203,60 @@ export function getLocalizedEquivalentPath(
     );
   }
 
+  // Blog category hubs: /blog/category/<slug>/ or /<code>/blog/category/<slug>/
+  const isBlogCategoryPath =
+    (segments[0] === 'blog' && segments[1] === 'category' && segments.length === 3) ||
+    (segments.length === 4 &&
+      isLocaleCode(segments[0]) &&
+      segments[0] !== DEFAULT_LOCALE &&
+      segments[1] === 'blog' &&
+      segments[2] === 'category');
+  if (isBlogCategoryPath) {
+    const slug = segments[0] === 'blog' ? segments[2] : segments[3];
+    const sourceLocale =
+      segments[0] === 'blog' ? DEFAULT_LOCALE : (segments[0] as LocaleCode);
+    const categoryId = resolveCategoryIdBySlug(slug, sourceLocale);
+    if (!categoryId) return withHash(home);
+    const base = getCategoryById(categoryId as CategoryId);
+    if (!base) return withHash(home);
+    if (targetLocale === DEFAULT_LOCALE) {
+      return withHash(`/blog/category/${base.slug}/`);
+    }
+    const localizedSlug = targetCategorySlug(base.id, targetLocale, targetData);
+    return withHash(
+      `${getLocaleInfo(targetLocale).pathPrefix}/blog/category/${localizedSlug}/`
+    );
+  }
+
+  // Blog articles: /blog/<slug>/ or /<code>/blog/<slug>/.
+  // If the article is not published in the target locale, fall back to
+  // that locale's blog home (never link an unfinished translation).
+  const isBlogArticlePath =
+    (segments[0] === 'blog' && segments.length === 2) ||
+    (segments.length === 3 &&
+      isLocaleCode(segments[0]) &&
+      segments[0] !== DEFAULT_LOCALE &&
+      segments[1] === 'blog');
+  if (isBlogArticlePath) {
+    const slug = segments[0] === 'blog' ? segments[1] : segments[2];
+    const sourceLocale =
+      segments[0] === 'blog' ? DEFAULT_LOCALE : (segments[0] as LocaleCode);
+    const articleId = resolveBlogArticleIdBySlug(slug, sourceLocale);
+    if (!articleId) return withHash(home);
+    const targetSlug = targetBlogArticleSlug(articleId, targetLocale, targetData);
+    if (!targetSlug) {
+      return withHash(
+        targetLocale === DEFAULT_LOCALE
+          ? '/blog/'
+          : `${getLocaleInfo(targetLocale).pathPrefix}/blog/`
+      );
+    }
+    if (targetLocale === DEFAULT_LOCALE) {
+      return withHash(`/blog/${targetSlug}/`);
+    }
+    return withHash(`${getLocaleInfo(targetLocale).pathPrefix}/blog/${targetSlug}/`);
+  }
+
   // Tool pages: /<slug>/ or /<code>/<slug>/ (single segment after the prefix)
   const toolSlug =
     segments.length === 1
@@ -224,6 +313,40 @@ export function getCategoryAlternatePaths(
       result[locale.code] =
         `${locale.pathPrefix}/${CATEGORY_PATH_SEGMENT[locale.code]}/${slug}/`;
     }
+  }
+  return result;
+}
+
+/** Canonical paths for a blog article in each locale where it is published. Static — reads SLUG_MANIFEST, needs no loaded locale data. */
+export function getArticleAlternatePaths(
+  articleId: string
+): LocaleAlternatePaths | undefined {
+  const base = getBlogArticleById(articleId);
+  if (!base || base.status !== 'published') return undefined;
+  const result: LocaleAlternatePaths = { en: `/blog/${base.en.slug}/` };
+  for (const locale of SUPPORTED_LOCALES) {
+    if (locale.code === DEFAULT_LOCALE) continue;
+    const slug = SLUG_MANIFEST[locale.code].articles?.[articleId];
+    if (slug) {
+      result[locale.code] = `${locale.pathPrefix}/blog/${slug}/`;
+    }
+  }
+  return result;
+}
+
+/** Canonical paths for a blog category in each locale. Static — reads SLUG_MANIFEST, needs no loaded locale data. */
+export function getBlogCategoryAlternatePaths(
+  categoryId: string
+): LocaleAlternatePaths | undefined {
+  const base = getCategoryById(categoryId as CategoryId);
+  if (!base) return undefined;
+  const result: LocaleAlternatePaths = { en: `/blog/category/${base.slug}/` };
+  for (const locale of SUPPORTED_LOCALES) {
+    if (locale.code === DEFAULT_LOCALE) continue;
+    const slug =
+      SLUG_MANIFEST[locale.code].categories[categoryId] ?? base.slug;
+    result[locale.code] =
+      `${locale.pathPrefix}/blog/category/${slug}/`;
   }
   return result;
 }

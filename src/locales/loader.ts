@@ -19,6 +19,7 @@ export const EN_LOCALE_DATA: LocaleData = {
   code: 'en',
   toolOverrides: {},
   categoryOverrides: {},
+  articleOverrides: {},
   uiStrings: enStrings,
   componentStrings: {},
 };
