@@ -23094,4 +23094,364 @@
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://utilityflow.online/blog/what-is-base64-encoding/</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/blog/what-is-base64-encoding/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/blog/what-is-base64-encoding/" />
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/blog/how-to-encode-decode-base64/</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/blog/how-to-encode-decode-base64/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/blog/how-to-encode-decode-base64/" />
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/blog/base64-vs-hex-vs-url-encoding/</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/blog/base64-vs-hex-vs-url-encoding/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/blog/base64-vs-hex-vs-url-encoding/" />
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/blog/what-is-color-converter/</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/blog/what-is-color-converter/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/blog/what-is-color-converter/" />
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/blog/how-to-convert-hex-to-rgb-hsl/</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/blog/how-to-convert-hex-to-rgb-hsl/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/blog/how-to-convert-hex-to-rgb-hsl/" />
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/blog/hex-vs-rgb-vs-hsl-color-formats/</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/blog/hex-vs-rgb-vs-hsl-color-formats/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/blog/hex-vs-rgb-vs-hsl-color-formats/" />
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/blog/what-is-cron-expression/</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/blog/what-is-cron-expression/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/blog/what-is-cron-expression/" />
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/blog/how-to-write-cron-expression/</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/blog/how-to-write-cron-expression/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/blog/how-to-write-cron-expression/" />
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/blog/cron-expression-examples-mistakes/</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/blog/cron-expression-examples-mistakes/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/blog/cron-expression-examples-mistakes/" />
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/blog/what-is-css-minifier/</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/blog/what-is-css-minifier/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/blog/what-is-css-minifier/" />
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/blog/how-to-minify-css/</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/blog/how-to-minify-css/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/blog/how-to-minify-css/" />
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/blog/css-minification-vs-gzip-bundling/</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/blog/css-minification-vs-gzip-bundling/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/blog/css-minification-vs-gzip-bundling/" />
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/blog/what-is-hash-generator/</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/blog/what-is-hash-generator/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/blog/what-is-hash-generator/" />
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/blog/how-to-generate-sha256-hash/</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/blog/how-to-generate-sha256-hash/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/blog/how-to-generate-sha256-hash/" />
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/blog/sha1-vs-sha256-vs-sha512/</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/blog/sha1-vs-sha256-vs-sha512/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/blog/sha1-vs-sha256-vs-sha512/" />
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/blog/what-are-html-entities/</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/blog/what-are-html-entities/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/blog/what-are-html-entities/" />
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/blog/how-to-encode-html-entities/</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/blog/how-to-encode-html-entities/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/blog/how-to-encode-html-entities/" />
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/blog/html-entity-encoding-xss-prevention/</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/blog/html-entity-encoding-xss-prevention/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/blog/html-entity-encoding-xss-prevention/" />
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/blog/what-is-javascript-minifier/</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/blog/what-is-javascript-minifier/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/blog/what-is-javascript-minifier/" />
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/blog/how-to-minify-javascript/</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/blog/how-to-minify-javascript/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/blog/how-to-minify-javascript/" />
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/blog/js-minifier-vs-bundler-vs-transpiler/</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/blog/js-minifier-vs-bundler-vs-transpiler/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/blog/js-minifier-vs-bundler-vs-transpiler/" />
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/blog/what-is-json-formatter/</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/blog/what-is-json-formatter/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/blog/what-is-json-formatter/" />
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/blog/how-to-format-validate-json/</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/blog/how-to-format-validate-json/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/blog/how-to-format-validate-json/" />
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/blog/common-json-syntax-errors-fix/</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/blog/common-json-syntax-errors-fix/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/blog/common-json-syntax-errors-fix/" />
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/blog/what-is-json-to-csv-conversion/</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/blog/what-is-json-to-csv-conversion/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/blog/what-is-json-to-csv-conversion/" />
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/blog/how-to-convert-json-to-csv/</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/blog/how-to-convert-json-to-csv/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/blog/how-to-convert-json-to-csv/" />
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/blog/csv-formatting-pitfalls/</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/blog/csv-formatting-pitfalls/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/blog/csv-formatting-pitfalls/" />
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/blog/what-is-jwt/</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/blog/what-is-jwt/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/blog/what-is-jwt/" />
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/blog/how-to-decode-jwt/</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/blog/how-to-decode-jwt/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/blog/how-to-decode-jwt/" />
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/blog/jwt-security-decoded-token-limits/</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/blog/jwt-security-decoded-token-limits/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/blog/jwt-security-decoded-token-limits/" />
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/blog/what-is-regex/</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/blog/what-is-regex/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/blog/what-is-regex/" />
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/blog/how-to-test-regex/</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/blog/how-to-test-regex/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/blog/how-to-test-regex/" />
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/blog/common-regex-patterns-mistakes/</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/blog/common-regex-patterns-mistakes/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/blog/common-regex-patterns-mistakes/" />
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/blog/what-is-sql-formatter/</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/blog/what-is-sql-formatter/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/blog/what-is-sql-formatter/" />
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/blog/how-to-format-sql-queries/</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/blog/how-to-format-sql-queries/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/blog/how-to-format-sql-queries/" />
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/blog/sql-formatting-style-guide/</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/blog/sql-formatting-style-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/blog/sql-formatting-style-guide/" />
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/blog/what-is-unix-timestamp/</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/blog/what-is-unix-timestamp/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/blog/what-is-unix-timestamp/" />
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/blog/how-to-convert-unix-timestamp/</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/blog/how-to-convert-unix-timestamp/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/blog/how-to-convert-unix-timestamp/" />
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/blog/unix-timestamp-pitfalls-2038/</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/blog/unix-timestamp-pitfalls-2038/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/blog/unix-timestamp-pitfalls-2038/" />
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/blog/what-is-url-encoding/</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/blog/what-is-url-encoding/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/blog/what-is-url-encoding/" />
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/blog/how-to-encode-decode-url/</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/blog/how-to-encode-decode-url/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/blog/how-to-encode-decode-url/" />
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/blog/url-encoding-mistakes/</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/blog/url-encoding-mistakes/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/blog/url-encoding-mistakes/" />
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/blog/what-is-uuid/</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/blog/what-is-uuid/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/blog/what-is-uuid/" />
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/blog/how-to-generate-uuid/</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/blog/how-to-generate-uuid/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/blog/how-to-generate-uuid/" />
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://utilityflow.online/blog/uuid-v4-vs-v7-database-keys/</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/blog/uuid-v4-vs-v7-database-keys/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/blog/uuid-v4-vs-v7-database-keys/" />
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
