@@ -78,7 +78,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-indigo-100/70 dark:border-slate-800 bg-gradient-to-r from-violet-200 via-indigo-200 to-sky-200 dark:from-violet-950/70 dark:via-indigo-950/60 dark:to-sky-950/70 backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 sm:gap-8 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 max-[379px]:gap-2 sm:gap-8 px-4 max-[379px]:px-3 sm:px-6 lg:px-8">
         {/* Zone 1: Single-element Brand Wordmark */}
         <Link
           to={localizeStaticPath('/', locale)}
@@ -206,7 +206,10 @@ export function Header() {
             <Search className="w-5 h-5" />
           </button>
 
-          <LanguageSwitcher />
+          {/* Language switcher hidden below 380px (still available in the mobile drawer) — the header row is 379px wide and overflows 320–375px viewports otherwise. */}
+          <div className="max-[379px]:hidden shrink-0">
+            <LanguageSwitcher />
+          </div>
 
           <ThemeToggle />
 
