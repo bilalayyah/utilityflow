@@ -1,93 +1,29 @@
-import { lazy, Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { AboutPage } from './pages/AboutPage';
+import { AdminCommentsPage } from './pages/AdminCommentsPage';
+import { AiTextSummarizerPage } from './pages/AiTextSummarizerPage';
+import { AiToolFinderPage } from './pages/AiToolFinderPage';
+import { AiWritingAssistantPage } from './pages/AiWritingAssistantPage';
+import { ArticlePage } from './pages/ArticlePage';
+import { BlogCategoryPage } from './pages/BlogCategoryPage';
+import { BlogHomePage } from './pages/BlogHomePage';
+import { CategoryPage } from './pages/CategoryPage';
+import { ContactPage } from './pages/ContactPage';
+import { HomePage } from './pages/HomePage';
+import { NotFoundPage } from './pages/NotFoundPage';
+import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage';
+import { TermsOfServicePage } from './pages/TermsOfServicePage';
+import { ToolPage } from './pages/ToolPage';
+import { ToolsDirectoryPage } from './pages/ToolsDirectoryPage';
 import { SiteLayout } from './components/layout/SiteLayout';
 import { LocaleProvider } from './locales/LocaleContext';
-
-// Phase 5: route-based code splitting. Every page is lazy-loaded so the
-// entry chunk contains only the shell (layout, locale provider, router)
-// plus the slim blog index — no page code, no tool workbenches, no
-// article bodies. The prerendered static HTML is already in the page,
-// so the fallback is only visible briefly while the page chunk loads.
-// SiteLayout and LocaleProvider stay static (they are the shell).
-const AboutPage = lazy(() =>
-  import('./pages/AboutPage').then((m) => ({ default: m.AboutPage }))
-);
-const AdminCommentsPage = lazy(() =>
-  import('./pages/AdminCommentsPage').then((m) => ({
-    default: m.AdminCommentsPage,
-  }))
-);
-const AiTextSummarizerPage = lazy(() =>
-  import('./pages/AiTextSummarizerPage').then((m) => ({
-    default: m.AiTextSummarizerPage,
-  }))
-);
-const AiToolFinderPage = lazy(() =>
-  import('./pages/AiToolFinderPage').then((m) => ({
-    default: m.AiToolFinderPage,
-  }))
-);
-const AiWritingAssistantPage = lazy(() =>
-  import('./pages/AiWritingAssistantPage').then((m) => ({
-    default: m.AiWritingAssistantPage,
-  }))
-);
-const ArticlePage = lazy(() =>
-  import('./pages/ArticlePage').then((m) => ({ default: m.ArticlePage }))
-);
-const BlogCategoryPage = lazy(() =>
-  import('./pages/BlogCategoryPage').then((m) => ({
-    default: m.BlogCategoryPage,
-  }))
-);
-const BlogHomePage = lazy(() =>
-  import('./pages/BlogHomePage').then((m) => ({ default: m.BlogHomePage }))
-);
-const CategoryPage = lazy(() =>
-  import('./pages/CategoryPage').then((m) => ({ default: m.CategoryPage }))
-);
-const ContactPage = lazy(() =>
-  import('./pages/ContactPage').then((m) => ({ default: m.ContactPage }))
-);
-const HomePage = lazy(() =>
-  import('./pages/HomePage').then((m) => ({ default: m.HomePage }))
-);
-const NotFoundPage = lazy(() =>
-  import('./pages/NotFoundPage').then((m) => ({ default: m.NotFoundPage }))
-);
-const PrivacyPolicyPage = lazy(() =>
-  import('./pages/PrivacyPolicyPage').then((m) => ({
-    default: m.PrivacyPolicyPage,
-  }))
-);
-const TermsOfServicePage = lazy(() =>
-  import('./pages/TermsOfServicePage').then((m) => ({
-    default: m.TermsOfServicePage,
-  }))
-);
-const ToolPage = lazy(() =>
-  import('./pages/ToolPage').then((m) => ({ default: m.ToolPage }))
-);
-const ToolsDirectoryPage = lazy(() =>
-  import('./pages/ToolsDirectoryPage').then((m) => ({
-    default: m.ToolsDirectoryPage,
-  }))
-);
-
-function PageLoadingFallback() {
-  return (
-    <div className="flex min-h-[50vh] items-center justify-center text-sm text-slate-500">
-      Loading…
-    </div>
-  );
-}
 
 export default function App() {
   return (
     <BrowserRouter>
       <LocaleProvider>
         <SiteLayout>
-          <Suspense fallback={<PageLoadingFallback />}>
+
             <Routes>
             <Route path="/" element={<HomePage />} />
             {/* Comments admin — not linked in the nav, not in the sitemap */}
@@ -422,7 +358,6 @@ export default function App() {
 
             <Route path="*" element={<NotFoundPage />} />
             </Routes>
-          </Suspense>
         </SiteLayout>
       </LocaleProvider>
     </BrowserRouter>

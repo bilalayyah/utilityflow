@@ -46,10 +46,14 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
 
   // Loaded data for the active locale. English is built in, so it starts
   // loaded; every other locale starts null and renders the loading fallback
-  // until its chunk arrives.
-  const [localeData, setLocaleData] = useState<LocaleData | null>(() =>
-    locale === DEFAULT_LOCALE ? EN_LOCALE_DATA : null
-  );
+  // until its chunk arrives — UNLESS the boot gate (src/boot/preloadRoute.ts)
+  // already loaded it and stored it (CLS fix, Wed 2026-11-18): then the
+  // first render has the data and no fallback ever paints.
+  const [localeData, setLocaleData] = useState<LocaleData | null>(() => {
+    if (locale === DEFAULT_LOCALE) return EN_LOCALE_DATA;
+    const stored = getActiveLocaleData();
+    return stored.code === locale ? stored : null;
+  });
 
   // Load the active locale's data whenever the URL locale changes. A
   // cancelled flag guards stale loads (locale changed mid-load): only the

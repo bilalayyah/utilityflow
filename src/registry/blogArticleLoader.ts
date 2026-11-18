@@ -34,14 +34,29 @@ for (const [path, loader] of Object.entries(articleModules)) {
  * the id is unknown or the chunk fails to load — never throws, so
  * callers (ArticlePage, main.tsx preload) can fall back to their own
  * loading/error state instead of crashing.
+ *
+ * CLS fix (Wed 2026-11-18): resolved versions are cached, so ArticlePage
+ * can read the body SYNCHRONOUSLY on its first render when the boot gate
+ * (src/boot/preloadRoute.ts) already loaded it — no loading placeholder,
+ * no placeholder -> body swap, no 0.381 grid shift.
  */
+const articleCache = new Map<string, BlogArticleLocaleVersion>();
+
+/** Synchronous read of an already-loaded EN version (null if not loaded yet). */
+export function getCachedArticleById(id: string): BlogArticleLocaleVersion | null {
+  return articleCache.get(id) ?? null;
+}
+
 export async function loadBlogArticleById(id: string): Promise<BlogArticleLocaleVersion | null> {
+  const cached = articleCache.get(id);
+  if (cached) return cached;
   const loader = loadersById.get(id);
   if (!loader) return null;
   try {
     const mod = await loader();
     const version = mod.articleEn ?? mod.default;
     if (!version || typeof version.body !== 'string') return null;
+    articleCache.set(id, version);
     return version;
   } catch {
     return null;

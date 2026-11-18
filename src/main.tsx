@@ -1,9 +1,7 @@
 import {createRoot} from 'react-dom/client';
 import App from './App.tsx';
+import { preloadRouteData } from './boot/preloadRoute';
 import {ThemeProvider} from './context/ThemeContext.tsx';
-import { getLocaleFromPath } from './locales/config.ts';
-import { getBlogArticleBySlug } from './registry/blogArticleMeta';
-import { loadBlogArticleById } from './registry/blogArticleLoader';
 import './index.css';
 
 // H-3 (page weight) / perf fix: defer gtag.js until first interaction.
@@ -42,33 +40,20 @@ function scheduleGtagLoad(): void {
 }
 scheduleGtagLoad();
 
-// Article pages: start downloading ONLY this article's per-article
-// chunk during initial load (registry split, perf fix Wed 2026-11-18).
-// The chunk is NOT in the entry bundle — it loads on demand when
-// ArticlePage renders — but starting the fetch here means it is usually
-// already in the module cache by the time the article renders, so the
-// body appears without a visible delay. Only article routes pay this
-// cost (and only ~5 KB gz per article, not the old 1.25 MB gz registry);
-// every other page skips it. The article id resolves from the URL slug
-// via the slim index (already in the entry chunk), so this adds no new
-// dependency. Non-EN article routes resolve no EN slug — they skip the
-// preload, which is correct: non-EN bodies come from the locale chunk,
-// never from the EN per-article chunk. If the slug does not resolve to
-// an article, the preload is skipped. The .catch() swallows the (benign)
-// failure if the chunk cannot load — ArticlePage shows its own
-// loading/error state instead.
-const pathname = window.location.pathname;
-const { locale: pathLocale, restPath } = getLocaleFromPath(pathname);
-const articleSlugMatch = /^\/blog\/([^/]+)\/?$/.exec(restPath);
-if (articleSlugMatch) {
-  const article = getBlogArticleBySlug(articleSlugMatch[1], pathLocale);
-  if (article) {
-    loadBlogArticleById(article.id).catch(() => {});
-  }
+// CLS fix (Wed 2026-11-18) — boot gate: preload the current route's page
+// chunk (+ locale data for non-EN, + article chunk for EN articles) BEFORE
+// the first render, so the first client commit is the FULL page instead of
+// the Suspense "Loading…" fallback. See src/boot/preloadRoute.ts for the
+// measured root cause. The prerendered static HTML stays visible while the
+// gate runs (createRoot has not executed yet), and the gate never rejects
+// and times out after 5 s, so mount can never hang.
+async function boot(): Promise<void> {
+  await preloadRouteData(window.location.pathname);
+  createRoot(document.getElementById('root')!).render(
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
+  );
 }
 
-createRoot(document.getElementById('root')!).render(
-  <ThemeProvider>
-    <App />
-  </ThemeProvider>
-);
+boot();

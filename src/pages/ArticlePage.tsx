@@ -30,7 +30,7 @@ import {
   getBlogArticleVersion,
   getBlogHomeUrl,
 } from '../registry/blogArticleMeta';
-import { loadBlogArticleById } from '../registry/blogArticleLoader';
+import { getCachedArticleById, loadBlogArticleById } from '../registry/blogArticleLoader';
 import type { BlogArticleLocaleVersion } from '../types/blog';
 import type { ArticleLocaleOverride } from '../locales/types';
 import type { BreadcrumbItem, ToolDefinition, ToolFAQ } from '../types/tool';
@@ -69,11 +69,25 @@ export function ArticlePage() {
   // registry (registry split, perf fix Wed 2026-11-18). For non-EN
   // locales the full version comes from the loaded locale data
   // (articleOverrides) and needs no extra fetch.
-  const [enFull, setEnFull] = useState<BlogArticleLocaleVersion | null>(null);
+  // CLS fix (Wed 2026-11-18): when the boot gate (src/boot/preloadRoute.ts)
+  // already loaded this article's chunk, start with the full version so
+  // the first render has the body — no loading placeholder, no
+  // placeholder -> body swap (that swap measured a 0.381 grid shift).
+  const [enFull, setEnFull] = useState<BlogArticleLocaleVersion | null>(() =>
+    locale === 'en' && article ? getCachedArticleById(article.id) : null
+  );
   const [enFullFailed, setEnFullFailed] = useState(false);
   const [enFullRetry, setEnFullRetry] = useState(0);
   useEffect(() => {
     if (locale !== 'en' || !article) return;
+    const cached = getCachedArticleById(article.id);
+    if (cached) {
+      // Already loaded (boot gate preloaded it): adopt it WITHOUT
+      // resetting to null first — the first render already has the body.
+      // setEnFull with the identical reference is a no-op re-render.
+      setEnFull(cached);
+      return;
+    }
     let cancelled = false;
     setEnFull(null);
     setEnFullFailed(false);
