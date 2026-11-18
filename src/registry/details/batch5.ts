@@ -1268,12 +1268,12 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         title: 'Edit or sanitize fields',
         description:
-          'Update Title, Author, Subject, and Keywords for clarity, or click Strip All Metadata Fields for privacy.',
+          'Update Title, Author, Subject, and Keywords for clarity, or click Clear Editable Fields for privacy.',
       },
       {
-        title: 'Strip all metadata for privacy',
+        title: 'Clear editable fields for privacy',
         description:
-          'Use Strip All Metadata Fields before sharing a file publicly to clear author names and software versions in one click.',
+          'Use Clear Editable Fields before sharing a file publicly to clear author names and software versions in one click.',
       },
       {
         title: 'Save and download',
@@ -1290,13 +1290,13 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         title: 'Anonymizing a PDF exported from Word or Illustrator',
         input: 'Author: "John Doe" · Creator: "Microsoft® Word 2021"',
-        output: 'Click Strip All Metadata Fields → Save clean PDF with blank Author/Creator',
+        output: 'Click Clear Editable Fields → Save clean PDF with blank Author/Creator',
         explanation: 'Removes employee names and software versions before public web hosting.',
       },
     ],
     benefits: [
       'Exposes hidden author names and software strings browsers show in tabs and properties',
-      'One-click Strip All Metadata Fields clears all 6 standard Info dictionary tags',
+      'One-click Clear Editable Fields clears all 6 standard Info dictionary tags',
       'Updates SEO-relevant Title, Subject, and comma-separated Keywords cleanly',
       'Displays exact PDF point dimensions (`width × height pt`) alongside page count',
     ],
@@ -1343,7 +1343,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
           'Yes. Clear just the Author field and save, leaving the Title, Subject, and other tags untouched.',
       },
       {
-        question: 'What does "Strip All Metadata Fields" do?',
+        question: 'What does "Clear Editable Fields" do?',
         answer:
           'It clears all six standard Info dictionary tags at once, removing author names, software strings, and titles before you share the file.',
       },

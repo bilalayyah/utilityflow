@@ -32,8 +32,8 @@ function calculateTotal(items, taxRate = 0.08) {
 function processJavaScript(code: string, mode: 'minify' | 'beautify', indentWidth: number): string {
   if (!code.trim()) return '';
 
-  // Tokenize preserving strings, template literals, and comments
-  const tokens: Array<{ type: 'code' | 'str' | 'comment' | 'ws'; value: string }> = [];
+  // Tokenize preserving strings, template literals, comments, and regex literals
+  const tokens: Array<{ type: 'code' | 'str' | 'comment' | 'regex' | 'ws'; value: string }> = [];
   let i = 0;
 
   while (i < code.length) {
@@ -84,12 +84,60 @@ function processJavaScript(code: string, mode: 'minify' | 'beautify', indentWidt
       continue;
     }
 
+    if (ch === '/' && next !== '/' && next !== '*') {
+      // Not a comment: a regex literal or a division operator. A '/'
+      // starts a regex when it follows an operator/keyword that expects a
+      // value (or the start of the input); otherwise it is division.
+      let prevText = '';
+      for (let k = tokens.length - 1; k >= 0; k -= 1) {
+        const prevTok = tokens[k];
+        if (prevTok.type === 'ws' || prevTok.type === 'comment') continue;
+        prevText = prevTok.value;
+        break;
+      }
+      const lastCh = prevText[prevText.length - 1] ?? '';
+      const isRegexStart =
+        !prevText ||
+        /[=(:,![&|?;{}]/.test(lastCh) ||
+        prevText.endsWith('=>') ||
+        /(?:^|[^a-zA-Z0-9_$])(?:return|typeof|case|delete|void|in|of|instanceof|new|yield|await)$/.test(
+          prevText
+        );
+      if (isRegexStart) {
+        let end = i + 1;
+        let inClass = false;
+        while (end < code.length) {
+          const c = code[end];
+          if (c === '\\') {
+            end += 2;
+            continue;
+          }
+          if (c === '\n') break;
+          if (c === '[') inClass = true;
+          else if (c === ']') inClass = false;
+          else if (c === '/' && !inClass) {
+            end += 1;
+            break;
+          }
+          end += 1;
+        }
+        while (end < code.length && /[a-z]/i.test(code[end])) end += 1;
+        tokens.push({ type: 'regex', value: code.slice(i, end) });
+        i = end;
+        continue;
+      }
+      if (next === '=') {
+        tokens.push({ type: 'code', value: '/=' });
+        i += 2;
+        continue;
+      }
+      tokens.push({ type: 'code', value: '/' });
+      i += 1;
+      continue;
+    }
+
     let end = i + 1;
-    while (
-      end < code.length &&
-      !/[\s"'`]/.test(code[end]) &&
-      !(code[end] === '/' && (code[end + 1] === '/' || code[end + 1] === '*'))
-    ) {
+    while (end < code.length && !/[\s"'`/]/.test(code[end])) {
       end += 1;
     }
     tokens.push({ type: 'code', value: code.slice(i, end) });
@@ -110,7 +158,7 @@ function processJavaScript(code: string, mode: 'minify' | 'beautify', indentWidt
         }
         continue;
       }
-      if (tok.type === 'str') {
+      if (tok.type === 'str' || tok.type === 'regex') {
         out += tok.value;
         continue;
       }
@@ -151,7 +199,7 @@ function processJavaScript(code: string, mode: 'minify' | 'beautify', indentWidt
       continue;
     }
 
-    if (tok.type === 'comment' || tok.type === 'str') {
+    if (tok.type === 'comment' || tok.type === 'str' || tok.type === 'regex') {
       appendIndent();
       out += tok.value;
       if (tok.type === 'comment' && tok.value.startsWith('//')) {

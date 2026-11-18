@@ -539,8 +539,12 @@ function blogHomeSeo(t: LocaleData['uiStrings'], locale: LocaleCode): SeoHeadPro
 
 /**
  * Blog category — mirrors BlogCategoryPage.tsx SeoHead call.
- * The title is built from the localized category name (same template as
- * the page: "<Category> Guides | UtilityFlow Blog").
+ * The title is built from the localized category name plus the localized
+ * word for "Guides" (t.blog.categoryGuidesWord): "<Category> <Guides> |
+ * UtilityFlow Blog". The description is the category's dedicated SEO
+ * description (category.seo.description), not the longDescription shown
+ * on the page — the long text is 190–338 chars, the SEO descriptions are
+ * all 129–160 chars (Phase 8 fix F1).
  */
 function blogCategorySeo(
   categoryId: string,
@@ -564,8 +568,8 @@ function blogCategorySeo(
     description: category.longDescription,
   };
   return {
-    title: `${category.name} Guides | UtilityFlow Blog`,
-    description: category.longDescription,
+    title: `${category.name} ${t.blog.categoryGuidesWord} | UtilityFlow Blog`,
+    description: category.seo.description,
     canonicalPath,
     ogType: 'website',
     structuredData: [collectionSchema, buildBreadcrumbSchema(breadcrumbs)],
@@ -606,6 +610,7 @@ function articleSeo(
     '@type': 'BlogPosting',
     headline: version.title,
     description: version.description,
+    inLanguage: localeTag(locale),
     datePublished: article.publishedAt,
     ...(article.updatedAt ? { dateModified: article.updatedAt } : {}),
     author: { '@type': 'Organization', name: 'UtilityFlow' },

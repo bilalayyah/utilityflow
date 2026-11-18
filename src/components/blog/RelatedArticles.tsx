@@ -1,11 +1,11 @@
 import { useLocale } from '../../locales/LocaleContext';
 import type { LocaleCode } from '../../locales/config';
-import { getRelatedBlogArticles } from '../../registry/blogArticles';
-import type { BlogArticle } from '../../types/blog';
+import { getRelatedBlogArticles } from '../../registry/blogArticleMeta';
+import type { BlogArticleMeta } from '../../types/blog';
 import { BlogCard } from './BlogCard';
 
 interface RelatedArticlesProps {
-  article: BlogArticle;
+  article: BlogArticleMeta;
   locale: LocaleCode;
 }
 

@@ -2375,7 +2375,7 @@ export const ptComponentStrings: Record<string, ComponentLocaleData> = {
       labelProducer: 'Produtor do PDF',
       saving: 'Salvando PDF...',
       saveBtn: 'Salvar metadados e baixar PDF',
-      stripBtn: 'Remover todos os campos de metadados',
+      stripBtn: 'Limpar campos editáveis',
     },
   },
   'pdf-page-rotator': {

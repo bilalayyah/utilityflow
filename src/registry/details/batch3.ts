@@ -2251,7 +2251,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'Where do fetched reference rates come from?',
         answer:
-          'When you click "Fetch ECB Reference Rate", your browser requests the latest European Central Bank reference rate published by api.frankfurter.app. Reference rates are mid-market benchmarks and differ slightly from retail bank quotes.',
+          'When you click "Fetch ECB Reference Rate", your browser requests the latest European Central Bank reference rate published by api.frankfurter.dev. Reference rates are mid-market benchmarks and differ slightly from retail bank quotes.',
       },
       {
         question: 'Does this work if I am offline or the external API is blocked?',

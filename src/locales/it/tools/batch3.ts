@@ -544,7 +544,7 @@ export const IT_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
     shortDescription:
       'Converti le valute con il tuo tasso di cambio manuale esatto o tassi di riferimento BCE facoltativi, con calcolo delle commissioni di cambio.',
     apiNotice:
-      'Richiede un’API esterna per i tassi di cambio in tempo reale e non usa mai tassi offline inventati. Usa per impostazione predefinita il tasso di cambio inserito manualmente (1,0000), oppure fai clic su «Recupera il tasso di riferimento BCE» per richiedere i tassi a api.frankfurter.app.',
+      'Richiede un’API esterna per i tassi di cambio in tempo reale e non usa mai tassi offline inventati. Usa per impostazione predefinita il tasso di cambio inserito manualmente (1,0000), oppure fai clic su «Recupera il tasso di riferimento BCE» per richiedere i tassi a api.frankfurter.dev.',
     keywords: [
       'calcolatrice di valute',
       'calcolatrice tasso di cambio',

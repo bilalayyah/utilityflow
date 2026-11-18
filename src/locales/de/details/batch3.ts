@@ -554,7 +554,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
     useCases: ["Prüfen, wie viel eine internationale Überweisung nach Bankgebühr kostet", "Rechnungsbeträge zu einem festen Vertragskurs berechnen", "Kreditkarten-Gebühren von 3 % für Auslandstransaktionen mit gebührenfreien Karten vergleichen", "Schnelle Referenz-Umrechnungstabellen für mehrere Beträge auswerten"],
     faqs: [
       { question: "Warum startet der Wechselkurs bei 1,0000 statt mit Live-Kursen?", answer: "Das Tool erfindet keine Kurse: Es startet mit dem neutralen Kurs 1,0000, bis Sie Ihren eigenen Kurs eingeben oder einen EZB-Referenzkurs abrufen." },
-      { question: "Woher stammen die abgerufenen Referenzkurse?", answer: "Sie stammen von der Europäischen Zentralbank über die Frankfurter API (api.frankfurter.app) und werden nur auf Ihren Klick abgerufen." },
+      { question: "Woher stammen die abgerufenen Referenzkurse?", answer: "Sie stammen von der Europäischen Zentralbank über die Frankfurter API (api.frankfurter.dev) und werden nur auf Ihren Klick abgerufen." },
       { question: "Funktioniert das Tool offline oder wenn die externe API blockiert ist?", answer: "Ja. Mit Ihrem manuell eingegebenen Kurs funktioniert die Umrechnung vollständig offline; nur der EZB-Abruf braucht Internet." },
       { question: "Wie rechnet der Währungsrechner mein Geld um?", answer: "Er multipliziert den Betrag mit Ihrem Wechselkurs und zieht optional die angegebene Gebühr in Prozent ab." },
       { question: "Welchen Wechselkurs soll ich eingeben?", answer: "Nutzen Sie den Kurs, den Ihre Bank, Ihr Broker oder Ihre Rechnung nennt – nicht einen allgemeinen Online-Kurs." },

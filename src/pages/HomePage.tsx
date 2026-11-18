@@ -416,7 +416,7 @@ export function HomePage() {
 
         {/* Live Tools Grid (if any registered) */}
         {filteredTools.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10 [&>*]:[content-visibility:auto] [&>*]:[contain-intrinsic-size:auto_280px]">
             {filteredTools.map((tool) => (
               <ToolCard key={tool.id} tool={tool} />
             ))}

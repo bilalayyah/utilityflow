@@ -544,7 +544,7 @@ export const FR_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
     shortDescription:
       'Convertissez les devises avec votre taux de change manuel exact ou des taux de référence BCE facultatifs, avec calcul des frais de change.',
     apiNotice:
-      'Nécessite une API externe pour les taux de change en direct et n’utilise jamais de taux hors ligne inventés. Utilise par défaut le taux de change saisi manuellement (1,0000), ou cliquez sur « Récupérer le taux de référence BCE » pour demander les taux à api.frankfurter.app.',
+      'Nécessite une API externe pour les taux de change en direct et n’utilise jamais de taux hors ligne inventés. Utilise par défaut le taux de change saisi manuellement (1,0000), ou cliquez sur « Récupérer le taux de référence BCE » pour demander les taux à api.frankfurter.dev.',
     keywords: [
       'calculatrice de devises',
       'calculatrice de taux de change',

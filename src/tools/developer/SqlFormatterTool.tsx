@@ -147,6 +147,13 @@ function tokenizeSql(sql: string): Array<{ type: 'str' | 'comment' | 'word' | 'p
       continue;
     }
 
+    const twoChar = sql.slice(i, i + 2);
+    if (['>=', '<=', '!=', '<>', '||', '=='].includes(twoChar)) {
+      tokens.push({ type: 'punct', value: twoChar });
+      i += 2;
+      continue;
+    }
+
     tokens.push({ type: 'punct', value: ch });
     i += 1;
   }

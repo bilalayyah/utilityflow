@@ -43,6 +43,30 @@ function truncateToWidth(text: string, maxChars: number): string {
   return `${text.slice(0, Math.max(0, maxChars - 1)).trimEnd()}…`;
 }
 
+function truncateToPx(text: string, maxPx: number, font: string): string {
+  if (measureTextWidthPx(text, font) <= maxPx) return text;
+  let lo = 0;
+  let hi = text.length;
+  while (lo < hi) {
+    const mid = Math.ceil((lo + hi) / 2);
+    const candidate = `${text.slice(0, mid).trimEnd()}…`;
+    if (measureTextWidthPx(candidate, font) <= maxPx) {
+      lo = mid;
+    } else {
+      hi = mid - 1;
+    }
+  }
+  return `${text.slice(0, lo).trimEnd()}…`;
+}
+
+function escAttr(value: string): string {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
 export default function SerpSnippetPreviewTool() {
   const { t } = useLocale();
   const s = useComponentStrings('serp-snippet-preview', STRINGS_EN);
@@ -80,7 +104,7 @@ export default function SerpSnippetPreviewTool() {
       descOver: description.length > descCapChars,
       host,
       breadcrumbTrail,
-      displayedTitle: truncateToWidth(title, device === 'desktop' ? 62 : 56),
+      displayedTitle: truncateToPx(title, titleCapPx, '400 20px Arial, sans-serif'),
       displayedDesc: truncateToWidth(description, descCapChars),
     };
   }, [title, url, description, device]);
@@ -101,7 +125,7 @@ export default function SerpSnippetPreviewTool() {
     );
   };
 
-  const headSnippet = `<title>${title.trim()}</title>\n<meta name="description" content="${description.trim()}" />`;
+  const headSnippet = `<title>${escAttr(title.trim())}</title>\n<meta name="description" content="${escAttr(description.trim())}" />`;
 
   return (
     <div className="space-y-6">

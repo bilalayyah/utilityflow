@@ -277,6 +277,7 @@ export const idStrings: UiStrings = {
     share: 'Bagikan',
     tryTool: 'Coba alatnya',
     guidesInCategory: 'Panduan dalam kategori ini',
+    categoryGuidesWord: 'Panduan',
     noArticlesYet: 'Belum ada artikel',
     noArticlesYetDescription: 'Panduan untuk bagian ini sedang disiapkan. Silakan kembali lagi nanti.',
     backToBlog: 'Kembali ke blog',
@@ -324,7 +325,7 @@ export const idStrings: UiStrings = {
       'Pelajari cara UtilityFlow membangun utilitas browser yang mengutamakan privasi dalam tujuh kategori tanpa akun, kekacauan, atau unggahan data yang tidak perlu.',
     title: 'Tentang UtilityFlow',
     intro:
-      'UtilityFlow adalah platform web independen yang membangun 85 utilitas browser yang fokus dan andal untuk pekerjaan digital sehari-hari.',
+      'UtilityFlow adalah platform web independen yang membangun 88 utilitas yang fokus dan andal untuk pekerjaan digital sehari-hari.',
     whyTitle: 'Mengapa Kami Membangun UtilityFlow',
     whyP1:
       'Tugas online rutin—menghitung kata, memvalidasi JSON, memeriksa batas karakter, menghitung pembayaran pinjaman, atau mengompresi gambar—sering memaksa orang ke situs lambat yang penuh overlay mengganggu, unduhan membingungkan, atau pendaftaran wajib.',
@@ -456,6 +457,7 @@ export const idStrings: UiStrings = {
         paragraphs: [
           'Kami dapat menampilkan iklan dari jaringan periklanan pihak ketiga (seperti Google AdSense) untuk mendukung akses gratis ke alat kami. Vendor pihak ketiga, termasuk Google, dapat menggunakan cookie atau web beacon untuk menayangkan iklan berdasarkan kunjungan pengguna sebelumnya ke situs web ini atau situs web lain.',
           'Anda dapat memilih untuk tidak menerima iklan yang dipersonalisasi dengan mengunjungi Pengaturan Iklan Google atau mengelola preferensi cookie langsung di pengaturan browser Anda.',
+          'Kami juga menggunakan Google Analytics 4 untuk memahami, secara agregat, bagaimana situs digunakan; layanan ini hanya berjalan setelah Anda menerima cookie di banner.',
         ],
       },
       {
@@ -474,7 +476,7 @@ export const idStrings: UiStrings = {
       {
         title: '7. Hak dan Pilihan Anda',
         paragraphs: [
-          'Anda dapat menonaktifkan iklan yang dipersonalisasi melalui Google Ads Settings atau halaman opt-out AboutAds.info yang ditautkan di bagian 4, dan Anda dapat memblokir atau menghapus cookie di pengaturan browser Anda kapan saja. Jika Anda pernah memposting komentar, Anda dapat meminta penghapusannya dengan menghubungi kami. Karena alat kami berjalan di browser Anda dan kami tidak menyimpan akun atau profil, tidak ada berkas data pribadi yang dapat diunduh atau dikoreksi — tetapi pertanyaan apa pun tentang data Anda akan dijawab jika Anda menulis kepada kami.',
+          'Anda dapat menonaktifkan iklan yang dipersonalisasi melalui Google Ads Settings, dan Anda dapat memblokir atau menghapus cookie di pengaturan browser Anda kapan saja. Jika Anda pernah memposting komentar, Anda dapat meminta penghapusannya dengan menghubungi kami. Karena alat kami berjalan di browser Anda dan kami tidak menyimpan akun atau profil, tidak ada berkas data pribadi yang dapat diunduh atau dikoreksi — tetapi pertanyaan apa pun tentang data Anda akan dijawab jika Anda menulis kepada kami.',
         ],
       },
       {
@@ -496,7 +498,6 @@ export const idStrings: UiStrings = {
     contactLink: 'Halaman kontak',
     contactMiddle: 'atau email',
     optOutGoogleAds: 'Google Ads Settings',
-    optOutAboutAds: 'Opt-out AboutAds.info',
   },
   terms: {
     seoTitle: 'Syarat Layanan – Ketentuan Alat UtilityFlow | UtilityFlow',
@@ -541,7 +542,7 @@ export const idStrings: UiStrings = {
       {
         title: '7. Layanan Pihak Ketiga',
         paragraphs: [
-          'Beberapa fitur bergantung pada layanan pihak ketiga yang independen: ketiga alat AI mengirim teks ke Groq untuk diproses, formulir kontak dikirimkan oleh FormSubmit, situs dihosting di Cloudflare, dan iklan disajikan oleh Google AdSense. Masing-masing layanan ini memiliki syarat dan kebijakan privasinya sendiri, dan penggunaan Anda atas layanan tersebut diatur oleh dokumen-dokumen itu. UtilityFlow tidak bertanggung jawab atas ketersediaan atau praktik layanan pihak ketiga.',
+          'Beberapa fitur bergantung pada layanan pihak ketiga yang independen: ketiga alat AI mengirim teks ke Groq untuk diproses, formulir kontak dikirimkan oleh FormSubmit, situs dihosting di Cloudflare, Kalkulator Mata Uang mengambil kurs tukar langsung dari Frankfurter, dan iklan disajikan oleh Google AdSense. Masing-masing layanan ini memiliki syarat dan kebijakan privasinya sendiri, dan penggunaan Anda atas layanan tersebut diatur oleh dokumen-dokumen itu. UtilityFlow tidak bertanggung jawab atas ketersediaan atau praktik layanan pihak ketiga.',
         ],
       },
       {

@@ -2375,7 +2375,7 @@ export const idComponentStrings: Record<string, ComponentLocaleData> = {
       labelProducer: 'Produsen PDF',
       saving: 'Menyimpan PDF...',
       saveBtn: 'Simpan Metadata & Unduh PDF',
-      stripBtn: 'Hapus Semua Bidang Metadata',
+      stripBtn: 'Hapus Bidang yang Dapat Diedit',
     },
   },
   'pdf-page-rotator': {

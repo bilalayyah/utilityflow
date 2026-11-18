@@ -108,7 +108,6 @@ export function ThemeToggle({ variant = 'dropdown', onSelect }: ThemeToggleProps
           }`}
           aria-hidden="true"
         />
-        <span className="hidden lg:inline whitespace-nowrap">{activeOptionLabel}</span>
         <ChevronDown
           className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-150 ${
             open ? 'rotate-180' : ''

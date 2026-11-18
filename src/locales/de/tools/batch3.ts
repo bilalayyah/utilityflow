@@ -230,6 +230,6 @@ export const DE_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
       schemaApplicationCategory: "FinanceApplication",
     },
     intro: "Rechnen Sie zwischen wichtigen Weltwährungen transparent mit dem exakten Wechselkurs Ihrer Bank, Ihres Brokers oder Ihrer Rechnung um – plus optionalem Abzug von Wechselgebühren, inverser Kursberechnung und EZB-Referenzkurs auf Abruf.",
-    apiNotice: "Erfordert eine externe API für Live-Wechselkurse und nutzt nie erfundene Offline-Kurse. Verwendet standardmäßig Ihren manuell eingegebenen Wechselkurs (1,0000) oder klicken Sie auf „EZB-Referenzkurs abrufen“, um Kurse von api.frankfurter.app anzufordern.",
+    apiNotice: "Erfordert eine externe API für Live-Wechselkurse und nutzt nie erfundene Offline-Kurse. Verwendet standardmäßig Ihren manuell eingegebenen Wechselkurs (1,0000) oder klicken Sie auf „EZB-Referenzkurs abrufen“, um Kurse von api.frankfurter.dev anzufordern.",
   },
 };

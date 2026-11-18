@@ -2375,7 +2375,7 @@ export const ruComponentStrings: Record<string, ComponentLocaleData> = {
       labelProducer: 'Производитель PDF',
       saving: 'Сохранение PDF...',
       saveBtn: 'Сохранить метаданные и скачать PDF',
-      stripBtn: 'Удалить все поля метаданных',
+      stripBtn: 'Очистить редактируемые поля',
     },
   },
   'pdf-page-rotator': {

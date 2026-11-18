@@ -277,6 +277,7 @@ export const frStrings: UiStrings = {
     share: 'Partager',
     tryTool: 'Essayer l’outil',
     guidesInCategory: 'Guides de cette catégorie',
+    categoryGuidesWord: 'Guides',
     noArticlesYet: 'Aucun article pour le moment',
     noArticlesYetDescription: 'Les guides de cette section sont en cours de préparation. Revenez bientôt.',
     backToBlog: 'Retour au blog',
@@ -324,7 +325,7 @@ export const frStrings: UiStrings = {
       'Découvrez comment UtilityFlow crée des utilitaires respectueux de la vie privée pour le navigateur, dans sept catégories, sans compte ni publicité intrusive.',
     title: 'À propos de UtilityFlow',
     intro:
-      'UtilityFlow est une plateforme web indépendante qui construit 85 utilitaires navigateur ciblés et fiables pour le travail numérique du quotidien.',
+      'UtilityFlow est une plateforme web indépendante qui construit 88 utilitaires ciblés et fiables pour le travail numérique du quotidien.',
     whyTitle: 'Pourquoi avons-nous créé UtilityFlow',
     whyP1:
       'Les tâches en ligne courantes — compter des mots, valider du JSON, vérifier des limites de caractères, calculer des mensualités de prêt ou compresser une image — obligent souvent à passer par des sites lents, remplis de fenêtres intrusives, de téléchargements confus ou d’inscriptions obligatoires.',
@@ -456,6 +457,7 @@ export const frStrings: UiStrings = {
         paragraphs: [
           'Nous pouvons afficher des publicités de réseaux publicitaires tiers (comme Google AdSense) pour financer l’accès gratuit à nos outils. Les fournisseurs tiers, y compris Google, peuvent utiliser des cookies ou des balises web pour diffuser des annonces en fonction des visites précédentes de l’utilisateur sur ce site ou sur d’autres sites.',
           'Vous pouvez refuser la publicité personnalisée en visitant les paramètres des annonces Google ou en gérant les préférences de cookies directement dans les paramètres de votre navigateur.',
+          'Nous utilisons également Google Analytics 4 pour comprendre, de façon agrégée, comment le site est utilisé ; il ne s’active que si vous acceptez les cookies dans la bannière.',
         ],
       },
       {
@@ -474,7 +476,7 @@ export const frStrings: UiStrings = {
       {
         title: '7. Vos droits et vos choix',
         paragraphs: [
-          'Vous pouvez désactiver la publicité personnalisée via les paramètres des annonces Google ou la page de refus d’AboutAds.info mentionnée dans la section 4, et vous pouvez bloquer ou supprimer les cookies dans les paramètres de votre navigateur à tout moment. Si vous avez publié un commentaire, vous pouvez demander sa suppression en nous contactant. Comme nos outils fonctionnent dans votre navigateur et que nous ne conservons ni comptes ni profils, il n’existe aucun fichier de données personnelles à télécharger ou à corriger — mais toute question sur vos données recevra une réponse si vous nous écrivez.',
+          'Vous pouvez désactiver la publicité personnalisée via les paramètres des annonces Google, et vous pouvez bloquer ou supprimer les cookies dans les paramètres de votre navigateur à tout moment. Si vous avez publié un commentaire, vous pouvez demander sa suppression en nous contactant. Comme nos outils fonctionnent dans votre navigateur et que nous ne conservons ni comptes ni profils, il n’existe aucun fichier de données personnelles à télécharger ou à corriger — mais toute question sur vos données recevra une réponse si vous nous écrivez.',
         ],
       },
       {
@@ -496,7 +498,6 @@ export const frStrings: UiStrings = {
     contactLink: 'page Contact',
     contactMiddle: 'ou par e-mail',
     optOutGoogleAds: 'Paramètres des annonces Google',
-    optOutAboutAds: 'Refus de publicité sur AboutAds.info',
   },
   terms: {
     seoTitle: 'Conditions d’utilisation | Outils en ligne UtilityFlow',
@@ -541,7 +542,7 @@ export const frStrings: UiStrings = {
       {
         title: '7. Services tiers',
         paragraphs: [
-          'Certaines fonctionnalités reposent sur des services tiers indépendants : les trois outils IA envoient du texte à Groq pour traitement, le formulaire de contact est transmis par FormSubmit, le site est hébergé sur Cloudflare et la publicité est diffusée par Google AdSense. Chacun de ces services possède ses propres conditions et sa propre politique de confidentialité, et votre utilisation est régie par ces documents. UtilityFlow n’est pas responsable de la disponibilité ni des pratiques des services tiers.',
+          'Certaines fonctionnalités reposent sur des services tiers indépendants : les trois outils IA envoient du texte à Groq pour traitement, le formulaire de contact est transmis par FormSubmit, le site est hébergé sur Cloudflare, le convertisseur de devises récupère les taux de change en direct auprès de Frankfurter et la publicité est diffusée par Google AdSense. Chacun de ces services possède ses propres conditions et sa propre politique de confidentialité, et votre utilisation est régie par ces documents. UtilityFlow n’est pas responsable de la disponibilité ni des pratiques des services tiers.',
         ],
       },
       {

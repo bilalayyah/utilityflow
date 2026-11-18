@@ -233,6 +233,6 @@ export const ID_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
       schemaApplicationCategory: "FinanceApplication",
     },
     intro: "Konversi antar mata uang utama dunia secara transparan dengan kurs tepat dari bank, broker, atau faktur Anda — ditambah pengurangan biaya konversi opsional, perhitungan kurs terbalik, dan kurs referensi ECB sesuai permintaan.",
-    apiNotice: "Membutuhkan API eksternal untuk kurs live dan tidak pernah menggunakan kurs offline yang dibuat-buat. Menggunakan kurs yang Anda masukkan secara manual secara default (1,0000), atau klik “Ambil Kurs Referensi ECB” untuk meminta kurs dari api.frankfurter.app.",
+    apiNotice: "Membutuhkan API eksternal untuk kurs live dan tidak pernah menggunakan kurs offline yang dibuat-buat. Menggunakan kurs yang Anda masukkan secara manual secara default (1,0000), atau klik “Ambil Kurs Referensi ECB” untuk meminta kurs dari api.frankfurter.dev.",
   },
 };

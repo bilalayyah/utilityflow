@@ -277,6 +277,7 @@ export const deStrings: UiStrings = {
     share: 'Teilen',
     tryTool: 'Tool ausprobieren',
     guidesInCategory: 'Anleitungen in dieser Kategorie',
+    categoryGuidesWord: 'Anleitungen',
     noArticlesYet: 'Noch keine Artikel',
     noArticlesYetDescription: 'Anleitungen für diesen Bereich sind in Arbeit. Schauen Sie bald wieder vorbei.',
     backToBlog: 'Zurück zum Blog',
@@ -324,7 +325,7 @@ export const deStrings: UiStrings = {
       'Erfahren Sie, wie UtilityFlow schnelle, datenschutzfreundliche Browser-Tools in sieben Kategorien entwickelt – ohne Konten, Werbung und unnötige Daten-Uploads.',
     title: 'Über UtilityFlow',
     intro:
-      'UtilityFlow ist eine unabhängige Webplattform, die 85 fokussierte, zuverlässige Browser-Utilities für die alltägliche digitale Arbeit entwickelt.',
+      'UtilityFlow ist eine unabhängige Webplattform, die 88 fokussierte, zuverlässige Utilities für die alltägliche digitale Arbeit entwickelt.',
     whyTitle: 'Warum wir UtilityFlow gebaut haben',
     whyP1:
       'Routinemäßige Online-Aufgaben – Wörter zählen, JSON validieren, Zeichenlimits prüfen, Kreditraten berechnen oder ein Bild komprimieren – zwingen Nutzer oft auf langsame Seiten voller aufdringlicher Overlays, verwirrender Downloads oder Pflichtregistrierungen.',
@@ -457,6 +458,7 @@ export const deStrings: UiStrings = {
         paragraphs: [
           'Wir zeigen möglicherweise Werbung von Werbenetzwerken Dritter (wie Google AdSense), um den kostenlosen Zugang zu unseren Tools zu finanzieren. Drittanbieter, einschließlich Google, können Cookies oder Web-Beacons verwenden, um Werbung basierend auf früheren Besuchen des Nutzers auf dieser oder anderen Websites auszuliefern.',
           'Sie können personalisierte Werbung deaktivieren, indem Sie die Google-Anzeigeneinstellungen besuchen oder die Cookie-Einstellungen direkt in Ihren Browsereinstellungen verwalten.',
+          'Wir verwenden außerdem Google Analytics 4, um aggregiert zu verstehen, wie die Website genutzt wird; es läuft nur, wenn Sie Cookies im Banner akzeptieren.',
         ],
       },
       {
@@ -475,7 +477,7 @@ export const deStrings: UiStrings = {
       {
         title: '7. Ihre Rechte und Wahlmöglichkeiten',
         paragraphs: [
-          'Sie können personalisierte Werbung über die Google-Anzeigeneinstellungen oder die Abmeldeseite von AboutAds.info deaktivieren, die in Abschnitt 4 verlinkt ist, und Sie können Cookies jederzeit in Ihren Browsereinstellungen blockieren oder löschen. Wenn Sie einen Kommentar gepostet haben, können Sie dessen Entfernung verlangen, indem Sie uns kontaktieren. Da unsere Tools in Ihrem Browser laufen und wir keine Konten oder Profile führen, gibt es keine persönliche Datendatei zum Herunterladen oder Korrigieren – aber jede Frage zu Ihren Daten wird beantwortet, wenn Sie uns schreiben.',
+          'Sie können personalisierte Werbung über die Google-Anzeigeneinstellungen deaktivieren, und Sie können Cookies jederzeit in Ihren Browsereinstellungen blockieren oder löschen. Wenn Sie einen Kommentar gepostet haben, können Sie dessen Entfernung verlangen, indem Sie uns kontaktieren. Da unsere Tools in Ihrem Browser laufen und wir keine Konten oder Profile führen, gibt es keine persönliche Datendatei zum Herunterladen oder Korrigieren – aber jede Frage zu Ihren Daten wird beantwortet, wenn Sie uns schreiben.',
         ],
       },
       {
@@ -497,7 +499,6 @@ export const deStrings: UiStrings = {
     contactLink: 'Kontaktseite',
     contactMiddle: 'oder per E-Mail',
     optOutGoogleAds: 'Google Ads Settings',
-    optOutAboutAds: 'AboutAds.info – Abmeldung',
   },
   terms: {
     seoTitle: 'Nutzungsbedingungen – Regeln für Online-Tools | UtilityFlow',
@@ -541,7 +542,7 @@ export const deStrings: UiStrings = {
       {
         title: '7. Dienste Dritter',
         paragraphs: [
-          'Einige Funktionen beruhen auf unabhängigen Diensten Dritter: Die drei KI-Tools senden Text zur Verarbeitung an Groq, das Kontaktformular wird von FormSubmit zugestellt, die Website wird auf Cloudflare gehostet und Werbung wird von Google AdSense ausgeliefert. Jeder dieser Dienste hat eigene Bedingungen und eine eigene Datenschutzerklärung, und Ihre Nutzung dieser Dienste unterliegt diesen Dokumenten. UtilityFlow ist nicht verantwortlich für die Verfügbarkeit oder die Praktiken von Diensten Dritter.',
+          'Einige Funktionen beruhen auf unabhängigen Diensten Dritter: Die drei KI-Tools senden Text zur Verarbeitung an Groq, das Kontaktformular wird von FormSubmit zugestellt, die Website wird auf Cloudflare gehostet, der Währungsrechner ruft Live-Wechselkurse von Frankfurter ab und Werbung wird von Google AdSense ausgeliefert. Jeder dieser Dienste hat eigene Bedingungen und eine eigene Datenschutzerklärung, und Ihre Nutzung dieser Dienste unterliegt diesen Dokumenten. UtilityFlow ist nicht verantwortlich für die Verfügbarkeit oder die Praktiken von Diensten Dritter.',
         ],
       },
       {

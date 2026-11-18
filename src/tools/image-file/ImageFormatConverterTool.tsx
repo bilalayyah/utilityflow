@@ -19,6 +19,7 @@ const STRINGS_EN = {
     converting: 'Converting...',
     reconvert: 'Re-convert',
     selectFilesError: 'Select one or more image files (PNG, JPG, WebP, SVG, GIF).',
+    filesTooLarge: 'Skipped {names} — files over the 25 MB per-file limit are not converted.',
     couldNotDecode: 'Could not decode "{name}".',
     canvasUnavailable: 'Canvas 2D unavailable.',
     conversionFailed: 'Conversion failed for "{name}".',
@@ -64,10 +65,15 @@ export default function ImageFormatConverterTool() {
 
     const ext = mime === 'image/png' ? 'png' : mime === 'image/jpeg' ? 'jpg' : 'webp';
     const nextResults: ConvertedItem[] = [];
+    const skipped: string[] = [];
 
     try {
       for (let i = 0; i < files.length; i += 1) {
         const file = files[i];
+        if (file.size > 25 * 1024 * 1024) {
+          skipped.push(file.name);
+          continue;
+        }
         const srcUrl = URL.createObjectURL(file);
         try {
           const img = await new Promise<HTMLImageElement>((resolve, reject) => {
@@ -113,6 +119,9 @@ export default function ImageFormatConverterTool() {
         prev.forEach((it) => URL.revokeObjectURL(it.outputUrl));
         return nextResults;
       });
+      if (skipped.length > 0) {
+        setError(s.filesTooLarge.replace('{names}', skipped.join(', ')));
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : s.batchFailed);
     } finally {
@@ -127,8 +136,17 @@ export default function ImageFormatConverterTool() {
       setError(s.selectFilesError);
       return;
     }
-    setSourceFiles(valid);
-    await convertBatch(valid, targetMime, quality, jpgFillColor);
+    const oversized = valid.filter((f) => f.size > 25 * 1024 * 1024);
+    const withinLimit = valid.filter((f) => f.size <= 25 * 1024 * 1024);
+    if (withinLimit.length === 0) {
+      setError(s.filesTooLarge.replace('{names}', oversized.map((f) => f.name).join(', ')));
+      return;
+    }
+    setSourceFiles(withinLimit);
+    await convertBatch(withinLimit, targetMime, quality, jpgFillColor);
+    if (oversized.length > 0) {
+      setError(s.filesTooLarge.replace('{names}', oversized.map((f) => f.name).join(', ')));
+    }
   };
 
   return (

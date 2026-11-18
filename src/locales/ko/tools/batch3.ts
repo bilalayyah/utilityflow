@@ -234,6 +234,6 @@ export const KO_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
       schemaApplicationCategory: "FinanceApplication",
     },
     intro: "은행, 중개업체, 청구서에서 제시한 정확한 환율을 사용해 세계 주요 통화 사이를 투명하게 변환합니다. 선택적 외환 수수료 차감과 역환율 계산, 요청 시 ECB 기준 환율 조회 기능도 제공합니다.",
-    apiNotice: "실시간 외환 환율에는 외부 API가 필요하며, 만들어낸 오프라인 환율을 절대 사용하지 않습니다. 기본적으로 직접 입력한 환율(1.0000)을 사용하거나, ECB 기준 환율 가져오기를 클릭해 api.frankfurter.app에서 환율을 요청하세요.",
+    apiNotice: "실시간 외환 환율에는 외부 API가 필요하며, 만들어낸 오프라인 환율을 절대 사용하지 않습니다. 기본적으로 직접 입력한 환율(1.0000)을 사용하거나, ECB 기준 환율 가져오기를 클릭해 api.frankfurter.dev에서 환율을 요청하세요.",
   },
 };

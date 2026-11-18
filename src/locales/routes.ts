@@ -14,7 +14,7 @@ import { getCategoryById, getCategoryBySlug } from '../registry/categories';
 import {
   getBlogArticleById,
   getBlogArticleBySlug,
-} from '../registry/blogArticles';
+} from '../registry/blogArticleMeta';
 import { getToolBySlug } from '../registry/toolsRegistry';
 import { getToolById } from './tools';
 import { SLUG_MANIFEST } from './slugManifest';

@@ -80,7 +80,7 @@ export function LanguageSwitcher({ variant = 'dropdown', onSelect }: LanguageSwi
         className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 px-2.5 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 cursor-pointer"
       >
         <Globe className="w-4 h-4 text-slate-500" aria-hidden="true" />
-        <span className="hidden sm:inline">{current.nativeName}</span>
+        <span className="hidden sm:inline">{current.code.toUpperCase()}</span>
         <ChevronDown
           className={`w-3.5 h-3.5 transition-transform ${open ? 'rotate-180' : ''}`}
           aria-hidden="true"

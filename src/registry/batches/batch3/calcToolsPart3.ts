@@ -219,7 +219,7 @@ export const CALC_TOOLS_PART_3: ToolDefinition[] = [
     processingMode: 'api',
     requiresExternalApi: true,
     apiNotice:
-      'Requires an external API for live FX rates and never uses fabricated offline rates. Uses your manually entered exchange rate by default (1.0000), or click "Fetch ECB Reference Rate" to request rates from api.frankfurter.app.',
+      'Requires an external API for live FX rates and never uses fabricated offline rates. Uses your manually entered exchange rate by default (1.0000), or click "Fetch ECB Reference Rate" to request rates from api.frankfurter.dev.',
     keywords: [
       'currency calculator',
       'exchange rate calculator',

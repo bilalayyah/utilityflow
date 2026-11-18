@@ -3,7 +3,7 @@ import { useLocale } from '../../locales/LocaleContext';
 import type { LocaleCode } from '../../locales/config';
 import { blogCategoryHref } from '../../locales/config';
 import type { CategoryId } from '../../types/tool';
-import { getBlogArticlesForCategory } from '../../registry/blogArticles';
+import { getBlogArticlesForCategory } from '../../registry/blogArticleMeta';
 import { BlogCard } from './BlogCard';
 
 /**

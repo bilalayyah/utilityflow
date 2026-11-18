@@ -189,6 +189,9 @@ export interface UiStrings {
     share: string;
     tryTool: string;
     guidesInCategory: string;
+    /** Localized word for "Guides" used in the blog-category page title
+     * ("<Category> <Guides> | UtilityFlow Blog") — Phase 8 fix F4. */
+    categoryGuidesWord: string;
     noArticlesYet: string;
     noArticlesYetDescription: string;
     backToBlog: string;
@@ -303,7 +306,6 @@ export interface UiStrings {
     contactLink: string;
     contactMiddle: string;
     optOutGoogleAds?: string;
-    optOutAboutAds?: string;
   };
   terms: {
     seoTitle: string;

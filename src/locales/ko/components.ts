@@ -2374,7 +2374,7 @@ export const koComponentStrings: Record<string, ComponentLocaleData> = {
       labelProducer: 'PDF 제작자',
       saving: 'PDF를 저장하는 중...',
       saveBtn: '메타데이터 저장 및 PDF 다운로드',
-      stripBtn: '모든 메타데이터 필드 제거',
+      stripBtn: '편집 가능한 필드 지우기',
     },
   },
   'pdf-page-rotator': {

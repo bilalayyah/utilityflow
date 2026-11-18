@@ -2375,7 +2375,7 @@ export const jaComponentStrings: Record<string, ComponentLocaleData> = {
       labelProducer: 'PDF作成者',
       saving: 'PDFを保存中...',
       saveBtn: 'メタデータを保存してPDFをダウンロード',
-      stripBtn: 'すべてのメタデータフィールドを削除',
+      stripBtn: '編集可能なフィールドをクリア',
     },
   },
   'pdf-page-rotator': {

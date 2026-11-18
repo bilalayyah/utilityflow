@@ -87,7 +87,7 @@ export const koStrings: UiStrings = {
   home: {
     seoTitle: 'UtilityFlow – 빠르고 브라우저 기반 온라인 유틸리티 도구',
     seoDescription:
-      '텍스트 분석, 개발자 서식, 계산기, PDF, SEO 검사, 이미지 워크플로를 위한 무료, 빠르고 개인정보 중심의 온라인 유틸리티 도구입니다.',
+      '텍스트 분석, 개발자 서식, 계산기, PDF, SEO 검사, 이미지 워크플로우까지 88가지 무료 온라인 도구를 브라우저에서 바로 사용할 수 있습니다. 설치나 가입이 필요 없으며, 입력한 데이터는 기기 밖으로 나가지 않아 안전합니다.',
     seoKeywords: [
       '온라인 유틸리티 도구',
       '브라우저 도구',
@@ -277,6 +277,7 @@ export const koStrings: UiStrings = {
     share: '공유',
     tryTool: '도구 사용해 보기',
     guidesInCategory: '이 카테고리의 가이드',
+    categoryGuidesWord: '가이드',
     noArticlesYet: '아직 글이 없습니다',
     noArticlesYetDescription: '이 섹션의 가이드가 곧 제공될 예정입니다. 나중에 다시 확인해 주세요.',
     backToBlog: '블로그로 돌아가기',
@@ -324,7 +325,7 @@ export const koStrings: UiStrings = {
       'UtilityFlow가 계정, 번잡함, 불필요한 데이터 업로드 없이 7개 카테고리에 걸쳐 빠르고 개인정보 중심의 브라우저 유틸리티를 만드는 방법을 알아보세요.',
     title: 'UtilityFlow 소개',
     intro:
-      'UtilityFlow는 일상적인 디지털 작업을 위한 85개의 집중적이고 안정적인 브라우저 유틸리티를 만드는 독립 웹 플랫폼입니다.',
+      'UtilityFlow는 일상적인 디지털 작업을 위한 88개의 집중적이고 안정적인 유틸리티를 만드는 독립 웹 플랫폼입니다.',
     whyTitle: 'UtilityFlow를 만든 이유',
     whyP1:
       '단어 세기, JSON 검증, 글자 수 제한 확인, 대출 상환액 계산, 이미지 압축 같은 일상적인 온라인 작업은 종종 사람들을 느린 사이트로 내몰며, 거슬리는 오버레이와 혼란스러운 다운로드, 필수 가입을 강요합니다.',
@@ -456,6 +457,7 @@ export const koStrings: UiStrings = {
         paragraphs: [
           '무료 도구 이용을 지원하기 위해 제3자 광고 네트워크(예: Google AdSense)의 광고를 표시할 수 있습니다. Google을 포함한 제3자 벤더는 사용자의 이전 웹사이트 또는 다른 웹사이트 방문 기록을 바탕으로 광고를 제공하기 위해 쿠키나 웹 비콘을 사용할 수 있습니다.',
           'Google 광고 설정에 방문하거나 브라우저 설정에서 직접 쿠키 기본 설정을 관리해 개인 맞춤형 광고를 거부할 수 있습니다.',
+          '또한 사이트 이용 현황을 종합적으로 파악하기 위해 Google Analytics 4를 사용합니다. 이는 배너에서 쿠키를 수락한 경우에만 동작합니다.',
         ],
       },
       {
@@ -474,7 +476,7 @@ export const koStrings: UiStrings = {
       {
         title: '7. 이용자의 권리와 선택',
         paragraphs: [
-          'Google Ads Settings이나 4항에 링크된 AboutAds.info 옵트아웃 페이지를 통해 개인 맞춤형 광고를 끌 수 있으며, 브라우저 설정에서 언제든 쿠키를 차단하거나 삭제할 수 있습니다. 댓글을 게시하셨다면 연락해 삭제를 요청할 수 있습니다. 도구가 브라우저에서 실행되고 계정이나 프로필을 보관하지 않으므로 다운로드하거나 수정할 개인 데이터 파일은 없지만, 데이터에 대한 질문이 있으시면 글을 보내 주세요. 답변해 드리겠습니다.',
+          'Google Ads Settings을 통해 개인 맞춤형 광고를 끌 수 있으며, 브라우저 설정에서 언제든 쿠키를 차단하거나 삭제할 수 있습니다. 댓글을 게시하셨다면 연락해 삭제를 요청할 수 있습니다. 도구가 브라우저에서 실행되고 계정이나 프로필을 보관하지 않으므로 다운로드하거나 수정할 개인 데이터 파일은 없지만, 데이터에 대한 질문이 있으시면 글을 보내 주세요. 답변해 드리겠습니다.',
         ],
       },
       {
@@ -496,7 +498,6 @@ export const koStrings: UiStrings = {
     contactLink: '문의 페이지',
     contactMiddle: '또는 이메일로 연락해 주세요',
     optOutGoogleAds: 'Google Ads Settings',
-    optOutAboutAds: 'AboutAds.info 옵트아웃',
   },
   terms: {
     seoTitle: '이용약관 | UtilityFlow',
@@ -540,7 +541,7 @@ export const koStrings: UiStrings = {
       {
         title: '7. 제3자 서비스',
         paragraphs: [
-          '일부 기능은 독립적인 제3자 서비스에 의존합니다. 세 가지 AI 도구는 처리를 위해 텍스트를 Groq으로 전송하고, 문의 양식은 FormSubmit을 통해 전달되며, 사이트는 Cloudflare에서 호스팅되고, 광고는 Google AdSense를 통해 제공됩니다. 각 서비스에는 자체 약관과 개인정보처리방침이 있으며, 해당 서비스의 이용은 그 문서에 따라 규율됩니다. UtilityFlow는 제3자 서비스의 이용 가능 여부나 관행에 대해 책임을 지지 않습니다.',
+          '일부 기능은 독립적인 제3자 서비스에 의존합니다. 세 가지 AI 도구는 처리를 위해 텍스트를 Groq으로 전송하고, 문의 양식은 FormSubmit을 통해 전달되며, 사이트는 Cloudflare에서 호스팅되고, 통화 계산기는 Frankfurter에서 실시간 환율을 가져오며, 광고는 Google AdSense를 통해 제공됩니다. 각 서비스에는 자체 약관과 개인정보처리방침이 있으며, 해당 서비스의 이용은 그 문서에 따라 규율됩니다. UtilityFlow는 제3자 서비스의 이용 가능 여부나 관행에 대해 책임을 지지 않습니다.',
         ],
       },
       {

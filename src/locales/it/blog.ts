@@ -6434,7 +6434,7 @@ export const IT_ARTICLE_OVERRIDES: Record<string, ArticleLocaleOverride> = {
 <p>Il Calcolatore di valuta di UtilityFlow funziona per impostazione predefinita con un tasso manuale. Il tasso predefinito è 1,0000, che è un punto di partenza neutro, non un tasso di cambio reale per nessuna coppia di valute. Lo sostituisci con il tasso che vuoi usare, e lo strumento converte con quel numero.</p>
 <p>Questo approccio manuale è deliberato, ed è onesto. Lo strumento non inventa un tasso, non indovina un tasso, e non mostra un tasso vecchio come se fosse in tempo reale. Usa il tasso che inserisci, e il risultato è buono solo quanto quel tasso.</p>
 <p>Se conosci il tasso quotato dalla tua banca, inserisci quel tasso. Se stai pianificando con un tasso da un articolo di giornale o dal sito di un fornitore, inserisci quel tasso. Lo strumento mostra poi esattamente che cosa significa quel tasso in denaro.</p>
-<p>Su richiesta, lo strumento può anche recuperare un tasso di riferimento BCE da api.frankfurter.app. Premi il pulsante "Fetch ECB Reference Rate", e lo strumento inserisce l'ultimo tasso di riferimento BCE disponibile per la tua coppia di valute.</p>
+<p>Su richiesta, lo strumento può anche recuperare un tasso di riferimento BCE da api.frankfurter.dev. Premi il pulsante "Fetch ECB Reference Rate", e lo strumento inserisce l'ultimo tasso di riferimento BCE disponibile per la tua coppia di valute.</p>
 <p>Quella funzione è utile quando vuoi un punto di partenza neutro e ufficiale. Ti risparmia di cercare un tasso altrove, e ti dà una cifra da una fonte pubblica affidabile invece che da un sito casuale.</p>
 <p>È importante capire che cos'è un tasso di riferimento BCE. La Banca Centrale Europea pubblica un tasso di riferimento giornaliero per l'euro rispetto ad altre valute principali, basato su una procedura giornaliera di concertazione tra banche centrali.</p>
 <p>Quel tasso è un punto di riferimento, non un tasso di negoziazione in tempo reale. Viene pubblicato una volta al giorno, non si muove minuto per minuto, e nessuna banca è obbligata a negoziare a quel tasso. Ti dice più o meno dove si trovava il mercato al momento di riferimento, non che cosa otterrai proprio ora.</p>
@@ -6521,7 +6521,7 @@ export const IT_ARTICLE_OVERRIDES: Record<string, ArticleLocaleOverride> = {
 <p>Se il tuo fornitore quota il tasso nella direzione opposta, usa invece il tasso inverso. Lo strumento mostra il tasso inverso per il tasso che inserisci, così puoi controllare se la direzione ha senso prima di fidarti della risposta.</p>
 <p>Se hai inserito 0,92 ma volevi convertire dollari in euro, la risposta sarebbe sbagliata. Il tasso corretto per quella direzione è l'inverso, circa 1,087, e usarlo dà il risultato giusto.</p>
 <h2 id="step-4-fetch-an-ecb-reference-rate">Passaggio 4: recupera invece un tasso di riferimento BCE</h2>
-<p>Se non hai un tasso dal tuo fornitore, puoi recuperare invece un tasso di riferimento BCE. Premi il pulsante "Fetch ECB Reference Rate", e lo strumento richiede l'ultimo tasso disponibile da api.frankfurter.app, che pubblica dati di riferimento BCE.</p>
+<p>Se non hai un tasso dal tuo fornitore, puoi recuperare invece un tasso di riferimento BCE. Premi il pulsante "Fetch ECB Reference Rate", e lo strumento richiede l'ultimo tasso disponibile da api.frankfurter.dev, che pubblica dati di riferimento BCE.</p>
 <p>Lo strumento inserisce poi quel tasso di riferimento nel campo del tasso, e puoi convertire con esso subito. È utile quando vuoi un punto di partenza neutro e ufficiale per pianificare o confrontare.</p>
 <p>Capisci che cosa stai ottenendo prima di affidarti a esso. Il tasso di riferimento BCE è un riferimento giornaliero pubblicato dalla Banca Centrale Europea, basato su una concertazione giornaliera tra banche centrali. Viene pubblicato una volta al giorno e non si muove minuto per minuto.</p>
 <p>La tua banca quoterà un tasso peggiore, più un ricarico o una commissione, quindi l'importo che ricevi davvero sarà inferiore all'importo mostrato al tasso BCE. Usa il tasso di riferimento per pianificare e confrontare, poi sostituiscilo con il tasso del tuo fornitore per la cifra finale.</p>
@@ -6596,7 +6596,7 @@ export const IT_ARTICLE_OVERRIDES: Record<string, ArticleLocaleOverride> = {
 <h2 id="what-is-the-ecb-reference-rate">Che cos'è il tasso di riferimento BCE?</h2>
 <p>Il tasso di riferimento BCE è un tasso giornaliero pubblicato dalla Banca Centrale Europea per l'euro rispetto alle valute principali. Ogni giorno lavorativo, la BCE pubblica tassi di riferimento basati su una procedura di concertazione tra banche centrali, tenuta nel primo pomeriggio, ora dell'Europa centrale.</p>
 <p>Il tasso pubblicato è un'istantanea di quel momento. Resta fisso fino al giorno lavorativo successivo, ed è lo stesso per tutti quelli che lo consultano. Quella stabilità è ciò che lo rende utile per scopi ufficiali e aziendali.</p>
-<p>Lo strumento di UtilityFlow può recuperare un tasso di riferimento BCE su richiesta da api.frankfurter.app, che pubblica dati di riferimento BCE. Questo ti dà un punto di partenza neutro e ufficiale per una conversione, ed è molto più affidabile di un tasso da un sito casuale.</p>
+<p>Lo strumento di UtilityFlow può recuperare un tasso di riferimento BCE su richiesta da api.frankfurter.dev, che pubblica dati di riferimento BCE. Questo ti dà un punto di partenza neutro e ufficiale per una conversione, ed è molto più affidabile di un tasso da un sito casuale.</p>
 <p>Ma il tasso recuperato resta comunque un tasso di riferimento, non un tasso di negoziazione in tempo reale. Trattalo come un parametro per stimare e confrontare, e sostituiscilo con il tasso del tuo fornitore quando ti serve la cifra finale.</p>
 <h2 id="what-is-a-bank-rate">Che cos'è un tasso bancario?</h2>
 <p>Un tasso bancario è il tasso che la tua banca o il tuo fornitore di carta applica davvero alla tua transazione. È un tasso al dettaglio, fissato dal fornitore, e differisce sempre dal tasso medio di mercato a favore del fornitore. Quella differenza è il modo in cui il fornitore guadagna sulla conversione.</p>
@@ -7303,7 +7303,7 @@ export const IT_ARTICLE_OVERRIDES: Record<string, ArticleLocaleOverride> = {
       { q: "Una durata più lunga significa sempre una rata più bassa?", a: "Sì, una durata più lunga di solito abbassa la rata mensile. Aumenta anche l'interesse totale, quindi il prestito costa di più in totale anche se ogni rata è più piccola." },
       { q: "Il calcolatore include commissioni o un tasso variabile?", a: "No. Il risultato presume un tasso fisso senza rimborso anticipato o commissioni extra, a meno che tu non le includa nei tuoi input. Controlla commissioni e condizioni di tasso separatamente con il finanziatore." },
     ],
-    readingMinutes: 11,
+    readingMinutes: 12,
   },
   'loan-emi-calculator-howto': {
     slug: 'come-calcolare-rata-prestito-e-interessi-totali',
@@ -15397,7 +15397,7 @@ print(user_id)</code></pre>
       { q: "Qual è la lunghezza massima di un handle su X?", a: "I nomi utente X possono essere lunghi al massimo 15 caratteri e devono essere almeno 4 caratteri. Il formattatore segnala come non valido per X qualsiasi candidato più lungo di 15 caratteri, anche se lo stesso handle è valido su Instagram, Threads o GitHub." },
       { q: "Il Formattatore di Handle Social è gratuito e privato?", a: "Sì, è gratuito da usare nel browser senza registrazione, e i nomi di brand e le idee di handle vengono elaborati localmente senza essere caricati. Niente di ciò che digiti lascia il tuo dispositivo." },
     ],
-    readingMinutes: 11,
+    readingMinutes: 12,
   },
   'social-handle-formatter-howto': {
     slug: 'come-scegliere-un-nome-utente-coerente',

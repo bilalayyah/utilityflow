@@ -275,6 +275,7 @@ export const enStrings: UiStrings = {
     share: 'Share',
     tryTool: 'Try the tool',
     guidesInCategory: 'Guides in this category',
+    categoryGuidesWord: 'Guides',
     noArticlesYet: 'No articles yet',
     noArticlesYetDescription: 'Guides for this section are on the way. Check back soon.',
     backToBlog: 'Back to blog',
@@ -322,7 +323,7 @@ export const enStrings: UiStrings = {
       'Learn how UtilityFlow builds fast, privacy-first browser utilities across seven categories without accounts, clutter, or unnecessary data uploads.',
     title: 'About UtilityFlow',
     intro:
-      'UtilityFlow is an independent web platform building 85 focused, reliable browser utilities for everyday digital work.',
+      'UtilityFlow is an independent web platform building 88 focused, reliable utilities for everyday digital work.',
     whyTitle: 'Why We Built UtilityFlow',
     whyP1:
       'Routine online tasks—counting words, validating JSON, checking character limits, computing loan payments, or compressing an image—often force people onto slow sites packed with intrusive overlays, confusing downloads, or mandatory sign-ups.',
@@ -454,6 +455,7 @@ export const enStrings: UiStrings = {
         paragraphs: [
           'We may display advertisements from third-party advertising networks (such as Google AdSense) to support free access to our tools. Third-party vendors, including Google, may use cookies or web beacons to serve ads based on a user’s prior visits to this website or other websites.',
           'You may opt out of personalized advertising by visiting Google Ads Settings or managing cookie preferences directly in your browser settings.',
+          'We also use Google Analytics 4 to understand, in aggregate, how the site is used; it only runs after you accept cookies in the banner.',
         ],
       },
       {
@@ -472,7 +474,7 @@ export const enStrings: UiStrings = {
       {
         title: '7. Your Rights and Choices',
         paragraphs: [
-          'You can switch off personalized advertising through Google Ads Settings or the AboutAds.info opt-out page linked in section 4, and you can block or delete cookies in your browser settings at any time. If you posted a comment, you can ask for it to be removed by contacting us. Because our tools run in your browser and we do not keep accounts or profiles, there is no personal data file to download or correct — but any question about your data will be answered if you write to us.',
+          'You can switch off personalized advertising through Google Ads Settings, and you can block or delete cookies in your browser settings at any time. If you posted a comment, you can ask for it to be removed by contacting us. Because our tools run in your browser and we do not keep accounts or profiles, there is no personal data file to download or correct — but any question about your data will be answered if you write to us.',
         ],
       },
       {
@@ -494,7 +496,6 @@ export const enStrings: UiStrings = {
     contactLink: 'Contact page',
     contactMiddle: 'or email',
     optOutGoogleAds: 'Google Ads Settings',
-    optOutAboutAds: 'AboutAds.info opt-out',
   },
   terms: {
     seoTitle: 'Terms of Service – Using UtilityFlow Tools | UtilityFlow',
@@ -539,7 +540,7 @@ export const enStrings: UiStrings = {
       {
         title: '7. Third-Party Services',
         paragraphs: [
-          'Some features rely on independent third-party services: the three AI tools send text to Groq for processing, the contact form is delivered by FormSubmit, the site is hosted on Cloudflare, and advertising is served by Google AdSense. Each of these services has its own terms and privacy policy, and your use of them is governed by those documents. UtilityFlow is not responsible for the availability or practices of third-party services.',
+          'Some features rely on independent third-party services: the three AI tools send text to Groq for processing, the contact form is delivered by FormSubmit, the site is hosted on Cloudflare, the Currency Calculator fetches live exchange rates from Frankfurter, and advertising is served by Google AdSense. Each of these services has its own terms and privacy policy, and your use of them is governed by those documents. UtilityFlow is not responsible for the availability or practices of third-party services.',
         ],
       },
       {

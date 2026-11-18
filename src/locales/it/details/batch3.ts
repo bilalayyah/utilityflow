@@ -2369,7 +2369,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'Da dove provengono i tassi di riferimento recuperati?',
         answer:
-          'Quando fai clic su «Recupera il tasso di riferimento BCE», il tuo browser richiede l’ultimo tasso di riferimento della Banca centrale europea pubblicato da api.frankfurter.app. I tassi di riferimento sono parametri di mercato medio e differiscono leggermente dalle quotazioni al dettaglio delle banche.',
+          'Quando fai clic su «Recupera il tasso di riferimento BCE», il tuo browser richiede l’ultimo tasso di riferimento della Banca centrale europea pubblicato da api.frankfurter.dev. I tassi di riferimento sono parametri di mercato medio e differiscono leggermente dalle quotazioni al dettaglio delle banche.',
       },
       {
         question: 'Funziona se sono offline o se l’API esterna è bloccata?',

@@ -2343,7 +2343,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: '¿De dónde vienen las tasas de referencia obtenidas?',
         answer:
-          'Cuando haces clic en "Obtener tasa de referencia del BCE", tu navegador solicita la última tasa de referencia del Banco Central Europeo publicada por api.frankfurter.app. Las tasas de referencia son puntos de referencia de mercado medio y difieren ligeramente de las cotizaciones minoristas de los bancos.',
+          'Cuando haces clic en "Obtener tasa de referencia del BCE", tu navegador solicita la última tasa de referencia del Banco Central Europeo publicada por api.frankfurter.dev. Las tasas de referencia son puntos de referencia de mercado medio y difieren ligeramente de las cotizaciones minoristas de los bancos.',
       },
       {
         question: '¿Esto funciona si estoy sin conexión o si la API externa está bloqueada?',

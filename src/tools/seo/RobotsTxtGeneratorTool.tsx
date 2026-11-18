@@ -24,6 +24,7 @@ const STRINGS_EN = {
     crawlDelayPlaceholder: 'None',
     sitemapUrlsLabel: 'Sitemap URLs (one per line)',
     generatedLabel: 'Generated robots.txt',
+    invalidSitemapWarning: 'Skipped invalid sitemap URL(s): {urls} — sitemap lines must be full http(s) URLs.',
   };
 
 interface RuleRow {
@@ -85,23 +86,36 @@ export default function RobotsTxtGeneratorTool() {
           lines.push(`${item.directive}: ${item.path.trim()}`);
         }
       }
-      if (ua === '*' && crawlDelay.trim() && Number(crawlDelay) > 0) {
+      if (crawlDelay.trim() && Number(crawlDelay) > 0) {
         lines.push(`Crawl-delay: ${Number(crawlDelay)}`);
       }
       blocks.push(lines.join('\n'));
     }
 
-    const sitemaps = sitemapsText
+    const sitemapLines = sitemapsText
       .split(/\r?\n/)
       .map((s) => s.trim())
-      .filter(Boolean)
+      .filter(Boolean);
+    const invalidSitemaps: string[] = [];
+    const sitemaps = sitemapLines
+      .filter((s) => {
+        let ok = false;
+        try {
+          const parsed = new URL(s);
+          ok = parsed.protocol === 'http:' || parsed.protocol === 'https:';
+        } catch {
+          ok = false;
+        }
+        if (!ok) invalidSitemaps.push(s);
+        return ok;
+      })
       .map((s) => `Sitemap: ${s}`);
 
     if (sitemaps.length > 0) {
       blocks.push(sitemaps.join('\n'));
     }
 
-    return `${blocks.join('\n\n')}\n`;
+    return { text: `${blocks.join('\n\n')}\n`, invalidSitemaps };
   }, [rules, crawlDelay, sitemapsText]);
 
   const addRule = () => {
@@ -110,7 +124,7 @@ export default function RobotsTxtGeneratorTool() {
   };
 
   const downloadFile = () => {
-    const blob = new Blob([robotsOutput], { type: 'text/plain;charset=utf-8' });
+    const blob = new Blob([robotsOutput.text], { type: 'text/plain;charset=utf-8' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
@@ -253,7 +267,7 @@ export default function RobotsTxtGeneratorTool() {
           <div className="flex flex-wrap items-center justify-between gap-2">
             <span className="text-xs font-semibold text-slate-700">{s.generatedLabel}</span>
             <div className="flex items-center gap-2">
-              <CopyButton text={robotsOutput} label={t.common.copy} copiedLabel={t.common.copied} />
+              <CopyButton text={robotsOutput.text} label={t.common.copy} copiedLabel={t.common.copied} />
               <button
                 type="button"
                 onClick={downloadFile}
@@ -265,8 +279,13 @@ export default function RobotsTxtGeneratorTool() {
             </div>
           </div>
           <pre className="rounded-lg border border-slate-200 bg-white p-3.5 font-mono text-xs text-slate-900 whitespace-pre-wrap overflow-x-auto min-h-48">
-            {robotsOutput}
+            {robotsOutput.text}
           </pre>
+          {robotsOutput.invalidSitemaps.length > 0 && (
+            <p role="alert" className="text-xs text-amber-700">
+              {s.invalidSitemapWarning.replace('{urls}', robotsOutput.invalidSitemaps.join(', '))}
+            </p>
+          )}
         </div>
       </div>
     </div>

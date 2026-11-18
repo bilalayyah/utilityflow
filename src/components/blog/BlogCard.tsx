@@ -4,12 +4,12 @@ import { articleHref, blogCategoryHref, localeTag } from '../../locales/config';
 import type { LocaleCode } from '../../locales/config';
 import { getLocalizedCategory } from '../../locales/tools';
 import { formatString } from '../../locales/ui';
-import { getBlogArticleVersion } from '../../registry/blogArticles';
-import type { BlogArticle } from '../../types/blog';
+import { getBlogArticleVersion } from '../../registry/blogArticleMeta';
+import type { BlogArticleMeta } from '../../types/blog';
 import { pastelForKey } from '../tool/pastel';
 
 interface BlogCardProps {
-  article: BlogArticle;
+  article: BlogArticleMeta;
   locale: LocaleCode;
 }
 

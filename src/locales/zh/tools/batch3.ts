@@ -233,6 +233,6 @@ export const ZH_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
       schemaApplicationCategory: 'FinanceApplication',
     },
     intro: '使用银行、经纪商或发票给出的精确汇率，在世界主要货币之间透明换算，支持可选的外汇手续费扣除、反向汇率计算和按需查询欧洲央行参考汇率。',
-    apiNotice: '实时汇率需要外部API，离线时不会使用编造的汇率。默认使用你手动输入的汇率（1.0000），或点击“获取欧洲央行参考汇率”，向api.frankfurter.app请求汇率。',
+    apiNotice: '实时汇率需要外部API，离线时不会使用编造的汇率。默认使用你手动输入的汇率（1.0000），或点击“获取欧洲央行参考汇率”，向api.frankfurter.dev请求汇率。',
   },
 };

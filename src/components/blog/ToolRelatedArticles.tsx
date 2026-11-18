@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useLocale } from '../../locales/LocaleContext';
 import type { LocaleCode } from '../../locales/config';
-import { getBlogArticlesForTool } from '../../registry/blogArticles';
+import { getBlogArticlesForTool } from '../../registry/blogArticleMeta';
 import { blogHref } from '../../locales/config';
 import { BlogCard } from './BlogCard';
 

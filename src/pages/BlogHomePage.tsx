@@ -5,7 +5,7 @@ import { getStaticAlternatePaths, toHreflangEntries } from '../locales/routes';
 import {
   getBlogArticleVersion,
   getPublishedBlogArticles,
-} from '../registry/blogArticles';
+} from '../registry/blogArticleMeta';
 import type { BreadcrumbItem } from '../types/tool';
 import { Breadcrumbs, buildBreadcrumbSchema } from '../components/common/Breadcrumbs';
 import { SeoHead } from '../components/seo/SeoHead';

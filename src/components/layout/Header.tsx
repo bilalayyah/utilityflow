@@ -78,7 +78,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-indigo-100/70 dark:border-slate-800 bg-gradient-to-r from-violet-200 via-indigo-200 to-sky-200 dark:from-violet-950/70 dark:via-indigo-950/60 dark:to-sky-950/70 backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 sm:gap-8 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 sm:gap-8 px-4 sm:px-6 lg:px-8">
         {/* Zone 1: Single-element Brand Wordmark */}
         <Link
           to={localizeStaticPath('/', locale)}
@@ -109,7 +109,7 @@ export function Header() {
         </Link>
 
         {/* Zone 2: Clean Single-Line Navigation Links */}
-        <nav aria-label="Primary" className="hidden md:flex items-center gap-6 lg:gap-7">
+        <nav aria-label="Primary" className="hidden lg:flex min-w-0 items-center gap-6 lg:gap-7">
           {NAV_ITEMS.map((item) => {
             if ('aiDropdown' in item && item.aiDropdown) {
               return (
@@ -118,6 +118,7 @@ export function Header() {
                     type="button"
                     aria-expanded={aiMenuOpen}
                     aria-haspopup="menu"
+                    aria-current={isOnAiRoute ? 'page' : undefined}
                     onClick={() => setAiMenuOpen((prev) => !prev)}
                     className={`inline-flex items-center gap-1 text-sm font-medium whitespace-nowrap shrink-0 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 rounded-sm cursor-pointer ${
                       isOnAiRoute
@@ -177,6 +178,7 @@ export function Header() {
               <Link
                 key={item.to}
                 to={item.to}
+                aria-current={isActive ? 'page' : undefined}
                 className={`text-sm font-medium whitespace-nowrap shrink-0 transition-colors duration-150 underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 rounded-sm ${
                   isActive ? 'text-indigo-600' : 'text-slate-600 hover:text-slate-950'
                 }`}
@@ -188,7 +190,7 @@ export function Header() {
         </nav>
 
         {/* Header search (desktop): same live tool search as the homepage */}
-        <div className="hidden lg:block w-60 xl:w-80 shrink-0">
+        <div className="hidden xl:block min-w-0 flex-1 max-w-xs">
           <ToolSearchBar placeholder={t.nav.searchPlaceholder} />
         </div>
 
@@ -199,7 +201,7 @@ export function Header() {
             aria-expanded={searchOpen}
             aria-label={searchOpen ? t.nav.closeSearch : t.nav.searchTools}
             onClick={() => setSearchOpen((prev) => !prev)}
-            className="inline-flex lg:hidden items-center justify-center rounded-lg border border-slate-200 p-2 text-slate-700 hover:bg-slate-50 hover:text-slate-900 min-h-[40px] min-w-[40px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 cursor-pointer"
+            className="inline-flex xl:hidden items-center justify-center rounded-lg border border-slate-200 p-2 text-slate-700 hover:bg-slate-50 hover:text-slate-900 min-h-[40px] min-w-[40px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 cursor-pointer"
           >
             <Search className="w-5 h-5" />
           </button>
@@ -210,7 +212,7 @@ export function Header() {
 
           <Link
             to={localizeStaticPath('/tools/', locale)}
-            className="hidden md:inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-indigo-600 to-violet-600 px-4 py-2 text-sm font-semibold text-white transition-colors duration-150 hover:from-indigo-700 hover:to-violet-700 whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:ring-offset-2"
+            className="hidden xl:inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-indigo-600 to-violet-600 px-4 py-2 text-sm font-semibold text-white transition-colors duration-150 hover:from-indigo-700 hover:to-violet-700 whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:ring-offset-2"
           >
             {t.nav.allTools}
           </Link>
@@ -221,7 +223,7 @@ export function Header() {
             aria-controls="mobile-navigation"
             aria-label={mobileOpen ? t.nav.closeMenu : t.nav.openMenu}
             onClick={() => setMobileOpen((prev) => !prev)}
-            className="inline-flex md:hidden items-center justify-center rounded-lg border border-slate-200 p-2 text-slate-700 hover:bg-slate-50 hover:text-slate-900 min-h-[40px] min-w-[40px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 cursor-pointer"
+            className="inline-flex lg:hidden items-center justify-center rounded-lg border border-slate-200 p-2 text-slate-700 hover:bg-slate-50 hover:text-slate-900 min-h-[40px] min-w-[40px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 cursor-pointer"
           >
             {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -230,7 +232,7 @@ export function Header() {
 
       {/* Mobile search row (expandable) */}
       {searchOpen && (
-        <div className="lg:hidden border-t border-indigo-100/70 dark:border-slate-800 bg-gradient-to-r from-violet-200 via-indigo-200 to-sky-200 dark:from-violet-950/70 dark:via-indigo-950/60 dark:to-sky-950/70 px-4 py-3">
+        <div className="xl:hidden border-t border-indigo-100/70 dark:border-slate-800 bg-gradient-to-r from-violet-200 via-indigo-200 to-sky-200 dark:from-violet-950/70 dark:via-indigo-950/60 dark:to-sky-950/70 px-4 py-3">
           <ToolSearchBar placeholder={t.nav.searchPlaceholder} />
         </div>
       )}
@@ -240,7 +242,7 @@ export function Header() {
         <nav
           id="mobile-navigation"
           aria-label="Mobile"
-          className="md:hidden border-t border-indigo-100/70 dark:border-slate-800 bg-gradient-to-b from-violet-200 via-indigo-200 to-sky-200 dark:from-violet-950/70 dark:via-indigo-950/60 dark:to-sky-950/70 px-4 py-4 space-y-2"
+          className="lg:hidden border-t border-indigo-100/70 dark:border-slate-800 bg-gradient-to-b from-violet-200 via-indigo-200 to-sky-200 dark:from-violet-950/70 dark:via-indigo-950/60 dark:to-sky-950/70 px-4 py-4 space-y-2"
         >
           {NAV_ITEMS.filter((item) => !('aiDropdown' in item && item.aiDropdown)).map((item) => (
             <Link

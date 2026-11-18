@@ -70,7 +70,8 @@ function parseFieldToken(
   min: number,
   max: number,
   s: typeof STRINGS_EN,
-  nameMap?: Record<string, number>
+  nameMap?: Record<string, number>,
+  mapValue?: (v: number) => number
 ): number[] {
   const replaceNames = (raw: string) => {
     const upper = raw.toUpperCase();
@@ -118,7 +119,7 @@ function parseFieldToken(
     }
 
     for (let v = start; v <= end; v += step) {
-      values.add(v);
+      values.add(mapValue ? mapValue(v) : v);
     }
   }
 
@@ -190,7 +191,7 @@ export default function CronExpressionParserTool() {
       const hours = parseFieldToken(hourF, 0, 23, s);
       const doms = parseFieldToken(domF, 1, 31, s);
       const months = parseFieldToken(monF, 1, 12, s, MONTH_NAMES);
-      const dows = parseFieldToken(dowF.replace(/\b7\b/g, '0'), 0, 6, s, DOW_NAMES);
+      const dows = parseFieldToken(dowF, 0, 7, s, DOW_NAMES, (v) => (v === 7 ? 0 : v));
 
       const minSet = new Set(mins);
       const hourSet = new Set(hours);
@@ -265,8 +266,8 @@ export default function CronExpressionParserTool() {
           : domF !== '*' && dowF === '*'
           ? s.dayOfMonth.replace('{day}', domF)
           : domF === '*' && dowF !== '*'
-          ? s.dayDow.replace('{dow}', describeField(dowF, 'weekday', locale, cronTables, (n) => dowLabels[n] ?? String(n)))
-          : s.dayBoth.replace('{day}', domF).replace('{dow}', describeField(dowF, 'weekday', locale, cronTables, (n) => dowLabels[n] ?? String(n)));
+          ? s.dayDow.replace('{dow}', describeField(dowF, 'weekday', locale, cronTables, (n) => dowLabels[n === 7 ? 0 : n] ?? String(n)))
+          : s.dayBoth.replace('{day}', domF).replace('{dow}', describeField(dowF, 'weekday', locale, cronTables, (n) => dowLabels[n === 7 ? 0 : n] ?? String(n)));
 
       const monthSummary =
         monF === '*' ? '' : s.monthIn.replace('{months}', describeField(monF, 'month', locale, cronTables, (n) => monthLabels[n] ?? String(n)));
@@ -286,7 +287,7 @@ export default function CronExpressionParserTool() {
           {
             label: s.fieldDow,
             raw: dowF,
-            meaning: describeField(dowF, 'weekday', locale, cronTables, (n) => dowLabels[n] ?? String(n)),
+            meaning: describeField(dowF, 'weekday', locale, cronTables, (n) => dowLabels[n === 7 ? 0 : n] ?? String(n)),
           },
         ],
         nextRuns,

@@ -576,6 +576,6 @@ export const ES_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
     intro:
       'Convierte entre las principales divisas del mundo con transparencia usando la tasa de cambio exacta cotizada por tu banco, corredor o factura, además de deducción opcional de comisión de cambio, matemática de tasa inversa y consulta de tasa de referencia del BCE bajo demanda.',
     apiNotice:
-      'Requiere una API externa para las tasas de cambio en vivo y nunca usa tasas falsas sin conexión. Usa tu tasa de cambio ingresada manualmente por defecto (1,0000) o haz clic en "Obtener tasa de referencia del BCE" para solicitar tasas de api.frankfurter.app.',
+      'Requiere una API externa para las tasas de cambio en vivo y nunca usa tasas falsas sin conexión. Usa tu tasa de cambio ingresada manualmente por defecto (1,0000) o haz clic en "Obtener tasa de referencia del BCE" para solicitar tasas de api.frankfurter.dev.',
   },
 };

@@ -101,7 +101,7 @@ export default function CurrencyCalculatorTool() {
     setIsFetching(true);
     try {
       const response = await fetch(
-        `https://api.frankfurter.app/latest?from=${encodeURIComponent(fromCurrency)}&to=${encodeURIComponent(toCurrency)}`
+        `https://api.frankfurter.dev/v1/latest?from=${encodeURIComponent(fromCurrency)}&to=${encodeURIComponent(toCurrency)}`
       );
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}`);

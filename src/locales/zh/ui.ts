@@ -87,7 +87,7 @@ export const zhStrings: UiStrings = {
   home: {
     seoTitle: 'UtilityFlow——免费快速的浏览器在线实用工具平台，88个工具',
     seoDescription:
-      '免费、快速、注重隐私的在线实用工具平台：88个浏览器工具，涵盖文本分析、开发者排版、计算器、PDF、SEO检查与图片处理流程，无需上传、无需注册，即开即用。',
+      '免费、快速、注重隐私的在线实用工具平台，提供88个工具，涵盖文本分析、开发者排版、计算器、PDF、SEO检查与图片处理流程，全部在浏览器中运行，无需上传文件、无需注册账号，打开即用，支持中文在内的11种语言，数据不出设备，安全又方便。',
     seoKeywords: [
       '在线实用工具',
       '浏览器工具',
@@ -277,6 +277,7 @@ export const zhStrings: UiStrings = {
     share: '分享',
     tryTool: '试用工具',
     guidesInCategory: '该分类下的指南',
+    categoryGuidesWord: '指南',
     noArticlesYet: '暂无文章',
     noArticlesYetDescription: '本栏目的指南即将推出，敬请期待。',
     backToBlog: '返回博客',
@@ -324,7 +325,7 @@ export const zhStrings: UiStrings = {
       '了解 UtilityFlow 如何在七大分类中打造快速、注重隐私的浏览器工具，无需账号、杂乱内容或不必要的数据上传。',
     title: '关于 UtilityFlow',
     intro:
-      'UtilityFlow 是一个独立的网络平台，致力于打造 85 个专注、可靠的浏览器工具，服务日常数字工作。',
+      'UtilityFlow 是一个独立的网络平台，致力于打造 88 个专注、可靠的工具，服务日常数字工作。',
     whyTitle: '我们为什么打造 UtilityFlow',
     whyP1:
       '日常在线任务——统计字数、验证 JSON、检查字符限制、计算贷款还款或压缩图片——常常迫使人们使用缓慢的网站，上面布满侵入式弹窗、令人困惑的下载或强制注册。',
@@ -456,6 +457,7 @@ export const zhStrings: UiStrings = {
         paragraphs: [
           '为支持免费使用工具，我们可能会展示来自第三方广告网络（例如 Google AdSense）的广告。包括 Google 在内的第三方供应商可能会使用 Cookie 或网络信标，根据用户此前访问本网站或其他网站的情况投放广告。',
           '您可以访问 Google 广告设置，或直接在浏览器设置中管理 Cookie 偏好，以选择退出个性化广告。',
+          '我们还使用 Google Analytics 4 以汇总方式了解网站的使用情况；它仅在您于横幅中接受 Cookie 后才会运行。',
         ],
       },
       {
@@ -474,7 +476,7 @@ export const zhStrings: UiStrings = {
       {
         title: '7. 您的权利与选择',
         paragraphs: [
-          '您可以通过 Google 广告设置或第 4 节中链接的 AboutAds.info 选择退出页面关闭个性化广告，也可以在浏览器设置中随时阻止或删除 Cookie。如果您发布过评论，可以联系我们要求删除。由于我们的工具在您的浏览器中运行，且我们不保留账号或个人资料，因此没有可供下载或更正的个人数据文件——但如果您对自己的数据有任何疑问，写信给我们都会得到答复。',
+          '您可以通过 Google 广告设置关闭个性化广告，也可以在浏览器设置中随时阻止或删除 Cookie。如果您发布过评论，可以联系我们要求删除。由于我们的工具在您的浏览器中运行，且我们不保留账号或个人资料，因此没有可供下载或更正的个人数据文件——但如果您对自己的数据有任何疑问，写信给我们都会得到答复。',
         ],
       },
       {
@@ -496,7 +498,6 @@ export const zhStrings: UiStrings = {
     contactLink: '联系页面',
     contactMiddle: '联系我们，或发送邮件至',
     optOutGoogleAds: 'Google 广告设置',
-    optOutAboutAds: 'AboutAds.info 选择退出',
   },
   terms: {
     seoTitle: '服务条款 | UtilityFlow',
@@ -541,7 +542,7 @@ export const zhStrings: UiStrings = {
       {
         title: '7. 第三方服务',
         paragraphs: [
-          '部分功能依赖独立的第三方服务：三个 AI 工具会将文本发送至 Groq 进行处理，联系表单由 FormSubmit 投递，网站托管于 Cloudflare，广告由 Google AdSense 提供。每项服务都有各自的条款与隐私政策，您的使用受这些文件约束。UtilityFlow 不对第三方服务的可用性或做法负责。',
+          '部分功能依赖独立的第三方服务：三个 AI 工具会将文本发送至 Groq 进行处理，联系表单由 FormSubmit 投递，网站托管于 Cloudflare，货币计算器从 Frankfurter 获取实时汇率，广告由 Google AdSense 提供。每项服务都有各自的条款与隐私政策，您的使用受这些文件约束。UtilityFlow 不对第三方服务的可用性或做法负责。',
         ],
       },
       {

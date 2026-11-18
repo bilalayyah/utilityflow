@@ -22,7 +22,7 @@ const STRINGS_EN = {
     labelProducer: 'PDF Producer',
     saving: 'Saving PDF...',
     saveBtn: 'Save Metadata & Download PDF',
-    stripBtn: 'Strip All Metadata Fields',
+    stripBtn: 'Clear Editable Fields',
   };
 
 export default function PdfMetadataEditorTool() {

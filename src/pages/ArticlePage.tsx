@@ -1,5 +1,5 @@
 import { ArrowLeft, ArrowRight, Check, Link2 } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { buildCanonicalUrl } from '../config/site';
 import { DEFAULT_OG_IMAGE } from '../config/ogImages';
@@ -29,7 +29,9 @@ import {
   getBlogArticleUrl,
   getBlogArticleVersion,
   getBlogHomeUrl,
-} from '../registry/blogArticles';
+} from '../registry/blogArticleMeta';
+import type { BlogArticleLocaleVersion } from '../types/blog';
+import type { ArticleLocaleOverride } from '../locales/types';
 import type { BreadcrumbItem, ToolDefinition, ToolFAQ } from '../types/tool';
 import { ArticleTOC, extractHeadingsFromBody } from '../components/blog/ArticleTOC';
 import { RelatedArticles } from '../components/blog/RelatedArticles';
@@ -55,7 +57,35 @@ export function ArticlePage() {
   // Declared before the early returns below so hook order stays stable.
   const [copied, setCopied] = useState(false);
 
+  // Slim meta record (id, slugs, titles — no bodies). Resolves
+  // synchronously from the generated index, so routing, the page shell
+  // and hreflang never wait on the full article data (Phase 5).
   const article = getBlogArticleBySlug(articleSlug, locale);
+
+  // Full EN version (body + FAQs) — loaded on demand from the full
+  // registry chunk, which is NOT in the initial bundle (Phase 5). For
+  // non-EN locales the full version comes from the loaded locale data
+  // (articleOverrides) and needs no extra fetch.
+  const [enFull, setEnFull] = useState<BlogArticleLocaleVersion | null>(null);
+  const [enFullFailed, setEnFullFailed] = useState(false);
+  const [enFullRetry, setEnFullRetry] = useState(0);
+  useEffect(() => {
+    if (locale !== 'en' || !article) return;
+    let cancelled = false;
+    setEnFull(null);
+    setEnFullFailed(false);
+    import('../registry/blogArticles')
+      .then((m) => {
+        if (cancelled) return;
+        setEnFull(m.getBlogArticleById(article.id)?.en ?? null);
+      })
+      .catch(() => {
+        if (!cancelled) setEnFullFailed(true);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [locale, article?.id, enFullRetry]);
 
   if (!article) {
     // The article exists in English but has no version in this locale:
@@ -96,11 +126,29 @@ export function ArticlePage() {
     );
   }
 
-  const version = getBlogArticleVersion(article, locale);
+  // Full version: EN loads async (enFull); other locales resolve
+  // synchronously from the loaded locale data. `version` is null only
+  // while the EN body chunk is still loading (or failed to load — see
+  // enFullFailed). While it is null the page renders its shell (H1,
+  // lede, breadcrumbs) from the meta record; the body, FAQs and TOC
+  // appear once the chunk arrives.
+  // ('body' in v) narrows the meta helper's union to the full-version
+  // branches — the EN meta version has no body and is never used here.
+  const localeVersion =
+    locale === 'en' ? undefined : getBlogArticleVersion(article, locale);
+  const version: BlogArticleLocaleVersion | ArticleLocaleOverride | null =
+    locale === 'en'
+      ? enFull
+      : localeVersion && 'body' in localeVersion
+        ? localeVersion
+        : null;
+  const isLoadingBody = locale === 'en' && version === null && !enFullFailed;
 
-  // Unreachable via getBlogArticleBySlug (it only matches when a version
-  // exists), but guard anyway: no version means no translation to show.
-  if (!version) {
+  // No version and not (still loading / failed) EN: the article has no
+  // version in this locale — show the notice. Unreachable via
+  // getBlogArticleBySlug (it only matches when a version exists), but
+  // guard anyway.
+  if (!version && !isLoadingBody && !enFullFailed) {
     return (
       <>
         <SeoHead
@@ -131,16 +179,19 @@ export function ArticlePage() {
   }
 
   // Cross-locale slug guard: a stale or English slug under /<locale>/
-  // redirects to the correct localized article URL.
-  if (version.slug !== articleSlug) {
+  // redirects to the correct localized article URL. Skipped while the
+  // EN body is still loading (version not yet known).
+  if (version && version.slug !== articleSlug) {
     return <Navigate to={articleHref(version.slug, locale)} replace />;
   }
 
   const category = getLocalizedCategory(article.categoryId, locale);
-  const canonicalPath = articleHref(version.slug, locale);
+  const canonicalPath = articleHref(version?.slug ?? article.en.slug, locale);
   const canonicalUrl = buildCanonicalUrl(canonicalPath);
-  const headings = extractHeadingsFromBody(version.body);
-  const lede = extractFirstParagraph(version.body) ?? version.description;
+  const headings = version ? extractHeadingsFromBody(version.body) : [];
+  const lede = version
+    ? extractFirstParagraph(version.body) ?? version.description
+    : article.en.description;
   const dateTag = localeTag(locale);
   const publishedDate = new Date(article.publishedAt).toLocaleDateString(
     dateTag,
@@ -172,14 +223,15 @@ export function ArticlePage() {
           },
         ]
       : []),
-    { label: version.title },
+    { label: version?.title ?? article.en.title },
   ];
 
   const blogPostingSchema: Record<string, unknown> = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
-    headline: version.title,
-    description: version.description,
+    headline: version?.title ?? article.en.title,
+    description: version?.description ?? article.en.description,
+    inLanguage: localeTag(locale),
     datePublished: article.publishedAt,
     ...(article.updatedAt ? { dateModified: article.updatedAt } : {}),
     author: { '@type': 'Organization', name: 'UtilityFlow' },
@@ -187,10 +239,12 @@ export function ArticlePage() {
     image: DEFAULT_OG_IMAGE,
   };
 
-  const faqs: ToolFAQ[] = version.faqs.map((faq) => ({
-    question: faq.q,
-    answer: faq.a,
-  }));
+  const faqs: ToolFAQ[] = version
+    ? (version.faqs ?? []).map((faq) => ({
+        question: faq.q,
+        answer: faq.a,
+      }))
+    : [];
 
   const structuredData: Array<Record<string, unknown>> = [
     blogPostingSchema,
@@ -227,7 +281,7 @@ export function ArticlePage() {
 
   const shareXUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(
     canonicalUrl
-  )}&text=${encodeURIComponent(version.title)}`;
+  )}&text=${encodeURIComponent(version?.title ?? article.en.title)}`;
   const shareFacebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
     canonicalUrl
   )}`;
@@ -235,8 +289,8 @@ export function ArticlePage() {
   return (
     <>
       <SeoHead
-        title={version.title}
-        description={version.description}
+        title={version?.title ?? article.en.title}
+        description={version?.description ?? article.en.description}
         canonicalPath={canonicalPath}
         ogType="article"
         structuredData={structuredData}
@@ -258,7 +312,7 @@ export function ArticlePage() {
             </p>
           )}
           <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 text-balance">
-            {version.title}
+            {version?.title ?? article.en.title}
           </h1>
           <p className="mt-3 text-base sm:text-lg leading-relaxed text-slate-600">
             {lede}
@@ -274,16 +328,43 @@ export function ArticlePage() {
               </>
             )}
             {' · '}
-            {formatString(t.blog.readingTime, { minutes: version.readingMinutes })}
+            {formatString(t.blog.readingTime, { minutes: version?.readingMinutes ?? article.en.readingMinutes })}
           </p>
         </header>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
           <div className="lg:col-span-8 space-y-12">
-            <article
-              className="text-slate-700 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-slate-900 [&_h2]:mt-10 [&_h2]:mb-4 [&_h3]:text-xl [&_h3]:font-bold [&_h3]:text-slate-900 [&_h3]:mt-8 [&_h3]:mb-3 [&_p]:text-base [&_p]:leading-relaxed [&_p]:mb-4 [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mb-4 [&_ul]:space-y-2 [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:mb-4 [&_ol]:space-y-2 [&_a]:text-indigo-600 [&_a]:underline [&_a]:underline-offset-4 [&_a:hover]:text-indigo-700 [&_strong]:font-semibold [&_strong]:text-slate-900 [&_code]:rounded [&_code]:bg-slate-100 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-sm [&_code]:font-mono"
-              dangerouslySetInnerHTML={{ __html: version.body }}
-            />
+            {version ? (
+              <article
+                className="text-slate-700 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-slate-900 [&_h2]:mt-10 [&_h2]:mb-4 [&_h3]:text-xl [&_h3]:font-bold [&_h3]:text-slate-900 [&_h3]:mt-8 [&_h3]:mb-3 [&_p]:text-base [&_p]:leading-relaxed [&_p]:mb-4 [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mb-4 [&_ul]:space-y-2 [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:mb-4 [&_ol]:space-y-2 [&_a]:text-indigo-600 [&_a]:underline [&_a]:underline-offset-4 [&_a:hover]:text-indigo-700 [&_strong]:font-semibold [&_strong]:text-slate-900 [&_code]:rounded [&_code]:bg-slate-100 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-sm [&_code]:font-mono"
+                dangerouslySetInnerHTML={{ __html: version.body }}
+              />
+            ) : enFullFailed ? (
+              <div
+                role="alert"
+                className="rounded-2xl border border-red-200 bg-red-50 p-6 text-center"
+              >
+                <p className="text-sm leading-relaxed text-red-800">
+                  The article body could not be loaded. Please check your
+                  connection and try again.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setEnFullRetry((n) => n + 1)}
+                  className="mt-4 inline-flex items-center gap-2 rounded-xl bg-red-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-red-700"
+                >
+                  {t.common.tryAgain}
+                </button>
+              </div>
+            ) : (
+              <div
+                aria-busy="true"
+                aria-live="polite"
+                className="rounded-2xl border border-slate-200 bg-white p-6 text-center text-sm text-slate-500"
+              >
+                {t.common.loading}
+              </div>
+            )}
 
             {faqs.length > 0 && (
               <section aria-labelledby="article-faq-heading">

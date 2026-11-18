@@ -579,6 +579,6 @@ export const PT_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
     intro:
       'Converta entre as principais moedas globais com transparência usando a taxa de câmbio exata informada pelo seu banco, corretora ou fatura — com dedução opcional de taxa de FX, cálculo de taxa inversa e uma consulta sob demanda da taxa de referência do BCE.',
     apiNotice:
-      'Precisa de uma API externa para taxas de câmbio ao vivo e nunca usa taxas offline inventadas. Usa sua taxa de câmbio digitada manualmente por padrão (1,0000), ou clique em "Buscar Taxa de Referência do BCE" para solicitar taxas de api.frankfurter.app.',
+      'Precisa de uma API externa para taxas de câmbio ao vivo e nunca usa taxas offline inventadas. Usa sua taxa de câmbio digitada manualmente por padrão (1,0000), ou clique em "Buscar Taxa de Referência do BCE" para solicitar taxas de api.frankfurter.dev.',
   },
 };

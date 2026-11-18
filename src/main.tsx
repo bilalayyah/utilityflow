@@ -1,6 +1,7 @@
 import {createRoot} from 'react-dom/client';
 import App from './App.tsx';
 import {ThemeProvider} from './context/ThemeContext.tsx';
+import { SUPPORTED_LOCALES } from './locales/config.ts';
 import './index.css';
 
 // H-3 (page weight): defer gtag.js until after LCP. The GA4 inline config
@@ -36,6 +37,24 @@ function scheduleGtagLoad(): void {
   }
 }
 scheduleGtagLoad();
+
+// Article pages: start downloading the full EN registry chunk during
+// initial load (Phase 5). It is NOT in the entry bundle — it loads on
+// demand when ArticlePage renders — but starting the fetch here means
+// the chunk is usually already in the module cache by the time the
+// article renders, so the body appears without a visible delay. Only
+// article routes pay this cost; every other page skips it. The
+// .catch() swallows the (benign) failure if the chunk cannot load —
+// ArticlePage shows its own loading/error state instead.
+const pathname = window.location.pathname;
+const isArticleRoute =
+  pathname.startsWith('/blog/') ||
+  SUPPORTED_LOCALES.some((info) =>
+    pathname.startsWith(`${info.pathPrefix}/blog/`)
+  );
+if (isArticleRoute) {
+  import('./registry/blogArticles').catch(() => {});
+}
 
 createRoot(document.getElementById('root')!).render(
   <ThemeProvider>

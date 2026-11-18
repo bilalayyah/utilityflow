@@ -98,6 +98,7 @@ function beautifyCss(css: string): string {
 
   let out = '';
   let depth = 0;
+  let parenDepth = 0;
   let inString: string | null = null;
 
   for (let i = 0; i < min.length; i += 1) {
@@ -121,7 +122,13 @@ function beautifyCss(css: string): string {
       continue;
     }
 
-    if (ch === '{') {
+    if (ch === '(') {
+      parenDepth += 1;
+      out += ch;
+    } else if (ch === ')') {
+      parenDepth = Math.max(0, parenDepth - 1);
+      out += ch;
+    } else if (ch === '{') {
       depth += 1;
       out = out.trimEnd() + ' {\n' + '  '.repeat(depth);
     } else if (ch === '}') {
@@ -130,7 +137,26 @@ function beautifyCss(css: string): string {
     } else if (ch === ';') {
       out += ';\n' + '  '.repeat(depth);
     } else if (ch === ':') {
-      out += ': ';
+      // Only a declaration colon gets ': ' — a ':' inside a selector
+      // (.a:hover, ::before), inside url()/parens (http://…), or inside an
+      // at-rule query is left untouched. A declaration colon is followed
+      // (outside strings/parens) by ';' or '}' before any '{'.
+      let isDeclaration = false;
+      if (depth > 0 && parenDepth === 0) {
+        let pd = 0;
+        for (let j = i + 1; j < min.length; j += 1) {
+          const c = min[j];
+          if (c === '(') pd += 1;
+          else if (c === ')') pd = Math.max(0, pd - 1);
+          else if (pd === 0 && (c === ';' || c === '}')) {
+            isDeclaration = true;
+            break;
+          } else if (pd === 0 && c === '{') {
+            break;
+          }
+        }
+      }
+      out += isDeclaration ? ': ' : ':';
     } else {
       out += ch;
     }

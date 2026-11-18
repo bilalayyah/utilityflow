@@ -233,6 +233,6 @@ export const JA_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
       schemaApplicationCategory: "FinanceApplication",
     },
     intro: "銀行、ブローカー、請求書が提示する正確な為替レートを使って、世界の主要通貨を透明に換算します。任意のFX手数料の控除、逆算レート、オンデマンドのECB基準レートの参照にも対応します。",
-    apiNotice: "ライブの為替レートには外部APIが必要で、オフラインで作り物のレートを使うことはありません。初期設定では手動で入力した為替レート（1.0000）を使います。または「ECB基準レートを取得」をクリックして、api.frankfurter.appからレートを要求します。",
+    apiNotice: "ライブの為替レートには外部APIが必要で、オフラインで作り物のレートを使うことはありません。初期設定では手動で入力した為替レート（1.0000）を使います。または「ECB基準レートを取得」をクリックして、api.frankfurter.devからレートを要求します。",
   },
 };

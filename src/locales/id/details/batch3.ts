@@ -554,7 +554,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
     useCases: ["Memeriksa berapa biaya transfer internasional setelah biaya bank", "Menghitung jumlah faktur dengan kurs kontrak tetap", "Membandingkan biaya kartu kredit 3% untuk transaksi luar negeri dengan kartu tanpa biaya", "Menilai tabel referensi konversi cepat untuk beberapa jumlah"],
     faqs: [
       { question: "Mengapa kurs dimulai dari 1,0000, bukan kurs live?", answer: "Alat ini tidak mengarang kurs: alat ini dimulai dengan kurs netral 1,0000 sampai Anda memasukkan kurs sendiri atau mengambil kurs referensi ECB." },
-      { question: "Dari mana asal kurs referensi yang diambil?", answer: "Kurs berasal dari Bank Sentral Eropa melalui Frankfurter API (api.frankfurter.app) dan hanya diambil saat Anda mengeklik." },
+      { question: "Dari mana asal kurs referensi yang diambil?", answer: "Kurs berasal dari Bank Sentral Eropa melalui Frankfurter API (api.frankfurter.dev) dan hanya diambil saat Anda mengeklik." },
       { question: "Apakah alat ini berfungsi offline atau jika API eksternal diblokir?", answer: "Ya. Dengan kurs yang Anda masukkan secara manual, konversi berfungsi sepenuhnya offline; hanya pengambilan ECB yang membutuhkan internet." },
       { question: "Bagaimana Kalkulator Mata Uang mengonversi uang saya?", answer: "Alat ini mengalikan jumlah dengan kurs Anda dan secara opsional mengurangi biaya dalam persen yang diberikan." },
       { question: "Kurs berapa yang harus saya masukkan?", answer: "Gunakan kurs yang disebutkan bank, broker, atau faktur Anda — bukan kurs online umum." },

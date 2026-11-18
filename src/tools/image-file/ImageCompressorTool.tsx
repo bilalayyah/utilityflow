@@ -14,6 +14,7 @@ const STRINGS_EN = {
     fileWithDims: '{name} ({w}×{h} · {size})',
     processedLocally: 'Processed locally via HTML5 Canvas · Never uploaded to remote servers',
     uploadImageError: 'Please upload a PNG, JPG, WebP, or GIF image file.',
+    fileTooLarge: 'File too large — the per-file limit is 20 MB. Please choose a smaller image.',
     unableToDecode: 'Unable to decode "{name}".',
     canvasUnavailable: 'Canvas 2D context unavailable.',
     compressionFailed: 'Compression failed in browser canvas.',
@@ -129,6 +130,10 @@ export default function ImageCompressorTool() {
     if (!file) return;
     if (!file.type.startsWith('image/')) {
       setError(s.uploadImageError);
+      return;
+    }
+    if (file.size > 20 * 1024 * 1024) {
+      setError(s.fileTooLarge);
       return;
     }
 

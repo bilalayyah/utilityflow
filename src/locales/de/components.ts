@@ -2375,7 +2375,7 @@ export const deComponentStrings: Record<string, ComponentLocaleData> = {
       labelProducer: 'PDF-Ersteller',
       saving: 'PDF wird gespeichert...',
       saveBtn: 'Metadaten speichern & PDF herunterladen',
-      stripBtn: 'Alle Metadatenfelder entfernen',
+      stripBtn: 'Bearbeitbare Felder leeren',
     },
   },
   'pdf-page-rotator': {

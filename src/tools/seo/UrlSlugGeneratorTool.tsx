@@ -82,7 +82,10 @@ export default function UrlSlugGeneratorTool() {
   }, [domainBase, titlesInput, removeStopWords, separator, maxLength, trailingSlash]);
 
   const allSlugs = results.map((r) => r.slug).filter(Boolean).join('\n');
-  const allUrls = results.map((r) => r.fullUrl).filter(Boolean).join('\n');
+  const allUrls = results
+    .filter((r) => r.slug)
+    .map((r) => r.fullUrl)
+    .join('\n');
 
   return (
     <div className="space-y-6">
@@ -195,7 +198,7 @@ export default function UrlSlugGeneratorTool() {
                     <td className="py-2.5 px-4">
                       <div className="font-mono font-semibold text-indigo-700">{row.slug || '—'}</div>
                       <div className="font-mono text-xs text-slate-500 truncate max-w-md">
-                        {row.fullUrl}
+                        {row.slug ? row.fullUrl : '—'}
                       </div>
                     </td>
                     <td className="py-2.5 px-4 text-right">

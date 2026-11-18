@@ -355,7 +355,7 @@ export function renderHomeBody(
   }
   parts.push('</dl></section>');
 
-  parts.push('<section class="mt-12">');
+  parts.push('<section id="ai-tools" class="mt-12">');
   parts.push(`<h2 class="${H2}">${escapeText(t.home.aiSpotlight.title)}</h2>`);
   parts.push(`<p class="text-sm sm:text-base text-slate-600 mb-6">${escapeText(t.home.aiSpotlight.description)}</p>`);
   parts.push(toolCards(aiTools, locale));
@@ -370,7 +370,7 @@ export function renderHomeBody(
   );
   parts.push('</section>');
 
-  parts.push('<section class="mt-12">');
+  parts.push('<section id="categories" class="mt-12">');
   parts.push(`<h2 class="${H2}">${escapeText(t.home.categories.title)}</h2>`);
   parts.push(`<p class="text-sm sm:text-base text-slate-600 mb-6">${escapeText(t.home.categories.description)}</p>`);
   parts.push('<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">');
@@ -391,7 +391,7 @@ export function renderHomeBody(
   }
   parts.push('</div></section>');
 
-  parts.push('<section class="mt-12">');
+  parts.push('<section id="directory" class="mt-12">');
   parts.push(`<h2 class="${H2}">${escapeText(t.home.directory.title)}</h2>`);
   parts.push(`<p class="text-sm sm:text-base text-slate-600 mb-6">${escapeText(t.home.directory.description)}</p>`);
   parts.push(toolCards(allTools, locale));

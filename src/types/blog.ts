@@ -63,3 +63,49 @@ export interface BlogArticle {
   /** Other tools genuinely relevant (for the "Related tools" section). */
   relatedToolIds: string[];
 }
+
+/**
+ * Slim EN version of an article (Phase 5 bundle split): everything a
+ * listing, card, search result, hreflang set or URL resolver needs — and
+ * nothing more. NO body, NO FAQs: those live in the full EN registry
+ * (src/registry/blogArticles.ts, loaded on demand by ArticlePage) and in
+ * the per-locale blog.ts chunks. Keeping bodies out of this type is what
+ * keeps the 4.6 MB EN registry out of the initial JS bundle.
+ */
+export interface BlogArticleMetaVersion {
+  /** URL slug under /blog/. Unique per locale. */
+  slug: string;
+  /** H1 / SEO title base. */
+  title: string;
+  /** Meta description (unique per article). */
+  description: string;
+  /** Reading time in minutes, computed from body word count. */
+  readingMinutes: number;
+}
+
+/**
+ * Slim article record (Phase 5 bundle split): the same identity +
+ * routing fields as BlogArticle, but with the slim EN version above.
+ * Generated into src/registry/blogArticleIndex.ts by
+ * scripts/generate-blog-article-index.ts — never hand-edit the index.
+ */
+export interface BlogArticleMeta {
+  /** Stable id, e.g. "word-counter-guide" (never changes; translations key off this). */
+  id: string;
+  /** The tool's stable English id (links article -> tool page). */
+  toolId: string;
+  /** One of the 7 category ids. */
+  categoryId: CategoryId;
+  /** A1 guide / A2 how-to / A3 advanced-comparison-optimization. */
+  type: BlogArticleType;
+  /** Only "published" is routed, prerendered, and sitemapped. */
+  status: BlogArticleStatus;
+  /** ISO date, real publication date (not fabricated). */
+  publishedAt: string;
+  /** Only when genuinely updated. */
+  updatedAt?: string;
+  /** English (original) slim version. */
+  en: BlogArticleMetaVersion;
+  /** Other tools genuinely relevant (for the "Related tools" section). */
+  relatedToolIds: string[];
+}

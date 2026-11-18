@@ -6,10 +6,10 @@ import { articleHref } from '../../locales/config';
 import {
   getBlogArticleVersion,
   getPublishedBlogArticles,
-} from '../../registry/blogArticles';
+} from '../../registry/blogArticleMeta';
 import type {
-  BlogArticle,
-  BlogArticleLocaleVersion,
+  BlogArticleMeta,
+  BlogArticleMetaVersion,
 } from '../../types/blog';
 
 interface BlogSearchProps {
@@ -18,8 +18,8 @@ interface BlogSearchProps {
 }
 
 interface SearchMatch {
-  article: BlogArticle;
-  version: BlogArticleLocaleVersion;
+  article: BlogArticleMeta;
+  version: BlogArticleMetaVersion;
 }
 
 /**

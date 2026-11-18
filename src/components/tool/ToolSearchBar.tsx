@@ -1,5 +1,5 @@
 import { ArrowRight, Search, X } from 'lucide-react';
-import { useMemo, useState, type FormEvent } from 'react';
+import { useEffect, useMemo, useRef, useState, type FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useLocale } from '../../locales/LocaleContext';
 import { categoryHref, localizeStaticPath, toolHref } from '../../locales/config';
@@ -26,6 +26,22 @@ export function ToolSearchBar({
   const [query, setQuery] = useState(initialQuery);
   const [focused, setFocused] = useState(false);
   const navigate = useNavigate();
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const isHero = variant === 'hero';
+
+  // Phase 9 (P9-3): the hero search shows a ⌘K hint — make it real.
+  // Cmd/Ctrl+K focuses the hero search input from anywhere on the page.
+  useEffect(() => {
+    if (!isHero) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
+        event.preventDefault();
+        inputRef.current?.focus();
+      }
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [isHero]);
 
   const effectivePlaceholder = placeholder ?? t.search.placeholder;
   const trimmed = query.trim().toLowerCase();
@@ -75,8 +91,6 @@ export function ToolSearchBar({
     focused &&
     trimmed.length > 0;
 
-  const isHero = variant === 'hero';
-
   return (
     <div className="relative w-full max-w-2xl">
       <form onSubmit={handleSubmit} role="search" aria-label={t.search.ariaLabel}>
@@ -86,6 +100,7 @@ export function ToolSearchBar({
             aria-hidden="true"
           />
           <input
+            ref={inputRef}
             type="search"
             value={query}
             onFocus={() => setFocused(true)}

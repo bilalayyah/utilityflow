@@ -2374,7 +2374,7 @@ export const zhComponentStrings: Record<string, ComponentLocaleData> = {
       "labelProducer": "PDF 制作者",
       "saving": "正在保存 PDF……",
       "saveBtn": "保存元数据并下载 PDF",
-      "stripBtn": "删除所有元数据字段"
+      "stripBtn": "清除可编辑字段"
     }
   },
   "pdf-page-rotator": {

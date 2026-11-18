@@ -277,6 +277,7 @@ export const itStrings: UiStrings = {
     share: 'Condividi',
     tryTool: 'Prova lo strumento',
     guidesInCategory: 'Guide in questa categoria',
+    categoryGuidesWord: 'Guide',
     noArticlesYet: 'Ancora nessun articolo',
     noArticlesYetDescription: 'Le guide per questa sezione sono in arrivo. Torna presto.',
     backToBlog: 'Torna al blog',
@@ -324,7 +325,7 @@ export const itStrings: UiStrings = {
       'Scopri come UtilityFlow crea utilità veloci e attente alla privacy per il browser in sette categorie, senza account, confusione o caricamenti di dati inutili.',
     title: 'Chi è UtilityFlow',
     intro:
-      'UtilityFlow è una piattaforma web indipendente che costruisce 85 utilità mirate e affidabili nel browser per il lavoro digitale quotidiano.',
+      'UtilityFlow è una piattaforma web indipendente che costruisce 88 utilità mirate e affidabili per il lavoro digitale quotidiano.',
     whyTitle: 'Perché abbiamo creato UtilityFlow',
     whyP1:
       'Le attività online di routine — contare le parole, convalidare JSON, verificare i limiti di caratteri, calcolare le rate di un prestito o comprimere un’immagine — spesso costringono a passare da siti lenti, pieni di finestre invadenti, download confusi o registrazioni obbligatorie.',
@@ -456,6 +457,7 @@ export const itStrings: UiStrings = {
         paragraphs: [
           'Potremmo mostrare annunci di reti pubblicitarie di terze parti (come Google AdSense) per sostenere l’accesso gratuito ai nostri strumenti. I fornitori di terze parti, incluso Google, possono utilizzare cookie o web beacon per mostrare annunci in base alle visite precedenti dell’utente a questo sito o ad altri siti.',
           'Puoi disattivare la pubblicità personalizzata visitando le Impostazioni annunci di Google o gestendo le preferenze sui cookie direttamente nelle impostazioni del tuo browser.',
+          'Utilizziamo anche Google Analytics 4 per capire, in forma aggregata, come viene usato il sito; si attiva solo se accetti i cookie nel banner.',
         ],
       },
       {
@@ -474,7 +476,7 @@ export const itStrings: UiStrings = {
       {
         title: '7. I tuoi diritti e le tue scelte',
         paragraphs: [
-          'Puoi disattivare la pubblicità personalizzata tramite le Impostazioni annunci di Google o la pagina di rinuncia di AboutAds.info collegata nella sezione 4, e puoi bloccare o eliminare i cookie nelle impostazioni del tuo browser in qualsiasi momento. Se hai pubblicato un commento, puoi chiederne la rimozione contattandoci. Poiché i nostri strumenti funzionano nel tuo browser e non teniamo account né profili, non esiste un file di dati personali da scaricare o correggere, ma qualsiasi domanda sui tuoi dati riceverà risposta se ci scrivi.',
+          'Puoi disattivare la pubblicità personalizzata tramite le Impostazioni annunci di Google, e puoi bloccare o eliminare i cookie nelle impostazioni del tuo browser in qualsiasi momento. Se hai pubblicato un commento, puoi chiederne la rimozione contattandoci. Poiché i nostri strumenti funzionano nel tuo browser e non teniamo account né profili, non esiste un file di dati personali da scaricare o correggere, ma qualsiasi domanda sui tuoi dati riceverà risposta se ci scrivi.',
         ],
       },
       {
@@ -496,7 +498,6 @@ export const itStrings: UiStrings = {
     contactLink: 'pagina Contatti',
     contactMiddle: 'o via email',
     optOutGoogleAds: 'Google Ads Settings',
-    optOutAboutAds: 'Rinuncia su AboutAds.info',
   },
   terms: {
     seoTitle: 'Termini di servizio | Strumenti online UtilityFlow',
@@ -540,7 +541,7 @@ export const itStrings: UiStrings = {
       {
         title: '7. Servizi di terze parti',
         paragraphs: [
-          'Alcune funzioni si basano su servizi indipendenti di terze parti: i tre strumenti IA inviano testo a Groq per l’elaborazione, il modulo di contatto è gestito da FormSubmit, il sito è ospitato su Cloudflare e la pubblicità è fornita da Google AdSense. Ciascuno di questi servizi ha i propri termini e la propria informativa sulla privacy, e il loro uso è regolato da quei documenti. UtilityFlow non è responsabile della disponibilità o delle pratiche dei servizi di terze parti.',
+          'Alcune funzioni si basano su servizi indipendenti di terze parti: i tre strumenti IA inviano testo a Groq per l’elaborazione, il modulo di contatto è gestito da FormSubmit, il sito è ospitato su Cloudflare, il Convertitore di valuta recupera i tassi di cambio in tempo reale da Frankfurter e la pubblicità è fornita da Google AdSense. Ciascuno di questi servizi ha i propri termini e la propria informativa sulla privacy, e il loro uso è regolato da quei documenti. UtilityFlow non è responsabile della disponibilità o delle pratiche dei servizi di terze parti.',
         ],
       },
       {

@@ -152,7 +152,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'What is the maximum image size I can compress?',
         answer:
-          'There is no fixed server limit because nothing is uploaded. Very large images are limited only by your device memory and browser Canvas size.',
+          'The per-file limit is 20 MB for PNG, JPG, and WebP files. Nothing is uploaded to a server, so within that limit very large images are constrained only by your device memory and browser Canvas size.',
       },
       {
         question: 'How do I compress an image to under 100 KB?',
@@ -384,7 +384,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'Are file limits enforced?',
         answer:
-          'Only your device RAM applies; all encoding occurs locally with zero server file size caps.',
+          'Yes, each file must be 25 MB or smaller. All encoding still occurs locally in your browser, so within that per-file limit only your device RAM applies.',
       },
       {
         question: 'Is the Image Format Converter free?',

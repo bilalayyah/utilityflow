@@ -28,6 +28,8 @@ const STRINGS_EN = {
     pairsLabel: 'Source → Destination Pairs (comma, tab, or “ -> ” separated)',
     generatedConfigLabel: 'Generated 301 Redirect Config',
     skippedInvalid: 'Skipped {n} line(s) missing destination target.',
+    invalidHreflangWarning:
+      'Skipped invalid hreflang code(s): {codes} — use a 2-letter language code (e.g. en, es), optionally followed by a region (e.g. en-US), or x-default.',
   };
 
 type Mode = 'hreflang' | 'redirects';
@@ -37,6 +39,20 @@ interface HreflangRow {
   id: number;
   lang: string;
   url: string;
+}
+
+function escAttr(value: string): string {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+const HREFLANG_PATTERN = /^(x-default|[a-z]{2}(-[A-Z]{2})?)$/;
+
+function isValidHreflang(code: string): boolean {
+  return HREFLANG_PATTERN.test(code);
 }
 
 export default function CanonicalHreflangGeneratorTool() {
@@ -60,21 +76,28 @@ export default function CanonicalHreflangGeneratorTool() {
   const hreflangOutput = useMemo(() => {
     const htmlLines: string[] = [];
     if (canonicalUrl.trim()) {
-      htmlLines.push(`<link rel="canonical" href="${canonicalUrl.trim()}" />`);
+      htmlLines.push(`<link rel="canonical" href="${escAttr(canonicalUrl.trim())}" />`);
     }
     const validRows = rows.filter((r) => r.lang.trim() && r.url.trim());
-    for (const r of validRows) {
-      htmlLines.push(`<link rel="alternate" hreflang="${r.lang.trim()}" href="${r.url.trim()}" />`);
+    const invalidCodes = validRows
+      .map((r) => r.lang.trim())
+      .filter((code) => !isValidHreflang(code));
+    const emitRows = validRows.filter((r) => isValidHreflang(r.lang.trim()));
+    for (const r of emitRows) {
+      htmlLines.push(
+        `<link rel="alternate" hreflang="${escAttr(r.lang.trim())}" href="${escAttr(r.url.trim())}" />`
+      );
     }
 
-    const xmlLines = validRows.map(
+    const xmlLines = emitRows.map(
       (r) =>
-        `  <xhtml:link rel="alternate" hreflang="${r.lang.trim()}" href="${r.url.trim()}" />`
+        `  <xhtml:link rel="alternate" hreflang="${escAttr(r.lang.trim())}" href="${escAttr(r.url.trim())}" />`
     );
 
     return {
       html: htmlLines.join('\n'),
       xml: xmlLines.join('\n'),
+      invalidCodes,
     };
   }, [canonicalUrl, rows]);
 
@@ -204,6 +227,12 @@ export default function CanonicalHreflangGeneratorTool() {
               </div>
             ))}
           </div>
+
+          {hreflangOutput.invalidCodes.length > 0 && (
+            <p role="alert" className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
+              {s.invalidHreflangWarning.replace('{codes}', hreflangOutput.invalidCodes.join(', '))}
+            </p>
+          )}
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <div className={`rounded-xl border border-slate-200 ${palette.card} p-4 space-y-2.5`}>

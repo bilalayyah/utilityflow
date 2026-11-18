@@ -117,9 +117,7 @@ export default function ReadabilityCheckerTool() {
       0.4 * (avgWordsPerSentence + 100 * (complexWords / wordCount))
     );
     const smog =
-      sentenceCount >= 3
-        ? 1.043 * Math.sqrt(complexWords * (30 / sentenceCount)) + 3.1291
-        : 1.043 * Math.sqrt(complexWords * 10) + 3.1291;
+      1.043 * Math.sqrt(complexWords * (30 / sentenceCount)) + 3.1291;
 
     const band = interpretFleschEase(fleschEase, s.levels);
 

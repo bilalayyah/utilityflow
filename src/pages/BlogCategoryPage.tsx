@@ -16,7 +16,7 @@ import {
 } from '../locales/routes';
 import { getCategoryByLocalizedSlug, getLocalizedCategory } from '../locales/tools';
 import { formatString } from '../locales/ui';
-import { getBlogArticlesForCategory } from '../registry/blogArticles';
+import { getBlogArticlesForCategory } from '../registry/blogArticleMeta';
 import type { BreadcrumbItem } from '../types/tool';
 import { BlogCard } from '../components/blog/BlogCard';
 import { BlogCategoryNav } from '../components/blog/BlogCategoryNav';
@@ -67,8 +67,8 @@ export function BlogCategoryPage() {
   return (
     <>
       <SeoHead
-        title={`${category.name} Guides | UtilityFlow Blog`}
-        description={category.longDescription}
+        title={`${category.name} ${t.blog.categoryGuidesWord} | UtilityFlow Blog`}
+        description={category.seo.description}
         canonicalPath={canonicalPath}
         ogType="website"
         ogImage={getOgImageForPage('category', category.id, locale)}

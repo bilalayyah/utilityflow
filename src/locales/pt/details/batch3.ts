@@ -2343,7 +2343,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'De onde vêm as taxas de referência buscadas?',
         answer:
-          'Quando você clica em "Buscar Taxa de Referência do BCE", seu navegador solicita a taxa de referência mais recente do Banco Central Europeu publicada por api.frankfurter.app. As taxas de referência são referências de mercado médio e diferem um pouco das cotações de varejo dos bancos.',
+          'Quando você clica em "Buscar Taxa de Referência do BCE", seu navegador solicita a taxa de referência mais recente do Banco Central Europeu publicada por api.frankfurter.dev. As taxas de referência são referências de mercado médio e diferem um pouco das cotações de varejo dos bancos.',
       },
       {
         question: 'Isto funciona se eu estiver offline ou se a API externa estiver bloqueada?',

@@ -2369,7 +2369,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'D’où proviennent les taux de référence récupérés ?',
         answer:
-          'Quand vous cliquez sur « Récupérer le taux de référence BCE », votre navigateur demande le dernier taux de référence de la Banque centrale européenne publié par api.frankfurter.app. Les taux de référence sont des repères de marché moyen et diffèrent légèrement des cotations de détail des banques.',
+          'Quand vous cliquez sur « Récupérer le taux de référence BCE », votre navigateur demande le dernier taux de référence de la Banque centrale européenne publié par api.frankfurter.dev. Les taux de référence sont des repères de marché moyen et diffèrent légèrement des cotations de détail des banques.',
       },
       {
         question: 'Cela fonctionne-t-il si je suis hors ligne ou si l’API externe est bloquée ?',
