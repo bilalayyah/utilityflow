@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx server.ts",
-    "build": "tsx scripts/generate-slug-manifest.ts && tsx scripts/generate-blog-article-index.ts && tsx scripts/generate-sitemap.ts && vite build && ./node_modules/.bin/tsx scripts/prerender-meta.ts",
+    "build": "tsx scripts/generate-slug-manifest.ts && tsx scripts/generate-blog-article-index.ts && tsx scripts/generate-blog-article-chunks.ts && tsx scripts/generate-sitemap.ts && vite build && ./node_modules/.bin/tsx scripts/prerender-meta.ts",
     "sitemap": "tsx scripts/generate-sitemap.ts",
     "preview": "vite preview",
     "clean": "rm -rf dist server.js",

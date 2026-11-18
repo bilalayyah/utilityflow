@@ -30,6 +30,7 @@ import {
   getBlogArticleVersion,
   getBlogHomeUrl,
 } from '../registry/blogArticleMeta';
+import { loadBlogArticleById } from '../registry/blogArticleLoader';
 import type { BlogArticleLocaleVersion } from '../types/blog';
 import type { ArticleLocaleOverride } from '../locales/types';
 import type { BreadcrumbItem, ToolDefinition, ToolFAQ } from '../types/tool';
@@ -62,9 +63,11 @@ export function ArticlePage() {
   // and hreflang never wait on the full article data (Phase 5).
   const article = getBlogArticleBySlug(articleSlug, locale);
 
-  // Full EN version (body + FAQs) — loaded on demand from the full
-  // registry chunk, which is NOT in the initial bundle (Phase 5). For
-  // non-EN locales the full version comes from the loaded locale data
+  // Full EN version (body + FAQs) — loaded on demand from the article's
+  // own per-article chunk (src/registry/articles/<id>.ts, via
+  // blogArticleLoader), which is ~5 KB gz instead of the full 1.25 MB gz
+  // registry (registry split, perf fix Wed 2026-11-18). For non-EN
+  // locales the full version comes from the loaded locale data
   // (articleOverrides) and needs no extra fetch.
   const [enFull, setEnFull] = useState<BlogArticleLocaleVersion | null>(null);
   const [enFullFailed, setEnFullFailed] = useState(false);
@@ -74,10 +77,10 @@ export function ArticlePage() {
     let cancelled = false;
     setEnFull(null);
     setEnFullFailed(false);
-    import('../registry/blogArticles')
-      .then((m) => {
+    loadBlogArticleById(article.id)
+      .then((version) => {
         if (cancelled) return;
-        setEnFull(m.getBlogArticleById(article.id)?.en ?? null);
+        setEnFull(version);
       })
       .catch(() => {
         if (!cancelled) setEnFullFailed(true);
@@ -360,6 +363,7 @@ export function ArticlePage() {
               <div
                 aria-busy="true"
                 aria-live="polite"
+                style={{ minHeight: article.en.readingMinutes * 2800 }}
                 className="rounded-2xl border border-slate-200 bg-white p-6 text-center text-sm text-slate-500"
               >
                 {t.common.loading}

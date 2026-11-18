@@ -855,6 +855,37 @@ function toolChunkFile(distDir: string, tool: ToolDefinition): string | null {
   return `assets/${matches[0]}`;
 }
 
+// ---------------------------------------------------------------------------
+// Perf fix (CLS, Wed 2026-11-18) — per-article chunk modulepreload for EN
+// article pages.
+//
+// EN article bodies load on demand from their own per-article chunk
+// (src/registry/articles/<id>.ts, ~5 KB gz, registry split). Preloading
+// that chunk in the prerendered <head> starts the download during
+// initial load, so the body is usually already in the module cache when
+// ArticlePage renders — shrinking the loading-placeholder window and
+// the layout shift when the body arrives. The chunk file is found by
+// scanning dist/assets for exactly one `<article-id>-<hash>.js` match
+// (Vite hashes are alphanumeric plus `_`/`-`, e.g. `CU_KS4ZX` — the
+// hash part is therefore [A-Za-z0-9_-]+. That class could in theory
+// also match a longer id's file against a shorter id's pattern, but no
+// article id is a prefix of another (verified: 0 prefix collisions
+// across all 264 ids), so exactly-one-match still holds). Zero or
+// ambiguous matches skip the preload silently, never a broken
+// link, never a failed build. Non-EN articles resolve synchronously
+// from locale data and never load the chunk, so they get no preload.
+// ---------------------------------------------------------------------------
+
+function articleChunkFile(distDir: string, articleId: string): string | null {
+  const assetsDir = resolve(distDir, 'assets');
+  if (!existsSync(assetsDir)) return null;
+  const escaped = articleId.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const pattern = new RegExp(`^${escaped}-[A-Za-z0-9_-]+\\.js$`);
+  const matches = readdirSync(assetsDir).filter((name) => pattern.test(name));
+  if (matches.length !== 1) return null;
+  return `assets/${matches[0]}`;
+}
+
 function filePathForRoute(distDir: string, routePath: string): string {
   if (routePath === '/') return resolve(distDir, 'index.html');
   const cleaned = routePath.replace(/^\/+|\/+$/g, '');
@@ -913,6 +944,24 @@ async function prerender(): Promise<void> {
       resolvedToolIds.add(tool.id);
     }
     toolPreloadCache.set(tool.id, files);
+    return files;
+  }
+
+  // Perf fix (CLS): per-article chunk preload for EN articles only (see
+  // articleChunkFile above). Cached per article id; resolvedArticleIds
+  // tracks coverage for the final log line.
+  const articlePreloadCache = new Map<string, string[]>();
+  const resolvedArticleIds = new Set<string>();
+  function articlePreloadFor(articleId: string): string[] {
+    const cached = articlePreloadCache.get(articleId);
+    if (cached) return cached;
+    const files: string[] = [];
+    const chunk = articleChunkFile(distDir, articleId);
+    if (chunk) {
+      files.push(chunk);
+      resolvedArticleIds.add(articleId);
+    }
+    articlePreloadCache.set(articleId, files);
     return files;
   }
 
@@ -1033,7 +1082,12 @@ async function prerender(): Promise<void> {
         locale,
         props: articleSeo(article.id, t, locale, data),
         body: renderArticleBody(article, version, t, locale, data),
-        preloadFiles: preloadFor(locale, t.nav.allTools),
+        // Perf fix (CLS): EN articles also preload their per-article
+        // chunk; non-EN articles resolve from locale data and skip it.
+        preloadFiles:
+          locale === 'en'
+            ? [...preloadFor(locale, t.nav.allTools), ...articlePreloadFor(article.id)]
+            : preloadFor(locale, t.nav.allTools),
         isArticle: true,
       });
       knownRoutes.add(articleHref(version.slug, locale));
@@ -1194,8 +1248,16 @@ async function prerender(): Promise<void> {
     `Static bodies (Fix H-1): ${(bodyBytes / 1024 / 1024).toFixed(1)} MB total across ${written} pages.`
   );
   console.log(
-    `Preloads: locale chunks for ${[...localePreloadCache.values()].filter((f) => f.length > 0).length}/10 non-EN locales; tool chunks for ${resolvedToolIds.size}/${TOOLS_REGISTRY.length} tools.`
+    `Preloads: locale chunks for ${[...localePreloadCache.values()].filter((f) => f.length > 0).length}/10 non-EN locales; tool chunks for ${resolvedToolIds.size}/${TOOLS_REGISTRY.length} tools; article chunks for ${resolvedArticleIds.size}/${publishedArticles.length} EN articles.`
   );
+  if (resolvedArticleIds.size !== publishedArticles.length) {
+    const missingArticles = publishedArticles
+      .filter((article) => !resolvedArticleIds.has(article.id))
+      .map((article) => article.id);
+    console.warn(
+      `WARNING: article-chunk preload missing for ${missingArticles.length} article(s): ${missingArticles.join(', ')}`
+    );
+  }
 }
 
 prerender().catch((err) => {
