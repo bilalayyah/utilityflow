@@ -2,6 +2,18 @@
   X-Frame-Options: SAMEORIGIN
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
+  # Audit #5: cross-origin isolation headers. COOP same-origin is safe
+  # (no cross-origin window.opener use; share links are plain
+  # target=_blank anchors). COEP is credentialless, NOT require-corp:
+  # require-corp would block the cross-origin loads this site needs
+  # (Google Fonts, gtag, Frankfurter .dev, the AI worker, FormSubmit),
+  # none of which send CORP headers. credentialless loads those without
+  # credentials (none of them need cookies) and is ignored by browsers
+  # that do not support it. CORP same-origin on our own assets only
+  # blocks other origins hotlinking them; our pages load them same-origin.
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Embedder-Policy: credentialless
+  Cross-Origin-Resource-Policy: same-origin
   # Fix #20: camera=(self) — the QR Code Scanner tool uses live camera
   # (navigator.mediaDevices.getUserMedia). camera=() made the browser reject
   # every camera request, so "Start Camera Scanner" always failed with
