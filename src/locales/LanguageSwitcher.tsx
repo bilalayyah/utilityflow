@@ -35,7 +35,16 @@ export function LanguageSwitcher({ variant = 'dropdown', onSelect }: LanguageSwi
   const handleSelect = (code: LocaleCode) => {
     setOpen(false);
     onSelect?.();
-    if (code !== locale) switchLocale(code);
+    // Audit #9: switchLocale is async — a bare call leaves an unhandled
+    // rejection if the locale chunk fails to load, and the user stays on
+    // the current page with no feedback. Catch it and log it; the user
+    // stays on the current locale (switchLocale only navigates after the
+    // target data loads, so a failure never half-switches the UI).
+    if (code !== locale) {
+      void switchLocale(code).catch((error: unknown) => {
+        console.error(`Failed to switch locale to ${code}`, error);
+      });
+    }
   };
 
   if (variant === 'list') {
