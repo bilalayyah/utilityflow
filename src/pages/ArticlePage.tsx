@@ -5,6 +5,10 @@ import { buildCanonicalUrl } from '../config/site';
 import { getBlogImageUrl } from '../config/ogImages';
 import { useLocale } from '../locales/LocaleContext';
 import {
+  getCachedLocalizedArticle,
+  loadLocalizedArticleById,
+} from '../locales/articleLoader';
+import {
   articleHref,
   blogCategoryHref,
   blogHref,
@@ -29,7 +33,6 @@ import {
   getBlogArticleUrl,
   getBlogArticleVersion,
   getBlogHomeUrl,
-  isFullArticleVersion,
 } from '../registry/blogArticleMeta';
 import { getCachedArticleById, loadBlogArticleById } from '../registry/blogArticleLoader';
 import type { BlogArticleLocaleVersion } from '../types/blog';
@@ -64,12 +67,13 @@ export function ArticlePage() {
   // and hreflang never wait on the full article data (Phase 5).
   const article = getBlogArticleBySlug(articleSlug, locale);
 
-  // Full EN version (body + FAQs) — loaded on demand from the article's
-  // own per-article chunk (src/registry/articles/<id>.ts, via
-  // blogArticleLoader), which is ~5 KB gz instead of the full 1.25 MB gz
-  // registry (registry split, perf fix Wed 2026-11-18). For non-EN
-  // locales the full version comes from the loaded locale data
-  // (articleOverrides) and needs no extra fetch.
+  // Full version (body + FAQs) — loaded on demand from the article's
+  // own per-article chunk, which is ~5 KB gz instead of the full
+  // registry / locale chunk. EN: src/registry/articles/<id>.ts (via
+  // blogArticleLoader, registry split, perf fix Wed 2026-11-18).
+  // Non-EN: src/locales/<code>/articles/<id>.ts (via articleLoader,
+  // audit #6 — the locale chunk carries only the SLIM overrides now,
+  // so the full version needs its own fetch, mirroring EN).
   // CLS fix (Wed 2026-11-18): when the boot gate (src/boot/preloadRoute.ts)
   // already loaded this article's chunk, start with the full version so
   // the first render has the body — no loading placeholder, no
@@ -104,6 +108,38 @@ export function ArticlePage() {
       cancelled = true;
     };
   }, [locale, article?.id, enFullRetry]);
+
+  // Non-EN full version — mirrors enFull exactly (audit #6).
+  const [localeFull, setLocaleFull] = useState<ArticleLocaleOverride | null>(() =>
+    locale !== 'en' && article ? getCachedLocalizedArticle(locale, article.id) : null
+  );
+  const [localeFullFailed, setLocaleFullFailed] = useState(false);
+  const [localeFullRetry, setLocaleFullRetry] = useState(0);
+  useEffect(() => {
+    if (locale === 'en' || !article) return;
+    const cached = getCachedLocalizedArticle(locale, article.id);
+    if (cached) {
+      setLocaleFull(cached);
+      return;
+    }
+    let cancelled = false;
+    setLocaleFull(null);
+    setLocaleFullFailed(false);
+    loadLocalizedArticleById(locale, article.id)
+      .then((version) => {
+        if (cancelled) return;
+        setLocaleFull(version);
+      })
+      .catch(() => {
+        if (!cancelled) setLocaleFullFailed(true);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [locale, article?.id, localeFullRetry]);
+
+  /** Either full-version load failed (EN or localized). */
+  const fullFailed = locale === 'en' ? enFullFailed : localeFullFailed;
 
   if (!article) {
     // The article exists in English but has no version in this locale:
@@ -144,33 +180,22 @@ export function ArticlePage() {
     );
   }
 
-  // Full version: EN loads async (enFull); other locales resolve
-  // synchronously from the loaded locale data. `version` is null only
-  // while the EN body chunk is still loading (or failed to load — see
-  // enFullFailed). While it is null the page renders its shell (H1,
-  // lede, breadcrumbs) from the meta record; the body, FAQs and TOC
-  // appear once the chunk arrives.
-  // isFullArticleVersion (a type predicate) narrows the meta helper's
-  // union to the full-version branch — the EN meta version has no body
-  // and is never used here. A plain `'body' in v` check does NOT narrow:
-  // TS keeps the meta member as BlogArticleMetaVersion &
-  // Record<"body", unknown> (no `faqs`), which is not assignable
-  // (audit #1, TS2322).
-  const localeVersion =
-    locale === 'en' ? undefined : getBlogArticleVersion(article, locale);
+  // Full version: EN loads async (enFull); other locales load async
+  // too (localeFull, audit #6 — the locale chunk no longer carries
+  // bodies). `version` is null only while the body chunk is still
+  // loading (or failed to load — see fullFailed). While it is null the
+  // page renders its shell (H1, lede, breadcrumbs) from the meta record
+  // and the slim locale version; the body, FAQs and TOC appear once the
+  // chunk arrives.
   const version: BlogArticleLocaleVersion | ArticleLocaleOverride | null =
-    locale === 'en'
-      ? enFull
-      : localeVersion && isFullArticleVersion(localeVersion)
-        ? localeVersion
-        : null;
-  const isLoadingBody = locale === 'en' && version === null && !enFullFailed;
+    locale === 'en' ? enFull : localeFull;
+  const isLoadingBody = version === null && !fullFailed;
 
-  // No version and not (still loading / failed) EN: the article has no
+  // No version and not (still loading / failed): the article has no
   // version in this locale — show the notice. Unreachable via
   // getBlogArticleBySlug (it only matches when a version exists), but
   // guard anyway.
-  if (!version && !isLoadingBody && !enFullFailed) {
+  if (!version && !isLoadingBody && !fullFailed) {
     return (
       <>
         <SeoHead
@@ -368,7 +393,7 @@ export function ArticlePage() {
                 className="text-slate-700 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-slate-900 [&_h2]:mt-10 [&_h2]:mb-4 [&_h3]:text-xl [&_h3]:font-bold [&_h3]:text-slate-900 [&_h3]:mt-8 [&_h3]:mb-3 [&_p]:text-base [&_p]:leading-relaxed [&_p]:mb-4 [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mb-4 [&_ul]:space-y-2 [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:mb-4 [&_ol]:space-y-2 [&_a]:text-indigo-600 [&_a]:underline [&_a]:underline-offset-4 [&_a:hover]:text-indigo-700 [&_strong]:font-semibold [&_strong]:text-slate-900 [&_code]:rounded [&_code]:bg-slate-100 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-sm [&_code]:font-mono"
                 dangerouslySetInnerHTML={{ __html: version.body }}
               />
-            ) : enFullFailed ? (
+            ) : fullFailed ? (
               <div
                 role="alert"
                 className="rounded-2xl border border-red-200 bg-red-50 p-6 text-center"
@@ -379,7 +404,11 @@ export function ArticlePage() {
                 </p>
                 <button
                   type="button"
-                  onClick={() => setEnFullRetry((n) => n + 1)}
+                  onClick={() =>
+                    locale === 'en'
+                      ? setEnFullRetry((n) => n + 1)
+                      : setLocaleFullRetry((n) => n + 1)
+                  }
                   className="mt-4 inline-flex items-center gap-2 rounded-xl bg-red-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-red-700"
                 >
                   {t.common.tryAgain}

@@ -2,8 +2,7 @@ import type { CategoryId } from '../types/tool';
 import type { BlogArticle, BlogArticleLocaleVersion } from '../types/blog';
 import type { LocaleCode } from '../locales/config';
 import { DEFAULT_LOCALE, getLocaleInfo } from '../locales/config';
-import type { LocaleData } from '../locales/types';
-import { getActiveLocaleData } from '../locales/store';
+import type { FullLocaleData } from '../locales/types';
 import { getCategoryById } from './categories';
 
 /**
@@ -15,9 +14,11 @@ import { getCategoryById } from './categories';
  * render correctly with zero articles (empty state, no broken links).
  *
  * Translations live in per-locale modules (src/locales/<code>/blog.ts,
- * ArticleLocaleOverride, carried on LocaleData.articleOverrides) and are
- * resolved through the `data` parameter (defaults to the active locale
- * data from the store) — mirroring getLocalizedTool / getLocalizedCategory.
+ * ArticleLocaleOverride, carried on FullLocaleData.articleOverrides) and are
+ * resolved through the `data` parameter — mirroring getLocalizedTool /
+ * getLocalizedCategory. (The browser's LocaleData carries only the SLIM
+ * overrides — audit #6 — so these Node-only helpers take FullLocaleData;
+ * callers must pass it explicitly.)
  * Helpers that only need slugs use the static SLUG_MANIFEST instead (see
  * src/locales/routes.ts).
  */
@@ -20547,7 +20548,7 @@ function normalizeSlug(slug: string): string {
 export function getBlogArticleVersion(
   article: BlogArticle,
   locale: LocaleCode,
-  data: LocaleData = getActiveLocaleData()
+  data: FullLocaleData
 ): BlogArticleLocaleVersion | undefined {
   if (locale === DEFAULT_LOCALE) return article.en;
   if (data.code !== locale) return undefined;
@@ -20562,7 +20563,7 @@ export function getBlogArticleVersion(
 export function getBlogArticleBySlug(
   slug: string,
   locale: LocaleCode,
-  data: LocaleData = getActiveLocaleData()
+  data: FullLocaleData
 ): BlogArticle | undefined {
   const normalized = normalizeSlug(slug);
   return getPublishedBlogArticles().find((article) => {
@@ -20575,7 +20576,7 @@ export function getBlogArticleBySlug(
 export function getBlogArticleUrl(
   article: BlogArticle,
   locale: LocaleCode,
-  data: LocaleData = getActiveLocaleData()
+  data: FullLocaleData
 ): string | undefined {
   const version = getBlogArticleVersion(article, locale, data);
   if (!version) return undefined;
@@ -20587,7 +20588,7 @@ export function getBlogArticleUrl(
 export function getBlogArticlesForTool(
   toolId: string,
   locale: LocaleCode,
-  data: LocaleData = getActiveLocaleData()
+  data: FullLocaleData
 ): BlogArticle[] {
   const order: Record<BlogArticle['type'], number> = { guide: 0, howto: 1, advanced: 2 };
   return getPublishedBlogArticles()
@@ -20603,7 +20604,7 @@ export function getBlogArticlesForTool(
 export function getBlogArticlesForCategory(
   categoryId: CategoryId,
   locale: LocaleCode,
-  data: LocaleData = getActiveLocaleData()
+  data: FullLocaleData
 ): BlogArticle[] {
   return getPublishedBlogArticles()
     .filter(
@@ -20618,7 +20619,7 @@ export function getBlogArticlesForCategory(
 export function getSiblingBlogArticles(
   article: BlogArticle,
   locale: LocaleCode,
-  data: LocaleData = getActiveLocaleData()
+  data: FullLocaleData
 ): BlogArticle[] {
   return getBlogArticlesForTool(article.toolId, locale, data).filter(
     (sibling) => sibling.id !== article.id
@@ -20636,7 +20637,7 @@ export function getRelatedBlogArticles(
   article: BlogArticle,
   locale: LocaleCode,
   limit = 4,
-  data: LocaleData = getActiveLocaleData()
+  data: FullLocaleData
 ): BlogArticle[] {
   const siblings = getSiblingBlogArticles(article, locale, data);
   const seen = new Set(siblings.map((s) => s.id));
@@ -20650,7 +20651,7 @@ export function getRelatedBlogArticles(
 export function getBlogArticlePrevNext(
   article: BlogArticle,
   locale: LocaleCode,
-  data: LocaleData = getActiveLocaleData()
+  data: FullLocaleData
 ): { prev?: BlogArticle; next?: BlogArticle } {
   const siblings = getBlogArticlesForTool(article.toolId, locale, data);
   const index = siblings.findIndex((sibling) => sibling.id === article.id);

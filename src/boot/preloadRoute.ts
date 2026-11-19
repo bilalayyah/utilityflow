@@ -32,6 +32,7 @@
  */
 import { getLocaleFromPath } from '../locales/config';
 import { loadLocaleData } from '../locales/loader';
+import { loadLocalizedArticleById } from '../locales/articleLoader';
 import { setActiveLocaleData } from '../locales/store';
 import { getBlogArticleBySlug } from '../registry/blogArticleMeta';
 import { loadBlogArticleById } from '../registry/blogArticleLoader';
@@ -47,8 +48,22 @@ export async function preloadRouteData(pathname: string): Promise<void> {
   const { locale, restPath } = getLocaleFromPath(pathname);
   const tasks: Array<Promise<unknown>> = [];
   if (locale !== 'en') {
+    // Audit #6: the locale chunk no longer carries article bodies, so a
+    // non-EN article page also needs its per-article chunk preloaded —
+    // sequenced AFTER the locale data loads, because resolving the
+    // article slug needs the loaded locale's slim overrides.
     tasks.push(
-      loadLocaleData(locale).then(setActiveLocaleData).catch(() => undefined)
+      loadLocaleData(locale)
+        .then(async (data) => {
+          setActiveLocaleData(data);
+          const articleSlugMatch = /^\/blog\/([^/]+)\/?$/.exec(restPath);
+          if (!articleSlugMatch) return;
+          const article = getBlogArticleBySlug(articleSlugMatch[1], locale, data);
+          if (article) {
+            await loadLocalizedArticleById(locale, article.id).catch(() => undefined);
+          }
+        })
+        .catch(() => undefined)
     );
   }
   if (locale === 'en') {

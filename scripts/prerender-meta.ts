@@ -80,7 +80,7 @@ import {
   ogLocaleTag,
   toolHref,
 } from '../src/locales/config';
-import { loadLocaleData } from '../src/locales/loader';
+import { loadFullLocaleData } from './load-full-locale-data';
 import { loadLocaleDetails } from '../src/locales/details';
 import {
   getArticleAlternatePaths,
@@ -105,7 +105,7 @@ import {
 } from './prerender-body';
 import { formatString } from '../src/locales/ui';
 import type { LocaleCode, NonDefaultLocale } from '../src/locales/config';
-import type { LocaleData } from '../src/locales/types';
+import type { FullLocaleData, LocaleData } from '../src/locales/types';
 import { CATEGORIES } from '../src/registry/categories';
 import { getBlogArticleById, getBlogArticleVersion, getPublishedBlogArticles } from '../src/registry/blogArticles';
 import { TOOLS_REGISTRY } from '../src/registry/toolsRegistry';
@@ -475,7 +475,7 @@ function categorySeo(
   categoryId: string,
   t: LocaleData['uiStrings'],
   locale: LocaleCode,
-  data: LocaleData
+  data: FullLocaleData
 ): SeoHeadProps {
   const category = getLocalizedCategory(categoryId as CategoryId, locale, data);
   if (!category) throw new Error(`Category not found: ${categoryId}`);
@@ -550,7 +550,7 @@ function blogCategorySeo(
   categoryId: string,
   t: LocaleData['uiStrings'],
   locale: LocaleCode,
-  data: LocaleData
+  data: FullLocaleData
 ): SeoHeadProps {
   const category = getLocalizedCategory(categoryId as CategoryId, locale, data);
   if (!category) throw new Error(`Category not found: ${categoryId}`);
@@ -592,7 +592,7 @@ function articleSeo(
   articleId: string,
   t: LocaleData['uiStrings'],
   locale: LocaleCode,
-  data: LocaleData
+  data: FullLocaleData
 ): SeoHeadProps {
   const article = getBlogArticleById(articleId);
   if (!article) throw new Error(`Article not found: ${articleId}`);
@@ -656,7 +656,7 @@ function toolSeo(
   toolId: string,
   t: LocaleData['uiStrings'],
   locale: LocaleCode,
-  data: LocaleData,
+  data: FullLocaleData,
   details: Record<string, ToolDetail>
 ): SeoHeadProps {
   const base = TOOLS_REGISTRY.find((tool) => tool.id === toolId);
@@ -794,12 +794,17 @@ function prerenderHead(shell: string, seo: SeoHeadProps, preloadFiles: string[] 
 // in parallel with the entry instead. The chunk file is found by scanning
 // dist/assets for `<locale>-<hash>.js` (exactly one match required -
 // otherwise the preload is skipped, never a broken link).
+// The hash is Vite's default 8 characters, so the pattern requires
+// exactly 8 — otherwise the per-article chunks (<locale>-<id>-<hash>.js,
+// audit #6) also match, since their <id> contains hyphens and the
+// character class includes '-'. A per-article suffix is always longer
+// than 8 chars (<id> + '-' + 8-char hash), so {8} excludes them.
 // ---------------------------------------------------------------------------
 
 function localeChunkFile(distDir: string, locale: LocaleCode, marker?: string): string | null {
   const assetsDir = resolve(distDir, 'assets');
   if (!existsSync(assetsDir)) return null;
-  const pattern = new RegExp(`^${locale}-[A-Za-z0-9_-]+\.js$`);
+  const pattern = new RegExp(`^${locale}-[A-Za-z0-9_-]{8}\.js$`);
   const matches = readdirSync(assetsDir).filter((name) => pattern.test(name));
   if (matches.length === 0) return null;
   if (matches.length === 1) return `assets/${matches[0]}`;
@@ -890,6 +895,25 @@ function articleChunkFile(distDir: string, articleId: string): string | null {
   return `assets/${matches[0]}`;
 }
 
+// Audit #6: the localized per-article chunk for one (locale, article).
+// Localized chunks are named <locale>-<id>-<hash>.js (the locale prefix
+// keeps them distinct from the EN <id>-<hash>.js chunks, so the EN
+// lookup above still matches exactly one file). Exactly one match
+// required; otherwise the preload is skipped silently.
+function localizedArticleChunkFile(
+  distDir: string,
+  locale: LocaleCode,
+  articleId: string
+): string | null {
+  const assetsDir = resolve(distDir, 'assets');
+  if (!existsSync(assetsDir)) return null;
+  const escaped = articleId.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const pattern = new RegExp(`^${locale}-${escaped}-[A-Za-z0-9_-]+\\.js$`);
+  const matches = readdirSync(assetsDir).filter((name) => pattern.test(name));
+  if (matches.length !== 1) return null;
+  return `assets/${matches[0]}`;
+}
+
 function filePathForRoute(distDir: string, routePath: string): string {
   if (routePath === '/') return resolve(distDir, 'index.html');
   const cleaned = routePath.replace(/^\/+|\/+$/g, '');
@@ -969,9 +993,28 @@ async function prerender(): Promise<void> {
     return files;
   }
 
+  // Audit #6: per-article chunk preload for non-EN articles (their
+  // localized chunk, <locale>-<id>-<hash>.js). Cached per (locale,
+  // article); resolvedLocalizedArticles tracks coverage for the log line.
+  const localizedArticlePreloadCache = new Map<string, string[]>();
+  const resolvedLocalizedArticles = new Set<string>();
+  function localizedArticlePreloadFor(locale: LocaleCode, articleId: string): string[] {
+    const key = `${locale}:${articleId}`;
+    const cached = localizedArticlePreloadCache.get(key);
+    if (cached) return cached;
+    const files: string[] = [];
+    const chunk = localizedArticleChunkFile(distDir, locale, articleId);
+    if (chunk) {
+      files.push(chunk);
+      resolvedLocalizedArticles.add(key);
+    }
+    localizedArticlePreloadCache.set(key, files);
+    return files;
+  }
+
   for (const localeInfo of SUPPORTED_LOCALES) {
     const locale = localeInfo.code;
-    const data: LocaleData = await loadLocaleData(locale);
+    const data: FullLocaleData = await loadFullLocaleData(locale);
     // H-3: bulk-load this locale's per-batch detail modules once, so every
     // tool page prerenders with its full guide (HowTo/FAQ JSON-LD + body).
     const details = await loadLocaleDetails(locale);
@@ -1086,12 +1129,13 @@ async function prerender(): Promise<void> {
         locale,
         props: articleSeo(article.id, t, locale, data),
         body: renderArticleBody(article, version, t, locale, data),
-        // Perf fix (CLS): EN articles also preload their per-article
-        // chunk; non-EN articles resolve from locale data and skip it.
+        // Perf fix (CLS): articles preload their per-article chunk —
+        // EN (<id>-<hash>.js) and non-EN (<locale>-<id>-<hash>.js,
+        // audit #6: non-EN no longer resolves from the locale chunk).
         preloadFiles:
           locale === 'en'
             ? [...preloadFor(locale, t.nav.allTools), ...articlePreloadFor(article.id)]
-            : preloadFor(locale, t.nav.allTools),
+            : [...preloadFor(locale, t.nav.allTools), ...localizedArticlePreloadFor(locale, article.id)],
         isArticle: true,
       });
       knownRoutes.add(articleHref(version.slug, locale));
@@ -1252,7 +1296,7 @@ async function prerender(): Promise<void> {
     `Static bodies (Fix H-1): ${(bodyBytes / 1024 / 1024).toFixed(1)} MB total across ${written} pages.`
   );
   console.log(
-    `Preloads: locale chunks for ${[...localePreloadCache.values()].filter((f) => f.length > 0).length}/10 non-EN locales; tool chunks for ${resolvedToolIds.size}/${TOOLS_REGISTRY.length} tools; article chunks for ${resolvedArticleIds.size}/${publishedArticles.length} EN articles.`
+    `Preloads: locale chunks for ${[...localePreloadCache.values()].filter((f) => f.length > 0).length}/10 non-EN locales; tool chunks for ${resolvedToolIds.size}/${TOOLS_REGISTRY.length} tools; article chunks for ${resolvedArticleIds.size}/${publishedArticles.length} EN articles; localized article chunks for ${resolvedLocalizedArticles.size}/${publishedArticles.length * (SUPPORTED_LOCALES.length - 1)} (locale, article) pairs.`
   );
   if (resolvedArticleIds.size !== publishedArticles.length) {
     const missingArticles = publishedArticles
@@ -1260,6 +1304,17 @@ async function prerender(): Promise<void> {
       .map((article) => article.id);
     console.warn(
       `WARNING: article-chunk preload missing for ${missingArticles.length} article(s): ${missingArticles.join(', ')}`
+    );
+  }
+  const expectedLocalized = publishedArticles.length * (SUPPORTED_LOCALES.length - 1);
+  if (resolvedLocalizedArticles.size !== expectedLocalized) {
+    const missingLocalized = publishedArticles.flatMap((article) =>
+      SUPPORTED_LOCALES.filter((l) => l.code !== 'en')
+        .filter((l) => !resolvedLocalizedArticles.has(`${l.code}:${article.id}`))
+        .map((l) => `${l.code}:${article.id}`)
+    );
+    console.warn(
+      `WARNING: localized article-chunk preload missing for ${missingLocalized.length} (locale, article) pair(s): ${missingLocalized.slice(0, 10).join(', ')}${missingLocalized.length > 10 ? ', …' : ''}`
     );
   }
 }

@@ -47,7 +47,7 @@ import {
   getLocalizedTools,
   getToolById,
 } from '../src/locales/tools';
-import type { LocaleData } from '../src/locales/types';
+import type { FullLocaleData, LocaleData } from '../src/locales/types';
 import { formatString } from '../src/locales/ui';
 import type { UiStrings } from '../src/locales/ui';
 import { AI_TOOLS } from '../src/registry/aiTools';
@@ -161,7 +161,7 @@ export function renderToolBody(
   tool: ToolDefinition,
   t: UiStrings,
   locale: LocaleCode,
-  data: LocaleData
+  data: FullLocaleData
 ): string {
   const category = getLocalizedCategory(tool.categoryId, locale, data);
   const howToTitle = formatString(t.toolPage.howToUse, { name: tool.name });
@@ -323,7 +323,7 @@ export function renderToolBody(
 export function renderHomeBody(
   t: UiStrings,
   locale: LocaleCode,
-  data: LocaleData
+  data: FullLocaleData
 ): string {
   const allTools = getLocalizedTools(locale, data);
   const categories = getLocalizedCategories(locale, data);
@@ -428,7 +428,7 @@ export function renderHomeBody(
 export function renderDirectoryBody(
   t: UiStrings,
   locale: LocaleCode,
-  data: LocaleData
+  data: FullLocaleData
 ): string {
   const allTools = getLocalizedTools(locale, data);
   const categories = getLocalizedCategories(locale, data);
@@ -472,7 +472,7 @@ export function renderCategoryBody(
   category: ToolCategory,
   t: UiStrings,
   locale: LocaleCode,
-  data: LocaleData
+  data: FullLocaleData
 ): string {
   const tools = getLocalizedTools(locale, data).filter(
     (tool) => tool.categoryId === category.id
@@ -572,7 +572,7 @@ export function renderStaticBody(
   key: StaticPageKey,
   t: UiStrings,
   locale: LocaleCode,
-  data: LocaleData
+  data: FullLocaleData
 ): string {
   const parts: string[] = [];
   const articleOpen =
@@ -749,7 +749,7 @@ function blogCard(
   version: BlogArticleLocaleVersion,
   t: UiStrings,
   locale: LocaleCode,
-  data: LocaleData
+  data: FullLocaleData
 ): string {
   const category = getLocalizedCategory(article.categoryId, locale, data);
   const palette = pastelForKey(`blog:${article.id}`);
@@ -776,7 +776,7 @@ function blogCards(
   articles: BlogArticle[],
   t: UiStrings,
   locale: LocaleCode,
-  data: LocaleData,
+  data: FullLocaleData,
   gridClass = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'
 ): string {
   const cards: string[] = [];
@@ -792,7 +792,7 @@ function blogCards(
 function blogCategoryNav(
   t: UiStrings,
   locale: LocaleCode,
-  data: LocaleData,
+  data: FullLocaleData,
   currentCategoryId?: string
 ): string {
   const categories = getLocalizedCategories(locale, data);
@@ -882,7 +882,7 @@ function extractHeadings(body: string): TocHeading[] {
 export function renderBlogHomeBody(
   t: UiStrings,
   locale: LocaleCode,
-  data: LocaleData
+  data: FullLocaleData
 ): string {
   const articles = getPublishedBlogArticles()
     .filter((article) => getBlogArticleVersion(article, locale, data) !== undefined)
@@ -939,7 +939,7 @@ export function renderBlogCategoryBody(
   category: ToolCategory,
   t: UiStrings,
   locale: LocaleCode,
-  data: LocaleData
+  data: FullLocaleData
 ): string {
   const articles = getBlogArticlesForCategory(category.id, locale, data);
   const parts: string[] = [];
@@ -996,7 +996,7 @@ export function renderArticleBody(
   version: BlogArticleLocaleVersion,
   t: UiStrings,
   locale: LocaleCode,
-  data: LocaleData
+  data: FullLocaleData
 ): string {
   const category = getLocalizedCategory(article.categoryId, locale, data);
   const headings = extractHeadings(version.body);

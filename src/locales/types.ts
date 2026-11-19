@@ -71,6 +71,23 @@ export interface ArticleLocaleOverride {
   readingMinutes: number;
 }
 
+/**
+ * Slim per-locale article record (audit #6, locale-chunk split).
+ * The browser's locale chunk carries ONLY this — slug, title,
+ * description, readingMinutes — for routing, listings, hreflang and
+ * search. The full body + FAQs live in the article's own per-article
+ * chunk (src/locales/<code>/articles/<id>.ts) and are loaded on demand
+ * by src/locales/articleLoader.ts, mirroring the EN per-article split.
+ * A full ArticleLocaleOverride IS a slim override (it has all four
+ * fields), so full records are assignable to this type.
+ */
+export interface ArticleLocaleSlimOverride {
+  slug: string;
+  title: string;
+  description: string;
+  readingMinutes: number;
+}
+
 /** A titled section of a legal / informational page. */
 export interface InfoSection {
   title: string;
@@ -105,8 +122,27 @@ export interface LocaleData {
   code: LocaleCode;
   toolOverrides: Record<string, ToolLocaleOverride>;
   categoryOverrides: Record<string, CategoryLocaleOverride>;
-  /** Blog article overrides, keyed by article id. Only published translations. Empty until Batch 4. */
-  articleOverrides: Record<string, ArticleLocaleOverride>;
+  /**
+   * Blog article overrides, keyed by article id. Only published
+   * translations. SLIM (audit #6): slug/title/description/readingMinutes
+   * only — the full body + FAQs are NOT in the locale chunk; they load
+   * per-article from src/locales/<code>/articles/<id>.ts via
+   * src/locales/articleLoader.ts. Every consumer that only needs the
+   * shell (routing, listings, hreflang, search) uses this.
+   */
+  articleOverrides: Record<string, ArticleLocaleSlimOverride>;
   uiStrings: UiStrings;
   componentStrings: Record<string, ComponentLocaleData>;
+}
+
+/**
+ * Node-only (prerender): the same locale data but with FULL article
+ * overrides (body + FAQs). The prerender scripts (which run under tsx,
+ * not in the browser bundle) load the full overrides from the locale's
+ * blog.ts source and use this type, so getBlogArticleVersion
+ * (src/registry/blogArticles.ts) keeps returning a full
+ * BlogArticleLocaleVersion for static HTML + FAQ JSON-LD.
+ */
+export interface FullLocaleData extends Omit<LocaleData, 'articleOverrides'> {
+  articleOverrides: Record<string, ArticleLocaleOverride>;
 }

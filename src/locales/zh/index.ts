@@ -2,7 +2,7 @@ import { ZH_TOOL_OVERRIDES } from './tools';
 import { ZH_CATEGORY_OVERRIDES } from './categories';
 import { zhStrings } from './ui';
 import { zhComponentStrings } from './components';
-import { ZH_ARTICLE_OVERRIDES } from './blog';
+import { ZH_ARTICLE_INDEX } from './blog-index';
 import type { LocaleData } from '../types';
 
 /**
@@ -15,7 +15,7 @@ const data: LocaleData = {
   code: 'zh',
   toolOverrides: ZH_TOOL_OVERRIDES,
   categoryOverrides: ZH_CATEGORY_OVERRIDES,
-  articleOverrides: ZH_ARTICLE_OVERRIDES,
+  articleOverrides: ZH_ARTICLE_INDEX,
   uiStrings: zhStrings,
   componentStrings: zhComponentStrings,
 };

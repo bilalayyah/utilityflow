@@ -2,7 +2,7 @@ import { KO_TOOL_OVERRIDES } from './tools';
 import { KO_CATEGORY_OVERRIDES } from './categories';
 import { koStrings } from './ui';
 import { koComponentStrings } from './components';
-import { KO_ARTICLE_OVERRIDES } from './blog';
+import { KO_ARTICLE_INDEX } from './blog-index';
 import type { LocaleData } from '../types';
 
 /**
@@ -15,7 +15,7 @@ const data: LocaleData = {
   code: 'ko',
   toolOverrides: KO_TOOL_OVERRIDES,
   categoryOverrides: KO_CATEGORY_OVERRIDES,
-  articleOverrides: KO_ARTICLE_OVERRIDES,
+  articleOverrides: KO_ARTICLE_INDEX,
   uiStrings: koStrings,
   componentStrings: koComponentStrings,
 };

@@ -5,7 +5,7 @@ import type {
 } from '../types/blog';
 import type { LocaleCode } from '../locales/config';
 import { DEFAULT_LOCALE, getLocaleInfo } from '../locales/config';
-import type { ArticleLocaleOverride, LocaleData } from '../locales/types';
+import type { ArticleLocaleSlimOverride, LocaleData } from '../locales/types';
 import { getActiveLocaleData } from '../locales/store';
 import { BLOG_ARTICLE_META } from './blogArticleIndex';
 
@@ -25,12 +25,17 @@ import { BLOG_ARTICLE_META } from './blogArticleIndex';
  *   articles use THESE helpers (meta only).
  * - The full article body + FAQs for ONE article come from
  *   src/registry/blogArticles.ts, loaded on demand by ArticlePage via
- *   dynamic import (EN), or from the loaded locale's articleOverrides
- *   (non-EN — already in the locale chunk).
+ *   dynamic import (EN), or from the article's own per-article chunk
+ *   (non-EN — src/locales/<code>/articles/<id>.ts, via
+ *   src/locales/articleLoader.ts). The locale chunk carries only the
+ *   SLIM overrides (slug/title/description/readingMinutes, audit #6),
+ *   so getBlogArticleVersion returns the slim version for non-EN —
+ *   never a body. ArticlePage loads the full version asynchronously.
  * - Node scripts (generate-sitemap, generate-slug-manifest,
  *   prerender-meta, prerender-body) keep importing the full registry —
  *   they run under tsx, not in the browser bundle, and they need the
- *   full bodies for static HTML + FAQ JSON-LD.
+ *   full bodies for static HTML + FAQ JSON-LD. They use
+ *   src/registry/blogArticles.ts (FullLocaleData), not this module.
  *
  * The lookup logic mirrors blogArticles.ts line-for-line where the
  * record shapes allow it, so behaviour is identical — only the data
@@ -55,40 +60,25 @@ function normalizeSlug(slug: string): string {
 }
 
 /**
- * The locale version of an article (slim EN version, or the translation
- * if published in that locale). For non-EN locales this returns the full
- * ArticleLocaleOverride from the loaded locale data (body + FAQs
- * included — it already lives in the locale chunk); for EN it returns
- * the slim meta version (slug/title/description/readingMinutes only —
- * the full EN body is loaded separately by ArticlePage).
+ * The locale version of an article (slim EN version, or the slim
+ * translation if published in that locale). For non-EN locales this
+ * returns the SLIM override from the loaded locale data
+ * (slug/title/description/readingMinutes only — audit #6, the full
+ * body + FAQs load per-article via src/locales/articleLoader.ts);
+ * for EN it returns the slim meta version (slug/title/description/
+ * readingMinutes only — the full EN body is loaded separately by
+ * ArticlePage).
  */
 export function getBlogArticleVersion(
   article: BlogArticleMeta,
   locale: LocaleCode,
   data: LocaleData = getActiveLocaleData()
-): BlogArticleMetaVersion | ArticleLocaleOverride | undefined {
+): BlogArticleMetaVersion | ArticleLocaleSlimOverride | undefined {
   if (locale === DEFAULT_LOCALE) return article.en;
   if (data.code !== locale) return undefined;
   const override = data.articleOverrides[article.id];
   if (!override) return undefined;
-  // Normalise: ArticleLocaleOverride.faqs is optional, but callers that
-  // render FAQs expect an array (possibly empty).
-  return { ...override, faqs: override.faqs ?? [] };
-}
-
-/**
- * Type predicate: is this the full locale version (body + FAQs) rather
- * than the slim EN meta version? The meta version has no `body`; the
- * override always has one. A plain `'body' in v` check does NOT narrow
- * correctly — TS keeps the meta member as `BlogArticleMetaVersion &
- * Record<"body", unknown>` (no `faqs`), which is not assignable to the
- * full-version union (audit #1, TS2322). The predicate asserts the
- * runtime check's result so callers get exactly ArticleLocaleOverride.
- */
-export function isFullArticleVersion(
-  version: BlogArticleMetaVersion | ArticleLocaleOverride | undefined
-): version is ArticleLocaleOverride {
-  return version !== undefined && 'body' in version;
+  return override;
 }
 
 /** Find a published article by its slug in the given locale (EN slug or the locale's translated slug). */

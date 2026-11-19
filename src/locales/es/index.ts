@@ -2,7 +2,7 @@ import { ES_TOOL_OVERRIDES } from './tools';
 import { ES_CATEGORY_OVERRIDES } from './categories';
 import { esStrings } from './ui';
 import { esComponentStrings } from './components';
-import { ES_ARTICLE_OVERRIDES } from './blog';
+import { ES_ARTICLE_INDEX } from './blog-index';
 import type { LocaleData } from '../types';
 
 /**
@@ -15,7 +15,7 @@ const data: LocaleData = {
   code: 'es',
   toolOverrides: ES_TOOL_OVERRIDES,
   categoryOverrides: ES_CATEGORY_OVERRIDES,
-  articleOverrides: ES_ARTICLE_OVERRIDES,
+  articleOverrides: ES_ARTICLE_INDEX,
   uiStrings: esStrings,
   componentStrings: esComponentStrings,
 };
