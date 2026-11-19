@@ -1693,7 +1693,7 @@ export const koComponentStrings: Record<string, ComponentLocaleData> = {
         }
       ],
       "title": "AI 스마트 도구 찾기",
-      "searchesLine": "실제 UtilityFlow 도구 {count}개를 검색합니다(브라우저 도구 85개 + AI 도구 2개)",
+      "searchesLine": "실제 UtilityFlow 도구 {count}개를 검색합니다(브라우저 도구 84개 + AI 도구 2개)",
       "aiSearchesToday": "오늘의 AI 검색:",
       "leftUnlimited": "남음 · 즉시 로컬 검색 무제한",
       "quotaFallback": "하루 최대 10회 무료 AI 검색 · 로컬 검색 무제한",
@@ -1917,7 +1917,7 @@ export const koComponentStrings: Record<string, ComponentLocaleData> = {
   "meta-tag-generator": {
     "strings": {
       "defaultTitle": "UtilityFlow – 빠르고 브라우저 기반의 온라인 유틸리티 도구",
-      "defaultDescription": "텍스트 편집, 개발자 코딩, 금융 계산기, PDF 워크플로, SEO를 위한 85개의 빠르고 개인정보를 보호하는 브라우저 도구를 살펴보세요.",
+      "defaultDescription": "텍스트 편집, 개발자 코딩, 금융 계산기, PDF 워크플로, SEO를 위한 84개의 빠르고 개인정보를 보호하는 브라우저 도구를 살펴보세요.",
       "pageTitleLabel": "페이지 제목(<title> / og:title)",
       "titleChars": "{n}자(이상적: 30–60)",
       "metaDescriptionLabel": "메타 설명",

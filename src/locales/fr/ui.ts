@@ -100,7 +100,7 @@ export const frStrings: UiStrings = {
     eyebrow: 'Plateforme UtilityFlow · 7 catégories principales · {count} utilitaires en ligne',
     h1: 'Des utilitaires en ligne pratiques, conçus pour la rapidité et la confidentialité.',
     heroDescription:
-      'UtilityFlow regroupe 85 utilitaires pensés pour le navigateur, plus l’écriture IA, le résumé et la découverte intelligente d’outils, pour le texte, le développement, les calculs, les réseaux sociaux, les PDF, le SEO et les images.',
+      'UtilityFlow regroupe 84 utilitaires pensés pour le navigateur, plus l’écriture IA, le résumé et la découverte intelligente d’outils, pour le texte, le développement, les calculs, les réseaux sociaux, les PDF, le SEO et les images.',
     exploreCategories: 'Explorer les catégories',
     openDirectory: 'Ouvrir l’annuaire complet',
     aiWriting: 'Écriture IA',
@@ -177,17 +177,17 @@ export const frStrings: UiStrings = {
       {
         question: 'Les outils de UtilityFlow sont-ils gratuits et utilisables sans créer de compte ?',
         answer:
-          'Oui. Les 85 utilitaires navigateur et les 3 outils IA de UtilityFlow sont entièrement gratuits, sans inscription, sans mur de connexion, sans crédits ni abonnement.',
+          'Oui. Les 84 utilitaires navigateur et les 3 outils IA de UtilityFlow sont entièrement gratuits, sans inscription, sans mur de connexion, sans crédits ni abonnement.',
       },
       {
         question: 'UtilityFlow envoie-t-il mes textes, mon code ou mes fichiers vers un serveur ?',
         answer:
-          'Les 85 utilitaires navigateur principaux s’exécutent localement dans votre navigateur web sans envoyer vos données. Nos 3 outils IA gratuits (assistant d’écriture IA, résumeur de texte IA et chercheur d’outils IA) traitent vos requêtes en toute sécurité via l’inférence Groq côté serveur, sans stocker vos textes.',
+          'Les 84 utilitaires navigateur principaux s’exécutent localement dans votre navigateur web sans envoyer vos données. Nos 3 outils IA gratuits (assistant d’écriture IA, résumeur de texte IA et chercheur d’outils IA) traitent vos requêtes en toute sécurité via l’inférence Groq côté serveur, sans stocker vos textes.',
       },
       {
         question: 'Comment les 88 outils sont-ils organisés sur la plateforme ?',
         answer:
-          'UtilityFlow couvre sept catégories principales (texte et écriture, développeurs, calculatrices, réseaux sociaux, PDF, SEO et outils d’images et de fichiers), soit 85 outils navigateur et 3 outils IA gratuits intégrés à la plateforme.',
+          'UtilityFlow couvre sept catégories principales (texte et écriture, développeurs, calculatrices, réseaux sociaux, PDF, SEO et outils d’images et de fichiers), soit 84 outils navigateur et 3 outils IA gratuits intégrés à la plateforme.',
       },
       {
         question: 'Puis-je mettre en favori ou partager un lien direct vers un outil précis ?',
@@ -440,7 +440,7 @@ export const frStrings: UiStrings = {
       {
         title: '2. Données des outils, traitement dans le navigateur et outils IA gratuits',
         paragraphs: [
-          'Les textes, chiffres, extraits de code et fichiers saisis dans nos 85 outils navigateur sont traités localement dans votre session de navigation, sans quitter votre appareil.',
+          'Les textes, chiffres, extraits de code et fichiers saisis dans nos 84 outils navigateur sont traités localement dans votre session de navigation, sans quitter votre appareil.',
           'Nos trois outils IA gratuits (assistant d’écriture IA, résumeur de texte IA et chercheur d’outils IA) envoient le texte soumis via notre backend protégé vers Groq pour une inférence en temps réel. Nous ne stockons ni n’enregistrons vos requêtes, et les limites quotidiennes gratuites utilisent uniquement un hachage SHA-256 daté en UTC, de sorte que les adresses IP brutes des visiteurs ne sont jamais stockées.',
           'Les commentaires publiés sous nos outils ne demandent qu’un nom et le texte du commentaire. Le nom et le texte que vous envoyez sont stockés sur notre plateforme d’hébergement et affichés publiquement sur la page de l’outil concerné, avec la date. Nous ne demandons ni adresse e-mail ni compte pour commenter, et nous n’utilisons pas les données des commentaires à des fins publicitaires. Si vous souhaitez qu’un commentaire soit supprimé, contactez-nous en indiquant la page et le nom utilisé, et nous le supprimerons.',
         ],

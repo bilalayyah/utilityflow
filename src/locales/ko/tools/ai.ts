@@ -126,7 +126,7 @@ export const KO_AI_OVERRIDES: Record<string, ToolLocaleOverride> = {
       schemaApplicationCategory: 'UtilitiesApplication',
     },
     apiNotice:
-      '로그인, 구독, 크레딧 없이 100% 무료입니다. 검증된 85개 브라우저 도구 + 2개 AI 도구를 검색합니다(하루 최대 10건의 AI 검색 + 무제한 즉시 키워드 매칭).',
+      '로그인, 구독, 크레딧 없이 100% 무료입니다. 검증된 84개 브라우저 도구 + 2개 AI 도구를 검색합니다(하루 최대 10건의 AI 검색 + 무제한 즉시 키워드 매칭).',
     intro:
       '어떤 도구가 작업을 처리하는지 잘 모르겠나요? 철자 실수나 비격식 표현이 있어도 평이한 한국어로 목표를 설명하면 하이브리드 키워드 + Groq AI 매처가 명확한 근거와 함께 UtilityFlow 라이브 카탈로그에서 검증된 도구를 추천합니다.',
   },

@@ -125,7 +125,7 @@ export const IT_AI_OVERRIDES: Record<string, ToolLocaleOverride> = {
       schemaApplicationCategory: 'UtilitiesApplication',
     },
     apiNotice:
-      '100% gratis, senza login, abbonamento o crediti. Ricerca nel nostro inventario verificato di 85 strumenti browser + 2 strumenti IA (fino a 10 ricerche IA al giorno + corrispondenza istantanea per parole chiave illimitata).',
+      '100% gratis, senza login, abbonamento o crediti. Ricerca nel nostro inventario verificato di 84 strumenti browser + 2 strumenti IA (fino a 10 ricerche IA al giorno + corrispondenza istantanea per parole chiave illimitata).',
     intro:
       'Non sai quale strumento gestisce la tua attività? Descrivi il tuo obiettivo in linguaggio semplice, anche con errori di ortografia o formulazioni informali, e il nostro comparatore ibrido parole chiave + IA Groq raccomanda strumenti verificati dal catalogo live di UtilityFlow con giustificazioni chiare.',
   },

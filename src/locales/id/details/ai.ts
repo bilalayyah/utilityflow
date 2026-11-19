@@ -89,7 +89,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: "Apa yang terjadi jika saya mencapai batas permintaan gratis harian?",
         answer:
-          "Batas harian direset otomatis pada tengah malam UTC. Sementara itu, semua 85+ utilitas browser lokal — termasuk Penghitung Kata, Pemeriksa Keterbacaan, dan Pemeriksa Perbedaan Teks — berfungsi tanpa batas.",
+          "Batas harian direset otomatis pada tengah malam UTC. Sementara itu, semua 84+ utilitas browser lokal — termasuk Penghitung Kata, Pemeriksa Keterbacaan, dan Pemeriksa Perbedaan Teks — berfungsi tanpa batas.",
       },
       {
         question: "Tugas penulisan apa yang dapat ditangani Asisten Penulisan AI?",
@@ -257,7 +257,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: "Apakah ada batas atau biaya untuk memakai Peringkas Teks AI?",
         answer:
-          "Alat ini sepenuhnya gratis tanpa penagihan atau pendaftaran. Pengunjung menerima hingga 5 ringkasan gratis per hari UTC, dan semua 85 alat browser lokal tetap tidak terbatas.",
+          "Alat ini sepenuhnya gratis tanpa penagihan atau pendaftaran. Pengunjung menerima hingga 5 ringkasan gratis per hari UTC, dan semua 84 alat browser lokal tetap tidak terbatas.",
       },
       {
         question: "Panjang ringkasan apa yang ditawarkan Peringkas Teks AI?",
@@ -391,7 +391,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       },
     ],
     benefits: [
-      "Pencarian bahasa alami gratis di semua 85 alat browser dan 2 alat AI",
+      "Pencarian bahasa alami gratis di semua 84 alat browser dan 2 alat AI",
       "Pencocokan kata kunci lokal instan yang toleran terhadap kesalahan ketik plus peringkat semantik AI Groq",
       "Verifikasi inventaris yang ketat menjamin nol alat yang dibuat-buat atau tautan rusak",
       "Menampilkan penjelasan satu kalimat yang jelas dan hingga 3 alternatif",
@@ -426,7 +426,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: "Alat apa yang dapat direkomendasikan Pencari Alat AI Cerdas?",
         answer:
-          "Alat ini mencari seluruh katalog UtilityFlow yang berisi 88 alat: 85 alat browser di kategori teks, pengembang, kalkulator, sosial, PDF, SEO, dan gambar, plus Asisten Penulisan AI dan Peringkas Teks AI.",
+          "Alat ini mencari seluruh katalog UtilityFlow yang berisi 88 alat: 84 alat browser di kategori teks, pengembang, kalkulator, sosial, PDF, SEO, dan gambar, plus Asisten Penulisan AI dan Peringkas Teks AI.",
       },
       {
         question: "Apakah Pencari Alat AI Cerdas mengirim pencarian saya ke layanan eksternal?",

@@ -100,7 +100,7 @@ export const deStrings: UiStrings = {
     eyebrow: 'UtilityFlow-Plattform · 7 Hauptkategorien · {count} Live-Utilities',
     h1: 'Praktische Online-Utilities für Tempo und Datenschutz.',
     heroDescription:
-      'UtilityFlow bündelt 85 browserbasierte Utilities plus kostenloses KI-Schreiben, Zusammenfassen und intelligentes Finden von Tools – für Text, Entwicklung, Rechner, Social Media, PDF, SEO und Bild-Workflows.',
+      'UtilityFlow bündelt 84 browserbasierte Utilities plus kostenloses KI-Schreiben, Zusammenfassen und intelligentes Finden von Tools – für Text, Entwicklung, Rechner, Social Media, PDF, SEO und Bild-Workflows.',
     exploreCategories: 'Kategorien entdecken',
     openDirectory: 'Vollständiges Verzeichnis öffnen',
     aiWriting: 'KI-Schreiben',
@@ -177,17 +177,17 @@ export const deStrings: UiStrings = {
       {
         question: 'Sind die Tools von UtilityFlow kostenlos und ohne Konto nutzbar?',
         answer:
-          'Ja. Alle 85 Browser-Utilities und 3 KI-Tools auf UtilityFlow sind kostenlos verfügbar – ohne Registrierung, Anmeldewand, Guthaben oder Abonnement.',
+          'Ja. Alle 84 Browser-Utilities und 3 KI-Tools auf UtilityFlow sind kostenlos verfügbar – ohne Registrierung, Anmeldewand, Guthaben oder Abonnement.',
       },
       {
         question: 'Lädt UtilityFlow meine Texte, meinen Code oder meine Dateien auf einen Server hoch?',
         answer:
-          'Alle 85 zentralen Browser-Utilities laufen lokal in Ihrem Webbrowser, ohne Eingaben hochzuladen. Unsere 3 optionalen kostenlosen KI-Tools (KI-Schreibassistent, KI-Textzusammenfasser und KI-Tool-Finder) verarbeiten Anfragen sicher über serverseitige Groq-Inferenz, ohne Ihre Texte zu speichern.',
+          'Alle 84 zentralen Browser-Utilities laufen lokal in Ihrem Webbrowser, ohne Eingaben hochzuladen. Unsere 3 optionalen kostenlosen KI-Tools (KI-Schreibassistent, KI-Textzusammenfasser und KI-Tool-Finder) verarbeiten Anfragen sicher über serverseitige Groq-Inferenz, ohne Ihre Texte zu speichern.',
       },
       {
         question: 'Wie sind die 88 Tools auf der Plattform organisiert?',
         answer:
-          'UtilityFlow umfasst sieben Hauptkategorien (Text & Schreiben, Entwickler, Rechner, Social Media, PDFs, SEO sowie Bild- & Datei-Tools) mit insgesamt 85 Browser-Tools und 3 kostenlosen KI-Tools, die in die Plattform integriert sind.',
+          'UtilityFlow umfasst sieben Hauptkategorien (Text & Schreiben, Entwickler, Rechner, Social Media, PDFs, SEO sowie Bild- & Datei-Tools) mit insgesamt 84 Browser-Tools und 3 kostenlosen KI-Tools, die in die Plattform integriert sind.',
       },
       {
         question: 'Kann ich ein Lesezeichen setzen oder einen direkten Link zu einem bestimmten Tool teilen?',
@@ -441,7 +441,7 @@ export const deStrings: UiStrings = {
       {
         title: '2. Tool-Eingaben, Browser-Verarbeitung & kostenlose KI-Tools',
         paragraphs: [
-          'Texte, Zahlen, Code-Snippets und Dateien, die Sie in unsere 85 browserbasierten Tools eingeben, werden lokal in Ihrer Browsersitzung verarbeitet, ohne Ihr Gerät zu verlassen.',
+          'Texte, Zahlen, Code-Snippets und Dateien, die Sie in unsere 84 browserbasierten Tools eingeben, werden lokal in Ihrer Browsersitzung verarbeitet, ohne Ihr Gerät zu verlassen.',
           'Unsere drei optionalen kostenlosen KI-Tools (KI-Schreibassistent, KI-Textzusammenfasser und KI-Tool-Finder) senden den übermittelten Text über unser geschütztes Backend an Groq zur Echtzeit-Inferenz. Wir speichern Ihre Anfragen nicht und protokollieren sie nicht; die kostenlosen täglichen Limits verwenden nur einen UTC-datierten SHA-256-Hash, sodass rohe Besucher-IP-Adressen nie gespeichert werden.',
           'Kommentare unter unseren Tools fragen nur nach einem Namen und dem Kommentartext. Der Name und der Text, die Sie übermitteln, werden auf unserer Hosting-Plattform gespeichert und zusammen mit dem Datum öffentlich auf der jeweiligen Tool-Seite angezeigt. Wir fragen weder nach einer E-Mail-Adresse noch nach einem Konto, um zu kommentieren, und wir verwenden Kommentardaten nicht für Werbung. Wenn Sie einen Kommentar entfernen lassen möchten, kontaktieren Sie uns mit der Seite und dem verwendeten Namen, und wir löschen ihn.',
         ],

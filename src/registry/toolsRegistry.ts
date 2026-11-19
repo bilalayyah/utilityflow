@@ -10,7 +10,7 @@ import { BATCH_7_IMAGE_FILE_TOOLS } from './batches/batch7ImageFileTools';
 
 /**
  * Central Tool Registry.
- * Combines all 85 local browser tools across 7 batches plus free AI utilities.
+ * Combines all 84 local browser tools across 7 batches plus free AI utilities.
  */
 export const TOOLS_REGISTRY: ToolDefinition[] = [
   ...BATCH_1_TEXT_TOOLS,

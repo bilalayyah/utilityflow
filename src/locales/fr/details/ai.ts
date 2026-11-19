@@ -89,7 +89,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'Que se passe-t-il si j’atteins la limite quotidienne gratuite de demandes ?',
         answer:
-          'Les limites quotidiennes se réinitialisent automatiquement à minuit UTC. En attendant, les plus de 85 utilitaires locaux du navigateur — notamment le compteur de mots, le vérificateur de lisibilité et le vérificateur de différences de texte — fonctionnent sans limites.',
+          'Les limites quotidiennes se réinitialisent automatiquement à minuit UTC. En attendant, les plus de 84 utilitaires locaux du navigateur — notamment le compteur de mots, le vérificateur de lisibilité et le vérificateur de différences de texte — fonctionnent sans limites.',
       },
       {
         question: 'Quelles tâches d’écriture l’assistant d’écriture IA peut-il gérer ?',
@@ -257,7 +257,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'Y a-t-il une limite ou un frais pour utiliser le résumeur de texte IA ?',
         answer:
-          'L’outil est entièrement gratuit, sans facturation ni inscription. Les visiteurs reçoivent jusqu’à 5 résumés gratuits par jour UTC, et les 85 outils locaux du navigateur restent illimités.',
+          'L’outil est entièrement gratuit, sans facturation ni inscription. Les visiteurs reçoivent jusqu’à 5 résumés gratuits par jour UTC, et les 84 outils locaux du navigateur restent illimités.',
       },
       {
         question: 'Quelles longueurs de résumé le résumeur de texte IA propose-t-il ?',
@@ -391,7 +391,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       },
     ],
     benefits: [
-      'Recherche gratuite en langage naturel dans les 85 outils de navigateur et 2 outils IA',
+      'Recherche gratuite en langage naturel dans les 84 outils de navigateur et 2 outils IA',
       'Correspondance instantanée locale par mots-clés tolérante aux fautes de frappe plus classement sémantique IA Groq',
       'La vérification stricte de l’inventaire garantit zéro outil fabriqué ou lien cassé',
       'Affiche une justification claire en une phrase et jusqu’à 3 alternatives',
@@ -426,7 +426,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'Quels outils le chercheur d’outils intelligent IA peut-il recommander ?',
         answer:
-          'Il recherche dans le catalogue complet d’UtilityFlow de 88 outils : 85 outils de navigateur dans les catégories texte, développeur, calculatrice, réseaux sociaux, PDF, SEO et image, plus l’assistant d’écriture IA et le résumeur de texte IA.',
+          'Il recherche dans le catalogue complet d’UtilityFlow de 88 outils : 84 outils de navigateur dans les catégories texte, développeur, calculatrice, réseaux sociaux, PDF, SEO et image, plus l’assistant d’écriture IA et le résumeur de texte IA.',
       },
       {
         question: 'Le chercheur d’outils intelligent IA envoie-t-il ma recherche à un service externe ?',

@@ -89,7 +89,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'O que acontece se eu atingir o limite diário gratuito?',
         answer:
-          'Os limites diários são zerados automaticamente à meia-noite UTC. Enquanto isso, todas as 85+ ferramentas locais de navegador — incluindo Contador de Palavras, Verificador de Legibilidade e Comparador de Texto — funcionam sem limites.',
+          'Os limites diários são zerados automaticamente à meia-noite UTC. Enquanto isso, todas as 84+ ferramentas locais de navegador — incluindo Contador de Palavras, Verificador de Legibilidade e Comparador de Texto — funcionam sem limites.',
       },
       {
         question: 'Quais tarefas de escrita o Assistente de Escrita com IA consegue fazer?',
@@ -257,7 +257,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'Há algum limite ou cobrança para usar o Resumidor de Texto com IA?',
         answer:
-          'A ferramenta é totalmente gratuita, sem cobrança ou cadastro. Os visitantes recebem até 5 resumos gratuitos por dia UTC, e todas as 85 ferramentas locais de navegador continuam ilimitadas.',
+          'A ferramenta é totalmente gratuita, sem cobrança ou cadastro. Os visitantes recebem até 5 resumos gratuitos por dia UTC, e todas as 84 ferramentas locais de navegador continuam ilimitadas.',
       },
       {
         question: 'Quais tamanhos de resumo o Resumidor de Texto com IA oferece?',
@@ -391,7 +391,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       },
     ],
     benefits: [
-      'Busca gratuita em linguagem natural em todas as 85 ferramentas de navegador e 2 ferramentas de IA',
+      'Busca gratuita em linguagem natural em todas as 84 ferramentas de navegador e 2 ferramentas de IA',
       'Correspondência instantânea local por palavras-chave tolerante a erros de digitação, além de classificação semântica com IA da Groq',
       'A verificação rigorosa do inventário garante zero ferramentas inventadas ou links quebrados',
       'Mostra justificativa clara de uma frase e até 3 alternativas',
@@ -426,7 +426,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'Quais ferramentas o Buscador Inteligente de Ferramentas com IA pode recomendar?',
         answer:
-          'Ele pesquisa o catálogo completo do UtilityFlow de 88 ferramentas: 85 ferramentas de navegador nas categorias de texto, desenvolvedor, calculadora, social, PDF, SEO e imagem, além do Assistente de Escrita com IA e do Resumidor de Texto com IA.',
+          'Ele pesquisa o catálogo completo do UtilityFlow de 88 ferramentas: 84 ferramentas de navegador nas categorias de texto, desenvolvedor, calculadora, social, PDF, SEO e imagem, além do Assistente de Escrita com IA e do Resumidor de Texto com IA.',
       },
       {
         question: 'O Buscador Inteligente de Ferramentas com IA envia minha busca para um serviço externo?',

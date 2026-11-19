@@ -1694,7 +1694,7 @@ export const esComponentStrings: Record<string, ComponentLocaleData> = {
         }
       ],
       "title": "Buscador inteligente de herramientas con IA",
-      "searchesLine": "Busca en {count} herramientas reales de UtilityFlow (85 de navegador + 2 de IA)",
+      "searchesLine": "Busca en {count} herramientas reales de UtilityFlow (84 de navegador + 2 de IA)",
       "aiSearchesToday": "Búsquedas con IA hoy:",
       "leftUnlimited": "restantes · Búsqueda local instantánea ilimitada",
       "quotaFallback": "Hasta 10 búsquedas con IA gratis al día · Búsqueda local ilimitada",
@@ -1918,7 +1918,7 @@ export const esComponentStrings: Record<string, ComponentLocaleData> = {
   "meta-tag-generator": {
     "strings": {
       "defaultTitle": "UtilityFlow – Herramientas de utilidad rápidas en el navegador",
-      "defaultDescription": "Explora 85 herramientas rápidas y privadas en el navegador para editar texto, codificar, calcular finanzas, trabajar con PDF y SEO.",
+      "defaultDescription": "Explora 84 herramientas rápidas y privadas en el navegador para editar texto, codificar, calcular finanzas, trabajar con PDF y SEO.",
       "pageTitleLabel": "Título de la página (<title> / og:title)",
       "titleChars": "{n} caracteres (ideal: 30–60)",
       "metaDescriptionLabel": "Metadescripción",
@@ -2588,7 +2588,7 @@ export const esComponentStrings: Record<string, ComponentLocaleData> = {
   },
   'social-thumbnail-previewer': {
     strings: {
-      sampleTitle: 'Cómo creamos 85 utilidades rápidas en el navegador sin rastreo',
+      sampleTitle: 'Cómo creamos 84 utilidades rápidas en el navegador sin rastreo',
       sampleChannel: 'UtilityFlow Studio',
       sampleViews: '24K vistas · hace 2 días',
       errNotImage: 'Seleccione un archivo de imagen PNG, JPG o WebP.',

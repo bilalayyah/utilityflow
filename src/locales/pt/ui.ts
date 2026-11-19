@@ -102,7 +102,7 @@ export const ptStrings: UiStrings = {
     eyebrow: 'Plataforma UtilityFlow · 7 categorias principais · {count} utilitários ativos',
     h1: 'Utilitários online práticos, feitos para velocidade e privacidade.',
     heroDescription:
-      'O UtilityFlow organiza 85 utilitários que rodam no navegador, além de escrita com IA gratuita, resumo e descoberta inteligente de ferramentas, em fluxos de texto, desenvolvimento, calculadoras, redes sociais, PDF, SEO e imagem.',
+      'O UtilityFlow organiza 84 utilitários que rodam no navegador, além de escrita com IA gratuita, resumo e descoberta inteligente de ferramentas, em fluxos de texto, desenvolvimento, calculadoras, redes sociais, PDF, SEO e imagem.',
     exploreCategories: 'Explorar categorias',
     openDirectory: 'Abrir diretório completo',
     aiWriting: 'Escrita com IA',
@@ -179,17 +179,17 @@ export const ptStrings: UiStrings = {
       {
         question: 'As ferramentas do UtilityFlow são gratuitas e podem ser usadas sem criar uma conta?',
         answer:
-          'Sim. Todos os 85 utilitários de navegador e as 3 ferramentas de IA do UtilityFlow são gratuitos, sem cadastro, sem tela de login, sem créditos e sem assinatura.',
+          'Sim. Todos os 84 utilitários de navegador e as 3 ferramentas de IA do UtilityFlow são gratuitos, sem cadastro, sem tela de login, sem créditos e sem assinatura.',
       },
       {
         question: 'O UtilityFlow envia meu texto, código ou arquivos para um servidor?',
         answer:
-          'Todos os 85 utilitários principais de navegador rodam localmente no seu navegador, sem enviar os dados inseridos. Nossas 3 ferramentas de IA gratuitas opcionais (Assistente de escrita com IA, Resumidor de texto com IA e Buscador inteligente de ferramentas com IA) processam os comandos com segurança por meio de inferência Groq no servidor, sem armazenar seu texto.',
+          'Todos os 84 utilitários principais de navegador rodam localmente no seu navegador, sem enviar os dados inseridos. Nossas 3 ferramentas de IA gratuitas opcionais (Assistente de escrita com IA, Resumidor de texto com IA e Buscador inteligente de ferramentas com IA) processam os comandos com segurança por meio de inferência Groq no servidor, sem armazenar seu texto.',
       },
       {
         question: 'Como as 88 ferramentas são organizadas na plataforma?',
         answer:
-          'O UtilityFlow cobre sete categorias principais (Texto e escrita, Desenvolvedores, Calculadoras, Redes sociais, PDFs, SEO e Ferramentas de imagem e arquivos), totalizando 85 ferramentas de navegador, além de 3 ferramentas de IA gratuitas integradas à plataforma.',
+          'O UtilityFlow cobre sete categorias principais (Texto e escrita, Desenvolvedores, Calculadoras, Redes sociais, PDFs, SEO e Ferramentas de imagem e arquivos), totalizando 84 ferramentas de navegador, além de 3 ferramentas de IA gratuitas integradas à plataforma.',
       },
       {
         question: 'Posso salvar ou compartilhar um link direto para uma ferramenta específica?',
@@ -442,7 +442,7 @@ export const ptStrings: UiStrings = {
       {
         title: '2. Entradas das ferramentas, processamento no navegador e ferramentas de IA gratuitas',
         paragraphs: [
-          'Texto, números, trechos de código e arquivos inseridos em nossas 85 ferramentas de navegador são processados localmente na sessão do seu navegador, sem sair do seu dispositivo.',
+          'Texto, números, trechos de código e arquivos inseridos em nossas 84 ferramentas de navegador são processados localmente na sessão do seu navegador, sem sair do seu dispositivo.',
           'Nossas três ferramentas de IA gratuitas opcionais (Assistente de escrita com IA, Resumidor de texto com IA e Buscador inteligente de ferramentas com IA) enviam o texto submetido por meio do nosso backend protegido para a Groq, para inferência em tempo real. Não armazenamos nem registramos seus comandos, e os limites diários gratuitos usam apenas um hash SHA-256 datado em UTC, para que os endereços IP brutos dos visitantes nunca sejam armazenados.',
           'Os comentários publicados nas nossas ferramentas pedem apenas um nome e o texto do comentário. O nome e o texto enviados são armazenados na nossa plataforma de hospedagem e exibidos publicamente na página daquela ferramenta, junto com a data. Não pedimos endereço de e-mail nem conta para comentar, e não usamos os dados dos comentários para publicidade. Se quiser que um comentário seja removido, entre em contato informando a página e o nome usado, e nós o excluiremos.',
         ],

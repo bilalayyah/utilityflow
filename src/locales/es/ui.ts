@@ -99,7 +99,7 @@ export const esStrings: UiStrings = {
     eyebrow: 'Plataforma UtilityFlow · 7 categorías principales · {count} utilidades en vivo',
     h1: 'Utilidades online prácticas, rápidas y privadas.',
     heroDescription:
-      'UtilityFlow reúne 85 utilidades pensadas para el navegador, además de escritura con IA gratuita, resúmenes y descubrimiento inteligente de herramientas para flujos de trabajo de texto, desarrollo, calculadoras, redes sociales, PDF, SEO e imágenes.',
+      'UtilityFlow reúne 84 utilidades pensadas para el navegador, además de escritura con IA gratuita, resúmenes y descubrimiento inteligente de herramientas para flujos de trabajo de texto, desarrollo, calculadoras, redes sociales, PDF, SEO e imágenes.',
     exploreCategories: 'Explorar categorías',
     openDirectory: 'Abrir el directorio completo',
     aiWriting: 'Escritura con IA',
@@ -176,17 +176,17 @@ export const esStrings: UiStrings = {
       {
         question: '¿Las herramientas de UtilityFlow son gratuitas y se pueden usar sin crear una cuenta?',
         answer:
-          'Sí. Las 85 utilidades del navegador y las 3 herramientas de IA de UtilityFlow están disponibles de forma gratuita, sin registro, muro de inicio de sesión, créditos ni suscripción.',
+          'Sí. Las 84 utilidades del navegador y las 3 herramientas de IA de UtilityFlow están disponibles de forma gratuita, sin registro, muro de inicio de sesión, créditos ni suscripción.',
       },
       {
         question: '¿UtilityFlow sube mi texto, código o archivos a un servidor?',
         answer:
-          'Las 85 utilidades principales del navegador se ejecutan localmente en tu navegador web sin subir las entradas. Nuestras 3 herramientas gratuitas opcionales de IA (Asistente de escritura con IA, Resumidor de texto con IA y Buscador inteligente de herramientas con IA) procesan las indicaciones de forma segura mediante inferencia de Groq del lado del servidor, sin almacenar tu texto.',
+          'Las 84 utilidades principales del navegador se ejecutan localmente en tu navegador web sin subir las entradas. Nuestras 3 herramientas gratuitas opcionales de IA (Asistente de escritura con IA, Resumidor de texto con IA y Buscador inteligente de herramientas con IA) procesan las indicaciones de forma segura mediante inferencia de Groq del lado del servidor, sin almacenar tu texto.',
       },
       {
         question: '¿Cómo están organizadas las 88 herramientas en la plataforma?',
         answer:
-          'UtilityFlow abarca siete categorías principales (herramientas de texto y escritura, para desarrolladores, calculadoras, redes sociales, PDF, SEO y herramientas de imagen y archivos) con un total de 85 herramientas del navegador junto con 3 herramientas gratuitas de IA integradas en la plataforma.',
+          'UtilityFlow abarca siete categorías principales (herramientas de texto y escritura, para desarrolladores, calculadoras, redes sociales, PDF, SEO y herramientas de imagen y archivos) con un total de 84 herramientas del navegador junto con 3 herramientas gratuitas de IA integradas en la plataforma.',
       },
       {
         question: '¿Puedo marcar o compartir un enlace directo a una herramienta específica?',
@@ -443,7 +443,7 @@ export const esStrings: UiStrings = {
       {
         title: '2. Entradas de herramientas, procesamiento en el navegador y herramientas gratuitas de IA',
         paragraphs: [
-          'El texto, los números, los fragmentos de código y los archivos que se ingresan en nuestras 85 herramientas basadas en el navegador se procesan localmente dentro de tu sesión del navegador sin salir de tu dispositivo.',
+          'El texto, los números, los fragmentos de código y los archivos que se ingresan en nuestras 84 herramientas basadas en el navegador se procesan localmente dentro de tu sesión del navegador sin salir de tu dispositivo.',
           'Nuestras tres herramientas gratuitas opcionales de IA (Asistente de escritura con IA, Resumidor de texto con IA y Buscador inteligente de herramientas con IA) envían el texto enviado a través de nuestro backend protegido a Groq para inferencia en tiempo real. No almacenamos ni registramos tus indicaciones, y los límites diarios gratuitos usan solo un hash SHA-256 con fecha UTC, por lo que las direcciones IP sin procesar de los visitantes nunca se almacenan.',
           'Los comentarios publicados en nuestras herramientas solo piden un nombre y el texto del comentario. El nombre y el texto que envías se guardan en nuestra plataforma de alojamiento y se muestran públicamente en la página de esa herramienta, junto con la fecha. No pedimos una dirección de correo ni una cuenta para comentar, y no usamos los datos de los comentarios para publicidad. Si quieres que se elimine un comentario, contáctanos con la página y el nombre usado y lo borraremos.',
         ],

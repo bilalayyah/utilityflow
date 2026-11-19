@@ -1694,7 +1694,7 @@ export const jaComponentStrings: Record<string, ComponentLocaleData> = {
         }
       ],
       "title": "AI搭載ツールファインダー",
-      "searchesLine": "{count}件の実際のUtilityFlowツールから検索（ブラウザツール85件 + AIツール2件）",
+      "searchesLine": "{count}件の実際のUtilityFlowツールから検索（ブラウザツール84件 + AIツール2件）",
       "aiSearchesToday": "本日のAI検索:",
       "leftUnlimited": "残り ・ 即時ローカル検索は無制限",
       "quotaFallback": "1日最大10回の無料AI検索 ・ ローカル検索は無制限",
@@ -1918,7 +1918,7 @@ export const jaComponentStrings: Record<string, ComponentLocaleData> = {
   "meta-tag-generator": {
     "strings": {
       "defaultTitle": "UtilityFlow – 高速なブラウザベースのオンラインユーティリティツール",
-      "defaultDescription": "テキスト編集、開発者向けコーディング、金融計算、PDFワークフロー、SEOのための85の高速でプライバシーに配慮したブラウザツールを発見。",
+      "defaultDescription": "テキスト編集、開発者向けコーディング、金融計算、PDFワークフロー、SEOのための84の高速でプライバシーに配慮したブラウザツールを発見。",
       "pageTitleLabel": "ページタイトル（<title> / og:title）",
       "titleChars": "{n}文字（理想は30〜60文字）",
       "metaDescriptionLabel": "メタディスクリプション",

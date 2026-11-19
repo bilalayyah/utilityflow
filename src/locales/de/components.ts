@@ -1694,7 +1694,7 @@ export const deComponentStrings: Record<string, ComponentLocaleData> = {
         }
       ],
       "title": "KI-gestützter Tool-Finder",
-      "searchesLine": "Durchsucht {count} echte UtilityFlow-Tools (85 Browser- + 2 KI-Tools)",
+      "searchesLine": "Durchsucht {count} echte UtilityFlow-Tools (84 Browser- + 2 KI-Tools)",
       "aiSearchesToday": "KI-Suchen heute:",
       "leftUnlimited": "übrig · Sofortige lokale Suche unbegrenzt",
       "quotaFallback": "Bis zu 10 kostenlose KI-Suchen / Tag · Unbegrenzte lokale Suche",
@@ -1918,7 +1918,7 @@ export const deComponentStrings: Record<string, ComponentLocaleData> = {
   "meta-tag-generator": {
     "strings": {
       "defaultTitle": "UtilityFlow – Schnelle browserbasierte Online-Utility-Tools",
-      "defaultDescription": "Entdecken Sie 85 schnelle, datenschutzfreundliche Browser-Tools für Textbearbeitung, Entwickler-Codierung, Finanzrechner, PDF-Workflows und SEO.",
+      "defaultDescription": "Entdecken Sie 84 schnelle, datenschutzfreundliche Browser-Tools für Textbearbeitung, Entwickler-Codierung, Finanzrechner, PDF-Workflows und SEO.",
       "pageTitleLabel": "Seitentitel (<title> / og:title)",
       "titleChars": "{n} Zeichen (ideal 30–60)",
       "metaDescriptionLabel": "Meta-Beschreibung",
@@ -2588,7 +2588,7 @@ export const deComponentStrings: Record<string, ComponentLocaleData> = {
   },
   'social-thumbnail-previewer': {
     strings: {
-      sampleTitle: 'Wie wir 85 schnelle Browser-Utilities ohne Tracking gebaut haben',
+      sampleTitle: 'Wie wir 84 schnelle Browser-Utilities ohne Tracking gebaut haben',
       sampleChannel: 'UtilityFlow Studio',
       sampleViews: '24.000 Aufrufe · vor 2 Tagen',
       errNotImage: 'Bitte wählen Sie eine PNG-, JPG- oder WebP-Bilddatei.',

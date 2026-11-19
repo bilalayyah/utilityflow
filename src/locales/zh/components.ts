@@ -1694,7 +1694,7 @@ export const zhComponentStrings: Record<string, ComponentLocaleData> = {
         }
       ],
       "title": "AI 智能工具查找器",
-      "searchesLine": "搜索 {count} 个真实的 UtilityFlow 工具（85 个浏览器工具 + 2 个 AI 工具）",
+      "searchesLine": "搜索 {count} 个真实的 UtilityFlow 工具（84 个浏览器工具 + 2 个 AI 工具）",
       "aiSearchesToday": "今日 AI 搜索：",
       "leftUnlimited": "剩余 · 即时本地搜索无限制",
       "quotaFallback": "每日最多 10 次免费 AI 搜索 · 本地搜索无限制",
@@ -1918,7 +1918,7 @@ export const zhComponentStrings: Record<string, ComponentLocaleData> = {
   "meta-tag-generator": {
     "strings": {
       "defaultTitle": "UtilityFlow – 快速的浏览器端在线实用工具",
-      "defaultDescription": "探索 85 款快速、注重隐私的浏览器工具，涵盖文本编辑、开发者编码、金融计算、PDF 工作流和 SEO。",
+      "defaultDescription": "探索 84 款快速、注重隐私的浏览器工具，涵盖文本编辑、开发者编码、金融计算、PDF 工作流和 SEO。",
       "pageTitleLabel": "页面标题（<title> / og:title）",
       "titleChars": "{n} 个字符（理想 30–60）",
       "metaDescriptionLabel": "元描述",
@@ -2580,7 +2580,7 @@ export const zhComponentStrings: Record<string, ComponentLocaleData> = {
   },
   "social-thumbnail-previewer": {
     "strings": {
-      "sampleTitle": "我们如何在不追踪的情况下构建 85 个快速浏览器实用工具",
+      "sampleTitle": "我们如何在不追踪的情况下构建 84 个快速浏览器实用工具",
       "sampleChannel": "UtilityFlow Studio",
       "sampleViews": "2.4 万次观看 · 2 天前",
       "errNotImage": "请选择 PNG、JPG 或 WebP 图片文件。",

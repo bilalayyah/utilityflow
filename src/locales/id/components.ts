@@ -1694,7 +1694,7 @@ export const idComponentStrings: Record<string, ComponentLocaleData> = {
         }
       ],
       "title": "Pencari Alat Cerdas AI",
-      "searchesLine": "Mencari di {count} alat UtilityFlow asli (85 browser + 3 AI)",
+      "searchesLine": "Mencari di {count} alat UtilityFlow asli (84 browser + 3 AI)",
       "aiSearchesToday": "Pencarian AI hari ini:",
       "leftUnlimited": "tersisa · Pencarian lokal instan tanpa batas",
       "quotaFallback": "Hingga 10 pencarian AI gratis / hari · Pencarian lokal tanpa batas",
@@ -1918,7 +1918,7 @@ export const idComponentStrings: Record<string, ComponentLocaleData> = {
   "meta-tag-generator": {
     "strings": {
       "defaultTitle": "UtilityFlow – Alat Utilitas Online Cepat Berbasis Browser",
-      "defaultDescription": "Jelajahi 85 alat browser cepat yang mengutamakan privasi untuk pengeditan teks, encoding developer, kalkulator keuangan, alur kerja PDF, dan SEO.",
+      "defaultDescription": "Jelajahi 84 alat browser cepat yang mengutamakan privasi untuk pengeditan teks, encoding developer, kalkulator keuangan, alur kerja PDF, dan SEO.",
       "pageTitleLabel": "Judul Halaman (<title> / og:title)",
       "titleChars": "{n} karakter (ideal 30–60)",
       "metaDescriptionLabel": "Deskripsi Meta",
@@ -2588,7 +2588,7 @@ export const idComponentStrings: Record<string, ComponentLocaleData> = {
   },
   'social-thumbnail-previewer': {
     strings: {
-      sampleTitle: 'Cara Kami Membangun 85 Utilitas Browser Cepat Tanpa Pelacakan',
+      sampleTitle: 'Cara Kami Membangun 84 Utilitas Browser Cepat Tanpa Pelacakan',
       sampleChannel: 'UtilityFlow Studio',
       sampleViews: '24 rb tampilan · 2 hari lalu',
       errNotImage: 'Pilih file gambar PNG, JPG, atau WebP.',

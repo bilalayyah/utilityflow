@@ -11,7 +11,7 @@ const paletteAlt = PASTEL_PALETTES[(PASTEL_PALETTES.indexOf(palette) + 1) % PAST
 const STRINGS_EN = {
     defaultTitle: 'UtilityFlow – Fast Browser-Based Online Utility Tools',
     defaultDescription:
-      'Explore 85 fast, privacy-first browser tools for text editing, developer encoding, finance calculators, PDF workflows, and SEO.',
+      'Explore 84 fast, privacy-first browser tools for text editing, developer encoding, finance calculators, PDF workflows, and SEO.',
     pageTitleLabel: 'Page Title (<title> / og:title)',
     titleChars: '{n} chars (ideal 30–60)',
     metaDescriptionLabel: 'Meta Description',

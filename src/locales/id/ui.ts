@@ -100,7 +100,7 @@ export const idStrings: UiStrings = {
     eyebrow: 'Platform UtilityFlow · 7 Kategori Inti · {count} Utilitas Aktif',
     h1: 'Utilitas online praktis yang dibuat untuk kecepatan dan privasi.',
     heroDescription:
-      'UtilityFlow mengorganisasi 85 utilitas berbasis browser plus penulisan AI gratis, perangkuman, dan penemuan alat cerdas untuk alur kerja teks, developer, kalkulator, media sosial, PDF, SEO, dan gambar.',
+      'UtilityFlow mengorganisasi 84 utilitas berbasis browser plus penulisan AI gratis, perangkuman, dan penemuan alat cerdas untuk alur kerja teks, developer, kalkulator, media sosial, PDF, SEO, dan gambar.',
     exploreCategories: 'Jelajahi Kategori',
     openDirectory: 'Buka Direktori Lengkap',
     aiWriting: 'Penulisan AI',
@@ -177,17 +177,17 @@ export const idStrings: UiStrings = {
       {
         question: 'Apakah alat UtilityFlow gratis digunakan tanpa membuat akun?',
         answer:
-          'Ya. Semua 85 utilitas browser dan 3 alat AI di UtilityFlow tersedia gratis tanpa registrasi, dinding masuk, kredit, atau langganan.',
+          'Ya. Semua 84 utilitas browser dan 3 alat AI di UtilityFlow tersedia gratis tanpa registrasi, dinding masuk, kredit, atau langganan.',
       },
       {
         question: 'Apakah UtilityFlow mengunggah teks, kode, atau file saya ke server?',
         answer:
-          'Semua 85 utilitas browser inti berjalan secara lokal di browser web Anda tanpa mengunggah input. Tiga alat AI Gratis opsional kami (Asisten Penulisan AI, Perangkum Teks AI, dan Pencari Alat Cerdas AI) memproses prompt secara aman melalui inferensi Groq di sisi server tanpa menyimpan teks Anda.',
+          'Semua 84 utilitas browser inti berjalan secara lokal di browser web Anda tanpa mengunggah input. Tiga alat AI Gratis opsional kami (Asisten Penulisan AI, Perangkum Teks AI, dan Pencari Alat Cerdas AI) memproses prompt secara aman melalui inferensi Groq di sisi server tanpa menyimpan teks Anda.',
       },
       {
         question: 'Bagaimana 88 alat diatur di seluruh platform?',
         answer:
-          'UtilityFlow mencakup tujuh kategori inti (Teks & Penulisan, Developer, Kalkulator, Media Sosial, PDF, SEO, dan Alat Gambar & File) dengan total 85 alat browser bersama 3 alat AI Gratis yang terintegrasi ke dalam platform.',
+          'UtilityFlow mencakup tujuh kategori inti (Teks & Penulisan, Developer, Kalkulator, Media Sosial, PDF, SEO, dan Alat Gambar & File) dengan total 84 alat browser bersama 3 alat AI Gratis yang terintegrasi ke dalam platform.',
       },
       {
         question: 'Bisakah saya menandai atau membagikan tautan langsung ke alat tertentu?',
@@ -440,7 +440,7 @@ export const idStrings: UiStrings = {
       {
         title: '2. Input Alat, Pemrosesan Browser & Alat AI Gratis',
         paragraphs: [
-          'Teks, angka, cuplikan kode, dan file yang dimasukkan ke dalam 85 alat berbasis browser kami diproses secara lokal di dalam sesi browser Anda tanpa meninggalkan perangkat Anda.',
+          'Teks, angka, cuplikan kode, dan file yang dimasukkan ke dalam 84 alat berbasis browser kami diproses secara lokal di dalam sesi browser Anda tanpa meninggalkan perangkat Anda.',
           'Tiga alat AI Gratis opsional kami (Asisten Penulisan AI, Perangkum Teks AI, dan Pencari Alat Cerdas AI) mengirim teks yang dikirimkan melalui backend kami yang terlindungi ke Groq untuk inferensi waktu nyata. Kami tidak menyimpan atau mencatat prompt Anda, dan batas laju harian gratis hanya menggunakan hash SHA-256 bertanggal UTC sehingga alamat IP mentah pengunjung tidak pernah disimpan.',
           'Komentar yang diposting di bawah alat kami hanya meminta nama dan teks komentar. Nama dan teks yang Anda kirimkan disimpan di platform hosting kami dan ditampilkan secara publik di halaman alat tersebut, beserta tanggalnya. Kami tidak meminta alamat email atau akun untuk berkomentar, dan kami tidak menggunakan data komentar untuk iklan. Jika Anda ingin sebuah komentar dihapus, hubungi kami dengan menyebutkan halaman dan nama yang digunakan, dan kami akan menghapusnya.',
         ],

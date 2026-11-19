@@ -89,7 +89,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'Che cosa succede se raggiungo il limite giornaliero gratuito di richieste?',
         answer:
-          'I limiti giornalieri si reimpostano automaticamente alla mezzanotte UTC. Nel frattempo, tutte le oltre 85 utility locali del browser — tra cui contatore di parole, verificatore di leggibilità e verificatore di differenze di testo — funzionano senza limiti.',
+          'I limiti giornalieri si reimpostano automaticamente alla mezzanotte UTC. Nel frattempo, tutte le oltre 84 utility locali del browser — tra cui contatore di parole, verificatore di leggibilità e verificatore di differenze di testo — funzionano senza limiti.',
       },
       {
         question: 'Quali attività di scrittura può gestire l’assistente di scrittura IA?',
@@ -257,7 +257,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'C’è un limite o un costo per usare il riassuntore di testo IA?',
         answer:
-          'Lo strumento è completamente gratuito, senza fatturazione né registrazione. I visitatori ricevono fino a 5 riassunti gratuiti per giorno UTC e gli 85 strumenti locali del browser restano illimitati.',
+          'Lo strumento è completamente gratuito, senza fatturazione né registrazione. I visitatori ricevono fino a 5 riassunti gratuiti per giorno UTC e gli 84 strumenti locali del browser restano illimitati.',
       },
       {
         question: 'Quali lunghezze di riassunto offre il riassuntore di testo IA?',
@@ -391,7 +391,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       },
     ],
     benefits: [
-      'Ricerca gratuita in linguaggio naturale in tutti gli 85 strumenti browser e 2 strumenti IA',
+      'Ricerca gratuita in linguaggio naturale in tutti gli 84 strumenti browser e 2 strumenti IA',
       'Corrispondenza istantanea locale per parole chiave tollerante ai refusi più classificazione semantica IA Groq',
       'La verifica rigorosa dell’inventario garantisce zero strumenti fabbricati o link rotti',
       'Mostra una giustificazione chiara in una frase e fino a 3 alternative',
@@ -426,7 +426,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'Quali strumenti può raccomandare il cercatore di strumenti intelligente IA?',
         answer:
-          'Cerca nell’intero catalogo UtilityFlow di 88 strumenti: 85 strumenti browser nelle categorie testo, sviluppatore, calcolatrice, social media, PDF, SEO e immagini, più l’assistente di scrittura IA e il riassuntore di testo IA.',
+          'Cerca nell’intero catalogo UtilityFlow di 88 strumenti: 84 strumenti browser nelle categorie testo, sviluppatore, calcolatrice, social media, PDF, SEO e immagini, più l’assistente di scrittura IA e il riassuntore di testo IA.',
       },
       {
         question: 'Il cercatore di strumenti intelligente IA invia la mia ricerca a un servizio esterno?',

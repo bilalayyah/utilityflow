@@ -89,7 +89,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: "达到每天免费请求上限后会怎样？",
         answer:
-          "每天的上限会在 UTC 午夜自动重置。在此期间，包括字数统计工具、可读性检查工具与文本差异检查工具在内的 85 个以上本地浏览器工具均可无限制使用。",
+          "每天的上限会在 UTC 午夜自动重置。在此期间，包括字数统计工具、可读性检查工具与文本差异检查工具在内的 84 个以上本地浏览器工具均可无限制使用。",
       },
       {
         question: "AI 写作助手能处理哪些写作任务？",
@@ -254,7 +254,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: "使用 AI 文本摘要工具有限制或费用吗？",
         answer:
-          "该工具完全免费，无需付费或注册。每位访客每个 UTC 自然日最多可获得 5 次免费摘要，全部 85 个本地浏览器工具始终无限制。",
+          "该工具完全免费，无需付费或注册。每位访客每个 UTC 自然日最多可获得 5 次免费摘要，全部 84 个本地浏览器工具始终无限制。",
       },
       {
         question: "AI 文本摘要工具提供哪些摘要长度？",
@@ -388,7 +388,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       },
     ],
     benefits: [
-      "通过免费自然语言搜索，覆盖全部 85 个浏览器工具与 2 个 AI 工具",
+      "通过免费自然语言搜索，覆盖全部 84 个浏览器工具与 2 个 AI 工具",
       "即时本地容错关键词匹配，搭配 Groq AI 语义排序",
       "严格的工具库验证保证零编造工具、零失效链接",
       "显示清晰的一句话推荐理由与最多 3 个备选方案",
@@ -423,7 +423,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: "AI 智能工具查找器可以推荐哪些工具？",
         answer:
-          "它会搜索 UtilityFlow 全部 88 个工具：涵盖文本、开发者、计算器、社交、PDF、SEO 与图片分类的 85 个浏览器工具，以及 AI 写作助手与 AI 文本摘要工具。",
+          "它会搜索 UtilityFlow 全部 88 个工具：涵盖文本、开发者、计算器、社交、PDF、SEO 与图片分类的 84 个浏览器工具，以及 AI 写作助手与 AI 文本摘要工具。",
       },
       {
         question: "AI 智能工具查找器会把我的搜索发送到外部服务吗？",

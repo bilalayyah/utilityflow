@@ -127,7 +127,7 @@ export const DE_AI_OVERRIDES: Record<string, ToolLocaleOverride> = {
       schemaApplicationCategory: 'UtilitiesApplication',
     },
     apiNotice:
-      '100 % kostenlos, ohne Login, Abo oder Credits. Durchsucht unser verifiziertes Inventar von 85 Browser-Tools + 2 KI-Tools (bis zu 10 KI-Suchen pro Tag + unbegrenzte sofortige Keyword-Suche).',
+      '100 % kostenlos, ohne Login, Abo oder Credits. Durchsucht unser verifiziertes Inventar von 84 Browser-Tools + 2 KI-Tools (bis zu 10 KI-Suchen pro Tag + unbegrenzte sofortige Keyword-Suche).',
     intro:
       'Du weißt nicht, welches Tool deine Aufgabe löst? Beschreibe dein Ziel in einfacher Sprache – auch mit Rechtschreibfehlern oder informeller Formulierung –, und unser hybrider Keyword- + Groq-KI-Abgleich empfiehlt verifizierte Tools aus dem Live-Katalog von UtilityFlow mit klaren Begründungen.',
   },

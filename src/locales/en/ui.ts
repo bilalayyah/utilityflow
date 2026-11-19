@@ -98,7 +98,7 @@ export const enStrings: UiStrings = {
     eyebrow: 'UtilityFlow Platform · 7 Core Categories · {count} Live Utilities',
     h1: 'Practical online utilities built for speed and privacy.',
     heroDescription:
-      'UtilityFlow organizes 85 browser-first utilities plus free AI writing, summarization, and smart tool discovery across text, developer, calculator, social media, PDF, SEO, and image workflows.',
+      'UtilityFlow organizes 84 browser-first utilities plus free AI writing, summarization, and smart tool discovery across text, developer, calculator, social media, PDF, SEO, and image workflows.',
     exploreCategories: 'Explore Categories',
     openDirectory: 'Open Full Directory',
     aiWriting: 'AI Writing',
@@ -175,17 +175,17 @@ export const enStrings: UiStrings = {
       {
         question: 'Are UtilityFlow tools free to use without creating an account?',
         answer:
-          'Yes. All 85 browser utilities and 3 AI tools on UtilityFlow are available free of charge with no registration, sign-in wall, credits, or subscription required.',
+          'Yes. All 84 browser utilities and 3 AI tools on UtilityFlow are available free of charge with no registration, sign-in wall, credits, or subscription required.',
       },
       {
         question: 'Does UtilityFlow upload my text, code, or files to a server?',
         answer:
-          'All 85 core browser utilities run locally in your web browser without uploading inputs. Our 3 optional Free AI tools (AI Writing Assistant, AI Text Summarizer, and AI Smart Tool Finder) process prompts securely via server-side Groq inference without storing your text.',
+          'All 84 core browser utilities run locally in your web browser without uploading inputs. Our 3 optional Free AI tools (AI Writing Assistant, AI Text Summarizer, and AI Smart Tool Finder) process prompts securely via server-side Groq inference without storing your text.',
       },
       {
         question: 'How are the 88 tools organized across the platform?',
         answer:
-          'UtilityFlow covers seven core categories (Text & Writing, Developer, Calculators, Social Media, PDFs, SEO, and Image & File tools) totaling 85 browser tools alongside 3 Free AI tools integrated into the platform.',
+          'UtilityFlow covers seven core categories (Text & Writing, Developer, Calculators, Social Media, PDFs, SEO, and Image & File tools) totaling 84 browser tools alongside 3 Free AI tools integrated into the platform.',
       },
       {
         question: 'Can I bookmark or share a direct link to any specific tool?',
@@ -438,7 +438,7 @@ export const enStrings: UiStrings = {
       {
         title: '2. Tool Inputs, Browser Processing & Free AI Tools',
         paragraphs: [
-          'Text, numbers, code snippets, and files entered into our 85 browser-based tools are processed locally within your browser session without leaving your device.',
+          'Text, numbers, code snippets, and files entered into our 84 browser-based tools are processed locally within your browser session without leaving your device.',
           'Our three optional Free AI tools (AI Writing Assistant, AI Text Summarizer, and AI Smart Tool Finder) send submitted text through our protected backend to Groq for real-time inference. We do not store or log your prompts, and free daily rate limits use only a UTC-dated SHA-256 hash so raw visitor IP addresses are never stored.',
           'Comments posted under our tools ask only for a name and the comment text. The name and text you submit are stored on our hosting platform and shown publicly on that tool’s page, together with the date. We do not ask for an email address or an account to comment, and we do not use comment data for advertising. If you would like a comment removed, contact us with the page and the name used and we will delete it.',
         ],

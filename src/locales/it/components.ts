@@ -1694,7 +1694,7 @@ export const itComponentStrings: Record<string, ComponentLocaleData> = {
         }
       ],
       "title": "Trova strumenti AI intelligente",
-      "searchesLine": "Cerca tra {count} strumenti reali di UtilityFlow (85 browser + 3 AI)",
+      "searchesLine": "Cerca tra {count} strumenti reali di UtilityFlow (84 browser + 3 AI)",
       "aiSearchesToday": "Ricerche AI oggi:",
       "leftUnlimited": "rimaste · Ricerca locale istantanea illimitata",
       "quotaFallback": "Fino a 10 ricerche AI gratuite / giorno · Ricerca locale illimitata",
@@ -1918,7 +1918,7 @@ export const itComponentStrings: Record<string, ComponentLocaleData> = {
   "meta-tag-generator": {
     "strings": {
       "defaultTitle": "UtilityFlow – Strumenti online veloci basati sul browser",
-      "defaultDescription": "Esplora 85 strumenti browser veloci e attenti alla privacy per modifica di testi, codifica per sviluppatori, calcolatori finanziari, flussi di lavoro PDF e SEO.",
+      "defaultDescription": "Esplora 84 strumenti browser veloci e attenti alla privacy per modifica di testi, codifica per sviluppatori, calcolatori finanziari, flussi di lavoro PDF e SEO.",
       "pageTitleLabel": "Titolo pagina (<title> / og:title)",
       "titleChars": "{n} caratteri (ideale 30–60)",
       "metaDescriptionLabel": "Meta description",
@@ -2588,7 +2588,7 @@ export const itComponentStrings: Record<string, ComponentLocaleData> = {
   },
   'social-thumbnail-previewer': {
     strings: {
-      sampleTitle: 'Come abbiamo creato 85 utility browser veloci senza tracciamento',
+      sampleTitle: 'Come abbiamo creato 84 utility browser veloci senza tracciamento',
       sampleChannel: 'UtilityFlow Studio',
       sampleViews: '24.000 visualizzazioni · 2 giorni fa',
       errNotImage: 'Seleziona un file immagine PNG, JPG o WebP.',

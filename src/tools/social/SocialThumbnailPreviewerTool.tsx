@@ -4,7 +4,7 @@ import { pastelForKey } from '../../components/tool/pastel';
 import { useComponentStrings } from '../../locales/componentStrings';
 
 const STRINGS_EN = {
-    sampleTitle: 'How We Built 85 Fast Browser Utilities Without Tracking',
+    sampleTitle: 'How We Built 84 Fast Browser Utilities Without Tracking',
     sampleChannel: 'UtilityFlow Studio',
     sampleViews: '24K views · 2 days ago',
     errNotImage: 'Please select a PNG, JPG, or WebP image file.',

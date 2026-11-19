@@ -89,7 +89,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'Was passiert, wenn ich das tägliche kostenlose Anfragenlimit erreiche?',
         answer:
-          'Tägliche Limits werden automatisch um UTC-Mitternacht zurückgesetzt. In der Zwischenzeit funktionieren alle 85+ lokalen Browser-Utilities – darunter Wortzähler, Lesbarkeitsprüfer und Text-Diff-Prüfer – ohne Begrenzung.',
+          'Tägliche Limits werden automatisch um UTC-Mitternacht zurückgesetzt. In der Zwischenzeit funktionieren alle 84+ lokalen Browser-Utilities – darunter Wortzähler, Lesbarkeitsprüfer und Text-Diff-Prüfer – ohne Begrenzung.',
       },
       {
         question: 'Welche Schreibaufgaben kann der KI-Schreibassistent bewältigen?',
@@ -257,7 +257,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'Gibt es ein Limit oder Kosten für die Nutzung des KI-Text-Zusammenfassers?',
         answer:
-          'Das Tool ist komplett kostenlos ohne Abrechnung oder Anmeldung. Besucher erhalten bis zu 5 kostenlose Zusammenfassungen pro UTC-Tag, und alle 85 lokalen Browser-Tools bleiben unbegrenzt.',
+          'Das Tool ist komplett kostenlos ohne Abrechnung oder Anmeldung. Besucher erhalten bis zu 5 kostenlose Zusammenfassungen pro UTC-Tag, und alle 84 lokalen Browser-Tools bleiben unbegrenzt.',
       },
       {
         question: 'Welche Zusammenfassungslängen bietet der KI-Text-Zusammenfasser?',
@@ -391,7 +391,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       },
     ],
     benefits: [
-      'Kostenlose Suche in natürlicher Sprache in allen 85 Browser-Tools und 2 KI-Tools',
+      'Kostenlose Suche in natürlicher Sprache in allen 84 Browser-Tools und 2 KI-Tools',
       'Sofortiger lokaler, tippfehlertoleranter Keyword-Abgleich plus semantisches Groq-KI-Ranking',
       'Strenge Inventarverifizierung garantiert keine erfundenen Tools oder defekten Links',
       'Zeigt eine klare Ein-Satz-Begründung und bis zu 3 Alternativen',
@@ -426,7 +426,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'Welche Tools kann der intelligente KI-Tool-Finder empfehlen?',
         answer:
-          'Er durchsucht den vollständigen UtilityFlow-Katalog mit 88 Tools: 85 Browser-Tools in den Kategorien Text, Entwickler, Rechner, Social Media, PDF, SEO und Bild sowie den KI-Schreibassistenten und den KI-Text-Zusammenfasser.',
+          'Er durchsucht den vollständigen UtilityFlow-Katalog mit 88 Tools: 84 Browser-Tools in den Kategorien Text, Entwickler, Rechner, Social Media, PDF, SEO und Bild sowie den KI-Schreibassistenten und den KI-Text-Zusammenfasser.',
       },
       {
         question: 'Sendet der intelligente KI-Tool-Finder meine Suche an einen externen Dienst?',

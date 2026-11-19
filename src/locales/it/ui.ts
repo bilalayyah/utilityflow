@@ -100,7 +100,7 @@ export const itStrings: UiStrings = {
     eyebrow: 'Piattaforma UtilityFlow · 7 categorie principali · {count} utilità attive',
     h1: 'Utilità online pratiche, pensate per la velocità e la privacy.',
     heroDescription:
-      'UtilityFlow raccoglie 85 utilità pensate per il browser, oltre alla scrittura IA gratuita, al riassunto e alla ricerca intelligente degli strumenti, per testi, sviluppo, calcoli, social media, PDF, SEO e immagini.',
+      'UtilityFlow raccoglie 84 utilità pensate per il browser, oltre alla scrittura IA gratuita, al riassunto e alla ricerca intelligente degli strumenti, per testi, sviluppo, calcoli, social media, PDF, SEO e immagini.',
     exploreCategories: 'Esplora le categorie',
     openDirectory: 'Apri la directory completa',
     aiWriting: 'Scrittura IA',
@@ -177,17 +177,17 @@ export const itStrings: UiStrings = {
       {
         question: 'Gli strumenti di UtilityFlow sono gratuiti e utilizzabili senza creare un account?',
         answer:
-          'Sì. Tutti gli 85 strumenti nel browser e i 3 strumenti IA di UtilityFlow sono disponibili gratuitamente, senza registrazione, senza barriere di accesso, senza crediti e senza abbonamento.',
+          'Sì. Tutti gli 84 strumenti nel browser e i 3 strumenti IA di UtilityFlow sono disponibili gratuitamente, senza registrazione, senza barriere di accesso, senza crediti e senza abbonamento.',
       },
       {
         question: 'UtilityFlow carica i miei testi, il mio codice o i miei file su un server?',
         answer:
-          'Tutti gli 85 strumenti principali nel browser funzionano in locale nel tuo browser web senza caricare i dati inseriti. I nostri 3 strumenti IA gratuiti opzionali (Assistente di scrittura IA, Riassuntore di testo IA e Cercatore di strumenti IA) elaborano le richieste in modo sicuro tramite inferenza Groq lato server, senza memorizzare i tuoi testi.',
+          'Tutti gli 84 strumenti principali nel browser funzionano in locale nel tuo browser web senza caricare i dati inseriti. I nostri 3 strumenti IA gratuiti opzionali (Assistente di scrittura IA, Riassuntore di testo IA e Cercatore di strumenti IA) elaborano le richieste in modo sicuro tramite inferenza Groq lato server, senza memorizzare i tuoi testi.',
       },
       {
         question: 'Come sono organizzati gli 88 strumenti sulla piattaforma?',
         answer:
-          'UtilityFlow copre sette categorie principali (Testo e scrittura, Sviluppatori, Calcolatrici, Social media, PDF, SEO e Strumenti per immagini e file), per un totale di 85 strumenti nel browser e 3 strumenti IA gratuiti integrati nella piattaforma.',
+          'UtilityFlow copre sette categorie principali (Testo e scrittura, Sviluppatori, Calcolatrici, Social media, PDF, SEO e Strumenti per immagini e file), per un totale di 84 strumenti nel browser e 3 strumenti IA gratuiti integrati nella piattaforma.',
       },
       {
         question: 'Posso salvare nei preferiti o condividere un collegamento diretto a uno strumento specifico?',
@@ -440,7 +440,7 @@ export const itStrings: UiStrings = {
       {
         title: '2. Dati degli strumenti, elaborazione nel browser e strumenti IA gratuiti',
         paragraphs: [
-          'Testi, numeri, frammenti di codice e file inseriti nei nostri 85 strumenti nel browser vengono elaborati localmente nella sessione del browser, senza lasciare il tuo dispositivo.',
+          'Testi, numeri, frammenti di codice e file inseriti nei nostri 84 strumenti nel browser vengono elaborati localmente nella sessione del browser, senza lasciare il tuo dispositivo.',
           'I nostri tre strumenti IA gratuiti (Assistente di scrittura IA, Riassuntore di testo IA e Cercatore di strumenti IA) inviano il testo inviato tramite il nostro backend protetto a Groq per l’inferenza in tempo reale. Non memorizziamo né registriamo le tue richieste, e i limiti giornalieri gratuiti utilizzano solo un hash SHA-256 datato in UTC, così gli indirizzi IP grezzi dei visitatori non vengono mai memorizzati.',
           'I commenti pubblicati sotto i nostri strumenti richiedono solo un nome e il testo del commento. Il nome e il testo che invii vengono memorizzati sulla nostra piattaforma di hosting e mostrati pubblicamente nella pagina di quello strumento, insieme alla data. Non chiediamo un indirizzo email né un account per commentare e non usiamo i dati dei commenti per la pubblicità. Se vuoi far rimuovere un commento, contattaci indicando la pagina e il nome usato e lo elimineremo.',
         ],

@@ -1694,7 +1694,7 @@ export const frComponentStrings: Record<string, ComponentLocaleData> = {
         }
       ],
       "title": "Recherche intelligente d'outils par IA",
-      "searchesLine": "Recherche parmi {count} outils réels d'UtilityFlow (85 dans le navigateur + 2 par IA)",
+      "searchesLine": "Recherche parmi {count} outils réels d'UtilityFlow (84 dans le navigateur + 2 par IA)",
       "aiSearchesToday": "Recherches par IA aujourd'hui :",
       "leftUnlimited": "restantes · Recherche locale instantanée illimitée",
       "quotaFallback": "Jusqu'à 10 recherches par IA gratuites par jour · Recherche locale illimitée",
@@ -1918,7 +1918,7 @@ export const frComponentStrings: Record<string, ComponentLocaleData> = {
   "meta-tag-generator": {
     "strings": {
       "defaultTitle": "UtilityFlow – Outils utilitaires rapides dans le navigateur",
-      "defaultDescription": "Découvrez 85 outils rapides et respectueux de la vie privée dans le navigateur pour modifier du texte, encoder, calculer des finances, travailler avec des PDF et le SEO.",
+      "defaultDescription": "Découvrez 84 outils rapides et respectueux de la vie privée dans le navigateur pour modifier du texte, encoder, calculer des finances, travailler avec des PDF et le SEO.",
       "pageTitleLabel": "Titre de la page (<title> / og:title)",
       "titleChars": "{n} caractères (idéal : 30–60)",
       "metaDescriptionLabel": "Méta-description",
@@ -2588,7 +2588,7 @@ export const frComponentStrings: Record<string, ComponentLocaleData> = {
   },
   'social-thumbnail-previewer': {
     strings: {
-      sampleTitle: 'Comment nous avons créé 85 utilitaires de navigateur rapides sans suivi',
+      sampleTitle: 'Comment nous avons créé 84 utilitaires de navigateur rapides sans suivi',
       sampleChannel: 'UtilityFlow Studio',
       sampleViews: '24 K vues · il y a 2 jours',
       errNotImage: 'Veuillez sélectionner un fichier image PNG, JPG ou WebP.',

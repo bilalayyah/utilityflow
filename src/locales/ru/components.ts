@@ -1694,7 +1694,7 @@ export const ruComponentStrings: Record<string, ComponentLocaleData> = {
         }
       ],
       "title": "Умный поиск инструментов ИИ",
-      "searchesLine": "Ищет среди {count} настоящих инструментов UtilityFlow (85 браузерных + 2 ИИ)",
+      "searchesLine": "Ищет среди {count} настоящих инструментов UtilityFlow (84 браузерных + 2 ИИ)",
       "aiSearchesToday": "Поисков ИИ сегодня:",
       "leftUnlimited": "осталось · Мгновенный локальный поиск без ограничений",
       "quotaFallback": "До 10 бесплатных ИИ-поисков в день · Локальный поиск без ограничений",
@@ -1918,7 +1918,7 @@ export const ruComponentStrings: Record<string, ComponentLocaleData> = {
   "meta-tag-generator": {
     "strings": {
       "defaultTitle": "UtilityFlow — быстрые браузерные онлайн-инструменты",
-      "defaultDescription": "Изучите 85 быстрых браузерных инструментов с приоритетом приватности: редактирование текста, кодирование для разработчиков, финансовые калькуляторы, PDF-процессы и SEO.",
+      "defaultDescription": "Изучите 84 быстрых браузерных инструментов с приоритетом приватности: редактирование текста, кодирование для разработчиков, финансовые калькуляторы, PDF-процессы и SEO.",
       "pageTitleLabel": "Заголовок страницы (<title> / og:title)",
       "titleChars": "{n} симв. (идеально 30–60)",
       "metaDescriptionLabel": "Метаописание",
@@ -2588,7 +2588,7 @@ export const ruComponentStrings: Record<string, ComponentLocaleData> = {
   },
   'social-thumbnail-previewer': {
     strings: {
-      sampleTitle: 'Как мы создали 85 быстрых браузерных утилит без отслеживания',
+      sampleTitle: 'Как мы создали 84 быстрых браузерных утилит без отслеживания',
       sampleChannel: 'UtilityFlow Studio',
       sampleViews: '24 тыс. просмотров · 2 дня назад',
       errNotImage: 'Выберите файл изображения PNG, JPG или WebP.',

@@ -90,7 +90,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'What happens if I hit the daily free request limit?',
         answer:
-          'Daily limits reset automatically at UTC midnight. In the meantime, all 85+ local browser utilities—including Word Counter, Readability Checker, and Text Diff Checker—work with no limits.',
+          'Daily limits reset automatically at UTC midnight. In the meantime, all 84+ local browser utilities—including Word Counter, Readability Checker, and Text Diff Checker—work with no limits.',
       },
       {
         question: 'What writing tasks can the AI Writing Assistant handle?',
@@ -250,7 +250,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'Is there any limit or charge for using the AI Text Summarizer?',
         answer:
-          'The tool is completely free with no billing or sign-up. Visitors receive up to 5 free summaries per UTC day, and all 85 local browser tools remain unlimited.',
+          'The tool is completely free with no billing or sign-up. Visitors receive up to 5 free summaries per UTC day, and all 84 local browser tools remain unlimited.',
       },
       {
         question: 'What summary lengths does the AI Text Summarizer offer?',
@@ -384,7 +384,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       },
     ],
     benefits: [
-      'Free natural-language search across all 85 browser tools and 2 AI tools',
+      'Free natural-language search across all 84 browser tools and 2 AI tools',
       'Instant local typo-tolerant keyword matching plus Groq AI semantic ranking',
       'Strict inventory verification guarantees zero fabricated tools or broken links',
       'Shows clear one-sentence justification and up to 3 alternatives',
@@ -418,7 +418,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'Which tools can the AI Smart Tool Finder recommend?',
         answer:
-          'It searches the full UtilityFlow catalog of 88 tools: 85 browser tools across text, developer, calculator, social, PDF, SEO, and image categories, plus the AI Writing Assistant and AI Text Summarizer.',
+          'It searches the full UtilityFlow catalog of 88 tools: 84 browser tools across text, developer, calculator, social, PDF, SEO, and image categories, plus the AI Writing Assistant and AI Text Summarizer.',
       },
       {
         question: 'Does the AI Smart Tool Finder send my search to an external service?',
