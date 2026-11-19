@@ -43,7 +43,11 @@ interface SitemapAlternate {
 
 interface SitemapEntry {
   loc: string;
-  lastmod: string;
+  /** Content date (articles only: publishedAt / updatedAt). Omitted for
+   * tool / category / static pages, which have no per-page content date —
+   * lastmod is optional in the sitemap spec, and stamping every URL with
+   * the build date (audit #8) misleads crawlers on every deploy. */
+  lastmod?: string;
   changefreq: string;
   priority: string;
   alternates: SitemapAlternate[];
@@ -102,22 +106,22 @@ function generateSitemap(): void {
   }
   const siteOrigin = envOrigin || SITE_CONFIG.defaultOrigin;
 
-  // lastmod is the GENERATION date, not a per-page content-change date:
-  // re-running the generator on a later date bumps all entries even if
-  // nothing changed. That is the documented semantics of this file.
-  const today = new Date().toISOString().split('T')[0];
   const entries: SitemapEntry[] = [];
 
   /**
    * Push the EN entry and one twin per translated locale, each carrying
    * hreflang alternates for every locale (en + translated + x-default).
    * localizedPaths maps locale code -> localized path (EN path is the key).
+   * lastmod is the page's CONTENT date (articles: publishedAt/updatedAt)
+   * — pass it only when known; tool / category / static pages carry no
+   * lastmod (audit #8: the build date used to stamp all 4,103 URLs).
    */
   const addMultilingual = (
     enPath: string,
     localizedPaths: Partial<Record<LocaleCode, string>>,
     changefreq: string,
-    priority: string
+    priority: string,
+    lastmod?: string
   ) => {
     const urls: Partial<Record<LocaleCode, string>> = { en: enPath, ...localizedPaths };
     const alternates: SitemapAlternate[] = [];
@@ -137,7 +141,7 @@ function generateSitemap(): void {
       if (!path) continue;
       entries.push({
         loc: buildCanonicalUrl(path, siteOrigin),
-        lastmod: today,
+        ...(lastmod ? { lastmod } : {}),
         changefreq,
         priority,
         alternates,
@@ -218,7 +222,13 @@ function generateSitemap(): void {
       const slug = ARTICLE_OVERRIDES_BY_LOCALE[locale.code]?.[article.id]?.slug;
       if (slug) localized[locale.code] = `${locale.pathPrefix}/blog/${slug}/`;
     }
-    addMultilingual(`/blog/${article.en.slug}/`, localized, 'weekly', '0.7');
+    addMultilingual(
+      `/blog/${article.en.slug}/`,
+      localized,
+      'weekly',
+      '0.7',
+      article.updatedAt ?? article.publishedAt
+    );
   }
 
   // Build-time completeness assertions: a silently incomplete sitemap
@@ -229,8 +239,9 @@ function generateSitemap(): void {
   // Blog pages per locale: 1 home + 7 categories = 8 (exist in all 11
   // locales). Articles are per-locale: an article counts in a locale
   // only when it is published there (EN: status "published"; non-EN:
-  // a translation override exists). Batch 2: 0 articles, so every locale
-  // has exactly 109 pages and the total is 1,199.
+  // a translation override exists). 264 articles are published in EN
+  // and in each localized locale (2,904 article URLs); the total is
+  // 4,103 URLs.
   const publishedArticles = BLOG_ARTICLES.filter((a) => a.status === 'published');
   const articleCountByLocale = new Map<LocaleCode, number>();
   for (const locale of SUPPORTED_LOCALES) {
@@ -309,7 +320,7 @@ function generateSitemap(): void {
               `    <xhtml:link rel="alternate" hreflang="${alt.hreflang}" href="${escapeXml(alt.href)}" />`
           )
           .join('\n') +
-        `\n    <lastmod>${entry.lastmod}</lastmod>\n` +
+        (entry.lastmod ? `\n    <lastmod>${entry.lastmod}</lastmod>\n` : '\n') +
         `    <changefreq>${entry.changefreq}</changefreq>\n` +
         `    <priority>${entry.priority}</priority>\n` +
         `  </url>`

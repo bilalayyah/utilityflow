@@ -11,9 +11,10 @@ import './index.css';
 // scroll / touchstart, one-time listeners) keeps the ~183 KB gtag.js out
 // of the initial-load window — Lighthouse does not interact, so gtag
 // leaves the measurement window entirely. A 20 s fallback timer still
-// loads it for non-interacting users (beyond Lighthouse's window). The
-// AdSense script is untouched, and index.html's inline GA stub is
-// byte-identical, so the CSP sha256 hashes in public/_headers still match.
+// loads it for non-interacting users (beyond Lighthouse's window).
+// AdSense was removed from the site entirely (2026-11-19: no ad scripts,
+// no ad slots); index.html's inline GA stub is byte-identical, so the CSP
+// sha256 hashes in public/_headers still match.
 const GTAG_SRC = 'https://www.googletagmanager.com/gtag/js?id=G-EEF32XG70M';
 let gtagLoading = false;
 function loadGtag(): void {
