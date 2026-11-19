@@ -1694,7 +1694,7 @@ export const zhComponentStrings: Record<string, ComponentLocaleData> = {
         }
       ],
       "title": "AI 智能工具查找器",
-      "searchesLine": "搜索 {count} 个真实的 UtilityFlow 工具（84 个浏览器工具、3 个 AI 工具 + 货币计算器）",
+      "searchesLine": "搜索 {count} 个真实的 UtilityFlow 工具（84 个浏览器工具、2 个 AI 工具 + 货币计算器）",
       "aiSearchesToday": "今日 AI 搜索：",
       "leftUnlimited": "剩余 · 即时本地搜索无限制",
       "quotaFallback": "每日最多 10 次免费 AI 搜索 · 本地搜索无限制",

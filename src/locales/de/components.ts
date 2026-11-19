@@ -1694,7 +1694,7 @@ export const deComponentStrings: Record<string, ComponentLocaleData> = {
         }
       ],
       "title": "KI-gestützter Tool-Finder",
-      "searchesLine": "Durchsucht {count} echte UtilityFlow-Tools (84 Browser-, 3 KI-Tools + Währungsrechner)",
+      "searchesLine": "Durchsucht {count} echte UtilityFlow-Tools (84 Browser-, 2 KI-Tools + Währungsrechner)",
       "aiSearchesToday": "KI-Suchen heute:",
       "leftUnlimited": "übrig · Sofortige lokale Suche unbegrenzt",
       "quotaFallback": "Bis zu 10 kostenlose KI-Suchen / Tag · Unbegrenzte lokale Suche",

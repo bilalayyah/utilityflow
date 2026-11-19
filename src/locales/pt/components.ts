@@ -1694,7 +1694,7 @@ export const ptComponentStrings: Record<string, ComponentLocaleData> = {
         }
       ],
       "title": "Localizador inteligente de ferramentas com IA",
-      "searchesLine": "Pesquisa em {count} ferramentas reais do UtilityFlow (84 de navegador, 3 de IA + Calculadora de Moedas)",
+      "searchesLine": "Pesquisa em {count} ferramentas reais do UtilityFlow (84 de navegador, 2 de IA + Calculadora de Moedas)",
       "aiSearchesToday": "Pesquisas com IA hoje:",
       "leftUnlimited": "restantes · Pesquisa local instantânea ilimitada",
       "quotaFallback": "Até 10 pesquisas com IA grátis por dia · Pesquisa local ilimitada",

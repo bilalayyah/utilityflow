@@ -75,7 +75,7 @@ const STRINGS_EN = {
       },
     ],
     title: 'AI Smart Tool Finder',
-    searchesLine: 'Searches {count} real UtilityFlow tools (84 browser + 3 AI + Currency Calculator)',
+    searchesLine: 'Searches {count} real UtilityFlow tools (84 browser + 2 AI + Currency Calculator)',
     aiSearchesToday: 'AI searches today:',
     leftUnlimited: 'left · Instant local search unlimited',
     quotaFallback: 'Up to 10 free AI searches / day · Unlimited local search',

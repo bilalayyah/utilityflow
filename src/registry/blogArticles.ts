@@ -5685,7 +5685,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
 <p>The finder uses two matching methods that work together. The first is instant local keyword matching, which runs in your browser as you type.</p>
 <p>The second is AI semantic ranking, which runs when you submit your description.</p>
 <h3 id="instant-local-keyword-matching">Instant Local Keyword Matching</h3>
-<p>As soon as you type at least two characters, the finder starts matching your words against the names and descriptions of all 88 tools. This happens locally, in your browser, without waiting for a server.</p>
+<p>As soon as you type at least two characters, the finder starts matching your words against the names and descriptions of all 87 tools. This happens locally, in your browser, without waiting for a server.</p>
 <p>It shows up to six instant matches, each labelled with the words it matched, so you can see exactly why a tool appeared. This layer is unlimited, so you can type, edit, and retype as often as you like without using up anything.</p>
 <p>It is best when you already know a keyword, such as PDF, image, QR code, or word count. If your description contains the right keyword, the local layer will usually surface the right tool within a second.</p>
 <p>The weakness of keyword matching is that it only understands words, not meaning. If you describe a job without using the tool vocabulary, it may miss the best match.</p>
@@ -5701,8 +5701,8 @@ export const BLOG_ARTICLES: BlogArticle[] = [
 <p>Instead of forcing a weak recommendation, it displays a message saying no exact matching tool is currently available.</p>
 <p>Below that message, it lists related existing tools that cover only part of the workflow. For example, a request to convert a PDF to Word has no exact UtilityFlow tool, so the finder says so and suggests tools that handle nearby PDF jobs.</p>
 <p>That is far more useful than a confident wrong answer, because it lets you decide whether a partial workflow is good enough. You save the time you would have spent chasing a tool that does not exist.</p>
-<h2 id="what-the-finder-searches">What the Finder Searches: 88 Real Tools</h2>
-<p>The finder searches 84 browser tools, 3 AI tools and the Currency Calculator — 88 tools in total. The browser tools run entirely in your browser, which means your files stay on your computer.</p>
+<h2 id="what-the-finder-searches">What the Finder Searches: 87 Real Tools</h2>
+<p>The finder searches 84 browser tools, 2 AI tools and the Currency Calculator — 87 tools in total. The browser tools run entirely in your browser, which means your files stay on your computer.</p>
 <p>The three AI tools use Groq free-tier inference, with their own daily limits, and they do not store your text.</p>
 <p>The catalogue covers PDF work, image work, text and writing, developers, converters, calculators, and social media tools. You do not need to know which category your task belongs to, because the finder searches across all of them at once.</p>
 <p>You can narrow the search if you want to. An optional category filter lets you limit results to one category, such as Text and Writing or PDF.</p>
@@ -5773,12 +5773,12 @@ export const BLOG_ARTICLES: BlogArticle[] = [
 <p>If you have used all 10 AI searches for the day, the page will tell you, and the local search will keep working. Use short keyword queries, try the quick-task buttons, or browse the smart suggestions shown on page load.</p>
 <h2 id="conclusion">Conclusion: Describe the Job, Let the Finder Name the Tool</h2>
 <p>The AI Smart Tool Finder turns a catalogue problem into a conversation. You do not need to know tool names, categories, or technical terms.</p>
-<p>You describe the job in plain English, and the finder matches it against 88 real tools, explains its choice, and admits it honestly when no tool fits.</p>
+<p>You describe the job in plain English, and the finder matches it against 87 real tools, explains its choice, and admits it honestly when no tool fits.</p>
 <p>Try it the next time you face a task on UtilityFlow and you are not sure where to start. Open the free <a href="/ai-tool-finder/">AI Smart Tool Finder</a>, type one clear sentence about what you want to do, and see what it recommends.</p>
 <p>If you want the practical steps, read <a href="/blog/how-to-find-right-online-tool-ai/">How to Find the Right Online Tool for Any Task (with AI)</a>, and if you want to know when manual browsing beats AI matching, read <a href="/blog/ai-tool-finder-vs-manual-search/">AI Tool Finder vs Manual Search: When AI Matching Wins (and When It Doesn't)</a>. The right tool is one sentence away.</p>`,
       faqs: [
         { q: 'What is the AI Smart Tool Finder?', a: 'The AI Smart Tool Finder is a free UtilityFlow tool that matches a plain-English task description to the best tool in the 88-tool catalogue. You describe what you want to do, and it recommends one best tool with a reason, plus up to three alternatives. If no tool fits, it says so instead of inventing one.' },
-        { q: 'How many tools does the AI Smart Tool Finder search?', a: 'It searches 88 real UtilityFlow tools: 84 browser tools, 3 AI tools and the Currency Calculator. Every result is verified against the live inventory, so you only ever see tools that exist and can be opened immediately. The catalogue covers PDF, image, text, developer, converter, calculator, and social media tools.' },
+        { q: 'How many tools does the AI Smart Tool Finder search?', a: 'It searches 87 real UtilityFlow tools: 84 browser tools, 2 AI tools and the Currency Calculator. Every result is verified against the live inventory, so you only ever see tools that exist and can be opened immediately. The catalogue covers PDF, image, text, developer, converter, calculator, and social media tools.' },
         { q: 'Is the AI Smart Tool Finder free?', a: 'Yes, it is free with no login, subscription, or credits, and you get up to 10 AI searches per day per visitor. Instant local keyword search is unlimited. The AI layer uses Groq free-tier inference and does not store your text.' },
         { q: 'How long can my task description be?', a: 'Your query must be at least 2 characters and no more than 500 characters. That is enough for one or two clear sentences. The best queries state the action, the input, and the desired output, such as reducing an image to under 100KB or converting a PDF into images.' },
         { q: 'What happens if no tool matches my task?', a: 'The finder shows a clear message saying no exact matching tool is currently available, and it names your request so you can check it understood you. Below that, it lists related existing tools that cover only part of the workflow. It never invents a fake tool or link.' },
@@ -5816,7 +5816,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
 <p>You will also see smart suggestions for eight popular tools, which you can open directly if one of them is already the tool you need.</p>
 <p>At the top of the page, you will see how many AI searches you have left today. You get up to 10 free AI searches per day per visitor, and instant local keyword search is unlimited.</p>
 <p>Check the counter before a long session, so you know how many AI searches you can afford to spend on refining a query.</p>
-<p>Do not skip this step by jumping straight to a category page. The finder searches all 88 tools at once, which is faster than guessing the right category.</p>
+<p>Do not skip this step by jumping straight to a category page. The finder searches all 87 tools at once, which is faster than guessing the right category.</p>
 <p>Even if you think you know the category, one search here can confirm it or correct you in seconds.</p>
 <h2 id="step-2-describe-your-task-in-plain-english">Step 2: Describe Your Task in Plain English</h2>
 <p>Type your task in the search box, using the words you would use to explain it to a colleague. Start with a verb, name the thing you are working on, and add the outcome you want.</p>
@@ -5952,7 +5952,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
 <p>This article compares AI task-matching with browsing categories and searching manually. It covers how each method works, where each one wins, where each one fails, and how to combine them.</p>
 <p>If you need the basics first, read <a href="/blog/what-is-ai-smart-tool-finder/">What Is the AI Smart Tool Finder? Complete Guide</a>.</p>
 <h2 id="ai-tool-finder-vs-manual-search-at-a-glance">AI Tool Finder vs Manual Search at a Glance</h2>
-<p>The AI Smart Tool Finder takes a plain-English description and returns one best tool, with a reason and up to three alternatives. It searches all 88 UtilityFlow tools at once, using instant local keyword matching plus Groq AI semantic ranking.</p>
+<p>The AI Smart Tool Finder takes a plain-English description and returns one best tool, with a reason and up to three alternatives. It searches all 87 UtilityFlow tools at once, using instant local keyword matching plus Groq AI semantic ranking.</p>
 <p>You do not need to know any tool names.</p>
 <p>Manual search means browsing category pages, using the site search, or scanning tool lists yourself. You rely on your own knowledge of keywords and categories.</p>
 <p>It is slower to start, but you see the full range of options, and you make the final judgement yourself.</p>
@@ -5984,7 +5984,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
 <ul>
 <li><strong>Unknown tool names:</strong> describe the outcome, and let the AI supply the name.</li>
 <li><strong>Informal or typo-heavy wording:</strong> the AI layer understands meaning, not just spelling.</li>
-<li><strong>Cross-category tasks:</strong> one search covers all 88 tools, with no category guess needed.</li>
+<li><strong>Cross-category tasks:</strong> one search covers all 87 tools, with no category guess needed.</li>
 <li><strong>Checking existence:</strong> a no-match answer settles the question in seconds.</li>
 <li><strong>Urgent, one-off jobs:</strong> a single sentence is faster than learning the catalogue.</li>
 </ul>

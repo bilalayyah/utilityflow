@@ -4847,7 +4847,7 @@ export const PT_ARTICLE_OVERRIDES: Record<string, ArticleLocaleOverride> = {
 <p>O localizador usa dois métodos de correspondência que funcionam juntos. O primeiro é a correspondência instantânea de palavras-chave local, que roda no seu navegador enquanto você digita.</p>
 <p>O segundo é a classificação semântica por IA, que roda quando você envia sua descrição.</p>
 <h3 id="instant-local-keyword-matching">Correspondência instantânea de palavras-chave local</h3>
-<p>Assim que você digita pelo menos dois caracteres, o localizador começa a comparar suas palavras com os nomes e descrições das 88 ferramentas. Isso acontece localmente, no seu navegador, sem esperar por um servidor.</p>
+<p>Assim que você digita pelo menos dois caracteres, o localizador começa a comparar suas palavras com os nomes e descrições das 87 ferramentas. Isso acontece localmente, no seu navegador, sem esperar por um servidor.</p>
 <p>Ele mostra até seis correspondências instantâneas, cada uma marcada com as palavras que combinaram, para que você veja exatamente por que uma ferramenta apareceu. Essa camada é ilimitada, então você pode digitar, editar e redigitar quantas vezes quiser sem gastar nada.</p>
 <p>Ela é melhor quando você já conhece uma palavra-chave, como PDF, imagem, QR code ou contagem de palavras. Se sua descrição contiver a palavra-chave certa, a camada local geralmente mostrará a ferramenta certa em um segundo.</p>
 <p>A fraqueza da correspondência por palavras-chave é que ela só entende palavras, e não significado. Se você descrever um trabalho sem usar o vocabulário das ferramentas, ela pode perder a melhor correspondência.</p>
@@ -4863,8 +4863,8 @@ export const PT_ARTICLE_OVERRIDES: Record<string, ArticleLocaleOverride> = {
 <p>Em vez de forçar uma recomendação fraca, ele exibe uma mensagem dizendo que nenhuma ferramenta correspondente exata está disponível no momento.</p>
 <p>Abaixo dessa mensagem, ele lista ferramentas existentes relacionadas que cobrem apenas parte do fluxo de trabalho. Por exemplo, um pedido para converter PDF em Word não tem uma ferramenta exata no UtilityFlow, então o localizador diz isso e sugere ferramentas que lidam com trabalhos próximos de PDF.</p>
 <p>Isso é muito mais útil do que uma resposta errada e confiante, porque permite que você decida se um fluxo parcial é bom o suficiente. Você economiza o tempo que gastaria perseguindo uma ferramenta que não existe.</p>
-<h2 id="what-the-finder-searches">O que o localizador busca: 88 ferramentas reais</h2>
-<p>O localizador busca 84 ferramentas de navegador, 3 ferramentas de IA e a Calculadora de Moedas — 88 ferramentas no total. As ferramentas de navegador rodam totalmente no seu navegador, o que significa que seus arquivos ficam no seu computador.</p>
+<h2 id="what-the-finder-searches">O que o localizador busca: 87 ferramentas reais</h2>
+<p>O localizador busca 84 ferramentas de navegador, 2 ferramentas de IA e a Calculadora de Moedas — 87 ferramentas no total. As ferramentas de navegador rodam totalmente no seu navegador, o que significa que seus arquivos ficam no seu computador.</p>
 <p>As três ferramentas de IA usam inferência gratuita do Groq, com seus próprios limites diários, e não armazenam seu texto.</p>
 <p>O catálogo cobre trabalhos com PDF, trabalhos com imagens, texto e escrita, desenvolvedores, conversores, calculadoras e ferramentas de redes sociais. Você não precisa saber a qual categoria sua tarefa pertence, porque o localizador busca em todas elas ao mesmo tempo.</p>
 <p>Você pode restringir a busca se quiser. Um filtro de categoria opcional permite limitar os resultados a uma categoria, como Texto e Escrita ou PDF.</p>
@@ -4935,12 +4935,12 @@ export const PT_ARTICLE_OVERRIDES: Record<string, ArticleLocaleOverride> = {
 <p>Se você usou todas as 10 buscas por IA do dia, a página vai informar, e a busca local continuará funcionando. Use consultas curtas por palavras-chave, experimente os botões de tarefas rápidas, ou navegue pelas sugestões inteligentes mostradas ao carregar a página.</p>
 <h2 id="conclusion">Conclusão: descreva o trabalho, deixe o localizador dizer o nome da ferramenta</h2>
 <p>O Localizador Inteligente de Ferramentas com IA transforma um problema de catálogo em uma conversa. Você não precisa conhecer nomes de ferramentas, categorias ou termos técnicos.</p>
-<p>Você descreve o trabalho em linguagem simples, e o localizador o combina com 88 ferramentas reais, explica sua escolha, e admite com honestidade quando nenhuma ferramenta se encaixa.</p>
+<p>Você descreve o trabalho em linguagem simples, e o localizador o combina com 87 ferramentas reais, explica sua escolha, e admite com honestidade quando nenhuma ferramenta se encaixa.</p>
 <p>Experimente na próxima vez que você enfrentar uma tarefa no UtilityFlow e não souber por onde começar. Abra o <a href="/pt/buscador-de-ferramentas-ia/">Localizador Inteligente de Ferramentas com IA</a> gratuito, digite uma frase clara sobre o que você quer fazer, e veja o que ele recomenda.</p>
 <p>Se quiser os passos práticos, leia <a href="/pt/blog/como-encontrar-a-ferramenta-online-certa-para-qualquer-tarefa/">Como encontrar a ferramenta online certa para qualquer tarefa (com IA)</a>, e se quiser saber quando a navegação manual vence a correspondência por IA, leia <a href="/pt/blog/localizador-de-ferramentas-ia-vs-busca-manual/">Localizador de Ferramentas com IA vs busca manual: quando a correspondência por IA vence (e quando não vence)</a>. A ferramenta certa está a uma frase de distância.</p>`,
     faqs: [
       { q: 'O que é o Localizador Inteligente de Ferramentas com IA?', a: 'O Localizador Inteligente de Ferramentas com IA é uma ferramenta gratuita do UtilityFlow que combina a descrição simples de uma tarefa com a melhor ferramenta do catálogo de 88. Você descreve sua tarefa, e ele recomenda a melhor ferramenta com um motivo, além de até três alternativas. Se nenhuma se encaixar, ele diz isso em vez de inventar uma.' },
-      { q: 'Quantas ferramentas o Localizador Inteligente de Ferramentas com IA busca?', a: 'Ele busca 88 ferramentas reais do UtilityFlow: 84 ferramentas de navegador, 3 ferramentas de IA e a Calculadora de Moedas. Cada resultado é verificado em relação ao inventário ao vivo, então você só vê ferramentas que existem e podem ser abertas imediatamente. O catálogo cobre ferramentas de PDF, imagem, texto, desenvolvedor, conversor, calculadora e redes sociais.' },
+      { q: 'Quantas ferramentas o Localizador Inteligente de Ferramentas com IA busca?', a: 'Ele busca 87 ferramentas reais do UtilityFlow: 84 ferramentas de navegador, 2 ferramentas de IA e a Calculadora de Moedas. Cada resultado é verificado em relação ao inventário ao vivo, então você só vê ferramentas que existem e podem ser abertas imediatamente. O catálogo cobre ferramentas de PDF, imagem, texto, desenvolvedor, conversor, calculadora e redes sociais.' },
       { q: 'O Localizador Inteligente de Ferramentas com IA é gratuito?', a: 'Sim, é gratuito, sem login, assinatura ou créditos, e você tem até 10 buscas por IA por dia por visitante. A busca local instantânea por palavras-chave é ilimitada. A camada de IA usa inferência gratuita do Groq e não armazena seu texto.' },
       { q: 'Qual o tamanho máximo da minha descrição de tarefa?', a: 'Sua consulta deve ter pelo menos 2 caracteres e no máximo 500 caracteres. Isso é suficiente para uma ou duas frases claras. As melhores consultas declaram a ação, a entrada e a saída desejada, como reduzir uma imagem para menos de 100KB ou converter um PDF em imagens.' },
       { q: 'O que acontece se nenhuma ferramenta corresponder à minha tarefa?', a: 'O localizador mostra uma mensagem clara dizendo que nenhuma ferramenta correspondente exata está disponível no momento, e nomeia seu pedido para que você confira se ele entendeu você. Abaixo disso, ele lista ferramentas existentes relacionadas que cobrem apenas parte do fluxo de trabalho. Ele nunca inventa uma ferramenta ou link falso.' },
@@ -4969,7 +4969,7 @@ export const PT_ARTICLE_OVERRIDES: Record<string, ArticleLocaleOverride> = {
 <p>Você também verá sugestões inteligentes de oito ferramentas populares, que você pode abrir diretamente se uma delas já for a ferramenta de que você precisa.</p>
 <p>No topo da página, você verá quantas buscas por IA ainda tem hoje. Você tem até 10 buscas gratuitas por IA por dia por visitante, e a busca local instantânea por palavras-chave é ilimitada.</p>
 <p>Confira o contador antes de uma sessão longa, para saber quantas buscas por IA você pode gastar refinando uma consulta.</p>
-<p>Não pule este passo indo direto para uma página de categoria. O localizador busca nas 88 ferramentas ao mesmo tempo, o que é mais rápido do que adivinhar a categoria certa.</p>
+<p>Não pule este passo indo direto para uma página de categoria. O localizador busca nas 87 ferramentas ao mesmo tempo, o que é mais rápido do que adivinhar a categoria certa.</p>
 <p>Mesmo que você ache que conhece a categoria, uma busca aqui pode confirmar ou corrigir você em segundos.</p>
 <h2 id="step-2-describe-your-task-in-plain-english">Passo 2: descreva sua tarefa em linguagem simples</h2>
 <p>Digite sua tarefa na caixa de busca, usando as palavras que você usaria para explicá-la a um colega. Comece com um verbo, nomeie o objeto do seu trabalho, e adicione o resultado que você quer.</p>
@@ -5096,7 +5096,7 @@ export const PT_ARTICLE_OVERRIDES: Record<string, ArticleLocaleOverride> = {
 <p>Este artigo compara a correspondência de tarefas por IA com a navegação por categorias e a busca manual. Ele cobre como cada método funciona, onde cada um vence, onde cada um falha, e como combiná-los.</p>
 <p>Se precisar do básico primeiro, leia <a href="/pt/blog/o-que-e-localizador-inteligente-de-ferramentas-ia/">O que é o Localizador Inteligente de Ferramentas com IA? Guia completo</a>.</p>
 <h2 id="ai-tool-finder-vs-manual-search-at-a-glance">Localizador de Ferramentas com IA vs busca manual em resumo</h2>
-<p>O Localizador Inteligente de Ferramentas com IA recebe uma descrição em linguagem simples e retorna uma melhor ferramenta, com um motivo e até três alternativas. Ele busca nas 88 ferramentas do UtilityFlow ao mesmo tempo, usando correspondência instantânea local por palavras-chave mais classificação semântica por IA do Groq.</p>
+<p>O Localizador Inteligente de Ferramentas com IA recebe uma descrição em linguagem simples e retorna uma melhor ferramenta, com um motivo e até três alternativas. Ele busca nas 87 ferramentas do UtilityFlow ao mesmo tempo, usando correspondência instantânea local por palavras-chave mais classificação semântica por IA do Groq.</p>
 <p>Você não precisa conhecer nenhum nome de ferramenta.</p>
 <p>A busca manual significa navegar pelas páginas de categorias, usar a busca do site, ou examinar as listas de ferramentas você mesmo. Você depende do seu próprio conhecimento de palavras-chave e categorias.</p>
 <p>É mais lenta para começar, mas você vê toda a variedade de opções, e faz o julgamento final você mesmo.</p>
@@ -5128,7 +5128,7 @@ export const PT_ARTICLE_OVERRIDES: Record<string, ArticleLocaleOverride> = {
 <ul>
 <li><strong>Nomes de ferramentas desconhecidos:</strong> descreva o resultado, e deixe a IA fornecer o nome.</li>
 <li><strong>Formulação informal ou cheia de erros de digitação:</strong> a camada de IA entende o significado, e não apenas a ortografia.</li>
-<li><strong>Tarefas que cruzam categorias:</strong> uma busca cobre as 88 ferramentas, sem precisar adivinhar a categoria.</li>
+<li><strong>Tarefas que cruzam categorias:</strong> uma busca cobre as 87 ferramentas, sem precisar adivinhar a categoria.</li>
 <li><strong>Verificar a existência:</strong> uma resposta de ausência de correspondência resolve a questão em segundos.</li>
 <li><strong>Trabalhos urgentes e únicos:</strong> uma única frase é mais rápida do que aprender o catálogo.</li>
 </ul>

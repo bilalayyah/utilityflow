@@ -5235,7 +5235,7 @@ export const DE_ARTICLE_OVERRIDES: Record<string, ArticleLocaleOverride> = {
 <p>Der Finder verwendet zwei Zuordnungsmethoden, die zusammenarbeiten. Die erste ist die sofortige lokale Stichwortsuche, die in Ihrem Browser läuft, während Sie tippen.</p>
 <p>Die zweite ist das semantische KI-Ranking, das läuft, wenn Sie Ihre Beschreibung absenden.</p>
 <h3 id="instant-local-keyword-matching">Sofortige lokale Stichwortsuche</h3>
-<p>Sobald Sie mindestens zwei Zeichen tippen, beginnt der Finder, Ihre Wörter mit den Namen und Beschreibungen aller 88 Tools abzugleichen. Das geschieht lokal in Ihrem Browser, ohne auf einen Server zu warten.</p>
+<p>Sobald Sie mindestens zwei Zeichen tippen, beginnt der Finder, Ihre Wörter mit den Namen und Beschreibungen aller 87 Tools abzugleichen. Das geschieht lokal in Ihrem Browser, ohne auf einen Server zu warten.</p>
 <p>Es zeigt bis zu sechs sofortige Treffer, jeder mit den Wörtern gekennzeichnet, mit denen er übereinstimmt, sodass Sie genau sehen, warum ein Tool erschienen ist. Diese Ebene ist unbegrenzt, sodass Sie so oft tippen, bearbeiten und neu tippen können, wie Sie möchten, ohne etwas aufzubrauchen.</p>
 <p>Sie ist am besten, wenn Sie bereits ein Stichwort kennen, etwa PDF, Bild, QR-Code oder Wortanzahl. Wenn Ihre Beschreibung das richtige Stichwort enthält, zeigt die lokale Ebene das richtige Tool meist innerhalb einer Sekunde an.</p>
 <p>Die Schwäche der Stichwortsuche ist, dass sie nur Wörter versteht, keine Bedeutung. Wenn Sie eine Aufgabe beschreiben, ohne das Vokabular der Tools zu verwenden, verpasst sie vielleicht die beste Übereinstimmung.</p>
@@ -5251,8 +5251,8 @@ export const DE_ARTICLE_OVERRIDES: Record<string, ArticleLocaleOverride> = {
 <p>Statt eine schwache Empfehlung zu erzwingen, zeigt er eine Meldung an, dass derzeit kein exakt passendes Tool verfügbar ist.</p>
 <p>Unter dieser Meldung listet er verwandte vorhandene Tools auf, die nur einen Teil des Ablaufs abdecken. Wenn Sie zum Beispiel eine PDF-Datei in Word umwandeln möchten, gibt es kein exaktes UtilityFlow-Tool. Der Finder sagt das und schlägt Tools vor, die benachbarte PDF-Aufgaben erledigen.</p>
 <p>Das ist weit nützlicher als eine selbstbewusste falsche Antwort, denn es lässt Sie entscheiden, ob ein Teilablauf gut genug ist. Sie sparen die Zeit, die Sie sonst damit verbracht hätten, einem Tool hinterherzujagen, das es nicht gibt.</p>
-<h2 id="what-the-finder-searches">Was der Finder durchsucht: 88 echte Tools</h2>
-<p>Der Finder durchsucht 84 Browser-Tools, 3 KI-Tools und den Währungsrechner — insgesamt 88 Tools. Die Browser-Tools laufen vollständig in Ihrem Browser, was bedeutet, dass Ihre Dateien auf Ihrem Computer bleiben.</p>
+<h2 id="what-the-finder-searches">Was der Finder durchsucht: 87 echte Tools</h2>
+<p>Der Finder durchsucht 84 Browser-Tools, 2 KI-Tools und den Währungsrechner — insgesamt 87 Tools. Die Browser-Tools laufen vollständig in Ihrem Browser, was bedeutet, dass Ihre Dateien auf Ihrem Computer bleiben.</p>
 <p>Die drei KI-Tools verwenden die kostenlose Groq-Inferenz, mit eigenen Tageslimits, und sie speichern Ihren Text nicht.</p>
 <p>Der Katalog deckt PDF-Arbeit, Bildarbeit, Text und Schreiben, Entwicklertools, Konverter, Rechner und Social-Media-Tools ab. Sie müssen nicht wissen, zu welcher Kategorie Ihre Aufgabe gehört, denn der Finder durchsucht alle auf einmal.</p>
 <p>Sie können die Suche eingrenzen, wenn Sie möchten. Ein optionaler Kategoriefilter lässt Sie die Ergebnisse auf eine Kategorie beschränken, etwa Text und Schreiben oder PDF.</p>
@@ -5323,12 +5323,12 @@ export const DE_ARTICLE_OVERRIDES: Record<string, ArticleLocaleOverride> = {
 <p>Wenn Sie alle 10 KI-Suchen des Tages verbraucht haben, sagt Ihnen die Seite das, und die lokale Suche funktioniert weiter. Verwenden Sie kurze Stichwortanfragen, probieren Sie die Schnellaufgaben-Schaltflächen aus oder durchsuchen Sie die intelligenten Vorschläge, die beim Laden der Seite angezeigt werden.</p>
 <h2 id="conclusion">Fazit: Beschreiben Sie die Aufgabe, lassen Sie den Finder das Tool nennen</h2>
 <p>Der AI Smart Tool Finder verwandelt ein Katalogproblem in ein Gespräch. Sie müssen keine Toolnamen, Kategorien oder Fachbegriffe kennen.</p>
-<p>Sie beschreiben die Aufgabe in einfachem Englisch, und der Finder gleicht sie mit 88 echten Tools ab, erklärt seine Wahl und gibt ehrlich zu, wenn kein Tool passt.</p>
+<p>Sie beschreiben die Aufgabe in einfachem Englisch, und der Finder gleicht sie mit 87 echten Tools ab, erklärt seine Wahl und gibt ehrlich zu, wenn kein Tool passt.</p>
 <p>Probieren Sie ihn das nächste Mal aus, wenn Sie auf UtilityFlow vor einer Aufgabe stehen und nicht sicher sind, wo Sie anfangen sollen. Öffnen Sie den kostenlosen <a href="/de/ki-tool-finder/">AI Smart Tool Finder</a>, tippen Sie einen klaren Satz darüber, was Sie tun möchten, und sehen Sie, was er empfiehlt.</p>
 <p>Wenn Sie die praktischen Schritte wollen, lesen Sie <a href="/de/blog/mit-ki-das-richtige-online-tool-finden/">Wie Sie das richtige Online-Tool für jede Aufgabe finden (mit KI)</a>. Wenn Sie wissen möchten, wann manuelles Durchsuchen die KI-Zuordnung schlägt, lesen Sie <a href="/de/blog/ki-tool-finder-vs-manuelle-suche/">AI Tool Finder vs. manuelle Suche: Wann KI-Zuordnung gewinnt (und wann nicht)</a>. Das richtige Tool ist einen Satz entfernt.</p>`,
     faqs: [
       { q: 'Was ist der AI Smart Tool Finder?', a: 'Der AI Smart Tool Finder ist ein kostenloses UtilityFlow-Tool, das eine Aufgabenbeschreibung in einfachem Englisch dem besten Tool im Katalog mit 88 Tools zuordnet. Sie beschreiben, was Sie tun möchten, und es empfiehlt ein bestes Tool mit Begründung, plus bis zu drei Alternativen. Wenn kein Tool passt, sagt es das, statt eines zu erfinden.' },
-      { q: 'Wie viele Tools durchsucht der AI Smart Tool Finder?', a: 'Er durchsucht 88 echte UtilityFlow-Tools: 84 Browser-Tools, 3 KI-Tools und den Währungsrechner. Jedes Ergebnis wird mit dem Live-Bestand abgeglichen, sodass Sie nur Tools sehen, die existieren und sofort geöffnet werden können. Der Katalog deckt PDF-, Bild-, Text-, Entwickler-, Konverter-, Rechner- und Social-Media-Tools ab.' },
+      { q: 'Wie viele Tools durchsucht der AI Smart Tool Finder?', a: 'Er durchsucht 87 echte UtilityFlow-Tools: 84 Browser-Tools, 2 KI-Tools und den Währungsrechner. Jedes Ergebnis wird mit dem Live-Bestand abgeglichen, sodass Sie nur Tools sehen, die existieren und sofort geöffnet werden können. Der Katalog deckt PDF-, Bild-, Text-, Entwickler-, Konverter-, Rechner- und Social-Media-Tools ab.' },
       { q: 'Ist der AI Smart Tool Finder kostenlos?', a: 'Ja, er ist kostenlos ohne Anmeldung, Abonnement oder Guthaben, und Sie erhalten bis zu 10 KI-Suchen pro Tag und Besucher. Die sofortige lokale Stichwortsuche ist unbegrenzt. Die KI-Ebene verwendet die kostenlose Groq-Inferenz und speichert Ihren Text nicht.' },
       { q: 'Wie lang darf meine Aufgabenbeschreibung sein?', a: 'Ihre Anfrage muss mindestens 2 Zeichen und höchstens 500 Zeichen lang sein. Das reicht für einen oder zwei klare Sätze. Die besten Anfragen nennen die Handlung, die Eingabe und die gewünschte Ausgabe, etwa ein Bild auf unter 100 KB zu verkleinern oder eine PDF-Datei in Bilder umzuwandeln.' },
       { q: 'Was passiert, wenn kein Tool zu meiner Aufgabe passt?', a: 'Der Finder zeigt eine klare Meldung, dass derzeit kein exakt passendes Tool verfügbar ist, und er nennt Ihre Anfrage, damit Sie prüfen können, ob er Sie richtig verstanden hat. Darunter listet er verwandte vorhandene Tools auf, die nur einen Teil des Ablaufs abdecken. Er erfindet niemals ein falsches Tool oder einen falschen Link.' },
@@ -5357,7 +5357,7 @@ export const DE_ARTICLE_OVERRIDES: Record<string, ArticleLocaleOverride> = {
 <p>Sie sehen außerdem intelligente Vorschläge für acht beliebte Tools, die Sie direkt öffnen können, wenn eines davon bereits das Tool ist, das Sie brauchen.</p>
 <p>Oben auf der Seite sehen Sie, wie viele KI-Suchen Ihnen heute noch bleiben. Sie erhalten bis zu 10 kostenlose KI-Suchen pro Tag und Besucher, und die sofortige lokale Stichwortsuche ist unbegrenzt.</p>
 <p>Prüfen Sie den Zähler vor einer langen Sitzung, damit Sie wissen, wie viele KI-Suchen Sie für die Verfeinerung einer Anfrage ausgeben können.</p>
-<p>Überspringen Sie diesen Schritt nicht, indem Sie direkt zu einer Kategorieseite springen. Der Finder durchsucht alle 88 Tools auf einmal, was schneller ist, als die richtige Kategorie zu erraten.</p>
+<p>Überspringen Sie diesen Schritt nicht, indem Sie direkt zu einer Kategorieseite springen. Der Finder durchsucht alle 87 Tools auf einmal, was schneller ist, als die richtige Kategorie zu erraten.</p>
 <p>Selbst wenn Sie glauben, die Kategorie zu kennen, kann eine Suche hier sie in Sekunden bestätigen oder korrigieren.</p>
 <h2 id="step-2-describe-your-task-in-plain-english">Schritt 2: Beschreiben Sie Ihre Aufgabe in einfachem Englisch</h2>
 <p>Tippen Sie Ihre Aufgabe in das Suchfeld, mit den Worten, die Sie verwenden würden, um sie einer Kollegin oder einem Kollegen zu erklären. Beginnen Sie mit einem Verb, nennen Sie das Ding, an dem Sie arbeiten, und fügen Sie das gewünschte Ergebnis hinzu.</p>
@@ -5484,7 +5484,7 @@ export const DE_ARTICLE_OVERRIDES: Record<string, ArticleLocaleOverride> = {
 <p>Dieser Artikel vergleicht KI-Aufgabenzuordnung mit dem Durchsuchen von Kategorien und der manuellen Suche. Er behandelt, wie jede Methode funktioniert, wo jede gewinnt, wo jede scheitert und wie man sie kombiniert.</p>
 <p>Wenn Sie zuerst die Grundlagen brauchen, lesen Sie <a href="/de/blog/was-ist-der-ki-smart-tool-finder/">Was ist der AI Smart Tool Finder? Vollständige Anleitung</a>.</p>
 <h2 id="ai-tool-finder-vs-manual-search-at-a-glance">AI Tool Finder vs. manuelle Suche auf einen Blick</h2>
-<p>Der AI Smart Tool Finder nimmt eine Beschreibung in einfachem Englisch und liefert ein bestes Tool, mit Begründung und bis zu drei Alternativen. Er durchsucht alle 88 UtilityFlow-Tools auf einmal, mit sofortiger lokaler Stichwortsuche plus semantischem Groq-KI-Ranking.</p>
+<p>Der AI Smart Tool Finder nimmt eine Beschreibung in einfachem Englisch und liefert ein bestes Tool, mit Begründung und bis zu drei Alternativen. Er durchsucht alle 87 UtilityFlow-Tools auf einmal, mit sofortiger lokaler Stichwortsuche plus semantischem Groq-KI-Ranking.</p>
 <p>Sie müssen keine Toolnamen kennen.</p>
 <p>Manuelle Suche bedeutet, Kategorieseiten zu durchsuchen, die Seitensuche zu verwenden oder Toollisten selbst zu überfliegen. Sie verlassen sich auf Ihr eigenes Wissen über Stichwörter und Kategorien.</p>
 <p>Es dauert länger, bis man anfängt, aber Sie sehen die ganze Bandbreite an Optionen, und Sie treffen die endgültige Entscheidung selbst.</p>
@@ -5516,7 +5516,7 @@ export const DE_ARTICLE_OVERRIDES: Record<string, ArticleLocaleOverride> = {
 <ul>
 <li><strong>Unbekannte Toolnamen:</strong> Beschreiben Sie das Ergebnis und lassen Sie die KI den Namen liefern.</li>
 <li><strong>Informelle oder fehlerreiche Formulierungen:</strong> Die KI-Ebene versteht Bedeutung, nicht nur Rechtschreibung.</li>
-<li><strong>Kategorieübergreifende Aufgaben:</strong> Eine Suche deckt alle 88 Tools ab, ohne dass man die Kategorie raten muss.</li>
+<li><strong>Kategorieübergreifende Aufgaben:</strong> Eine Suche deckt alle 87 Tools ab, ohne dass man die Kategorie raten muss.</li>
 <li><strong>Prüfung der Existenz:</strong> Eine Antwort ohne Treffer klärt die Frage in Sekunden.</li>
 <li><strong>Dringende einmalige Aufgaben:</strong> Ein einziger Satz ist schneller, als den Katalog zu lernen.</li>
 </ul>

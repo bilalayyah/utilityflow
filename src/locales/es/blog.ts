@@ -7604,7 +7604,7 @@ export const ES_ARTICLE_OVERRIDES: Record<string, ArticleLocaleOverride> = {
 <p>El buscador usa dos métodos de coincidencia que trabajan juntos. El primero es la coincidencia local instantánea por palabras clave, que se ejecuta en tu navegador mientras escribes.</p>
 <p>El segundo es la clasificación semántica con IA, que se ejecuta cuando envías tu descripción.</p>
 <h3 id="instant-local-keyword-matching">Búsqueda local instantánea por palabras clave</h3>
-<p>En cuanto escribes al menos dos caracteres, el buscador empieza a comparar tus palabras con los nombres y las descripciones de las 88 herramientas. Esto ocurre de forma local, en tu navegador, sin esperar a un servidor.</p>
+<p>En cuanto escribes al menos dos caracteres, el buscador empieza a comparar tus palabras con los nombres y las descripciones de las 87 herramientas. Esto ocurre de forma local, en tu navegador, sin esperar a un servidor.</p>
 <p>Muestra hasta seis coincidencias instantáneas, cada una etiquetada con las palabras que coincidieron, para que puedas ver exactamente por qué apareció una herramienta. Esta capa es ilimitada, así que puedes escribir, editar y volver a escribir tantas veces como quieras sin gastar nada.</p>
 <p>Funciona mejor cuando ya conoces una palabra clave, como PDF, imagen, código QR o conteo de palabras. Si tu descripción contiene la palabra clave correcta, la capa local suele mostrar la herramienta adecuada en un segundo.</p>
 <p>La debilidad de la coincidencia por palabras clave es que solo entiende palabras, no significado. Si describes un trabajo sin usar el vocabulario de las herramientas, puede pasar por alto la mejor coincidencia.</p>
@@ -7620,8 +7620,8 @@ export const ES_ARTICLE_OVERRIDES: Record<string, ArticleLocaleOverride> = {
 <p>En lugar de forzar una recomendación débil, muestra un mensaje que dice que no hay una herramienta que coincida exactamente disponible por ahora.</p>
 <p>Debajo de ese mensaje, lista herramientas existentes relacionadas que cubren solo parte del flujo de trabajo. Por ejemplo, una solicitud para convertir un PDF a Word no tiene una herramienta exacta en UtilityFlow, así que el buscador lo dice y sugiere herramientas que manejan trabajos cercanos con PDF.</p>
 <p>Eso es mucho más útil que una respuesta equivocada y segura, porque así puedes decidir si un flujo de trabajo parcial es suficiente. Ahorras el tiempo que habrías gastado persiguiendo una herramienta que no existe.</p>
-<h2 id="what-the-finder-searches">Qué busca el buscador: 88 herramientas reales</h2>
-<p>El buscador busca en 84 herramientas de navegador, 3 herramientas de IA y la Calculadora de Divisas — 88 herramientas en total. Las herramientas de navegador funcionan por completo en tu navegador, lo que significa que tus archivos se quedan en tu computadora.</p>
+<h2 id="what-the-finder-searches">Qué busca el buscador: 87 herramientas reales</h2>
+<p>El buscador busca en 84 herramientas de navegador, 2 herramientas de IA y la Calculadora de Divisas — 87 herramientas en total. Las herramientas de navegador funcionan por completo en tu navegador, lo que significa que tus archivos se quedan en tu computadora.</p>
 <p>Las tres herramientas de IA usan inferencia gratuita de Groq, con sus propios límites diarios, y no guardan tu texto.</p>
 <p>El catálogo cubre trabajo con PDF, trabajo con imágenes, texto y escritura, desarrolladores, conversores, calculadoras y herramientas de redes sociales. No necesitas saber a qué categoría pertenece tu tarea, porque el buscador busca en todas a la vez.</p>
 <p>Puedes limitar la búsqueda si quieres. Con un filtro opcional de categoría puedes limitar los resultados a una, como texto y escritura o PDF.</p>
@@ -7692,12 +7692,12 @@ export const ES_ARTICLE_OVERRIDES: Record<string, ArticleLocaleOverride> = {
 <p>Si ya usaste las 10 búsquedas con IA del día, la página te lo dirá, y la búsqueda local seguirá funcionando. Usa consultas cortas con palabras clave, prueba los botones de tareas rápidas, o navega por las sugerencias inteligentes que se muestran al cargar la página.</p>
 <h2 id="conclusion">Conclusión: describe el trabajo, deja que el buscador nombre la herramienta</h2>
 <p>El buscador de herramientas con IA convierte un problema de catálogo en una conversación. No necesitas conocer nombres de herramientas, categorías ni términos técnicos.</p>
-<p>Describes el trabajo en español sencillo, y el buscador lo relaciona con 88 herramientas reales, explica su elección, y admite con honestidad cuando ninguna herramienta encaja.</p>
+<p>Describes el trabajo en español sencillo, y el buscador lo relaciona con 87 herramientas reales, explica su elección, y admite con honestidad cuando ninguna herramienta encaja.</p>
 <p>Pruébalo la próxima vez que enfrentes una tarea en UtilityFlow y no sepas por dónde empezar. Abre el <a href="/es/buscador-de-herramientas-ia/">buscador de herramientas con IA</a> gratuito, escribe una frase clara sobre lo que quieres hacer, y mira lo que recomienda.</p>
 <p>Si quieres los pasos prácticos, lee <a href="/es/blog/como-encontrar-la-herramienta-en-linea-adecuada-con-ia/">Cómo encontrar la herramienta en línea adecuada para cualquier tarea (con IA)</a>, y si quieres saber cuándo la navegación manual supera a la búsqueda con IA, lee <a href="/es/blog/buscador-de-herramientas-ia-vs-busqueda-manual/">Buscador de herramientas con IA vs búsqueda manual: cuándo gana la IA (y cuándo no)</a>. Te separa una sola frase de la herramienta adecuada.</p>`,
     faqs: [
       { q: '¿Qué es el buscador de herramientas con IA?', a: 'El buscador de herramientas con IA es una herramienta gratuita de UtilityFlow que toma la descripción de una tarea en español sencillo y te recomienda la mejor herramienta del catálogo de 88. Describes lo que quieres hacer, y te sugiere la mejor herramienta con una razón, además de hasta tres alternativas. Si ninguna herramienta encaja, lo dice en lugar de inventar una.' },
-      { q: '¿Cuántas herramientas busca el buscador de herramientas con IA?', a: 'Busca en 88 herramientas reales de UtilityFlow: 84 herramientas de navegador, 3 herramientas de IA y la Calculadora de Divisas. Cada resultado se verifica con el inventario actualizado, así que solo ves herramientas que existen y se pueden abrir de inmediato. El catálogo cubre herramientas de PDF, imagen, texto, desarrolladores, conversores, calculadoras y redes sociales.' },
+      { q: '¿Cuántas herramientas busca el buscador de herramientas con IA?', a: 'Busca en 87 herramientas reales de UtilityFlow: 84 herramientas de navegador, 2 herramientas de IA y la Calculadora de Divisas. Cada resultado se verifica con el inventario actualizado, así que solo ves herramientas que existen y se pueden abrir de inmediato. El catálogo cubre herramientas de PDF, imagen, texto, desarrolladores, conversores, calculadoras y redes sociales.' },
       { q: '¿El buscador de herramientas con IA es gratis?', a: 'Sí, es gratis, sin inicio de sesión, suscripción ni créditos, y tienes hasta 10 búsquedas con IA por día por visitante. La búsqueda local instantánea por palabras clave es ilimitada. La capa de IA usa inferencia gratuita de Groq y no guarda tu texto.' },
       { q: '¿Qué tan larga puede ser la descripción de mi tarea?', a: 'Tu consulta debe tener al menos 2 caracteres y no más de 500 caracteres. Eso alcanza para una o dos frases claras. Las mejores consultas indican la acción, la entrada y la salida deseada, como reducir una imagen a menos de 100 KB o convertir un PDF en imágenes.' },
       { q: '¿Qué pasa si ninguna herramienta coincide con mi tarea?', a: 'El buscador muestra un mensaje claro que dice que no hay una herramienta que coincida exactamente disponible por ahora, y nombra tu solicitud para que puedas comprobar que te entendió. Debajo, lista herramientas existentes relacionadas que cubren solo parte del flujo de trabajo. Nunca inventa una herramienta ni un enlace falso.' },
@@ -7726,7 +7726,7 @@ export const ES_ARTICLE_OVERRIDES: Record<string, ArticleLocaleOverride> = {
 <p>También verás sugerencias inteligentes de ocho herramientas populares, que puedes abrir directamente si una de ellas ya es la herramienta que necesitas.</p>
 <p>En la parte superior de la página, verás cuántas búsquedas con IA te quedan hoy. Tienes hasta 10 búsquedas gratuitas con IA por día por visitante, y la búsqueda local instantánea por palabras clave es ilimitada.</p>
 <p>Revisa el contador antes de una sesión larga, para saber cuántas búsquedas con IA puedes gastar en refinar una consulta.</p>
-<p>No te saltes este paso yendo directo a una página de categoría. El buscador busca en las 88 herramientas a la vez, lo que es más rápido que adivinar la categoría correcta.</p>
+<p>No te saltes este paso yendo directo a una página de categoría. El buscador busca en las 87 herramientas a la vez, lo que es más rápido que adivinar la categoría correcta.</p>
 <p>Aunque creas conocer la categoría, una búsqueda aquí puede confirmarla o corregirte en segundos.</p>
 <h2 id="step-2-describe-your-task-in-plain-english">Paso 2: describe tu tarea en español sencillo</h2>
 <p>Escribe tu tarea en el campo de búsqueda, con las palabras que usarías para explicársela a un colega. Empieza con un verbo, nombra aquello con lo que trabajas y agrega el resultado que quieres.</p>
@@ -7853,7 +7853,7 @@ export const ES_ARTICLE_OVERRIDES: Record<string, ArticleLocaleOverride> = {
 <p>Este artículo compara la coincidencia de tareas con IA con la navegación por categorías y la búsqueda manual. Cubre cómo funciona cada método, dónde gana cada uno, dónde falla cada uno, y cómo combinarlos.</p>
 <p>Si necesitas primero lo básico, lee <a href="/es/blog/que-es-un-buscador-de-herramientas-ia/">¿Qué es un buscador de herramientas con IA? Guía completa</a>.</p>
 <h2 id="ai-tool-finder-vs-manual-search-at-a-glance">Buscador de herramientas con IA vs búsqueda manual de un vistazo</h2>
-<p>El buscador de herramientas con IA toma una descripción en español sencillo y devuelve una mejor herramienta, con una razón y hasta tres alternativas. Busca en las 88 herramientas de UtilityFlow a la vez, con coincidencia local instantánea por palabras clave más clasificación semántica con IA de Groq.</p>
+<p>El buscador de herramientas con IA toma una descripción en español sencillo y devuelve una mejor herramienta, con una razón y hasta tres alternativas. Busca en las 87 herramientas de UtilityFlow a la vez, con coincidencia local instantánea por palabras clave más clasificación semántica con IA de Groq.</p>
 <p>No necesitas conocer ningún nombre de herramienta.</p>
 <p>La búsqueda manual significa navegar por las páginas de categorías, usar la búsqueda del sitio, o revisar las listas de herramientas por tu cuenta. Dependes de tu propio conocimiento de palabras clave y categorías.</p>
 <p>Es más lenta al empezar, pero ves toda la gama de opciones, y tú haces el juicio final.</p>
@@ -7885,7 +7885,7 @@ export const ES_ARTICLE_OVERRIDES: Record<string, ArticleLocaleOverride> = {
 <ul>
 <li><strong>Nombres de herramientas desconocidos:</strong> describe el resultado, y deja que la IA te dé el nombre.</li>
 <li><strong>Redacción informal o con muchos errores:</strong> la capa de IA entiende el significado, no solo la ortografía.</li>
-<li><strong>Tareas que cruzan categorías:</strong> una búsqueda cubre las 88 herramientas, sin necesidad de adivinar la categoría.</li>
+<li><strong>Tareas que cruzan categorías:</strong> una búsqueda cubre las 87 herramientas, sin necesidad de adivinar la categoría.</li>
 <li><strong>Comprobar la existencia:</strong> una respuesta de sin coincidencia resuelve la pregunta en segundos.</li>
 <li><strong>Trabajos urgentes y únicos:</strong> una sola frase es más rápida que aprender el catálogo.</li>
 </ul>
