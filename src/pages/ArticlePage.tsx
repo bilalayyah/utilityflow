@@ -29,6 +29,7 @@ import {
   getBlogArticleUrl,
   getBlogArticleVersion,
   getBlogHomeUrl,
+  isFullArticleVersion,
 } from '../registry/blogArticleMeta';
 import { getCachedArticleById, loadBlogArticleById } from '../registry/blogArticleLoader';
 import type { BlogArticleLocaleVersion } from '../types/blog';
@@ -149,14 +150,18 @@ export function ArticlePage() {
   // enFullFailed). While it is null the page renders its shell (H1,
   // lede, breadcrumbs) from the meta record; the body, FAQs and TOC
   // appear once the chunk arrives.
-  // ('body' in v) narrows the meta helper's union to the full-version
-  // branches — the EN meta version has no body and is never used here.
+  // isFullArticleVersion (a type predicate) narrows the meta helper's
+  // union to the full-version branch — the EN meta version has no body
+  // and is never used here. A plain `'body' in v` check does NOT narrow:
+  // TS keeps the meta member as BlogArticleMetaVersion &
+  // Record<"body", unknown> (no `faqs`), which is not assignable
+  // (audit #1, TS2322).
   const localeVersion =
     locale === 'en' ? undefined : getBlogArticleVersion(article, locale);
   const version: BlogArticleLocaleVersion | ArticleLocaleOverride | null =
     locale === 'en'
       ? enFull
-      : localeVersion && 'body' in localeVersion
+      : localeVersion && isFullArticleVersion(localeVersion)
         ? localeVersion
         : null;
   const isLoadingBody = locale === 'en' && version === null && !enFullFailed;

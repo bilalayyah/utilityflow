@@ -76,6 +76,21 @@ export function getBlogArticleVersion(
   return { ...override, faqs: override.faqs ?? [] };
 }
 
+/**
+ * Type predicate: is this the full locale version (body + FAQs) rather
+ * than the slim EN meta version? The meta version has no `body`; the
+ * override always has one. A plain `'body' in v` check does NOT narrow
+ * correctly — TS keeps the meta member as `BlogArticleMetaVersion &
+ * Record<"body", unknown>` (no `faqs`), which is not assignable to the
+ * full-version union (audit #1, TS2322). The predicate asserts the
+ * runtime check's result so callers get exactly ArticleLocaleOverride.
+ */
+export function isFullArticleVersion(
+  version: BlogArticleMetaVersion | ArticleLocaleOverride | undefined
+): version is ArticleLocaleOverride {
+  return version !== undefined && 'body' in version;
+}
+
 /** Find a published article by its slug in the given locale (EN slug or the locale's translated slug). */
 export function getBlogArticleBySlug(
   slug: string,
