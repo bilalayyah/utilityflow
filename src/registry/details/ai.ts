@@ -384,7 +384,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       },
     ],
     benefits: [
-      'Free natural-language search across all 84 browser tools and 2 AI tools',
+      'Free natural-language search across all 84 browser tools, 3 AI tools and the Currency Calculator',
       'Instant local typo-tolerant keyword matching plus Groq AI semantic ranking',
       'Strict inventory verification guarantees zero fabricated tools or broken links',
       'Shows clear one-sentence justification and up to 3 alternatives',
@@ -418,7 +418,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'Which tools can the AI Smart Tool Finder recommend?',
         answer:
-          'It searches the full UtilityFlow catalog of 88 tools: 84 browser tools across text, developer, calculator, social, PDF, SEO, and image categories, plus the AI Writing Assistant and AI Text Summarizer.',
+          'It searches the full UtilityFlow catalog of 88 tools: 84 browser tools across text, developer, calculator, social, PDF, SEO, and image categories, plus the AI Writing Assistant, the AI Text Summarizer, the AI Smart Tool Finder and the Currency Calculator.',
       },
       {
         question: 'Does the AI Smart Tool Finder send my search to an external service?',

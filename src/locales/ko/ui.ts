@@ -177,7 +177,7 @@ export const koStrings: UiStrings = {
       {
         question: 'UtilityFlow 도구를 계정을 만들지 않고 무료로 쓸 수 있나요?',
         answer:
-          '네, UtilityFlow의 84개 브라우저 유틸리티와 3개 AI 도구는 모두 등록, 로그인 장벽, 크레딧, 구독 없이 무료로 이용할 수 있습니다.',
+          '네, UtilityFlow의 84개 브라우저 유틸리티, 3개 AI 도구, 환율 계산기는 모두 등록, 로그인 장벽, 크레딧, 구독 없이 무료로 이용할 수 있습니다.',
       },
       {
         question: 'UtilityFlow가 제 텍스트, 코드, 파일을 서버에 업로드하나요?',
@@ -187,7 +187,7 @@ export const koStrings: UiStrings = {
       {
         question: '88개 도구는 플랫폼에서 어떻게 정리되어 있나요?',
         answer:
-          'UtilityFlow는 7개 핵심 카테고리(텍스트·글쓰기, 개발자, 계산기, 소셜 미디어, PDF, SEO, 이미지·파일 도구)에 걸쳐 84개 브라우저 도구와 플랫폼에 통합된 3개의 무료 AI 도구를 다룹니다.',
+          'UtilityFlow는 7개 핵심 카테고리(텍스트·글쓰기, 개발자, 계산기, 소셜 미디어, PDF, SEO, 이미지·파일 도구)에 걸쳐 84개 브라우저 도구, 플랫폼에 통합된 3개의 무료 AI 도구, 환율 계산기를 다룹니다.',
       },
       {
         question: '특정 도구에 대한 직접 링크를 북마크하거나 공유할 수 있나요?',

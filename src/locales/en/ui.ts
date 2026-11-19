@@ -175,7 +175,7 @@ export const enStrings: UiStrings = {
       {
         question: 'Are UtilityFlow tools free to use without creating an account?',
         answer:
-          'Yes. All 84 browser utilities and 3 AI tools on UtilityFlow are available free of charge with no registration, sign-in wall, credits, or subscription required.',
+          'Yes. All 84 browser utilities, 3 AI tools and the Currency Calculator on UtilityFlow are available free of charge with no registration, sign-in wall, credits, or subscription required.',
       },
       {
         question: 'Does UtilityFlow upload my text, code, or files to a server?',
@@ -185,7 +185,7 @@ export const enStrings: UiStrings = {
       {
         question: 'How are the 88 tools organized across the platform?',
         answer:
-          'UtilityFlow covers seven core categories (Text & Writing, Developer, Calculators, Social Media, PDFs, SEO, and Image & File tools) totaling 84 browser tools alongside 3 Free AI tools integrated into the platform.',
+          'UtilityFlow covers seven core categories (Text & Writing, Developer, Calculators, Social Media, PDFs, SEO, and Image & File tools) totaling 84 browser tools, 3 Free AI tools and the Currency Calculator integrated into the platform.',
       },
       {
         question: 'Can I bookmark or share a direct link to any specific tool?',

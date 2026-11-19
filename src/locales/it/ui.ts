@@ -177,7 +177,7 @@ export const itStrings: UiStrings = {
       {
         question: 'Gli strumenti di UtilityFlow sono gratuiti e utilizzabili senza creare un account?',
         answer:
-          'Sì. Tutti gli 84 strumenti nel browser e i 3 strumenti IA di UtilityFlow sono disponibili gratuitamente, senza registrazione, senza barriere di accesso, senza crediti e senza abbonamento.',
+          'Sì. Tutti gli 84 strumenti nel browser, i 3 strumenti IA e la Calcolatrice di Valute di UtilityFlow sono disponibili gratuitamente, senza registrazione, senza barriere di accesso, senza crediti e senza abbonamento.',
       },
       {
         question: 'UtilityFlow carica i miei testi, il mio codice o i miei file su un server?',
@@ -187,7 +187,7 @@ export const itStrings: UiStrings = {
       {
         question: 'Come sono organizzati gli 88 strumenti sulla piattaforma?',
         answer:
-          'UtilityFlow copre sette categorie principali (Testo e scrittura, Sviluppatori, Calcolatrici, Social media, PDF, SEO e Strumenti per immagini e file), per un totale di 84 strumenti nel browser e 3 strumenti IA gratuiti integrati nella piattaforma.',
+          'UtilityFlow copre sette categorie principali (Testo e scrittura, Sviluppatori, Calcolatrici, Social media, PDF, SEO e Strumenti per immagini e file), per un totale di 84 strumenti nel browser, 3 strumenti IA gratuiti e la Calcolatrice di Valute integrati nella piattaforma.',
       },
       {
         question: 'Posso salvare nei preferiti o condividere un collegamento diretto a uno strumento specifico?',

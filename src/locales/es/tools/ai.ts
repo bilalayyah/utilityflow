@@ -124,7 +124,7 @@ export const ES_AI_OVERRIDES: Record<string, ToolLocaleOverride> = {
       schemaApplicationCategory: 'UtilitiesApplication',
     },
     apiNotice:
-      '100% gratis sin inicio de sesión, suscripción ni créditos. Busca en nuestro inventario verificado de 84 herramientas de navegador + 2 herramientas de IA (hasta 10 búsquedas de IA por día + coincidencia instantánea de palabras clave ilimitada).',
+      '100% gratis sin inicio de sesión, suscripción ni créditos. Busca en nuestro inventario verificado de 84 herramientas de navegador, 3 herramientas de IA y la Calculadora de Divisas (hasta 10 búsquedas de IA por día + coincidencia instantánea de palabras clave ilimitada).',
     intro:
       '¿No está seguro de qué herramienta maneja su tarea? Describa su objetivo en lenguaje simple, incluso con errores de ortografía o redacción informal, y nuestro comparador híbrido de palabras clave + IA de Groq recomienda herramientas verificadas del catálogo en vivo de UtilityFlow con justificaciones claras.',
   },

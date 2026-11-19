@@ -133,7 +133,7 @@ export const AI_TOOL_FINDER_TOOL: ToolDefinition = {
   processingMode: 'api',
   requiresExternalApi: true,
   apiNotice:
-    '100% free with no login, subscription, or credits. Searches our verified inventory of 84 browser tools + 3 AI tools (up to 10 AI searches/day + unlimited instant keyword matching).',
+    '100% free with no login, subscription, or credits. Searches our verified inventory of 84 browser tools, 3 AI tools and the Currency Calculator (up to 10 AI searches/day + unlimited instant keyword matching).',
   popular: true,
   featured: true,
   keywords: [

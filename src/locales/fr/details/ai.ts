@@ -391,7 +391,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       },
     ],
     benefits: [
-      'Recherche gratuite en langage naturel dans les 84 outils de navigateur et 2 outils IA',
+      'Recherche gratuite en langage naturel dans les 84 outils de navigateur, 3 outils IA et la Calculatrice de Devises',
       'Correspondance instantanée locale par mots-clés tolérante aux fautes de frappe plus classement sémantique IA Groq',
       'La vérification stricte de l’inventaire garantit zéro outil fabriqué ou lien cassé',
       'Affiche une justification claire en une phrase et jusqu’à 3 alternatives',
@@ -426,7 +426,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'Quels outils le chercheur d’outils intelligent IA peut-il recommander ?',
         answer:
-          'Il recherche dans le catalogue complet d’UtilityFlow de 88 outils : 84 outils de navigateur dans les catégories texte, développeur, calculatrice, réseaux sociaux, PDF, SEO et image, plus l’assistant d’écriture IA et le résumeur de texte IA.',
+          'Il recherche dans le catalogue complet d’UtilityFlow de 88 outils : 84 outils de navigateur dans les catégories texte, développeur, calculatrice, réseaux sociaux, PDF, SEO et image, plus l’assistant d’écriture IA, le résumeur de texte IA, le chercheur d’outils IA et la Calculatrice de Devises.',
       },
       {
         question: 'Le chercheur d’outils intelligent IA envoie-t-il ma recherche à un service externe ?',

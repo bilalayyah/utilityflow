@@ -391,7 +391,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       },
     ],
     benefits: [
-      "Pencarian bahasa alami gratis di semua 84 alat browser dan 2 alat AI",
+      "Pencarian bahasa alami gratis di semua 84 alat browser, 3 alat AI, dan Kalkulator Mata Uang",
       "Pencocokan kata kunci lokal instan yang toleran terhadap kesalahan ketik plus peringkat semantik AI Groq",
       "Verifikasi inventaris yang ketat menjamin nol alat yang dibuat-buat atau tautan rusak",
       "Menampilkan penjelasan satu kalimat yang jelas dan hingga 3 alternatif",
@@ -426,7 +426,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: "Alat apa yang dapat direkomendasikan Pencari Alat AI Cerdas?",
         answer:
-          "Alat ini mencari seluruh katalog UtilityFlow yang berisi 88 alat: 84 alat browser di kategori teks, pengembang, kalkulator, sosial, PDF, SEO, dan gambar, plus Asisten Penulisan AI dan Peringkas Teks AI.",
+          "Alat ini mencari seluruh katalog UtilityFlow yang berisi 88 alat: 84 alat browser di kategori teks, pengembang, kalkulator, sosial, PDF, SEO, dan gambar, plus Asisten Penulisan AI, Peringkas Teks AI, Pencari Alat AI Cerdas, dan Kalkulator Mata Uang.",
       },
       {
         question: "Apakah Pencari Alat AI Cerdas mengirim pencarian saya ke layanan eksternal?",

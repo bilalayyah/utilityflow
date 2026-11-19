@@ -177,7 +177,7 @@ export const deStrings: UiStrings = {
       {
         question: 'Sind die Tools von UtilityFlow kostenlos und ohne Konto nutzbar?',
         answer:
-          'Ja. Alle 84 Browser-Utilities und 3 KI-Tools auf UtilityFlow sind kostenlos verfügbar – ohne Registrierung, Anmeldewand, Guthaben oder Abonnement.',
+          'Ja. Alle 84 Browser-Utilities, 3 KI-Tools und der Währungsrechner auf UtilityFlow sind kostenlos verfügbar – ohne Registrierung, Anmeldewand, Guthaben oder Abonnement.',
       },
       {
         question: 'Lädt UtilityFlow meine Texte, meinen Code oder meine Dateien auf einen Server hoch?',
@@ -187,7 +187,7 @@ export const deStrings: UiStrings = {
       {
         question: 'Wie sind die 88 Tools auf der Plattform organisiert?',
         answer:
-          'UtilityFlow umfasst sieben Hauptkategorien (Text & Schreiben, Entwickler, Rechner, Social Media, PDFs, SEO sowie Bild- & Datei-Tools) mit insgesamt 84 Browser-Tools und 3 kostenlosen KI-Tools, die in die Plattform integriert sind.',
+          'UtilityFlow umfasst sieben Hauptkategorien (Text & Schreiben, Entwickler, Rechner, Social Media, PDFs, SEO sowie Bild- & Datei-Tools) mit insgesamt 84 Browser-Tools, 3 kostenlosen KI-Tools und dem Währungsrechner, die in die Plattform integriert sind.',
       },
       {
         question: 'Kann ich ein Lesezeichen setzen oder einen direkten Link zu einem bestimmten Tool teilen?',

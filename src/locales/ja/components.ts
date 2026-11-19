@@ -1694,7 +1694,7 @@ export const jaComponentStrings: Record<string, ComponentLocaleData> = {
         }
       ],
       "title": "AI搭載ツールファインダー",
-      "searchesLine": "{count}件の実際のUtilityFlowツールから検索（ブラウザツール84件 + AIツール2件）",
+      "searchesLine": "{count}件の実際のUtilityFlowツールから検索（ブラウザツール84件、AIツール3件 + 為替計算機）",
       "aiSearchesToday": "本日のAI検索:",
       "leftUnlimited": "残り ・ 即時ローカル検索は無制限",
       "quotaFallback": "1日最大10回の無料AI検索 ・ ローカル検索は無制限",

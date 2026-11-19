@@ -177,7 +177,7 @@ export const idStrings: UiStrings = {
       {
         question: 'Apakah alat UtilityFlow gratis digunakan tanpa membuat akun?',
         answer:
-          'Ya. Semua 84 utilitas browser dan 3 alat AI di UtilityFlow tersedia gratis tanpa registrasi, dinding masuk, kredit, atau langganan.',
+          'Ya. Semua 84 utilitas browser, 3 alat AI, dan Kalkulator Mata Uang di UtilityFlow tersedia gratis tanpa registrasi, dinding masuk, kredit, atau langganan.',
       },
       {
         question: 'Apakah UtilityFlow mengunggah teks, kode, atau file saya ke server?',
@@ -187,7 +187,7 @@ export const idStrings: UiStrings = {
       {
         question: 'Bagaimana 88 alat diatur di seluruh platform?',
         answer:
-          'UtilityFlow mencakup tujuh kategori inti (Teks & Penulisan, Developer, Kalkulator, Media Sosial, PDF, SEO, dan Alat Gambar & File) dengan total 84 alat browser bersama 3 alat AI Gratis yang terintegrasi ke dalam platform.',
+          'UtilityFlow mencakup tujuh kategori inti (Teks & Penulisan, Developer, Kalkulator, Media Sosial, PDF, SEO, dan Alat Gambar & File) dengan total 84 alat browser, 3 alat AI Gratis, dan Kalkulator Mata Uang yang terintegrasi ke dalam platform.',
       },
       {
         question: 'Bisakah saya menandai atau membagikan tautan langsung ke alat tertentu?',

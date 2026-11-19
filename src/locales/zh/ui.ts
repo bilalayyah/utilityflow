@@ -177,7 +177,7 @@ export const zhStrings: UiStrings = {
       {
         question: 'UtilityFlow 的工具无需创建账号即可免费使用吗？',
         answer:
-          '是的。UtilityFlow 的全部 84 个浏览器工具与 3 个 AI 工具均可免费使用，无需注册、登录墙、点数或订阅。',
+          '是的。UtilityFlow 的全部 84 个浏览器工具、3 个 AI 工具与货币计算器均可免费使用，无需注册、登录墙、点数或订阅。',
       },
       {
         question: 'UtilityFlow 会把我的文本、代码或文件上传到服务器吗？',
@@ -187,7 +187,7 @@ export const zhStrings: UiStrings = {
       {
         question: '88 个工具在平台上是如何组织的？',
         answer:
-          'UtilityFlow 涵盖七大核心分类（文本与写作、开发者、计算器、社交媒体、PDF、SEO、图片与文件工具），共 84 个浏览器工具，以及集成在平台中的 3 个免费 AI 工具。',
+          'UtilityFlow 涵盖七大核心分类（文本与写作、开发者、计算器、社交媒体、PDF、SEO、图片与文件工具），共 84 个浏览器工具、集成在平台中的 3 个免费 AI 工具和货币计算器。',
       },
       {
         question: '我可以收藏或分享某个具体工具的直接链接吗？',

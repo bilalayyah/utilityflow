@@ -1693,7 +1693,7 @@ export const koComponentStrings: Record<string, ComponentLocaleData> = {
         }
       ],
       "title": "AI 스마트 도구 찾기",
-      "searchesLine": "실제 UtilityFlow 도구 {count}개를 검색합니다(브라우저 도구 84개 + AI 도구 2개)",
+      "searchesLine": "실제 UtilityFlow 도구 {count}개를 검색합니다(브라우저 도구 84개, AI 도구 3개 + 환율 계산기)",
       "aiSearchesToday": "오늘의 AI 검색:",
       "leftUnlimited": "남음 · 즉시 로컬 검색 무제한",
       "quotaFallback": "하루 최대 10회 무료 AI 검색 · 로컬 검색 무제한",

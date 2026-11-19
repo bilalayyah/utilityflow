@@ -391,7 +391,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       },
     ],
     benefits: [
-      '84개 브라우저 도구와 2개 AI 도구 전체에서 무료 자연어 검색',
+      '84개 브라우저 도구, 3개 AI 도구, 환율 계산기 전체에서 무료 자연어 검색',
       '즉시 로컬 오타 허용 키워드 매칭과 Groq AI 의미 순위',
       '엄격한 인벤토리 검증으로 지어낸 도구나 깨진 링크가 전혀 없음',
       '명확한 한 문장 근거와 최대 3개의 대안 표시',
@@ -426,7 +426,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'AI 도구 찾기가 추천할 수 있는 도구는 무엇인가요?',
         answer:
-          'UtilityFlow 카탈로그 88개 도구 전체를 검색합니다. 텍스트, 개발자, 계산기, 소셜, PDF, SEO, 이미지 카테고리의 84개 브라우저 도구와 AI 글쓰기 도우미, AI 텍스트 요약기입니다.',
+          'UtilityFlow 카탈로그 88개 도구 전체를 검색합니다. 텍스트, 개발자, 계산기, 소셜, PDF, SEO, 이미지 카테고리의 84개 브라우저 도구와 AI 글쓰기 도우미, AI 텍스트 요약기, AI 스마트 도구 찾기, 환율 계산기입니다.',
       },
       {
         question: 'AI 도구 찾기가 제 검색을 외부 서비스로 보내나요?',

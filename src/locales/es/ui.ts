@@ -176,7 +176,7 @@ export const esStrings: UiStrings = {
       {
         question: '¿Las herramientas de UtilityFlow son gratuitas y se pueden usar sin crear una cuenta?',
         answer:
-          'Sí. Las 84 utilidades del navegador y las 3 herramientas de IA de UtilityFlow están disponibles de forma gratuita, sin registro, muro de inicio de sesión, créditos ni suscripción.',
+          'Sí. Las 84 utilidades del navegador, las 3 herramientas de IA y la Calculadora de Divisas de UtilityFlow están disponibles de forma gratuita, sin registro, muro de inicio de sesión, créditos ni suscripción.',
       },
       {
         question: '¿UtilityFlow sube mi texto, código o archivos a un servidor?',
@@ -186,7 +186,7 @@ export const esStrings: UiStrings = {
       {
         question: '¿Cómo están organizadas las 88 herramientas en la plataforma?',
         answer:
-          'UtilityFlow abarca siete categorías principales (herramientas de texto y escritura, para desarrolladores, calculadoras, redes sociales, PDF, SEO y herramientas de imagen y archivos) con un total de 84 herramientas del navegador junto con 3 herramientas gratuitas de IA integradas en la plataforma.',
+          'UtilityFlow abarca siete categorías principales (herramientas de texto y escritura, para desarrolladores, calculadoras, redes sociales, PDF, SEO y herramientas de imagen y archivos) con un total de 84 herramientas del navegador, 3 herramientas gratuitas de IA y la Calculadora de Divisas integradas en la plataforma.',
       },
       {
         question: '¿Puedo marcar o compartir un enlace directo a una herramienta específica?',

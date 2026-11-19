@@ -391,7 +391,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       },
     ],
     benefits: [
-      'Ricerca gratuita in linguaggio naturale in tutti gli 84 strumenti browser e 2 strumenti IA',
+      'Ricerca gratuita in linguaggio naturale in tutti gli 84 strumenti browser, 3 strumenti IA e la Calcolatrice di Valute',
       'Corrispondenza istantanea locale per parole chiave tollerante ai refusi più classificazione semantica IA Groq',
       'La verifica rigorosa dell’inventario garantisce zero strumenti fabbricati o link rotti',
       'Mostra una giustificazione chiara in una frase e fino a 3 alternative',
@@ -426,7 +426,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'Quali strumenti può raccomandare il cercatore di strumenti intelligente IA?',
         answer:
-          'Cerca nell’intero catalogo UtilityFlow di 88 strumenti: 84 strumenti browser nelle categorie testo, sviluppatore, calcolatrice, social media, PDF, SEO e immagini, più l’assistente di scrittura IA e il riassuntore di testo IA.',
+          'Cerca nell’intero catalogo UtilityFlow di 88 strumenti: 84 strumenti browser nelle categorie testo, sviluppatore, calcolatrice, social media, PDF, SEO e immagini, più l’assistente di scrittura IA, il riassuntore di testo IA, il Cercatore di strumenti IA e la Calcolatrice di Valute.',
       },
       {
         question: 'Il cercatore di strumenti intelligente IA invia la mia ricerca a un servizio esterno?',

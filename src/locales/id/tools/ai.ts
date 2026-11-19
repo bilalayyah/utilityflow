@@ -127,7 +127,7 @@ export const ID_AI_OVERRIDES: Record<string, ToolLocaleOverride> = {
       schemaApplicationCategory: "UtilitiesApplication",
     },
     apiNotice:
-      "100% gratis, tanpa login, langganan, atau kredit. Mencari inventaris terverifikasi kami yang berisi 84 alat browser + 2 alat AI (hingga 10 pencarian AI per hari + pencocokan kata kunci instan tanpa batas).",
+      "100% gratis, tanpa login, langganan, atau kredit. Mencari inventaris terverifikasi kami yang berisi 84 alat browser, 3 alat AI, dan Kalkulator Mata Uang (hingga 10 pencarian AI per hari + pencocokan kata kunci instan tanpa batas).",
     intro:
       "Tidak yakin alat mana yang menangani tugas Anda? Jelaskan tujuan Anda dalam bahasa sederhana — bahkan dengan kesalahan ejaan atau susunan kata informal — dan pencocok kata kunci + AI Groq hibrida kami merekomendasikan alat terverifikasi dari katalog live UtilityFlow dengan penjelasan yang jelas.",
   },

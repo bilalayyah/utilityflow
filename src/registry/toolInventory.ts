@@ -139,8 +139,8 @@ const IO_FORMATS_FR: Record<string, string> = {
 /**
  * Dynamically builds the verified tool inventory from TOOLS_REGISTRY.
  * Excludes 'ai-tool-finder' itself so search results recommend actionable utility tools
- * across the other 87 tools in the inventory (84 browser utilities + 2 AI writing/summarization tools),
- * out of 88 total live tools (84 browser + 3 AI, including the excluded ai-tool-finder).
+ * across the other 87 tools in the inventory (84 browser utilities + 2 AI writing/summarization tools + the Currency Calculator),
+ * out of 88 total live tools (84 browser + 3 AI + the Currency Calculator, including the excluded ai-tool-finder).
  * Pass a non-English locale for localized names, descriptions, keywords and URLs.
  */
 export function buildStructuredToolInventory(locale: LocaleCode = 'en'): StructuredToolEntry[] {

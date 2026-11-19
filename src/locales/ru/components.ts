@@ -1694,7 +1694,7 @@ export const ruComponentStrings: Record<string, ComponentLocaleData> = {
         }
       ],
       "title": "Умный поиск инструментов ИИ",
-      "searchesLine": "Ищет среди {count} настоящих инструментов UtilityFlow (84 браузерных + 2 ИИ)",
+      "searchesLine": "Ищет среди {count} настоящих инструментов UtilityFlow (84 браузерных, 3 ИИ + Валютный калькулятор)",
       "aiSearchesToday": "Поисков ИИ сегодня:",
       "leftUnlimited": "осталось · Мгновенный локальный поиск без ограничений",
       "quotaFallback": "До 10 бесплатных ИИ-поисков в день · Локальный поиск без ограничений",

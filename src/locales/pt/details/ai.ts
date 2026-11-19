@@ -391,7 +391,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       },
     ],
     benefits: [
-      'Busca gratuita em linguagem natural em todas as 84 ferramentas de navegador e 2 ferramentas de IA',
+      'Busca gratuita em linguagem natural em todas as 84 ferramentas de navegador, 3 ferramentas de IA e a Calculadora de Moedas',
       'Correspondência instantânea local por palavras-chave tolerante a erros de digitação, além de classificação semântica com IA da Groq',
       'A verificação rigorosa do inventário garante zero ferramentas inventadas ou links quebrados',
       'Mostra justificativa clara de uma frase e até 3 alternativas',
@@ -426,7 +426,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'Quais ferramentas o Buscador Inteligente de Ferramentas com IA pode recomendar?',
         answer:
-          'Ele pesquisa o catálogo completo do UtilityFlow de 88 ferramentas: 84 ferramentas de navegador nas categorias de texto, desenvolvedor, calculadora, social, PDF, SEO e imagem, além do Assistente de Escrita com IA e do Resumidor de Texto com IA.',
+          'Ele pesquisa o catálogo completo do UtilityFlow de 88 ferramentas: 84 ferramentas de navegador nas categorias de texto, desenvolvedor, calculadora, social, PDF, SEO e imagem, além do Assistente de Escrita com IA, do Resumidor de Texto com IA, do Localizador Inteligente de Ferramentas com IA e da Calculadora de Moedas.',
       },
       {
         question: 'O Buscador Inteligente de Ferramentas com IA envia minha busca para um serviço externo?',

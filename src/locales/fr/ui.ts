@@ -177,7 +177,7 @@ export const frStrings: UiStrings = {
       {
         question: 'Les outils de UtilityFlow sont-ils gratuits et utilisables sans créer de compte ?',
         answer:
-          'Oui. Les 84 utilitaires navigateur et les 3 outils IA de UtilityFlow sont entièrement gratuits, sans inscription, sans mur de connexion, sans crédits ni abonnement.',
+          'Oui. Les 84 utilitaires navigateur, les 3 outils IA et la Calculatrice de Devises de UtilityFlow sont entièrement gratuits, sans inscription, sans mur de connexion, sans crédits ni abonnement.',
       },
       {
         question: 'UtilityFlow envoie-t-il mes textes, mon code ou mes fichiers vers un serveur ?',
@@ -187,7 +187,7 @@ export const frStrings: UiStrings = {
       {
         question: 'Comment les 88 outils sont-ils organisés sur la plateforme ?',
         answer:
-          'UtilityFlow couvre sept catégories principales (texte et écriture, développeurs, calculatrices, réseaux sociaux, PDF, SEO et outils d’images et de fichiers), soit 84 outils navigateur et 3 outils IA gratuits intégrés à la plateforme.',
+          'UtilityFlow couvre sept catégories principales (texte et écriture, développeurs, calculatrices, réseaux sociaux, PDF, SEO et outils d’images et de fichiers), soit 84 outils navigateur, 3 outils IA gratuits et la Calculatrice de Devises intégrés à la plateforme.',
       },
       {
         question: 'Puis-je mettre en favori ou partager un lien direct vers un outil précis ?',

@@ -388,7 +388,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       },
     ],
     benefits: [
-      "通过免费自然语言搜索，覆盖全部 84 个浏览器工具与 2 个 AI 工具",
+      "通过免费自然语言搜索，覆盖全部 84 个浏览器工具、3 个 AI 工具与货币计算器",
       "即时本地容错关键词匹配，搭配 Groq AI 语义排序",
       "严格的工具库验证保证零编造工具、零失效链接",
       "显示清晰的一句话推荐理由与最多 3 个备选方案",
@@ -423,7 +423,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: "AI 智能工具查找器可以推荐哪些工具？",
         answer:
-          "它会搜索 UtilityFlow 全部 88 个工具：涵盖文本、开发者、计算器、社交、PDF、SEO 与图片分类的 84 个浏览器工具，以及 AI 写作助手与 AI 文本摘要工具。",
+          "它会搜索 UtilityFlow 全部 88 个工具：涵盖文本、开发者、计算器、社交、PDF、SEO 与图片分类的 84 个浏览器工具，以及 AI 写作助手、AI 文本摘要工具、AI 智能工具查找器与货币计算器。",
       },
       {
         question: "AI 智能工具查找器会把我的搜索发送到外部服务吗？",

@@ -1694,7 +1694,7 @@ export const esComponentStrings: Record<string, ComponentLocaleData> = {
         }
       ],
       "title": "Buscador inteligente de herramientas con IA",
-      "searchesLine": "Busca en {count} herramientas reales de UtilityFlow (84 de navegador + 2 de IA)",
+      "searchesLine": "Busca en {count} herramientas reales de UtilityFlow (84 de navegador, 3 de IA + Calculadora de Divisas)",
       "aiSearchesToday": "Búsquedas con IA hoy:",
       "leftUnlimited": "restantes · Búsqueda local instantánea ilimitada",
       "quotaFallback": "Hasta 10 búsquedas con IA gratis al día · Búsqueda local ilimitada",
