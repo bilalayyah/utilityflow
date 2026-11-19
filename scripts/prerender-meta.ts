@@ -64,7 +64,7 @@ import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { SITE_CONFIG, STATIC_ROUTES, buildCanonicalUrl } from '../src/config/site';
-import { DEFAULT_OG_IMAGE, getOgImageForPage } from '../src/config/ogImages';
+import { DEFAULT_OG_IMAGE, getBlogImageUrl, getOgImageForPage } from '../src/config/ogImages';
 import {
   CATEGORY_LOCALE_SLUGS,
   CATEGORY_PATH_SEGMENT,
@@ -583,7 +583,10 @@ function blogCategorySeo(
  * Article — mirrors ArticlePage.tsx SeoHead call (published version).
  * Hreflang covers ONLY the locales where the article is published
  * (getArticleAlternatePaths reads the slug manifest), plus x-default → EN.
- * The BlogPosting image is the default OG image (same as the page).
+ * The og:image + BlogPosting image are the per-article branded card
+ * (article-images batch): public/blog-images/<id>-<lang>.png via
+ * getBlogImageUrl. Not-yet-translated articles never reach this function
+ * (getBlogArticleVersion throws), so no fallback is needed here.
  */
 function articleSeo(
   articleId: string,
@@ -615,7 +618,7 @@ function articleSeo(
     ...(article.updatedAt ? { dateModified: article.updatedAt } : {}),
     author: { '@type': 'Organization', name: 'UtilityFlow' },
     mainEntityOfPage: buildCanonicalUrl(canonicalPath, ORIGIN),
-    image: DEFAULT_OG_IMAGE,
+    image: getBlogImageUrl(articleId, locale),
   };
   const faqs = version.faqs.map((faq) => ({ question: faq.q, answer: faq.a }));
   return {
@@ -623,6 +626,7 @@ function articleSeo(
     description: version.description,
     canonicalPath,
     ogType: 'article',
+    ogImage: getBlogImageUrl(articleId, locale),
     structuredData: [
       blogPostingSchema,
       buildBreadcrumbSchema(breadcrumbs),

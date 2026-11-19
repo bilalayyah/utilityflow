@@ -72,3 +72,13 @@ export function getOgImageForPage(
   const path = OG_IMAGE_MAP[key];
   return path ? `${SITE_CONFIG.defaultOrigin}${path}` : DEFAULT_OG_IMAGE;
 }
+
+// Per-article OG images (article-images batch): one branded card per
+// published (article, locale) pair, generated with Pillow — see
+// scripts/generate-blog-images.py. URL by convention (no registry field);
+// the image file is public/blog-images/<id>-<lang>.png (1200x630).
+// Callers pass this only when the article IS published in that locale;
+// not-yet-translated articles keep DEFAULT_OG_IMAGE (SeoHead's default).
+export function getBlogImageUrl(articleId: string, locale: string): string {
+  return `${SITE_CONFIG.defaultOrigin}/blog-images/${articleId}-${locale}.png`;
+}
