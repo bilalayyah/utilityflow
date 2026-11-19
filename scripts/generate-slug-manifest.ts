@@ -96,12 +96,6 @@ const ARTICLE_OVERRIDES: Record<
   zh: ZH_ARTICLE_OVERRIDES,
 };
 
-function sortRecord(record: Record<string, string>): Record<string, string> {
-  return Object.fromEntries(
-    Object.entries(record).sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0))
-  );
-}
-
 function generateSlugManifest(): void {
   // Loud completeness checks: a locale added to SUPPORTED_LOCALES without
   // its override maps, or a locale that lost a tool/category, must fail
@@ -118,67 +112,84 @@ function generateSlugManifest(): void {
     }
   }
 
+  // Compact parallel-array format (audit #7 — LocaleContext diet): the
+  // article/tool/category ids are stored ONCE in SLUG_IDS (sorted), and
+  // each locale carries only the localized slugs in the SAME order. The
+  // old Record<string,string> format repeated every id 10x (once per
+  // locale) — ~238 KB source for the manifest alone. Parallel arrays
+  // store each id once, roughly halving the manifest's bundled size.
+  // Lookups go through the helpers in src/locales/slugLookup.ts.
+  const sortIds = (ids: string[]): string[] => [...ids].sort();
+  const toolIds = sortIds(TOOLS_REGISTRY.map((t) => t.id));
+  const categoryIds = sortIds(CATEGORIES.map((c) => c.id));
+  const articleIds = sortIds(
+    BLOG_ARTICLES.filter((a) => a.status === 'published').map((a) => a.id)
+  );
+
   const manifest: Record<
     NonDefaultLocale,
     {
-      tools: Record<string, string>;
-      categories: Record<string, string>;
-      articles: Record<string, string>;
+      tools: string[];
+      categories: string[];
+      articles: (string | null)[];
     }
   > = {} as Record<
     NonDefaultLocale,
     {
-      tools: Record<string, string>;
-      categories: Record<string, string>;
-      articles: Record<string, string>;
+      tools: string[];
+      categories: string[];
+      articles: (string | null)[];
     }
   >;
 
   for (const locale of Object.keys(TOOL_OVERRIDES) as NonDefaultLocale[]) {
-    const tools: Record<string, string> = {};
-    for (const [toolId, override] of Object.entries(TOOL_OVERRIDES[locale])) {
-      tools[toolId] = override.slug;
-    }
-    const categories: Record<string, string> = {};
-    for (const [categoryId, override] of Object.entries(CATEGORY_OVERRIDES[locale])) {
-      categories[categoryId] = override.slug;
-    }
-    // Article slugs: only for articles actually published in that locale
-    // (an article id appears here only when its translation exists).
-    const articles: Record<string, string> = {};
-    for (const [articleId, override] of Object.entries(ARTICLE_OVERRIDES[locale])) {
-      articles[articleId] = override.slug;
-    }
-    manifest[locale] = {
-      tools: sortRecord(tools),
-      categories: sortRecord(categories),
-      articles: sortRecord(articles),
-    };
+    const tools: string[] = toolIds.map((toolId) => {
+      const slug = TOOL_OVERRIDES[locale][toolId]?.slug;
+      if (!slug) {
+        throw new Error(
+          `Slug manifest incomplete for locale "${locale}": tool "${toolId}" has no slug override.`
+        );
+      }
+      return slug;
+    });
+    const categories: string[] = categoryIds.map((categoryId) => {
+      const slug = CATEGORY_OVERRIDES[locale][categoryId]?.slug;
+      if (!slug) {
+        throw new Error(
+          `Slug manifest incomplete for locale "${locale}": category "${categoryId}" has no slug override.`
+        );
+      }
+      return slug;
+    });
+    // Article slugs: parallel to articleIds; null when the article is
+    // not published in that locale (an article appears as a slug only
+    // when its translation exists).
+    const articles: (string | null)[] = articleIds.map(
+      (articleId) => ARTICLE_OVERRIDES[locale][articleId]?.slug ?? null
+    );
+    manifest[locale] = { tools, categories, articles };
   }
 
   // Every locale must carry every tool and every category — exact counts,
   // not approximate. A missing slug would silently drop that locale from
   // hreflang sets and switcher equivalents.
   for (const locale of nonDefaultLocales) {
-    const toolCount = Object.keys(manifest[locale].tools).length;
-    const categoryCount = Object.keys(manifest[locale].categories).length;
-    if (toolCount !== TOOLS_REGISTRY.length) {
+    if (manifest[locale].tools.length !== TOOLS_REGISTRY.length) {
       throw new Error(
-        `Slug manifest incomplete for locale "${locale}": ${toolCount} tool slugs, expected ${TOOLS_REGISTRY.length}.`
+        `Slug manifest incomplete for locale "${locale}": ${manifest[locale].tools.length} tool slugs, expected ${TOOLS_REGISTRY.length}.`
       );
     }
-    if (categoryCount !== CATEGORIES.length) {
+    if (manifest[locale].categories.length !== CATEGORIES.length) {
       throw new Error(
-        `Slug manifest incomplete for locale "${locale}": ${categoryCount} category slugs, expected ${CATEGORIES.length}.`
+        `Slug manifest incomplete for locale "${locale}": ${manifest[locale].categories.length} category slugs, expected ${CATEGORIES.length}.`
       );
     }
     // Article slugs are NOT exact-count: an article appears in a locale
-    // only when its translation is published there. But every manifest
-    // article slug must belong to a published article (no stale/orphan
-    // slugs for drafts or removed articles).
-    for (const articleId of Object.keys(manifest[locale].articles)) {
-      const article = BLOG_ARTICLES.find((a) => a.id === articleId);
-      if (!article || article.status !== 'published') {
+    // only when its translation is published there. But an override for
+    // an UNPUBLISHED article must fail loudly (it would otherwise be
+    // silently dropped from the manifest).
+    for (const articleId of Object.keys(ARTICLE_OVERRIDES[locale])) {
+      if (!articleIds.includes(articleId)) {
         throw new Error(
           `Slug manifest has an orphan article slug for locale "${locale}": "${articleId}" is not a published article.`
         );
@@ -192,20 +203,32 @@ function generateSlugManifest(): void {
     ' * Do NOT edit by hand; re-run the generator (it is the first step of',
     ' * `npm run build`, so it never goes stale).',
     ' *',
-    ' * Slugs ONLY: tool id -> localized slug, category id -> localized',
-    ' * slug, and article id -> localized slug per non-default locale. No',
-    ' * names, descriptions, FAQs or UI strings — routes.ts uses this for',
-    ' * cross-locale navigation without loading any locale data.',
+    ' * Compact parallel-array format (audit #7): the ids live ONCE in',
+    ' * SLUG_IDS (sorted); each locale carries only the localized slugs in',
+    ' * the SAME order, so a slug is found by the id\'s index. The old',
+    ' * Record<string,string> format repeated every id 10x (once per',
+    ' * locale). Lookups go through src/locales/slugLookup.ts — do NOT',
+    ' * index SLUG_MANIFEST directly.',
+    ' *',
+    ' * Slugs ONLY: no names, descriptions, FAQs or UI strings — routes.ts',
+    ' * uses this for cross-locale navigation without loading locale data.',
     ' */',
     '',
     "import type { NonDefaultLocale } from './config';",
     '',
+    '/** Per-locale slug arrays, parallel to SLUG_IDS (same order, same length). */',
     'export interface SlugManifestEntry {',
-    '  tools: Record<string, string>;',
-    '  categories: Record<string, string>;',
-    '  /** Article id -> localized slug. Only articles published in that locale. */',
-    '  articles: Record<string, string>;',
+    '  tools: string[];',
+    '  categories: string[];',
+    '  /** Localized article slug, parallel to SLUG_IDS.articles; null when the article is not published in that locale. */',
+    '  articles: (string | null)[];',
     '}',
+    '',
+    `export const SLUG_IDS = ${JSON.stringify(
+      { tools: toolIds, categories: categoryIds, articles: articleIds },
+      null,
+      2
+    )};`,
     '',
     'export const SLUG_MANIFEST: Record<NonDefaultLocale, SlugManifestEntry> = ',
   ].join('\n');
@@ -221,15 +244,15 @@ function generateSlugManifest(): void {
   );
 
   const toolCount = Object.values(manifest).reduce(
-    (sum, entry) => sum + Object.keys(entry.tools).length,
+    (sum, entry) => sum + entry.tools.length,
     0
   );
   const categoryCount = Object.values(manifest).reduce(
-    (sum, entry) => sum + Object.keys(entry.categories).length,
+    (sum, entry) => sum + entry.categories.length,
     0
   );
   const articleCount = Object.values(manifest).reduce(
-    (sum, entry) => sum + Object.keys(entry.articles).length,
+    (sum, entry) => sum + entry.articles.filter(Boolean).length,
     0
   );
   console.log(

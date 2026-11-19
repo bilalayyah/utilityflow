@@ -90,7 +90,7 @@ import {
   getToolAlternatePaths,
   toHreflangEntries,
 } from '../src/locales/routes';
-import { SLUG_MANIFEST } from '../src/locales/slugManifest';
+import { getPublishedArticleCount } from '../src/locales/slugLookup';
 import { getLocalizedCategory, getLocalizedTool } from '../src/locales/tools';
 import {
   injectStaticBody,
@@ -1169,7 +1169,7 @@ async function prerender(): Promise<void> {
     publishedArticles.length +
     SUPPORTED_LOCALES.filter((l) => l.code !== 'en').reduce(
       (sum, l) =>
-        sum + Object.keys(SLUG_MANIFEST[l.code as NonDefaultLocale].articles ?? {}).length,
+        sum + getPublishedArticleCount(l.code as NonDefaultLocale),
       0
     );
   const expectedTotal = basePages * SUPPORTED_LOCALES.length + articleUrls;

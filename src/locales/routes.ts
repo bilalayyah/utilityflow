@@ -17,7 +17,14 @@ import {
 } from '../registry/blogArticleMeta';
 import { getToolBySlug } from '../registry/toolsRegistry';
 import { getToolById } from './tools';
-import { SLUG_MANIFEST } from './slugManifest';
+import {
+  getArticleIdBySlug,
+  getArticleSlug,
+  getCategoryIdBySlug,
+  getCategorySlug,
+  getToolIdBySlug,
+  getToolSlug,
+} from './slugLookup';
 import { getActiveLocaleData } from './store';
 import type { LocaleData } from './types';
 
@@ -55,10 +62,8 @@ function homePath(locale: LocaleCode): string {
 function resolveToolIdBySlug(slug: string, locale: LocaleCode): string | undefined {
   const normalized = slug.replace(/^\/+|\/+$/g, '').toLowerCase();
   if (locale !== DEFAULT_LOCALE) {
-    const entry = Object.entries(SLUG_MANIFEST[locale].tools).find(
-      ([, localizedSlug]) => localizedSlug.toLowerCase() === normalized
-    );
-    if (entry) return entry[0];
+    const id = getToolIdBySlug(locale as NonDefaultLocale, normalized);
+    if (id) return id;
   }
   return getToolBySlug(normalized)?.id;
 }
@@ -67,10 +72,8 @@ function resolveToolIdBySlug(slug: string, locale: LocaleCode): string | undefin
 function resolveBlogArticleIdBySlug(slug: string, locale: LocaleCode): string | undefined {
   const normalized = slug.replace(/^\/+|\/+$/g, '').toLowerCase();
   if (locale !== DEFAULT_LOCALE) {
-    const entry = Object.entries(SLUG_MANIFEST[locale].articles ?? {}).find(
-      ([, localizedSlug]) => localizedSlug.toLowerCase() === normalized
-    );
-    if (entry) return entry[0];
+    const id = getArticleIdBySlug(locale as NonDefaultLocale, normalized);
+    if (id) return id;
   }
   return getBlogArticleBySlug(normalized, DEFAULT_LOCALE)?.id;
 }
@@ -91,17 +94,15 @@ function targetBlogArticleSlug(
   if (storeData.code === targetLocale) {
     return storeData.articleOverrides[articleId]?.slug;
   }
-  return SLUG_MANIFEST[targetLocale as NonDefaultLocale].articles?.[articleId];
+  return getArticleSlug(targetLocale as NonDefaultLocale, articleId);
 }
 
 /** Invert the manifest: localized category slug -> category id (EN slugs resolve via the registry). */
 function resolveCategoryIdBySlug(slug: string, locale: LocaleCode): string | undefined {
   const normalized = slug.replace(/^\/+|\/+$/g, '').toLowerCase();
   if (locale !== DEFAULT_LOCALE) {
-    const entry = Object.entries(SLUG_MANIFEST[locale].categories).find(
-      ([, localizedSlug]) => localizedSlug.toLowerCase() === normalized
-    );
-    if (entry) return entry[0];
+    const id = getCategoryIdBySlug(locale as NonDefaultLocale, normalized);
+    if (id) return id;
   }
   return getCategoryBySlug(normalized)?.id;
 }
@@ -120,7 +121,7 @@ function targetToolSlug(
   if (storeData.code === targetLocale) {
     return storeData.toolOverrides[toolId]?.slug;
   }
-  return SLUG_MANIFEST[targetLocale as NonDefaultLocale].tools[toolId];
+  return getToolSlug(targetLocale as NonDefaultLocale, toolId);
 }
 
 /** Localized category slug for the target locale: targetData -> store -> manifest (falls back to the English slug, as before). */
@@ -138,7 +139,7 @@ function targetCategorySlug(
   if (storeData.code === targetLocale) {
     return storeData.categoryOverrides[categoryId]?.slug ?? base?.slug ?? categoryId;
   }
-  return SLUG_MANIFEST[targetLocale as NonDefaultLocale].categories[categoryId] ?? base?.slug ?? categoryId;
+  return getCategorySlug(targetLocale as NonDefaultLocale, categoryId) ?? base?.slug ?? categoryId;
 }
 
 export function getLocalizedEquivalentPath(
@@ -291,7 +292,7 @@ export function getToolAlternatePaths(toolId: string): LocaleAlternatePaths | un
   const result: LocaleAlternatePaths = { en: `/${base.slug}/` };
   for (const locale of SUPPORTED_LOCALES) {
     if (locale.code === DEFAULT_LOCALE) continue;
-    const slug = SLUG_MANIFEST[locale.code].tools[toolId];
+    const slug = getToolSlug(locale.code as NonDefaultLocale, toolId);
     if (slug) {
       result[locale.code] = `${locale.pathPrefix}/${slug}/`;
     }
@@ -308,7 +309,7 @@ export function getCategoryAlternatePaths(
   const result: LocaleAlternatePaths = { en: `/category/${base.slug}/` };
   for (const locale of SUPPORTED_LOCALES) {
     if (locale.code === DEFAULT_LOCALE) continue;
-    const slug = SLUG_MANIFEST[locale.code].categories[categoryId];
+    const slug = getCategorySlug(locale.code as NonDefaultLocale, categoryId);
     if (slug && slug !== base.slug) {
       result[locale.code] =
         `${locale.pathPrefix}/${CATEGORY_PATH_SEGMENT[locale.code]}/${slug}/`;
@@ -326,7 +327,7 @@ export function getArticleAlternatePaths(
   const result: LocaleAlternatePaths = { en: `/blog/${base.en.slug}/` };
   for (const locale of SUPPORTED_LOCALES) {
     if (locale.code === DEFAULT_LOCALE) continue;
-    const slug = SLUG_MANIFEST[locale.code].articles?.[articleId];
+    const slug = getArticleSlug(locale.code as NonDefaultLocale, articleId);
     if (slug) {
       result[locale.code] = `${locale.pathPrefix}/blog/${slug}/`;
     }
@@ -344,7 +345,7 @@ export function getBlogCategoryAlternatePaths(
   for (const locale of SUPPORTED_LOCALES) {
     if (locale.code === DEFAULT_LOCALE) continue;
     const slug =
-      SLUG_MANIFEST[locale.code].categories[categoryId] ?? base.slug;
+      getCategorySlug(locale.code as NonDefaultLocale, categoryId) ?? base.slug;
     result[locale.code] =
       `${locale.pathPrefix}/blog/category/${slug}/`;
   }

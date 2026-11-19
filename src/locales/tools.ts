@@ -1,8 +1,8 @@
 import type { CategoryId, ToolCategory, ToolDefinition } from '../types/tool';
 import { CATEGORIES, getCategoryById } from '../registry/categories';
 import { TOOLS_REGISTRY, getToolBySlug } from '../registry/toolsRegistry';
-import type { LocaleCode } from './config';
-import { SLUG_MANIFEST } from './slugManifest';
+import type { LocaleCode, NonDefaultLocale } from './config';
+import { hasCategorySlug, hasToolSlug } from './slugLookup';
 import { getActiveLocaleData } from './store';
 import type { LocaleData } from './types';
 
@@ -43,7 +43,7 @@ export function hasToolOverride(
 ): boolean {
   if (locale === 'en') return true;
   if (locale === data.code) return Boolean(data.toolOverrides[toolId]);
-  return Boolean(SLUG_MANIFEST[locale]?.tools[toolId]);
+  return hasToolSlug(locale as NonDefaultLocale, toolId);
 }
 
 export function getLocalizedTool(
@@ -131,7 +131,7 @@ export function hasCategoryOverride(
 ): boolean {
   if (locale === 'en') return true;
   if (locale === data.code) return Boolean(data.categoryOverrides[categoryId]);
-  return Boolean(SLUG_MANIFEST[locale]?.categories[categoryId]);
+  return hasCategorySlug(locale as NonDefaultLocale, categoryId);
 }
 
 export function getLocalizedCategory(
