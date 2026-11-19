@@ -12,7 +12,7 @@
 // Each file is the shell with ONLY the SEO head replaced by the route-correct
 // head AND the empty `<div id="root">` filled with a static <main> rendered
 // from the locale data (Audit Fix H-1, see scripts/prerender-body.ts); the
-// JS bundle, CSS, fonts and the AdSense script are untouched, so the app
+// JS bundle, CSS and fonts are untouched, so the app
 // boots exactly as before for real users — createRoot() replaces the static
 // <main> on mount.
 //
@@ -740,7 +740,7 @@ function adminSeo(): SeoHeadProps {
 // ---------------------------------------------------------------------------
 // Shell surgery: strip the shell's SEO tags, then replace <title> with the
 // route-correct SEO block. Everything else in <head> (charset, viewport,
-// favicon, theme script, fonts, AdSense script) and the whole <body> stay
+// favicon, theme script, fonts) and the whole <body> stay
 // byte-identical, so the app boots exactly as before.
 // ---------------------------------------------------------------------------
 

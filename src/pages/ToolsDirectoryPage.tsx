@@ -1,6 +1,5 @@
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { AdSlot } from '../components/common/AdSlot';
 import { Breadcrumbs, buildBreadcrumbSchema } from '../components/common/Breadcrumbs';
 import { CategoryIcon } from '../components/common/CategoryIcon';
 import { SeoHead } from '../components/seo/SeoHead';
@@ -150,8 +149,6 @@ export function ToolsDirectoryPage() {
             </div>
           </section>
         )}
-
-        <AdSlot slotId="directory-top" format="horizontal" />
 
         <section aria-label="Category suites" className="mt-8">
           <h2 className="text-xl font-bold text-slate-900 mb-4">{t.directory.categorySuites}</h2>

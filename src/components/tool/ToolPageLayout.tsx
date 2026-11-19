@@ -12,7 +12,6 @@ import { formatString } from '../../locales/ui';
 import type { BreadcrumbItem, ToolDefinition, ToolDetail, ToolStep } from '../../types/tool';
 import { buildToolNameEntries, linkifyToolNames } from '../../utils/linkifyToolNames';
 import { trackEvent } from '../../utils/analytics';
-import { AdSlot } from '../common/AdSlot';
 import { Breadcrumbs, buildBreadcrumbSchema } from '../common/Breadcrumbs';
 import { FAQAccordion, buildFaqSchema } from '../common/FAQAccordion';
 import { CommentsSection } from '../comments/CommentsSection';
@@ -197,9 +196,6 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
           {children}
         </section>
 
-        {/* Ad placement isolated below interactive controls */}
-        <AdSlot slotId="tool-below-workspace" format="horizontal" />
-
         {/* Structured Educational & SEO Guide Sections */}
         <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-10">
           <div className="lg:col-span-8 space-y-12">
@@ -323,8 +319,6 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
             )}
           </aside>
         </div>
-
-        <AdSlot slotId="tool-below-guide" format="horizontal" />
 
         <div className="mt-12">
           <ToolRelatedArticles toolId={tool.id} locale={locale} />

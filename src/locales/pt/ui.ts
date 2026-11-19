@@ -335,7 +335,7 @@ export const ptStrings: UiStrings = {
       'Nosso objetivo é simples: dar a cada utilitário uma página limpa e dedicada, que carrega rápido, explica claramente como a ferramenta funciona e executa diretamente no seu navegador sempre que os padrões web permitirem.',
     orgTitle: 'Quem mantém o UtilityFlow',
     orgP1:
-      'O UtilityFlow é um projeto independente, criado e mantido por Bilal, um criador que desenvolve ferramentas web gratuitas nas horas vagas. Não há nenhuma empresa por trás do site, nenhum investimento externo e nenhuma equipe de funcionários — cada ferramenta, guia e página de ajuda é projetada, construída e testada por uma só pessoa. O projeto é mantido pela publicidade exibida no site, e é isso que mantém as 88 ferramentas gratuitas, sem contas e sem assinaturas. O crédito no rodapé menciona Shaheen, cujo incentivo inspirou o projeto e cujo nome aparece em todas as páginas como um lembrete de onde a ideia começou.',
+      'O UtilityFlow é um projeto independente, criado e mantido por Bilal, um criador que desenvolve ferramentas web gratuitas nas horas vagas. Não há nenhuma empresa por trás do site, nenhum investimento externo e nenhuma equipe de funcionários — cada ferramenta, guia e página de ajuda é projetada, construída e testada por uma só pessoa. As 88 ferramentas são gratuitas, sem contas e sem assinaturas. O crédito no rodapé menciona Shaheen, cujo incentivo inspirou o projeto e cujo nome aparece em todas as páginas como um lembrete de onde a ideia começou.',
     orgP2:
       'Como o projeto é pequeno e independente, as decisões continuam simples: se uma ferramenta está lenta, confusa ou errada, ela é corrigida. O feedback enviado pela página de contato vai direto para a pessoa que pode mudar o código, e sugestões de visitantes já deram origem a novas ferramentas e melhorias em todo o site.',
     howTitle: 'Como nossas ferramentas são criadas e testadas',
@@ -429,14 +429,14 @@ export const ptStrings: UiStrings = {
   privacy: {
     seoTitle: 'Política de privacidade | UtilityFlow — Ferramentas',
     seoDescription:
-      'Leia a Política de Privacidade do UtilityFlow sobre execução de ferramentas no navegador, cookies, registros e divulgação de publicidade de terceiros.',
+      'Leia a Política de Privacidade do UtilityFlow sobre execução de ferramentas no navegador, cookies, registros e análises.',
     title: 'Política de privacidade',
     lastUpdated: 'Última atualização: novembro de 2026',
     sections: [
       {
         title: '1. Visão geral',
         paragraphs: [
-          'O UtilityFlow foi projetado em torno do processamento no navegador, no lado do cliente. Esta Política de Privacidade explica quais informações são processadas quando você visita nosso site, como nossos utilitários tratam os dados inseridos e como cookies ou tecnologias de publicidade podem funcionar.',
+          'O UtilityFlow foi projetado em torno do processamento no navegador, no lado do cliente. Esta Política de Privacidade explica quais informações são processadas quando você visita nosso site, como nossos utilitários tratam os dados inseridos e como cookies e análises funcionam no site.',
         ],
       },
       {
@@ -455,10 +455,9 @@ export const ptStrings: UiStrings = {
         ],
       },
       {
-        title: '4. Cookies e publicidade de terceiros',
+        title: '4. Cookies e análises',
         paragraphs: [
-          'Podemos exibir anúncios de redes de publicidade de terceiros (como o Google AdSense) para manter o acesso gratuito às nossas ferramentas. Fornecedores terceiros, incluindo o Google, podem usar cookies ou web beacons para exibir anúncios com base em visitas anteriores do usuário a este site ou a outros sites.',
-          'Você pode desativar a publicidade personalizada visitando as Configurações de anúncios do Google ou gerenciando as preferências de cookies diretamente nas configurações do seu navegador.',
+          'O UtilityFlow atualmente não exibe anúncios de terceiros.',
           'Também usamos o Google Analytics 4 para entender, de forma agregada, como o site é usado; ele só é ativado quando você aceita os cookies no banner.',
         ],
       },
@@ -478,7 +477,7 @@ export const ptStrings: UiStrings = {
       {
         title: '7. Seus direitos e escolhas',
         paragraphs: [
-          'Você pode desativar a publicidade personalizada nas Configurações de anúncios do Google, e pode bloquear ou excluir cookies nas configurações do seu navegador a qualquer momento. Se você publicou um comentário, pode pedir a remoção dele entrando em contato conosco. Como nossas ferramentas rodam no seu navegador e não mantemos contas nem perfis, não há um arquivo de dados pessoais para baixar ou corrigir — mas qualquer dúvida sobre seus dados será respondida se você nos escrever.',
+          'Você pode bloquear ou excluir cookies nas configurações do seu navegador a qualquer momento. Se você publicou um comentário, pode pedir a remoção dele entrando em contato conosco. Como nossas ferramentas rodam no seu navegador e não mantemos contas nem perfis, não há um arquivo de dados pessoais para baixar ou corrigir — mas qualquer dúvida sobre seus dados será respondida se você nos escrever.',
         ],
       },
       {
@@ -499,7 +498,6 @@ export const ptStrings: UiStrings = {
       'Se você tiver dúvidas sobre esta Política de Privacidade, entre em contato conosco pela nossa',
     contactLink: 'página de contato',
     contactMiddle: 'ou pelo e-mail',
-    optOutGoogleAds: 'Configurações de anúncios do Google',
   },
   terms: {
     seoTitle: 'Termos de serviço do UtilityFlow | Ferramentas online',
@@ -544,7 +542,7 @@ export const ptStrings: UiStrings = {
       {
         title: '7. Serviços de terceiros',
         paragraphs: [
-          'Alguns recursos dependem de serviços independentes de terceiros: as três ferramentas de IA enviam texto para a Groq para processamento, o formulário de contato é entregue pelo FormSubmit, o site é hospedado na Cloudflare, a Calculadora de câmbio obtém as taxas de câmbio ao vivo da Frankfurter e a publicidade é veiculada pelo Google AdSense. Cada um desses serviços tem seus próprios termos e política de privacidade, e o seu uso deles é regido por esses documentos. O UtilityFlow não é responsável pela disponibilidade nem pelas práticas de serviços de terceiros.',
+          'Alguns recursos dependem de serviços independentes de terceiros: as três ferramentas de IA enviam texto para a Groq para processamento, o formulário de contato é entregue pelo FormSubmit, o site é hospedado na Cloudflare e a Calculadora de câmbio obtém as taxas de câmbio ao vivo da Frankfurter. Cada um desses serviços tem seus próprios termos e política de privacidade, e o seu uso deles é regido por esses documentos. O UtilityFlow não é responsável pela disponibilidade nem pelas práticas de serviços de terceiros.',
         ],
       },
       {

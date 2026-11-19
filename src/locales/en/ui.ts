@@ -331,7 +331,7 @@ export const enStrings: UiStrings = {
       'Our goal is straightforward: give every utility a clean, dedicated page that loads quickly, explains clearly how the tool works, and executes directly inside your browser whenever web standards allow.',
     orgTitle: 'Who Runs UtilityFlow',
     orgP1:
-      'UtilityFlow is an independent project created and maintained by Bilal, a maker who builds free web tools in his spare time. There is no company behind the site, no investor funding, and no team of employees — every tool, guide, and help page is designed, built, and tested by one person. The project is supported by the advertising shown on the site, which is what keeps all 88 tools free to use without accounts or subscriptions. The footer credit names Shaheen, whose encouragement inspired the project and whose name appears on every page as a reminder of where the idea began.',
+      'UtilityFlow is an independent project created and maintained by Bilal, a maker who builds free web tools in his spare time. There is no company behind the site, no investor funding, and no team of employees — every tool, guide, and help page is designed, built, and tested by one person. All 88 tools are free to use without accounts or subscriptions. The footer credit names Shaheen, whose encouragement inspired the project and whose name appears on every page as a reminder of where the idea began.',
     orgP2:
       'Because the project is small and independent, decisions stay simple: if a tool is slow, confusing, or wrong, it gets fixed. Feedback sent through the contact page goes directly to the person who can change the code, and suggestions from visitors have already shaped new tools and improvements across the site.',
     howTitle: 'How Our Tools Are Built and Tested',
@@ -425,14 +425,14 @@ export const enStrings: UiStrings = {
   privacy: {
     seoTitle: 'Privacy Policy – How We Protect Your Data | UtilityFlow',
     seoDescription:
-      'Read the UtilityFlow Privacy Policy covering browser-side tool execution, cookies, server logs, and third-party advertising disclosures.',
+      'Read the UtilityFlow Privacy Policy covering browser-side tool execution, cookies, server logs, and analytics.',
     title: 'Privacy Policy',
     lastUpdated: 'Last updated: November 2026',
     sections: [
       {
         title: '1. Overview',
         paragraphs: [
-          'UtilityFlow is designed around client-side browser processing. This Privacy Policy explains what information is processed when you visit our website, how our utilities handle inputs, and how cookies or advertising technologies may operate.',
+          'UtilityFlow is designed around client-side browser processing. This Privacy Policy explains what information is processed when you visit our website, how our utilities handle inputs, and how cookies and analytics work on the site.',
         ],
       },
       {
@@ -451,10 +451,9 @@ export const enStrings: UiStrings = {
         ],
       },
       {
-        title: '4. Cookies & Third-Party Advertising',
+        title: '4. Cookies & Analytics',
         paragraphs: [
-          'We may display advertisements from third-party advertising networks (such as Google AdSense) to support free access to our tools. Third-party vendors, including Google, may use cookies or web beacons to serve ads based on a user’s prior visits to this website or other websites.',
-          'You may opt out of personalized advertising by visiting Google Ads Settings or managing cookie preferences directly in your browser settings.',
+          'UtilityFlow currently shows no third-party advertisements.',
           'We also use Google Analytics 4 to understand, in aggregate, how the site is used; it only runs after you accept cookies in the banner.',
         ],
       },
@@ -474,7 +473,7 @@ export const enStrings: UiStrings = {
       {
         title: '7. Your Rights and Choices',
         paragraphs: [
-          'You can switch off personalized advertising through Google Ads Settings, and you can block or delete cookies in your browser settings at any time. If you posted a comment, you can ask for it to be removed by contacting us. Because our tools run in your browser and we do not keep accounts or profiles, there is no personal data file to download or correct — but any question about your data will be answered if you write to us.',
+          'You can block or delete cookies in your browser settings at any time. If you posted a comment, you can ask for it to be removed by contacting us. Because our tools run in your browser and we do not keep accounts or profiles, there is no personal data file to download or correct — but any question about your data will be answered if you write to us.',
         ],
       },
       {
@@ -495,7 +494,6 @@ export const enStrings: UiStrings = {
       'If you have questions about this Privacy Policy, please contact us via our',
     contactLink: 'Contact page',
     contactMiddle: 'or email',
-    optOutGoogleAds: 'Google Ads Settings',
   },
   terms: {
     seoTitle: 'Terms of Service – Using UtilityFlow Tools | UtilityFlow',
@@ -540,7 +538,7 @@ export const enStrings: UiStrings = {
       {
         title: '7. Third-Party Services',
         paragraphs: [
-          'Some features rely on independent third-party services: the three AI tools send text to Groq for processing, the contact form is delivered by FormSubmit, the site is hosted on Cloudflare, the Currency Calculator fetches live exchange rates from Frankfurter, and advertising is served by Google AdSense. Each of these services has its own terms and privacy policy, and your use of them is governed by those documents. UtilityFlow is not responsible for the availability or practices of third-party services.',
+          'Some features rely on independent third-party services: the three AI tools send text to Groq for processing, the contact form is delivered by FormSubmit, the site is hosted on Cloudflare, and the Currency Calculator fetches live exchange rates from Frankfurter. Each of these services has its own terms and privacy policy, and your use of them is governed by those documents. UtilityFlow is not responsible for the availability or practices of third-party services.',
         ],
       },
       {

@@ -1,7 +1,6 @@
 import { ArrowRight, Layers, Lock, ShieldCheck, Sparkles, Zap } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { AdSlot } from '../components/common/AdSlot';
 import { CategoryIcon } from '../components/common/CategoryIcon';
 import { FAQAccordion, buildFaqSchema } from '../components/common/FAQAccordion';
 import { SeoHead } from '../components/seo/SeoHead';
@@ -341,10 +340,6 @@ export function HomePage() {
           </div>
         </div>
       </section>
-
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <AdSlot slotId="home-mid" format="horizontal" />
-      </div>
 
       {/* All Tools Directory Section */}
       <section

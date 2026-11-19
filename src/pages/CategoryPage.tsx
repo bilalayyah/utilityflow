@@ -1,7 +1,6 @@
 import { ArrowRight } from 'lucide-react';
 import { useMemo } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
-import { AdSlot } from '../components/common/AdSlot';
 import { Breadcrumbs, buildBreadcrumbSchema } from '../components/common/Breadcrumbs';
 import { CategoryIcon } from '../components/common/CategoryIcon';
 import { CategoryGuides } from '../components/blog/CategoryGuides';
@@ -155,8 +154,6 @@ export function CategoryPage() {
             </div>
           </section>
         )}
-
-        <AdSlot slotId="category-mid" format="horizontal" />
 
         {/* L-15: short FAQ (3–5 Q&As) about this category. */}
         {category.faqs && category.faqs.length > 0 && (

@@ -333,7 +333,7 @@ export const deStrings: UiStrings = {
       'Unser Ziel ist einfach: Jedes Utility bekommt eine eigene, saubere Seite, die schnell lädt, klar erklärt, wie das Tool funktioniert, und direkt in Ihrem Browser ausgeführt wird, wann immer es die Webstandards zulassen.',
     orgTitle: 'Wer hinter UtilityFlow steht',
     orgP1:
-      'UtilityFlow ist ein unabhängiges Projekt, das von Bilal erstellt und gepflegt wird – einem Maker, der in seiner Freizeit kostenlose Web-Tools baut. Hinter der Website steht kein Unternehmen, keine Investorenfinanzierung und kein Team von Mitarbeitern: Jedes Tool, jede Anleitung und jede Hilfeseite wird von einer einzigen Person entworfen, gebaut und getestet. Das Projekt wird durch die Werbung auf der Website finanziert, und genau das hält alle 88 Tools kostenlos nutzbar – ohne Konten und ohne Abonnements. Die Fußzeile nennt Shaheen, dessen Ermutigung das Projekt inspiriert hat und dessen Name auf jeder Seite als Erinnerung daran steht, wo die Idee begann.',
+      'UtilityFlow ist ein unabhängiges Projekt, das von Bilal erstellt und gepflegt wird – einem Maker, der in seiner Freizeit kostenlose Web-Tools baut. Hinter der Website steht kein Unternehmen, keine Investorenfinanzierung und kein Team von Mitarbeitern: Jedes Tool, jede Anleitung und jede Hilfeseite wird von einer einzigen Person entworfen, gebaut und getestet. Alle 88 Tools sind kostenlos nutzbar – ohne Konten und ohne Abonnements. Die Fußzeile nennt Shaheen, dessen Ermutigung das Projekt inspiriert hat und dessen Name auf jeder Seite als Erinnerung daran steht, wo die Idee begann.',
     orgP2:
       'Weil das Projekt klein und unabhängig ist, bleiben Entscheidungen einfach: Wenn ein Tool langsam, verwirrend oder falsch ist, wird es repariert. Feedback über die Kontaktseite geht direkt an die Person, die den Code ändern kann, und Vorschläge von Besuchern haben bereits neue Tools und Verbesserungen auf der Website geprägt.',
     howTitle: 'Wie unsere Tools gebaut und getestet werden',
@@ -428,14 +428,14 @@ export const deStrings: UiStrings = {
   privacy: {
     seoTitle: 'Datenschutzerklärung und Cookie-Hinweise | UtilityFlow',
     seoDescription:
-      'Lesen Sie die Datenschutzerklärung von UtilityFlow zur browserbasierten Tool-Ausführung, Cookies, Serverprotokollen und externer Werbung von Drittanbietern.',
+      'Lesen Sie die Datenschutzerklärung von UtilityFlow zur browserbasierten Tool-Ausführung, Cookies, Serverprotokollen und Analysen.',
     title: 'Datenschutzerklärung',
     lastUpdated: 'Letzte Aktualisierung: November 2026',
     sections: [
       {
         title: '1. Überblick',
         paragraphs: [
-          'UtilityFlow ist auf clientseitige Verarbeitung im Browser ausgelegt. Diese Datenschutzerklärung erklärt, welche Informationen bei Ihrem Besuch unserer Website verarbeitet werden, wie unsere Utilities Eingaben behandeln und wie Cookies oder Werbetechnologien funktionieren können.',
+          'UtilityFlow ist auf clientseitige Verarbeitung im Browser ausgelegt. Diese Datenschutzerklärung erklärt, welche Informationen bei Ihrem Besuch unserer Website verarbeitet werden, wie unsere Utilities Eingaben behandeln und wie Cookies und Analysen auf der Website funktionieren.',
         ],
       },
       {
@@ -454,10 +454,9 @@ export const deStrings: UiStrings = {
         ],
       },
       {
-        title: '4. Cookies & Werbung von Drittanbietern',
+        title: '4. Cookies & Analysen',
         paragraphs: [
-          'Wir zeigen möglicherweise Werbung von Werbenetzwerken Dritter (wie Google AdSense), um den kostenlosen Zugang zu unseren Tools zu finanzieren. Drittanbieter, einschließlich Google, können Cookies oder Web-Beacons verwenden, um Werbung basierend auf früheren Besuchen des Nutzers auf dieser oder anderen Websites auszuliefern.',
-          'Sie können personalisierte Werbung deaktivieren, indem Sie die Google-Anzeigeneinstellungen besuchen oder die Cookie-Einstellungen direkt in Ihren Browsereinstellungen verwalten.',
+          'UtilityFlow zeigt derzeit keine Werbung von Drittanbietern.',
           'Wir verwenden außerdem Google Analytics 4, um aggregiert zu verstehen, wie die Website genutzt wird; es läuft nur, wenn Sie Cookies im Banner akzeptieren.',
         ],
       },
@@ -477,7 +476,7 @@ export const deStrings: UiStrings = {
       {
         title: '7. Ihre Rechte und Wahlmöglichkeiten',
         paragraphs: [
-          'Sie können personalisierte Werbung über die Google-Anzeigeneinstellungen deaktivieren, und Sie können Cookies jederzeit in Ihren Browsereinstellungen blockieren oder löschen. Wenn Sie einen Kommentar gepostet haben, können Sie dessen Entfernung verlangen, indem Sie uns kontaktieren. Da unsere Tools in Ihrem Browser laufen und wir keine Konten oder Profile führen, gibt es keine persönliche Datendatei zum Herunterladen oder Korrigieren – aber jede Frage zu Ihren Daten wird beantwortet, wenn Sie uns schreiben.',
+          'Sie können Cookies jederzeit in Ihren Browsereinstellungen blockieren oder löschen. Wenn Sie einen Kommentar gepostet haben, können Sie dessen Entfernung verlangen, indem Sie uns kontaktieren. Da unsere Tools in Ihrem Browser laufen und wir keine Konten oder Profile führen, gibt es keine persönliche Datendatei zum Herunterladen oder Korrigieren – aber jede Frage zu Ihren Daten wird beantwortet, wenn Sie uns schreiben.',
         ],
       },
       {
@@ -498,7 +497,6 @@ export const deStrings: UiStrings = {
       'Wenn Sie Fragen zu dieser Datenschutzerklärung haben, kontaktieren Sie uns über unsere',
     contactLink: 'Kontaktseite',
     contactMiddle: 'oder per E-Mail',
-    optOutGoogleAds: 'Google Ads Settings',
   },
   terms: {
     seoTitle: 'Nutzungsbedingungen – Regeln für Online-Tools | UtilityFlow',
@@ -542,7 +540,7 @@ export const deStrings: UiStrings = {
       {
         title: '7. Dienste Dritter',
         paragraphs: [
-          'Einige Funktionen beruhen auf unabhängigen Diensten Dritter: Die drei KI-Tools senden Text zur Verarbeitung an Groq, das Kontaktformular wird von FormSubmit zugestellt, die Website wird auf Cloudflare gehostet, der Währungsrechner ruft Live-Wechselkurse von Frankfurter ab und Werbung wird von Google AdSense ausgeliefert. Jeder dieser Dienste hat eigene Bedingungen und eine eigene Datenschutzerklärung, und Ihre Nutzung dieser Dienste unterliegt diesen Dokumenten. UtilityFlow ist nicht verantwortlich für die Verfügbarkeit oder die Praktiken von Diensten Dritter.',
+          'Einige Funktionen beruhen auf unabhängigen Diensten Dritter: Die drei KI-Tools senden Text zur Verarbeitung an Groq, das Kontaktformular wird von FormSubmit zugestellt, die Website wird auf Cloudflare gehostet und der Währungsrechner ruft Live-Wechselkurse von Frankfurter ab. Jeder dieser Dienste hat eigene Bedingungen und eine eigene Datenschutzerklärung, und Ihre Nutzung dieser Dienste unterliegt diesen Dokumenten. UtilityFlow ist nicht verantwortlich für die Verfügbarkeit oder die Praktiken von Diensten Dritter.',
         ],
       },
       {

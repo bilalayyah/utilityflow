@@ -305,7 +305,6 @@ export interface UiStrings {
     contactBefore: string;
     contactLink: string;
     contactMiddle: string;
-    optOutGoogleAds?: string;
   };
   terms: {
     seoTitle: string;

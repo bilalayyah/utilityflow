@@ -676,19 +676,11 @@ export function renderStaticBody(
     parts.push(`<h1 class="${H1}">${escapeText(t.privacy.title)}</h1>`);
     parts.push(`<p class="mt-2 text-sm text-slate-500">${escapeText(t.privacy.lastUpdated)}</p>`);
     parts.push('</header><div class="space-y-8 text-base leading-relaxed text-slate-700">');
-    t.privacy.sections.forEach((section, sectionIndex) => {
+    t.privacy.sections.forEach((section) => {
       parts.push('<section>');
       parts.push(`<h2 class="text-xl font-bold text-slate-900 mb-2">${escapeText(section.title)}</h2>`);
       for (const paragraph of section.paragraphs) {
         parts.push(`<p class="mt-3">${escapeText(paragraph)}</p>`);
-      }
-      if (sectionIndex === 3) {
-        // L-2: the optout.aboutads.info link was removed — it persistently
-        // returns HTTP 429 (rate-limited) from multiple networks. Google
-        // Ads Settings already covers opt-out.
-        parts.push(
-          `<p class="mt-3"><a href="https://adssettings.google.com" target="_blank" rel="noopener" class="${LINK}">${escapeText(t.privacy.optOutGoogleAds ?? 'Google Ads Settings')}</a></p>`
-        );
       }
       parts.push('</section>');
     });
