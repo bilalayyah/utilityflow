@@ -32,12 +32,12 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-[#E5E5EA] bg-[#FFFFFF]/90 backdrop-blur-md dark:border-[#243247] dark:bg-[#0C1322]/90">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 max-[379px]:gap-2 sm:gap-8 px-4 max-[379px]:px-3 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 max-[379px]:gap-2 sm:gap-8 px-4 max-[379px]:px-2 sm:px-6 lg:px-8">
         {/* Zone 1: Single-element Brand Wordmark */}
         <Link
           to={localizeStaticPath('/', locale)}
           onClick={() => setMobileOpen(false)}
-          className="inline-flex items-center gap-2.5 text-lg font-bold tracking-tight text-[#1D1D1F] whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0E8A66] rounded-md dark:text-[#F1F5F9]"
+          className="inline-flex items-center gap-2.5 text-lg max-[379px]:text-base font-bold tracking-tight text-[#1D1D1F] whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0E8A66] rounded-md dark:text-[#F1F5F9]"
         >
           <svg
             width="24"
@@ -86,7 +86,7 @@ export function Header() {
         </div>
 
         {/* Zone 3: Language Switcher + Theme Switcher + Primary Action + Mobile Drawer Toggle */}
-        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+        <div className="flex items-center gap-2 max-[379px]:gap-1.5 sm:gap-3 shrink-0">
           <button
             type="button"
             aria-expanded={searchOpen}
@@ -97,8 +97,8 @@ export function Header() {
             <Search className="w-5 h-5" />
           </button>
 
-          {/* Language switcher hidden below 380px (still available in the mobile drawer) — the header row is 379px wide and overflows 320–375px viewports otherwise. */}
-          <div className="max-[379px]:hidden shrink-0">
+          {/* Language switcher stays visible at all widths: globe-only below 380px (label + chevron hidden in the switcher) so the header row still fits 320px viewports. The drawer no longer carries a language list. */}
+          <div className="shrink-0">
             <LanguageSwitcher />
           </div>
 
@@ -148,10 +148,6 @@ export function Header() {
               {item.label}
             </Link>
           ))}
-
-          <div className="pt-2 border-t border-[#E5E5EA] dark:border-[#243247]">
-            <LanguageSwitcher variant="list" onSelect={() => setMobileOpen(false)} />
-          </div>
 
           <div className="pt-2 border-t border-[#E5E5EA] dark:border-[#243247]">
             <ThemeToggle variant="segmented" onSelect={() => setMobileOpen(false)} />

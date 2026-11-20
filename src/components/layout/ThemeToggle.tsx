@@ -100,7 +100,7 @@ export function ThemeToggle({ variant = 'dropdown', onSelect }: ThemeToggleProps
         aria-expanded={open}
         aria-label={`Change theme (current: ${activeOptionLabel})`}
         onClick={() => setOpen((prev) => !prev)}
-        className="inline-flex items-center gap-1.5 rounded-lg border border-[#E5E5EA] bg-[#FFFFFF] px-2.5 sm:px-3 py-2 text-xs sm:text-sm font-medium text-[#6E6E73] hover:bg-[#F5F5F7] hover:text-[#1D1D1F] transition-colors min-h-[40px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0E8A66] cursor-pointer dark:border-[#243247] dark:bg-[#131D31] dark:text-[#CBD5E1] dark:hover:bg-[#0C1322] dark:hover:text-[#F1F5F9]"
+        className="inline-flex items-center gap-1.5 rounded-lg border border-[#E5E5EA] bg-[#FFFFFF] px-2.5 max-[379px]:px-2 sm:px-3 py-2 text-xs sm:text-sm font-medium text-[#6E6E73] hover:bg-[#F5F5F7] hover:text-[#1D1D1F] transition-colors min-h-[40px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0E8A66] cursor-pointer dark:border-[#243247] dark:bg-[#131D31] dark:text-[#CBD5E1] dark:hover:bg-[#0C1322] dark:hover:text-[#F1F5F9]"
       >
         <ActiveIcon
           className={`w-4 h-4 shrink-0 ${
@@ -109,7 +109,7 @@ export function ThemeToggle({ variant = 'dropdown', onSelect }: ThemeToggleProps
           aria-hidden="true"
         />
         <ChevronDown
-          className={`w-3.5 h-3.5 text-[#86868B] transition-transform duration-150 dark:text-[#CBD5E1] ${
+          className={`w-3.5 h-3.5 max-[379px]:hidden text-[#86868B] transition-transform duration-150 dark:text-[#CBD5E1] ${
             open ? 'rotate-180' : ''
           }`}
           aria-hidden="true"
