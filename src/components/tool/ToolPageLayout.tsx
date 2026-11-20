@@ -155,7 +155,7 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
         <Breadcrumbs items={breadcrumbItems} className="mb-6" />
 
         <header className="max-w-3xl mb-8">
-          <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500 mb-3">
+          <div className="flex flex-wrap items-center gap-2 text-xs text-slate-600 mb-3">
             <span className={`rounded-full px-2.5 py-0.5 font-semibold ${palette.soft}`}>
               {category ? category.name : 'Utility'}
             </span>
@@ -176,7 +176,7 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
           </p>
 
           {/* L-12: author byline + last-updated line (E-E-A-T). */}
-          <p className="mt-3 text-xs text-slate-500">
+          <p className="mt-3 text-xs text-slate-600">
             {t.toolPage.bylineAuthor} · {t.toolPage.lastUpdated}
           </p>
 

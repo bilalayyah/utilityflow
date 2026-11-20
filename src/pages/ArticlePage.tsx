@@ -371,7 +371,7 @@ export function ArticlePage() {
           <p className="mt-3 text-base sm:text-lg leading-relaxed text-slate-600">
             {lede}
           </p>
-          <p className="mt-3 text-xs text-slate-500">
+          <p className="mt-3 text-xs text-slate-600">
             {t.blog.byEditorial}
             {' · '}
             {formatString(t.blog.publishedOn, { date: publishedDate })}

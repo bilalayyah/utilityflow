@@ -106,7 +106,7 @@ function breadcrumbs(
       return `<li class="inline">${sep}${inner}</li>`;
     })
     .join('');
-  return `<nav aria-label="Breadcrumb" class="mb-6"><ol class="flex flex-wrap items-center gap-1 text-sm text-slate-500">${lis}</ol></nav>`;
+  return `<nav aria-label="Breadcrumb" class="mb-6"><ol class="flex flex-wrap items-center gap-1 text-sm text-slate-600">${lis}</ol></nav>`;
 }
 
 /** One tool card: name link + short description (mirrors ToolCard.tsx). */
@@ -199,13 +199,13 @@ export function renderToolBody(
   );
   parts.push('<header class="max-w-3xl mb-8">');
   parts.push(
-    `<p class="text-xs text-slate-500 mb-3">${category ? escapeText(category.name) : 'Utility'} · ${escapeText(modeLabel)}</p>`
+    `<p class="text-xs text-slate-600 mb-3">${category ? escapeText(category.name) : 'Utility'} · ${escapeText(modeLabel)}</p>`
   );
   parts.push(`<h1 class="${H1}">${escapeText(tool.name)}</h1>`);
   parts.push(`<p class="${BODY_P}">${escapeText(tool.intro)}</p>`);
   // L-12: author byline + last-updated line (E-E-A-T).
   parts.push(
-    `<p class="mt-3 text-xs text-slate-500">${escapeText(t.toolPage.bylineAuthor)} · ${escapeText(t.toolPage.lastUpdated)}</p>`
+    `<p class="mt-3 text-xs text-slate-600">${escapeText(t.toolPage.bylineAuthor)} · ${escapeText(t.toolPage.lastUpdated)}</p>`
   );
   if (tool.requiresExternalApi && tool.apiNotice) {
     parts.push(
@@ -416,7 +416,7 @@ export function renderHomeBody(
     parts.push(faqList(t.home.faqs));
     parts.push('</section>');
   }
-  parts.push(`<p class="mt-12 text-center text-sm text-slate-500">${escapeText(t.home.trustLine)}</p>`);
+  parts.push(`<p class="mt-12 text-center text-sm text-slate-600">${escapeText(t.home.trustLine)}</p>`);
   parts.push('</main>');
   return parts.join('');
 }
@@ -1059,7 +1059,7 @@ export function renderArticleBody(
   parts.push(`<h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 text-balance">${escapeText(version.title)}</h1>`);
   parts.push(`<p class="mt-3 text-base sm:text-lg leading-relaxed text-slate-600">${escapeText(lede)}</p>`);
   parts.push(
-    `<p class="mt-3 text-xs text-slate-500">${escapeText(t.blog.byEditorial)} · ${escapeText(formatString(t.blog.publishedOn, { date: publishedDate }))}${updatedDate ? ` · ${escapeText(formatString(t.blog.updatedOn, { date: updatedDate }))}` : ''} · ${escapeText(formatString(t.blog.readingTime, { minutes: version.readingMinutes }))}</p>`
+    `<p class="mt-3 text-xs text-slate-600">${escapeText(t.blog.byEditorial)} · ${escapeText(formatString(t.blog.publishedOn, { date: publishedDate }))}${updatedDate ? ` · ${escapeText(formatString(t.blog.updatedOn, { date: updatedDate }))}` : ''} · ${escapeText(formatString(t.blog.readingTime, { minutes: version.readingMinutes }))}</p>`
   );
   parts.push('</header>');
 

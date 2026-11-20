@@ -542,7 +542,7 @@ export function HomePage() {
 
       {/* Trust strip */}
       <div className="mx-auto max-w-6xl px-4 pb-14 sm:px-6 lg:px-8">
-        <p className="flex items-center justify-center gap-2 text-center text-sm text-slate-500 dark:text-slate-400">
+        <p className="flex items-center justify-center gap-2 text-center text-sm text-slate-600 dark:text-slate-400">
           <ShieldCheck className="w-4 h-4 shrink-0 text-indigo-600 dark:text-indigo-400" aria-hidden="true" />
           <span>{t.home.trustLine}</span>
         </p>
