@@ -49,14 +49,6 @@ import { ToolCard } from '../components/tool/ToolCard';
 import { pastelForKey } from '../components/tool/pastel';
 import { NotFoundPage } from './NotFoundPage';
 
-/** First <p> of the body as plain text, for the lede paragraph. */
-function extractFirstParagraph(body: string): string | undefined {
-  const match = /<p\b[^>]*>([\s\S]*?)<\/p>/i.exec(body);
-  if (!match) return undefined;
-  const text = match[1].replace(/<[^>]*>/g, '').trim();
-  return text === '' ? undefined : text;
-}
-
 export function ArticlePage() {
   const { locale, t } = useLocale();
   const { articleSlug = '' } = useParams<{ articleSlug: string }>();
@@ -186,7 +178,7 @@ export function ArticlePage() {
   // too (localeFull, audit #6 — the locale chunk no longer carries
   // bodies). `version` is null only while the body chunk is still
   // loading (or failed to load — see fullFailed). While it is null the
-  // page renders its shell (H1, lede, breadcrumbs) from the meta record
+  // page renders its shell (H1, byline, breadcrumbs) from the meta record
   // and the slim locale version; the body, FAQs and TOC appear once the
   // chunk arrives.
   const version: BlogArticleLocaleVersion | ArticleLocaleOverride | null =
@@ -244,9 +236,6 @@ export function ArticlePage() {
   // SeoHead's default generic image (no ogImage prop passed there).
   const blogImageUrl = getBlogImageUrl(article.id, locale);
   const headings = version ? extractHeadingsFromBody(version.body) : [];
-  const lede = version
-    ? extractFirstParagraph(version.body) ?? version.description
-    : article.en.description;
   const dateTag = localeTag(locale);
   const publishedDate = new Date(article.publishedAt).toLocaleDateString(
     dateTag,
@@ -393,9 +382,6 @@ export function ArticlePage() {
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-[#1D1D1F] text-balance dark:text-[#F1F5F9]">
             {version?.title ?? article.en.title}
           </h1>
-          <p className="mt-3 text-base sm:text-lg leading-relaxed text-[#6E6E73] dark:text-[#CBD5E1]">
-            {lede}
-          </p>
           <p className="mt-3 text-sm text-[#6E6E73] dark:text-[#CBD5E1]">
             By{' '}
             <button
