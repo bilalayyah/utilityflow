@@ -1,6 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AboutPage } from './pages/AboutPage';
-import { AdminCommentsPage } from './pages/AdminCommentsPage';
 import { ArticlePage } from './pages/ArticlePage';
 import { BlogCategoryPage } from './pages/BlogCategoryPage';
 import { BlogHomePage } from './pages/BlogHomePage';
@@ -23,9 +22,6 @@ export default function App() {
 
             <Routes>
             <Route path="/" element={<HomePage />} />
-            {/* Comments admin — not linked in the nav, not in the sitemap */}
-            <Route path="/admin/comments" element={<AdminCommentsPage />} />
-            <Route path="/admin/comments/" element={<AdminCommentsPage />} />
             <Route path="/tools" element={<ToolsDirectoryPage />} />
             <Route path="/tools/" element={<ToolsDirectoryPage />} />
             <Route path="/category/:categorySlug" element={<CategoryPage />} />

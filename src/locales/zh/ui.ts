@@ -277,17 +277,6 @@ export const zhStrings: UiStrings = {
     notAvailableInLanguage: '本文暂不支持当前语言。',
     minRead: '分钟阅读',
   },
-  comments: {
-    title: '评论',
-    note: '分享您的想法，无需注册账号。只需写下名字即可发布。',
-    namePlaceholder: '您的名字',
-    commentPlaceholder: '写评论…',
-    postButton: '发布评论',
-    posting: '发布中…',
-    empty: '暂无评论，快来分享您的想法吧。',
-    loadError: '暂时无法加载评论，但您仍可以在下方发布评论。',
-    postError: '评论发布失败，请稍后再试。',
-  },
   search: {
     placeholder:
       '搜索工具或分类（例如：字数统计、JSON、PDF、计算器）...',

@@ -1,5 +1,4 @@
 import { isOriginAllowed, resolveConfig } from './config';
-import { handleCommentsRequest } from './comments';
 import { buildFindToolPrompt, buildSummarizePrompt, buildWritingPrompt } from './prompts';
 import {
   generateWithFreeProviders,
@@ -103,16 +102,6 @@ export async function handleAiWorkerRequest(
   const path = url.pathname.replace(/\/+$/, '');
   const store = resolveQuotaStore(env);
   const clientIp = getClientIp(request);
-
-  // Anonymous comments (GET/POST /api/comments*) — same CORS rules as the AI endpoints.
-  const commentsResponse = await handleCommentsRequest(
-    request,
-    env,
-    store,
-    clientIp,
-    allowOriginHeader
-  );
-  if (commentsResponse) return commentsResponse;
 
   if (request.method === 'GET' && path === '/api/ai/health') {
     const quota = await inspectQuotaStatus(store, config, clientIp);

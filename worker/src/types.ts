@@ -123,6 +123,4 @@ export interface WorkerEnv {
   SUMMARIZE_DAILY_LIMIT?: string;
   FINDER_DAILY_LIMIT?: string;
   RATE_LIMIT_PER_MIN?: string;
-  /** Admin secret for deleting comments (set in the Cloudflare dashboard, never committed). */
-  ADMIN_TOKEN?: string;
 }

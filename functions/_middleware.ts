@@ -4,9 +4,7 @@
 // - Unknown page paths get a real HTTP 404 status (SPA shell body, so the
 //   client-side 404 page still renders) instead of the fallback's 200.
 // - Known routes requested without a trailing slash 301 to the slash
-//   version (except `/`). L-4: /admin/comments is a known route in both
-//   forms, but the slash-less form 301s to /admin/comments/ like any
-//   other known route.
+//   version (except `/`).
 // - The three known dead/guessed URLs 301 to their real pages here too:
 //   _redirects carries the same rules, but whether _redirects or Functions
 //   runs first is not guaranteed, so both layers redirect them.
@@ -201,10 +199,8 @@ export async function onRequest(context: MiddlewareContext): Promise<Response> {
   if (legacy) return redirectTo(url, legacy);
 
   // Known route without trailing slash -> 301 to the slash version.
-  // Runs BEFORE the KNOWN_ROUTES passthrough below: '/admin/comments'
-  // is itself a known route (both forms are listed), so the passthrough
-  // would swallow it before this check ever ran (L-4). The only other
-  // slash-less known route is '/', which is excluded here.
+  // Runs BEFORE the KNOWN_ROUTES passthrough below, which would
+  // otherwise swallow slash-less known routes.
   if (
     pathname !== '/' &&
     !pathname.endsWith('/') &&

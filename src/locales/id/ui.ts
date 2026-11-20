@@ -277,17 +277,6 @@ export const idStrings: UiStrings = {
     notAvailableInLanguage: 'Artikel ini belum tersedia dalam bahasa ini.',
     minRead: 'mnt baca',
   },
-  comments: {
-    title: 'Komentar',
-    note: 'Bagikan pendapat Anda — tanpa perlu akun. Cukup tulis nama Anda dan kirim.',
-    namePlaceholder: 'Nama Anda',
-    commentPlaceholder: 'Tulis komentar…',
-    postButton: 'Kirim komentar',
-    posting: 'Mengirim…',
-    empty: 'Belum ada komentar — jadilah yang pertama berbagi pendapat.',
-    loadError: 'Komentar tidak dapat dimuat saat ini, tetapi Anda tetap dapat mengirim komentar di bawah.',
-    postError: 'Komentar Anda tidak dapat dikirim. Silakan coba lagi sebentar lagi.',
-  },
   search: {
     placeholder:
       'Cari alat atau kategori (mis., penghitung kata, JSON, PDF, kalkulator)...',

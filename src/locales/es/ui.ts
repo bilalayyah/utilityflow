@@ -280,17 +280,6 @@ export const esStrings: UiStrings = {
     notAvailableInLanguage: 'Este artículo aún no está disponible en este idioma.',
     minRead: 'min de lectura',
   },
-  comments: {
-    title: 'Comentarios',
-    note: 'Comparte tu opinión: no necesitas cuenta. Solo escribe tu nombre y publica.',
-    namePlaceholder: 'Tu nombre',
-    commentPlaceholder: 'Escribe un comentario…',
-    postButton: 'Publicar comentario',
-    posting: 'Publicando…',
-    empty: 'Aún no hay comentarios. Sé la primera persona en compartir su opinión.',
-    loadError: 'No se pudieron cargar los comentarios ahora mismo, pero puedes publicar uno abajo.',
-    postError: 'No se pudo publicar tu comentario. Inténtalo de nuevo en un momento.',
-  },
   search: {
     placeholder:
       'Buscar herramientas o categorías (p. ej., contador de palabras, JSON, PDF, calculadoras)...',

@@ -277,17 +277,6 @@ export const jaStrings: UiStrings = {
     notAvailableInLanguage: 'この記事はまだこの言語ではご利用いただけません。',
     minRead: '分で読めます',
   },
-  comments: {
-    title: 'コメント',
-    note: '感想を共有しましょう。アカウントは不要です。名前を書いて投稿するだけです。',
-    namePlaceholder: 'お名前',
-    commentPlaceholder: 'コメントを書く…',
-    postButton: 'コメントを投稿',
-    posting: '投稿中…',
-    empty: 'まだコメントはありません。最初に感想を共有しましょう。',
-    loadError: 'コメントを読み込めませんでしたが、下から投稿できます。',
-    postError: 'コメントを投稿できませんでした。しばらくしてからもう一度お試しください。',
-  },
   search: {
     placeholder:
       'ツールやカテゴリを検索（例：ワードカウンター、JSON、PDF、計算機）...',
