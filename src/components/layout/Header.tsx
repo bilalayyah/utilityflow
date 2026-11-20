@@ -31,13 +31,13 @@ export function Header() {
   }, [location.pathname]);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-indigo-100/70 dark:border-slate-800 bg-gradient-to-r from-violet-200 via-indigo-200 to-sky-200 dark:from-violet-950/70 dark:via-indigo-950/60 dark:to-sky-950/70 backdrop-blur-md">
+    <header className="sticky top-0 z-40 border-b border-[#E5E5EA] bg-[#FFFFFF]/90 backdrop-blur-md dark:border-[#243247] dark:bg-[#0C1322]/90">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 max-[379px]:gap-2 sm:gap-8 px-4 max-[379px]:px-3 sm:px-6 lg:px-8">
         {/* Zone 1: Single-element Brand Wordmark */}
         <Link
           to={localizeStaticPath('/', locale)}
           onClick={() => setMobileOpen(false)}
-          className="inline-flex items-center gap-2.5 text-lg font-bold tracking-tight text-slate-900 whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 rounded-md"
+          className="inline-flex items-center gap-2.5 text-lg font-bold tracking-tight text-[#1D1D1F] whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0E8A66] rounded-md dark:text-[#F1F5F9]"
         >
           <svg
             width="24"
@@ -47,16 +47,10 @@ export function Header() {
             aria-hidden="true"
             className="shrink-0"
           >
-            <defs>
-              <linearGradient id="header-logo-gradient" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stopColor="#4f46e5" />
-                <stop offset="100%" stopColor="#7c3aed" />
-              </linearGradient>
-            </defs>
-            <rect width="32" height="32" rx="7" fill="url(#header-logo-gradient)" />
+            <rect width="32" height="32" rx="7" fill="#0E8A66" />
             <rect x="7" y="7" width="8" height="8" rx="1.5" fill="#FFFFFF" />
-            <rect x="17" y="7" width="8" height="8" rx="1.5" fill="#93C5FD" />
-            <rect x="7" y="17" width="8" height="8" rx="1.5" fill="#93C5FD" />
+            <rect x="17" y="7" width="8" height="8" rx="1.5" fill="#FFFFFF" />
+            <rect x="7" y="17" width="8" height="8" rx="1.5" fill="#FFFFFF" />
             <rect x="17" y="17" width="8" height="8" rx="1.5" fill="#FFFFFF" />
           </svg>
           <span>{SITE_CONFIG.name}</span>
@@ -74,8 +68,10 @@ export function Header() {
                 key={item.to}
                 to={item.to}
                 aria-current={isActive ? 'page' : undefined}
-                className={`text-sm font-medium whitespace-nowrap shrink-0 transition-colors duration-150 underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 rounded-sm ${
-                  isActive ? 'text-indigo-600' : 'text-slate-600 hover:text-slate-950'
+                className={`text-sm font-medium whitespace-nowrap shrink-0 transition-colors duration-150 underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0E8A66] rounded-sm ${
+                  isActive
+                    ? 'text-[#0B7A59] dark:text-[#34D399]'
+                    : 'text-[#6E6E73] hover:text-[#1D1D1F] dark:text-[#CBD5E1] dark:hover:text-[#F1F5F9]'
                 }`}
               >
                 {item.label}
@@ -96,7 +92,7 @@ export function Header() {
             aria-expanded={searchOpen}
             aria-label={searchOpen ? t.nav.closeSearch : t.nav.searchTools}
             onClick={() => setSearchOpen((prev) => !prev)}
-            className="inline-flex xl:hidden items-center justify-center rounded-lg border border-slate-200 p-2 text-slate-700 hover:bg-slate-50 hover:text-slate-900 min-h-[40px] min-w-[40px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 cursor-pointer"
+            className="inline-flex xl:hidden items-center justify-center rounded-lg border border-[#E5E5EA] p-2 text-[#6E6E73] hover:bg-[#F5F5F7] hover:text-[#1D1D1F] min-h-[40px] min-w-[40px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0E8A66] cursor-pointer dark:border-[#243247] dark:text-[#CBD5E1] dark:hover:bg-[#131D31] dark:hover:text-[#F1F5F9]"
           >
             <Search className="w-5 h-5" />
           </button>
@@ -110,7 +106,7 @@ export function Header() {
 
           <Link
             to={localizeStaticPath('/tools/', locale)}
-            className="hidden xl:inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-indigo-600 to-violet-600 px-4 py-2 text-sm font-semibold text-white transition-colors duration-150 hover:from-indigo-700 hover:to-violet-700 whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:ring-offset-2"
+            className="hidden xl:inline-flex items-center justify-center rounded-full bg-[#0E8A66] px-4 py-2 text-sm font-semibold text-white transition-colors duration-150 hover:bg-[#0B7557] whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0E8A66] focus-visible:ring-offset-2"
           >
             {t.nav.allTools}
           </Link>
@@ -121,7 +117,7 @@ export function Header() {
             aria-controls="mobile-navigation"
             aria-label={mobileOpen ? t.nav.closeMenu : t.nav.openMenu}
             onClick={() => setMobileOpen((prev) => !prev)}
-            className="inline-flex lg:hidden items-center justify-center rounded-lg border border-slate-200 p-2 text-slate-700 hover:bg-slate-50 hover:text-slate-900 min-h-[40px] min-w-[40px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 cursor-pointer"
+            className="inline-flex lg:hidden items-center justify-center rounded-lg border border-[#E5E5EA] p-2 text-[#6E6E73] hover:bg-[#F5F5F7] hover:text-[#1D1D1F] min-h-[40px] min-w-[40px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0E8A66] cursor-pointer dark:border-[#243247] dark:text-[#CBD5E1] dark:hover:bg-[#131D31] dark:hover:text-[#F1F5F9]"
           >
             {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -130,7 +126,7 @@ export function Header() {
 
       {/* Mobile search row (expandable) */}
       {searchOpen && (
-        <div className="xl:hidden border-t border-indigo-100/70 dark:border-slate-800 bg-gradient-to-r from-violet-200 via-indigo-200 to-sky-200 dark:from-violet-950/70 dark:via-indigo-950/60 dark:to-sky-950/70 px-4 py-3">
+        <div className="xl:hidden border-t border-[#E5E5EA] bg-[#FFFFFF]/90 px-4 py-3 dark:border-[#243247] dark:bg-[#0C1322]/90">
           <ToolSearchBar placeholder={t.nav.searchPlaceholder} />
         </div>
       )}
@@ -140,31 +136,31 @@ export function Header() {
         <nav
           id="mobile-navigation"
           aria-label="Mobile"
-          className="lg:hidden border-t border-indigo-100/70 dark:border-slate-800 bg-gradient-to-b from-violet-200 via-indigo-200 to-sky-200 dark:from-violet-950/70 dark:via-indigo-950/60 dark:to-sky-950/70 px-4 py-4 space-y-2"
+          className="lg:hidden border-t border-[#E5E5EA] bg-[#FFFFFF] px-4 py-4 space-y-2 dark:border-[#243247] dark:bg-[#0C1322]"
         >
           {NAV_ITEMS.map((item) => (
             <Link
               key={item.to}
               to={item.to}
               onClick={() => setMobileOpen(false)}
-              className="flex items-center rounded-lg px-3 py-2.5 text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-slate-950 min-h-[44px]"
+              className="flex items-center rounded-lg px-3 py-2.5 text-base font-medium text-[#6E6E73] hover:bg-[#F5F5F7] hover:text-[#1D1D1F] min-h-[44px] dark:text-[#CBD5E1] dark:hover:bg-[#131D31] dark:hover:text-[#F1F5F9]"
             >
               {item.label}
             </Link>
           ))}
 
-          <div className="pt-2 border-t border-slate-100">
+          <div className="pt-2 border-t border-[#E5E5EA] dark:border-[#243247]">
             <LanguageSwitcher variant="list" onSelect={() => setMobileOpen(false)} />
           </div>
 
-          <div className="pt-2 border-t border-slate-100">
+          <div className="pt-2 border-t border-[#E5E5EA] dark:border-[#243247]">
             <ThemeToggle variant="segmented" onSelect={() => setMobileOpen(false)} />
           </div>
           <div className="pt-2">
             <Link
               to={localizeStaticPath('/tools/', locale)}
               onClick={() => setMobileOpen(false)}
-              className="flex w-full items-center justify-center rounded-lg bg-gradient-to-r from-indigo-600 to-violet-600 px-4 py-2.5 text-sm font-semibold text-white hover:from-indigo-700 hover:to-violet-700 min-h-[44px]"
+              className="flex w-full items-center justify-center rounded-full bg-[#0E8A66] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#0B7557] min-h-[44px]"
             >
               {t.nav.allTools}
             </Link>

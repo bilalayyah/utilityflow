@@ -54,16 +54,16 @@ export function CopyButton({
       type="button"
       onClick={handleCopy}
       disabled={isDisabled}
-      className={`inline-flex items-center gap-1.5 rounded-xl border px-3 py-1.5 text-xs sm:text-sm font-medium transition-colors whitespace-nowrap shrink-0 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 ${
+      className={`inline-flex items-center gap-1.5 rounded-xl border px-3 py-1.5 text-xs sm:text-sm font-medium transition-colors whitespace-nowrap shrink-0 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0E8A66] ${
         isDisabled
-          ? 'border-slate-200 bg-slate-50 text-slate-400 cursor-not-allowed'
+          ? 'border-[#E5E5EA] bg-[#F5F5F7] text-[#86868B] cursor-not-allowed dark:border-[#243247] dark:bg-[#182239] dark:text-[#94A3B8]'
           : copied
-          ? 'border-emerald-300 bg-emerald-50 text-emerald-800 cursor-pointer'
-          : 'border-slate-200 bg-white text-slate-700 hover:border-indigo-300 hover:bg-indigo-50/40 hover:text-indigo-700 cursor-pointer'
+          ? 'border-[#BFE3D3] bg-[#E7F3EE] text-[#0B7A59] cursor-pointer dark:border-[rgba(52,211,153,.35)] dark:bg-[rgba(16,185,129,.14)] dark:text-[#34D399]'
+          : 'border-[#D2D2D7] bg-white text-[#1D1D1F] hover:border-[#0E8A66] hover:text-[#0B7A59] cursor-pointer dark:border-[#243247] dark:bg-[#131D31] dark:text-[#F1F5F9] dark:hover:border-[#34D399] dark:hover:text-[#34D399]'
       } ${className}`}
     >
       {copied ? (
-        <Check className="w-3.5 h-3.5 text-emerald-600" aria-hidden="true" />
+        <Check className="w-3.5 h-3.5 text-[#0E8A66] dark:text-[#34D399]" aria-hidden="true" />
       ) : (
         <Copy className="w-3.5 h-3.5" aria-hidden="true" />
       )}

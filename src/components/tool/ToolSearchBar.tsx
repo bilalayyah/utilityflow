@@ -96,7 +96,7 @@ export function ToolSearchBar({
       <form onSubmit={handleSubmit} role="search" aria-label={t.search.ariaLabel}>
         <div className="relative flex items-center">
           <Search
-            className="pointer-events-none absolute left-4 w-5 h-5 text-slate-400"
+            className="pointer-events-none absolute left-4 w-5 h-5 text-[#86868B]"
             aria-hidden="true"
           />
           <input
@@ -110,8 +110,8 @@ export function ToolSearchBar({
             aria-label={t.search.ariaLabel}
             className={
               isHero
-                ? 'w-full rounded-2xl border border-slate-300 bg-white py-4 pl-12 pr-14 text-base text-slate-900 placeholder:text-slate-400 shadow-md transition-colors focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/20 dark:border-slate-700 dark:bg-slate-900 dark:text-white dark:placeholder:text-slate-500'
-                : 'w-full rounded-xl border border-slate-300 bg-white py-3.5 pl-12 pr-28 text-sm sm:text-base text-slate-900 placeholder:text-slate-400 shadow-xs transition-colors focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/20'
+                ? 'w-full rounded-2xl border border-[#E5E5EA] bg-white py-4 pl-12 pr-32 text-base text-[#1D1D1F] placeholder:text-[#86868B] shadow-sm transition-colors focus:border-[#0E8A66] focus:outline-none focus:ring-2 focus:ring-[#0E8A66]/20'
+                : 'w-full rounded-xl border border-[#E5E5EA] bg-white py-3.5 pl-12 pr-28 text-sm sm:text-base text-[#1D1D1F] placeholder:text-[#86868B] shadow-sm transition-colors focus:border-[#0E8A66] focus:outline-none focus:ring-2 focus:ring-[#0E8A66]/20'
             }
           />
           {query && (
@@ -119,21 +119,24 @@ export function ToolSearchBar({
               type="button"
               onClick={() => handleChange('')}
               aria-label={t.search.clearSearch}
-              className={`absolute p-1.5 text-slate-400 hover:text-slate-700 rounded-md cursor-pointer ${
-                isHero ? 'right-12' : 'right-20'
+              className={`absolute p-1.5 text-[#86868B] hover:text-[#1D1D1F] rounded-md cursor-pointer ${
+                isHero ? 'right-28' : 'right-20'
               }`}
             >
               <X className="w-4 h-4" />
             </button>
           )}
           {isHero ? (
-            <kbd className="pointer-events-none absolute right-4 rounded-md border border-slate-200 bg-slate-50 px-2 py-0.5 text-xs font-semibold text-slate-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-400">
-              ⌘K
-            </kbd>
+            <button
+              type="submit"
+              className="absolute right-2 rounded-xl bg-[#0E8A66] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0B7557] sm:px-5 whitespace-nowrap shrink-0 cursor-pointer"
+            >
+              {t.common.search}
+            </button>
           ) : (
             <button
               type="submit"
-              className="absolute right-2 rounded-lg bg-indigo-600 px-3.5 py-2 text-xs sm:text-sm font-semibold text-white transition-colors hover:bg-indigo-700 whitespace-nowrap shrink-0 cursor-pointer"
+              className="absolute right-2 rounded-lg bg-[#0E8A66] px-3.5 py-2 text-xs sm:text-sm font-semibold text-white transition-colors hover:bg-[#0B7557] whitespace-nowrap shrink-0 cursor-pointer"
             >
               {t.common.search}
             </button>
@@ -142,21 +145,21 @@ export function ToolSearchBar({
       </form>
 
       {showDropdown && (
-        <div className="absolute left-0 right-0 top-full z-30 mt-2 rounded-xl border border-slate-200 bg-white p-2 shadow-lg">
+        <div className="absolute left-0 right-0 top-full z-30 mt-2 rounded-2xl border border-[#E5E5EA] bg-white p-2 shadow-lg dark:border-[#243247] dark:bg-[#131D31]">
           {matchingTools.length > 0 && (
             <div className="mb-2">
-              <div className="px-3 py-1.5 text-xs font-semibold text-slate-500">{t.search.tools}</div>
+              <div className="px-3 py-1.5 text-xs font-semibold text-[#86868B]">{t.search.tools}</div>
               {matchingTools.map((tool) => (
                 <Link
                   key={tool.id}
                   to={toolHref(tool.slug, locale)}
-                  className="flex items-center justify-between gap-3 rounded-lg px-3 py-2 text-sm hover:bg-slate-50"
+                  className="flex items-center justify-between gap-3 rounded-lg px-3 py-2 text-sm hover:bg-[#F5F5F7] dark:hover:bg-[#182239]"
                 >
                   <div>
-                    <div className="font-medium text-slate-900">{tool.name}</div>
-                    <div className="text-xs text-slate-500 line-clamp-1">{tool.shortDescription}</div>
+                    <div className="font-medium text-[#1D1D1F] dark:text-[#F1F5F9]">{tool.name}</div>
+                    <div className="text-xs text-[#6E6E73] line-clamp-1 dark:text-[#CBD5E1]">{tool.shortDescription}</div>
                   </div>
-                  <ArrowRight className="w-4 h-4 text-slate-400 shrink-0" aria-hidden="true" />
+                  <ArrowRight className="w-4 h-4 text-[#86868B] shrink-0" aria-hidden="true" />
                 </Link>
               ))}
             </div>
@@ -164,32 +167,32 @@ export function ToolSearchBar({
 
           {matchingCategories.length > 0 && (
             <div>
-              <div className="px-3 py-1.5 text-xs font-semibold text-slate-500">{t.search.categories}</div>
+              <div className="px-3 py-1.5 text-xs font-semibold text-[#86868B]">{t.search.categories}</div>
               {matchingCategories.map((cat) => (
                 <Link
                   key={cat.id}
                   to={categoryHref(cat.id, locale)}
-                  className="flex items-center justify-between gap-3 rounded-lg px-3 py-2 text-sm hover:bg-slate-50"
+                  className="flex items-center justify-between gap-3 rounded-lg px-3 py-2 text-sm hover:bg-[#F5F5F7] dark:hover:bg-[#182239]"
                 >
                   <div className="flex items-center gap-2.5">
-                    <CategoryIcon name={cat.iconName} className="w-4 h-4 text-indigo-600 shrink-0" />
+                    <CategoryIcon name={cat.iconName} className="w-4 h-4 text-[#0E8A66] shrink-0 dark:text-[#34D399]" />
                     <div>
-                      <div className="font-medium text-slate-900">{cat.name}</div>
-                      <div className="text-xs text-slate-500">
+                      <div className="font-medium text-[#1D1D1F] dark:text-[#F1F5F9]">{cat.name}</div>
+                      <div className="text-xs text-[#6E6E73] dark:text-[#CBD5E1]">
                         {formatString(t.category.plannedCount, { count: cat.plannedToolCount })}
                       </div>
                     </div>
                   </div>
-                  <ArrowRight className="w-4 h-4 text-slate-400 shrink-0" aria-hidden="true" />
+                  <ArrowRight className="w-4 h-4 text-[#86868B] shrink-0" aria-hidden="true" />
                 </Link>
               ))}
             </div>
           )}
 
           {matchingTools.length === 0 && matchingCategories.length === 0 && (
-            <div className="px-3 py-4 text-sm text-slate-600 text-center">
+            <div className="px-3 py-4 text-sm text-[#6E6E73] text-center dark:text-[#CBD5E1]">
               {formatString(t.search.noResults, { query: query.trim() })}{' '}
-              <Link to={localizeStaticPath('/tools/', locale)} className="font-semibold text-indigo-600 hover:underline">
+              <Link to={localizeStaticPath('/tools/', locale)} className="font-semibold text-[#0B7A59] hover:underline dark:text-[#34D399]">
                 {t.search.viewDirectory}
               </Link>
             </div>

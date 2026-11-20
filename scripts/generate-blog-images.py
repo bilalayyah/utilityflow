@@ -1,47 +1,58 @@
 #!/usr/bin/env python3
-"""Generate branded per-article OG images for the UtilityFlow blog.
+"""Generate branded per-article OG images for the UtilityFlow blog —
+MINIMALIST redesign theme (2026-11-20).
 
 Usage:
     python3 scripts/generate-blog-images.py --jobs /tmp/jobs.json --out public/blog-images
 
 Jobs JSON: a list of {"id": <article id>, "lang": <lang>, "title": <localized title>}.
-Output: 1200x630 PNG files named <id>-<lang>.png, matching the house style of
-the existing per-tool cards in public/og/*.jpg (pastel lavender gradient,
-soft circles, violet "UtilityFlow" pill with yellow dot, bold left-aligned
-article title, slate subline, violet utilityflow.online). Deterministic:
-same input -> byte-identical output (PNG, no timestamps). $0 — uses only
-Pillow + system fonts (Noto Sans).
+Output: 1200x630 PNG files named <id>-<lang>.png (identical names, size and
+format to the previous pipeline, so og:image URLs do not change).
+Deterministic: same input -> byte-identical output (PNG, no timestamps).
+$0 — uses only Pillow + system fonts (Noto Sans; Inter is NOT installed on
+this machine, see FONT note below).
+
+Style (matches the approved mockup uf-06-blog-article.png):
+  - flat warm off-white background #F8F5F0, no gradients, no blobs, no pill
+  - one thin green (#0E8A66) line-art icon, centred, drawn for the article's
+    topic (shield+key for password/security, document for text tools,
+    calculator, QR grid, image frame, clock, swap arrows, dice, droplet,
+    waveform, 4-square grid as the generic fallback)
+  - minimal centred typography: dark title, muted subline, green domain
+  - icons are drawn at 2x supersampling and downscaled (LANCZOS) so the
+    thin strokes stay smooth
 
 Title extraction driver: scripts/extract-blog-image-titles.ts (EN titles from
 src/registry/blogArticleIndex.ts, localized titles from
-src/locales/<lang>/blog.ts). See ~/workspace/utilityflow/article-images-plan.md.
+src/locales/<lang>/blog.ts). Bulk regeneration:
+  ./node_modules/.bin/tsx scripts/extract-blog-image-titles.ts --all --out /tmp/uf-blog-image-jobs-all.json
+  python3 scripts/generate-blog-images.py --jobs /tmp/uf-blog-image-jobs-all.json --out public/blog-images
 """
 
 import argparse
 import json
+import math
 import os
 import sys
 
 from PIL import Image, ImageDraw, ImageFont
 
 W, H = 1200, 630
-# Brand colours from src/index.css (:root tokens) + the public/og/*.jpg cards.
-GRAD_TOP = (235, 232, 253)     # #EBE8FD lavender
-GRAD_BOTTOM = (222, 214, 253)  # #DED6FD
-VIOLET = (124, 58, 237)        # #7c3aed brand violet
-INDIGO = (79, 70, 229)         # #4f46e5 accent
-DARK = (15, 23, 42)            # #0f172a title ink (slate-900)
-MUTED = (71, 85, 105)          # #475569 subline (slate-600)
-YELLOW = (250, 204, 21)        # #FACC15 pill dot
-CIRCLES = [
-    # (cx, cy, r, rgb) — soft pastel blobs, partly off-canvas (as on the og cards)
-    (980, 150, 170, (247, 210, 230)),   # pink, top-right
-    (1240, 300, 330, (238, 233, 254)),  # pale lavender, right edge
-    (80, 640, 230, (221, 214, 254)),    # violet, bottom-left
-]
+SS = 2  # supersampling factor for smooth thin line art
+# Minimalist theme colours (from the approved redesign mockups).
+BG = (248, 245, 240)       # #F8F5F0 warm off-white
+GREEN = (14, 138, 102)     # #0E8A66 brand green (icon + domain)
+GREEN_SOFT = (127, 191, 169)  # #7FBFA9 light green accent (inner detail)
+GREY = (154, 163, 160)     # #9AA3A0 muted grey-green (inner shield line)
+DARK = (31, 41, 55)         # #1F2937 title ink
+MUTED = (107, 114, 128)     # #6B7280 subline
 SUBLINE = "Free guide \u00b7 No sign-up \u00b7 Read instantly"
 DOMAIN = "utilityflow.online"
 
+# FONT: Inter is NOT installed on this machine (fc-list shows no Inter).
+# Noto Sans is the closest clean sans available; the site's web font is
+# Inter, but for the PIL pipeline Noto Sans Bold/Regular is the best
+# available option without downloading fonts.
 FONT_BOLD = "/usr/share/fonts/truetype/noto/NotoSans-Bold.ttf"
 FONT_REGULAR = "/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf"
 # CJK fallback for ja/ko/zh titles (Noto Sans CJK if present, else Serif CJK).
@@ -107,8 +118,9 @@ def wrap_text(draw, text, font, max_width):
 
 
 def fit_title(draw, title, lang, max_width, max_lines=3):
-    """Largest bold size (76..44) whose wrapped title fits in max_lines."""
-    for size in range(76, 43, -4):
+    """Largest bold size (72..40, 1x units) whose wrapped title fits in max_lines.
+    Sizes are scaled by SS: the draw surface is supersampled."""
+    for size in range(72 * SS, 39 * SS, -4 * SS):
         font = font_for(lang, size, bold=True)
         lines = wrap_text(draw, title, font, max_width)
         if len(lines) <= max_lines and all(
@@ -117,82 +129,255 @@ def fit_title(draw, title, lang, max_width, max_lines=3):
             return font, lines
     # Fallback: smallest size, allow overflow lines (should not happen for
     # real titles, which are <=60 chars after the metadata fix).
-    font = font_for(lang, 44, bold=True)
+    font = font_for(lang, 40 * SS, bold=True)
     lines = wrap_text(draw, title, font, max_width)
     if len(lines) > max_lines or any(
         draw.textlength(line, font=font) > max_width for line in lines
     ):
-        print(f"OVERFLOW title needs {len(lines)} lines at 44px: {title!r}", file=sys.stderr)
+        print(f"OVERFLOW title needs {len(lines)} lines at 40px: {title!r}", file=sys.stderr)
     return font, lines
 
 
-def render_card(title, lang):
-    # Vertical lavender gradient background.
-    grad = Image.new("RGB", (1, H))
-    px = grad.load()
-    for y in range(H):
-        t = y / (H - 1)
-        px[0, y] = tuple(
-            int(GRAD_TOP[i] + (GRAD_BOTTOM[i] - GRAD_TOP[i]) * t) for i in range(3)
+# ---------------------------------------------------------------------------
+# Thin line-art icons. All coordinates are in a local box centred on (0, 0)
+# with half-size ~120 (1x units); the caller scales by SS and translates to
+# the icon centre. `w` is the stroke width in final (1x) pixels.
+# ---------------------------------------------------------------------------
+
+def _quad(p0, p1, p2, n=24):
+    """Sample a quadratic Bezier curve; returns a list of (x, y)."""
+    pts = []
+    for i in range(n + 1):
+        t = i / n
+        x = (1 - t) ** 2 * p0[0] + 2 * (1 - t) * t * p1[0] + t ** 2 * p2[0]
+        y = (1 - t) ** 2 * p0[1] + 2 * (1 - t) * t * p1[1] + t ** 2 * p2[1]
+        pts.append((x, y))
+    return pts
+
+
+def _shield_points(scale=1.0):
+    """Shield outline points (right half mirrored to the left)."""
+    right = []
+    right += _quad((0, -112), (70, -102), (106, -56))
+    right += _quad((106, -56), (110, 18), (62, 82))
+    right += _quad((62, 82), (32, 106), (0, 118))
+    left = [(-x, y) for (x, y) in reversed(right[1:-1])]
+    pts = right + [(0, 118)] + left
+    return [(x * scale, y * scale) for (x, y) in pts]
+
+
+def icon_shield_key(d, cx, cy, w):
+    """Shield + key (password / security) — as in the approved mockup."""
+    pts = [(cx + x, cy + y) for (x, y) in _shield_points()]
+    d.line(pts, fill=GREEN, width=w, joint="curve")
+    inner = [(cx + x, cy + y) for (x, y) in _shield_points(scale=0.80)]
+    d.line(inner, fill=GREY, width=max(2, w - 2), joint="curve")
+    # Key overlapping the shield's lower right, angled 45 degrees.
+    kx, ky, kr = cx + 78, cy - 8, 32  # bow centre + radius
+    d.ellipse([kx - kr, ky - kr, kx + kr, ky + kr], outline=GREEN, width=w)
+    d.line([kx - 12, ky - 12, kx + 12, ky + 12], fill=GREEN, width=max(2, w - 2))
+    # Shaft from the bow edge down-right, with two teeth.
+    ux, uy = 0.7071, 0.7071  # unit vector along the shaft
+    sx, sy = kx + kr * ux, ky + kr * uy  # shaft start (on the bow)
+    ex, ey = sx + 62 * ux, sy + 62 * uy  # shaft end
+    d.line([sx, sy, ex, ey], fill=GREEN, width=w)
+    for t in (30, 48):  # teeth, perpendicular to the shaft
+        tx, ty = sx + t * ux, sy + t * uy
+        d.line([tx, ty, tx - 16 * uy, ty + 16 * ux], fill=GREEN, width=max(2, w - 2))
+
+
+def icon_document(d, cx, cy, w):
+    """Document with text lines (word / text tools)."""
+    d.rounded_rectangle(
+        [cx - 78, cy - 108, cx + 78, cy + 108], radius=18,
+        outline=GREEN, width=w,
+    )
+    for i, (y, ln) in enumerate([(-52, 96), (-8, 96), (36, 64)]):
+        d.line(
+            [cx - ln // 2, cy + y, cx + ln // 2, cy + y],
+            fill=GREEN_SOFT if i == 2 else GREEN,
+            width=max(2, w - 2),
         )
-    img = grad.resize((W, H))
-    draw = ImageDraw.Draw(img, "RGBA")
-    # soft circles (solid pastel; edges are off-canvas so no halo needed)
-    for cx, cy, r, rgb in CIRCLES:
-        draw.ellipse([cx - r, cy - r, cx + r, cy + r], fill=rgb + (255,))
-    draw = ImageDraw.Draw(img, "RGB")
 
-    # violet pill with yellow dot + "UtilityFlow", top-left (as on og cards)
-    pill_font = font_for(lang, 40, bold=True)
-    pill_text = "UtilityFlow"
-    pill_tw = draw.textlength(pill_text, font=pill_font)
-    pill_x, pill_y, pill_h = 60, 56, 76
-    pill_w = int(28 + 22 + 12 + pill_tw + 28)
-    draw.rounded_rectangle(
-        [pill_x, pill_y, pill_x + pill_w, pill_y + pill_h],
-        radius=pill_h // 2,
-        fill=VIOLET,
+
+def icon_calculator(d, cx, cy, w):
+    """Calculator (calculator tools)."""
+    d.rounded_rectangle(
+        [cx - 72, cy - 112, cx + 72, cy + 112], radius=18,
+        outline=GREEN, width=w,
     )
-    dot_cx, dot_cy, dot_r = pill_x + 28 + 11, pill_y + pill_h // 2, 11
-    draw.ellipse(
-        [dot_cx - dot_r, dot_cy - dot_r, dot_cx + dot_r, dot_cy + dot_r],
-        fill=YELLOW,
+    d.rounded_rectangle(
+        [cx - 50, cy - 88, cx + 50, cy - 40], radius=8,
+        outline=GREEN, width=max(2, w - 2),
     )
-    draw.text(
-        (pill_x + 28 + 22 + 12, pill_y + (pill_h - 40) // 2 - 2),
-        pill_text,
-        font=pill_font,
-        fill=(255, 255, 255),
+    for row in range(3):
+        for col in range(3):
+            x0 = cx - 50 + col * 38
+            y0 = cy - 12 + row * 38
+            d.rectangle(
+                [x0, y0, x0 + 24, y0 + 24], outline=GREEN, width=max(2, w - 2)
+            )
+
+
+def icon_qr(d, cx, cy, w):
+    """QR code (QR generator / scanner)."""
+    def finder(fx, fy):
+        d.rectangle([fx, fy, fx + 66, fy + 66], outline=GREEN, width=w)
+        d.rectangle([fx + 20, fy + 20, fx + 46, fy + 46], fill=GREEN)
+    finder(cx - 108, cy - 108)
+    finder(cx + 42, cy - 108)
+    finder(cx - 108, cy + 42)
+    # Deterministic data modules (bottom-right area).
+    for mx, my in [(48, 48), (78, 48), (48, 78), (96, 78), (66, 96),
+                   (48, 108), (96, 108), (78, 96)]:
+        d.rectangle([cx + mx, cy + my, cx + mx + 16, cy + my + 16], fill=GREEN)
+
+
+def icon_image(d, cx, cy, w):
+    """Image frame with sun + mountains (image / photo / PDF tools)."""
+    d.rounded_rectangle(
+        [cx - 100, cy - 74, cx + 100, cy + 74], radius=12,
+        outline=GREEN, width=w,
+    )
+    d.ellipse(
+        [cx + 42, cy - 52, cx + 70, cy - 24], outline=GREEN, width=max(2, w - 2)
+    )
+    d.line(
+        [(cx - 100, cy + 74), (cx - 38, cy - 6), (cx + 2, cy + 34),
+         (cx + 44, cy - 18), (cx + 100, cy + 74)],
+        fill=GREEN, width=w, joint="curve",
     )
 
-    # title, left-aligned, auto-fit, max 3 lines.
-    # The whole block (title + subline + domain) is vertically centred in
-    # the region below the pill (y 170..606) so 1-, 2- and 3-line titles
-    # all fit with the subline + domain visible — a fixed title y would
-    # push the subline off-canvas for 3-line titles.
-    title_font, lines = fit_title(draw, title, lang, max_width=1080, max_lines=3)
+
+def icon_clock(d, cx, cy, w):
+    """Clock (timer / date / calendar tools)."""
+    d.ellipse([cx - 100, cy - 100, cx + 100, cy + 100], outline=GREEN, width=w)
+    d.line([cx, cy, cx, cy - 62], fill=GREEN, width=w)
+    d.line([cx, cy, cx + 44, cy + 32], fill=GREEN, width=w)
+    d.ellipse([cx - 6, cy - 6, cx + 6, cy + 6], fill=GREEN)
+
+
+def icon_swap(d, cx, cy, w):
+    """Two opposing arrows (unit / currency converters)."""
+    # Top arrow pointing right.
+    d.line([cx - 92, cy - 38, cx + 62, cy - 38], fill=GREEN, width=w)
+    d.line([cx + 62, cy - 38, cx + 34, cy - 58], fill=GREEN, width=w)
+    d.line([cx + 62, cy - 38, cx + 34, cy - 18], fill=GREEN, width=w)
+    # Bottom arrow pointing left.
+    d.line([cx + 92, cy + 38, cx - 62, cy + 38], fill=GREEN, width=w)
+    d.line([cx - 62, cy + 38, cx - 34, cy + 18], fill=GREEN, width=w)
+    d.line([cx - 62, cy + 38, cx - 34, cy + 58], fill=GREEN, width=w)
+
+
+def icon_dice(d, cx, cy, w):
+    """Die (random / picker tools)."""
+    d.rounded_rectangle(
+        [cx - 84, cy - 84, cx + 84, cy + 84], radius=20,
+        outline=GREEN, width=w,
+    )
+    for px, py in [(-46, -46), (46, -46), (0, 0), (-46, 46), (46, 46)]:
+        d.ellipse(
+            [cx + px - 11, cy + py - 11, cx + px + 11, cy + py + 11],
+            fill=GREEN,
+        )
+
+
+def icon_droplet(d, cx, cy, w):
+    """Droplet (colour / palette tools)."""
+    d.line([cx, cy - 108, cx - 72, cy + 8], fill=GREEN, width=w)
+    d.line([cx, cy - 108, cx + 72, cy + 8], fill=GREEN, width=w)
+    d.arc([cx - 72, cy - 8, cx + 72, cy + 136], 0, 180, fill=GREEN, width=w)
+    d.arc(
+        [cx - 40, cy + 28, cx + 40, cy + 108], 90, 180,
+        fill=GREEN_SOFT, width=max(2, w - 2),
+    )
+
+
+def icon_waveform(d, cx, cy, w):
+    """Audio waveform bars (audio / video / speech tools)."""
+    for i, h in enumerate([-58, -92, -34, -108, -66, -96, -44]):
+        x = cx - 84 + i * 28
+        d.line([x, cy + h, x, cy - h], fill=GREEN, width=w)
+
+
+def icon_grid(d, cx, cy, w):
+    """4-square grid — the UtilityFlow logo motif (generic fallback)."""
+    for gx in (-52, 10):
+        for gy in (-52, 10):
+            d.rounded_rectangle(
+                [cx + gx, cy + gy, cx + gx + 42, cy + gy + 42], radius=10,
+                outline=GREEN, width=w,
+            )
+
+
+# Ordered keyword -> icon. Article ids are "<toolId>-<type>" (type is
+# guide/howto/advanced), so the tool slug is the id minus its last segment.
+ICON_RULES = [
+    (("password", "security", "otp", "authenticator", "2fa"), icon_shield_key),
+    (("qr",), icon_qr),
+    (("image", "photo", "picture", "pdf", "compress", "resize", "rotate",
+      "background", "watermark"), icon_image),
+    (("calculator", "age", "loan", "bmi", "percent", "mortgage", "emi",
+      "tip", "discount", "salary", "tax", "currency", "compound",
+      "interest"), icon_calculator),
+    (("word", "text", "case", "character", "lorem", "json", "csv",
+      "markdown", "regex", "base64", "url", "hash", "slug", "paraphrase",
+      "summar", "translat", "grammar", "plagiarism"), icon_document),
+    (("color", "colour", "palette", "gradient"), icon_droplet),
+    (("timer", "stopwatch", "countdown", "date", "calendar", "clock",
+      "alarm"), icon_clock),
+    (("random", "dice", "coin", "picker", "lottery", "name-generator"), icon_dice),
+    (("unit", "length", "weight", "temperature", "speed", "time-zone",
+      "convert"), icon_swap),
+    (("audio", "video", "speech", "voice", "music"), icon_waveform),
+]
+
+
+def icon_for(article_id):
+    """Pick the line-art icon for an article id; grid is the fallback."""
+    tool = article_id.rsplit("-", 1)[0] if "-" in article_id else article_id
+    for keywords, fn in ICON_RULES:
+        if any(k in tool for k in keywords):
+            return fn
+    return icon_grid
+
+
+def render_card(title, lang, article_id):
+    # Flat off-white background, drawn at 2x then downscaled for smooth lines.
+    img = Image.new("RGB", (W * SS, H * SS), BG)
+    # The icon is drawn on its own 1x layer (local coords are 1x units)
+    # and upscaled to the 2x canvas, so the icon is exactly the designed
+    # ~240px tall. (Drawing the 1x coords straight onto the 2x canvas
+    # rendered every icon at half size.)
+    icon_fn = icon_for(article_id)
+    layer = Image.new("RGBA", (480, 480), (0, 0, 0, 0))
+    icon_draw = ImageDraw.Draw(layer)
+    icon_fn(icon_draw, 240, 240, w=5)
+    layer = layer.resize((480 * SS, 480 * SS), Image.LANCZOS)
+    img.paste(layer, ((W * SS - 480 * SS) // 2, int(178 * SS) - 240 * SS), layer)
+    draw = ImageDraw.Draw(img)
+
+    # Centred title block: title + subline + domain, vertically centred in
+    # the region below the icon (y 300..606) so 1-, 2- and 3-line titles
+    # all sit evenly.
+    title_font, lines = fit_title(draw, title, lang, max_width=1020 * SS, max_lines=3)
     line_h = int(title_font.size * 1.18)
     total_h = line_h * len(lines)
-    block_h = total_h + 22 + 26 + 44 + 28
-    y = 170 + (436 - block_h) // 2
-    title_top = y
+    sub_font = font_for(lang, 26 * SS, bold=False)
+    dom_font = font_for(lang, 28 * SS, bold=True)
+    block_h = total_h + 20 * SS + 26 * SS + 14 * SS + 28 * SS
+    y = int(300 * SS + (306 * SS - block_h) // 2)
     for line in lines:
-        draw.text((60, y), line, font=title_font, fill=DARK)
+        tw = draw.textlength(line, font=title_font)
+        draw.text(((W * SS - tw) // 2, y), line, font=title_font, fill=DARK)
         y += line_h
-
-    # subline below title
-    sub_font = font_for(lang, 26, bold=False)
-    draw.text((60, title_top + total_h + 22), SUBLINE, font=sub_font, fill=MUTED)
-
-    # domain below subline
-    dom_font = font_for(lang, 28, bold=True)
-    draw.text(
-        (60, title_top + total_h + 22 + 44),
-        DOMAIN,
-        font=dom_font,
-        fill=VIOLET,
-    )
-    return img
+    y += 20 * SS
+    sw = draw.textlength(SUBLINE, font=sub_font)
+    draw.text(((W * SS - sw) // 2, y), SUBLINE, font=sub_font, fill=MUTED)
+    y += 26 * SS + 14 * SS
+    dw = draw.textlength(DOMAIN, font=dom_font)
+    draw.text(((W * SS - dw) // 2, y), DOMAIN, font=dom_font, fill=GREEN)
+    return img.resize((W, H), Image.LANCZOS)
 
 
 def main():
@@ -206,7 +391,7 @@ def main():
     os.makedirs(args.out, exist_ok=True)
 
     for job in jobs:
-        img = render_card(job["title"], job["lang"])
+        img = render_card(job["title"], job["lang"], job["id"])
         name = f"{job['id']}-{job['lang']}.png"
         path = os.path.join(args.out, name)
         img.save(path, format="PNG", optimize=True)

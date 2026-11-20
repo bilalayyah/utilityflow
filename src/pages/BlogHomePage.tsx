@@ -53,10 +53,10 @@ export function BlogHomePage() {
         <Breadcrumbs items={breadcrumbs} className="mb-6" />
 
         <header className="mx-auto max-w-3xl text-center mb-10">
-          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900">
+          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1D1D1F] dark:text-[#F1F5F9]">
             {t.blog.title}
           </h1>
-          <p className="mt-3 text-base sm:text-lg leading-relaxed text-slate-600">
+          <p className="mt-3 text-base sm:text-lg leading-relaxed text-[#6E6E73] dark:text-[#CBD5E1]">
             {t.blog.description}
           </p>
           <div className="mt-6 flex justify-center">
@@ -70,7 +70,7 @@ export function BlogHomePage() {
           <section aria-labelledby="featured-articles-heading" className="mb-12">
             <h2
               id="featured-articles-heading"
-              className="text-xl font-bold text-slate-900 mb-5"
+              className="text-xl font-bold text-[#1D1D1F] mb-5 dark:text-[#F1F5F9]"
             >
               {t.blog.featured}
             </h2>
@@ -85,10 +85,10 @@ export function BlogHomePage() {
         <section aria-labelledby="latest-articles-heading">
           <h2
             id="latest-articles-heading"
-            className="text-xl font-bold text-slate-900 mb-5"
+            className="text-xl font-bold text-[#1D1D1F] mb-5 dark:text-[#F1F5F9]"
           >
             {t.blog.latest}{' '}
-            <span className="text-base font-semibold text-slate-500">
+            <span className="text-base font-semibold text-[#6E6E73] dark:text-[#CBD5E1]">
               ({articles.length})
             </span>
           </h2>
@@ -99,11 +99,11 @@ export function BlogHomePage() {
               ))}
             </div>
           ) : (
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm text-center">
-              <h3 className="text-lg font-bold text-slate-900">
+            <div className="rounded-2xl border border-[#E5E5EA] bg-[#FFFFFF] p-6 sm:p-8 shadow-sm text-center dark:border-[#243247] dark:bg-[#131D31]">
+              <h3 className="text-lg font-bold text-[#1D1D1F] dark:text-[#F1F5F9]">
                 {t.blog.noArticlesYet}
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-slate-600 max-w-xl mx-auto">
+              <p className="mt-2 text-sm leading-relaxed text-[#6E6E73] max-w-xl mx-auto dark:text-[#CBD5E1]">
                 {t.blog.noArticlesYetDescription}
               </p>
             </div>

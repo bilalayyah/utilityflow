@@ -13,7 +13,6 @@ import { categoryHref, localizeStaticPath } from '../locales/config';
 import { getStaticAlternatePaths, toHreflangEntries } from '../locales/routes';
 import { getLocalizedCategories, getLocalizedTools, searchToolsLocalized } from '../locales/tools';
 import { formatString } from '../locales/ui';
-import { CATEGORIES } from '../registry/categories';
 import { getPopularTools } from '../registry/toolsRegistry';
 import type { CategoryId } from '../types/tool';
 
@@ -25,10 +24,8 @@ export function HomePage() {
   const [directoryQuery, setDirectoryQuery] = useState('');
 
   const allTools = getLocalizedTools(locale);
-  const popularTools = getPopularTools(8);
+  const popularTools = getPopularTools(6);
   const categories = getLocalizedCategories(locale);
-  const directoryPalette = pastelForKey('directory');
-  const popularPalette = pastelForKey('popular');
 
   const filteredTools = useMemo(() => {
     return searchToolsLocalized(directoryQuery, locale, selectedCategory);
@@ -94,129 +91,100 @@ export function HomePage() {
       />
 
       {/* Hero Section */}
-      <section className="border-b border-slate-200/70 bg-gradient-to-b from-violet-50/80 via-[#f6f6fb] to-transparent dark:border-slate-800 dark:from-violet-950/30 dark:via-transparent">
-        <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="text-xs sm:text-sm font-medium text-indigo-600 dark:text-indigo-400 mb-3">
-              {formatString(t.home.eyebrow, { count: allTools.length })}
-            </p>
-            <h1 className="text-4xl sm:text-5xl lg:text-[3.5rem] font-bold tracking-tight text-slate-900 dark:text-white leading-[1.1] text-balance">
-              {t.home.h1}
-            </h1>
-            <p className="mx-auto mt-5 text-base sm:text-lg leading-relaxed text-slate-600 dark:text-slate-300 max-w-2xl">
-              {t.home.heroDescription}
-            </p>
+      <section className="mx-auto max-w-6xl px-4 pt-14 pb-12 sm:px-6 sm:pt-20 lg:px-8">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="text-xs font-semibold uppercase tracking-wide text-[#6E6E73] dark:text-[#94A3B8] mb-3">
+            {formatString(t.home.eyebrow, { count: allTools.length })}
+          </p>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#1D1D1F] dark:text-[#F1F5F9] leading-[1.1] text-balance">
+            {t.home.h1}
+          </h1>
+          <p className="mx-auto mt-5 text-base sm:text-lg leading-relaxed text-[#6E6E73] dark:text-[#CBD5E1] max-w-2xl">
+            {t.home.heroDescription}
+          </p>
 
-            <div className="mt-8 flex justify-center">
-              <ToolSearchBar variant="hero" />
-            </div>
-
-            <div className="mt-5 flex flex-wrap items-center justify-center gap-2">
-              {heroPills.map((pill) => (
-                <button
-                  key={pill.id}
-                  type="button"
-                  aria-pressed={selectedCategory === pill.id}
-                  onClick={() => setSelectedCategory(pill.id)}
-                  className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
-                    selectedCategory === pill.id
-                      ? 'bg-gradient-to-r from-indigo-600 to-violet-600 text-white shadow-sm'
-                      : 'border border-slate-200 bg-white text-slate-700 shadow-sm hover:border-indigo-300 hover:text-slate-900 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300 dark:hover:border-indigo-500'
-                  }`}
-                >
-                  {pill.label}
-                </button>
-              ))}
-            </div>
-
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-              <a
-                href="#categories"
-                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-indigo-600 to-violet-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:from-indigo-700 hover:to-violet-700 whitespace-nowrap shrink-0"
-              >
-                {t.home.exploreCategories}
-                <ArrowRight className="w-4 h-4" aria-hidden="true" />
-              </a>
-              <Link
-                to={localizeStaticPath('/tools/', locale)}
-                className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-800 shadow-sm transition-colors hover:bg-slate-50 whitespace-nowrap shrink-0 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800"
-              >
-                {t.home.openDirectory}
-              </Link>
-            </div>
+          <div className="mt-8 flex justify-center">
+            <ToolSearchBar variant="hero" />
           </div>
 
-          {/* 4-column Platform Metrics Strip */}
-          <dl className="mt-12 grid grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="rounded-2xl border border-slate-200/70 bg-white/80 p-4 text-center shadow-sm dark:border-slate-800 dark:bg-slate-900/60">
-              <dt className="text-xs text-slate-500 dark:text-slate-400">{t.home.metrics.toolCategories}</dt>
-              <dd className="mt-1 text-2xl font-bold text-slate-900 dark:text-white tabular-nums">
-                {CATEGORIES.length}
-              </dd>
-            </div>
-            <div className="rounded-2xl border border-slate-200/70 bg-white/80 p-4 text-center shadow-sm dark:border-slate-800 dark:bg-slate-900/60">
-              <dt className="text-xs text-slate-500 dark:text-slate-400">{t.home.metrics.browserUtilities}</dt>
-              <dd className="mt-1 text-2xl font-bold text-slate-900 dark:text-white tabular-nums">
-                {SITE_CONFIG.plannedTotalTools}
-              </dd>
-            </div>
-            <div className="rounded-2xl border border-slate-200/70 bg-white/80 p-4 text-center shadow-sm dark:border-slate-800 dark:bg-slate-900/60">
-              <dt className="text-xs text-slate-500 dark:text-slate-400">{t.home.metrics.liveTools}</dt>
-              <dd className="mt-1 text-2xl font-bold text-slate-900 dark:text-white tabular-nums">
-                {allTools.length}
-              </dd>
-            </div>
-            <div className="rounded-2xl border border-slate-200/70 bg-white/80 p-4 text-center shadow-sm dark:border-slate-800 dark:bg-slate-900/60">
-              <dt className="text-xs text-slate-500 dark:text-slate-400">{t.home.metrics.accountRequired}</dt>
-              <dd className="mt-1 text-2xl font-bold text-slate-900 dark:text-white tabular-nums">{t.home.metrics.none}</dd>
-            </div>
-          </dl>
+          <div className="mt-5 flex flex-wrap items-center justify-center gap-2">
+            {heroPills.map((pill) => (
+              <button
+                key={pill.id}
+                type="button"
+                aria-pressed={selectedCategory === pill.id}
+                onClick={() => setSelectedCategory(pill.id)}
+                className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
+                  selectedCategory === pill.id
+                    ? 'bg-[#0E8A66] text-white shadow-sm'
+                    : 'border border-[#E5E5EA] bg-white text-[#1D1D1F] shadow-sm hover:border-[#BFE3D3] hover:text-[#0B7A59] dark:border-[#243247] dark:bg-[#131D31] dark:text-[#F1F5F9] dark:hover:border-[#34D399] dark:hover:text-[#34D399]'
+                }`}
+              >
+                {pill.label}
+              </button>
+            ))}
+          </div>
+
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+            <a
+              href="#categories"
+              className="inline-flex items-center gap-2 rounded-full bg-[#0E8A66] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0B7557] whitespace-nowrap shrink-0"
+            >
+              {t.home.exploreCategories}
+              <ArrowRight className="w-4 h-4" aria-hidden="true" />
+            </a>
+            <Link
+              to={localizeStaticPath('/tools/', locale)}
+              className="inline-flex items-center gap-2 rounded-full border border-[#D2D2D7] bg-white px-5 py-2.5 text-sm font-semibold text-[#1D1D1F] shadow-sm transition-colors hover:bg-[#F5F5F7] whitespace-nowrap shrink-0 dark:border-[#243247] dark:bg-[#131D31] dark:text-[#F1F5F9] dark:hover:bg-[#182239]"
+            >
+              {t.home.openDirectory}
+            </Link>
+          </div>
         </div>
       </section>
-
 
       {/* Popular Tools Section */}
       <section aria-labelledby="popular-tools-heading" className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
           <div>
-            <h2 id="popular-tools-heading" className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
+            <h2 id="popular-tools-heading" className="text-2xl sm:text-3xl font-bold tracking-tight text-[#1D1D1F] dark:text-[#F1F5F9]">
               {t.home.popular.title}
             </h2>
-            <p className="mt-1.5 text-sm sm:text-base text-slate-600 dark:text-slate-300">
+            <p className="mt-1.5 text-sm sm:text-base text-[#6E6E73] dark:text-[#CBD5E1]">
               {t.home.popular.description}
             </p>
           </div>
           <Link
             to={localizeStaticPath('/tools/', locale)}
-            className="text-sm font-semibold text-indigo-600 hover:text-indigo-700 underline-offset-4 hover:underline whitespace-nowrap shrink-0 dark:text-indigo-400 dark:hover:text-indigo-300"
+            className="text-sm font-semibold text-[#0B7A59] hover:text-[#0B7557] underline-offset-4 hover:underline whitespace-nowrap shrink-0 dark:text-[#34D399] dark:hover:text-[#6EE7B7]"
           >
             {t.home.popular.viewDirectory}
           </Link>
         </div>
 
         {popularTools.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {popularTools.map((tool) => (
               <ToolCard key={tool.id} tool={tool} />
             ))}
           </div>
         ) : (
-          <div className={`rounded-2xl ${popularPalette.card} p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-sm dark:border-slate-800 dark:bg-slate-900`}>
+          <div className="rounded-2xl border border-[#E5E5EA] bg-white p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-sm dark:border-[#243247] dark:bg-[#131D31]">
             <div className="max-w-2xl">
-              <p className={`text-xs font-semibold ${popularPalette.link} mb-1`}>
+              <p className="text-xs font-semibold text-[#0B7A59] mb-1 dark:text-[#34D399]">
                 Phase 0 · Platform Foundation Ready
               </p>
-              <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
+              <h3 className="text-lg font-semibold text-[#1D1D1F] dark:text-[#F1F5F9]">
                 Tool slots are initialized and ready
               </h3>
-              <p className="mt-1.5 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+              <p className="mt-1.5 text-sm leading-relaxed text-[#6E6E73] dark:text-[#CBD5E1]">
                 The routing architecture, shared tool layout, central registry, and SEO pipeline
                 are live. Popular tools will automatically populate here.
               </p>
             </div>
             <Link
               to={categoryHref('text-writing', locale)}
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white hover:bg-slate-800 transition-colors whitespace-nowrap shrink-0 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-[#1D1D1F] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#2C2C2E] transition-colors whitespace-nowrap shrink-0 dark:bg-white dark:text-[#1D1D1F] dark:hover:bg-[#F5F5F7]"
             >
               Preview Text & Writing Tools
               <ArrowRight className="w-4 h-4" aria-hidden="true" />
@@ -229,14 +197,14 @@ export function HomePage() {
       <section
         id="categories"
         aria-labelledby="categories-heading"
-        className="border-y border-slate-200/70 bg-white/50 py-14 sm:py-16 dark:border-slate-800 dark:bg-slate-900/30"
+        className="py-14 sm:py-16"
       >
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl mb-10">
-            <h2 id="categories-heading" className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
+            <h2 id="categories-heading" className="text-2xl sm:text-3xl font-bold tracking-tight text-[#1D1D1F] dark:text-[#F1F5F9]">
               {t.home.categories.title}
             </h2>
-            <p className="mt-2 text-sm sm:text-base text-slate-600 dark:text-slate-300">
+            <p className="mt-2 text-sm sm:text-base text-[#6E6E73] dark:text-[#CBD5E1]">
               {t.home.categories.description}
             </p>
           </div>
@@ -249,7 +217,7 @@ export function HomePage() {
                 <Link
                   key={category.id}
                   to={categoryHref(category.id, locale)}
-                  className={`group flex flex-col justify-between rounded-2xl p-6 shadow-sm transition-all duration-150 hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 ${palette.card}`}
+                  className={`group flex flex-col justify-between rounded-2xl p-6 shadow-sm transition-all duration-150 hover:-translate-y-0.5 hover:border-[#BFE3D3] hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0E8A66] dark:hover:border-[#34D399] ${palette.card}`}
                 >
                   <div>
                     <div className="flex items-center justify-between gap-3 mb-4">
@@ -257,7 +225,7 @@ export function HomePage() {
                         <div className={`flex h-10 w-10 items-center justify-center rounded-full ${palette.icon}`}>
                           <CategoryIcon name={category.iconName} className="w-5 h-5" />
                         </div>
-                        <span className="text-xs font-medium text-slate-600 dark:text-slate-300 tabular-nums">
+                        <span className="text-xs font-medium text-[#6E6E73] dark:text-[#CBD5E1] tabular-nums">
                           {liveCount >= category.plannedToolCount
                             ? formatString(t.category.toolsLive, { count: liveCount })
                             : formatString(t.category.ofToolsLive, {
@@ -267,20 +235,20 @@ export function HomePage() {
                         </span>
                       </div>
                       <ArrowRight
-                        className="w-4 h-4 text-slate-500 dark:text-slate-300 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:text-indigo-600 dark:group-hover:text-indigo-300"
+                        className="w-4 h-4 text-[#86868B] transition-transform duration-150 group-hover:translate-x-0.5 group-hover:text-[#0E8A66] dark:group-hover:text-[#34D399]"
                         aria-hidden="true"
                       />
                     </div>
 
-                    <h3 className="text-lg font-bold text-slate-900 dark:text-white group-hover:text-indigo-700 dark:group-hover:text-indigo-300 transition-colors">
+                    <h3 className="text-lg font-bold text-[#1D1D1F] group-hover:text-[#0B7A59] transition-colors dark:text-[#F1F5F9] dark:group-hover:text-[#34D399]">
                       {category.name}
                     </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-slate-700/90 dark:text-slate-200/90">
+                    <p className="mt-2 text-sm leading-relaxed text-[#6E6E73] dark:text-[#CBD5E1]">
                       {category.description}
                     </p>
                   </div>
 
-                  <p className="mt-5 pt-4 border-t border-slate-900/10 dark:border-white/15 text-xs text-slate-600 dark:text-slate-300 truncate">
+                  <p className="mt-5 pt-4 border-t border-[#E5E5EA] text-xs text-[#6E6E73] truncate dark:border-[#243247] dark:text-[#CBD5E1]">
                     {formatString(t.home.categories.includes, {
                       names: category.sampleToolNames.slice(0, 3).join(' · '),
                     })}
@@ -300,10 +268,10 @@ export function HomePage() {
       >
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8">
           <div>
-            <h2 id="directory-heading" className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
+            <h2 id="directory-heading" className="text-2xl sm:text-3xl font-bold tracking-tight text-[#1D1D1F] dark:text-[#F1F5F9]">
               {t.home.directory.title}
             </h2>
-            <p className="mt-1.5 text-sm sm:text-base text-slate-600 dark:text-slate-300">
+            <p className="mt-1.5 text-sm sm:text-base text-[#6E6E73] dark:text-[#CBD5E1]">
               {t.home.directory.description}
             </p>
           </div>
@@ -318,7 +286,7 @@ export function HomePage() {
               value={directoryQuery}
               onChange={(e) => setDirectoryQuery(e.target.value)}
               placeholder={t.home.directory.filterPlaceholder}
-              className="w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-sm text-slate-900 placeholder:text-slate-400 shadow-sm focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/20 dark:border-slate-700 dark:bg-slate-900 dark:text-white dark:placeholder:text-slate-500"
+              className="w-full rounded-xl border border-[#E5E5EA] bg-white px-3.5 py-2 text-sm text-[#1D1D1F] placeholder:text-[#86868B] shadow-sm focus:border-[#0E8A66] focus:outline-none focus:ring-2 focus:ring-[#0E8A66]/20"
             />
           </div>
         </div>
@@ -336,8 +304,8 @@ export function HomePage() {
             onClick={() => setSelectedCategory('all')}
             className={`px-4 py-1.5 text-xs sm:text-sm font-medium rounded-full transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
               selectedCategory === 'all'
-                ? 'bg-gradient-to-r from-indigo-600 to-violet-600 text-white shadow-sm'
-                : 'border border-slate-200 bg-white text-slate-700 shadow-sm hover:border-indigo-300 hover:text-slate-900 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300 dark:hover:border-indigo-500'
+                ? 'bg-[#0E8A66] text-white shadow-sm'
+                : 'border border-[#E5E5EA] bg-white text-[#1D1D1F] shadow-sm hover:border-[#BFE3D3] hover:text-[#0B7A59] dark:border-[#243247] dark:bg-[#131D31] dark:text-[#F1F5F9] dark:hover:border-[#34D399] dark:hover:text-[#34D399]'
             }`}
           >
             {t.home.directory.allCategories}
@@ -351,8 +319,8 @@ export function HomePage() {
               onClick={() => setSelectedCategory(category.id)}
               className={`px-4 py-1.5 text-xs sm:text-sm font-medium rounded-full transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
                 selectedCategory === category.id
-                  ? 'bg-gradient-to-r from-indigo-600 to-violet-600 text-white shadow-sm'
-                  : 'border border-slate-200 bg-white text-slate-700 shadow-sm hover:border-indigo-300 hover:text-slate-900 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300 dark:hover:border-indigo-500'
+                  ? 'bg-[#0E8A66] text-white shadow-sm'
+                  : 'border border-[#E5E5EA] bg-white text-[#1D1D1F] shadow-sm hover:border-[#BFE3D3] hover:text-[#0B7A59] dark:border-[#243247] dark:bg-[#131D31] dark:text-[#F1F5F9] dark:hover:border-[#34D399] dark:hover:text-[#34D399]'
               }`}
             >
               {category.shortName}
@@ -377,29 +345,29 @@ export function HomePage() {
                   return (
                     <div
                       key={category.id}
-                      className={`rounded-2xl ${palette.card} p-5 flex flex-col justify-between gap-4 shadow-sm dark:border-slate-800 dark:bg-slate-900`}
+                      className={`rounded-2xl ${palette.card} p-5 flex flex-col justify-between gap-4 shadow-sm`}
                     >
                       <div>
                         <div className="flex items-center justify-between gap-3">
                           <Link
                             to={categoryHref(category.id, locale)}
-                            className="inline-flex items-center gap-2 text-base font-bold text-slate-900 hover:text-indigo-700 dark:text-white dark:hover:text-indigo-300"
+                            className="inline-flex items-center gap-2 text-base font-bold text-[#1D1D1F] hover:text-[#0B7A59] dark:text-[#F1F5F9] dark:hover:text-[#34D399]"
                           >
                             <CategoryIcon name={category.iconName} className={`w-4 h-4 ${palette.link}`} />
                             <span>{category.name}</span>
                           </Link>
-                          <span className="text-xs font-mono text-slate-500 dark:text-slate-400 tabular-nums">
+                          <span className="text-xs font-mono text-[#86868B] tabular-nums">
                             {categoryLiveTools.length}/{category.plannedToolCount}
                           </span>
                         </div>
-                        <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
+                        <p className="mt-2 text-sm text-[#6E6E73] dark:text-[#CBD5E1]">
                           {formatString(t.home.directory.upcomingUtilities, {
                             names: category.sampleToolNames.join(', '),
                           })}
                         </p>
                       </div>
-                      <div className="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-800 text-xs">
-                        <span className="text-slate-500 dark:text-slate-400">
+                      <div className="flex items-center justify-between pt-3 border-t border-[#E5E5EA] text-xs dark:border-[#243247]">
+                        <span className="text-[#86868B]">
                           {formatString(t.home.directory.toolsActive, { count: categoryLiveTools.length })}
                         </span>
                         <Link
@@ -414,8 +382,8 @@ export function HomePage() {
                 })}
               </div>
             ) : (
-              <div className={`rounded-2xl ${directoryPalette.card} p-8 text-center shadow-sm dark:border-slate-800 dark:bg-slate-900`}>
-                <p className="text-sm text-slate-600 dark:text-slate-300">
+              <div className="rounded-2xl border border-[#E5E5EA] bg-white p-8 text-center shadow-sm dark:border-[#243247] dark:bg-[#131D31]">
+                <p className="text-sm text-[#6E6E73] dark:text-[#CBD5E1]">
                   {formatString(t.home.directory.noMatch, { query: directoryQuery })}
                 </p>
                 <button
@@ -424,7 +392,7 @@ export function HomePage() {
                     setDirectoryQuery('');
                     setSelectedCategory('all');
                   }}
-                  className="mt-3 text-sm font-semibold text-indigo-600 hover:underline cursor-pointer dark:text-indigo-400"
+                  className="mt-3 text-sm font-semibold text-[#0B7A59] hover:underline cursor-pointer dark:text-[#34D399]"
                 >
                   {t.home.directory.resetFilters}
                 </button>
@@ -437,14 +405,14 @@ export function HomePage() {
       {/* Why Choose Us Section */}
       <section
         aria-labelledby="why-choose-heading"
-        className="border-y border-slate-200/70 bg-white/50 py-14 sm:py-16 dark:border-slate-800 dark:bg-slate-900/30"
+        className="py-14 sm:py-16"
       >
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl mb-10">
-            <h2 id="why-choose-heading" className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
+            <h2 id="why-choose-heading" className="text-2xl sm:text-3xl font-bold tracking-tight text-[#1D1D1F] dark:text-[#F1F5F9]">
               {t.home.why.title}
             </h2>
-            <p className="mt-2 text-sm sm:text-base text-slate-600 dark:text-slate-300">
+            <p className="mt-2 text-sm sm:text-base text-[#6E6E73] dark:text-[#CBD5E1]">
               {t.home.why.description}
             </p>
           </div>
@@ -456,7 +424,7 @@ export function HomePage() {
               return (
                 <div
                   key={item.title}
-                  className={`rounded-2xl ${palette.card} p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900`}
+                  className={`rounded-2xl ${palette.card} p-6 shadow-sm`}
                 >
                   <div className="flex items-center justify-between gap-4 mb-3">
                     <span className={`font-mono text-sm font-semibold ${palette.link} tabular-nums`}>
@@ -466,8 +434,8 @@ export function HomePage() {
                       <IconComponent className="w-5 h-5" aria-hidden="true" />
                     </span>
                   </div>
-                  <h3 className="text-lg font-bold text-slate-900 dark:text-white">{item.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                  <h3 className="text-lg font-bold text-[#1D1D1F] dark:text-[#F1F5F9]">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-[#6E6E73] dark:text-[#CBD5E1]">
                     {item.description}
                   </p>
                 </div>
@@ -477,13 +445,42 @@ export function HomePage() {
         </div>
       </section>
 
+      {/* How It Works Section */}
+      <section aria-labelledby="how-it-works-heading" className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
+        <div className="max-w-2xl mb-10">
+          <h2 id="how-it-works-heading" className="text-2xl sm:text-3xl font-bold tracking-tight text-[#1D1D1F] dark:text-[#F1F5F9]">
+            {t.home.howItWorks.title}
+          </h2>
+          <p className="mt-2 text-sm sm:text-base text-[#6E6E73] dark:text-[#CBD5E1]">
+            {t.home.howItWorks.description}
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {t.home.howItWorks.steps.map((step, index) => (
+            <div
+              key={step.title}
+              className="rounded-2xl border border-[#E5E5EA] bg-white p-6 shadow-sm dark:border-[#243247] dark:bg-[#131D31]"
+            >
+              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#E7F3EE] text-sm font-bold text-[#0B7A59] dark:bg-[rgba(16,185,129,.14)] dark:text-[#34D399]">
+                {index + 1}
+              </span>
+              <h3 className="mt-4 text-lg font-bold text-[#1D1D1F] dark:text-[#F1F5F9]">{step.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-[#6E6E73] dark:text-[#CBD5E1]">
+                {step.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* Homepage FAQ Section */}
       <section aria-labelledby="home-faq-heading" className="mx-auto max-w-4xl px-4 py-14 sm:px-6 lg:px-8">
         <div className="mb-8">
-          <h2 id="home-faq-heading" className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
+          <h2 id="home-faq-heading" className="text-2xl sm:text-3xl font-bold tracking-tight text-[#1D1D1F] dark:text-[#F1F5F9]">
             {t.home.faq.title}
           </h2>
-          <p className="mt-2 text-sm sm:text-base text-slate-600 dark:text-slate-300">
+          <p className="mt-2 text-sm sm:text-base text-[#6E6E73] dark:text-[#CBD5E1]">
             {t.home.faq.description}
           </p>
         </div>
@@ -493,8 +490,8 @@ export function HomePage() {
 
       {/* Trust strip */}
       <div className="mx-auto max-w-6xl px-4 pb-14 sm:px-6 lg:px-8">
-        <p className="flex items-center justify-center gap-2 text-center text-sm text-slate-600 dark:text-slate-400">
-          <ShieldCheck className="w-4 h-4 shrink-0 text-indigo-600 dark:text-indigo-400" aria-hidden="true" />
+        <p className="flex items-center justify-center gap-2 text-center text-sm text-[#6E6E73] dark:text-[#CBD5E1]">
+          <ShieldCheck className="w-4 h-4 shrink-0 text-[#0E8A66] dark:text-[#34D399]" aria-hidden="true" />
           <span>{t.home.trustLine}</span>
         </p>
       </div>

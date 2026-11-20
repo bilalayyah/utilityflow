@@ -142,6 +142,24 @@ export const esStrings: UiStrings = {
         },
       ],
     },
+    howItWorks: {
+      title: 'How It Works',
+      description: 'Three simple steps — no account, no install, no waiting.',
+      steps: [
+        {
+          title: 'Find your tool',
+          description: 'Search or browse the directory to find the tool you need.',
+        },
+        {
+          title: 'Use it right in your browser',
+          description: 'Open the tool and start working instantly — nothing to install.',
+        },
+        {
+          title: 'Copy or download the result',
+          description: 'Copy your output or download it as a file, ready to use.',
+        },
+      ],
+    },
     faq: {
       title: 'Preguntas frecuentes',
       description:

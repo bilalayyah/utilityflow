@@ -48,13 +48,13 @@ export function ThemeToggle({ variant = 'dropdown', onSelect }: ThemeToggleProps
   if (variant === 'segmented') {
     return (
       <div className="space-y-1.5">
-        <div className="px-1 text-xs font-semibold text-slate-500 dark:text-slate-400">
+        <div className="px-1 text-xs font-semibold text-[#86868B] dark:text-[#CBD5E1]">
           Appearance
         </div>
         <div
           role="radiogroup"
           aria-label="Theme preference"
-          className="grid grid-cols-3 gap-1 rounded-lg bg-slate-100 p-1 border border-slate-200"
+          className="grid grid-cols-3 gap-1 rounded-xl bg-[#F5F5F7] p-1 border border-[#E5E5EA] dark:bg-[#0C1322] dark:border-[#243247]"
         >
           {THEME_OPTIONS.map(({ id, shortLabel, Icon }) => {
             const active = theme === id;
@@ -68,10 +68,10 @@ export function ThemeToggle({ variant = 'dropdown', onSelect }: ThemeToggleProps
                   setTheme(id);
                   onSelect?.();
                 }}
-                className={`inline-flex items-center justify-center gap-1.5 rounded-md px-2.5 py-2 text-xs font-semibold transition-colors min-h-[40px] cursor-pointer ${
+                className={`inline-flex items-center justify-center gap-1.5 rounded-lg px-2.5 py-2 text-xs font-semibold transition-colors min-h-[40px] cursor-pointer ${
                   active
-                    ? 'bg-white text-slate-900 shadow-xs'
-                    : 'text-slate-600 hover:text-slate-900'
+                    ? 'bg-[#FFFFFF] text-[#1D1D1F] shadow-sm dark:bg-[#131D31] dark:text-[#F1F5F9]'
+                    : 'text-[#6E6E73] hover:text-[#1D1D1F] dark:text-[#CBD5E1] dark:hover:text-[#F1F5F9]'
                 }`}
               >
                 <Icon className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
@@ -100,16 +100,16 @@ export function ThemeToggle({ variant = 'dropdown', onSelect }: ThemeToggleProps
         aria-expanded={open}
         aria-label={`Change theme (current: ${activeOptionLabel})`}
         onClick={() => setOpen((prev) => !prev)}
-        className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-2.5 sm:px-3 py-2 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition-colors min-h-[40px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 cursor-pointer"
+        className="inline-flex items-center gap-1.5 rounded-lg border border-[#E5E5EA] bg-[#FFFFFF] px-2.5 sm:px-3 py-2 text-xs sm:text-sm font-medium text-[#6E6E73] hover:bg-[#F5F5F7] hover:text-[#1D1D1F] transition-colors min-h-[40px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0E8A66] cursor-pointer dark:border-[#243247] dark:bg-[#131D31] dark:text-[#CBD5E1] dark:hover:bg-[#0C1322] dark:hover:text-[#F1F5F9]"
       >
         <ActiveIcon
           className={`w-4 h-4 shrink-0 ${
-            resolvedTheme === 'dark' ? 'text-indigo-400' : 'text-amber-500'
+            resolvedTheme === 'dark' ? 'text-[#34D399]' : 'text-[#0E8A66]'
           }`}
           aria-hidden="true"
         />
         <ChevronDown
-          className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-150 ${
+          className={`w-3.5 h-3.5 text-[#86868B] transition-transform duration-150 dark:text-[#CBD5E1] ${
             open ? 'rotate-180' : ''
           }`}
           aria-hidden="true"
@@ -120,7 +120,7 @@ export function ThemeToggle({ variant = 'dropdown', onSelect }: ThemeToggleProps
         <div
           role="menu"
           aria-label="Theme selection"
-          className="absolute right-0 top-full z-50 mt-2 w-52 rounded-xl border border-slate-200 bg-white p-1.5 shadow-lg"
+          className="absolute right-0 top-full z-50 mt-2 w-52 rounded-2xl border border-[#E5E5EA] bg-[#FFFFFF] p-1.5 shadow-sm dark:border-[#243247] dark:bg-[#131D31]"
         >
           {THEME_OPTIONS.map(({ id, label, Icon }) => {
             const selected = theme === id;
@@ -135,10 +135,10 @@ export function ThemeToggle({ variant = 'dropdown', onSelect }: ThemeToggleProps
                   setOpen(false);
                   onSelect?.();
                 }}
-                className={`flex w-full items-center justify-between gap-2 rounded-lg px-3 py-2 text-left text-xs sm:text-sm font-medium transition-colors min-h-[40px] cursor-pointer ${
+                className={`flex w-full items-center justify-between gap-2 rounded-xl px-3 py-2 text-left text-xs sm:text-sm font-medium transition-colors min-h-[40px] cursor-pointer ${
                   selected
-                    ? 'bg-indigo-50 text-indigo-700'
-                    : 'text-slate-700 hover:bg-slate-50 hover:text-slate-900'
+                    ? 'bg-[#E7F3EE] text-[#0B7A59] dark:bg-[rgba(16,185,129,0.14)] dark:text-[#34D399]'
+                    : 'text-[#6E6E73] hover:bg-[#F5F5F7] hover:text-[#1D1D1F] dark:text-[#CBD5E1] dark:hover:bg-[#0C1322] dark:hover:text-[#F1F5F9]'
                 }`}
               >
                 <span className="inline-flex items-center gap-2.5">
@@ -146,7 +146,7 @@ export function ThemeToggle({ variant = 'dropdown', onSelect }: ThemeToggleProps
                   <span>
                     {label}
                     {id === 'system' && (
-                      <span className="ml-1 text-[11px] text-slate-500">
+                      <span className="ml-1 text-[11px] text-[#86868B] dark:text-[#CBD5E1]">
                         ({systemTheme === 'dark' ? 'Dark' : 'Light'})
                       </span>
                     )}

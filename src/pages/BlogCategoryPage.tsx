@@ -80,21 +80,21 @@ export function BlogCategoryPage() {
         <Breadcrumbs items={breadcrumbs} className="mb-6" />
 
         <header className="mx-auto max-w-3xl text-center mb-10">
-          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900">
+          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1D1D1F] dark:text-[#F1F5F9]">
             {category.name}
           </h1>
-          <p className="mt-3 text-base sm:text-lg leading-relaxed text-slate-600">
+          <p className="mt-3 text-base sm:text-lg leading-relaxed text-[#6E6E73] dark:text-[#CBD5E1]">
             {category.longDescription}
           </p>
           {category.intro && (
-            <p className="mt-3 text-base leading-relaxed text-slate-600">
+            <p className="mt-3 text-base leading-relaxed text-[#6E6E73] dark:text-[#CBD5E1]">
               {category.intro}
             </p>
           )}
           <p className="mt-5">
             <Link
               to={categoryHref(category.id, locale)}
-              className="inline-flex items-center gap-1.5 text-sm font-semibold text-indigo-600 hover:text-indigo-700 underline-offset-4 hover:underline"
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0B7A59] hover:text-[#0A6B4E] underline-offset-4 hover:underline dark:text-[#34D399] dark:hover:text-[#6EE7B7]"
             >
               {formatString(t.toolPage.browseAll, { name: category.name })}
               <ArrowRight className="w-4 h-4" aria-hidden="true" />
@@ -105,10 +105,10 @@ export function BlogCategoryPage() {
         <section aria-labelledby="category-articles-heading" className="mb-12">
           <h2
             id="category-articles-heading"
-            className="text-xl font-bold text-slate-900 mb-5"
+            className="text-xl font-bold text-[#1D1D1F] mb-5 dark:text-[#F1F5F9]"
           >
             {t.blog.guidesInCategory}{' '}
-            <span className="text-base font-semibold text-slate-500">
+            <span className="text-base font-semibold text-[#6E6E73] dark:text-[#CBD5E1]">
               ({articles.length})
             </span>
           </h2>
@@ -119,11 +119,11 @@ export function BlogCategoryPage() {
               ))}
             </div>
           ) : (
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm text-center">
-              <h3 className="text-lg font-bold text-slate-900">
+            <div className="rounded-2xl border border-[#E5E5EA] bg-[#FFFFFF] p-6 sm:p-8 shadow-sm text-center dark:border-[#243247] dark:bg-[#131D31]">
+              <h3 className="text-lg font-bold text-[#1D1D1F] dark:text-[#F1F5F9]">
                 {t.blog.noArticlesYet}
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-slate-600 max-w-xl mx-auto">
+              <p className="mt-2 text-sm leading-relaxed text-[#6E6E73] max-w-xl mx-auto dark:text-[#CBD5E1]">
                 {t.blog.noArticlesYetDescription}
               </p>
             </div>

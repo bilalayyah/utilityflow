@@ -11,13 +11,13 @@ export function Footer() {
   const categories = getLocalizedCategories(locale);
 
   return (
-    <footer className="border-t border-indigo-100/70 dark:border-slate-800 bg-gradient-to-br from-violet-100/80 via-indigo-100/50 to-sky-100/80 dark:from-violet-950/50 dark:via-[#0b0f17] dark:to-sky-950/50 text-slate-600">
+    <footer className="border-t border-[#E5E5EA] bg-[#FFFFFF] text-[#6E6E73] dark:border-[#243247] dark:bg-[#131D31] dark:text-[#CBD5E1]">
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-12">
           <div className="lg:col-span-4 space-y-3">
             <Link
               to={localizeStaticPath('/', locale)}
-              className="inline-flex items-center gap-2.5 text-lg font-bold tracking-tight text-slate-900"
+              className="inline-flex items-center gap-2.5 text-lg font-bold tracking-tight text-[#1D1D1F] dark:text-[#F1F5F9]"
             >
               <svg
                 width="22"
@@ -27,28 +27,22 @@ export function Footer() {
                 aria-hidden="true"
                 className="shrink-0"
               >
-                <defs>
-                  <linearGradient id="footer-logo-gradient" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stopColor="#4f46e5" />
-                    <stop offset="100%" stopColor="#7c3aed" />
-                  </linearGradient>
-                </defs>
-                <rect width="32" height="32" rx="7" fill="url(#footer-logo-gradient)" />
+                <rect width="32" height="32" rx="7" fill="#0E8A66" />
                 <rect x="7" y="7" width="8" height="8" rx="1.5" fill="#FFFFFF" />
-                <rect x="17" y="7" width="8" height="8" rx="1.5" fill="#93C5FD" />
-                <rect x="7" y="17" width="8" height="8" rx="1.5" fill="#93C5FD" />
+                <rect x="17" y="7" width="8" height="8" rx="1.5" fill="#FFFFFF" />
+                <rect x="7" y="17" width="8" height="8" rx="1.5" fill="#FFFFFF" />
                 <rect x="17" y="17" width="8" height="8" rx="1.5" fill="#FFFFFF" />
               </svg>
               <span>{SITE_CONFIG.name}</span>
             </Link>
-            <p className="text-sm leading-relaxed text-slate-600 max-w-sm">
+            <p className="text-sm leading-relaxed text-[#6E6E73] max-w-sm dark:text-[#CBD5E1]">
               {t.footer.tagline}
             </p>
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-[#86868B] dark:text-[#CBD5E1]">
               {t.nav.contact}:{' '}
               <a
                 href={`mailto:${SITE_CONFIG.contactEmail}`}
-                className="text-slate-700 hover:text-indigo-600 underline-offset-4 hover:underline"
+                className="text-[#1D1D1F] hover:text-[#0B7A59] underline-offset-4 hover:underline dark:text-[#F1F5F9] dark:hover:text-[#34D399]"
               >
                 {SITE_CONFIG.contactEmail}
               </a>
@@ -56,13 +50,13 @@ export function Footer() {
           </div>
 
           <div className="lg:col-span-4">
-            <h2 className="text-sm font-semibold text-slate-900 mb-3">{t.footer.categories}</h2>
+            <h2 className="text-sm font-semibold text-[#1D1D1F] mb-3 dark:text-[#F1F5F9]">{t.footer.categories}</h2>
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 text-sm">
               {categories.map((category) => (
                 <li key={category.id}>
                   <Link
                     to={categoryHref(category.id, locale)}
-                    className="hover:text-indigo-700 transition-colors underline-offset-4 hover:underline"
+                    className="hover:text-[#0B7A59] transition-colors underline-offset-4 hover:underline dark:hover:text-[#34D399]"
                   >
                     {category.name}
                   </Link>
@@ -72,12 +66,12 @@ export function Footer() {
           </div>
 
           <div className="lg:col-span-2">
-            <h2 className="text-sm font-semibold text-slate-900 mb-3">{t.footer.platformAi}</h2>
+            <h2 className="text-sm font-semibold text-[#1D1D1F] mb-3 dark:text-[#F1F5F9]">{t.footer.platformAi}</h2>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link
                   to={localizeStaticPath('/tools/', locale)}
-                  className="hover:text-indigo-700 transition-colors underline-offset-4 hover:underline"
+                  className="hover:text-[#0B7A59] transition-colors underline-offset-4 hover:underline dark:hover:text-[#34D399]"
                 >
                   {t.footer.allToolsDirectory}
                 </Link>
@@ -85,7 +79,7 @@ export function Footer() {
               <li>
                 <Link
                   to={localizeStaticPath('/blog/', locale)}
-                  className="hover:text-indigo-700 transition-colors underline-offset-4 hover:underline"
+                  className="hover:text-[#0B7A59] transition-colors underline-offset-4 hover:underline dark:hover:text-[#34D399]"
                 >
                   {t.footer.blog}
                 </Link>
@@ -94,12 +88,12 @@ export function Footer() {
           </div>
 
           <div className="lg:col-span-2">
-            <h2 className="text-sm font-semibold text-slate-900 mb-3">{t.footer.trustLegal}</h2>
+            <h2 className="text-sm font-semibold text-[#1D1D1F] mb-3 dark:text-[#F1F5F9]">{t.footer.trustLegal}</h2>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link
                   to={localizeStaticPath('/', locale)}
-                  className="hover:text-indigo-700 transition-colors underline-offset-4 hover:underline"
+                  className="hover:text-[#0B7A59] transition-colors underline-offset-4 hover:underline dark:hover:text-[#34D399]"
                 >
                   {t.footer.home}
                 </Link>
@@ -107,7 +101,7 @@ export function Footer() {
               <li>
                 <Link
                   to={localizeStaticPath('/about/', locale)}
-                  className="hover:text-indigo-700 transition-colors underline-offset-4 hover:underline"
+                  className="hover:text-[#0B7A59] transition-colors underline-offset-4 hover:underline dark:hover:text-[#34D399]"
                 >
                   {t.footer.aboutUs}
                 </Link>
@@ -115,7 +109,7 @@ export function Footer() {
               <li>
                 <Link
                   to={localizeStaticPath('/contact/', locale)}
-                  className="hover:text-indigo-700 transition-colors underline-offset-4 hover:underline"
+                  className="hover:text-[#0B7A59] transition-colors underline-offset-4 hover:underline dark:hover:text-[#34D399]"
                 >
                   {t.footer.contact}
                 </Link>
@@ -123,7 +117,7 @@ export function Footer() {
               <li>
                 <Link
                   to={localizeStaticPath('/privacy-policy/', locale)}
-                  className="hover:text-indigo-700 transition-colors underline-offset-4 hover:underline"
+                  className="hover:text-[#0B7A59] transition-colors underline-offset-4 hover:underline dark:hover:text-[#34D399]"
                 >
                   {t.footer.privacyPolicy}
                 </Link>
@@ -131,7 +125,7 @@ export function Footer() {
               <li>
                 <Link
                   to={localizeStaticPath('/terms-of-service/', locale)}
-                  className="hover:text-indigo-700 transition-colors underline-offset-4 hover:underline"
+                  className="hover:text-[#0B7A59] transition-colors underline-offset-4 hover:underline dark:hover:text-[#34D399]"
                 >
                   {t.footer.termsOfService}
                 </Link>
@@ -139,7 +133,7 @@ export function Footer() {
               <li>
                 <a
                   href="/sitemap.xml"
-                  className="hover:text-indigo-700 transition-colors underline-offset-4 hover:underline"
+                  className="hover:text-[#0B7A59] transition-colors underline-offset-4 hover:underline dark:hover:text-[#34D399]"
                 >
                   {t.footer.xmlSitemap}
                 </a>
@@ -148,7 +142,7 @@ export function Footer() {
                 <button
                   type="button"
                   onClick={() => requestConsentBanner()}
-                  className="hover:text-indigo-700 transition-colors underline-offset-4 hover:underline"
+                  className="hover:text-[#0B7A59] transition-colors underline-offset-4 hover:underline dark:hover:text-[#34D399]"
                 >
                   {t.consent.cookieSettings}
                 </button>
@@ -157,7 +151,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 border-t border-slate-200 pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs text-slate-500">
+        <div className="mt-10 border-t border-[#E5E5EA] pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs text-[#86868B] dark:border-[#243247] dark:text-[#CBD5E1]">
           <p>
             © {currentYear} {SITE_CONFIG.name}. {t.footer.rightsReserved}
           </p>

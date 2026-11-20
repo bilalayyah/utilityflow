@@ -26,7 +26,7 @@ export function CategoryGuides({
 
   return (
     <section aria-labelledby="category-guides-heading" className="mb-12">
-      <h2 id="category-guides-heading" className="text-xl font-bold text-slate-900 mb-5">
+      <h2 id="category-guides-heading" className="text-xl font-bold text-[#1D1D1F] mb-5 dark:text-[#F1F5F9]">
         {t.blog.guidesInCategory}
       </h2>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -37,7 +37,7 @@ export function CategoryGuides({
       <p className="mt-6">
         <Link
           to={blogCategoryHref(categoryId, locale)}
-          className="font-semibold text-indigo-700 hover:underline"
+          className="font-semibold text-[#0B7A59] hover:underline dark:text-[#34D399]"
         >
           {t.blog.allArticles} →
         </Link>

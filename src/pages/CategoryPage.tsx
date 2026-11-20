@@ -1,4 +1,4 @@
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ChevronRight } from 'lucide-react';
 import { useMemo } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { Breadcrumbs, buildBreadcrumbSchema } from '../components/common/Breadcrumbs';
@@ -6,12 +6,11 @@ import { CategoryIcon } from '../components/common/CategoryIcon';
 import { CategoryGuides } from '../components/blog/CategoryGuides';
 import { FAQAccordion } from '../components/common/FAQAccordion';
 import { SeoHead } from '../components/seo/SeoHead';
-import { ToolCard } from '../components/tool/ToolCard';
 import { PASTEL_PALETTES, pastelForKey } from '../components/tool/pastel';
 import { buildCanonicalUrl } from '../config/site';
 import { getOgImageForPage } from '../config/ogImages';
 import { useLocale } from '../locales/LocaleContext';
-import { categoryHref, localizeStaticPath } from '../locales/config';
+import { categoryHref, localizeStaticPath, toolHref } from '../locales/config';
 import { getCategoryAlternatePaths, toHreflangEntries } from '../locales/routes';
 import { getCategoryByLocalizedSlug, getLocalizedCategories, getLocalizedCategory, getLocalizedTools } from '../locales/tools';
 import { formatString } from '../locales/ui';
@@ -86,40 +85,53 @@ export function CategoryPage() {
       <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
         <Breadcrumbs items={breadcrumbs} className="mb-6" />
 
-        <header className="mx-auto max-w-3xl text-center mb-10">
-          <div className="flex items-center justify-center gap-2.5 text-xs font-medium text-slate-500 mb-3">
-            <CategoryIcon name={category.iconName} className="w-4 h-4 text-indigo-600" />
-            <span className="tabular-nums">
-              {tools.length >= category.plannedToolCount
-                ? formatString(t.category.toolsLive, { count: tools.length })
-                : formatString(t.category.ofToolsLive, {
-                    count: tools.length,
-                    total: category.plannedToolCount,
-                  })}
-            </span>
-          </div>
-          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900">
+        <header className="mb-10">
+          <p className="text-xs font-semibold uppercase tracking-wide text-[#6E6E73] dark:text-[#94A3B8]">
+            Category · {category.name}
+          </p>
+          <h1 className="mt-3 text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#1D1D1F] dark:text-[#F1F5F9]">
             {category.name}
           </h1>
-          <p className="mt-3 text-base sm:text-lg leading-relaxed text-slate-600">
+          <p className="mt-4 max-w-2xl text-base sm:text-lg leading-relaxed text-[#6E6E73] dark:text-[#CBD5E1]">
             {category.longDescription}
           </p>
           {/* L-15: short intro paragraph (complements longDescription). */}
           {category.intro && (
-            <p className="mt-3 text-base leading-relaxed text-slate-600">
+            <p className="mt-3 max-w-2xl text-base leading-relaxed text-[#6E6E73] dark:text-[#CBD5E1]">
               {category.intro}
             </p>
           )}
         </header>
 
         {tools.length > 0 ? (
-          <section aria-labelledby="category-tools-heading" className="mb-12">
-            <h2 id="category-tools-heading" className="text-xl font-bold text-slate-900 mb-5">
+          <section aria-label={formatString(t.category.availableTools, { name: category.name })} className="mb-12">
+            <h2 className="sr-only">
               {formatString(t.category.availableTools, { name: category.name })}
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="overflow-hidden rounded-2xl border border-[#E5E5EA] bg-white shadow-sm dark:border-[#243247] dark:bg-[#131D31]">
               {tools.map((tool) => (
-                <ToolCard key={tool.id} tool={tool} />
+                <Link
+                  key={tool.id}
+                  to={toolHref(tool.slug, locale)}
+                  className="group flex items-center gap-4 border-b border-[#E5E5EA] px-5 py-4 transition-colors last:border-b-0 hover:bg-[#F5F5F7] sm:px-6 sm:py-5 dark:border-[#243247] dark:hover:bg-[#182239]"
+                >
+                  <CategoryIcon
+                    name={category.iconName}
+                    className="h-6 w-6 shrink-0 text-[#1D1D1F] dark:text-[#F1F5F9]"
+                  />
+                  <span className="min-w-0 flex-1">
+                    <span className="block truncate text-base font-bold text-[#1D1D1F] group-hover:text-[#0B7A59] dark:text-[#F1F5F9] dark:group-hover:text-[#34D399]">
+                      {tool.name}
+                    </span>
+                    <span className="mt-0.5 block truncate text-sm text-[#6E6E73] dark:text-[#CBD5E1]">
+                      {tool.shortDescription}
+                    </span>
+                  </span>
+                  <ChevronRight
+                    className="h-5 w-5 shrink-0 text-[#86868B] transition-transform duration-150 group-hover:translate-x-0.5 group-hover:text-[#0E8A66] dark:group-hover:text-[#34D399]"
+                    aria-hidden="true"
+                  />
+                </Link>
               ))}
             </div>
           </section>
@@ -128,24 +140,24 @@ export function CategoryPage() {
             aria-label="Category rollout status"
             className={`rounded-2xl ${categoryPalette.card} p-6 sm:p-8 mb-10 shadow-sm`}
           >
-            <h2 className="text-lg font-bold text-slate-900">
+            <h2 className="text-lg font-bold text-[#1D1D1F] dark:text-[#F1F5F9]">
               {t.category.scheduledTitle}
             </h2>
-            <p className="mt-2 text-sm leading-relaxed text-slate-600 max-w-2xl">
+            <p className="mt-2 text-sm leading-relaxed text-[#6E6E73] dark:text-[#CBD5E1] max-w-2xl">
               {formatString(t.category.scheduledDescription, {
                 name: category.name,
               })}
             </p>
 
             <div className="mt-5">
-              <h3 className="text-xs font-semibold text-slate-700 mb-2">
+              <h3 className="text-xs font-semibold text-[#1D1D1F] mb-2 dark:text-[#F1F5F9]">
                 {t.category.plannedToolsTitle}
               </h3>
-              <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 text-sm text-slate-700">
+              <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 text-sm text-[#1D1D1F] dark:text-[#F1F5F9]">
                 {category.sampleToolNames.map((name, index) => (
                   <li
                     key={name}
-                    className={`rounded-xl ${PASTEL_PALETTES[index % PASTEL_PALETTES.length].card} px-3 py-2 text-slate-800 shadow-sm`}
+                    className={`rounded-xl ${PASTEL_PALETTES[index % PASTEL_PALETTES.length].card} px-3 py-2 text-[#1D1D1F] shadow-sm dark:text-[#F1F5F9]`}
                   >
                     {name}
                   </li>
@@ -158,7 +170,7 @@ export function CategoryPage() {
         {/* L-15: short FAQ (3–5 Q&As) about this category. */}
         {category.faqs && category.faqs.length > 0 && (
           <section aria-labelledby="category-faq-heading" className="mb-12">
-            <h2 id="category-faq-heading" className="text-xl font-bold text-slate-900 mb-5">
+            <h2 id="category-faq-heading" className="text-xl font-bold text-[#1D1D1F] mb-5 dark:text-[#F1F5F9]">
               {t.toolPage.faqs}
             </h2>
             <FAQAccordion
@@ -172,8 +184,8 @@ export function CategoryPage() {
 
         <CategoryGuides categoryId={category.id} locale={locale} />
 
-        <section aria-labelledby="other-categories-heading" className="pt-10 border-t border-slate-200">
-          <h2 id="other-categories-heading" className="text-xl font-bold text-slate-900 mb-5">
+        <section aria-labelledby="other-categories-heading" className="pt-10 border-t border-[#E5E5EA] dark:border-[#243247]">
+          <h2 id="other-categories-heading" className="text-xl font-bold text-[#1D1D1F] mb-5 dark:text-[#F1F5F9]">
             {t.category.exploreOther}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -183,7 +195,7 @@ export function CategoryPage() {
                 <Link
                   key={item.id}
                   to={categoryHref(item.id, locale)}
-                  className={`group flex items-center justify-between gap-3 rounded-2xl ${palette.card} p-4 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md`}
+                  className={`group flex items-center justify-between gap-3 rounded-2xl ${palette.card} p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-[#BFE3D3] hover:shadow-md dark:hover:border-[#34D399]`}
                 >
                   <div className="flex items-center gap-3 min-w-0">
                     <span
@@ -192,10 +204,10 @@ export function CategoryPage() {
                       <CategoryIcon name={item.iconName} className="w-5 h-5" />
                     </span>
                     <div className="min-w-0">
-                      <div className="text-sm font-semibold text-slate-900 truncate">
+                      <div className="text-sm font-semibold text-[#1D1D1F] truncate dark:text-[#F1F5F9]">
                         {item.name}
                       </div>
-                      <div className="text-xs text-slate-500 tabular-nums">
+                      <div className="text-xs text-[#86868B] tabular-nums">
                         {formatString(t.category.plannedCount, { count: item.plannedToolCount })}
                       </div>
                     </div>

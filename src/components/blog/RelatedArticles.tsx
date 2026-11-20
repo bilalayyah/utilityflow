@@ -19,7 +19,7 @@ export function RelatedArticles({ article, locale }: RelatedArticlesProps) {
     <section aria-labelledby="related-articles-heading">
       <h2
         id="related-articles-heading"
-        className="text-xl sm:text-2xl font-bold text-slate-900 mb-5"
+        className="text-xl sm:text-2xl font-bold text-[#1D1D1F] mb-5 dark:text-[#F1F5F9]"
       >
         {t.blog.relatedArticles}
       </h2>

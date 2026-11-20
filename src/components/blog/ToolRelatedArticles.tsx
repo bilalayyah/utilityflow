@@ -27,7 +27,7 @@ export function ToolRelatedArticles({
     <section aria-labelledby="related-articles-heading" className="mt-10">
       <h2
         id="related-articles-heading"
-        className="text-2xl font-bold tracking-tight text-slate-900"
+        className="text-2xl font-bold tracking-tight text-[#1D1D1F] dark:text-[#F1F5F9]"
       >
         {t.blog.relatedArticles}
       </h2>
@@ -39,7 +39,7 @@ export function ToolRelatedArticles({
       <p className="mt-6">
         <Link
           to={blogHref(locale)}
-          className="font-semibold text-indigo-700 hover:underline"
+          className="font-semibold text-[#0B7A59] hover:underline dark:text-[#34D399]"
         >
           {t.blog.allArticles} →
         </Link>

@@ -127,14 +127,14 @@ export function CommentsSection() {
 
   return (
     <section aria-labelledby="comments-heading">
-      <h2 id="comments-heading" className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-2">
+      <h2 id="comments-heading" className="text-2xl font-bold text-[#1D1D1F] dark:text-[#F1F5F9] mb-2">
         {t.comments.title}
       </h2>
-      <p className="text-sm text-slate-600 dark:text-slate-400 mb-5">{t.comments.note}</p>
+      <p className="text-sm text-[#6E6E73] dark:text-[#CBD5E1] mb-5">{t.comments.note}</p>
 
       <form
         onSubmit={handleSubmit}
-        className="rounded-2xl border border-indigo-100 dark:border-slate-800 bg-violet-50/70 dark:bg-slate-900 p-4 sm:p-5 shadow-sm space-y-3"
+        className="rounded-2xl border border-[#E5E5EA] dark:border-[#243247] bg-[#F5F5F7] dark:bg-[#131D31] p-4 sm:p-5 shadow-sm space-y-3"
       >
         <div>
           <label htmlFor="comment-name" className="sr-only">
@@ -147,7 +147,7 @@ export function CommentsSection() {
             maxLength={50}
             onChange={(e) => setName(e.target.value)}
             placeholder={t.comments.namePlaceholder}
-            className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2.5 text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-violet-500"
+            className="w-full rounded-xl border border-[#D2D2D7] dark:border-[#243247] bg-[#FFFFFF] dark:bg-[#0F172A] px-3 py-2.5 text-sm text-[#1D1D1F] dark:text-[#F1F5F9] placeholder:text-[#86868B] focus:outline-none focus:ring-2 focus:ring-[#0E8A66]"
           />
         </div>
         {/* Honeypot: hidden from humans, bots that fill it get rejected. */}
@@ -173,9 +173,9 @@ export function CommentsSection() {
             rows={3}
             onChange={(e) => setText(e.target.value)}
             placeholder={t.comments.commentPlaceholder}
-            className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2.5 text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-violet-500 resize-y"
+            className="w-full rounded-xl border border-[#D2D2D7] dark:border-[#243247] bg-[#FFFFFF] dark:bg-[#0F172A] px-3 py-2.5 text-sm text-[#1D1D1F] dark:text-[#F1F5F9] placeholder:text-[#86868B] focus:outline-none focus:ring-2 focus:ring-[#0E8A66] resize-y"
           />
-          <div className="mt-1 text-right text-xs text-slate-600">
+          <div className="mt-1 text-right text-xs text-[#6E6E73] dark:text-[#CBD5E1]">
             {text.length}/{MAX_TEXT_LEN}
           </div>
         </div>
@@ -187,38 +187,38 @@ export function CommentsSection() {
         <button
           type="submit"
           disabled={!canPost}
-          className="rounded-xl bg-violet-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-violet-700 disabled:cursor-not-allowed disabled:opacity-50"
+          className="rounded-full bg-[#0E8A66] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0B7557] disabled:cursor-not-allowed disabled:opacity-50"
         >
           {posting ? t.comments.posting : t.comments.postButton}
         </button>
       </form>
 
       <div className="mt-6 space-y-4">
-        {loading && <p className="text-sm text-slate-600 dark:text-slate-400">{t.common.loading}</p>}
+        {loading && <p className="text-sm text-[#6E6E73] dark:text-[#CBD5E1]">{t.common.loading}</p>}
         {!loading && loadError && (
-          <p className="text-sm text-slate-600 dark:text-slate-400">{t.comments.loadError}</p>
+          <p className="text-sm text-[#6E6E73] dark:text-[#CBD5E1]">{t.comments.loadError}</p>
         )}
         {!loading && !loadError && comments.length === 0 && (
-          <p className="text-sm text-slate-600 dark:text-slate-400">{t.comments.empty}</p>
+          <p className="text-sm text-[#6E6E73] dark:text-[#CBD5E1]">{t.comments.empty}</p>
         )}
         {comments.map((comment) => (
           <article
             key={comment.id}
-            className="rounded-2xl border border-indigo-100 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 shadow-sm"
+            className="rounded-2xl border border-[#E5E5EA] dark:border-[#243247] bg-[#FFFFFF] dark:bg-[#131D31] p-4 shadow-sm"
           >
             <div className="flex items-center gap-2.5">
               <span
                 aria-hidden="true"
-                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-violet-600 text-sm font-bold text-white"
+                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#0E8A66] text-sm font-bold text-white"
               >
                 {comment.name.trim().charAt(0).toUpperCase()}
               </span>
-              <span className="text-sm font-semibold text-slate-900 dark:text-slate-100">
+              <span className="text-sm font-semibold text-[#1D1D1F] dark:text-[#F1F5F9]">
                 {comment.name}
               </span>
-              <span className="text-xs text-slate-600">{formatCommentDate(comment.createdAt, locale)}</span>
+              <span className="text-xs text-[#6E6E73] dark:text-[#CBD5E1]">{formatCommentDate(comment.createdAt, locale)}</span>
             </div>
-            <p className="mt-2.5 text-sm leading-relaxed whitespace-pre-wrap break-words text-slate-700 dark:text-slate-300">
+            <p className="mt-2.5 text-sm leading-relaxed whitespace-pre-wrap break-words text-[#6E6E73] dark:text-[#CBD5E1]">
               {comment.text}
             </p>
           </article>

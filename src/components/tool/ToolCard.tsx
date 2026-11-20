@@ -5,7 +5,6 @@ import { toolHref } from '../../locales/config';
 import { getLocalizedCategory, getLocalizedTool } from '../../locales/tools';
 import type { ToolDefinition } from '../../types/tool';
 import { CategoryIcon } from '../common/CategoryIcon';
-import { pastelForKey } from './pastel';
 
 interface ToolCardProps {
   tool: ToolDefinition;
@@ -18,35 +17,28 @@ export function ToolCard({ tool }: ToolCardProps) {
   const localized = getLocalizedTool(tool, locale);
   const category = getLocalizedCategory(localized.categoryId, locale);
   const href = toolHref(localized.slug, locale);
-  const palette = pastelForKey(tool.id);
 
   return (
     <Link
       to={href}
-      className={`group flex flex-col justify-between rounded-2xl p-5 sm:p-6 shadow-sm transition-all duration-150 hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 ${palette.card}`}
+      className="group flex flex-col justify-between rounded-2xl border border-[#E5E5EA] bg-white p-5 shadow-sm transition-all duration-150 hover:-translate-y-0.5 hover:border-[#BFE3D3] hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0E8A66] sm:p-6 dark:border-[#243247] dark:bg-[#131D31] dark:hover:border-[#34D399]"
     >
-      <div className="flex items-start gap-4">
-        <div
-          className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full ${palette.icon}`}
-        >
+      <div>
+        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#E7F3EE] text-[#0E8A66] dark:bg-[rgba(16,185,129,.14)] dark:text-[#34D399]">
           <CategoryIcon
             name={category ? category.iconName : 'FileText'}
             className="w-6 h-6"
           />
         </div>
-        <div className="min-w-0">
-          <h3 className="text-lg font-bold text-slate-900 dark:text-white">
-            {localized.name}
-          </h3>
-          <p className="mt-1 text-sm leading-relaxed text-slate-700/90 dark:text-slate-200/90 line-clamp-2">
-            {localized.shortDescription}
-          </p>
-        </div>
+        <h3 className="mt-4 text-lg font-bold text-[#1D1D1F] dark:text-[#F1F5F9]">
+          {localized.name}
+        </h3>
+        <p className="mt-1 text-sm leading-relaxed text-[#6E6E73] line-clamp-2 dark:text-[#CBD5E1]">
+          {localized.shortDescription}
+        </p>
       </div>
 
-      <div
-        className={`mt-4 flex items-center gap-1.5 text-sm font-semibold ${palette.link}`}
-      >
+      <div className="mt-4 flex items-center gap-1.5 text-sm font-semibold text-[#0B7A59] dark:text-[#34D399]">
         <span>{t.common.openTool}</span>
         <ArrowRight
           className="w-4 h-4 transition-transform duration-150 group-hover:translate-x-0.5"

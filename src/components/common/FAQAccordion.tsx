@@ -2,7 +2,6 @@ import { ChevronDown } from 'lucide-react';
 import { useId, useState } from 'react';
 import type { ReactNode } from 'react';
 import type { ToolFAQ } from '../../types/tool';
-import { PASTEL_PALETTES } from '../tool/pastel';
 
 interface FAQAccordionProps {
   items: ToolFAQ[];
@@ -40,17 +39,14 @@ export function FAQAccordion({ items, defaultOpenIndex = 0, renderAnswer }: FAQA
     <div className="space-y-2.5">
       {items.map((item, index) => {
         const isOpen = openIndex === index;
-        // Pastel redesign: rotate the 12 palettes across items so the list
-        // reads as colorful pastel cards like the homepage, not flat white.
-        const itemPalette = PASTEL_PALETTES[index % PASTEL_PALETTES.length];
         const triggerId = `${baseId}-trigger-${index}`;
         const panelId = `${baseId}-panel-${index}`;
 
         return (
           <div
             key={item.question}
-            className={`rounded-2xl px-4 transition-all ${itemPalette.card} ${
-              isOpen ? 'shadow-md' : 'shadow-sm hover:shadow-md'
+            className={`rounded-2xl border border-[#E5E5EA] bg-white px-4 transition-all dark:border-[#243247] dark:bg-[#131D31] ${
+              isOpen ? 'shadow-sm' : 'shadow-sm hover:border-[#BFE3D3] dark:hover:border-[#34D399]'
             }`}
           >
             <h3>
@@ -60,12 +56,12 @@ export function FAQAccordion({ items, defaultOpenIndex = 0, renderAnswer }: FAQA
                 aria-expanded={isOpen}
                 aria-controls={panelId}
                 onClick={() => setOpenIndex(isOpen ? null : index)}
-                className="flex w-full items-center justify-between gap-4 py-4 text-left text-base font-semibold text-slate-900 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 rounded-xl cursor-pointer"
+                className="flex w-full items-center justify-between gap-4 py-4 text-left text-base font-semibold text-[#1D1D1F] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0E8A66] rounded-xl cursor-pointer dark:text-[#F1F5F9]"
               >
                 <span>{item.question}</span>
                 <ChevronDown
                   className={`w-4 h-4 shrink-0 transition-transform duration-150 ${
-                    isOpen ? `rotate-180 ${itemPalette.link}` : 'text-slate-500'
+                    isOpen ? 'rotate-180 text-[#0E8A66] dark:text-[#34D399]' : 'text-[#86868B]'
                   }`}
                   aria-hidden="true"
                 />
@@ -76,7 +72,7 @@ export function FAQAccordion({ items, defaultOpenIndex = 0, renderAnswer }: FAQA
                 id={panelId}
                 role="region"
                 aria-labelledby={triggerId}
-                className="pb-5 pr-8 text-sm sm:text-base leading-relaxed text-slate-600"
+                className="pb-5 pr-8 text-sm sm:text-base leading-relaxed text-[#6E6E73] dark:text-[#CBD5E1]"
               >
                 {renderAnswer ? renderAnswer(item.answer) : item.answer}
               </div>

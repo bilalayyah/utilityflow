@@ -28,24 +28,24 @@ export function buildBreadcrumbSchema(items: BreadcrumbItem[]) {
 
 export function Breadcrumbs({ items, className = '' }: BreadcrumbsProps) {
   return (
-    <nav aria-label="Breadcrumb" className={`text-sm text-slate-600 ${className}`}>
+    <nav aria-label="Breadcrumb" className={`text-sm text-[#6E6E73] dark:text-[#CBD5E1] ${className}`}>
       <ol className="flex flex-wrap items-center gap-1.5">
         {items.map((item, index) => {
           const isLast = index === items.length - 1;
           return (
             <li key={`${item.label}-${index}`} className="inline-flex items-center gap-1.5">
               {index > 0 && (
-                <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" aria-hidden="true" />
+                <ChevronRight className="w-3.5 h-3.5 text-[#86868B] shrink-0 dark:text-[#CBD5E1]" aria-hidden="true" />
               )}
               {item.href && !isLast ? (
                 <Link
                   to={item.href}
-                  className="hover:text-indigo-700 transition-colors underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 rounded-sm"
+                  className="hover:text-[#0B7A59] transition-colors underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0E8A66] rounded-sm dark:hover:text-[#34D399]"
                 >
                   {item.label}
                 </Link>
               ) : (
-                <span className={isLast ? 'text-slate-900 font-medium' : ''} aria-current={isLast ? 'page' : undefined}>
+                <span className={isLast ? 'text-[#1D1D1F] font-medium dark:text-[#F1F5F9]' : ''} aria-current={isLast ? 'page' : undefined}>
                   {item.label}
                 </span>
               )}

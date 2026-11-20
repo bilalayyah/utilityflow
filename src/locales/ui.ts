@@ -103,6 +103,7 @@ export interface UiStrings {
       openCategory: string;
     };
     why: { title: string; description: string; items: WhyChooseItem[] };
+    howItWorks: { title: string; description: string; steps: WhyChooseItem[] };
     faq: { title: string; description: string };
     faqs: ToolFAQ[];
     trustLine: string;
