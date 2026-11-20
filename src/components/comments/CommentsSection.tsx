@@ -1,6 +1,6 @@
 /**
  * Anonymous comments under every tool page (rendered by ToolPageLayout,
- * so all 88 tools x 11 languages get it from one place).
+ * so all 83 tools x 11 languages get it from one place).
  *
  * No account needed: the visitor types a name and posts. Comments are
  * stored per page path in the Cloudflare Worker + KV backend

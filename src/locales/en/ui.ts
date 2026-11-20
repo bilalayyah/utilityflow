@@ -8,14 +8,11 @@ export const enStrings: UiStrings = {
   nav: {
     tools: 'Tools',
     categories: 'Categories',
-    aiTools: 'AI Tools',
     about: 'About',
     contact: 'Contact',
     blog: 'Blog',
     allTools: 'All Tools',
-    freeAiTools: 'Free AI Tools',
-    viewAiSection: 'View AI section on Homepage →',
-    searchPlaceholder: 'Search 88 tools...',
+    searchPlaceholder: 'Search 83 tools...',
     searchTools: 'Search tools',
     closeSearch: 'Close search',
     openMenu: 'Open navigation menu',
@@ -23,24 +20,12 @@ export const enStrings: UiStrings = {
     skipToContent: 'Skip to content',
     language: 'Language',
     chooseLanguage: 'Choose language',
-    aiWriting: {
-      label: 'AI Writing Assistant',
-      desc: 'Grammar, rewrite, tone & email drafting',
-    },
-    aiSummarizer: {
-      label: 'AI Text Summarizer',
-      desc: 'Short, medium & bulleted summaries',
-    },
-    aiFinder: {
-      label: 'AI Smart Tool Finder',
-      desc: 'Find the right tool in plain English',
-    },
   },
   footer: {
     tagline:
       'A fast, browser-first collection of everyday utilities for writers, engineers, marketers, and analysts. Built to run locally with minimal overhead.',
     categories: 'Categories',
-    platformAi: 'Platform & AI',
+    platformAi: 'Explore',
     trustLegal: 'Trust & Legal',
     home: 'Home',
     allToolsDirectory: 'All Tools Directory',
@@ -79,7 +64,6 @@ export const enStrings: UiStrings = {
     tryAgain: 'Try again',
     openTool: 'Open tool',
     browserSide: 'Browser-side',
-    freeAiTool: 'Free AI Tool',
     externalApi: 'External API',
   },
   home: {
@@ -98,24 +82,15 @@ export const enStrings: UiStrings = {
     eyebrow: 'UtilityFlow Platform · 7 Core Categories · {count} Live Utilities',
     h1: 'Practical online utilities built for speed and privacy.',
     heroDescription:
-      'UtilityFlow organizes 84 browser-first utilities plus free AI writing, summarization, and smart tool discovery across text, developer, calculator, social media, PDF, SEO, and image workflows.',
+      'UtilityFlow organizes 83 browser-first utilities across text, developer, calculator, social media, PDF, SEO, and image workflows.',
     exploreCategories: 'Explore Categories',
     openDirectory: 'Open Full Directory',
-    aiWriting: 'AI Writing',
-    aiSummarizer: 'AI Summarizer',
-    aiFinder: 'AI Tool Finder',
     metrics: {
       toolCategories: 'Tool Categories',
       browserUtilities: 'Browser Utilities',
       liveTools: 'Live Tools',
       accountRequired: 'Account Required',
       none: 'None',
-    },
-    aiSpotlight: {
-      badge: 'Free AI Suite · Zero Login Required',
-      title: 'Free AI Tools',
-      description:
-        'Improve drafts, summarize long documents, or find the right tool in seconds with zero sign-up.',
     },
     popular: {
       title: 'Popular Tools',
@@ -175,22 +150,22 @@ export const enStrings: UiStrings = {
       {
         question: 'Are UtilityFlow tools free to use without creating an account?',
         answer:
-          'Yes. All 84 browser utilities, 3 AI tools and the Currency Calculator on UtilityFlow are available free of charge with no registration, sign-in wall, credits, or subscription required.',
+          'Yes. All 83 browser utilities on UtilityFlow are available free of charge with no registration, sign-in wall, credits, or subscription required.',
       },
       {
         question: 'Does UtilityFlow upload my text, code, or files to a server?',
         answer:
-          'All 84 core browser utilities run locally in your web browser without uploading inputs. Our 3 optional Free AI tools (AI Writing Assistant, AI Text Summarizer, and AI Smart Tool Finder) process prompts securely via server-side Groq inference without storing your text.',
+          'All 83 core browser utilities run locally in your web browser without uploading inputs.',
       },
       {
-        question: 'How are the 88 tools organized across the platform?',
+        question: 'How are the 83 tools organized across the platform?',
         answer:
-          'UtilityFlow covers seven core categories (Text & Writing, Developer, Calculators, Social Media, PDFs, SEO, and Image & File tools) totaling 84 browser tools, 3 Free AI tools and the Currency Calculator integrated into the platform.',
+          'UtilityFlow covers seven core categories (Text & Writing, Developer, Calculators, Social Media, PDFs, SEO, and Image & File tools) totaling 83 browser tools integrated into the platform.',
       },
       {
         question: 'Can I bookmark or share a direct link to any specific tool?',
         answer:
-          'Yes. Every tool and category receives its own permanent, clean URL (such as /word-counter/, /ai-writing-assistant/, or /category/developer-tools/) that loads directly and works across browser refreshes.',
+          'Yes. Every tool and category receives its own permanent, clean URL (such as /word-counter/ or /category/developer-tools/) that loads directly and works across browser refreshes.',
       },
       {
         question: 'Does UtilityFlow work smoothly on mobile phones and tablets?',
@@ -201,13 +176,13 @@ export const enStrings: UiStrings = {
     trustLine: 'All tools are free • No signup required • Works in your browser',
   },
   directory: {
-    seoTitle: 'Browse All 88 Free Online Utility Tools | UtilityFlow',
+    seoTitle: 'Browse All 83 Free Online Utility Tools | UtilityFlow',
     seoDescription:
       'Browse and search all browser-based utilities and categories on UtilityFlow, organized for writing, development, calculators, PDFs, SEO, and images.',
     seoKeywords: ['utility tools directory', 'all online tools', 'free browser tools'],
     title: 'All Tools Directory',
     description:
-      'Browse all {count} live utilities registered on UtilityFlow or explore the seven category hubs across browser and free AI workflows.',
+      'Browse all {count} live utilities registered on UtilityFlow or explore the seven category hubs.',
     searchPlaceholder: 'Search by tool name, keyword, or category...',
     showing: 'Showing {tools} live tools across {categories} categories',
     all: 'All',
@@ -238,7 +213,6 @@ export const enStrings: UiStrings = {
     commonUseCases: 'Common Use Cases',
     runsLocally: 'Runs locally in your browser',
     externalApi: 'External API integration',
-    freeAiTool: 'Free AI Tool · Zero Login',
     loadingWorkspace: 'Loading {name} workspace...',
     input: 'Input',
     output: 'Output',
@@ -323,7 +297,7 @@ export const enStrings: UiStrings = {
       'Learn how UtilityFlow builds fast, privacy-first browser utilities across seven categories without accounts, clutter, or unnecessary data uploads.',
     title: 'About UtilityFlow',
     intro:
-      'UtilityFlow is an independent web platform building 88 focused, reliable utilities for everyday digital work.',
+      'UtilityFlow is an independent web platform building 83 focused, reliable utilities for everyday digital work.',
     whyTitle: 'Why We Built UtilityFlow',
     whyP1:
       'Routine online tasks—counting words, validating JSON, checking character limits, computing loan payments, or compressing an image—often force people onto slow sites packed with intrusive overlays, confusing downloads, or mandatory sign-ups.',
@@ -331,14 +305,14 @@ export const enStrings: UiStrings = {
       'Our goal is straightforward: give every utility a clean, dedicated page that loads quickly, explains clearly how the tool works, and executes directly inside your browser whenever web standards allow.',
     orgTitle: 'Who Runs UtilityFlow',
     orgP1:
-      'UtilityFlow is an independent project created and maintained by Bilal, a maker who builds free web tools in his spare time. There is no company behind the site, no investor funding, and no team of employees — every tool, guide, and help page is designed, built, and tested by one person. All 88 tools are free to use without accounts or subscriptions. The footer credit names Shaheen, whose encouragement inspired the project and whose name appears on every page as a reminder of where the idea began.',
+      'UtilityFlow is an independent project created and maintained by Bilal, a maker who builds free web tools in his spare time. There is no company behind the site, no investor funding, and no team of employees — every tool, guide, and help page is designed, built, and tested by one person. All 83 tools are free to use without accounts or subscriptions. The footer credit names Shaheen, whose encouragement inspired the project and whose name appears on every page as a reminder of where the idea began.',
     orgP2:
       'Because the project is small and independent, decisions stay simple: if a tool is slow, confusing, or wrong, it gets fixed. Feedback sent through the contact page goes directly to the person who can change the code, and suggestions from visitors have already shaped new tools and improvements across the site.',
     howTitle: 'How Our Tools Are Built and Tested',
     howP1:
       'Each utility starts as a single clear job — count words, merge PDFs, format JSON — and is built as a focused page that does that job well. Wherever web standards allow, the work happens entirely inside your browser, so your text and files never need to leave your device. Every tool page explains its steps with a short guide, shows worked examples, and answers the questions people ask most often, so you can judge the result instead of trusting a black box.',
     howP2:
-      'Before a tool goes live it is run through real inputs in a desktop and a mobile browser, including edge cases such as empty input, very large text, and unusual file types. When something breaks or a calculation looks wrong, the fix is shipped as a site update and the page is re-checked. The three optional AI tools are the only ones that send text to a server, and their pages say so plainly before you use them.',
+      'Before a tool goes live it is run through real inputs in a desktop and a mobile browser, including edge cases such as empty input, very large text, and unusual file types. When something breaks or a calculation looks wrong, the fix is shipped as a site update and the page is re-checked. Every tool runs entirely in your browser — nothing you enter is ever sent to a server.',
     whoTitle: 'Who UtilityFlow Is For',
     whoP1:
       'UtilityFlow is built for anyone who needs a quick answer from a tool without installing software or creating an account: students checking an essay word count, writers formatting a draft, developers validating JSON or encoding a URL, marketers checking character limits, and small business owners calculating a loan or a discount. If a task takes less than a minute, the tool for it should take less than a minute too — that is the standard every page on this site is held to.',
@@ -436,10 +410,9 @@ export const enStrings: UiStrings = {
         ],
       },
       {
-        title: '2. Tool Inputs, Browser Processing & Free AI Tools',
+        title: '2. Tool Inputs & Browser Processing',
         paragraphs: [
-          'Text, numbers, code snippets, and files entered into our 84 browser-based tools are processed locally within your browser session without leaving your device.',
-          'Our three optional Free AI tools (AI Writing Assistant, AI Text Summarizer, and AI Smart Tool Finder) send submitted text through our protected backend to Groq for real-time inference. We do not store or log your prompts, and free daily rate limits use only a UTC-dated SHA-256 hash so raw visitor IP addresses are never stored.',
+          'Text, numbers, code snippets, and files entered into our 83 browser-based tools are processed locally within your browser session without leaving your device.',
           'Comments posted under our tools ask only for a name and the comment text. The name and text you submit are stored on our hosting platform and shown publicly on that tool’s page, together with the date. We do not ask for an email address or an account to comment, and we do not use comment data for advertising. If you would like a comment removed, contact us with the page and the name used and we will delete it.',
         ],
       },
@@ -467,7 +440,7 @@ export const enStrings: UiStrings = {
       {
         title: '6. Data Retention',
         paragraphs: [
-          'Information processed in your browser is never sent to us, so there is nothing to retain. Text sent to the optional AI tools is processed for the request and is not stored. Comments are kept until they are deleted, either by us or at your request. Hosting logs and security records are kept only for the limited period our hosting provider needs to operate and protect the service.',
+          'Information processed in your browser is never sent to us, so there is nothing to retain. Comments are kept until they are deleted, either by us or at your request. Hosting logs and security records are kept only for the limited period our hosting provider needs to operate and protect the service.',
         ],
       },
       {
@@ -538,7 +511,7 @@ export const enStrings: UiStrings = {
       {
         title: '7. Third-Party Services',
         paragraphs: [
-          'Some features rely on independent third-party services: the three AI tools send text to Groq for processing, the contact form is delivered by FormSubmit, the site is hosted on Cloudflare, and the Currency Calculator fetches live exchange rates from Frankfurter. Each of these services has its own terms and privacy policy, and your use of them is governed by those documents. UtilityFlow is not responsible for the availability or practices of third-party services.',
+          'Some features rely on independent third-party services: the contact form is delivered by FormSubmit and the site is hosted on Cloudflare. Each of these services has its own terms and privacy policy, and your use of them is governed by those documents. UtilityFlow is not responsible for the availability or practices of third-party services.',
         ],
       },
       {

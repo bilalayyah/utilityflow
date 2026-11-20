@@ -42,7 +42,7 @@ export const DEV_TOOLS_PART_2: ToolDefinition[] = [
       'Inspect JSON Web Tokens (JWT) safely in local browser memory—view formatted Header and Payload JSON objects and check human-readable `iat`, `nbf`, and `exp` expiration status.',
     relatedToolSlugs: [
       'base64-encoder-decoder',
-      'json-formatter',
+      'js-formatter',
       'unix-timestamp-converter',
       'hash-generator',
     ],
@@ -90,7 +90,7 @@ export const DEV_TOOLS_PART_2: ToolDefinition[] = [
       'uuid-generator',
       'base64-encoder-decoder',
       'jwt-decoder',
-      'json-formatter',
+      'js-formatter',
     ],
     component: lazy(() => import('../../../tools/developer/HashGeneratorTool')),
   },
@@ -179,7 +179,7 @@ export const DEV_TOOLS_PART_2: ToolDefinition[] = [
     intro:
       'Transform API JSON arrays into clean CSV spreadsheets—automatically flattening nested object keys—or parse delimited CSV/TSV files with quoted commas back into formatted JSON.',
     relatedToolSlugs: [
-      'json-formatter',
+      'js-formatter',
       'sql-formatter',
       'word-frequency-counter',
       'remove-duplicate-lines',
@@ -228,7 +228,7 @@ export const DEV_TOOLS_PART_2: ToolDefinition[] = [
       'jwt-decoder',
       'cron-expression-parser',
       'uuid-generator',
-      'json-formatter',
+      'js-formatter',
     ],
     component: lazy(() => import('../../../tools/developer/UnixTimestampConverterTool')),
   },

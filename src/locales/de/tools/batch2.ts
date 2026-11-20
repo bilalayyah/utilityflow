@@ -9,34 +9,6 @@ import type { ToolLocaleOverride } from '../../types';
  * English slugs or reserved paths.
  */
 export const DE_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
-  'json-formatter': {
-    slug: 'json-formatierer',
-    name: 'JSON-Formatierer & Validator',
-    shortDescription:
-      'Formatieren, minimieren, sortieren Sie Schlüssel und validieren Sie JSON-Syntax mit präziser Fehlerangabe nach Zeile und Spalte.',
-    keywords: [
-      'json formatierer',
-      'json validator',
-      'json beautifier',
-      'json minifier',
-      'json pretty print',
-      'json drucker',
-      'json online formatieren',
-      'json syntax prüfer',
-      'json lint',
-    ],
-    seo: {
-      title: 'JSON-Formatierer & Validator: JSON drucken | UtilityFlow',
-      description:
-        'Formatieren, validieren, minimieren und sortieren Sie JSON-Schlüssel sofort in Ihrem Browser – mit Syntaxfehlern nach Zeile und Spalte zum schnellen Debuggen.',
-      primaryKeyword: 'json formatierer',
-      secondaryKeywords: ['json validator', 'json beautifier', 'json minifier', 'json pretty print'],
-      longTailKeywords: ['json online kostenlos validieren und drucken', 'json schlüssel alphabetisch im browser sortieren', 'json payload ohne server upload minimieren', 'verschachteltes json mit einrückung online formatieren'],
-      schemaApplicationCategory: 'DeveloperApplication',
-    },
-    intro:
-      'Validieren Sie fehlerhaftes JSON mit Rückmeldung nach Zeile und Spalte, formatieren Sie verschachtelte Strukturen mit 2-Leerzeichen-, 4-Leerzeichen- oder Tab-Einrückung, sortieren Sie Schlüssel alphabetisch oder minimieren Sie für den Produktionstransport.',
-  },
   'base64-encoder-decoder': {
     slug: 'base64-kodierer-dekodierer',
     name: 'Base64-Kodierer / Dekodierer',

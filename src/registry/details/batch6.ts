@@ -674,7 +674,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       'Supports 5 of the highest-impact Schema.org structured data types',
       'Escapes "<" characters cleanly inside JSON-LD to avoid HTML script-injection breaks',
       'Omits empty optional properties automatically for clean syntax',
-      'Pairs naturally with JSON Formatter & Validator for custom extensions',
+      'Pairs naturally with a JSON formatter for custom extensions',
     ],
     useCases: [
       'Adding Article author and publish metadata to editorial blog templates',

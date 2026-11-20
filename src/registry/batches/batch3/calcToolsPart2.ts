@@ -48,7 +48,7 @@ export const CALC_TOOLS_PART_2: ToolDefinition[] = [
     relatedToolSlugs: [
       'vat-tax-calculator',
       'percentage-calculator',
-      'currency-calculator',
+      'unit-converter',
       'tip-calculator',
     ],
     component: lazy(() => import('../../../tools/calculators/DiscountMarginCalculatorTool')),
@@ -202,7 +202,7 @@ export const CALC_TOOLS_PART_2: ToolDefinition[] = [
       'percentage-calculator',
       'discount-margin-calculator',
       'vat-tax-calculator',
-      'currency-calculator',
+      'unit-converter',
     ],
     component: lazy(() => import('../../../tools/calculators/TipCalculatorTool')),
   },

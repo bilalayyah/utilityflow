@@ -1,5 +1,4 @@
 import type { ToolLocaleOverride } from '../../types';
-import { DE_AI_OVERRIDES } from './ai';
 import { DE_BATCH_1_OVERRIDES } from './batch1';
 import { DE_BATCH_2_OVERRIDES } from './batch2';
 import { DE_BATCH_3_OVERRIDES } from './batch3';
@@ -13,5 +12,4 @@ export const DE_TOOL_OVERRIDES: Record<string, ToolLocaleOverride> = {
   ...DE_BATCH_3_OVERRIDES,
   ...DE_BATCH_4_OVERRIDES,
   ...DE_BATCH_5_OVERRIDES,
-  ...DE_AI_OVERRIDES,
 };

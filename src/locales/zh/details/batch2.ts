@@ -5,168 +5,6 @@
 import type { ToolDetail } from '../../../types/tool';
 
 export const TOOL_DETAILS: Record<string, ToolDetail> = {
-  'json-formatter': {
-    instructions: [
-      {
-        title: '粘贴原始 JSON',
-        description:
-          '将任意 JSON 对象或数组粘贴到原始 JSON 输入框中，或点击“加载示例”查看示例数据。',
-      },
-      {
-        title: '选择格式化模式',
-        description:
-          '在 2 空格、4 空格、制表符或压缩之间切换，并可按需开启“按键名 A–Z 排序”。',
-      },
-      {
-        title: '根据行号与列号提示修复语法错误',
-        description:
-          '如果验证器报告错误，请查看显示的准确行号与列号，修正输入中多余的逗号、引号或括号问题，状态横幅会立即更新。',
-      },
-      {
-        title: '查看格式化结果与统计信息',
-        description:
-          '确认“JSON 有效”横幅显示的键总数、嵌套深度与字节数，并浏览格式化后的输出，检查嵌套结构是否正确显示。',
-      },
-      {
-        title: '复制或下载结果',
-        description:
-          '点击“复制”将格式化后的 JSON 放入剪贴板，或点击“下载”保存为 .json 文件，供项目使用。',
-      },
-      {
-        title: '小贴士：比较大小并让差异更清晰',
-        description:
-          '压缩后再次粘贴同一数据比较字节数，或在 git diff 之前开启“按键名 A–Z 排序”，这样只会显示真实的改动。',
-      },
-    ],
-    examples: [
-      {
-        title: '格式化压缩的 API 响应',
-        input: '{"service":"utilityflow","limits":{"rate":120}}',
-        output: '{\n  "service": "utilityflow",\n  "limits": {\n    "rate": 120\n  }\n}',
-        explanation: '将压缩为一行的 API 数据展开为易读的带缩进 JSON。',
-      },
-      {
-        title: '按键名按字母顺序排序',
-        input: '{"z": 1, "a": 2}',
-        output: '{\n  "a": 2,\n  "z": 1\n}',
-        explanation: '递归排列键名，让 git diff 更清晰。',
-      },
-    ],
-    benefits: [
-      '报告语法错误的位置，并附带行号与列号上下文',
-      '递归地按字母顺序排列嵌套对象的键名，让差异更清晰',
-      '统计键总数、最大嵌套深度与输出字节数',
-      'API 响应与私人令牌完全保留在浏览器内存中',
-    ],
-    useCases: [
-      '开发过程中调试 REST 与 GraphQL 的 API 数据',
-      '在 git diff 之前规范 package.json 或配置文件',
-      '压缩 JSON 测试数据与静态数据集',
-      '编写解析器之前验证 webhook 内容',
-    ],
-    faqs: [
-      {
-        question: '按键名排序会改变数组元素的顺序吗？',
-        answer:
-          '不会。“按键名 A–Z 排序”只会重新排列 JSON 对象内部的键名，数组元素的顺序会原样保留。',
-      },
-      {
-        question: '为什么带尾随逗号的 JSON 会显示语法错误？',
-        answer:
-          '严格的 JSON（RFC 8259）不允许尾随逗号或单引号键名。验证器会指出准确的行号与列号，方便你在部署前修正。',
-      },
-      {
-        question: '我的 JSON 数据会被记录到任何地方吗？',
-        answer:
-          '不会。解析与格式化完全在浏览器标签页内的 JavaScript 中运行。',
-      },
-      {
-        question: 'JSON 格式化工具免费吗？',
-        answer:
-          '是的，JSON 格式化工具完全免费，无需注册，没有使用次数限制，输出也没有水印。',
-      },
-      {
-        question: '格式化 JSON 与压缩 JSON 有什么区别？',
-        answer:
-          '格式化会添加缩进与换行，让 JSON 更易阅读；压缩会删除所有不必要的空白，让数据尽可能小，便于传输。',
-      },
-      {
-        question: 'JSON 格式化工具能处理大型 JSON 文件吗？',
-        answer:
-          '可以。由于所有处理都在浏览器本地进行，没有服务器上传限制，不过超大数据的处理速度取决于浏览器内存。',
-      },
-      {
-        question: 'JSON 格式化工具提供哪些缩进选项？',
-        answer:
-          '可以使用 2 空格、4 空格或制表符进行格式化，让输出符合代码库的风格。',
-      },
-      {
-        question: 'JSON 格式化工具支持顶层 JSON 数组吗？',
-        answer:
-          '支持。顶层数组也是合法的 JSON，可以像对象一样粘贴并格式化。',
-      },
-      {
-        question: '如何修复 JSON 的“Unexpected token”错误？',
-        answer:
-          '请查看验证器报告的行号与列号。最常见的原因是缺少逗号、括号未闭合，或在需要双引号的地方用了单引号。',
-      },
-      {
-        question: '可以格式化带注释或尾随逗号的 JSON 吗？',
-        answer:
-          '不可以。注释与尾随逗号不属于严格 JSON 的一部分，请先删除它们，格式化工具才能接受清理后的输入。',
-      },
-      {
-        question: 'JSON 格式化工具中的嵌套深度统计是什么意思？',
-        answer:
-          '嵌套深度是指最深的值位于对象与数组中的层数，有助于了解数据的复杂程度。',
-      },
-      {
-        question: 'JSON 格式化工具会保留对象键名的顺序吗？',
-        answer:
-          '会，除非你开启“按键名 A–Z 排序”。默认情况下，格式化工具会原样保留你粘贴的键名顺序。',
-      },
-      {
-        question: '嵌套 JSON 对象中的键名也可以排序吗？',
-        answer:
-          '可以。排序会递归应用，因此每个嵌套对象内部的键名都会按字母顺序排列，而数组顺序保持不变。',
-      },
-      {
-        question: 'JSON 格式化工具下载的文件是什么格式？',
-        answer:
-          '下载会将格式化或压缩后的结果保存为标准的 .json 文本文件，可用任意编辑器打开。',
-      },
-      {
-        question: 'JSON 格式化工具可以离线使用吗？',
-        answer:
-          '可以。页面加载一次后，格式化与验证完全在浏览器内运行，不会发起网络请求。',
-      },
-      {
-        question: '为什么合法的 JavaScript 对象会被当作 JSON 拒绝？',
-        answer:
-          'JSON 比 JavaScript 更严格：键名必须用双引号，值不能是 undefined 或函数，也不允许尾随逗号。',
-      },
-      {
-        question: 'JSON 格式化工具可以验证 API 响应的 JSON 吗？',
-        answer:
-          '可以。将原始响应内容粘贴到输入框中，验证器会确认它是否为合法 JSON，并指出语法错误。',
-      },
-      {
-        question: 'JSON 格式化工具最多可以粘贴多大的 JSON？',
-        answer:
-          '没有固定的大小限制，因为数据不会上传到服务器。实际限制只来自浏览器内存与文本框能流畅处理的大小。',
-      },
-      {
-        question: '压缩 JSON 会改变它的含义吗？',
-        answer:
-          '不会。压缩只会删除空白字符，数据、键名与值完全不变，只是文件变小了。',
-      },
-      {
-        question: '如何复制没有多余空白的格式化 JSON？',
-        answer:
-          '先切换到压缩模式，再点击“复制”。剪贴板中将是没有多余空格与换行的单行紧凑 JSON。',
-      },
-    ],
-  },
   'base64-encoder-decoder': {
     instructions: [
       {
@@ -365,14 +203,14 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
     examples: [
       {
         title: '编码查询值',
-        input: 'json formatter & validator',
-        output: 'json%20formatter%20%26%20validator',
+        input: 'hello world & friends',
+        output: 'hello%20world%20%26%20friends',
         explanation: '使用 encodeURIComponent 会转义“&”，因此不会拆分查询字符串。',
       },
       {
         title: '解码查询字符串',
-        input: 'json%20formatter%20%26%20validator',
-        output: 'json formatter & validator',
+        input: 'hello%20world%20%26%20friends',
+        output: 'hello world & friends',
         explanation: '将百分号编码的值还原为易读的文本。',
       },
     ],

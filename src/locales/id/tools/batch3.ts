@@ -219,20 +219,4 @@ export const ID_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
     },
     intro: "Konversi secara instan dalam tujuh keluarga pengukuran — panjang, berat & massa, suhu, luas, volume, kecepatan, dan Penyimpanan Digital — dengan tabel perbandingan otomatis yang menampilkan setiap satuan dalam kategori tersebut.",
   },
-  'currency-calculator': {
-    slug: "kalkulator-mata-uang",
-    name: "Kalkulator Mata Uang",
-    shortDescription: "Konversi mata uang dengan kurs manual Anda yang tepat atau gunakan kurs referensi ECB opsional dengan perhitungan biaya.",
-    keywords: ["kalkulator mata uang", "kalkulator kurs", "kalkulator biaya fx", "konverter mata uang manual", "konverter usd ke eur", "konverter mata uang dengan biaya", "kalkulator markup kurs", "kalkulator biaya luar negeri", "kalkulator kurs terbalik"],
-    seo: {
-      title: "Kalkulator Mata Uang: Kurs, Biaya & ECB | UtilityFlow",
-      description: "Konversi antar mata uang utama dengan kurs Anda sendiri, tambahkan biaya bank atau kartu ke jumlah bersih, atau gunakan kurs referensi ECB — gratis online.",
-      primaryKeyword: "kalkulator mata uang",
-      secondaryKeywords: ["kalkulator kurs", "kalkulator biaya fx", "konverter mata uang dengan biaya", "kalkulator kurs terbalik"],
-      longTailKeywords: ["konversi usd ke eur dengan kurs sendiri", "hitung konversi mata uang dengan biaya bank", "ambil kurs referensi ecb online", "hitung kurs terbalik online"],
-      schemaApplicationCategory: "FinanceApplication",
-    },
-    intro: "Konversi antar mata uang utama dunia secara transparan dengan kurs tepat dari bank, broker, atau faktur Anda — ditambah pengurangan biaya konversi opsional, perhitungan kurs terbalik, dan kurs referensi ECB sesuai permintaan.",
-    apiNotice: "Membutuhkan API eksternal untuk kurs live dan tidak pernah menggunakan kurs offline yang dibuat-buat. Menggunakan kurs yang Anda masukkan secara manual secara default (1,0000), atau klik “Ambil Kurs Referensi ECB” untuk meminta kurs dari api.frankfurter.dev.",
-  },
 };

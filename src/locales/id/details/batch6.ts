@@ -704,7 +704,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       "Mendukung 5 jenis data terstruktur Schema.org yang paling berdampak",
       "Meng-escape karakter '<' dengan bersih di dalam JSON-LD untuk mencegah kerusakan skrip HTML",
       "Menghilangkan properti opsional yang kosong secara otomatis demi sintaks yang bersih",
-      "Bekerja baik dengan JSON Formatter & Validator untuk ekstensi kustom",
+      "Bekerja baik dengan pemformat JSON untuk ekstensi kustom",
     ],
     useCases: [
       "Menambahkan metadata penulis dan tanggal terbit artikel ke template blog editorial",

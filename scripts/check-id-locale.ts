@@ -18,8 +18,7 @@ import { CATEGORY_LOCALE_SLUGS } from '../src/locales/config';
 const RESERVED = new Set([
   'tools', 'tool', 'category', 'kategori', 'tentang-kami', 'kontak', 'kebijakan-privasi', 'syarat-layanan',
   'about', 'contact', 'privacy-policy',
-  'terms-of-service', 'ai-writing-assistant',
-  'ai-text-summarizer', 'ai-tool-finder',
+  'terms-of-service', ,
   // NOTE: asisten-penulisan-ai / peringkas-teks-ai / pencari-alat-ai are intentionally NOT reserved — they are
   // the fixed slugs of the 3 AI tools. The per-tool check below only flags
   // a collision if a *different* tool uses the same slug.

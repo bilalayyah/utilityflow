@@ -9,34 +9,6 @@ import type { ToolLocaleOverride } from "../../types";
  * hyphenated, and do not collide with English slugs or reserved paths.
  */
 export const RU_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
-  "json-formatter": {
-    slug: "formatirovanie-json",
-    name: "Форматирование и проверка JSON",
-    shortDescription:
-      "Форматируйте, минифицируйте, сортируйте ключи и проверяйте синтаксис JSON с точным указанием строки и столбца ошибки.",
-    keywords: [
-      "форматтер json",
-      "валидатор json",
-      "бьютификатор json",
-      "минификатор json",
-      "красивый вывод json",
-      "форматировать json онлайн",
-      "проверка синтаксиса json",
-      "json lint",
-      "парсер json",
-    ],
-    seo: {
-      title: "Форматтер JSON и валидатор — красивый JSON | UtilityFlow",
-      description:
-        "Форматируйте, проверяйте, минифицируйте и сортируйте ключи в JSON-данных мгновенно в браузере, с точными деталями синтаксических ошибок для быстрой отладки.",
-      primaryKeyword: "форматтер json",
-      secondaryKeywords: ["валидатор json", "бьютификатор json", "минификатор json", "красивый вывод json"],
-      longTailKeywords: ["проверить и красиво вывести json онлайн бесплатно", "сортировать ключи json по алфавиту в браузере", "минифицировать json без загрузки на сервер", "форматировать вложенный json с отступами онлайн"],
-      schemaApplicationCategory: "DeveloperApplication",
-    },
-    intro:
-      "Проверяйте повреждённые JSON-данные с обратной связью по строке и столбцу, форматируйте вложенные структуры с отступами в 2 пробела, 4 пробела или табуляцию, сортируйте ключи по алфавиту или минифицируйте для производственной передачи.",
-  },
   "base64-encoder-decoder": {
     slug: "base64-koder-dekoder",
     name: "Кодер / Декодер Base64",

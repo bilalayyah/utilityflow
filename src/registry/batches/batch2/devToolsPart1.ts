@@ -3,60 +3,6 @@ import type { ToolDefinition } from '../../../types/tool';
 
 export const DEV_TOOLS_PART_1: ToolDefinition[] = [
   {
-    id: 'json-formatter',
-    slug: 'json-formatter',
-    name: 'JSON Formatter & Validator',
-    shortDescription:
-      'Format, minify, sort keys, and validate JSON syntax with line and column error pinpointing.',
-    categoryId: 'developer',
-    batch: 2,
-    processingMode: 'browser',
-    requiresExternalApi: false,
-    popular: true,
-    featured: true,
-    keywords: [
-      'json formatter',
-      'json validator',
-      'json beautifier',
-      'json minifier',
-      'pretty print json',
-      'json pretty printer',
-      'format json online',
-      'json syntax checker',
-      'json lint',
-      'json parser',
-    ],
-    seo: {
-      title: 'JSON Formatter & Validator – Pretty Print JSON | UtilityFlow',
-      description:
-        'Format, validate, minify and sort keys in JSON payloads instantly in your browser, with precise line and column syntax error details for fast debugging.',
-      primaryKeyword: 'json formatter',
-      secondaryKeywords: [
-        'json validator',
-        'json beautifier',
-        'json minifier',
-        'pretty print json',
-        'json syntax checker',
-      ],
-      longTailKeywords: [
-        'validate and pretty print json online free',
-        'sort json keys alphabetically in browser',
-        'minify json payload without server upload',
-        'format nested json with indentation online',
-      ],
-      schemaApplicationCategory: 'DeveloperApplication',
-    },
-    intro:
-      'Validate malformed JSON payloads with line and column feedback, format nested structures with 2-space, 4-space, or tab indentation, sort keys alphabetically, or minify for production transport.',
-    relatedToolSlugs: [
-      'json-csv-converter',
-      'base64-encoder-decoder',
-      'jwt-decoder',
-      'js-formatter',
-    ],
-    component: lazy(() => import('../../../tools/developer/JsonFormatterTool')),
-  },
-  {
     id: 'base64-encoder-decoder',
     slug: 'base64-encoder-decoder',
     name: 'Base64 Encoder / Decoder',
@@ -104,7 +50,7 @@ export const DEV_TOOLS_PART_1: ToolDefinition[] = [
     relatedToolSlugs: [
       'url-encoder-decoder',
       'jwt-decoder',
-      'json-formatter',
+      'js-formatter',
       'hash-generator',
     ],
     component: lazy(() => import('../../../tools/developer/Base64Tool')),
@@ -157,7 +103,7 @@ export const DEV_TOOLS_PART_1: ToolDefinition[] = [
       'base64-encoder-decoder',
       'html-entity-encoder',
       'text-to-slug',
-      'json-formatter',
+      'js-formatter',
     ],
     component: lazy(() => import('../../../tools/developer/UrlEncoderDecoderTool')),
   },
@@ -208,7 +154,7 @@ export const DEV_TOOLS_PART_1: ToolDefinition[] = [
       'Create single or bulk batches of cryptographically random UUID v4 and timestamp-ordered RFC 9562 UUID v7 identifiers directly via Web Crypto APIs, complete with formatting toggles.',
     relatedToolSlugs: [
       'hash-generator',
-      'json-formatter',
+      'js-formatter',
       'unix-timestamp-converter',
       'base64-encoder-decoder',
     ],
@@ -260,7 +206,7 @@ export const DEV_TOOLS_PART_1: ToolDefinition[] = [
       'Debug JavaScript regular expressions interactively with live highlighted matches, match index positions, numbered capture group inspection, flag toggles, and replacement previews.',
     relatedToolSlugs: [
       'find-and-replace',
-      'json-formatter',
+      'js-formatter',
       'cron-expression-parser',
       'url-encoder-decoder',
     ],

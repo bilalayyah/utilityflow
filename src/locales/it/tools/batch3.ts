@@ -538,44 +538,4 @@ export const IT_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
     intro:
       'Converti istantaneamente in sette famiglie di misure — lunghezza, peso e massa, temperatura, superficie, volume, velocità e archiviazione digitale — con una tabella automatica fianco a fianco che mostra ogni unità della categoria.',
   },
-  'currency-calculator': {
-    slug: 'convertitore-valute',
-    name: 'Calcolatrice di Valute',
-    shortDescription:
-      'Converti le valute con il tuo tasso di cambio manuale esatto o tassi di riferimento BCE facoltativi, con calcolo delle commissioni di cambio.',
-    apiNotice:
-      'Richiede un’API esterna per i tassi di cambio in tempo reale e non usa mai tassi offline inventati. Usa per impostazione predefinita il tasso di cambio inserito manualmente (1,0000), oppure fai clic su «Recupera il tasso di riferimento BCE» per richiedere i tassi a api.frankfurter.dev.',
-    keywords: [
-      'calcolatrice di valute',
-      'calcolatrice tasso di cambio',
-      'calcolatrice commissioni di cambio',
-      'convertitore di valute manuale',
-      'convertitore usd verso eur',
-      'convertitore di valute con commissioni',
-      'calcolatrice maggiorazione tasso di cambio',
-      'calcolatrice commissioni transazione estera',
-      'calcolatrice tasso di cambio inverso',
-    ],
-    seo: {
-      title: 'Calcolatrice di Valute – Tassi e Commissioni | UtilityFlow',
-      description:
-        'Converti tra le principali valute con il tuo tasso quotato e aggiungi le commissioni di cambio per vedere l’importo netto, o recupera un tasso BCE online.',
-      primaryKeyword: 'calcolatrice di valute',
-      secondaryKeywords: [
-        'calcolatrice commissioni tasso di cambio',
-        'convertitore di valute manuale',
-        'calcolatrice spread di cambio',
-        'convertitore tasso di riferimento bce',
-      ],
-      longTailKeywords: [
-        'convertire valuta con tasso di cambio bancario personalizzato e commissioni',
-        'calcolatrice di valute senza tassi codificati inventati',
-        'calcolare importo netto in valuta estera dopo maggiorazione',
-        'quanto riceverò dopo le commissioni di conversione di valuta',
-      ],
-      schemaApplicationCategory: 'FinanceApplication',
-    },
-    intro:
-      'Converti tra le principali valute mondiali in tutta trasparenza usando il tasso di cambio esatto quotato dalla tua banca, dal tuo broker o dalla tua fattura — con deduzione facoltativa delle commissioni di cambio, calcolo del tasso inverso e consultazione su richiesta del tasso di riferimento BCE.',
-  },
 };

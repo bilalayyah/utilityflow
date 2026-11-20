@@ -568,60 +568,6 @@ export const ID_ARTICLE_INDEX: Record<string, ArticleLocaleSlimOverride> = {
     "description": "Penomoran baris untuk SQL dan kode: pilih format angka, pemisah, dan awalan yang tepat, dan hindari kesalahan umum yang merusak kueri serta skrip Anda.",
     "readingMinutes": 11
   },
-  "ai-tool-finder-guide": {
-    "slug": "apa-itu-pencari-alat-ai",
-    "title": "Apa Itu Pencari Alat AI? Panduan Lengkap",
-    "description": "Kenali Pencari Alat AI: cara alat ini mencocokkan deskripsi tugas sederhana dengan alat UtilityFlow yang tepat, dan kapan alat ini menghemat waktu Anda.",
-    "readingMinutes": 11
-  },
-  "ai-tool-finder-howto": {
-    "slug": "cara-menemukan-alat-online-yang-tepat-dengan-ai",
-    "title": "Cara Menemukan Alat Online yang Tepat untuk Tugas Apa Pun (dengan AI)",
-    "description": "Cara menemukan alat online yang tepat dengan AI: deskripsikan tugas Anda, baca kecocokan terbaik, lalu buka alatnya gratis dalam hitungan menit tanpa daftar.",
-    "readingMinutes": 12
-  },
-  "ai-tool-finder-advanced": {
-    "slug": "pencari-alat-ai-vs-pencarian-manual",
-    "title": "Pencari Alat AI vs Pencarian Manual: Kapan Pencocokan AI Menang (dan Kapan Tidak)",
-    "description": "Pencari Alat AI vs pencarian manual: kapan pencocokan AI lebih cepat, kapan kalah, dan cara menggabungkan keduanya supaya Anda selalu menemukan alat yang tepat.",
-    "readingMinutes": 12
-  },
-  "ai-text-summarizer-guide": {
-    "slug": "apa-itu-peringkas-teks-ai",
-    "title": "Apa Itu Peringkas Teks AI? Panduan Lengkap",
-    "description": "Apa itu peringkas teks AI? Pelajari cara kerja ringkasan pendek, sedang, dan panjang, plus poin kunci yang membantu Anda membaca lebih cepat, gratis online.",
-    "readingMinutes": 10
-  },
-  "ai-text-summarizer-howto": {
-    "slug": "cara-meringkas-artikel-panjang",
-    "title": "Cara Meringkas Artikel Panjang dan Laporan dalam Hitungan Detik",
-    "description": "Cara meringkas artikel panjang dan laporan dalam hitungan detik: bersihkan teks, pilih panjang dan format, lalu periksa ringkasannya sebelum Anda memakainya.",
-    "readingMinutes": 11
-  },
-  "ai-text-summarizer-advanced": {
-    "slug": "akurasi-peringkas-ai",
-    "title": "Akurasi Peringkas AI: Apa yang Benar, Apa yang Terlewat, dan Cara Memeriksa",
-    "description": "Seberapa akurat ringkasan AI? Pelajari apa yang biasanya benar, apa yang sering terlewat, dan checklist untuk memeriksa ringkasan sebelum Anda memakainya.",
-    "readingMinutes": 10
-  },
-  "ai-writing-assistant-guide": {
-    "slug": "apa-itu-asisten-penulisan-ai",
-    "title": "Apa Itu Asisten Penulisan AI? Panduan Lengkap",
-    "description": "Apa itu asisten penulisan AI? Perbaiki tata bahasa, tulis ulang kalimat, atur nada, parafrase teks, dan susun email, gratis, tanpa daftar, di browser Anda.",
-    "readingMinutes": 12
-  },
-  "ai-writing-assistant-howto": {
-    "slug": "cara-memperbaiki-tata-bahasa-dengan-ai",
-    "title": "Cara Memperbaiki Tata Bahasa dan Menulis Ulang Kalimat dengan Asisten Penulisan AI",
-    "description": "Cara memperbaiki tata bahasa dengan AI: koreksi kesalahan, tulis ulang kalimat yang canggung, sesuaikan nada, lalu tinjau hasilnya sebelum Anda mengirimnya.",
-    "readingMinutes": 12
-  },
-  "ai-writing-assistant-advanced": {
-    "slug": "asisten-penulisan-ai-vs-editing-manual",
-    "title": "Asisten Penulisan AI vs Editing Manual: Pengaturan Terbaik, Pilihan Nada, dan Batas",
-    "description": "Asisten penulisan AI vs editing manual: pengaturan terbaik, pilihan nada, praktik parafrase, batas dan risiko AI, dan kapan tinjauan manusia tetap dibutuhkan.",
-    "readingMinutes": 11
-  },
   "case-converter-guide": {
     "slug": "apa-itu-case-converter",
     "title": "Apa Itu Case Converter? Panduan Lengkap Format Huruf Teks",
@@ -946,24 +892,6 @@ export const ID_ARTICLE_INDEX: Record<string, ArticleLocaleSlimOverride> = {
     "description": "Bunga majemuk vs bunga sederhana dibandingkan dengan contoh soal: lihat seberapa besar pemajemukan menghasilkan selama 10, 20, dan 30 tahun. Coba sekarang.",
     "readingMinutes": 10
   },
-  "currency-calculator-guide": {
-    "slug": "apa-itu-kalkulator-mata-uang",
-    "title": "Apa Itu Kalkulator Mata Uang? Panduan Lengkap",
-    "description": "Pelajari cara kerja kalkulator mata uang online gratis, kurs manual dan kurs referensi ECB, dan bagaimana biaya penukaran mengubah jumlah yang Anda terima.",
-    "readingMinutes": 11
-  },
-  "currency-calculator-howto": {
-    "slug": "cara-mengonversi-mata-uang",
-    "title": "Cara Mengonversi Mata Uang (dan Memperhitungkan Biaya Penukaran)",
-    "description": "Ikuti konversi mata uang langkah demi langkah dengan kurs manual atau kurs referensi ECB, tambahkan biaya penukaran, dan periksa jumlah yang akan Anda terima.",
-    "readingMinutes": 11
-  },
-  "currency-calculator-advanced": {
-    "slug": "kurs-tengah-vs-kurs-bank-vs-kurs-referensi",
-    "title": "Kurs Tengah vs Kurs Bank vs Kurs Referensi: Kurs Mana yang Berlaku untuk Anda",
-    "description": "Bandingkan kurs tengah, kurs bank, dan kurs referensi ECB untuk melihat kurs mana yang berlaku pada konversi Anda, dan mengapa bank selalu lebih mahal.",
-    "readingMinutes": 11
-  },
   "date-difference-calculator-guide": {
     "slug": "apa-itu-kalkulator-selisih-tanggal",
     "title": "Apa Itu Kalkulator Selisih Tanggal? Panduan Lengkap",
@@ -1269,24 +1197,6 @@ export const ID_ARTICLE_INDEX: Record<string, ArticleLocaleSlimOverride> = {
     "title": "Minifier JavaScript vs Bundler vs Transpiler: Apa Sebenarnya yang Dilakukan Masing-Masing",
     "description": "Bandingkan minifier JavaScript, bundler, dan transpiler: apa yang dilakukan masing-masing, kapan Anda membutuhkan tool, dan mengapa minifikasi saja tidak cukup.",
     "readingMinutes": 11
-  },
-  "json-formatter-guide": {
-    "slug": "apa-itu-json",
-    "title": "Apa Itu JSON? Panduan Lengkap Memformat dan Memvalidasi",
-    "description": "Pelajari apa itu JSON, cara kerja formatting, minifikasi, dan validasi, serta bagaimana error baris dan kolom membantu Anda men-debug JSON dengan cepat.",
-    "readingMinutes": 12
-  },
-  "json-formatter-howto": {
-    "slug": "cara-memformat-dan-memvalidasi-json",
-    "title": "Cara Memformat dan Memvalidasi JSON (dan Memperbaiki Error Sintaks)",
-    "description": "Panduan langkah demi langkah memformat, me-minify, mengurutkan key, dan memvalidasi JSON, dengan perbaikan untuk koma di akhir, tanda kutip, dan error sintaks.",
-    "readingMinutes": 11
-  },
-  "json-formatter-advanced": {
-    "slug": "kesalahan-sintaks-json-umum",
-    "title": "Error Sintaks JSON yang Umum dan Cara Memperbaikinya (Koma di Akhir, Tanda Kutip, dan Lainnya)",
-    "description": "Perbaiki error sintaks JSON yang paling umum dengan cepat: koma di akhir, tanda kutip tunggal, key tanpa tanda kutip, koma yang hilang, kurung, dan komentar.",
-    "readingMinutes": 12
   },
   "json-csv-converter-guide": {
     "slug": "apa-itu-json-ke-csv",

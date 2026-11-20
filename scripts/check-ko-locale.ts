@@ -18,11 +18,7 @@ import { CATEGORY_LOCALE_SLUGS } from '../src/locales/config';
 const RESERVED = new Set([
   'tools', 'tool', 'category', 'kategori', 'sogae', 'mun-ui', 'peuraibeosi-jeongchaek', 'iyong-yagwan',
   'about', 'contact', 'privacy-policy',
-  'terms-of-service', 'ai-writing-assistant',
-  'ai-text-summarizer', 'ai-tool-finder',
-  // NOTE: ai-geul-sseugi / ai-yoyak / ai-dogu-chatgi are intentionally NOT reserved — they are
-  // the fixed slugs of the 3 AI tools. The per-tool check below only flags
-  // a collision if a *different* tool uses the same slug.
+  'terms-of-service', ,
   'de', 'it', 'es', 'pt', 'fr', 'en', 'id', 'ru', 'ja', 'ko',
   'sitemap.xml', 'robots.txt', 'favicon.svg', '404', 'all-tools',
   'alle-tools', 'tutti-gli-strumenti', 'semua-alat', 'vse-instrumenty',

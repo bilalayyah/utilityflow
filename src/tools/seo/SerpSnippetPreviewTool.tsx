@@ -7,7 +7,7 @@ import { useComponentStrings } from '../../locales/componentStrings';
 const palette = pastelForKey('serp-snippet-preview');
 
 const STRINGS_EN = {
-    defaultTitle: 'JSON Formatter & Validator – Pretty Print & Minify | UtilityFlow',
+    defaultTitle: 'Word Counter – Count Words & Characters | UtilityFlow',
     defaultDescription:
       'Format, validate, minify, and sort keys in JSON payloads instantaneously in your browser with line/column syntax error details.',
     desktopSerp: 'Desktop SERP (~580px title)',
@@ -71,7 +71,7 @@ export default function SerpSnippetPreviewTool() {
   const { t } = useLocale();
   const s = useComponentStrings('serp-snippet-preview', STRINGS_EN);
   const [title, setTitle] = useState(s.defaultTitle);
-  const [url, setUrl] = useState('https://utilityflow.online/json-formatter/');
+  const [url, setUrl] = useState('https://utilityflow.online/word-counter/');
   const [description, setDescription] = useState(s.defaultDescription);
   const [siteName, setSiteName] = useState('UtilityFlow');
   const [targetKeyword, setTargetKeyword] = useState('JSON');

@@ -5,168 +5,6 @@
 import type { ToolDetail } from '../../../types/tool';
 
 export const TOOL_DETAILS: Record<string, ToolDetail> = {
-  'json-formatter': {
-    instructions: [
-      {
-        title: 'Pega el JSON sin procesar',
-        description:
-          'Inserta cualquier objeto o arreglo JSON en la entrada de JSON sin procesar, o haz clic en Cargar ejemplo para revisar una carga de muestra.',
-      },
-      {
-        title: 'Selecciona el modo de formato',
-        description:
-          'Cambia entre 2 espacios, 4 espacios, Tabulación o Minimizar, y activa opcionalmente Ordenar claves de la A a la Z.',
-      },
-      {
-        title: 'Corrige errores de sintaxis con pistas de línea y columna',
-        description:
-          'Si el validador reporta un error, lee la línea y la columna exactas que se muestran, corrige la coma, la comilla o el corchete problemático en tu entrada y el aviso de estado se actualiza al instante.',
-      },
-      {
-        title: 'Revisa el resultado formateado y las estadísticas',
-        description:
-          'Confirma el aviso de estado JSON válido que muestra el total de claves, la profundidad de anidado y el tamaño en bytes, y luego revisa el resultado formateado para comprobar que las estructuras anidadas se vean bien.',
-      },
-      {
-        title: 'Copia o descarga el resultado',
-        description:
-          'Haz clic en Copiar para colocar el JSON formateado en tu portapapeles, o en Descargar para guardarlo como un archivo .json para tu proyecto.',
-      },
-      {
-        title: 'Consejo: compara tamaños y limpia las diferencias',
-        description:
-          'Pega la misma carga otra vez después de minimizarla para comparar los tamaños en bytes, o activa Ordenar claves de la A a la Z antes de una diferencia en git para que solo se muestren los cambios reales.',
-      },
-    ],
-    examples: [
-      {
-        title: 'Formato de una respuesta de API minimizada',
-        input: '{"service":"utilityflow","limits":{"rate":120}}',
-        output: '{\n  "service": "utilityflow",\n  "limits": {\n    "rate": 120\n  }\n}',
-        explanation: 'Expande cargas de API compactas de una sola línea en JSON legible con indentación.',
-      },
-      {
-        title: 'Ordenación alfabética de claves',
-        input: '{"b": 2, "a": 1}',
-        output: '{\n  "a": 1,\n  "b": 2\n}',
-        explanation: 'Ordena las claves de los objetos alfabéticamente para que las diferencias en git sean limpias.',
-      },
-    ],
-    benefits: [
-      'Reporta la posición de los errores de sintaxis con contexto de línea y columna',
-      'Ordena de forma recursiva las claves de los objetos anidados alfabéticamente para diferencias limpias',
-      'Calcula el total de claves, la profundidad máxima de anidado y el tamaño de salida en bytes',
-      'Mantiene las respuestas privadas de API y los tokens estrictamente en la memoria del navegador',
-    ],
-    useCases: [
-      'Depurar cargas de API REST y GraphQL durante el desarrollo',
-      'Normalizar archivos package.json o de configuración antes de compararlos en git',
-      'Minimizar archivos JSON de prueba y conjuntos de datos estáticos',
-      'Validar cuerpos de webhooks antes de escribir analizadores',
-    ],
-    faqs: [
-      {
-        question: '¿La ordenación de claves altera el orden de los elementos del arreglo?',
-        answer:
-          'No. Ordenar claves de la A a la Z solo reordena las claves dentro de los objetos JSON y conserva la secuencia exacta de los elementos del arreglo.',
-      },
-      {
-        question: '¿Por qué el JSON con comas finales muestra un error de sintaxis?',
-        answer:
-          'El JSON estricto de la norma RFC 8259 no permite comas finales ni claves entre comillas simples. El validador señala la línea y la columna exactas para que puedas corregirlo antes de desplegar.',
-      },
-      {
-        question: '¿Mi carga JSON queda registrada en algún lugar?',
-        answer:
-          'Nunca. El análisis y el formato se ejecutan por completo con JavaScript en la pestaña de tu navegador.',
-      },
-      {
-        question: '¿El Formateador JSON es gratis?',
-        answer:
-          'Sí, el Formateador JSON es completamente gratis, sin registro, sin límites de uso y sin marca de agua en el resultado.',
-      },
-      {
-        question: '¿Cuál es la diferencia entre formatear y minimizar JSON?',
-        answer:
-          'Formatear agrega indentación y saltos de línea para que el JSON sea fácil de leer, mientras que minimizar elimina todo el espacio en blanco innecesario para que la carga sea lo más pequeña posible para el transporte.',
-      },
-      {
-        question: '¿El Formateador JSON puede manejar archivos JSON grandes?',
-        answer:
-          'Sí. Como todo el procesamiento ocurre localmente en tu navegador, no hay límite de subida al servidor, aunque las cargas muy grandes dependen de la memoria de tu navegador.',
-      },
-      {
-        question: '¿Qué opciones de indentación ofrece el Formateador JSON?',
-        answer:
-          'Puedes formatear con 2 espacios, 4 espacios o un carácter de tabulación, para que el resultado coincida con el estilo de tu código.',
-      },
-      {
-        question: '¿El Formateador JSON admite arreglos JSON en el nivel superior?',
-        answer:
-          'Sí. Un arreglo en el nivel superior es JSON válido, así que puedes pegar y formatear arreglos igual que los objetos.',
-      },
-      {
-        question: '¿Cómo corrijo un error "Unexpected token" en mi JSON?',
-        answer:
-          'Revisa la línea y la columna que indica el validador. Las causas más comunes son una coma faltante, un corchete sin cerrar o una comilla simple donde se requiere una comilla doble.',
-      },
-      {
-        question: '¿Puedo formatear JSON con comentarios o comas finales?',
-        answer:
-          'No. Los comentarios y las comas finales no forman parte del JSON estricto, así que elimínalos primero y el formateador aceptará la entrada limpia.',
-      },
-      {
-        question: '¿Qué significa la estadística de profundidad de anidado en el Formateador JSON?',
-        answer:
-          'La profundidad de anidado cuenta cuántos niveles de profundidad tiene el valor más anidado dentro de objetos y arreglos, lo que ayuda a juzgar qué tan compleja es una carga.',
-      },
-      {
-        question: '¿El Formateador JSON conserva el orden de las claves de los objetos?',
-        answer:
-          'Sí, a menos que actives Ordenar claves de la A a la Z. Por defecto, el formateador mantiene el orden original de tus claves exactamente como lo pegaste.',
-      },
-      {
-        question: '¿Puedo ordenar las claves en objetos JSON anidados también?',
-        answer:
-          'Sí. La ordenación se aplica de forma recursiva, así que las claves dentro de cada objeto anidado se reordenan alfabéticamente mientras el orden de los arreglos queda intacto.',
-      },
-      {
-        question: '¿Qué formato de archivo produce la descarga del Formateador JSON?',
-        answer:
-          'La descarga guarda tu resultado formateado o minimizado como un archivo de texto .json estándar que puedes abrir en cualquier editor.',
-      },
-      {
-        question: '¿El Formateador JSON funciona sin conexión?',
-        answer:
-          'Sí. Una vez que la página ha cargado, el formato y la validación se ejecutan por completo en tu navegador sin solicitudes de red.',
-      },
-      {
-        question: '¿Por qué se rechaza como JSON mi objeto JavaScript válido?',
-        answer:
-          'JSON es más estricto que JavaScript: las claves deben usar comillas dobles, los valores no pueden ser undefined ni funciones, y las comas finales no están permitidas.',
-      },
-      {
-        question: '¿El Formateador JSON puede validar JSON de una respuesta de API?',
-        answer:
-          'Sí. Pega el cuerpo sin procesar de la respuesta en la entrada y el validador confirmará si es JSON válido y señalará cualquier error de sintaxis.',
-      },
-      {
-        question: '¿Cuál es el tamaño máximo de JSON que puedo pegar en el Formateador JSON?',
-        answer:
-          'No hay un límite fijo de tamaño porque nada se sube a un servidor. Los límites prácticos dependen solo de la memoria de tu navegador y de qué tan grande sea el cuadro de texto que puede manejar sin problemas.',
-      },
-      {
-        question: '¿Minimizar JSON cambia su significado?',
-        answer:
-          'No. Minimizar solo elimina el espacio en blanco, así que los datos, las claves y los valores se mantienen exactamente iguales mientras el archivo se hace más pequeño.',
-      },
-      {
-        question: '¿Cómo copio JSON formateado sin espacio en blanco extra?',
-        answer:
-          'Cambia primero al modo Minimizar y luego haz clic en Copiar. El portapapeles contendrá el JSON compacto en una sola línea, sin espacios ni saltos de línea extra.',
-      },
-    ],
-  },
   'base64-encoder-decoder': {
     instructions: [
       {
@@ -365,14 +203,14 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
     examples: [
       {
         title: 'Codificación de un valor de consulta',
-        input: 'json formatter & validator',
-        output: 'json%20formatter%20%26%20validator',
+        input: 'hello world & friends',
+        output: 'hello%20world%20%26%20friends',
         explanation: 'Usar encodeURIComponent escapa "&" para que no divida tu cadena de consulta.',
       },
       {
         title: 'Decodificación de un valor de consulta',
-        input: 'json%20formatter%20%26%20validator',
-        output: 'json formatter & validator',
+        input: 'hello%20world%20%26%20friends',
+        output: 'hello world & friends',
         explanation: 'Decodifica %20 como espacios y %26 como el carácter &.',
       },
     ],

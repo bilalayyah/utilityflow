@@ -9,34 +9,6 @@ import type { ToolLocaleOverride } from '../../types';
  * English slugs or reserved paths.
  */
 export const IT_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
-  'json-formatter': {
-    slug: 'formattatore-json',
-    name: 'Formattatore e Validatore JSON',
-    shortDescription:
-      'Formatta, minifica, ordina le chiavi e convalida la sintassi JSON con individuazione precisa degli errori per riga e colonna.',
-    keywords: [
-      'formattatore json',
-      'validatore json',
-      'abbellitore json',
-      'minificatore json',
-      'stampare json in modo leggibile',
-      'stampante json',
-      'formattare json online',
-      'verifica sintassi json',
-      'json lint',
-    ],
-    seo: {
-      title: 'Formattatore JSON e Validatore: stampa JSON | UtilityFlow',
-      description:
-        'Formatta, convalida, minifica e ordina le chiavi JSON all’istante nel tuo browser, con errori di sintassi per riga e colonna per fare debug velocemente.',
-      primaryKeyword: 'formattatore json',
-      secondaryKeywords: ['validatore json', 'abbellitore json', 'minificatore json', 'stampare json in modo leggibile'],
-      longTailKeywords: ['convalidare e stampare json online gratis', 'ordinare le chiavi json alfabeticamente nel browser', 'minificare un payload json senza invio a un server', 'formattare json annidato con indentazione online'],
-      schemaApplicationCategory: 'DeveloperApplication',
-    },
-    intro:
-      'Convalida payload JSON malformati con feedback per riga e colonna, formatta strutture annidate con indentazione di 2 spazi, 4 spazi o tabulazione, ordina le chiavi alfabeticamente oppure minifica per il trasporto in produzione.',
-  },
   'base64-encoder-decoder': {
     slug: 'codificatore-decodificatore-base64',
     name: 'Codificatore / Decodificatore Base64',

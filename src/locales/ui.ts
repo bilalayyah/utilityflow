@@ -16,13 +16,10 @@ export interface UiStrings {
   nav: {
     tools: string;
     categories: string;
-    aiTools: string;
     about: string;
     contact: string;
     blog: string;
     allTools: string;
-    freeAiTools: string;
-    viewAiSection: string;
     searchPlaceholder: string;
     searchTools: string;
     closeSearch: string;
@@ -31,9 +28,6 @@ export interface UiStrings {
     skipToContent: string;
     language: string;
     chooseLanguage: string;
-    aiWriting: { label: string; desc: string };
-    aiSummarizer: { label: string; desc: string };
-    aiFinder: { label: string; desc: string };
   };
   footer: {
     tagline: string;
@@ -77,7 +71,6 @@ export interface UiStrings {
     tryAgain: string;
     openTool: string;
     browserSide: string;
-    freeAiTool: string;
     externalApi: string;
   };
   home: {
@@ -89,9 +82,6 @@ export interface UiStrings {
     heroDescription: string;
     exploreCategories: string;
     openDirectory: string;
-    aiWriting: string;
-    aiSummarizer: string;
-    aiFinder: string;
     metrics: {
       toolCategories: string;
       browserUtilities: string;
@@ -99,7 +89,6 @@ export interface UiStrings {
       accountRequired: string;
       none: string;
     };
-    aiSpotlight: { badge: string; title: string; description: string };
     popular: { title: string; description: string; viewDirectory: string };
     categories: { title: string; description: string; includes: string };
     directory: {
@@ -153,7 +142,6 @@ export interface UiStrings {
     commonUseCases: string;
     runsLocally: string;
     externalApi: string;
-    freeAiTool: string;
     loadingWorkspace: string;
     input: string;
     output: string;

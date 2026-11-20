@@ -9,34 +9,6 @@ import type { ToolLocaleOverride } from '../../types';
  * do not collide with English slugs or reserved paths.
  */
 export const JA_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
-  'json-formatter': {
-    slug: 'json-fomata',
-    name: 'JSONフォーマッター＆バリデーター',
-    shortDescription:
-      'JSONを整形、圧縮、キーの並び替え、構文検証します。エラーの行番号と列番号も表示します。',
-    keywords: [
-      'JSON フォーマッター',
-      'JSON バリデーター',
-      'JSON 整形',
-      'JSON 圧縮',
-      'JSON きれいに表示',
-      'JSON 構文チェック',
-      'JSON オンライン',
-      'JSON エラー確認',
-      'JSON lint',
-    ],
-    seo: {
-      title: 'JSONフォーマッター｜JSONを整形・検証・圧縮できる無料オンラインツール | UtilityFlow',
-      description:
-        'JSONをブラウザ内で瞬時に整形、検証、圧縮し、キーをアルファベット順に並び替えられます。構文エラーの行番号と列番号を表示するため、デバッグが速くなります。登録は不要で、APIのレスポンス確認にも最適です。APIのレスポンスや設定ファイルの確認に最適で、スマートフォンのブラウザでも同じように使えます。',
-      primaryKeyword: 'JSON フォーマッター',
-      secondaryKeywords: ['JSON バリデーター', 'JSON 整形ツール', 'JSON 圧縮ツール', 'JSON 構文チェック'],
-      longTailKeywords: ['JSONをオンラインで無料で整形と検証する', 'JSONのキーをアルファベット順に並び替える', 'JSONをサーバーにアップロードせず圧縮する', '入れ子になったJSONをインデント付きで整形する'],
-      schemaApplicationCategory: 'DeveloperApplication',
-    },
-    intro:
-      '壊れたJSONペイロードを、行番号と列番号付きのフィードバックで検証します。入れ子構造を2スペース、4スペース、タブで整形し、キーをアルファベット順に並べ替えたり、運用配信用に圧縮したりできます。',
-  },
   'base64-encoder-decoder': {
     slug: 'base64-enkodo-dekodo',
     name: 'Base64エンコーダー・デコーダー',

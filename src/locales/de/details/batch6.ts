@@ -704,7 +704,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       'Unterstützt 5 der wirkungsvollsten Schema.org-Structured-Data-Typen',
       'Escapet „<“-Zeichen sauber innerhalb von JSON-LD, um HTML-Script-Brüche zu vermeiden',
       'Lässt leere optionale Eigenschaften automatisch weg – für saubere Syntax',
-      'Passt gut zum JSON-Formatter & Validator für eigene Erweiterungen',
+      'Passt gut zu einem JSON-Formatter für eigene Erweiterungen',
     ],
     useCases: [
       'Autoren- und Veröffentlichungsmetadaten von Artikeln zu redaktionellen Blog-Templates hinzufügen',

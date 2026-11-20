@@ -10,34 +10,6 @@ import type { ToolLocaleOverride } from '../../types';
  * reserved paths.
  */
 export const KO_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
-  'json-formatter': {
-    slug: 'json-pomaeteo',
-    name: 'JSON 포맷터',
-    shortDescription:
-      'JSON 문법을 포맷하고, 압축하고, 키를 정렬하고, 줄과 열로 오류 위치를 정확히 표시하며 검증합니다.',
-    keywords: [
-      'JSON 포맷터',
-      'JSON 검증기',
-      'JSON 보기 좋게 만들기',
-      'JSON 압축기',
-      '온라인 JSON 포맷',
-      'JSON 문법 검사',
-      'JSON 키 정렬',
-      'JSON 오류 찾기',
-      'JSON 들여쓰기 정리',
-    ],
-    seo: {
-      title: 'JSON 포맷터: JSON을 정렬하고 검증하는 무료 온라인 변환 도구 | UtilityFlow',
-      description:
-        'JSON을 보기 좋게 포맷하고, 압축하고, 키를 정렬하고, 문법을 검증하세요. 오류 위치를 줄과 열로 정확히 표시하며, 모든 작업은 브라우저에서 로컬로 이루어지고 무료입니다. API 응답과 설정 파일을 다듬을 때 유용하며, 입력한 데이터는 브라우저 안에서만 안전하게 처리됩니다.',
-      primaryKeyword: 'JSON 포맷터',
-      secondaryKeywords: ['JSON 검증기', 'JSON 보기 좋게 만들기', '온라인 JSON 포맷', 'JSON 압축기'],
-      longTailKeywords: ['온라인 JSON 문법 검증 오류 위치 확인', 'JSON 압축 해제 들여쓰기 정리', 'JSON 키 정렬 포맷 온라인', 'API 응답 JSON 보기 좋게 만들기'],
-      schemaApplicationCategory: 'DeveloperApplication',
-    },
-    intro:
-      '압축된 API 응답을 읽기 쉬운 형태로 펼치고, 키를 정렬하고, 문법 오류를 줄과 열 단위로 정확히 찾아내세요.',
-  },
   'base64-encoder-decoder': {
     slug: 'base64-inkodeo-dikodeo',
     name: 'Base64 인코더·디코더',

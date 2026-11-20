@@ -1,5 +1,4 @@
 import type { ToolLocaleOverride } from '../../types';
-import { PT_AI_OVERRIDES } from './ai';
 import { PT_BATCH_1_OVERRIDES } from './batch1';
 import { PT_BATCH_2_OVERRIDES } from './batch2';
 import { PT_BATCH_3_OVERRIDES } from './batch3';
@@ -13,5 +12,4 @@ export const PT_TOOL_OVERRIDES: Record<string, ToolLocaleOverride> = {
   ...PT_BATCH_3_OVERRIDES,
   ...PT_BATCH_4_OVERRIDES,
   ...PT_BATCH_5_OVERRIDES,
-  ...PT_AI_OVERRIDES,
 };

@@ -9,34 +9,6 @@ import type { ToolLocaleOverride } from '../../types';
  * English slugs or reserved paths.
  */
 export const FR_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
-  'json-formatter': {
-    slug: 'formateur-json',
-    name: 'Formateur et Validateur JSON',
-    shortDescription:
-      'Formatez, minifiez, triez les clés et validez la syntaxe JSON avec un repérage précis des erreurs par ligne et colonne.',
-    keywords: [
-      'formateur json',
-      'validateur json',
-      'embellisseur json',
-      'minifieur json',
-      'imprimer json proprement',
-      'imprimante json',
-      'formater json en ligne',
-      'vérificateur de syntaxe json',
-      'json lint',
-    ],
-    seo: {
-      title: 'Formateur JSON et Validateur : imprimer JSON | UtilityFlow',
-      description:
-        'Formatez, validez, minifiez et triez les clés JSON instantanément dans votre navigateur, avec des erreurs de syntaxe par ligne et colonne pour déboguer vite.',
-      primaryKeyword: 'formateur json',
-      secondaryKeywords: ['validateur json', 'embellisseur json', 'minifieur json', 'imprimer json proprement'],
-      longTailKeywords: ['valider et imprimer json en ligne gratuitement', 'trier les clés json par ordre alphabétique dans le navigateur', 'minifier une charge utile json sans envoi vers un serveur', 'formater du json imbriqué avec indentation en ligne'],
-      schemaApplicationCategory: 'DeveloperApplication',
-    },
-    intro:
-      'Validez les charges utiles JSON mal formées avec un retour par ligne et colonne, formatez les structures imbriquées avec une indentation de 2 espaces, 4 espaces ou tabulation, triez les clés par ordre alphabétique ou minifiez pour le transport en production.',
-  },
   'base64-encoder-decoder': {
     slug: 'encodeur-decodeur-base64',
     name: 'Encodeur / Décodeur Base64',

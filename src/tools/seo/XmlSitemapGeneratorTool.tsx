@@ -31,7 +31,7 @@ export default function XmlSitemapGeneratorTool() {
   const { t } = useLocale();
   const s = useComponentStrings('xml-sitemap-generator', STRINGS_EN);
   const [urlsInput, setUrlsInput] = useState(
-    'https://utilityflow.online/\nhttps://utilityflow.online/tools/\nhttps://utilityflow.online/word-counter/\nhttps://utilityflow.online/json-formatter/\nhttps://utilityflow.online/qr-code-generator/'
+    'https://utilityflow.online/\nhttps://utilityflow.online/tools/\nhttps://utilityflow.online/word-counter/\nhttps://utilityflow.online/word-counter/\nhttps://utilityflow.online/qr-code-generator/'
   );
   const [lastmod, setLastmod] = useState('2026-11-12');
   const [changefreq, setChangefreq] = useState<'none' | 'daily' | 'weekly' | 'monthly'>('weekly');

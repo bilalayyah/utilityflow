@@ -216,20 +216,4 @@ export const DE_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
     },
     intro: "Rechnen Sie sofort in sieben Messfamilien um – Länge, Gewicht & Masse, Temperatur, Fläche, Volumen, Geschwindigkeit und Digitaler Speicher – mit einer automatischen Vergleichstabelle, die jede Einheit der Kategorie zeigt.",
   },
-  'currency-calculator': {
-    slug: "waehrungsrechner",
-    name: "Währungsrechner",
-    shortDescription: "Rechnen Sie Währungen mit Ihrem exakten manuellen Wechselkurs um oder nutzen Sie optional EZB-Referenzkurse mit Gebührenberechnung.",
-    keywords: ["währungsrechner", "wechselkurs rechner", "fx gebühren rechner", "manueller währungsumrechner", "usd in eur umrechner", "währungsumrechner mit gebühr", "wechselkurs aufschlag rechner", "auslandsgebühr rechner", "inverser wechselkurs rechner"],
-    seo: {
-      title: "Währungsrechner – Kurse, Gebühren & EZB | UtilityFlow",
-      description: "Rechnen Sie zwischen wichtigen Währungen mit Ihrem eigenen Wechselkurs um, addieren Sie Bank- oder Kartengebühren zum Nettobetrag oder nutzen Sie EZB-Kurse.",
-      primaryKeyword: "währungsrechner",
-      secondaryKeywords: ["wechselkurs rechner", "fx gebühren rechner", "währungsumrechner mit gebühr", "inverser wechselkurs rechner"],
-      longTailKeywords: ["usd in eur mit eigenem wechselkurs umrechnen", "währungsumrechnung mit bankgebühr berechnen", "ezb referenzkurs online abrufen", "inversen wechselkurs berechnen online"],
-      schemaApplicationCategory: "FinanceApplication",
-    },
-    intro: "Rechnen Sie zwischen wichtigen Weltwährungen transparent mit dem exakten Wechselkurs Ihrer Bank, Ihres Brokers oder Ihrer Rechnung um – plus optionalem Abzug von Wechselgebühren, inverser Kursberechnung und EZB-Referenzkurs auf Abruf.",
-    apiNotice: "Erfordert eine externe API für Live-Wechselkurse und nutzt nie erfundene Offline-Kurse. Verwendet standardmäßig Ihren manuell eingegebenen Wechselkurs (1,0000) oder klicken Sie auf „EZB-Referenzkurs abrufen“, um Kurse von api.frankfurter.dev anzufordern.",
-  },
 };

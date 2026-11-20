@@ -50,7 +50,6 @@ import {
 import type { FullLocaleData, LocaleData } from '../src/locales/types';
 import { formatString } from '../src/locales/ui';
 import type { UiStrings } from '../src/locales/ui';
-import { AI_TOOLS } from '../src/registry/aiTools';
 import {
   getBlogArticlesForCategory,
   getBlogArticlesForTool,
@@ -165,11 +164,9 @@ export function renderToolBody(
 ): string {
   const category = getLocalizedCategory(tool.categoryId, locale, data);
   const howToTitle = formatString(t.toolPage.howToUse, { name: tool.name });
-  const modeLabel = tool.id.startsWith('ai-')
-    ? t.toolPage.freeAiTool
-    : tool.requiresExternalApi
-      ? t.toolPage.externalApi
-      : t.toolPage.runsLocally;
+  const modeLabel = tool.requiresExternalApi
+    ? t.toolPage.externalApi
+    : t.toolPage.runsLocally;
   const related = getRelatedTools(tool, 4).map((item) =>
     getLocalizedTool(item, locale, data)
   );
@@ -330,7 +327,6 @@ export function renderHomeBody(
   const popularTools = getPopularTools(8).map((tool) =>
     getLocalizedTool(tool, locale, data)
   );
-  const aiTools = AI_TOOLS.map((tool) => getLocalizedTool(tool, locale, data));
   const parts: string[] = [];
   parts.push(openMain());
   parts.push('<section class="mx-auto max-w-3xl text-center py-6">');
@@ -355,11 +351,6 @@ export function renderHomeBody(
   }
   parts.push('</dl></section>');
 
-  parts.push('<section id="ai-tools" class="mt-12">');
-  parts.push(`<h2 class="${H2}">${escapeText(t.home.aiSpotlight.title)}</h2>`);
-  parts.push(`<p class="text-sm sm:text-base text-slate-600 mb-6">${escapeText(t.home.aiSpotlight.description)}</p>`);
-  parts.push(toolCards(aiTools, locale));
-  parts.push('</section>');
 
   parts.push('<section class="mt-12">');
   parts.push(`<h2 class="${H2}">${escapeText(t.home.popular.title)}</h2>`);

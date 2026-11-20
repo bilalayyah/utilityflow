@@ -10,14 +10,11 @@ export const deStrings: UiStrings = {
   nav: {
     tools: 'Tools',
     categories: 'Kategorien',
-    aiTools: 'KI-Tools',
     about: 'Über uns',
     contact: 'Kontakt',
     blog: 'Blog',
     allTools: 'Alle Tools',
-    freeAiTools: 'Kostenlose KI-Tools',
-    viewAiSection: 'KI-Bereich auf der Startseite ansehen →',
-    searchPlaceholder: '88 Tools durchsuchen …',
+    searchPlaceholder: '83 Tools durchsuchen …',
     searchTools: 'Tools suchen',
     closeSearch: 'Suche schließen',
     openMenu: 'Navigationsmenü öffnen',
@@ -25,24 +22,12 @@ export const deStrings: UiStrings = {
     skipToContent: 'Zum Inhalt springen',
     language: 'Sprache',
     chooseLanguage: 'Sprache wählen',
-    aiWriting: {
-      label: 'KI-Schreibassistent',
-      desc: 'Grammatik, Umschreiben, Ton & E-Mail-Entwürfe',
-    },
-    aiSummarizer: {
-      label: 'KI-Textzusammenfasser',
-      desc: 'Kurze, mittlere & stichpunktartige Zusammenfassungen',
-    },
-    aiFinder: {
-      label: 'KI-Tool-Finder',
-      desc: 'Das passende Tool in einfacher Sprache finden',
-    },
   },
   footer: {
     tagline:
       'Eine schnelle, browserbasierte Sammlung alltäglicher Utilities für Schreibende, Entwickler, Marketingteams und Analysten. Für den lokalen Betrieb mit minimalem Aufwand gebaut.',
     categories: 'Kategorien',
-    platformAi: 'Plattform & KI',
+    platformAi: 'Entdecken',
     trustLegal: 'Vertrauen & Rechtliches',
     home: 'Startseite',
     allToolsDirectory: 'Alle-Tools-Verzeichnis',
@@ -81,7 +66,6 @@ export const deStrings: UiStrings = {
     tryAgain: 'Erneut versuchen',
     openTool: 'Tool öffnen',
     browserSide: 'Browserbasiert',
-    freeAiTool: 'Kostenloses KI-Tool',
     externalApi: 'Externe API',
   },
   home: {
@@ -100,24 +84,15 @@ export const deStrings: UiStrings = {
     eyebrow: 'UtilityFlow-Plattform · 7 Hauptkategorien · {count} Live-Utilities',
     h1: 'Praktische Online-Utilities für Tempo und Datenschutz.',
     heroDescription:
-      'UtilityFlow bündelt 84 browserbasierte Utilities plus kostenloses KI-Schreiben, Zusammenfassen und intelligentes Finden von Tools – für Text, Entwicklung, Rechner, Social Media, PDF, SEO und Bild-Workflows.',
+      'UtilityFlow bündelt 83 browserbasierte Utilities für Text, Entwicklung, Rechner, Social Media, PDF, SEO und Bild-Workflows.',
     exploreCategories: 'Kategorien entdecken',
     openDirectory: 'Vollständiges Verzeichnis öffnen',
-    aiWriting: 'KI-Schreiben',
-    aiSummarizer: 'KI-Zusammenfassung',
-    aiFinder: 'KI-Tool-Finder',
     metrics: {
       toolCategories: 'Tool-Kategorien',
       browserUtilities: 'Browser-Utilities',
       liveTools: 'Live-Tools',
       accountRequired: 'Konto erforderlich',
       none: 'Keines',
-    },
-    aiSpotlight: {
-      badge: 'Kostenlose KI-Suite · Keine Anmeldung nötig',
-      title: 'Kostenlose KI-Tools',
-      description:
-        'Verbessern Sie Entwürfe, fassen Sie lange Dokumente zusammen oder finden Sie in Sekunden das passende Tool – ganz ohne Registrierung.',
     },
     popular: {
       title: 'Beliebte Tools',
@@ -177,22 +152,22 @@ export const deStrings: UiStrings = {
       {
         question: 'Sind die Tools von UtilityFlow kostenlos und ohne Konto nutzbar?',
         answer:
-          'Ja. Alle 84 Browser-Utilities, 3 KI-Tools und der Währungsrechner auf UtilityFlow sind kostenlos verfügbar – ohne Registrierung, Anmeldewand, Guthaben oder Abonnement.',
+          'Ja. Alle 83 Browser-Utilities auf UtilityFlow sind kostenlos verfügbar – ohne Registrierung, Anmeldewand, Guthaben oder Abonnement.',
       },
       {
         question: 'Lädt UtilityFlow meine Texte, meinen Code oder meine Dateien auf einen Server hoch?',
         answer:
-          'Alle 84 zentralen Browser-Utilities laufen lokal in Ihrem Webbrowser, ohne Eingaben hochzuladen. Unsere 3 optionalen kostenlosen KI-Tools (KI-Schreibassistent, KI-Textzusammenfasser und KI-Tool-Finder) verarbeiten Anfragen sicher über serverseitige Groq-Inferenz, ohne Ihre Texte zu speichern.',
+          'Alle 83 zentralen Browser-Utilities laufen lokal in Ihrem Webbrowser, ohne Eingaben hochzuladen.',
       },
       {
-        question: 'Wie sind die 88 Tools auf der Plattform organisiert?',
+        question: 'Wie sind die 83 Tools auf der Plattform organisiert?',
         answer:
-          'UtilityFlow umfasst sieben Hauptkategorien (Text & Schreiben, Entwickler, Rechner, Social Media, PDFs, SEO sowie Bild- & Datei-Tools) mit insgesamt 84 Browser-Tools, 3 kostenlosen KI-Tools und dem Währungsrechner, die in die Plattform integriert sind.',
+          'UtilityFlow umfasst sieben Hauptkategorien (Text & Schreiben, Entwickler, Rechner, Social Media, PDFs, SEO sowie Bild- & Datei-Tools) mit insgesamt 83 Browser-Tools, die in die Plattform integriert sind.',
       },
       {
         question: 'Kann ich ein Lesezeichen setzen oder einen direkten Link zu einem bestimmten Tool teilen?',
         answer:
-          'Ja. Jedes Tool und jede Kategorie erhält eine eigene permanente, saubere URL (wie /word-counter/, /ai-writing-assistant/ oder /category/developer-tools/), die direkt lädt und auch nach dem Neuladen des Browsers funktioniert.',
+          'Ja. Jedes Tool und jede Kategorie erhält eine eigene permanente, saubere URL (wie /word-counter/ oder /category/developer-tools/), die direkt lädt und auch nach dem Neuladen des Browsers funktioniert.',
       },
       {
         question: 'Funktioniert UtilityFlow reibungslos auf Smartphones und Tablets?',
@@ -209,7 +184,7 @@ export const deStrings: UiStrings = {
     seoKeywords: ['Utility-Tools-Verzeichnis', 'alle Online-Tools', 'kostenlose Browser-Tools'],
     title: 'Alle-Tools-Verzeichnis',
     description:
-      'Durchsuchen Sie alle {count} Live-Utilities auf UtilityFlow oder erkunden Sie die sieben Kategorie-Hubs für Browser- und kostenlose KI-Workflows.',
+      'Durchsuchen Sie alle {count} Live-Utilities auf UtilityFlow oder erkunden Sie die sieben Kategorie-Hubs.',
     searchPlaceholder: 'Nach Toolname, Stichwort oder Kategorie suchen …',
     showing: '{tools} Live-Tools in {categories} Kategorien werden angezeigt',
     all: 'Alle',
@@ -240,7 +215,6 @@ export const deStrings: UiStrings = {
     commonUseCases: 'Typische Anwendungsfälle',
     runsLocally: 'Läuft lokal in Ihrem Browser',
     externalApi: 'Integration externer API',
-    freeAiTool: 'Kostenloses KI-Tool · Keine Anmeldung',
     loadingWorkspace: '{name}-Arbeitsbereich wird geladen …',
     input: 'Eingabe',
     output: 'Ausgabe',
@@ -325,7 +299,7 @@ export const deStrings: UiStrings = {
       'Erfahren Sie, wie UtilityFlow schnelle, datenschutzfreundliche Browser-Tools in sieben Kategorien entwickelt – ohne Konten, Werbung und unnötige Daten-Uploads.',
     title: 'Über UtilityFlow',
     intro:
-      'UtilityFlow ist eine unabhängige Webplattform, die 88 fokussierte, zuverlässige Utilities für die alltägliche digitale Arbeit entwickelt.',
+      'UtilityFlow ist eine unabhängige Webplattform, die 83 fokussierte, zuverlässige Utilities für die alltägliche digitale Arbeit entwickelt.',
     whyTitle: 'Warum wir UtilityFlow gebaut haben',
     whyP1:
       'Routinemäßige Online-Aufgaben – Wörter zählen, JSON validieren, Zeichenlimits prüfen, Kreditraten berechnen oder ein Bild komprimieren – zwingen Nutzer oft auf langsame Seiten voller aufdringlicher Overlays, verwirrender Downloads oder Pflichtregistrierungen.',
@@ -333,14 +307,14 @@ export const deStrings: UiStrings = {
       'Unser Ziel ist einfach: Jedes Utility bekommt eine eigene, saubere Seite, die schnell lädt, klar erklärt, wie das Tool funktioniert, und direkt in Ihrem Browser ausgeführt wird, wann immer es die Webstandards zulassen.',
     orgTitle: 'Wer hinter UtilityFlow steht',
     orgP1:
-      'UtilityFlow ist ein unabhängiges Projekt, das von Bilal erstellt und gepflegt wird – einem Maker, der in seiner Freizeit kostenlose Web-Tools baut. Hinter der Website steht kein Unternehmen, keine Investorenfinanzierung und kein Team von Mitarbeitern: Jedes Tool, jede Anleitung und jede Hilfeseite wird von einer einzigen Person entworfen, gebaut und getestet. Alle 88 Tools sind kostenlos nutzbar – ohne Konten und ohne Abonnements. Die Fußzeile nennt Shaheen, dessen Ermutigung das Projekt inspiriert hat und dessen Name auf jeder Seite als Erinnerung daran steht, wo die Idee begann.',
+      'UtilityFlow ist ein unabhängiges Projekt, das von Bilal erstellt und gepflegt wird – einem Maker, der in seiner Freizeit kostenlose Web-Tools baut. Hinter der Website steht kein Unternehmen, keine Investorenfinanzierung und kein Team von Mitarbeitern: Jedes Tool, jede Anleitung und jede Hilfeseite wird von einer einzigen Person entworfen, gebaut und getestet. Alle 83 Tools sind kostenlos nutzbar – ohne Konten und ohne Abonnements. Die Fußzeile nennt Shaheen, dessen Ermutigung das Projekt inspiriert hat und dessen Name auf jeder Seite als Erinnerung daran steht, wo die Idee begann.',
     orgP2:
       'Weil das Projekt klein und unabhängig ist, bleiben Entscheidungen einfach: Wenn ein Tool langsam, verwirrend oder falsch ist, wird es repariert. Feedback über die Kontaktseite geht direkt an die Person, die den Code ändern kann, und Vorschläge von Besuchern haben bereits neue Tools und Verbesserungen auf der Website geprägt.',
     howTitle: 'Wie unsere Tools gebaut und getestet werden',
     howP1:
       'Jedes Utility beginnt mit einer einzigen klaren Aufgabe – Wörter zählen, PDFs zusammenführen, JSON formatieren – und wird als fokussierte Seite gebaut, die genau diese Aufgabe gut erledigt. Wo es die Webstandards zulassen, geschieht die Arbeit vollständig in Ihrem Browser, sodass Ihre Texte und Dateien Ihr Gerät nie verlassen müssen. Jede Tool-Seite erklärt ihre Schritte in einer kurzen Anleitung, zeigt ausgearbeitete Beispiele und beantwortet die Fragen, die am häufigsten gestellt werden, damit Sie das Ergebnis selbst beurteilen können, statt einer Blackbox zu vertrauen.',
     howP2:
-      'Bevor ein Tool live geht, wird es in einem Desktop- und einem mobilen Browser mit echten Eingaben getestet, einschließlich Grenzfälle wie leere Eingaben, sehr lange Texte und ungewöhnliche Dateitypen. Wenn etwas kaputtgeht oder eine Berechnung falsch aussieht, wird die Korrektur als Website-Update ausgeliefert und die Seite erneut geprüft. Die drei optionalen KI-Tools sind die einzigen, die Text an einen Server senden, und ihre Seiten sagen das vor der Nutzung klar und deutlich.',
+      'Bevor ein Tool live geht, wird es in einem Desktop- und einem mobilen Browser mit echten Eingaben getestet, einschließlich Grenzfälle wie leere Eingaben, sehr lange Texte und ungewöhnliche Dateitypen. Wenn etwas kaputtgeht oder eine Berechnung falsch aussieht, wird die Korrektur als Website-Update ausgeliefert und die Seite erneut geprüft. Jedes Tool läuft vollständig in Ihrem Browser – nichts, was Sie eingeben, wird jemals an einen Server gesendet.',
     whoTitle: 'Für wen UtilityFlow gedacht ist',
     whoP1:
       'UtilityFlow ist für alle gedacht, die eine schnelle Antwort von einem Tool brauchen, ohne Software zu installieren oder ein Konto zu erstellen: Studierende, die die Wortzahl eines Aufsatzes prüfen, Autoren, die einen Entwurf formatieren, Entwickler, die JSON validieren oder eine URL kodieren, Marketer, die Zeichenlimits prüfen, und kleine Unternehmen, die einen Kredit oder einen Rabatt berechnen. Wenn eine Aufgabe weniger als eine Minute dauert, sollte auch das Tool dafür weniger als eine Minute brauchen – das ist der Standard, an dem jede Seite dieser Website gemessen wird.',
@@ -439,10 +413,9 @@ export const deStrings: UiStrings = {
         ],
       },
       {
-        title: '2. Tool-Eingaben, Browser-Verarbeitung & kostenlose KI-Tools',
+        title: '2. Tool-Eingaben & Browser-Verarbeitung',
         paragraphs: [
-          'Texte, Zahlen, Code-Snippets und Dateien, die Sie in unsere 84 browserbasierten Tools eingeben, werden lokal in Ihrer Browsersitzung verarbeitet, ohne Ihr Gerät zu verlassen.',
-          'Unsere drei optionalen kostenlosen KI-Tools (KI-Schreibassistent, KI-Textzusammenfasser und KI-Tool-Finder) senden den übermittelten Text über unser geschütztes Backend an Groq zur Echtzeit-Inferenz. Wir speichern Ihre Anfragen nicht und protokollieren sie nicht; die kostenlosen täglichen Limits verwenden nur einen UTC-datierten SHA-256-Hash, sodass rohe Besucher-IP-Adressen nie gespeichert werden.',
+          'Texte, Zahlen, Code-Snippets und Dateien, die Sie in unsere 83 browserbasierten Tools eingeben, werden lokal in Ihrer Browsersitzung verarbeitet, ohne Ihr Gerät zu verlassen.',
           'Kommentare unter unseren Tools fragen nur nach einem Namen und dem Kommentartext. Der Name und der Text, die Sie übermitteln, werden auf unserer Hosting-Plattform gespeichert und zusammen mit dem Datum öffentlich auf der jeweiligen Tool-Seite angezeigt. Wir fragen weder nach einer E-Mail-Adresse noch nach einem Konto, um zu kommentieren, und wir verwenden Kommentardaten nicht für Werbung. Wenn Sie einen Kommentar entfernen lassen möchten, kontaktieren Sie uns mit der Seite und dem verwendeten Namen, und wir löschen ihn.',
         ],
       },
@@ -470,7 +443,7 @@ export const deStrings: UiStrings = {
       {
         title: '6. Datenspeicherung',
         paragraphs: [
-          'Informationen, die in Ihrem Browser verarbeitet werden, werden nie an uns gesendet, sodass es nichts zu speichern gibt. Text, der an die optionalen KI-Tools gesendet wird, wird für die Anfrage verarbeitet und nicht gespeichert. Kommentare werden aufbewahrt, bis sie gelöscht werden – von uns oder auf Ihren Wunsch. Hosting- und Sicherheitsprotokolle werden nur für den begrenzten Zeitraum aufbewahrt, den unser Hosting-Anbieter für den Betrieb und den Schutz des Dienstes benötigt.',
+          'Informationen, die in Ihrem Browser verarbeitet werden, werden nie an uns gesendet, sodass es nichts zu speichern gibt. Kommentare werden aufbewahrt, bis sie gelöscht werden – von uns oder auf Ihren Wunsch. Hosting- und Sicherheitsprotokolle werden nur für den begrenzten Zeitraum aufbewahrt, den unser Hosting-Anbieter für den Betrieb und den Schutz des Dienstes benötigt.',
         ],
       },
       {
@@ -540,7 +513,7 @@ export const deStrings: UiStrings = {
       {
         title: '7. Dienste Dritter',
         paragraphs: [
-          'Einige Funktionen beruhen auf unabhängigen Diensten Dritter: Die drei KI-Tools senden Text zur Verarbeitung an Groq, das Kontaktformular wird von FormSubmit zugestellt, die Website wird auf Cloudflare gehostet und der Währungsrechner ruft Live-Wechselkurse von Frankfurter ab. Jeder dieser Dienste hat eigene Bedingungen und eine eigene Datenschutzerklärung, und Ihre Nutzung dieser Dienste unterliegt diesen Dokumenten. UtilityFlow ist nicht verantwortlich für die Verfügbarkeit oder die Praktiken von Diensten Dritter.',
+          'Einige Funktionen beruhen auf unabhängigen Diensten Dritter: Das Kontaktformular wird von FormSubmit zugestellt und die Website wird auf Cloudflare gehostet. Jeder dieser Dienste hat eigene Bedingungen und eine eigene Datenschutzerklärung, und Ihre Nutzung dieser Dienste unterliegt diesen Dokumenten. UtilityFlow ist nicht verantwortlich für die Verfügbarkeit oder die Praktiken von Diensten Dritter.',
         ],
       },
       {

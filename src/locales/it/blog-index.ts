@@ -568,60 +568,6 @@ export const IT_ARTICLE_INDEX: Record<string, ArticleLocaleSlimOverride> = {
     "description": "Numerazione delle righe per SQL e codice: scegli il formato numerico, il separatore e il prefisso giusti, ed evita gli errori comuni che rompono query e script.",
     "readingMinutes": 13
   },
-  "ai-tool-finder-guide": {
-    "slug": "cercatore-strumenti-ia-trovare-tool-giusto",
-    "title": "Cercatore di strumenti IA: trova il tool online giusto per ogni lavoro",
-    "description": "Descrivi quello che devi fare e il Cercatore di strumenti IA ti consiglia lo strumento UtilityFlow giusto: gratis, in pochi secondi e senza installare nulla.",
-    "readingMinutes": 13
-  },
-  "ai-tool-finder-howto": {
-    "slug": "come-trovare-lo-strumento-online-giusto-per-ogni-compito-con-ai",
-    "title": "Come trovare lo strumento online giusto per ogni compito (con l'AI)",
-    "description": "Impara a trovare lo strumento giusto per ogni compito con l'AI: descrivi il lavoro in inglese semplice, leggi l'abbinamento e apri lo strumento migliore.",
-    "readingMinutes": 13
-  },
-  "ai-tool-finder-advanced": {
-    "slug": "cercatore-strumenti-ai-vs-ricerca-manuale",
-    "title": "Cercatore di strumenti IA vs ricerca manuale: quando conviene l'AI (e quando no)",
-    "description": "Confronta il Cercatore di strumenti IA con la navigazione manuale: scopri quando vince la scelta AI, quando perde e come combinare bene entrambi i metodi.",
-    "readingMinutes": 13
-  },
-  "ai-text-summarizer-guide": {
-    "slug": "riassumere-testo-online-ai-guida",
-    "title": "Riassumere un testo online con l'AI: guida completa al riassunto automatico",
-    "description": "Scopri che cos'è un riassuntore di testo AI, come differiscono i riassunti e come elenchi puntati e punti chiave ti aiutano a leggere più in fretta e meglio.",
-    "readingMinutes": 12
-  },
-  "ai-text-summarizer-howto": {
-    "slug": "come-riassumere-articoli-lunghi-in-pochi-secondi",
-    "title": "Come riassumere articoli lunghi e report in pochi secondi",
-    "description": "Impara a riassumere articoli lunghi, report e appunti: pulisci il testo, scegli una lunghezza, scegli un formato e verifica il riassunto prima di usarlo.",
-    "readingMinutes": 13
-  },
-  "ai-text-summarizer-advanced": {
-    "slug": "riassuntore-ai-affidabilita-errori-verifica",
-    "title": "Riassuntore AI: quanto è affidabile, cosa sbaglia e come verificare i riassunti",
-    "description": "Quanto sono affidabili i riassunti AI? Scopri cosa azzeccano, cosa perdono e come verificare ogni riassunto con una checklist prima di fidarti e usarlo.",
-    "readingMinutes": 12
-  },
-  "ai-writing-assistant-guide": {
-    "slug": "che-cose-un-assistente-di-scrittura-ai",
-    "title": "Che cos'è un assistente di scrittura AI? Guida completa",
-    "description": "Scopri che cosa fa un assistente di scrittura AI: correggere la grammatica, riscrivere frasi, regolare il tono, parafrasare testi, e chi aiuta di più.",
-    "readingMinutes": 13
-  },
-  "ai-writing-assistant-howto": {
-    "slug": "come-correggere-grammatica-e-riscrivere-frasi-con-assistente-ai",
-    "title": "Come correggere la grammatica e riscrivere frasi con un assistente di scrittura AI",
-    "description": "Impara a correggere la grammatica con l'AI: correggi gli errori, riscrivi frasi, regola il tono, parafrasa il testo, e rivedi il risultato prima di inviarlo.",
-    "readingMinutes": 13
-  },
-  "ai-writing-assistant-advanced": {
-    "slug": "assistente-scrittura-ai-vs-revisione-manuale",
-    "title": "Assistente di scrittura AI vs revisione manuale: impostazioni, toni e limiti da conoscere",
-    "description": "Assistente di scrittura AI vs revisione manuale: impostazioni, scelte di tono, buone pratiche di parafrasi, limiti, e dove serve ancora la revisione umana.",
-    "readingMinutes": 13
-  },
   "case-converter-guide": {
     "slug": "convertire-maiuscole-minuscole-online",
     "title": "Convertire maiuscole e minuscole online: guida completa ai formati di testo",
@@ -946,24 +892,6 @@ export const IT_ARTICLE_INDEX: Record<string, ArticleLocaleSlimOverride> = {
     "description": "Interesse composto e interesse semplice a confronto con esempi svolti: scopri quanto rende in più la capitalizzazione in 10, 20 e 30 anni. Provalo ora.",
     "readingMinutes": 11
   },
-  "currency-calculator-guide": {
-    "slug": "convertitore-valuta-come-funziona",
-    "title": "Convertitore valuta: come funziona e come si calcola il cambio",
-    "description": "Scopri come funziona un convertitore di valuta: tassi manuali, tasso di riferimento BCE e commissioni di cambio che riducono l'importo ricevuto. Provalo ora.",
-    "readingMinutes": 13
-  },
-  "currency-calculator-howto": {
-    "slug": "come-convertire-valuta",
-    "title": "Come convertire valuta: cambio, commissioni e importo reale",
-    "description": "Segui la conversione di valuta passo passo con un tasso manuale o un tasso BCE, aggiungi la commissione FX e controlla l'importo che riceverai davvero.",
-    "readingMinutes": 13
-  },
-  "currency-calculator-advanced": {
-    "slug": "tasso-di-cambio-bce-banca-medio-mercato",
-    "title": "Tasso di cambio BCE, tasso bancario e tasso medio di mercato: quale si applica a te",
-    "description": "Confronta tassi BCE, tassi bancari e tassi medi di mercato per vedere quale tasso si applica alla tua conversione e perché le banche applicano di più.",
-    "readingMinutes": 14
-  },
   "date-difference-calculator-guide": {
     "slug": "calcolo-differenza-date",
     "title": "Calcolo differenza tra date: anni, mesi, giorni e giorni lavorativi",
@@ -1268,24 +1196,6 @@ export const IT_ARTICLE_INDEX: Record<string, ArticleLocaleSlimOverride> = {
     "slug": "minificatore-javascript-bundler-transpiler-a-confronto",
     "title": "Minificatore JavaScript, bundler e transpiler a confronto: che cosa fa davvero ciascuno",
     "description": "Confronta minificatore JavaScript, bundler e transpiler: che cosa fa ciascuno al tuo codice, quando ti serve ciascuno e perché la sola minificazione non basta.",
-    "readingMinutes": 13
-  },
-  "json-formatter-guide": {
-    "slug": "json-cose-formattazione-convalida",
-    "title": "JSON: cos'è, come si formatta e come si convalida",
-    "description": "Cos'è JSON e come funzionano formattazione, minificazione e convalida: riga e colonna degli errori ti aiutano a debuggare JSON velocemente online gratis.",
-    "readingMinutes": 13
-  },
-  "json-formatter-howto": {
-    "slug": "come-formattare-convalidare-json",
-    "title": "Come formattare e convalidare JSON (e correggere gli errori di sintassi)",
-    "description": "Guida passo passo per formattare, minificare, ordinare le chiavi e convalidare JSON, con soluzioni chiare per virgole finali, virgolette e altri errori.",
-    "readingMinutes": 13
-  },
-  "json-formatter-advanced": {
-    "slug": "errori-comuni-sintassi-json-come-sistemarli",
-    "title": "Errori comuni di sintassi JSON e come sistemarli (virgole finali, virgolette e altro)",
-    "description": "Correggi velocemente gli errori di sintassi JSON più comuni: virgole finali, virgolette singole, chiavi senza virgolette, virgole mancanti e parentesi.",
     "readingMinutes": 13
   },
   "json-csv-converter-guide": {

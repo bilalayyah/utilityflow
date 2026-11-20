@@ -6,34 +6,6 @@ import type { ToolLocaleOverride } from '../../types';
  * (devToolsPart1/2/3.ts). Brazilian Portuguese, neutral, "você" forms.
  */
 export const PT_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
-  'json-formatter': {
-    slug: 'formatador-json',
-    name: 'Formatador e Validador de JSON',
-    shortDescription:
-      'Formate, minifique, ordene chaves e valide a sintaxe JSON com indicação precisa de erros de linha e coluna.',
-    keywords: [
-      'formatador json',
-      'validador json',
-      'embelezador json',
-      'minificador json',
-      'imprimir json bonito',
-      'formatar json online',
-      'verificador de sintaxe json',
-      'lint json',
-      'analisador json',
-    ],
-    seo: {
-      title: 'Formatador JSON: Valide e Imprima JSON Bonito | UtilityFlow',
-      description:
-        'Formate, valide, minifique e ordene chaves de payloads JSON na hora no navegador, com detalhes de erros de sintaxe de linha e coluna para depurar rápido.',
-      primaryKeyword: 'formatador json',
-      secondaryKeywords: ['validador json', 'embelezador json', 'minificador json', 'imprimir json bonito'],
-      longTailKeywords: ['validar e imprimir json bonito online grátis', 'ordenar chaves json alfabeticamente no navegador', 'minificar payload json sem enviar ao servidor', 'formatar json aninhado com indentação online'],
-      schemaApplicationCategory: 'DeveloperApplication',
-    },
-    intro:
-      'Valide payloads JSON malformados com feedback de linha e coluna, formate estruturas aninhadas com indentação de 2 espaços, 4 espaços ou tabulação, ordene chaves alfabeticamente ou minifique para transporte em produção.',
-  },
   'base64-encoder-decoder': {
     slug: 'codificador-decodificador-base64',
     name: 'Codificador / Decodificador Base64',

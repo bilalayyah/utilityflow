@@ -568,60 +568,6 @@ export const ES_ARTICLE_INDEX: Record<string, ArticleLocaleSlimOverride> = {
     "description": "Numeración de líneas para SQL y código: elige el formato, el separador y el prefijo adecuados, y evita los errores comunes que rompen consultas y scripts.",
     "readingMinutes": 13
   },
-  "ai-tool-finder-guide": {
-    "slug": "que-es-un-buscador-de-herramientas-ia",
-    "title": "¿Qué es un buscador de herramientas con IA? Guía completa",
-    "description": "Descubre qué hace un buscador de herramientas con IA, cómo relaciona tu tarea con la herramienta adecuada de UtilityFlow y cuándo te ahorra tiempo cada día.",
-    "readingMinutes": 13
-  },
-  "ai-tool-finder-howto": {
-    "slug": "como-encontrar-la-herramienta-en-linea-adecuada-con-ia",
-    "title": "Cómo encontrar la herramienta en línea adecuada para cualquier tarea (con IA)",
-    "description": "Aprende a encontrar la herramienta adecuada para cualquier tarea con IA: describe tu trabajo, lee la coincidencia y abre la mejor herramienta gratis hoy.",
-    "readingMinutes": 13
-  },
-  "ai-tool-finder-advanced": {
-    "slug": "buscador-de-herramientas-ia-vs-busqueda-manual",
-    "title": "Buscador de herramientas con IA vs búsqueda manual: cuándo gana la IA (y cuándo no)",
-    "description": "Compara el buscador de herramientas con IA con la navegación manual: mira cuándo gana la búsqueda con IA, cuándo pierde y cómo combinar ambas en tu trabajo.",
-    "readingMinutes": 14
-  },
-  "ai-text-summarizer-guide": {
-    "slug": "que-es-un-resumidor-de-texto-con-ia",
-    "title": "¿Qué es un resumidor de texto con IA? Guía completa",
-    "description": "Aprende qué hace un resumidor de texto con IA, cómo se diferencian los resúmenes cortos, medianos y largos, y cómo los puntos clave te ayudan a leer más rápido.",
-    "readingMinutes": 12
-  },
-  "ai-text-summarizer-howto": {
-    "slug": "como-resumir-articulos-largos",
-    "title": "Cómo resumir artículos e informes largos en segundos",
-    "description": "Aprende cómo resumir artículos, informes y notas largos en segundos: limpia el texto, elige una longitud y un formato, y verifica el resumen antes de usarlo.",
-    "readingMinutes": 13
-  },
-  "ai-text-summarizer-advanced": {
-    "slug": "precision-del-resumidor-ia-limitaciones",
-    "title": "Precisión del resumidor con IA: qué acierta, qué se le escapa y cómo verificarlo",
-    "description": "Precisión del resumidor con IA: qué aciertan los resúmenes, qué se les escapa, y una lista práctica para verificar cualquier resumen antes de confiar en él.",
-    "readingMinutes": 12
-  },
-  "ai-writing-assistant-guide": {
-    "slug": "que-es-un-asistente-de-escritura-con-ia",
-    "title": "¿Qué es un asistente de escritura con IA? Guía completa",
-    "description": "Aprende qué hace un asistente de escritura con IA: corrige gramática, reescribe frases, ajusta el tono, parafrasea texto y redacta correos, y a quién le sirve.",
-    "readingMinutes": 13
-  },
-  "ai-writing-assistant-howto": {
-    "slug": "como-corregir-gramatica-y-reescribir-con-ia",
-    "title": "Cómo corregir gramática y reescribir frases con un asistente de escritura con IA",
-    "description": "Aprende a corregir gramática con IA: corrige errores, reescribe frases torpes, ajusta el tono, parafrasea texto y revisa el resultado antes de publicar.",
-    "readingMinutes": 13
-  },
-  "ai-writing-assistant-advanced": {
-    "slug": "asistente-de-escritura-ia-vs-edicion-manual",
-    "title": "Asistente de escritura con IA vs edición manual: mejores configuraciones, tonos y límites",
-    "description": "Asistente de escritura con IA vs edición manual: configuraciones, tonos, buenas prácticas de parafraseo, límites y dónde sigue siendo necesario editar a mano.",
-    "readingMinutes": 14
-  },
   "case-converter-guide": {
     "slug": "que-es-un-convertidor-de-mayusculas-y-minusculas",
     "title": "¿Qué es un convertidor de mayúsculas y minúsculas? Guía completa de formatos de texto",
@@ -946,24 +892,6 @@ export const ES_ARTICLE_INDEX: Record<string, ArticleLocaleSlimOverride> = {
     "description": "Interés compuesto vs interés simple comparados con ejemplos resueltos: mira cuánto más gana la capitalización en 10, 20 y 30 años. Haz tus propios números.",
     "readingMinutes": 12
   },
-  "currency-calculator-guide": {
-    "slug": "que-es-una-calculadora-de-moneda",
-    "title": "¿Qué es una calculadora de moneda? Guía completa",
-    "description": "Aprende qué hace una calculadora de moneda, cómo funcionan las tasas manuales y de referencia del BCE, y cómo las comisiones de cambio alteran lo que recibes.",
-    "readingMinutes": 14
-  },
-  "currency-calculator-howto": {
-    "slug": "como-convertir-moneda",
-    "title": "Cómo convertir moneda (y tener en cuenta las comisiones de cambio)",
-    "description": "Sigue la conversión de moneda paso a paso con una tasa manual o de referencia del BCE, añade la comisión de cambio y revisa lo que recibirás, gratis en línea.",
-    "readingMinutes": 13
-  },
-  "currency-calculator-advanced": {
-    "slug": "tasa-bce-vs-tasa-bancaria-vs-tasa-media",
-    "title": "Tasas de referencia del BCE vs tasas bancarias vs tasa media del mercado: qué tipo de cambio aplica para ti",
-    "description": "Compara las tasas de referencia del BCE, las tasas bancarias y las tasas medias del mercado para ver qué tipo de cambio aplica a tu conversión, gratis en línea.",
-    "readingMinutes": 14
-  },
   "date-difference-calculator-guide": {
     "slug": "que-es-una-calculadora-de-diferencia-de-fechas",
     "title": "¿Qué es una calculadora de diferencia de fechas? Guía completa",
@@ -1268,24 +1196,6 @@ export const ES_ARTICLE_INDEX: Record<string, ArticleLocaleSlimOverride> = {
     "slug": "minificador-de-js-vs-empaquetador-vs-transpilador",
     "title": "Minificador de JavaScript vs empaquetador vs transpilador: qué hace cada uno",
     "description": "Compara un minificador de JavaScript, un empaquetador y un transpilador: qué hace cada uno con tu código, cuándo necesitas cada uno y por qué en la práctica.",
-    "readingMinutes": 13
-  },
-  "json-formatter-guide": {
-    "slug": "que-es-json",
-    "title": "¿Qué es JSON? Guía completa para dar formato y validar",
-    "description": "Aprende qué es JSON, cómo funcionan el formato, la minificación y la validación, y cómo la ubicación de errores te ayuda a depurar JSON rápido en línea.",
-    "readingMinutes": 13
-  },
-  "json-formatter-howto": {
-    "slug": "como-dar-formato-y-validar-json",
-    "title": "Cómo dar formato y validar JSON (y corregir errores de sintaxis)",
-    "description": "Guía paso a paso para dar formato, minificar, ordenar claves y validar JSON, con correcciones claras para comas finales, comillas y otros errores de sintaxis.",
-    "readingMinutes": 13
-  },
-  "json-formatter-advanced": {
-    "slug": "errores-comunes-de-sintaxis-json-y-como-corregirlos",
-    "title": "Errores comunes de sintaxis JSON y cómo corregirlos",
-    "description": "Corrige rápido los errores de sintaxis JSON más comunes: comas finales, comillas simples, claves sin comillas, corchetes y secuencias de escape con ejemplos.",
     "readingMinutes": 13
   },
   "json-csv-converter-guide": {

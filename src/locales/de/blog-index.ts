@@ -568,60 +568,6 @@ export const DE_ARTICLE_INDEX: Record<string, ArticleLocaleSlimOverride> = {
     "description": "Zeilennummerierung für SQL und Code: Zahlenformat, Trennzeichen und Präfix richtig wählen und die häufigsten Fehler vermeiden, die Abfragen und Skripte brechen.",
     "readingMinutes": 13
   },
-  "ai-tool-finder-guide": {
-    "slug": "was-ist-der-ki-smart-tool-finder",
-    "title": "Was ist der AI Smart Tool Finder? Vollständige Anleitung",
-    "description": "Entdecken Sie, was der AI Smart Tool Finder leistet, wie er Aufgabenbeschreibungen dem richtigen UtilityFlow-Tool zuordnet und wann er Ihnen Zeit spart.",
-    "readingMinutes": 12
-  },
-  "ai-tool-finder-howto": {
-    "slug": "mit-ki-das-richtige-online-tool-finden",
-    "title": "Wie Sie mit KI das richtige Online-Tool für jede Aufgabe finden",
-    "description": "Mit KI das richtige Online-Tool finden: Aufgabe in einfachem Englisch beschreiben, Treffer lesen und das beste Tool kostenlos in wenigen Minuten öffnen.",
-    "readingMinutes": 13
-  },
-  "ai-tool-finder-advanced": {
-    "slug": "ki-tool-finder-vs-manuelle-suche",
-    "title": "AI Tool Finder vs. manuelle Suche: Wann KI-Zuordnung gewinnt (und wann nicht)",
-    "description": "AI Smart Tool Finder vs. manuelle Suche: Wann KI-Zuordnung gewinnt, wann sie verliert, was sie kostet und wie Sie beide Methoden heute gut kombinieren.",
-    "readingMinutes": 13
-  },
-  "ai-text-summarizer-guide": {
-    "slug": "ki-text-zusammenfassung",
-    "title": "Text mit KI zusammenfassen: So funktioniert eine KI-Zusammenfassung",
-    "description": "Text mit KI zusammenfassen: kurze, mittlere und lange Zusammenfassungen, Stichpunkte und Kernpunkte – und wie Sie damit lange Artikel online schneller lesen.",
-    "readingMinutes": 12
-  },
-  "ai-text-summarizer-howto": {
-    "slug": "lange-artikel-zusammenfassen-anleitung",
-    "title": "Wie Sie lange Artikel und Berichte in Sekunden zusammenfassen",
-    "description": "Lange Artikel, Berichte und Notizen in Sekunden zusammenfassen: Text bereinigen, Länge und Format wählen und die Zusammenfassung vor der Verwendung prüfen.",
-    "readingMinutes": 13
-  },
-  "ai-text-summarizer-advanced": {
-    "slug": "ki-zusammenfassung-genauigkeit-grenzen",
-    "title": "Genauigkeit von KI-Zusammenfassungen: Was sie richtig machen, was sie übersehen und wie Sie prüfen",
-    "description": "Genauigkeit von KI-Zusammenfassungen: Was sie richtig machen, was sie übersehen und eine Checkliste, um jede Zusammenfassung zu prüfen, bevor Sie ihr vertrauen.",
-    "readingMinutes": 12
-  },
-  "ai-writing-assistant-guide": {
-    "slug": "was-ist-ein-ki-schreibassistent",
-    "title": "Was ist ein KI-Schreibassistent? Vollständige Anleitung",
-    "description": "Was ein KI-Schreibassistent leistet: Grammatik korrigieren, Sätze umschreiben, Ton anpassen, paraphrasieren und E-Mails entwerfen – und wem er am meisten hilft.",
-    "readingMinutes": 13
-  },
-  "ai-writing-assistant-howto": {
-    "slug": "grammatik-korrigieren-saetze-umschreiben-mit-ki",
-    "title": "Wie Sie Grammatik korrigieren und Sätze mit einem KI-Schreibassistenten umschreiben",
-    "description": "Grammatik mit KI korrigieren, Schritt für Schritt: Fehler beheben, unbeholfene Sätze umschreiben, Ton anpassen und das Ergebnis vor dem Senden prüfen.",
-    "readingMinutes": 13
-  },
-  "ai-writing-assistant-advanced": {
-    "slug": "ki-schreibassistent-vs-manuelles-bearbeiten",
-    "title": "KI-Schreibassistent vs. manuelles Bearbeiten: Beste Einstellungen, Tonwahl und Grenzen",
-    "description": "KI-Schreibassistent vs. manuelles Bearbeiten: beste Einstellungen, Tonwahl, bewährte Paraphrasierung, Grenzen und wo menschliche Prüfung weiterhin nötig ist.",
-    "readingMinutes": 13
-  },
   "case-converter-guide": {
     "slug": "text-gross-kleinschreibung-umwandeln",
     "title": "Text in Groß- oder Kleinschreibung umwandeln: Anleitung zu Textformaten",
@@ -946,24 +892,6 @@ export const DE_ARTICLE_INDEX: Record<string, ArticleLocaleSlimOverride> = {
     "description": "Zinseszins vs. einfacher Zins im Vergleich mit Rechenbeispielen: Sehen Sie, wie viel mehr Zinseszins über 10, 20 und 30 Jahre einbringt. Rechnen Sie selbst.",
     "readingMinutes": 11
   },
-  "currency-calculator-guide": {
-    "slug": "was-ist-waehrungsrechner",
-    "title": "Was ist ein Währungsrechner? Vollständige Anleitung",
-    "description": "Erfahren Sie, was ein Währungsrechner tut, wie manuelle Kurse und EZB-Referenzkurse funktionieren und wie Gebühren den Betrag verändern, den Sie erhalten.",
-    "readingMinutes": 12
-  },
-  "currency-calculator-howto": {
-    "slug": "waehrung-umrechnen",
-    "title": "So rechnen Sie Währungen um (und berücksichtigen Wechselgebühren)",
-    "description": "Folgen Sie der Schritt-für-Schritt-Währungsumrechnung mit einem Kurs oder EZB-Referenzkurs, fügen Sie die Devisengebühr hinzu und prüfen Sie den Betrag.",
-    "readingMinutes": 13
-  },
-  "currency-calculator-advanced": {
-    "slug": "ezb-referenzkurs-vs-bankkurs-vs-mittelkurs",
-    "title": "EZB-Referenzkurse vs. Bankkurse vs. Mittelkurs: Welcher Wechselkurs gilt für Sie",
-    "description": "Vergleichen Sie EZB-Referenzkurse, Bankkurse und Mittelkurse, um zu sehen, welcher Wechselkurs für Ihre Umrechnung gilt und warum Banken mehr berechnen.",
-    "readingMinutes": 12
-  },
   "date-difference-calculator-guide": {
     "slug": "was-ist-datumsrechner",
     "title": "Was ist ein Datumsrechner? Vollständige Anleitung",
@@ -1269,24 +1197,6 @@ export const DE_ARTICLE_INDEX: Record<string, ArticleLocaleSlimOverride> = {
     "title": "JavaScript-Minifier vs. Bundler vs. Transpiler: Was jeder wirklich tut",
     "description": "Vergleichen Sie JavaScript-Minifier, Bundler und Transpiler: Was jeder mit Ihrem Code tut, wann Sie jeden brauchen und warum Minifizierung allein nicht reicht.",
     "readingMinutes": 12
-  },
-  "json-formatter-guide": {
-    "slug": "was-ist-json-formatieren-validieren",
-    "title": "Was ist JSON? Vollständige Anleitung zum Formatieren und Validieren",
-    "description": "Was JSON ist, wie Formatieren, Minifizieren und Validieren funktionieren und wie die Fehlerangabe mit Zeile und Spalte hilft, JSON schnell zu debuggen.",
-    "readingMinutes": 13
-  },
-  "json-formatter-howto": {
-    "slug": "json-formatieren-validieren-anleitung",
-    "title": "JSON formatieren und validieren (und Syntaxfehler beheben)",
-    "description": "JSON formatieren, minifizieren, Schlüssel sortieren und validieren – Schritt für Schritt, mit Korrekturen für Kommas, Anführungszeichen und Syntaxfehler.",
-    "readingMinutes": 13
-  },
-  "json-formatter-advanced": {
-    "slug": "haeufige-json-syntaxfehler-beheben",
-    "title": "Häufige JSON-Syntaxfehler und wie man sie behebt (Kommas, Anführungszeichen und mehr)",
-    "description": "JSON-Syntaxfehler schnell beheben: abschließende Kommas, einfache Anführungszeichen, Schlüssel ohne Anführungszeichen, fehlende Kommas und schlechte Escapes.",
-    "readingMinutes": 13
   },
   "json-csv-converter-guide": {
     "slug": "was-ist-json-zu-csv-konvertierung",

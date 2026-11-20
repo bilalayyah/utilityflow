@@ -1,5 +1,4 @@
 import type { CategoryId, ToolDefinition } from '../types/tool';
-import { AI_TOOLS } from './aiTools';
 import { BATCH_1_TEXT_TOOLS } from './batches/batch1TextTools';
 import { BATCH_2_DEVELOPER_TOOLS } from './batches/batch2DeveloperTools';
 import { BATCH_3_CALCULATORS } from './batches/batch3Calculators';
@@ -10,7 +9,7 @@ import { BATCH_7_IMAGE_FILE_TOOLS } from './batches/batch7ImageFileTools';
 
 /**
  * Central Tool Registry.
- * Combines all 84 local browser tools across 7 batches plus free AI utilities.
+ * Combines all 83 local browser tools across 7 batches.
  */
 export const TOOLS_REGISTRY: ToolDefinition[] = [
   ...BATCH_1_TEXT_TOOLS,
@@ -20,7 +19,6 @@ export const TOOLS_REGISTRY: ToolDefinition[] = [
   ...BATCH_5_PDF_TOOLS,
   ...BATCH_6_SEO_TOOLS,
   ...BATCH_7_IMAGE_FILE_TOOLS,
-  ...AI_TOOLS,
 ];
 
 export function getAllTools(): ToolDefinition[] {

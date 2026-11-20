@@ -541,44 +541,4 @@ export const PT_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
     intro:
       'Converta na hora em sete famílias de medidas — Comprimento, Peso e Massa, Temperatura, Área, Volume, Velocidade e Armazenamento Digital — com uma tabela automática lado a lado mostrando cada unidade da categoria.',
   },
-  'currency-calculator': {
-    slug: 'conversor-de-moedas',
-    name: 'Calculadora de Moedas',
-    shortDescription:
-      'Converta moedas usando sua taxa de câmbio manual exata ou taxas de referência opcionais do BCE com cálculo de taxa de câmbio.',
-    keywords: [
-      'calculadora de moedas',
-      'calculadora de taxa de câmbio',
-      'calculadora de taxa de fx',
-      'conversor de moedas manual',
-      'conversor de usd para eur',
-      'conversor de moedas com taxa',
-      'calculadora de markup de taxa de câmbio',
-      'calculadora de taxa de transação estrangeira',
-      'calculadora de taxa de câmbio inversa',
-    ],
-    seo: {
-      title: 'Calculadora de Moedas – Taxas, Tarifas e BCE | UtilityFlow',
-      description:
-        'Converta entre as moedas com sua taxa informada, some taxas de FX de banco ou cartão para ver o valor líquido, ou busque uma taxa de referência do BCE.',
-      primaryKeyword: 'calculadora de moedas',
-      secondaryKeywords: [
-        'calculadora de taxa de câmbio com tarifa',
-        'conversor de moedas manual',
-        'calculadora de spread de fx',
-        'conversor de taxa de referência do bce',
-      ],
-      longTailKeywords: [
-        'converter moeda com taxa de câmbio personalizada de banco e tarifa',
-        'calculadora de moedas sem taxas falsas fixas',
-        'calcular valor líquido em moeda estrangeira após markup de cartão',
-        'quanto vou receber após a taxa de conversão de moeda',
-      ],
-      schemaApplicationCategory: 'FinanceApplication',
-    },
-    intro:
-      'Converta entre as principais moedas globais com transparência usando a taxa de câmbio exata informada pelo seu banco, corretora ou fatura — com dedução opcional de taxa de FX, cálculo de taxa inversa e uma consulta sob demanda da taxa de referência do BCE.',
-    apiNotice:
-      'Precisa de uma API externa para taxas de câmbio ao vivo e nunca usa taxas offline inventadas. Usa sua taxa de câmbio digitada manualmente por padrão (1,0000), ou clique em "Buscar Taxa de Referência do BCE" para solicitar taxas de api.frankfurter.dev.',
-  },
 };

@@ -257,7 +257,7 @@ export const SEO_TOOLS_PART_1: ToolDefinition[] = [
       'Build clean Schema.org JSON-LD structured data blocks for `Article`, `FAQPage`, `Product`, `Organization`, and `BreadcrumbList`—complete with dynamic row builders, HTML-safe `<` escaping inside script tags, and `.jsonld` export.',
     relatedToolSlugs: [
       'meta-tag-generator',
-      'json-formatter',
+      'json-csv-converter',
       'on-page-seo-checker',
       'serp-snippet-preview',
     ],

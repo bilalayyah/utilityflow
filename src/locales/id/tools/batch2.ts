@@ -9,34 +9,6 @@ import type { ToolLocaleOverride } from '../../types';
  * English slugs or reserved paths.
  */
 export const ID_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
-  'json-formatter': {
-    slug: 'pemformat-json',
-    name: 'Pemformat JSON & Validator',
-    shortDescription:
-      'Format, minify, urutkan kunci, dan validasi sintaks JSON dengan penunjuk kesalahan baris dan kolom.',
-    keywords: [
-      'pemformat json',
-      'validator json',
-      'json beautifier',
-      'json minifier',
-      'cetak json rapi',
-      'pencetak json rapi',
-      'format json online',
-      'pemeriksa sintaks json',
-      'json lint',
-    ],
-    seo: {
-      title: 'Pemformat JSON & Validator – Cetak JSON Rapi | UtilityFlow',
-      description:
-        'Format, validasi, minify, dan urutkan kunci dalam payload JSON secara instan di browser Anda, dengan detail kesalahan sintaks baris dan kolom untuk debug cepat.',
-      primaryKeyword: 'pemformat json',
-      secondaryKeywords: ['validator json', 'json beautifier', 'json minifier', 'cetak json rapi'],
-      longTailKeywords: ['validasi dan cetak json rapi online gratis', 'urutkan kunci json alfabetis di browser', 'minify payload json tanpa unggah server', 'format json bersarang dengan indentasi online'],
-      schemaApplicationCategory: 'DeveloperApplication',
-    },
-    intro:
-      'Validasi payload JSON yang cacat dengan umpan balik baris dan kolom, format struktur bersarang dengan indentasi 2 spasi, 4 spasi, atau tab, urutkan kunci secara alfabetis, atau minify untuk pengiriman produksi.',
-  },
   'base64-encoder-decoder': {
     slug: 'encoder-decoder-base64',
     name: 'Encoder / Decoder Base64',

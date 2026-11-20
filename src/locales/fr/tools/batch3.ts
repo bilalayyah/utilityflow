@@ -538,44 +538,4 @@ export const FR_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
     intro:
       'Convertissez instantanément dans sept familles de mesures — longueur, poids et masse, température, surface, volume, vitesse et stockage numérique — avec un tableau automatique côte à côte montrant chaque unité de la catégorie.',
   },
-  'currency-calculator': {
-    slug: 'convertisseur-devises',
-    name: 'Calculatrice de Devises',
-    shortDescription:
-      'Convertissez les devises avec votre taux de change manuel exact ou des taux de référence BCE facultatifs, avec calcul des frais de change.',
-    apiNotice:
-      'Nécessite une API externe pour les taux de change en direct et n’utilise jamais de taux hors ligne inventés. Utilise par défaut le taux de change saisi manuellement (1,0000), ou cliquez sur « Récupérer le taux de référence BCE » pour demander les taux à api.frankfurter.dev.',
-    keywords: [
-      'calculatrice de devises',
-      'calculatrice de taux de change',
-      'calculatrice de frais de change',
-      'convertisseur de devises manuel',
-      'convertisseur usd vers eur',
-      'convertisseur de devises avec frais',
-      'calculatrice de majoration de taux de change',
-      'calculatrice de frais de transaction étrangère',
-      'calculatrice de taux de change inverse',
-    ],
-    seo: {
-      title: 'Calculatrice de Devises – Taux, Frais et BCE | UtilityFlow',
-      description:
-        'Convertissez entre les grandes devises avec votre taux coté et ajoutez les frais de change pour voir le montant net, ou récupérez un taux BCE en ligne.',
-      primaryKeyword: 'calculatrice de devises',
-      secondaryKeywords: [
-        'calculatrice de frais de taux de change',
-        'convertisseur de devises manuel',
-        'calculatrice d’écart de change',
-        'convertisseur de taux de référence bce',
-      ],
-      longTailKeywords: [
-        'convertir devise avec taux de change bancaire personnalisé et frais',
-        'calculatrice de devises sans taux codés en dur inventés',
-        'calculer montant net en devise étrangère après majoration',
-        'combien vais-je recevoir après frais de conversion de devise',
-      ],
-      schemaApplicationCategory: 'FinanceApplication',
-    },
-    intro:
-      'Convertissez entre les grandes devises mondiales en toute transparence en utilisant le taux de change exact coté par votre banque, votre courtier ou votre facture — avec déduction facultative des frais de change, calcul du taux inverse et consultation à la demande du taux de référence BCE.',
-  },
 };

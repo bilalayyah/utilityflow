@@ -10,14 +10,11 @@ export const itStrings: UiStrings = {
   nav: {
     tools: 'Strumenti',
     categories: 'Categorie',
-    aiTools: 'Strumenti IA',
     about: 'Chi siamo',
     contact: 'Contatti',
     blog: 'Blog',
     allTools: 'Tutti gli strumenti',
-    freeAiTools: 'Strumenti IA gratuiti',
-    viewAiSection: 'Vedi la sezione IA sulla home →',
-    searchPlaceholder: 'Cerca tra 88 strumenti...',
+    searchPlaceholder: 'Cerca tra 83 strumenti...',
     searchTools: 'Cerca strumenti',
     closeSearch: 'Chiudi la ricerca',
     openMenu: 'Apri il menu di navigazione',
@@ -25,24 +22,12 @@ export const itStrings: UiStrings = {
     skipToContent: 'Vai al contenuto',
     language: 'Lingua',
     chooseLanguage: 'Scegli la lingua',
-    aiWriting: {
-      label: 'Assistente di scrittura IA',
-      desc: 'Grammatica, riscrittura, tono e bozze di email',
-    },
-    aiSummarizer: {
-      label: 'Riassuntore di testo IA',
-      desc: 'Riassunti brevi, medi e in elenchi puntati',
-    },
-    aiFinder: {
-      label: 'Cercatore di strumenti IA',
-      desc: 'Trova lo strumento giusto in linguaggio semplice',
-    },
   },
   footer: {
     tagline:
       'Una raccolta veloce di utilità quotidiane nel browser per scrittori, ingegneri, marketer e analisti. Pensata per funzionare in locale con il minimo carico.',
     categories: 'Categorie',
-    platformAi: 'Piattaforma e IA',
+    platformAi: 'Esplora',
     trustLegal: 'Fiducia e Note legali',
     home: 'Home',
     allToolsDirectory: 'Directory di tutti gli strumenti',
@@ -81,7 +66,6 @@ export const itStrings: UiStrings = {
     tryAgain: 'Riprova',
     openTool: 'Apri lo strumento',
     browserSide: 'Nel browser',
-    freeAiTool: 'Strumento IA gratuito',
     externalApi: 'API esterna',
   },
   home: {
@@ -100,24 +84,15 @@ export const itStrings: UiStrings = {
     eyebrow: 'Piattaforma UtilityFlow · 7 categorie principali · {count} utilità attive',
     h1: 'Utilità online pratiche, pensate per la velocità e la privacy.',
     heroDescription:
-      'UtilityFlow raccoglie 84 utilità pensate per il browser, oltre alla scrittura IA gratuita, al riassunto e alla ricerca intelligente degli strumenti, per testi, sviluppo, calcoli, social media, PDF, SEO e immagini.',
+      'UtilityFlow raccoglie 83 utilità pensate per il browser per testi, sviluppo, calcoli, social media, PDF, SEO e immagini.',
     exploreCategories: 'Esplora le categorie',
     openDirectory: 'Apri la directory completa',
-    aiWriting: 'Scrittura IA',
-    aiSummarizer: 'Riassuntore IA',
-    aiFinder: 'Cercatore di strumenti IA',
     metrics: {
       toolCategories: 'Categorie di strumenti',
       browserUtilities: 'Utilità nel browser',
       liveTools: 'Strumenti attivi',
       accountRequired: 'Account richiesto',
       none: 'Nessuno',
-    },
-    aiSpotlight: {
-      badge: 'Suite IA gratuita · Nessun accesso richiesto',
-      title: 'Strumenti IA gratuiti',
-      description:
-        'Migliora le tue bozze, riassumi documenti lunghi o trova lo strumento giusto in pochi secondi, senza registrarti.',
     },
     popular: {
       title: 'Strumenti popolari',
@@ -177,22 +152,22 @@ export const itStrings: UiStrings = {
       {
         question: 'Gli strumenti di UtilityFlow sono gratuiti e utilizzabili senza creare un account?',
         answer:
-          'Sì. Tutti gli 84 strumenti nel browser, i 3 strumenti IA e la Calcolatrice di Valute di UtilityFlow sono disponibili gratuitamente, senza registrazione, senza barriere di accesso, senza crediti e senza abbonamento.',
+          'Sì. Tutti gli 83 strumenti nel browser di UtilityFlow sono disponibili gratuitamente, senza registrazione, senza barriere di accesso, senza crediti e senza abbonamento.',
       },
       {
         question: 'UtilityFlow carica i miei testi, il mio codice o i miei file su un server?',
         answer:
-          'Tutti gli 84 strumenti principali nel browser funzionano in locale nel tuo browser web senza caricare i dati inseriti. I nostri 3 strumenti IA gratuiti opzionali (Assistente di scrittura IA, Riassuntore di testo IA e Cercatore di strumenti IA) elaborano le richieste in modo sicuro tramite inferenza Groq lato server, senza memorizzare i tuoi testi.',
+          'Tutti gli 83 strumenti principali nel browser funzionano in locale nel tuo browser web senza caricare i dati inseriti.',
       },
       {
-        question: 'Come sono organizzati gli 88 strumenti sulla piattaforma?',
+        question: 'Come sono organizzati gli 83 strumenti sulla piattaforma?',
         answer:
-          'UtilityFlow copre sette categorie principali (Testo e scrittura, Sviluppatori, Calcolatrici, Social media, PDF, SEO e Strumenti per immagini e file), per un totale di 84 strumenti nel browser, 3 strumenti IA gratuiti e la Calcolatrice di Valute integrati nella piattaforma.',
+          'UtilityFlow copre sette categorie principali (Testo e scrittura, Sviluppatori, Calcolatrici, Social media, PDF, SEO e Strumenti per immagini e file), per un totale di 83 strumenti nel browser integrati nella piattaforma.',
       },
       {
         question: 'Posso salvare nei preferiti o condividere un collegamento diretto a uno strumento specifico?',
         answer:
-          'Sì. Ogni strumento e ogni categoria ha il proprio URL permanente e pulito (come /word-counter/, /ai-writing-assistant/ o /category/developer-tools/) che si carica direttamente e funziona anche dopo l’aggiornamento del browser.',
+          'Sì. Ogni strumento e ogni categoria ha il proprio URL permanente e pulito (come /word-counter/ o /category/developer-tools/) che si carica direttamente e funziona anche dopo l’aggiornamento del browser.',
       },
       {
         question: 'UtilityFlow funziona bene su telefoni cellulari e tablet?',
@@ -209,7 +184,7 @@ export const itStrings: UiStrings = {
     seoKeywords: ['directory degli strumenti', 'tutti gli strumenti online', 'strumenti gratuiti nel browser'],
     title: 'Directory di tutti gli strumenti',
     description:
-      'Sfoglia tutte le {count} utilità attive registrate su UtilityFlow o esplora i sette hub di categoria tra flussi nel browser e IA gratuita.',
+      'Sfoglia tutte le {count} utilità attive registrate su UtilityFlow o esplora i sette hub di categoria.',
     searchPlaceholder: 'Cerca per nome di strumento, parola chiave o categoria...',
     showing: 'Mostra {tools} strumenti attivi in {categories} categorie',
     all: 'Tutti',
@@ -240,7 +215,6 @@ export const itStrings: UiStrings = {
     commonUseCases: 'Casi d’uso comuni',
     runsLocally: 'Funziona in locale nel tuo browser',
     externalApi: 'Integrazione con API esterna',
-    freeAiTool: 'Strumento IA gratuito · Nessun accesso',
     loadingWorkspace: 'Caricamento dello spazio di lavoro {name}...',
     input: 'Input',
     output: 'Output',
@@ -325,7 +299,7 @@ export const itStrings: UiStrings = {
       'Scopri come UtilityFlow crea utilità veloci e attente alla privacy per il browser in sette categorie, senza account, confusione o caricamenti di dati inutili.',
     title: 'Chi è UtilityFlow',
     intro:
-      'UtilityFlow è una piattaforma web indipendente che costruisce 88 utilità mirate e affidabili per il lavoro digitale quotidiano.',
+      'UtilityFlow è una piattaforma web indipendente che costruisce 83 utilità mirate e affidabili per il lavoro digitale quotidiano.',
     whyTitle: 'Perché abbiamo creato UtilityFlow',
     whyP1:
       'Le attività online di routine — contare le parole, convalidare JSON, verificare i limiti di caratteri, calcolare le rate di un prestito o comprimere un’immagine — spesso costringono a passare da siti lenti, pieni di finestre invadenti, download confusi o registrazioni obbligatorie.',
@@ -333,14 +307,14 @@ export const itStrings: UiStrings = {
       'Il nostro obiettivo è semplice: dare a ogni utilità una pagina pulita e dedicata che si carica velocemente, spiega chiaramente come funziona lo strumento e viene eseguita direttamente nel tuo browser ogni volta che gli standard del web lo consentono.',
     orgTitle: 'Chi gestisce UtilityFlow',
     orgP1:
-      'UtilityFlow è un progetto indipendente creato e gestito da Bilal, un creatore che costruisce strumenti web gratuiti nel suo tempo libero. Dietro al sito non c’è nessuna azienda, nessun finanziamento di investitori e nessun team di dipendenti: ogni strumento, guida e pagina di aiuto è progettato, realizzato e testato da una sola persona. Tutti gli 88 strumenti sono gratuiti, senza account né abbonamenti. La riga nel piè di pagina nomina Shaheen, il cui incoraggiamento ha ispirato il progetto e il cui nome compare su ogni pagina come promemoria di dove è nata l’idea.',
+      'UtilityFlow è un progetto indipendente creato e gestito da Bilal, un creatore che costruisce strumenti web gratuiti nel suo tempo libero. Dietro al sito non c’è nessuna azienda, nessun finanziamento di investitori e nessun team di dipendenti: ogni strumento, guida e pagina di aiuto è progettato, realizzato e testato da una sola persona. Tutti gli 83 strumenti sono gratuiti, senza account né abbonamenti. La riga nel piè di pagina nomina Shaheen, il cui incoraggiamento ha ispirato il progetto e il cui nome compare su ogni pagina come promemoria di dove è nata l’idea.',
     orgP2:
       'Poiché il progetto è piccolo e indipendente, le decisioni restano semplici: se uno strumento è lento, poco chiaro o sbagliato, viene corretto. I messaggi inviati dalla pagina Contatti arrivano direttamente alla persona che può modificare il codice, e i suggerimenti dei visitatori hanno già ispirato nuovi strumenti e miglioramenti in tutto il sito.',
     howTitle: 'Come vengono creati e testati i nostri strumenti',
     howP1:
       'Ogni utilità nasce da un unico compito chiaro — contare parole, unire PDF, formattare JSON — ed è costruita come una pagina mirata che svolge bene quel compito. Ovunque gli standard del web lo consentono, il lavoro avviene interamente nel tuo browser, così i tuoi testi e i tuoi file non devono mai lasciare il tuo dispositivo. Ogni pagina di strumento spiega i passaggi con una breve guida, mostra esempi concreti e risponde alle domande più frequenti, così puoi valutare il risultato invece di fidarti di una scatola nera.',
     howP2:
-      'Prima che uno strumento venga pubblicato, viene provato con input reali in un browser desktop e in uno mobile, compresi i casi limite come input vuoto, testi molto lunghi e tipi di file insoliti. Quando qualcosa si rompe o un calcolo sembra sbagliato, la correzione viene distribuita come aggiornamento del sito e la pagina viene ricontrollata. I tre strumenti IA opzionali sono gli unici che inviano testo a un server, e le loro pagine lo dicono chiaramente prima che tu li usi.',
+      'Prima che uno strumento venga pubblicato, viene provato con input reali in un browser desktop e in uno mobile, compresi i casi limite come input vuoto, testi molto lunghi e tipi di file insoliti. Quando qualcosa si rompe o un calcolo sembra sbagliato, la correzione viene distribuita come aggiornamento del sito e la pagina viene ricontrollata. Ogni strumento funziona interamente nel tuo browser: nulla di ciò che inserisci viene mai inviato a un server.',
     whoTitle: 'A chi è rivolto UtilityFlow',
     whoP1:
       'UtilityFlow è pensato per chiunque abbia bisogno di una risposta rapida da uno strumento senza installare software né creare un account: studenti che controllano il numero di parole di un saggio, scrittori che formattano una bozza, sviluppatori che convalidano JSON o codificano un URL, marketer che verificano i limiti di caratteri e piccoli imprenditori che calcolano un prestito o uno sconto. Se un’attività richiede meno di un minuto, anche lo strumento dovrebbe richiederne meno di uno: è questo lo standard a cui è tenuta ogni pagina del sito.',
@@ -438,10 +412,9 @@ export const itStrings: UiStrings = {
         ],
       },
       {
-        title: '2. Dati degli strumenti, elaborazione nel browser e strumenti IA gratuiti',
+        title: '2. Dati degli strumenti ed elaborazione nel browser',
         paragraphs: [
-          'Testi, numeri, frammenti di codice e file inseriti nei nostri 84 strumenti nel browser vengono elaborati localmente nella sessione del browser, senza lasciare il tuo dispositivo.',
-          'I nostri tre strumenti IA gratuiti (Assistente di scrittura IA, Riassuntore di testo IA e Cercatore di strumenti IA) inviano il testo inviato tramite il nostro backend protetto a Groq per l’inferenza in tempo reale. Non memorizziamo né registriamo le tue richieste, e i limiti giornalieri gratuiti utilizzano solo un hash SHA-256 datato in UTC, così gli indirizzi IP grezzi dei visitatori non vengono mai memorizzati.',
+          'Testi, numeri, frammenti di codice e file inseriti nei nostri 83 strumenti nel browser vengono elaborati localmente nella sessione del browser, senza lasciare il tuo dispositivo.',
           'I commenti pubblicati sotto i nostri strumenti richiedono solo un nome e il testo del commento. Il nome e il testo che invii vengono memorizzati sulla nostra piattaforma di hosting e mostrati pubblicamente nella pagina di quello strumento, insieme alla data. Non chiediamo un indirizzo email né un account per commentare e non usiamo i dati dei commenti per la pubblicità. Se vuoi far rimuovere un commento, contattaci indicando la pagina e il nome usato e lo elimineremo.',
         ],
       },
@@ -469,7 +442,7 @@ export const itStrings: UiStrings = {
       {
         title: '6. Conservazione dei dati',
         paragraphs: [
-          'Le informazioni elaborate nel tuo browser non ci vengono mai inviate, quindi non c’è nulla da conservare. Il testo inviato agli strumenti IA opzionali viene elaborato per la richiesta e non viene memorizzato. I commenti vengono conservati finché non vengono eliminati, da noi o su tua richiesta. I registri di hosting e di sicurezza vengono conservati solo per il periodo limitato di cui il nostro fornitore di hosting ha bisogno per gestire e proteggere il servizio.',
+          'Le informazioni elaborate nel tuo browser non ci vengono mai inviate, quindi non c’è nulla da conservare. I commenti vengono conservati finché non vengono eliminati, da noi o su tua richiesta. I registri di hosting e di sicurezza vengono conservati solo per il periodo limitato di cui il nostro fornitore di hosting ha bisogno per gestire e proteggere il servizio.',
         ],
       },
       {
@@ -539,7 +512,7 @@ export const itStrings: UiStrings = {
       {
         title: '7. Servizi di terze parti',
         paragraphs: [
-          'Alcune funzioni si basano su servizi indipendenti di terze parti: i tre strumenti IA inviano testo a Groq per l’elaborazione, il modulo di contatto è gestito da FormSubmit, il sito è ospitato su Cloudflare e il Convertitore di valuta recupera i tassi di cambio in tempo reale da Frankfurter. Ciascuno di questi servizi ha i propri termini e la propria informativa sulla privacy, e il loro uso è regolato da quei documenti. UtilityFlow non è responsabile della disponibilità o delle pratiche dei servizi di terze parti.',
+          'Alcune funzioni si basano su servizi indipendenti di terze parti: il modulo di contatto è gestito da FormSubmit e il sito è ospitato su Cloudflare. Ciascuno di questi servizi ha i propri termini e la propria informativa sulla privacy, e il loro uso è regolato da quei documenti. UtilityFlow non è responsabile della disponibilità o delle pratiche dei servizi di terze parti.',
         ],
       },
       {

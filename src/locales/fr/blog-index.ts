@@ -568,60 +568,6 @@ export const FR_ARTICLE_INDEX: Record<string, ArticleLocaleSlimOverride> = {
     "description": "Numérotation de lignes pour SQL et code : choisissez le bon format, le séparateur et le préfixe, et évitez les erreurs qui cassent requêtes et scripts.",
     "readingMinutes": 14
   },
-  "ai-tool-finder-guide": {
-    "slug": "recherche-d-outils-par-ia",
-    "title": "Recherche d'outils par IA : trouvez le bon outil en décrivant votre tâche (guide complet)",
-    "description": "Trouvez le bon outil en décrivant votre tâche en langage simple : la recherche par IA associe votre besoin au bon outil UtilityFlow, et fait gagner du temps.",
-    "readingMinutes": 14
-  },
-  "ai-tool-finder-howto": {
-    "slug": "comment-trouver-le-bon-outil-en-ligne-avec-ia",
-    "title": "Comment trouver le bon outil en ligne pour n'importe quelle tâche (avec l'IA)",
-    "description": "Apprenez à trouver le bon outil pour toute tâche avec l'IA : décrivez votre travail en langage simple, lisez la correspondance et ouvrez le meilleur outil.",
-    "readingMinutes": 14
-  },
-  "ai-tool-finder-advanced": {
-    "slug": "chercheur-d-outils-ia-ou-recherche-manuelle",
-    "title": "Chercheur d'outils IA ou recherche manuelle : quand la correspondance IA gagne (et quand elle ne gagne pas)",
-    "description": "Comparez l'outil de recherche par IA et la navigation manuelle : voyez quand la correspondance IA gagne, quand elle perd, et comment combiner les deux méthodes.",
-    "readingMinutes": 14
-  },
-  "ai-text-summarizer-guide": {
-    "slug": "resume-de-texte-par-ia",
-    "title": "Résumé de texte par IA : comment ça marche et quand s'en servir (guide complet)",
-    "description": "Résumez vos textes par IA : en quoi les résumés courts, moyens et longs diffèrent, et comment les points clés vous aident à lire plus vite en ligne chaque jour.",
-    "readingMinutes": 13
-  },
-  "ai-text-summarizer-howto": {
-    "slug": "comment-resumer-de-longs-articles",
-    "title": "Comment résumer de longs articles et rapports en quelques secondes",
-    "description": "Apprenez à résumer de longs articles, rapports et notes en quelques secondes : nettoyez le texte, choisissez une longueur et un format, puis vérifiez le résumé.",
-    "readingMinutes": 14
-  },
-  "ai-text-summarizer-advanced": {
-    "slug": "precision-des-resumeurs-ia",
-    "title": "Précision des outils de résumé IA : ce qu'ils réussissent, ce qu'ils manquent, et comment vérifier",
-    "description": "Précision des outils de résumé IA expliquée : ce que les résumés IA réussissent, ce qu'ils manquent, et comment vérifier un résumé avant de lui faire confiance.",
-    "readingMinutes": 13
-  },
-  "ai-writing-assistant-guide": {
-    "slug": "qu-est-ce-qu-un-assistant-d-ecriture-ia",
-    "title": "Qu'est-ce qu'un assistant d'écriture IA ? Guide complet",
-    "description": "Découvrez l'assistant d'écriture IA : corriger la grammaire, réécrire des phrases, ajuster le ton, paraphraser un texte et rédiger des e-mails, gratuitement.",
-    "readingMinutes": 14
-  },
-  "ai-writing-assistant-howto": {
-    "slug": "comment-corriger-la-grammaire-reecrire-avec-ia",
-    "title": "Comment corriger la grammaire et réécrire des phrases avec un assistant d'écriture IA",
-    "description": "Apprenez à corriger la grammaire avec l'IA étape par étape : corriger les erreurs, réécrire les phrases, ajuster le ton et vérifier le résultat avant l'envoi.",
-    "readingMinutes": 14
-  },
-  "ai-writing-assistant-advanced": {
-    "slug": "assistant-d-ecriture-ia-ou-relecture-manuelle",
-    "title": "Assistant d'écriture IA ou relecture manuelle : meilleurs réglages, choix de ton et limites",
-    "description": "Assistant d'écriture IA ou relecture manuelle : meilleurs réglages, choix de ton, bonnes pratiques de paraphrase, limites et relecture humaine nécessaire.",
-    "readingMinutes": 14
-  },
   "case-converter-guide": {
     "slug": "qu-est-ce-qu-un-convertisseur-de-casse",
     "title": "Qu'est-ce qu'un convertisseur de casse ? Guide complet des formats de casse de texte",
@@ -946,24 +892,6 @@ export const FR_ARTICLE_INDEX: Record<string, ArticleLocaleSlimOverride> = {
     "description": "Intérêts composés contre intérêts simples comparés avec des exemples concrets : découvrez combien la capitalisation rapporte de plus sur 10, 20 et 30 ans.",
     "readingMinutes": 13
   },
-  "currency-calculator-guide": {
-    "slug": "qu-est-ce-qu-un-convertisseur-de-devises",
-    "title": "Qu'est-ce qu'un convertisseur de devises ? Guide complet",
-    "description": "Découvrez ce que fait un convertisseur de devises, comment fonctionnent les taux manuels et les taux de référence de la BCE, et comment les frais de change",
-    "readingMinutes": 14
-  },
-  "currency-calculator-howto": {
-    "slug": "comment-convertir-des-devises",
-    "title": "Comment convertir des devises (et tenir compte des frais de change)",
-    "description": "Suivez la conversion de devises étape par étape avec un taux manuel ou un taux de référence de la BCE, ajoutez les frais de change, et vérifiez le montant",
-    "readingMinutes": 14
-  },
-  "currency-calculator-advanced": {
-    "slug": "taux-de-reference-bce-vs-taux-bancaire-vs-taux-moyen",
-    "title": "Taux de référence de la BCE contre taux bancaires contre taux moyen du marché : quel taux de change s'applique à vous",
-    "description": "Taux de référence de la BCE, taux bancaires et taux moyens du marché comparés : découvrez quel taux de change s'applique à votre conversion et pourquoi.",
-    "readingMinutes": 15
-  },
   "date-difference-calculator-guide": {
     "slug": "difference-entre-deux-dates",
     "title": "Différence entre deux dates : années, mois, jours et jours ouvrés (guide complet)",
@@ -1269,24 +1197,6 @@ export const FR_ARTICLE_INDEX: Record<string, ArticleLocaleSlimOverride> = {
     "title": "Minification JavaScript, bundler ou transpileur : ce que chacun fait réellement",
     "description": "Minification, bundler ou transpileur : comparez ce que chacun fait de votre code, quand l'utiliser, et pourquoi minifier seul ne suffit pas — guide gratuit.",
     "readingMinutes": 14
-  },
-  "json-formatter-guide": {
-    "slug": "json-formatage-validation",
-    "title": "Qu'est-ce que JSON ? Guide complet de formatage et de validation",
-    "description": "Découvrez ce qu'est JSON, comment fonctionnent le formatage, la minification et la validation, et comment le repérage d'erreur par ligne aide à déboguer vite.",
-    "readingMinutes": 14
-  },
-  "json-formatter-howto": {
-    "slug": "comment-formater-et-valider-le-json",
-    "title": "Comment formater et valider le JSON (et corriger les erreurs de syntaxe)",
-    "description": "Apprenez à formater, minifier, trier et valider le JSON pas à pas, et à corriger les erreurs de syntaxe les plus courantes : virgules finales et guillemets.",
-    "readingMinutes": 13
-  },
-  "json-formatter-advanced": {
-    "slug": "erreurs-de-syntaxe-json-courantes-et-corrections",
-    "title": "Erreurs de syntaxe JSON courantes et comment les corriger (virgules finales, guillemets, etc.)",
-    "description": "Corrigez rapidement les erreurs de syntaxe JSON les plus courantes : virgules finales, guillemets simples, clés non citées, virgules manquantes et crochets.",
-    "readingMinutes": 13
   },
   "json-csv-converter-guide": {
     "slug": "qu-est-ce-que-la-conversion-json-vers-csv",

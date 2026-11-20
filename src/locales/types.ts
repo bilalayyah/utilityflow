@@ -32,7 +32,7 @@ export interface ToolLocaleOverride {
   benefits?: string[];
   useCases?: string[];
   faqs?: ToolFAQ[];
-  /** Only for tools that carry an apiNotice in English (3 AI tools + currency converter). */
+  /** Optional notice shown when a tool needs an external API (e.g. live exchange rates). No current tool carries one — the API-backed tools (3 AI tools + Currency Calculator) were removed — but the field is kept for any future API-backed tool. */
   apiNotice?: string;
 }
 

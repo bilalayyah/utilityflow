@@ -568,60 +568,6 @@ export const RU_ARTICLE_INDEX: Record<string, ArticleLocaleSlimOverride> = {
     "description": "Форматы нумерации строк для SQL и кода: кавычки для текста, числа без кавычек, экранирование, завершающая запятая и строгие правила JSON — с чек-листом.",
     "readingMinutes": 11
   },
-  "ai-tool-finder-guide": {
-    "slug": "poisk-instrumentov-ai-onlajn",
-    "title": "Умный поиск инструментов с ИИ: полное руководство",
-    "description": "Узнайте, что такое умный поиск инструментов с ИИ, как он подбирает инструмент по описанию задачи среди 88 инструментов и когда он лучше ручного поиска.",
-    "readingMinutes": 11
-  },
-  "ai-tool-finder-howto": {
-    "slug": "kak-najti-nuzhnyj-onlajn-instrument",
-    "title": "Как найти нужный онлайн-инструмент для любой задачи",
-    "description": "Пошагово: как найти нужный онлайн-инструмент для любой задачи — опишите задачу, прочитайте мгновенные совпадения, запустите ИИ-поиск и проверьте результат.",
-    "readingMinutes": 11
-  },
-  "ai-tool-finder-advanced": {
-    "slug": "ai-poisk-instrumentov-protiv-ruchnogo-poiska",
-    "title": "ИИ-поиск инструментов или ручной поиск: что лучше",
-    "description": "Сравнение ИИ-поиска инструментов и ручного поиска: когда ИИ-подбор выигрывает, когда быстрее искать вручную и как сочетать оба способа для лучшего результата.",
-    "readingMinutes": 11
-  },
-  "ai-text-summarizer-guide": {
-    "slug": "ai-summarizator-teksta-onlajn",
-    "title": "Что такое ИИ-суммаризатор текста? Полное руководство",
-    "description": "Узнайте, что такое ИИ-суммаризатор текста, какие длины и форматы изложения он предлагает и как получить краткое изложение статьи или отчёта за секунды.",
-    "readingMinutes": 11
-  },
-  "ai-text-summarizer-howto": {
-    "slug": "kak-sokratit-dlinnuyu-statyu-onlajn",
-    "title": "Как сократить длинную статью или отчёт за секунды",
-    "description": "Пошагово: как сократить длинную статью или отчёт — скопируйте чистый текст, выберите длину и формат, создайте изложение и сверьте цифры и даты с оригиналом.",
-    "readingMinutes": 11
-  },
-  "ai-text-summarizer-advanced": {
-    "slug": "tochnost-ai-summarizatora-ogranicheniya",
-    "title": "Точность ИИ-суммаризатора: что он упускает и как проверить",
-    "description": "Насколько точны ИИ-изложения текста: что суммаризатор понимает верно, что упускает — цифры, оговорки и нюансы — и как проверить изложение по чек-листу.",
-    "readingMinutes": 11
-  },
-  "ai-writing-assistant-guide": {
-    "slug": "ai-assistent-dlya-napisaniya-teksta",
-    "title": "Что такое ИИ-ассистент для письма? Полное руководство",
-    "description": "Узнайте, что умеет ИИ-ассистент для письма: правка грамматики, переписывание, смена тона, перефразирование и черновики писем — бесплатно, до 5 запросов в день.",
-    "readingMinutes": 11
-  },
-  "ai-writing-assistant-howto": {
-    "slug": "kak-ispravit-grammatiku-i-perepisat-tekst",
-    "title": "Как исправить грамматику и переписать текст с помощью ИИ",
-    "description": "Пошагово: как исправить грамматику и переписать предложения с ИИ — выберите задачу, исправьте грамматику, перепишите текст, настройте тон и проверьте результат.",
-    "readingMinutes": 11
-  },
-  "ai-writing-assistant-advanced": {
-    "slug": "ai-assistent-protiv-ruchnogo-redaktirovaniya",
-    "title": "ИИ-ассистент или ручное редактирование: настройки и тон",
-    "description": "Сравнение ИИ-ассистента и ручного редактирования: где выигрывает ИИ, где нужен человек, лучшие настройки, выбор тона и гибридный рабочий процесс — с примерами.",
-    "readingMinutes": 11
-  },
   "case-converter-guide": {
     "slug": "konverter-registra-teksta-onlajn",
     "title": "Что такое конвертер регистра? Полное руководство по форматам",
@@ -946,24 +892,6 @@ export const RU_ARTICLE_INDEX: Record<string, ArticleLocaleSlimOverride> = {
     "description": "Сравнение сложного и простого процента с готовыми примерами: посмотрите, насколько больше приносит начисление за 10, 20 и 30 лет. Проверьте свои числа сейчас.",
     "readingMinutes": 11
   },
-  "currency-calculator-guide": {
-    "slug": "chto-takoe-kalkulyator-valyut",
-    "title": "Что такое калькулятор валют? Полное руководство",
-    "description": "Узнайте, что делает калькулятор валют, как работают ручной курс и справочный курс ЕЦБ и как комиссии за обмен меняют сумму, которую вы получите, — с примерами.",
-    "readingMinutes": 11
-  },
-  "currency-calculator-howto": {
-    "slug": "kak-konvertirovat-valyutu",
-    "title": "Как конвертировать валюту (и учесть комиссии за обмен)",
-    "description": "Пошаговая конвертация валюты с ручным курсом или справочным курсом ЕЦБ: добавьте комиссию FX и проверьте сумму, которую вы получите, — бесплатно онлайн.",
-    "readingMinutes": 11
-  },
-  "currency-calculator-advanced": {
-    "slug": "kurs-etsb-protiv-bankovskogo-i-sredneryochnogo",
-    "title": "Курс ЕЦБ против банковского и среднерыночного: какой курс для вас",
-    "description": "Сравните справочные курсы ЕЦБ, банковские курсы и среднерыночные курсы, чтобы увидеть, какой курс применяется к вашей конвертации и почему банки берут больше.",
-    "readingMinutes": 11
-  },
   "date-difference-calculator-guide": {
     "slug": "chto-takoe-kalkulyator-raznitsy-dat",
     "title": "Что такое калькулятор разницы дат? Полное руководство",
@@ -1268,24 +1196,6 @@ export const RU_ARTICLE_INDEX: Record<string, ArticleLocaleSlimOverride> = {
     "slug": "minifikator-javascript-sborshchik-transpilyator",
     "title": "Минификатор, сборщик и транспилятор JavaScript: что делает каждый",
     "description": "Сравниваем минификатор, сборщик и транспилятор JavaScript: что каждый делает с кодом, когда нужен каждый и почему одной минификации недостаточно для проекта.",
-    "readingMinutes": 11
-  },
-  "json-formatter-guide": {
-    "slug": "chto-takoe-json-format-zapisej",
-    "title": "Что такое JSON? Полное руководство по форматированию и проверке",
-    "description": "Узнайте, что такое JSON, как работают форматирование, минификация и проверка, и как указание строки и столбца ошибки помогает быстро отладить JSON онлайн.",
-    "readingMinutes": 11
-  },
-  "json-formatter-howto": {
-    "slug": "kak-formatirovat-i-proveryat-json",
-    "title": "Как форматировать и проверять JSON: пошаговая инструкция",
-    "description": "Как форматировать JSON онлайн: вставка, форматирование, минификация, сортировка ключей и проверка. Исправляем запятые, кавычки и скобки — пошагово и бесплатно.",
-    "readingMinutes": 11
-  },
-  "json-formatter-advanced": {
-    "slug": "oshibki-sintaksisa-json-kak-ispravit",
-    "title": "Ошибки синтаксиса JSON: 10 частых ошибок и как их исправить",
-    "description": "Распространённые ошибки синтаксиса JSON и как их исправить: лишняя запятая, одинарные кавычки, ключи без кавычек, скобки и комментарии — с примерами онлайн.",
     "readingMinutes": 11
   },
   "json-csv-converter-guide": {

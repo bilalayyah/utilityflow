@@ -1,5 +1,5 @@
-import { ChevronDown, Menu, Search, Sparkles, X } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
+import { Menu, Search, X } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { SITE_CONFIG } from '../../config/site';
 import { LanguageSwitcher } from '../../locales/LanguageSwitcher';
@@ -11,70 +11,24 @@ import { ThemeToggle } from './ThemeToggle';
 export function Header() {
   const { locale, t } = useLocale();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [aiMenuOpen, setAiMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
-  const aiMenuRef = useRef<HTMLDivElement | null>(null);
   const location = useLocation();
 
   const homePrefix = getLocaleInfo(locale).pathPrefix;
   const categoriesAnchor = `${homePrefix}/#categories`;
-  const aiAnchor = `${homePrefix}/#ai-tools`;
-
-  const AI_NAV_ITEMS = [
-    {
-      label: t.nav.aiWriting.label,
-      to: localizeStaticPath('/ai-writing-assistant/', locale),
-      desc: t.nav.aiWriting.desc,
-    },
-    {
-      label: t.nav.aiSummarizer.label,
-      to: localizeStaticPath('/ai-text-summarizer/', locale),
-      desc: t.nav.aiSummarizer.desc,
-    },
-    {
-      label: t.nav.aiFinder.label,
-      to: localizeStaticPath('/ai-tool-finder/', locale),
-      desc: t.nav.aiFinder.desc,
-    },
-  ] as const;
 
   const NAV_ITEMS = [
     { label: t.nav.tools, to: localizeStaticPath('/tools/', locale) },
     { label: t.nav.categories, to: categoriesAnchor, anchor: true },
-    { label: t.nav.aiTools, to: aiAnchor, anchor: true, aiDropdown: true },
     { label: t.nav.blog, to: localizeStaticPath('/blog/', locale) },
     { label: t.nav.about, to: localizeStaticPath('/about/', locale) },
     { label: t.nav.contact, to: localizeStaticPath('/contact/', locale) },
   ] as const;
 
   useEffect(() => {
-    setAiMenuOpen(false);
     setMobileOpen(false);
     setSearchOpen(false);
   }, [location.pathname]);
-
-  useEffect(() => {
-    if (!aiMenuOpen) return;
-    const handleOutside = (event: MouseEvent) => {
-      if (aiMenuRef.current && !aiMenuRef.current.contains(event.target as Node)) {
-        setAiMenuOpen(false);
-      }
-    };
-    const handleEsc = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setAiMenuOpen(false);
-    };
-    document.addEventListener('mousedown', handleOutside);
-    document.addEventListener('keydown', handleEsc);
-    return () => {
-      document.removeEventListener('mousedown', handleOutside);
-      document.removeEventListener('keydown', handleEsc);
-    };
-  }, [aiMenuOpen]);
-
-  const isOnAiRoute = AI_NAV_ITEMS.some(
-    (ai) =>
-      location.pathname === ai.to || location.pathname === ai.to.replace(/\/$/, '')
-  );
 
   return (
     <header className="sticky top-0 z-40 border-b border-indigo-100/70 dark:border-slate-800 bg-gradient-to-r from-violet-200 via-indigo-200 to-sky-200 dark:from-violet-950/70 dark:via-indigo-950/60 dark:to-sky-950/70 backdrop-blur-md">
@@ -111,65 +65,6 @@ export function Header() {
         {/* Zone 2: Clean Single-Line Navigation Links */}
         <nav aria-label="Primary" className="hidden lg:flex min-w-0 items-center gap-6 lg:gap-7">
           {NAV_ITEMS.map((item) => {
-            if ('aiDropdown' in item && item.aiDropdown) {
-              return (
-                <div key={item.to} ref={aiMenuRef} className="relative">
-                  <button
-                    type="button"
-                    aria-expanded={aiMenuOpen}
-                    aria-haspopup="menu"
-                    aria-current={isOnAiRoute ? 'page' : undefined}
-                    onClick={() => setAiMenuOpen((prev) => !prev)}
-                    className={`inline-flex items-center gap-1 text-sm font-medium whitespace-nowrap shrink-0 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 rounded-sm cursor-pointer ${
-                      isOnAiRoute
-                        ? 'text-indigo-600'
-                        : 'text-slate-600 hover:text-slate-950'
-                    }`}
-                  >
-                    <Sparkles className="w-3.5 h-3.5 text-indigo-600" aria-hidden="true" />
-                    <span>{item.label}</span>
-                    <ChevronDown
-                      className={`w-3.5 h-3.5 transition-transform ${
-                        aiMenuOpen ? 'rotate-180' : ''
-                      }`}
-                      aria-hidden="true"
-                    />
-                  </button>
-
-                  {aiMenuOpen && (
-                    <div
-                      role="menu"
-                      aria-label={t.nav.freeAiTools}
-                      className="absolute left-0 top-full mt-2 w-72 rounded-xl border border-slate-200 bg-white p-2 shadow-lg z-50"
-                    >
-                      {AI_NAV_ITEMS.map((ai) => (
-                        <Link
-                          key={ai.to}
-                          role="menuitem"
-                          to={ai.to}
-                          onClick={() => setAiMenuOpen(false)}
-                          className="block rounded-lg px-3 py-2.5 hover:bg-slate-50 transition-colors"
-                        >
-                          <div className="text-sm font-semibold text-slate-900">{ai.label}</div>
-                          <div className="text-xs text-slate-500 mt-0.5">{ai.desc}</div>
-                        </Link>
-                      ))}
-                      <div className="mt-1 pt-1 border-t border-slate-100">
-                        <Link
-                          role="menuitem"
-                          to={aiAnchor}
-                          onClick={() => setAiMenuOpen(false)}
-                          className="block rounded-lg px-3 py-2 text-xs font-semibold text-indigo-600 hover:bg-indigo-50"
-                        >
-                          {t.nav.viewAiSection}
-                        </Link>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              );
-            }
-
             const isActive =
               !('anchor' in item && item.anchor) &&
               (location.pathname === item.to ||
@@ -247,7 +142,7 @@ export function Header() {
           aria-label="Mobile"
           className="lg:hidden border-t border-indigo-100/70 dark:border-slate-800 bg-gradient-to-b from-violet-200 via-indigo-200 to-sky-200 dark:from-violet-950/70 dark:via-indigo-950/60 dark:to-sky-950/70 px-4 py-4 space-y-2"
         >
-          {NAV_ITEMS.filter((item) => !('aiDropdown' in item && item.aiDropdown)).map((item) => (
+          {NAV_ITEMS.map((item) => (
             <Link
               key={item.to}
               to={item.to}
@@ -257,22 +152,6 @@ export function Header() {
               {item.label}
             </Link>
           ))}
-
-          <div className="pt-2 border-t border-slate-100 space-y-1">
-            <div className="px-3 py-1 text-xs font-semibold uppercase tracking-wider text-indigo-600">
-              {t.nav.freeAiTools}
-            </div>
-            {AI_NAV_ITEMS.map((ai) => (
-              <Link
-                key={ai.to}
-                to={ai.to}
-                onClick={() => setMobileOpen(false)}
-                className="flex items-center rounded-lg px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 hover:text-slate-950 min-h-[42px]"
-              >
-                {ai.label}
-              </Link>
-            ))}
-          </div>
 
           <div className="pt-2 border-t border-slate-100">
             <LanguageSwitcher variant="list" onSelect={() => setMobileOpen(false)} />

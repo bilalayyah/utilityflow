@@ -9,8 +9,8 @@ import type { CategoryLocaleOverride } from "../types";
  * pdf-gongju, seo-gongju, tuxiang-wenjian-gongju.
  * Sample tool ids per category (first 5 in registry order): text-writing:
  * word-counter, character-counter, case-converter, remove-duplicate-lines,
- * text-diff-checker; developer: json-formatter, base64-encoder-decoder,
- * url-encoder-decoder, uuid-generator, regex-tester; calculators:
+ * text-diff-checker; developer: base64-encoder-decoder,
+ * url-encoder-decoder, uuid-generator, regex-tester, jwt-decoder; calculators:
  * age-calculator, percentage-calculator, loan-emi-calculator,
  * discount-margin-calculator, date-difference-calculator; social-media:
  * qr-code-generator, utm-link-builder, social-character-limit-checker,

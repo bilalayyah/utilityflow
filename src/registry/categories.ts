@@ -87,7 +87,7 @@ export const CATEGORIES: ToolCategory[] = [
       {
         question: 'Which tool should I use to check if my JSON is valid?',
         answer:
-          'Use the JSON Formatter & Validator. Paste your JSON into it and it will format the code and show any errors.',
+          'Use any JSON formatter. Paste your JSON into it and it will format the code and show any errors.',
       },
     ],
     batch: 2,
@@ -99,14 +99,12 @@ export const CATEGORIES: ToolCategory[] = [
         'Client-side developer utilities for formatting JSON, testing regex, encoding Base64 and URLs, inspecting JWTs, and generating UUIDs safely.',
       keywords: [
         'developer tools',
-        'json formatter',
         'base64 encoder',
         'regex tester',
         'jwt decoder',
       ],
     },
     sampleToolNames: [
-      'JSON Formatter & Validator',
       'Base64 Encoder / Decoder',
       'URL Encoder / Decoder',
       'UUID Generator',

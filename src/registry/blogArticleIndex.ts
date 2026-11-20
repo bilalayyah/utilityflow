@@ -985,7 +985,6 @@ export const BLOG_ARTICLE_META: BlogArticleMeta[] = [
     "status": "published",
     "publishedAt": "2026-11-17",
     "relatedToolIds": [
-      "json-formatter",
       "on-page-seo-checker",
       "meta-tag-generator"
     ],
@@ -1004,7 +1003,6 @@ export const BLOG_ARTICLE_META: BlogArticleMeta[] = [
     "status": "published",
     "publishedAt": "2026-11-17",
     "relatedToolIds": [
-      "json-formatter",
       "meta-tag-generator",
       "on-page-seo-checker"
     ],
@@ -1850,186 +1848,6 @@ export const BLOG_ARTICLE_META: BlogArticleMeta[] = [
     }
   },
   {
-    "id": "ai-tool-finder-guide",
-    "toolId": "ai-tool-finder",
-    "categoryId": "text-writing",
-    "type": "guide",
-    "status": "published",
-    "publishedAt": "2026-11-17",
-    "relatedToolIds": [
-      "ai-text-summarizer",
-      "ai-writing-assistant",
-      "word-counter",
-      "readability-checker"
-    ],
-    "en": {
-      "slug": "what-is-ai-smart-tool-finder",
-      "title": "What Is the AI Smart Tool Finder? Complete Guide",
-      "description": "Discover what the AI Smart Tool Finder does, how it matches plain-English task descriptions to the right UtilityFlow tool, and when it saves you time.",
-      "readingMinutes": 13
-    }
-  },
-  {
-    "id": "ai-tool-finder-howto",
-    "toolId": "ai-tool-finder",
-    "categoryId": "text-writing",
-    "type": "howto",
-    "status": "published",
-    "publishedAt": "2026-11-17",
-    "relatedToolIds": [
-      "ai-writing-assistant",
-      "ai-text-summarizer",
-      "word-counter",
-      "keyword-density-checker"
-    ],
-    "en": {
-      "slug": "how-to-find-right-online-tool-ai",
-      "title": "How to Find the Right Online Tool for Any Task (with AI)",
-      "description": "Learn how to find the right online tool for any task with AI: describe your job in plain English, read the match, and open the best tool free in minutes.",
-      "readingMinutes": 13
-    }
-  },
-  {
-    "id": "ai-tool-finder-advanced",
-    "toolId": "ai-tool-finder",
-    "categoryId": "text-writing",
-    "type": "advanced",
-    "status": "published",
-    "publishedAt": "2026-11-17",
-    "relatedToolIds": [
-      "ai-text-summarizer",
-      "ai-writing-assistant",
-      "case-converter",
-      "word-counter"
-    ],
-    "en": {
-      "slug": "ai-tool-finder-vs-manual-search",
-      "title": "AI Tool Finder vs Manual Search: When AI Matching Wins (and When It Doesn't)",
-      "description": "Compare the AI Smart Tool Finder with manual browsing and search: see when AI matching wins, when it loses, and how to combine both methods well today.",
-      "readingMinutes": 13
-    }
-  },
-  {
-    "id": "ai-text-summarizer-guide",
-    "toolId": "ai-text-summarizer",
-    "categoryId": "text-writing",
-    "type": "guide",
-    "status": "published",
-    "publishedAt": "2026-11-17",
-    "relatedToolIds": [
-      "ai-writing-assistant",
-      "word-counter",
-      "readability-checker",
-      "pdf-text-extractor"
-    ],
-    "en": {
-      "slug": "what-is-ai-text-summarizer",
-      "title": "What Is an AI Text Summarizer? Complete Guide",
-      "description": "Learn what an AI text summarizer does, how short, medium, and long summaries differ, and how bullet points and key takeaways help you read faster online.",
-      "readingMinutes": 12
-    }
-  },
-  {
-    "id": "ai-text-summarizer-howto",
-    "toolId": "ai-text-summarizer",
-    "categoryId": "text-writing",
-    "type": "howto",
-    "status": "published",
-    "publishedAt": "2026-11-17",
-    "relatedToolIds": [
-      "ai-writing-assistant",
-      "word-counter",
-      "readability-checker",
-      "pdf-text-extractor"
-    ],
-    "en": {
-      "slug": "how-to-summarize-long-articles",
-      "title": "How to Summarize Long Articles and Reports in Seconds",
-      "description": "Learn how to summarize long articles, reports, and notes in seconds: clean the text, pick a length, choose a format, and verify the summary before using it.",
-      "readingMinutes": 13
-    }
-  },
-  {
-    "id": "ai-text-summarizer-advanced",
-    "toolId": "ai-text-summarizer",
-    "categoryId": "text-writing",
-    "type": "advanced",
-    "status": "published",
-    "publishedAt": "2026-11-17",
-    "relatedToolIds": [
-      "ai-writing-assistant",
-      "word-counter",
-      "readability-checker",
-      "text-diff-checker"
-    ],
-    "en": {
-      "slug": "ai-summarizer-accuracy-limitations",
-      "title": "AI Summarizer Accuracy: What It Gets Right, What It Misses, and How to Check",
-      "description": "AI summarizer accuracy explained: what AI summaries get right, what they miss, and a practical checklist for verifying any summary before you trust it.",
-      "readingMinutes": 12
-    }
-  },
-  {
-    "id": "ai-writing-assistant-guide",
-    "toolId": "ai-writing-assistant",
-    "categoryId": "text-writing",
-    "type": "guide",
-    "status": "published",
-    "publishedAt": "2026-11-17",
-    "relatedToolIds": [
-      "ai-text-summarizer",
-      "readability-checker",
-      "word-counter",
-      "text-diff-checker"
-    ],
-    "en": {
-      "slug": "what-is-ai-writing-assistant",
-      "title": "What Is an AI Writing Assistant? Complete Guide",
-      "description": "Learn what an AI writing assistant does — fixing grammar, rewriting sentences, adjusting tone, paraphrasing text, and drafting emails — and who it helps most.",
-      "readingMinutes": 13
-    }
-  },
-  {
-    "id": "ai-writing-assistant-howto",
-    "toolId": "ai-writing-assistant",
-    "categoryId": "text-writing",
-    "type": "howto",
-    "status": "published",
-    "publishedAt": "2026-11-17",
-    "relatedToolIds": [
-      "ai-text-summarizer",
-      "readability-checker",
-      "word-counter",
-      "text-diff-checker"
-    ],
-    "en": {
-      "slug": "how-to-fix-grammar-rewrite-ai",
-      "title": "How to Fix Grammar and Rewrite Sentences with an AI Writing Assistant",
-      "description": "Learn how to fix grammar with AI step by step: correct errors, rewrite awkward sentences, adjust tone, paraphrase text, and review the result before sending.",
-      "readingMinutes": 12
-    }
-  },
-  {
-    "id": "ai-writing-assistant-advanced",
-    "toolId": "ai-writing-assistant",
-    "categoryId": "text-writing",
-    "type": "advanced",
-    "status": "published",
-    "publishedAt": "2026-11-17",
-    "relatedToolIds": [
-      "ai-text-summarizer",
-      "readability-checker",
-      "word-counter",
-      "text-diff-checker"
-    ],
-    "en": {
-      "slug": "ai-writing-assistant-vs-manual-editing",
-      "title": "AI Writing Assistant vs Manual Editing: Best Settings, Tone Choices, and Limits",
-      "description": "AI writing assistant vs manual editing compared: best settings, tone choices, paraphrasing best practices, limits, and where human review is still needed.",
-      "readingMinutes": 12
-    }
-  },
-  {
     "id": "case-converter-guide",
     "toolId": "case-converter",
     "categoryId": "text-writing",
@@ -2079,8 +1897,7 @@ export const BLOG_ARTICLE_META: BlogArticleMeta[] = [
     "relatedToolIds": [
       "text-to-slug",
       "word-counter",
-      "find-and-replace",
-      "json-formatter"
+      "find-and-replace"
     ],
     "en": {
       "slug": "camelcase-vs-snakecase-vs-kebabcase",
@@ -2358,7 +2175,6 @@ export const BLOG_ARTICLE_META: BlogArticleMeta[] = [
     "publishedAt": "2026-11-17",
     "relatedToolIds": [
       "word-counter",
-      "ai-writing-assistant",
       "text-diff-checker",
       "word-frequency-counter"
     ],
@@ -2379,7 +2195,6 @@ export const BLOG_ARTICLE_META: BlogArticleMeta[] = [
     "relatedToolIds": [
       "word-counter",
       "keyword-density-checker",
-      "ai-text-summarizer",
       "character-counter"
     ],
     "en": {
@@ -3110,66 +2925,6 @@ export const BLOG_ARTICLE_META: BlogArticleMeta[] = [
     }
   },
   {
-    "id": "currency-calculator-guide",
-    "toolId": "currency-calculator",
-    "categoryId": "calculators",
-    "type": "guide",
-    "status": "published",
-    "publishedAt": "2026-11-17",
-    "relatedToolIds": [
-      "unit-converter",
-      "discount-margin-calculator",
-      "vat-tax-calculator",
-      "percentage-calculator"
-    ],
-    "en": {
-      "slug": "what-is-currency-calculator",
-      "title": "What Is a Currency Calculator? Complete Guide",
-      "description": "Learn what a currency calculator does, how manual and ECB reference rates work, and how FX fees change the amount you receive, with worked examples inside.",
-      "readingMinutes": 13
-    }
-  },
-  {
-    "id": "currency-calculator-howto",
-    "toolId": "currency-calculator",
-    "categoryId": "calculators",
-    "type": "howto",
-    "status": "published",
-    "publishedAt": "2026-11-17",
-    "relatedToolIds": [
-      "unit-converter",
-      "discount-margin-calculator",
-      "vat-tax-calculator",
-      "percentage-calculator"
-    ],
-    "en": {
-      "slug": "how-to-convert-currency",
-      "title": "How to Convert Currency (and Account for Exchange Fees)",
-      "description": "Follow step-by-step currency conversion with a manual rate or ECB reference rate, add the FX fee, and check the amount you will actually receive, free online.",
-      "readingMinutes": 13
-    }
-  },
-  {
-    "id": "currency-calculator-advanced",
-    "toolId": "currency-calculator",
-    "categoryId": "calculators",
-    "type": "advanced",
-    "status": "published",
-    "publishedAt": "2026-11-17",
-    "relatedToolIds": [
-      "unit-converter",
-      "discount-margin-calculator",
-      "vat-tax-calculator",
-      "percentage-calculator"
-    ],
-    "en": {
-      "slug": "ecb-rate-vs-bank-rate-vs-mid-market",
-      "title": "ECB Reference Rates vs Bank Rates vs Mid-Market: Which Exchange Rate Applies to You",
-      "description": "Compare ECB reference rates, bank rates and mid-market rates to see which exchange rate applies to your conversion and why banks charge more, in plain English.",
-      "readingMinutes": 13
-    }
-  },
-  {
     "id": "date-difference-calculator-guide",
     "toolId": "date-difference-calculator",
     "categoryId": "calculators",
@@ -3239,7 +2994,6 @@ export const BLOG_ARTICLE_META: BlogArticleMeta[] = [
     "relatedToolIds": [
       "vat-tax-calculator",
       "percentage-calculator",
-      "currency-calculator",
       "tip-calculator"
     ],
     "en": {
@@ -3259,7 +3013,6 @@ export const BLOG_ARTICLE_META: BlogArticleMeta[] = [
     "relatedToolIds": [
       "vat-tax-calculator",
       "percentage-calculator",
-      "currency-calculator",
       "tip-calculator"
     ],
     "en": {
@@ -3279,7 +3032,6 @@ export const BLOG_ARTICLE_META: BlogArticleMeta[] = [
     "relatedToolIds": [
       "vat-tax-calculator",
       "percentage-calculator",
-      "currency-calculator",
       "tip-calculator"
     ],
     "en": {
@@ -3599,8 +3351,7 @@ export const BLOG_ARTICLE_META: BlogArticleMeta[] = [
     "relatedToolIds": [
       "percentage-calculator",
       "discount-margin-calculator",
-      "vat-tax-calculator",
-      "currency-calculator"
+      "vat-tax-calculator"
     ],
     "en": {
       "slug": "what-is-tip-calculator",
@@ -3619,8 +3370,7 @@ export const BLOG_ARTICLE_META: BlogArticleMeta[] = [
     "relatedToolIds": [
       "percentage-calculator",
       "discount-margin-calculator",
-      "vat-tax-calculator",
-      "currency-calculator"
+      "vat-tax-calculator"
     ],
     "en": {
       "slug": "how-to-calculate-tip-split-bill",
@@ -3639,8 +3389,7 @@ export const BLOG_ARTICLE_META: BlogArticleMeta[] = [
     "relatedToolIds": [
       "percentage-calculator",
       "discount-margin-calculator",
-      "vat-tax-calculator",
-      "currency-calculator"
+      "vat-tax-calculator"
     ],
     "en": {
       "slug": "how-much-to-tip-guide",
@@ -3657,7 +3406,6 @@ export const BLOG_ARTICLE_META: BlogArticleMeta[] = [
     "status": "published",
     "publishedAt": "2026-11-17",
     "relatedToolIds": [
-      "currency-calculator",
       "bmi-calculator",
       "calorie-calculator",
       "time-duration-calculator"
@@ -3677,7 +3425,6 @@ export const BLOG_ARTICLE_META: BlogArticleMeta[] = [
     "status": "published",
     "publishedAt": "2026-11-17",
     "relatedToolIds": [
-      "currency-calculator",
       "bmi-calculator",
       "calorie-calculator",
       "time-duration-calculator"
@@ -3697,7 +3444,6 @@ export const BLOG_ARTICLE_META: BlogArticleMeta[] = [
     "status": "published",
     "publishedAt": "2026-11-17",
     "relatedToolIds": [
-      "currency-calculator",
       "bmi-calculator",
       "calorie-calculator",
       "time-duration-calculator"
@@ -3796,8 +3542,7 @@ export const BLOG_ARTICLE_META: BlogArticleMeta[] = [
     "publishedAt": "2026-11-17",
     "relatedToolIds": [
       "url-encoder-decoder",
-      "jwt-decoder",
-      "json-formatter"
+      "jwt-decoder"
     ],
     "en": {
       "slug": "how-to-encode-decode-base64",
@@ -3869,8 +3614,7 @@ export const BLOG_ARTICLE_META: BlogArticleMeta[] = [
     "status": "published",
     "publishedAt": "2026-11-17",
     "relatedToolIds": [
-      "html-entity-encoder",
-      "json-formatter"
+      "html-entity-encoder"
     ],
     "en": {
       "slug": "hex-vs-rgb-vs-hsl-color-formats",
@@ -3905,8 +3649,7 @@ export const BLOG_ARTICLE_META: BlogArticleMeta[] = [
     "status": "published",
     "publishedAt": "2026-11-17",
     "relatedToolIds": [
-      "unix-timestamp-converter",
-      "json-formatter"
+      "unix-timestamp-converter"
     ],
     "en": {
       "slug": "how-to-write-cron-expression",
@@ -3977,8 +3720,7 @@ export const BLOG_ARTICLE_META: BlogArticleMeta[] = [
     "status": "published",
     "publishedAt": "2026-11-17",
     "relatedToolIds": [
-      "js-formatter",
-      "json-formatter"
+      "js-formatter"
     ],
     "en": {
       "slug": "css-minification-vs-gzip-bundling",
@@ -4107,8 +3849,7 @@ export const BLOG_ARTICLE_META: BlogArticleMeta[] = [
     "status": "published",
     "publishedAt": "2026-11-17",
     "relatedToolIds": [
-      "css-minifier",
-      "json-formatter"
+      "css-minifier"
     ],
     "en": {
       "slug": "what-is-javascript-minifier",
@@ -4143,68 +3884,13 @@ export const BLOG_ARTICLE_META: BlogArticleMeta[] = [
     "status": "published",
     "publishedAt": "2026-11-17",
     "relatedToolIds": [
-      "css-minifier",
-      "json-formatter"
+      "css-minifier"
     ],
     "en": {
       "slug": "js-minifier-vs-bundler-vs-transpiler",
       "title": "JavaScript Minifier vs Bundler vs Transpiler: What Each One Actually Does",
       "description": "Compare a JavaScript minifier, a bundler, and a transpiler: what each one does to your code, when you need each, and why minification alone is not enough.",
       "readingMinutes": 12
-    }
-  },
-  {
-    "id": "json-formatter-guide",
-    "toolId": "json-formatter",
-    "categoryId": "developer",
-    "type": "guide",
-    "status": "published",
-    "publishedAt": "2026-11-17",
-    "relatedToolIds": [
-      "json-csv-converter",
-      "jwt-decoder"
-    ],
-    "en": {
-      "slug": "what-is-json-formatter",
-      "title": "What Is JSON? Complete Guide to Formatting and Validating",
-      "description": "Learn what JSON is, how formatting, minification, and validation work, and how line and column error pinpointing helps you debug JSON fast, free online.",
-      "readingMinutes": 13
-    }
-  },
-  {
-    "id": "json-formatter-howto",
-    "toolId": "json-formatter",
-    "categoryId": "developer",
-    "type": "howto",
-    "status": "published",
-    "publishedAt": "2026-11-17",
-    "relatedToolIds": [
-      "json-csv-converter",
-      "base64-encoder-decoder"
-    ],
-    "en": {
-      "slug": "how-to-format-validate-json",
-      "title": "How to Format and Validate JSON (and Fix Syntax Errors)",
-      "description": "Step-by-step guide to formatting, minifying, sorting keys, and validating JSON, with clear fixes for trailing commas, quotes, and other syntax errors.",
-      "readingMinutes": 13
-    }
-  },
-  {
-    "id": "json-formatter-advanced",
-    "toolId": "json-formatter",
-    "categoryId": "developer",
-    "type": "advanced",
-    "status": "published",
-    "publishedAt": "2026-11-17",
-    "relatedToolIds": [
-      "json-csv-converter",
-      "jwt-decoder"
-    ],
-    "en": {
-      "slug": "common-json-syntax-errors-fix",
-      "title": "Common JSON Syntax Errors and How to Fix Them (Trailing Commas, Quotes, and More)",
-      "description": "Fix the most common JSON syntax errors fast: trailing commas, single quotes, unquoted keys, missing commas, brackets, comments, and bad escape sequences.",
-      "readingMinutes": 13
     }
   },
   {
@@ -4215,7 +3901,6 @@ export const BLOG_ARTICLE_META: BlogArticleMeta[] = [
     "status": "published",
     "publishedAt": "2026-11-17",
     "relatedToolIds": [
-      "json-formatter",
       "sql-formatter"
     ],
     "en": {
@@ -4233,7 +3918,6 @@ export const BLOG_ARTICLE_META: BlogArticleMeta[] = [
     "status": "published",
     "publishedAt": "2026-11-17",
     "relatedToolIds": [
-      "json-formatter",
       "remove-duplicate-lines"
     ],
     "en": {
@@ -4251,7 +3935,6 @@ export const BLOG_ARTICLE_META: BlogArticleMeta[] = [
     "status": "published",
     "publishedAt": "2026-11-17",
     "relatedToolIds": [
-      "json-formatter",
       "sql-formatter",
       "word-frequency-counter"
     ],
@@ -4288,8 +3971,7 @@ export const BLOG_ARTICLE_META: BlogArticleMeta[] = [
     "status": "published",
     "publishedAt": "2026-11-17",
     "relatedToolIds": [
-      "base64-encoder-decoder",
-      "json-formatter"
+      "base64-encoder-decoder"
     ],
     "en": {
       "slug": "how-to-decode-jwt",
@@ -4324,8 +4006,7 @@ export const BLOG_ARTICLE_META: BlogArticleMeta[] = [
     "status": "published",
     "publishedAt": "2026-11-17",
     "relatedToolIds": [
-      "find-and-replace",
-      "json-formatter"
+      "find-and-replace"
     ],
     "en": {
       "slug": "what-is-regex",
@@ -4378,8 +4059,7 @@ export const BLOG_ARTICLE_META: BlogArticleMeta[] = [
     "status": "published",
     "publishedAt": "2026-11-17",
     "relatedToolIds": [
-      "json-csv-converter",
-      "json-formatter"
+      "json-csv-converter"
     ],
     "en": {
       "slug": "what-is-sql-formatter",
@@ -4396,7 +4076,6 @@ export const BLOG_ARTICLE_META: BlogArticleMeta[] = [
     "status": "published",
     "publishedAt": "2026-11-17",
     "relatedToolIds": [
-      "json-formatter",
       "js-formatter"
     ],
     "en": {
@@ -4468,8 +4147,7 @@ export const BLOG_ARTICLE_META: BlogArticleMeta[] = [
     "status": "published",
     "publishedAt": "2026-11-17",
     "relatedToolIds": [
-      "cron-expression-parser",
-      "json-formatter"
+      "cron-expression-parser"
     ],
     "en": {
       "slug": "unix-timestamp-pitfalls-2038",
@@ -4522,8 +4200,7 @@ export const BLOG_ARTICLE_META: BlogArticleMeta[] = [
     "status": "published",
     "publishedAt": "2026-11-17",
     "relatedToolIds": [
-      "base64-encoder-decoder",
-      "json-formatter"
+      "base64-encoder-decoder"
     ],
     "en": {
       "slug": "url-encoding-mistakes",

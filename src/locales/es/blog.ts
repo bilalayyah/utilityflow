@@ -4717,7 +4717,7 @@ export const ES_ARTICLE_OVERRIDES: Record<string, ArticleLocaleOverride> = {
 <p>Si el validador informa que el bloque no se puede analizar en absoluto, el problema suele ser un error de sintaxis, y la solución más rápida es regenerar el bloque en lugar de editar el JSON a mano.</p>
 <p>La validación también es el momento de revisar el texto que escribiste. Lee el bloque que muestra el validador, y compara cada valor con la página. ¿El titular es idéntico?</p>
 <p>¿El precio es correcto? ¿Cada respuesta coincide con la página? Un validador revisa la estructura, no la verdad, así que no detectará un precio incorrecto o una fecha obsoleta.</p>
-<p>Tú eres quien revisa eso. El <a href="/es/formateador-json/">formateador de JSON</a> también puede ayudarte a inspeccionar el bloque: pega el JSON generado en él para confirmar que la estructura es limpia y legible antes de validarlo.</p>
+<p>Tú eres quien revisa eso. El formateador de JSON también puede ayudarte a inspeccionar el bloque: pega el JSON generado en él para confirmar que la estructura es limpia y legible antes de validarlo.</p>
 <p>Para los errores que la validación detecta con más frecuencia, y cómo corregir cada uno, lee <a href="/es/blog/errores-json-ld-validacion-solucion/">Errores de JSON-LD y validación: corregir datos estructurados no analizables y escapes malos</a>.</p>
 <h2 id="step-9-install-the-block">Paso 9: añade el bloque a tu página y exporta una copia</h2>
 <p>Una vez que el bloque se valida, añádelo a la página. El bloque JSON-LD va dentro de una etiqueta script cuyo tipo es application/ld+json, y esa etiqueta puede estar en el head o el cuerpo de la página. El generador produce el JSON, y la herramienta lo muestra listo para copiar.</p>
@@ -4788,7 +4788,7 @@ export const ES_ARTICLE_OVERRIDES: Record<string, ArticleLocaleOverride> = {
 <p>Los saltos de línea dentro de una cadena deben escribirse como un escape, no como una nueva línea literal, porque las cadenas JSON no pueden abarcar líneas.</p>
 <p>Cada una de estas es una regla pequeña, y cada una es fácil de romper cuando el texto se copia de una página, se pega desde un procesador de textos, o se escribe a mano.</p>
 <p>La defensa más segura contra todas estas es generar el bloque con una herramienta en lugar de escribirlo a mano. Un <a href="/es/generador-de-datos-estructurados/">generador de marcado schema</a> escapa los valores mientras crea el bloque, así que una comilla en la descripción de un producto o una respuesta se maneja correctamente sin que tengas que pensar en ello.</p>
-<p>El <a href="/es/formateador-json/">formateador de JSON</a> es una segunda revisión útil: pega el JSON generado en él y confirma que se analice limpiamente y que la estructura se vea bien.</p>
+<p>El formateador de JSON es una segunda revisión útil: pega el JSON generado en él y confirma que se analice limpiamente y que la estructura se vea bien.</p>
 <p>Si necesitas editar un bloque a mano, edita un valor a la vez y vuelve a validar después de cada cambio, en lugar de reescribir todo el bloque y preguntarte qué cambio lo rompió.</p>
 <p>Cuando un validador reporta un error de análisis, lee primero la línea que señala, porque el fallo suele estar en esa línea o en la línea justo antes de ella, donde falta una coma o una comilla.</p>
 <ul>
@@ -7583,1059 +7583,6 @@ export const ES_ARTICLE_OVERRIDES: Record<string, ArticleLocaleOverride> = {
       { q: '¿Cuándo debo rellenar con ceros los números de línea en la documentación de código?', a: 'Rellena con ceros cuando la lista tiene diez o más líneas, para que el código se mantenga alineado y las líneas se ordenen bien como texto. Una lista numerada del 1 al 100 se ve desordenada, mientras que de 001 a 100 mantiene todas las líneas con el mismo ancho. No rellenes las listas cortas, porque los ceros extra agregan ruido visual sin beneficio.' },
     ],
     readingMinutes: 13,
-  },
-  'ai-tool-finder-guide': {
-    slug: 'que-es-un-buscador-de-herramientas-ia',
-    title: '¿Qué es un buscador de herramientas con IA? Guía completa',
-    description: 'Descubre qué hace un buscador de herramientas con IA, cómo relaciona tu tarea con la herramienta adecuada de UtilityFlow y cuándo te ahorra tiempo cada día.',
-    body: `<p>UtilityFlow tiene 88 herramientas, y eso es a la vez su fortaleza y su problema. Cuando sabes exactamente lo que necesitas, un catálogo grande es maravilloso.</p>
-<p>Cuando solo conoces el trabajo que quieres hacer, 88 opciones pueden parecer un laberinto.</p>
-<p>Terminas haciendo clic por las categorías, abriendo herramientas que parecen cercanas y cerrándolas de nuevo cuando resultan no ser la correcta. Esa búsqueda desperdicia el tiempo que una herramienta debía ahorrarte.</p>
-<p>El <strong>buscador de herramientas con IA</strong> existe para eliminar esa búsqueda. En lugar de navegar por un catálogo, describes tu tarea en español sencillo, con tus propias palabras.</p>
-<p>El buscador lee esa descripción y te señala la herramienta que realmente hace el trabajo.</p>
-<p>Esta guía explica qué es el buscador de herramientas con IA, cómo funciona su sistema de coincidencias y cuándo es la ruta más rápida a la herramienta correcta. También cubre sus límites con honestidad, para que sepas lo que no puede hacer.</p>
-<h2 id="what-is-the-ai-smart-tool-finder">¿Qué es el buscador de herramientas con IA?</h2>
-<p>El buscador de herramientas con IA es una herramienta gratuita de UtilityFlow que relaciona la descripción de una tarea con una herramienta real del catálogo. Escribes lo que quieres hacer, y te recomienda una mejor herramienta, con una breve razón que explica por qué esa herramienta encaja.</p>
-<p>También muestra hasta tres alternativas relevantes cuando otras herramientas podrían ayudar con parte del trabajo. Así, una tarea de varios pasos no te deja buscando de nuevo para el segundo paso.</p>
-<p>No es un buscador general, y no busca en todo internet. Solo busca herramientas de UtilityFlow, lo que significa que cada resultado es una página real que puedes abrir de inmediato.</p>
-<p>No hay enlaces rotos ni sugerencias inventadas.</p>
-<p>Si ninguna herramienta de UtilityFlow hace exactamente lo que pediste, lo dice claramente en lugar de adivinar. Esa honestidad es una de sus funciones más útiles, porque te evita perseguir una herramienta que no existe.</p>
-<h2 id="how-the-ai-smart-tool-finder-works">Cómo funciona el buscador de herramientas con IA</h2>
-<p>El buscador usa dos métodos de coincidencia que trabajan juntos. El primero es la coincidencia local instantánea por palabras clave, que se ejecuta en tu navegador mientras escribes.</p>
-<p>El segundo es la clasificación semántica con IA, que se ejecuta cuando envías tu descripción.</p>
-<h3 id="instant-local-keyword-matching">Búsqueda local instantánea por palabras clave</h3>
-<p>En cuanto escribes al menos dos caracteres, el buscador empieza a comparar tus palabras con los nombres y las descripciones de las 87 herramientas. Esto ocurre de forma local, en tu navegador, sin esperar a un servidor.</p>
-<p>Muestra hasta seis coincidencias instantáneas, cada una etiquetada con las palabras que coincidieron, para que puedas ver exactamente por qué apareció una herramienta. Esta capa es ilimitada, así que puedes escribir, editar y volver a escribir tantas veces como quieras sin gastar nada.</p>
-<p>Funciona mejor cuando ya conoces una palabra clave, como PDF, imagen, código QR o conteo de palabras. Si tu descripción contiene la palabra clave correcta, la capa local suele mostrar la herramienta adecuada en un segundo.</p>
-<p>La debilidad de la coincidencia por palabras clave es que solo entiende palabras, no significado. Si describes un trabajo sin usar el vocabulario de las herramientas, puede pasar por alto la mejor coincidencia.</p>
-<p>Ahí es donde entra la segunda capa.</p>
-<h3 id="ai-semantic-ranking-with-groq">Clasificación semántica con IA y Groq</h3>
-<p>Cuando presionas el botón de buscar, el buscador envía tu descripción a un modelo de IA, que usa inferencia gratuita de Groq y clasifica las herramientas candidatas por significado y no solo por palabras compartidas. Puede conectar una frase como hacer mi foto más pequeña para un formulario con un compresor de imágenes.</p>
-<p>La IA devuelve una recomendación principal, una razón para esa elección y hasta tres alternativas. Antes de mostrarte nada, cada herramienta sugerida se verifica contra el inventario real de UtilityFlow.</p>
-<p>Una sugerencia que no corresponde a una herramienta real se descarta, así que la IA no puede inventar una herramienta, un nombre ni un enlace que no exista. Cada herramienta que muestra el buscador es una herramienta real que puedes abrir de inmediato.</p>
-<p>Las búsquedas con IA son gratuitas, sin inicio de sesión ni suscripción, pero están limitadas a 10 por día por visitante. Ese límite se aplica solo a la capa de IA.</p>
-<p>La búsqueda local instantánea sigue siendo ilimitada, así que puedes seguir explorando con palabras clave después de que se agoten las búsquedas con IA.</p>
-<h3 id="what-happens-when-there-is-no-match">Qué pasa cuando no hay coincidencia</h3>
-<p>A veces la respuesta honesta es que UtilityFlow no tiene la herramienta que necesitas. El buscador lo dice sin rodeos.</p>
-<p>En lugar de forzar una recomendación débil, muestra un mensaje que dice que no hay una herramienta que coincida exactamente disponible por ahora.</p>
-<p>Debajo de ese mensaje, lista herramientas existentes relacionadas que cubren solo parte del flujo de trabajo. Por ejemplo, una solicitud para convertir un PDF a Word no tiene una herramienta exacta en UtilityFlow, así que el buscador lo dice y sugiere herramientas que manejan trabajos cercanos con PDF.</p>
-<p>Eso es mucho más útil que una respuesta equivocada y segura, porque así puedes decidir si un flujo de trabajo parcial es suficiente. Ahorras el tiempo que habrías gastado persiguiendo una herramienta que no existe.</p>
-<h2 id="what-the-finder-searches">Qué busca el buscador: 87 herramientas reales</h2>
-<p>El buscador busca en 84 herramientas de navegador, 2 herramientas de IA y la Calculadora de Divisas — 87 herramientas en total. Las herramientas de navegador funcionan por completo en tu navegador, lo que significa que tus archivos se quedan en tu computadora.</p>
-<p>Las tres herramientas de IA usan inferencia gratuita de Groq, con sus propios límites diarios, y no guardan tu texto.</p>
-<p>El catálogo cubre trabajo con PDF, trabajo con imágenes, texto y escritura, desarrolladores, conversores, calculadoras y herramientas de redes sociales. No necesitas saber a qué categoría pertenece tu tarea, porque el buscador busca en todas a la vez.</p>
-<p>Puedes limitar la búsqueda si quieres. Con un filtro opcional de categoría puedes limitar los resultados a una, como texto y escritura o PDF.</p>
-<p>Esto es útil cuando una palabra tiene significados distintos en contextos diferentes.</p>
-<h2 id="when-to-use-the-ai-smart-tool-finder">Cuándo usar el buscador de herramientas con IA</h2>
-<p>Usa el buscador cuando conozcas el resultado que quieres pero no el nombre de la herramienta que lo produce. Esa es la situación más común en un sitio con 88 herramientas.</p>
-<p>Sabes que necesitas reducir una foto, acortar un artículo largo o crear un código QR, pero no sabes si la herramienta se llama compresor, resumidor o generador.</p>
-<p>También es la opción más rápida cuando trabajas en algo que no conoces. Si un formulario pide un archivo por debajo de cierto tamaño, un cliente pide un documento en otro formato, o un maestro pide un conteo de palabras, puedes describir lo que necesitas en una frase y tener una respuesta directa.</p>
-<p>Los visitantes nuevos se benefician más, porque aún no tienen un mapa mental del sitio. En lugar de leer las páginas de categorías, pueden hacer una pregunta y llegar a la herramienta correcta.</p>
-<p>Los visitantes que regresan también se benefician, cuando enfrentan una tarea que no han hecho antes.</p>
-<ul>
-<li><strong>Conoces el trabajo, no el nombre de la herramienta:</strong> describe el resultado y deja que el buscador nombre la herramienta.</li>
-<li><strong>Tienes prisa:</strong> una frase es más rápida que navegar por varias páginas de categorías.</li>
-<li><strong>La tarea es nueva para ti:</strong> el buscador traduce un requisito desconocido en una herramienta familiar.</li>
-<li><strong>Tu redacción es vaga o informal:</strong> la capa de IA entiende frases naturales, incluidos los errores de escritura.</li>
-<li><strong>Quieres comprobar si existe una herramienta:</strong> una respuesta clara de sin coincidencia te ahorra una larga búsqueda manual.</li>
-</ul>
-<h2 id="example-queries-that-work-well">Ejemplos de consultas que funcionan bien</h2>
-<p>El buscador trae ocho botones de tareas rápidas, y son un buen modelo de cómo redactar tus propias solicitudes. Cada uno es una frase corta y simple que indica el trabajo y, donde importa, un número o un formato.</p>
-<p>Prueba uno primero si quieres ver cómo responde el buscador antes de escribir tu propia consulta. Cada botón completa la frase entera y ejecuta la búsqueda por ti, para que puedas aprender el patrón con ejemplos.</p>
-<p>Las tareas rápidas incluyen reducir una imagen a menos de 100 KB, convertir un PDF en imágenes, contar palabras en un ensayo y generar un código QR. También cubren cambiar las dimensiones de una imagen, corregir la gramática y reescribir un correo de forma profesional, y resumir un artículo largo en puntos clave.</p>
-<p>Fíjate en lo que estos ejemplos tienen en común. Todos empiezan con un verbo, nombran aquello con lo que se trabaja, e incluyen el detalle que decide qué herramienta encaja.</p>
-<p>Un tamaño objetivo, un formato de archivo o una forma de salida deseada convierte una solicitud vaga en una precisa.</p>
-<ul>
-<li><strong>Quiero reducir el tamaño de mi imagen a 100 KB:</strong> el tamaño objetivo le dice al buscador que necesitas compresión, no cambio de tamaño.</li>
-<li><strong>Necesito convertir un PDF en imágenes:</strong> el cambio de formato apunta directo a una herramienta de PDF a imagen.</li>
-<li><strong>Quiero contar palabras en mi ensayo:</strong> el objeto, un ensayo, y la acción, contar palabras, hacen obvia la coincidencia.</li>
-<li><strong>Necesito generar un código QR:</strong> corto, directo y sin ambigüedad, así que el buscador responde en un paso.</li>
-<li><strong>Quiero que la IA corrija errores de gramática y reescriba un correo de forma profesional:</strong> nombrar tanto el problema como el tono guía a la capa de IA.</li>
-<li><strong>Necesito resumir un artículo largo en puntos clave:</strong> la forma de salida, puntos clave, elige la configuración correcta del resumidor.</li>
-</ul>
-<h2 id="what-the-finder-cannot-do">Lo que el buscador no puede hacer</h2>
-<p>El buscador encuentra herramientas. No hace la tarea por ti.</p>
-<p>Escribir que quieres comprimir una imagen te mostrará el compresor de imágenes, pero no comprimirá la imagen por ti. Todavía necesitas abrir la herramienta recomendada y usarla.</p>
-<p>Tampoco puede encontrar herramientas que no existen en UtilityFlow. Si necesitas una función que el catálogo no cubre, ningún truco de redacción la hará aparecer.</p>
-<p>El buscador te dirá que no hay coincidencia exacta, y esa respuesta es correcta.</p>
-<p>El buscador también está limitado por la información que le das. Una consulta demasiado corta, como una sola palabra vaga, le da a la IA muy poco material para trabajar.</p>
-<p>Una consulta de más de 500 caracteres se rechaza, así que las explicaciones muy largas necesitan recortarse.</p>
-<p>El punto ideal es una o dos frases que indiquen el trabajo, la entrada y la salida deseada. Mantén tu descripción en ese rango, y la coincidencia suele ser correcta al primer intento.</p>
-<h2 id="privacy-cost-and-limits">Privacidad, costo y límites</h2>
-<p>El buscador es gratuito, sin inicio de sesión, sin suscripción y sin créditos. No necesitas crear una cuenta, y no necesitas dar una dirección de correo.</p>
-<p>La búsqueda local instantánea se ejecuta en tu navegador, y la búsqueda con IA usa inferencia gratuita de Groq sin guardar tu texto.</p>
-<p>Los límites son simples y visibles. Tu consulta debe tener al menos 2 caracteres y no más de 500 caracteres, lo que alcanza para una o dos frases claras.</p>
-<p>Tienes hasta 10 búsquedas con IA por día por visitante, y la página muestra tu conteo restante.</p>
-<p>La búsqueda local instantánea por palabras clave no tiene límite diario, así que puedes seguir buscando con palabras clave todo lo que quieras. Estos límites son generosos para el uso normal, porque la mayoría de la gente necesita solo una o dos búsquedas para encontrar una herramienta.</p>
-<p>Si se te agotan las búsquedas con IA, cambia a la búsqueda por palabras clave, o vuelve al día siguiente. El buscador está pensado para consultas ocasionales, no para búsquedas en masa, y los límites reflejan eso.</p>
-<h2 id="common-mistakes">Errores comunes que debes evitar</h2>
-<p>El error más común es escribir un nombre de herramienta que estás adivinando, en lugar de describir la tarea. Si escribes un nombre que no existe, el buscador intentará coincidir con las palabras y puede devolver algo no relacionado.</p>
-<p>Describe el trabajo en su lugar, y deja que el buscador te dé el nombre.</p>
-<p>Otro error es omitir el detalle que decide la respuesta. Pedir cambiar una imagen no es lo mismo que pedir reducir una imagen a menos de 100 KB.</p>
-<p>Lo primero podría significar cambiar el tamaño, recortar o comprimir. Lo segundo apunta a una sola herramienta.</p>
-<p>Un tercer error es ignorar las alternativas. La mejor herramienta suele ser la correcta, pero no siempre, sobre todo en trabajos de varios pasos.</p>
-<p>Revisa las alternativas antes de decidir, porque una de ellas puede ser la herramienta que realmente necesitas para el segundo paso.</p>
-<p>El <a href="/es/resumidor-de-texto-ia/">resumidor de texto con IA</a>, por ejemplo, suele aparecer junto a las herramientas de escritura cuando una tarea implica acortar y pulir un texto. Revisarlo no cuesta nada, y puede ahorrarte una segunda búsqueda después.</p>
-<ul>
-<li><strong>Adivinar un nombre de herramienta:</strong> describe la tarea en español sencillo en lugar de inventar un nombre.</li>
-<li><strong>Omitir el detalle clave:</strong> agrega el tamaño objetivo, el formato o la forma de salida que decide la coincidencia.</li>
-<li><strong>Usar una sola palabra vaga:</strong> una sola palabra como archivo o arreglo le da a la IA casi nada para clasificar.</li>
-<li><strong>Ignorar la razón:</strong> lee por qué se recomendó la herramienta antes de abrirla, para detectar un malentendido a tiempo.</li>
-<li><strong>Saltar las alternativas:</strong> revisa las herramientas relacionadas, porque un trabajo de varios pasos a menudo necesita más de una.</li>
-<li><strong>Pegar un documento entero:</strong> el campo de consulta es para describir una tarea, no para el texto que quieres procesar.</li>
-</ul>
-<h2 id="troubleshooting">Solución de problemas: cuando el buscador no ayuda</h2>
-<p>Si el buscador no devuelve una coincidencia exacta, primero revisa que tu consulta diga lo que querías decir. Un error de escritura en la palabra clave puede confundir a la capa local, y un detalle que falta puede confundir a la capa de IA.</p>
-<p>Reescribe la consulta con la acción, la entrada y la salida deseada bien claras.</p>
-<p>Si la capa de IA informa que no está disponible, los resultados locales por palabras clave que están debajo siguen funcionando. Usa esas coincidencias, o prueba el filtro de categoría para limitar el catálogo manualmente.</p>
-<p>También puedes reintentar la búsqueda con IA, porque el problema suele ser temporal.</p>
-<p>Si ya usaste las 10 búsquedas con IA del día, la página te lo dirá, y la búsqueda local seguirá funcionando. Usa consultas cortas con palabras clave, prueba los botones de tareas rápidas, o navega por las sugerencias inteligentes que se muestran al cargar la página.</p>
-<h2 id="conclusion">Conclusión: describe el trabajo, deja que el buscador nombre la herramienta</h2>
-<p>El buscador de herramientas con IA convierte un problema de catálogo en una conversación. No necesitas conocer nombres de herramientas, categorías ni términos técnicos.</p>
-<p>Describes el trabajo en español sencillo, y el buscador lo relaciona con 87 herramientas reales, explica su elección, y admite con honestidad cuando ninguna herramienta encaja.</p>
-<p>Pruébalo la próxima vez que enfrentes una tarea en UtilityFlow y no sepas por dónde empezar. Abre el <a href="/es/buscador-de-herramientas-ia/">buscador de herramientas con IA</a> gratuito, escribe una frase clara sobre lo que quieres hacer, y mira lo que recomienda.</p>
-<p>Si quieres los pasos prácticos, lee <a href="/es/blog/como-encontrar-la-herramienta-en-linea-adecuada-con-ia/">Cómo encontrar la herramienta en línea adecuada para cualquier tarea (con IA)</a>, y si quieres saber cuándo la navegación manual supera a la búsqueda con IA, lee <a href="/es/blog/buscador-de-herramientas-ia-vs-busqueda-manual/">Buscador de herramientas con IA vs búsqueda manual: cuándo gana la IA (y cuándo no)</a>. Te separa una sola frase de la herramienta adecuada.</p>`,
-    faqs: [
-      { q: '¿Qué es el buscador de herramientas con IA?', a: 'El buscador de herramientas con IA es una herramienta gratuita de UtilityFlow que toma la descripción de una tarea en español sencillo y te recomienda la mejor herramienta del catálogo de 88. Describes lo que quieres hacer, y te sugiere la mejor herramienta con una razón, además de hasta tres alternativas. Si ninguna herramienta encaja, lo dice en lugar de inventar una.' },
-      { q: '¿Cuántas herramientas busca el buscador de herramientas con IA?', a: 'Busca en 87 herramientas reales de UtilityFlow: 84 herramientas de navegador, 2 herramientas de IA y la Calculadora de Divisas. Cada resultado se verifica con el inventario actualizado, así que solo ves herramientas que existen y se pueden abrir de inmediato. El catálogo cubre herramientas de PDF, imagen, texto, desarrolladores, conversores, calculadoras y redes sociales.' },
-      { q: '¿El buscador de herramientas con IA es gratis?', a: 'Sí, es gratis, sin inicio de sesión, suscripción ni créditos, y tienes hasta 10 búsquedas con IA por día por visitante. La búsqueda local instantánea por palabras clave es ilimitada. La capa de IA usa inferencia gratuita de Groq y no guarda tu texto.' },
-      { q: '¿Qué tan larga puede ser la descripción de mi tarea?', a: 'Tu consulta debe tener al menos 2 caracteres y no más de 500 caracteres. Eso alcanza para una o dos frases claras. Las mejores consultas indican la acción, la entrada y la salida deseada, como reducir una imagen a menos de 100 KB o convertir un PDF en imágenes.' },
-      { q: '¿Qué pasa si ninguna herramienta coincide con mi tarea?', a: 'El buscador muestra un mensaje claro que dice que no hay una herramienta que coincida exactamente disponible por ahora, y nombra tu solicitud para que puedas comprobar que te entendió. Debajo, lista herramientas existentes relacionadas que cubren solo parte del flujo de trabajo. Nunca inventa una herramienta ni un enlace falso.' },
-      { q: '¿El buscador hace la tarea por sí mismo, o solo encuentra la herramienta?', a: 'Solo encuentra la herramienta. Te señala la herramienta adecuada de UtilityFlow con una razón, y luego abres esa herramienta y haces el trabajo ahí. Por ejemplo, puede recomendar el compresor de imágenes, pero igual necesitas abrir el compresor y subir tu imagen.' },
-    ],
-    readingMinutes: 13,
-  },
-  'ai-tool-finder-howto': {
-    slug: 'como-encontrar-la-herramienta-en-linea-adecuada-con-ia',
-    title: 'Cómo encontrar la herramienta en línea adecuada para cualquier tarea (con IA)',
-    description: 'Aprende a encontrar la herramienta adecuada para cualquier tarea con IA: describe tu trabajo, lee la coincidencia y abre la mejor herramienta gratis hoy.',
-    body: `<p>Tienes una tarea, una fecha límite y ninguna idea de qué herramienta en línea hace el trabajo. Podrías navegar por las páginas de categorías, abrir una docena de herramientas y esperar que una de ellas encaje.</p>
-<p>Ese enfoque funciona, pero desperdicia el tiempo que intentabas ahorrar. Hay una forma más rápida, y empieza con una frase.</p>
-<p>Este tutorial te muestra cómo encontrar la herramienta en línea adecuada para cualquier tarea con el <a href="/es/buscador-de-herramientas-ia/">buscador de herramientas con IA</a> de UtilityFlow. Aprenderás a describir una tarea en español sencillo, a leer la recomendación que devuelve, y qué hacer cuando la primera coincidencia no es del todo correcta.</p>
-<p>No se necesita ningún conocimiento técnico.</p>
-<p>Al final, podrás pasar de un requisito vago a la herramienta correcta en menos de un minuto. El método funciona para trabajos con PDF, trabajos con imágenes, trabajos de escritura y muchas otras tareas de las 88 herramientas de UtilityFlow.</p>
-<p>También funciona cuando no conoces el vocabulario adecuado para el trabajo.</p>
-<h2 id="what-you-need-before-you-start">Lo que necesitas antes de empezar</h2>
-<p>No necesitas casi nada para empezar. Necesitas la tarea misma, expresada con tus propias palabras, y un navegador.</p>
-<p>El buscador es gratuito, sin inicio de sesión ni cuenta, así que no hay nada que configurar y nada que instalar. Puedes empezar a buscar a los pocos segundos de abrir la página.</p>
-<p>Antes de escribir, tómate diez segundos para pensar en tres cosas. ¿Con qué empiezas, con qué quieres terminar, y hay un número o formato que importe?</p>
-<p>Un archivo inicial, un tamaño objetivo y un formato deseado son los detalles que convierten una solicitud vaga en una coincidencia precisa.</p>
-<p>Ese número le dice al buscador que necesitas compresión, no solo un cambio de tamaño. Ten ese patrón en mente mientras avanzas por los pasos de abajo.</p>
-<h2 id="step-1-open-the-finder">Paso 1: abre el buscador</h2>
-<p>Abre el <a href="/es/buscador-de-herramientas-ia/">buscador de herramientas con IA</a> en tu navegador. La página muestra un campo de búsqueda, un filtro opcional de categoría y una fila de botones de tareas rápidas.</p>
-<p>También verás sugerencias inteligentes de ocho herramientas populares, que puedes abrir directamente si una de ellas ya es la herramienta que necesitas.</p>
-<p>En la parte superior de la página, verás cuántas búsquedas con IA te quedan hoy. Tienes hasta 10 búsquedas gratuitas con IA por día por visitante, y la búsqueda local instantánea por palabras clave es ilimitada.</p>
-<p>Revisa el contador antes de una sesión larga, para saber cuántas búsquedas con IA puedes gastar en refinar una consulta.</p>
-<p>No te saltes este paso yendo directo a una página de categoría. El buscador busca en las 87 herramientas a la vez, lo que es más rápido que adivinar la categoría correcta.</p>
-<p>Aunque creas conocer la categoría, una búsqueda aquí puede confirmarla o corregirte en segundos.</p>
-<h2 id="step-2-describe-your-task-in-plain-english">Paso 2: describe tu tarea en español sencillo</h2>
-<p>Escribe tu tarea en el campo de búsqueda, con las palabras que usarías para explicársela a un colega. Empieza con un verbo, nombra aquello con lo que trabajas y agrega el resultado que quieres.</p>
-<p>Una buena consulta es de una o dos frases, de entre 2 y 500 caracteres.</p>
-<p>Escribe con naturalidad, incluidos los errores de escritura si ocurren. La capa de IA entiende frases informales y errores de ortografía, así que no necesitas una gramática perfecta.</p>
-<p>Lo que importa es el significado, no la elegancia. Una frase como quiero hacer mi foto más pequeña para un formulario es perfectamente usable, aunque no use ningún término técnico.</p>
-<p>Evita pegar un documento entero en el campo. El buscador busca la descripción de una tarea, no el texto que quieres procesar.</p>
-<p>Si pegas un ensayo, intentará coincidir con las palabras del ensayo, y el resultado será confuso. Describe el trabajo, no el contenido.</p>
-<h2 id="step-3-use-the-category-filter-when-it-helps">Paso 3: usa el filtro de categoría cuando ayude</h2>
-<p>El filtro de categoría es opcional, y la mayoría de las búsquedas no lo necesitan. Déjalo en todas las categorías cuando no estés seguro de dónde pertenece tu tarea, porque el buscador buscará en todo.</p>
-<p>Esa es la opción por defecto, y es la correcta para la mayoría de la gente la mayor parte del tiempo.</p>
-<p>Usa el filtro cuando una palabra tenga significados distintos en áreas diferentes. La palabra convertir, por ejemplo, podría significar cambiar un formato de archivo, cambiar una unidad o cambiar las mayúsculas de un texto.</p>
-<p>Limitar la búsqueda a herramientas de PDF o herramientas de texto elimina los significados irrelevantes y afina el resultado.</p>
-<p>Cambia el filtro y ejecuta la búsqueda de nuevo si el primer conjunto de resultados se ve mal.</p>
-<h2 id="step-4-read-the-instant-matches-first">Paso 4: lee primero las coincidencias instantáneas</h2>
-<p>Mientras escribes, aparecen coincidencias locales instantáneas por palabras clave debajo del campo de búsqueda. Están ordenadas por palabra clave, muestran hasta seis herramientas, y cada una está etiquetada con las palabras que coincidieron.</p>
-<p>Léelas antes de presionar el botón de buscar, porque la herramienta correcta puede estar ya ahí.</p>
-<p>Las coincidencias instantáneas son ilimitadas, así que puedes experimentar libremente. Prueba otra palabra clave, agrega un formato o quita una palabra vaga, y mira cómo cambia la lista.</p>
-<p>Es la forma más económica de afinar una consulta, porque no cuesta ninguna búsqueda con IA.</p>
-<p>Si una coincidencia instantánea se ve bien, haz clic y abre la herramienta. No necesitas esperar la respuesta de la IA.</p>
-<p>La capa de IA está para los casos en que las palabras clave fallan, no como una puerta por la que debes pasar. Usa la vía rápida siempre que funcione.</p>
-<h2 id="step-5-run-the-ai-search">Paso 5: ejecuta la búsqueda con IA</h2>
-<p>Cuando las coincidencias instantáneas no lo resuelven, presiona buscar herramienta coincidente. El buscador envía tu descripción a un modelo de IA de Groq, que clasifica las herramientas candidatas por significado.</p>
-<p>Devuelve una mejor herramienta recomendada, una razón para la elección y hasta tres alternativas.</p>
-<p>Espera a que cargue el resultado, y lee primero la razón. La razón te dice lo que la IA creyó que pediste, con sus propias palabras.</p>
-<p>Si la razón coincide con tu tarea, la recomendación probablemente es correcta. Si la razón describe otro trabajo, la IA entendió mal tu consulta, y necesitas reescribirla.</p>
-<p>Cada sugerencia de IA se verifica con el inventario real de UtilityFlow antes de mostrarse. Eso significa que la herramienta recomendada siempre existe, y su enlace siempre funciona.</p>
-<p>Si la IA sugiere algo que no está en el catálogo, esa sugerencia se descarta en lugar de mostrarse.</p>
-<h2 id="step-6-open-the-best-tool-and-check-it">Paso 6: abre la mejor herramienta y revísala</h2>
-<p>Haz clic para ir a la herramienta recomendada y verifica que haga lo que necesitas. Lee su breve descripción en la página de la herramienta, y mira las opciones que ofrece.</p>
-<p>Una herramienta que coincide con tus palabras pero carece de la única función que necesitas no es la herramienta correcta, aunque el buscador la haya clasificado primero.</p>
-<p>Haz una prueba rápida con una copia de tu archivo si puedes. Prueba la herramienta con un ejemplo pequeño antes de comprometerte con todo el trabajo.</p>
-<p>Esto toma un minuto, y detecta los desajustes temprano, cuando son baratos de corregir. Si la prueba funciona, sigue con el archivo real.</p>
-<p>Si la herramienta está equivocada, vuelve al buscador en lugar de navegar al azar. Lee las alternativas que mostró el buscador, porque una de ellas puede ser la herramienta que realmente necesitas.</p>
-<p>Si ninguna encaja, reescribe tu consulta con más detalle y ejecuta la búsqueda de nuevo.</p>
-<h2 id="example-queries-that-get-great-matches">Ejemplos de consultas que funcionan muy bien</h2>
-<p>La mejor forma de aprender a escribir consultas es estudiar buenos ejemplos. El buscador ofrece ocho botones de tareas rápidas, y cada uno es una consulta modelo.</p>
-<p>Haz clic en uno para ver la frase completa que usa, y fíjate en cómo indica el trabajo, la entrada y la salida deseada en una sola línea.</p>
-<p>Prueba la consulta para reducir una imagen a menos de 100 KB. Nombra la acción, reducir, el objeto, el tamaño de mi imagen, y el objetivo, 100 KB.</p>
-<p>Ese objetivo es el detalle que separa la compresión del cambio de tamaño. Sin él, el buscador tendría que adivinar qué trabajo con imágenes querías decir.</p>
-<p>Prueba la consulta para resumir un artículo largo en puntos clave. Nombra la entrada, un artículo largo, y la forma de salida, puntos clave.</p>
-<p>Esa forma importa, porque una herramienta de resumen puede producir párrafos, viñetas o puntos clave, y el buscador necesita saber cuál quieres.</p>
-<ul>
-<li><strong>Quiero reducir el tamaño de mi imagen a 100 KB:</strong> copia este patrón siempre que un límite de tamaño decida la herramienta.</li>
-<li><strong>Necesito convertir un PDF en imágenes:</strong> nombra tanto el formato inicial como el formato final.</li>
-<li><strong>Quiero contar palabras en mi ensayo:</strong> nombra la acción y el tipo de documento en una frase corta.</li>
-<li><strong>Necesito generar un código QR:</strong> lo corto y directo funciona cuando la tarea tiene una sola herramienta posible.</li>
-<li><strong>Quiero que la IA corrija errores de gramática y reescriba un correo de forma profesional:</strong> nombra el problema y el tono que quieres.</li>
-<li><strong>Necesito resumir un artículo largo en puntos clave:</strong> indica la forma de salida, no solo la acción.</li>
-<li><strong>Quiero cambiar las dimensiones de una imagen:</strong> úsalo cuando el tamaño en píxeles importe más que el tamaño del archivo.</li>
-<li><strong>Necesito convertir un PDF a Word:</strong> una prueba útil, porque no existe una herramienta exacta, así que el buscador debería decirlo.</li>
-</ul>
-<h2 id="worked-example-finding-a-tool-for-a-form">Ejemplo práctico: encontrar una herramienta para un formulario</h2>
-<p>Imagina que un formulario de trabajo te pide subir una foto de menos de 100 KB, y tu foto pesa 2 MB. No conoces el nombre de la herramienta que arregla esto.</p>
-<p>Abres el buscador y escribes «quiero reducir el tamaño de mi imagen a 100 KB», luego presionas el botón de buscar.</p>
-<p>El buscador recomienda el compresor de imágenes, y su razón explica que la herramienta reduce el tamaño del archivo hasta un objetivo que tú eliges. Las alternativas incluyen herramientas para cambiar el tamaño de imágenes, que cambian las dimensiones en lugar del tamaño del archivo.</p>
-<p>Lees la razón, confirmas que coincide con tu necesidad, y abres el compresor.</p>
-<p>En el compresor, subes la foto, defines el objetivo en 100 KB, y descargas el archivo más pequeño. Todo el trabajo, desde abrir el buscador hasta descargar la foto terminada, toma unos minutos.</p>
-<p>Sin el buscador, podrías haber probado primero una herramienta para cambiar el tamaño, descubrir que el archivo seguía siendo demasiado grande, y empezar de nuevo.</p>
-<h2 id="how-to-write-better-queries">Cómo escribir mejores consultas</h2>
-<p>Las buenas consultas siguen una fórmula simple: verbo, objeto, resultado. Empieza con lo que quieres hacer, nombra aquello sobre lo que lo haces, y termina con cómo debe verse el resultado.</p>
-<p>Esa fórmula cubre la mayoría de las tareas, y es fácil de recordar cuando tienes prisa.</p>
-<p>Agrega un detalle decisivo siempre que puedas. Un número, un formato, un idioma o una forma de salida suele ser el detalle que separa dos herramientas parecidas.</p>
-<p>Sin él, el buscador debe adivinar, y una suposición a veces es errónea. Con él, la coincidencia suele ser obvia.</p>
-<p>Mantén la consulta en una o dos frases. Más largo no es mejor, porque las palabras extra pueden confundir la clasificación.</p>
-<p>Si te encuentras escribiendo un párrafo, detente y pregúntate cuál es el detalle más importante. Escribe ese detalle, y deja fuera el resto.</p>
-<ul>
-<li><strong>Empieza con un verbo:</strong> reducir, convertir, contar, generar, resumir, corregir o fusionar.</li>
-<li><strong>Nombra el objeto:</strong> una imagen, un PDF, un ensayo, un correo o un artículo largo.</li>
-<li><strong>Agrega el resultado:</strong> menos de 100 KB, en imágenes, en puntos clave, o en un tono profesional.</li>
-<li><strong>Incluye un número o formato:</strong> un tamaño objetivo, un tipo de archivo o un conteo de páginas afina la coincidencia.</li>
-<li><strong>Usa tus propias palabras:</strong> la redacción natural funciona mejor que los términos técnicos adivinados.</li>
-<li><strong>Mantenla corta:</strong> una o dos frases, menos de 500 caracteres, es el punto ideal.</li>
-</ul>
-<h2 id="common-mistakes">Errores comunes que debes evitar</h2>
-<p>El error más común es escribir una sola palabra vaga, como archivo, arreglo o convertir. Una palabra le da al buscador casi nada para clasificar, y los resultados serán una lista mezclada de herramientas que comparten esa palabra.</p>
-<p>Agrega un verbo y un objeto, y la lista se reduce de inmediato.</p>
-<p>Otro error es adivinar un nombre de herramienta en lugar de describir la tarea. Si escribes un nombre que no existe, el buscador relacionará las palabras lo mejor que pueda, y el resultado puede no tener nada que ver.</p>
-<p>Describe el trabajo, y deja que el buscador te dé el nombre. Ese es el orden en que está pensado.</p>
-<p>Un tercer error es pegar el contenido que quieres procesar en el campo de consulta. El campo es para una descripción, no para el documento mismo.</p>
-<p>Pega tu documento en la herramienta recomendada, después de que el buscador te haya señalado cuál es, y el flujo de trabajo tendrá sentido.</p>
-<ul>
-<li><strong>Una palabra vaga:</strong> amplíala en una frase con un verbo, un objeto y un resultado.</li>
-<li><strong>Adivinar un nombre de herramienta:</strong> describe la tarea en su lugar, y deja que el buscador nombre la herramienta.</li>
-<li><strong>Pegar un documento entero:</strong> el campo de consulta es para la tarea, no para el texto a procesar.</li>
-<li><strong>Ignorar la razón:</strong> lee por qué se recomendó una herramienta, para detectar un malentendido a tiempo.</li>
-<li><strong>Saltar las alternativas:</strong> un trabajo de varios pasos a menudo necesita una segunda herramienta de la lista de alternativas.</li>
-<li><strong>Usar las 10 búsquedas con IA en una sola consulta vaga:</strong> refina primero con la búsqueda local gratuita por palabras clave, luego gasta una búsqueda con IA.</li>
-</ul>
-<h2 id="what-to-do-when-there-is-no-exact-match">Qué hacer cuando no hay coincidencia exacta</h2>
-<p>A veces el buscador te dirá que no hay una herramienta que coincida exactamente disponible por ahora. Eso no es un fracaso, es información útil.</p>
-<p>Significa que UtilityFlow no tiene una herramienta para ese trabajo exacto, y ninguna reformulación hará que aparezca una.</p>
-<p>Para una solicitud de PDF a Word, por ejemplo, las herramientas cercanas de PDF pueden permitirte extraer texto o convertir a imágenes, lo que podría ser un sustituto viable según para qué necesites el archivo Word.</p>
-<p>De cualquier modo, el buscador te ha ahorrado el tiempo de una larga búsqueda manual de una herramienta que no existe.</p>
-<h2 id="troubleshooting">Solución de problemas: cuando el resultado se ve mal</h2>
-<p>Si la herramienta recomendada se ve mal, lee primero la razón. Suele revelar el malentendido.</p>
-<p>Una consulta sobre cambiar una imagen, por ejemplo, podría significar cambiar el tamaño o comprimir, y la razón mostrará cuál eligió la IA. Agrega el detalle que falta y busca de nuevo.</p>
-<p>También puedes reintentar la búsqueda con IA, porque el problema suele ser temporal.</p>
-<p>El <a href="/es/contador-de-palabras/">contador de palabras</a> y otras herramientas populares aparecen ahí, y no necesitan ninguna búsqueda. Vuelve mañana para más búsquedas con IA.</p>
-<h2 id="conclusion">Conclusión: una frase es suficiente</h2>
-<p>Encontrar la herramienta en línea adecuada no tiene por qué ser un proyecto de investigación. Describe la tarea en una frase clara, lee las coincidencias instantáneas, ejecuta la búsqueda con IA cuando las palabras clave no bastan, y revisa la razón antes de abrir la herramienta recomendada.</p>
-<p>Esa rutina toma menos de un minuto, y funciona para casi cualquier tarea en UtilityFlow.</p>
-<p>Pruébala en tu próxima tarea, sea cual sea. Abre el <a href="/es/buscador-de-herramientas-ia/">buscador de herramientas con IA</a> gratuito, escribe lo que quieres hacer en español sencillo, y sigue los pasos de este tutorial.</p>
-<p>Si quieres primero el contexto, lee <a href="/es/blog/que-es-un-buscador-de-herramientas-ia/">¿Qué es un buscador de herramientas con IA? Guía completa</a>, y si quieres juzgar cuándo la búsqueda con IA supera a la navegación manual, lee <a href="/es/blog/buscador-de-herramientas-ia-vs-busqueda-manual/">Buscador de herramientas con IA vs búsqueda manual: cuándo gana la búsqueda con IA (y cuándo no)</a>.</p>
-<p>Te separa una sola frase de la herramienta adecuada.</p>`,
-    faqs: [
-      { q: '¿Cómo encuentro la herramienta en línea adecuada para una tarea?', a: 'Describe la tarea en español sencillo en el buscador de herramientas con IA, con un verbo, un objeto y el resultado que quieres. Lee las coincidencias instantáneas por palabras clave, luego ejecuta la búsqueda con IA si hace falta. Abre la herramienta recomendada y verifica que haga lo que necesitas antes de comprometerte con todo el trabajo.' },
-      { q: '¿Qué debo escribir en el buscador de herramientas con IA?', a: 'Escribe una o dos frases que indiquen la acción, la entrada y la salida deseada. Por ejemplo, quiero reducir el tamaño de mi imagen a 100 KB o necesito resumir un artículo largo en puntos clave. Mantenlo entre 2 y 500 caracteres, y usa tus propias palabras.' },
-      { q: '¿Necesito una cuenta para usar el buscador de herramientas con IA?', a: 'No, el buscador es gratis, sin inicio de sesión, suscripción ni créditos, y tienes hasta 10 búsquedas con IA por día por visitante. La búsqueda local instantánea por palabras clave es ilimitada. La capa de IA usa inferencia gratuita de Groq y no guarda tu texto.' },
-      { q: '¿Qué pasa si el buscador recomienda la herramienta equivocada?', a: 'Lee la razón que dio, porque suele revelar el malentendido. Luego reescribe tu consulta con el detalle que falta, como un tamaño objetivo o un formato, y busca de nuevo. Revisa también las alternativas, porque una de ellas puede ser la herramienta que realmente necesitas.' },
-      { q: '¿Qué debo hacer si no hay coincidencia exacta?', a: 'Lee las herramientas relacionadas que se muestran debajo del mensaje de sin coincidencia. Cubren solo parte del flujo de trabajo, pero un flujo parcial puede bastar para tus necesidades. Si no, divide la tarea en pasos más pequeños y busca cada paso, o usa otro servicio para la parte que falta.' },
-      { q: '¿Cuántas búsquedas con IA tengo por día?', a: 'Tienes hasta 10 búsquedas gratuitas con IA por día por visitante, y la página muestra cuántas te quedan. La búsqueda local instantánea por palabras clave es ilimitada, así que puedes seguir afinando con palabras clave después de que se agoten las búsquedas con IA. El contador se reinicia al día siguiente.' },
-    ],
-    readingMinutes: 13,
-  },
-  'ai-tool-finder-advanced': {
-    slug: 'buscador-de-herramientas-ia-vs-busqueda-manual',
-    title: 'Buscador de herramientas con IA vs búsqueda manual: cuándo gana la IA (y cuándo no)',
-    description: 'Compara el buscador de herramientas con IA con la navegación manual: mira cuándo gana la búsqueda con IA, cuándo pierde y cómo combinar ambas en tu trabajo.',
-    body: `<p>Hay dos formas de encontrar una herramienta en UtilityFlow. Puedes describir tu tarea al <a href="/es/buscador-de-herramientas-ia/">buscador de herramientas con IA</a> y dejar que te recomiende una herramienta, o puedes navegar por las categorías y buscar por palabra clave por tu cuenta.</p>
-<p>Ambos métodos funcionan, pero funcionan mejor en situaciones distintas.</p>
-<p>Elegir el método equivocado cuesta tiempo. La búsqueda con IA es rápida cuando no conoces el nombre de la herramienta, pero puede malinterpretar una solicitud vaga.</p>
-<p>La búsqueda manual es confiable cuando conoces la palabra clave, pero es lenta cuando enfrentas una tarea desconocida. Saber qué método encaja con tu situación es la habilidad que importa.</p>
-<p>Este artículo compara la coincidencia de tareas con IA con la navegación por categorías y la búsqueda manual. Cubre cómo funciona cada método, dónde gana cada uno, dónde falla cada uno, y cómo combinarlos.</p>
-<p>Si necesitas primero lo básico, lee <a href="/es/blog/que-es-un-buscador-de-herramientas-ia/">¿Qué es un buscador de herramientas con IA? Guía completa</a>.</p>
-<h2 id="ai-tool-finder-vs-manual-search-at-a-glance">Buscador de herramientas con IA vs búsqueda manual de un vistazo</h2>
-<p>El buscador de herramientas con IA toma una descripción en español sencillo y devuelve una mejor herramienta, con una razón y hasta tres alternativas. Busca en las 87 herramientas de UtilityFlow a la vez, con coincidencia local instantánea por palabras clave más clasificación semántica con IA de Groq.</p>
-<p>No necesitas conocer ningún nombre de herramienta.</p>
-<p>La búsqueda manual significa navegar por las páginas de categorías, usar la búsqueda del sitio, o revisar las listas de herramientas por tu cuenta. Dependes de tu propio conocimiento de palabras clave y categorías.</p>
-<p>Es más lenta al empezar, pero ves toda la gama de opciones, y tú haces el juicio final.</p>
-<p>Ningún método es mejor en todos los casos. La búsqueda con IA gana en velocidad y en tareas desconocidas.</p>
-<p>La búsqueda manual gana en control, en navegación, y en tareas donde ya conoces la palabra clave. El mejor enfoque suele ser una mezcla de ambos.</p>
-<h2 id="how-ai-matching-works">Cómo funciona la búsqueda con IA</h2>
-<p>La búsqueda con IA empieza con tu descripción, no con una palabra clave. Escribes lo que quieres hacer, y el buscador clasifica las herramientas por significado.</p>
-<p>Puede conectar hacer mi foto más pequeña para un formulario con un compresor de imágenes, aunque ninguna de esas palabras aparezca en el nombre de la herramienta.</p>
-<p>Lo hace en dos capas. La coincidencia local instantánea por palabras clave se ejecuta mientras escribes, mostrando hasta seis herramientas que comparten tus palabras.</p>
-<p>La clasificación semántica con IA se ejecuta cuando envías, usando un modelo de Groq para juzgar el significado, y devuelve una recomendación principal con una razón.</p>
-<p>Cada sugerencia de IA se verifica contra el inventario real antes de mostrarse. Si la IA sugiere una herramienta que no existe, esa sugerencia se descarta.</p>
-<p>Esa verificación es lo que separa al buscador de un chatbot general, que podría inventar una herramienta que suena plausible.</p>
-<h2 id="how-manual-search-works">Cómo funciona la búsqueda manual</h2>
-<p>La búsqueda manual empieza con el catálogo, no con tu descripción. Abres una categoría, como PDF o texto y escritura, y revisas las herramientas que hay dentro.</p>
-<p>Lees nombres y descripciones cortas, y abres las que parecen cercanas.</p>
-<p>También puedes usar la búsqueda por palabras clave, escribiendo un término como PDF, imagen o código QR y revisando los resultados. Esto funciona bien cuando conoces el vocabulario.</p>
-<p>Funciona mal cuando no lo conoces, porque la palabra clave equivocada lleva a la lista equivocada.</p>
-<p>La ventaja de la búsqueda manual es que ves el contexto. Notas las herramientas vecinas, comparas opciones parecidas, y a veces descubres una herramienta que no sabías que necesitabas.</p>
-<p>Ese descubrimiento no ocurre con una sola recomendación de IA.</p>
-<h2 id="when-ai-matching-wins">Cuándo gana la búsqueda con IA</h2>
-<p>La búsqueda con IA gana cuando conoces el trabajo pero no el nombre de la herramienta. Esa es la situación más común para los visitantes nuevos, y es la situación para la que se creó el buscador.</p>
-<p>Una frase reemplaza varios minutos de navegación.</p>
-<p>También gana cuando tu redacción es informal, vaga o está llena de errores de escritura. Una búsqueda manual por palabras clave necesita la palabra correcta, mientras que la capa de IA entiende la intención.</p>
-<p>Una frase como haz mi ensayo más corto coincidirá con un resumidor, aunque nunca hayas usado la palabra resumir.</p>
-<p>Gana cuando la tarea cruza categorías. Un trabajo que implica tanto un PDF como una imagen, por ejemplo, no pertenece claramente a una categoría.</p>
-<p>El buscador busca en todas las categorías a la vez, así que no te obliga a adivinar dónde vive la herramienta.</p>
-<p>También gana cuando necesitas comprobar si existe una herramienta. Una respuesta clara de sin coincidencia del buscador es más rápida que navegar por cada categoría para probar algo negativo.</p>
-<p>Si el buscador dice que no existe una herramienta exacta, puedes dejar de buscar y planear un flujo de trabajo parcial en su lugar.</p>
-<ul>
-<li><strong>Nombres de herramientas desconocidos:</strong> describe el resultado, y deja que la IA te dé el nombre.</li>
-<li><strong>Redacción informal o con muchos errores:</strong> la capa de IA entiende el significado, no solo la ortografía.</li>
-<li><strong>Tareas que cruzan categorías:</strong> una búsqueda cubre las 87 herramientas, sin necesidad de adivinar la categoría.</li>
-<li><strong>Comprobar la existencia:</strong> una respuesta de sin coincidencia resuelve la pregunta en segundos.</li>
-<li><strong>Trabajos urgentes y únicos:</strong> una sola frase es más rápida que aprender el catálogo.</li>
-</ul>
-<h2 id="when-manual-search-wins">Cuándo gana la búsqueda manual</h2>
-<p>La búsqueda manual gana cuando ya conoces la palabra clave. Si sabes que necesitas un contador de palabras, escribir contador de palabras en un campo de búsqueda es más rápido que escribir una frase y esperar la clasificación con IA.</p>
-<p>La ruta directa supera a la ruta ingeniosa cuando la respuesta ya se conoce.</p>
-<p>Gana cuando quieres navegar y comparar. La búsqueda con IA te da una mejor respuesta, mientras que la navegación manual te muestra todo el estante.</p>
-<p>Si existen varias herramientas parecidas, y las diferencias entre ellas importan, verlas lado a lado es mejor que confiar en una sola clasificación.</p>
-<p>Gana cuando ya usaste tus 10 búsquedas diarias con IA. La capa de IA está limitada a 10 por día por visitante, mientras que la navegación manual y la búsqueda local por palabras clave son ilimitadas.</p>
-<p>Después del límite, la búsqueda manual no solo es mejor, es la única opción sin IA que sigue funcionando bien.</p>
-<p>También gana cuando la tarea es ambigua y necesitas explorar. Navegar te ayuda a afinar tu comprensión de la tarea misma, porque ves qué herramientas existen y qué pueden hacer.</p>
-<p>La búsqueda con IA supone que ya sabes lo que quieres, y no puede ayudarte a descubrirlo.</p>
-<ul>
-<li><strong>Conoces la palabra clave:</strong> una búsqueda directa es más rápida que describir la tarea a la IA.</li>
-<li><strong>Quieres comparar herramientas parecidas:</strong> navegar muestra toda la gama, no solo un ganador.</li>
-<li><strong>Te quedaste sin búsquedas con IA:</strong> la búsqueda manual y la coincidencia local por palabras clave siguen ilimitadas.</li>
-<li><strong>Estás explorando, no preguntando:</strong> navegar te ayuda a descubrir qué es posible antes de decidir.</li>
-<li><strong>Desconfías de una sola recomendación:</strong> ver la lista por tu cuenta te da control sobre la elección.</li>
-</ul>
-<h2 id="accuracy-limits-of-ai-matching">Límites de precisión de la búsqueda con IA</h2>
-<p>La búsqueda con IA es tan precisa como la descripción que recibe. Una solicitud clara con una acción, un objeto y un resultado suele dar con la herramienta correcta.</p>
-<p>Una solicitud vaga como hacer mi archivo mejor tiene varios significados posibles, y la IA debe adivinar cuál quisiste decir.</p>
-<p>Esa suposición a veces es errónea, y el buscador muestra su razón para que puedas detectar el error. Lee siempre la razón antes de abrir la herramienta recomendada.</p>
-<p>Si la razón describe un trabajo distinto al tuyo, reescribe tu consulta con el detalle que falta e inténtalo de nuevo.</p>
-<p>La búsqueda con IA también puede ser engañada por una sola palabra clave fuerte. Si tu descripción contiene una palabra que coincide con una herramienta popular, la IA puede poner esa herramienta muy arriba aunque el resto de la frase apunte a otro lado.</p>
-<p>Agregar el detalle decisivo, como un tamaño objetivo o un formato, suele corregir esto.</p>
-<p>Otro límite es el catálogo mismo. El buscador solo puede recomendar herramientas que existen en UtilityFlow.</p>
-<p>Si tu tarea necesita una función que el catálogo no cubre, la IA no puede inventarla. Dirá que no hay coincidencia exacta, lo cual es honesto, pero no es la respuesta que querías.</p>
-<h2 id="side-by-side-comparison">Comparación directa</h2>
-<p>La velocidad favorece a la búsqueda con IA para tareas desconocidas, y a la búsqueda manual para tareas familiares. Si conoces la palabra clave, lo manual es más rápido.</p>
-<p>Si no la conoces, la IA es más rápida, porque elimina el paso de adivinar la palabra clave.</p>
-<p>El control favorece a la búsqueda manual. Ves las opciones, las comparas y eliges.</p>
-<p>La búsqueda con IA te da una recomendación y una razón, lo cual es eficiente, pero oculta las herramientas que clasificó más abajo. La lista de alternativas suaviza esto, pero solo muestra tres.</p>
-<p>El descubrimiento favorece la navegación manual. Te topas con herramientas que no sabías que existían, y eso puede cambiar tu forma de abordar una tarea.</p>
-<p>La búsqueda con IA está orientada a un objetivo, así que rara vez te sorprende con una herramienta no relacionada.</p>
-<p>La confiabilidad es un empate con distintos modos de fallo. La IA falla cuando la descripción es vaga.</p>
-<p>Lo manual falla cuando la palabra clave es errónea. Ambos fallos se corrigen agregando detalle, pero el detalle es distinto: una frase más clara para la IA, una mejor palabra clave para la búsqueda manual.</p>
-<h2 id="best-practice-combine-both-methods">Mejor práctica: combina ambos métodos</h2>
-<p>El flujo de trabajo más fuerte usa primero la IA y luego lo manual, o al revés, según lo que sepas. Empieza con el método que coincida con tu conocimiento, luego usa el otro método para verificar la respuesta.</p>
-<p>Esa verificación toma segundos, y detecta la mayoría de los errores.</p>
-<p>Si empiezas con IA, lee la razón, revisa las alternativas, y luego abre la herramienta recomendada para verificarla. Si la herramienta se ve mal, cambia a la navegación manual en la categoría que sugirió el buscador, y mira si una herramienta vecina encaja mejor.</p>
-<p>Si empiezas manualmente, usa el buscador para confirmar tu elección. Describe la tarea en una frase y mira si el buscador recomienda la misma herramienta que encontraste.</p>
-<p>Si lo hace, tu elección está confirmada. Si recomienda una herramienta distinta, compara ambas antes de comprometerte.</p>
-<p>Usa las coincidencias instantáneas por palabras clave como un puente entre los dos métodos. Aparecen mientras escribes, no cuestan búsquedas con IA, y te muestran la vista por palabras clave de tu descripción.</p>
-<p>Si las coincidencias por palabras clave y la respuesta de IA coinciden, puedes estar seguro. Si no coinciden, investiga la diferencia.</p>
-<h2 id="worked-comparison-two-tasks">Comparación práctica: dos tareas</h2>
-<p>Toma primero una tarea familiar: contar palabras en un ensayo. Manualmente, buscarías contador de palabras, lo encontrarías de inmediato y lo abrirías.</p>
-<p>Con IA, escribirías quiero contar palabras en mi ensayo, esperarías la clasificación, y darías con la misma herramienta. Lo manual gana aquí, porque la palabra clave es obvia.</p>
-<p>Ahora toma una tarea desconocida: un formulario quiere una foto de menos de 100 KB, y tu foto pesa 2 MB. Manualmente, podrías buscar cambiar tamaño, encontrar una herramienta para cambiar el tamaño, y descubrir que el archivo sigue siendo demasiado grande.</p>
-<p>Con IA, escribirías quiero reducir el tamaño de mi imagen a 100 KB, y el buscador recomendaría el compresor directamente. La IA gana aquí, porque la palabra clave no era obvia.</p>
-<p>La lección no es que un método sea mejor que otro, sino que el mejor método depende de la tarea. Las tareas familiares favorecen la búsqueda manual.</p>
-<p>Las tareas desconocidas favorecen la búsqueda con IA. Usa el método que encaje con la tarea que tienes enfrente, no el método que usaste la última vez.</p>
-<h2 id="common-mistakes">Errores comunes en ambos métodos</h2>
-<p>El error más común con IA es confiar en la recomendación sin leer la razón. La razón es la única evidencia que tienes de por qué se eligió la herramienta.</p>
-<p>Saltársela convierte una recomendación transparente en una suposición a ciegas, y una suposición a ciegas a veces es errónea.</p>
-<p>El error manual más común es conformarse con la primera herramienta cercana. Navegar cansa, así que la gente se detiene en la primera opción plausible.</p>
-<p>Esa opción puede funcionar, pero una herramienta mejor puede estar en la categoría de al lado. Revisa al menos las alternativas antes de comprometerte.</p>
-<p>Un error compartido por ambos métodos es ignorar las alternativas. En la búsqueda con IA, las alternativas se listan debajo de la mejor herramienta.</p>
-<p>En la búsqueda manual, las alternativas son las herramientas vecinas de la categoría. De cualquier modo, una revisión rápida puede revelar un mejor ajuste para un trabajo de varios pasos.</p>
-<p>Otro error compartido es usar las 10 búsquedas con IA en una sola consulta vaga. Afina primero con la búsqueda local gratuita por palabras clave, luego gasta una búsqueda con IA en una consulta clara y detallada.</p>
-<p>Ese orden guarda tu límite diario para las búsquedas que realmente necesitan IA.</p>
-<ul>
-<li><strong>Confiar en la IA sin leer la razón:</strong> la razón revela malentendidos antes de abrir la herramienta.</li>
-<li><strong>Conformarse con la primera coincidencia manual cercana:</strong> revisa las herramientas vecinas antes de comprometerte.</li>
-<li><strong>Ignorar las alternativas en cualquier método:</strong> un trabajo de varios pasos a menudo necesita una segunda herramienta.</li>
-<li><strong>Gastar búsquedas con IA en consultas vagas:</strong> afina primero con la búsqueda gratuita por palabras clave, luego usa la IA.</li>
-<li><strong>Buscar solo en una categoría:</strong> las tareas que cruzan categorías se pierden cuando adivinas mal la categoría.</li>
-</ul>
-<h2 id="troubleshooting">Solución de problemas: cuando ningún método funciona</h2>
-<p>Si la búsqueda con IA y la búsqueda manual fallan, el problema puede ser la tarea, no el método. Intenta replantear la tarea con palabras más simples.</p>
-<p>Quita la jerga, quita las marcas, y describe solo la acción, la entrada y la salida deseada.</p>
-<p>Comprueba si la herramienta existe. El buscador te dirá claramente si no hay coincidencia exacta, y merece la pena confiar en esa respuesta.</p>
-<p>Si no existe una herramienta, planea un flujo de trabajo parcial con herramientas relacionadas, o usa otro servicio para el paso que falta.</p>
-<p>Si la capa de IA no está disponible, recurre a la búsqueda manual y a las coincidencias locales por palabras clave. Siguen funcionando cuando la capa de IA está caída.</p>
-<p>El <a href="/es/contador-de-palabras/">contador de palabras</a> y otras herramientas populares también aparecen en las sugerencias inteligentes al cargar la página, así que puede que no necesites buscar en absoluto.</p>
-<p>Si te quedaste sin búsquedas con IA por hoy, se aplica la misma solución. Usa la búsqueda por palabras clave, navega por la categoría que mejor encaje, y vuelve mañana para más búsquedas con IA.</p>
-<p>El límite se reinicia a diario, y la mayoría de las tareas necesitan solo una o dos búsquedas.</p>
-<h2 id="conclusion">Conclusión: usa la IA cuando no sabes, navega cuando sabes</h2>
-<p>La búsqueda con IA y la búsqueda manual no son rivales, son dos herramientas para dos situaciones. Usa la búsqueda con IA cuando conoces el trabajo pero no el nombre de la herramienta, cuando tu redacción es informal, o cuando la tarea cruza categorías.</p>
-<p>Usa la búsqueda manual cuando conoces la palabra clave, cuando quieres comparar herramientas parecidas, o cuando quieres navegar y descubrir.</p>
-<p>Combínalas siempre que haya mucho en juego. Deja que la IA sugiera, luego verifica manualmente.</p>
-<p>O navega manualmente, luego deja que la IA confirme. Esa verificación en dos pasos toma segundos, y detecta los errores que cada método comete por su cuenta.</p>
-<p>Prueba la comparación en tu próxima tarea. Abre el <a href="/es/buscador-de-herramientas-ia/">buscador de herramientas con IA</a> gratuito, describe tu tarea en una frase, y mira lo que recomienda.</p>
-<p>Luego navega por la categoría por tu cuenta y compara. Si quieres el método paso a paso, sigue <a href="/es/blog/como-encontrar-la-herramienta-en-linea-adecuada-con-ia/">Cómo encontrar la herramienta en línea adecuada para cualquier tarea (con IA)</a>, y para todo el contexto, lee <a href="/es/blog/que-es-un-buscador-de-herramientas-ia/">¿Qué es un buscador de herramientas con IA? Guía completa</a></p>
-<p>El método adecuado es el que encaja con tu tarea.</p>`,
-    faqs: [
-      { q: '¿Cuándo debo usar el buscador de herramientas con IA en lugar de la búsqueda manual?', a: 'Usa el buscador cuando conoces el trabajo pero no el nombre de la herramienta, cuando tu redacción es informal o tiene errores, o cuando la tarea cruza categorías. La búsqueda manual es más rápida cuando ya conoces la palabra clave, como contador de palabras, porque puedes ir directo a la herramienta sin describir la tarea.' },
-      { q: '¿La búsqueda con IA es más precisa que la búsqueda manual?', a: 'Ninguna es siempre más precisa: la búsqueda con IA es más precisa para tareas vagas o desconocidas, porque entiende el significado y no solo las palabras clave, mientras que la búsqueda manual es más precisa cuando conoces la palabra clave exacta. Ambas fallan cuando la descripción o la palabra clave es errónea.' },
-      { q: '¿Cuáles son los límites de la coincidencia de herramientas con IA?', a: 'La búsqueda con IA depende de lo claramente que describas la tarea. Las solicitudes vagas pueden malinterpretarse, y una palabra clave fuerte puede confundir la clasificación. Solo puede recomendar herramientas que existen en UtilityFlow, y las búsquedas con IA están limitadas a 10 por día por visitante, así que lee siempre la razón que da antes de abrir la herramienta.' },
-      { q: '¿Cuáles son los límites de la búsqueda manual?', a: 'La búsqueda manual depende de tu vocabulario. La palabra clave equivocada lleva a la lista equivocada, y puedes pasar por alto una herramienta listada con otro nombre. También es lenta entre 88 herramientas, y la mayoría se detiene temprano y se conforma con la primera herramienta cercana en lugar de la mejor.' },
-      { q: '¿Puedo combinar la búsqueda con IA y la búsqueda manual?', a: 'Sí, y esa es la mejor práctica. Empieza con el método que encaje con lo que sabes, luego usa el otro para verificar la respuesta. Si la IA recomienda una herramienta, navega por su categoría para verificarla, y si encuentras una herramienta manualmente, pídele al buscador que la confirme con una descripción de una frase.' },
-      { q: '¿Qué debo hacer si ningún método encuentra la herramienta adecuada?', a: 'Replantea la tarea con palabras más simples, usando solo la acción, la entrada y la salida deseada. Si el buscador dice que no existe una coincidencia exacta, confía en esa respuesta y mira las herramientas relacionadas para un flujo de trabajo parcial. Si ningún flujo parcial funciona, usa otro servicio para el paso que falta.' },
-    ],
-    readingMinutes: 14,
-  },
-  'ai-text-summarizer-guide': {
-    slug: 'que-es-un-resumidor-de-texto-con-ia',
-    title: '¿Qué es un resumidor de texto con IA? Guía completa',
-    description: 'Aprende qué hace un resumidor de texto con IA, cómo se diferencian los resúmenes cortos, medianos y largos, y cómo los puntos clave te ayudan a leer más rápido.',
-    body: `<p>La mayor parte del texto que encuentras cada día es más largo de lo necesario. Un artículo de noticias esconde su idea principal entre cuatro párrafos de contexto, y un informe de empresa esconde una decisión en treinta páginas.</p>
-<p>Un <strong>resumidor de texto con IA</strong> lee ese texto largo y te devuelve una versión más corta con las ideas importantes intactas. Esta guía explica qué hace la herramienta, cómo funciona y cuándo vale la pena usarla.</p>
-<p>Un buen resumen no recorta palabras al azar. Encuentra las afirmaciones que importan, conserva los hechos que las respaldan, y elimina la repetición, el contexto y el relleno.</p>
-<h2 id="what-is-an-ai-text-summarizer">¿Qué es un resumidor de texto con IA?</h2>
-<p>Un resumidor de texto con IA es una herramienta que toma un texto largo y produce una versión más corta que conserva las ideas principales. Pegas un artículo, un informe, unas notas o una transcripción, y eliges qué tan largo debe ser el resumen.</p>
-<p>El <a href="/es/resumidor-de-texto-ia/">resumidor de texto con IA</a> de UtilityFlow hace esto gratis, sin cuenta ni registro. Ofrece tres longitudes y cuatro formatos, para que puedas ajustar la salida al trabajo.</p>
-<p>La herramienta está pensada para la lectura diaria, no solo para investigadores. Los estudiantes la usan para avanzar en las lecturas asignadas, los profesionales la usan para revisar informes antes de una reunión, y los escritores la usan para comprobar si un borrador tiene un punto principal claro.</p>
-<p>Conviene dejar claro lo que la herramienta no hace. No sabe qué detalles te importan a ti personalmente, y juzga la importancia por lo que el propio texto destaca.</p>
-<h2 id="how-an-ai-summarizer-works">Cómo funciona un resumidor con IA</h2>
-<p>Detrás de la interfaz simple, la herramienta usa un modelo de lenguaje para leer el texto y reescribirlo en forma más corta. A diferencia de las herramientas antiguas que simplemente elegían frases comunes, un resumidor moderno entiende el significado del pasaje y lo replantea.</p>
-<p>Por eso la salida se lee como escritura nueva y no como un conjunto de líneas copiadas. Puede combinar ideas de distintos párrafos en una sola frase, y puede eliminar detalles que no cambian el punto principal.</p>
-<p>El resumidor de UtilityFlow funciona con inferencia gratuita de Groq, un servicio rápido de IA que ejecuta el modelo de lenguaje. Tu texto se envía al servicio para resumirse y no se guarda.</p>
-<p>Gratis tienes hasta cinco resúmenes por día por visitante, con hasta 25.000 caracteres en cada solicitud. Eso cubre la mayoría de los artículos, informes y conjuntos largos de notas en una sola solicitud.</p>
-<h2 id="the-three-summary-lengths">Las tres longitudes de resumen, explicadas</h2>
-<p>La configuración de longitud es la elección más importante que harás, porque decide cuánto del original sobrevive. Corto conserva del 10 al 20 por ciento, mediano conserva del 30 al 40 por ciento, y largo conserva del 50 al 60 por ciento.</p>
-<p>Esos porcentajes son guías más que medidas exactas, pero te dan una idea confiable de qué esperar. Elegir la longitud correcta es un equilibrio entre velocidad y completitud.</p>
-<h3 id="short-summary">Corto: del 10 al 20 por ciento</h3>
-<p>Un resumen corto es la forma más rápida de saber de qué trata un texto. Conserva la afirmación central y el punto de apoyo más importante, y elimina casi todo lo demás.</p>
-<p>Un artículo de 3.000 palabras se convierte en unas 300 a 600 palabras, que puedes leer en unos dos minutos. Usa esta longitud cuando estés decidiendo si un documento merece leerse completo.</p>
-<p>Los resúmenes cortos funcionan mejor en textos con una idea principal clara. Un artículo de noticias, una publicación de blog o un informe corto suelen comprimirse bien, mientras que un texto con varios puntos iguales perderá algo con esta longitud.</p>
-<h3 id="medium-summary">Mediano: del 30 al 40 por ciento</h3>
-<p>La longitud mediana es la mejor opción por defecto para la mayoría de los usos. Conserva el argumento principal y la evidencia clave detrás de él, para que puedas seguir el razonamiento y no solo la conclusión.</p>
-<p>Un artículo de 3.000 palabras se convierte en unas 900 a 1.200 palabras. Eso sigue siendo mucho más rápido de leer que el original, pero es lo bastante detallado para comentarlo o basar una decisión en él.</p>
-<p>Usa mediano cuando necesitas entender un documento lo suficiente para hablar de él, pero no necesitas cada detalle. Sirve para preparar reuniones, lectura de contexto y notas de investigación.</p>
-<h3 id="long-summary">Largo: del 50 al 60 por ciento</h3>
-<p>Un resumen largo conserva más de la mitad del original, lo que lo hace lo más cercano a leer el texto completo. Preserva la estructura del argumento, la mayor parte del detalle de apoyo, y las conexiones entre ideas.</p>
-<p>Un artículo de 3.000 palabras se convierte en unas 1.500 a 1.800 palabras. Usa esta longitud cuando los detalles importan, pero igual quieres el texto más ajustado.</p>
-<p>Los resúmenes largos sirven para material denso como artículos de investigación, documentos legales e informes técnicos. También sirven para textos que planeas estudiar en lugar de ojear, porque el detalle extra ayuda a que las ideas se fijen.</p>
-<h2 id="summary-formats">Los cuatro formatos de resumen</h2>
-<p>La longitud es solo la mitad de la elección. La herramienta también ofrece cuatro formatos, y cada uno presenta las mismas ideas en una forma distinta.</p>
-<p>El formato que elijas debe coincidir con lo que planeas hacer con el resumen. Un párrafo sirve para leer, los puntos con viñetas sirven para revisar, los puntos clave sirven para tomar notas, y el lenguaje sencillo sirve para textos difíciles de entender.</p>
-<h3 id="paragraph-format">Resúmenes en párrafo</h3>
-<p>El formato de párrafo devuelve el resumen como prosa fluida, como una versión más corta del artículo original. Se lee con naturalidad, y es la mejor opción cuando quieres leer el resumen de principio a fin.</p>
-<p>Úsalo cuando te estás poniendo al día con un artículo o un capítulo y quieres la experiencia de leer en lugar de revisar una lista. También funciona bien cuando necesitas compartir el resultado con otra persona.</p>
-<h3 id="bullet-point-summaries">Resúmenes con viñetas</h3>
-<p>Las viñetas dividen el resumen en una lista, con una idea por línea. Este formato es el más rápido de revisar, porque tu ojo puede bajar por la lista y elegir los puntos que te importan.</p>
-<p>Úsalo cuando estás revisando material que ya conoces en parte, o cuando necesitas encontrar un dato específico rápido. También es el mejor formato para preparar reuniones, porque cada viñeta puede convertirse en un tema de conversación.</p>
-<h3 id="key-takeaways">Puntos clave</h3>
-<p>Los puntos clave son una lista corta de las conclusiones más importantes del texto, sin el detalle de apoyo. Responden a la pregunta de qué debes recordar después de leer, más que a qué decía el texto.</p>
-<p>Usa este formato cuando terminas un documento y quieres un registro de lo que importaba. También ayuda cuando comparas varias fuentes y necesitas ver sus conclusiones lado a lado.</p>
-<h3 id="plain-language-format">Resúmenes en lenguaje sencillo</h3>
-<p>El formato de lenguaje sencillo reescribe el resumen con palabras simples y cotidianas. Está pensado para textos difíciles de leer en el original, ya sea por la jerga, las frases largas o un estilo formal.</p>
-<p>Úsalo para documentos técnicos, artículos académicos y texto legal que necesitas entender pero no necesitas citar palabra por palabra. Te ahorra volver a leer el mismo párrafo tres veces.</p>
-<h2 id="what-the-tool-preserves">Qué conserva la herramienta</h2>
-<p>Un resumen solo es útil si mantiene los datos correctos. El resumidor de UtilityFlow está pensado para conservar nombres, números y fechas del texto original, que son los detalles con más probabilidad de importar después.</p>
-<p>Un resumen que omite la fecha de un evento o la cifra de un informe ha fallado en su trabajo, aunque se lea bien. La herramienta está pensada para no soltar esos datos, para que el resumen siga siendo útil como referencia.</p>
-<p>Aun así, ningún resumen conserva todo, y debes contrastar los datos que más importan con el original. Eso vale sobre todo para los números, donde un solo dígito puede cambiar el significado de un hallazgo.</p>
-<h2 id="who-benefits-most">¿Quién se beneficia más de un resumidor con IA?</h2>
-<p>Los estudiantes se benefician porque las listas de lectura son largas y el tiempo es corto. Un resumidor permite a un estudiante revisar un capítulo antes de leerlo, para que la lectura completa sea más rápida, o repasar apuntes antes de un examen.</p>
-<p>Los profesionales se benefician porque gran parte de su lectura es elegir qué merece atención. Un gerente puede recibir diez informes en una semana y tener que decidir cuáles dos leer completos, y un resumen corto de cada uno resuelve esa decisión en minutos.</p>
-<p>Los investigadores se benefician porque las revisiones de literatura implican docenas de artículos. Un resumen mediano de cada uno basta para decidir si pertenece a la revisión, lo que ahorra horas de lectura.</p>
-<p>Los lectores de todos los días también se benefician, porque internet premia la longitud. Los artículos a menudo se rellenan para posicionar mejor en los buscadores, y los boletines repiten el mismo punto de tres formas distintas.</p>
-<p>Un resumidor quita ese relleno y deja la idea que hay debajo. Si lees mucho en línea, puede devolverte una cantidad significativa de tiempo cada semana.</p>
-<h2 id="choosing-the-right-length">Cómo elegir la longitud adecuada para tu texto</h2>
-<p>La mejor longitud depende de dos cosas: qué tan largo es el original, y qué tan bien necesitas conocerlo. Para un artículo corto de menos de mil palabras, un resumen corto puede ser demasiado delgado, porque no hay mucho que recortar.</p>
-<p>Un resumen mediano de un artículo corto suele ser el punto ideal. Para un informe largo, un resumen corto es un buen primer paso, y puedes seguirlo con una versión mediana o larga si el tema resulta importar.</p>
-<p>Un enfoque práctico es generar primero el resumen corto, leerlo, y luego decidir. Si responde tu pregunta, ya terminaste, y si plantea nuevas preguntas, genera un resumen mediano del mismo texto.</p>
-<h2 id="tips-for-better-summaries">Consejos para obtener mejores resúmenes</h2>
-<p>La calidad de un resumen depende de la calidad del texto que le das a la herramienta. El texto limpio da resultados limpios, así que quita los menús de navegación, los anuncios y los encabezados repetidos antes de pegar.</p>
-<p>Si copias desde una página web, pega primero en un editor de texto plano y borra las partes que no forman parte del artículo. La herramienta solo puede resumir lo que le das, y el texto extraño se convierte en ideas extrañas en la salida.</p>
-<p>Mantén todo el documento en una solicitud cuando puedas, porque la herramienta necesita el contexto completo para juzgar qué importa. Dividir un artículo en partes te da un conjunto de resúmenes locales, no un resumen del todo.</p>
-<ul>
-<li><strong>Pega texto limpio:</strong> quita menús, anuncios y encabezados repetidos antes de resumir.</li>
-<li><strong>Mantén todo el documento junto:</strong> una solicitud da una mejor idea del argumento principal que varios fragmentos.</li>
-<li><strong>Empieza con mediano:</strong> es la opción por defecto más útil, y puedes ajustar desde ahí.</li>
-<li><strong>Compara dos longitudes:</strong> un resumen corto y uno mediano juntos revelan lo que el texto realmente enfatiza.</li>
-<li><strong>Guarda los puntos clave:</strong> los puntos clave son una buena hoja de estudio o nota de reunión.</li>
-<li><strong>Verifica números y fechas:</strong> comprueba cualquier cifra que planees citar contra el texto original.</li>
-</ul>
-<h2 id="common-mistakes">Errores comunes que debes evitar</h2>
-<p>El error más común es tratar el resumen como un sustituto del original cuando los detalles importan. Un resumen es una guía para entender un texto, no un reemplazo.</p>
-<p>Si estás escribiendo un ensayo, tomando una decisión o citando una fuente, lee el pasaje original al que señala el resumen. El resumen te dice dónde mirar, y el original te dice qué hay realmente ahí.</p>
-<p>Otro error común es resumir un texto demasiado corto como para necesitarlo. Un anuncio de 200 palabras no necesita un resumen, y el resultado será poco más que una repetición.</p>
-<h2 id="limitations-to-know">Limitaciones que debes conocer</h2>
-<p>Un resumidor con IA puede pasar por alto cosas, y es honesto decirlo. Puede omitir un punto que te importa, aunque el texto mismo no lo enfatice.</p>
-<p>También puede aplanar un argumento con matices en una afirmación simple, o malinterpretar un texto irónico, ambiguo o mal estructurado. Son limitaciones de la tecnología, y por eso cada resumen debe verificarse cuando importa.</p>
-<p>La cuota gratuita es otro límite práctico. Tienes hasta cinco resúmenes por día, lo que basta para la lectura diaria de la mayoría, pero no para trabajo en masa.</p>
-<p>Si necesitas resumir muchos documentos, planea cuáles importan más y usa tu cuota en esos. El límite de 25.000 caracteres por solicitud significa que los documentos muy largos deben dividirse, y un resumen dividido es menos confiable que uno completo.</p>
-<p>La salida de la IA siempre debe contrastarse con el original antes de confiar en ella. Ese solo hábito te protege de cada limitación descrita arriba.</p>
-<h2 id="related-tools">Herramientas que combinan bien con un resumidor</h2>
-<p>Un resumidor rara vez trabaja solo. Antes de resumir, quizá quieras saber qué tan largo es el texto, y el <a href="/es/contador-de-palabras/">contador de palabras</a> te lo dice con un clic.</p>
-<p>Después de resumir, quizá quieras comprobar si el resumen es fácil de leer, y el <a href="/es/verificador-de-legibilidad/">verificador de legibilidad</a> lo puntúa por ti. Si trabajas con un PDF, el <a href="/es/extractor-de-texto-de-pdf/">extractor de texto de PDF</a> saca el texto para que puedas pegarlo en el resumidor.</p>
-<p>Si el resumen revela que un pasaje necesita reescribirse, el <a href="/es/asistente-de-escritura-ia/">asistente de escritura con IA</a> puede ayudarte a reformularlo, corregir la gramática o cambiar el tono. Juntas, estas herramientas cubren todo el ciclo de leer, condensar, revisar y reescribir.</p>
-<h2 id="conclusion">Conclusión: lee menos, entiende más</h2>
-<p>Un resumidor de texto con IA hace un trabajo, y lo hace bien. Convierte un texto largo en una versión más corta que conserva las ideas que importan, para que puedas decidir rápido si un documento merece toda tu atención.</p>
-<p>Con tres longitudes y cuatro formatos, puedes ajustar el resumen a la tarea, desde una revisión rápida hasta una ayuda de estudio cuidadosa. La clave es usarlo como una herramienta de lectura, no como un reemplazo de la lectura, y revisar el original siempre que los detalles importen.</p>
-<p>Pruébalo con el próximo artículo largo que abras. Pega el texto en el <a href="/es/resumidor-de-texto-ia/">resumidor de texto con IA</a> gratuito, elige un resumen mediano con viñetas, y mira cuánto aprendes en dos minutos.</p>
-<p>Si quieres los pasos prácticos, lee <a href="/es/blog/como-resumir-articulos-largos/">Cómo resumir artículos e informes largos en segundos</a>. Si quieres aprender a revisar un resumen correctamente, lee <a href="/es/blog/precision-del-resumidor-ia-limitaciones/">Precisión del resumidor con IA: qué acierta, qué se le escapa, y cómo verificarlo</a>.</p>`,
-    faqs: [
-      { q: '¿Qué es un resumidor de texto con IA?', a: 'Un resumidor de texto con IA es una herramienta que lee un texto largo y produce una versión más corta que conserva las ideas principales. Pegas un artículo, informe o notas, eliges una longitud y un formato de resumen, y la herramienta devuelve una versión condensada en segundos.' },
-      { q: '¿Qué longitudes de resumen ofrece el resumidor de texto con IA de UtilityFlow?', a: 'Ofrece tres longitudes: corto conserva del 10 al 20 por ciento del original, mediano conserva del 30 al 40 por ciento, y largo conserva del 50 al 60 por ciento. Corto es mejor para una vista rápida, mediano es la mejor opción por defecto para la mayoría de los usos, y largo sirve para material denso donde el detalle importa.' },
-      { q: '¿En qué formatos puedo obtener un resumen?', a: 'Puedes elegir los formatos de párrafo, viñetas, puntos clave o lenguaje sencillo. Los párrafos sirven para leer, las viñetas sirven para revisar, los puntos clave sirven para tomar notas y repasar, y el lenguaje sencillo sirve para texto técnico o académico difícil de leer en el original.' },
-      { q: '¿El resumidor de texto con IA es gratis?', a: 'Sí, es completamente gratis, sin inicio de sesión, suscripción ni créditos. Gratis tienes hasta cinco resúmenes por día por visitante, con hasta 25.000 caracteres por solicitud. Tu texto se procesa para crear el resumen y no se guarda.' },
-      { q: '¿El resumidor conserva nombres, números y fechas?', a: 'Sí, la herramienta está diseñada para conservar nombres, números y fechas del texto original, ya que son los detalles con más probabilidad de importar después. Aun así, debes contrastar cualquier cifra que planees citar con el original, porque ningún resumen es una copia perfecta de la fuente.' },
-      { q: '¿Un resumidor con IA puede reemplazar la lectura del original?', a: 'No. Un resumen es una guía para entender un texto, no un reemplazo. Te ayuda a decidir si un documento merece una lectura completa y te recuerda las ideas principales después, así que cuando los detalles, las citas o las decisiones importan, lee el pasaje original por tu cuenta.' },
-    ],
-    readingMinutes: 12,
-  },
-  'ai-text-summarizer-howto': {
-    slug: 'como-resumir-articulos-largos',
-    title: 'Cómo resumir artículos e informes largos en segundos',
-    description: 'Aprende cómo resumir artículos, informes y notas largos en segundos: limpia el texto, elige una longitud y un formato, y verifica el resumen antes de usarlo.',
-    body: `<p>Abres un artículo largo, lo recorres, y te das cuenta de que no tienes veinte minutos para leerlo bien. Igual necesitas saber qué dice, porque una reunión empieza en diez minutos o un ensayo se entrega esta noche. Aprender <strong>a resumir artículos largos</strong> rápido es una habilidad que te ahorra tiempo todos los días.</p>
-<p>Este tutorial muestra todo el proceso, paso a paso, con el <a href="/es/resumidor-de-texto-ia/">resumidor de texto con IA</a> gratuito de UtilityFlow. Aprenderás a preparar tu texto, a elegir una longitud de resumen, y a usar los puntos clave. Todo el trabajo toma menos de un minuto una vez que conoces los pasos.</p>
-<p>Nada de esto necesita una cuenta, una descarga ni un pago. Pegas texto en una herramienta del navegador, eliges tu configuración, y lees el resultado.</p>
-<p>Si quieres primero el contexto, lee <a href="/es/blog/que-es-un-resumidor-de-texto-con-ia/">¿Qué es un resumidor de texto con IA? Guía completa</a> antes de empezar.</p>
-<h2 id="what-you-need-before-you-start">Lo que necesitas antes de empezar</h2>
-<p>Necesitas muy poco, y reunirlo primero te evita detenerte a mitad de camino. Necesitas el texto mismo, copiado de forma limpia, y una idea aproximada de qué quieres sacar de él. ¿Estás decidiendo si leerlo, preparándote para una reunión, o estudiándolo para un examen?</p>
-<p>Tu respuesta decide la longitud y el formato que elegirás. Una decisión rápida necesita un resumen corto, mientras que preparar una reunión necesita uno mediano con viñetas. Conocer el objetivo antes de empezar evita que generes tres versiones y las compares al azar.</p>
-<ul>
-<li><strong>El texto completo:</strong> el artículo, informe o notas, copiados como texto plano.</li>
-<li><strong>Una copia limpia:</strong> menús, anuncios y encabezados repetidos eliminados.</li>
-<li><strong>Tu objetivo:</strong> una vista rápida, preparar una reunión, notas de estudio o una decisión.</li>
-<li><strong>Un navegador:</strong> cualquier navegador moderno, en una computadora, tableta o celular.</li>
-<li><strong>Un minuto:</strong> el resumen en sí toma segundos, y revisarlo toma un poco más.</li>
-</ul>
-<h2 id="step-1-copy-clean-text">Paso 1: copia texto limpio</h2>
-<p>Abre el artículo o informe y selecciona el texto que quieres resumir. Cópialo, luego pégalo primero en un editor de texto plano, para que puedas ver exactamente qué tienes. Las páginas web a menudo esconden menús de navegación, avisos de cookies y enlaces a artículos relacionados dentro del texto copiado.</p>
-<p>Borra todo lo que no forme parte del artículo mismo. Los titulares y subtítulos está bien conservarlos, porque ayudan a la herramienta a entender la estructura. Los anuncios, las biografías de autores, las secciones de comentarios y los enlaces del pie no, y pueden confundir el resumen.</p>
-<p>Si trabajas con un PDF, no siempre puedes seleccionar el texto de forma limpia. El <a href="/es/extractor-de-texto-de-pdf/">extractor de texto de PDF</a> saca el texto de un archivo PDF para que puedas pegarlo en el resumidor. Revisa el texto extraído por si tiene líneas rotas y espacios que faltan antes de continuar.</p>
-<h2 id="step-2-check-the-length">Paso 2: revisa la longitud de tu texto</h2>
-<p>Antes de pegar, revisa qué tan largo es el texto. El resumidor acepta hasta 25.000 caracteres por solicitud, que son unas cuatro a cinco mil palabras. La mayoría de los artículos e informes caben con facilidad, pero un documento muy largo puede no caber.</p>
-<p>Pega tu texto en el <a href="/es/contador-de-palabras/">contador de palabras</a> para ver el conteo de caracteres con un clic. Si el texto supera el límite, divídelo en un corte natural, como un capítulo o el encabezado de una sección, y resume las partes por separado.</p>
-<h2 id="step-3-choose-a-summary-length">Paso 3: elige una longitud de resumen</h2>
-<p>Abre el <a href="/es/resumidor-de-texto-ia/">resumidor de texto con IA</a> y pega tu texto limpio en el campo de entrada. Ahora elige una longitud: corto conserva del 10 al 20 por ciento del original, mediano conserva del 30 al 40 por ciento, y largo conserva del 50 al 60 por ciento.</p>
-<p>Para una primera pasada, elige corto. Un resumen corto te dice de qué trata el documento en unos dos minutos de lectura, y basta para decidir si el documento te importa. Si te importa, puedes generar una versión más larga justo después.</p>
-<p>Elige mediano cuando ya sabes que el documento importa y necesitas entenderlo bien. Conserva el argumento principal y la evidencia clave, para que puedas seguir el razonamiento y comentarlo después. Mediano es la mejor opción por defecto cuando no estás seguro.</p>
-<p>Elige largo cuando los detalles importan y quieres lo más cercano a leer el texto completo. Sirve para artículos de investigación, informes técnicos, y cualquier documento que planees estudiar. Un resumen largo igual ahorra tiempo, pero es una lectura seria por sí mismo.</p>
-<h2 id="step-4-choose-a-format">Paso 4: elige un formato</h2>
-<p>Luego, elige un formato: párrafo, viñetas, puntos clave o lenguaje sencillo. El formato decide cómo se ve el resumen, no qué contiene, así que elige la forma que encaje con tu siguiente paso. Un párrafo se lee con naturalidad de principio a fin, como una versión más corta del original.</p>
-<p>Las viñetas son las más rápidas de revisar, con una idea por línea. Sirven para preparar reuniones, porque cada viñeta puede convertirse en un tema de conversación, y sirven para repasar, porque cada viñeta es fácil de comprobar contra ti mismo.</p>
-<p>Los puntos clave, o conclusiones principales, reducen el resumen a las conclusiones que debes recordar. Úsalos cuando terminas un documento y quieres un registro de lo que importaba, o cuando comparas varias fuentes lado a lado.</p>
-<p>El lenguaje sencillo reescribe el resumen con palabras simples y cotidianas. Úsalo para texto técnico, académico o legal difícil de leer en el original, y para cualquier documento que necesites explicarle a otra persona.</p>
-<h2 id="step-5-generate-the-summary">Paso 5: genera el resumen</h2>
-<p>Con el texto pegado y la configuración elegida, genera el resumen. La herramienta envía tu texto al servicio de IA, que lo lee y escribe la versión más corta. Esto suele tomar unos segundos, aunque un texto muy largo puede tomar un poco más.</p>
-<p>Lee el resultado de inmediato, mientras el original sigue fresco en tu mente. ¿Suena como el documento que pegaste? ¿El punto principal coincide con lo que esperabas?</p>
-<p>Si algo se ve mal, no supongas que la herramienta está rota. Revisa primero tu entrada, porque una entrada desordenada es la causa más común de un resultado extraño.</p>
-<h2 id="step-6-read-and-check-the-summary">Paso 6: lee y revisa el resumen</h2>
-<p>Un resumen solo es útil si puedes confiar en él, así que revisa el resultado antes de usarlo. Lee el resumen una vez completo, luego compara sus afirmaciones principales con el original. La verificación más fuerte es simple: encuentra la afirmación más importante del resumen y localízala en el texto original.</p>
-<p>Presta especial atención a los números, nombres y fechas, porque son los detalles que más importan y los más fáciles de recordar mal. Si el resumen cita una cifra, encuentra esa cifra en el original y confirma que coincide. La salida de la IA siempre debe verificarse antes de citarla o basar una decisión en ella.</p>
-<p>Si el resumen se siente delgado o pasa por alto un punto que sabes que está en el original, genera una versión más larga. Un resumen corto de un documento complejo siempre dejará cosas fuera, y eso no es un error. Es la longitud haciendo su trabajo, y la solución es pedir más detalle.</p>
-<h2 id="step-7-save-the-key-takeaways">Paso 7: guarda los puntos clave</h2>
-<p>Una vez que el resumen te convenza, guarda los puntos clave. Genera una versión de puntos clave del mismo texto, copia el resultado, y pégalo en tus notas, tu documento de reunión o tu archivo de estudio. Una lista corta de conclusiones es mucho más útil en una semana que un resumen completo que nunca vuelves a leer.</p>
-<p>Agrega la fuente junto a los puntos clave: el título del artículo, el autor y la fecha. Así, cuando vuelvas a tus notas después, podrás encontrar el original en segundos. Una conclusión sin fuente es una afirmación que no puedes verificar, y tarde o temprano causará problemas.</p>
-<h2 id="worked-example-news-article">Ejemplo práctico: resumir un artículo de noticias</h2>
-<p>Imagina un artículo de noticias de 2.500 palabras sobre un cambio en las tasas de interés. Necesitas entenderlo antes de una reunión de equipo en quince minutos. Copia el texto del artículo, quita los enlaces a historias relacionadas y la sección de comentarios, y pégalo en el resumidor.</p>
-<p>Elige un resumen corto con viñetas. El resultado debería ser cinco o seis viñetas: qué cambió, en cuánto, por qué ocurrió el cambio, a quién afecta, y qué sigue. Lee las viñetas, y verifica la cifra clave contra el artículo.</p>
-<p>Si las viñetas responden tus preguntas, terminaste en unos tres minutos. Si la reunión discutirá en detalle las razones detrás de la decisión, genera también un resumen mediano en párrafo. Ahora tienes una versión rápida para revisar y una versión más completa para comentar.</p>
-<h2 id="worked-example-report">Ejemplo práctico: resumir un informe largo</h2>
-<p>Ahora imagina un informe de empresa de 12.000 palabras con un resumen ejecutivo, cinco capítulos y un apéndice. Es demasiado largo para una solicitud, así que divídelo en dos partes en un corte de capítulo. Resume cada parte por separado, empezando por el resumen ejecutivo y los primeros capítulos.</p>
-<p>Usa una longitud mediana con viñetas para cada parte, porque necesitas los hallazgos y la evidencia detrás de ellos. Lee ambos resúmenes, luego escribe dos o tres frases propias que los conecten. Esa nota corta es tu verdadero resumen de todo el informe.</p>
-<p>Verifica los números de cada resumen contra el informe antes de compartirlos. Un resumen de informe a menudo se usa para tomar decisiones, así que una cifra equivocada aquí tiene consecuencias reales. Cuando las cifras cuadran, guarda las viñetas con el título y la fecha del informe.</p>
-<h2 id="worked-example-notes-transcript">Ejemplo práctico: resumir notas y transcripciones</h2>
-<p>Las notas de reuniones y las transcripciones de entrevistas son más desordenadas que los artículos, porque repiten ideas y se desvían del tema. Copia las notas, borra los saludos y la charla informal, y conserva las partes donde se tomaron decisiones o se dijeron datos. Pega el texto limpio en el resumidor.</p>
-<p>Elige un resumen mediano con puntos clave. El resultado debería listar las decisiones, las acciones pendientes, y los datos que las respaldan. Compara los puntos clave con tu propio recuerdo de la reunión, y agrega lo que el resumen haya pasado por alto.</p>
-<h2 id="splitting-very-long-documents">Cómo dividir documentos muy largos</h2>
-<p>Algunos documentos son simplemente demasiado largos para una sola solicitud, y dividirlos es la única opción. Divide en un corte natural, como el encabezado de un capítulo o el límite de una sección, y nunca en medio de un párrafo. Un corte limpio le da a cada parte su propia estructura, lo que ayuda a la herramienta a resumirla bien.</p>
-<p>Resume cada parte con la misma longitud y formato, para que los resultados sean fáciles de comparar. Lee los resúmenes en orden, y escribe un párrafo corto propio que los enlace. Ese párrafo es donde vive tu comprensión, y vale los dos minutos que toma.</p>
-<p>Recuerda que un resumen dividido puede perder conexiones entre las partes. Si el documento construye un argumento a través de los capítulos, el punto más importante puede estar en el hueco entre dos resúmenes. Cuando el argumento importa, lee tú mismo la introducción y la conclusión del original.</p>
-<h2 id="troubleshooting">Solución de problemas: cuando el resumen se ve mal</h2>
-<p>La mayoría de los problemas tienen una causa simple, y la mayoría se corrigen cambiando la entrada o la configuración en lugar de culpar a la herramienta. Un resumen que se ve extraño suele significar que la entrada estaba desordenada, que el texto era demasiado corto, o que la longitud era incorrecta para el documento. </p><p>Revisa la lista de abajo antes de intentarlo de nuevo.</p>
-<ul>
-<li><strong>El resumen repite el mismo punto:</strong> el original se repite, o la entrada contiene texto duplicado, así que limpia la entrada e inténtalo de nuevo.</li>
-<li><strong>El resumen pasa por alto el punto principal:</strong> el texto puede enterrar su conclusión al final, así que prueba un resumen más largo que conserve más detalle.</li>
-<li><strong>El resumen es demasiado corto para ser útil:</strong> el original puede ser corto, o elegiste la longitud corta, así que cambia a mediano.</li>
-<li><strong>Los números se ven mal:</strong> encuentra cada cifra en el original y compárala, y vuelve a verificar cualquier número que planees citar.</li>
-<li><strong>El resumen se lee como un sinsentido:</strong> la entrada probablemente contiene menús, anuncios o texto roto de un PDF, así que límpiala e inténtalo de nuevo.</li>
-<li><strong>La herramienta rechaza el texto:</strong> el texto supera los 25.000 caracteres, así que divídelo en un corte de sección y resume las partes por separado.</li>
-</ul>
-<h2 id="common-mistakes">Errores comunes que debes evitar</h2>
-<p>El error más común es saltarse el paso de limpieza. Pegar una página web entera, con menús y todo, le da a la herramienta una entrada confusa, y el resumen reflejará esa confusión. Dos minutos de limpieza te evitan un resultado inútil y un segundo intento.</p>
-<p>Otro error común es elegir la longitud corta para un documento complejo y luego concluir que el documento no tiene nada que decir. Un resumen corto de un texto complejo es delgado por diseño. Si el resultado se siente vacío, la respuesta es un resumen más largo, no otra herramienta.</p>
-<p>Un tercer error es confiar en el resumen sin verificarlo. Los resúmenes son útiles, pero no son el original, y la salida de la IA siempre debe verificarse cuando importa. Verifica las afirmaciones que planeas usar, sobre todo números y fechas, contra el texto fuente.</p>
-<h2 id="tips-for-faster-summarising">Consejos para resumir más rápido</h2>
-<p>Crea una pequeña rutina y el proceso se vuelve automático. Mantén un editor de texto plano abierto para limpiar, decide tu longitud antes de pegar, y guarda siempre los puntos clave con la fuente. Después de unos días, todo el trabajo toma menos de un minuto.</p>
-<p>Usa el <a href="/es/verificador-de-legibilidad/">verificador de legibilidad</a> en el texto original cuando un documento se sienta difícil de leer. Una puntuación baja de legibilidad es una señal para usar el formato de lenguaje sencillo, que reescribe el resumen con palabras más simples.</p>
-<p>Si un resumen muestra que tu propia escritura no es clara, el <a href="/es/asistente-de-escritura-ia/">asistente de escritura con IA</a> puede ayudarte a reescribir el pasaje. Resumir tu propio borrador es una buena prueba: si la herramienta no encuentra tu punto principal, tus lectores tampoco lo encontrarán.</p>
-<h2 id="conclusion">Conclusión: un hábito de un minuto que ahorra horas</h2>
-<p>Resumir artículos e informes largos es un hábito simple: copia texto limpio, revisa la longitud, elige una longitud y un formato, genera el resumen, revísalo, y guarda los puntos clave. Cada paso toma segundos, y toda la rutina toma menos de un minuto una vez que la conoces.</p>
-<p>El tiempo que ahorra es real. Un lector que resume cinco artículos largos al día puede ahorrar una hora o más, y el hábito también mejora la comprensión, porque un buen resumen te obliga a decidir qué dice realmente un texto. Empieza con el próximo artículo largo que abras, y mira cuánto aprendes en dos minutos.</p>
-<p>Pruébalo ahora con el <a href="/es/resumidor-de-texto-ia/">resumidor de texto con IA</a> gratuito. Si quieres todo el contexto, lee <a href="/es/blog/que-es-un-resumidor-de-texto-con-ia/">¿Qué es un resumidor de texto con IA? Guía completa</a>, y si quieres aprender a revisar un resumen correctamente, lee <a href="/es/blog/precision-del-resumidor-ia-limitaciones/">Precisión del resumidor con IA: qué acierta, qué se le escapa, y cómo verificarlo</a>.</p>`,
-    faqs: [
-      { q: '¿Cómo resumo un artículo largo rápido?', a: 'Copia el texto del artículo, quita menús y anuncios, pégalo en un resumidor gratuito con IA, elige una longitud corta o mediana, y lee el resultado. Todo el proceso toma menos de un minuto. Verifica cualquier número o fecha que planees usar contra el original antes de confiar en ellos.' },
-      { q: '¿Cuál es la mejor longitud de resumen para un informe largo?', a: 'Mediano, que conserva del 30 al 40 por ciento del original, es la mejor opción por defecto para la mayoría de los informes, porque conserva el argumento y la evidencia clave. Usa corto para una vista rápida, y largo cuando los detalles importan lo suficiente para estudiar el documento de cerca.' },
-      { q: '¿Debo usar viñetas o párrafos para un resumen?', a: 'Usa viñetas cuando necesites revisar rápido, preparar una reunión o repasar, porque una idea por línea es fácil de verificar. Usa párrafos cuando quieras leer el resumen de principio a fin, o compartirlo con otra persona como prosa normal.' },
-      { q: '¿Cómo resumo un documento de más de 25.000 caracteres?', a: 'Divídelo en un corte natural, como el encabezado de un capítulo o sección, y resume cada parte por separado con la misma longitud y formato. Luego escribe un párrafo corto propio que enlace las partes. Revisa tú mismo la introducción y la conclusión del original, ya que los resúmenes divididos pueden perder conexiones.' },
-      { q: '¿Qué son los puntos clave, y cómo los uso?', a: 'Los puntos clave son una lista corta de las conclusiones más importantes de un texto, sin el detalle de apoyo. Guárdalos con el título, el autor y la fecha de la fuente en tus notas o documento de reunión. Son la forma más útil de un resumen una semana después, cuando necesitas recordar qué importaba.' },
-      { q: '¿Cómo sé si un resumen con IA es preciso?', a: 'Lee el resumen, luego encuentra su afirmación más importante en el texto original y confirma que coincide. Verifica cada número, nombre y fecha que planees citar. Si el resumen se siente delgado, genera una versión más larga, y verifica siempre la salida de la IA antes de basar una decisión en ella.' },
-    ],
-    readingMinutes: 13,
-  },
-  'ai-text-summarizer-advanced': {
-    slug: 'precision-del-resumidor-ia-limitaciones',
-    title: 'Precisión del resumidor con IA: qué acierta, qué se le escapa y cómo verificarlo',
-    description: 'Precisión del resumidor con IA: qué aciertan los resúmenes, qué se les escapa, y una lista práctica para verificar cualquier resumen antes de confiar en él.',
-    body: `<p>Un resumen con IA se lee con fluidez, y esa fluidez es justamente lo que lo hace peligroso. Un resumen seguro y bien escrito se siente verdadero, aunque haya eliminado en silencio una condición, suavizado una advertencia o fusionado dos afirmaciones separadas en una. </p><p>Entender la <strong>precisión del resumidor con IA</strong> significa saber dónde estas herramientas son confiables y dónde no.</p>
-<p>Esta guía es para lectores que ya usan un resumidor y quieren usarlo bien. Explica qué suelen acertar los resúmenes con IA, las formas específicas en que se equivocan, y un método práctico para revisar cualquier resumen antes de confiar en él. </p><p>Los ejemplos usan el <a href="/es/resumidor-de-texto-ia/">resumidor de texto con IA</a> gratuito de UtilityFlow, pero las revisiones funcionan con cualquier resumidor.</p>
-<h2 id="what-accuracy-means-for-a-summary">Qué significa la precisión en un resumen</h2>
-<p>La precisión en un resumen no es lo mismo que la precisión en una copia. Se supone que un resumen omite cosas, así que no puedes juzgarlo por si contiene todo. Lo juzgas por si lo que conserva es verdadero, y por si lo que omite cambia el significado de lo que queda.</p>
-<p>Un buen resumen conserva la afirmación principal, la evidencia clave y las condiciones importantes. Puede omitir ejemplos, contexto y repetición, porque eso no cambia la conclusión. Un mal resumen conserva las palabras pero pierde el significado, a menudo al eliminar una sola frase que matiza el sentido.</p>
-<h2 id="what-ai-summaries-get-right">Qué suelen acertar los resúmenes con IA</h2>
-<p>Los resumidores modernos son buenos para encontrar la idea principal de un texto bien escrito. Leen todo el documento, ponderan lo que enfatiza, y replantean la afirmación central con lenguaje claro. Para artículos de noticias, publicaciones de blog e informes directos, la idea principal del resumen suele ser correcta.</p>
-<p>También son buenos para conservar la estructura. Un resumen de un texto con tres argumentos suele presentar tres puntos, en el mismo orden, con la misma relación entre ellos. Esa fidelidad estructural es lo que hace útiles los resúmenes para orientarse, aunque los detalles individuales necesiten verificación.</p>
-<h2 id="what-ai-summaries-miss-omissions">Qué se les escapa: las omisiones</h2>
-<p>La omisión es el fallo de resumen más común, y viene incluida en el trabajo. Un resumen corto que conserva del 10 al 20 por ciento del original debe omitir del 80 al 90 por ciento. Algo importante puede estar fácilmente en la parte descartada, sobre todo si el texto no lo enfatiza.</p>
-<p>El riesgo es mayor cuando un texto plantea varios puntos de igual peso. El resumidor debe elegir, y su elección puede no coincidir con la tuya.</p>
-<p>Un punto que importa para tu trabajo puede eliminarse porque el texto mismo lo trata como secundario. Un resumen más largo reduce este riesgo, porque conserva más del original.</p>
-<h2 id="what-ai-summaries-miss-numbers">Qué se les escapa: números y cifras</h2>
-<p>Los números merecen un cuidado especial, porque un pequeño cambio en una cifra puede invertir el significado de un hallazgo. Un resumen que reporta 15 por ciento en lugar de 50 por ciento no ha cometido un error pequeño. Ha hecho que el hallazgo diga lo contrario de lo que decía el original.</p>
-<p>La defensa es simple y no negociable: nunca cites un número de un resumen sin encontrarlo en el original. Abre la fuente, busca la cifra, y confirma que está junto a la afirmación a la que el resumen la asocia. Este solo hábito previene los errores de resumen más dañinos.</p>
-<h2 id="what-ai-summaries-miss-nuance">Qué se les escapa: matices, tono y condiciones</h2>
-<p>El matiz es donde los resúmenes pierden más, y es la pérdida más difícil de notar. Un texto que dice que un tratamiento suele ayudar, con efectos secundarios en algunos pacientes, puede convertirse en un resumen que dice que el tratamiento ayuda. La diferencia es una sola palabra, y cambia una afirmación cuidadosa en una segura.</p>
-<p>El tono sufre de la misma forma. Un pasaje irónico, una reseña escéptica, o una recomendación cautelosa puede salir de un resumen sonando directo y seguro. El resumidor lee las palabras, pero no siempre capta la actitud detrás de ellas, sobre todo en textos que argumentan contra su propio tema.</p>
-<h2 id="hedges-and-qualifications">Atenuantes y calificaciones: las palabras que desaparecen primero</h2>
-<p>Palabras como puede, podría, a menudo, a veces, y en algunos casos son las primeras en desaparecer en un resumen. Son pequeñas, hacen más lenta una frase y un resumidor que intenta ser conciso las cortará. Sin embargo, esas palabras llevan la incertidumbre de la afirmación original.</p>
-<p>Cuando revises un resumen, lee sus afirmaciones seguras con sospecha. Encuentra cada afirmación fuerte en el original y mira las palabras que la rodean. Si el original matiza y el resumen no, confía en el original, y anota el matiz en tus propias notas.</p>
-<h2 id="how-to-verify-a-summary">Cómo verificar un resumen: una lista práctica</h2>
-<p>Revisar un resumen no significa volver a leer todo el original. Eso anularía el propósito de resumir.</p>
-<p>Significa revisar las partes que importan, con una rutina corta que toma unos minutos. La lista de abajo funciona para cualquier resumen, de cualquier longitud, sobre cualquier tema.</p>
-<ul>
-<li><strong>Afirmación principal:</strong> encuentra la afirmación central del resumen en el original, y confirma que el original realmente la hace.</li>
-<li><strong>Números:</strong> encuentra cada cifra que planees citar en el original, y confirma que pertenece a la afirmación a la que el resumen la asocia.</li>
-<li><strong>Nombres y fechas:</strong> confirma que las personas, organizaciones y fechas del resumen coinciden con el original.</li>
-<li><strong>Condiciones:</strong> verifica si cada afirmación del original lleva una condición, rango de fechas o limitación que el resumen omitió.</li>
-<li><strong>Atenuantes:</strong> busca puede, podría, a menudo y a veces en el original, y restaura los que el resumen eliminó.</li>
-<li><strong>Nada inventado:</strong> confirma que cada afirmación del resumen tiene un pasaje correspondiente en el texto original.</li>
-</ul>
-<h2 id="the-spot-check-method">El método de verificación puntual, paso a paso</h2>
-<p>Empieza con la afirmación más importante del resumen, no con la primera. Abre el original y busca las palabras clave de esa afirmación. Lee el pasaje alrededor de la coincidencia, incluida la frase anterior y la posterior, porque el contexto es donde viven las condiciones y los atenuantes.</p>
-<p>Luego, revisa los números. Busca en el original cada cifra del resumen, una a la vez, y confirma que la cifra está en el pasaje correcto. Si una cifra aparece varias veces en el original con valores distintos, asegúrate de que el resumen eligió la que coincide con su afirmación.</p>
-<h2 id="checking-against-your-own-knowledge">Contrastar el resumen con lo que ya sabes</h2>
-<p>Tu propio conocimiento es una segunda verificación útil, pero no es un sustituto del original. Si un resumen dice algo que contradice lo que sabes, eso es una señal para revisar el original, no una señal de que el resumen está mal. El original puede contener un hallazgo sorprendente, o el resumen puede haberlo deformado.</p>
-<p>Lo contrario también es cierto. Un resumen que coincide con lo que ya crees puede igual estar mal en sus detalles, y la coincidencia hace menos probable que lo revises. Trata las afirmaciones que te resultan familiares con el mismo cuidado que las sorprendentes, sobre todo cuando planeas citarlas o tomar decisiones con base en ellas.</p>
-<h2 id="when-the-summary-disagrees-with-you">Cuando el resumen no coincide contigo</h2>
-<p>A veces leerás un resumen y sentirás que está mal, aunque no puedas decir por qué. Confía en ese sentimiento lo suficiente para investigarlo.</p>
-<p>Abre el original, encuentra el pasaje en el que se basa el resumen, y léelo con atención. Solo hay unos pocos resultados posibles, y cada uno te enseña algo.</p>
-<h2 id="comparing-summary-lengths">Comparar longitudes para probar la precisión</h2>
-<p>Generar el mismo texto en dos longitudes es una de las mejores pruebas de precisión disponibles. Resume un documento en longitud corta, luego en mediana, y compara ambas. Las afirmaciones que aparecen en ambas versiones son aquellas de las que la herramienta está más segura, y suelen ser las ideas principales del texto.</p>
-<p>Las afirmaciones que aparecen solo en la versión mediana son el detalle de apoyo. Léelas con atención, porque a menudo contienen las condiciones y calificaciones que la versión corta omitió. Si una afirmación solo de la versión mediana te sorprende, verifícala contra el original antes de usarla.</p>
-<h2 id="choosing-length-by-content-type">Cómo elegir la longitud adecuada según el tipo de contenido</h2>
-<p>La precisión depende de ajustar la longitud al contenido, porque los distintos textos esconden sus puntos importantes en lugares distintos. Los artículos de noticias ponen el punto principal primero, así que un resumen corto suele captarlo. </p><p>Los artículos de investigación entierran el hallazgo detrás del método y la discusión, así que un resumen corto puede pasar por alto las condiciones que lo limitan.</p>
-<p>Los artículos de opinión son los más difíciles de resumir con precisión en longitud corta, porque el argumento es el punto, y el argumento necesita sus pasos. Un resumen corto de un artículo de opinión a menudo conserva la conclusión y omite el razonamiento, lo que deja la conclusión sin respaldo. </p><p>Usa mediano o largo para opinión y análisis.</p>
-<p>Los documentos técnicos y legales necesitan la longitud larga, porque los detalles son el contenido. Un resumen corto de un contrato o una especificación es una lista de temas, no un relato usable de lo que el documento exige. Cuando el documento crea obligaciones, resúmelo en largo y verifícalo contra el original.</p>
-<h2 id="long-documents-and-splits">Documentos largos, divisiones y conexiones perdidas</h2>
-<p>Los documentos de más de 25.000 caracteres deben dividirse, y dividirlos crea un riesgo específico de precisión. La herramienta resume cada parte sin ver las demás, así que no puede juzgar qué importa en todo el documento. Un punto que parece menor en un capítulo puede ser la clave del argumento en el siguiente.</p>
-<h2 id="when-not-to-trust-a-summary">Cuándo no confiar en un resumen en absoluto</h2>
-<p>Algunos documentos no deberían resumirse para tomar decisiones. Los contratos, la orientación médica, las instrucciones de seguridad y las preguntas de examen son ejemplos, porque el costo de un pequeño error es demasiado alto. Un resumen puede ayudarte a orientarte en un documento así, pero la decisión debe venir del texto original.</p>
-<p>Lo mismo se aplica a textos donde la redacción exacta importa. Una cita, una definición legal, o un conjunto de instrucciones siempre deben tomarse del original, nunca de un resumen. Un resumen replantea ideas, y replantear cambia las palabras, que es justo lo que no puedes permitirte cuando las palabras mismas son el punto.</p>
-<p>La salida de la IA siempre debe verificarse, y esto es doblemente cierto para texto de alto riesgo. Si un resumen informará una elección médica, un paso legal, o una decisión financiera, verifica cada afirmación en la que te apoyes contra el original. </p><p>La guía sobre <a href="/es/blog/como-resumir-articulos-largos/">cómo resumir artículos largos</a> explica el flujo de trabajo paso a paso para hacerlo bien.</p>
-<h2 id="documenting-your-checks">Cómo documentar tus revisiones</h2>
-<p>Cuando un resumen alimenta un trabajo que otras personas verán, anota qué verificaste. Una nota corta basta: el título de la fuente, la longitud del resumen, y las cifras que verificaste contra el original. Esa nota te protege si alguien cuestiona una afirmación después, y protege a tu lector de un error que se te escapó.</p>
-<h2 id="common-mistakes-advanced">Errores comunes que incluso los lectores cuidadosos cometen</h2>
-<p>El error más común es verificar el resumen contra tu memoria del original en lugar de contra el original mismo. La memoria no es confiable, y tiende a coincidir con un resumen plausible.</p>
-<p>Abre el texto, busca la afirmación, y lee el pasaje. La memoria no es una fuente.</p>
-<p>Otro error es verificar solo las afirmaciones que te sorprenden. Las afirmaciones sorprendentes merecen verificación, pero las familiares también, porque la coincidencia te hace descuidado. Verifica las afirmaciones que usarás, te sorprendan o no.</p>
-<p>Un tercer error es tratar un resumen fluido como un resumen preciso. La fluidez es una propiedad de la escritura, no de los hechos, y un modelo que escribe bien puede escribir una afirmación equivocada con belleza. Juzga un resumen por sus afirmaciones, no por su estilo.</p>
-<p>Un último error es usar la misma longitud para cada documento. Los resúmenes cortos son precisos para textos simples y engañosos para textos complejos, y la longitud correcta depende del contenido. Ajusta la longitud al documento, y compara dos longitudes cuando el documento importa.</p>
-<h2 id="tools-that-help-you-check">Herramientas que te ayudan a verificar un resumen</h2>
-<p>Verificar es más fácil con las herramientas adecuadas. El <a href="/es/contador-de-palabras/">contador de palabras</a> te dice qué tan largo es el original, lo que te ayuda a juzgar si un resumen corto tuvo suficiente espacio para ser justo. El <a href="/es/verificador-de-legibilidad/">verificador de legibilidad</a> puntúa el texto original, y una puntuación baja te advierte de que el resumen puede haber simplificado un pasaje difícil.</p>
-<p>Si necesitas comparar dos versiones de un resumen, el <a href="/es/comparador-de-textos/">verificador de diferencias de texto</a> resalta exactamente qué cambió entre ellas. Eso es útil cuando generas un resumen corto y uno mediano del mismo texto y quieres ver qué agregó la versión más larga.</p>
-<p>Cuando un resumen revela que un pasaje necesita reescribirse, el <a href="/es/asistente-de-escritura-ia/">asistente de escritura con IA</a> puede ayudarte a reformularlo con claridad. Y si necesitas entender la herramienta misma antes de seguir, la <a href="/es/blog/que-es-un-resumidor-de-texto-con-ia/">guía completa de resumidores de texto con IA</a> cubre las longitudes y los formatos en detalle.</p>
-<h2 id="conclusion">Conclusión: confía en las ideas principales, verifica los detalles</h2>
-<p>La precisión del resumidor con IA no es una sola puntuación, y no es una razón para usar o abandonar la herramienta. Los resúmenes son confiables para las ideas principales y la estructura, y poco confiables para números, condiciones, atenuantes y matices. Ese patrón es estable en todas las herramientas, y te dice exactamente cómo usarlas.</p>
-<p>Usa un resumidor para orientarte, para decidir qué merece una lectura completa, y para crear notas y puntos clave. Luego verifica los detalles que importan, con la lista de esta guía, antes de citar una cifra o basar una decisión en un resumen. La revisión toma minutos, y es el hábito que hace confiable a la herramienta.</p>
-<p>Pon el método en práctica en tu próximo resumen. Abre el <a href="/es/resumidor-de-texto-ia/">resumidor de texto con IA</a> gratuito, genera un resumen mediano y contrasta la lista de seis puntos con el original.</p>
-<p>Si quieres el flujo de trabajo desde el inicio, lee <a href="/es/blog/como-resumir-articulos-largos/">Cómo resumir artículos e informes largos en segundos</a>, y para todo el contexto, lee <a href="/es/blog/que-es-un-resumidor-de-texto-con-ia/">¿Qué es un resumidor de texto con IA? Guía completa</a>.</p>`,
-    faqs: [
-      { q: '¿Qué tan precisos son los resumidores de texto con IA?', a: 'Los resumidores con IA suelen ser precisos para las ideas principales y la estructura del documento, pero menos confiables para números, condiciones y matices. Rara vez inventan afirmaciones directamente, pero a menudo omiten palabras que matizan el sentido o toman una cifra de la parte equivocada del texto. Contrasta siempre los detalles que planees usar con el original.' },
-      { q: '¿Qué se les escapa con más frecuencia a los resumidores con IA?', a: 'Los errores más comunes son las omisiones, donde se omite un punto importante, y los matices eliminados, donde palabras como puede, suele o a veces desaparecen. Los números también pueden asociarse a la afirmación equivocada, sobre todo cuando una cifra aparece varias veces en el original con valores distintos.' },
-      { q: '¿Cómo verifico si un resumen con IA es preciso?', a: 'Usa una lista corta: encuentra la afirmación principal en el original, verifica cada número que planees citar, confirma nombres y fechas, restaura cualquier condición o matiz omitido, y confirma que cada afirmación del resumen tiene un pasaje correspondiente en el original. Verificar las afirmaciones que usarás toma solo unos minutos.' },
-      { q: '¿Un resumen más largo significa un resumen más preciso?', a: 'Por lo general, sí. Un resumen largo conserva del 50 al 60 por ciento del original, así que tiene espacio para condiciones, evidencia y calificaciones que un resumen corto debe recortar. Comparar un resumen corto y uno mediano del mismo texto es una buena prueba de precisión, porque las afirmaciones en ambas versiones suelen ser las ideas principales.' },
-      { q: '¿Puedo confiar en un resumen con IA para un contrato o documento médico?', a: 'No, no para tomar decisiones. Usa un resumen para orientarte en un contrato, una orientación médica o instrucciones de seguridad, pero toma la decisión a partir del texto original. Cuando la redacción exacta importa, como una cita o una definición legal, toma siempre las palabras del original, nunca de un resumen.' },
-      { q: '¿Por qué un resumen a veces no coincide con lo que recuerdo haber leído?', a: 'Hay tres explicaciones: el resumen puede estar mal, el original puede estar escrito de forma ambigua, o tu memoria puede estar mal. Abre el original, encuentra el pasaje en el que se basa el resumen, y léelo con atención. Cada resultado te enseña algo, y detectar el error antes de que importe es para lo que sirve verificar.' },
-    ],
-    readingMinutes: 12,
-  },
-  'ai-writing-assistant-guide': {
-    slug: 'que-es-un-asistente-de-escritura-con-ia',
-    title: '¿Qué es un asistente de escritura con IA? Guía completa',
-    description: 'Aprende qué hace un asistente de escritura con IA: corrige gramática, reescribe frases, ajusta el tono, parafrasea texto y redacta correos, y a quién le sirve.',
-    body: `<p>La mayoría de los problemas de escritura son pequeños, pero se acumulan rápido. Una coma mal puesta, una frase enredada, o un correo que suena más frío de lo que querías pueden frenarte y hacerte dudar de cada borrador.</p>
-<p>Un <strong>asistente de escritura con IA</strong> existe justo para eso. Lee tu texto y lo mejora, para que dediques tu energía a lo que quieres decir y no a cómo decirlo.</p>
-<p>El <a href="/es/asistente-de-escritura-ia/">asistente de escritura con IA</a> de UtilityFlow es gratuito, no necesita registro, y funciona en tu navegador. Ofrece diez tareas de escritura, siete tonos y dieciséis idiomas de salida, con hasta cinco solicitudes gratuitas al día y un límite de 12.000 caracteres por solicitud.</p>
-<h2 id="what-is-an-ai-writing-assistant">¿Qué es un asistente de escritura con IA?</h2>
-<p>Un asistente de escritura con IA es un programa que te ayuda a escribir con más claridad sugiriendo mejoras al texto que ya escribiste. No es un generador de página en blanco que inventa ideas por ti.</p>
-<p>Empieza con tus palabras, tus datos y tu significado, y trabaja para expresarlos mejor. Piensa en él como un editor paciente que siempre está disponible y devuelve un borrador revisado en segundos.</p>
-<p>Lo que lo diferencia de un corrector ortográfico es el alcance. Un corrector ortográfico marca palabras mal escritas, mientras que un asistente de escritura con IA mira frases completas y párrafos completos.</p>
-<h2 id="what-the-assistant-can-do">Qué puede hacer el asistente de escritura con IA</h2>
-<p>El asistente ofrece diez tareas de escritura, y cada una resuelve un problema distinto. Eliges la tarea que coincida con lo que necesitas, pegas tu texto, eliges un tono, y la ejecutas.</p>
-<p>Las seis tareas que la mayoría usa cada día son corregir gramática, reescribir, ajustar el tono, parafrasear, expandir y redactar correos. Las otras cuatro cubren los huecos entre ellas: mejorar la escritura, hacer el texto casual, simplificar el texto y corregir la ortografía.</p>
-<h3 id="fix-grammar-and-spelling">Corregir gramática y ortografía</h3>
-<p>La corrección de gramática es la tarea más común, y el mejor lugar para empezar. La herramienta corrige la concordancia entre sujeto y verbo, el tiempo verbal, el uso de artículos, la puntuación y las mayúsculas.</p>
-<p>También corrige la ortografía, incluidos errores de escritura que un corrector normal podría pasar por alto porque la palabra equivocada sigue siendo una palabra real. Puede detectar <em>their</em> donde querías decir <em>there</em>, porque lee la frase, no solo la palabra.</p>
-<p>Las correcciones de gramática suelen ser el tipo de edición más seguro, porque cambian la menor cantidad de palabras. Ejecuta primero la tarea de gramática, lee el resultado, y solo después decide si el texto necesita una reescritura o un cambio de tono.</p>
-<h3 id="rewrite-sentences">Reescribir frases para mejorar la fluidez</h3>
-<p>Reescribir es para frases correctas pero torpes. Una frase puede tener una gramática perfecta y seguir siendo difícil de leer, porque es demasiado larga o sus cláusulas están en el orden equivocado.</p>
-<p>La tarea de reescritura suaviza la fluidez y encuentra una redacción más natural. Mantiene tu significado y tus datos, pero cambia la construcción de la frase.</p>
-<p>Usa la reescritura cuando una frase se siente pesada, aunque no puedas decir exactamente por qué. Pégala, ejecuta la reescritura, y compara las dos versiones lado a lado.</p>
-<h3 id="adjust-tone">Ajustar el tono: profesional, formal, casual y más</h3>
-<p>El tono es la actitud que lleva tu escritura, y importa tanto como las palabras mismas. La misma solicitud puede sonar educada, exigente, cálida o fría según cómo se redacte.</p>
-<p>El asistente ofrece siete tonos: profesional, amable, formal, casual, académico, persuasivo y simple. Elegir uno le dice a la herramienta a qué registro apuntar, para que el mismo borrador pueda convertirse en una carta formal o en una nota amable.</p>
-<p>El ajuste de tono es más útil cuando escribes a alguien cuyas expectativas necesitas cumplir. Un mensaje a un cliente suele necesitar un tono profesional, mientras que un mensaje a un colega cercano puede ser casual.</p>
-<h3 id="paraphrase-text">Parafrasear sin cambiar el significado</h3>
-<p>Parafrasear replantea un pasaje con palabras nuevas manteniendo el mismo significado. Es útil cuando necesitas decir algo dos veces sin repetirte, o cuando citas una fuente con tus propias palabras.</p>
-<p>La herramienta encuentra sinónimos y nuevas estructuras de frase, pero está diseñada para conservar nombres, números, fechas y datos exactamente como los escribiste. Esa protección importa, porque un número cambiado es un dato cambiado.</p>
-<h3 id="expand-short-notes">Expandir notas cortas en texto completo</h3>
-<p>Expandir convierte una nota corta en un pasaje más completo. Le das a la herramienta una frase o unas viñetas, y agrega detalle útil basado en lo que escribiste.</p>
-<p>Esto es útil cuando sabes qué quieres decir pero no cómo desarrollarlo. Una nota como <em>las reuniones cortas ahorran tiempo</em> puede convertirse en un párrafo corto sobre por qué ayudan a un equipo remoto a concentrarse.</p>
-<p>La expansión tiene un límite claro, y debes conocerlo antes de usarla. La herramienta puede desarrollar una idea que ya expresaste, pero no puede inventar datos nuevos sobre tu proyecto, tu empresa o tus resultados.</p>
-<h3 id="draft-emails">Redactar correos con línea de asunto</h3>
-<p>La tarea de correo convierte notas en bruto en un correo estructurado con línea de asunto. Pegas los puntos clave, como para quién es el correo, qué pasó, y qué necesitas de esa persona.</p>
-<p>La herramienta organiza esos puntos en un saludo, un cuerpo claro y un cierre. También sugiere una línea de asunto que resume el mensaje, que es la parte con la que más gente tiene problemas.</p>
-<p>Los borradores de correo igual necesitan tus ojos antes de enviarse. Verifica que los nombres, fechas y números estén bien, que la solicitud sea clara, y que el tono coincida con el destinatario.</p>
-<h2 id="how-the-tool-works">Cómo funciona la herramienta</h2>
-<p>Usar el asistente toma cuatro pasos, y todo el proceso suele tomar menos de un minuto. No hay cuenta que crear ni programa que instalar, y todo ocurre en tu navegador.</p>
-<ol>
-<li><strong>Elige una tarea de escritura:</strong> elige una de las diez tareas, como corregir gramática, reescribir texto, parafrasear o escribir un correo, porque la tarea decide qué tipo de cambios hará la herramienta.</li>
-<li><strong>Elige un tono:</strong> elige entre profesional, amable, formal, casual, académico, persuasivo o simple, para que el resultado coincida con el lector para el que escribes.</li>
-<li><strong>Elige un idioma de salida:</strong> mantén tu idioma original o elige otro de los dieciséis disponibles, incluidos inglés con ortografía de EE. UU. o Reino Unido, español, francés, alemán, portugués y árabe.</li>
-<li><strong>Pega tu texto y ejecútalo:</strong> escribe o pega hasta 12.000 caracteres, luego ejecuta la tarea y lee la versión mejorada, con las palabras agregadas y eliminadas resaltadas.</li>
-<li><strong>Revisa, copia o descarga:</strong> acepta los cambios que te gusten, luego copia el texto o descárgalo como un archivo de texto plano; puedes hacer hasta cinco solicitudes gratuitas al día.</li>
-</ol>
-<p>Ese paso de revisión es la parte más importante del proceso. La herramienta misma te recuerda revisar la copia final antes de enviarla, y merece la pena tomar ese consejo en serio.</p>
-<h2 id="who-is-it-for">¿Para quién es un asistente de escritura con IA?</h2>
-<p>Casi cualquier persona que escriba con regularidad le sacará partido a un asistente de escritura con IA, pero algunos grupos se benefician más que otros. Los estudiantes lo usan para limpiar ensayos, los buscadores de empleo lo usan para pulir cartas de presentación, y los dueños de pequeños negocios lo usan para escribir respuestas a clientes.</p>
-<ul>
-<li><strong>Estudiantes:</strong> limpian ensayos, informes y tareas, y aprenden de las correcciones que la herramienta hace a los errores comunes.</li>
-<li><strong>Buscadores de empleo:</strong> pulen CV, cartas de presentación y correos de seguimiento para que la escritura coincida con la calidad de la experiencia detrás de ella.</li>
-<li><strong>Hablantes no nativos:</strong> detectan errores de artículos, errores de preposición y frases torpes que un corrector ortográfico nunca marcará.</li>
-<li><strong>Profesionales:</strong> redactan correos a clientes, notas de reuniones e informes más rápido, con un tono que coincide con el lugar de trabajo.</li>
-<li><strong>Escritores de contenido:</strong> reescriben y parafrasean pasajes, simplifican borradores densos, y mantienen una voz consistente en muchas piezas.</li>
-<li><strong>Cualquiera con poco tiempo:</strong> convierte notas en bruto en texto legible en segundos, en lugar de mirar una página en blanco durante media hora.</li>
-</ul>
-<p>Si escribes en un segundo idioma, el asistente es especialmente valioso. Un artículo que falta, una preposición equivocada, o un orden de palabras que sigue a tu primer idioma son cosas que la herramienta puede detectar.</p>
-<h2 id="what-it-cannot-do">Qué no puede hacer un asistente de escritura con IA</h2>
-<p>Una guía honesta tiene que cubrir los límites además de las fortalezas. Un asistente de escritura con IA no conoce tus datos, tu lector ni tu intención, y no puede decir si una afirmación de tu borrador es verdadera.</p>
-<p>Puede hacer que una afirmación falsa se lea muy bien, lo que es peor que dejarla torpe. Los datos siempre son tu trabajo, y ninguna cantidad de pulido cambia eso.</p>
-<p>La herramienta tampoco puede tomar decisiones de juicio por ti. No puede decidir si una disculpa debe ser corta o detallada, o si un mensaje delicado debe enviarse.</p>
-<p>También hay límites prácticos. El límite gratuito es de cinco solicitudes al día, y cada solicitud tiene un límite de 12.000 caracteres, que son unas 2.000 palabras.</p>
-<p>Los documentos largos deben procesarse por secciones, y cada sección debe revisarse por su cuenta. La herramienta no reemplaza a un editor profesional para un libro, un documento legal, o cualquier cosa donde un solo error podría tener consecuencias graves.</p>
-<h2 id="getting-good-results">Cómo obtener buenos resultados: consejos que realmente ayudan</h2>
-<p>Los buenos resultados empiezan con una buena entrada, y cuanto más claro sea tu texto original, mejor será la revisión. Si pegas un revoltijo de ideas a medio terminar, la herramienta tiene que adivinar qué quisiste decir, y a veces adivinará mal.</p>
-<p>Si pegas un borrador completo con los datos en su lugar, la herramienta puede concentrarse en el lenguaje, que es en lo que es buena. Escribe primero el borrador, luego pulelo.</p>
-<ul>
-<li><strong>Escribe primero el borrador:</strong> pon tus ideas y datos antes de ejecutar la herramienta, para que esté puliendo un borrador real en lugar de inventar uno.</li>
-<li><strong>Una tarea a la vez:</strong> corrige primero la gramática, luego reescribe, luego ajusta el tono, porque hacer todos los cambios a la vez hace difícil ver qué salió mal.</li>
-<li><strong>Trabaja en secciones cortas:</strong> un párrafo a la vez es más fácil de revisar que un documento entero, y los errores son más fáciles de detectar.</li>
-<li><strong>Elige el tono deliberadamente:</strong> profesional es una opción segura por defecto, pero formal, amable y simple sirven para distintos lectores y propósitos.</li>
-<li><strong>Compara antes y después:</strong> usa los cambios resaltados para ver qué se agregó y qué se quitó, y rechaza cualquier cosa que altere un dato.</li>
-<li><strong>Mantén tu voz:</strong> si el resultado suena como si lo hubiera escrito otra persona, toma las correcciones que necesitas y conserva tu propia redacción para el resto.</li>
-</ul>
-<p>Otro hábito que ayuda es leer el resultado en voz alta. Una frase que se ve bien en pantalla puede sonar mal al hablarla, y tu oído detectará la torpeza que tu ojo pasó por alto.</p>
-<h2 id="common-mistakes">Errores comunes que debes evitar</h2>
-<p>La mayoría de las decepciones con un asistente de escritura con IA vienen de cómo se usa, no de la herramienta misma. El error más común es aceptar el primer resultado sin leerlo, porque el resultado suele verse bien.</p>
-<p>Resiste esa tentación. Un solo número cambiado, una fecha límite suavizada, o un nombre escrito distinto puede causar problemas reales, y son fáciles de pasar por alto cuando el texto se ve pulido.</p>
-<ul>
-<li><strong>Aceptar sin leer:</strong> lee siempre el resultado completo, incluidos nombres, números y fechas, antes de copiarlo o enviarlo.</li>
-<li><strong>Ejecutar la tarea equivocada:</strong> parafrasear cuando querías una corrección de gramática cambiará muchas más palabras de las necesarias.</li>
-<li><strong>Pulir demasiado:</strong> pasar el mismo texto por la herramienta tres veces puede quitarle tu voz y dejar algo insípido y genérico.</li>
-<li><strong>Confiar a ciegas en el texto expandido:</strong> verifica cada detalle agregado en un pasaje expandido, porque la herramienta solo puede desarrollar lo que le diste.</li>
-<li><strong>Ignorar el tono:</strong> un tono profesional en un mensaje a un amigo suena frío, y un tono casual en una solicitud formal suena descuidado.</li>
-<li><strong>Procesar texto muy largo de una vez:</strong> divide los documentos largos en secciones, porque el límite de 12.000 caracteres significa que los borradores largos necesitan más de una solicitud.</li>
-</ul>
-<p>El error de pulir demasiado merece una mirada más cercana, porque es el que la gente nota al final. Cada pasada por la herramienta suaviza el texto un poco más, y después de dos o tres pasadas la escritura puede perder los detalles que la hacían tuya.</p>
-<p>Una opinión aguda se vuelve una opinión suave, un ejemplo vívido se vuelve un ejemplo genérico, y una voz personal se vuelve una voz corporativa. Una pasada suele bastar, y si el texto sigue necesitando trabajo después de eso, edítalo tú mismo en lugar de ejecutarlo de nuevo.</p>
-<h2 id="troubleshooting">Solución de problemas: cuando el resultado no es lo que esperabas</h2>
-<p>A veces el resultado no coincidirá con lo que querías, y la solución suele ser simple. Si la herramienta cambió el significado de una frase, la entrada probablemente era ambigua, y reescribir la frase original con más claridad ayudará.</p>
-<p>Si el tono se siente mal, probablemente elegiste el tono equivocado, así que prueba el siguiente más cercano. Si el resultado es demasiado corto, la tarea de expandir puede convenirte más que una reescritura, y si es demasiado largo, la tarea de simplificar puede ajustarlo.</p>
-<ul>
-<li><strong>Significado cambiado:</strong> reescribe la frase original con palabras más simples y ejecuta la tarea de nuevo en la parte más pequeña.</li>
-<li><strong>El tono se siente mal:</strong> cambia a un tono vecino, como amable en lugar de casual, o formal en lugar de profesional.</li>
-<li><strong>El resultado es demasiado genérico:</strong> agrega un detalle, nombre o ejemplo específico a la entrada, porque la herramienta solo puede trabajar con lo que le das.</li>
-<li><strong>El texto es demasiado largo para una solicitud:</strong> divídelo en secciones de menos de 12.000 caracteres y procesa cada una por separado.</li>
-<li><strong>Cuota diaria agotada:</strong> el límite gratuito es de cinco solicitudes al día, así que guarda las solicitudes restantes para tu texto más importante y vuelve mañana.</li>
-<li><strong>Un dato se ve mal:</strong> la herramienta puede haber replanteado tu dato de una forma que lo cambió, así que restaura tu redacción original para esa frase.</li>
-</ul>
-<p>Si ninguna de estas soluciones ayuda, lo mejor es editar la frase tú mismo. La herramienta es una ayuda, no un reemplazo de tu juicio, y algunas frases son simplemente más fáciles de corregir a mano.</p>
-<h2 id="conclusion">Conclusión: un editor rápido, no un reemplazo de ti</h2>
-<p>Un asistente de escritura con IA se entiende mejor como un editor rápido y paciente para la escritura diaria. Corrige gramática, reescribe frases torpes, ajusta el tono, parafrasea pasajes, expande notas cortas y redacta correos, todo en segundos y sin registro.</p>
-<p>El hábito que lo hace funcionar es simple: redacta primero, ejecuta una tarea, y revisa el resultado antes de enviarlo. Conserva tus datos, conserva tu voz, y deja que la herramienta se encargue del pulido rutinario.</p>
-<p>Si quieres probarlo con tu propia escritura, abre el <a href="/es/asistente-de-escritura-ia/">asistente de escritura con IA</a> gratuito, pega un párrafo, y ejecuta la tarea de gramática. Luego, cuando estés listo para los pasos prácticos, lee <a href="/es/blog/como-corregir-gramatica-y-reescribir-con-ia/">Cómo corregir gramática y reescribir frases con un asistente de escritura con IA</a>.</p>
-<p>Cuando quieras compararlo con editar a mano, lee <a href="/es/blog/asistente-de-escritura-ia-vs-edicion-manual/">Asistente de escritura con IA vs edición manual: mejores configuraciones, tonos y límites</a>. Para revisar rápido qué tan legible quedó tu borrador, prueba el <a href="/es/verificador-de-legibilidad/">verificador de legibilidad</a>.</p>`,
-    faqs: [
-      { q: '¿Qué es un asistente de escritura con IA?', a: 'Un asistente de escritura con IA es una herramienta que lee el texto que escribiste y lo mejora. Puede corregir gramática y ortografía, reescribir frases torpes, ajustar el tono, parafrasear pasajes, simplificar redacción densa, expandir notas cortas y redactar correos estructurados. Empieza con tus palabras y tu significado, y trabaja para expresarlos con más claridad.' },
-      { q: '¿Qué puede hacer el asistente de escritura con IA de UtilityFlow?', a: 'Ofrece diez tareas: corregir gramática, reescribir texto, mejorar la escritura, hacer profesional, hacer casual, simplificar texto, expandir texto, parafrasear, corregir ortografía y escribir un correo. También puedes elegir uno de siete tonos y dieciséis idiomas de salida. Cada solicitud admite hasta 12.000 caracteres, y el límite gratuito es de cinco solicitudes al día.' },
-      { q: '¿El asistente de escritura con IA es gratis?', a: 'Sí, el asistente de escritura con IA de UtilityFlow es gratis, sin registro, suscripción ni tarjeta. El límite gratuito es de hasta cinco solicitudes de escritura por día por visitante, con un límite de 12.000 caracteres por solicitud. Tu texto se procesa para producir el resultado y no se guarda.' },
-      { q: '¿Quién debería usar un asistente de escritura con IA?', a: 'Cualquiera que escriba con regularidad puede beneficiarse, incluidos estudiantes que pulen ensayos, buscadores de empleo que escriben cartas de presentación, hablantes no nativos de inglés que detectan errores pequeños, y profesionales que redactan correos a clientes e informes. Es especialmente útil cuando sabes qué quieres decir pero necesitas ayuda para decirlo con claridad y en el tono adecuado.' },
-      { q: '¿Puede un asistente de escritura con IA reemplazar a un editor humano?', a: 'No. Es una ayuda rápida para la escritura diaria, pero no puede verificar si tus datos son verdaderos, juzgar si un mensaje delicado debe enviarse, ni tomar decisiones sobre qué debes decir. Para libros, documentos legales y cualquier cosa donde un error podría tener consecuencias graves, sigue siendo necesario un editor humano.' },
-      { q: '¿Todavía necesito revisar el texto después de usar la herramienta?', a: 'Sí, revisa siempre la copia final antes de enviarla, como la herramienta misma te recuerda. Verifica nombres, números y fechas, confirma que el significado no haya cambiado, y asegúrate de que el tono encaje con tu lector. Una palabra cambiada puede alterar el significado, así que una lectura rápida es el paso más importante del proceso.' },
-    ],
-    readingMinutes: 13,
-  },
-  'ai-writing-assistant-howto': {
-    slug: 'como-corregir-gramatica-y-reescribir-con-ia',
-    title: 'Cómo corregir gramática y reescribir frases con un asistente de escritura con IA',
-    description: 'Aprende a corregir gramática con IA: corrige errores, reescribe frases torpes, ajusta el tono, parafrasea texto y revisa el resultado antes de publicar.',
-    body: `<p>Corregir gramática a mano es un trabajo lento. Lees una frase tres veces, sabes que algo está mal en ella, pero no puedes decir qué, así que la reescribes desde cero y esperas que la nueva versión sea mejor.</p>
-<p>Un asistente de escritura con IA elimina la mayor parte de esa incertidumbre. Pegas tu borrador, eliges la tarea, y recibes una versión corregida en segundos, con los cambios resaltados para que puedas ver exactamente qué cambió.</p>
-<p>Este tutorial te muestra <strong>cómo corregir gramática con IA</strong> con el <a href="/es/asistente-de-escritura-ia/">asistente de escritura con IA</a> gratuito de UtilityFlow. Cubre la corrección de gramática, la reescritura de frases, el ajuste de tono, el parafraseo y la revisión final, con ejemplos prácticos que puedes seguir con tus propios borradores.</p>
-<h2 id="what-you-need">Lo que necesitas antes de empezar</h2>
-<p>Necesitas muy poco, y reunirlo primero te evitará detenerte a mitad de camino. Necesitas un borrador terminado con los datos ya en su lugar, porque la herramienta pule el lenguaje y no puede verificar si tus datos son verdaderos.</p>
-<p>También necesitas saber para quién es el texto, porque el tono adecuado depende del lector. Un correo a un cliente, un ensayo universitario y un mensaje a un amigo necesitan registros distintos, y eliges el tono antes de ejecutar la herramienta.</p>
-<ul>
-<li><strong>Tu borrador:</strong> un texto completo, aunque sea en bruto, con nombres, números y fechas ya correctos.</li>
-<li><strong>Tu lector en mente:</strong> ¿quién leerá esto, y qué tono espera de ti?</li>
-<li><strong>Tu objetivo para la pasada:</strong> ¿estás corrigiendo errores, reescribiendo para mejorar la fluidez, o cambiando el tono? Elige un objetivo por pasada.</li>
-<li><strong>Un navegador:</strong> cualquier navegador moderno funciona, y no hay cuenta que crear ni nada que instalar.</li>
-<li><strong>Cinco solicitudes gratuitas al día:</strong> planea tus pasadas, porque el límite gratuito es de cinco solicitudes por visitante por día.</li>
-</ul>
-<h2 id="step-1-open-the-tool">Paso 1: abre la herramienta y pega tu texto</h2>
-<p>Abre el <a href="/es/asistente-de-escritura-ia/">asistente de escritura con IA</a> en tu navegador. Verás una página simple con un selector de tarea, un selector de tono, un selector de idioma y un cuadro grande de texto.</p>
-<p>Pega tu borrador en el campo de texto, hasta 12.000 caracteres, que son unas 2.000 palabras. Si tu documento es más largo, divídelo en secciones y trabaja con ellas una a la vez.</p>
-<h2 id="step-2-choose-the-task">Paso 2: elige la tarea adecuada para el trabajo</h2>
-<p>La herramienta ofrece diez tareas, y elegir la correcta importa más que cualquier otra cosa en este tutorial. Cada tarea cambia tu texto de una forma distinta, así que la elección equivocada te da el tipo de edición equivocado.</p>
-<p>Para una primera pasada, elige corregir gramática. Corrige errores cambiando la menor cantidad de palabras, lo que te da una base limpia para todo lo que sigue. Solo pasa a reescribir o a cambiar el tono después de que la gramática esté limpia.</p>
-<ul>
-<li><strong>Corregir gramática:</strong> corrige gramática y puntuación manteniendo la estructura de tus frases y tu voz.</li>
-<li><strong>Corregir ortografía:</strong> corrige solo errores de escritura y mayúsculas, sin tocar la gramática ni la redacción.</li>
-<li><strong>Reescribir texto:</strong> suaviza la fluidez y encuentra una redacción más natural para frases correctas pero torpes.</li>
-<li><strong>Mejorar la escritura:</strong> pule la claridad y la elección de palabras en un pasaje que necesita una mejora general.</li>
-<li><strong>Simplificar texto:</strong> convierte frases densas y complicadas en frases claras y fáciles de leer.</li>
-<li><strong>Parafrasear:</strong> replantea un pasaje con palabras nuevas manteniendo el mismo significado y los mismos datos.</li>
-</ul>
-<h2 id="step-3-fix-grammar">Paso 3: corrige primero la gramática</h2>
-<p>Selecciona corregir gramática, deja el tono en profesional a menos que tengas una razón para cambiarlo, y ejecuta la tarea. La herramienta devuelve una versión corregida, con las palabras agregadas y eliminadas resaltadas para que puedas ver qué cambió.</p>
-<p>Lee el resultado despacio, comparándolo con tu original. La herramienta suele corregir la concordancia entre sujeto y verbo, el tiempo verbal, los artículos y la puntuación, y detecta errores de palabra equivocada como <em>their</em> en lugar de <em>there</em>.</p>
-<ul>
-<li><strong>Antes:</strong> Hi team, i wanted to folow up on yesterday meeting and share the update timeline for our Q4 product launch.</li>
-<li><strong>Después:</strong> Hi team, I wanted to follow up on yesterday's meeting and share the updated timeline for our Q4 product launch.</li>
-<li><strong>Antes:</strong> Their are still two items we need review before friday, so please let me know if any blockers comes up.</li>
-<li><strong>Después:</strong> There are still two items we need to review before Friday, so please let me know if any blockers come up.</li>
-</ul>
-<h2 id="step-4-rewrite-sentences">Paso 4: reescribe las frases torpes</h2>
-<p>Una vez que la gramática está limpia, lee el borrador de nuevo y marca cualquier frase que se sienta pesada. Una frase puede ser gramaticalmente correcta y seguir siendo difícil de leer, porque es demasiado larga, sus cláusulas están en el orden equivocado o repite la misma palabra.</p>
-<p>Selecciona reescribir texto y ejecútalo solo en las frases marcadas, no en todo el documento. Reescribir una parte pequeña te da más control, y evita que la herramienta suavice detalles que querías conservar.</p>
-<p>Compara la reescritura con tu original antes de aceptarla. La herramienta muestra qué se agregó y qué se quitó, así que verifica que cada dato haya sobrevivido y que el énfasis siga donde lo quieres.</p>
-<ul>
-<li><strong>Antes:</strong> The reason for the delay in the delivery of the report is because of the fact that the data was not available on time.</li>
-<li><strong>Después:</strong> The report was delayed because the data was not available on time.</li>
-<li><strong>Antes:</strong> In order to be able to complete the task, it is necessary for team members to submit their updates by Thursday.</li>
-<li><strong>Después:</strong> To complete the task, team members need to submit their updates by Thursday.</li>
-</ul>
-<h2 id="step-5-adjust-tone">Paso 5: ajusta el tono para tu lector</h2>
-<p>El tono es la actitud que lleva tu escritura, y es el paso que la mayoría se salta. La misma solicitud puede sonar educada o exigente según las palabras que la rodean, así que elige el tono que encaje con la persona que la lee.</p>
-<p>La herramienta ofrece siete tonos: profesional, amable, formal, casual, académico, persuasivo y simple. Profesional es una opción segura por defecto para el trabajo, formal sirve para solicitudes y cartas oficiales, y amable sirve para colegas que conoces bien.</p>
-<ul>
-<li><strong>Profesional:</strong> lenguaje claro y educado de trabajo, adecuado para clientes, gerentes y correos formales.</li>
-<li><strong>Amable:</strong> cálido y accesible, adecuado para colegas, clientes habituales y actualizaciones de equipo.</li>
-<li><strong>Formal:</strong> cuidadoso y respetuoso, adecuado para solicitudes, quejas y correspondencia oficial.</li>
-<li><strong>Casual:</strong> lenguaje relajado y cotidiano, adecuado para amigos, equipos informales y publicaciones sociales.</li>
-<li><strong>Académico:</strong> preciso y centrado en la evidencia, adecuado para ensayos, informes y escritura de investigación.</li>
-<li><strong>Persuasivo:</strong> seguro y centrado en los beneficios, adecuado para propuestas, presentaciones y mensajes de ventas.</li>
-<li><strong>Simple:</strong> frases cortas y palabras sencillas, adecuado para instrucciones, públicos amplios y lectores jóvenes.</li>
-</ul>
-<h2 id="step-6-paraphrase">Paso 6: parafrasea cuando necesites una redacción nueva</h2>
-<p>Parafrasear es para los momentos en que necesitas decir lo mismo con palabras distintas. Quizá estés repitiendo un punto en un documento más largo, replanteando una fuente con tus propias palabras, o reemplazando una frase que suena gastada.</p>
-<p>Selecciona parafrasear y ejecútalo en el pasaje, luego revisa el resultado línea por línea comparándolo con tu original. La herramienta está pensada para conservar nombres, números, fechas y datos, pero un sinónimo puede cambiar el significado de forma sutil.</p>
-<p>Ten cuidado con palabras que parecen sinónimos pero llevan un matiz distinto de significado. Un <em>problem</em> no es exactamente un <em>challenge</em>, y un <em>delay</em> no es exactamente un <em>postponement</em>, así que rechaza cualquier cambio que altere lo que quisiste decir.</p>
-<h2 id="step-7-expand-or-simplify">Paso 7: expande notas cortas o simplifica texto denso</h2>
-<p>Dos tareas manejan los problemas opuestos de longitud. Expandir texto convierte una nota corta en un pasaje más completo, mientras que simplificar texto convierte un pasaje denso en frases claras y fáciles. Usa la que coincida con el problema que tienes enfrente.</p>
-<p>La expansión funciona cuando sabes qué quieres decir pero no cómo desarrollarlo. Dale a la herramienta una frase o unas viñetas, y añadirá detalle a partir de lo que escribiste, sin inventar datos nuevos.</p>
-<p>La simplificación funciona cuando un pasaje es correcto pero difícil de seguir. Acorta las frases largas, reemplaza palabras complicadas por palabras sencillas, y divide una frase enredada en dos frases claras.</p>
-<h2 id="step-8-draft-emails">Paso 8: convierte notas en bruto en un correo</h2>
-<p>La tarea de escribir un correo es la forma más rápida de convertir notas apresuradas en un mensaje que te alegraría enviar. Pega los puntos clave, como para quién es el correo, qué pasó, y qué necesitas de esa persona.</p>
-<p>La herramienta organiza esos puntos en un saludo, un cuerpo claro y un cierre, y sugiere una línea de asunto que resume el mensaje. Esa estructura por sí sola ahorra varios minutos de mirar un correo en blanco.</p>
-<p>Siempre revisa el borrador antes de enviarlo. Confirma los nombres, fechas y números, asegúrate de que la solicitud sea clara, y asegúrate de que el tono coincida con el destinatario y la situación.</p>
-<h2 id="step-9-review">Paso 9: revisa el resultado antes de enviarlo</h2>
-<p>La revisión no es un paso extra opcional, y es el paso que la herramienta misma te pide dar. El asistente te recuerda revisar la copia final antes de enviarla, porque una palabra cambiada puede alterar el significado de toda una frase.</p>
-<p>Revisa esta lista corta en cada resultado, y hazlo antes de copiar el texto a ningún otro lugar. Toda la revisión toma un minuto, y detecta los errores que más importan.</p>
-<ul>
-<li><strong>Primero los datos:</strong> verifica cada nombre, número, fecha, precio y fecha límite contra tu original, porque un dato cambiado es el error más grave.</li>
-<li><strong>Segundo el significado:</strong> lee cada frase y pregúntate si sigue diciendo lo que quisiste decir, sobre todo después de una reescritura o un parafraseo.</li>
-<li><strong>Tercero el tono:</strong> lee el resultado en voz alta y pregúntate si suena como tú escribiéndole a este lector en particular.</li>
-<li><strong>Por último la voz:</strong> si el resultado suena genérico o corporativo, toma lo que te sirva y restaura tu propia redacción en el resto.</li>
-</ul>
-<p>También puedes comparar versiones con el <a href="/es/comparador-de-textos/">verificador de diferencias de texto</a>, que muestra las diferencias entre tu original y el borrador revisado. Esa comparación es la forma más rápida de detectar un cambio que no esperabas.</p>
-<h2 id="worked-example">Un ejemplo práctico: de notas en bruto a un correo limpio</h2>
-<p>Aquí está todo el proceso en un ejemplo corto, para que puedas ver cómo encajan los pasos. El punto de partida es un conjunto de notas en bruto, del tipo que escribirías en tu celular entre reuniones.</p>
-<p>Las notas dicen: <em>need to update client Daniel about the mobile app launch. testing finished today, 2 minor UI bugs left to fix tomorrow morning, ready for App Store submission on Friday afternoon. ask if Monday 10am works for handoff call.</em></p>
-<p>El primer paso es ejecutar la tarea de escribir un correo con un tono profesional. La herramienta convierte esas notas en un correo estructurado con línea de asunto, saludo, cuerpo claro y cierre, y los datos se mantienen exactamente como los escribiste.</p>
-<ul>
-<li><strong>Resultado:</strong> <em>Subject: Mobile App Launch Update and Handoff Call. Hi Daniel, I wanted to update you on the mobile app launch. Testing finished today, and two minor UI bugs remain, which we will fix tomorrow morning. We will be ready for App Store submission on Friday afternoon. Would Monday at 10am work for a handoff call? Best regards.</em></li>
-</ul>
-<p>El segundo paso es la revisión. Verifica el nombre, la cantidad de errores, los días y la hora contra tus notas. En este ejemplo, Daniel, dos errores, mañana por la mañana, el viernes por la tarde, y el lunes a las 10:00 deberían coincidir.</p>
-<h2 id="common-mistakes">Errores comunes que debes evitar</h2>
-<p>La mayoría de los malos resultados vienen del flujo de trabajo, no de la herramienta. Los errores de abajo son los que aparecen con más frecuencia, y cada uno es fácil de evitar una vez que sabes buscarlo.</p>
-<ul>
-<li><strong>Saltarse la revisión:</strong> copiar el primer resultado directo en un correo es la forma más rápida de enviar un número cambiado o una fecha límite suavizada.</li>
-<li><strong>Elegir la tarea equivocada:</strong> parafrasear cuando querías una corrección de gramática cambia muchas más palabras de las necesarias, así que ajusta la tarea al objetivo.</li>
-<li><strong>Ejecutar todo el documento de una vez:</strong> el texto largo es más difícil de revisar, así que trabaja párrafo por párrafo y revisa cada sección.</li>
-<li><strong>Volver a ejecutar el mismo texto varias veces:</strong> cada pasada suaviza la escritura un poco más, y después de tres pasadas tu voz suele desaparecer.</li>
-<li><strong>Confiar a ciegas en el texto expandido:</strong> verifica cada detalle agregado, porque la herramienta solo puede desarrollar ideas que realmente le diste.</li>
-<li><strong>Olvidar el límite diario:</strong> el límite gratuito es de cinco solicitudes al día, así que guarda tus pasadas para el texto que más importa.</li>
-</ul>
-<h2 id="troubleshooting">Solución de problemas: cuando el resultado se ve mal</h2>
-<p>Cuando un resultado no coincide con lo que esperabas, la causa suele ser simple, y la solución suele ser una entrada más pequeña o una tarea distinta. Revisa la lista de abajo antes de rendirte con una frase.</p>
-<ul>
-<li><strong>Significado cambiado:</strong> reescribe la frase original con palabras más simples, luego ejecuta la tarea de nuevo solo en esa parte más pequeña.</li>
-<li><strong>El tono se siente mal:</strong> cambia a un tono vecino, como amable en lugar de casual, o formal en lugar de profesional.</li>
-<li><strong>El resultado es demasiado genérico:</strong> agrega un detalle, nombre o ejemplo específico a la entrada, porque la herramienta solo puede trabajar con lo que le das.</li>
-<li><strong>El resultado es demasiado largo:</strong> ejecuta simplificar texto en el pasaje, o divídelo tú mismo en dos frases más cortas.</li>
-<li><strong>El resultado es demasiado corto:</strong> ejecuta expandir texto, e incluye los detalles que quieres desarrollar en la entrada.</li>
-<li><strong>Un dato se ve mal:</strong> restaura tu redacción original para esa frase, porque la herramienta replanteó tu dato de una forma que lo cambió.</li>
-</ul>
-<h2 id="conclusion">Conclusión: corrige, reescribe, revisa, envía</h2>
-<p>El flujo de trabajo de este tutorial es lo bastante corto para recordarlo: redacta primero, corrige la gramática, reescribe las frases pesadas, ajusta el tono, y revisa antes de enviar. Cada paso tiene un trabajo, y hacerlos en orden te mantiene en control del resultado.</p>
-<p>Empieza con la tarea de corregir gramática, porque cambia la menor cantidad de palabras y te da una base limpia. Pasa a reescribir solo las frases que siguen sintiéndose pesadas, y cambia el tono solo cuando el lector necesita un registro distinto.</p>
-<p>Pruébalo ahora con algo que necesites enviar hoy. Abre el <a href="/es/asistente-de-escritura-ia/">asistente de escritura con IA</a> gratuito, pega un párrafo, y ejecuta la tarea de gramática, luego lee el resultado con la lista del paso nueve.</p>
-<p>Si quieres primero el contexto, lee <a href="/es/blog/que-es-un-asistente-de-escritura-con-ia/">¿Qué es un asistente de escritura con IA? Guía completa</a>, y si quieres comparar este flujo de trabajo con editar a mano, lee <a href="/es/blog/asistente-de-escritura-ia-vs-edicion-manual/">Asistente de escritura con IA vs edición manual: mejores configuraciones, tonos y límites</a>. </p><p>Para una versión más corta de un borrador largo antes de pulirlo, prueba el <a href="/es/resumidor-de-texto-ia/">resumidor de texto con IA</a> a continuación.</p>`,
-    faqs: [
-      { q: '¿Cómo corrijo gramática con IA gratis?', a: 'Abre el asistente de escritura con IA gratuito de UtilityFlow, pega tu texto, elige la tarea de corregir gramática, y ejecútala. La herramienta devuelve una versión corregida con las palabras agregadas y eliminadas resaltadas. Lee el resultado, verifica nombres y números, y copia el texto, sin registro y con cinco solicitudes gratuitas al día.' },
-      { q: '¿Cuál es el mejor orden para corregir gramática y reescribir?', a: 'Corrige primero la gramática, luego reescribe, luego ajusta el tono, porque la corrección de gramática cambia la menor cantidad de palabras y te da una base limpia. Reescribir después solo toca las frases que siguen sintiéndose pesadas. Cambiar el tono al final significa que estás ajustando frases pulidas en lugar de frases en bruto.' },
-      { q: '¿Puede la IA reescribir mis frases sin cambiar el significado?', a: 'Por lo general sí, cuando trabajas en secciones cortas y revisas el resultado. La tarea de reescritura mantiene tu significado y tus datos mientras cambia cómo se construyen las frases. Compara siempre la reescritura con tu original, porque una frase reestructurada puede cambiar el énfasis o eliminar un detalle.' },
-      { q: '¿Cómo cambio el tono de mi escritura con IA?', a: 'Elige uno de los siete tonos antes de ejecutar la tarea: profesional, amable, formal, casual, académico, persuasivo o simple. Profesional es una opción segura por defecto para el trabajo, formal sirve para solicitudes, y amable sirve para colegas que conoces bien. Lee el resultado en voz alta para comprobar que sigue sonando como tú.' },
-      { q: '¿Cuánto texto puedo corregir a la vez?', a: 'Cada solicitud admite hasta 12.000 caracteres, que son unas 2.000 palabras. Para los mejores resultados, trabaja párrafo por párrafo en lugar de pegar un documento entero. Las secciones cortas son más fáciles de revisar, y los errores son más fáciles de detectar cuando solo lees unas frases.' },
-      { q: '¿Necesito revisar el texto después de que la IA lo corrige?', a: 'Sí, siempre. Verifica cada nombre, número, fecha, precio y fecha límite contra tu original, confirma que el significado no haya cambiado, y lee el resultado en voz alta para comprobar el tono. La herramienta misma te recuerda revisar la copia final antes de enviarla, y esa revisión toma un minuto.' },
-    ],
-    readingMinutes: 13,
-  },
-  'ai-writing-assistant-advanced': {
-    slug: 'asistente-de-escritura-ia-vs-edicion-manual',
-    title: 'Asistente de escritura con IA vs edición manual: mejores configuraciones, tonos y límites',
-    description: 'Asistente de escritura con IA vs edición manual: configuraciones, tonos, buenas prácticas de parafraseo, límites y dónde sigue siendo necesario editar a mano.',
-    body: `<p>Editar a mano y editar con IA se sienten como trabajos distintos, aunque el objetivo sea el mismo. La edición manual es lenta, cuidadosa y está por completo bajo tu control, mientras que la edición con IA es rápida, consistente y a veces sorprendente en lo que cambia.</p>
-<p>La mayoría de los escritores con experiencia termina usando ambas, y la habilidad es saber qué trabajo pertenece a cada método. Esta guía compara <strong>el asistente de escritura con IA y la edición manual</strong> frente a frente, para que armes un flujo de trabajo que use cada uno donde es más fuerte.</p>
-<p>Cubre las mejores configuraciones para el <a href="/es/asistente-de-escritura-ia/">asistente de escritura con IA</a> de UtilityFlow, cómo elegir entre sus siete tonos, las mejores prácticas de parafraseo, y los lugares donde la revisión humana sigue siendo necesaria. Si eres nuevo en la herramienta, empieza primero con <a href="/es/blog/que-es-un-asistente-de-escritura-con-ia/">¿Qué es un asistente de escritura con IA? Guía completa</a>.</p>
-<h2 id="what-changes-when-ai-edits">Qué cambia cuando la IA edita</h2>
-<p>La mayor diferencia entre la edición con IA y la edición manual no es la velocidad, aunque la velocidad importa. La verdadera diferencia es lo que cada método nota, porque un lector de IA y un lector humano prestan atención a cosas distintas.</p>
-<p>Un asistente de IA es excelente en problemas de patrón: gramática, puntuación, elección de palabras, longitud de frases y consistencia de tono. Aplica las mismas reglas a cada frase, nunca se cansa, y nunca se salta un párrafo porque ya es tarde.</p>
-<p>Un editor humano es excelente en problemas de significado: si una afirmación es verdadera, si un argumento tiene sentido, si un chiste funcionará, y si un mensaje es adecuado para el lector. Esos juicios necesitan un contexto que la herramienta no tiene.</p>
-<h2 id="ai-vs-manual-head-to-head">Asistente de escritura con IA vs edición manual, frente a frente</h2>
-<h3 id="where-ai-wins">Dónde gana la edición con IA</h3>
-<p>La edición con IA gana en cualquier tarea repetitiva, basada en reglas, y repartida en un documento largo. La corrección de gramática es el ejemplo más claro, porque las reglas son estables y la herramienta las aplica igual en la página uno y en la página cuarenta.</p>
-<ul>
-<li><strong>Velocidad:</strong> una pasada de gramática en 2.000 palabras toma segundos con IA, frente a media hora o más a mano.</li>
-<li><strong>Consistencia:</strong> la misma regla se aplica a cada frase, sin desviaciones a medida que el editor se cansa.</li>
-<li><strong>Cobertura:</strong> cada frase se revisa, incluidas las que un lector humano pasaría por alto.</li>
-<li><strong>Cambio de tono:</strong> cambiar todo un borrador de casual a profesional toma una ejecución, no una reescritura línea por línea.</li>
-<li><strong>Disponibilidad:</strong> la herramienta está lista a medianoche, no necesita reserva, y no cuesta nada hasta cinco solicitudes al día.</li>
-</ul>
-<h3 id="where-manual-wins">Dónde gana la edición manual</h3>
-<p>La edición manual gana donde el texto necesita juicio en lugar de reglas. Un editor humano puede decir que una frase es gramaticalmente perfecta pero incorrecta para el lector, o que un párrafo está bien escrito pero en el lugar equivocado.</p>
-<p>También gana en la voz, porque tu voz es el conjunto de decisiones que hacen que tu escritura sea tuya. Una pasada con IA tiende a suavizar la escritura hacia un punto medio genérico, mientras que una edición humana puede afinar los detalles que hacen distintiva una pieza.</p>
-<ul>
-<li><strong>Verificación de datos:</strong> solo un humano puede verificar que una afirmación, un número o una fecha del borrador sea realmente verdadera.</li>
-<li><strong>Juicio sobre la audiencia:</strong> solo un humano conoce la relación con el lector y lo que este mensaje debe y no debe decir.</li>
-<li><strong>Estructura:</strong> solo un humano puede decidir que un párrafo pertenece antes, o que una sección debe eliminarse por completo.</li>
-<li><strong>Voz:</strong> solo un humano puede cuidar la redacción que hace que la escritura suene a su autor.</li>
-<li><strong>Mensajes delicados:</strong> las disculpas, quejas y malas noticias necesitan una decisión humana sobre qué decir, no solo cómo decirlo.</li>
-</ul>
-<h3 id="the-hybrid-workflow">El flujo de trabajo híbrido que supera a ambos</h3>
-<p>El flujo de trabajo más fuerte usa primero la IA y luego un humano, en ese orden. Ejecuta la pasada de gramática con IA para limpiar la superficie, luego lee el resultado tú mismo con ojos frescos y toma las decisiones de significado.</p>
-<ol>
-<li><strong>Borrador:</strong> escribe tú mismo el borrador completo, con los datos y el argumento en su lugar, antes de ejecutar cualquier herramienta.</li>
-<li><strong>Pasada de gramática con IA:</strong> ejecuta corregir gramática en cada sección, acepta las correcciones, y rechaza cualquier cosa que cambie un dato.</li>
-<li><strong>Pasada de reescritura con IA:</strong> ejecuta reescribir texto solo en las frases que siguen sintiéndose pesadas, no en todo el documento.</li>
-<li><strong>Pasada de tono con IA:</strong> ajusta el tono si el lector necesita un registro distinto, y lee el resultado en voz alta.</li>
-<li><strong>Revisión humana:</strong> verifica tú mismo los datos, la estructura y la voz, y toma las decisiones finales a mano.</li>
-</ol>
-<h2 id="best-settings">Mejores configuraciones para el asistente de escritura con IA</h2>
-<p>La herramienta tiene tres configuraciones que importan: la tarea, el tono y el idioma de salida. Acertarlas es la diferencia entre un resultado que necesita una revisión ligera y un resultado que necesita una reparación grande.</p>
-<h3 id="task-order">Orden de tareas: gramática, luego reescritura, luego tono</h3>
-<p>Ejecuta siempre primero corregir gramática. Cambia la menor cantidad de palabras, corrige los errores que hacen más difícil juzgar todo lo demás, y te da una base limpia para las pasadas posteriores.</p>
-<h3 id="tone-settings">Configuración de tono: una tabla para decidir</h3>
-<p>El tono es una configuración, no una decoración, y la opción correcta depende del lector y el propósito. Profesional es la opción segura por defecto para el trabajo, pero es la opción equivocada para un mensaje a un amigo o una publicación escrita para un público casual.</p>
-<ul>
-<li><strong>Correo a un cliente o informe:</strong> profesional, porque es claro, educado y neutral sin ser rígido.</li>
-<li><strong>Solicitud de empleo o carta oficial:</strong> formal, porque muestra respeto por el proceso y el lector.</li>
-<li><strong>Actualización de equipo o cliente habitual:</strong> amable, porque la calidez genera confianza sin perder claridad.</li>
-<li><strong>Ensayo o resumen de investigación:</strong> académico, porque la precisión y la evidencia importan más que la calidez.</li>
-<li><strong>Propuesta o presentación:</strong> persuasivo, porque el objetivo es mover al lector hacia una decisión.</li>
-<li><strong>Instrucciones o un público amplio:</strong> simple, porque las frases cortas y las palabras sencillas llegan a más lectores.</li>
-<li><strong>Amigos o equipos informales:</strong> casual, porque el lenguaje relajado coincide con la relación.</li>
-</ul>
-<h3 id="language-settings">Configuración de idioma: EE. UU., Reino Unido y traducción</h3>
-<p>La herramienta ofrece dieciséis idiomas de salida, incluido el inglés con ortografía de EE. UU. o Reino Unido. Esa elección importa más de lo que parece, porque las convenciones de ortografía señalan para qué público escribes.</p>
-<p>Elige inglés (Reino Unido) para lectores británicos, europeos y de la Commonwealth, e inglés (EE. UU.) para lectores estadounidenses. Mezclar ambos en un documento se ve descuidado, así que elige uno y mantenlo consistente en toda la pieza.</p>
-<h2 id="tone-choices-in-depth">Tonos en profundidad: cuándo ayuda y cuándo perjudica cada tono</h2>
-<p>Cada uno de los siete tonos tiene un modo de fallo, y conocerlo te ayuda a evitar los errores de tono más comunes. Profesional puede sonar frío, amable puede sonar poco serio, formal puede sonar rígido, y casual puede sonar descuidado.</p>
-<p>Persuasivo merece una advertencia propia. Fortalece las afirmaciones y agrega confianza, lo que es útil en una presentación pero peligroso en un informe, donde los datos deben hablar por sí mismos. Nunca uses el tono persuasivo en texto que debe mantenerse neutral.</p>
-<p>Simple es el tono más infrautilizado, y a menudo es la mejor opción para instrucciones, páginas de ayuda y mensajes a un público mixto. Las frases cortas y las palabras sencillas no son una señal de escritura débil; son una señal de respeto por el tiempo del lector.</p>
-<h2 id="paraphrasing-best-practices">Mejores prácticas de parafraseo</h2>
-<p>Parafrasear es la tarea donde la edición con IA se equivoca en silencio con más frecuencia, porque una palabra cambiada puede alterar el significado sin parecer un error. Las prácticas de abajo mantienen los parafraseos fieles al original.</p>
-<ul>
-<li><strong>Primero fija los datos:</strong> anota los nombres, números y fechas antes de parafrasear, luego verifica cada uno contra el resultado.</li>
-<li><strong>Un pasaje a la vez:</strong> parafrasea un párrafo, revísalo, y solo entonces pasa al siguiente.</li>
-<li><strong>Cuidado con los casi sinónimos:</strong> un problema no es un reto, un retraso no es un aplazamiento, y una afirmación no es un hecho.</li>
-<li><strong>Verifica el énfasis:</strong> una frase reestructurada puede mover la información importante al final, donde el lector puede pasarla por alto.</li>
-<li><strong>Mantén intacto el material citado:</strong> nunca parafrasees una cita directa, una frase legal, o un término técnico que debe mantenerse exacto.</li>
-<li><strong>Lee ambas versiones en voz alta:</strong> si el parafraseo suena como si dijera algo ligeramente distinto, probablemente lo dice.</li>
-</ul>
-<p>Segundo, usa el parafraseo para sus propósitos reales: evitar la repetición, replantear una fuente con tus propias palabras, y refrescar una redacción gastada. No lo uses para disfrazar texto copiado como trabajo original.</p>
-<p>Parafrasear una fuente sin crédito sigue siendo plagio, aunque cada palabra sea distinta. La herramienta cambia la redacción, pero no cambia la obligación de citar la fuente de la que tomaste la idea.</p>
-<h2 id="where-human-review-is-still-needed">Dónde sigue siendo necesaria la revisión humana</h2>
-<p>La revisión humana no es un paso de cortesía, y no es opcional para nada que envíes, publiques o entregues. La herramienta misma te dice que revises la copia final antes de enviarla, porque conoce sus propios límites.</p>
-<p>La revisión tiene tres capas, y cada una detecta un tipo distinto de error. Los datos van primero, porque un dato cambiado es el error más grave; el significado va segundo, porque un significado alterado es el más difícil de detectar; la voz va al final, porque es lo que le da al texto tu sello.</p>
-<ul>
-<li><strong>Datos:</strong> nombres, números, fechas, precios, fechas límite, y cualquier afirmación sobre la que el lector pueda actuar o verificar.</li>
-<li><strong>Significado:</strong> cada frase sigue diciendo lo que quisiste decir, sobre todo después de una reescritura, un parafraseo o un cambio de tono.</li>
-<li><strong>Voz:</strong> el resultado sigue sonando como tú, no como un borrador corporativo genérico que podría haber venido de cualquiera.</li>
-<li><strong>Contexto:</strong> el mensaje encaja con el lector, la relación, y la situación en la que se envía.</li>
-<li><strong>Completitud:</strong> nada importante se eliminó con una pasada de simplificación, y nada inventado se agregó con una pasada de expansión.</li>
-</ul>
-<h2 id="limits-of-ai-editing">Los límites de la edición con IA</h2>
-<p>La edición con IA tiene límites duros, y respetarlos es parte de usar bien la herramienta. El límite gratuito es de cinco solicitudes al día, y cada solicitud tiene un límite de 12.000 caracteres, que son unas 2.000 palabras.</p>
-<p>La herramienta tampoco puede conocer tus datos, tu lector ni tu intención. No puede decir si una afirmación es verdadera, si un número es correcto, o si una promesa es una que puedes cumplir, y pulirá una afirmación falsa con la misma soltura que una verdadera.</p>
-<p>Por último, la herramienta necesita conexión a internet, porque el procesamiento con IA corre en un servicio externo. No reemplaza a un editor profesional para un libro, un documento legal, o cualquier cosa donde un solo error podría tener consecuencias graves.</p>
-<h2 id="workflow-for-long-documents">Un flujo de trabajo para documentos largos</h2>
-<p>Los documentos largos necesitan un flujo de trabajo distinto al de los cortos, porque el límite de caracteres y la cuota diaria se convierten en restricciones reales. El enfoque de abajo mantiene una edición larga manejable sin perder de vista qué cambió.</p>
-<ol>
-<li><strong>Divide el documento:</strong> divídelo en secciones de menos de 12.000 caracteres cada una, en cortes naturales como encabezados, y lleva una lista de las secciones.</li>
-<li><strong>Corrige la gramática sección por sección:</strong> ejecuta corregir gramática en una sección, revísala, y guarda el resultado antes de pasar a la siguiente.</li>
-<li><strong>Reescribe solo las frases pesadas:</strong> márcalas durante la pasada de revisión, y ejecuta reescribir texto solo en esas frases.</li>
-<li><strong>Define el tono una vez, al final:</strong> elige un tono para todo el documento, para que el registro se mantenga consistente de principio a fin.</li>
-<li><strong>Verifica la consistencia entre secciones:</strong> confirma que la ortografía, el tono y la terminología coincidan, porque cada sección se procesó por separado.</li>
-<li><strong>Haz una lectura humana final:</strong> lee todo el documento en orden, verificando datos, estructura y fluidez, antes de publicarlo o enviarlo.</li>
-</ol>
-<p>Antes de esa lectura final, pasa el texto revisado por el <a href="/es/verificador-de-legibilidad/">verificador de legibilidad</a> para ver si las frases son fáciles de seguir, y usa el <a href="/es/contador-de-palabras/">contador de palabras</a> para confirmar la longitud. Si el documento es largo, el <a href="/es/resumidor-de-texto-ia/">resumidor de texto con IA</a> también puede darte una versión corta para comprobar que los puntos principales sobrevivieron a la edición.</p>
-<h2 id="common-mistakes-advanced">Errores comunes que incluso los usuarios con experiencia cometen</h2>
-<ul>
-<li><strong>Pulir demasiado:</strong> tres pasadas por la herramienta suavizan los detalles que hacían tuya la escritura, así que una pasada suele bastar.</li>
-<li><strong>Orden de tareas equivocado:</strong> reescribir antes de corregir la gramática esconde los errores bajo un estilo nuevo en lugar de eliminarlos.</li>
-<li><strong>Tono por defecto:</strong> dejar el tono en profesional para cada documento, incluidos mensajes amables y solicitudes formales.</li>
-<li><strong>Parafrasear citas:</strong> cambiar la redacción de una cita directa, una frase legal, o un término técnico que debe mantenerse exacto.</li>
-<li><strong>Saltarse la revisión de sección:</strong> suponer que las secciones procesadas por separado coincidirán, sin verificar ortografía, tono y términos.</li>
-<li><strong>Confiar en el tono persuasivo en texto neutral:</strong> dejar que la herramienta fortalezca afirmaciones en un informe donde los datos deben hablar por sí mismos.</li>
-</ul>
-<h2 id="troubleshooting-advanced">Solución de problemas: cuando la configuración avanzada se resiste</h2>
-<p>Cuando un resultado no coincide con lo que esperabas, la causa suele ser una de las configuraciones y no el texto. Revisa la lista de abajo, cambiando una configuración a la vez para que puedas ver qué cambio lo corrigió.</p>
-<ul>
-<li><strong>El resultado suena genérico:</strong> ejecutaste demasiadas pasadas, así que restaura tu original y ejecuta una sola pasada de gramática.</li>
-<li><strong>El significado cambió después de parafrasear:</strong> parafrasea un pasaje más pequeño, y verifica los datos contra la lista que anotaste primero.</li>
-<li><strong>El tono es inconsistente entre secciones:</strong> vuelve a ejecutar la pasada de tono con un tono para todo el documento, al final del flujo de trabajo.</li>
-<li><strong>La ortografía mezcla formas de EE. UU. y Reino Unido:</strong> elige un idioma de salida y vuelve a ejecutar las secciones afectadas con ese idioma.</li>
-<li><strong>El texto expandido agregó afirmaciones:</strong> quita cualquier cosa que no puedas respaldar, porque la herramienta solo puede desarrollar lo que le diste.</li>
-<li><strong>La cuota diaria se acabó a mitad del documento:</strong> guarda tu lugar, termina mañana las secciones más importantes, y revisa hoy lo que ya está hecho.</li>
-</ul>
-<h2 id="conclusion">Conclusión: deja que la IA se encargue de lo repetitivo y guarda el juicio para ti</h2>
-<p>La comparación de esta guía se resume en una línea: la edición con IA es mejor en patrones, y la edición manual es mejor en significado. La gramática, la consistencia, la cobertura y el cambio de tono pertenecen a la herramienta, mientras que los datos, la audiencia, la estructura y la voz te pertenecen a ti.</p>
-<p>El flujo de trabajo que supera a ambos es el híbrido: redacta tú mismo, ejecuta la pasada de gramática con IA, reescribe solo las frases pesadas, define el tono una vez, y termina con una revisión humana de datos, significado y voz. Ese orden mantiene a cada método haciendo el trabajo en el que es mejor.</p>
-<p>Prueba el flujo de trabajo en tu próximo documento. Abre el <a href="/es/asistente-de-escritura-ia/">asistente de escritura con IA</a> gratuito, ejecuta una sola pasada de gramática en una sección, y revisa los cambios resaltados con la lista de esta guía.</p>
-<p>Si quieres la versión paso a paso del flujo de trabajo básico, lee <a href="/es/blog/como-corregir-gramatica-y-reescribir-con-ia/">Cómo corregir gramática y reescribir frases con un asistente de escritura con IA</a>, y si quieres primero la introducción completa, lee <a href="/es/blog/que-es-un-asistente-de-escritura-con-ia/">¿Qué es un asistente de escritura con IA? Guía completa</a>. </p><p>Para comparar borradores lado a lado, el <a href="/es/comparador-de-textos/">verificador de diferencias de texto</a> te mostrará exactamente qué cambió.</p>`,
-    faqs: [
-      { q: '¿Un asistente de escritura con IA es mejor que la edición manual?', a: 'Ninguno es mejor en todas partes. La IA gana en velocidad, consistencia y cobertura para el trabajo basado en reglas, como la gramática, mientras que la edición manual gana en juicio, contexto y voz. El flujo de trabajo más fuerte usa primero la IA para lo repetitivo y luego un humano para los datos, la estructura y la voz.' },
-      { q: '¿Cuáles son las mejores configuraciones para un asistente de escritura con IA?', a: 'Ejecuta primero corregir gramática, luego reescribir texto solo en frases pesadas, y ajusta el tono al final. Elige una tarea, un tono y un idioma por ejecución, para que puedas ver qué hizo cada elección. Profesional es un tono seguro por defecto, pero formal, amable y simple sirven para distintos lectores.' },
-      { q: '¿Qué tono debo elegir en un asistente de escritura con IA?', a: 'Elige el tono que encaje con tu lector y propósito: profesional para correos a clientes, formal para solicitudes, amable para actualizaciones de equipo, académico para ensayos, persuasivo para presentaciones, simple para instrucciones, y casual para amigos. Lee el resultado en voz alta para comprobar que sigue sonando como tú.' },
-      { q: '¿Cómo parafraseo sin cambiar el significado?', a: 'Parafrasea un pasaje corto a la vez, anota primero los nombres, números y fechas, y verifica cada uno contra el resultado. Cuidado con los casi sinónimos, porque un problema no es un reto y un retraso no es un aplazamiento. Nunca parafrasees una cita directa, una frase legal, o un término técnico.' },
-      { q: '¿Dónde sigue siendo necesaria la revisión humana después de editar con IA?', a: 'La revisión humana es necesaria para los datos, el significado, la voz, el contexto y la completitud. Solo un humano puede verificar que una afirmación sea verdadera, juzgar si un mensaje encaja con el lector y la situación, y proteger la redacción que le da a la escritura tu sello personal. La herramienta misma te recuerda revisar la copia final antes de enviarla.' },
-      { q: '¿Cuáles son los límites del asistente de escritura con IA de UtilityFlow?', a: 'El límite gratuito es de cinco solicitudes al día, y cada solicitud tiene un límite de 12.000 caracteres, unas 2.000 palabras. La herramienta no puede verificar si tus datos son verdaderos, tomar decisiones de juicio sobre mensajes delicados, ni reemplazar a un editor profesional para libros y documentos legales.' },
-    ],
-    readingMinutes: 14,
   },
   'case-converter-guide': {
     slug: 'que-es-un-convertidor-de-mayusculas-y-minusculas',
@@ -13923,263 +12870,6 @@ export const ES_ARTICLE_OVERRIDES: Record<string, ArticleLocaleOverride> = {
     ],
     readingMinutes: 12,
   },
-  'currency-calculator-guide': {
-    slug: 'que-es-una-calculadora-de-moneda',
-    title: '¿Qué es una calculadora de moneda? Guía completa',
-    description: 'Aprende qué hace una calculadora de moneda, cómo funcionan las tasas manuales y de referencia del BCE, y cómo las comisiones de cambio alteran lo que recibes.',
-    body: `<p>Una <strong>calculadora de moneda</strong> es una herramienta que convierte una cantidad de una moneda a otra. Ingresas una cantidad en tu moneda inicial, eliges la moneda que quieres e ingresas un tipo de cambio. La herramienta muestra después cuánto vale esa cantidad en la segunda moneda.</p>
-<p>Esta guía explica qué hace una calculadora de moneda, cómo funciona y cuándo confiar en su resultado. También explica la diferencia entre una tasa manual y una tasa de referencia del BCE, y cómo una comisión de cambio altera la cantidad final.</p>
-<p>Si alguna vez intentaste calcular un precio en otra moneda, sabes lo fácil que es cometer un error. Una tasa con cuatro decimales, una comisión tomada de entrada y una conversión en la dirección equivocada pueden cambiar la respuesta por una cantidad sorprendente.</p>
-<p>Una calculadora de moneda elimina el cálculo mental y muestra el trabajo con claridad. Puedes ver la tasa usada, la cantidad convertida y cualquier comisión deducida, todo en un solo lugar.</p>
-<p>La <a href="/es/calculadora-de-divisas/">Calculadora de moneda gratuita de UtilityFlow</a> funciona en tu navegador sin registro. Usa el tipo de cambio que ingresas tú mismo, así que mantienes el control sobre el número que más importa.</p>
-<p>También puedes obtener una tasa de referencia del BCE si quieres un punto de partida. Esa tasa es una referencia diaria publicada por el Banco Central Europeo, no una tasa de negociación en vivo, y esta guía explica qué significa esa diferencia para ti.</p>
-<h2 id="what-is-a-currency-calculator">¿Qué es una calculadora de moneda?</h2>
-<p>Una calculadora de moneda convierte dinero entre monedas usando un tipo de cambio. El tipo de cambio te dice cuánto de una moneda obtienes por una unidad de otra moneda. Por ejemplo, una tasa de 0,92 significa que una unidad de la primera moneda compra 0,92 unidades de la segunda.</p>
-<p>El cálculo en sí es una simple multiplicación. Multiplicas la cantidad por la tasa para obtener la cantidad convertida, y eso es el núcleo de lo que hace la herramienta.</p>
-<p>La mayoría usa una calculadora de moneda antes de gastar, enviar o recibir dinero en otra moneda. Un viajero revisa cuánto cuesta una habitación de hotel en su propio dinero, un comprador revisa el precio de un artículo de una tienda extranjera, y un trabajador independiente revisa cuánto vale un pago en dólares en euros.</p>
-<p>En cada caso, la pregunta es la misma: ¿cuánto vale realmente esta cantidad en mi moneda? La calculadora da una respuesta clara basada en la tasa que ingresas, y esa claridad es lo que la hace útil.</p>
-<p>Lo que hace es mostrarte lo que una tasa dada significa en dinero real, para que puedas comparar opciones y detectar una mala oferta antes de comprometerte.</p>
-<h2 id="how-currency-conversion-works">Cómo funciona la conversión de moneda</h2>
-<p>La conversión de moneda empieza con dos monedas y un tipo de cambio. La tasa es una relación entre las dos monedas, y siempre se cotiza en una dirección. Esa dirección importa, porque convertir euros a dólares usa un número distinto al de convertir dólares a euros.</p>
-<p>Supongamos que la tasa es 0,92, lo que significa que un euro compra 0,92 dólares estadounidenses en este ejemplo. Convertir 100 euros con esa tasa da 92 dólares, porque 100 multiplicado por 0,92 es igual a 92.</p>
-<p>Para convertir de vuelta, necesitas la tasa inversa. La inversa de 0,92 es aproximadamente 1,087, lo que significa que un dólar compra aproximadamente 1,087 euros en este ejemplo. Convertir 92 dólares con 1,087 da aproximadamente 100 euros de nuevo.</p>
-<p>La herramienta de UtilityFlow se encarga de este cálculo inverso por ti. Cuando ingresas una tasa, también puede mostrar la tasa inversa, para que puedas revisar la conversión en la otra dirección sin hacer la división tú mismo.</p>
-<p>Por eso la herramienta te permite ingresar una tasa con cuatro decimales por defecto. También acepta una tasa que escribas tú mismo, para que puedas usar la cifra exacta que te cotizó tu banco o tu proveedor de tarjeta.</p>
-<h2 id="manual-rate-vs-ecb-reference-rate">Tasa manual vs tasa de referencia del BCE</h2>
-<p>La Calculadora de moneda de UtilityFlow funciona con una tasa manual por defecto. La tasa por defecto es 1,0000, que es un punto de partida neutral, no un tipo de cambio real para ningún par de monedas. La reemplazas con la tasa que quieres usar, y la herramienta convierte con ese número.</p>
-<p>Este enfoque manual es deliberado, y es honesto. La herramienta no inventa una tasa, no adivina una tasa, ni muestra una tasa vieja como si fuera en vivo. Usa la tasa que ingresas, y el resultado solo es tan bueno como esa tasa.</p>
-<p>Si conoces la tasa que te cotizó tu banco, ingresa esa tasa. Si estás planificando con una tasa de un artículo de noticias o del sitio web de un proveedor, ingresa esa tasa. La herramienta muestra después exactamente lo que esa tasa significa en dinero.</p>
-<p>Si lo pides, la herramienta también puede obtener una tasa de referencia del BCE desde api.frankfurter.dev. Presionas el botón «Obtener tasa de referencia del BCE», y la herramienta completa la última tasa de referencia del BCE disponible para tu par de monedas.</p>
-<p>Esa función es útil cuando quieres un punto de partida neutral y oficial. Te evita buscar una tasa en otro lugar, y te da una cifra de una fuente pública confiable en lugar de la de un sitio web cualquiera.</p>
-<p>Es importante entender qué es una tasa de referencia del BCE. El Banco Central Europeo publica una tasa de referencia diaria para el euro frente a otras monedas importantes, basada en un procedimiento diario de concertación entre bancos centrales.</p>
-<p>Esa tasa es un punto de referencia, no una tasa de negociación en vivo. Se publica una vez al día, no se mueve minuto a minuto, y ningún banco está obligado a negociar a esa tasa. Te dice aproximadamente dónde estaba el mercado en el momento de referencia, no lo que recibirás ahora mismo.</p>
-<p>La herramienta no muestra tasas de negociación en vivo, y nunca usa tasas inventadas sin conexión. Si necesitas la tasa que un banco aplicará realmente, debes obtener esa tasa del propio banco, porque la tasa de referencia del BCE y la tasa del banco son números distintos.</p>
-<h2 id="what-is-the-ecb-reference-rate">¿Qué es la tasa de referencia del BCE?</h2>
-<p>La tasa de referencia del BCE es una tasa diaria publicada por el Banco Central Europeo. Cada día laborable, el BCE publica tasas de referencia para el euro frente a un conjunto de monedas importantes, incluidos el dólar estadounidense, la libra esterlina y el yen japonés.</p>
-<p>Estas tasas se basan en una concertación entre bancos centrales que tiene lugar a primera hora de la tarde, hora de Europa Central. La tasa publicada es una foto de ese momento, y se mantiene fija hasta el siguiente día laborable.</p>
-<p>Esa estabilidad también es su límite. Una tasa fijada a primera hora de la tarde no refleja los movimientos del mercado más tarde en el día, y no refleja la tasa en el momento en que realmente cambias dinero. Es una referencia, no una cotización.</p>
-<p>Así que la tasa del BCE es un buen punto de referencia para comparar ofertas y para estimar una conversión. No es la cantidad que recibirás, y tratarla como una promesa te dejará decepcionado cuando llegue el pago real.</p>
-<h2 id="how-fx-fees-change-the-result">Cómo cambian el resultado las comisiones de cambio</h2>
-<p>Un tipo de cambio es solo la mitad de la historia, porque la mayoría de las conversiones también implican una comisión. Los bancos, los proveedores de tarjetas y los servicios de transferencia de dinero cobran por la conversión de moneda, y ese cargo a menudo se llama comisión de cambio o comisión de divisas.</p>
-<p>La comisión puede ser un porcentaje de la cantidad, un cargo fijo, o un tipo de cambio peor que esconde la comisión dentro de la propia tasa. Se cobre como se cobre, reduce la cantidad que recibes.</p>
-<p>Supongamos que conviertes 1.000 euros con una tasa de ejemplo de 1,08, lo que da 1.080 dólares antes de cualquier comisión. Si tu proveedor cobra una comisión de cambio del 2 por ciento, esa comisión es de 21,60 dólares, y recibes 1.058,40 dólares.</p>
-<p>La comisión es pequeña como porcentaje, pero es dinero real. En cantidades mayores, una comisión del 2 por ciento sobre 10.000 euros es de 200 euros, lo que basta para notarlo y para buscar otras opciones.</p>
-<p>La herramienta de UtilityFlow incluye un campo opcional de comisión de cambio justo por esta razón. Ingresas la comisión como un porcentaje, y la herramienta la deduce de la cantidad convertida para que puedas ver lo que realmente recibirás.</p>
-<p>Una conversión rápida antes de pedir o reservar puede evitar una sorpresa desagradable cuando llegue después el estado de cuenta de la tarjeta.</p>
-<p>Revisar el total antes de pagar ayuda a un comprador a decidir si la oferta es realmente una oferta, o si una alternativa local es más barata.</p>
-<p>Esa cifra es la que importa para presupuestar, facturar y decidir si una tarifa de pago es justa.</p>
-<p>La herramienta ayuda a un dueño de negocio a estimar márgenes, fijar precios y revisar si el precio de un proveedor realmente ha cambiado o si el tipo de cambio se ha movido.</p>
-<p>Una calculadora que muestra la cantidad neta te ayuda a comparar servicios de transferencia con honestidad, en lugar de comparar lo que dice su publicidad.</p>
-<h2 id="worked-examples">Ejemplos resueltos: ver los números en acción</h2>
-<p>Los ejemplos resueltos hacen concreta la conversión, así que aquí hay tres casos comunes con tasas de ejemplo claramente etiquetadas. Ninguna de estas tasas es una tasa en vivo, y ninguna es una predicción. Son ejemplos didácticos que muestran cómo funciona la matemática.</p>
-<p>Primero, un presupuesto de vacaciones. Supongamos que tienes 500 euros para gastar y la tasa de ejemplo es de 1,08 dólares por euro. Multiplicar 500 por 1,08 da 540 dólares, que es tu dinero para gastar antes de cualquier comisión de tarjeta.</p>
-<p>Si tu tarjeta cobra una comisión de cambio del 2 por ciento, la comisión es de 10,80 dólares y recibes 529,20 dólares para gastar. Esa es la cifra con la que debes planificar tu viaje, no los 540 dólares antes de la comisión.</p>
-<p>Cada ejemplo sigue el mismo patrón: cantidad multiplicada por tasa, y luego comisión deducida. Una vez que ves ese patrón, puedes aplicarlo a cualquier par de monedas y cualquier cantidad.</p>
-<h2 id="common-mistakes">Errores comunes que debes evitar</h2>
-<p>El error más común es convertir en la dirección equivocada. La gente toma la tasa de euros a dólares y la usa para convertir dólares a euros, lo que da una respuesta muy equivocada. Revisa siempre qué moneda va primero en la tasa, y usa la tasa inversa para la dirección contraria.</p>
-<p>La herramienta muestra la tasa inversa por esta razón, así que úsala como revisión. Si tu respuesta parece demasiado grande o demasiado pequeña, la dirección es lo primero que debes revisar.</p>
-<p>Otro error común es usar la tasa por defecto de 1,0000 como si fuera una tasa real. La tasa por defecto es un marcador, no una tasa de mercado, y convertir a 1,0000 simplemente expresa el mismo número en otra moneda. Reemplaza siempre la tasa por defecto con una tasa real antes de confiar en el resultado.</p>
-<p>Un tercer error es olvidar la comisión. Una conversión que se ve bien antes de la comisión puede verse normal después de ella, y un proveedor que anuncia que no cobra comisión puede esconder su cargo dentro de una tasa peor. Pregunta siempre cuál es el costo total, incluida la comisión y el margen de la tasa.</p>
-<p>Un cuarto error es tratar una tasa de referencia del BCE como la tasa que recibirás. La tasa del BCE es una referencia diaria, no una tasa de negociación, y tu banco te dará una tasa peor más una comisión. Usa la tasa del BCE para estimar y comparar, y luego revisa la tasa real antes de comprometerte.</p>
-<p>Un quinto error es redondear demasiado pronto. Redondear la tasa a dos decimales antes de multiplicar puede cambiar mucho el resultado, porque el error de redondeo también se multiplica. Mantén cuatro decimales en la tasa, y redondea solo la respuesta final.</p>
-<h2 id="tips-for-better-conversions">Consejos para mejores conversiones</h2>
-<p>Ingresa esa tasa en la herramienta, añade el porcentaje de comisión, y verás la cantidad que realmente recibirás. Esa es la estimación más honesta que puedes hacer antes de que el dinero se mueva.</p>
-<p>Un proveedor con una tasa un poco peor y sin comisión puede ganarle a un proveedor con una mejor tasa y una comisión alta, y solo la cantidad final revela eso.</p>
-<p>Para presupuestar, usa una tasa cautelosa en lugar de una optimista. Si la tasa de referencia es 1,08 en este ejemplo, presupuesta como si fueras a recibir 1,06, porque la tasa de tu proveedor será peor y se aplicará una comisión.</p>
-<p>Presupuestar con una tasa cautelosa te deja con una pequeña sorpresa agradable en lugar de un déficit, y te protege si la tasa se mueve en tu contra antes de que pagues.</p>
-<p>Guarda una nota de la tasa y la comisión que usaste para las conversiones importantes. Si un pago llega más bajo de lo esperado, esa nota te permite revisar si la tasa se movió, si la comisión fue más alta de lo cotizado, o si algo más salió mal.</p>
-<p>Sin una nota, estás adivinando después de los hechos, y adivinar rara vez resuelve una disputa con un proveedor.</p>
-<p>Si trabajas con porcentajes a menudo, la <a href="/es/calculadora-de-porcentaje/">Calculadora de porcentajes</a> puede ayudarte a revisar las cantidades de comisión rápidamente. Si la conversión es parte de un cálculo de precio mayor, la <a href="/es/calculadora-de-descuento-y-margen/">Calculadora de descuento y margen</a> puede ayudar con los márgenes, y la <a href="/es/calculadora-de-iva-e-impuestos/">Calculadora de IVA e impuestos</a> puede añadirle impuestos a un precio convertido.</p>
-<h2 id="troubleshooting">Solución de problemas: cuando el resultado parece incorrecto</h2>
-<p>Si la cantidad convertida parece demasiado grande, revisa primero la dirección. Quizás estés multiplicando cuando deberías dividir, o usando la tasa al revés. Prueba la tasa inversa y mira si la respuesta se vuelve razonable.</p>
-<p>Si el resultado es exactamente igual a la cantidad que ingresaste, revisa el campo de tasa. Una tasa de 1,0000 significa que una unidad es igual a una unidad, así que probablemente la herramienta aún muestra la tasa por defecto. Reemplázala con la tasa que quieres usar.</p>
-<p>Si la tasa de referencia del BCE no carga, recuerda que se obtiene si lo pides desde un servicio externo. Revisa tu conexión, inténtalo de nuevo, e ingresa una tasa manual mientras tanto. La herramienta funciona por completo con una tasa manual, así que si la obtención falla no se bloquea tu conversión.</p>
-<h2 id="conclusion">Conclusión: convierte con la tasa que realmente recibirás</h2>
-<p>Una calculadora de moneda es una herramienta sencilla, pero responde una pregunta que importa cada vez que el dinero cruza una frontera. ¿Cuánto vale realmente esta cantidad en otra moneda, después de tener en cuenta tanto la tasa como la comisión?</p>
-<p>La respuesta depende de la tasa que uses, así que elígela con cuidado. Una tasa manual de tu proveedor es la más realista, y una tasa de referencia del BCE es un punto de referencia neutral útil para estimar y comparar.</p>
-<p>Recuerda que la tasa del BCE es una referencia diaria, no una tasa de negociación en vivo, y que los bancos y los proveedores de tarjetas siempre cobran su propia tasa más un recargo o comisión. La cantidad que realmente recibas diferirá de una conversión a tasa media del mercado, y planificar con la cantidad neta te protege de sorpresas.</p>
-<p>Pruébala ahora con una conversión real. Abre la <a href="/es/calculadora-de-divisas/">herramienta gratuita Calculadora de moneda</a>, ingresa tu cantidad y tu tasa, añade la comisión de cambio, y mira la cantidad que realmente recibirás. Si quieres los pasos prácticos, lee <a href="/es/blog/como-convertir-moneda/">Cómo convertir moneda (y tener en cuenta las comisiones de cambio)</a>.</p>
-<p>Si quieres entender qué tasa aplica para ti y por qué los bancos cobran más, lee <a href="/es/blog/tasa-bce-vs-tasa-bancaria-vs-tasa-media/">Tasas de referencia del BCE vs tasas bancarias vs tasa media del mercado: qué tipo de cambio aplica para ti</a>. Convierte con la tasa real, y gasta sin dudar.</p>`,
-    faqs: [
-      { q: '¿Qué es una calculadora de moneda?', a: 'Una calculadora de moneda convierte una cantidad de una moneda a otra usando un tipo de cambio. Ingresas la cantidad, eliges las monedas e ingresas una tasa, y la herramienta muestra la cantidad convertida. La herramienta de UtilityFlow también deduce una comisión de cambio opcional y muestra la tasa inversa.' },
-      { q: '¿La Calculadora de moneda muestra tipos de cambio en vivo?', a: 'No. La herramienta usa el tipo de cambio que ingresas manualmente, con un valor por defecto de 1,0000 que debes reemplazar. Puede obtener una tasa de referencia del BCE si lo pides, pero esa es una referencia diaria publicada por el Banco Central Europeo, no una tasa de negociación en vivo.' },
-      { q: '¿Qué es la tasa de referencia del BCE?', a: 'La tasa de referencia del BCE es una tasa diaria publicada por el Banco Central Europeo para el euro frente a las monedas importantes. Se basa en una concertación diaria entre bancos centrales y es un punto de referencia, no una tasa a la que ningún banco esté obligado a negociar.' },
-      { q: '¿Por qué la cantidad que recibo es menor que la cantidad convertida?', a: 'Los bancos y los proveedores de tarjetas cobran su propio tipo de cambio más un recargo o comisión, así que la cantidad que recibes es menor que una conversión a tasa media del mercado. La herramienta te permite ingresar un porcentaje de comisión de cambio para que puedas ver la cantidad neta después de ese cargo.' },
-      { q: '¿Cómo convierto moneda en la otra dirección?', a: 'Usa la tasa inversa, que es uno dividido entre la tasa original. Por ejemplo, si la tasa es 0,92 en una dirección, la inversa es aproximadamente 1,087 en la otra dirección. La herramienta muestra la tasa inversa para que puedas revisar la conversión inversa.' },
-      { q: '¿Necesito registrarme para usar la Calculadora de moneda?', a: 'No. La herramienta es gratuita y se usa en tu navegador sin registro y sin cuenta. Ingresas tu cantidad y tu tasa, y el cálculo se hace con los valores que proporcionas.' },
-    ],
-    readingMinutes: 14,
-  },
-  'currency-calculator-howto': {
-    slug: 'como-convertir-moneda',
-    title: 'Cómo convertir moneda (y tener en cuenta las comisiones de cambio)',
-    description: 'Sigue la conversión de moneda paso a paso con una tasa manual o de referencia del BCE, añade la comisión de cambio y revisa lo que recibirás, gratis en línea.',
-    body: `<p>Necesitas convertir dinero de una moneda a otra, y quieres que la respuesta sea correcta. Quizás estés pagando un hotel en el extranjero, comprando algo en una tienda extranjera, o revisando cuánto vale un pago en dólares en euros. Adivinar la tasa no ayudará, y hacer el cálculo mentalmente invita a errores.</p>
-<p>Este tutorial te muestra <strong>cómo convertir moneda</strong> paso a paso, usando la herramienta gratuita de UtilityFlow. Cubre las dos formas de obtener una tasa, una manual y una de referencia del BCE, y muestra cómo añadir la comisión de cambio.</p>
-<p>El método usa la <a href="/es/calculadora-de-divisas/">Calculadora de moneda de UtilityFlow</a>, que funciona en tu navegador sin registro. Ingresas tu cantidad y tu tasa, y la herramienta muestra la cantidad convertida, la tasa inversa y la cantidad que queda después de cualquier comisión que ingreses.</p>
-<p>Al final de este tutorial, podrás convertir cualquier cantidad, revisar la conversión inversa y comparar proveedores por la cantidad final que recibes. Esa última habilidad es la que ahorra dinero real, porque la tasa anunciada rara vez es todo el costo.</p>
-<h2 id="what-you-need-before-you-start">Qué necesitas antes de empezar</h2>
-<p>Necesitas muy poco para convertir moneda, pero reunirlo primero hace el trabajo más rápido y preciso. El dato más importante es el tipo de cambio que quieres usar, porque todo el resultado depende de él. Decide si usarás una tasa de tu proveedor o una tasa de referencia del BCE.</p>
-<p>También necesitas la cantidad, las dos monedas y el porcentaje de comisión de cambio si tu proveedor cobra una. Tener esos números listos significa que puedes seguir los pasos sin detenerte a buscar cifras.</p>
-<ul><li><strong>La cantidad:</strong> la suma que quieres convertir, en la moneda desde la que empiezas.</li><li><strong>Las dos monedas:</strong> la moneda que tienes y la moneda que quieres, como euros a dólares estadounidenses.</li><li><strong>Un tipo de cambio:</strong> una tasa de tu banco o proveedor de tarjeta, o una tasa de referencia del BCE obtenida por la herramienta.</li><li><strong>La comisión de cambio:</strong> el porcentaje que cobra tu proveedor, si lo hay, para que puedas ver la cantidad neta.</li><li><strong>Una nota del resultado:</strong> un lugar donde anotar la tasa, la comisión y la cantidad final para comparar después.</li></ul>
-<h2 id="step-1-open-the-tool">Paso 1: abre la herramienta</h2>
-<p>Abre la <a href="/es/calculadora-de-divisas/">herramienta Calculadora de moneda</a> en tu navegador, en cualquier dispositivo. Verás campos para la cantidad, las monedas, el tipo de cambio y la comisión de cambio opcional. No hay nada que instalar ni cuenta que crear.</p>
-<p>La herramienta se abre con un tipo de cambio por defecto de 1,0000. Es un marcador neutral, no una tasa real para ningún par de monedas, y debes reemplazarlo antes de confiar en el resultado.</p>
-<p>Si conviertes a 1,0000, la respuesta simplemente repetirá tu cantidad en la otra moneda, lo que no te dice nada. Trata el valor por defecto como una invitación a ingresar tu propia tasa.</p>
-<h2 id="step-2-enter-the-amount-and-currencies">Paso 2: ingresa la cantidad y elige las monedas</h2>
-<p>Ingresa la cantidad que quieres convertir en el campo de cantidad. Escribe el número sin símbolos de moneda ni comas, porque los símbolos y separadores pueden confundir el cálculo. Por ejemplo, ingresa 500 para quinientas unidades, no 500 euros con un símbolo.</p>
-<p>Luego, elige la moneda desde la que conviertes y la moneda a la que conviertes. Asegúrate de que el orden coincida con tu situación real, porque la dirección decide qué tasa necesitas.</p>
-<p>Si estás convirtiendo euros a dólares, la moneda «de» es euros y la moneda «a» es dólares. Invertirlas te dará la conversión inversa, que es una respuesta totalmente distinta.</p>
-<h2 id="step-3-enter-a-manual-exchange-rate">Paso 3: ingresa un tipo de cambio manual</h2>
-<p>La forma más precisa de convertir moneda es usar la tasa que tu proveedor aplicará realmente. Esa tasa puede aparecer en tu app bancaria, en una cotización de transferencia o en un correo de tu proveedor. Cópiala con cuidado, incluidos los cuatro decimales.</p>
-<p>Ingresa esa tasa en el campo de tipo de cambio, reemplazando el valor por defecto de 1,0000. Revisa dos veces los dígitos, porque una tasa de 1,0850 y una tasa de 1,8050 son números muy distintos, y un solo dígito mal escrito puede cambiar el resultado por cientos de unidades.</p>
-<p>Si tu proveedor cotiza la tasa en la dirección opuesta, usa la tasa inversa. La herramienta muestra la tasa inversa de la tasa que ingresas, para que puedas revisar si la dirección tiene sentido antes de confiar en la respuesta.</p>
-<p>Si ingresaste 0,92 pero querías convertir dólares a euros, la respuesta estaría mal. La tasa correcta para esa dirección es la inversa, aproximadamente 1,087, y usarla da el resultado correcto.</p>
-<h2 id="step-4-fetch-an-ecb-reference-rate">Paso 4: obtén una tasa de referencia del BCE</h2>
-<p>Si no tienes una tasa de tu proveedor, puedes obtener una tasa de referencia del BCE. Presiona el botón «Obtener tasa de referencia del BCE», y la herramienta solicita la última tasa disponible desde api.frankfurter.dev, que publica datos de referencia del BCE.</p>
-<p>La herramienta completa después el campo de tasa con esa tasa de referencia, y puedes convertir con ella de inmediato. Esto es útil cuando quieres un punto de partida neutral y oficial para planificar o comparar.</p>
-<p>Entiende lo que obtienes antes de confiar en ello. La tasa de referencia del BCE es una referencia diaria publicada por el Banco Central Europeo, basada en una concertación diaria entre bancos centrales. Se publica una vez al día y no se mueve minuto a minuto.</p>
-<p>Tu banco cotizará una tasa peor, más un recargo o comisión, así que la cantidad que realmente recibas será menor que la cantidad mostrada con la tasa del BCE. Usa la tasa de referencia para planificar y comparar, y luego reemplázala con la tasa de tu proveedor para la cifra final.</p>
-<h2 id="step-5-read-the-converted-amount">Paso 5: lee la cantidad convertida</h2>
-<p>Una vez que ingresaste la cantidad, las monedas y la tasa, la herramienta muestra la cantidad convertida. Esta es la cantidad antes de deducir cualquier comisión, y es el resultado de multiplicar tu cantidad por la tasa que ingresaste.</p>
-<p>Lee el resultado y pregúntate si parece razonable. Una conversión que convierte 100 unidades en 10.000 unidades, o en 1 unidad, casi seguro usa la tasa equivocada o la dirección equivocada.</p>
-<p>Revisa la tasa inversa como una segunda opinión. La tasa inversa muestra lo que una unidad de la segunda moneda compra en la primera moneda, y convertir de vuelta debería devolver aproximadamente tu cantidad original.</p>
-<p>Supongamos que la tasa de ejemplo es 1,08 y conviertes 100 euros a 108 dólares. Convertir 108 dólares de vuelta con la tasa inversa de aproximadamente 0,926 debería dar aproximadamente 100 euros de nuevo.</p>
-<p>Si el viaje de ida y vuelta no devuelve cerca de tu cantidad inicial, algo está mal. Revisa la tasa, revisa la dirección, y verifica que ingresaste la cantidad correctamente antes de confiar en la cifra.</p>
-<h2 id="step-6-add-the-fx-fee">Paso 6: añade la comisión de cambio</h2>
-<p>La mayoría de las conversiones implican una comisión, e ignorarla es la forma más fácil de sobreestimar lo que recibirás. Encuentra la comisión de cambio que cobra tu proveedor, normalmente mostrada como un porcentaje, e ingrésala en el campo de comisión de la herramienta.</p>
-<p>Una comisión de cambio típica de tarjeta está entre el 1 y el 3 por ciento, pero la cifra exacta depende de tu proveedor y tu cuenta. Revisa los términos de tu tarjeta, tu app bancaria o la cotización de transferencia para el número real.</p>
-<p>La herramienta deduce la comisión de la cantidad convertida y muestra la cantidad neta que realmente recibirás. Esa cifra neta es el número que importa para tu decisión, porque es el dinero que llegará a la cuenta.</p>
-<p>Supongamos que conviertes 1.000 euros con una tasa de ejemplo de 1,08, lo que da 1.080 dólares antes de cualquier comisión. Si tu proveedor cobra una comisión de cambio del 2 por ciento, la comisión es de 21,60 dólares y recibes 1.058,40 dólares.</p>
-<p>La diferencia entre 1.080 y 1.058,40 es el costo de la conversión, y vale la pena conocerla antes de comprometerte. En una cantidad mayor, el mismo porcentaje cuesta mucho más en dinero real.</p>
-<p>Para comparar proveedores con justicia, ingresa la tasa y la comisión de cada proveedor por turno y anota la cantidad final que te da cada uno. El proveedor con la mayor cantidad final es el más barato, diga lo que diga su tasa anunciada.</p>
-<h2 id="step-7-compare-and-decide">Paso 7: compara proveedores y decide</h2>
-<p>Con la herramienta, puedes comparar dos o tres proveedores en pocos minutos. Usa la misma cantidad inicial para cada uno, ingresa la tasa y la comisión de cada proveedor, y anota la cantidad neta que te deja cada proveedor.</p>
-<p>No compares solo las tasas, porque una mejor tasa con una comisión más alta puede dejarte peor. Tampoco compares solo las comisiones, porque un proveedor sin comisión puede esconder su cargo en una tasa peor. Solo la cantidad final cuenta toda la historia.</p>
-<p>Supongamos que el Proveedor A ofrece una tasa de ejemplo de 1,08 con una comisión del 2 por ciento, mientras que el Proveedor B ofrece 1,07 sin comisión. Sobre 1.000 euros, el Proveedor A da 1.058,40 dólares después de la comisión, mientras que el Proveedor B da 1.070 dólares.</p>
-<p>El Proveedor B gana aquí, aunque su tasa se vea peor a primera vista. Ese es el tipo de resultado que solo ves cuando comparas cantidades finales, y por eso importa este paso.</p>
-<p>Si estás convirtiendo como parte de una compra mayor, recuerda añadir también cualquier otro costo. La entrega, los impuestos y la comisión de la tarjeta se suman al total, y el precio convertido por sí solo puede subestimar lo que realmente pagarás.</p>
-<h2 id="worked-examples">Ejemplos resueltos: tres conversiones cotidianas</h2>
-<p>Aquí hay tres ejemplos completos que siguen los pasos anteriores, con tasas de ejemplo claramente etiquetadas. Ninguna de estas tasas está en vivo, y ninguna es una recomendación. Muestran el método, para que puedas repetirlo con tasas reales.</p>
-<p>Primero, una reserva de hotel. Supongamos que una habitación cuesta 150 dólares por noche y la tasa de ejemplo es de 0,92 euros por dólar. Multiplicar 150 por 0,92 da 138 euros por noche antes de cualquier comisión.</p>
-<p>Si tu tarjeta cobra una comisión de cambio del 2 por ciento, la comisión es de 2,76 euros y el costo real es de 140,76 euros por noche. Para una estancia de cinco noches, esa comisión añade unos 13,80 euros al total, lo que vale la pena saber antes de reservar.</p>
-<p>Cada ejemplo usa los mismos pasos: ingresa la cantidad, ingresa la tasa, lee la cantidad convertida, añade la comisión, y lee la cantidad neta. Practica el patrón una vez, y se vuelve rápido y automático.</p>
-<h2 id="common-mistakes">Errores comunes que debes evitar</h2>
-<p>El error más común es usar la tasa por defecto de 1,0000 sin reemplazarla. La tasa por defecto es un marcador, y convertir a 1,0000 simplemente expresa tu cantidad en otra moneda. Ingresa siempre una tasa real antes de confiar en el resultado.</p>
-<p>Otro error común es convertir en la dirección equivocada. Revisa qué moneda es «de» y cuál es «a», y usa la tasa inversa para la dirección contraria. Si la respuesta parece demasiado grande o pequeña, la dirección es lo primero que debes revisar.</p>
-<p>Un tercer error es olvidar la comisión de cambio. Una conversión sin la comisión es una estimación del valor a tasa media del mercado, no la cantidad que recibirás. Añade siempre la comisión, y compara proveedores por la cantidad final después de la comisión.</p>
-<p>Un cuarto error es tratar una tasa de referencia del BCE como una tasa garantizada. La tasa del BCE es una referencia diaria, no una tasa de negociación en vivo, y tu banco te dará una tasa peor. Usa la tasa de referencia para planificar, y luego revisa la tasa real antes de pagar.</p>
-<p>Un quinto error es escribir la tasa con muy pocos decimales. Una tasa de ejemplo de 1,08 y una tasa de ejemplo de 1,0850 difieren en 0,005, lo que son 5 unidades por cada 1.000 convertidas. Mantén cuatro decimales en la tasa y redondea solo la respuesta final.</p>
-<h2 id="troubleshooting">Solución de problemas: cuando los números parecen incorrectos</h2>
-<p>Si la cantidad convertida es exactamente igual a la cantidad que ingresaste, probablemente la tasa sigue siendo 1,0000. Reemplaza el valor por defecto con la tasa que quieres usar, y el resultado cambiará.</p>
-<p>Si el resultado parece demasiado grande, quizás tengas la dirección invertida. Prueba la tasa inversa, que la herramienta muestra para la tasa que ingresaste, y mira si la respuesta se vuelve razonable.</p>
-<p>Si la tasa de referencia del BCE no carga, revisa tu conexión e inténtalo de nuevo con el botón. También puedes ingresar una tasa manual de otra fuente, porque la herramienta funciona por completo sin la función de obtención.</p>
-<p>Si la cantidad después de la comisión parece incorrecta, revisa el campo de comisión. Una comisión de 2 significa 2 por ciento, mientras que una comisión de 0,02 significa 0,02 por ciento, lo que es un cargo muy distinto. Asegúrate de que la comisión sea el porcentaje que querías.</p>
-<p>Si necesitas trabajar con porcentajes en otros contextos, la <a href="/es/calculadora-de-porcentaje/">Calculadora de porcentajes</a> puede ayudarte a revisar una comisión rápidamente. Si estás convirtiendo unidades además de monedas, el <a href="/es/conversor-de-unidades/">Convertidor de unidades</a> maneja longitudes, pesos y más.</p>
-<h2 id="tips-for-faster-conversions">Consejos para conversiones más rápidas y precisas</h2>
-<p>Guarda la tasa y la comisión de tu proveedor en un lugar donde puedas encontrarlas de nuevo. Una nota en tu celular, con la fecha, la tasa y la comisión, te permite repetir una conversión sin buscar las cifras una segunda vez.</p>
-<p>Para presupuestar, usa una tasa un poco cautelosa en lugar de la más optimista. Si la tasa de referencia es 1,08 en este ejemplo, presupuesta como si fueras a recibir 1,06, porque la tasa de tu proveedor será peor y se aplicará una comisión.</p>
-<p>Cuando una conversión es parte de un precio que incluye impuestos, usa la <a href="/es/calculadora-de-iva-e-impuestos/">Calculadora de IVA e impuestos</a> para añadir el impuesto después de la conversión. Cuando es parte de un margen de negocio, la <a href="/es/calculadora-de-descuento-y-margen/">Calculadora de descuento y margen</a> puede ayudarte a revisar si la oferta sigue teniendo sentido.</p>
-<h2 id="conclusion">Conclusión: convierte, añade la comisión y luego decide</h2>
-<p>Convertir moneda es un trabajo corto una vez que conoces los pasos. Abre la herramienta, ingresa la cantidad y las monedas, ingresa una tasa manual u obtén una tasa de referencia del BCE, lee la cantidad convertida, añade la comisión de cambio, y compara las cantidades finales.</p>
-<p>El paso que la gente se salta es la comisión, y es el paso que más importa. Una conversión sin la comisión es una estimación, mientras que una conversión con la comisión es la cantidad que realmente recibirás.</p>
-<p>Recuerda que una tasa de referencia del BCE es una referencia diaria, no una tasa de negociación en vivo, y que los bancos y los proveedores de tarjetas cobran su propia tasa más un recargo o comisión. Planificar con la cantidad neta mantiene tu presupuesto honesto y tus comparaciones justas.</p>
-<p>Pruébala ahora con una conversión real. Abre la <a href="/es/calculadora-de-divisas/">herramienta gratuita Calculadora de moneda</a>, sigue los pasos anteriores y anota la cantidad final.</p>
-<p>Si quieres primero el contexto, lee <a href="/es/blog/que-es-una-calculadora-de-moneda/">¿Qué es una calculadora de moneda? Guía completa</a>.</p>
-<p>Si quieres entender qué tasa aplica para ti y por qué los bancos cobran más, lee <a href="/es/blog/tasa-bce-vs-tasa-bancaria-vs-tasa-media/">Tasas de referencia del BCE vs tasas bancarias vs tasa media del mercado: qué tipo de cambio aplica para ti</a>. Convierte con la tasa real, añade la comisión, y decide sin dudar.</p>`,
-    faqs: [
-      { q: '¿Cómo convierto moneda paso a paso?', a: 'Abre la Calculadora de moneda, ingresa la cantidad y las dos monedas, y luego ingresa un tipo de cambio u obtén una tasa de referencia del BCE. Lee la cantidad convertida, añade el porcentaje de comisión de cambio, y anota la cantidad neta que realmente recibirás.' },
-      { q: '¿Debo usar una tasa manual o una tasa de referencia del BCE?', a: 'Usa una tasa manual de tu proveedor siempre que puedas, porque es la tasa que realmente se aplicará. Usa una tasa de referencia del BCE para planificar y comparar, pero recuerda que es una referencia diaria, no una tasa de negociación en vivo, y tu banco te dará una tasa peor.' },
-      { q: '¿Cómo tengo en cuenta la comisión de cambio?', a: 'Ingresa la comisión de cambio como un porcentaje en la herramienta, y deducirá la comisión de la cantidad convertida. Por ejemplo, una comisión del 2 por ciento sobre 1.080 dólares es de 21,60 dólares, dejando 1.058,40 dólares. Compara siempre proveedores por esta cantidad neta.' },
-      { q: '¿Cómo convierto moneda de vuelta en la otra dirección?', a: 'Usa la tasa inversa, que es uno dividido entre la tasa original. Si la tasa es 0,92 en una dirección, la inversa es aproximadamente 1,087 en la otra dirección. La herramienta muestra la tasa inversa para que puedas revisar la conversión inversa.' },
-      { q: '¿Por qué mi banco me da una tasa peor que la tasa de referencia del BCE?', a: 'La tasa del BCE es una referencia diaria sin margen bancario ni comisión incluidos. Los bancos y los proveedores de tarjetas añaden su propio recargo a la tasa y a menudo cobran una comisión de cambio aparte, así que la cantidad que recibes siempre es menor que una conversión a la tasa de referencia.' },
-      { q: '¿Qué debo hacer si la tasa de referencia del BCE no carga?', a: 'Revisa tu conexión a internet e inténtalo de nuevo con el botón de obtención. La herramienta funciona por completo con una tasa manual, así que puedes ingresar una tasa de tu proveedor o de otra fuente y continuar tu conversión sin esperar la obtención.' },
-    ],
-    readingMinutes: 13,
-  },
-  'currency-calculator-advanced': {
-    slug: 'tasa-bce-vs-tasa-bancaria-vs-tasa-media',
-    title: 'Tasas de referencia del BCE vs tasas bancarias vs tasa media del mercado: qué tipo de cambio aplica para ti',
-    description: 'Compara las tasas de referencia del BCE, las tasas bancarias y las tasas medias del mercado para ver qué tipo de cambio aplica a tu conversión, gratis en línea.',
-    body: `<p>Buscas un tipo de cambio en línea, y ves un número. Tu banco te cotiza un número distinto, y tu estado de cuenta muestra un tercero. Los tres dicen ser el tipo de cambio, pero ninguno coincide con los otros, y la cantidad que recibes siempre es menor de lo que sugería el primer número.</p>
-<p>Este artículo explica por qué esos números difieren. Compara las <strong>tasas de referencia del BCE, las tasas bancarias y las tasas medias del mercado</strong>, y muestra qué tasa aplica a tu conversión y por qué los bancos cobran más.</p>
-<p>La <a href="/es/calculadora-de-divisas/">Calculadora de moneda gratuita de UtilityFlow</a> puede ayudarte a probar cada tasa por turno. Ingresa una tasa media del mercado o de referencia del BCE, luego ingresa la tasa y la comisión de tu banco, y compara las cantidades finales lado a lado.</p>
-<h2 id="what-is-the-mid-market-rate">¿Qué es la tasa media del mercado?</h2>
-<p>La tasa media del mercado es el punto medio entre la tasa de compra y la tasa de venta en el mercado mayorista de divisas. Es la tasa a la que los bancos negocian grandes cantidades de moneda entre sí, y es lo más cercano que tiene el mercado a una sola tasa verdadera.</p>
-<p>Cuando un sitio de noticias o un sitio web de monedas muestra un tipo de cambio, normalmente muestra la tasa media del mercado. Esa tasa se mueve constantemente durante las horas de negociación, porque la oferta y la demanda de cada moneda cambian minuto a minuto.</p>
-<p>La tasa media del mercado es un punto de referencia útil, porque te dice dónde está el mercado ahora mismo. Si conoces la tasa media del mercado, puedes juzgar si la oferta de un proveedor es justa o cara según la diferencia entre ambas.</p>
-<h2 id="what-is-the-ecb-reference-rate">¿Qué es la tasa de referencia del BCE?</h2>
-<p>La tasa de referencia del BCE es una tasa diaria publicada por el Banco Central Europeo para el euro frente a las monedas importantes. Cada día laborable, el BCE publica tasas de referencia basadas en un procedimiento de concertación entre bancos centrales, celebrado a primera hora de la tarde, hora de Europa Central.</p>
-<p>La tasa publicada es una foto de ese momento. Se mantiene fija hasta el siguiente día laborable, y es la misma para todos los que la consultan. Esa estabilidad es lo que la hace útil para fines oficiales y de negocios.</p>
-<p>La herramienta de UtilityFlow puede obtener una tasa de referencia del BCE si lo pides desde api.frankfurter.dev, que publica datos de referencia del BCE. Eso te da un punto de partida neutral y oficial para una conversión, y es mucho más confiable que la tasa de un sitio web cualquiera.</p>
-<p>Pero la tasa obtenida sigue siendo una tasa de referencia, no una tasa de negociación en vivo. Trátala como un punto de referencia para estimar y comparar, y reemplázala con la tasa de tu proveedor cuando necesites la cifra final.</p>
-<h2 id="what-is-a-bank-rate">¿Qué es una tasa bancaria?</h2>
-<p>Una tasa bancaria es la tasa que tu banco o proveedor de tarjeta aplica realmente a tu transacción. Es una tasa minorista, fijada por el proveedor, y siempre difiere de la tasa media del mercado a favor del proveedor. Esa diferencia es cómo el proveedor gana dinero con la conversión.</p>
-<p>Una tasa bancaria viene en dos formas, una tasa de compra y una tasa de venta. El banco te compra moneda a una tasa más baja y te vende moneda a una tasa más alta, y la diferencia entre ambas se llama diferencial. La tasa media del mercado está en el medio de ese diferencial.</p>
-<p>Supongamos que la tasa media del mercado es de 1,08 dólares por euro en este ejemplo. Un banco podría venderte dólares a 1,06 y comprarte dólares a 1,10, quedándose la diferencia como su margen. De cualquier forma, recibes menos de lo que sugeriría la conversión a tasa media del mercado.</p>
-<p>Por eso la cantidad en tu estado de cuenta siempre es menor que la cantidad que sugería un sitio web de monedas. El sitio web mostraba la tasa media del mercado, mientras que tu banco aplicó su propia tasa más una comisión, y las dos nunca fueron el mismo número.</p>
-<h2 id="side-by-side-comparison">BCE vs banco vs tasa media del mercado: lado a lado</h2>
-<p>Las tres tasas difieren en quién las publica, con qué frecuencia cambian, y si puedes negociar a ellas. Verlas lado a lado aclara las diferencias, y muestra por qué existe cada una.</p>
-<ul><li><strong>Tasa media del mercado:</strong> el punto medio del mercado mayorista, que se mueve constantemente, mostrada por los sitios web de monedas, pero no disponible para los clientes comunes.</li><li><strong>Tasa de referencia del BCE:</strong> una tasa diaria publicada por el Banco Central Europeo, fijada una vez al día, cercana a la tasa media del mercado en el momento de referencia, usada para valoración e informes.</li><li><strong>Tasa bancaria:</strong> la tasa minorista que aplica tu proveedor, siempre peor que la tasa media del mercado para el cliente, más una posible comisión de cambio, y la única tasa que decide lo que recibes.</li></ul>
-<p>La tasa media del mercado es el punto de referencia, la tasa del BCE es la foto diaria oficial, y la tasa bancaria es el precio que realmente pagas. Ninguna de ellas está mal, pero solo una de ellas decide la cantidad que llega a tu cuenta.</p>
-<p>Cuando compares ofertas, revisa siempre qué tasa se está cotizando. Un proveedor que anuncia la tasa media del mercado pero cobra una comisión alta puede costarte más que un proveedor que cotiza una tasa peor sin comisión. Solo la cantidad final revela el costo real.</p>
-<h2 id="why-banks-charge-more">¿Por qué los bancos cobran más que la tasa media del mercado?</h2>
-<p>Los bancos cobran más que la tasa media del mercado porque la conversión de moneda es un servicio, y el margen es como se les paga por él. Manejar moneda extranjera implica riesgo, sistemas, revisiones de cumplimiento y personal, y el diferencial cubre esos costos más una ganancia.</p>
-<p>La competencia limita el margen, pero no lo elimina. Los servicios de transferencia especializados en conversión de moneda a menudo ofrecen diferenciales más estrechos que los bancos tradicionales, porque manejan volúmenes mayores y operan con menos gastos. Por eso comparar proveedores puede ahorrar dinero real.</p>
-<p>Algunos proveedores anuncian que no cobran comisión, lo que suena como una conversión gratuita, pero el costo suele estar escondido en la tasa. Un proveedor que ofreciera la tasa media del mercado sin comisión no ganaría dinero, así que una oferta «sin comisión» casi siempre significa un diferencial más amplio.</p>
-<p>La forma honesta de juzgar cualquier oferta es pedir la cantidad final. Para la misma suma inicial, ¿cuánto recibirá el destinatario, después de la tasa y cada comisión? El proveedor con la mayor cantidad final es el más barato, diga lo que diga su publicidad.</p>
-<h2 id="which-rate-applies-to-you">¿Qué tasa aplica a tu situación?</h2>
-<p>La tasa que aplica para ti depende de lo que estés haciendo, porque distintas situaciones usan tasas distintas. Un viajero, un titular de tarjeta, un negocio y un contador pueden necesitar cada uno una cifra distinta, incluso para el mismo par de monedas el mismo día.</p>
-<p>Para un pago con tarjeta en el extranjero, aplica la tasa bancaria. Tu proveedor de tarjeta convierte el pago a su propia tasa, añade su comisión de cambio, y muestra el resultado en tu estado de cuenta. La tasa media del mercado y la tasa del BCE son solo puntos de referencia para juzgar si esa conversión fue justa.</p>
-<p>Para una transferencia de dinero, aplica la tasa del proveedor de transferencia. Cada proveedor cotiza su propia tasa y comisión, y el destinatario recibe la cantidad que queda después de ambas. Comparar proveedores por sus cantidades finales es la única comparación justa.</p>
-<p>Para un negocio que valora ventas o tenencias en el extranjero, a menudo aplica la tasa de referencia del BCE. Los contadores usan la tasa diaria publicada para que las valoraciones sean constantes y auditables, y para que todos usen la misma cifra para el mismo día.</p>
-<h2 id="worked-example-same-amount-three-rates">Ejemplo resuelto: la misma cantidad con tres tasas</h2>
-<p>Un solo ejemplo muestra cuánto importa la elección de la tasa. Supongamos que quieres convertir 1.000 euros a dólares, y la tasa media del mercado de ejemplo es 1,08, la tasa de referencia del BCE de ejemplo es 1,08, y tu banco ofrece 1,06 con una comisión del 2 por ciento.</p>
-<p>Con la tasa media del mercado, 1.000 euros se convierten en 1.080 dólares. Con la tasa de referencia del BCE, la cifra es la misma en este ejemplo, porque la tasa de referencia está cerca de la tasa media del mercado en el momento de referencia.</p>
-<p>Con la tasa bancaria, 1.000 euros se convierten en 1.060 dólares antes de la comisión. Después de la comisión del 2 por ciento de 21,20 dólares, recibes 1.038,80 dólares, lo que es 41,20 dólares menos que la cifra a tasa media del mercado.</p>
-<p>Esa diferencia de 41,20 dólares es el costo total de la conversión: el diferencial más la comisión. No es un error, ni un cargo escondido, porque la tasa y la comisión del banco eran los términos del servicio. Pero es dinero real, y vale la pena compararlo.</p>
-<p>Prueba la misma comparación tú mismo con la <a href="/es/calculadora-de-divisas/">Calculadora de moneda</a>. Ingresa la tasa y la comisión de cada proveedor por turno, anota la cantidad neta, y elige la mayor cifra final. La herramienta hace que la comparación lleve minutos en lugar de suposiciones.</p>
-<h2 id="the-spread-explained">El diferencial explicado en términos sencillos</h2>
-<p>El diferencial es la diferencia entre la tasa a la que un proveedor compra moneda y la tasa a la que vende moneda. Es el margen del proveedor, y es la razón principal por la que la tasa que recibes difiere de la tasa media del mercado.</p>
-<p>Un diferencial estrecho significa que las tasas del proveedor están cerca de la tasa media del mercado, y la conversión es barata. Un diferencial amplio significa que las tasas están lejos de la tasa media del mercado, y la conversión es cara. El diferencial suele expresarse como un porcentaje de la tasa media del mercado.</p>
-<p>Supongamos que la tasa media del mercado es 1,08 en este ejemplo, y un proveedor vende dólares a 1,06. La diferencia es 0,02, lo que es aproximadamente el 1,9 por ciento de la tasa media del mercado. Ese porcentaje es el costo del diferencial, antes de añadir cualquier comisión aparte.</p>
-<p>Conocer el diferencial te ayuda a evitar las peores ofertas. Si la tasa de un proveedor está lejos de la tasa media del mercado o de referencia del BCE, el diferencial es amplio, y debes buscar una mejor oferta antes de comprometerte.</p>
-<h2 id="common-mistakes">Errores comunes al comparar tasas</h2>
-<p>El error más común es tratar la tasa media del mercado como la cantidad que recibirás. Siempre recibirás menos, porque cada proveedor añade un margen y a menudo una comisión. Presupuesta con la cantidad neta, no con la cifra a tasa media del mercado.</p>
-<p>Otro error común es tratar una tasa de referencia del BCE como una tasa en vivo. La tasa del BCE se publica una vez al día y no se mueve durante el día, mientras que el mercado se mueve constantemente. Una tasa de esta mañana puede estar desactualizada para la tarde.</p>
-<p>Un tercer error es comparar tasas sin comparar comisiones. Un proveedor con una mejor tasa y una comisión alta puede costarte más que un proveedor con una tasa peor y sin comisión. Compara siempre la cantidad final después de aplicar tanto la tasa como la comisión.</p>
-<p>Un cuarto error es confiar en una afirmación de «sin comisión» sin revisar la tasa. Un proveedor que no cobra una comisión aparte normalmente esconde su cargo dentro de una tasa peor, así que la conversión igual te cuesta dinero. Compara la tasa con la tasa media del mercado o de referencia del BCE para ver el margen escondido.</p>
-<p>Un sexto error es convertir en la dirección equivocada. La tasa de euros a dólares no es la tasa de dólares a euros, y usar el mismo número en ambos sentidos da una respuesta equivocada. Usa la tasa inversa para la dirección contraria, como muestra la herramienta.</p>
-<h2 id="how-to-compare-providers-fairly">Cómo comparar proveedores con justicia</h2>
-<p>Comparar proveedores con justicia lleva unos pocos minutos, y sigue un método sencillo. Usa la misma cantidad inicial para cada proveedor, ingresa la tasa y la comisión de cada proveedor, y anota la cantidad final que te deja cada uno.</p>
-<p>Empieza buscando la tasa media del mercado o de referencia del BCE para tu par de monedas, para tener un punto de referencia. Esa cifra te dice dónde está el mercado, y te permite ver lo grande que es el margen de cada proveedor.</p>
-<p>Luego, obtén una cotización de cada proveedor para la misma cantidad. Pide la tasa y la comisión, y pide la cantidad final que recibirá el destinatario. Un proveedor que no indique la cantidad final es un proveedor que debes tratar con cautela.</p>
-<p>Ingresa cada cotización en la <a href="/es/calculadora-de-divisas/">Calculadora de moneda</a> y anota el resultado neto. El proveedor con la mayor cantidad final es el más barato para esa transacción, diga lo que diga su tasa anunciada.</p>
-<h2 id="tips-for-getting-a-better-rate">Consejos para obtener una mejor tasa</h2>
-<p>Compara antes de convertir, sobre todo para cantidades grandes. Una diferencia del 1 por ciento sobre 10.000 unidades son 100 unidades, lo que vale unos pocos minutos de comparación. Para cantidades pequeñas, el ahorro puede ser menor que el tiempo que lleva comparar, así que juzga el esfuerzo contra la cantidad.</p>
-<p>Considera un servicio de transferencia especializado para transferencias mayores, porque a menudo ofrece diferenciales más estrechos que los bancos tradicionales. Revisa su tasa y su comisión frente a la oferta de tu banco, y compara las cantidades finales antes de decidir.</p>
-<p>Evita cambiar efectivo en aeropuertos y hoteles cuando puedas, porque sus diferenciales suelen ser los más amplios. Un pago con tarjeta o una transferencia organizada con anticipación suele ser más barato, incluso después de la comisión del proveedor de la tarjeta.</p>
-<p>Si una conversión es parte de un precio mayor, usa la <a href="/es/calculadora-de-iva-e-impuestos/">Calculadora de IVA e impuestos</a> para añadirle impuestos a la cantidad convertida, o la <a href="/es/calculadora-de-descuento-y-margen/">Calculadora de descuento y margen</a> para revisar si el margen sigue funcionando.</p><p> La <a href="/es/calculadora-de-porcentaje/">Calculadora de porcentajes</a> puede ayudarte a revisar una comisión o un diferencial rápidamente, y el <a href="/es/conversor-de-unidades/">Convertidor de unidades</a> maneja conversiones que no son de moneda.</p>
-<h2 id="troubleshooting">Solución de problemas: cuando las tasas no coinciden</h2>
-<p>Si la tasa en un sitio web de monedas difiere de la tasa de tu banco, eso es normal. El sitio web muestra la tasa media del mercado, mientras que tu banco aplica su propia tasa minorista más una comisión. La diferencia entre ellas es el margen del banco, no un error.</p>
-<p>Si la tasa de tu proveedor está lejos tanto de la tasa media del mercado como de la del BCE, el diferencial es amplio y la oferta es cara. Obtén una cotización de otro proveedor antes de aceptarla, porque la diferencia puede valer dinero real.</p>
-<h2 id="conclusion">Conclusión: sabe qué tasa estás mirando</h2>
-<p>No existe un solo tipo de cambio, y esa es la idea clave de este artículo. La tasa media del mercado es el punto de referencia, la tasa de referencia del BCE es la foto diaria oficial, y la tasa bancaria es el precio que realmente pagas.</p>
-<p>Cada tasa tiene su lugar. Usa la tasa media del mercado o de referencia del BCE para planificar, estimar y comparar, y usa la tasa y la comisión de tu proveedor para calcular lo que realmente recibirás. Nunca confundas una con la otra.</p>
-<p>La cantidad que importa es la cantidad final después de aplicar tanto la tasa como la comisión. Compara proveedores por esa cifra, guarda una nota de los términos que acordaste, y presupuesta con una tasa cautelosa para que un movimiento del mercado no te deje corto.</p>
-<p>Prueba la comparación tú mismo. Abre la <a href="/es/calculadora-de-divisas/">herramienta gratuita Calculadora de moneda</a>, ingresa la tasa de referencia del BCE, luego ingresa la tasa y la comisión de tu banco, y mira la diferencia en dinero real.</p>
-<p>Si quieres primero el contexto, lee <a href="/es/blog/que-es-una-calculadora-de-moneda/">¿Qué es una calculadora de moneda? Guía completa</a>.</p>
-<p>Si quieres los pasos prácticos para cualquier conversión, lee <a href="/es/blog/como-convertir-moneda/">Cómo convertir moneda (y tener en cuenta las comisiones de cambio)</a>. Ten claro qué tasa estás mirando, y convierte con los ojos abiertos.</p>`,
-    faqs: [
-      { q: '¿Cuál es la diferencia entre la tasa de referencia del BCE y la tasa media del mercado?', a: 'La tasa media del mercado es el punto medio del mercado mayorista de divisas, que se mueve constantemente. La tasa de referencia del BCE es una foto diaria publicada por el Banco Central Europeo, cercana a la tasa media del mercado en el momento de referencia, pero fija para el día. Ninguna es una tasa a la que puedas negociar como cliente.' },
-      { q: '¿Por qué mi tasa bancaria es peor que la tasa de referencia del BCE?', a: 'La tasa del BCE es una referencia diaria sin margen bancario ni comisión incluidos. Tu banco añade su propio recargo a la tasa, llamado diferencial, y a menudo cobra una comisión de cambio aparte. La diferencia entre la tasa de referencia y la tasa bancaria es cómo el banco gana dinero con la conversión.' },
-      { q: '¿Qué tipo de cambio recibiré realmente?', a: 'Recibirás la tasa que fije tu proveedor, ya sea un banco, una compañía de tarjetas o un servicio de transferencia, y siempre es peor que la tasa media del mercado para el cliente. Las tasas medias del mercado y de referencia del BCE son puntos de referencia para planificar y comparar, no tasas que ningún proveedor esté obligado a ofrecerte.' },
-      { q: '¿Qué es el diferencial en la conversión de moneda?', a: 'El diferencial es la diferencia entre la tasa a la que un proveedor compra moneda y la tasa a la que vende moneda. Es el margen del proveedor, y es la razón por la que la tasa que recibes difiere de la tasa media del mercado. Un diferencial estrecho significa una conversión más barata.' },
-      { q: '¿Una conversión de moneda sin comisión es realmente gratuita?', a: 'Normalmente no. Un proveedor que no cobra una comisión aparte normalmente esconde su cargo dentro de una tasa de cambio peor, así que la conversión igual te cuesta dinero. Compara la cantidad final que recibes, no solo la comisión, para juzgar el costo real.' },
-      { q: '¿Qué tasa debo usar para presupuestar?', a: 'Usa la tasa de referencia del BCE o la tasa media del mercado para una estimación aproximada, y luego reemplázala con la tasa y la comisión de tu proveedor para la cifra final. Presupuesta con una tasa un poco cautelosa, porque la tasa de tu proveedor será peor y se aplicará una comisión.' },
-    ],
-    readingMinutes: 14,
-  },
   'date-difference-calculator-guide': {
     slug: 'que-es-una-calculadora-de-diferencia-de-fechas',
     title: '¿Qué es una calculadora de diferencia de fechas? Guía completa',
@@ -14583,7 +13273,7 @@ export const ES_ARTICLE_OVERRIDES: Record<string, ArticleLocaleOverride> = {
 <p>Si el margen parece incorrecto, revisa entre qué número dividiste. El margen divide la ganancia entre el precio de venta, mientras que el recargo divide la ganancia entre el costo. Dividir entre el número equivocado da el otro porcentaje.</p>
 <p>Si el precio final con impuesto parece incorrecto, revisa la tasa de impuesto y el orden. Asegúrate de que el impuesto se añadió después del descuento, y asegúrate de que la tasa es la que aplica donde estás comprando. Para una revisión de impuestos aparte, prueba la <a href="/es/calculadora-de-iva-e-impuestos/">Calculadora de IVA e impuestos</a>.</p>
 <h2 id="tips-for-accurate-calculations">Consejos para cálculos precisos</h2>
-<p>Trabaja en la misma moneda todo el tiempo. Mezclar monedas, u olvidar una conversión, distorsionará cada respuesta. Si estás comparando precios en monedas distintas, conviértelos primero con la <a href="/es/calculadora-de-divisas/">Calculadora de moneda</a>.</p>
+<p>Trabaja en la misma moneda todo el tiempo. Mezclar monedas, u olvidar una conversión, distorsionará cada respuesta. Si estás comparando precios en monedas distintas, conviértelos primero con la calculadora de moneda.</p>
 <p>Redondea solo al final. Si redondeas después de cada paso, los pequeños errores se suman. Mantén los números completos durante el cálculo, y redondea el precio final al centavo más cercano.</p>
 <p>Anota los pasos para cualquier precio que importe. Una nota corta que diga $200, menos 30%, menos 10%, más 8% de impuesto, es igual a $136,08, te permite revisar la respuesta después. También permite que otra persona siga tu precio sin adivinar.</p>
 <h2 id="frequently-asked-questions">Preguntas frecuentes</h2>
@@ -16439,7 +15129,7 @@ export const ES_ARTICLE_OVERRIDES: Record<string, ArticleLocaleOverride> = {
 <p>Por último, no dejes propina a alguien por un servicio que no recibiste, como un cargo por una mesa en la que nunca te sentaste. Revisa la cuenta línea por línea, y pregunta por cualquier cosa que no reconozcas antes de pagar.</p>
 <h2 id="using-a-calculator-while-travelling">Usar una calculadora mientras viajas</h2>
 <p>Cuando viajas, una calculadora de propinas te ayuda a probar distintos porcentajes rápidamente y ver el costo en la moneda local. Prueba 10, 15 y 20 por ciento en la misma cuenta, y elige la cifra que se sienta correcta para el servicio.</p>
-<p>Si la cuenta está en una moneda extranjera, conviértela primero con una <a href="/es/calculadora-de-divisas/">calculadora de moneda</a>, para que conozcas la cantidad en tu moneda local. Ese paso evita que una propina generosa se convierta en un gasto accidental.</p>
+<p>Si la cuenta está en una moneda extranjera, conviértela primero con una calculadora de moneda, para que conozcas la cantidad en tu moneda local. Ese paso evita que una propina generosa se convierta en un gasto accidental.</p>
 <p>Para una comida en grupo grande en el extranjero, divide la cuenta con la calculadora antes de que alguien pague, porque una división en grupo en una moneda extranjera es fácil de calcular mal. Una cifra clara por persona en la moneda local mantiene el pago sencillo.</p>
 <p>Lleva una nota de la costumbre local de cada país que visites, porque los rangos difieren más de lo que la mayoría de los viajeros esperan. Una nota corta en tu teléfono es suficiente, y te ahorra adivinar en cada comida.</p>
 <h2 id="conclusion">Conclusión: deja propina con reflexión, no con ansiedad</h2>
@@ -16521,7 +15211,7 @@ export const ES_ARTICLE_OVERRIDES: Record<string, ArticleLocaleOverride> = {
 <h2 id="how-to-use-the-tool">Cómo usar el Convertidor de Unidades de UtilityFlow</h2>
 <p>Usar la herramienta te lleva menos de un minuto. Abre el <a href="/es/conversor-de-unidades/">Convertidor de Unidades</a>, elige una familia como Longitud o Temperatura, ingresa tu número, y elige las unidades en ambos lados. El resultado y la tabla completa lado a lado aparecen de inmediato.</p>
 <p>Lee la tabla, no solo la primera respuesta. Muestra el mismo valor en cada unidad de la familia, así que puedes elegir la versión que se adapte a tu receta, tu formulario o tu público.</p>
-<p>Si también necesitas conversiones de dinero, prueba la <a href="/es/calculadora-de-divisas/">Calculadora de Moneda</a>. Si estás siguiendo tu salud, la <a href="/es/calculadora-de-imc/">Calculadora de IMC</a> y la <a href="/es/calculadora-de-calorias/">Calculadora de Calorías</a> usan las mismas unidades métricas e imperiales que acabas de convertir.</p>
+<p>Si también necesitas conversiones de dinero, prueba la calculadora de moneda. Si estás siguiendo tu salud, la <a href="/es/calculadora-de-imc/">Calculadora de IMC</a> y la <a href="/es/calculadora-de-calorias/">Calculadora de Calorías</a> usan las mismas unidades métricas e imperiales que acabas de convertir.</p>
 <ol><li><strong>Elige la familia:</strong> elige Longitud, Peso y Masa, Temperatura, Área, Volumen, Velocidad o Almacenamiento Digital.</li><li><strong>Ingresa tu valor:</strong> escribe el número que quieres convertir, como 5 o 250.</li><li><strong>Elige la unidad inicial:</strong> selecciona la unidad en la que ya está tu número, como kilómetros o kilogramos.</li><li><strong>Elige la unidad objetivo:</strong> selecciona la unidad que quieres, como millas o libras.</li><li><strong>Lee la tabla:</strong> revisa la tabla lado a lado para el mismo valor en cada otra unidad.</li><li><strong>Redondea con sensatez:</strong> usa dos o tres decimales para uso cotidiano, y más solo cuando la precisión importa.</li></ol>
 <h2 id="worked-examples">Ejemplos resueltos que puedes comprobar</h2>
 <p>Estos ejemplos usan los mismos factores que la herramienta, así que puedes probarlos tú mismo. Cada uno muestra la matemática, no solo la respuesta, para que puedas ver de dónde sale el número.</p>
@@ -16616,7 +15306,7 @@ export const ES_ARTICLE_OVERRIDES: Record<string, ArticleLocaleOverride> = {
 <h2 id="using-the-tool">Usar la herramienta paso a paso</h2>
 <p>Ahora pon el método en práctica con la herramienta. Abre el <a href="/es/conversor-de-unidades/">Convertidor de Unidades</a>, elige la familia, ingresa tu número, y elige ambas unidades. La respuesta y la tabla completa aparecen de inmediato, sin registro ni subidas.</p>
 <p>Lee la tabla antes de copiar la respuesta. Muestra el mismo valor en cada unidad, así que puedes encontrar un número más redondo en otro lugar. Por ejemplo, 5 kilómetros son 3,11 millas, pero también 5.000 metros.</p>
-<p>Si estás planeando un viaje, la <a href="/es/calculadora-de-duracion-de-tiempo/">Calculadora de Duración de Tiempo</a> combina bien con las conversiones de longitud y velocidad. Si hay dinero involucrado, usa la <a href="/es/calculadora-de-divisas/">Calculadora de Moneda</a> después, para que la distancia y el costo estén ambos en unidades que entiendes.</p>
+<p>Si estás planeando un viaje, la <a href="/es/calculadora-de-duracion-de-tiempo/">Calculadora de Duración de Tiempo</a> combina bien con las conversiones de longitud y velocidad. Si hay dinero involucrado, usa la calculadora de moneda después, para que la distancia y el costo estén ambos en unidades que entiendes.</p>
 <ol><li><strong>Abre la herramienta:</strong> ve a la página del Convertidor de Unidades en tu navegador.</li><li><strong>Elige la familia:</strong> elige Longitud, Peso y Masa, Temperatura, Área, Volumen, Velocidad o Almacenamiento Digital.</li><li><strong>Ingresa el número:</strong> escribe el valor que quieres convertir.</li><li><strong>Elige la unidad inicial:</strong> selecciona la unidad en la que ya está tu número.</li><li><strong>Elige la unidad objetivo:</strong> selecciona la unidad en la que quieres la respuesta.</li><li><strong>Lee la tabla:</strong> revisa la tabla lado a lado para el mismo valor en cada otra unidad.</li><li><strong>Revisa con sentido común y redondea:</strong> compara la respuesta con un valor que conoces, luego redondea con sensatez.</li></ol>
 <h2 id="rounding">¿Cuánto deberías redondear?</h2>
 <p>Redondear es una elección práctica, no una regla matemática. Dos decimales son suficientes para cocinar, viajar y comprar, mientras que tres o cuatro son mejores para trabajo preciso.</p>
@@ -16730,7 +15420,7 @@ export const ES_ARTICLE_OVERRIDES: Record<string, ArticleLocaleOverride> = {
 <h2 id="tips">Consejos para conversiones sin errores</h2>
 <p>Mantén la unidad original junto a cada número convertido. Escribir 5 km (3,11 millas) es mucho más útil que escribir solo 3,11 millas, porque siempre puedes volver a revisar la conversión después. También le dice a tu lector de dónde salió el número.</p>
 <p>Usa la tabla lado a lado de la herramienta, no solo la primera respuesta. Muestra el mismo valor en cada unidad, así que puedes detectar una dirección incorrecta de un vistazo.</p>
-<p>Para dinero junto con distancia, combina el convertidor con la <a href="/es/calculadora-de-divisas/">Calculadora de Moneda</a>. Para tiempo junto con distancia, usa la <a href="/es/calculadora-de-duracion-de-tiempo/">Calculadora de Duración de Tiempo</a>. Convertir bien una cantidad es bueno, pero convertir todo el problema es mejor.</p>
+<p>Para dinero junto con distancia, combina el convertidor con la calculadora de moneda. Para tiempo junto con distancia, usa la <a href="/es/calculadora-de-duracion-de-tiempo/">Calculadora de Duración de Tiempo</a>. Convertir bien una cantidad es bueno, pero convertir todo el problema es mejor.</p>
 <h2 id="conclusion">Conclusión: conoce el sistema, luego revisa la respuesta</h2>
 <p>Los sistemas métrico e imperial funcionan bien por sí solos. Los errores ocurren en el límite entre ellos, donde un desplazamiento olvidado, un galón incorrecto, o una onza confundida pueden cambiar la respuesta por una gran cantidad. Las tablas en esta guía te dan los factores, y los errores anteriores te dan las advertencias.</p>
 <p>El hábito que evita la mayoría de los errores es sencillo: convierte, luego revisa con sentido común. Compara la respuesta con un punto de referencia que conoces, como 20 °C son 68 °F, 10 millas son aproximadamente 16,09 kilómetros, o 70 kilogramos son aproximadamente 154,32 libras. Cuando la respuesta cae cerca de un punto de referencia, puedes confiar en ella.</p>
@@ -17167,7 +15857,7 @@ Hello</code></pre>
 <h2 id="conclusion">Conclusión: codifica, comprueba en ambos sentidos, y luego envía</h2>
 <p>Codificar y decodificar Base64 es un proceso corto: abre la herramienta, elige la variante, pega tu texto y copia el resultado. La habilidad está en las decisiones que lo rodean, que son la variante, el relleno y la codificación del texto. Si aciertas esas tres, el resultado funcionará a la primera.</p>
 <p>Acostúmbrate a comprobar la conversión en ambos sentidos. Codifica, decodifica y compara, cada vez que prepares datos para otro sistema. Ese solo hábito detecta errores de copia, errores de variante y problemas de caracteres antes de que lleguen a su destino.</p>
-<p>Pruébalo ahora con tu propio texto. Abre el <a href="/es/codificador-decodificador-base64/">Codificador Decodificador Base64</a> gratuito, codifica una frase, y decodifícala de vuelta para confirmar la coincidencia. Si necesitas dar formato al resultado para una dirección web, el <a href="/es/codificador-decodificador-url/">Codificador Decodificador de URL</a> es la siguiente herramienta que te conviene probar, y el <a href="/es/formateador-json/">Formateador JSON</a> puede ordenar los valores JSON antes de codificarlos.</p>`,
+<p>Pruébalo ahora con tu propio texto. Abre el <a href="/es/codificador-decodificador-base64/">Codificador Decodificador Base64</a> gratuito, codifica una frase, y decodifícala de vuelta para confirmar la coincidencia. Si necesitas dar formato al resultado para una dirección web, el <a href="/es/codificador-decodificador-url/">Codificador Decodificador de URL</a> es la siguiente herramienta que te conviene probar, y el formateador JSON puede ordenar los valores JSON antes de codificarlos.</p>`,
     faqs: [
       { q: '¿Cómo codifico texto en Base64?', a: 'Abre el Codificador Decodificador Base64, elige el modo codificar, escoge Base64 estándar o seguro para URL, y pega tu texto. La herramienta convierte el texto a bytes UTF-8 y lo codifica al instante. Copia la salida y úsala donde se necesite.' },
       { q: '¿Cómo decodifico una cadena Base64?', a: 'Abre la herramienta, elige el modo decodificar, y pega la cadena Base64 exactamente como aparece. Elige la variante correspondiente, estándar o segura para URL, y la herramienta valida la entrada y devuelve el texto original. Comprueba el resultado con lo que esperabas.' },
@@ -17500,7 +16190,7 @@ color: rgba(37, 99, 235, 0.5);</code></pre>
 <h2 id="conclusion">Conclusión: usa el formato adecuado para el trabajo, y comprueba el contraste</h2>
 <p>HEX es mejor para colores fijos, RGB es mejor para código que lee canales, y HSL es mejor para crear y ajustar paletas. Ninguno es el mejor para todo, y la mayoría de los proyectos usarán más de uno. El convertidor lo hace fácil, porque muestra los tres formatos del mismo color a la vez.</p>
 <p>El contraste es la prueba que convierte una buena paleta en una paleta que sirva de verdad. AA necesita 4.5:1 para texto común y 3:1 para texto grande, mientras que AAA necesita 7:1 y 4.5:1. </p><p>Apunta a AA en todas partes, a AAA donde más importa, y a un margen cómodo por encima del límite, para que tu texto se mantenga legible en pantallas reales.</p>
-<p>Pruébalo con tu propia paleta. Abre el <a href="/es/convertidor-colores/">Convertidor de Color</a> gratuito, convierte tus colores de marca a HSL, crea una escala de sombras, y comprueba cada par de texto para AA y AAA. </p><p>Si trabajas con marcado a menudo, el <a href="/es/codificador-entidades-html/">Codificador de Entidades HTML</a> y el <a href="/es/formateador-json/">Formateador JSON</a> son herramientas útiles para el mismo tipo de trabajo ordenado y fiable de front-end.</p>`,
+<p>Pruébalo con tu propia paleta. Abre el <a href="/es/convertidor-colores/">Convertidor de Color</a> gratuito, convierte tus colores de marca a HSL, crea una escala de sombras, y comprueba cada par de texto para AA y AAA. </p><p>Si trabajas con marcado a menudo, el <a href="/es/codificador-entidades-html/">Codificador de Entidades HTML</a> y el formateador JSON son herramientas útiles para el mismo tipo de trabajo ordenado y fiable de front-end.</p>`,
     faqs: [
       { q: '¿Cuál es mejor, HEX, RGB o HSL?', a: 'Ningún formato es mejor para todos los trabajos: HEX es mejor para colores fijos que copias y nunca ajustas, RGB es mejor cuando el código necesita leer o cambiar los canales, y HSL es mejor para crear paletas, porque los pasos de luminosidad te dan sombras predecibles.' },
       { q: '¿Cuándo debo usar HSL en lugar de HEX?', a: 'Usa HSL cuando necesites crear versiones más claras, más oscuras o más apagadas de un color. Mantén el tono y la saturación iguales y cambia solo la luminosidad, en pasos fijos. Eso te da una escala de sombras ordenada sin adivinar números.' },
@@ -17667,7 +16357,7 @@ Resumen:   A las 9:00 a. m. el primer día del mes</code></pre>
 <h2 id='conclusion'>Conclusión: escríbela, compruébala, y luego guárdala</h2>
 <p>Escribir una expresión cron es un hábito de cinco pasos: escribe el horario en palabras, completa el minuto y la hora, completa los campos de día, empieza desde un ajuste predefinido si ayuda, y revisa el resumen y las próximas ocho ejecuciones. Ese hábito detecta la mayoría de los errores antes de que lleguen a un sistema en producción.</p>
 <p>Empieza con los patrones diario, semanal y mensual de este tutorial, y cambia un campo a la vez. Cada cambio es pequeño, cada comprobación es rápida, y la vista previa te muestra exactamente lo que pasará después. Con ese ciclo, puedes escribir horarios en los que confías.</p>
-<p>Prueba tu propio horario ahora. Abre el <a href="/es/analizador-expresiones-cron/">Analizador de Expresiones Cron</a> gratuito, escribe tus cinco campos, y revisa el resumen en español claro y las próximas ejecuciones. Si trabajas con marcas de tiempo en tus trabajos, el <a href="/es/convertidor-marca-tiempo-unix/">Convertidor de Marcas de Tiempo Unix</a> es una herramienta útil, y el <a href="/es/formateador-json/">Formateador JSON</a> puede ordenar los datos que producen tus trabajos programados.</p>`,
+<p>Prueba tu propio horario ahora. Abre el <a href="/es/analizador-expresiones-cron/">Analizador de Expresiones Cron</a> gratuito, escribe tus cinco campos, y revisa el resumen en español claro y las próximas ejecuciones. Si trabajas con marcas de tiempo en tus trabajos, el <a href="/es/convertidor-marca-tiempo-unix/">Convertidor de Marcas de Tiempo Unix</a> es una herramienta útil, y el formateador JSON puede ordenar los datos que producen tus trabajos programados.</p>`,
     faqs: [
       { q: '¿Cómo escribo mi primera expresión cron?', a: 'Empieza escribiendo tu horario como una frase clara, como cada día de semana a las 9 a. m. Luego completa el minuto y la hora, seguidos de los campos de día y mes, usando asteriscos para los campos que no necesitas limitar. Comprueba el resultado en el Analizador de Expresiones Cron antes de guardarlo en cualquier lugar.' },
       { q: '¿Cómo pruebo una expresión cron antes de usarla?', a: 'Pega la expresión en el Analizador de Expresiones Cron y lee primero el resumen en español claro. Luego lee la vista previa de las próximas ocho ejecuciones para ver el patrón en fechas reales. Si el resumen o las fechas no coinciden con tu frase, corrige los campos y vuelve a comprobar.' },
@@ -17815,7 +16505,7 @@ Resumen:   A las 9:00 a. m. el primer día del mes</code></pre>
 <h2 id="tips-for-better-results">Consejos para mejores resultados</h2>
 <p>Quita el CSS sin usar antes de minificar, porque un minificador no puede saber qué reglas usan realmente tus páginas. Una hoja de estilos con reglas muertas se mantiene grande incluso después de la compresión. Limpiarla primero te da un archivo más pequeño y un código más fácil de mantener.</p>
 <p>Combina la minificación con las herramientas relacionadas de UtilityFlow cuando trabajes en un proyecto de front-end. El <a href="/es/formateador-javascript/">Formateador JS</a> puede ordenar JavaScript igual, y el <a href="/es/convertidor-colores/">Convertidor de Color</a> puede ayudarte a estandarizar los valores de color antes de comprimir una hoja de estilos.</p>
-<p>Si das formato a datos JSON para una API, el <a href="/es/formateador-json/">Formateador JSON</a> puede presentarlos con claridad, igual que el embellecedor de CSS presenta los estilos con claridad. Si necesitas mostrar caracteres especiales con seguridad en HTML, el <a href="/es/codificador-entidades-html/">Codificador de Entidades HTML</a> puede convertirlos por ti.</p>
+<p>Si das formato a datos JSON para una API, el formateador JSON puede presentarlos con claridad, igual que el embellecedor de CSS presenta los estilos con claridad. Si necesitas mostrar caracteres especiales con seguridad en HTML, el <a href="/es/codificador-entidades-html/">Codificador de Entidades HTML</a> puede convertirlos por ti.</p>
 <h2 id="css-minifier-and-other-tools">Minificadores de CSS y otras herramientas de front-end</h2>
 <p>Para una guía práctica, lee <a href="/es/blog/como-minificar-css/">Cómo minificar CSS (y embellecerlo de vuelta) paso a paso</a>. Trabaja una hoja de estilos real de principio a fin. Para el panorama más amplio de velocidad, lee <a href="/es/blog/minificacion-de-css-vs-gzip-y-empaquetado/">Minificación de CSS vs Gzip vs empaquetado</a>, que compara la minificación con la compresión y el empaquetado.</p>
 <h2 id="faq">Preguntas frecuentes</h2>
@@ -17997,7 +16687,7 @@ body {
 <h2 id="conclusion">Conclusión: usa las tres, en el orden adecuado</h2>
 <p>La minificación, la compresión y el empaquetado reducen CSS cada uno de forma distinta. La minificación recorta el archivo en sí, la compresión lo comprime para el envío, y el empaquetado reduce el número de peticiones. Ninguna técnica reemplaza a las demás, y el mejor resultado viene de usar las tres juntas.</p>
 <p>El orden es sencillo de recordar. Limpia las reglas sin usar, empaqueta los archivos que pertenecen juntos, minifica el resultado, y deja que el servidor lo comprima con Gzip o Brotli. Luego mide el tamaño transferido, porque ese es el número que tus visitantes sienten realmente.</p>
-<p>Empieza con el paso que puedes hacer hoy. Abre el <a href="/es/minificador-css/">Minificador de CSS</a> gratuito, pega una hoja de estilos, y revisa las estadísticas de ahorro de bytes en vivo por ti mismo. Luego revisa la configuración de compresión de tu alojamiento, y explora el <a href="/es/formateador-json/">Formateador JSON</a> cuando los datos de tu proyecto necesiten el mismo tratamiento ordenado.</p>`,
+<p>Empieza con el paso que puedes hacer hoy. Abre el <a href="/es/minificador-css/">Minificador de CSS</a> gratuito, pega una hoja de estilos, y revisa las estadísticas de ahorro de bytes en vivo por ti mismo. Luego revisa la configuración de compresión de tu alojamiento, y explora el formateador JSON cuando los datos de tu proyecto necesiten el mismo tratamiento ordenado.</p>`,
     faqs: [
       { q: '¿La minificación de CSS es lo mismo que la compresión Gzip?', a: 'No. La minificación quita comentarios, espacios en blanco y puntos y coma finales de la hoja de estilos en sí, así que el archivo en el servidor se vuelve más pequeño. Gzip comprime el archivo para enviarlo por la red, el navegador lo expande de nuevo al llegar, y funcionan en etapas distintas, así que es mejor usarlas juntas.' },
       { q: '¿Cuánto más pequeño puede ser el CSS con la minificación?', a: 'Depende del archivo fuente. Como rango aproximado, una hoja de estilos típica suele reducirse entre una décima y un tercio al minificarse, y los archivos con muchos comentarios ahorran más. La única cifra confiable es la que mides en tu propio archivo, con las estadísticas en vivo de la herramienta.' },
@@ -18562,7 +17252,7 @@ Tom &amp;amp; Jerry vende café &amp;amp; té a diario.</code></pre>
 <h2 id="tips-for-better-results">Consejos para mejores resultados</h2>
 <p>Mantén tus archivos fuente legibles, con comentarios claros y sangría consistente, y minifica solo al final. Una fuente limpia hace fácil mantener la versión legible, y la salida minificada será lo más pequeña posible de cualquier forma. Los buenos hábitos en la fuente valen la pena después.</p>
 <p>Prueba la salida minificada antes de publicarla, aunque el cambio se vea trivial. Ejecuta la página, haz clic en los botones, y revisa los mensajes que muestra el código. Una prueba rápida detecta el caso raro en que un comentario o un espacio era importante, y lleva mucho menos tiempo que depurar una página publicada.</p>
-<p>Combina la minificación con otras herramientas sencillas cuando trabajes en código web. El <a href="/es/minificador-css/">Minificador de CSS</a> reduce tus hojas de estilo igual, y el <a href="/es/formateador-json/">Formateador JSON</a> hace legibles de nuevo los datos de configuración. Juntos, mantienen un sitio pequeño rápido sin ninguna configuración de compilación.</p>
+<p>Combina la minificación con otras herramientas sencillas cuando trabajes en código web. El <a href="/es/minificador-css/">Minificador de CSS</a> reduce tus hojas de estilo igual, y el formateador JSON hace legibles de nuevo los datos de configuración. Juntos, mantienen un sitio pequeño rápido sin ninguna configuración de compilación.</p>
 <ul><li><strong>Minifica al final:</strong> escribe y prueba primero código legible, luego minifica la versión terminada.</li><li><strong>Guarda el original:</strong> guarda la fuente legible en un lugar seguro antes de minificar.</li><li><strong>Prueba la salida:</strong> ejecuta el código minificado y comprueba que se comporte igual.</li><li><strong>Usa el formato para leer:</strong> embellece cualquier código compacto que necesites entender.</li></ul>
 <h2 id="faq">Preguntas frecuentes</h2>
 <p>Estas son las preguntas más frecuentes sobre los minificadores de JavaScript. Para los pasos prácticos, mira el tutorial enlazado antes, y para cómo se comparan los minificadores con empaquetadores y transpiladores, mira el artículo avanzado enlazado en la siguiente sección.</p>
@@ -18654,7 +17344,7 @@ greet("Sam");</code></pre>
 <p>Mantén las dos versiones juntas en tu proyecto. Guarda el archivo legible como la referencia, y trata el archivo minificado como una copia generada que puedes regenerar en cualquier momento. Cuando necesites un cambio, edita la fuente y minifícala de nuevo.</p>
 <p>Usa el formato cuando heredes código compacto. Antes de cambiar un fragmento denso, embellecelo, léelo, y asegúrate de entenderlo. Editar código que no has leído es como los errores pequeños se vuelven grandes, y el formato es la forma más rápida de leerlo.</p>
 <ul><li><strong>Escribe, prueba, y luego minifica:</strong> nunca minifiques código que no hayas probado.</li><li><strong>Guarda la fuente:</strong> el archivo legible es el que editas, no la copia minificada.</li><li><strong>Da formato antes de editar:</strong> embellece el código compacto antes de cambiarlo.</li><li><strong>Prueba en su lugar:</strong> ejecuta el código minificado donde realmente vivirá.</li></ul>
-<p>Cuando trabajes con otros formatos web, se aplica el mismo hábito. El <a href="/es/minificador-css/">Minificador de CSS</a> reduce hojas de estilo igual, y el <a href="/es/formateador-json/">Formateador JSON</a> hace legibles de nuevo los datos compactos. El <a href="/es/probador-regex/">Probador de Regex</a> es útil cuando un fragmento usa patrones que quieres comprobar antes de minificar.</p>
+<p>Cuando trabajes con otros formatos web, se aplica el mismo hábito. El <a href="/es/minificador-css/">Minificador de CSS</a> reduce hojas de estilo igual, y el formateador JSON hace legibles de nuevo los datos compactos. El <a href="/es/probador-regex/">Probador de Regex</a> es útil cuando un fragmento usa patrones que quieres comprobar antes de minificar.</p>
 <h2 id="faq">Preguntas frecuentes</h2>
 <p>Estas son las preguntas más frecuentes sobre los pasos. Para repasar qué quita la minificación y por qué ayuda, mira la guía enlazada antes, y para cómo se comparan los minificadores con empaquetadores y transpiladores, mira <a href="/es/blog/minificador-de-js-vs-empaquetador-vs-transpilador/">Minificador de JavaScript vs empaquetador vs transpilador</a>.</p>
 <h2 id="conclusion">Conclusión: minifica en minutos, léelo de vuelta cuando lo necesites</h2>
@@ -18729,7 +17419,7 @@ greet("Sam");</code></pre>
 <p>Para un solo fragmento, un bookmarklet, o un script en línea, usa solo el minificador. Pega el código probado en el <a href="/es/formateador-javascript/">Minificador y Formateador de JavaScript</a>, minifícalo, y copia el resultado. No hay configuración, ni archivo de configuración, ni nada que instalar.</p>
 <p>Para un sitio web pequeño con unos pocos scripts, minifica cada archivo y mantén bajo el número de archivos. Combina scripts a mano solo si estás seguro del orden en que deben cargar, porque un orden incorrecto rompe la página. Con este tamaño, un enfoque sencillo todavía funciona bien.</p>
 <p>Para una aplicación más grande con muchos archivos, dependencias y sintaxis moderna, usa la cadena completa. Deja que un transpilador maneje la sintaxis, un empaquetador una los archivos y quite el código sin usar, y un minificador reduzca el paquete final. Esa configuración toma tiempo aprenderla, pero vale la pena a medida que el proyecto crece.</p>
-<p>Cuando trabajes con otros formatos web, se aplica el mismo pensamiento. El <a href="/es/minificador-css/">Minificador de CSS</a> reduce hojas de estilo como un minificador de JavaScript reduce scripts, y el <a href="/es/formateador-json/">Formateador JSON</a> hace legibles de nuevo los datos compactos. </p><p>El <a href="/es/formateador-sql/">Formateador SQL</a> ordena consultas de bases de datos, y el <a href="/es/probador-regex/">Probador de Regex</a> te ayuda a comprobar patrones antes de que entren en tu código.</p>
+<p>Cuando trabajes con otros formatos web, se aplica el mismo pensamiento. El <a href="/es/minificador-css/">Minificador de CSS</a> reduce hojas de estilo como un minificador de JavaScript reduce scripts, y el formateador JSON hace legibles de nuevo los datos compactos. </p><p>El <a href="/es/formateador-sql/">Formateador SQL</a> ordena consultas de bases de datos, y el <a href="/es/probador-regex/">Probador de Regex</a> te ayuda a comprobar patrones antes de que entren en tu código.</p>
 <h2 id="faq">Preguntas frecuentes</h2>
 <p>Estas son las preguntas más frecuentes sobre la comparación. Para lo básico de la minificación, lee <a href="/es/blog/que-es-un-minificador-de-javascript/">¿Qué es un minificador de JavaScript? Guía completa</a>, y para los pasos prácticos, lee <a href="/es/blog/como-minificar-javascript/">Cómo minificar JavaScript (y darle formato de vuelta para legibilidad)</a>.</p>
 <h2 id="conclusion">Conclusión: tres herramientas, tres trabajos distintos</h2>
@@ -18743,416 +17433,6 @@ greet("Sam");</code></pre>
       { q: '¿Qué hace un transpilador que un minificador no puede?', a: 'Un transpilador analiza el código y lo reescribe en otra sintaxis, como convertir JavaScript moderno en JavaScript más antiguo o TypeScript en JavaScript simple. Un minificador trabaja sobre texto y solo quita comentarios y espacios en blanco, así que no puede cambiar la sintaxis, comprobar tipos, ni hacer que el código se ejecute en navegadores antiguos.' },
       { q: '¿Puedo usar un minificador, un empaquetador y un transpilador juntos?', a: 'Sí, la mayoría de los proyectos profesionales usan los tres en secuencia. El transpilador reescribe primero la sintaxis, el empaquetador une los archivos y quita el código sin usar, y el minificador reduce el paquete final. Para un solo fragmento o bookmarklet, el minificador solo basta, sin configuración de compilación.' },
       { q: '¿La herramienta de UtilityFlow transpila o empaqueta mi código?', a: 'No. El Minificador y Formateador de JavaScript minifica y da formato a fragmentos de texto en el navegador, quitando comentarios y espacios en blanco excesivos mientras mantiene intactas las cadenas literales y las plantillas literales. No analiza, comprueba tipos, compila, ni empaqueta código, así que usa una configuración de compilación adecuada para esos trabajos.' },
-    ],
-    readingMinutes: 13,
-  },
-  'json-formatter-guide': {
-    slug: 'que-es-json',
-    title: '¿Qué es JSON? Guía completa para dar formato y validar',
-    description: 'Aprende qué es JSON, cómo funcionan el formato, la minificación y la validación, y cómo la ubicación de errores te ayuda a depurar JSON rápido en línea.',
-    body: `<p>JSON aparece casi en todas partes en la web moderna. Lleva configuraciones, respuestas de API, archivos de configuración, y datos entre aplicaciones. Sin embargo, mucha gente pega JSON en una herramienta sin saber realmente qué es o por qué se rompe.</p>
-<p>Esta guía explica JSON en lenguaje claro. Aprenderás su sintaxis, qué hace un <strong>formateador JSON</strong>, y cómo encajan el formato, la minificación y la validación. También verás cómo la ubicación de errores por línea y columna te ayuda a encontrar un error en segundos.</p>
-<p>Al final, podrás leer JSON con confianza y corregirlo cuando falle. Puedes seguir con el <a href="/es/formateador-json/">Formateador y Validador JSON gratuito de UtilityFlow</a>, que funciona por completo en tu navegador y no sube nada.</p>
-<h2 id="what-is-json">¿Qué es JSON?</h2>
-<p>JSON significa Notación de Objetos JavaScript. Es un formato de texto ligero para guardar y mover datos estructurados. Es fácil de leer para las personas, y fácil de analizar y generar para el software.</p>
-<p>JSON se basó en la sintaxis de objetos de JavaScript, pero ahora es independiente del lenguaje. Lo encontrarás en Python, Java, Go, Ruby, PHP, y casi todos los demás lenguajes de programación. Un documento JSON es solo texto, así que puede viajar en un archivo, una petición web, o un mensaje.</p>
-<p>El formato usa dos estructuras principales: objetos y arreglos. Un objeto contiene valores con nombre, llamados pares clave-valor.</p>
-<p>Un arreglo contiene una lista ordenada de valores. Juntos, pueden describir casi cualquier dato estructurado.</p>
-<pre><code>{
-  "name": "Aisha",
-  "age": 29,
-  "isStudent": false,
-  "courses": ["Python", "Design"],
-  "address": {
-    "city": "Lahore",
-    "country": "Pakistan"
-  }
-}</code></pre>
-<p>En el ejemplo anterior, todo el documento es un objeto. Tiene una cadena, un número, un booleano, un arreglo, y un objeto anidado. Ese anidamiento es normal en JSON, y es una razón por la que el formato importa tanto.</p>
-<h2 id="json-syntax-basics">Conceptos básicos de la sintaxis JSON</h2>
-<p>La sintaxis JSON tiene un conjunto pequeño de reglas, y son estrictas. Cada clave debe ser una cadena entre comillas dobles.</p>
-<p>Cada valor de cadena también debe usar comillas dobles. Las comillas simples no están permitidas, y tampoco las claves sin comillas.</p>
-<p>Los valores pueden ser cadenas, números, booleanos, null, objetos o arreglos. Los números no tienen comillas, y usan un punto decimal en lugar de una coma. Las palabras true, false y null siempre se escriben en minúsculas, sin comillas.</p>
-<p>Las comas separan los elementos, pero nunca van después del último elemento de un objeto o un arreglo. Esa regla atrapa a muchos principiantes, porque otros lenguajes permiten una coma final. JSON no, y una sola coma extra hace inválido todo el documento.</p>
-<h3 id="objects-in-json">Objetos en JSON</h3>
-<p>Un objeto empieza con una llave de apertura y termina con una llave de cierre. Dentro de él, cada clave va seguida de dos puntos y luego un valor. Las claves deben ser únicas en la práctica, y deben describir los datos con claridad.</p>
-<p>Los buenos nombres de clave son cortos, claros y consistentes. Usa lowerCamelCase o snake_case, y mantén un estilo en un documento. Evita espacios en las claves, porque hacen los datos más difíciles de usar en código.</p>
-<p>Un objeto puede estar vacío, escrito como dos llaves sin nada entre ellas. También puede contener otro objeto, que es como JSON describe datos anidados como una dirección dentro de un registro de usuario.</p>
-<pre><code>{
-  "id": 104,
-  "title": "Intro to JSON",
-  "published": true,
-  "tags": []
-}</code></pre>
-<h3 id="arrays-in-json">Arreglos en JSON</h3>
-<p>Un arreglo empieza con un corchete de apertura y termina con un corchete de cierre. Contiene una lista ordenada de valores, separados por comas. Los valores pueden ser de tipos distintos, pero suelen ser del mismo tipo en datos reales.</p>
-<p>Los arreglos son ideales para listas como etiquetas, puntajes, productos o usuarios. Su orden importa, así que el primer elemento está en la posición cero en la mayoría de los lenguajes de programación. Un formateador mantiene ese orden sin cambios mientras mejora el diseño.</p>
-<p>Un arreglo vacío se escribe como dos corchetes. Un arreglo anidado, un arreglo dentro de un arreglo, está permitido, aunque puede volverse difícil de leer sin formato. Ahí es donde la sangría ayuda más.</p>
-<pre><code>{
-  "scores": [88, 92, 79, 95],
-  "skills": ["HTML", "CSS", "JavaScript"],
-  "matrix": [[1, 2], [3, 4]]
-}</code></pre>
-<h3 id="json-data-types">Los seis tipos de datos JSON</h3>
-<p>JSON tiene solo seis tipos de valor, lo que lo mantiene sencillo. Una cadena es texto entre comillas dobles, como un nombre o una ciudad. Un número es un entero o un decimal, sin comillas y sin separador de miles.</p>
-<p>Un booleano es true o false, escrito en minúsculas. Null significa sin valor, y es distinto de cero o una cadena vacía. Un objeto agrupa valores con nombre, y un arreglo agrupa valores ordenados.</p>
-<p>No hay tipo de fecha en JSON. Las fechas suelen guardarse como cadenas, a menudo en formato ISO como 2026-11-17. Tampoco hay tipo de comentario, así que no puedes agregar notas dentro de un documento JSON.</p>
-<ul><li><strong>Cadena:</strong> texto entre comillas dobles, por ejemplo "Lahore".</li><li><strong>Número:</strong> un entero o decimal, por ejemplo 42 o 19.95.</li><li><strong>Booleano:</strong> true o false, siempre en minúsculas y sin comillas.</li><li><strong>Null:</strong> null, que significa sin valor, no cero ni una cadena vacía.</li><li><strong>Objeto:</strong> un conjunto de pares clave-valor dentro de llaves.</li><li><strong>Arreglo:</strong> una lista ordenada de valores dentro de corchetes.</li></ul>
-<h2 id="what-is-a-json-formatter">¿Qué es un formateador JSON?</h2>
-<p>Un formateador JSON toma JSON desordenado o compacto y lo reescribe con sangría clara y saltos de línea. No cambia los datos, el orden de los valores, ni el significado. Solo cambia el diseño, para que un humano pueda leerlo.</p>
-<p>Sin formato, el JSON de una API a menudo llega en una sola línea larga. Esa línea puede contener cientos de caracteres, y encontrar un campo dentro de ella es lento y propenso a errores. Un formateador lo divide en líneas, sangra los niveles anidados, y hace visible la estructura de un vistazo.</p>
-<p>El formato también se llama pretty-printing o embellecimiento. El resultado a veces se llama JSON bonito. Los datos se mantienen exactamente iguales, pero el documento se vuelve mucho más fácil de revisar, corregir y depurar.</p>
-<pre><code>{"name":"Aisha","age":29,"courses":["Python","Design"]}</code></pre>
-<p>La línea anterior es JSON válido, pero es difícil de leer. Después del formato, cada clave está en su propia línea, los valores anidados tienen sangría, y la estructura es clara. Nada de los datos ha cambiado, solo su presentación.</p>
-<h2 id="what-is-json-validation">¿Qué es la validación JSON?</h2>
-<p>La validación comprueba si un documento sigue cada regla de sintaxis JSON. Un validador analiza el texto de principio a fin, y reporta el primer error que encuentra. Si llega al final sin un error, el documento es válido.</p>
-<p>La validación importa porque los analizadores son estrictos. Una sola comilla faltante, una coma extra, o un corchete que no coincide impiden que todo el documento cargue. Tu aplicación no adivinará qué quisiste decir, y no saltará la parte rota.</p>
-<p>Un buen validador hace más que decir válido o no válido. Te dice dónde está el problema, usando un número de línea y un número de columna. Esa ubicación es la diferencia entre una corrección de cinco segundos y una búsqueda larga en un archivo grande.</p>
-<p>El <a href="/es/formateador-json/">Formateador y Validador JSON</a> revisa tu texto mientras trabajas. Pegas tu JSON, y te dice si la sintaxis es válida. Si no lo es, señala la línea y columna exactas donde se detuvo el análisis.</p>
-<h2 id="how-line-column-errors-work">Cómo la ubicación de errores por línea y columna te ayuda a depurar</h2>
-<p>Cuando un analizador JSON falla, se detiene en el primer carácter que no puede aceptar. Esa posición se reporta como una línea y una columna. La línea te dice qué fila mirar, y la columna te dice qué tan lejos en esa fila mirar.</p>
-<p>Eso suena sencillo, pero es poderoso en la práctica. Un archivo JSON grande puede tener cientos de líneas, y el error suele ser un solo carácter.</p>
-<p>Sin una ubicación, tendrías que revisar todo el archivo a simple vista. Con una ubicación, puedes saltar directo al problema.</p>
-<p>Hay un hábito que hace esto aún más rápido. Mira el carácter en la posición reportada, y luego mira justo antes de él. Muchos errores son causados por el carácter anterior al reportado, como una coma faltante en la línea anterior o una cadena sin cerrar arriba.</p>
-<p>Por ejemplo, si el error señala una clave en la línea 12, revisa si la línea 11 termina con una coma. Si una cadena nunca se cerró, el analizador puede fallar solo varias líneas después, cuando encuentra un carácter que no puede pertenecer dentro de una cadena. La posición reportada es el punto de partida, no siempre el culpable exacto.</p>
-<ul><li><strong>Número de línea:</strong> la fila donde se detuvo el análisis, contando desde arriba.</li><li><strong>Número de columna:</strong> la posición en esa fila, contando desde la izquierda.</li><li><strong>Mira justo antes:</strong> muchos errores están un carácter antes del lugar reportado.</li><li><strong>Corrige un error a la vez:</strong> después de cada corrección, valida de nuevo para encontrar el siguiente error.</li></ul>
-<h2 id="formatting-vs-minifying">Formato, minificación y ordenación de claves</h2>
-<p>El formato y la minificación son opuestos, y ambos son útiles. El formato agrega espacios en blanco para que JSON sea legible. La minificación quita todos los espacios en blanco innecesarios para que JSON sea lo más pequeño posible.</p>
-<p>El JSON minificado es ideal para enviar por la red, guardar en un archivo pequeño, o pegar en una URL o un cuerpo de petición. Carga más rápido y ocupa menos espacio, porque cada espacio, tabulación y salto de línea se ha quitado. Sigue siendo JSON válido, solo que más difícil de leer para una persona.</p>
-<p>Ordenar las claves alfabéticamente es una tercera operación. Reordena las claves dentro de cada objeto de la A a la Z, sin cambiar ningún valor. Las claves ordenadas facilitan comparar dos documentos, encontrar un campo, y detectar una clave faltante.</p>
-<p>Ordenar es sobre todo útil cuando comparas versiones de los mismos datos. Si las claves aparecen en distinto orden en cada versión, una simple comparación de texto muestra muchas diferencias falsas. Las claves ordenadas quitan ese ruido, así que solo destacan los cambios reales.</p>
-<h2 id="indentation-options">Opciones de sangría: 2 espacios, 4 espacios o tabulación</h2>
-<p>La sangría es el espacio en blanco al inicio de cada línea, y muestra la profundidad de anidamiento. Mientras más profundo esté un valor dentro de objetos y arreglos, más sangría tiene. Ese patrón visual es lo que hace fácil seguir el JSON formateado.</p>
-<p>El formateador ofrece tres opciones de sangría: 2 espacios, 4 espacios o tabulación. Dos espacios son compactos y comunes en proyectos JavaScript, donde los archivos a menudo tienen anidamiento profundo. Cuatro espacios son más anchos y fáciles de revisar en un documento grande.</p>
-<p>Una tabulación es un solo carácter, así que los archivos con sangría de tabulación son más pequeños que los archivos con sangría de espacios. Algunos equipos prefieren tabulaciones por esa razón, mientras que otros prefieren espacios porque se ven igual en cada editor. No hay una respuesta correcta, solo un estilo de equipo a seguir.</p>
-<p>Elige el estilo que tu proyecto ya usa, y mantén consistencia. Si editas un archivo para otra persona, haz coincidir su sangría existente. Si empiezas de cero, elige un estilo y úsalo en todo el proyecto.</p>
-<h2 id="nested-structures">Cómo manejar estructuras anidadas</h2>
-<p>Las estructuras anidadas son objetos y arreglos dentro de otros objetos y arreglos. El JSON real a menudo está anidado varios niveles, como un objeto de usuario que contiene un objeto de dirección, que contiene una lista de direcciones pasadas. Cada nivel agrega un paso de sangría.</p>
-<p>El anidamiento es poderoso, pero puede volverse confuso sin formato. Una llave de cierre faltante en un nivel profundo es fácil de pasar por alto en un archivo plano. Un formateador alinea los corchetes de apertura y cierre, para que puedas ver dónde empieza y termina cada nivel.</p>
-<p>Cuando leas JSON anidado, trabaja de afuera hacia adentro. Encuentra primero las claves de nivel superior, luego abre el objeto anidado que necesitas. Un formateador hace natural ese enfoque, porque cada nivel es visualmente distinto del nivel superior.</p>
-<pre><code>{
-  "user": {
-    "name": "Aisha",
-    "address": {
-      "city": "Lahore",
-      "postcode": "54000"
-    },
-    "orders": [
-      {
-        "id": 1,
-        "total": 49.99
-      }
-    ]
-  }
-}</code></pre>
-<p>En este ejemplo, el objeto de usuario contiene un objeto de dirección y un arreglo de pedidos. El arreglo de pedidos contiene un objeto de pedido. Cada nivel tiene un paso más de sangría, así que la forma de los datos es clara sin contar corchetes.</p>
-<h2 id="privacy-and-browser-processing">Privacidad: todo funciona en tu navegador</h2>
-<p>La herramienta JSON de UtilityFlow funciona por completo en tu navegador. Tu JSON se formatea, minifica, ordena y valida en tu propio dispositivo. Nada se sube a un servidor, y nada se guarda en una cuenta.</p>
-<p>Eso importa porque JSON a menudo contiene datos privados. Puede contener nombres, direcciones de correo, claves de API, o configuraciones internas. Pegar esos datos en una herramienta que los suba crearía un riesgo real de privacidad, así que una herramienta solo de navegador es la opción más segura.</p>
-<p>Puedes usar la herramienta sin conexión igual, una vez que la página ha cargado. Tus datos nunca salen de tu dispositivo, y cerrar la pestaña los quita de la vista. Para datos sensibles, ese procesamiento local es una función importante, no un detalle menor.</p>
-<h2 id="practical-tips">Consejos prácticos para trabajar con JSON</h2>
-<p>Valida temprano y a menudo, sobre todo después de editar JSON a mano. Una validación rápida después de cada cambio detecta un error mientras todavía recuerdas qué cambiaste. Esperar hasta el final hace el error más difícil de rastrear.</p>
-<p>Guarda una copia formateada para leer y una copia minificada para enviar. Da formato al JSON mientras trabajas en él, luego minifícalo solo cuando necesites enviarlo o guardarlo. Así, obtienes la legibilidad del formato y el beneficio de tamaño de la minificación.</p>
-<p>Usa nombres de clave consistentes y un estilo consistente. Si un campo se llama userName, no llames a un campo parecido user_name en otro lugar. La consistencia hace los datos más fáciles de buscar, comparar y usar en código, y reduce la confusión para todos los que los leen.</p>
-<ul><li><strong>Valida después de cada edición:</strong> detecta errores mientras el cambio todavía está fresco.</li><li><strong>Da formato mientras trabajas:</strong> minifica solo cuando necesites enviar o guardar datos.</li><li><strong>Mantén las claves consistentes:</strong> usa un estilo de nombres en todo un documento.</li><li><strong>Ordena las claves antes de comparar:</strong> las claves ordenadas hacen destacar las diferencias reales.</li><li><strong>Nunca pegues secretos en una herramienta desconocida:</strong> usa una herramienta solo de navegador para datos privados.</li></ul>
-<h2 id="faq">Preguntas frecuentes</h2>
-<p>Estas son las preguntas más frecuentes sobre JSON y el formato. Para un tutorial paso a paso, lee <a href="/es/blog/como-dar-formato-y-validar-json/">Cómo dar formato y validar JSON</a>. Para una referencia de errores comunes, lee <a href="/es/blog/errores-comunes-de-sintaxis-json-y-como-corregirlos/">Errores comunes de sintaxis JSON y cómo corregirlos</a>.</p>
-<h2 id="conclusion">Conclusión: JSON es sencillo una vez que ves su forma</h2>
-<p>JSON es un formato sencillo con reglas estrictas. Usa objetos, arreglos y seis tipos de datos para describir datos estructurados como texto plano. Una vez que conoces esas reglas, puedes leer casi cualquier documento JSON.</p>
-<p>El formato hace legibles esos datos, la minificación los hace pequeños, y la validación prueba que son correctos. La ubicación de errores por línea y columna convierte un documento fallido en una corrección rápida, en lugar de una búsqueda larga. Ordenar las claves agrega orden, lo que ayuda cuando comparas documentos.</p>
-<p>Pruébalo ahora con tus propios datos. Abre el <a href="/es/formateador-json/">Formateador y Validador JSON</a> gratuito, pega tu JSON, y dale formato con tu sangría preferida. Si necesitas codificar datos para transportarlos, el <a href="/es/codificador-decodificador-base64/">Codificador y Decodificador Base64</a> es un paso útil siguiente.</p>`,
-    faqs: [
-      { q: '¿Qué es JSON?', a: 'JSON, abreviatura de Notación de Objetos JavaScript, es un formato de texto ligero para datos estructurados. Usa objetos y arreglos para guardar valores con nombre y listas ordenadas. Se usa mucho para API, archivos de configuración, e intercambio de datos entre sistemas.' },
-      { q: '¿Qué hace un formateador JSON?', a: 'Un formateador JSON reescribe JSON con sangría clara y saltos de línea, sin cambiar los datos. Convierte una sola línea larga en un documento legible, para que puedas ver la estructura de un vistazo. Los datos, los valores y el orden se mantienen exactamente iguales.' },
-      { q: '¿Cuál es la diferencia entre dar formato y minificar JSON?', a: 'Dar formato agrega espacios en blanco para que JSON sea legible para las personas. Minificar quita todos los espacios en blanco innecesarios para que JSON sea lo más pequeño posible para enviar o guardar. Ambos mantienen los datos válidos, y puedes cambiar entre ellos según necesites.' },
-      { q: '¿Cómo funciona la validación JSON?', a: 'La validación analiza el documento de principio a fin y comprueba cada regla de sintaxis. Si encuentra un problema, reporta la línea y columna donde se detuvo el análisis. Si llega al final sin un error, el JSON es válido.' },
-      { q: '¿Por qué JSON usa comillas dobles en lugar de comillas simples?', a: 'La especificación JSON requiere comillas dobles para todas las cadenas y claves. Las comillas simples son válidas en JavaScript, pero no son válidas en JSON. Un documento con comillas simples fallará la validación y debe cambiarse a comillas dobles.' },
-      { q: '¿Mi JSON se sube cuando uso el formateador de UtilityFlow?', a: 'No. Todo funciona en tu navegador, y nada se sube a un servidor. Tu JSON se queda en tu propio dispositivo, lo que hace la herramienta segura para datos privados o sensibles.' },
-    ],
-    readingMinutes: 13,
-  },
-  'json-formatter-howto': {
-    slug: 'como-dar-formato-y-validar-json',
-    title: 'Cómo dar formato y validar JSON (y corregir errores de sintaxis)',
-    description: 'Guía paso a paso para dar formato, minificar, ordenar claves y validar JSON, con correcciones claras para comas finales, comillas y otros errores de sintaxis.',
-    body: `<p>Tienes un bloque de JSON, y necesitas que esté limpio, legible y válido. Los pasos son sencillos, pero un pequeño error puede impedir que todo el documento funcione. Este tutorial te muestra <strong>cómo dar formato a JSON</strong> correctamente, desde pegar hasta el resultado terminado.</p>
-<p>Aprenderás cómo dar formato a JSON, cómo minificarlo, cómo ordenar sus claves, y cómo validarlo. También aprenderás cómo leer un mensaje de error y corregir los problemas de sintaxis más comunes. Cada paso usa la herramienta gratuita de UtilityFlow, y nada se sube.</p>
-<p>Abre el <a href="/es/formateador-json/">Formateador y Validador JSON</a> en una pestaña nueva antes de empezar. Puedes seguir cada paso con tu propio JSON, o usar los ejemplos de este tutorial. Al final, tendrás un documento limpio que puedes copiar y usar con confianza.</p>
-<h2 id="what-you-need">Lo que necesitas antes de empezar</h2>
-<p>Solo necesitas dos cosas: tu texto JSON y un navegador. No hay nada que instalar, ni cuenta que crear, ni archivo que descargar. La herramienta funciona en un teléfono, una tableta, o una computadora.</p>
-<p>Tu JSON puede venir de muchos lugares. Puede ser una respuesta de API, un archivo de configuración, una entrada de registro, o un fragmento de un tutorial.</p>
-<p>Puede ser una sola línea larga, o puede tener ya algunos saltos de línea. La herramienta admite ambas formas.</p>
-<p>Antes de pegar nada, comprueba si contiene secretos como contraseñas o claves de API privadas. La herramienta de UtilityFlow funciona en tu navegador, así que tus datos se quedan en tu dispositivo. Aun así, es buena práctica quitar los secretos antes de compartir JSON en cualquier lugar.</p>
-<ul><li><strong>Tu texto JSON:</strong> copiado de una API, un archivo, o un mensaje.</li><li><strong>Un navegador:</strong> cualquier navegador moderno, en cualquier dispositivo.</li><li><strong>Dos minutos:</strong> la mayoría de los documentos toman menos de un minuto en formatearse y revisarse.</li><li><strong>Un lugar para guardar el resultado:</strong> un archivo, un editor de código, o una aplicación de notas.</li></ul>
-<h2 id="step-1-paste">Paso 1: pega tu JSON en la herramienta</h2>
-<p>Copia tu JSON desde su fuente, luego pégalo en el cuadro de entrada de la página de la herramienta. Asegúrate de copiar todo el documento, desde la primera llave o corchete de apertura hasta el último de cierre. Una llave faltante al final causará un error de validación después.</p>
-<p>Si tu JSON está dentro de un mensaje más grande, copia solo la parte JSON. Las palabras extra antes o después del documento lo harán inválido, porque un analizador espera solo JSON. Quita etiquetas, encabezados o texto de chat alrededor.</p>
-<h2 id="step-2-format">Paso 2: da formato al JSON</h2>
-<p>Haz clic en el botón de formato, y la herramienta reescribirá tu JSON con sangría clara y saltos de línea. Cada clave estará en su propia línea, y los valores anidados tendrán un paso más de sangría. Los datos en sí no cambiarán de ninguna manera.</p>
-<p>Lee el resultado de arriba a abajo, y comprueba que la estructura se vea bien. Las claves de nivel superior te dicen qué contiene el documento, y la sangría muestra cómo encajan las partes anidadas. Si una sección se ve mal, puede contener un problema de datos y no un problema de formato.</p>
-<p>Dar formato no corrige errores de sintaxis, y no puede hacer válido el JSON inválido. Si tu documento tiene una comilla faltante o una coma extra, la herramienta reportará un error en lugar de un resultado formateado. Eso es esperado, y los siguientes pasos te muestran cómo corregirlo.</p>
-<pre><code>{"name":"Aisha","age":29,"city":"Lahore"}</code></pre>
-<p>La línea anterior es JSON válido, pero es difícil de leer. Después de darle formato con sangría de dos espacios, se convierte en un bloque corto con una clave por línea. Los valores son los mismos, pero el documento es mucho más fácil de revisar y comprobar.</p>
-<pre><code>{
-  "name": "Aisha",
-  "age": 29,
-  "city": "Lahore"
-}</code></pre>
-<h2 id="step-4-minify">Paso 4: minifica el JSON cuando lo necesites pequeño</h2>
-<p>Minificar quita cada espacio, tabulación y salto de línea innecesario de tu JSON. El resultado es una sola línea lo más pequeña posible. Sigue siendo JSON válido, y un analizador lo leerá exactamente igual.</p>
-<p>Minifica tu JSON cuando necesites enviarlo por la red, guardarlo en un espacio pequeño, o pegarlo en un cuerpo de petición. Un documento más pequeño carga más rápido y usa menos ancho de banda, lo que importa para respuestas grandes y conexiones móviles.</p>
-<pre><code>{"name":"Aisha","age":29,"city":"Lahore"}</code></pre>
-<p>La línea minificada anterior contiene los mismos datos que el bloque formateado del paso anterior. Es más corta, pero es más difícil de leer para una persona. Úsala para enviar y guardar, no para editar.</p>
-<h2 id="step-5-sort-keys">Paso 5: ordena las claves alfabéticamente</h2>
-<p>Ordenar las claves reordena las claves dentro de cada objeto de la A a la Z. No cambia ningún valor, y no cambia el orden de los elementos dentro de arreglos. Solo cambia el orden de las claves, para que el documento sea más fácil de revisar.</p>
-<p>Las claves ordenadas ayudan sobre todo cuando comparas dos versiones del mismo documento. Si las claves aparecen en distinto orden en cada versión, una simple comparación muestra muchas diferencias falsas. Ordenar quita ese ruido, así que solo destacan los cambios reales.</p>
-<p>Ordenar también ayuda cuando buscas un solo campo en un objeto grande. Puedes adivinar dónde está una clave en orden alfabético, en lugar de revisar cada línea. Ese pequeño hábito ahorra tiempo en un documento con muchos campos.</p>
-<p>Para ordenar las claves, usa la opción ordenar después de haber dado formato a tu JSON. Revisa el resultado para confirmar que ningún valor ha cambiado. El documento ordenado sigue siendo JSON válido, y se puede minificar o formatear de nuevo sin ninguna pérdida.</p>
-<pre><code>{
-  "age": 29,
-  "city": "Lahore",
-  "name": "Aisha"
-}</code></pre>
-<p>En el ejemplo ordenado anterior, las claves ahora van de la A a la Z. La clave age va primero, luego city, luego name. Los valores no cambian, y el documento es más fácil de comparar con otra versión.</p>
-<h2 id="step-6-validate">Paso 6: valida tu JSON</h2>
-<p>La validación es la comprobación final, y es el paso más importante. Un validador analiza tu documento de principio a fin y comprueba cada regla de sintaxis. Si llega al final sin un problema, tu JSON es válido.</p>
-<p>Si el validador encuentra un error, reportará la línea y columna donde se detuvo el análisis. Esa ubicación es tu punto de partida, y la siguiente sección explica cómo usarla. No te saltes la validación, aunque el resultado formateado se vea bien.</p>
-<p>Un documento puede verse correcto y aun así ser inválido, porque una coma o comilla faltante es fácil de pasar por alto a simple vista. La validación detecta esos errores en segundos, y te salva de una falla después cuando una aplicación intente leer el archivo.</p>
-<p>Valida después de cada edición, no solo al final. Una comprobación rápida después de cada cambio te dice si ese cambio rompió algo. Si esperas hasta el final, quizás tengas que buscar entre muchos cambios para encontrar el que causó el error.</p>
-<h2 id="reading-error-messages">Cómo leer un mensaje de error</h2>
-<p>Un mensaje de error suele darte un número de línea y un número de columna. La línea es la fila donde se detuvo el análisis, contando desde arriba del documento. La columna es la posición en esa fila, contando desde la izquierda.</p>
-<p>Ve primero a esa línea, y mira el carácter en esa columna. Luego mira los caracteres justo antes de él, porque muchos errores son causados por el carácter anterior. Una coma faltante en la línea anterior es un ejemplo común.</p>
-<p>Si la línea reportada está en blanco o se ve correcta, mira las líneas anteriores. Una cadena sin cerrar puede confundir a un analizador durante muchas líneas, así que la falla puede aparecer muy por debajo del error real. En ese caso, busca hacia arriba una cadena que nunca se cerró.</p>
-<p>Corrige un error a la vez, y valida de nuevo después de cada corrección. Un analizador reporta solo el primer error que encuentra, así que un documento puede contener varios errores. Cada corrección revela el siguiente, y la lista se reducirá con cada comprobación.</p>
-<h2 id="fix-trailing-comma">Corrección 1: quita una coma final</h2>
-<p>Una coma final es una coma después del último elemento de un objeto o un arreglo. Muchos lenguajes la permiten, pero JSON no. El analizador espera una clave o valor nuevo después de una coma, y falla cuando encuentra una llave de cierre.</p>
-<p>Para corregirla, encuentra la coma justo antes de una llave o corchete de cierre, y bórrala. Revisa cada objeto y arreglo del documento, porque un archivo puede contener más de una coma final. Valida de nuevo después de quitar cada una.</p>
-<pre><code>{
-  "name": "Aisha",
-  "age": 29
-}</code></pre>
-<p>El ejemplo anterior es correcto, porque no hay coma después del último valor. Si agregas una coma después de 29, el documento se vuelve inválido. Quita esa coma, y el documento pasará la validación de nuevo.</p>
-<h2 id="fix-single-quotes">Corrección 2: cambia comillas simples por comillas dobles</h2>
-<p>JSON requiere comillas dobles para cada cadena y cada clave. Las comillas simples son válidas en JavaScript, pero no son válidas en JSON. Un documento que usa comillas simples fallará en la primera cadena que encuentre.</p>
-<p>Para corregirlo, reemplaza cada comilla simple que marca una cadena o una clave por una comilla doble. Ten cuidado con los apóstrofes dentro del texto, porque esos no son marcadores de cadena. Si un valor contiene un apóstrofe, mantén el valor entre comillas dobles y deja el apóstrofe como está.</p>
-<pre><code>{
-  "name": "Aisha",
-  "city": "Lahore"
-}</code></pre>
-<p>El ejemplo anterior usa comillas dobles para claves y valores. Esa es la forma correcta, y pasará la validación. Una versión con comillas simples alrededor de las mismas palabras fallaría de inmediato.</p>
-<h2 id="fix-unquoted-keys">Corrección 3: agrega comillas alrededor de claves sin comillas</h2>
-<p>Cada clave en JSON debe ser una cadena entre comillas dobles. JavaScript permite claves sin comillas en muchos casos, pero JSON no. Una clave sin comillas causará un error de validación en el primer carácter de la clave.</p>
-<p>Para corregirla, agrega comillas dobles alrededor de la clave, y asegúrate de que los dos puntos sigan a la comilla de cierre. Revisa cada clave del documento, porque un archivo copiado de código JavaScript puede tener muchas claves sin comillas. Valida de nuevo después de corregirlas.</p>
-<pre><code>{
-  "name": "Aisha",
-  "age": 29
-}</code></pre>
-<p>En este ejemplo correcto, ambas claves tienen comillas. Si quitas las comillas de name, el analizador se detendrá en la letra n. Agregar las comillas de vuelta corregirá el error de inmediato.</p>
-<h2 id="fix-missing-comma">Corrección 4: agrega una coma faltante</h2>
-<p>Cada elemento de un objeto o un arreglo necesita una coma después, excepto el último elemento. Si agregas un campo nuevo y olvidas su coma, el analizador fallará en la siguiente clave. El error a menudo señalará el inicio de esa siguiente clave.</p>
-<p>Para corregirlo, mira la línea anterior al error reportado, y comprueba si termina con una coma. Si no termina, agrega una. Luego valida de nuevo, y repite la comprobación para cualquier otra coma faltante del documento.</p>
-<p>Este error es común cuando copias un campo de un lugar a otro. El campo copiado puede necesitar una coma en su nueva posición, aunque no la necesitara en su posición anterior. Revisa siempre las comas después de mover o agregar un campo.</p>
-<h2 id="fix-mismatched-brackets">Corrección 5: haz coincidir cada corchete de apertura</h2>
-<p>Cada llave de apertura necesita una llave de cierre, y cada corchete de apertura necesita un corchete de cierre. Un corchete faltante o extra causará un error de validación, a menudo al final del documento. El analizador llega al final mientras todavía espera un carácter de cierre.</p>
-<p>Para corregirlo, da formato al JSON y cuenta los corchetes en cada nivel. Un formateador alinea los caracteres de apertura y cierre, para que uno faltante destaque. Empieza con el bloque anidado más interno, y trabaja hacia afuera hasta que cada bloque esté cerrado.</p>
-<p>Si el error señala la última línea, el corchete faltante puede estar en cualquier lugar arriba. Revisa cada objeto y arreglo anidado por turno, y agrega el carácter de cierre faltante en el nivel correcto. Valida de nuevo después de cada cambio.</p>
-<h2 id="copy-and-save">Paso 7: copia y guarda el resultado terminado</h2>
-<p>Una vez que tu JSON está formateado y es válido, copia el resultado de la herramienta. Pégalo en tu archivo, tu editor de código, o tu cuerpo de petición. Comprueba que copiaste todo el documento, desde el primer carácter hasta el último.</p>
-<p>Guarda una copia formateada para tu propia edición, aunque también necesites una copia minificada para enviar. Esa copia formateada te ahorrará tiempo la próxima vez que necesites cambiar los datos. Nombra el archivo con claridad, y guárdalo con el resto de tus archivos de proyecto.</p>
-<p>Si trabajas con un archivo de configuración, pruébalo después de guardarlo. Reinicia la herramienta o recarga la página que usa el archivo, y comprueba que cargue sin un error. Un archivo JSON válido debe cargar de inmediato, sin advertencia.</p>
-<h2 id="troubleshooting-howto">Solución de problemas: cuando la herramienta todavía reporta un error</h2>
-<p>Si la herramienta todavía reporta un error después de tus correcciones, lee los nuevos números de línea y columna. Pueden señalar un error distinto, porque el analizador reporta solo el primer problema que encuentra. Corrige ese error, y valida de nuevo.</p>
-<p>Si el error señala el final del documento, revisa si falta una llave o corchete de cierre. Cuenta los caracteres de apertura y cierre, y busca un bloque anidado que nunca se cerró. Un formateador puede ayudar, porque alinea los corchetes por ti.</p>
-<p>Si el error señala una cadena, revisa si esa cadena se cerró. Una comilla de cierre faltante puede confundir al analizador durante muchas líneas, así que la falla puede aparecer muy por debajo del error real. Busca hacia arriba una cadena sin cerrar.</p>
-<h2 id="faq">Preguntas frecuentes</h2>
-<p>Estas son las preguntas más frecuentes sobre los pasos. Para una referencia completa de cada error común, lee <a href="/es/blog/errores-comunes-de-sintaxis-json-y-como-corregirlos/">Errores comunes de sintaxis JSON y cómo corregirlos</a>.</p>
-<p>Para repasar la sintaxis JSON, lee <a href="/es/blog/que-es-json/">¿Qué es JSON? Guía completa para dar formato y validar</a>.</p>
-<h2 id="conclusion">Conclusión: da formato, valida, y luego usa tu JSON</h2>
-<p>Dar formato, minificar, ordenar y validar JSON son pasos sencillos, y hacen tus datos confiables. Pega tu JSON, dale formato con tu sangría preferida, y valídalo antes de usarlo. Minifícalo solo cuando lo necesites pequeño, y ordena sus claves cuando necesites compararlo.</p>
-<p>Cuando aparece un error, lee la línea y la columna, corrige un problema a la vez, y valida de nuevo. La mayoría de los errores son pequeños, y la mayoría de las correcciones toman solo unos segundos. Con práctica, detectarás comas finales, comillas simples y comas faltantes de un vistazo.</p>
-<p>Pruébalo ahora con tu propio JSON. Abre el <a href="/es/formateador-json/">Formateador y Validador JSON</a> gratuito, pega tu documento, y dale formato en segundos. Si necesitas convertir el resultado en una tabla, el <a href="/es/convertidor-json-csv/">Convertidor de JSON a CSV</a> es el siguiente paso lógico.</p>`,
-    faqs: [
-      { q: '¿Cómo doy formato a JSON en línea?', a: 'Pega tu JSON en el Formateador y Validador JSON gratuito, elige sangría de dos espacios, cuatro espacios o tabulación, y dale formato. La herramienta reescribe el documento con saltos de línea y sangría claros, sin cambiar ningún dato. Luego valídalo antes de copiar el resultado.' },
-      { q: '¿Cómo valido JSON?', a: 'Pega tu JSON en un validador y revísalo. El validador analiza el documento y reporta la línea y columna del primer error que encuentra. Si llega al final sin un error, el JSON es válido y seguro de usar.' },
-      { q: '¿Cómo minifico JSON?', a: 'Da formato y valida primero tu JSON, luego usa la opción minificar. Minificar quita todos los espacios en blanco innecesarios y produce una sola línea compacta. Usa la copia minificada para enviar o guardar, y guarda una copia formateada para editar.' },
-      { q: '¿Cómo ordeno las claves JSON alfabéticamente?', a: 'Usa la opción ordenar claves en el formateador después de haber dado formato a tu JSON. Reordena las claves dentro de cada objeto de la A a la Z, sin cambiar ningún valor ni el orden de los elementos de arreglo. Las claves ordenadas facilitan comparar dos documentos.' },
-      { q: '¿Cómo corrijo un error de sintaxis JSON?', a: 'Lee la línea y columna del mensaje de error, y mira el carácter justo antes de la posición reportada. Corrige un error a la vez, y valida de nuevo después de cada corrección. Las correcciones más comunes son quitar una coma final, cambiar comillas simples, y agregar una coma faltante.' },
-      { q: '¿Mi JSON está seguro cuando lo formateo en línea?', a: 'Depende de la herramienta, así que elige una que funcione en tu navegador. El formateador de UtilityFlow funciona por completo en tu dispositivo, y nada se sube a un servidor. Tu JSON se mantiene privado, lo que importa cuando contiene nombres, direcciones u otros datos sensibles.' },
-    ],
-    readingMinutes: 13,
-  },
-  'json-formatter-advanced': {
-    slug: 'errores-comunes-de-sintaxis-json-y-como-corregirlos',
-    title: 'Errores comunes de sintaxis JSON y cómo corregirlos',
-    description: 'Corrige rápido los errores de sintaxis JSON más comunes: comas finales, comillas simples, claves sin comillas, corchetes y secuencias de escape con ejemplos.',
-    body: `<p>JSON falla por razones pequeñas. Una coma extra, una comilla equivocada, o un corchete faltante pueden impedir que todo un documento cargue. Esta guía de referencia te muestra los patrones de <strong>corrección de errores de sintaxis JSON</strong> más comunes, con un ejemplo roto y un ejemplo corregido para cada uno.</p>
-<p>Usa esta guía cuando un validador reporte un error y necesites saber qué significa. Cada sección explica la regla, muestra el error, y muestra la corrección. Puedes ir directo al error que tienes, o leer toda la guía para aprender los patrones.</p>
-<p>Mantén abierto el <a href="/es/formateador-json/">Formateador y Validador JSON</a> gratuito mientras trabajas. Pega tu JSON, lee la línea y columna que reporta, y relaciona ese error con las secciones siguientes. Corrige un error a la vez, y valida de nuevo después de cada corrección.</p>
-<h2 id="how-to-use-this-guide">Cómo usar esta guía</h2>
-<p>Empieza con la línea y columna de tu mensaje de error. La línea es la fila donde se detuvo el análisis, y la columna es la posición en esa fila. Ve primero a ese lugar, luego mira el carácter justo antes de él.</p>
-<p>Muchos errores están un carácter antes de la posición reportada. Una coma faltante en la línea anterior es un ejemplo común, y una cadena sin cerrar puede causar una falla muchas líneas después. Usa la posición reportada como punto de partida, no como respuesta final.</p>
-<p>Corrige el primer error, luego valida de nuevo. Un analizador reporta solo el primer problema que encuentra, así que un documento puede contener varios errores a la vez. Cada corrección revela el siguiente error, y la lista se reducirá con cada comprobación.</p>
-<h2 id="error-1-trailing-comma">Error 1: coma final</h2>
-<p>Una coma final es una coma después del último elemento de un objeto o un arreglo. Muchos lenguajes la permiten, pero JSON no. El analizador espera otra clave o valor después de una coma, y falla cuando encuentra una llave o corchete de cierre.</p>
-<p>Este error es común cuando borras el último campo de un objeto y dejas su coma atrás. También es común cuando copias un campo y lo pegas al final de una lista. La corrección es sencilla, pero debes revisar cada objeto y arreglo del documento.</p>
-<p><strong>Roto:</strong> una coma sigue al último valor, justo antes de la llave de cierre.</p>
-<pre><code>{
-  "name": "Aisha",
-  "age": 29,
-}</code></pre>
-<p><strong>Corregido:</strong> quita la coma después del último valor, y el documento se vuelve válido.</p>
-<pre><code>{
-  "name": "Aisha",
-  "age": 29
-}</code></pre>
-<p>La misma regla se aplica a los arreglos. Una coma después del último elemento de un arreglo también es inválida, y la corrección es la misma. Quita la coma, luego valida el documento de nuevo para buscar una segunda coma final en otro lugar.</p>
-<h2 id="error-2-single-quotes">Error 2: comillas simples en lugar de comillas dobles</h2>
-<p>JSON requiere comillas dobles para cada cadena y cada clave. Las comillas simples son válidas en JavaScript, pero no son válidas en JSON. Un documento que usa comillas simples fallará en la primera cadena que encuentre.</p>
-<p>Este error es común cuando copias JSON de código JavaScript, un tutorial, o un mensaje de chat. JavaScript permite comillas simples, así que el texto copiado parece correcto a primera vista. El validador lo marcará de inmediato, y la corrección es cambiar las comillas.</p>
-<p><strong>Roto:</strong> las comillas simples marcan las claves y los valores de cadena.</p>
-<pre><code>{
-  'name': 'Aisha',
-  'city': 'Lahore'
-}</code></pre>
-<p><strong>Corregido:</strong> cambia cada marcador de cadena por una comilla doble, y el documento se vuelve válido.</p>
-<pre><code>{
-  "name": "Aisha",
-  "city": "Lahore"
-}</code></pre>
-<p>Ten cuidado con los apóstrofes dentro de un valor, porque esos no son marcadores de cadena. Un nombre como O Brien contiene un apóstrofe, y debe quedarse dentro de comillas dobles. No reemplaces un apóstrofe que es parte del texto mismo.</p>
-<h2 id="error-3-unquoted-keys">Error 3: claves sin comillas</h2>
-<p>Cada clave en JSON debe ser una cadena entre comillas dobles. JavaScript permite claves sin comillas en muchos casos, pero JSON no. Una clave sin comillas causará un error de validación en el primer carácter de la clave.</p>
-<p>Este error es común en datos copiados de objetos JavaScript, donde las claves a menudo se escriben sin comillas. También es común en fragmentos de configuración escritos a mano. La corrección es agregar comillas dobles alrededor de cada clave.</p>
-<p><strong>Roto:</strong> las claves no tienen comillas alrededor.</p>
-<pre><code>{
-  name: "Aisha",
-  age: 29
-}</code></pre>
-<p><strong>Corregido:</strong> agrega comillas dobles alrededor de cada clave, y mantén los dos puntos después de la comilla de cierre.</p>
-<pre><code>{
-  "name": "Aisha",
-  "age": 29
-}</code></pre>
-<p>Revisa cada clave del documento, porque un archivo copiado de JavaScript puede tener muchas claves sin comillas. Un formateador no agregará comillas por ti, así que debes corregir cada clave a mano y luego validar de nuevo.</p>
-<h2 id="error-4-missing-comma">Error 4: coma faltante entre elementos</h2>
-<p>Cada elemento de un objeto o un arreglo necesita una coma después, excepto el último elemento. Si agregas un campo nuevo y olvidas su coma, el analizador fallará en la siguiente clave. El error a menudo señalará el inicio de esa siguiente clave.</p>
-<p>Este error es común cuando agregas un campo en medio de un objeto. El campo nuevo necesita una coma, y el campo anterior también puede necesitar una. Revisa siempre las comas después de agregar, mover, o copiar un campo.</p>
-<p><strong>Roto:</strong> ninguna coma sigue al primer valor, así que el analizador falla en la siguiente clave.</p>
-<pre><code>{
-  "name": "Aisha"
-  "age": 29
-}</code></pre>
-<p><strong>Corregido:</strong> agrega una coma después del primer valor, y el documento se vuelve válido.</p>
-<pre><code>{
-  "name": "Aisha",
-  "age": 29
-}</code></pre>
-<p>Si el error señala una clave, mira la línea justo arriba de ella. Esa línea a menudo no tiene su coma, aunque se vea correcta por sí sola. Agrega la coma, luego valida de nuevo para encontrar el siguiente error si hay uno.</p>
-<h2 id="error-5-missing-quote">Error 5: comilla faltante o no coincidente</h2>
-<p>Cada cadena en JSON necesita una comilla doble de apertura y una comilla doble de cierre. Si falta alguna de las dos, el analizador tratará el texto siguiente como parte de la cadena. Puede fallar solo muchas líneas después, cuando encuentre un carácter que no puede pertenecer dentro de una cadena.</p>
-<p>Este error es difícil de encontrar, porque la línea reportada puede estar muy por debajo del error real. Si el error señala una línea que se ve correcta, busca hacia arriba una cadena que nunca se cerró. Esa cadena sin cerrar es a menudo la causa verdadera.</p>
-<p><strong>Roto:</strong> falta la comilla de cierre después del primer valor.</p>
-<pre><code>{
-  "name": "Aisha,
-  "age": 29
-}</code></pre>
-<p><strong>Corregido:</strong> agrega la comilla de cierre, y el analizador podrá leer el resto del documento.</p>
-<pre><code>{
-  "name": "Aisha",
-  "age": 29
-}</code></pre>
-<p>Una comilla no coincidente también puede causar este error, como una comilla simple en un extremo y una comilla doble en el otro. Usa comillas dobles en ambos extremos de cada cadena, y comprueba que cada comilla de apertura tenga su comilla de cierre correspondiente.</p>
-<h2 id="error-6-brackets">Error 6: corchetes no coincidentes o faltantes</h2>
-<p>Cada llave de apertura necesita una llave de cierre, y cada corchete de apertura necesita un corchete de cierre. Un corchete faltante causará un error de validación, a menudo al final del documento. El analizador llega al final mientras todavía espera un carácter de cierre.</p>
-<p>Este error es común en JSON anidado, donde varios niveles de corchetes están abiertos a la vez. Una llave de cierre faltante en un nivel profundo es fácil de pasar por alto, y romperá todo el documento. Da formato primero al JSON, para que los corchetes queden alineados y sean fáciles de contar.</p>
-<p><strong>Roto:</strong> falta la llave de cierre del objeto interno.</p>
-<pre><code>{
-  "user": {
-    "name": "Aisha",
-    "age": 29
-}</code></pre>
-<p><strong>Corregido:</strong> agrega la llave de cierre faltante, para que cada llave de apertura tenga su cierre correspondiente.</p>
-<pre><code>{
-  "user": {
-    "name": "Aisha",
-    "age": 29
-  }
-}</code></pre>
-<p>Si el error señala la última línea, cuenta los caracteres de apertura y cierre desde arriba. Empieza con el bloque anidado más interno, y trabaja hacia afuera hasta que cada bloque esté cerrado. Valida de nuevo después de cada cambio.</p>
-<h2 id="error-7-comments">Error 7: comentarios en JSON</h2>
-<p>JSON no tiene sintaxis de comentarios, así que no puedes agregar notas dentro de un documento JSON. Una línea que empieza con dos barras, o un bloque entre marcadores de barra y asterisco, causará un error de validación. El analizador trata esos caracteres como datos, y falla de inmediato.</p>
-<p>Este error es común cuando copias un archivo de configuración de un lenguaje que permite comentarios. También es común cuando agregas una nota para recordarte qué significa un campo. La corrección es quitar el comentario, y mantener tus notas fuera del archivo JSON.</p>
-<p><strong>Roto:</strong> una línea de comentario está dentro del objeto, antes de un campo válido.</p>
-<pre><code>{
-  "name": "Aisha",
-  "age": 29
-}</code></pre>
-<p><strong>Corregido:</strong> quita la línea de comentario por completo, y mantén el objeto solo con pares clave-valor válidos. Si necesitas explicar un campo, escribe la nota en un documento aparte o en el código que lee el JSON.</p>
-<h2 id="error-8-numbers-booleans">Error 8: números, booleanos y null incorrectos</h2>
-<p>Los números en JSON no tienen comillas, y usan un punto decimal en lugar de una coma. Un número escrito con un separador de miles fallará, y un número escrito entre comillas se leerá como una cadena en lugar de un número. Quita las comillas y el separador para corregirlo.</p>
-<p>Las palabras true, false y null siempre van en minúsculas y sin comillas en JSON. Una True con mayúscula, un true entre comillas, o un valor como undefined causarán un error o un resultado distinto. Revisa cada una de esas palabras, y corrige las mayúsculas y las comillas.</p>
-<p><strong>Roto:</strong> el número tiene comillas, y el booleano usa una letra mayúscula.</p>
-<pre><code>{
-  "age": "29",
-  "active": True
-}</code></pre>
-<p><strong>Corregido:</strong> escribe el número sin comillas, y escribe el booleano en minúsculas.</p>
-<pre><code>{
-  "age": 29,
-  "active": true
-}</code></pre>
-<p>Undefined y NaN no son valores JSON válidos, aunque aparecen en JavaScript. Reemplaza un valor undefined por null, y reemplaza un valor NaN por null o por un número real. Ese cambio hará que el documento sea válido de nuevo.</p>
-<h2 id="error-9-escape-sequences">Error 9: secuencias de escape incorrectas y caracteres de control</h2>
-<p>Algunos caracteres dentro de una cadena JSON deben escaparse con una barra invertida. Un salto de línea dentro de una cadena se escribe como barra invertida y la letra n, y una tabulación se escribe como barra invertida y la letra t. Un salto de línea real dentro de una cadena no está permitido, y causará un error de validación.</p>
-<p>Los caracteres de control, como una tabulación real o un salto de línea real dentro de una cadena, también deben escaparse. Si pegas texto con un salto de línea real dentro de un valor entre comillas, el analizador fallará en ese salto. Reemplaza el salto por la secuencia de escape de dos caracteres.</p>
-<p><strong>Roto:</strong> un salto de línea real está dentro del valor de cadena, así que el analizador falla.</p>
-<pre><code>{
-  "note": "Hello\n  World"
-}</code></pre>
-<p><strong>Corregido:</strong> usa la secuencia de escape barra invertida y la letra n, escrita como \\\\n en esta guía, para mostrar un salto de línea dentro de la cadena.</p>
-<pre><code>{
-  "note": "Hello\\\\nWorld"
-}</code></pre>
-<p>La misma regla se aplica a las comillas y barras invertidas dentro de una cadena. Una comilla doble dentro de un valor debe escribirse como barra invertida y comilla doble, y una barra invertida en sí debe escribirse como dos barras invertidas. Esos escapes mantienen la cadena válida y legible.</p>
-<h2 id="error-10-extra-data">Error 10: datos extra, claves duplicadas y texto final</h2>
-<p>Un documento JSON debe contener exactamente un valor, como un objeto o un arreglo. El texto extra después de ese valor, como un segundo objeto o una oración, causará un error de validación. El analizador espera que el archivo termine, y falla cuando encuentra más datos.</p>
-<p>Este error es común cuando pegas dos documentos JSON en un solo cuadro, o cuando dejas una etiqueta o un encabezado alrededor del JSON. Quita el texto extra, y mantén solo un documento. Si necesitas dos documentos, valida cada uno por separado.</p>
-<p>Las claves duplicadas son un problema más sutil, y no siempre causan un error de validación. Si la misma clave aparece dos veces en un objeto, la mayoría de los analizadores conservará solo el último valor. Eso puede ocultar un error, así que busca duplicados cuando un valor se vea mal.</p>
-<p><strong>Roto:</strong> dos objetos están juntos, sin arreglo ni envoltura alrededor.</p>
-<pre><code>{
-  "name": "Aisha"
-}
-{
-  "name": "Bilal"
-}</code></pre>
-<p><strong>Corregido:</strong> envuelve los dos objetos en un arreglo, para que el documento contenga un valor.</p>
-<pre><code>[
-  {
-    "name": "Aisha"
-  },
-  {
-    "name": "Bilal"
-  }
-]</code></pre>
-<p>Si querías enviar una lista de registros, un arreglo es la envoltura correcta. Cada objeto dentro del arreglo se separa con una coma, y el arreglo en sí es el único valor de nivel superior. Esa estructura pasará la validación.</p>
-<h2 id="preventing-errors">Cómo prevenir estos errores en el futuro</h2>
-<p>Valida tu JSON después de cada edición, no solo al final. Una comprobación rápida después de cada cambio detecta un error mientras todavía recuerdas qué cambiaste. Esperar hasta el final hace que el error sea más difícil de rastrear, porque muchos cambios se han acumulado.</p>
-<p>Usa un editor de código que resalte la sintaxis JSON y haga coincidir los corchetes por ti. Ese resaltado mostrará una comilla faltante o un corchete no coincidente de inmediato, antes de que ejecutes un validador. Es un hábito sencillo que previene muchos errores.</p>
-<p>Copia JSON con cuidado, y revisa el resultado después de pegarlo. Una copia de un mensaje de chat, una página web, o un PDF puede cambiar las comillas o agregar caracteres extra. Una validación rápida después de pegar detectará esos cambios antes de que causen una falla.</p>
-<p>Para repasar la sintaxis y el formato JSON, lee <a href="/es/blog/que-es-json/">¿Qué es JSON? Guía completa para dar formato y validar</a>. Para un tutorial paso a paso sobre dar formato y validar, lee <a href="/es/blog/como-dar-formato-y-validar-json/">Cómo dar formato y validar JSON</a>.</p>
-<h2 id="faq">Preguntas frecuentes</h2>
-<p>Estas son las preguntas más frecuentes sobre los errores. Si tu error no está en la lista, revisa la línea y columna del validador, y repasa las secciones anteriores en orden. La mayoría de los errores JSON caen en uno de los diez patrones de esta guía.</p>
-<h2 id="conclusion">Conclusión: la mayoría de los errores JSON son pequeños y corregibles</h2>
-<p>La mayoría de los errores JSON son pequeños, y la mayoría de las correcciones toman solo unos segundos. Una coma final, una comilla simple, una clave sin comillas, o una coma faltante pueden detener todo un documento, pero cada una tiene una corrección sencilla. La línea y columna del mensaje de error te señalarán el lugar correcto.</p>
-<p>Aprende los diez patrones de esta guía, y los reconocerás de un vistazo. Da formato a tu JSON, valídalo después de cada edición, y corrige un error a la vez. Con práctica, pasarás menos tiempo depurando y más tiempo usando tus datos.</p>
-<p>Pruébalo ahora con un documento que falló antes. Abre el <a href="/es/formateador-json/">Formateador y Validador JSON</a> gratuito, pega tu JSON, y corrige el primer error que reporte. Si necesitas inspeccionar un token que lleva JSON dentro, el <a href="/es/decodificador-jwt/">Decodificador JWT</a> es un paso útil siguiente.</p>`,
-    faqs: [
-      { q: '¿Cuál es el error de sintaxis JSON más común?', a: 'Una coma final es uno de los errores más comunes. Es una coma después del último elemento de un objeto o un arreglo, y JSON no la permite. Quita la coma antes de la llave o corchete de cierre, y valida de nuevo.' },
-      { q: '¿Por qué JSON no permite comillas simples?', a: 'La especificación JSON requiere comillas dobles para todas las cadenas y claves. Las comillas simples son válidas en JavaScript, pero no son válidas en JSON. Cambia cada marcador de cadena por una comilla doble para corregir el error.' },
-      { q: '¿Qué significa un error de línea y columna en JSON?', a: 'Es la posición donde se detuvo el analizador, con la línea contando desde arriba y la columna contando desde la izquierda. Ve a ese lugar, y revisa el carácter justo antes de él, porque muchos errores están un carácter antes. Corrige un error, luego valida de nuevo.' },
-      { q: '¿JSON puede tener comentarios?', a: 'No. JSON no tiene sintaxis de comentarios, así que una línea que empieza con dos barras o un bloque entre marcadores de barra y asterisco causará un error. Quita el comentario, y mantén tus notas fuera del archivo JSON o en el código que lo lee.' },
-      { q: '¿Cómo corrijo una cadena sin cerrar en JSON?', a: 'Encuentra la cadena que nunca se cerró, y agrega su comilla doble de cierre. El error puede aparecer muchas líneas por debajo del error real, así que busca hacia arriba desde la línea reportada. Un editor de código con resaltado de sintaxis puede ayudarte a detectar la cadena sin cerrar.' },
-      { q: '¿Por qué mi JSON es inválido aunque se ve correcto?', a: 'Un solo carácter incorrecto puede hacer inválido un documento, aunque el resto se vea bien. Las causas comunes son una coma final, una coma faltante, una comilla simple, o una cadena sin cerrar. Valida el documento, lee la línea y columna, y revisa los diez errores de esta guía.' },
     ],
     readingMinutes: 13,
   },
@@ -19179,7 +17459,7 @@ greet("Sam");</code></pre>
     "orders": 2
   }
 ]</code></pre>
-<p>JSON es estricto con su sintaxis, y una coma faltante o una llave sin pareja lo romperá. Esa rigidez es útil, porque un analizador puede rechazar datos incorrectos en lugar de adivinar qué significaban. El <a href="/es/formateador-json/">Formateador JSON</a> gratuito puede revisar y ordenar JSON antes de convertirlo.</p>
+<p>JSON es estricto con su sintaxis, y una coma faltante o una llave sin pareja lo romperá. Esa rigidez es útil, porque un analizador puede rechazar datos incorrectos en lugar de adivinar qué significaban. El formateador JSON gratuito puede revisar y ordenar JSON antes de convertirlo.</p>
 <h2 id="what-is-csv">¿Qué es CSV?</h2>
 <p>CSV significa Comma-Separated Values (valores separados por comas), y es uno de los formatos de tabla en texto plano más antiguos. Cada línea es una fila, y las comas separan los valores dentro de una fila. La primera línea a menudo contiene los nombres de columna, que se llaman la fila de encabezado.</p>
 <p>Un programa de hoja de cálculo puede abrir un archivo CSV y mostrarlo como una cuadrícula de filas y columnas. Esa es la razón principal por la que CSV sigue en todas partes, desde exportaciones de bases de datos hasta descargas de herramientas de negocio. Casi cada hoja de cálculo y herramienta de datos puede leerlo.</p>
@@ -19241,7 +17521,7 @@ Omar Ali,Karachi,2</code></pre>
 <h2 id="conclusion">Conclusión: elige el formato que se ajuste al siguiente paso</h2>
 <p>JSON y CSV son ambos formatos de texto plano, y cada uno se ajusta a un trabajo distinto. JSON conserva estructura y tipos, mientras CSV mantiene las tablas sencillas y fáciles de abrir. La conversión mueve datos entre esos dos mundos, y las reglas RFC 4180 mantienen el movimiento seguro.</p>
 <p>Las ideas clave para recordar son sencillas. Comprueba que JSON es un arreglo de objetos similares, pon entre comillas los campos que contienen comas o saltos de línea, duplica cualquier comilla dentro de un campo entre comillas, y guarda una copia del original antes de convertir en ambos sentidos. </p><p>Esos hábitos previenen la mayoría de los problemas de conversión.</p>
-<p>Pruébalo ahora con tus propios datos. Abre el <a href="/es/convertidor-json-csv/">Convertidor de JSON a CSV</a> gratuito, pega un arreglo JSON o una tabla CSV, y conviértelo en segundos. Si tu JSON necesita ordenarse primero, el <a href="/es/formateador-json/">Formateador JSON</a> puede ayudar, y el <a href="/es/formateador-sql/">Formateador SQL</a> es útil cuando el siguiente paso es una consulta de base de datos.</p>`,
+<p>Pruébalo ahora con tus propios datos. Abre el <a href="/es/convertidor-json-csv/">Convertidor de JSON a CSV</a> gratuito, pega un arreglo JSON o una tabla CSV, y conviértelo en segundos. Si tu JSON necesita ordenarse primero, el formateador JSON puede ayudar, y el <a href="/es/formateador-sql/">Formateador SQL</a> es útil cuando el siguiente paso es una consulta de base de datos.</p>`,
     faqs: [
       { q: '¿Qué es la conversión de JSON a CSV?', a: 'Convierte un arreglo de objetos JSON en una tabla CSV, donde cada objeto se convierte en una fila y cada nombre de campo en un encabezado de columna. La dirección inversa convierte una tabla CSV de vuelta en un arreglo de objetos JSON, usando la fila de encabezado como nombres de campo.' },
       { q: '¿Qué es RFC 4180?', a: 'RFC 4180 es el estándar que define cómo deben escribirse los archivos CSV. Dice que cada registro está en su propia línea, los campos se separan por comas, y los campos con comas, comillas o saltos de línea deben envolverse entre comillas dobles, con las comillas internas duplicadas.' },
@@ -19262,7 +17542,7 @@ Omar Ali,Karachi,2</code></pre>
 <p>Todo el trabajo ocurre en el <a href="/es/convertidor-json-csv/">Convertidor de JSON a CSV en UtilityFlow</a> gratuito. Funciona en tu navegador, así que nada se sube. Pega tus datos, conviértelos, y copia o descarga el resultado.</p>
 <h2 id="before-you-start">Antes de empezar: lo que necesitas</h2>
 <p>Necesitas tus datos de origen y una idea clara del resultado que quieres. Para JSON a CSV, la fuente debe ser un arreglo de objetos. Para CSV a JSON, la fuente debe ser una tabla con una fila de encabezado que nombre las columnas.</p>
-<p>Comprueba que tu JSON sea válido antes de convertirlo. Una coma faltante o una llave sin pareja detendrá la conversión, y el error es más fácil de corregir en la fuente. El <a href="/es/formateador-json/">Formateador JSON</a> puede revisar tu JSON y mostrar dónde está un error de sintaxis.</p>
+<p>Comprueba que tu JSON sea válido antes de convertirlo. Una coma faltante o una llave sin pareja detendrá la conversión, y el error es más fácil de corregir en la fuente. El formateador JSON puede revisar tu JSON y mostrar dónde está un error de sintaxis.</p>
 <ul><li><strong>Datos de origen:</strong> un arreglo JSON, o una tabla CSV o TSV con una fila de encabezado.</li><li><strong>Formato destino:</strong> CSV para una hoja de cálculo, o JSON para un programa o servicio.</li><li><strong>Una copia del original:</strong> guardada antes de convertir, por si la necesitas de nuevo.</li></ul>
 <h2 id="json-to-csv-steps">Convertir JSON a CSV en cinco pasos</h2>
 <p>La dirección JSON a CSV es la que la mayoría necesita primero. Un servicio web devuelve JSON, y una hoja de cálculo necesita CSV. Sigue los cinco pasos siguientes, y revisa el resultado después del último.</p>
@@ -19466,7 +17746,7 @@ Ayesha Khan,12 Main Street,Lahore</code></pre>
 <h2 id="conclusion">Conclusión: respeta las comillas, y prueba en ambos sentidos</h2>
 <p>CSV es sencillo hasta que los datos reales lo encuentran, y entonces las reglas de comillas hacen el trabajo. Un campo con una coma, una comilla, o un salto de línea debe ir entre comillas, y una comilla dentro de un campo entre comillas debe duplicarse. Esas dos reglas previenen la mayoría de los problemas CSV.</p>
 <p>El JSON anidado y los arreglos también necesitan cuidado, porque una tabla plana no puede contener su profundidad. Aplana un nivel limpiamente, une listas cortas con cuidado, y mantén los datos muy anidados como JSON cuando la estructura importa. Prueba una muestra pequeña convirtiendo en ambos sentidos antes de convertir un archivo grande.</p>
-<p>Pruébalo ahora con un archivo complicado propio. Abre el <a href="/es/convertidor-json-csv/">Convertidor de JSON a CSV</a> gratuito, pega datos con un valor con coma o un objeto anidado, y conviértelo en segundos. Si tu JSON necesita ordenarse primero, el <a href="/es/formateador-json/">Formateador JSON</a> puede ayudar, y el <a href="/es/formateador-sql/">Formateador SQL</a> es útil cuando el siguiente paso es una consulta de base de datos.</p>`,
+<p>Pruébalo ahora con un archivo complicado propio. Abre el <a href="/es/convertidor-json-csv/">Convertidor de JSON a CSV</a> gratuito, pega datos con un valor con coma o un objeto anidado, y conviértelo en segundos. Si tu JSON necesita ordenarse primero, el formateador JSON puede ayudar, y el <a href="/es/formateador-sql/">Formateador SQL</a> es útil cuando el siguiente paso es una consulta de base de datos.</p>`,
     faqs: [
       { q: '¿Cuándo debe ir entre comillas un campo CSV?', a: 'Un campo debe envolverse entre comillas dobles cuando contiene una coma, una comilla doble, o un salto de línea. Las comillas le dicen al analizador que los caracteres especiales pertenecen al valor. Los valores simples sin ninguno de esos caracteres no necesitan comillas.' },
       { q: '¿Cómo escribo una comilla dentro de un campo CSV entre comillas?', a: 'Escribe la comilla como dos comillas dobles seguidas, dentro del campo entre comillas. Un analizador lee el par duplicado como un carácter de comilla en el valor. Nunca escribas una sola comilla dentro de un campo entre comillas sin duplicarla.' },
@@ -19567,7 +17847,7 @@ Ayesha Khan,12 Main Street,Lahore</code></pre>
 <p>Un JWT es un token compacto con tres partes: un encabezado, una carga útil, y una firma. El encabezado nombra el algoritmo, la carga útil lleva las claims, y la firma prueba que el token es genuino. Decodificar muestra las primeras dos partes en lenguaje sencillo, y revela la fecha de expiración.</p>
 <p>La lección clave es sencilla. Decodificar es leer, no verificar.</p>
 <p>Un token decodificado te dice qué afirma el token, no si esas afirmaciones son verdaderas. La confianza requiere verificación de firma con la clave correcta, en el lado del servidor, cada vez.</p>
-<p>Pruébalo ahora con un token de prueba. Abre el <a href="/es/decodificador-jwt/">Decodificador JWT</a> gratuito, pega un token de muestra, y lee su encabezado, claims y fecha de expiración. Si quieres revisar una sola parte a mano, el <a href="/es/codificador-decodificador-base64/">Codificador Decodificador Base64</a> es un paso útil siguiente, y el <a href="/es/formateador-json/">Formateador JSON</a> puede ordenar cualquier JSON que necesites inspeccionar.</p>`,
+<p>Pruébalo ahora con un token de prueba. Abre el <a href="/es/decodificador-jwt/">Decodificador JWT</a> gratuito, pega un token de muestra, y lee su encabezado, claims y fecha de expiración. Si quieres revisar una sola parte a mano, el <a href="/es/codificador-decodificador-base64/">Codificador Decodificador Base64</a> es un paso útil siguiente, y el formateador JSON puede ordenar cualquier JSON que necesites inspeccionar.</p>`,
     faqs: [
       { q: '¿Qué es un JWT?', a: 'Un JSON Web Token es una cadena compacta con tres partes: un encabezado, una carga útil, y una firma. Lleva claims sobre un usuario o una sesión, y se usa mucho para autenticación en aplicaciones web y APIs. El token es autocontenido, así que las claims viajan con él.' },
       { q: '¿Cuáles son las tres partes de un JWT?', a: 'El encabezado nombra el tipo de token y el algoritmo de firma. La carga útil lleva las claims, como el id de usuario, el emisor, y el tiempo de expiración. La firma prueba que el token fue emitido por una parte confiable y no ha sido cambiado desde que se creó.' },
@@ -19656,7 +17936,7 @@ Ayesha Khan,12 Main Street,Lahore</code></pre>
 <h2 id="conclusion">Conclusión: decodifica, lee, y luego verifica</h2>
 <p>Decodificar un JWT es un proceso corto con tres pasos: copia el token, pégalo en un decodificador local, y lee el encabezado, la carga útil, y las marcas de tiempo. El encabezado nombra el algoritmo, la carga útil lleva las claims, y exp te dice si el token sigue activo.</p>
 <p>Esa lectura es útil para depurar, para revisar un rol, y para detectar un token expirado. No es una comprobación de confianza, y no reemplaza la verificación de firma. Un token decodificado te dice qué afirma el token, y solo el servidor puede confirmar esas afirmaciones.</p>
-<p>Pruébalo ahora con un token de muestra. Abre el <a href="/es/decodificador-jwt/">Decodificador JWT</a> gratuito, pega un token de prueba, y lee sus claims y fecha de expiración. Si necesitas revisar una sola parte, el <a href="/es/codificador-decodificador-base64/">Codificador Decodificador Base64</a> puede ayudar, y el <a href="/es/formateador-json/">Formateador JSON</a> puede ordenar cualquier JSON que necesites inspeccionar.</p>`,
+<p>Pruébalo ahora con un token de muestra. Abre el <a href="/es/decodificador-jwt/">Decodificador JWT</a> gratuito, pega un token de prueba, y lee sus claims y fecha de expiración. Si necesitas revisar una sola parte, el <a href="/es/codificador-decodificador-base64/">Codificador Decodificador Base64</a> puede ayudar, y el formateador JSON puede ordenar cualquier JSON que necesites inspeccionar.</p>`,
     faqs: [
       { q: '¿Cómo decodifico un JWT?', a: 'Copia el token completo, pégalo en un decodificador local como el Decodificador JWT de UtilityFlow, y lee el encabezado y la carga útil decodificados. La herramienta divide el token en sus dos puntos, decodifica las primeras dos partes, y muestra las claims y la fecha de expiración como fechas UTC simples.' },
       { q: '¿Qué necesito para decodificar un JWT?', a: 'Solo necesitas el propio token y un navegador. No se necesita clave secreta, porque decodificar no es verificar. El encabezado y la carga útil solo están codificados en Base64URL, así que cualquiera que tenga el token puede decodificarlos y leerlos.' },
@@ -19844,7 +18124,7 @@ Ayesha Khan,12 Main Street,Lahore</code></pre>
 <p>Las anclas dicen dónde debe estar una coincidencia, los grupos recuerdan partes, y las banderas cambian las reglas. Aprende esas ideas y podrás leer la mayoría de los patrones que encuentres en código real.</p>
 <p>El hábito que más importa es probar cada patrón antes de confiar en él. Un patrón que se ve bien todavía puede corresponder a demasiado, muy poco, o al fragmento equivocado.</p>
 <p>Abre ahora el <a href="/es/probador-regex/">Probador de Regex</a> gratuito y prueba los patrones de esta guía en tu propio texto. Empieza con un patrón de dígitos sencillo, agrega un cuantificador, prueba un ancla, y mira cómo cambian los resaltados.</p>
-<p>Cuando necesites limpiar texto en masa, la herramienta <a href="/es/buscar-y-reemplazar-texto/">Buscar y reemplazar</a> es el siguiente paso lógico. El <a href="/es/formateador-json/">Formateador JSON</a> puede ayudar cuando tu texto es datos estructurados.</p>`,
+<p>Cuando necesites limpiar texto en masa, la herramienta <a href="/es/buscar-y-reemplazar-texto/">Buscar y reemplazar</a> es el siguiente paso lógico. El formateador JSON puede ayudar cuando tu texto es datos estructurados.</p>`,
     faqs: [
       { q: '¿Para qué se usa regex?', a: 'Regex se usa para encontrar, revisar y remodelar texto que sigue un patrón, como fechas, números de teléfono y códigos. Se usa en programación, editores de texto, herramientas de búsqueda y validación de formularios. Un probador de regex te permite probar un patrón de forma segura antes de usarlo en código.' },
       { q: '¿Qué hace un probador de regex?', a: 'Un probador de regex te permite escribir un patrón y un texto de muestra, luego muestra las coincidencias con resaltados en vivo, posiciones de índice de coincidencia, y grupos de captura numerados. Puedes alternar banderas y ver una vista previa de salida de reemplazo. Funciona en el navegador, así que nada se sube.' },
@@ -20147,7 +18427,7 @@ ORDER BY
 <h2 id="conclusion">Conclusión: pequeños cambios, gran diferencia</h2>
 <p>Un formateador SQL es una herramienta sencilla con un efecto desproporcionado. Recibe una consulta difícil de leer y le da sangría clara, uso consistente de mayúsculas en palabras clave, y saltos de línea limpios. La consulta sigue haciendo lo mismo, pero cada persona que la lee la entiende más rápido.</p>
 <p>El SQL legible ahorra tiempo, detecta errores antes, y hace el trabajo en equipo más fluido. Cuesta casi nada, porque dar formato a una consulta lleva segundos. El hábito de dar formato a cada consulta que escribes y compartes es una de las mejoras más baratas que un desarrollador o analista puede hacer.</p>
-<p>Pruébalo ahora con una consulta propia. Abre el <a href="/es/formateador-sql/">Formateador SQL</a> gratuito, pega una consulta desordenada, y ve la versión limpia en segundos. Si también trabajas con JSON, el <a href="/es/formateador-json/">Formateador JSON</a> aplica la misma idea a datos JSON, y el <a href="/es/formateador-javascript/">Formateador JS</a> hace lo mismo para código JavaScript.</p>`,
+<p>Pruébalo ahora con una consulta propia. Abre el <a href="/es/formateador-sql/">Formateador SQL</a> gratuito, pega una consulta desordenada, y ve la versión limpia en segundos. Si también trabajas con JSON, el formateador JSON aplica la misma idea a datos JSON, y el <a href="/es/formateador-javascript/">Formateador JS</a> hace lo mismo para código JavaScript.</p>`,
     faqs: [
       { q: '¿Qué es un formateador SQL?', a: 'Un formateador SQL es una herramienta que estandariza el diseño de una consulta SQL. Agrega sangría, pone cada cláusula en su propia línea, y hace consistente el uso de mayúsculas en palabras clave. La consulta todavía devuelve los mismos resultados, pero se vuelve mucho más fácil de leer.' },
       { q: '¿Dar formato a una consulta SQL cambia sus resultados?', a: 'No. El formato cambia solo el espacio en blanco, los saltos de línea, y el uso de mayúsculas en palabras clave, que no afectan lo que devuelve la base de datos. Una consulta formateada devuelve exactamente las mismas filas que la original, en el mismo orden.' },
@@ -20242,7 +18522,7 @@ ORDER BY
 <h2 id="conclusion">Conclusión: siete pasos hacia SQL legible</h2>
 <p>Dar formato a una consulta SQL toma siete pasos pequeños: copia el original, pégalo en la herramienta, elige sangría y uso de mayúsculas en palabras clave, lee el resultado, corrige lo que revela, y copia la versión limpia de vuelta. Todo el proceso lleva alrededor de un minuto, y se paga cada vez que alguien lee la consulta.</p>
 <p>El hábito importa más que cualquier formato individual. Da formato a cada consulta que escribas, compartas, o copies de un registro, y el SQL legible se convierte en tu valor predeterminado. Tus compañeros te lo agradecerán, y tu yo futuro también.</p>
-<p>Pruébalo ahora con una consulta desordenada propia. Abre el <a href="/es/formateador-sql/">Formateador SQL</a> gratuito, pega la consulta, y sigue los pasos anteriores. Si también trabajas con datos JSON, el <a href="/es/formateador-json/">Formateador JSON</a> sigue la misma idea, y el <a href="/es/formateador-javascript/">Formateador JS</a> hace lo mismo para JavaScript.</p>`,
+<p>Pruébalo ahora con una consulta desordenada propia. Abre el <a href="/es/formateador-sql/">Formateador SQL</a> gratuito, pega la consulta, y sigue los pasos anteriores. Si también trabajas con datos JSON, el formateador JSON sigue la misma idea, y el <a href="/es/formateador-javascript/">Formateador JS</a> hace lo mismo para JavaScript.</p>`,
     faqs: [
       { q: '¿Cómo doy formato a una consulta SQL?', a: 'Pega la consulta en el Formateador SQL, elige dos o cuatro espacios para la sangría, elige palabras clave en mayúsculas o minúsculas, y dale formato. Lee el resultado cláusula por cláusula, corrige cualquier error que detectes, luego copia la versión limpia de vuelta a tu editor.' },
       { q: '¿Cómo doy formato a una consulta SQL con JOIN?', a: 'Pega la consulta completa en el formateador y dale formato con tu configuración usual. Cada JOIN tiene su propia línea, con la condición de unión junto a él, para que puedas revisar qué columnas enlazan las tablas. Lee la cláusula WHERE por separado para revisar los filtros.' },
@@ -20333,7 +18613,7 @@ WHERE
 <h2 id="conclusion">Conclusión: escribe las reglas, luego impónlas</h2>
 <p>Una guía de estilo de formato SQL es un documento pequeño con un efecto grande. Resuelve el uso de mayúsculas en palabras clave, la sangría, y los saltos de línea una vez, para que el equipo nunca discuta sobre ellos de nuevo. Cada consulta de la base de código empieza a parecer salida de una mano.</p>
 <p>Las reglas de esta guía son sencillas: un uso de mayúsculas en palabras clave, un tamaño de sangría, una cláusula por línea, y listas cortas divididas en líneas separadas. Impónlas con el formateador, revísalas en revisión, y revísalas dos veces al año.</p>
-<p>Empieza hoy escribiendo el estilo de tu equipo en una página. Luego abre el <a href="/es/formateador-sql/">Formateador SQL</a> gratuito, configúralo para igualar tu estilo, y da formato a tu siguiente consulta. Si también trabajas con listas de texto, la herramienta <a href="/es/agregar-prefijo-sufijo-y-numeros-a-lineas/">Prefijo Sufijo de Línea</a> puede limpiar listas en masa, y el <a href="/es/formateador-json/">Formateador JSON</a> lleva el mismo orden a los datos JSON.</p>`,
+<p>Empieza hoy escribiendo el estilo de tu equipo en una página. Luego abre el <a href="/es/formateador-sql/">Formateador SQL</a> gratuito, configúralo para igualar tu estilo, y da formato a tu siguiente consulta. Si también trabajas con listas de texto, la herramienta <a href="/es/agregar-prefijo-sufijo-y-numeros-a-lineas/">Prefijo Sufijo de Línea</a> puede limpiar listas en masa, y el formateador JSON lleva el mismo orden a los datos JSON.</p>`,
     faqs: [
       { q: '¿Qué debe incluir una guía de estilo de formato SQL?', a: 'Debe cubrir el uso de mayúsculas en palabras clave, el tamaño de sangría, los saltos de línea, y cómo se disponen las listas y subconsultas. Una guía corta con seis o siete reglas es suficiente. La clave es que todo el equipo esté de acuerdo y use la misma configuración del formateador.' },
       { q: '¿Las palabras clave SQL deben ir en mayúsculas o minúsculas?', a: 'La mayoría de los equipos elige mayúsculas, porque las palabras clave destacan de los nombres de tabla y columna. Las minúsculas también están bien y coinciden con muchos estilos de código. Elige una, escríbela, y aplícala a cada consulta con el formateador.' },
@@ -20566,7 +18846,7 @@ print(int(back))</code></pre>
 <p>El almacenamiento más seguro es un entero con signo de 64 bits que guarda segundos UTC. Maneja fechas antes de 1970, no se desbordará en 2038, y se ordena y compara como un número simple. Cada base de datos importante admite enteros de 64 bits, y la mayoría ya los usa para columnas de marca de tiempo.</p>
 <p>Si necesitas precisión de subsegundo, guarda milisegundos enteros en un campo de 64 bits, y nombra el campo para que la unidad sea obvia. Un nombre como created_at_ms le dice al siguiente desarrollador exactamente qué significa el número, mientras created_at lo deja adivinando entre segundos y milisegundos.</p>
 <p>Nunca guardes cadenas de hora local como tu único registro. Una cadena local sin zona horaria no puede convertirse de vuelta de forma confiable, y se rompe en el momento en que una región cambia sus reglas de horario de verano. Si debes guardar una cadena local para mostrar, guarda la marca de tiempo junto a ella.</p>
-<p>Para datos estructurados, el <a href="/es/formateador-json/">Formateador JSON</a> puede ayudarte a inspeccionar cargas útiles que llevan marcas de tiempo, y hace que las unidades mezcladas sean más fáciles de detectar. Revisa la forma de tus datos antes de construir sobre ellos, y la decisión de almacenamiento se vuelve mucho más clara.</p>
+<p>Para datos estructurados, el formateador JSON puede ayudarte a inspeccionar cargas útiles que llevan marcas de tiempo, y hace que las unidades mezcladas sean más fáciles de detectar. Revisa la forma de tus datos antes de construir sobre ellos, y la decisión de almacenamiento se vuelve mucho más clara.</p>
 <h2 id="migration-checklist">Lista de migración: corregir marcas de tiempo antes de que se rompan</h2>
 <p>Empieza con una auditoría de tu esquema de base de datos, buscando columnas enteras que guardan tiempo y anotando su tamaño. Una columna de 32 bits que guarda segundos es un riesgo 2038, y una columna sin signo que guarda tiempo no puede representar fechas antes de 1970. Enuméralas todas antes de cambiar cualquier cosa.</p>
 <p>Después, revisa los límites encontrando cada lugar donde una marca de tiempo entra o sale de tu sistema: APIs, archivos, colas y librerías. Anota la unidad en cada límite, y agrega una revisión de conteo de dígitos donde la unidad podría estar mal. El límite es donde las unidades mezcladas causan daño.</p>
@@ -20581,7 +18861,7 @@ print(int(back))</code></pre>
 <h2 id="conclusion">Conclusión: las marcas de tiempo aburridas son marcas de tiempo seguras</h2>
 <p>Las trampas de esta guía comparten una causa: una marca de tiempo es sencilla, así que es fácil dejar de pensar en ella. La unidad se asume, la zona horaria se olvida, y el tamaño de almacenamiento nunca se revisa. Cada suposición es pequeña, y cada una puede romper fechas de una manera difícil de rastrear.</p>
 <p>Las correcciones son igual de sencillas. Guarda segundos UTC de 64 bits, nombra la unidad en el campo, valida en cada límite, y prueba con los valores extremos. Esos cuatro hábitos quitan la confusión entre segundos y milisegundos, los errores de zona horaria, y el problema 2038 de una vez.</p>
-<p>Revisa ahora tus propios valores. Abre el <a href="/es/convertidor-marca-tiempo-unix/">Convertidor de marca de tiempo Unix</a> gratuito, pega una marca de tiempo de tu sistema, y confirma la fecha, la unidad y la zona horaria. Si sobrevive a 2147483647 en una prueba, tu almacenamiento está listo para 2038, y el <a href="/es/formateador-json/">Formateador JSON</a> puede ayudarte a inspeccionar las cargas útiles alrededor.</p>`,
+<p>Revisa ahora tus propios valores. Abre el <a href="/es/convertidor-marca-tiempo-unix/">Convertidor de marca de tiempo Unix</a> gratuito, pega una marca de tiempo de tu sistema, y confirma la fecha, la unidad y la zona horaria. Si sobrevive a 2147483647 en una prueba, tu almacenamiento está listo para 2038, y el formateador JSON puede ayudarte a inspeccionar las cargas útiles alrededor.</p>`,
     faqs: [
       { q: '¿Cuál es la diferencia entre marcas de tiempo Unix en segundos y milisegundos?', a: 'Una marca de tiempo en segundos tiene 10 dígitos hoy, mientras una en milisegundos tiene 13 dígitos y es exactamente 1,000 veces mayor. Confundirlas es el error de marca de tiempo más común: los milisegundos leídos como segundos caen en el año 55840, y los segundos leídos como milisegundos caen en 1970.' },
       { q: '¿Por qué mis marcas de tiempo muestran la fecha equivocada?', a: 'La causa usual es la zona horaria. Una marca de tiempo convertida a hora local puede mostrar una fecha distinta de la misma marca de tiempo en UTC, especialmente cerca de la medianoche. Compara los resultados UTC y local, y etiqueta cada fecha con su zona horaria para detener la confusión.' },
@@ -20660,7 +18940,7 @@ Resultado: https://example.com/fish%20&amp;%20chips</code></pre>
 <ul><li><strong>Codifica valores, no estructura:</strong> codifica cada valor de consulta por separado.</li><li><strong>Elige el modo correcto:</strong> encodeURIComponent para un valor, encodeURI para una URL completa.</li><li><strong>Decodifica antes de mostrar:</strong> muestra a las personas texto legible, no códigos de porcentaje.</li><li><strong>Guarda el original:</strong> guarda el texto simple, y codifica solo cuando construyes el enlace.</li></ul>
 <h2 id="url-encoding-and-other-encodings">Codificación URL y otros tipos de codificación</h2>
 <p>La codificación URL no es la única codificación que encontrarás como desarrollador. La codificación Base64 convierte datos binarios en texto seguro para incrustar en páginas y mensajes, y el <a href="/es/codificador-decodificador-base64/">Codificador Decodificador Base64</a> se encarga de ese trabajo. La codificación de entidades HTML convierte caracteres como menor que y ampersand en códigos seguros para mostrar dentro de una página web.</p>
-<p>Si trabajas con datos JSON en URLs o APIs, el <a href="/es/formateador-json/">Formateador JSON</a> puede ayudarte a revisar que tus datos estén bien formados antes de codificarlos. Los datos limpios, codificados en el momento correcto, causan muchos menos problemas que los datos codificados en el lugar equivocado o de la forma equivocada.</p>
+<p>Si trabajas con datos JSON en URLs o APIs, el formateador JSON puede ayudarte a revisar que tus datos estén bien formados antes de codificarlos. Los datos limpios, codificados en el momento correcto, causan muchos menos problemas que los datos codificados en el lugar equivocado o de la forma equivocada.</p>
 <h2 id="faq">Preguntas frecuentes</h2>
 <p>Estas son las preguntas más frecuentes sobre codificación URL. Si quieres los pasos prácticos, el tutorial enlazado antes muestra cada paso de codificación y decodificación en orden. Si quieres las trampas, la guía avanzada cubre la doble codificación y los caracteres reservados en detalle.</p>
 <h2 id="conclusion">Conclusión: lee enlaces codificados con confianza</h2>
@@ -20761,7 +19041,7 @@ const back = decodeURIComponent(value);</code></pre>
 <h2 id="encoding-other-text">Codificar otro texto: Base64 y entidades HTML</h2>
 <p>La codificación URL es una de varias codificaciones que puedes necesitar. La codificación Base64 convierte datos binarios en texto seguro para incrustar en páginas, y el <a href="/es/codificador-decodificador-base64/">Codificador Decodificador Base64</a> se encarga de ese trabajo. </p><p>La codificación de entidades HTML convierte caracteres como menor que y ampersand en códigos seguros para mostrar en una página web, y el <a href="/es/codificador-entidades-html/">Codificador de entidades HTML</a> se encarga de ese trabajo.</p>
 <p>No mezcles estas codificaciones. Una cadena Base64 no es una cadena codificada en URL, y una cadena codificada en URL no es HTML válido. Usa la codificación que coincida con el lugar donde aparecerá el texto, y decodifícala con el decodificador correspondiente cuando la leas de vuelta.</p>
-<p>Si trabajas con datos estructurados, el <a href="/es/formateador-json/">Formateador JSON</a> puede revisar que tus datos estén bien formados antes de codificarlos para una URL o una llamada de API. Los datos limpios, codificados en el momento correcto con el modo correcto, causan muchos menos problemas que los datos codificados en el lugar equivocado.</p>
+<p>Si trabajas con datos estructurados, el formateador JSON puede revisar que tus datos estén bien formados antes de codificarlos para una URL o una llamada de API. Los datos limpios, codificados en el momento correcto con el modo correcto, causan muchos menos problemas que los datos codificados en el lugar equivocado.</p>
 <h2 id="faq">Preguntas frecuentes</h2>
 <p>Estas son las preguntas más frecuentes sobre los pasos. Para repasar qué es la codificación porcentual, mira <a href="/es/blog/que-es-la-codificacion-url/">la guía completa de codificación URL</a>. Para los errores que debes evitar, mira la guía avanzada sobre doble codificación y caracteres reservados.</p>
 <h2 id="conclusion">Conclusión: codifica la pieza correcta, luego prueba el enlace</h2>
@@ -20857,7 +19137,7 @@ Decodifica una vez:   "fish%2520%2526%2520chips" becomes "fish%20%26%20chips"</c
 <h2 id="conclusion">Conclusión: codifica una vez, en el lugar correcto, con el modo correcto</h2>
 <p>Los errores de codificación URL rara vez tratan de la propia codificación. Tratan de alcance, tiempo, y capas: codificar toda la URL en lugar de un valor, codificar un valor que una librería ya codificó, o codificar un valor que ya estaba codificado. Cada error tiene un patrón claro, y cada patrón tiene una corrección clara.</p>
 <p>Los hábitos que los previenen son sencillos. Guarda texto simple, codifica cada valor una vez con encodeURIComponent, codifica una URL completa con encodeURI solo cuando lo necesites, y comprueba en ambos sentidos decodificando el resultado. Inspecciona la URL analizada cuando un enlace se rompe, y deja que la tabla de consulta te muestre qué valor salió mal.</p>
-<p>Pruébalo ahora con un enlace que te ha causado problemas. Abre el <a href="/es/codificador-decodificador-url/">Codificador Decodificador de URL</a> gratuito, pega el enlace, decodifícalo, e inspecciona las partes analizadas. Si necesitas convertir datos binarios en texto seguro, el <a href="/es/codificador-decodificador-base64/">Codificador Decodificador Base64</a> es el siguiente paso lógico, y el <a href="/es/formateador-json/">Formateador JSON</a> puede revisar datos estructurados antes de codificarlos.</p>`,
+<p>Pruébalo ahora con un enlace que te ha causado problemas. Abre el <a href="/es/codificador-decodificador-url/">Codificador Decodificador de URL</a> gratuito, pega el enlace, decodifícalo, e inspecciona las partes analizadas. Si necesitas convertir datos binarios en texto seguro, el <a href="/es/codificador-decodificador-base64/">Codificador Decodificador Base64</a> es el siguiente paso lógico, y el formateador JSON puede revisar datos estructurados antes de codificarlos.</p>`,
     faqs: [
       { q: '¿Qué es la doble codificación URL?', a: 'La doble codificación ocurre cuando un valor se codifica dos veces. Un espacio se convierte en %20 en la primera codificación, y el signo de porcentaje en %20 se convierte en %25 en la segunda, dando %2520. Decodificar una vez luego deja %20 como texto literal, en lugar de restaurar el espacio.' },
       { q: '¿Cómo corrijo una URL doblemente codificada?', a: 'Decodifica el valor hasta que no queden grupos codificados en porcentaje, para llegar al texto simple, luego codifícalo una vez. También debes encontrar y quitar el paso extra de codificación en tu código, para que el mismo valor no se codifique dos veces de nuevo. Codifica solo en el momento en que construyes la URL.' },
@@ -20943,7 +19223,7 @@ console.log(id);
 <h2 id="conclusion">Conclusión: elige la versión que encaje con el trabajo</h2>
 <p>Un UUID es un identificador de 128 bits que cualquier sistema puede generar sin coordinación. La versión 4 llena esos bits con datos aleatorios, lo que lo hace privado e impredecible. La versión 7 empieza con una marca de tiempo en milisegundos, lo que lo hace clasificable por tiempo de creación mientras mantiene el elemento aleatorio.</p>
 <p>Para la mayoría de los identificadores generales, v4 es el valor predeterminado seguro. Para claves primarias de base de datos, registros de eventos, y registros distribuidos, v7 es usualmente la mejor elección. Las dos versiones comparten el mismo formato, así que cambiar entre ellas es sencillo cuando tus necesidades cambian.</p>
-<p>Prueba generar ambas versiones ahora. Abre el <a href="/es/generador-uuid/">Generador UUID</a> gratuito, elige v4 o v7, elige tu formato, y genera un identificador o un lote de hasta 100. Si necesitas codificar un resultado, el <a href="/es/codificador-decodificador-base64/">Codificador y Decodificador Base64</a> es un paso útil siguiente, y el <a href="/es/formateador-json/">Formateador JSON</a> puede ordenar una respuesta de API que contenga UUID.</p>`,
+<p>Prueba generar ambas versiones ahora. Abre el <a href="/es/generador-uuid/">Generador UUID</a> gratuito, elige v4 o v7, elige tu formato, y genera un identificador o un lote de hasta 100. Si necesitas codificar un resultado, el <a href="/es/codificador-decodificador-base64/">Codificador y Decodificador Base64</a> es un paso útil siguiente, y el formateador JSON puede ordenar una respuesta de API que contenga UUID.</p>`,
     faqs: [
       { q: '¿Qué es un UUID?', a: 'Un UUID, o Identificador Único Universal, es un valor de 128 bits escrito como 32 dígitos hexadecimales, usualmente agrupados con guiones. Cualquier sistema puede generar uno sin un servidor central, y dos UUID generados de forma independiente casi con seguridad serán distintos.' },
       { q: '¿Cuál es la diferencia entre UUID v4 y UUID v7?', a: 'UUID v4 está construido con 122 bits aleatorios, así que no revela nada sobre cuándo se creó y no se ordena por tiempo. UUID v7 empieza con una marca de tiempo Unix en milisegundos, así que se ordena por orden de creación, con bits aleatorios llenando el resto.' },
@@ -21033,7 +19313,7 @@ print(user_id)</code></pre>
 <h2 id="conclusion">Conclusión: genera, revisa, y luego usa</h2>
 <p>Generar UUID en masa es un trabajo corto: elige v4 o v7, fija el tamaño de lote hasta 100, elige un formato, y genera. Los pasos de este tutorial funcionan para datos de prueba, archivos seed, comprobaciones de API, e importaciones de base de datos, y toman menos de un minuto una vez que los conoces.</p>
 <p>El paso que más importa es la revisión. Confirma el dígito de versión, cuenta las líneas, busca duplicados, y prueba un identificador en el destino real. Esas cuatro revisiones detectan los errores de copia y configuraciones equivocadas que causan la mayoría de los problemas de generación en masa.</p>
-<p>Pruébalo ahora con tu propio proyecto. Abre el <a href="/es/generador-uuid/">Generador UUID</a> gratuito, genera un lote en la versión y formato que necesitas, y pégalo en tu archivo o base de datos. Si necesitas ordenar un fixture de prueba JSON, el <a href="/es/formateador-json/">Formateador JSON</a> puede ayudar, y el <a href="/es/codificador-decodificador-base64/">Codificador y Decodificador Base64</a> puede codificar un resultado para transporte.</p>`,
+<p>Pruébalo ahora con tu propio proyecto. Abre el <a href="/es/generador-uuid/">Generador UUID</a> gratuito, genera un lote en la versión y formato que necesitas, y pégalo en tu archivo o base de datos. Si necesitas ordenar un fixture de prueba JSON, el formateador JSON puede ayudar, y el <a href="/es/codificador-decodificador-base64/">Codificador y Decodificador Base64</a> puede codificar un resultado para transporte.</p>`,
     faqs: [
       { q: '¿Cuántos UUID puedo generar a la vez?', a: 'El Generador UUID gratuito crea hasta 100 UUID en un solo lote. Para un conjunto más grande, genera varios lotes de 100 y únelos en un archivo de texto. No hay límite en cuántos lotes puedes crear.' },
       { q: '¿Cómo genero UUID v7 en masa?', a: 'Abre el Generador UUID, cambia la versión a v7, fija tu tamaño de lote hasta 100, y genera. Los resultados se ordenan por orden de creación, porque cada uno empieza con una marca de tiempo Unix en milisegundos. Pégalos en orden para mantener ese ordenamiento.' },

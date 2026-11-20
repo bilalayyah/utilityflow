@@ -84,30 +84,6 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  to={localizeStaticPath('/ai-writing-assistant/', locale)}
-                  className="hover:text-indigo-700 transition-colors underline-offset-4 hover:underline"
-                >
-                  {t.nav.aiWriting.label}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to={localizeStaticPath('/ai-text-summarizer/', locale)}
-                  className="hover:text-indigo-700 transition-colors underline-offset-4 hover:underline"
-                >
-                  {t.nav.aiSummarizer.label}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to={localizeStaticPath('/ai-tool-finder/', locale)}
-                  className="hover:text-indigo-700 transition-colors underline-offset-4 hover:underline"
-                >
-                  {t.nav.aiFinder.label}
-                </Link>
-              </li>
-              <li>
-                <Link
                   to={localizeStaticPath('/blog/', locale)}
                   className="hover:text-indigo-700 transition-colors underline-offset-4 hover:underline"
                 >

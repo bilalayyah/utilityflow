@@ -10,14 +10,11 @@ export const frStrings: UiStrings = {
   nav: {
     tools: 'Outils',
     categories: 'Catégories',
-    aiTools: 'Outils IA',
     about: 'À propos',
     contact: 'Contact',
     blog: 'Blog',
     allTools: 'Tous les outils',
-    freeAiTools: 'Outils IA gratuits',
-    viewAiSection: 'Voir la section IA sur la page d’accueil →',
-    searchPlaceholder: 'Rechercher parmi 88 outils…',
+    searchPlaceholder: 'Rechercher parmi 83 outils…',
     searchTools: 'Rechercher des outils',
     closeSearch: 'Fermer la recherche',
     openMenu: 'Ouvrir le menu de navigation',
@@ -25,24 +22,12 @@ export const frStrings: UiStrings = {
     skipToContent: 'Aller au contenu',
     language: 'Langue',
     chooseLanguage: 'Choisir la langue',
-    aiWriting: {
-      label: 'Assistant d’écriture IA',
-      desc: 'Grammaire, réécriture, ton et rédaction d’e-mails',
-    },
-    aiSummarizer: {
-      label: 'Résumeur de texte IA',
-      desc: 'Résumés courts, moyens et à puces',
-    },
-    aiFinder: {
-      label: 'Chercheur d’outils IA',
-      desc: 'Trouvez le bon outil en langage simple',
-    },
   },
   footer: {
     tagline:
       'Une collection rapide d’utilitaires du quotidien, exécutés dans le navigateur, pour les rédacteurs, les ingénieurs, les spécialistes du marketing et les analystes. Conçue pour fonctionner localement, avec un minimum de ressources.',
     categories: 'Catégories',
-    platformAi: 'Plateforme et IA',
+    platformAi: 'Explorer',
     trustLegal: 'Confiance & Légal',
     home: 'Accueil',
     allToolsDirectory: 'Annuaire de tous les outils',
@@ -81,7 +66,6 @@ export const frStrings: UiStrings = {
     tryAgain: 'Réessayer',
     openTool: 'Ouvrir l’outil',
     browserSide: 'Côté navigateur',
-    freeAiTool: 'Outil IA gratuit',
     externalApi: 'API externe',
   },
   home: {
@@ -100,24 +84,15 @@ export const frStrings: UiStrings = {
     eyebrow: 'Plateforme UtilityFlow · 7 catégories principales · {count} utilitaires en ligne',
     h1: 'Des utilitaires en ligne pratiques, conçus pour la rapidité et la confidentialité.',
     heroDescription:
-      'UtilityFlow regroupe 84 utilitaires pensés pour le navigateur, plus l’écriture IA, le résumé et la découverte intelligente d’outils, pour le texte, le développement, les calculs, les réseaux sociaux, les PDF, le SEO et les images.',
+      'UtilityFlow regroupe 83 utilitaires pensés pour le navigateur, pour le texte, le développement, les calculs, les réseaux sociaux, les PDF, le SEO et les images.',
     exploreCategories: 'Explorer les catégories',
     openDirectory: 'Ouvrir l’annuaire complet',
-    aiWriting: 'Écriture IA',
-    aiSummarizer: 'Résumé IA',
-    aiFinder: 'Recherche d’outils IA',
     metrics: {
       toolCategories: 'Catégories d’outils',
       browserUtilities: 'Utilitaires navigateur',
       liveTools: 'Outils en ligne',
       accountRequired: 'Compte requis',
       none: 'Aucun',
-    },
-    aiSpotlight: {
-      badge: 'Suite IA gratuite · Aucune connexion requise',
-      title: 'Outils IA gratuits',
-      description:
-        'Améliorez vos brouillons, résumez de longs documents ou trouvez le bon outil en quelques secondes, sans inscription.',
     },
     popular: {
       title: 'Outils populaires',
@@ -177,22 +152,22 @@ export const frStrings: UiStrings = {
       {
         question: 'Les outils de UtilityFlow sont-ils gratuits et utilisables sans créer de compte ?',
         answer:
-          'Oui. Les 84 utilitaires navigateur, les 3 outils IA et la Calculatrice de Devises de UtilityFlow sont entièrement gratuits, sans inscription, sans mur de connexion, sans crédits ni abonnement.',
+          'Oui. Les 83 utilitaires navigateur de UtilityFlow sont entièrement gratuits, sans inscription, sans mur de connexion, sans crédits ni abonnement.',
       },
       {
         question: 'UtilityFlow envoie-t-il mes textes, mon code ou mes fichiers vers un serveur ?',
         answer:
-          'Les 84 utilitaires navigateur principaux s’exécutent localement dans votre navigateur web sans envoyer vos données. Nos 3 outils IA gratuits (assistant d’écriture IA, résumeur de texte IA et chercheur d’outils IA) traitent vos requêtes en toute sécurité via l’inférence Groq côté serveur, sans stocker vos textes.',
+          'Les 83 utilitaires navigateur principaux s’exécutent localement dans votre navigateur web sans envoyer vos données.',
       },
       {
-        question: 'Comment les 88 outils sont-ils organisés sur la plateforme ?',
+        question: 'Comment les 83 outils sont-ils organisés sur la plateforme ?',
         answer:
-          'UtilityFlow couvre sept catégories principales (texte et écriture, développeurs, calculatrices, réseaux sociaux, PDF, SEO et outils d’images et de fichiers), soit 84 outils navigateur, 3 outils IA gratuits et la Calculatrice de Devises intégrés à la plateforme.',
+          'UtilityFlow couvre sept catégories principales (texte et écriture, développeurs, calculatrices, réseaux sociaux, PDF, SEO et outils d’images et de fichiers), soit 83 outils navigateur intégrés à la plateforme.',
       },
       {
         question: 'Puis-je mettre en favori ou partager un lien direct vers un outil précis ?',
         answer:
-          'Oui. Chaque outil et chaque catégorie possède sa propre URL permanente et propre (par exemple /word-counter/, /ai-writing-assistant/ ou /category/developer-tools/) qui se charge directement et fonctionne après actualisation du navigateur.',
+          'Oui. Chaque outil et chaque catégorie possède sa propre URL permanente et propre (par exemple /word-counter/ ou /category/developer-tools/) qui se charge directement et fonctionne après actualisation du navigateur.',
       },
       {
         question: 'UtilityFlow fonctionne-t-il bien sur mobile et tablette ?',
@@ -209,7 +184,7 @@ export const frStrings: UiStrings = {
     seoKeywords: ['annuaire des outils utilitaires', 'tous les outils en ligne', 'outils navigateur gratuits'],
     title: 'Annuaire de tous les outils',
     description:
-      'Parcourez les {count} utilitaires en ligne enregistrés sur UtilityFlow ou explorez les sept hubs de catégories, entre les flux navigateur et IA gratuits.',
+      'Parcourez les {count} utilitaires en ligne enregistrés sur UtilityFlow ou explorez les sept hubs de catégories.',
     searchPlaceholder: 'Rechercher par nom d’outil, mot-clé ou catégorie…',
     showing: 'Affichage de {tools} outils en ligne dans {categories} catégories',
     all: 'Tout',
@@ -240,7 +215,6 @@ export const frStrings: UiStrings = {
     commonUseCases: 'Cas d’usage courants',
     runsLocally: 'S’exécute localement dans votre navigateur',
     externalApi: 'Intégration d’API externe',
-    freeAiTool: 'Outil IA gratuit · Aucune connexion',
     loadingWorkspace: 'Chargement de l’espace de travail {name}…',
     input: 'Entrée',
     output: 'Sortie',
@@ -325,7 +299,7 @@ export const frStrings: UiStrings = {
       'Découvrez comment UtilityFlow crée des utilitaires respectueux de la vie privée pour le navigateur, dans sept catégories, sans compte ni publicité intrusive.',
     title: 'À propos de UtilityFlow',
     intro:
-      'UtilityFlow est une plateforme web indépendante qui construit 88 utilitaires ciblés et fiables pour le travail numérique du quotidien.',
+      'UtilityFlow est une plateforme web indépendante qui construit 83 utilitaires ciblés et fiables pour le travail numérique du quotidien.',
     whyTitle: 'Pourquoi avons-nous créé UtilityFlow',
     whyP1:
       'Les tâches en ligne courantes — compter des mots, valider du JSON, vérifier des limites de caractères, calculer des mensualités de prêt ou compresser une image — obligent souvent à passer par des sites lents, remplis de fenêtres intrusives, de téléchargements confus ou d’inscriptions obligatoires.',
@@ -333,14 +307,14 @@ export const frStrings: UiStrings = {
       'Notre objectif est simple : donner à chaque utilitaire une page propre et dédiée qui se charge vite, explique clairement comment l’outil fonctionne et s’exécute directement dans votre navigateur chaque fois que les standards du web le permettent.',
     orgTitle: 'Qui gère UtilityFlow',
     orgP1:
-      'UtilityFlow est un projet indépendant créé et maintenu par Bilal, un créateur qui développe des outils web gratuits pendant son temps libre. Aucune entreprise ne se cache derrière le site, aucun financement d’investisseurs, aucune équipe d’employés — chaque outil, chaque guide et chaque page d’aide est conçu, construit et testé par une seule personne. Les 88 outils sont gratuits, sans compte ni abonnement. Le crédit en pied de page nomme Shaheen, dont les encouragements ont inspiré le projet et dont le nom apparaît sur chaque page pour rappeler d’où l’idée est née.',
+      'UtilityFlow est un projet indépendant créé et maintenu par Bilal, un créateur qui développe des outils web gratuits pendant son temps libre. Aucune entreprise ne se cache derrière le site, aucun financement d’investisseurs, aucune équipe d’employés — chaque outil, chaque guide et chaque page d’aide est conçu, construit et testé par une seule personne. Les 83 outils sont gratuits, sans compte ni abonnement. Le crédit en pied de page nomme Shaheen, dont les encouragements ont inspiré le projet et dont le nom apparaît sur chaque page pour rappeler d’où l’idée est née.',
     orgP2:
       'Parce que le projet est petit et indépendant, les décisions restent simples : si un outil est lent, confus ou incorrect, il est corrigé. Les messages envoyés via la page Contact arrivent directement à la personne qui peut modifier le code, et les suggestions des visiteurs ont déjà inspiré de nouveaux outils et des améliorations sur tout le site.',
     howTitle: 'Comment nos outils sont construits et testés',
     howP1:
       'Chaque utilitaire part d’une tâche unique et claire — compter des mots, fusionner des PDF, formater du JSON — et devient une page ciblée qui accomplit bien cette tâche. Chaque fois que les standards du web le permettent, le travail se fait entièrement dans votre navigateur, de sorte que vos textes et fichiers n’ont jamais besoin de quitter votre appareil. Chaque page d’outil explique ses étapes dans un court guide, montre des exemples concrets et répond aux questions les plus fréquentes, pour que vous puissiez juger le résultat au lieu de faire confiance à une boîte noire.',
     howP2:
-      'Avant la mise en ligne, chaque outil est testé avec des données réelles dans un navigateur de bureau et un navigateur mobile, y compris des cas limites comme une entrée vide, un texte très long ou des types de fichiers inhabituels. Quand quelque chose ne fonctionne pas ou qu’un calcul semble erroné, la correction est publiée dans une mise à jour du site et la page est vérifiée à nouveau. Les trois outils IA facultatifs sont les seuls à envoyer du texte vers un serveur, et leurs pages l’indiquent clairement avant toute utilisation.',
+      'Avant la mise en ligne, chaque outil est testé avec des données réelles dans un navigateur de bureau et un navigateur mobile, y compris des cas limites comme une entrée vide, un texte très long ou des types de fichiers inhabituels. Quand quelque chose ne fonctionne pas ou qu’un calcul semble erroné, la correction est publiée dans une mise à jour du site et la page est vérifiée à nouveau. Chaque outil fonctionne entièrement dans votre navigateur : rien de ce que vous saisissez n’est jamais envoyé vers un serveur.',
     whoTitle: 'À qui s’adresse UtilityFlow',
     whoP1:
       'UtilityFlow est conçu pour toute personne qui a besoin d’une réponse rapide d’un outil, sans installer de logiciel ni créer de compte : les étudiants qui vérifient le nombre de mots d’une dissertation, les rédacteurs qui mettent en forme un brouillon, les développeurs qui valident du JSON ou encodent une URL, les spécialistes du marketing qui vérifient des limites de caractères, et les petits entrepreneurs qui calculent un prêt ou une remise. Si une tâche prend moins d’une minute, l’outil qui la réalise devrait prendre moins d’une minute aussi — c’est l’exigence à laquelle chaque page du site est soumise.',
@@ -438,10 +412,9 @@ export const frStrings: UiStrings = {
         ],
       },
       {
-        title: '2. Données des outils, traitement dans le navigateur et outils IA gratuits',
+        title: '2. Données des outils et traitement dans le navigateur',
         paragraphs: [
-          'Les textes, chiffres, extraits de code et fichiers saisis dans nos 84 outils navigateur sont traités localement dans votre session de navigation, sans quitter votre appareil.',
-          'Nos trois outils IA gratuits (assistant d’écriture IA, résumeur de texte IA et chercheur d’outils IA) envoient le texte soumis via notre backend protégé vers Groq pour une inférence en temps réel. Nous ne stockons ni n’enregistrons vos requêtes, et les limites quotidiennes gratuites utilisent uniquement un hachage SHA-256 daté en UTC, de sorte que les adresses IP brutes des visiteurs ne sont jamais stockées.',
+          'Les textes, chiffres, extraits de code et fichiers saisis dans nos 83 outils navigateur sont traités localement dans votre session de navigation, sans quitter votre appareil.',
           'Les commentaires publiés sous nos outils ne demandent qu’un nom et le texte du commentaire. Le nom et le texte que vous envoyez sont stockés sur notre plateforme d’hébergement et affichés publiquement sur la page de l’outil concerné, avec la date. Nous ne demandons ni adresse e-mail ni compte pour commenter, et nous n’utilisons pas les données des commentaires à des fins publicitaires. Si vous souhaitez qu’un commentaire soit supprimé, contactez-nous en indiquant la page et le nom utilisé, et nous le supprimerons.',
         ],
       },
@@ -469,7 +442,7 @@ export const frStrings: UiStrings = {
       {
         title: '6. Conservation des données',
         paragraphs: [
-          'Les informations traitées dans votre navigateur ne nous sont jamais envoyées, il n’y a donc rien à conserver. Le texte envoyé aux outils IA facultatifs est traité pour la demande et n’est pas stocké. Les commentaires sont conservés jusqu’à leur suppression, par nous ou à votre demande. Les journaux d’hébergement et les enregistrements de sécurité ne sont conservés que pendant la durée limitée dont notre hébergeur a besoin pour exploiter et protéger le service.',
+          'Les informations traitées dans votre navigateur ne nous sont jamais envoyées, il n’y a donc rien à conserver. Les commentaires sont conservés jusqu’à leur suppression, par nous ou à votre demande. Les journaux d’hébergement et les enregistrements de sécurité ne sont conservés que pendant la durée limitée dont notre hébergeur a besoin pour exploiter et protéger le service.',
         ],
       },
       {
@@ -540,7 +513,7 @@ export const frStrings: UiStrings = {
       {
         title: '7. Services tiers',
         paragraphs: [
-          'Certaines fonctionnalités reposent sur des services tiers indépendants : les trois outils IA envoient du texte à Groq pour traitement, le formulaire de contact est transmis par FormSubmit, le site est hébergé sur Cloudflare et le convertisseur de devises récupère les taux de change en direct auprès de Frankfurter. Chacun de ces services possède ses propres conditions et sa propre politique de confidentialité, et votre utilisation est régie par ces documents. UtilityFlow n’est pas responsable de la disponibilité ni des pratiques des services tiers.',
+          'Certaines fonctionnalités reposent sur des services tiers indépendants : le formulaire de contact est transmis par FormSubmit et le site est hébergé sur Cloudflare. Chacun de ces services possède ses propres conditions et sa propre politique de confidentialité, et votre utilisation est régie par ces documents. UtilityFlow n’est pas responsable de la disponibilité ni des pratiques des services tiers.',
         ],
       },
       {

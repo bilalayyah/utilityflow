@@ -201,64 +201,11 @@ export const CALC_TOOLS_PART_3: ToolDefinition[] = [
     intro:
       'Convert instantaneously across seven measurement families—Length, Weight & Mass, Temperature, Area, Volume, Speed, and Digital Storage—with an automatic side-by-side table showing every unit in the category.',
     relatedToolSlugs: [
-      'currency-calculator',
+      'percentage-calculator',
       'bmi-calculator',
       'calorie-calculator',
       'time-duration-calculator',
     ],
     component: lazy(() => import('../../../tools/calculators/UnitConverterTool')),
-  },
-  {
-    id: 'currency-calculator',
-    slug: 'currency-calculator',
-    name: 'Currency Calculator',
-    shortDescription:
-      'Convert currencies using your exact manual exchange rate or optional ECB reference rates with FX fee calculation.',
-    categoryId: 'calculators',
-    batch: 3,
-    processingMode: 'api',
-    requiresExternalApi: true,
-    apiNotice:
-      'Requires an external API for live FX rates and never uses fabricated offline rates. Uses your manually entered exchange rate by default (1.0000), or click "Fetch ECB Reference Rate" to request rates from api.frankfurter.dev.',
-    keywords: [
-      'currency calculator',
-      'exchange rate calculator',
-      'fx fee calculator',
-      'manual currency converter',
-      'usd to eur converter',
-      'currency converter with fee',
-      'exchange rate markup calculator',
-      'foreign transaction fee calculator',
-      'inverse exchange rate calculator',
-    ],
-    seo: {
-      title: 'Currency Calculator – Rates, Fees & ECB | UtilityFlow',
-      description:
-        'Convert between major currencies with your own quoted exchange rate, add bank or card FX fees to see the net amount, or fetch an ECB reference rate on demand.',
-      primaryKeyword: 'currency calculator',
-      secondaryKeywords: [
-        'exchange rate fee calculator',
-        'manual currency converter',
-        'fx spread calculator',
-        'ecb reference rate converter',
-        'bank fx fee calculator',
-      ],
-      longTailKeywords: [
-        'convert currency with custom bank exchange rate and fee',
-        'currency calculator without fake hardcoded rates',
-        'calculate net foreign currency after card markup',
-        'how much will I receive after currency conversion fee',
-      ],
-      schemaApplicationCategory: 'FinanceApplication',
-    },
-    intro:
-      'Convert between major global currencies transparently using the exact exchange rate quoted by your bank, broker, or invoice—plus optional FX fee deduction, inverse rate math, and an on-demand ECB reference rate lookup.',
-    relatedToolSlugs: [
-      'unit-converter',
-      'discount-margin-calculator',
-      'vat-tax-calculator',
-      'percentage-calculator',
-    ],
-    component: lazy(() => import('../../../tools/calculators/CurrencyCalculatorTool')),
   },
 ];

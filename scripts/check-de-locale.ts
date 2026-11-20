@@ -18,8 +18,7 @@ import { CATEGORY_LOCALE_SLUGS } from '../src/locales/config';
 const RESERVED = new Set([
   'tools', 'tool', 'category', 'kategorie', 'about', 'ueber-uns',
   'contact', 'kontakt', 'privacy-policy', 'datenschutzerklaerung',
-  'terms-of-service', 'nutzungsbedingungen', 'ai-writing-assistant',
-  'ai-text-summarizer', 'ai-tool-finder',
+  'terms-of-service', 'nutzungsbedingungen', ,
   // NOTE: ki-schreibassistent / ki-text-zusammenfasser /
   // ki-tool-finder are intentionally NOT reserved — they are
   // the fixed slugs of the 3 AI tools. The per-tool check below only flags

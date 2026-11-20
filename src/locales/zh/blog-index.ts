@@ -568,60 +568,6 @@ export const ZH_ARTICLE_INDEX: Record<string, ArticleLocaleSlimOverride> = {
     "description": "给SQL和代码用的列表编号一次做对并不容易，少一个引号或逗号查询就会失败。本指南讲清文本、数字与日期的SQL格式、引号转义、末尾逗号与JSON规则，帮你避开常见错误，写出机器一次就能读懂的列表。文章还讲了编号给人看、标点给机器看的区别，以及SQL文本数字日期格式、引号转义与末尾逗号变通方法，以及JSON格式要求。",
     "readingMinutes": 9
   },
-  "ai-tool-finder-guide": {
-    "slug": "ai-zhineng-gongju-chazhao-qi-shi-yong-zhinan",
-    "title": "AI 智能工具查找器是什么？完整使用指南",
-    "description": "网上工具太多，不知道该搜什么关键词？AI智能工具查找器让你用大白话描述任务，从88个工具里推荐最合适的一个并说明理由。本指南讲清本地匹配与Groq语义排序两层机制、适用场景与局限，帮你几秒找到真正能用的工具。文章还给出效果好的示例查询，讲清没有匹配时工具会直接说没有、绝不凭空编造，以及隐私、费用与每日AI搜索额度限制。",
-    "readingMinutes": 7
-  },
-  "ai-tool-finder-howto": {
-    "slug": "zen-yang-yong-ai-zhaodao-shihe-de-zaixian-gongju",
-    "title": "怎么用 AI 找到适合任何任务的在线工具？分步教程",
-    "description": "不知道工具叫什么名字，也能找到它。本教程一步步教你用AI智能工具查找器描述任务、筛选分类、读懂即时匹配结果，再运行AI搜索确认最佳工具。免费使用，每天10次AI搜索额度，几分钟就能为任何任务找到合适的在线工具。教程还教你怎么写出更好的查询，附为一份表格找工具的实例，讲清没有完全匹配时怎么办，以及排错方法。",
-    "readingMinutes": 6
-  },
-  "ai-tool-finder-advanced": {
-    "slug": "ai-gongju-chazhao-qi-vs-shoudong-sousuo",
-    "title": "AI 工具查找器 vs 手动搜索：什么时候 AI 更胜一筹？",
-    "description": "AI匹配和手动搜索都能找到工具，但适用场景完全不同。本指南对比AI工具查找器与手动搜索的胜负手：AI擅长理解模糊描述，手动搜索更快更准。读完你会知道什么时候用AI、什么时候自己搜，以及怎样结合两者得到最可靠的结果。文章还并排对比两种方法的准确性、成本与限制，给出结合使用的最佳实践与两个实例对比，讲清两种方法的常见错误。",
-    "readingMinutes": 6
-  },
-  "ai-text-summarizer-guide": {
-    "slug": "ai-wenben-zhaiyao-gongju-shi-yong-zhinan",
-    "title": "AI 文本摘要工具是什么？长文章一键总结完整指南",
-    "description": "长文章、报告和会议记录读不完，又怕漏掉关键信息？AI文本摘要工具几秒钟把长文本浓缩成保留核心观点的精简版。本指南讲清三种摘要长度与四种格式、工具怎么工作、适合谁用，以及怎样选长度格式，每天免费5次，最多25000字符。文章还讲清工具会保留什么、谁最能受益、怎样按目的选长度，以及获得更好摘要的小技巧、常见错误与局限。",
-    "readingMinutes": 6
-  },
-  "ai-text-summarizer-howto": {
-    "slug": "zen-yang-kuaisu-zongjie-chang-wenzhang-baogao",
-    "title": "怎么快速总结长文章和报告？几秒钟搞定",
-    "description": "几秒钟总结一篇长文章并不难，关键在选对长度和格式。本教程一步步教你复制干净文本、选摘要长度与格式、生成摘要再核对关键信息，还教你超长文档怎么分段。免费在线工具，不到一分钟就能把长报告变成可保存的要点清单。教程还附上总结新闻报道、长报告与笔记文字记录的三个实例，讲清超长文档怎么分段、摘要不对时怎么排错。",
-    "readingMinutes": 6
-  },
-  "ai-text-summarizer-advanced": {
-    "slug": "ai-zhaiyao-zhunquexing-xianzhi-hechajian",
-    "title": "AI 摘要准确性：它做对了什么、漏掉了什么，怎么核查",
-    "description": "AI摘要读起来通顺，但通顺不等于准确：它很少编造观点，却常漏掉限定词、数字和细微差别。本指南讲清摘要准确性的含义、它做对了什么、最容易漏掉什么，以及怎样用几分钟抽查核对，既放心省时间，又不在关键细节上被带偏。文章还讲清最先消失的限定词与保留性说法、抽查核对的实用清单与分段丢失联系的问题，教你对比不同长度测试准确性。",
-    "readingMinutes": 6
-  },
-  "ai-writing-assistant-guide": {
-    "slug": "ai-xiezuo-zhushou-shi-yong-zhinan",
-    "title": "AI 写作助手是什么？改语法调语气完整指南",
-    "description": "邮件改了三遍还是别扭，句子意思都对读起来却不顺？AI写作助手帮你改语法拼写、改写句子、调整语气、扩展笔记和起草邮件。本指南讲清它的十种任务、怎么工作、适合谁用与做不到的事，免费每天5次，最多12000字符。文章还讲清工具的十种任务细节、怎样获得好结果的实用技巧、常见错误与排错方法，记住它的定位：一个速度很快的编辑助手。",
-    "readingMinutes": 6
-  },
-  "ai-writing-assistant-howto": {
-    "slug": "zen-yang-yong-ai-gai-yufa-gaixie-juzi",
-    "title": "怎么用 AI 改语法、改写句子？分步教程",
-    "description": "写好的文字总有几处别扭，自己改又慢又看不出问题。本教程一步步教你用免费AI写作助手按正确顺序改语法、改写句子、调整语气，最后起草邮件。先语法再改写最后调语气，每一步都站在干净基础上改，任何文字都能越改越顺。教程还附上从粗糙笔记到一封干净邮件的完整实例，讲清每次请求12000字符与每天5次的额度规划、长文档分段处理。",
-    "readingMinutes": 6
-  },
-  "ai-writing-assistant-advanced": {
-    "slug": "ai-xiezuo-zhushou-vs-rengong-bianji",
-    "title": "AI 写作助手 vs 人工编辑：最佳设置、语气选择与局限",
-    "description": "AI编辑和人工编辑哪个更好？答案取决于改什么：规则性工作AI又快又稳，判断事实与保留风格仍需人工。本指南对比两者胜负手，给出最佳设置、语气决策表与任务顺序，教你先让AI做模式化工作，再由人做判断，组成更强的混合工作流。文章还深入讲清语气决策表、语言设置与改写最佳实践，教你哪些地方仍需人工检查，以及长文档工作流。",
-    "readingMinutes": 7
-  },
   "case-converter-guide": {
     "slug": "daxiaoxie-zhuanhuan-gongju-shi-yong-zhinan",
     "title": "大小写转换工具是什么？8 种文本格式完整指南",
@@ -946,24 +892,6 @@ export const ZH_ARTICLE_INDEX: Record<string, ArticleLocaleSlimOverride> = {
     "description": "复利与单利对比，附实例演算：看看10年、20年和30年里复利能多赚多少，讲清复利频率与每月定投如何拉大差距、72法则与通货膨胀的影响，免费复利计算器可核对你的数字。举个例子，10000美元按6%单利、20年，赚取12000美元利息，最终金额是22000美元，每一年都恰好增加600美元，而复利会让差距越拉越大。",
     "readingMinutes": 8
   },
-  "currency-calculator-guide": {
-    "slug": "huo-bi-huan-suan-qi",
-    "title": "货币换算器是什么？完整指南",
-    "description": "了解货币换算器能做什么、手动汇率和欧洲央行参考汇率如何运作，以及外汇手续费如何改变最终金额，附实例演算、常见错误与排错方法，免费在线换算，汇率由你自己掌控。货币换算器省去了心算，还能清楚地展示计算过程，使用的汇率、换算后的金额和扣掉的手续费，都能在一处看到，免费在线使用。按你实际能拿到的汇率换算，才是正确答案。",
-    "readingMinutes": 10
-  },
-  "currency-calculator-howto": {
-    "slug": "ru-he-huan-suan-huo-bi",
-    "title": "如何换算货币（并计入汇兑手续费）",
-    "description": "按分步方法换算货币：输入金额与货币、用手动汇率或欧洲央行参考汇率换算、加上外汇手续费并按实际收到金额比较服务商，附三个日常实例演算与常见错误，免费在线完成。读完本教程，你就能换算任何金额、核对反向换算，并按最终收到的金额比较服务商，最后这项技能真正能省钱，因为标明的汇率很少是全部成本。换算、加上手续费，再做决定。",
-    "readingMinutes": 9
-  },
-  "currency-calculator-advanced": {
-    "slug": "ou-zhou-yang-xing-hui-lu-dui-bi",
-    "title": "欧洲央行参考汇率、银行汇率与中间价：哪种汇率适用于你",
-    "description": "比较欧洲央行参考汇率、银行汇率和中间价，了解哪种汇率适用于你的换算、为什么银行收费更高，附同一金额三种汇率的实例演算、点差解析与公平比较服务商的方法，免费工具可测试。中间价是批发货币市场买入价和卖出价之间的中点，是银行之间大额交易货币的汇率，也是市场最接近单一真实汇率的数值，新闻网站通常显示的就是它。",
-    "readingMinutes": 9
-  },
   "date-difference-calculator-guide": {
     "slug": "ri-qi-jian-ge-ji-suan-qi",
     "title": "日期间隔计算器是什么？两个日期相差天数完整指南",
@@ -1269,24 +1197,6 @@ export const ZH_ARTICLE_INDEX: Record<string, ArticleLocaleSlimOverride> = {
     "title": "JavaScript 压缩器与打包器、转译器对比：三者到底各做什么",
     "description": "JavaScript 压缩器、打包器、转译器有什么区别？本文用大白话对比三者：压缩器缩小单个文件，打包器合并多个文件并减少请求，转译器改写代码形式，并讲清它们如何在同一个工作流程里配合使用。同时详解构建工具如何把三者串联成一条流水线，并讲清小型项目与大型应用各自需要哪些步骤，避免过度配置，选工具不再迷茫。",
     "readingMinutes": 10
-  },
-  "json-formatter-guide": {
-    "slug": "shen-me-shi-json",
-    "title": "什么是 JSON？格式化与验证完整指南",
-    "description": "JSON 是什么？本文用大白话讲清 JSON 的语法、对象与数组、六种数据类型，以及格式化、压缩与验证的区别；并详解行号与列号的错误定位方法，附免费在线工具，帮你自信地阅读与修复 JSON。同时详解嵌套对象与数组的读法、键名必须加双引号等严格规则，并讲清格式化如何让深层结构一目了然，从此不再害怕 JSON。",
-    "readingMinutes": 10
-  },
-  "json-formatter-howto": {
-    "slug": "ru-he-geshi-hua-he-yan-zheng-json",
-    "title": "如何格式化与验证 JSON（并修复语法错误）",
-    "description": "手把手教你格式化 JSON：粘贴到免费在线工具里一键格式化、压缩、按字母排序键名，再验证有效性；同时详解错误信息的行号列号含义与最常见语法错误的修复方法，几分钟得到一份干净可用的文档。同时详解键名排序的用途与压缩后文档的适用场景，并讲清粘贴前去掉密码与密钥等机密信息的注意事项，让 JSON 处理变得轻松。",
-    "readingMinutes": 10
-  },
-  "json-formatter-advanced": {
-    "slug": "chang-jian-json-yu-fa-cuo-wu-xiu-fu",
-    "title": "常见 JSON 语法错误及修复方法（末尾逗号、引号等）",
-    "description": "JSON 报错怎么修？本文逐条讲清最常见的 JSON 语法错误：末尾逗号、单引号、未加引号的键、缺失逗号、括号不匹配、注释与多余文字，每种错误都有错误示例与修复示例，附行号定位技巧，快速恢复有效文档。同时详解错误信息里行号与列号的读法，并讲清一次只修一个错误、每次修复后重新验证的调试方法，让 JSON 不再报错。",
-    "readingMinutes": 9
   },
   "json-csv-converter-guide": {
     "slug": "shen-me-shi-json-zhuan-csv",

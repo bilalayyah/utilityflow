@@ -9,34 +9,6 @@ import type { ToolLocaleOverride } from '../../types';
  * do not collide with English slugs or reserved paths.
  */
 export const ZH_BATCH_2_OVERRIDES: Record<string, ToolLocaleOverride> = {
-  'json-formatter': {
-    slug: 'json-geshihua',
-    name: 'JSON 格式化与验证工具',
-    shortDescription:
-      '格式化、压缩、按键排序并验证 JSON 语法，精确显示错误的行号与列号。',
-    keywords: [
-      'JSON 格式化',
-      'JSON 验证',
-      'JSON 美化',
-      'JSON 压缩',
-      'JSON 在线格式化',
-      'JSON 语法检查',
-      'JSON 解析工具',
-      'JSON 校验',
-      'JSON 排版',
-    ],
-    seo: {
-      title: 'JSON 格式化与验证工具：免费在线美化、验证、压缩、排序 JSON 数据 | UtilityFlow',
-      description:
-        '在浏览器中即时格式化、验证、压缩 JSON 数据，并按字母顺序排列键名，精确显示语法错误的行号与列号，调试更快速。无需注册，适合检查 API 响应与配置文件，手机浏览器同样可用。支持 2 空格、4 空格、制表符与压缩四种模式，键名可按字母排序，输出可直接复制或下载为文件使用，适合日常开发、调试与接口联调。',
-      primaryKeyword: 'JSON 格式化',
-      secondaryKeywords: ['JSON 验证工具', 'JSON 美化工具', 'JSON 压缩工具', 'JSON 语法检查'],
-      longTailKeywords: ['免费在线格式化并验证 JSON', '按字母顺序排列 JSON 键名', '不上传服务器压缩 JSON', '在线格式化嵌套 JSON 并缩进'],
-      schemaApplicationCategory: 'DeveloperApplication',
-    },
-    intro:
-      '通过行号与列号反馈验证损坏的 JSON 数据，将嵌套结构按 2 空格、4 空格或制表符格式化，按字母顺序排列键名，或压缩后用于生产环境传输。',
-  },
   'base64-encoder-decoder': {
     slug: 'base64-bianma-jie-ma',
     name: 'Base64 编码与解码工具',

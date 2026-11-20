@@ -19,12 +19,7 @@ import { CATEGORY_LOCALE_SLUGS } from '../src/locales/config';
 const RESERVED = new Set([
   'tools', 'tool', 'category', 'categoria', 'about', 'sobre',
   'contact', 'contato', 'privacy-policy', 'politica-de-privacidade',
-  'terms-of-service', 'termos-de-servico', 'ai-writing-assistant',
-  'ai-text-summarizer', 'ai-tool-finder',
-  // NOTE: assistente-de-escrita-ia / resumidor-de-texto-ia /
-  // buscador-de-ferramentas-ia are intentionally NOT reserved — they are
-  // the fixed slugs of the 3 AI tools. The per-tool check below only flags
-  // a collision if a *different* tool uses the same slug.
+  'terms-of-service', 'termos-de-servico', ,
   'pt', 'es', 'fr', 'en',
   'sitemap.xml', 'robots.txt', 'favicon.svg', '404', 'all-tools',
   'todas-as-ferramentas',

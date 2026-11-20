@@ -10,14 +10,11 @@ export const zhStrings: UiStrings = {
   nav: {
     tools: '工具',
     categories: '分类',
-    aiTools: 'AI 工具',
     about: '关于我们',
     contact: '联系我们',
     blog: '博客',
     allTools: '全部工具',
-    freeAiTools: '免费 AI 工具',
-    viewAiSection: '在首页查看 AI 专区 →',
-    searchPlaceholder: '搜索 88 个工具...',
+    searchPlaceholder: '搜索 83 个工具...',
     searchTools: '搜索工具',
     closeSearch: '关闭搜索',
     openMenu: '打开导航菜单',
@@ -25,24 +22,12 @@ export const zhStrings: UiStrings = {
     skipToContent: '跳到正文',
     language: '语言',
     chooseLanguage: '选择语言',
-    aiWriting: {
-      label: 'AI 写作助手',
-      desc: '语法、改写、语气与邮件起草',
-    },
-    aiSummarizer: {
-      label: 'AI 文本摘要工具',
-      desc: '短、中、要点式摘要',
-    },
-    aiFinder: {
-      label: 'AI 智能工具查找器',
-      desc: '用通俗语言找到合适的工具',
-    },
   },
   footer: {
     tagline:
       '为作家、工程师、营销人员与分析师打造的快速、浏览器优先的日常工具合集。本地运行，开销极小。',
     categories: '分类',
-    platformAi: '平台与 AI',
+    platformAi: '探索',
     trustLegal: '信任与法律信息',
     home: '首页',
     allToolsDirectory: '全部工具目录',
@@ -81,13 +66,12 @@ export const zhStrings: UiStrings = {
     tryAgain: '再试一次',
     openTool: '打开工具',
     browserSide: '浏览器端',
-    freeAiTool: '免费 AI 工具',
     externalApi: '外部 API',
   },
   home: {
-    seoTitle: 'UtilityFlow——免费快速的浏览器在线实用工具平台，88个工具',
+    seoTitle: 'UtilityFlow——免费快速的浏览器在线实用工具平台，83个工具',
     seoDescription:
-      '免费、快速、注重隐私的在线实用工具平台，提供88个工具，涵盖文本分析、开发者排版、计算器、PDF、SEO检查与图片处理流程，全部在浏览器中运行，无需上传文件、无需注册账号，打开即用，支持中文在内的11种语言，数据不出设备，安全又方便。',
+      '免费、快速、注重隐私的在线实用工具平台，提供83个工具，涵盖文本分析、开发者排版、计算器、PDF、SEO检查与图片处理流程，全部在浏览器中运行，无需上传文件、无需注册账号，打开即用，支持中文在内的11种语言，数据不出设备，安全又方便。',
     seoKeywords: [
       '在线实用工具',
       '浏览器工具',
@@ -100,24 +84,15 @@ export const zhStrings: UiStrings = {
     eyebrow: 'UtilityFlow 平台 · 7 大核心分类 · {count} 个已上线工具',
     h1: '为速度与隐私而生的实用在线工具。',
     heroDescription:
-      'UtilityFlow 汇集了 84 个浏览器优先的工具，以及免费的 AI 写作、摘要与智能工具发现功能，覆盖文本、开发者、计算器、社交媒体、PDF、SEO 与图片处理流程。',
+      'UtilityFlow 汇集了 83 个浏览器优先的工具，覆盖文本、开发者、计算器、社交媒体、PDF、SEO 与图片处理流程。',
     exploreCategories: '浏览分类',
     openDirectory: '打开完整目录',
-    aiWriting: 'AI 写作',
-    aiSummarizer: 'AI 摘要',
-    aiFinder: 'AI 工具查找器',
     metrics: {
       toolCategories: '工具分类',
       browserUtilities: '浏览器工具',
       liveTools: '已上线工具',
       accountRequired: '需要账号',
       none: '无需账号',
-    },
-    aiSpotlight: {
-      badge: '免费 AI 套件 · 无需登录',
-      title: '免费 AI 工具',
-      description:
-        '无需注册，几秒钟即可改进草稿、摘要长文档或找到合适的工具。',
     },
     popular: {
       title: '热门工具',
@@ -177,22 +152,22 @@ export const zhStrings: UiStrings = {
       {
         question: 'UtilityFlow 的工具无需创建账号即可免费使用吗？',
         answer:
-          '是的。UtilityFlow 的全部 84 个浏览器工具、3 个 AI 工具与货币计算器均可免费使用，无需注册、登录墙、点数或订阅。',
+          '是的。UtilityFlow 的全部 83 个浏览器工具均可免费使用，无需注册、登录墙、点数或订阅。',
       },
       {
         question: 'UtilityFlow 会把我的文本、代码或文件上传到服务器吗？',
         answer:
-          '全部 84 个核心浏览器工具都在您的网页浏览器本地运行，不会上传输入内容。3 个可选的免费 AI 工具（AI 写作助手、AI 文本摘要工具与 AI 智能工具查找器）会通过服务器端 Groq 推理安全处理您的提示，且不会保存您的文本。',
+          '全部 83 个核心浏览器工具都在您的网页浏览器本地运行，不会上传输入内容。',
       },
       {
-        question: '88 个工具在平台上是如何组织的？',
+        question: '83 个工具在平台上是如何组织的？',
         answer:
-          'UtilityFlow 涵盖七大核心分类（文本与写作、开发者、计算器、社交媒体、PDF、SEO、图片与文件工具），共 84 个浏览器工具、集成在平台中的 3 个免费 AI 工具和货币计算器。',
+          'UtilityFlow 涵盖七大核心分类（文本与写作、开发者、计算器、社交媒体、PDF、SEO、图片与文件工具），共 83 个浏览器工具，全部集成在平台中。',
       },
       {
         question: '我可以收藏或分享某个具体工具的直接链接吗？',
         answer:
-          '可以。每个工具与分类都有自己永久、干净的网址（例如 /word-counter/、/ai-writing-assistant/ 或 /category/developer-tools/），可直接打开，刷新浏览器后依然有效。',
+          '可以。每个工具与分类都有自己永久、干净的网址（例如 /word-counter/ 或 /category/developer-tools/），可直接打开，刷新浏览器后依然有效。',
       },
       {
         question: 'UtilityFlow 在手机与平板上运行流畅吗？',
@@ -209,7 +184,7 @@ export const zhStrings: UiStrings = {
     seoKeywords: ['实用工具目录', '全部在线工具', '免费浏览器工具'],
     title: '全部工具目录',
     description:
-      '浏览 UtilityFlow 上注册的全部 {count} 个已上线工具，或探索涵盖浏览器与免费 AI 流程的七个分类中心。',
+      '浏览 UtilityFlow 上注册的全部 {count} 个已上线工具，或探索七个分类中心。',
     searchPlaceholder: '按工具名称、关键词或分类搜索...',
     showing: '共 {categories} 个分类、{tools} 个已上线工具',
     all: '全部',
@@ -240,7 +215,6 @@ export const zhStrings: UiStrings = {
     commonUseCases: '常见使用场景',
     runsLocally: '在您的浏览器本地运行',
     externalApi: '外部 API 集成',
-    freeAiTool: '免费 AI 工具 · 无需登录',
     loadingWorkspace: '正在加载 {name} 工作区...',
     input: '输入',
     output: '输出',
@@ -325,7 +299,7 @@ export const zhStrings: UiStrings = {
       '了解 UtilityFlow 如何在七大分类中打造快速、注重隐私的浏览器工具，无需账号、杂乱内容或不必要的数据上传。',
     title: '关于 UtilityFlow',
     intro:
-      'UtilityFlow 是一个独立的网络平台，致力于打造 88 个专注、可靠的工具，服务日常数字工作。',
+      'UtilityFlow 是一个独立的网络平台，致力于打造 83 个专注、可靠的工具，服务日常数字工作。',
     whyTitle: '我们为什么打造 UtilityFlow',
     whyP1:
       '日常在线任务——统计字数、验证 JSON、检查字符限制、计算贷款还款或压缩图片——常常迫使人们使用缓慢的网站，上面布满侵入式弹窗、令人困惑的下载或强制注册。',
@@ -333,14 +307,14 @@ export const zhStrings: UiStrings = {
       '我们的目标很简单：为每个工具提供一个干净的专属页面，加载快速、清楚说明工具的工作方式，并在网络标准允许的情况下直接在浏览器内执行。',
     orgTitle: '谁在运营 UtilityFlow',
     orgP1:
-      'UtilityFlow 是由 Bilal 创建并维护的独立项目，他利用业余时间开发免费网络工具。网站背后没有公司，没有投资者资金，也没有员工团队——每一个工具、指南和帮助页面都由一个人设计、开发和测试。全部 88 个工具无需注册或订阅即可免费使用。页脚的署名是 Shaheen，正是他的鼓励启发了这个项目，他的名字出现在每一页上，提醒人们这个想法从何而来。',
+      'UtilityFlow 是由 Bilal 创建并维护的独立项目，他利用业余时间开发免费网络工具。网站背后没有公司，没有投资者资金，也没有员工团队——每一个工具、指南和帮助页面都由一个人设计、开发和测试。全部 83 个工具无需注册或订阅即可免费使用。页脚的署名是 Shaheen，正是他的鼓励启发了这个项目，他的名字出现在每一页上，提醒人们这个想法从何而来。',
     orgP2:
       '正因为项目规模小且独立，决策保持简单：如果某个工具运行缓慢、令人困惑或出错，就会得到修复。通过联系页面发送的反馈会直接到达能够修改代码的人手中，访客的建议已经催生了新的工具和全站的改进。',
     howTitle: '我们的工具如何开发与测试',
     howP1:
       '每个工具都从一个明确的单一任务出发——统计字数、合并 PDF、格式化 JSON——并被打造成专注做好这项任务的页面。只要网络标准允许，所有处理都在您的浏览器内完成，您的文本和文件无需离开设备。每个工具页面都用简短指南说明操作步骤、展示实际示例，并回答人们最常问的问题，让您可以自行判断结果，而不必盲目信任一个黑盒。',
     howP2:
-      '工具上线之前，会在桌面浏览器和手机浏览器中使用真实输入进行测试，包括空输入、超长文本和不常见文件类型等边界情况。如果出现故障或计算结果有误，修复会随网站更新发布，页面也会重新检查。三个可选的 AI 工具是唯一会把文本发送到服务器的工具，其页面会在您使用之前明确说明这一点。',
+      '工具上线之前，会在桌面浏览器和手机浏览器中使用真实输入进行测试，包括空输入、超长文本和不常见文件类型等边界情况。如果出现故障或计算结果有误，修复会随网站更新发布，页面也会重新检查。所有工具都在您的浏览器内完整运行，您输入的任何内容都不会发送到服务器。',
     whoTitle: 'UtilityFlow 适合谁',
     whoP1:
       'UtilityFlow 面向所有需要快速获得工具结果、而不想安装软件或创建账号的人：检查论文字数的学生、排版草稿的作者、验证 JSON 或编码 URL 的开发者、检查字符限制的营销人员，以及计算贷款或折扣的小企业主。如果一项任务不到一分钟就能完成，相应的工具也应该不到一分钟就能完成——这是本站每个页面都要达到的标准。',
@@ -438,10 +412,9 @@ export const zhStrings: UiStrings = {
         ],
       },
       {
-        title: '2. 工具输入、浏览器处理与免费 AI 工具',
+        title: '2. 工具输入与浏览器处理',
         paragraphs: [
-          '在我们 84 个基于浏览器的工具中输入的文本、数字、代码片段与文件，均在您的浏览器会话内本地处理，不会离开您的设备。',
-          '我们提供的三个可选免费 AI 工具（AI 写作助手、AI 文本摘要工具与 AI 智能工具查找器）会把提交的文本通过受保护的后端发送至 Groq 进行实时推理。我们不会保存或记录您的提示，免费每日限流仅使用带 UTC 日期标记的 SHA-256 哈希值，因此绝不会保存访客的原始 IP 地址。',
+          '在我们 83 个基于浏览器的工具中输入的文本、数字、代码片段与文件，均在您的浏览器会话内本地处理，不会离开您的设备。',
           '在我们的工具下方发表评论时，只需提供名字和评论文本。您提交的名字和文本会存储在我们的托管平台上，并与日期一起公开展示在相应工具页面上。评论无需提供邮箱地址或注册账号，我们也不会将评论数据用于广告。如果您希望删除某条评论，请联系我们并提供页面和所用名字，我们会将其删除。',
         ],
       },
@@ -469,7 +442,7 @@ export const zhStrings: UiStrings = {
       {
         title: '6. 数据保留',
         paragraphs: [
-          '在浏览器中处理的信息从不会发送给我们，因此无从保留。发送给可选 AI 工具的文本仅为完成请求而处理，不会被存储。评论会一直保留，直到被我们删除或应您的要求删除。托管日志与安全记录仅在托管服务商运营和保护服务所需的有限期限内保留。',
+          '在浏览器中处理的信息从不会发送给我们，因此无从保留。评论会一直保留，直到被我们删除或应您的要求删除。托管日志与安全记录仅在托管服务商运营和保护服务所需的有限期限内保留。',
         ],
       },
       {
@@ -540,7 +513,7 @@ export const zhStrings: UiStrings = {
       {
         title: '7. 第三方服务',
         paragraphs: [
-          '部分功能依赖独立的第三方服务：三个 AI 工具会将文本发送至 Groq 进行处理，联系表单由 FormSubmit 投递，网站托管于 Cloudflare，货币计算器从 Frankfurter 获取实时汇率。每项服务都有各自的条款与隐私政策，您的使用受这些文件约束。UtilityFlow 不对第三方服务的可用性或做法负责。',
+          '部分功能依赖独立的第三方服务：联系表单由 FormSubmit 投递，网站托管于 Cloudflare。每项服务都有各自的条款与隐私政策，您的使用受这些文件约束。UtilityFlow 不对第三方服务的可用性或做法负责。',
         ],
       },
       {

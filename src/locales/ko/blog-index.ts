@@ -568,60 +568,6 @@ export const KO_ARTICLE_INDEX: Record<string, ArticleLocaleSlimOverride> = {
     "description": "SQL과 코드에 줄 번호를 매길 때 어떤 형식을 골라야 할까요? 숫자 형식과 구분자, 접두사 선택법부터 쿼리와 스크립트를 망가뜨리는 흔한 실수와 해결 방법까지 자세히 알려드려요. 처음부터 끝까지 실전 예시와 체크리스트로 정리했어요. 지금 읽고 바로 써 보세요. 오늘부터 써 보세요.",
     "readingMinutes": 9
   },
-  "ai-tool-finder-guide": {
-    "slug": "ai-dogu-chajgi-ran-mueos-inga",
-    "title": "AI 스마트 도구 찾기란? 완벽 가이드",
-    "description": "AI 스마트 도구 찾기가 무엇인지, 하고 싶은 일을 일상적인 말로 적으면 88개 도구 중에서 맞는 도구를 어떻게 골라주는지, 무료 AI 검색 한도와 개인정보 보호, 잘 맞는 질문을 쓰는 방법까지 자세히 알려드려요. 처음 쓰는 분도 한 문장만 입력하면 바로 쓸 수 있어요.",
-    "readingMinutes": 9
-  },
-  "ai-tool-finder-howto": {
-    "slug": "ai-ro-onrain-dogu-chajneun-bangbeop",
-    "title": "AI로 어떤 작업이든 맞는 온라인 도구 찾는 방법",
-    "description": "AI로 어떤 작업이든 맞는 온라인 도구를 찾는 방법을 단계별로 알려드려요. 하고 싶은 일을 한 문장으로 설명하고, 추천 이유를 확인한 뒤 도구를 여는 과정과 좋은 질문을 쓰는 요령까지 무료로 안내해 드려요. 처음 쓰는 분도 1분 안에 맞는 도구를 찾을 수 있어요. 따라 해 보세요.",
-    "readingMinutes": 9
-  },
-  "ai-tool-finder-advanced": {
-    "slug": "ai-dogu-chajgi-vs-jikjeop-geomsaek",
-    "title": "AI 도구 찾기 vs 직접 검색: AI 매칭이 이기는 경우와 그렇지 않은 경우",
-    "description": "AI 도구 찾기와 직접 검색을 비교해 드려요. AI 매칭이 이기는 경우와 직접 검색이 더 빠르고 정확한 경우를 정리하고, 하루 10회 AI 검색 한도 안에서 두 방법을 함께 쓰는 가장 좋은 순서까지 알려드려요. 오늘 바로 내 작업에 맞는 방법을 골라 보세요. 지금 확인해 보세요.",
-    "readingMinutes": 9
-  },
-  "ai-text-summarizer-guide": {
-    "slug": "ai-tekseuteu-yoyakgi-ran-mueos-inga",
-    "title": "AI 텍스트 요약기란? 완벽 가이드",
-    "description": "AI 텍스트 요약기가 무엇인지, 짧은 요약과 중간 요약, 긴 요약이 어떻게 다른지, 문단과 요점, 핵심 내용, 쉬운 말 형식을 언제 쓰면 좋은지, 긴 글을 더 빨리 읽는 실전 사용법까지 자세히 알려드려요. 지금 바로 써 보세요. 하루 5회까지 무료로 쓸 수 있어요. 확인해 보세요.",
-    "readingMinutes": 8
-  },
-  "ai-text-summarizer-howto": {
-    "slug": "gin-geul-gwa-bogoseo-yoyakhaneun-bangbeop",
-    "title": "긴 글과 보고서를 몇 초 만에 요약하는 방법",
-    "description": "긴 글과 보고서를 몇 초 만에 요약하는 방법을 단계별로 알려드려요. 글을 깨끗하게 정리하고 길이를 고르고 형식을 고른 뒤, 요약을 쓰기 전에 확인하는 과정까지 무료로 자세히 안내해 드려요. 하루 5회 무료로 쓸 수 있고, 핵심 내용만 저장하는 요령까지 알려드려요. 지금 바로 시작하세요.",
-    "readingMinutes": 9
-  },
-  "ai-text-summarizer-advanced": {
-    "slug": "ai-yoyakgi-jeonghwakdo-wa-hwagin-bangbeop",
-    "title": "AI 요약기 정확도: 잘 맞는 것, 놓치는 것, 확인하는 방법",
-    "description": "AI 요약기의 정확도를 알려드려요. 잘 맞는 부분과 자주 놓치는 부분, 숫자와 조건, 완곡한 표현을 확인하는 실전 체크리스트까지 정리했어요. 요약 내용을 믿고 쓰기 전에 꼭 확인하고, 계약서나 의료 문서에는 원본을 읽는 이유도 알려드려요. 지금 바로 확인해 보세요. 오늘부터 써 보세요.",
-    "readingMinutes": 8
-  },
-  "ai-writing-assistant-guide": {
-    "slug": "ai-geulseugi-doumi-ran-mueos-inga",
-    "title": "AI 글쓰기 도우미란? 완벽 가이드",
-    "description": "AI 글쓰기 도우미가 무엇인지, 문법 고치기와 문장 다시 쓰기, 어조 바꾸기, 바꿔 쓰기, 이메일 초안 작성까지 알려드려요. 열 가지 작업과 일곱 가지 어조, 열여섯 개 언어를 무료로 쓰는 방법과 하루 5회 한도, 검토 요령까지 자세히 안내해 드려요. 지금 확인해 보세요.",
-    "readingMinutes": 9
-  },
-  "ai-writing-assistant-howto": {
-    "slug": "ai-ro-munbeop-gogigo-munjang-dasi-sseugi",
-    "title": "AI 글쓰기 도우미로 문법 고치고 문장 다시 쓰는 방법",
-    "description": "AI 글쓰기 도우미로 문법을 고치는 방법을 단계별로 알려드려요. 오류를 고치고 어색한 문장을 다시 쓰고 어조를 바꾸는 과정과, 보내기 전에 꼭 확인해야 할 검토 방법을 무료로 자세히 안내해 드려요. 지금 바로 따라 해 보세요. 오늘부터 써 보세요. 하루 5회 무료로 쓸 수 있어요.",
-    "readingMinutes": 9
-  },
-  "ai-writing-assistant-advanced": {
-    "slug": "ai-geulseugi-doumi-vs-jikjeop-pyeonjip",
-    "title": "AI 글쓰기 도우미 vs 직접 편집: 가장 좋은 설정, 어조 선택, 한계",
-    "description": "AI 글쓰기 도우미와 직접 편집을 비교해 드려요. 가장 좋은 설정과 어조 선택, 바꿔 쓰기 요령, 한계까지 정리했어요. AI가 잘하는 패턴 작업과 사람이 직접 해야 하는 판단을 나눠서 알려드려요. 지금 확인해 보세요. 오늘부터 써 보세요. 하루 5회 무료로 쓸 수 있어요.",
-    "readingMinutes": 9
-  },
   "case-converter-guide": {
     "slug": "daesomunja-byeonhwangi-ran-mueos-inga",
     "title": "대소문자 변환기란? 텍스트 대소문자 형식 완벽 가이드",
@@ -946,24 +892,6 @@ export const KO_ARTICLE_INDEX: Record<string, ArticleLocaleSlimOverride> = {
     "description": "복리와 단리를 예시로 비교했어요. 10년, 20년, 30년 동안 복리가 얼마나 더 버는지, 복리 주기와 월 납입이 차이를 어떻게 키우는지 무료 복리 계산기로 직접 확인해 보세요. 단리와 복리의 장기 격차를 표와 예시로 비교하고, 내 상황에 맞는 선택법과 주의할 점도 알려드려요.",
     "readingMinutes": 8
   },
-  "currency-calculator-guide": {
-    "slug": "hwan-yul-gye-san-gi",
-    "title": "환율 계산기란? 환율 계산법과 ECB 기준환율·수수료 완벽 가이드",
-    "description": "환율 계산기가 무엇인지, 환율 계산법과 직접 입력 환율, ECB 기준환율의 차이, 환전 수수료가 받는 금액을 어떻게 바꾸는지 예시와 함께 무료 환율 계산기로 알아보세요. 여행과 해외 직구, 송금 전에 환율을 확인해 손해를 줄이는 실용적인 요령과 수수료 비교법까지 정리했어요.",
-    "readingMinutes": 8
-  },
-  "currency-calculator-howto": {
-    "slug": "hwan-yul-gye-san-beop",
-    "title": "환율 계산법: 환율 변환하고 수수료까지 계산하는 방법",
-    "description": "환율 계산법을 단계별로 정리했어요. 직접 입력 환율과 ECB 기준환율로 환율을 변환하고 FX 수수료를 더해 실제로 받을 금액을 확인하는 방법까지 무료 환율 계산기로 알아보세요. 수수료와 우대율을 반영한 실제 수령액 계산법과 환전 타이밍 요령, 은행별 비교법까지 함께 알려드려요.",
-    "readingMinutes": 8
-  },
-  "currency-calculator-advanced": {
-    "slug": "ecb-hwan-yul-vs-jung-gan-hwan-yul",
-    "title": "ECB 기준환율 vs 은행 환율 vs 중간환율: 나에게 적용되는 환율은?",
-    "description": "ECB 기준환율과 은행 환율, 중간환율을 비교했어요. 세 환율이 왜 다른지, 은행이 왜 더 비싸게 받는지, 본인 변환에 어떤 환율이 적용되는지 무료 환율 계산기로 확인해 보세요. 환율 종류별 차이를 표로 비교하고, 해외 결제와 송금에서 유리한 선택법과 주의할 점도 정리했어요.",
-    "readingMinutes": 8
-  },
   "date-difference-calculator-guide": {
     "slug": "naljja-chai-gyesan-gi",
     "title": "날짜 차이 계산기란? 일수·평일 계산 완벽 가이드",
@@ -1268,24 +1196,6 @@ export const KO_ARTICLE_INDEX: Record<string, ArticleLocaleSlimOverride> = {
     "slug": "js-minipeo-beondeulleo-teuranseupailleo-bigyo",
     "title": "자바스크립트 압축기 vs 번들러 vs 트랜스파일러 비교",
     "description": "자바스크립트 압축기와 번들러, 트랜스파일러가 각각 무엇을 하는지 자세히 비교했어요. 언제 어느 도구가 필요한지, 세 도구를 함께 쓰는 방법까지 정리했어요. 개발자와 초보자 모두를 위해 핵심 개념과 예제를 쉽게 풀어서 설명했어요. 실무에서 바로 쓸 수 있는 예제와 팁까지 함께 정리했어요.",
-    "readingMinutes": 6
-  },
-  "json-formatter-guide": {
-    "slug": "json-pomaeteo-ran-mueos-inga",
-    "title": "JSON이란 무엇인가요? 정리와 검증 완전 가이드",
-    "description": "JSON이 무엇인지, 여섯 가지 데이터 형식이 어떻게 작동하는지, 정리와 검증이 왜 필요한지 알려드려요. 무료 JSON 포매터로 들여쓰기와 오류 찾기를 하는 방법을 자세히 정리했어요. 실무에서 바로 쓸 수 있는 예제와 팁까지 함께 정리했어요. 지금 바로 무료 도구로 직접 따라 해보세요.",
-    "readingMinutes": 7
-  },
-  "json-formatter-howto": {
-    "slug": "json-pomaeting-geomsa-haneun-beob",
-    "title": "JSON 정리와 검증 방법 (문법 오류 고치기까지)",
-    "description": "JSON을 정리하고 검증하는 방법을 단계별로 알려드려요. 압축과 키 정렬, 줄과 열 오류 읽기, 마지막 쉼표와 따옴표 고치기까지 무료 도구로 따라 하는 법을 정리했어요. 개발자와 초보자 모두를 위해 핵심 개념과 예제를 쉽게 풀어서 설명했어요. 지금 바로 무료 도구로 직접 따라 해보세요.",
-    "readingMinutes": 7
-  },
-  "json-formatter-advanced": {
-    "slug": "json-munbeop-oryu-gochineun-beob",
-    "title": "흔한 JSON 문법 오류와 고치는 방법 (마지막 쉼표, 따옴표 등)",
-    "description": "흔한 JSON 문법 오류 10가지를 고치는 방법을 자세히 정리했어요. 마지막 쉼표와 작은따옴표, 빠진 쉼표, 괄호 불일치, 주석, 잘못된 숫자까지 무료 도구로 확인하는 법을 알려드려요. 자주 하는 실수와 해결 방법까지 꼼꼼하게 정리했어요. 지금 바로 무료 도구로 직접 따라 해보세요.",
     "readingMinutes": 6
   },
   "json-csv-converter-guide": {

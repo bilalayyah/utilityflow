@@ -161,9 +161,7 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
             </span>
             <span aria-hidden="true">·</span>
             <span>
-              {tool.id.startsWith('ai-')
-                ? t.toolPage.freeAiTool
-                : tool.requiresExternalApi
+              {tool.requiresExternalApi
                 ? t.toolPage.externalApi
                 : t.toolPage.runsLocally}
             </span>

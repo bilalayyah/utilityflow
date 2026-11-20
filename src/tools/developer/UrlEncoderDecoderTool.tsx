@@ -31,7 +31,7 @@ const STRINGS_EN = {
     malformed: 'Malformed percent-encoding sequence.',
   };
 
-const SAMPLE_URL = 'https://utilityflow.online/tools/?q=json formatter&utm_source=docs&lang=en-US';
+const SAMPLE_URL = 'https://utilityflow.online/tools/?q=word counter&utm_source=docs&lang=en-US';
 
 export default function UrlEncoderDecoderTool() {
   const { t } = useLocale();

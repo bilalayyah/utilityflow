@@ -8,7 +8,7 @@ import type { ArticleLocaleOverride } from './types';
  * generated file (src/locales/<code>/articles/<id>.ts, written by
  * scripts/generate-blog-article-chunks.ts). The locale chunk carries only
  * the SLIM overrides (slug/title/description/readingMinutes), so opening
- * any page in a language no longer downloads all 264 articles' bodies.
+ * any page in a language no longer downloads all 249 articles' bodies.
  *
  * This module maps locale -> lazy per-locale loader
  * (src/locales/<code>/articleLoader.ts, one import.meta.glob per locale),

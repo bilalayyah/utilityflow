@@ -568,60 +568,6 @@ export const JA_ARTICLE_INDEX: Record<string, ArticleLocaleSlimOverride> = {
     "description": "SQLやコード向けの行番号付けで、数値の形式や区切り文字、行頭・行末の選び方を解説します。クエリやスクリプトを壊すよくあるミスと、その防ぎ方もまとめました。数値のゼロ埋めや区切り文字の選び方、行頭・行末の組み合わせも実例付きで解説します。",
     "readingMinutes": 16
   },
-  "ai-tool-finder-guide": {
-    "slug": "ai-tsuru-kensaku-toha",
-    "title": "AIツールファインダーとは？やりたいことから最適なツールを探す方法",
-    "description": "AIスマートツールファインダーとは何か、88のツールの中からやりたいことに合う最適なツールをどう見つけるのかを解説します。キーワード検索とAI検索の仕組み、使える場面、1日10回までの制限と注意点を紹介します。無料でログイン不要、8つのクイックタスクボタン付きです。",
-    "readingMinutes": 16
-  },
-  "ai-tool-finder-howto": {
-    "slug": "ai-tsuru-kensaku-yarikata",
-    "title": "AIで最適なオンラインツールを見つける方法｜やりたいことを1文で伝えるだけ",
-    "description": "AIで最適なオンラインツールを見つける方法をステップごとに解説します。やりたいことを1文で説明し、即時一致とAI検索を読み、推薦されたツールを確認する手順を紹介します。無料でログイン不要、1日10回のAI検索付きです。88のツールの中から探せます。",
-    "readingMinutes": 16
-  },
-  "ai-tool-finder-advanced": {
-    "slug": "ai-tsuru-kensaku-vs-shudo-kensaku",
-    "title": "AIツールファインダーと手動検索の比較｜AIが勝つとき・負けるとき",
-    "description": "AIスマートツールファインダーと手動検索を比較します。AI照合が勝つ場面、手動検索が勝つ場面、それぞれの精度の限界、両方を組み合わせる最適な方法を解説します。1日10回のAI検索を無駄にしない使い方も紹介します。88のツールが対象です。",
-    "readingMinutes": 17
-  },
-  "ai-text-summarizer-guide": {
-    "slug": "ai-bunsho-yoyaku-toha",
-    "title": "AI文章要約ツールとは？長い文章を短くまとめる無料ツールの使い方と選び方",
-    "description": "AI文章要約ツールとは何か、短・中・長の要約の違い、箇条書きや要点まとめの使い分けを解説します。長い記事やレポートを速く読むための無料ツールの活用法を紹介します。要約の長さと形式の選び方、原文の意味を保つコツ、使える場面もわかりやすく解説します。",
-    "readingMinutes": 14
-  },
-  "ai-text-summarizer-howto": {
-    "slug": "nagai-bunsho-yoyaku-hoho",
-    "title": "長い文章を要約する方法｜レポート・記事を数秒でまとめる手順とコツ",
-    "description": "長い文章を要約する方法を手順ごとに解説します。文章をきれいに整えるコツ、長さと形式の選び方、要約の確認方法まで、無料のAI要約ツールを使った実践的な手順を紹介します。長い記事やレポート、会議のメモも、数分で要点だけを抜き出せるようになります。",
-    "readingMinutes": 15
-  },
-  "ai-text-summarizer-advanced": {
-    "slug": "ai-yoyaku-seido-genkai",
-    "title": "AI要約の精度と限界｜正しいこと・見落とすこと・確認方法を解説",
-    "description": "AI要約の精度を解説します。AI要約が得意なこと、見落としやすい数字や条件、曖昧な表現の扱い、そして要約を信頼する前に使える実践的な確認チェックリストを紹介します。数字や条件の見落としを防ぎ、要約を鵜呑みにせず正しく使う方法が身につきます。",
-    "readingMinutes": 14
-  },
-  "ai-writing-assistant-guide": {
-    "slug": "ai-raithingu-asisutanto-toha",
-    "title": "AIライティングアシスタントとは？文章校正・言い換え・メール作成ができる無料ツール",
-    "description": "AIライティングアシスタントとは何か、文法修正、文章の書き直し、トーン調整、言い換え、メール作成といった機能と、どんな人に役立つのかを解説します。無料で使える使い方を紹介します。文章を書くのが苦手な人でも、読みやすく伝わる文章を速く作れるようになります。",
-    "readingMinutes": 16
-  },
-  "ai-writing-assistant-howto": {
-    "slug": "ai-de-bunpo-shusei-hoho",
-    "title": "AIで文法チェック・文章を書き直す方法｜無料ライティングツールの使い方",
-    "description": "AIで文法を修正する方法を手順ごとに解説します。誤りの修正、ぎこちない文章の書き直し、トーンの調整、言い換え、送る前の確認まで、無料ツールの実践的な使い方を紹介します。メールやレポートの文章も、AIと一緒に短時間できれいに仕上げられます。",
-    "readingMinutes": 17
-  },
-  "ai-writing-assistant-advanced": {
-    "slug": "ai-raithingu-asisutanto-vs-shudo-kousei",
-    "title": "AIライティングアシスタント vs 手動校正｜最適な設定・トーン選び・限界を比較",
-    "description": "AIライティングアシスタントと手動校正を比較します。最適な設定、トーンの選び方、言い換えのコツ、限界、そして今も人間の確認が必要な場所をまとめました。AI任せにせず、自分の目で最終チェックする習慣が身につく実践的な内容です。",
-    "readingMinutes": 16
-  },
   "case-converter-guide": {
     "slug": "oomoji-komoji-henkan-toha",
     "title": "大文字・小文字変換ツールとは？8つの表記形式を完全解説",
@@ -946,24 +892,6 @@ export const JA_ARTICLE_INDEX: Record<string, ArticleLocaleSlimOverride> = {
     "description": "複利と単利の違いを具体例で比べます。同じ金額・金利・期間で10年・20年・30年後にどれくらい差が出るか、複利の頻度や毎月の積立の影響も解説します。長期投資で複利の効果がどれだけ大きくなるか、年代別の具体例とグラフの読み方で紹介します。",
     "readingMinutes": 14
   },
-  "currency-calculator-guide": {
-    "slug": "kawase-keisan",
-    "title": "為替計算とは？通貨換算の仕組みと手数料・ECBレートを解説",
-    "description": "為替計算とは何か、通貨換算の仕組みや手動レートとECB基準レートの違い、為替手数料が受取額をどう変えるかを解説します。無料の為替計算機の使い方も紹介します。手数料やスプレッドで受取額が変わる仕組みと、損をしないコツも解説します。",
-    "readingMinutes": 15
-  },
-  "currency-calculator-howto": {
-    "slug": "kawase-keisan-houhou",
-    "title": "通貨換算の方法｜為替レートと手数料を考えた正しい換算手順",
-    "description": "通貨換算の方法を手順に沿って解説します。手動レートやECB基準レートの使い方、為替手数料の加え方、実際に受け取れる金額の確認方法まで紹介します。旅行や送金でECB基準レートの使い方や、両替で損をしないための確認ポイントも紹介します。",
-    "readingMinutes": 15
-  },
-  "currency-calculator-advanced": {
-    "slug": "ecb-kijun-bank-nakane-hikaku",
-    "title": "ECB基準レートと銀行レート・仲値の違い｜あなたに当てはまる為替レート",
-    "description": "ECB基準レートと銀行レート、仲値の違いを解説します。どの為替レートが自分の換算に当てはまるのか、銀行がなぜ仲値より多く請求するのかをわかりやすく紹介します。銀行レートと仲値の差が生まれる理由と、実質コストの比べ方も解説します。",
-    "readingMinutes": 15
-  },
   "date-difference-calculator-guide": {
     "slug": "nissu-keisan",
     "title": "日数計算とは？2つの日付のあいだの日数・営業日を調べる方法",
@@ -1269,24 +1197,6 @@ export const JA_ARTICLE_INDEX: Record<string, ArticleLocaleSlimOverride> = {
     "title": "JavaScriptのミニファイ・バンドラー・トランスパイラの違い",
     "description": "JavaScriptのミニファイ、バンドラー、トランスパイラを比較します。それぞれがコードに何をするのか、いつどれが必要なのか、なぜ圧縮だけでは大きなアプリに足りないのかを解説します。小さいサイトと大きいアプリで、最適な組み合わせがどう変わるかも解説します。",
     "readingMinutes": 18
-  },
-  "json-formatter-guide": {
-    "slug": "json-toha-seikei-kensho",
-    "title": "JSONとは？整形・圧縮・検証の仕組みをわかりやすく解説",
-    "description": "JSONとは何か、整形・圧縮・検証の違いと使い方を解説します。文法の基本、6つのデータ型、行・列でエラーの場所を示す機能で、JSONの間違いを素早く見つける方法も紹介します。APIの応答を読みやすく整えるコツと、よくあるエラーの原因も紹介します。",
-    "readingMinutes": 18
-  },
-  "json-formatter-howto": {
-    "slug": "json-seikei-kensho-hoho",
-    "title": "JSONの整形・検証方法｜文法エラーの直し方も解説",
-    "description": "JSONの整形・圧縮・キーの並べ替え・検証の手順を解説します。末尾のカンマや引用符などの文法エラーの直し方、行・列エラーの読み方まで、無料ツールで学べます。実務でよく出るエラーの直し方と、ツールの便利な使い方も紹介します。",
-    "readingMinutes": 16
-  },
-  "json-formatter-advanced": {
-    "slug": "json-bunpou-error-naoshikata",
-    "title": "JSONの文法エラー10選と直し方｜カンマ・引用符・括弧",
-    "description": "JSONの文法エラーを素早く直す方法を解説します。末尾のカンマ、一重引用符、引用符のないキー、カンマの欠落、括弧の不一致、コメント、エスケープまで10のパターンを紹介します。エラーの意味を読み解くコツと、再発を防ぐための確認方法も解説します。",
-    "readingMinutes": 17
   },
   "json-csv-converter-guide": {
     "slug": "json-csv-henkan-toha",

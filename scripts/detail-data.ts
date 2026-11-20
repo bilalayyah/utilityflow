@@ -13,7 +13,6 @@
 import type { LocaleCode } from '../src/locales/config';
 import type { ToolDetail } from '../src/types/tool';
 
-import { TOOL_DETAILS as EN_AI } from '../src/registry/details/ai';
 import { TOOL_DETAILS as EN_BATCH1 } from '../src/registry/details/batch1';
 import { TOOL_DETAILS as EN_BATCH2 } from '../src/registry/details/batch2';
 import { TOOL_DETAILS as EN_BATCH3 } from '../src/registry/details/batch3';
@@ -21,7 +20,6 @@ import { TOOL_DETAILS as EN_BATCH4 } from '../src/registry/details/batch4';
 import { TOOL_DETAILS as EN_BATCH5 } from '../src/registry/details/batch5';
 import { TOOL_DETAILS as EN_BATCH6 } from '../src/registry/details/batch6';
 import { TOOL_DETAILS as EN_BATCH7 } from '../src/registry/details/batch7';
-import { TOOL_DETAILS as ES_AI } from '../src/locales/es/details/ai';
 import { TOOL_DETAILS as ES_BATCH1 } from '../src/locales/es/details/batch1';
 import { TOOL_DETAILS as ES_BATCH2 } from '../src/locales/es/details/batch2';
 import { TOOL_DETAILS as ES_BATCH3 } from '../src/locales/es/details/batch3';
@@ -29,7 +27,6 @@ import { TOOL_DETAILS as ES_BATCH4 } from '../src/locales/es/details/batch4';
 import { TOOL_DETAILS as ES_BATCH5 } from '../src/locales/es/details/batch5';
 import { TOOL_DETAILS as ES_BATCH6 } from '../src/locales/es/details/batch6';
 import { TOOL_DETAILS as ES_BATCH7 } from '../src/locales/es/details/batch7';
-import { TOOL_DETAILS as PT_AI } from '../src/locales/pt/details/ai';
 import { TOOL_DETAILS as PT_BATCH1 } from '../src/locales/pt/details/batch1';
 import { TOOL_DETAILS as PT_BATCH2 } from '../src/locales/pt/details/batch2';
 import { TOOL_DETAILS as PT_BATCH3 } from '../src/locales/pt/details/batch3';
@@ -37,7 +34,6 @@ import { TOOL_DETAILS as PT_BATCH4 } from '../src/locales/pt/details/batch4';
 import { TOOL_DETAILS as PT_BATCH5 } from '../src/locales/pt/details/batch5';
 import { TOOL_DETAILS as PT_BATCH6 } from '../src/locales/pt/details/batch6';
 import { TOOL_DETAILS as PT_BATCH7 } from '../src/locales/pt/details/batch7';
-import { TOOL_DETAILS as FR_AI } from '../src/locales/fr/details/ai';
 import { TOOL_DETAILS as FR_BATCH1 } from '../src/locales/fr/details/batch1';
 import { TOOL_DETAILS as FR_BATCH2 } from '../src/locales/fr/details/batch2';
 import { TOOL_DETAILS as FR_BATCH3 } from '../src/locales/fr/details/batch3';
@@ -45,7 +41,6 @@ import { TOOL_DETAILS as FR_BATCH4 } from '../src/locales/fr/details/batch4';
 import { TOOL_DETAILS as FR_BATCH5 } from '../src/locales/fr/details/batch5';
 import { TOOL_DETAILS as FR_BATCH6 } from '../src/locales/fr/details/batch6';
 import { TOOL_DETAILS as FR_BATCH7 } from '../src/locales/fr/details/batch7';
-import { TOOL_DETAILS as DE_AI } from '../src/locales/de/details/ai';
 import { TOOL_DETAILS as DE_BATCH1 } from '../src/locales/de/details/batch1';
 import { TOOL_DETAILS as DE_BATCH2 } from '../src/locales/de/details/batch2';
 import { TOOL_DETAILS as DE_BATCH3 } from '../src/locales/de/details/batch3';
@@ -53,7 +48,6 @@ import { TOOL_DETAILS as DE_BATCH4 } from '../src/locales/de/details/batch4';
 import { TOOL_DETAILS as DE_BATCH5 } from '../src/locales/de/details/batch5';
 import { TOOL_DETAILS as DE_BATCH6 } from '../src/locales/de/details/batch6';
 import { TOOL_DETAILS as DE_BATCH7 } from '../src/locales/de/details/batch7';
-import { TOOL_DETAILS as IT_AI } from '../src/locales/it/details/ai';
 import { TOOL_DETAILS as IT_BATCH1 } from '../src/locales/it/details/batch1';
 import { TOOL_DETAILS as IT_BATCH2 } from '../src/locales/it/details/batch2';
 import { TOOL_DETAILS as IT_BATCH3 } from '../src/locales/it/details/batch3';
@@ -61,7 +55,6 @@ import { TOOL_DETAILS as IT_BATCH4 } from '../src/locales/it/details/batch4';
 import { TOOL_DETAILS as IT_BATCH5 } from '../src/locales/it/details/batch5';
 import { TOOL_DETAILS as IT_BATCH6 } from '../src/locales/it/details/batch6';
 import { TOOL_DETAILS as IT_BATCH7 } from '../src/locales/it/details/batch7';
-import { TOOL_DETAILS as ID_AI } from '../src/locales/id/details/ai';
 import { TOOL_DETAILS as ID_BATCH1 } from '../src/locales/id/details/batch1';
 import { TOOL_DETAILS as ID_BATCH2 } from '../src/locales/id/details/batch2';
 import { TOOL_DETAILS as ID_BATCH3 } from '../src/locales/id/details/batch3';
@@ -69,7 +62,6 @@ import { TOOL_DETAILS as ID_BATCH4 } from '../src/locales/id/details/batch4';
 import { TOOL_DETAILS as ID_BATCH5 } from '../src/locales/id/details/batch5';
 import { TOOL_DETAILS as ID_BATCH6 } from '../src/locales/id/details/batch6';
 import { TOOL_DETAILS as ID_BATCH7 } from '../src/locales/id/details/batch7';
-import { TOOL_DETAILS as RU_AI } from '../src/locales/ru/details/ai';
 import { TOOL_DETAILS as RU_BATCH1 } from '../src/locales/ru/details/batch1';
 import { TOOL_DETAILS as RU_BATCH2 } from '../src/locales/ru/details/batch2';
 import { TOOL_DETAILS as RU_BATCH3 } from '../src/locales/ru/details/batch3';
@@ -77,7 +69,6 @@ import { TOOL_DETAILS as RU_BATCH4 } from '../src/locales/ru/details/batch4';
 import { TOOL_DETAILS as RU_BATCH5 } from '../src/locales/ru/details/batch5';
 import { TOOL_DETAILS as RU_BATCH6 } from '../src/locales/ru/details/batch6';
 import { TOOL_DETAILS as RU_BATCH7 } from '../src/locales/ru/details/batch7';
-import { TOOL_DETAILS as JA_AI } from '../src/locales/ja/details/ai';
 import { TOOL_DETAILS as JA_BATCH1 } from '../src/locales/ja/details/batch1';
 import { TOOL_DETAILS as JA_BATCH2 } from '../src/locales/ja/details/batch2';
 import { TOOL_DETAILS as JA_BATCH3 } from '../src/locales/ja/details/batch3';
@@ -85,7 +76,6 @@ import { TOOL_DETAILS as JA_BATCH4 } from '../src/locales/ja/details/batch4';
 import { TOOL_DETAILS as JA_BATCH5 } from '../src/locales/ja/details/batch5';
 import { TOOL_DETAILS as JA_BATCH6 } from '../src/locales/ja/details/batch6';
 import { TOOL_DETAILS as JA_BATCH7 } from '../src/locales/ja/details/batch7';
-import { TOOL_DETAILS as KO_AI } from '../src/locales/ko/details/ai';
 import { TOOL_DETAILS as KO_BATCH1 } from '../src/locales/ko/details/batch1';
 import { TOOL_DETAILS as KO_BATCH2 } from '../src/locales/ko/details/batch2';
 import { TOOL_DETAILS as KO_BATCH3 } from '../src/locales/ko/details/batch3';
@@ -93,7 +83,6 @@ import { TOOL_DETAILS as KO_BATCH4 } from '../src/locales/ko/details/batch4';
 import { TOOL_DETAILS as KO_BATCH5 } from '../src/locales/ko/details/batch5';
 import { TOOL_DETAILS as KO_BATCH6 } from '../src/locales/ko/details/batch6';
 import { TOOL_DETAILS as KO_BATCH7 } from '../src/locales/ko/details/batch7';
-import { TOOL_DETAILS as ZH_AI } from '../src/locales/zh/details/ai';
 import { TOOL_DETAILS as ZH_BATCH1 } from '../src/locales/zh/details/batch1';
 import { TOOL_DETAILS as ZH_BATCH2 } from '../src/locales/zh/details/batch2';
 import { TOOL_DETAILS as ZH_BATCH3 } from '../src/locales/zh/details/batch3';
@@ -104,7 +93,6 @@ import { TOOL_DETAILS as ZH_BATCH7 } from '../src/locales/zh/details/batch7';
 
 export const EN_DETAILS: Record<string, ToolDetail> = Object.assign(
   {},
-  EN_AI,
   EN_BATCH1,
   EN_BATCH2,
   EN_BATCH3,
@@ -117,7 +105,6 @@ export const EN_DETAILS: Record<string, ToolDetail> = Object.assign(
 export const LOCALE_DETAILS: Record<Exclude<LocaleCode, 'en'>, Record<string, ToolDetail>> = {
   es: Object.assign(
     {},
-    ES_AI,
     ES_BATCH1,
     ES_BATCH2,
     ES_BATCH3,
@@ -128,7 +115,6 @@ export const LOCALE_DETAILS: Record<Exclude<LocaleCode, 'en'>, Record<string, To
   ),
   pt: Object.assign(
     {},
-    PT_AI,
     PT_BATCH1,
     PT_BATCH2,
     PT_BATCH3,
@@ -139,7 +125,6 @@ export const LOCALE_DETAILS: Record<Exclude<LocaleCode, 'en'>, Record<string, To
   ),
   fr: Object.assign(
     {},
-    FR_AI,
     FR_BATCH1,
     FR_BATCH2,
     FR_BATCH3,
@@ -150,7 +135,6 @@ export const LOCALE_DETAILS: Record<Exclude<LocaleCode, 'en'>, Record<string, To
   ),
   de: Object.assign(
     {},
-    DE_AI,
     DE_BATCH1,
     DE_BATCH2,
     DE_BATCH3,
@@ -161,7 +145,6 @@ export const LOCALE_DETAILS: Record<Exclude<LocaleCode, 'en'>, Record<string, To
   ),
   it: Object.assign(
     {},
-    IT_AI,
     IT_BATCH1,
     IT_BATCH2,
     IT_BATCH3,
@@ -172,7 +155,6 @@ export const LOCALE_DETAILS: Record<Exclude<LocaleCode, 'en'>, Record<string, To
   ),
   id: Object.assign(
     {},
-    ID_AI,
     ID_BATCH1,
     ID_BATCH2,
     ID_BATCH3,
@@ -183,7 +165,6 @@ export const LOCALE_DETAILS: Record<Exclude<LocaleCode, 'en'>, Record<string, To
   ),
   ru: Object.assign(
     {},
-    RU_AI,
     RU_BATCH1,
     RU_BATCH2,
     RU_BATCH3,
@@ -194,7 +175,6 @@ export const LOCALE_DETAILS: Record<Exclude<LocaleCode, 'en'>, Record<string, To
   ),
   ja: Object.assign(
     {},
-    JA_AI,
     JA_BATCH1,
     JA_BATCH2,
     JA_BATCH3,
@@ -205,7 +185,6 @@ export const LOCALE_DETAILS: Record<Exclude<LocaleCode, 'en'>, Record<string, To
   ),
   ko: Object.assign(
     {},
-    KO_AI,
     KO_BATCH1,
     KO_BATCH2,
     KO_BATCH3,
@@ -216,7 +195,6 @@ export const LOCALE_DETAILS: Record<Exclude<LocaleCode, 'en'>, Record<string, To
   ),
   zh: Object.assign(
     {},
-    ZH_AI,
     ZH_BATCH1,
     ZH_BATCH2,
     ZH_BATCH3,

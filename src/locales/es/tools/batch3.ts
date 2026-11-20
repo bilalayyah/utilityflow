@@ -538,44 +538,4 @@ export const ES_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
     intro:
       'Convierte al instante en siete familias de medidas: longitud, peso y masa, temperatura, área, volumen, velocidad y almacenamiento digital, con una tabla automática lado a lado que muestra cada unidad de la categoría.',
   },
-  'currency-calculator': {
-    slug: 'calculadora-de-divisas',
-    name: 'Calculadora de Divisas',
-    shortDescription:
-      'Convierte divisas usando tu tasa de cambio manual exacta o tasas de referencia opcionales del BCE con cálculo de comisión de cambio.',
-    keywords: [
-      'calculadora de divisas',
-      'calculadora de tasa de cambio',
-      'calculadora de comisión de cambio',
-      'convertidor de moneda manual',
-      'convertidor de usd a eur',
-      'convertidor de moneda con comisión',
-      'calculadora de recargo de tasa de cambio',
-      'calculadora de comisión por transacción extranjera',
-      'calculadora de tasa de cambio inversa',
-    ],
-    seo: {
-      title: 'Calculadora de Divisas – Tasas y Comisiones | UtilityFlow',
-      description:
-        'Convierte entre las principales divisas con tu propia tasa de cambio cotizada, suma comisiones de banco o tarjeta para ver el monto neto, o consulta el BCE.',
-      primaryKeyword: 'calculadora de divisas',
-      secondaryKeywords: [
-        'calculadora de comisión de tasa de cambio',
-        'convertidor de moneda manual',
-        'calculadora de margen de cambio',
-        'convertidor de tasa de referencia del bce',
-      ],
-      longTailKeywords: [
-        'convertir moneda con tasa de cambio de banco y comisión',
-        'calculadora de divisas sin tasas falsas fijas',
-        'calcular monto neto en moneda extranjera tras comisión',
-        'cuánto recibiré después de la comisión de cambio',
-      ],
-      schemaApplicationCategory: 'FinanceApplication',
-    },
-    intro:
-      'Convierte entre las principales divisas del mundo con transparencia usando la tasa de cambio exacta cotizada por tu banco, corredor o factura, además de deducción opcional de comisión de cambio, matemática de tasa inversa y consulta de tasa de referencia del BCE bajo demanda.',
-    apiNotice:
-      'Requiere una API externa para las tasas de cambio en vivo y nunca usa tasas falsas sin conexión. Usa tu tasa de cambio ingresada manualmente por defecto (1,0000) o haz clic en "Obtener tasa de referencia del BCE" para solicitar tasas de api.frankfurter.dev.',
-  },
 };

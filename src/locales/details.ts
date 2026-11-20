@@ -14,13 +14,12 @@ import type { ToolDetail } from '../types/tool';
  * stay out of the initial bundle.
  */
 
-export type DetailKey = 'ai' | 'batch1' | 'batch2' | 'batch3' | 'batch4' | 'batch5' | 'batch6' | 'batch7';
+export type DetailKey = 'batch1' | 'batch2' | 'batch3' | 'batch4' | 'batch5' | 'batch6' | 'batch7';
 
-const BATCH_KEYS: DetailKey[] = ['ai', 'batch1', 'batch2', 'batch3', 'batch4', 'batch5', 'batch6', 'batch7'];
+const BATCH_KEYS: DetailKey[] = ['batch1', 'batch2', 'batch3', 'batch4', 'batch5', 'batch6', 'batch7'];
 
-/** Detail module for a tool: the 3 AI tools live in 'ai', the rest in their EN batch. */
+/** Detail module for a tool: each tool's detail lives in its EN batch module. */
 export function detailKeyForTool(toolId: string, batch: number): DetailKey {
-  if (toolId.startsWith('ai-')) return 'ai';
   return `batch${batch}` as DetailKey;
 }
 
@@ -29,7 +28,6 @@ type DetailLoader = () => Promise<DetailModule>;
 
 const DETAIL_LOADERS: Record<LocaleCode, Record<DetailKey, DetailLoader>> = {
   en: {
-    ai: () => import('../registry/details/ai'),
     batch1: () => import('../registry/details/batch1'),
     batch2: () => import('../registry/details/batch2'),
     batch3: () => import('../registry/details/batch3'),
@@ -39,7 +37,6 @@ const DETAIL_LOADERS: Record<LocaleCode, Record<DetailKey, DetailLoader>> = {
     batch7: () => import('../registry/details/batch7'),
   },
   es: {
-    ai: () => import('./es/details/ai'),
     batch1: () => import('./es/details/batch1'),
     batch2: () => import('./es/details/batch2'),
     batch3: () => import('./es/details/batch3'),
@@ -49,7 +46,6 @@ const DETAIL_LOADERS: Record<LocaleCode, Record<DetailKey, DetailLoader>> = {
     batch7: () => import('./es/details/batch7'),
   },
   pt: {
-    ai: () => import('./pt/details/ai'),
     batch1: () => import('./pt/details/batch1'),
     batch2: () => import('./pt/details/batch2'),
     batch3: () => import('./pt/details/batch3'),
@@ -59,7 +55,6 @@ const DETAIL_LOADERS: Record<LocaleCode, Record<DetailKey, DetailLoader>> = {
     batch7: () => import('./pt/details/batch7'),
   },
   fr: {
-    ai: () => import('./fr/details/ai'),
     batch1: () => import('./fr/details/batch1'),
     batch2: () => import('./fr/details/batch2'),
     batch3: () => import('./fr/details/batch3'),
@@ -69,7 +64,6 @@ const DETAIL_LOADERS: Record<LocaleCode, Record<DetailKey, DetailLoader>> = {
     batch7: () => import('./fr/details/batch7'),
   },
   de: {
-    ai: () => import('./de/details/ai'),
     batch1: () => import('./de/details/batch1'),
     batch2: () => import('./de/details/batch2'),
     batch3: () => import('./de/details/batch3'),
@@ -79,7 +73,6 @@ const DETAIL_LOADERS: Record<LocaleCode, Record<DetailKey, DetailLoader>> = {
     batch7: () => import('./de/details/batch7'),
   },
   it: {
-    ai: () => import('./it/details/ai'),
     batch1: () => import('./it/details/batch1'),
     batch2: () => import('./it/details/batch2'),
     batch3: () => import('./it/details/batch3'),
@@ -89,7 +82,6 @@ const DETAIL_LOADERS: Record<LocaleCode, Record<DetailKey, DetailLoader>> = {
     batch7: () => import('./it/details/batch7'),
   },
   id: {
-    ai: () => import('./id/details/ai'),
     batch1: () => import('./id/details/batch1'),
     batch2: () => import('./id/details/batch2'),
     batch3: () => import('./id/details/batch3'),
@@ -99,7 +91,6 @@ const DETAIL_LOADERS: Record<LocaleCode, Record<DetailKey, DetailLoader>> = {
     batch7: () => import('./id/details/batch7'),
   },
   ru: {
-    ai: () => import('./ru/details/ai'),
     batch1: () => import('./ru/details/batch1'),
     batch2: () => import('./ru/details/batch2'),
     batch3: () => import('./ru/details/batch3'),
@@ -109,7 +100,6 @@ const DETAIL_LOADERS: Record<LocaleCode, Record<DetailKey, DetailLoader>> = {
     batch7: () => import('./ru/details/batch7'),
   },
   ja: {
-    ai: () => import('./ja/details/ai'),
     batch1: () => import('./ja/details/batch1'),
     batch2: () => import('./ja/details/batch2'),
     batch3: () => import('./ja/details/batch3'),
@@ -119,7 +109,6 @@ const DETAIL_LOADERS: Record<LocaleCode, Record<DetailKey, DetailLoader>> = {
     batch7: () => import('./ja/details/batch7'),
   },
   ko: {
-    ai: () => import('./ko/details/ai'),
     batch1: () => import('./ko/details/batch1'),
     batch2: () => import('./ko/details/batch2'),
     batch3: () => import('./ko/details/batch3'),
@@ -129,7 +118,6 @@ const DETAIL_LOADERS: Record<LocaleCode, Record<DetailKey, DetailLoader>> = {
     batch7: () => import('./ko/details/batch7'),
   },
   zh: {
-    ai: () => import('./zh/details/ai'),
     batch1: () => import('./zh/details/batch1'),
     batch2: () => import('./zh/details/batch2'),
     batch3: () => import('./zh/details/batch3'),

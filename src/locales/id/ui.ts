@@ -10,14 +10,11 @@ export const idStrings: UiStrings = {
   nav: {
     tools: 'Alat',
     categories: 'Kategori',
-    aiTools: 'Alat AI',
     about: 'Tentang',
     contact: 'Kontak',
     blog: 'Blog',
     allTools: 'Semua Alat',
-    freeAiTools: 'Alat AI Gratis',
-    viewAiSection: 'Lihat bagian AI di Beranda →',
-    searchPlaceholder: 'Cari 88 alat...',
+    searchPlaceholder: 'Cari 83 alat...',
     searchTools: 'Cari alat',
     closeSearch: 'Tutup pencarian',
     openMenu: 'Buka menu navigasi',
@@ -25,24 +22,12 @@ export const idStrings: UiStrings = {
     skipToContent: 'Lewati ke konten',
     language: 'Bahasa',
     chooseLanguage: 'Pilih bahasa',
-    aiWriting: {
-      label: 'Asisten Penulisan AI',
-      desc: 'Tata bahasa, penulisan ulang, nada & draf email',
-    },
-    aiSummarizer: {
-      label: 'Perangkum Teks AI',
-      desc: 'Ringkasan singkat, sedang & berpoin',
-    },
-    aiFinder: {
-      label: 'Pencari Alat Cerdas AI',
-      desc: 'Temukan alat yang tepat dengan bahasa sederhana',
-    },
   },
   footer: {
     tagline:
       'Koleksi utilitas sehari-hari yang cepat dan berbasis browser untuk penulis, insinyur, pemasar, dan analis. Dibangun untuk berjalan secara lokal dengan beban minimal.',
     categories: 'Kategori',
-    platformAi: 'Platform & AI',
+    platformAi: 'Jelajahi',
     trustLegal: 'Kepercayaan & Hukum',
     home: 'Beranda',
     allToolsDirectory: 'Direktori Semua Alat',
@@ -81,7 +66,6 @@ export const idStrings: UiStrings = {
     tryAgain: 'Coba lagi',
     openTool: 'Buka alat',
     browserSide: 'Berbasis browser',
-    freeAiTool: 'Alat AI Gratis',
     externalApi: 'API Eksternal',
   },
   home: {
@@ -100,24 +84,15 @@ export const idStrings: UiStrings = {
     eyebrow: 'Platform UtilityFlow · 7 Kategori Inti · {count} Utilitas Aktif',
     h1: 'Utilitas online praktis yang dibuat untuk kecepatan dan privasi.',
     heroDescription:
-      'UtilityFlow mengorganisasi 84 utilitas berbasis browser plus penulisan AI gratis, perangkuman, dan penemuan alat cerdas untuk alur kerja teks, developer, kalkulator, media sosial, PDF, SEO, dan gambar.',
+      'UtilityFlow mengorganisasi 83 utilitas berbasis browser untuk alur kerja teks, developer, kalkulator, media sosial, PDF, SEO, dan gambar.',
     exploreCategories: 'Jelajahi Kategori',
     openDirectory: 'Buka Direktori Lengkap',
-    aiWriting: 'Penulisan AI',
-    aiSummarizer: 'Perangkum AI',
-    aiFinder: 'Pencari Alat AI',
     metrics: {
       toolCategories: 'Kategori Alat',
       browserUtilities: 'Utilitas Browser',
       liveTools: 'Alat Aktif',
       accountRequired: 'Akun Diperlukan',
       none: 'Tidak Ada',
-    },
-    aiSpotlight: {
-      badge: 'Suite AI Gratis · Tanpa Login',
-      title: 'Alat AI Gratis',
-      description:
-        'Tingkatkan draf, ringkas dokumen panjang, atau temukan alat yang tepat dalam hitungan detik tanpa mendaftar.',
     },
     popular: {
       title: 'Alat Populer',
@@ -177,22 +152,22 @@ export const idStrings: UiStrings = {
       {
         question: 'Apakah alat UtilityFlow gratis digunakan tanpa membuat akun?',
         answer:
-          'Ya. Semua 84 utilitas browser, 3 alat AI, dan Kalkulator Mata Uang di UtilityFlow tersedia gratis tanpa registrasi, dinding masuk, kredit, atau langganan.',
+          'Ya. Semua 83 utilitas browser di UtilityFlow tersedia gratis tanpa registrasi, dinding masuk, kredit, atau langganan.',
       },
       {
         question: 'Apakah UtilityFlow mengunggah teks, kode, atau file saya ke server?',
         answer:
-          'Semua 84 utilitas browser inti berjalan secara lokal di browser web Anda tanpa mengunggah input. Tiga alat AI Gratis opsional kami (Asisten Penulisan AI, Perangkum Teks AI, dan Pencari Alat Cerdas AI) memproses prompt secara aman melalui inferensi Groq di sisi server tanpa menyimpan teks Anda.',
+          'Semua 83 utilitas browser inti berjalan secara lokal di browser web Anda tanpa mengunggah input.',
       },
       {
-        question: 'Bagaimana 88 alat diatur di seluruh platform?',
+        question: 'Bagaimana 83 alat diatur di seluruh platform?',
         answer:
-          'UtilityFlow mencakup tujuh kategori inti (Teks & Penulisan, Developer, Kalkulator, Media Sosial, PDF, SEO, dan Alat Gambar & File) dengan total 84 alat browser, 3 alat AI Gratis, dan Kalkulator Mata Uang yang terintegrasi ke dalam platform.',
+          'UtilityFlow mencakup tujuh kategori inti (Teks & Penulisan, Developer, Kalkulator, Media Sosial, PDF, SEO, dan Alat Gambar & File) dengan total 83 alat browser yang terintegrasi ke dalam platform.',
       },
       {
         question: 'Bisakah saya menandai atau membagikan tautan langsung ke alat tertentu?',
         answer:
-          'Ya. Setiap alat dan kategori mendapatkan URL permanen yang bersih (seperti /word-counter/, /ai-writing-assistant/, atau /category/developer-tools/) yang dapat dimuat langsung dan berfungsi saat penyegaran browser.',
+          'Ya. Setiap alat dan kategori mendapatkan URL permanen yang bersih (seperti /word-counter/ atau /category/developer-tools/) yang dapat dimuat langsung dan berfungsi saat penyegaran browser.',
       },
       {
         question: 'Apakah UtilityFlow berfungsi dengan lancar di ponsel dan tablet?',
@@ -209,7 +184,7 @@ export const idStrings: UiStrings = {
     seoKeywords: ['direktori alat utilitas', 'semua alat online', 'alat browser gratis'],
     title: 'Direktori Semua Alat',
     description:
-      'Jelajahi semua {count} utilitas aktif yang terdaftar di UtilityFlow atau telusuri tujuh hub kategori untuk alur kerja browser dan AI gratis.',
+      'Jelajahi semua {count} utilitas aktif yang terdaftar di UtilityFlow atau telusuri tujuh hub kategori.',
     searchPlaceholder: 'Cari berdasarkan nama alat, kata kunci, atau kategori...',
     showing: 'Menampilkan {tools} alat aktif di {categories} kategori',
     all: 'Semua',
@@ -240,7 +215,6 @@ export const idStrings: UiStrings = {
     commonUseCases: 'Kasus Penggunaan Umum',
     runsLocally: 'Berjalan secara lokal di browser Anda',
     externalApi: 'Integrasi API eksternal',
-    freeAiTool: 'Alat AI Gratis · Tanpa Login',
     loadingWorkspace: 'Memuat ruang kerja {name}...',
     input: 'Input',
     output: 'Output',
@@ -325,7 +299,7 @@ export const idStrings: UiStrings = {
       'Pelajari cara UtilityFlow membangun utilitas browser yang mengutamakan privasi dalam tujuh kategori tanpa akun, kekacauan, atau unggahan data yang tidak perlu.',
     title: 'Tentang UtilityFlow',
     intro:
-      'UtilityFlow adalah platform web independen yang membangun 88 utilitas yang fokus dan andal untuk pekerjaan digital sehari-hari.',
+      'UtilityFlow adalah platform web independen yang membangun 83 utilitas yang fokus dan andal untuk pekerjaan digital sehari-hari.',
     whyTitle: 'Mengapa Kami Membangun UtilityFlow',
     whyP1:
       'Tugas online rutin—menghitung kata, memvalidasi JSON, memeriksa batas karakter, menghitung pembayaran pinjaman, atau mengompresi gambar—sering memaksa orang ke situs lambat yang penuh overlay mengganggu, unduhan membingungkan, atau pendaftaran wajib.',
@@ -333,14 +307,14 @@ export const idStrings: UiStrings = {
       'Tujuan kami sederhana: memberikan setiap utilitas halaman khusus yang bersih, memuat dengan cepat, menjelaskan dengan jelas cara kerja alat, dan berjalan langsung di dalam browser Anda kapan pun standar web memungkinkan.',
     orgTitle: 'Siapa yang Menjalankan UtilityFlow',
     orgP1:
-      'UtilityFlow adalah proyek independen yang dibuat dan dikelola oleh Bilal, seorang pembuat yang membangun alat web gratis di waktu luangnya. Tidak ada perusahaan di balik situs ini, tidak ada pendanaan investor, dan tidak ada tim karyawan — setiap alat, panduan, dan halaman bantuan dirancang, dibangun, dan diuji oleh satu orang. Ke-88 alat tetap gratis digunakan tanpa akun atau langganan. Kredit di footer menyebut Shaheen, yang dorongannya menginspirasi proyek ini dan yang namanya muncul di setiap halaman sebagai pengingat dari mana ide ini bermula.',
+      'UtilityFlow adalah proyek independen yang dibuat dan dikelola oleh Bilal, seorang pembuat yang membangun alat web gratis di waktu luangnya. Tidak ada perusahaan di balik situs ini, tidak ada pendanaan investor, dan tidak ada tim karyawan — setiap alat, panduan, dan halaman bantuan dirancang, dibangun, dan diuji oleh satu orang. Ke-83 alat tetap gratis digunakan tanpa akun atau langganan. Kredit di footer menyebut Shaheen, yang dorongannya menginspirasi proyek ini dan yang namanya muncul di setiap halaman sebagai pengingat dari mana ide ini bermula.',
     orgP2:
       'Karena proyek ini kecil dan independen, keputusan tetap sederhana: jika sebuah alat lambat, membingungkan, atau salah, alat itu diperbaiki. Umpan balik yang dikirim melalui halaman kontak langsung sampai ke orang yang dapat mengubah kodenya, dan saran dari pengunjung telah membentuk alat baru serta berbagai perbaikan di seluruh situs.',
     howTitle: 'Cara Alat Kami Dibangun dan Diuji',
     howP1:
       'Setiap utilitas berawal dari satu tugas yang jelas — menghitung kata, menggabungkan PDF, memformat JSON — dan dibangun sebagai halaman yang fokus untuk melakukan tugas itu dengan baik. Di mana pun standar web memungkinkan, pekerjaan berlangsung sepenuhnya di dalam browser Anda, sehingga teks dan file Anda tidak perlu meninggalkan perangkat Anda. Setiap halaman alat menjelaskan langkah-langkahnya dengan panduan singkat, menunjukkan contoh yang sudah dikerjakan, dan menjawab pertanyaan yang paling sering diajukan, sehingga Anda dapat menilai hasilnya sendiri alih-alih mempercayai kotak hitam.',
     howP2:
-      'Sebelum sebuah alat diluncurkan, alat itu diuji dengan input nyata di browser desktop dan seluler, termasuk kasus tepi seperti input kosong, teks yang sangat panjang, dan jenis file yang tidak biasa. Ketika sesuatu rusak atau perhitungan tampak salah, perbaikannya dikirim sebagai pembaruan situs dan halaman tersebut diperiksa ulang. Tiga alat AI opsional adalah satu-satunya yang mengirim teks ke server, dan halaman mereka mengatakannya dengan jelas sebelum Anda menggunakannya.',
+      'Sebelum sebuah alat diluncurkan, alat itu diuji dengan input nyata di browser desktop dan seluler, termasuk kasus tepi seperti input kosong, teks yang sangat panjang, dan jenis file yang tidak biasa. Ketika sesuatu rusak atau perhitungan tampak salah, perbaikannya dikirim sebagai pembaruan situs dan halaman tersebut diperiksa ulang. Setiap alat berjalan sepenuhnya di browser Anda — tidak ada yang Anda masukkan yang pernah dikirim ke server.',
     whoTitle: 'Untuk Siapa UtilityFlow Dibuat',
     whoP1:
       'UtilityFlow dibuat untuk siapa pun yang membutuhkan jawaban cepat dari sebuah alat tanpa memasang perangkat lunak atau membuat akun: pelajar yang memeriksa jumlah kata esai, penulis yang memformat draf, developer yang memvalidasi JSON atau mengenkode URL, pemasar yang memeriksa batas karakter, dan pemilik usaha kecil yang menghitung pinjaman atau diskon. Jika sebuah tugas memakan waktu kurang dari satu menit, alat untuk tugas itu juga seharusnya memakan waktu kurang dari satu menit — itulah standar yang berlaku untuk setiap halaman di situs ini.',
@@ -438,10 +412,9 @@ export const idStrings: UiStrings = {
         ],
       },
       {
-        title: '2. Input Alat, Pemrosesan Browser & Alat AI Gratis',
+        title: '2. Input Alat & Pemrosesan Browser',
         paragraphs: [
-          'Teks, angka, cuplikan kode, dan file yang dimasukkan ke dalam 84 alat berbasis browser kami diproses secara lokal di dalam sesi browser Anda tanpa meninggalkan perangkat Anda.',
-          'Tiga alat AI Gratis opsional kami (Asisten Penulisan AI, Perangkum Teks AI, dan Pencari Alat Cerdas AI) mengirim teks yang dikirimkan melalui backend kami yang terlindungi ke Groq untuk inferensi waktu nyata. Kami tidak menyimpan atau mencatat prompt Anda, dan batas laju harian gratis hanya menggunakan hash SHA-256 bertanggal UTC sehingga alamat IP mentah pengunjung tidak pernah disimpan.',
+          'Teks, angka, cuplikan kode, dan file yang dimasukkan ke dalam 83 alat berbasis browser kami diproses secara lokal di dalam sesi browser Anda tanpa meninggalkan perangkat Anda.',
           'Komentar yang diposting di bawah alat kami hanya meminta nama dan teks komentar. Nama dan teks yang Anda kirimkan disimpan di platform hosting kami dan ditampilkan secara publik di halaman alat tersebut, beserta tanggalnya. Kami tidak meminta alamat email atau akun untuk berkomentar, dan kami tidak menggunakan data komentar untuk iklan. Jika Anda ingin sebuah komentar dihapus, hubungi kami dengan menyebutkan halaman dan nama yang digunakan, dan kami akan menghapusnya.',
         ],
       },
@@ -469,7 +442,7 @@ export const idStrings: UiStrings = {
       {
         title: '6. Penyimpanan Data',
         paragraphs: [
-          'Informasi yang diproses di browser Anda tidak pernah dikirim kepada kami, jadi tidak ada yang perlu disimpan. Teks yang dikirim ke alat AI opsional diproses untuk permintaan tersebut dan tidak disimpan. Komentar disimpan hingga dihapus, baik oleh kami maupun atas permintaan Anda. Log hosting dan catatan keamanan hanya disimpan selama periode terbatas yang dibutuhkan penyedia hosting kami untuk mengoperasikan dan melindungi layanan.',
+          'Informasi yang diproses di browser Anda tidak pernah dikirim kepada kami, jadi tidak ada yang perlu disimpan. Komentar disimpan hingga dihapus, baik oleh kami maupun atas permintaan Anda. Log hosting dan catatan keamanan hanya disimpan selama periode terbatas yang dibutuhkan penyedia hosting kami untuk mengoperasikan dan melindungi layanan.',
         ],
       },
       {
@@ -540,7 +513,7 @@ export const idStrings: UiStrings = {
       {
         title: '7. Layanan Pihak Ketiga',
         paragraphs: [
-          'Beberapa fitur bergantung pada layanan pihak ketiga yang independen: ketiga alat AI mengirim teks ke Groq untuk diproses, formulir kontak dikirimkan oleh FormSubmit, situs dihosting di Cloudflare, Kalkulator Mata Uang mengambil kurs tukar langsung dari Frankfurter. Masing-masing layanan ini memiliki syarat dan kebijakan privasinya sendiri, dan penggunaan Anda atas layanan tersebut diatur oleh dokumen-dokumen itu. UtilityFlow tidak bertanggung jawab atas ketersediaan atau praktik layanan pihak ketiga.',
+          'Beberapa fitur bergantung pada layanan pihak ketiga yang independen: formulir kontak dikirimkan oleh FormSubmit dan situs dihosting di Cloudflare. Masing-masing layanan ini memiliki syarat dan kebijakan privasinya sendiri, dan penggunaan Anda atas layanan tersebut diatur oleh dokumen-dokumen itu. UtilityFlow tidak bertanggung jawab atas ketersediaan atau praktik layanan pihak ketiga.',
         ],
       },
       {
