@@ -1,7 +1,6 @@
 import { ArrowRight, Layers, Lock, ShieldCheck, Zap } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { CategoryIcon } from '../components/common/CategoryIcon';
 import { FAQAccordion, buildFaqSchema } from '../components/common/FAQAccordion';
 import { SeoHead } from '../components/seo/SeoHead';
 import { ToolCard } from '../components/tool/ToolCard';
@@ -9,7 +8,7 @@ import { ToolSearchBar } from '../components/tool/ToolSearchBar';
 import { PASTEL_PALETTES } from '../components/tool/pastel';
 import { SITE_CONFIG, buildCanonicalUrl } from '../config/site';
 import { useLocale } from '../locales/LocaleContext';
-import { categoryHref, localizeStaticPath } from '../locales/config';
+import { localizeStaticPath } from '../locales/config';
 import { getStaticAlternatePaths, toHreflangEntries } from '../locales/routes';
 import { getLocalizedCategories, getLocalizedTools, searchToolsLocalized } from '../locales/tools';
 import { formatString } from '../locales/ui';
@@ -20,23 +19,13 @@ const WHY_ICONS = [Lock, Zap, Layers, ShieldCheck];
 export function HomePage() {
   const { locale, t } = useLocale();
   const [selectedCategory, setSelectedCategory] = useState<CategoryId | 'all'>('all');
-  const [directoryQuery, setDirectoryQuery] = useState('');
 
   const allTools = getLocalizedTools(locale);
   const categories = getLocalizedCategories(locale);
 
   const filteredTools = useMemo(() => {
-    return searchToolsLocalized(directoryQuery, locale, selectedCategory);
-  }, [directoryQuery, selectedCategory, locale]);
-
-  const filteredCategories = useMemo(() => {
-    const q = directoryQuery.trim().toLowerCase();
-    return categories.filter((cat) => {
-      if (selectedCategory !== 'all' && cat.id !== selectedCategory) return false;
-      if (!q) return true;
-      return [cat.name, cat.description, ...cat.sampleToolNames].join(' ').toLowerCase().includes(q);
-    });
-  }, [directoryQuery, selectedCategory, categories]);
+    return searchToolsLocalized('', locale, selectedCategory);
+  }, [selectedCategory, locale]);
 
   const homePath = localizeStaticPath('/', locale);
   const websiteSchema = {
@@ -152,140 +141,21 @@ export function HomePage() {
         aria-labelledby="directory-heading"
         className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8"
       >
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8">
-          <div>
-            <h2 id="directory-heading" className="text-2xl sm:text-3xl font-bold tracking-tight text-[#1D1D1F] dark:text-[#F1F5F9]">
-              {t.home.directory.title}
-            </h2>
-            <p className="mt-1.5 text-sm sm:text-base text-[#6E6E73] dark:text-[#CBD5E1]">
-              {t.home.directory.description}
-            </p>
-          </div>
-
-          <div className="w-full lg:w-80">
-            <label htmlFor="directory-filter-input" className="sr-only">
-              {t.home.directory.filterPlaceholder}
-            </label>
-            <input
-              id="directory-filter-input"
-              type="search"
-              value={directoryQuery}
-              onChange={(e) => setDirectoryQuery(e.target.value)}
-              placeholder={t.home.directory.filterPlaceholder}
-              className="w-full rounded-xl border border-[#E5E5EA] bg-white px-3.5 py-2 text-sm text-[#1D1D1F] placeholder:text-[#86868B] shadow-sm focus:border-[#0E8A66] focus:outline-none focus:ring-2 focus:ring-[#0E8A66]/20"
-            />
-          </div>
+        <div className="mb-8">
+          <h2 id="directory-heading" className="text-2xl sm:text-3xl font-bold tracking-tight text-[#1D1D1F] dark:text-[#F1F5F9]">
+            {t.home.directory.title}
+          </h2>
+          <p className="mt-1.5 text-sm sm:text-base text-[#6E6E73] dark:text-[#CBD5E1]">
+            {t.home.directory.description}
+          </p>
         </div>
 
-        {/* Category Filter Tabs */}
-        <div
-          role="tablist"
-          aria-label="Filter directory by category"
-          className="flex flex-wrap items-center gap-2 mb-8"
-        >
-          <button
-            type="button"
-            role="tab"
-            aria-selected={selectedCategory === 'all'}
-            onClick={() => setSelectedCategory('all')}
-            className={`px-4 py-1.5 text-xs sm:text-sm font-medium rounded-full transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
-              selectedCategory === 'all'
-                ? 'bg-[#0E8A66] text-white shadow-sm'
-                : 'border border-[#E5E5EA] bg-white text-[#1D1D1F] shadow-sm hover:border-[#BFE3D3] hover:text-[#0B7A59] dark:border-[#243247] dark:bg-[#131D31] dark:text-[#F1F5F9] dark:hover:border-[#34D399] dark:hover:text-[#34D399]'
-            }`}
-          >
-            {t.home.directory.allCategories}
-          </button>
-          {categories.map((category) => (
-            <button
-              key={category.id}
-              type="button"
-              role="tab"
-              aria-selected={selectedCategory === category.id}
-              onClick={() => setSelectedCategory(category.id)}
-              className={`px-4 py-1.5 text-xs sm:text-sm font-medium rounded-full transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
-                selectedCategory === category.id
-                  ? 'bg-[#0E8A66] text-white shadow-sm'
-                  : 'border border-[#E5E5EA] bg-white text-[#1D1D1F] shadow-sm hover:border-[#BFE3D3] hover:text-[#0B7A59] dark:border-[#243247] dark:bg-[#131D31] dark:text-[#F1F5F9] dark:hover:border-[#34D399] dark:hover:text-[#34D399]'
-              }`}
-            >
-              {category.shortName}
-            </button>
+        {/* Live Tools Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
+          {filteredTools.map((tool) => (
+            <ToolCard key={tool.id} tool={tool} />
           ))}
         </div>
-
-        {/* Live Tools Grid (if any registered) */}
-        {filteredTools.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
-            {filteredTools.map((tool) => (
-              <ToolCard key={tool.id} tool={tool} />
-            ))}
-          </div>
-        ) : (
-          <div className="space-y-4">
-            {filteredCategories.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {filteredCategories.map((category, index) => {
-                  const categoryLiveTools = allTools.filter((tool) => tool.categoryId === category.id);
-                  const palette = PASTEL_PALETTES[index % PASTEL_PALETTES.length];
-                  return (
-                    <div
-                      key={category.id}
-                      className={`rounded-2xl ${palette.card} p-5 flex flex-col justify-between gap-4 shadow-sm`}
-                    >
-                      <div>
-                        <div className="flex items-center justify-between gap-3">
-                          <Link
-                            to={categoryHref(category.id, locale)}
-                            className="inline-flex items-center gap-2 text-base font-bold text-[#1D1D1F] hover:text-[#0B7A59] dark:text-[#F1F5F9] dark:hover:text-[#34D399]"
-                          >
-                            <CategoryIcon name={category.iconName} className={`w-4 h-4 ${palette.link}`} />
-                            <span>{category.name}</span>
-                          </Link>
-                          <span className="text-xs font-mono text-[#86868B] tabular-nums">
-                            {categoryLiveTools.length}/{category.plannedToolCount}
-                          </span>
-                        </div>
-                        <p className="mt-2 text-sm text-[#6E6E73] dark:text-[#CBD5E1]">
-                          {formatString(t.home.directory.upcomingUtilities, {
-                            names: category.sampleToolNames.join(', '),
-                          })}
-                        </p>
-                      </div>
-                      <div className="flex items-center justify-between pt-3 border-t border-[#E5E5EA] text-xs dark:border-[#243247]">
-                        <span className="text-[#86868B]">
-                          {formatString(t.home.directory.toolsActive, { count: categoryLiveTools.length })}
-                        </span>
-                        <Link
-                          to={categoryHref(category.id, locale)}
-                          className={`font-semibold ${palette.link} hover:underline underline-offset-4`}
-                        >
-                          {t.home.directory.openCategory}
-                        </Link>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            ) : (
-              <div className="rounded-2xl border border-[#E5E5EA] bg-white p-8 text-center shadow-sm dark:border-[#243247] dark:bg-[#131D31]">
-                <p className="text-sm text-[#6E6E73] dark:text-[#CBD5E1]">
-                  {formatString(t.home.directory.noMatch, { query: directoryQuery })}
-                </p>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setDirectoryQuery('');
-                    setSelectedCategory('all');
-                  }}
-                  className="mt-3 text-sm font-semibold text-[#0B7A59] hover:underline cursor-pointer dark:text-[#34D399]"
-                >
-                  {t.home.directory.resetFilters}
-                </button>
-              </div>
-            )}
-          </div>
-        )}
       </section>
 
       {/* Why Choose Us Section */}
