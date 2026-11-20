@@ -81,10 +81,11 @@ export const deStrings: UiStrings = {
       'PDF-Tools',
       'SEO-Tools',
     ],
-    eyebrow: 'UtilityFlow-Plattform · 7 Hauptkategorien · {count} Live-Utilities',
-    h1: 'Praktische Online-Utilities für Tempo und Datenschutz.',
+    eyebrow: '{count} kostenlose Online-Tools · Keine Anmeldung · 100 % privat',
+    h1Lead: 'Kostenlose Online-Tools',
+    h1Rest: ' für Tempo und Datenschutz.',
     heroDescription:
-      'UtilityFlow bündelt 83 browserbasierte Utilities für Text, Entwicklung, Rechner, Social Media, PDF, SEO und Bild-Workflows.',
+      '{count} browserbasierte Utilities für Text, Entwicklung, Rechner, Social Media, PDF, SEO und Bild-Workflows — ohne Anmeldung, ohne Installation, alles läuft privat in deinem Browser.',
     exploreCategories: 'Kategorien entdecken',
     openDirectory: 'Vollständiges Verzeichnis öffnen',
     metrics: {

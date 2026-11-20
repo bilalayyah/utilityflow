@@ -81,10 +81,11 @@ export const koStrings: UiStrings = {
       'PDF 도구',
       'SEO 도구',
     ],
-    eyebrow: 'UtilityFlow 플랫폼 · 7개 핵심 카테고리 · {count}개 라이브 유틸리티',
-    h1: '속도와 개인정보를 위해 만든 실용적인 온라인 유틸리티.',
+    eyebrow: '{count}개 무료 온라인 도구 · 가입 불필요 · 100% 비공개',
+    h1Lead: '무료 온라인 도구',
+    h1Rest: ' 빠르고 안전하게.',
     heroDescription:
-      'UtilityFlow는 텍스트, 개발자, 계산기, 소셜 미디어, PDF, SEO, 이미지 워크플로에 걸쳐 83개의 브라우저 중심 유틸리티를 정리했습니다.',
+      '텍스트, 개발자, 계산기, 소셜 미디어, PDF, SEO, 이미지 워크플로를 위한 {count}개의 브라우저 중심 유틸리티 — 가입도 설치도 필요 없고, 모든 작업이 브라우저 안에서 비공개로 처리됩니다.',
     exploreCategories: '카테고리 살펴보기',
     openDirectory: '전체 디렉터리 열기',
     metrics: {

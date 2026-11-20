@@ -81,10 +81,11 @@ export const idStrings: UiStrings = {
       'alat pdf',
       'alat seo',
     ],
-    eyebrow: 'Platform UtilityFlow · 7 Kategori Inti · {count} Utilitas Aktif',
-    h1: 'Utilitas online praktis yang dibuat untuk kecepatan dan privasi.',
+    eyebrow: '{count} Alat Online Gratis · Tanpa Daftar · 100% Pribadi',
+    h1Lead: 'Alat Online Gratis',
+    h1Rest: ' cepat dan pribadi.',
     heroDescription:
-      'UtilityFlow mengorganisasi 83 utilitas berbasis browser untuk alur kerja teks, developer, kalkulator, media sosial, PDF, SEO, dan gambar.',
+      '{count} utilitas berbasis browser untuk teks, developer, kalkulator, media sosial, PDF, SEO, dan gambar — tanpa daftar, tanpa instalasi, semuanya berjalan secara pribadi di browser Anda.',
     exploreCategories: 'Jelajahi Kategori',
     openDirectory: 'Buka Direktori Lengkap',
     metrics: {

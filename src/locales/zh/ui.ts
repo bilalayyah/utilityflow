@@ -81,10 +81,11 @@ export const zhStrings: UiStrings = {
       'PDF 工具',
       'SEO 工具',
     ],
-    eyebrow: 'UtilityFlow 平台 · 7 大核心分类 · {count} 个已上线工具',
-    h1: '为速度与隐私而生的实用在线工具。',
+    eyebrow: '{count} 个免费在线工具 · 无需注册 · 100% 隐私',
+    h1Lead: '免费在线工具',
+    h1Rest: '，快速又私密。',
     heroDescription:
-      'UtilityFlow 汇集了 83 个浏览器优先的工具，覆盖文本、开发者、计算器、社交媒体、PDF、SEO 与图片处理流程。',
+      '{count} 个浏览器优先工具，覆盖文本、开发者、计算器、社交媒体、PDF、SEO 与图片处理——无需注册、无需安装，一切都在浏览器内私密运行。',
     exploreCategories: '浏览分类',
     openDirectory: '打开完整目录',
     metrics: {

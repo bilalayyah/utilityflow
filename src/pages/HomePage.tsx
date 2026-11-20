@@ -91,14 +91,19 @@ export function HomePage() {
       {/* Hero Section */}
       <section className="mx-auto max-w-6xl px-4 pt-14 pb-12 sm:px-6 sm:pt-20 lg:px-8">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-wide text-[#6E6E73] dark:text-[#94A3B8] mb-3">
+          <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#D9EADF] bg-white px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wide text-[#0B7A59] shadow-sm dark:border-[#1E3A32] dark:bg-[#131D31] dark:text-[#34D399]">
+            <span
+              className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#0E8A66] dark:bg-[#34D399]"
+              aria-hidden="true"
+            />
             {formatString(t.home.eyebrow, { count: allTools.length })}
           </p>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#1D1D1F] dark:text-[#F1F5F9] leading-[1.1] text-balance">
-            {t.home.h1}
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-[#1D1D1F] dark:text-[#F1F5F9] leading-[1.08] text-balance">
+            <span className="text-[#0E8A66] dark:text-[#34D399]">{t.home.h1Lead}</span>
+            {t.home.h1Rest}
           </h1>
-          <p className="mx-auto mt-5 text-base sm:text-lg leading-relaxed text-[#6E6E73] dark:text-[#CBD5E1] max-w-2xl">
-            {t.home.heroDescription}
+          <p className="mx-auto mt-5 text-base sm:text-lg leading-relaxed text-[#6E6E73] dark:text-[#CBD5E1] max-w-2xl text-balance">
+            {formatString(t.home.heroDescription, { count: allTools.length })}
           </p>
 
           <div className="mt-8 flex justify-center">

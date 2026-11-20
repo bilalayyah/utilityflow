@@ -81,10 +81,11 @@ export const frStrings: UiStrings = {
       'outils PDF',
       'outils SEO',
     ],
-    eyebrow: 'Plateforme UtilityFlow · 7 catégories principales · {count} utilitaires en ligne',
-    h1: 'Des utilitaires en ligne pratiques, conçus pour la rapidité et la confidentialité.',
+    eyebrow: '{count} outils en ligne gratuits · Sans inscription · 100 % privés',
+    h1Lead: 'Outils en ligne gratuits',
+    h1Rest: ' rapides et privés.',
     heroDescription:
-      'UtilityFlow regroupe 83 utilitaires pensés pour le navigateur, pour le texte, le développement, les calculs, les réseaux sociaux, les PDF, le SEO et les images.',
+      '{count} utilitaires dans le navigateur pour le texte, le développement, les calculs, les réseaux sociaux, les PDF, le SEO et les images — sans inscription, sans installation, tout fonctionne en privé dans votre navigateur.',
     exploreCategories: 'Explorer les catégories',
     openDirectory: 'Ouvrir l’annuaire complet',
     metrics: {

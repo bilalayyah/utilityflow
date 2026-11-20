@@ -331,10 +331,10 @@ export function renderHomeBody(
   parts.push(openMain());
   parts.push('<section class="mx-auto max-w-3xl text-center py-6">');
   parts.push(
-    `<p class="text-xs sm:text-sm font-medium text-indigo-600 mb-3">${escapeText(formatString(t.home.eyebrow, { count: allTools.length }))}</p>`
+    `<p class="mb-4 inline-flex items-center gap-2 rounded-full border border-[#D9EADF] bg-white px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wide text-[#0B7A59] shadow-sm"><span class="h-1.5 w-1.5 rounded-full bg-[#0E8A66]"></span>${escapeText(formatString(t.home.eyebrow, { count: allTools.length }))}</p>`
   );
-  parts.push(`<h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-slate-900 leading-[1.1]">${escapeText(t.home.h1)}</h1>`);
-  parts.push(`<p class="mx-auto mt-5 text-base sm:text-lg leading-relaxed text-slate-600 max-w-2xl">${escapeText(t.home.heroDescription)}</p>`);
+  parts.push(`<h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-[#1D1D1F] leading-[1.08]"><span class="text-[#0E8A66]">${escapeText(t.home.h1Lead)}</span>${escapeText(t.home.h1Rest)}</h1>`);
+  parts.push(`<p class="mx-auto mt-5 text-base sm:text-lg leading-relaxed text-slate-600 max-w-2xl">${escapeText(formatString(t.home.heroDescription, { count: allTools.length }))}</p>`);
   parts.push('</section>');
 
   parts.push('<section class="mt-8"><dl class="grid grid-cols-2 lg:grid-cols-4 gap-4">');

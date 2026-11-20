@@ -78,7 +78,8 @@ export interface UiStrings {
     seoDescription: string;
     seoKeywords: string[];
     eyebrow: string;
-    h1: string;
+    h1Lead: string;
+    h1Rest: string;
     heroDescription: string;
     exploreCategories: string;
     openDirectory: string;

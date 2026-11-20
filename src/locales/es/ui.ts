@@ -80,10 +80,11 @@ export const esStrings: UiStrings = {
       'herramientas pdf',
       'herramientas seo',
     ],
-    eyebrow: 'Plataforma UtilityFlow · 7 categorías principales · {count} utilidades en vivo',
-    h1: 'Utilidades online prácticas, rápidas y privadas.',
+    eyebrow: '{count} herramientas online gratis · Sin registro · 100 % privadas',
+    h1Lead: 'Herramientas online gratis',
+    h1Rest: ' rápidas y privadas.',
     heroDescription:
-      'UtilityFlow reúne 83 utilidades pensadas para el navegador para flujos de trabajo de texto, desarrollo, calculadoras, redes sociales, PDF, SEO e imágenes.',
+      '{count} utilidades para el navegador para texto, desarrollo, calculadoras, redes sociales, PDF, SEO e imágenes — sin registro, sin instalación, todo funciona de forma privada en tu navegador.',
     exploreCategories: 'Explorar categorías',
     openDirectory: 'Abrir el directorio completo',
     metrics: {

@@ -79,10 +79,11 @@ export const enStrings: UiStrings = {
       'pdf tools',
       'seo tools',
     ],
-    eyebrow: 'UtilityFlow Platform · 7 Core Categories · {count} Live Utilities',
-    h1: 'Practical online utilities built for speed and privacy.',
+    eyebrow: '{count} Free Online Tools · No Sign-Up · 100% Private',
+    h1Lead: 'Free Online Tools',
+    h1Rest: ' Built for Speed and Privacy.',
     heroDescription:
-      'UtilityFlow organizes 83 browser-first utilities across text, developer, calculator, social media, PDF, SEO, and image workflows.',
+      '{count} browser-first utilities for text, developer, calculator, social media, PDF, SEO, and image workflows — no sign-up, no install, everything runs privately in your browser.',
     exploreCategories: 'Explore Categories',
     openDirectory: 'Open Full Directory',
     metrics: {
