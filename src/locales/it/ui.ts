@@ -27,7 +27,7 @@ export const itStrings: UiStrings = {
     tagline:
       'Una raccolta veloce di utilità quotidiane nel browser per scrittori, ingegneri, marketer e analisti. Pensata per funzionare in locale con il minimo carico.',
     categories: 'Categorie',
-    platformAi: 'Esplora',
+    explore: 'Esplora',
     trustLegal: 'Fiducia e Note legali',
     home: 'Home',
     allToolsDirectory: 'Directory di tutti gli strumenti',

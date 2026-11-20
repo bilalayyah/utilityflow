@@ -27,7 +27,7 @@ export const zhStrings: UiStrings = {
     tagline:
       '为作家、工程师、营销人员与分析师打造的快速、浏览器优先的日常工具合集。本地运行，开销极小。',
     categories: '分类',
-    platformAi: '探索',
+    explore: '探索',
     trustLegal: '信任与法律信息',
     home: '首页',
     allToolsDirectory: '全部工具目录',

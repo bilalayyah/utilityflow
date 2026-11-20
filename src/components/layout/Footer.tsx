@@ -13,8 +13,8 @@ export function Footer() {
   return (
     <footer className="border-t border-[#E5E5EA] bg-[#FFFFFF] text-[#6E6E73] dark:border-[#243247] dark:bg-[#131D31] dark:text-[#CBD5E1]">
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-12">
-          <div className="lg:col-span-4 space-y-3">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
+          <div className="space-y-3">
             <Link
               to={localizeStaticPath('/', locale)}
               className="inline-flex items-center gap-2.5 text-lg font-bold tracking-tight text-[#1D1D1F] dark:text-[#F1F5F9]"
@@ -49,10 +49,10 @@ export function Footer() {
             </p>
           </div>
 
-          <div className="lg:col-span-4">
+          <div>
             <h2 className="text-sm font-semibold text-[#1D1D1F] mb-3 dark:text-[#F1F5F9]">{t.footer.categories}</h2>
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 text-sm">
-              {categories.map((category) => (
+            <ul className="space-y-2 text-sm">
+              {categories.slice(0, 6).map((category) => (
                 <li key={category.id}>
                   <Link
                     to={categoryHref(category.id, locale)}
@@ -65,8 +65,8 @@ export function Footer() {
             </ul>
           </div>
 
-          <div className="lg:col-span-2">
-            <h2 className="text-sm font-semibold text-[#1D1D1F] mb-3 dark:text-[#F1F5F9]">{t.footer.platformAi}</h2>
+          <div>
+            <h2 className="text-sm font-semibold text-[#1D1D1F] mb-3 dark:text-[#F1F5F9]">{t.footer.explore}</h2>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link
@@ -82,20 +82,6 @@ export function Footer() {
                   className="hover:text-[#0B7A59] transition-colors underline-offset-4 hover:underline dark:hover:text-[#34D399]"
                 >
                   {t.footer.blog}
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div className="lg:col-span-2">
-            <h2 className="text-sm font-semibold text-[#1D1D1F] mb-3 dark:text-[#F1F5F9]">{t.footer.trustLegal}</h2>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link
-                  to={localizeStaticPath('/', locale)}
-                  className="hover:text-[#0B7A59] transition-colors underline-offset-4 hover:underline dark:hover:text-[#34D399]"
-                >
-                  {t.footer.home}
                 </Link>
               </li>
               <li>
@@ -114,6 +100,12 @@ export function Footer() {
                   {t.footer.contact}
                 </Link>
               </li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 className="text-sm font-semibold text-[#1D1D1F] mb-3 dark:text-[#F1F5F9]">{t.footer.trustLegal}</h2>
+            <ul className="space-y-2 text-sm">
               <li>
                 <Link
                   to={localizeStaticPath('/privacy-policy/', locale)}
@@ -131,14 +123,6 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <a
-                  href="/sitemap.xml"
-                  className="hover:text-[#0B7A59] transition-colors underline-offset-4 hover:underline dark:hover:text-[#34D399]"
-                >
-                  {t.footer.xmlSitemap}
-                </a>
-              </li>
-              <li>
                 <button
                   type="button"
                   onClick={() => requestConsentBanner()}
@@ -146,6 +130,14 @@ export function Footer() {
                 >
                   {t.consent.cookieSettings}
                 </button>
+              </li>
+              <li>
+                <a
+                  href="/sitemap.xml"
+                  className="hover:text-[#0B7A59] transition-colors underline-offset-4 hover:underline dark:hover:text-[#34D399]"
+                >
+                  {t.footer.xmlSitemap}
+                </a>
               </li>
             </ul>
           </div>

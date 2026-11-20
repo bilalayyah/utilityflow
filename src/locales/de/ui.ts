@@ -27,7 +27,7 @@ export const deStrings: UiStrings = {
     tagline:
       'Eine schnelle, browserbasierte Sammlung alltäglicher Utilities für Schreibende, Entwickler, Marketingteams und Analysten. Für den lokalen Betrieb mit minimalem Aufwand gebaut.',
     categories: 'Kategorien',
-    platformAi: 'Entdecken',
+    explore: 'Entdecken',
     trustLegal: 'Vertrauen & Rechtliches',
     home: 'Startseite',
     allToolsDirectory: 'Alle-Tools-Verzeichnis',

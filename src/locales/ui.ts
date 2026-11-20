@@ -32,7 +32,7 @@ export interface UiStrings {
   footer: {
     tagline: string;
     categories: string;
-    platformAi: string;
+    explore: string;
     trustLegal: string;
     home: string;
     allToolsDirectory: string;

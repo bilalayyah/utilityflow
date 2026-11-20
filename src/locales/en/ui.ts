@@ -25,7 +25,7 @@ export const enStrings: UiStrings = {
     tagline:
       'A fast, browser-first collection of everyday utilities for writers, engineers, marketers, and analysts. Built to run locally with minimal overhead.',
     categories: 'Categories',
-    platformAi: 'Explore',
+    explore: 'Explore',
     trustLegal: 'Trust & Legal',
     home: 'Home',
     allToolsDirectory: 'All Tools Directory',

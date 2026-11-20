@@ -27,7 +27,7 @@ export const jaStrings: UiStrings = {
     tagline:
       'ライター、エンジニア、マーケター、アナリストのための、高速でブラウザ中心の日常ユーティリティ集です。ローカルで動作し、負荷を最小限に抑えて構築されています。',
     categories: 'カテゴリ',
-    platformAi: '探索する',
+    explore: '探索する',
     trustLegal: '信頼と法的情報',
     home: 'ホーム',
     allToolsDirectory: 'すべてのツールディレクトリ',

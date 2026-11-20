@@ -29,7 +29,7 @@ export const ptStrings: UiStrings = {
     tagline:
       'Uma coleção rápida de utilitários do dia a dia, que rodam no navegador, para escritores, engenheiros, profissionais de marketing e analistas. Feita para rodar localmente, com o mínimo de sobrecarga.',
     categories: 'Categorias',
-    platformAi: 'Explorar',
+    explore: 'Explorar',
     trustLegal: 'Confiança e Jurídico',
     home: 'Início',
     allToolsDirectory: 'Diretório de todas as ferramentas',

@@ -27,7 +27,7 @@ export const frStrings: UiStrings = {
     tagline:
       'Une collection rapide d’utilitaires du quotidien, exécutés dans le navigateur, pour les rédacteurs, les ingénieurs, les spécialistes du marketing et les analystes. Conçue pour fonctionner localement, avec un minimum de ressources.',
     categories: 'Catégories',
-    platformAi: 'Explorer',
+    explore: 'Explorer',
     trustLegal: 'Confiance & Légal',
     home: 'Accueil',
     allToolsDirectory: 'Annuaire de tous les outils',
