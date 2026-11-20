@@ -84,7 +84,7 @@ export function LanguageSwitcher({ variant = 'dropdown', onSelect }: LanguageSwi
         type="button"
         aria-expanded={open}
         aria-haspopup="menu"
-        aria-label={t.nav.chooseLanguage}
+        aria-label={`${t.nav.chooseLanguage} (${current.code.toUpperCase()})`}
         onClick={() => setOpen((prev) => !prev)}
         className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 px-2.5 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 cursor-pointer"
       >
