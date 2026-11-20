@@ -10,7 +10,6 @@ import type { BreadcrumbItem } from '../types/tool';
 import { Breadcrumbs, buildBreadcrumbSchema } from '../components/common/Breadcrumbs';
 import { SeoHead } from '../components/seo/SeoHead';
 import { BlogCard } from '../components/blog/BlogCard';
-import { BlogCategoryNav } from '../components/blog/BlogCategoryNav';
 import { BlogSearch } from '../components/blog/BlogSearch';
 
 export function BlogHomePage() {
@@ -22,7 +21,6 @@ export function BlogHomePage() {
   const articles = getPublishedBlogArticles()
     .filter((article) => getBlogArticleVersion(article, locale) !== undefined)
     .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
-  const featured = articles.slice(0, 3);
 
   const canonicalPath = blogHref(locale);
   const breadcrumbs: BreadcrumbItem[] = [
@@ -63,24 +61,6 @@ export function BlogHomePage() {
             <BlogSearch variant="hero" />
           </div>
         </header>
-
-        <BlogCategoryNav locale={locale} />
-
-        {featured.length > 0 && (
-          <section aria-labelledby="featured-articles-heading" className="mb-12">
-            <h2
-              id="featured-articles-heading"
-              className="text-xl font-bold text-[#1D1D1F] mb-5 dark:text-[#F1F5F9]"
-            >
-              {t.blog.featured}
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {featured.map((article) => (
-                <BlogCard key={article.id} article={article} locale={locale} />
-              ))}
-            </div>
-          </section>
-        )}
 
         <section aria-labelledby="latest-articles-heading">
           <h2

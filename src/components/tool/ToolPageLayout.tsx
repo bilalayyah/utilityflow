@@ -15,7 +15,6 @@ import { trackEvent } from '../../utils/analytics';
 import { Breadcrumbs, buildBreadcrumbSchema } from '../common/Breadcrumbs';
 import { FAQAccordion, buildFaqSchema } from '../common/FAQAccordion';
 import { SeoHead } from '../seo/SeoHead';
-import { ToolRelatedArticles } from '../blog/ToolRelatedArticles';
 import { PASTEL_PALETTES, pastelForKey } from './pastel';
 import { RelatedTools } from './RelatedTools';
 
@@ -315,10 +314,6 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
               </section>
             )}
           </aside>
-        </div>
-
-        <div className="mt-12">
-          <ToolRelatedArticles toolId={tool.id} locale={locale} />
         </div>
 
         <div className="mt-12">

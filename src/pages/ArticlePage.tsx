@@ -39,7 +39,7 @@ import type { BlogArticleLocaleVersion } from '../types/blog';
 import type { ArticleLocaleOverride } from '../locales/types';
 import type { BreadcrumbItem, ToolDefinition, ToolFAQ } from '../types/tool';
 import { ArticleTOC, extractHeadingsFromBody } from '../components/blog/ArticleTOC';
-import { AuthorProfile } from '../components/blog/AuthorProfile';
+import { AuthorProfileModal } from '../components/blog/AuthorProfileModal';
 import { RelatedArticles } from '../components/blog/RelatedArticles';
 import { Breadcrumbs, buildBreadcrumbSchema } from '../components/common/Breadcrumbs';
 import { FAQAccordion, buildFaqSchema } from '../components/common/FAQAccordion';
@@ -62,6 +62,7 @@ export function ArticlePage() {
   const { articleSlug = '' } = useParams<{ articleSlug: string }>();
   // Declared before the early returns below so hook order stays stable.
   const [copied, setCopied] = useState(false);
+  const [authorModalOpen, setAuthorModalOpen] = useState(false);
 
   // Slim meta record (id, slugs, titles — no bodies). Resolves
   // synchronously from the generated index, so routing, the page shell
@@ -340,12 +341,25 @@ export function ArticlePage() {
     }
   };
 
+  const shareTitle = version?.title ?? article.en.title;
   const shareXUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(
     canonicalUrl
-  )}&text=${encodeURIComponent(version?.title ?? article.en.title)}`;
+  )}&text=${encodeURIComponent(shareTitle)}`;
   const shareFacebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
     canonicalUrl
   )}`;
+  const shareWhatsAppUrl = `https://wa.me/?text=${encodeURIComponent(
+    `${shareTitle} ${canonicalUrl}`
+  )}`;
+  const shareLinkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
+    canonicalUrl
+  )}`;
+  const shareTelegramUrl = `https://t.me/share/url?url=${encodeURIComponent(
+    canonicalUrl
+  )}&text=${encodeURIComponent(shareTitle)}`;
+  const shareEmailUrl = `mailto:?subject=${encodeURIComponent(
+    shareTitle
+  )}&body=${encodeURIComponent(canonicalUrl)}`;
 
   return (
     <>
@@ -384,9 +398,13 @@ export function ArticlePage() {
           </p>
           <p className="mt-3 text-sm text-[#6E6E73] dark:text-[#CBD5E1]">
             By{' '}
-            <span className="font-semibold text-[#1D1D1F] dark:text-[#F1F5F9]">
+            <button
+              type="button"
+              onClick={() => setAuthorModalOpen(true)}
+              className="cursor-pointer font-semibold text-[#1D1D1F] underline-offset-4 hover:text-[#0B7A59] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0E8A66] dark:text-[#F1F5F9] dark:hover:text-[#34D399]"
+            >
               Bilal Asghar
-            </span>
+            </button>
             {' · '}
             {publishedDate}
             {updatedDate && (
@@ -398,9 +416,6 @@ export function ArticlePage() {
             {' · '}
             {formatString(t.blog.readingTime, { minutes: version?.readingMinutes ?? article.en.readingMinutes })}
           </p>
-          <div className="mt-6">
-            <AuthorProfile />
-          </div>
         </header>
 
         <img
@@ -585,10 +600,38 @@ export function ArticlePage() {
                 >
                   Facebook
                 </a>
+                <a
+                  href={shareWhatsAppUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-xl border border-[#E5E5EA] bg-[#FFFFFF] px-4 py-2.5 text-sm font-semibold text-[#1D1D1F] shadow-sm transition-colors hover:border-[#BFE3D3] hover:text-[#0B7A59] dark:border-[#243247] dark:bg-[#131D31] dark:text-[#F1F5F9] dark:hover:border-[#34D399] dark:hover:text-[#34D399]"
+                >
+                  WhatsApp
+                </a>
+                <a
+                  href={shareLinkedInUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-xl border border-[#E5E5EA] bg-[#FFFFFF] px-4 py-2.5 text-sm font-semibold text-[#1D1D1F] shadow-sm transition-colors hover:border-[#BFE3D3] hover:text-[#0B7A59] dark:border-[#243247] dark:bg-[#131D31] dark:text-[#F1F5F9] dark:hover:border-[#34D399] dark:hover:text-[#34D399]"
+                >
+                  LinkedIn
+                </a>
+                <a
+                  href={shareTelegramUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-xl border border-[#E5E5EA] bg-[#FFFFFF] px-4 py-2.5 text-sm font-semibold text-[#1D1D1F] shadow-sm transition-colors hover:border-[#BFE3D3] hover:text-[#0B7A59] dark:border-[#243247] dark:bg-[#131D31] dark:text-[#F1F5F9] dark:hover:border-[#34D399] dark:hover:text-[#34D399]"
+                >
+                  Telegram
+                </a>
+                <a
+                  href={shareEmailUrl}
+                  className="inline-flex items-center gap-2 rounded-xl border border-[#E5E5EA] bg-[#FFFFFF] px-4 py-2.5 text-sm font-semibold text-[#1D1D1F] shadow-sm transition-colors hover:border-[#BFE3D3] hover:text-[#0B7A59] dark:border-[#243247] dark:bg-[#131D31] dark:text-[#F1F5F9] dark:hover:border-[#34D399] dark:hover:text-[#34D399]"
+                >
+                  Email
+                </a>
               </div>
             </section>
-
-            <AuthorProfile />
           </div>
 
           <aside className="order-first lg:order-last lg:col-span-4">
@@ -614,6 +657,11 @@ export function ArticlePage() {
           </Link>
         </p>
       </div>
+
+      <AuthorProfileModal
+        open={authorModalOpen}
+        onClose={() => setAuthorModalOpen(false)}
+      />
     </>
   );
 }
