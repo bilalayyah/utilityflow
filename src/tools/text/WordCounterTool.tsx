@@ -197,7 +197,7 @@ export default function WordCounterTool() {
       {/* Secondary Stats + Top Keywords */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
         <div className={`rounded-lg border border-slate-200 ${PASTEL_PALETTES[6].card} p-4`}>
-          <h3 className="text-sm font-semibold text-slate-900 mb-2">{s.deliveryTimingLines}</h3>
+          <h2 className="text-sm font-semibold text-slate-900 mb-2">{s.deliveryTimingLines}</h2>
           <dl className="space-y-1.5 text-sm">
             <div className="flex justify-between">
               <dt className="text-slate-600">{s.speakingTime}</dt>
