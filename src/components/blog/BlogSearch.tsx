@@ -83,8 +83,8 @@ export function BlogSearch({ placeholder, variant = 'default' }: BlogSearchProps
             aria-label={t.blog.searchArticles}
             className={
               isHero
-                ? 'w-full rounded-2xl border border-[#D2D2D7] bg-[#FFFFFF] py-4 pl-12 pr-14 text-base text-[#1D1D1F] placeholder:text-[#86868B] shadow-sm transition-colors focus:border-[#0E8A66] focus:outline-none focus:ring-2 focus:ring-[#0E8A66]/20 dark:border-[#243247] dark:bg-[#131D31] dark:text-[#F1F5F9] dark:placeholder:text-[#94A3B8]'
-                : 'w-full rounded-xl border border-[#D2D2D7] bg-[#FFFFFF] py-3.5 pl-12 pr-28 text-sm sm:text-base text-[#1D1D1F] placeholder:text-[#86868B] shadow-sm transition-colors focus:border-[#0E8A66] focus:outline-none focus:ring-2 focus:ring-[#0E8A66]/20 dark:border-[#243247] dark:bg-[#131D31] dark:text-[#F1F5F9] dark:placeholder:text-[#94A3B8]'
+                ? 'w-full rounded-2xl border border-[#D2D2D7] bg-[#FFFFFF] py-4 pl-12 pr-14 text-base text-[#1D1D1F] placeholder:text-[#86868B] shadow-sm transition-colors focus:border-[#0E8A66] focus:outline-none focus:ring-2 focus:ring-[#0E8A66]/20 dark:border-[#243247] dark:bg-[#131D31] dark:text-[#F1F5F9] dark:placeholder:text-[#94A3B8] no-native-clear'
+                : 'w-full rounded-xl border border-[#D2D2D7] bg-[#FFFFFF] py-3.5 pl-12 pr-28 text-sm sm:text-base text-[#1D1D1F] placeholder:text-[#86868B] shadow-sm transition-colors focus:border-[#0E8A66] focus:outline-none focus:ring-2 focus:ring-[#0E8A66]/20 dark:border-[#243247] dark:bg-[#131D31] dark:text-[#F1F5F9] dark:placeholder:text-[#94A3B8] no-native-clear'
             }
           />
           {query && (

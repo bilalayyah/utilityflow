@@ -110,8 +110,8 @@ export function ToolSearchBar({
             aria-label={t.search.ariaLabel}
             className={
               isHero
-                ? 'w-full rounded-2xl border border-[#E5E5EA] bg-white py-4 pl-12 pr-32 text-base text-[#1D1D1F] placeholder:text-[#86868B] shadow-sm transition-colors focus:border-[#0E8A66] focus:outline-none focus:ring-2 focus:ring-[#0E8A66]/20'
-                : 'w-full rounded-xl border border-[#E5E5EA] bg-white py-3.5 pl-12 pr-28 text-sm sm:text-base text-[#1D1D1F] placeholder:text-[#86868B] shadow-sm transition-colors focus:border-[#0E8A66] focus:outline-none focus:ring-2 focus:ring-[#0E8A66]/20'
+                ? 'w-full rounded-2xl border border-[#E5E5EA] bg-white py-4 pl-12 pr-32 text-base text-[#1D1D1F] placeholder:text-[#86868B] shadow-sm transition-colors focus:border-[#0E8A66] focus:outline-none focus:ring-2 focus:ring-[#0E8A66]/20 no-native-clear'
+                : 'w-full rounded-xl border border-[#E5E5EA] bg-white py-3.5 pl-12 pr-28 text-sm sm:text-base text-[#1D1D1F] placeholder:text-[#86868B] shadow-sm transition-colors focus:border-[#0E8A66] focus:outline-none focus:ring-2 focus:ring-[#0E8A66]/20 no-native-clear'
             }
           />
           {query && (

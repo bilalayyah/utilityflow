@@ -601,3 +601,19 @@ html.dark .shadow-lg {
 .text-balance {
   text-wrap: balance;
 }
+
+/* --------------------------------------------------------------------------
+ * Hide the browser's native search-field cancel (×) button on inputs that
+ * render their own clear (×) button — otherwise Chrome/Safari show two ×
+ * icons side by side. Scoped to .no-native-clear on purpose: the /tools/
+ * directory search has no custom clear button, so its native × must stay.
+ * -------------------------------------------------------------------------- */
+.no-native-clear::-webkit-search-cancel-button,
+.no-native-clear::-webkit-search-decoration {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
+}
+.no-native-clear::-ms-clear {
+  display: none;
+}
