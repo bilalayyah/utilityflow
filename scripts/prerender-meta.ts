@@ -119,6 +119,7 @@ import { PT_TOOL_OVERRIDES } from '../src/locales/pt/tools';
 import { RU_TOOL_OVERRIDES } from '../src/locales/ru/tools';
 import { ZH_TOOL_OVERRIDES } from '../src/locales/zh/tools';
 import { HI_TOOL_OVERRIDES } from '../src/locales/hi/tools';
+import { TR_TOOL_OVERRIDES } from '../src/locales/tr/tools';
 import type { ToolLocaleOverride } from '../src/locales/types';
 import type { BreadcrumbItem, CategoryId, ToolDefinition, ToolDetail } from '../src/types/tool';
 
@@ -136,6 +137,7 @@ const TOOL_OVERRIDES_BY_LOCALE: Record<string, Record<string, ToolLocaleOverride
   ko: KO_TOOL_OVERRIDES,
   zh: ZH_TOOL_OVERRIDES,
   hi: HI_TOOL_OVERRIDES,
+  tr: TR_TOOL_OVERRIDES,
 };
 
 // ---------------------------------------------------------------------------

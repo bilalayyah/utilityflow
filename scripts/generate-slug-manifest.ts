@@ -25,8 +25,10 @@ import { KO_CATEGORY_OVERRIDES } from '../src/locales/ko/categories';
 import { KO_TOOL_OVERRIDES } from '../src/locales/ko/tools';
 import { ZH_CATEGORY_OVERRIDES } from '../src/locales/zh/categories';
 import { HI_CATEGORY_OVERRIDES } from '../src/locales/hi/categories';
+import { TR_CATEGORY_OVERRIDES } from '../src/locales/tr/categories';
 import { ZH_TOOL_OVERRIDES } from '../src/locales/zh/tools';
 import { HI_TOOL_OVERRIDES } from '../src/locales/hi/tools';
+import { TR_TOOL_OVERRIDES } from '../src/locales/tr/tools';
 import { BLOG_ARTICLES } from '../src/registry/blogArticles';
 import { ES_ARTICLE_OVERRIDES } from '../src/locales/es/blog';
 import { DE_ARTICLE_OVERRIDES } from '../src/locales/de/blog';
@@ -39,6 +41,7 @@ import { JA_ARTICLE_OVERRIDES } from '../src/locales/ja/blog';
 import { KO_ARTICLE_OVERRIDES } from '../src/locales/ko/blog';
 import { ZH_ARTICLE_OVERRIDES } from '../src/locales/zh/blog';
 import { HI_ARTICLE_OVERRIDES } from '../src/locales/hi/blog';
+import { TR_ARTICLE_OVERRIDES } from '../src/locales/tr/blog';
 import type { ArticleLocaleOverride, CategoryLocaleOverride, ToolLocaleOverride } from '../src/locales/types';
 
 /**
@@ -65,6 +68,7 @@ const TOOL_OVERRIDES: Record<NonDefaultLocale, Record<string, ToolLocaleOverride
   ko: KO_TOOL_OVERRIDES,
   zh: ZH_TOOL_OVERRIDES,
   hi: HI_TOOL_OVERRIDES,
+  tr: TR_TOOL_OVERRIDES,
 };
 
 const CATEGORY_OVERRIDES: Record<
@@ -82,6 +86,7 @@ const CATEGORY_OVERRIDES: Record<
   ko: KO_CATEGORY_OVERRIDES,
   zh: ZH_CATEGORY_OVERRIDES,
   hi: HI_CATEGORY_OVERRIDES,
+  tr: TR_CATEGORY_OVERRIDES,
 };
 
 /** Blog article overrides (Batch 2). Empty until Batch 4 (localization). */
@@ -100,6 +105,7 @@ const ARTICLE_OVERRIDES: Record<
   ko: KO_ARTICLE_OVERRIDES,
   zh: ZH_ARTICLE_OVERRIDES,
   hi: HI_ARTICLE_OVERRIDES,
+  tr: TR_ARTICLE_OVERRIDES,
 };
 
 function generateSlugManifest(): void {

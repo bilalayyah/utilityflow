@@ -43,6 +43,7 @@ const LOCALE_LOADERS: Record<
   ko: () => import('./ko/articleLoader'),
   zh: () => import('./zh/articleLoader'),
   hi: () => import('./hi/articleLoader'),
+  tr: () => import('./tr/articleLoader'),
 };
 
 const articleCache = new Map<string, ArticleLocaleOverride>();
