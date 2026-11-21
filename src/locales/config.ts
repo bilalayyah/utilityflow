@@ -2,7 +2,7 @@
  * Central language configuration for UtilityFlow.
  *
  * Designed for 11 languages from the start: English (default) + es + pt + de +
- * fr + ja + id + it + ru + ko + zh. Phase 1 shipped en + es; Phase 2 adds
+ * fr + ja + id + it + ru + ko + zh. Hindi (hi) added 2026-11-21 (12 locales). Phase 1 shipped en + es; Phase 2 adds
  * pt + fr; Phase 3 adds de + it; Phase 4 adds id + ru; Phase 5 adds ja + ko. Later phases add a LocaleInfo entry, a locales/<code>.ts
  * dictionary, tool overrides and category overrides — no routing or component
  * rework required.
@@ -17,7 +17,7 @@
 import { getCategoryById } from '../registry/categories';
 import type { CategoryId, ToolCategory } from '../types/tool';
 
-export type LocaleCode = 'en' | 'es' | 'pt' | 'fr' | 'de' | 'it' | 'id' | 'ru' | 'ja' | 'ko' | 'zh';
+export type LocaleCode = 'en' | 'es' | 'pt' | 'fr' | 'de' | 'it' | 'id' | 'ru' | 'ja' | 'ko' | 'zh' | 'hi';
 
 /** Non-default locales (the ones that live under a /<code>/ prefix). */
 export type NonDefaultLocale = Exclude<LocaleCode, 'en'>;
@@ -44,6 +44,7 @@ export const SUPPORTED_LOCALES: LocaleInfo[] = [
   { code: 'ja', nativeName: '日本語', pathPrefix: '/ja', htmlLang: 'ja' },
   { code: 'ko', nativeName: '한국어', pathPrefix: '/ko', htmlLang: 'ko' },
   { code: 'zh', nativeName: '中文', pathPrefix: '/zh', htmlLang: 'zh-CN' },
+  { code: 'hi', nativeName: 'हिन्दी', pathPrefix: '/hi', htmlLang: 'hi' },
 ];
 
 /** Literal 'en' type (not LocaleCode) so `locale === DEFAULT_LOCALE` narrows the type. */
@@ -88,6 +89,8 @@ export function localeTag(locale: LocaleCode): string {
       return 'ko';
     case 'zh':
       return 'zh-CN';
+    case 'hi':
+      return 'hi';
   }
 }
 
@@ -121,6 +124,8 @@ export function ogLocaleTag(locale: LocaleCode): string {
       return 'ko_KR';
     case 'zh':
       return 'zh_CN';
+    case 'hi':
+      return 'hi_IN';
   }
 }
 
@@ -141,7 +146,7 @@ export function getLocaleFromPath(pathname: string): { locale: LocaleCode; restP
 
 /** Localized URL for a static page path (English path in, localized path out). */
 export const STATIC_PATHS: Record<string, Partial<Record<LocaleCode, string>>> = {
-  '/': { en: '/', es: '/es/', pt: '/pt/', fr: '/fr/', de: '/de/', it: '/it/', id: '/id/', ru: '/ru/', ja: '/ja/', ko: '/ko/', zh: '/zh/' },
+  '/': { en: '/', es: '/es/', pt: '/pt/', fr: '/fr/', de: '/de/', it: '/it/', id: '/id/', ru: '/ru/', ja: '/ja/', ko: '/ko/', zh: '/zh/', hi: '/hi/' },
   '/tools/': {
     en: '/tools/',
     es: '/es/todas-las-herramientas/',
@@ -154,9 +159,10 @@ export const STATIC_PATHS: Record<string, Partial<Record<LocaleCode, string>>> =
     ja: '/ja/tools/',
     ko: '/ko/tools/',
     zh: '/zh/all-tools/',
+    hi: '/hi/sabhi-tools/',
   },
-  '/about/': { en: '/about/', es: '/es/acerca-de/', pt: '/pt/sobre/', fr: '/fr/a-propos/', de: '/de/ueber-uns/', it: '/it/chi-siamo/', id: '/id/tentang-kami/', ru: '/ru/o-nas/', ja: '/ja/watashitachi/', ko: '/ko/sogae/', zh: '/zh/guanyu-women/' },
-  '/contact/': { en: '/contact/', es: '/es/contacto/', pt: '/pt/contato/', fr: '/fr/contact/', de: '/de/kontakt/', it: '/it/contatti/', id: '/id/kontak/', ru: '/ru/kontakty/', ja: '/ja/otoiawase/', ko: '/ko/mun-ui/', zh: '/zh/lianxi-women/' },
+  '/about/': { en: '/about/', es: '/es/acerca-de/', pt: '/pt/sobre/', fr: '/fr/a-propos/', de: '/de/ueber-uns/', it: '/it/chi-siamo/', id: '/id/tentang-kami/', ru: '/ru/o-nas/', ja: '/ja/watashitachi/', ko: '/ko/sogae/', zh: '/zh/guanyu-women/', hi: '/hi/hamare-bare-mein/' },
+  '/contact/': { en: '/contact/', es: '/es/contacto/', pt: '/pt/contato/', fr: '/fr/contact/', de: '/de/kontakt/', it: '/it/contatti/', id: '/id/kontak/', ru: '/ru/kontakty/', ja: '/ja/otoiawase/', ko: '/ko/mun-ui/', zh: '/zh/lianxi-women/', hi: '/hi/sampark/' },
   '/privacy-policy/': {
     en: '/privacy-policy/',
     es: '/es/politica-de-privacidad/',
@@ -169,6 +175,7 @@ export const STATIC_PATHS: Record<string, Partial<Record<LocaleCode, string>>> =
     ja: '/ja/puraibashi-porishi/',
     ko: '/ko/peuraibeosi-jeongchaek/',
     zh: '/zh/yinsi-zhengce/',
+    hi: '/hi/gopniyata-neeti/',
   },
   '/terms-of-service/': {
     en: '/terms-of-service/',
@@ -182,6 +189,7 @@ export const STATIC_PATHS: Record<string, Partial<Record<LocaleCode, string>>> =
     ja: '/ja/riyo-kiyaku/',
     ko: '/ko/iyong-yagwan/',
     zh: '/zh/shiyong-tiaokuan/',
+    hi: '/hi/sewa-ki-shartein/',
   },
   /** Blog home — the segment is "blog" in every locale. */
   '/blog/': {
@@ -196,6 +204,7 @@ export const STATIC_PATHS: Record<string, Partial<Record<LocaleCode, string>>> =
     ja: '/ja/blog/',
     ko: '/ko/blog/',
     zh: '/zh/blog/',
+    hi: '/hi/blog/',
   },
 };
 
@@ -295,6 +304,15 @@ export const CATEGORY_LOCALE_SLUGS: Record<NonDefaultLocale, Record<string, stri
     seo: 'seo-gongju',
     'image-file': 'tuxiang-wenjian-gongju',
   },
+  hi: {
+    'text-writing': 'text-aur-lekhan-tools',
+    developer: 'developer-tools',
+    calculators: 'calculator',
+    'social-media': 'social-media-tools',
+    pdf: 'pdf-tools',
+    seo: 'seo-tools',
+    'image-file': 'image-aur-file-tools',
+  },
 };
 
 /** Spanish slugs for the 7 categories, keyed by category id. Kept for the Phase 1 validator. */
@@ -312,6 +330,7 @@ export const CATEGORY_PATH_SEGMENT: Record<NonDefaultLocale, string> = {
   ja: 'kategori',
   ko: 'kategori',
   zh: 'fenlei',
+  hi: 'shreni',
 };
 
 /**

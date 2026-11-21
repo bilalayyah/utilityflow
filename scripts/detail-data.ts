@@ -1,8 +1,8 @@
 /**
  * Synchronous detail-data access for the validation scripts (check-*-locale.ts).
  *
- * DEV-ONLY: statically imports all 88 per-batch detail modules (EN + 10
- * locales) and merges them into per-locale maps. The check scripts are
+ * DEV-ONLY: statically imports all per-batch detail modules (EN + 11
+ * locales, 7 batches each) and merges them into per-locale maps. The check scripts are
  * synchronous Node scripts, so they cannot use the async loader in
  * src/locales/details.ts.
  *
@@ -90,6 +90,13 @@ import { TOOL_DETAILS as ZH_BATCH4 } from '../src/locales/zh/details/batch4';
 import { TOOL_DETAILS as ZH_BATCH5 } from '../src/locales/zh/details/batch5';
 import { TOOL_DETAILS as ZH_BATCH6 } from '../src/locales/zh/details/batch6';
 import { TOOL_DETAILS as ZH_BATCH7 } from '../src/locales/zh/details/batch7';
+import { TOOL_DETAILS as HI_BATCH1 } from '../src/locales/hi/details/batch1';
+import { TOOL_DETAILS as HI_BATCH2 } from '../src/locales/hi/details/batch2';
+import { TOOL_DETAILS as HI_BATCH3 } from '../src/locales/hi/details/batch3';
+import { TOOL_DETAILS as HI_BATCH4 } from '../src/locales/hi/details/batch4';
+import { TOOL_DETAILS as HI_BATCH5 } from '../src/locales/hi/details/batch5';
+import { TOOL_DETAILS as HI_BATCH6 } from '../src/locales/hi/details/batch6';
+import { TOOL_DETAILS as HI_BATCH7 } from '../src/locales/hi/details/batch7';
 
 export const EN_DETAILS: Record<string, ToolDetail> = Object.assign(
   {},
@@ -202,5 +209,15 @@ export const LOCALE_DETAILS: Record<Exclude<LocaleCode, 'en'>, Record<string, To
     ZH_BATCH5,
     ZH_BATCH6,
     ZH_BATCH7,
+  ),
+  hi: Object.assign(
+    {},
+    HI_BATCH1,
+    HI_BATCH2,
+    HI_BATCH3,
+    HI_BATCH4,
+    HI_BATCH5,
+    HI_BATCH6,
+    HI_BATCH7,
   ),
 };

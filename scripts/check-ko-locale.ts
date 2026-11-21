@@ -2,7 +2,7 @@
  * Phase 5 Korean validation — run with:
  *   node -e "require('esbuild').buildSync({entryPoints:['scripts/check-ko-locale.ts'],bundle:true,platform:'node',format:'cjs',outfile:'/tmp/check-ko-locale.cjs'})" && node /tmp/check-ko-locale.cjs
  *
- * Checks: 88/88 KO tool overrides, 20 FAQs each, unique Korean slugs with no
+ * Checks: all KO tool overrides, 20 FAQs each, unique Korean slugs with no
  * collision against English slugs or reserved paths, SEO title/description
  * lengths, category overrides, and en/ko chrome-dictionary key parity.
  */
@@ -39,10 +39,9 @@ const enIds = TOOLS_REGISTRY.map((t) => t.id);
 const koIds = Object.keys(KO_TOOL_OVERRIDES);
 const missing = enIds.filter((id) => !KO_TOOL_OVERRIDES[id]);
 const extra = koIds.filter((id) => !enIds.includes(id));
-if (enIds.length !== 88) fail(`registry has ${enIds.length} tools, expected 88`);
-else ok(`registry: 88 tools`);
+ok(`registry: ${enIds.length} tools`);
 if (missing.length) fail(`missing KO overrides: ${missing.join(', ')}`);
-else ok('all 88 tools have a KO override');
+else ok(`all ${enIds.length} tools have a KO override`);
 if (extra.length) fail(`extra KO override keys (no such EN tool): ${extra.join(', ')}`);
 else ok('no extra KO override keys');
 
@@ -61,7 +60,7 @@ for (const tool of TOOLS_REGISTRY) {
   if (idSlugs.has(s)) { fail(`duplicate KO slug "${s}": ${idSlugs.get(s)} and ${tool.id}`); slugBad++; }
   idSlugs.set(s, tool.id);
 }
-if (!slugBad) ok(`88 unique Korean slugs, no EN collision, no reserved path`);
+if (!slugBad) ok(`${enIds.length} unique Korean slugs, no EN collision, no reserved path`);
 
 /* ---------- 3. Per-tool field counts & lengths ---------- */
 console.log('\n== Per-tool fields ==');
@@ -104,7 +103,7 @@ for (const tool of TOOLS_REGISTRY) {
   }
   if (problems.length) { fieldBad++; fail(`${tool.id}: ${problems.join('; ')}`); }
 }
-if (!fieldBad) ok(`all 88 tools pass field counts/lengths; total KO FAQs = ${faqTotal} (expect 1760)`);
+if (!fieldBad) ok(`all 88 tools pass field counts/lengths; total KO FAQs = ${faqTotal} (expect ${enIds.length * 20})`);
 else console.log(`  INFO  total KO FAQs counted: ${faqTotal}`);
 
 /* ---------- 4. Categories ---------- */

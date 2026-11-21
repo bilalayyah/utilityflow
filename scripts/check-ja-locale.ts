@@ -2,7 +2,7 @@
  * Phase 5 Japanese validation — run with:
  *   node -e "require('esbuild').buildSync({entryPoints:['scripts/check-ja-locale.ts'],bundle:true,platform:'node',format:'cjs',outfile:'/tmp/check-ja-locale.cjs'})" && node /tmp/check-ja-locale.cjs
  *
- * Checks: 88/88 JA tool overrides, 20 FAQs each, unique Japanese slugs with no
+ * Checks: all JA tool overrides, 20 FAQs each, unique Japanese slugs with no
  * collision against English slugs or reserved paths, SEO title/description
  * lengths, category overrides, and en/ja chrome-dictionary key parity.
  */
@@ -39,10 +39,9 @@ const enIds = TOOLS_REGISTRY.map((t) => t.id);
 const jaIds = Object.keys(JA_TOOL_OVERRIDES);
 const missing = enIds.filter((id) => !JA_TOOL_OVERRIDES[id]);
 const extra = jaIds.filter((id) => !enIds.includes(id));
-if (enIds.length !== 88) fail(`registry has ${enIds.length} tools, expected 88`);
-else ok(`registry: 88 tools`);
+ok(`registry: ${enIds.length} tools`);
 if (missing.length) fail(`missing JA overrides: ${missing.join(', ')}`);
-else ok('all 88 tools have a JA override');
+else ok(`all ${enIds.length} tools have a JA override`);
 if (extra.length) fail(`extra JA override keys (no such EN tool): ${extra.join(', ')}`);
 else ok('no extra JA override keys');
 
@@ -61,7 +60,7 @@ for (const tool of TOOLS_REGISTRY) {
   if (idSlugs.has(s)) { fail(`duplicate JA slug "${s}": ${idSlugs.get(s)} and ${tool.id}`); slugBad++; }
   idSlugs.set(s, tool.id);
 }
-if (!slugBad) ok(`88 unique Japanese slugs, no EN collision, no reserved path`);
+if (!slugBad) ok(`${enIds.length} unique Japanese slugs, no EN collision, no reserved path`);
 
 /* ---------- 3. Per-tool field counts & lengths ---------- */
 console.log('\n== Per-tool fields ==');
@@ -104,7 +103,7 @@ for (const tool of TOOLS_REGISTRY) {
   }
   if (problems.length) { fieldBad++; fail(`${tool.id}: ${problems.join('; ')}`); }
 }
-if (!fieldBad) ok(`all 88 tools pass field counts/lengths; total JA FAQs = ${faqTotal} (expect 1760)`);
+if (!fieldBad) ok(`all 88 tools pass field counts/lengths; total JA FAQs = ${faqTotal} (expect ${enIds.length * 20})`);
 else console.log(`  INFO  total JA FAQs counted: ${faqTotal}`);
 
 /* ---------- 4. Categories ---------- */

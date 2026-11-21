@@ -118,6 +118,7 @@ import { KO_TOOL_OVERRIDES } from '../src/locales/ko/tools';
 import { PT_TOOL_OVERRIDES } from '../src/locales/pt/tools';
 import { RU_TOOL_OVERRIDES } from '../src/locales/ru/tools';
 import { ZH_TOOL_OVERRIDES } from '../src/locales/zh/tools';
+import { HI_TOOL_OVERRIDES } from '../src/locales/hi/tools';
 import type { ToolLocaleOverride } from '../src/locales/types';
 import type { BreadcrumbItem, CategoryId, ToolDefinition, ToolDetail } from '../src/types/tool';
 
@@ -134,6 +135,7 @@ const TOOL_OVERRIDES_BY_LOCALE: Record<string, Record<string, ToolLocaleOverride
   ja: JA_TOOL_OVERRIDES,
   ko: KO_TOOL_OVERRIDES,
   zh: ZH_TOOL_OVERRIDES,
+  hi: HI_TOOL_OVERRIDES,
 };
 
 // ---------------------------------------------------------------------------
@@ -1261,7 +1263,7 @@ async function prerender(): Promise<void> {
     `Static bodies (Fix H-1): ${(bodyBytes / 1024 / 1024).toFixed(1)} MB total across ${written} pages.`
   );
   console.log(
-    `Preloads: locale chunks for ${[...localePreloadCache.values()].filter((f) => f.length > 0).length}/10 non-EN locales; tool chunks for ${resolvedToolIds.size}/${TOOLS_REGISTRY.length} tools; article chunks for ${resolvedArticleIds.size}/${publishedArticles.length} EN articles; localized article chunks for ${resolvedLocalizedArticles.size}/${publishedArticles.length * (SUPPORTED_LOCALES.length - 1)} (locale, article) pairs.`
+    `Preloads: locale chunks for ${[...localePreloadCache.values()].filter((f) => f.length > 0).length}/${SUPPORTED_LOCALES.length - 1} non-EN locales; tool chunks for ${resolvedToolIds.size}/${TOOLS_REGISTRY.length} tools; article chunks for ${resolvedArticleIds.size}/${publishedArticles.length} EN articles; localized article chunks for ${resolvedLocalizedArticles.size}/${publishedArticles.length * (SUPPORTED_LOCALES.length - 1)} (locale, article) pairs.`
   );
   if (resolvedArticleIds.size !== publishedArticles.length) {
     const missingArticles = publishedArticles

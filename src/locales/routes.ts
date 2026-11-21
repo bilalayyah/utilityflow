@@ -310,7 +310,7 @@ export function getCategoryAlternatePaths(
   for (const locale of SUPPORTED_LOCALES) {
     if (locale.code === DEFAULT_LOCALE) continue;
     const slug = getCategorySlug(locale.code as NonDefaultLocale, categoryId);
-    if (slug && slug !== base.slug) {
+    if (slug) {
       result[locale.code] =
         `${locale.pathPrefix}/${CATEGORY_PATH_SEGMENT[locale.code]}/${slug}/`;
     }

@@ -283,6 +283,30 @@ export default function App() {
             <Route path="/zh/:toolSlug" element={<ToolPage />} />
             <Route path="/zh/:toolSlug/" element={<ToolPage />} />
 
+
+            {/* Hindi (hi) routes — same components, locale from URL */}
+            <Route path="/hi" element={<HomePage />} />
+            <Route path="/hi/" element={<HomePage />} />
+            <Route path="/hi/sabhi-tools" element={<ToolsDirectoryPage />} />
+            <Route path="/hi/sabhi-tools/" element={<ToolsDirectoryPage />} />
+            <Route path="/hi/shreni/:categorySlug" element={<CategoryPage />} />
+            <Route path="/hi/shreni/:categorySlug/" element={<CategoryPage />} />
+            <Route path="/hi/hamare-bare-mein" element={<AboutPage />} />
+            <Route path="/hi/hamare-bare-mein/" element={<AboutPage />} />
+            <Route path="/hi/sampark" element={<ContactPage />} />
+            <Route path="/hi/sampark/" element={<ContactPage />} />
+            <Route path="/hi/gopniyata-neeti" element={<PrivacyPolicyPage />} />
+            <Route path="/hi/gopniyata-neeti/" element={<PrivacyPolicyPage />} />
+            <Route path="/hi/sewa-ki-shartein" element={<TermsOfServicePage />} />
+            <Route path="/hi/sewa-ki-shartein/" element={<TermsOfServicePage />} />
+                        <Route path="/hi/blog" element={<BlogHomePage />} />
+            <Route path="/hi/blog/" element={<BlogHomePage />} />
+            <Route path="/hi/blog/category/:categorySlug" element={<BlogCategoryPage />} />
+            <Route path="/hi/blog/category/:categorySlug/" element={<BlogCategoryPage />} />
+            <Route path="/hi/blog/:articleSlug" element={<ArticlePage />} />
+            <Route path="/hi/blog/:articleSlug/" element={<ArticlePage />} />
+            <Route path="/hi/:toolSlug" element={<ToolPage />} />
+            <Route path="/hi/:toolSlug/" element={<ToolPage />} />
             <Route path="*" element={<NotFoundPage />} />
             </Routes>
         </SiteLayout>

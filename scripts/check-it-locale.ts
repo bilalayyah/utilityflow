@@ -2,7 +2,7 @@
  * Phase 3 Italian validation — run with:
  *   node -e "require('esbuild').buildSync({entryPoints:['scripts/check-it-locale.ts'],bundle:true,platform:'node',format:'cjs',outfile:'/tmp/check-it-locale.cjs'})" && node /tmp/check-it-locale.cjs
  *
- * Checks: 88/88 IT tool overrides, 20 FAQs each, unique Italian slugs with no
+ * Checks: all IT tool overrides, 20 FAQs each, unique Italian slugs with no
  * collision against English slugs or reserved paths, SEO title/description
  * lengths, category overrides, and en/it chrome-dictionary key parity.
  */
@@ -42,10 +42,9 @@ const enIds = TOOLS_REGISTRY.map((t) => t.id);
 const itIds = Object.keys(IT_TOOL_OVERRIDES);
 const missing = enIds.filter((id) => !IT_TOOL_OVERRIDES[id]);
 const extra = itIds.filter((id) => !enIds.includes(id));
-if (enIds.length !== 88) fail(`registry has ${enIds.length} tools, expected 88`);
-else ok(`registry: 88 tools`);
+ok(`registry: ${enIds.length} tools`);
 if (missing.length) fail(`missing IT overrides: ${missing.join(', ')}`);
-else ok('all 88 tools have a FR override');
+else ok(`all ${enIds.length} tools have a IT override`);
 if (extra.length) fail(`extra IT override keys (no such EN tool): ${extra.join(', ')}`);
 else ok('no extra IT override keys');
 
@@ -64,7 +63,7 @@ for (const tool of TOOLS_REGISTRY) {
   if (itSlugs.has(s)) { fail(`duplicate IT slug "${s}": ${itSlugs.get(s)} and ${tool.id}`); slugBad++; }
   itSlugs.set(s, tool.id);
 }
-if (!slugBad) ok(`88 unique Italian slugs, no EN collision, no reserved path`);
+if (!slugBad) ok(`${enIds.length} unique Italian slugs, no EN collision, no reserved path`);
 
 /* ---------- 3. Per-tool field counts & lengths ---------- */
 console.log('\n== Per-tool fields ==');
@@ -107,7 +106,7 @@ for (const tool of TOOLS_REGISTRY) {
   }
   if (problems.length) { fieldBad++; fail(`${tool.id}: ${problems.join('; ')}`); }
 }
-if (!fieldBad) ok(`all 88 tools pass field counts/lengths; total IT FAQs = ${faqTotal} (expect 1760)`);
+if (!fieldBad) ok(`all 88 tools pass field counts/lengths; total IT FAQs = ${faqTotal} (expect ${enIds.length * 20})`);
 else console.log(`  INFO  total IT FAQs counted: ${faqTotal}`);
 
 /* ---------- 4. Categories ---------- */

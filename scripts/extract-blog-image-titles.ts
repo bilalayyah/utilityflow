@@ -13,8 +13,8 @@
  *   ./node_modules/.bin/tsx scripts/extract-blog-image-titles.ts \
  *     --all --out /tmp/uf-blog-image-jobs-all.json
  *
- * --all enumerates every published (id, lang) pair: all 264 EN meta entries
- * plus every override key in each of the 10 locale files (expected 2,904
+ * --all enumerates every published (id, lang) pair: all 249 EN meta entries
+ * plus every override key in each of the 11 locale files (expected 2,988
  * total). Missing titles fail loudly (exit 1) instead of shipping a blank
  * card. Titles longer than 60 chars are warned about (the generator's
  * 3-line auto-fit is sized for <=60 chars).
@@ -31,8 +31,9 @@ import { KO_ARTICLE_OVERRIDES } from '../src/locales/ko/blog';
 import { PT_ARTICLE_OVERRIDES } from '../src/locales/pt/blog';
 import { RU_ARTICLE_OVERRIDES } from '../src/locales/ru/blog';
 import { ZH_ARTICLE_OVERRIDES } from '../src/locales/zh/blog';
+import { HI_ARTICLE_OVERRIDES } from '../src/locales/hi/blog';
 
-const LOCALES = ['en', 'es', 'pt', 'de', 'fr', 'ja', 'id', 'it', 'ru', 'ko', 'zh'] as const;
+const LOCALES = ['en', 'es', 'pt', 'de', 'fr', 'ja', 'id', 'it', 'ru', 'ko', 'zh', 'hi'] as const;
 type LocaleCode = (typeof LOCALES)[number];
 
 const OVERRIDES: Record<Exclude<LocaleCode, 'en'>, Record<string, { title?: string }>> = {
@@ -46,6 +47,7 @@ const OVERRIDES: Record<Exclude<LocaleCode, 'en'>, Record<string, { title?: stri
   ru: RU_ARTICLE_OVERRIDES,
   ko: KO_ARTICLE_OVERRIDES,
   zh: ZH_ARTICLE_OVERRIDES,
+  hi: HI_ARTICLE_OVERRIDES,
 };
 
 interface Job {

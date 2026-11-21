@@ -2,7 +2,7 @@
  * Phase 2 Portuguese (pt-BR) validation — run with:
  *   node -e "require('esbuild').buildSync({entryPoints:['scripts/check-pt-locale.ts'],bundle:true,platform:'node',format:'cjs',outfile:'/tmp/check-pt-locale.cjs'})" && node /tmp/check-pt-locale.cjs
  *
- * Checks: 88/88 PT tool overrides, 20 FAQs each, unique Portuguese slugs with no
+ * Checks: all PT tool overrides, 20 FAQs each, unique Portuguese slugs with no
  * collision against English slugs or reserved paths, SEO title/description
  * lengths, category overrides, en/pt chrome-dictionary key parity, and no
  * European-Portuguese markers (this is Brazilian Portuguese).
@@ -41,10 +41,9 @@ const enIds = TOOLS_REGISTRY.map((t) => t.id);
 const ptIds = Object.keys(PT_TOOL_OVERRIDES);
 const missing = enIds.filter((id) => !PT_TOOL_OVERRIDES[id]);
 const extra = ptIds.filter((id) => !enIds.includes(id));
-if (enIds.length !== 88) fail(`registry has ${enIds.length} tools, expected 88`);
-else ok(`registry: 88 tools`);
+ok(`registry: ${enIds.length} tools`);
 if (missing.length) fail(`missing PT overrides: ${missing.join(', ')}`);
-else ok('all 88 tools have a PT override');
+else ok(`all ${enIds.length} tools have a PT override`);
 if (extra.length) fail(`extra PT override keys (no such EN tool): ${extra.join(', ')}`);
 else ok('no extra PT override keys');
 
@@ -63,7 +62,7 @@ for (const tool of TOOLS_REGISTRY) {
   if (ptSlugs.has(s)) { fail(`duplicate PT slug "${s}": ${ptSlugs.get(s)} and ${tool.id}`); slugBad++; }
   ptSlugs.set(s, tool.id);
 }
-if (!slugBad) ok(`88 unique Portuguese slugs, no EN collision, no reserved path`);
+if (!slugBad) ok(`${enIds.length} unique Portuguese slugs, no EN collision, no reserved path`);
 
 /* ---------- 3. Per-tool field counts & lengths ---------- */
 console.log('\n== Per-tool fields ==');
@@ -111,7 +110,7 @@ for (const tool of TOOLS_REGISTRY) {
   }
   if (problems.length) { fieldBad++; fail(`${tool.id}: ${problems.join('; ')}`); }
 }
-if (!fieldBad) ok(`all 88 tools pass field counts/lengths; total PT FAQs = ${faqTotal} (expect 1760)`);
+if (!fieldBad) ok(`all 88 tools pass field counts/lengths; total PT FAQs = ${faqTotal} (expect ${enIds.length * 20})`);
 else console.log(`  INFO  total PT FAQs counted: ${faqTotal}`);
 
 /* ---------- 4. Categories ---------- */

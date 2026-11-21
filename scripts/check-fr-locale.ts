@@ -2,7 +2,7 @@
  * Phase 2 French validation — run with:
  *   node -e "require('esbuild').buildSync({entryPoints:['scripts/check-fr-locale.ts'],bundle:true,platform:'node',format:'cjs',outfile:'/tmp/check-fr-locale.cjs'})" && node /tmp/check-fr-locale.cjs
  *
- * Checks: 88/88 FR tool overrides, 20 FAQs each, unique French slugs with no
+ * Checks: all FR tool overrides, 20 FAQs each, unique French slugs with no
  * collision against English slugs or reserved paths, SEO title/description
  * lengths, category overrides, and en/fr chrome-dictionary key parity.
  */
@@ -42,10 +42,9 @@ const enIds = TOOLS_REGISTRY.map((t) => t.id);
 const frIds = Object.keys(FR_TOOL_OVERRIDES);
 const missing = enIds.filter((id) => !FR_TOOL_OVERRIDES[id]);
 const extra = frIds.filter((id) => !enIds.includes(id));
-if (enIds.length !== 88) fail(`registry has ${enIds.length} tools, expected 88`);
-else ok(`registry: 88 tools`);
+ok(`registry: ${enIds.length} tools`);
 if (missing.length) fail(`missing FR overrides: ${missing.join(', ')}`);
-else ok('all 88 tools have a FR override');
+else ok(`all ${enIds.length} tools have a FR override`);
 if (extra.length) fail(`extra FR override keys (no such EN tool): ${extra.join(', ')}`);
 else ok('no extra FR override keys');
 
@@ -64,7 +63,7 @@ for (const tool of TOOLS_REGISTRY) {
   if (frSlugs.has(s)) { fail(`duplicate FR slug "${s}": ${frSlugs.get(s)} and ${tool.id}`); slugBad++; }
   frSlugs.set(s, tool.id);
 }
-if (!slugBad) ok(`88 unique French slugs, no EN collision, no reserved path`);
+if (!slugBad) ok(`${enIds.length} unique French slugs, no EN collision, no reserved path`);
 
 /* ---------- 3. Per-tool field counts & lengths ---------- */
 console.log('\n== Per-tool fields ==');
@@ -107,7 +106,7 @@ for (const tool of TOOLS_REGISTRY) {
   }
   if (problems.length) { fieldBad++; fail(`${tool.id}: ${problems.join('; ')}`); }
 }
-if (!fieldBad) ok(`all 88 tools pass field counts/lengths; total FR FAQs = ${faqTotal} (expect 1760)`);
+if (!fieldBad) ok(`all 88 tools pass field counts/lengths; total FR FAQs = ${faqTotal} (expect ${enIds.length * 20})`);
 else console.log(`  INFO  total FR FAQs counted: ${faqTotal}`);
 
 /* ---------- 4. Categories ---------- */

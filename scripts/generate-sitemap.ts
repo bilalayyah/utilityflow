@@ -20,6 +20,7 @@ import { RU_TOOL_OVERRIDES } from '../src/locales/ru/tools';
 import { JA_TOOL_OVERRIDES } from '../src/locales/ja/tools';
 import { KO_TOOL_OVERRIDES } from '../src/locales/ko/tools';
 import { ZH_TOOL_OVERRIDES } from '../src/locales/zh/tools';
+import { HI_TOOL_OVERRIDES } from '../src/locales/hi/tools';
 import type { ToolLocaleOverride } from '../src/locales/types';
 import { CATEGORIES } from '../src/registry/categories';
 import { TOOLS_REGISTRY } from '../src/registry/toolsRegistry';
@@ -34,6 +35,7 @@ import { RU_ARTICLE_OVERRIDES } from '../src/locales/ru/blog';
 import { JA_ARTICLE_OVERRIDES } from '../src/locales/ja/blog';
 import { KO_ARTICLE_OVERRIDES } from '../src/locales/ko/blog';
 import { ZH_ARTICLE_OVERRIDES } from '../src/locales/zh/blog';
+import { HI_ARTICLE_OVERRIDES } from '../src/locales/hi/blog';
 import type { ArticleLocaleOverride } from '../src/locales/types';
 
 interface SitemapAlternate {
@@ -64,6 +66,7 @@ const TOOL_OVERRIDES_BY_LOCALE: Record<string, Record<string, ToolLocaleOverride
   ja: JA_TOOL_OVERRIDES,
   ko: KO_TOOL_OVERRIDES,
   zh: ZH_TOOL_OVERRIDES,
+  hi: HI_TOOL_OVERRIDES,
 };
 
 /** Blog article overrides per locale (Batch 2). Empty until Batch 4 (localization). */
@@ -81,6 +84,7 @@ const ARTICLE_OVERRIDES_BY_LOCALE: Record<
   ja: JA_ARTICLE_OVERRIDES,
   ko: KO_ARTICLE_OVERRIDES,
   zh: ZH_ARTICLE_OVERRIDES,
+  hi: HI_ARTICLE_OVERRIDES,
 };
 
 function escapeXml(value: string): string {
