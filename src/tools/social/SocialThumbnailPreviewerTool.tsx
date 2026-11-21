@@ -116,7 +116,7 @@ export default function SocialThumbnailPreviewerTool() {
       )}
 
       {duration.trim() && (
-        <span className="absolute bottom-1.5 right-1.5 rounded bg-black/85 px-1.5 py-0.5 font-mono text-[11px] font-semibold text-white tabular-nums">
+        <span className="absolute bottom-1.5 end-1.5 rounded bg-black/85 px-1.5 py-0.5 font-mono text-[11px] font-semibold text-white tabular-nums">
           {duration.trim()}
         </span>
       )}
@@ -124,7 +124,7 @@ export default function SocialThumbnailPreviewerTool() {
       {showSafeZone && (
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute bottom-1 right-1 h-7 w-14 rounded border border-dashed border-amber-400 bg-amber-400/15"
+          className="pointer-events-none absolute bottom-1 end-1 h-7 w-14 rounded border border-dashed border-amber-400 bg-amber-400/15"
           title={s.safeZoneTitle}
         />
       )}

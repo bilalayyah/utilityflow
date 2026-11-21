@@ -97,7 +97,7 @@ export function BlogCategoryPage() {
               className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0B7A59] hover:text-[#0A6B4E] underline-offset-4 hover:underline dark:text-[#34D399] dark:hover:text-[#6EE7B7]"
             >
               {formatString(t.toolPage.browseAll, { name: category.name })}
-              <ArrowRight className="w-4 h-4" aria-hidden="true" />
+              <ArrowRight className="w-4 h-4 rtl:rotate-180" aria-hidden="true" />
             </Link>
           </p>
         </header>

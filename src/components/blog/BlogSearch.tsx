@@ -70,7 +70,7 @@ export function BlogSearch({ placeholder, variant = 'default' }: BlogSearchProps
       <form onSubmit={handleSubmit} role="search" aria-label={t.blog.searchArticles}>
         <div className="relative flex items-center">
           <Search
-            className="pointer-events-none absolute left-4 w-5 h-5 text-[#86868B] dark:text-[#94A3B8]"
+            className="pointer-events-none absolute start-4 w-5 h-5 text-[#86868B] dark:text-[#94A3B8]"
             aria-hidden="true"
           />
           <input
@@ -83,8 +83,8 @@ export function BlogSearch({ placeholder, variant = 'default' }: BlogSearchProps
             aria-label={t.blog.searchArticles}
             className={
               isHero
-                ? 'w-full rounded-2xl border border-[#D2D2D7] bg-[#FFFFFF] py-4 pl-12 pr-14 text-base text-[#1D1D1F] placeholder:text-[#86868B] shadow-sm transition-colors focus:border-[#0E8A66] focus:outline-none focus:ring-2 focus:ring-[#0E8A66]/20 dark:border-[#243247] dark:bg-[#131D31] dark:text-[#F1F5F9] dark:placeholder:text-[#94A3B8] no-native-clear'
-                : 'w-full rounded-xl border border-[#D2D2D7] bg-[#FFFFFF] py-3.5 pl-12 pr-28 text-sm sm:text-base text-[#1D1D1F] placeholder:text-[#86868B] shadow-sm transition-colors focus:border-[#0E8A66] focus:outline-none focus:ring-2 focus:ring-[#0E8A66]/20 dark:border-[#243247] dark:bg-[#131D31] dark:text-[#F1F5F9] dark:placeholder:text-[#94A3B8] no-native-clear'
+                ? 'w-full rounded-2xl border border-[#D2D2D7] bg-[#FFFFFF] py-4 ps-12 pe-14 text-base text-[#1D1D1F] placeholder:text-[#86868B] shadow-sm transition-colors focus:border-[#0E8A66] focus:outline-none focus:ring-2 focus:ring-[#0E8A66]/20 dark:border-[#243247] dark:bg-[#131D31] dark:text-[#F1F5F9] dark:placeholder:text-[#94A3B8] no-native-clear'
+                : 'w-full rounded-xl border border-[#D2D2D7] bg-[#FFFFFF] py-3.5 ps-12 pe-28 text-sm sm:text-base text-[#1D1D1F] placeholder:text-[#86868B] shadow-sm transition-colors focus:border-[#0E8A66] focus:outline-none focus:ring-2 focus:ring-[#0E8A66]/20 dark:border-[#243247] dark:bg-[#131D31] dark:text-[#F1F5F9] dark:placeholder:text-[#94A3B8] no-native-clear'
             }
           />
           {query && (
@@ -93,20 +93,20 @@ export function BlogSearch({ placeholder, variant = 'default' }: BlogSearchProps
               onClick={() => setQuery('')}
               aria-label={t.common.clear}
               className={`absolute p-1.5 text-[#86868B] hover:text-[#1D1D1F] rounded-md cursor-pointer dark:text-[#94A3B8] dark:hover:text-[#F1F5F9] ${
-                isHero ? 'right-12' : 'right-20'
+                isHero ? 'end-12' : 'end-20'
               }`}
             >
               <X className="w-4 h-4" />
             </button>
           )}
           {isHero ? (
-            <kbd className="pointer-events-none absolute right-4 rounded-md border border-[#E5E5EA] bg-[#F5F5F7] px-2 py-0.5 text-xs font-semibold text-[#6E6E73] dark:border-[#243247] dark:bg-[#182239] dark:text-[#CBD5E1]">
+            <kbd className="pointer-events-none absolute end-4 rounded-md border border-[#E5E5EA] bg-[#F5F5F7] px-2 py-0.5 text-xs font-semibold text-[#6E6E73] dark:border-[#243247] dark:bg-[#182239] dark:text-[#CBD5E1]">
               ⌘K
             </kbd>
           ) : (
             <button
               type="submit"
-              className="absolute right-2 rounded-full bg-[#0E8A66] px-3.5 py-2 text-xs sm:text-sm font-semibold text-white transition-colors hover:bg-[#0B7557] whitespace-nowrap shrink-0 cursor-pointer"
+              className="absolute end-2 rounded-full bg-[#0E8A66] px-3.5 py-2 text-xs sm:text-sm font-semibold text-white transition-colors hover:bg-[#0B7557] whitespace-nowrap shrink-0 cursor-pointer"
             >
               {t.common.search}
             </button>

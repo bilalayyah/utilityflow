@@ -251,7 +251,7 @@ export default function YoutubeTimestampGeneratorTool() {
       {analysis.warnings.length > 0 && (
         <div className="rounded-xl border border-amber-200 bg-amber-50 p-4 text-xs sm:text-sm text-amber-900 space-y-1">
           <div className="font-semibold">{s.specTitle}</div>
-          <ul className="list-disc pl-5 space-y-0.5">
+          <ul className="list-disc ps-5 space-y-0.5">
             {analysis.warnings.map((w) => (
               <li key={w}>{w}</li>
             ))}
@@ -275,7 +275,7 @@ export default function YoutubeTimestampGeneratorTool() {
             {s.shareTitle} {videoId ? s.videoIdLabel(videoId) : s.noVideoId}
           </div>
           {videoId ? (
-            <div className="space-y-2 max-h-60 overflow-y-auto pr-1">
+            <div className="space-y-2 max-h-60 overflow-y-auto pe-1">
               {analysis.shareLinks.map((link, index) => (
                 <div
                   key={link.id}

@@ -183,12 +183,12 @@ export default function UrlSlugGeneratorTool() {
           </div>
 
           <div className={`rounded-xl border border-slate-200 overflow-x-auto ${palette.card}`}>
-            <table className="w-full text-left text-xs sm:text-sm">
+            <table className="w-full text-start text-xs sm:text-sm">
               <thead className="bg-slate-50 text-slate-500 border-b border-slate-200">
                 <tr>
                   <th className="py-2.5 px-4 font-semibold">{s.originalTitleHeader}</th>
                   <th className="py-2.5 px-4 font-semibold">{s.slugUrlHeader}</th>
-                  <th className="py-2.5 px-4 font-semibold text-right">{s.copyHeader}</th>
+                  <th className="py-2.5 px-4 font-semibold text-end">{s.copyHeader}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
@@ -201,7 +201,7 @@ export default function UrlSlugGeneratorTool() {
                         {row.slug ? row.fullUrl : '—'}
                       </div>
                     </td>
-                    <td className="py-2.5 px-4 text-right">
+                    <td className="py-2.5 px-4 text-end">
                       <CopyButton text={row.slug} label={t.common.copy} copiedLabel={t.common.copied} />
                     </td>
                   </tr>

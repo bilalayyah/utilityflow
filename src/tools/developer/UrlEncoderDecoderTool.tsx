@@ -228,7 +228,7 @@ export default function UrlEncoderDecoderTool() {
 
           {parsedUrl.params.length > 0 && (
             <div className={`overflow-x-auto rounded-lg border border-slate-200 ${paletteAlt2.card}`}>
-              <table className="w-full text-left text-xs font-mono">
+              <table className="w-full text-start text-xs font-mono">
                 <thead className="border-b border-slate-200 bg-slate-50 font-sans text-slate-600">
                   <tr>
                     <th className="py-2 px-3 font-semibold">{s.queryParam}</th>

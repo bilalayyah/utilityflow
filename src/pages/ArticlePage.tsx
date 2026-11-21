@@ -165,7 +165,7 @@ export function ArticlePage() {
               to={getBlogHomeUrl(locale)}
               className="inline-flex items-center gap-2 rounded-full bg-[#0E8A66] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0B7557]"
             >
-              <ArrowLeft className="w-4 h-4" aria-hidden="true" />
+              <ArrowLeft className="w-4 h-4 rtl:rotate-180" aria-hidden="true" />
               {t.blog.backToBlog}
             </Link>
           </p>
@@ -210,7 +210,7 @@ export function ArticlePage() {
               to={getBlogHomeUrl(locale)}
               className="inline-flex items-center gap-2 rounded-full bg-[#0E8A66] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0B7557]"
             >
-              <ArrowLeft className="w-4 h-4" aria-hidden="true" />
+              <ArrowLeft className="w-4 h-4 rtl:rotate-180" aria-hidden="true" />
               {t.blog.backToBlog}
             </Link>
           </p>
@@ -414,7 +414,7 @@ export function ArticlePage() {
           <div className="lg:col-span-8 space-y-12">
             {version ? (
               <article
-                className="text-[#3A3A3C] dark:text-[#CBD5E1] [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-[#1D1D1F] [&_h2]:dark:text-[#F1F5F9] [&_h2]:mt-10 [&_h2]:mb-4 [&_h3]:text-xl [&_h3]:font-bold [&_h3]:text-[#1D1D1F] [&_h3]:dark:text-[#F1F5F9] [&_h3]:mt-8 [&_h3]:mb-3 [&_p]:text-base [&_p]:leading-relaxed [&_p]:mb-4 [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mb-4 [&_ul]:space-y-2 [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:mb-4 [&_ol]:space-y-2 [&_a]:text-[#0B7A59] [&_a]:dark:text-[#34D399] [&_a]:underline [&_a]:underline-offset-4 [&_a:hover]:text-[#0A6B4E] [&_a:hover]:dark:text-[#6EE7B7] [&_strong]:font-semibold [&_strong]:text-[#1D1D1F] [&_strong]:dark:text-[#F1F5F9] [&_code]:rounded [&_code]:bg-[#F5F5F7] [&_code]:dark:bg-[#182239] [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-sm [&_code]:font-mono [&_code]:text-[#1D1D1F] [&_code]:dark:text-[#F1F5F9]"
+                className="text-[#3A3A3C] dark:text-[#CBD5E1] [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-[#1D1D1F] [&_h2]:dark:text-[#F1F5F9] [&_h2]:mt-10 [&_h2]:mb-4 [&_h3]:text-xl [&_h3]:font-bold [&_h3]:text-[#1D1D1F] [&_h3]:dark:text-[#F1F5F9] [&_h3]:mt-8 [&_h3]:mb-3 [&_p]:text-base [&_p]:leading-relaxed [&_p]:mb-4 [&_ul]:list-disc [&_ul]:ps-6 [&_ul]:mb-4 [&_ul]:space-y-2 [&_ol]:list-decimal [&_ol]:ps-6 [&_ol]:mb-4 [&_ol]:space-y-2 [&_a]:text-[#0B7A59] [&_a]:dark:text-[#34D399] [&_a]:underline [&_a]:underline-offset-4 [&_a:hover]:text-[#0A6B4E] [&_a:hover]:dark:text-[#6EE7B7] [&_strong]:font-semibold [&_strong]:text-[#1D1D1F] [&_strong]:dark:text-[#F1F5F9] [&_code]:rounded [&_code]:bg-[#F5F5F7] [&_code]:dark:bg-[#182239] [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-sm [&_code]:font-mono [&_code]:text-[#1D1D1F] [&_code]:dark:text-[#F1F5F9]"
                 dangerouslySetInnerHTML={{ __html: version.body }}
               />
             ) : fullFailed ? (
@@ -481,7 +481,7 @@ export function ArticlePage() {
                     className="inline-flex items-center gap-2 rounded-full bg-[#0E8A66] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0B7557]"
                   >
                     {t.blog.tryTool}
-                    <ArrowRight className="w-4 h-4" aria-hidden="true" />
+                    <ArrowRight className="w-4 h-4 rtl:rotate-180" aria-hidden="true" />
                   </Link>
                 </p>
               </section>
@@ -518,7 +518,7 @@ export function ArticlePage() {
                     className="rounded-2xl border border-[#E5E5EA] bg-[#FFFFFF] p-4 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-[#243247] dark:bg-[#131D31]"
                   >
                     <span className="flex items-center gap-1.5 text-xs font-semibold text-[#6E6E73] dark:text-[#CBD5E1]">
-                      <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
+                      <ArrowLeft className="w-3.5 h-3.5 rtl:rotate-180" aria-hidden="true" />
                       {t.blog.prevArticle}
                     </span>
                     <span className="mt-1.5 block text-sm font-semibold text-[#1D1D1F] dark:text-[#F1F5F9]">
@@ -531,11 +531,11 @@ export function ArticlePage() {
                 {nextVersion && next ? (
                   <Link
                     to={articleHref(nextVersion.slug, locale)}
-                    className="rounded-2xl border border-[#E5E5EA] bg-[#FFFFFF] p-4 text-right shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-[#243247] dark:bg-[#131D31]"
+                    className="rounded-2xl border border-[#E5E5EA] bg-[#FFFFFF] p-4 text-end shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-[#243247] dark:bg-[#131D31]"
                   >
                     <span className="flex items-center justify-end gap-1.5 text-xs font-semibold text-[#6E6E73] dark:text-[#CBD5E1]">
                       {t.blog.nextArticle}
-                      <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+                      <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" aria-hidden="true" />
                     </span>
                     <span className="mt-1.5 block text-sm font-semibold text-[#1D1D1F] dark:text-[#F1F5F9]">
                       {nextVersion.title}
@@ -638,7 +638,7 @@ export function ArticlePage() {
             to={blogHref(locale)}
             className="inline-flex items-center gap-2 text-sm font-semibold text-[#0B7A59] hover:text-[#0A6B4E] underline-offset-4 hover:underline dark:text-[#34D399] dark:hover:text-[#6EE7B7]"
           >
-            <ArrowLeft className="w-4 h-4" aria-hidden="true" />
+            <ArrowLeft className="w-4 h-4 rtl:rotate-180" aria-hidden="true" />
             {t.blog.backToBlog}
           </Link>
         </p>

@@ -2,7 +2,7 @@
  * Central language configuration for UtilityFlow.
  *
  * Designed for 11 languages from the start: English (default) + es + pt + de +
- * fr + ja + id + it + ru + ko + zh. Hindi (hi) added 2026-11-21 (12 locales). Phase 1 shipped en + es; Phase 2 adds
+ * fr + ja + id + it + ru + ko + zh. Hindi (hi) added 2026-11-21 (12 locales); Arabic (ar) added 2026-11-22 (13 locales). Phase 1 shipped en + es; Phase 2 adds
  * pt + fr; Phase 3 adds de + it; Phase 4 adds id + ru; Phase 5 adds ja + ko. Later phases add a LocaleInfo entry, a locales/<code>.ts
  * dictionary, tool overrides and category overrides — no routing or component
  * rework required.
@@ -17,7 +17,7 @@
 import { getCategoryById } from '../registry/categories';
 import type { CategoryId, ToolCategory } from '../types/tool';
 
-export type LocaleCode = 'en' | 'es' | 'pt' | 'fr' | 'de' | 'it' | 'id' | 'ru' | 'ja' | 'ko' | 'zh' | 'hi';
+export type LocaleCode = 'en' | 'es' | 'pt' | 'fr' | 'de' | 'it' | 'id' | 'ru' | 'ja' | 'ko' | 'zh' | 'hi' | 'ar';
 
 /** Non-default locales (the ones that live under a /<code>/ prefix). */
 export type NonDefaultLocale = Exclude<LocaleCode, 'en'>;
@@ -30,21 +30,24 @@ export interface LocaleInfo {
   pathPrefix: string;
   /** BCP 47 tag for <html lang>. */
   htmlLang: string;
+  /** Text direction for <html dir>. Only 'ar' is RTL. */
+  dir: 'ltr' | 'rtl';
 }
 
 export const SUPPORTED_LOCALES: LocaleInfo[] = [
-  { code: 'en', nativeName: 'English', pathPrefix: '', htmlLang: 'en' },
-  { code: 'es', nativeName: 'Español', pathPrefix: '/es', htmlLang: 'es' },
-  { code: 'pt', nativeName: 'Português', pathPrefix: '/pt', htmlLang: 'pt-BR' },
-  { code: 'fr', nativeName: 'Français', pathPrefix: '/fr', htmlLang: 'fr' },
-  { code: 'de', nativeName: 'Deutsch', pathPrefix: '/de', htmlLang: 'de' },
-  { code: 'it', nativeName: 'Italiano', pathPrefix: '/it', htmlLang: 'it' },
-  { code: 'id', nativeName: 'Bahasa Indonesia', pathPrefix: '/id', htmlLang: 'id' },
-  { code: 'ru', nativeName: 'Русский', pathPrefix: '/ru', htmlLang: 'ru' },
-  { code: 'ja', nativeName: '日本語', pathPrefix: '/ja', htmlLang: 'ja' },
-  { code: 'ko', nativeName: '한국어', pathPrefix: '/ko', htmlLang: 'ko' },
-  { code: 'zh', nativeName: '中文', pathPrefix: '/zh', htmlLang: 'zh-CN' },
-  { code: 'hi', nativeName: 'हिन्दी', pathPrefix: '/hi', htmlLang: 'hi' },
+  { code: 'en', nativeName: 'English', pathPrefix: '', htmlLang: 'en', dir: 'ltr' },
+  { code: 'es', nativeName: 'Español', pathPrefix: '/es', htmlLang: 'es', dir: 'ltr' },
+  { code: 'pt', nativeName: 'Português', pathPrefix: '/pt', htmlLang: 'pt-BR', dir: 'ltr' },
+  { code: 'fr', nativeName: 'Français', pathPrefix: '/fr', htmlLang: 'fr', dir: 'ltr' },
+  { code: 'de', nativeName: 'Deutsch', pathPrefix: '/de', htmlLang: 'de', dir: 'ltr' },
+  { code: 'it', nativeName: 'Italiano', pathPrefix: '/it', htmlLang: 'it', dir: 'ltr' },
+  { code: 'id', nativeName: 'Bahasa Indonesia', pathPrefix: '/id', htmlLang: 'id', dir: 'ltr' },
+  { code: 'ru', nativeName: 'Русский', pathPrefix: '/ru', htmlLang: 'ru', dir: 'ltr' },
+  { code: 'ja', nativeName: '日本語', pathPrefix: '/ja', htmlLang: 'ja', dir: 'ltr' },
+  { code: 'ko', nativeName: '한국어', pathPrefix: '/ko', htmlLang: 'ko', dir: 'ltr' },
+  { code: 'zh', nativeName: '中文', pathPrefix: '/zh', htmlLang: 'zh-CN', dir: 'ltr' },
+  { code: 'hi', nativeName: 'हिन्दी', pathPrefix: '/hi', htmlLang: 'hi', dir: 'ltr' },
+  { code: 'ar', nativeName: 'العربية', pathPrefix: '/ar', htmlLang: 'ar', dir: 'rtl' },
 ];
 
 /** Literal 'en' type (not LocaleCode) so `locale === DEFAULT_LOCALE` narrows the type. */
@@ -91,6 +94,8 @@ export function localeTag(locale: LocaleCode): string {
       return 'zh-CN';
     case 'hi':
       return 'hi';
+    case 'ar':
+      return 'ar';
   }
 }
 
@@ -126,6 +131,8 @@ export function ogLocaleTag(locale: LocaleCode): string {
       return 'zh_CN';
     case 'hi':
       return 'hi_IN';
+    case 'ar':
+      return 'ar_SA';
   }
 }
 
@@ -146,7 +153,7 @@ export function getLocaleFromPath(pathname: string): { locale: LocaleCode; restP
 
 /** Localized URL for a static page path (English path in, localized path out). */
 export const STATIC_PATHS: Record<string, Partial<Record<LocaleCode, string>>> = {
-  '/': { en: '/', es: '/es/', pt: '/pt/', fr: '/fr/', de: '/de/', it: '/it/', id: '/id/', ru: '/ru/', ja: '/ja/', ko: '/ko/', zh: '/zh/', hi: '/hi/' },
+  '/': { en: '/', es: '/es/', pt: '/pt/', fr: '/fr/', de: '/de/', it: '/it/', id: '/id/', ru: '/ru/', ja: '/ja/', ko: '/ko/', zh: '/zh/', hi: '/hi/', ar: '/ar/' },
   '/tools/': {
     en: '/tools/',
     es: '/es/todas-las-herramientas/',
@@ -160,9 +167,10 @@ export const STATIC_PATHS: Record<string, Partial<Record<LocaleCode, string>>> =
     ko: '/ko/tools/',
     zh: '/zh/all-tools/',
     hi: '/hi/sabhi-tools/',
+    ar: '/ar/jami-aladawat/',
   },
-  '/about/': { en: '/about/', es: '/es/acerca-de/', pt: '/pt/sobre/', fr: '/fr/a-propos/', de: '/de/ueber-uns/', it: '/it/chi-siamo/', id: '/id/tentang-kami/', ru: '/ru/o-nas/', ja: '/ja/watashitachi/', ko: '/ko/sogae/', zh: '/zh/guanyu-women/', hi: '/hi/hamare-bare-mein/' },
-  '/contact/': { en: '/contact/', es: '/es/contacto/', pt: '/pt/contato/', fr: '/fr/contact/', de: '/de/kontakt/', it: '/it/contatti/', id: '/id/kontak/', ru: '/ru/kontakty/', ja: '/ja/otoiawase/', ko: '/ko/mun-ui/', zh: '/zh/lianxi-women/', hi: '/hi/sampark/' },
+  '/about/': { en: '/about/', es: '/es/acerca-de/', pt: '/pt/sobre/', fr: '/fr/a-propos/', de: '/de/ueber-uns/', it: '/it/chi-siamo/', id: '/id/tentang-kami/', ru: '/ru/o-nas/', ja: '/ja/watashitachi/', ko: '/ko/sogae/', zh: '/zh/guanyu-women/', hi: '/hi/hamare-bare-mein/', ar: '/ar/man-nahnu/' },
+  '/contact/': { en: '/contact/', es: '/es/contacto/', pt: '/pt/contato/', fr: '/fr/contact/', de: '/de/kontakt/', it: '/it/contatti/', id: '/id/kontak/', ru: '/ru/kontakty/', ja: '/ja/otoiawase/', ko: '/ko/mun-ui/', zh: '/zh/lianxi-women/', hi: '/hi/sampark/', ar: '/ar/ittasil-bina/' },
   '/privacy-policy/': {
     en: '/privacy-policy/',
     es: '/es/politica-de-privacidad/',
@@ -176,6 +184,7 @@ export const STATIC_PATHS: Record<string, Partial<Record<LocaleCode, string>>> =
     ko: '/ko/peuraibeosi-jeongchaek/',
     zh: '/zh/yinsi-zhengce/',
     hi: '/hi/gopniyata-neeti/',
+    ar: '/ar/siyasat-al-khususiyya/',
   },
   '/terms-of-service/': {
     en: '/terms-of-service/',
@@ -190,6 +199,7 @@ export const STATIC_PATHS: Record<string, Partial<Record<LocaleCode, string>>> =
     ko: '/ko/iyong-yagwan/',
     zh: '/zh/shiyong-tiaokuan/',
     hi: '/hi/sewa-ki-shartein/',
+    ar: '/ar/shurut-al-khidma/',
   },
   /** Blog home — the segment is "blog" in every locale. */
   '/blog/': {
@@ -205,6 +215,7 @@ export const STATIC_PATHS: Record<string, Partial<Record<LocaleCode, string>>> =
     ko: '/ko/blog/',
     zh: '/zh/blog/',
     hi: '/hi/blog/',
+    ar: '/ar/blog/',
   },
 };
 
@@ -313,6 +324,15 @@ export const CATEGORY_LOCALE_SLUGS: Record<NonDefaultLocale, Record<string, stri
     seo: 'seo-tools',
     'image-file': 'image-aur-file-tools',
   },
+  ar: {
+    'text-writing': 'adawat-al-nass-wal-kitaba',
+    developer: 'adawat-al-mutawwirin',
+    calculators: 'al-hasibat',
+    'social-media': 'adawat-wasail-al-tawasul',
+    pdf: 'adawat-pdf',
+    seo: 'adawat-seo',
+    'image-file': 'adawat-al-suwar-wal-malafat',
+  },
 };
 
 /** Spanish slugs for the 7 categories, keyed by category id. Kept for the Phase 1 validator. */
@@ -331,6 +351,7 @@ export const CATEGORY_PATH_SEGMENT: Record<NonDefaultLocale, string> = {
   ko: 'kategori',
   zh: 'fenlei',
   hi: 'shreni',
+  ar: 'tasnif',
 };
 
 /**

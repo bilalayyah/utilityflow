@@ -190,12 +190,12 @@ export default function SalaryCalculatorTool() {
 
       {breakdown.rows && (
         <div className="overflow-x-auto rounded-xl border border-slate-200">
-          <table className="w-full text-left text-sm font-mono tabular-nums">
+          <table className="w-full text-start text-sm font-mono tabular-nums">
             <thead className={`${palette.soft} border-b border-slate-200 font-sans text-xs text-slate-600`}>
               <tr>
                 <th className="py-3 px-4 font-semibold">{s.payPeriodHeader}</th>
-                <th className="py-3 px-4 font-semibold text-right">{s.grossPayHeader}</th>
-                <th className="py-3 px-4 font-semibold text-right">
+                <th className="py-3 px-4 font-semibold text-end">{s.grossPayHeader}</th>
+                <th className="py-3 px-4 font-semibold text-end">
                   {s.estNetPay} ({taxRatePct}% {s.taxWord})
                 </th>
               </tr>
@@ -204,8 +204,8 @@ export default function SalaryCalculatorTool() {
               {breakdown.rows.map((row) => (
                 <tr key={row.label} className={row.id === 'annual' ? 'bg-indigo-50/40 font-semibold' : ''}>
                   <td className="py-2.5 px-4 font-sans text-slate-800">{row.label}</td>
-                  <td className="py-2.5 px-4 text-right text-slate-900">${money(row.gross, locale)}</td>
-                  <td className="py-2.5 px-4 text-right text-indigo-700">${money(row.net, locale)}</td>
+                  <td className="py-2.5 px-4 text-end text-slate-900">${money(row.gross, locale)}</td>
+                  <td className="py-2.5 px-4 text-end text-indigo-700">${money(row.net, locale)}</td>
                 </tr>
               ))}
             </tbody>

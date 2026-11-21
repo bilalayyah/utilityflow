@@ -100,7 +100,7 @@ export function LanguageSwitcher({ variant = 'dropdown', onSelect }: LanguageSwi
         <div
           role="menu"
           aria-label={t.nav.chooseLanguage}
-          className="absolute right-0 top-full mt-2 w-48 rounded-xl border border-slate-200 bg-white p-1.5 shadow-lg z-50"
+          className="absolute end-0 top-full mt-2 w-48 rounded-xl border border-slate-200 bg-white p-1.5 shadow-lg z-50"
         >
           {SUPPORTED_LOCALES.map((item) => (
             <button

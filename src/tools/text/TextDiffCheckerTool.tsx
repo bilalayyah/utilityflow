@@ -230,10 +230,10 @@ export default function TextDiffCheckerTool() {
                     : 'bg-white text-slate-700'
                 }`}
               >
-                <span className="w-8 shrink-0 text-right text-slate-400 tabular-nums select-none">
+                <span className="w-8 shrink-0 text-end text-slate-400 tabular-nums select-none">
                   {line.oldLine ?? ''}
                 </span>
-                <span className="w-8 shrink-0 text-right text-slate-400 tabular-nums select-none">
+                <span className="w-8 shrink-0 text-end text-slate-400 tabular-nums select-none">
                   {line.newLine ?? ''}
                 </span>
                 <span className="w-4 shrink-0 font-bold select-none">

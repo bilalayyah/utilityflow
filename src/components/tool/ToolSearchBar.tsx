@@ -96,7 +96,7 @@ export function ToolSearchBar({
       <form onSubmit={handleSubmit} role="search" aria-label={t.search.ariaLabel}>
         <div className="relative flex items-center">
           <Search
-            className="pointer-events-none absolute left-4 w-5 h-5 text-[#86868B]"
+            className="pointer-events-none absolute start-4 w-5 h-5 text-[#86868B]"
             aria-hidden="true"
           />
           <input
@@ -110,8 +110,8 @@ export function ToolSearchBar({
             aria-label={t.search.ariaLabel}
             className={
               isHero
-                ? 'w-full rounded-2xl border border-[#E5E5EA] bg-white py-4 pl-12 pr-32 text-base text-[#1D1D1F] placeholder:text-[#86868B] shadow-sm transition-colors focus:border-[#0E8A66] focus:outline-none focus:ring-2 focus:ring-[#0E8A66]/20 no-native-clear'
-                : 'w-full rounded-xl border border-[#E5E5EA] bg-white py-3.5 pl-12 pr-28 text-sm sm:text-base text-[#1D1D1F] placeholder:text-[#86868B] shadow-sm transition-colors focus:border-[#0E8A66] focus:outline-none focus:ring-2 focus:ring-[#0E8A66]/20 no-native-clear'
+                ? 'w-full rounded-2xl border border-[#E5E5EA] bg-white py-4 ps-12 pe-32 text-base text-[#1D1D1F] placeholder:text-[#86868B] shadow-sm transition-colors focus:border-[#0E8A66] focus:outline-none focus:ring-2 focus:ring-[#0E8A66]/20 no-native-clear'
+                : 'w-full rounded-xl border border-[#E5E5EA] bg-white py-3.5 ps-12 pe-28 text-sm sm:text-base text-[#1D1D1F] placeholder:text-[#86868B] shadow-sm transition-colors focus:border-[#0E8A66] focus:outline-none focus:ring-2 focus:ring-[#0E8A66]/20 no-native-clear'
             }
           />
           {query && (
@@ -120,7 +120,7 @@ export function ToolSearchBar({
               onClick={() => handleChange('')}
               aria-label={t.search.clearSearch}
               className={`absolute p-1.5 text-[#86868B] hover:text-[#1D1D1F] rounded-md cursor-pointer ${
-                isHero ? 'right-28' : 'right-20'
+                isHero ? 'end-28' : 'end-20'
               }`}
             >
               <X className="w-4 h-4" />
@@ -129,14 +129,14 @@ export function ToolSearchBar({
           {isHero ? (
             <button
               type="submit"
-              className="absolute right-2 rounded-xl bg-[#0E8A66] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0B7557] sm:px-5 whitespace-nowrap shrink-0 cursor-pointer"
+              className="absolute end-2 rounded-xl bg-[#0E8A66] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0B7557] sm:px-5 whitespace-nowrap shrink-0 cursor-pointer"
             >
               {t.common.search}
             </button>
           ) : (
             <button
               type="submit"
-              className="absolute right-2 rounded-lg bg-[#0E8A66] px-3.5 py-2 text-xs sm:text-sm font-semibold text-white transition-colors hover:bg-[#0B7557] whitespace-nowrap shrink-0 cursor-pointer"
+              className="absolute end-2 rounded-lg bg-[#0E8A66] px-3.5 py-2 text-xs sm:text-sm font-semibold text-white transition-colors hover:bg-[#0B7557] whitespace-nowrap shrink-0 cursor-pointer"
             >
               {t.common.search}
             </button>
@@ -159,7 +159,7 @@ export function ToolSearchBar({
                     <div className="font-medium text-[#1D1D1F] dark:text-[#F1F5F9]">{tool.name}</div>
                     <div className="text-xs text-[#6E6E73] line-clamp-1 dark:text-[#CBD5E1]">{tool.shortDescription}</div>
                   </div>
-                  <ArrowRight className="w-4 h-4 text-[#86868B] shrink-0" aria-hidden="true" />
+                  <ArrowRight className="w-4 h-4 text-[#86868B] shrink-0 rtl:rotate-180" aria-hidden="true" />
                 </Link>
               ))}
             </div>
@@ -183,7 +183,7 @@ export function ToolSearchBar({
                       </div>
                     </div>
                   </div>
-                  <ArrowRight className="w-4 h-4 text-[#86868B] shrink-0" aria-hidden="true" />
+                  <ArrowRight className="w-4 h-4 text-[#86868B] shrink-0 rtl:rotate-180" aria-hidden="true" />
                 </Link>
               ))}
             </div>

@@ -389,12 +389,12 @@ export default function UnitConverterTool() {
           </div>
 
           <div className="rounded-xl border border-slate-200 overflow-x-auto">
-            <table className="w-full text-left text-sm">
+            <table className="w-full text-start text-sm">
               <thead className={`${palette.soft} text-xs text-slate-500 border-b border-slate-200`}>
                 <tr>
                   <th className="py-2.5 px-4 font-semibold">{s.unitHeader}</th>
                   <th className="py-2.5 px-4 font-semibold">{s.symbolHeader}</th>
-                  <th className="py-2.5 px-4 font-semibold text-right">{s.equivalentHeader}</th>
+                  <th className="py-2.5 px-4 font-semibold text-end">{s.equivalentHeader}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 tabular-nums">
@@ -402,7 +402,7 @@ export default function UnitConverterTool() {
                   <tr key={u.id} className={u.id === toId ? 'bg-indigo-50/50' : ''}>
                     <td className="py-2 px-4 text-slate-800 font-medium">{unitLabel(u.id)}</td>
                     <td className="py-2 px-4 font-mono text-slate-500">{u.symbol}</td>
-                    <td className="py-2 px-4 font-mono font-semibold text-slate-900 text-right">
+                    <td className="py-2 px-4 font-mono font-semibold text-slate-900 text-end">
                       {u.formatted}
                     </td>
                   </tr>

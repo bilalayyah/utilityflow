@@ -123,7 +123,7 @@ export function HomePage() {
               className="inline-flex items-center gap-2 rounded-full bg-[#0E8A66] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0B7557] whitespace-nowrap shrink-0"
             >
               {t.home.exploreCategories}
-              <ArrowRight className="w-4 h-4" aria-hidden="true" />
+              <ArrowRight className="w-4 h-4 rtl:rotate-180" aria-hidden="true" />
             </a>
             <Link
               to={localizeStaticPath('/tools/', locale)}

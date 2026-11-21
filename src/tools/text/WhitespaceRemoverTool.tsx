@@ -140,7 +140,7 @@ export default function WhitespaceRemoverTool() {
       </div>
 
       <div className="flex flex-wrap items-center gap-2">
-        <span className="text-xs font-semibold text-slate-600 mr-1">{s.lineBreaks}</span>
+        <span className="text-xs font-semibold text-slate-600 me-1">{s.lineBreaks}</span>
         {lineBreakModes.map((mode, index) => (
           <button
             key={mode.id}

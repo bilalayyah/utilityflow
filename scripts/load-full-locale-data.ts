@@ -12,6 +12,7 @@ import { JA_ARTICLE_OVERRIDES } from '../src/locales/ja/blog';
 import { KO_ARTICLE_OVERRIDES } from '../src/locales/ko/blog';
 import { ZH_ARTICLE_OVERRIDES } from '../src/locales/zh/blog';
 import { HI_ARTICLE_OVERRIDES } from '../src/locales/hi/blog';
+import { AR_ARTICLE_OVERRIDES } from '../src/locales/ar/blog';
 
 /**
  * Node-only (prerender) locale-data loader with FULL article overrides.
@@ -35,6 +36,7 @@ const FULL_ARTICLE_OVERRIDES = {
   ko: KO_ARTICLE_OVERRIDES,
   zh: ZH_ARTICLE_OVERRIDES,
   hi: HI_ARTICLE_OVERRIDES,
+  ar: AR_ARTICLE_OVERRIDES,
 } as const;
 
 export async function loadFullLocaleData(locale: LocaleCode): Promise<FullLocaleData> {
