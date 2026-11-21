@@ -40,7 +40,7 @@ import type { ToolDefinition } from '../types/tool';
  * page, RelatedTools and the prerenderer's LINK constant already use for
  * links inside prose — no new visual style is invented here.
  */
-export const GUIDE_LINK_CLASS = 'font-semibold text-indigo-600 hover:underline';
+export const GUIDE_LINK_CLASS = 'font-semibold text-[#0B7A59] hover:underline dark:text-[#34D399]';
 
 export interface ToolNameEntry {
   toolId: string;

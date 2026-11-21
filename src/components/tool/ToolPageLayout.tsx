@@ -14,6 +14,7 @@ import { buildToolNameEntries, linkifyToolNames } from '../../utils/linkifyToolN
 import { trackEvent } from '../../utils/analytics';
 import { Breadcrumbs, buildBreadcrumbSchema } from '../common/Breadcrumbs';
 import { FAQAccordion, buildFaqSchema } from '../common/FAQAccordion';
+import { ToolRelatedArticles } from '../blog/ToolRelatedArticles';
 import { SeoHead } from '../seo/SeoHead';
 import { PASTEL_PALETTES, pastelForKey } from './pastel';
 import { RelatedTools } from './RelatedTools';
@@ -315,6 +316,12 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
             )}
           </aside>
         </div>
+
+        {/* Internal linking (audit fix #1): the tool's 3 articles. Renders
+            nothing when the tool has no published articles in this locale.
+            Placed above Related Tools, mirroring the static prerender
+            (scripts/prerender-body.ts renderToolBody) and CMP's layout. */}
+        <ToolRelatedArticles toolId={tool.id} locale={locale} />
 
         <div className="mt-12">
           <RelatedTools tool={tool} />
