@@ -217,13 +217,13 @@ export default function SocialHandleFormatterTool() {
       )}
 
       <div className="rounded-xl border border-slate-200 overflow-x-auto">
-        <table className="w-full text-left text-xs sm:text-sm">
+        <table className="w-full text-start text-xs sm:text-sm">
           <thead className={`${palette.soft} text-slate-500 border-b border-slate-200`}>
             <tr>
               <th className="py-2.5 px-4 font-semibold">{s.thPlatform}</th>
               <th className="py-2.5 px-4 font-semibold">{s.thRules}</th>
               <th className="py-2.5 px-4 font-semibold">{s.thStatus}</th>
-              <th className="py-2.5 px-4 font-semibold text-right">{s.thCheck}</th>
+              <th className="py-2.5 px-4 font-semibold text-end">{s.thCheck}</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100">
@@ -240,7 +240,7 @@ export default function SocialHandleFormatterTool() {
                     {v.valid ? s.valid : s.invalid}
                   </span>
                 </td>
-                <td className="py-2.5 px-4 text-right">
+                <td className="py-2.5 px-4 text-end">
                   {v.valid ? (
                     <a
                       href={v.url}

@@ -358,8 +358,8 @@ export default function CronExpressionParserTool() {
                 {analysis.breakdown.map((item) => (
                   <div key={item.label} className="py-2 flex items-center justify-between gap-3">
                     <dt className="text-slate-600">{item.label}</dt>
-                    <dd className="text-right">
-                      <span className="font-mono font-semibold text-slate-900 mr-2">{item.raw}</span>
+                    <dd className="text-end">
+                      <span className="font-mono font-semibold text-slate-900 me-2">{item.raw}</span>
                       <span className="text-slate-500">({item.meaning})</span>
                     </dd>
                   </div>

@@ -80,7 +80,7 @@ export default function VatTaxCalculatorTool() {
         </div>
 
         <div className="flex flex-wrap items-center gap-1.5">
-          <span className="text-xs text-slate-500 mr-1">{s.commonRates}</span>
+          <span className="text-xs text-slate-500 me-1">{s.commonRates}</span>
           {RATE_PRESETS.map((preset, index) => (
             <button
               key={preset}

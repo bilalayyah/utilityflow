@@ -303,7 +303,7 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
             {fullTool.useCases.length > 0 && (
               <section className={`rounded-2xl ${useCasesPalette.card} p-5 shadow-sm`}>
                 <h2 className="text-lg font-bold text-slate-900 mb-3">{t.toolPage.commonUseCases}</h2>
-                <ul className="space-y-2 text-sm text-slate-600 list-disc pl-4">
+                <ul className="space-y-2 text-sm text-slate-600 list-disc ps-4">
                   {fullTool.useCases.map((useCase) => (
                     <li
                       key={useCase}

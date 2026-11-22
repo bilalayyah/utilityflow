@@ -146,7 +146,7 @@ function markdownToHtml(markdown: string): string {
     if (trimmed.startsWith('> ')) {
       closeList();
       html.push(
-        `<blockquote class="my-3 border-l-2 border-slate-300 pl-4 italic text-slate-600">${formatInline(
+        `<blockquote class="my-3 border-s-2 border-slate-300 ps-4 italic text-slate-600">${formatInline(
           trimmed.slice(2)
         )}</blockquote>`
       );
@@ -158,7 +158,7 @@ function markdownToHtml(markdown: string): string {
       if (listType !== 'ul') {
         closeList();
         listType = 'ul';
-        html.push('<ul class="my-3 list-disc pl-6 space-y-1 text-slate-700">');
+        html.push('<ul class="my-3 list-disc ps-6 space-y-1 text-slate-700">');
       }
       html.push(`<li>${formatInline(ulMatch[1])}</li>`);
       continue;
@@ -169,7 +169,7 @@ function markdownToHtml(markdown: string): string {
       if (listType !== 'ol') {
         closeList();
         listType = 'ol';
-        html.push('<ol class="my-3 list-decimal pl-6 space-y-1 text-slate-700">');
+        html.push('<ol class="my-3 list-decimal ps-6 space-y-1 text-slate-700">');
       }
       html.push(`<li>${formatInline(olMatch[1])}</li>`);
       continue;

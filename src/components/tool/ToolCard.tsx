@@ -41,7 +41,7 @@ export function ToolCard({ tool }: ToolCardProps) {
       <div className="mt-4 flex items-center gap-1.5 text-sm font-semibold text-[#0B7A59] dark:text-[#34D399]">
         <span>{t.common.openTool}</span>
         <ArrowRight
-          className="w-4 h-4 transition-transform duration-150 group-hover:translate-x-0.5"
+          className="w-4 h-4 transition-transform duration-150 group-hover:translate-x-0.5 rtl:rotate-180 rtl:group-hover:-translate-x-0.5"
           aria-hidden="true"
         />
       </div>

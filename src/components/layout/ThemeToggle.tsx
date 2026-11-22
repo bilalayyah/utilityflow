@@ -120,7 +120,7 @@ export function ThemeToggle({ variant = 'dropdown', onSelect }: ThemeToggleProps
         <div
           role="menu"
           aria-label="Theme selection"
-          className="absolute right-0 top-full z-50 mt-2 w-52 rounded-2xl border border-[#E5E5EA] bg-[#FFFFFF] p-1.5 shadow-sm dark:border-[#243247] dark:bg-[#131D31]"
+          className="absolute end-0 top-full z-50 mt-2 w-52 rounded-2xl border border-[#E5E5EA] bg-[#FFFFFF] p-1.5 shadow-sm dark:border-[#243247] dark:bg-[#131D31]"
         >
           {THEME_OPTIONS.map(({ id, label, Icon }) => {
             const selected = theme === id;
@@ -135,7 +135,7 @@ export function ThemeToggle({ variant = 'dropdown', onSelect }: ThemeToggleProps
                   setOpen(false);
                   onSelect?.();
                 }}
-                className={`flex w-full items-center justify-between gap-2 rounded-xl px-3 py-2 text-left text-xs sm:text-sm font-medium transition-colors min-h-[40px] cursor-pointer ${
+                className={`flex w-full items-center justify-between gap-2 rounded-xl px-3 py-2 text-start text-xs sm:text-sm font-medium transition-colors min-h-[40px] cursor-pointer ${
                   selected
                     ? 'bg-[#E7F3EE] text-[#0B7A59] dark:bg-[rgba(16,185,129,0.14)] dark:text-[#34D399]'
                     : 'text-[#6E6E73] hover:bg-[#F5F5F7] hover:text-[#1D1D1F] dark:text-[#CBD5E1] dark:hover:bg-[#0C1322] dark:hover:text-[#F1F5F9]'
@@ -146,7 +146,7 @@ export function ThemeToggle({ variant = 'dropdown', onSelect }: ThemeToggleProps
                   <span>
                     {label}
                     {id === 'system' && (
-                      <span className="ml-1 text-[11px] text-[#86868B] dark:text-[#CBD5E1]">
+                      <span className="ms-1 text-[11px] text-[#86868B] dark:text-[#CBD5E1]">
                         ({systemTheme === 'dark' ? 'Dark' : 'Light'})
                       </span>
                     )}

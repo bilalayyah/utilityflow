@@ -128,7 +128,7 @@ export function CategoryPage() {
                     </span>
                   </span>
                   <ChevronRight
-                    className="h-5 w-5 shrink-0 text-[#86868B] transition-transform duration-150 group-hover:translate-x-0.5 group-hover:text-[#0E8A66] dark:group-hover:text-[#34D399]"
+                    className="h-5 w-5 shrink-0 text-[#86868B] transition-transform duration-150 group-hover:translate-x-0.5 rtl:rotate-180 rtl:group-hover:-translate-x-0.5 group-hover:text-[#0E8A66] dark:group-hover:text-[#34D399]"
                     aria-hidden="true"
                   />
                 </Link>
@@ -213,7 +213,7 @@ export function CategoryPage() {
                     </div>
                   </div>
                   <ArrowRight
-                    className={`w-4 h-4 shrink-0 ${palette.link}`}
+                    className={`w-4 h-4 shrink-0 rtl:rotate-180 ${palette.link}`}
                     aria-hidden="true"
                   />
                 </Link>

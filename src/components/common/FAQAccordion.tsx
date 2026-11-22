@@ -56,7 +56,7 @@ export function FAQAccordion({ items, defaultOpenIndex = 0, renderAnswer }: FAQA
                 aria-expanded={isOpen}
                 aria-controls={panelId}
                 onClick={() => setOpenIndex(isOpen ? null : index)}
-                className="flex w-full items-center justify-between gap-4 py-4 text-left text-base font-semibold text-[#1D1D1F] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0E8A66] rounded-xl cursor-pointer dark:text-[#F1F5F9]"
+                className="flex w-full items-center justify-between gap-4 py-4 text-start text-base font-semibold text-[#1D1D1F] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0E8A66] rounded-xl cursor-pointer dark:text-[#F1F5F9]"
               >
                 <span>{item.question}</span>
                 <ChevronDown
@@ -72,7 +72,7 @@ export function FAQAccordion({ items, defaultOpenIndex = 0, renderAnswer }: FAQA
                 id={panelId}
                 role="region"
                 aria-labelledby={triggerId}
-                className="pb-5 pr-8 text-sm sm:text-base leading-relaxed text-[#6E6E73] dark:text-[#CBD5E1]"
+                className="pb-5 pe-8 text-sm sm:text-base leading-relaxed text-[#6E6E73] dark:text-[#CBD5E1]"
               >
                 {renderAnswer ? renderAnswer(item.answer) : item.answer}
               </div>

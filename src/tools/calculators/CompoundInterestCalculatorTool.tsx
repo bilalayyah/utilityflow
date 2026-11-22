@@ -211,13 +211,13 @@ export default function CompoundInterestCalculatorTool() {
           </dl>
 
           <div className="overflow-x-auto max-h-72 overflow-y-auto rounded-xl border border-slate-200">
-            <table className="w-full text-left text-xs sm:text-sm font-mono tabular-nums">
+            <table className="w-full text-start text-xs sm:text-sm font-mono tabular-nums">
               <thead className={`${palette.soft} border-b border-slate-200 font-sans text-slate-600 sticky top-0`}>
                 <tr>
                   <th className="py-2.5 px-3 font-semibold">{s.yearHeader}</th>
-                  <th className="py-2.5 px-3 font-semibold text-right">{s.totalContributedHeader}</th>
-                  <th className="py-2.5 px-3 font-semibold text-right">{s.cumulativeInterestHeader}</th>
-                  <th className="py-2.5 px-3 font-semibold text-right">{s.endingBalanceHeader}</th>
+                  <th className="py-2.5 px-3 font-semibold text-end">{s.totalContributedHeader}</th>
+                  <th className="py-2.5 px-3 font-semibold text-end">{s.cumulativeInterestHeader}</th>
+                  <th className="py-2.5 px-3 font-semibold text-end">{s.endingBalanceHeader}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 bg-white">
@@ -226,11 +226,11 @@ export default function CompoundInterestCalculatorTool() {
                     <td className="py-2 px-3 text-slate-500">
                       {s.yearPrefix} {row.year}
                     </td>
-                    <td className="py-2 px-3 text-right">${money(row.contributionsTotal, locale)}</td>
-                    <td className="py-2 px-3 text-right text-emerald-700">
+                    <td className="py-2 px-3 text-end">${money(row.contributionsTotal, locale)}</td>
+                    <td className="py-2 px-3 text-end text-emerald-700">
                       ${money(row.interestTotal, locale)}
                     </td>
-                    <td className="py-2 px-3 text-right font-semibold text-slate-900">
+                    <td className="py-2 px-3 text-end font-semibold text-slate-900">
                       ${money(row.endingBalance, locale)}
                     </td>
                   </tr>

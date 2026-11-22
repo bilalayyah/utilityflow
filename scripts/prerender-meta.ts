@@ -119,6 +119,7 @@ import { PT_TOOL_OVERRIDES } from '../src/locales/pt/tools';
 import { RU_TOOL_OVERRIDES } from '../src/locales/ru/tools';
 import { ZH_TOOL_OVERRIDES } from '../src/locales/zh/tools';
 import { HI_TOOL_OVERRIDES } from '../src/locales/hi/tools';
+import { AR_TOOL_OVERRIDES } from '../src/locales/ar/tools';
 import type { ToolLocaleOverride } from '../src/locales/types';
 import type { BreadcrumbItem, CategoryId, ToolDefinition, ToolDetail } from '../src/types/tool';
 
@@ -136,6 +137,7 @@ const TOOL_OVERRIDES_BY_LOCALE: Record<string, Record<string, ToolLocaleOverride
   ko: KO_TOOL_OVERRIDES,
   zh: ZH_TOOL_OVERRIDES,
   hi: HI_TOOL_OVERRIDES,
+  ar: AR_TOOL_OVERRIDES,
 };
 
 // ---------------------------------------------------------------------------
@@ -1199,7 +1201,11 @@ async function prerender(): Promise<void> {
   for (const page of pages) {
     const html = injectStaticBody(prerenderHead(shell, page.props, page.preloadFiles), page.body);
     bodyBytes += page.body.length;
-    const withLang = html.replace('<html lang="en">', () => `<html lang="${escapeAttr(getLocaleInfo(page.locale).htmlLang)}">`);
+    const localeInfo = getLocaleInfo(page.locale);
+    const withLang = html.replace(
+      '<html lang="en">',
+      () => `<html lang="${escapeAttr(localeInfo.htmlLang)}"${localeInfo.dir === 'rtl' ? ' dir="rtl"' : ''}>`
+    );
     const outPath = filePathForRoute(distDir, page.path);
     mkdirSync(dirname(outPath), { recursive: true });
     writeFileSync(outPath, withLang, 'utf8');

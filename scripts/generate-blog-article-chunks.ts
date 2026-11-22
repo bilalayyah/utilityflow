@@ -15,6 +15,7 @@ import { JA_ARTICLE_OVERRIDES } from '../src/locales/ja/blog';
 import { KO_ARTICLE_OVERRIDES } from '../src/locales/ko/blog';
 import { ZH_ARTICLE_OVERRIDES } from '../src/locales/zh/blog';
 import { HI_ARTICLE_OVERRIDES } from '../src/locales/hi/blog';
+import { AR_ARTICLE_OVERRIDES } from '../src/locales/ar/blog';
 
 /**
  * Generates src/registry/articles/<article-id>.ts — one file per article
@@ -187,6 +188,7 @@ const LOCALE_OVERRIDES: Array<{
   { code: 'ko', overrides: KO_ARTICLE_OVERRIDES, exportName: 'KO_ARTICLE_INDEX' },
   { code: 'zh', overrides: ZH_ARTICLE_OVERRIDES, exportName: 'ZH_ARTICLE_INDEX' },
   { code: 'hi', overrides: HI_ARTICLE_OVERRIDES, exportName: 'HI_ARTICLE_INDEX' },
+  { code: 'ar', overrides: AR_ARTICLE_OVERRIDES, exportName: 'AR_ARTICLE_INDEX' },
 ];
 
 /** Write only when the content changed (keeps re-runs fast and git clean). */
