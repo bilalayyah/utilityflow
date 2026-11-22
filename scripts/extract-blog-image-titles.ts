@@ -34,7 +34,9 @@ import { ZH_ARTICLE_OVERRIDES } from '../src/locales/zh/blog';
 import { HI_ARTICLE_OVERRIDES } from '../src/locales/hi/blog';
 import { AR_ARTICLE_OVERRIDES } from '../src/locales/ar/blog';
 
-const LOCALES = ['en', 'es', 'pt', 'de', 'fr', 'ja', 'id', 'it', 'ru', 'ko', 'zh', 'hi', 'ar'] as const;
+const LOCALES = ['en', 'es', 'pt', 'de', 'fr', 'ja', 'id', 'it', 'ru', 'ko', 'zh', 'hi', 'ar', 'tr'] as const;
+import { TR_ARTICLE_OVERRIDES } from '../src/locales/tr/blog';
+
 type LocaleCode = (typeof LOCALES)[number];
 
 const OVERRIDES: Record<Exclude<LocaleCode, 'en'>, Record<string, { title?: string }>> = {
@@ -50,6 +52,7 @@ const OVERRIDES: Record<Exclude<LocaleCode, 'en'>, Record<string, { title?: stri
   zh: ZH_ARTICLE_OVERRIDES,
   hi: HI_ARTICLE_OVERRIDES,
   ar: AR_ARTICLE_OVERRIDES,
+  tr: TR_ARTICLE_OVERRIDES,
 };
 
 interface Job {

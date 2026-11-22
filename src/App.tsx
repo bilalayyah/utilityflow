@@ -330,6 +330,29 @@ export default function App() {
             <Route path="/ar/blog/:articleSlug/" element={<ArticlePage />} />
             <Route path="/ar/:toolSlug" element={<ToolPage />} />
             <Route path="/ar/:toolSlug/" element={<ToolPage />} />
+            {/* Turkish (tr) routes — same components, locale from URL */}
+            <Route path="/tr" element={<HomePage />} />
+            <Route path="/tr/" element={<HomePage />} />
+            <Route path="/tr/tum-araclar" element={<ToolsDirectoryPage />} />
+            <Route path="/tr/tum-araclar/" element={<ToolsDirectoryPage />} />
+            <Route path="/tr/kategori/:categorySlug" element={<CategoryPage />} />
+            <Route path="/tr/kategori/:categorySlug/" element={<CategoryPage />} />
+            <Route path="/tr/hakkimizda" element={<AboutPage />} />
+            <Route path="/tr/hakkimizda/" element={<AboutPage />} />
+            <Route path="/tr/iletisim" element={<ContactPage />} />
+            <Route path="/tr/iletisim/" element={<ContactPage />} />
+            <Route path="/tr/gizlilik-politikasi" element={<PrivacyPolicyPage />} />
+            <Route path="/tr/gizlilik-politikasi/" element={<PrivacyPolicyPage />} />
+            <Route path="/tr/kullanim-sartlari" element={<TermsOfServicePage />} />
+            <Route path="/tr/kullanim-sartlari/" element={<TermsOfServicePage />} />
+            <Route path="/tr/blog" element={<BlogHomePage />} />
+            <Route path="/tr/blog/" element={<BlogHomePage />} />
+            <Route path="/tr/blog/category/:categorySlug" element={<BlogCategoryPage />} />
+            <Route path="/tr/blog/category/:categorySlug/" element={<BlogCategoryPage />} />
+            <Route path="/tr/blog/:articleSlug" element={<ArticlePage />} />
+            <Route path="/tr/blog/:articleSlug/" element={<ArticlePage />} />
+            <Route path="/tr/:toolSlug" element={<ToolPage />} />
+            <Route path="/tr/:toolSlug/" element={<ToolPage />} />
             <Route path="*" element={<NotFoundPage />} />
             </Routes>
         </SiteLayout>

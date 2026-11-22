@@ -46,6 +46,7 @@ import { KO_TOOL_OVERRIDES } from '../src/locales/ko/tools';
 import { ZH_TOOL_OVERRIDES } from '../src/locales/zh/tools';
 import { HI_TOOL_OVERRIDES } from '../src/locales/hi/tools';
 import { AR_TOOL_OVERRIDES } from '../src/locales/ar/tools';
+import { TR_TOOL_OVERRIDES } from '../src/locales/tr/tools';
 import type { ToolLocaleOverride } from '../src/locales/types';
 import { CATEGORIES } from '../src/registry/categories';
 import { TOOLS_REGISTRY } from '../src/registry/toolsRegistry';
@@ -62,6 +63,7 @@ import { KO_ARTICLE_OVERRIDES } from '../src/locales/ko/blog';
 import { ZH_ARTICLE_OVERRIDES } from '../src/locales/zh/blog';
 import { HI_ARTICLE_OVERRIDES } from '../src/locales/hi/blog';
 import { AR_ARTICLE_OVERRIDES } from '../src/locales/ar/blog';
+import { TR_ARTICLE_OVERRIDES } from '../src/locales/tr/blog';
 
 const TOOL_OVERRIDES_BY_LOCALE: Record<string, Record<string, ToolLocaleOverride>> = {
   es: ES_TOOL_OVERRIDES,
@@ -76,6 +78,7 @@ const TOOL_OVERRIDES_BY_LOCALE: Record<string, Record<string, ToolLocaleOverride
   zh: ZH_TOOL_OVERRIDES,
   hi: HI_TOOL_OVERRIDES,
   ar: AR_TOOL_OVERRIDES,
+  tr: TR_TOOL_OVERRIDES,
 };
 
 const ARTICLE_OVERRIDES_BY_LOCALE = {
@@ -91,6 +94,7 @@ const ARTICLE_OVERRIDES_BY_LOCALE = {
   zh: ZH_ARTICLE_OVERRIDES,
   hi: HI_ARTICLE_OVERRIDES,
   ar: AR_ARTICLE_OVERRIDES,
+  tr: TR_ARTICLE_OVERRIDES,
 } as const;
 
 interface ExpectedEntry {
