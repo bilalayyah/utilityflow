@@ -91,12 +91,19 @@ import { TOOL_DETAILS as ZH_BATCH5 } from '../src/locales/zh/details/batch5';
 import { TOOL_DETAILS as ZH_BATCH6 } from '../src/locales/zh/details/batch6';
 import { TOOL_DETAILS as ZH_BATCH7 } from '../src/locales/zh/details/batch7';
 import { TOOL_DETAILS as HI_BATCH1 } from '../src/locales/hi/details/batch1';
+import { TOOL_DETAILS as BN_BATCH1 } from '../src/locales/bn/details/batch1';
 import { TOOL_DETAILS as HI_BATCH2 } from '../src/locales/hi/details/batch2';
+import { TOOL_DETAILS as BN_BATCH2 } from '../src/locales/bn/details/batch2';
 import { TOOL_DETAILS as HI_BATCH3 } from '../src/locales/hi/details/batch3';
+import { TOOL_DETAILS as BN_BATCH3 } from '../src/locales/bn/details/batch3';
 import { TOOL_DETAILS as HI_BATCH4 } from '../src/locales/hi/details/batch4';
+import { TOOL_DETAILS as BN_BATCH4 } from '../src/locales/bn/details/batch4';
 import { TOOL_DETAILS as HI_BATCH5 } from '../src/locales/hi/details/batch5';
+import { TOOL_DETAILS as BN_BATCH5 } from '../src/locales/bn/details/batch5';
 import { TOOL_DETAILS as HI_BATCH6 } from '../src/locales/hi/details/batch6';
+import { TOOL_DETAILS as BN_BATCH6 } from '../src/locales/bn/details/batch6';
 import { TOOL_DETAILS as HI_BATCH7 } from '../src/locales/hi/details/batch7';
+import { TOOL_DETAILS as BN_BATCH7 } from '../src/locales/bn/details/batch7';
 
 export const EN_DETAILS: Record<string, ToolDetail> = Object.assign(
   {},
@@ -219,5 +226,15 @@ export const LOCALE_DETAILS: Record<Exclude<LocaleCode, 'en'>, Record<string, To
     HI_BATCH5,
     HI_BATCH6,
     HI_BATCH7,
+  ),
+  bn: Object.assign(
+    {},
+    BN_BATCH1,
+    BN_BATCH2,
+    BN_BATCH3,
+    BN_BATCH4,
+    BN_BATCH5,
+    BN_BATCH6,
+    BN_BATCH7,
   ),
 };

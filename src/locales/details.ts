@@ -135,6 +135,15 @@ const DETAIL_LOADERS: Record<LocaleCode, Record<DetailKey, DetailLoader>> = {
     batch6: () => import('./hi/details/batch6'),
     batch7: () => import('./hi/details/batch7'),
   },
+  bn: {
+    batch1: () => import('./bn/details/batch1'),
+    batch2: () => import('./bn/details/batch2'),
+    batch3: () => import('./bn/details/batch3'),
+    batch4: () => import('./bn/details/batch4'),
+    batch5: () => import('./bn/details/batch5'),
+    batch6: () => import('./bn/details/batch6'),
+    batch7: () => import('./bn/details/batch7'),
+  },
 };
 
 const moduleCache = new Map<string, Promise<Record<string, ToolDetail>>>();

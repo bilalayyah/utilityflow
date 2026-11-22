@@ -307,6 +307,29 @@ export default function App() {
             <Route path="/hi/blog/:articleSlug/" element={<ArticlePage />} />
             <Route path="/hi/:toolSlug" element={<ToolPage />} />
             <Route path="/hi/:toolSlug/" element={<ToolPage />} />
+            {/* Bengali (bn) routes — same components, locale from URL */}
+            <Route path="/bn" element={<HomePage />} />
+            <Route path="/bn/" element={<HomePage />} />
+            <Route path="/bn/sob-tool" element={<ToolsDirectoryPage />} />
+            <Route path="/bn/sob-tool/" element={<ToolsDirectoryPage />} />
+            <Route path="/bn/bibhag/:categorySlug" element={<CategoryPage />} />
+            <Route path="/bn/bibhag/:categorySlug/" element={<CategoryPage />} />
+            <Route path="/bn/amader-somporke" element={<AboutPage />} />
+            <Route path="/bn/amader-somporke/" element={<AboutPage />} />
+            <Route path="/bn/jogajog" element={<ContactPage />} />
+            <Route path="/bn/jogajog/" element={<ContactPage />} />
+            <Route path="/bn/goponiyota-niti" element={<PrivacyPolicyPage />} />
+            <Route path="/bn/goponiyota-niti/" element={<PrivacyPolicyPage />} />
+            <Route path="/bn/sebar-shortaboli" element={<TermsOfServicePage />} />
+            <Route path="/bn/sebar-shortaboli/" element={<TermsOfServicePage />} />
+            <Route path="/bn/blog" element={<BlogHomePage />} />
+            <Route path="/bn/blog/" element={<BlogHomePage />} />
+            <Route path="/bn/blog/category/:categorySlug" element={<BlogCategoryPage />} />
+            <Route path="/bn/blog/category/:categorySlug/" element={<BlogCategoryPage />} />
+            <Route path="/bn/blog/:articleSlug" element={<ArticlePage />} />
+            <Route path="/bn/blog/:articleSlug/" element={<ArticlePage />} />
+            <Route path="/bn/:toolSlug" element={<ToolPage />} />
+            <Route path="/bn/:toolSlug/" element={<ToolPage />} />
             <Route path="*" element={<NotFoundPage />} />
             </Routes>
         </SiteLayout>
