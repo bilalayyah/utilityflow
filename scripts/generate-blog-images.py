@@ -69,6 +69,13 @@ CJK_BOLD_CANDIDATES = [
 # run-by-run via _run_font / draw_mixed_text — never with a single font.
 DEVA_BOLD = "/usr/share/fonts/truetype/noto/NotoSansDevanagari-Bold.ttf"
 
+# Urdu — same mixed-run problem as Hindi: this machine's
+# Noto Sans Urdu Bold covers only 16/95 Latin glyphs, and Noto Sans
+# has no Urdu. Mixed titles like "PDF في..." must be rendered
+# run-by-run via _run_font / draw_mixed_text — never with a single font.
+# Urdu runs are laid out right-to-left (draw_mixed_text, rtl=True).
+URDU_BOLD = "/usr/share/fonts/truetype/noto/NotoNastaliqUrdu-Bold.ttf"
+
 
 def font_for(lang, size, bold=True):
     """Pick a font that can render the language; CJK needs a CJK font."""
@@ -84,6 +91,20 @@ def font_for(lang, size, bold=True):
         if not os.path.exists(path):
             raise RuntimeError(
                 f"No Devanagari font found for lang=hi; refusing to render. "
+                f"Checked: {path}"
+            )
+        return ImageFont.truetype(path, size)
+    if lang == "ur":
+        # Bold (titles) needs Urdu glyphs; regular weight is only
+        # ever used for Latin-only strings (subline), so Noto Sans
+        # Regular is correct there.
+        if bold:
+            path = URDU_BOLD
+        else:
+            return ImageFont.truetype(FONT_REGULAR, size)
+        if not os.path.exists(path):
+            raise RuntimeError(
+                f"No Urdu font found for lang=ar; refusing to render. "
                 f"Checked: {path}"
             )
         return ImageFont.truetype(path, size)
@@ -110,8 +131,28 @@ def _is_deva(ch):
     return '\u0900' <= ch <= '\u097f' or ch in ('\u200c', '\u200d')
 
 
-def _split_runs(text):
-    """Split mixed-script text into (is_devanagari, substring) runs.
+def _is_urdu(ch):
+    """Urdu codepoint (Urdu, Supplement, Extended-A, presentation
+    forms A/B, incl. ZWJ/ZWNJ joiners). Western digits 0-9 and Latin
+    punctuation are NOT Urdu — they ride in Latin runs, as in RTL
+    text. Urdu-Indic digits (U+0660-0669, U+06F0-06F9) ARE Urdu."""
+    return (
+        '\u0600' <= ch <= '\u06ff'
+        or '\u0750' <= ch <= '\u077f'
+        or '\u08a0' <= ch <= '\u08ff'
+        or '\ufb50' <= ch <= '\ufdff'
+        or '\ufe70' <= ch <= '\ufeff'
+        or ch in ('\u200c', '\u200d')
+    )
+
+
+def _is_native(ch, lang):
+    """True when ch belongs to the locale's native script (vs Latin)."""
+    return _is_urdu(ch) if lang == "ur" else _is_deva(ch)
+
+
+def _split_runs(text, lang="hi"):
+    """Split mixed-script text into (is_native, substring) runs.
     Spaces are neutral: they ride with the preceding run (or the next run
     if the text starts with a space), so inter-word spacing is measured
     with a font that actually has a space glyph."""
@@ -121,13 +162,13 @@ def _split_runs(text):
         if ch == ' ':
             pending_space += ch
             continue
-        is_deva = _is_deva(ch)
+        is_native = _is_native(ch, lang)
         piece = pending_space + ch
         pending_space = ''
-        if runs and runs[-1][0] == is_deva:
-            runs[-1] = (is_deva, runs[-1][1] + piece)
+        if runs and runs[-1][0] == is_native:
+            runs[-1] = (is_native, runs[-1][1] + piece)
         else:
-            runs.append((is_deva, piece))
+            runs.append((is_native, piece))
     if pending_space:
         if runs:
             runs[-1] = (runs[-1][0], runs[-1][1] + pending_space)
@@ -136,28 +177,50 @@ def _split_runs(text):
     return runs
 
 
-def _run_font(is_deva, size):
-    """Bold font for one script run of a Hindi title. This machine's
+def _run_font(is_native, size, lang="hi"):
+    """Bold font for one script run of a Hindi/Urdu title. This machine's
     Noto Sans Devanagari has NO Latin glyphs (272 glyphs, Devanagari
-    only) and Noto Sans has no Devanagari — a single font cannot render
-    mixed titles like 'PDF में पेज नंबर...', so each run gets its own."""
-    if is_deva:
-        return ImageFont.truetype(DEVA_BOLD, size)
+    only) and Noto Sans Urdu Bold covers only 16/95 Latin glyphs,
+    while Noto Sans has neither Devanagari nor Urdu — a single font
+    cannot render mixed titles like 'PDF में पेज नंबर...' or
+    'PDF في...', so each run gets its own."""
+    if is_native:
+        path = URDU_BOLD if lang == "ur" else DEVA_BOLD
+        return ImageFont.truetype(path, size)
     return ImageFont.truetype(FONT_BOLD, size)
 
 
-def mixed_textlength(draw, text, size):
-    """Pixel width of a mixed-script Hindi title line (sum of run widths)."""
+def mixed_textlength(draw, text, size, lang="hi"):
+    """Pixel width of a mixed-script Hindi/Urdu title line (sum of run widths)."""
     return sum(
-        draw.textlength(run, font=_run_font(is_deva, size))
-        for is_deva, run in _split_runs(text)
+        draw.textlength(run, font=_run_font(is_native, size, lang))
+        for is_native, run in _split_runs(text, lang)
     )
 
 
-def draw_mixed_text(draw, x, y, text, size, fill):
-    """Draw a mixed-script Hindi title line starting at x, run by run."""
-    for is_deva, run in _split_runs(text):
-        f = _run_font(is_deva, size)
+def draw_mixed_text(draw, x, y, text, size, fill, lang="hi", rtl=False):
+    """Draw a mixed-script Hindi/Urdu title line starting at x, run by run.
+    For rtl=True (Urdu) runs are laid out right-to-left: x is the LEFT
+    edge of the centred line and runs are placed in logical order from
+    the right edge, so the first logical run sits rightmost. Within each
+    run Pillow+raqm shapes the script correctly (Urdu contextual forms,
+    ligatures)."""
+    runs = _split_runs(text, lang)
+    if rtl:
+        # anchor='lt': with the default 'la' anchor the Urdu ink sits
+        # ~0.53x below the anchor (Noto Sans Urdu's ascender metric is
+        # far above the actual glyph tops) and overflows the line slot
+        # into the subline. 'lt' anchors at the ink top, so glyphs fill
+        # the slot exactly (measured: 0..156 of a 169 slot at size 72).
+        x_right = x + mixed_textlength(draw, text, size, lang)
+        for is_native, run in runs:
+            f = _run_font(is_native, size, lang)
+            w = draw.textlength(run, font=f)
+            draw.text((x_right - w, y), run, font=f, fill=fill, anchor='lt')
+            x_right -= w
+        return
+    for is_native, run in runs:
+        f = _run_font(is_native, size, lang)
         draw.text((x, y), run, font=f, fill=fill)
         x += draw.textlength(run, font=f)
 
@@ -167,14 +230,14 @@ def wrap_text(draw, text, font, max_width, lang=None):
     A word wider than max_width is split by character — required for
     spaceless CJK titles (Japanese has no spaces, so the whole title is
     a single 'word'); CJK breaks anywhere without hyphenation.
-    For lang='hi', widths are measured per script run (mixed_textlength):
-    a Devanagari word measured with the Latin font (or vice versa) would
+    For lang='hi'/'ur', widths are measured per script run (mixed_textlength):
+    a Devanagari/Urdu word measured with the Latin font (or vice versa) would
     use .notdef widths and wrap wrongly."""
     size = font.size
 
     def wlen(s):
-        if lang == 'hi':
-            return mixed_textlength(draw, s, size)
+        if lang in ('hi', 'ur'):
+            return mixed_textlength(draw, s, size, lang)
         return draw.textlength(s, font=font)
 
     words = text.split()
@@ -213,7 +276,7 @@ def fit_title(draw, title, lang, max_width, max_lines=3):
         font = font_for(lang, size, bold=True)
         lines = wrap_text(draw, title, font, max_width, lang=lang)
         if len(lines) <= max_lines and all(
-            (mixed_textlength(draw, line, size) if lang == 'hi'
+            (mixed_textlength(draw, line, size, lang) if lang in ('hi', 'ur')
              else draw.textlength(line, font=font)) <= max_width for line in lines
         ):
             return font, lines
@@ -222,7 +285,7 @@ def fit_title(draw, title, lang, max_width, max_lines=3):
     font = font_for(lang, 40 * SS, bold=True)
     lines = wrap_text(draw, title, font, max_width, lang=lang)
     if len(lines) > max_lines or any(
-        (mixed_textlength(draw, line, 40 * SS) if lang == 'hi'
+        (mixed_textlength(draw, line, 40 * SS, lang) if lang in ('hi', 'ur')
          else draw.textlength(line, font=font)) > max_width for line in lines
     ):
         print(f"OVERFLOW title needs {len(lines)} lines at 40px: {title!r}", file=sys.stderr)
@@ -461,9 +524,9 @@ def render_card(title, lang, article_id):
     block_h = total_h + 20 * SS + 26 * SS + 14 * SS + 28 * SS
     y = int(300 * SS + (306 * SS - block_h) // 2)
     for line in lines:
-        if lang == 'hi':
-            tw = mixed_textlength(draw, line, title_font.size)
-            draw_mixed_text(draw, (W * SS - tw) // 2, y, line, title_font.size, DARK)
+        if lang in ('hi', 'ur'):
+            tw = mixed_textlength(draw, line, title_font.size, lang)
+            draw_mixed_text(draw, (W * SS - tw) // 2, y, line, title_font.size, DARK, lang=lang, rtl=(lang == 'ur'))
         else:
             tw = draw.textlength(line, font=title_font)
             draw.text(((W * SS - tw) // 2, y), line, font=title_font, fill=DARK)

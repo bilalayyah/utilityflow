@@ -228,13 +228,13 @@ export default function KeywordDensityCheckerTool() {
 
       {analysis.topTerms.length > 0 && (
         <div className={`rounded-xl border border-slate-200 overflow-x-auto ${palette.card}`}>
-          <table className="w-full text-left text-xs sm:text-sm">
+          <table className="w-full text-start text-xs sm:text-sm">
             <thead className="bg-slate-50 text-slate-500 border-b border-slate-200">
               <tr>
                 <th className="py-2.5 px-4 font-semibold">{s.rankHeader}</th>
                 <th className="py-2.5 px-4 font-semibold">{s.termHeader}</th>
-                <th className="py-2.5 px-4 font-semibold text-right">{s.occurrencesHeader}</th>
-                <th className="py-2.5 px-4 font-semibold text-right">{s.shareHeader}</th>
+                <th className="py-2.5 px-4 font-semibold text-end">{s.occurrencesHeader}</th>
+                <th className="py-2.5 px-4 font-semibold text-end">{s.shareHeader}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 tabular-nums">
@@ -242,8 +242,8 @@ export default function KeywordDensityCheckerTool() {
                 <tr key={item.term}>
                   <td className="py-2 px-4 font-mono text-slate-500">#{idx + 1}</td>
                   <td className="py-2 px-4 font-semibold text-slate-900">{item.term}</td>
-                  <td className="py-2 px-4 text-right font-mono text-slate-700">{item.count}</td>
-                  <td className="py-2 px-4 text-right font-mono text-indigo-700 font-semibold">
+                  <td className="py-2 px-4 text-end font-mono text-slate-700">{item.count}</td>
+                  <td className="py-2 px-4 text-end font-mono text-indigo-700 font-semibold">
                     {item.density.toFixed(2)}%
                   </td>
                 </tr>

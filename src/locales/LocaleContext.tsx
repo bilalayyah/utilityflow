@@ -116,6 +116,7 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     document.documentElement.lang = getLocaleInfo(locale).htmlLang;
+    document.documentElement.dir = getLocaleInfo(locale).dir;
   }, [locale]);
 
   // No translated strings are available yet while loading: render a minimal

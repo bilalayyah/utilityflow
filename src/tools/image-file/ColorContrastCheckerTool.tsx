@@ -550,7 +550,7 @@ export default function ColorContrastCheckerTool() {
                   if (paletteTarget === 'fg') applyFg(swatch.hex);
                   else applyBg(swatch.hex);
                 }}
-                className="group rounded-lg border border-slate-200 bg-white p-2 text-left hover:border-indigo-400 cursor-pointer transition-colors"
+                className="group rounded-lg border border-slate-200 bg-white p-2 text-start hover:border-indigo-400 cursor-pointer transition-colors"
               >
                 <div
                   className="h-10 w-full rounded border border-slate-200"

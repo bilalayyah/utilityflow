@@ -127,7 +127,7 @@ export default function TipCalculatorTool() {
 
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div className="flex flex-wrap items-center gap-1.5">
-          <span className="text-xs font-semibold text-slate-600 mr-1">{s.presetsLabel}</span>
+          <span className="text-xs font-semibold text-slate-600 me-1">{s.presetsLabel}</span>
           {TIP_PRESETS.map((p, index) => (
             <button
               key={p}

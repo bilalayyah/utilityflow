@@ -55,7 +55,7 @@ export function ArticleTOC({ headings }: ArticleTOCProps) {
       </h2>
       <ul className="mt-3 space-y-2">
         {headings.map((heading) => (
-          <li key={heading.id} className={heading.level === 3 ? 'pl-4' : ''}>
+          <li key={heading.id} className={heading.level === 3 ? 'ps-4' : ''}>
             <a
               href={`#${heading.id}`}
               className="text-sm leading-snug text-[#6E6E73] transition-colors hover:text-[#0B7A59] hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0E8A66] rounded-sm dark:text-[#CBD5E1] dark:hover:text-[#34D399]"

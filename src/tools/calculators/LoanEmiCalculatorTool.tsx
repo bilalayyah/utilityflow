@@ -240,28 +240,28 @@ export default function LoanEmiCalculatorTool() {
 
             {showSchedule && (
               <div className="mt-4 overflow-x-auto max-h-80 overflow-y-auto rounded-xl border border-slate-200">
-                <table className="w-full text-left text-xs sm:text-sm font-mono tabular-nums">
+                <table className="w-full text-start text-xs sm:text-sm font-mono tabular-nums">
                   <thead className={`${palette.soft} border-b border-slate-200 font-sans text-slate-600 sticky top-0`}>
                     <tr>
                       <th className="py-2.5 px-3 font-semibold">{s.monthHeader}</th>
-                      <th className="py-2.5 px-3 font-semibold text-right">{s.paymentHeader}</th>
-                      <th className="py-2.5 px-3 font-semibold text-right">{s.principalHeader}</th>
-                      <th className="py-2.5 px-3 font-semibold text-right">{s.interestHeader}</th>
-                      <th className="py-2.5 px-3 font-semibold text-right">{s.balanceHeader}</th>
+                      <th className="py-2.5 px-3 font-semibold text-end">{s.paymentHeader}</th>
+                      <th className="py-2.5 px-3 font-semibold text-end">{s.principalHeader}</th>
+                      <th className="py-2.5 px-3 font-semibold text-end">{s.interestHeader}</th>
+                      <th className="py-2.5 px-3 font-semibold text-end">{s.balanceHeader}</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-100 bg-white">
                     {calculation.data.schedule.map((row) => (
                       <tr key={row.month}>
                         <td className="py-2 px-3 text-slate-500">{row.month}</td>
-                        <td className="py-2 px-3 text-right">${formatMoney(row.payment, locale)}</td>
-                        <td className="py-2 px-3 text-right text-slate-900">
+                        <td className="py-2 px-3 text-end">${formatMoney(row.payment, locale)}</td>
+                        <td className="py-2 px-3 text-end text-slate-900">
                           ${formatMoney(row.principal, locale)}
                         </td>
-                        <td className="py-2 px-3 text-right text-amber-700">
+                        <td className="py-2 px-3 text-end text-amber-700">
                           ${formatMoney(row.interest, locale)}
                         </td>
-                        <td className="py-2 px-3 text-right text-slate-600">
+                        <td className="py-2 px-3 text-end text-slate-600">
                           ${formatMoney(row.balance, locale)}
                         </td>
                       </tr>

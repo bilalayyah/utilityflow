@@ -207,13 +207,13 @@ export default function WordFrequencyCounterTool() {
 
         {analysis.rows.length > 0 ? (
           <div className="overflow-x-auto max-h-80 overflow-y-auto">
-            <table className="w-full text-left text-sm">
+            <table className="w-full text-start text-sm">
               <thead className="bg-white border-b border-slate-200 text-xs text-slate-500 sticky top-0">
                 <tr>
                   <th className="py-2.5 px-4 font-semibold">{s.rank}</th>
                   <th className="py-2.5 px-4 font-semibold">{s.termPhrase}</th>
-                  <th className="py-2.5 px-4 font-semibold text-right">{s.count}</th>
-                  <th className="py-2.5 px-4 font-semibold text-right">{s.density}</th>
+                  <th className="py-2.5 px-4 font-semibold text-end">{s.count}</th>
+                  <th className="py-2.5 px-4 font-semibold text-end">{s.density}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 bg-white">
@@ -223,10 +223,10 @@ export default function WordFrequencyCounterTool() {
                       {idx + 1}
                     </td>
                     <td className="py-2 px-4 font-mono text-slate-900">{row.term}</td>
-                    <td className="py-2 px-4 font-mono text-right text-slate-800 tabular-nums">
+                    <td className="py-2 px-4 font-mono text-end text-slate-800 tabular-nums">
                       {row.count}
                     </td>
-                    <td className="py-2 px-4 font-mono text-right text-slate-600 tabular-nums">
+                    <td className="py-2 px-4 font-mono text-end text-slate-600 tabular-nums">
                       {row.density.toFixed(2)}%
                     </td>
                   </tr>

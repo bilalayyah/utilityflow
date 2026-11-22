@@ -199,7 +199,7 @@ export default function OnPageSeoCheckerTool() {
                       .replace('{total}', String(audit.checks.length))}
                   </div>
                 </div>
-                <div className="text-right text-xs text-slate-600 tabular-nums">
+                <div className="text-end text-xs text-slate-600 tabular-nums">
                   <div>
                     {s.linksSummary
                       .replace('{total}', String(audit.linksTotal))

@@ -249,7 +249,7 @@ export default function UtmLinkBuilderTool() {
 
           {result.params.length > 0 && (
             <div className="rounded-xl border border-slate-200 overflow-x-auto">
-              <table className="w-full text-left text-xs sm:text-sm">
+              <table className="w-full text-start text-xs sm:text-sm">
                 <thead className={`${palette.soft} text-slate-500 border-b border-slate-200`}>
                   <tr>
                     <th className="py-2 px-4 font-semibold">{s.thParam}</th>

@@ -35,7 +35,7 @@ export function Breadcrumbs({ items, className = '' }: BreadcrumbsProps) {
           return (
             <li key={`${item.label}-${index}`} className="inline-flex items-center gap-1.5">
               {index > 0 && (
-                <ChevronRight className="w-3.5 h-3.5 text-[#86868B] shrink-0 dark:text-[#CBD5E1]" aria-hidden="true" />
+                <ChevronRight className="w-3.5 h-3.5 text-[#86868B] shrink-0 dark:text-[#CBD5E1] rtl:rotate-180" aria-hidden="true" />
               )}
               {item.href && !isLast ? (
                 <Link

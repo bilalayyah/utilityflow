@@ -292,7 +292,7 @@ export function renderToolBody(
     );
     parts.push(blogCards(toolArticles, t, locale, data, 'mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3'));
     parts.push(
-      `<p class="mt-6"><a href="${escapeAttr(blogHref(locale))}" class="font-semibold text-indigo-700 hover:underline">${escapeText(t.blog.allArticles)} →</a></p>`
+      `<p class="mt-6"><a href="${escapeAttr(blogHref(locale))}" class="font-semibold text-indigo-700 hover:underline">${escapeText(t.blog.allArticles)} <span class="inline-block rtl:rotate-180" aria-hidden="true">→</span></a></p>`
     );
     parts.push('</section>');
   }
@@ -531,7 +531,7 @@ export function renderCategoryBody(
     );
     parts.push(blogCards(categoryArticles, t, locale, data, 'grid gap-6 sm:grid-cols-2 lg:grid-cols-3'));
     parts.push(
-      `<p class="mt-6"><a href="${escapeAttr(blogCategoryHref(category.id, locale))}" class="font-semibold text-indigo-700 hover:underline">${escapeText(t.blog.allArticles)} →</a></p>`
+      `<p class="mt-6"><a href="${escapeAttr(blogCategoryHref(category.id, locale))}" class="font-semibold text-indigo-700 hover:underline">${escapeText(t.blog.allArticles)} <span class="inline-block rtl:rotate-180" aria-hidden="true">→</span></a></p>`
     );
     parts.push('</section>');
   }
