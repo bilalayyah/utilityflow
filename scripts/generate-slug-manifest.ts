@@ -31,6 +31,8 @@ import { HI_TOOL_OVERRIDES } from '../src/locales/hi/tools';
 import { AR_TOOL_OVERRIDES } from '../src/locales/ar/tools';
 import { TR_CATEGORY_OVERRIDES } from '../src/locales/tr/categories';
 import { TR_TOOL_OVERRIDES } from '../src/locales/tr/tools';
+import { VI_CATEGORY_OVERRIDES } from '../src/locales/vi/categories';
+import { VI_TOOL_OVERRIDES } from '../src/locales/vi/tools';
 import { BLOG_ARTICLES } from '../src/registry/blogArticles';
 import { ES_ARTICLE_OVERRIDES } from '../src/locales/es/blog';
 import { DE_ARTICLE_OVERRIDES } from '../src/locales/de/blog';
@@ -45,6 +47,7 @@ import { ZH_ARTICLE_OVERRIDES } from '../src/locales/zh/blog';
 import { HI_ARTICLE_OVERRIDES } from '../src/locales/hi/blog';
 import { AR_ARTICLE_OVERRIDES } from '../src/locales/ar/blog';
 import { TR_ARTICLE_OVERRIDES } from '../src/locales/tr/blog';
+import { VI_ARTICLE_OVERRIDES } from '../src/locales/vi/blog';
 import type { ArticleLocaleOverride, CategoryLocaleOverride, ToolLocaleOverride } from '../src/locales/types';
 
 /**
@@ -73,6 +76,7 @@ const TOOL_OVERRIDES: Record<NonDefaultLocale, Record<string, ToolLocaleOverride
   hi: HI_TOOL_OVERRIDES,
   ar: AR_TOOL_OVERRIDES,
   tr: TR_TOOL_OVERRIDES,
+  vi: VI_TOOL_OVERRIDES,
 };
 
 const CATEGORY_OVERRIDES: Record<
@@ -92,6 +96,7 @@ const CATEGORY_OVERRIDES: Record<
   hi: HI_CATEGORY_OVERRIDES,
   ar: AR_CATEGORY_OVERRIDES,
   tr: TR_CATEGORY_OVERRIDES,
+  vi: VI_CATEGORY_OVERRIDES,
 };
 
 /** Blog article overrides (Batch 2). Empty until Batch 4 (localization). */
@@ -112,6 +117,7 @@ const ARTICLE_OVERRIDES: Record<
   hi: HI_ARTICLE_OVERRIDES,
   ar: AR_ARTICLE_OVERRIDES,
   tr: TR_ARTICLE_OVERRIDES,
+  vi: VI_ARTICLE_OVERRIDES,
 };
 
 function generateSlugManifest(): void {

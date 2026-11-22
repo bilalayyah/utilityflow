@@ -2,7 +2,7 @@
  * Central language configuration for UtilityFlow.
  *
  * Designed for 11 languages from the start: English (default) + es + pt + de +
- * fr + ja + id + it + ru + ko + zh. Hindi (hi) added 2026-11-21 (12 locales); Arabic (ar) added 2026-11-22 (13 locales); Turkish (tr) added 2026-11-22 (14 locales). Phase 1 shipped en + es; Phase 2 adds
+ * fr + ja + id + it + ru + ko + zh. Hindi (hi) added 2026-11-21 (12 locales); Vietnamese (vi) added 2026-11-22 (15 locales); Arabic (ar) added 2026-11-22 (13 locales); Turkish (tr) added 2026-11-22 (14 locales). Phase 1 shipped en + es; Phase 2 adds
  * pt + fr; Phase 3 adds de + it; Phase 4 adds id + ru; Phase 5 adds ja + ko. Later phases add a LocaleInfo entry, a locales/<code>.ts
  * dictionary, tool overrides and category overrides — no routing or component
  * rework required.
@@ -17,7 +17,7 @@
 import { getCategoryById } from '../registry/categories';
 import type { CategoryId, ToolCategory } from '../types/tool';
 
-export type LocaleCode = 'en' | 'es' | 'pt' | 'fr' | 'de' | 'it' | 'id' | 'ru' | 'ja' | 'ko' | 'zh' | 'hi' | 'ar' | 'tr';
+export type LocaleCode = 'en' | 'es' | 'pt' | 'fr' | 'de' | 'it' | 'id' | 'ru' | 'ja' | 'ko' | 'zh' | 'hi' | 'ar' | 'tr' | 'vi';
 
 /** Non-default locales (the ones that live under a /<code>/ prefix). */
 export type NonDefaultLocale = Exclude<LocaleCode, 'en'>;
@@ -49,6 +49,7 @@ export const SUPPORTED_LOCALES: LocaleInfo[] = [
   { code: 'hi', nativeName: 'हिन्दी', pathPrefix: '/hi', htmlLang: 'hi', dir: 'ltr' },
   { code: 'ar', nativeName: 'العربية', pathPrefix: '/ar', htmlLang: 'ar', dir: 'rtl' },
   { code: 'tr', nativeName: 'Türkçe', pathPrefix: '/tr', htmlLang: 'tr', dir: 'ltr' },
+  { code: 'vi', nativeName: 'Tiếng Việt', pathPrefix: '/vi', htmlLang: 'vi', dir: 'ltr' },
 ];
 
 /** Literal 'en' type (not LocaleCode) so `locale === DEFAULT_LOCALE` narrows the type. */
@@ -99,6 +100,8 @@ export function localeTag(locale: LocaleCode): string {
       return 'ar';
     case 'tr':
       return 'tr';
+    case 'vi':
+      return 'vi';
   }
 }
 
@@ -138,6 +141,8 @@ export function ogLocaleTag(locale: LocaleCode): string {
       return 'ar_SA';
     case 'tr':
       return 'tr_TR';
+    case 'vi':
+      return 'vi_VN';
   }
 }
 
@@ -158,7 +163,7 @@ export function getLocaleFromPath(pathname: string): { locale: LocaleCode; restP
 
 /** Localized URL for a static page path (English path in, localized path out). */
 export const STATIC_PATHS: Record<string, Partial<Record<LocaleCode, string>>> = {
-  '/': { en: '/', es: '/es/', pt: '/pt/', fr: '/fr/', de: '/de/', it: '/it/', id: '/id/', ru: '/ru/', ja: '/ja/', ko: '/ko/', zh: '/zh/', hi: '/hi/', ar: '/ar/', tr: '/tr/' },
+  '/': { en: '/', es: '/es/', pt: '/pt/', fr: '/fr/', de: '/de/', it: '/it/', id: '/id/', ru: '/ru/', ja: '/ja/', ko: '/ko/', zh: '/zh/', hi: '/hi/', ar: '/ar/', tr: '/tr/', vi: '/vi/' },
   '/tools/': {
     en: '/tools/',
     es: '/es/todas-las-herramientas/',
@@ -174,9 +179,10 @@ export const STATIC_PATHS: Record<string, Partial<Record<LocaleCode, string>>> =
     hi: '/hi/sabhi-tools/',
     ar: '/ar/jami-aladawat/',
     tr: '/tr/tum-araclar/',
+    vi: '/vi/tat-ca-cong-cu/',
   },
-  '/about/': { en: '/about/', es: '/es/acerca-de/', pt: '/pt/sobre/', fr: '/fr/a-propos/', de: '/de/ueber-uns/', it: '/it/chi-siamo/', id: '/id/tentang-kami/', ru: '/ru/o-nas/', ja: '/ja/watashitachi/', ko: '/ko/sogae/', zh: '/zh/guanyu-women/', hi: '/hi/hamare-bare-mein/', ar: '/ar/man-nahnu/', tr: '/tr/hakkimizda/' },
-  '/contact/': { en: '/contact/', es: '/es/contacto/', pt: '/pt/contato/', fr: '/fr/contact/', de: '/de/kontakt/', it: '/it/contatti/', id: '/id/kontak/', ru: '/ru/kontakty/', ja: '/ja/otoiawase/', ko: '/ko/mun-ui/', zh: '/zh/lianxi-women/', hi: '/hi/sampark/', ar: '/ar/ittasil-bina/', tr: '/tr/iletisim/' },
+  '/about/': { en: '/about/', es: '/es/acerca-de/', pt: '/pt/sobre/', fr: '/fr/a-propos/', de: '/de/ueber-uns/', it: '/it/chi-siamo/', id: '/id/tentang-kami/', ru: '/ru/o-nas/', ja: '/ja/watashitachi/', ko: '/ko/sogae/', zh: '/zh/guanyu-women/', hi: '/hi/hamare-bare-mein/', ar: '/ar/man-nahnu/', tr: '/tr/hakkimizda/', vi: '/vi/ve-chung-toi/' },
+  '/contact/': { en: '/contact/', es: '/es/contacto/', pt: '/pt/contato/', fr: '/fr/contact/', de: '/de/kontakt/', it: '/it/contatti/', id: '/id/kontak/', ru: '/ru/kontakty/', ja: '/ja/otoiawase/', ko: '/ko/mun-ui/', zh: '/zh/lianxi-women/', hi: '/hi/sampark/', ar: '/ar/ittasil-bina/', tr: '/tr/iletisim/', vi: '/vi/lien-he/' },
   '/privacy-policy/': {
     en: '/privacy-policy/',
     es: '/es/politica-de-privacidad/',
@@ -192,6 +198,7 @@ export const STATIC_PATHS: Record<string, Partial<Record<LocaleCode, string>>> =
     hi: '/hi/gopniyata-neeti/',
     ar: '/ar/siyasat-al-khususiyya/',
     tr: '/tr/gizlilik-politikasi/',
+    vi: '/vi/chinh-sach-bao-mat/',
   },
   '/terms-of-service/': {
     en: '/terms-of-service/',
@@ -208,6 +215,7 @@ export const STATIC_PATHS: Record<string, Partial<Record<LocaleCode, string>>> =
     hi: '/hi/sewa-ki-shartein/',
     ar: '/ar/shurut-al-khidma/',
     tr: '/tr/kullanim-sartlari/',
+    vi: '/vi/dieu-khoan-dich-vu/',
   },
   /** Blog home — the segment is "blog" in every locale. */
   '/blog/': {
@@ -225,6 +233,7 @@ export const STATIC_PATHS: Record<string, Partial<Record<LocaleCode, string>>> =
     hi: '/hi/blog/',
     ar: '/ar/blog/',
     tr: '/tr/blog/',
+    vi: '/vi/blog/',
   },
 };
 
@@ -351,6 +360,15 @@ export const CATEGORY_LOCALE_SLUGS: Record<NonDefaultLocale, Record<string, stri
     seo: 'seo-araclari',
     'image-file': 'goruntu-dosya-araclari',
   },
+  vi: {
+    'text-writing': 'cong-cu-van-ban',
+    developer: 'cong-cu-lap-trinh',
+    calculators: 'may-tinh',
+    'social-media': 'cong-cu-mang-xa-hoi',
+    pdf: 'cong-cu-pdf',
+    seo: 'cong-cu-seo',
+    'image-file': 'cong-cu-anh-va-tep',
+  },
 };
 
 /** Spanish slugs for the 7 categories, keyed by category id. Kept for the Phase 1 validator. */
@@ -371,6 +389,7 @@ export const CATEGORY_PATH_SEGMENT: Record<NonDefaultLocale, string> = {
   hi: 'shreni',
   ar: 'tasnif',
   tr: 'kategori',
+  vi: 'danh-muc',
 };
 
 /**

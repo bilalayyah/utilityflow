@@ -111,6 +111,13 @@ import { TOOL_DETAILS as TR_BATCH4 } from '../src/locales/tr/details/batch4';
 import { TOOL_DETAILS as TR_BATCH5 } from '../src/locales/tr/details/batch5';
 import { TOOL_DETAILS as TR_BATCH6 } from '../src/locales/tr/details/batch6';
 import { TOOL_DETAILS as TR_BATCH7 } from '../src/locales/tr/details/batch7';
+import { TOOL_DETAILS as VI_BATCH1 } from '../src/locales/vi/details/batch1';
+import { TOOL_DETAILS as VI_BATCH2 } from '../src/locales/vi/details/batch2';
+import { TOOL_DETAILS as VI_BATCH3 } from '../src/locales/vi/details/batch3';
+import { TOOL_DETAILS as VI_BATCH4 } from '../src/locales/vi/details/batch4';
+import { TOOL_DETAILS as VI_BATCH5 } from '../src/locales/vi/details/batch5';
+import { TOOL_DETAILS as VI_BATCH6 } from '../src/locales/vi/details/batch6';
+import { TOOL_DETAILS as VI_BATCH7 } from '../src/locales/vi/details/batch7';
 
 export const EN_DETAILS: Record<string, ToolDetail> = Object.assign(
   {},
@@ -253,5 +260,15 @@ export const LOCALE_DETAILS: Record<Exclude<LocaleCode, 'en'>, Record<string, To
     TR_BATCH5,
     TR_BATCH6,
     TR_BATCH7,
+  ),
+  vi: Object.assign(
+    {},
+    VI_BATCH1,
+    VI_BATCH2,
+    VI_BATCH3,
+    VI_BATCH4,
+    VI_BATCH5,
+    VI_BATCH6,
+    VI_BATCH7,
   ),
 };
