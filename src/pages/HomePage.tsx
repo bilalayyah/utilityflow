@@ -87,7 +87,15 @@ export function HomePage() {
             />
             {formatString(t.home.eyebrow, { count: allTools.length })}
           </p>
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-[#1D1D1F] dark:text-[#F1F5F9] leading-[1.08] text-balance">
+          <h1
+            className={`text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-[#1D1D1F] dark:text-[#F1F5F9] text-balance ${
+              // Bengali + Hindi (Devanagari) glyphs have tall ascenders /
+              // descenders that cross into the next line at leading 1.08 —
+              // give the hero heading room in those scripts only; every
+              // other locale keeps the 1.08 look.
+              locale === 'bn' || locale === 'hi' ? 'leading-[1.35]' : 'leading-[1.08]'
+            }`}
+          >
             <span className="text-[#0E8A66] dark:text-[#34D399]">{t.home.h1Lead}</span>
             {t.home.h1Rest}
           </h1>
