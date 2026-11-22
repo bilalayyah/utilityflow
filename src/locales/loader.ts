@@ -42,6 +42,7 @@ const LOCALE_LOADERS: Record<
   ar: () => import('./ar/index'),
   tr: () => import('./tr/index'),
   vi: () => import('./vi/index'),
+  bn: () => import('./bn/index'),
 };
 
 const cache = new Map<LocaleCode, LocaleData>([['en', EN_LOCALE_DATA]]);

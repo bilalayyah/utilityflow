@@ -75,6 +75,13 @@ export function ArticlePage() {
   const [enFull, setEnFull] = useState<BlogArticleLocaleVersion | null>(() =>
     locale === 'en' && article ? getCachedArticleById(article.id) : null
   );
+  // Article id the enFull version belongs to. Client-side article→article
+  // navigation reuses this component (same route), so the previous
+  // article's version lingers in state for the first renders after the
+  // URL changes; the slug guard below must never act on a stale version.
+  const [enFullId, setEnFullId] = useState<string | null>(() =>
+    locale === 'en' && article && enFull ? article.id : null
+  );
   const [enFullFailed, setEnFullFailed] = useState(false);
   const [enFullRetry, setEnFullRetry] = useState(0);
   useEffect(() => {
@@ -85,15 +92,18 @@ export function ArticlePage() {
       // resetting to null first — the first render already has the body.
       // setEnFull with the identical reference is a no-op re-render.
       setEnFull(cached);
+      setEnFullId(article.id);
       return;
     }
     let cancelled = false;
     setEnFull(null);
+    setEnFullId(null);
     setEnFullFailed(false);
     loadBlogArticleById(article.id)
       .then((version) => {
         if (cancelled) return;
         setEnFull(version);
+        setEnFullId(version ? article.id : null);
       })
       .catch(() => {
         if (!cancelled) setEnFullFailed(true);
@@ -107,6 +117,11 @@ export function ArticlePage() {
   const [localeFull, setLocaleFull] = useState<ArticleLocaleOverride | null>(() =>
     locale !== 'en' && article ? getCachedLocalizedArticle(locale, article.id) : null
   );
+  // Article id the localeFull version belongs to — same staleness guard
+  // as enFullId above (see comment there).
+  const [localeFullId, setLocaleFullId] = useState<string | null>(() =>
+    locale !== 'en' && article && localeFull ? article.id : null
+  );
   const [localeFullFailed, setLocaleFullFailed] = useState(false);
   const [localeFullRetry, setLocaleFullRetry] = useState(0);
   useEffect(() => {
@@ -114,15 +129,18 @@ export function ArticlePage() {
     const cached = getCachedLocalizedArticle(locale, article.id);
     if (cached) {
       setLocaleFull(cached);
+      setLocaleFullId(article.id);
       return;
     }
     let cancelled = false;
     setLocaleFull(null);
+    setLocaleFullId(null);
     setLocaleFullFailed(false);
     loadLocalizedArticleById(locale, article.id)
       .then((version) => {
         if (cancelled) return;
         setLocaleFull(version);
+        setLocaleFullId(version ? article.id : null);
       })
       .catch(() => {
         if (!cancelled) setLocaleFullFailed(true);
@@ -181,8 +199,18 @@ export function ArticlePage() {
   // page renders its shell (H1, byline, breadcrumbs) from the meta record
   // and the slim locale version; the body, FAQs and TOC appear once the
   // chunk arrives.
+  // Only a full version that belongs to the CURRENT article may drive
+  // the page. A stale version (previous article, same route component)
+  // reads as "not loaded yet" — otherwise the slug guard below
+  // redirects to the previous article, the other article's stale
+  // version redirects straight back, and the two URLs ping-pong
+  // forever (React error #185, maximum update depth). That was the
+  // related-articles click bug: the card link navigated, then the
+  // guard bounced the URL back, over and over.
+  const enVersion = enFullId === article.id ? enFull : null;
+  const localeVersion = localeFullId === article.id ? localeFull : null;
   const version: BlogArticleLocaleVersion | ArticleLocaleOverride | null =
-    locale === 'en' ? enFull : localeFull;
+    locale === 'en' ? enVersion : localeVersion;
   const isLoadingBody = version === null && !fullFailed;
 
   // No version and not (still loading / failed): the article has no

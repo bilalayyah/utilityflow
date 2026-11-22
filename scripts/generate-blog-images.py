@@ -67,7 +67,18 @@ CJK_BOLD_CANDIDATES = [
 # NO Latin glyphs (272 glyphs, Devanagari only) and Noto Sans has no
 # Devanagari. Mixed titles like "PDF में पेज नंबर..." must be rendered
 # run-by-run via _run_font / draw_mixed_text — never with a single font.
-DEVA_BOLD = "/usr/share/fonts/truetype/noto/NotoSansDevanagari-Bold.ttf"
+# Arabic — same mixed-run problem as Hindi: this machine's
+# Noto Sans Arabic Bold covers only 16/95 Latin glyphs, and Noto Sans
+# has no Arabic. Mixed titles like "PDF في..." must be rendered
+# run-by-run via _run_font / draw_mixed_text — never with a single font.
+# Arabic runs are laid out right-to-left (draw_mixed_text, rtl=True).
+ARABIC_BOLD = "/usr/share/fonts/truetype/noto/NotoSansArabic-Bold.ttf"
+
+# Bengali — same mixed-run problem as Hindi: Noto Sans Bengali Bold
+# covers Bengali only, Noto Sans has no Bengali. Mixed titles like
+# "PDF দিয়ে..." must be rendered run-by-run via _run_font /
+# draw_mixed_text — never with a single font. Bengali is LTR like Hindi.
+BENGALI_BOLD = "/usr/share/fonts/truetype/noto/NotoSansBengali-Bold.ttf"
 
 # Arabic — same mixed-run problem as Hindi: this machine's
 # Noto Sans Arabic Bold covers only 16/95 Latin glyphs, and Noto Sans
@@ -108,47 +119,20 @@ def font_for(lang, size, bold=True):
                 f"Checked: {path}"
             )
         return ImageFont.truetype(path, size)
-    if lang in ("ja", "ko", "zh"):
-        if bold:
-            for path in CJK_BOLD_CANDIDATES:
-                if os.path.exists(path):
-                    return ImageFont.truetype(path, size)
-            # Fall through to Noto Sans: it lacks CJK glyphs (tofu boxes).
-            # The full-batch driver must fail loudly here instead of shipping tofu.
-            raise RuntimeError(
-                f"No CJK bold font found for lang={lang}; refusing to render. "
-                f"Checked: {CJK_BOLD_CANDIDATES}"
-            )
-        # Regular weight is only ever used for Latin-only strings (the
-        # subline and domain), so Noto Sans Regular is correct here.
-        return ImageFont.truetype(FONT_REGULAR, size)
-    path = FONT_BOLD if bold else FONT_REGULAR
-    return ImageFont.truetype(path, size)
-
-
-def _is_deva(ch):
-    """Devanagari codepoint (incl. ZWJ/ZWNJ joiners used in conjuncts)."""
-    return '\u0900' <= ch <= '\u097f' or ch in ('\u200c', '\u200d')
-
-
-def _is_arabic(ch):
-    """Arabic codepoint (Arabic, Supplement, Extended-A, presentation
-    forms A/B, incl. ZWJ/ZWNJ joiners). Western digits 0-9 and Latin
-    punctuation are NOT Arabic — they ride in Latin runs, as in RTL
-    text. Arabic-Indic digits (U+0660-0669, U+06F0-06F9) ARE Arabic."""
-    return (
-        '\u0600' <= ch <= '\u06ff'
-        or '\u0750' <= ch <= '\u077f'
-        or '\u08a0' <= ch <= '\u08ff'
-        or '\ufb50' <= ch <= '\ufdff'
-        or '\ufe70' <= ch <= '\ufeff'
-        or ch in ('\u200c', '\u200d')
-    )
+def _is_bengali(ch):
+    """Bengali codepoint (U+0980–U+09FF, incl. ZWJ/ZWNJ joiners used in
+    conjuncts). Western digits 0-9 and Latin punctuation are NOT Bengali
+    — they ride in Latin runs. Bengali digits (U+09E6–U+09EF) ARE Bengali."""
+    return '\u0980' <= ch <= '\u09ff' or ch in ('\u200c', '\u200d')
 
 
 def _is_native(ch, lang):
     """True when ch belongs to the locale's native script (vs Latin)."""
-    return _is_arabic(ch) if lang == "ar" else _is_deva(ch)
+    if lang == "ar":
+        return _is_arabic(ch)
+    if lang == "bn":
+        return _is_bengali(ch)
+    return _is_deva(ch)
 
 
 def _split_runs(text, lang="hi"):
@@ -178,20 +162,25 @@ def _split_runs(text, lang="hi"):
 
 
 def _run_font(is_native, size, lang="hi"):
-    """Bold font for one script run of a Hindi/Arabic title. This machine's
+    """Bold font for one script run of a Hindi/Arabic/Bengali title. This machine's
     Noto Sans Devanagari has NO Latin glyphs (272 glyphs, Devanagari
     only) and Noto Sans Arabic Bold covers only 16/95 Latin glyphs,
-    while Noto Sans has neither Devanagari nor Arabic — a single font
+    while Noto Sans has neither Devanagari nor Arabic nor Bengali — a single font
     cannot render mixed titles like 'PDF में पेज नंबर...' or
-    'PDF في...', so each run gets its own."""
+    'PDF في...' or 'PDF দিয়ে...', so each run gets its own."""
     if is_native:
-        path = ARABIC_BOLD if lang == "ar" else DEVA_BOLD
+        if lang == "ar":
+            path = ARABIC_BOLD
+        elif lang == "bn":
+            path = BENGALI_BOLD
+        else:
+            path = DEVA_BOLD
         return ImageFont.truetype(path, size)
     return ImageFont.truetype(FONT_BOLD, size)
 
 
 def mixed_textlength(draw, text, size, lang="hi"):
-    """Pixel width of a mixed-script Hindi/Arabic title line (sum of run widths)."""
+    """Pixel width of a mixed-script Hindi/Arabic/Bengali title line (sum of run widths)."""
     return sum(
         draw.textlength(run, font=_run_font(is_native, size, lang))
         for is_native, run in _split_runs(text, lang)
@@ -199,7 +188,7 @@ def mixed_textlength(draw, text, size, lang="hi"):
 
 
 def draw_mixed_text(draw, x, y, text, size, fill, lang="hi", rtl=False):
-    """Draw a mixed-script Hindi/Arabic title line starting at x, run by run.
+    """Draw a mixed-script Hindi/Arabic/Bengali title line starting at x, run by run.
     For rtl=True (Arabic) runs are laid out right-to-left: x is the LEFT
     edge of the centred line and runs are placed in logical order from
     the right edge, so the first logical run sits rightmost. Within each
@@ -230,13 +219,13 @@ def wrap_text(draw, text, font, max_width, lang=None):
     A word wider than max_width is split by character — required for
     spaceless CJK titles (Japanese has no spaces, so the whole title is
     a single 'word'); CJK breaks anywhere without hyphenation.
-    For lang='hi'/'ar', widths are measured per script run (mixed_textlength):
-    a Devanagari/Arabic word measured with the Latin font (or vice versa) would
+    For lang='hi'/'ar'/'bn', widths are measured per script run (mixed_textlength):
+    a Devanagari/Arabic/Bengali word measured with the Latin font (or vice versa) would
     use .notdef widths and wrap wrongly."""
     size = font.size
 
     def wlen(s):
-        if lang in ('hi', 'ar'):
+        if lang in ('hi', 'ar', 'bn'):
             return mixed_textlength(draw, s, size, lang)
         return draw.textlength(s, font=font)
 
@@ -276,7 +265,7 @@ def fit_title(draw, title, lang, max_width, max_lines=3):
         font = font_for(lang, size, bold=True)
         lines = wrap_text(draw, title, font, max_width, lang=lang)
         if len(lines) <= max_lines and all(
-            (mixed_textlength(draw, line, size, lang) if lang in ('hi', 'ar')
+            (mixed_textlength(draw, line, size, lang) if lang in ('hi', 'ar', 'bn')
              else draw.textlength(line, font=font)) <= max_width for line in lines
         ):
             return font, lines
@@ -285,7 +274,7 @@ def fit_title(draw, title, lang, max_width, max_lines=3):
     font = font_for(lang, 40 * SS, bold=True)
     lines = wrap_text(draw, title, font, max_width, lang=lang)
     if len(lines) > max_lines or any(
-        (mixed_textlength(draw, line, 40 * SS, lang) if lang in ('hi', 'ar')
+        (mixed_textlength(draw, line, 40 * SS, lang) if lang in ('hi', 'ar', 'bn')
          else draw.textlength(line, font=font)) > max_width for line in lines
     ):
         print(f"OVERFLOW title needs {len(lines)} lines at 40px: {title!r}", file=sys.stderr)
@@ -524,7 +513,7 @@ def render_card(title, lang, article_id):
     block_h = total_h + 20 * SS + 26 * SS + 14 * SS + 28 * SS
     y = int(300 * SS + (306 * SS - block_h) // 2)
     for line in lines:
-        if lang in ('hi', 'ar'):
+        if lang in ('hi', 'ar', 'bn'):
             tw = mixed_textlength(draw, line, title_font.size, lang)
             draw_mixed_text(draw, (W * SS - tw) // 2, y, line, title_font.size, DARK, lang=lang, rtl=(lang == 'ar'))
         else:

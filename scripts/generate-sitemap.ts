@@ -24,6 +24,7 @@ import { HI_TOOL_OVERRIDES } from '../src/locales/hi/tools';
 import { AR_TOOL_OVERRIDES } from '../src/locales/ar/tools';
 import { TR_TOOL_OVERRIDES } from '../src/locales/tr/tools';
 import { VI_TOOL_OVERRIDES } from '../src/locales/vi/tools';
+import { BN_TOOL_OVERRIDES } from '../src/locales/bn/tools';
 import type { ToolLocaleOverride } from '../src/locales/types';
 import { CATEGORIES } from '../src/registry/categories';
 import { TOOLS_REGISTRY } from '../src/registry/toolsRegistry';
@@ -42,6 +43,7 @@ import { HI_ARTICLE_OVERRIDES } from '../src/locales/hi/blog';
 import { AR_ARTICLE_OVERRIDES } from '../src/locales/ar/blog';
 import { TR_ARTICLE_OVERRIDES } from '../src/locales/tr/blog';
 import { VI_ARTICLE_OVERRIDES } from '../src/locales/vi/blog';
+import { BN_ARTICLE_OVERRIDES } from '../src/locales/bn/blog';
 import type { ArticleLocaleOverride } from '../src/locales/types';
 
 interface SitemapAlternate {
@@ -76,6 +78,7 @@ const TOOL_OVERRIDES_BY_LOCALE: Record<string, Record<string, ToolLocaleOverride
   ar: AR_TOOL_OVERRIDES,
   tr: TR_TOOL_OVERRIDES,
   vi: VI_TOOL_OVERRIDES,
+  bn: BN_TOOL_OVERRIDES,
 };
 
 /** Blog article overrides per locale (Batch 2). Empty until Batch 4 (localization). */
@@ -97,6 +100,7 @@ const ARTICLE_OVERRIDES_BY_LOCALE: Record<
   ar: AR_ARTICLE_OVERRIDES,
   tr: TR_ARTICLE_OVERRIDES,
   vi: VI_ARTICLE_OVERRIDES,
+  bn: BN_ARTICLE_OVERRIDES,
 };
 
 function escapeXml(value: string): string {
