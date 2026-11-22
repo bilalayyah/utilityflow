@@ -32,8 +32,9 @@ import { PT_ARTICLE_OVERRIDES } from '../src/locales/pt/blog';
 import { RU_ARTICLE_OVERRIDES } from '../src/locales/ru/blog';
 import { ZH_ARTICLE_OVERRIDES } from '../src/locales/zh/blog';
 import { HI_ARTICLE_OVERRIDES } from '../src/locales/hi/blog';
+import { VI_ARTICLE_OVERRIDES } from '../src/locales/vi/blog';
 
-const LOCALES = ['en', 'es', 'pt', 'de', 'fr', 'ja', 'id', 'it', 'ru', 'ko', 'zh', 'hi'] as const;
+const LOCALES = ['en', 'es', 'pt', 'de', 'fr', 'ja', 'id', 'it', 'ru', 'ko', 'zh', 'hi', 'vi'] as const;
 type LocaleCode = (typeof LOCALES)[number];
 
 const OVERRIDES: Record<Exclude<LocaleCode, 'en'>, Record<string, { title?: string }>> = {
@@ -48,6 +49,7 @@ const OVERRIDES: Record<Exclude<LocaleCode, 'en'>, Record<string, { title?: stri
   ko: KO_ARTICLE_OVERRIDES,
   zh: ZH_ARTICLE_OVERRIDES,
   hi: HI_ARTICLE_OVERRIDES,
+  vi: VI_ARTICLE_OVERRIDES,
 };
 
 interface Job {

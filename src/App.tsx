@@ -307,6 +307,29 @@ export default function App() {
             <Route path="/hi/blog/:articleSlug/" element={<ArticlePage />} />
             <Route path="/hi/:toolSlug" element={<ToolPage />} />
             <Route path="/hi/:toolSlug/" element={<ToolPage />} />
+            {/* Vietnamese (vi) routes — same components, locale from URL */}
+            <Route path="/vi" element={<HomePage />} />
+            <Route path="/vi/" element={<HomePage />} />
+            <Route path="/vi/tat-ca-cong-cu" element={<ToolsDirectoryPage />} />
+            <Route path="/vi/tat-ca-cong-cu/" element={<ToolsDirectoryPage />} />
+            <Route path="/vi/danh-muc/:categorySlug" element={<CategoryPage />} />
+            <Route path="/vi/danh-muc/:categorySlug/" element={<CategoryPage />} />
+            <Route path="/vi/ve-chung-toi" element={<AboutPage />} />
+            <Route path="/vi/ve-chung-toi/" element={<AboutPage />} />
+            <Route path="/vi/lien-he" element={<ContactPage />} />
+            <Route path="/vi/lien-he/" element={<ContactPage />} />
+            <Route path="/vi/chinh-sach-bao-mat" element={<PrivacyPolicyPage />} />
+            <Route path="/vi/chinh-sach-bao-mat/" element={<PrivacyPolicyPage />} />
+            <Route path="/vi/dieu-khoan-dich-vu" element={<TermsOfServicePage />} />
+            <Route path="/vi/dieu-khoan-dich-vu/" element={<TermsOfServicePage />} />
+            <Route path="/vi/blog" element={<BlogHomePage />} />
+            <Route path="/vi/blog/" element={<BlogHomePage />} />
+            <Route path="/vi/blog/category/:categorySlug" element={<BlogCategoryPage />} />
+            <Route path="/vi/blog/category/:categorySlug/" element={<BlogCategoryPage />} />
+            <Route path="/vi/blog/:articleSlug" element={<ArticlePage />} />
+            <Route path="/vi/blog/:articleSlug/" element={<ArticlePage />} />
+            <Route path="/vi/:toolSlug" element={<ToolPage />} />
+            <Route path="/vi/:toolSlug/" element={<ToolPage />} />
             <Route path="*" element={<NotFoundPage />} />
             </Routes>
         </SiteLayout>
