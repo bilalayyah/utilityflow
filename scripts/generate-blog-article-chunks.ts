@@ -19,6 +19,7 @@ import { AR_ARTICLE_OVERRIDES } from '../src/locales/ar/blog';
 import { TR_ARTICLE_OVERRIDES } from '../src/locales/tr/blog';
 import { VI_ARTICLE_OVERRIDES } from '../src/locales/vi/blog';
 import { BN_ARTICLE_OVERRIDES } from '../src/locales/bn/blog';
+import { UR_ARTICLE_OVERRIDES } from '../src/locales/ur/blog';
 
 /**
  * Generates src/registry/articles/<article-id>.ts — one file per article
@@ -195,6 +196,7 @@ const LOCALE_OVERRIDES: Array<{
   { code: 'tr', overrides: TR_ARTICLE_OVERRIDES, exportName: 'TR_ARTICLE_INDEX' },
   { code: 'vi', overrides: VI_ARTICLE_OVERRIDES, exportName: 'VI_ARTICLE_INDEX' },
   { code: 'bn', overrides: BN_ARTICLE_OVERRIDES, exportName: 'BN_ARTICLE_INDEX' },
+  { code: 'ur', overrides: UR_ARTICLE_OVERRIDES, exportName: 'UR_ARTICLE_INDEX' },
 ];
 
 /** Write only when the content changed (keeps re-runs fast and git clean). */

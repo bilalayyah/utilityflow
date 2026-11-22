@@ -41,7 +41,7 @@ export function ToolRelatedArticles({
           to={blogHref(locale)}
           className="font-semibold text-[#0B7A59] hover:underline dark:text-[#34D399]"
         >
-          {t.blog.allArticles} →
+          {t.blog.allArticles} <span className="inline-block rtl:rotate-180" aria-hidden="true">→</span>
         </Link>
       </p>
     </section>

@@ -125,6 +125,13 @@ import { TOOL_DETAILS as BN_BATCH4 } from '../src/locales/bn/details/batch4';
 import { TOOL_DETAILS as BN_BATCH5 } from '../src/locales/bn/details/batch5';
 import { TOOL_DETAILS as BN_BATCH6 } from '../src/locales/bn/details/batch6';
 import { TOOL_DETAILS as BN_BATCH7 } from '../src/locales/bn/details/batch7';
+import { TOOL_DETAILS as UR_BATCH1 } from '../src/locales/ur/details/batch1';
+import { TOOL_DETAILS as UR_BATCH2 } from '../src/locales/ur/details/batch2';
+import { TOOL_DETAILS as UR_BATCH3 } from '../src/locales/ur/details/batch3';
+import { TOOL_DETAILS as UR_BATCH4 } from '../src/locales/ur/details/batch4';
+import { TOOL_DETAILS as UR_BATCH5 } from '../src/locales/ur/details/batch5';
+import { TOOL_DETAILS as UR_BATCH6 } from '../src/locales/ur/details/batch6';
+import { TOOL_DETAILS as UR_BATCH7 } from '../src/locales/ur/details/batch7';
 
 export const EN_DETAILS: Record<string, ToolDetail> = Object.assign(
   {},
@@ -287,5 +294,15 @@ export const LOCALE_DETAILS: Record<Exclude<LocaleCode, 'en'>, Record<string, To
     BN_BATCH5,
     BN_BATCH6,
     BN_BATCH7,
+  ),
+  ur: Object.assign(
+    {},
+    UR_BATCH1,
+    UR_BATCH2,
+    UR_BATCH3,
+    UR_BATCH4,
+    UR_BATCH5,
+    UR_BATCH6,
+    UR_BATCH7,
   ),
 };
