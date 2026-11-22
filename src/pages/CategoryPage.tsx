@@ -13,6 +13,7 @@ import { useLocale } from '../locales/LocaleContext';
 import { categoryHref, localizeStaticPath, toolHref } from '../locales/config';
 import { getCategoryAlternatePaths, toHreflangEntries } from '../locales/routes';
 import { getCategoryByLocalizedSlug, getLocalizedCategories, getLocalizedCategory, getLocalizedTools } from '../locales/tools';
+import { getAllTools } from '../registry/toolsRegistry';
 import { formatString } from '../locales/ui';
 import { buildToolNameEntries, linkifyToolNames } from '../utils/linkifyToolNames';
 import type { BreadcrumbItem } from '../types/tool';
@@ -37,6 +38,33 @@ export function CategoryPage() {
   const tools = getLocalizedTools(locale).filter(
     (tool) => tool.categoryId === category.id
   );
+  // Internal linking (audit fix #4): the empty-category branch lists
+  // sample tool names as plain text. Sample names are shortened forms of
+  // the canonical names ("UUID Generator" vs "UUID Generator (v4 & v7)"),
+  // so resolve them against the canonical registry: exact match, then
+  // prefix match, then every-word-present match. Unmatched names stay
+  // plain text — never link to the wrong tool.
+  const toolSlugBySampleName = useMemo(() => {
+    const tools = getAllTools();
+    const wordsOf = (s: string) =>
+      s.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim().split(' ');
+    const resolve = (sampleName: string): string | undefined => {
+      const lower = sampleName.toLowerCase();
+      const exact = tools.find((t) => t.name.toLowerCase() === lower);
+      if (exact) return exact.slug;
+      const prefix = tools.find((t) => t.name.toLowerCase().startsWith(lower));
+      if (prefix) return prefix.slug;
+      const sampleWords = wordsOf(sampleName);
+      const subset = tools.find((t) => {
+        const nameWords = new Set(wordsOf(t.name));
+        return sampleWords.every((w) => nameWords.has(w));
+      });
+      return subset?.slug;
+    };
+    const map = new Map<string, string | undefined>();
+    for (const name of category.sampleToolNames) map.set(name, resolve(name));
+    return map;
+  }, [category.sampleToolNames]);
   // O-1: same M-5 linkifier as tool pages, applied to category FAQ
   // answers so named tools become real links. No excludeToolId: a
   // category page has no single "current tool" — every named tool in the
@@ -154,14 +182,26 @@ export function CategoryPage() {
                 {t.category.plannedToolsTitle}
               </h3>
               <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 text-sm text-[#1D1D1F] dark:text-[#F1F5F9]">
-                {category.sampleToolNames.map((name, index) => (
-                  <li
-                    key={name}
-                    className={`rounded-xl ${PASTEL_PALETTES[index % PASTEL_PALETTES.length].card} px-3 py-2 text-[#1D1D1F] shadow-sm dark:text-[#F1F5F9]`}
-                  >
-                    {name}
-                  </li>
-                ))}
+                {category.sampleToolNames.map((name, index) => {
+                  const slug = toolSlugBySampleName.get(name);
+                  return (
+                    <li
+                      key={name}
+                      className={`rounded-xl ${PASTEL_PALETTES[index % PASTEL_PALETTES.length].card} px-3 py-2 text-[#1D1D1F] shadow-sm dark:text-[#F1F5F9]`}
+                    >
+                      {slug ? (
+                        <Link
+                          to={toolHref(slug, locale)}
+                          className="font-semibold text-[#0B7A59] hover:underline dark:text-[#34D399]"
+                        >
+                          {name}
+                        </Link>
+                      ) : (
+                        name
+                      )}
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           </section>

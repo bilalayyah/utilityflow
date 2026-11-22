@@ -13,7 +13,7 @@ interface RelatedToolsProps {
 
 export function RelatedTools({ tool }: RelatedToolsProps) {
   const { locale, t } = useLocale();
-  const related = getRelatedTools(tool, 3);
+  const related = getRelatedTools(tool, 4);
   const category = getLocalizedCategory(tool.categoryId, locale);
 
   if (related.length === 0 && !category) {
