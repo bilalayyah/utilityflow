@@ -1,6 +1,7 @@
 import { RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { ResultExportPanel } from '../../components/export';
 import { PASTEL_PALETTES } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
@@ -114,6 +115,30 @@ export default function CharacterCounterTool() {
           </dd>
         </div>
       </dl>
+
+      {text.length > 0 && (
+        <ResultExportPanel
+          fileKind="analysis"
+          result={{
+            toolId: 'character-counter',
+            toolSlug: 'character-counter',
+            toolName: 'Character Counter',
+            input: [{ label: s.textToMeasure, value: text }],
+            output: [
+              { label: s.withSpaces, value: metrics.withSpaces.toLocaleString(locale), mono: true },
+              { label: s.withoutSpaces, value: metrics.withoutSpaces.toLocaleString(locale), mono: true },
+              { label: s.words, value: metrics.words.toLocaleString(locale), mono: true },
+              { label: s.letters, value: metrics.letters.toLocaleString(locale), mono: true },
+              { label: s.digits, value: metrics.digits.toLocaleString(locale), mono: true },
+              { label: s.utf8Bytes, value: metrics.utf8Bytes.toLocaleString(locale), mono: true },
+            ],
+            details: [
+              { label: s.whitespaceChars, value: metrics.spacesOnly.toLocaleString(locale), mono: true },
+              { label: s.lines, value: metrics.lines.toLocaleString(locale), mono: true },
+            ],
+          }}
+        />
+      )}
 
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-2">

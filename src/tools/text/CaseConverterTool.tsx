@@ -1,6 +1,7 @@
 import { RotateCcw, Sparkles } from 'lucide-react';
 import { useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { ResultExportPanel } from '../../components/export';
 import { PASTEL_PALETTES } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
@@ -120,9 +121,22 @@ export default function CaseConverterTool() {
   const { t } = useLocale();
   const s = useComponentStrings('case-converter', STRINGS_EN);
   const [text, setText] = useState('');
+  // Last applied conversion, so the export panel has real in-scope
+  // input (original text) and output (converted text). Cleared whenever
+  // the text is edited, sampled, or cleared — the stored values would
+  // otherwise go stale. Transforms here are in-place; no original is
+  // retained by the tool itself.
+  const [lastConversion, setLastConversion] = useState<{
+    label: string;
+    before: string;
+    after: string;
+  } | null>(null);
 
-  const applyTransform = (fn: (val: string) => string) => {
-    setText((prev) => fn(prev));
+  const applyTransform = (label: string, fn: (val: string) => string) => {
+    const before = text;
+    const after = fn(before);
+    setText(after);
+    setLastConversion({ label, before, after });
   };
 
   const transforms: Array<{ label: string; fn: (val: string) => string }> = [
@@ -144,7 +158,10 @@ export default function CaseConverterTool() {
         <div className="flex items-center gap-2">
           <button
             type="button"
-            onClick={() => setText(SAMPLE_TEXT)}
+            onClick={() => {
+              setText(SAMPLE_TEXT);
+              setLastConversion(null);
+            }}
             className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
           >
             <Sparkles className="w-3.5 h-3.5 text-indigo-600" aria-hidden="true" />
@@ -152,7 +169,10 @@ export default function CaseConverterTool() {
           </button>
           <button
             type="button"
-            onClick={() => setText('')}
+            onClick={() => {
+              setText('');
+              setLastConversion(null);
+            }}
             disabled={!text}
             className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 disabled:text-slate-400 disabled:bg-slate-50 disabled:cursor-not-allowed cursor-pointer"
           >
@@ -172,7 +192,10 @@ export default function CaseConverterTool() {
           id="case-converter-input"
           rows={8}
           value={text}
-          onChange={(e) => setText(e.target.value)}
+          onChange={(e) => {
+            setText(e.target.value);
+            setLastConversion(null);
+          }}
           placeholder={s.placeholder}
           className="w-full rounded-xl border border-slate-300 bg-white p-4 text-sm sm:text-base leading-relaxed text-slate-900 placeholder:text-slate-400 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/20"
         />
@@ -184,13 +207,26 @@ export default function CaseConverterTool() {
             key={item.label}
             type="button"
             disabled={!text}
-            onClick={() => applyTransform(item.fn)}
+            onClick={() => applyTransform(item.label, item.fn)}
             className={`rounded-lg border border-slate-300 ${PASTEL_PALETTES[index % PASTEL_PALETTES.length].card} px-3.5 py-2 text-xs sm:text-sm font-semibold text-slate-800 transition-colors hover:border-indigo-400 hover:bg-indigo-50 hover:text-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer whitespace-nowrap`}
           >
             {item.label}
           </button>
         ))}
       </div>
+
+      {lastConversion && (
+        <ResultExportPanel
+          fileKind="result"
+          result={{
+            toolId: 'case-converter',
+            toolSlug: 'case-converter',
+            toolName: 'Case Converter',
+            input: [{ label: s.textToConvert, value: lastConversion.before }],
+            output: [{ label: lastConversion.label, value: lastConversion.after, mono: true }],
+          }}
+        />
+      )}
     </div>
   );
 }

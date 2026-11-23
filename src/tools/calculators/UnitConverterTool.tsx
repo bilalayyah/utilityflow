@@ -1,6 +1,7 @@
 import { ArrowLeftRight } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
+import { ResultExportPanel } from '../../components/export';
 import { pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
@@ -410,6 +411,32 @@ export default function UnitConverterTool() {
               </tbody>
             </table>
           </div>
+
+          <ResultExportPanel
+            fileKind="conversion"
+            result={{
+              toolId: 'unit-converter',
+              toolSlug: 'unit-converter',
+              toolName: 'Unit Converter',
+              input: [
+                { label: s.valueLabel, value: `${inputValue || '0'} ${result.data.fromUnit.symbol}`, mono: true },
+                { label: s.fromLabel, value: `${unitLabel(result.data.fromUnit.id)} (${result.data.fromUnit.symbol})` },
+                { label: s.toLabel, value: `${unitLabel(result.data.toUnit.id)} (${result.data.toUnit.symbol})` },
+              ],
+              output: [
+                {
+                  label: `${unitLabel(result.data.fromUnit.id)} ${s.toWord} ${unitLabel(result.data.toUnit.id)}`,
+                  value: `${result.data.formatted} ${result.data.toUnit.symbol}`,
+                  mono: true,
+                },
+              ],
+              details: result.data.allUnits.map((u) => ({
+                label: unitLabel(u.id),
+                value: `${u.formatted} ${u.symbol}`,
+                mono: true,
+              })),
+            }}
+          />
         </>
       )}
     </div>
