@@ -234,6 +234,16 @@ export function renderToolBody(
     }
     parts.push('</ol></section>');
   }
+  // Phase 18: How It Works — EN-only heading (fields exist only in the EN
+  // detail modules; other locales render nothing until they add them).
+  if ((tool.howItWorks ?? []).length > 0) {
+    parts.push('<section>');
+    parts.push(`<h2 class="${H2}">How It Works</h2>`);
+    for (const paragraph of tool.howItWorks ?? []) {
+      parts.push(`<p class="mt-3 text-sm leading-relaxed text-slate-600">${linkifyGuideText(paragraph)}</p>`);
+    }
+    parts.push('</section>');
+  }
   if ((tool.examples ?? []).length > 0) {
     parts.push('<section>');
     parts.push(`<h2 class="${H2}">${escapeText(t.toolPage.practicalExamples)}</h2>`);
@@ -255,6 +265,18 @@ export function renderToolBody(
     }
     parts.push('</section>');
   }
+  // Phase 18: Supported Formats — EN-only heading, see above.
+  if ((tool.supportedFormats ?? []).length > 0) {
+    parts.push('<section>');
+    parts.push(`<h2 class="${H2}">Supported Formats</h2>`);
+    parts.push('<ul class="flex flex-wrap gap-2">');
+    for (const format of tool.supportedFormats ?? []) {
+      parts.push(
+        `<li class="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700">${escapeText(format)}</li>`
+      );
+    }
+    parts.push('</ul></section>');
+  }
   if ((tool.benefits ?? []).length > 0) {
     parts.push('<section>');
     parts.push(`<h2 class="${H2}">${escapeText(t.toolPage.keyBenefits)}</h2>`);
@@ -270,6 +292,16 @@ export function renderToolBody(
     parts.push('<ul class="space-y-2 text-sm text-slate-600 list-disc pl-4">');
     for (const useCase of tool.useCases ?? []) {
       parts.push(`<li>${linkifyGuideText(useCase)}</li>`);
+    }
+    parts.push('</ul></section>');
+  }
+  // Phase 18: Accuracy & Limitations — EN-only heading, see above.
+  if ((tool.limitations ?? []).length > 0) {
+    parts.push('<section>');
+    parts.push(`<h2 class="${H2}">Accuracy &amp; Limitations</h2>`);
+    parts.push('<ul class="space-y-2 text-sm text-slate-600 list-disc pl-4">');
+    for (const limitation of tool.limitations ?? []) {
+      parts.push(`<li>${linkifyGuideText(limitation)}</li>`);
     }
     parts.push('</ul></section>');
   }

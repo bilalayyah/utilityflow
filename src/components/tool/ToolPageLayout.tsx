@@ -72,7 +72,8 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
     toolUseFiredRef.current = tool.id;
     trackEvent('tool_use', { tool_id: tool.id, tool_name: tool.name });
   }, [tool.id, tool.name]);
-  const fullTool: ToolDefinition & ToolDetail = {
+  const fullTool: ToolDefinition &
+    ToolDetail & { howItWorks: string[]; supportedFormats: string[]; limitations: string[] } = {
     ...tool,
     // Spread alone does not narrow the optional detail fields to required,
     // so assign them explicitly (empty arrays until the detail loads).
@@ -81,6 +82,9 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
     benefits: detail?.benefits ?? [],
     useCases: detail?.useCases ?? [],
     faqs: detail?.faqs ?? [],
+    howItWorks: detail?.howItWorks ?? [],
+    supportedFormats: detail?.supportedFormats ?? [],
+    limitations: detail?.limitations ?? [],
   };
   const category = getLocalizedCategory(tool.categoryId, locale);
   const canonicalPath = toolHref(tool.slug, locale);
@@ -228,6 +232,27 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
               </section>
             )}
 
+            {/* Phase 18: How It Works — mechanism, not UI steps. Headings
+                are hardcoded English (EN-only): the fields exist only in the
+                EN detail modules, so this section never renders in other
+                locales until they add the fields. */}
+            {fullTool.howItWorks.length > 0 && (
+              <section aria-labelledby="how-it-works-heading">
+                <h2 id="how-it-works-heading" className="text-2xl font-bold text-slate-900 mb-4">
+                  How It Works
+                </h2>
+                <div className="space-y-3">
+                  {fullTool.howItWorks.map((paragraph) => (
+                    <p
+                      key={paragraph.slice(0, 48)}
+                      className="text-sm leading-relaxed text-slate-600"
+                      dangerouslySetInnerHTML={{ __html: linkifyGuideText(paragraph) }}
+                    />
+                  ))}
+                </div>
+              </section>
+            )}
+
             {fullTool.examples.length > 0 && (
               <section aria-labelledby="examples-heading">
                 <h2 id="examples-heading" className="text-2xl font-bold text-slate-900 mb-4">
@@ -270,6 +295,42 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
                     );
                   })}
                 </div>
+              </section>
+            )}
+
+            {/* Phase 18: Supported Formats — EN-only heading, see above. */}
+            {fullTool.supportedFormats.length > 0 && (
+              <section aria-labelledby="supported-formats-heading">
+                <h2 id="supported-formats-heading" className="text-2xl font-bold text-slate-900 mb-4">
+                  Supported Formats
+                </h2>
+                <ul className="flex flex-wrap gap-2">
+                  {fullTool.supportedFormats.map((format) => (
+                    <li
+                      key={format}
+                      className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700"
+                    >
+                      {format}
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
+
+            {/* Phase 18: Accuracy & Limitations — EN-only heading, see above. */}
+            {fullTool.limitations.length > 0 && (
+              <section aria-labelledby="limitations-heading">
+                <h2 id="limitations-heading" className="text-2xl font-bold text-slate-900 mb-4">
+                  Accuracy &amp; Limitations
+                </h2>
+                <ul className="space-y-2 text-sm text-slate-600 list-disc ps-4">
+                  {fullTool.limitations.map((limitation) => (
+                    <li
+                      key={limitation.slice(0, 48)}
+                      dangerouslySetInnerHTML={{ __html: linkifyGuideText(limitation) }}
+                    />
+                  ))}
+                </ul>
               </section>
             )}
 

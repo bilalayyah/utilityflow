@@ -55,6 +55,12 @@ export interface ToolDetail {
   benefits: string[];
   useCases: string[];
   faqs: ToolFAQ[];
+  /** Phase 18: how the tool works under the hood (mechanism, not UI steps). */
+  howItWorks?: string[];
+  /** Phase 18: formats, units or input types the tool supports. */
+  supportedFormats?: string[];
+  /** Phase 18: accuracy, limits and caveats of the tool's output. */
+  limitations?: string[];
 }
 
 export interface ToolDefinition {
@@ -78,6 +84,9 @@ export interface ToolDefinition {
   benefits?: string[];
   useCases?: string[];
   faqs?: ToolFAQ[];
+  howItWorks?: string[];
+  supportedFormats?: string[];
+  limitations?: string[];
   relatedToolSlugs: string[];
   component: LazyExoticComponent<ComponentType<Record<string, never>>>;
 }
