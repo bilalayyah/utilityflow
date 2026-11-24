@@ -1,6 +1,7 @@
 import { Download, FlipHorizontal2, FlipVertical2, ImagePlus, RotateCcw, RotateCw } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { formatBytes } from '../pdf/pdfUtils';
+import { validateImageFile } from './imageValidation';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
 import { pastelForKey } from '../../components/tool/pastel';
@@ -12,6 +13,9 @@ const STRINGS_EN = {
     loadedReplace: '{name} (Click to replace)',
     previewNote: 'Real-time HTML5 Canvas preview & pixel export',
     selectImageError: 'Please select a PNG, JPG, WebP, or GIF image.',
+    fileTooLarge: 'File too large — the per-file limit is 25 MB. Please choose a smaller image.',
+    invalidImageType: (name: string) =>
+      `"${name}" does not appear to be a valid image — its contents do not match its file type.`,
     failedLoading: 'Failed loading "{name}".',
     rotateLeft: 'Rotate 90° Left',
     rotateRight: 'Rotate 90° Right',
@@ -115,10 +119,20 @@ export default function ImageRotateFlipTool() {
     };
   }, [sourceFile, rotation, flipH, flipV, grayscale, brightness, contrast, outputMime, locale]);
 
-  const handleFile = (file: File | undefined) => {
+  const handleFile = async (file: File | undefined) => {
     if (!file) return;
     if (!file.type.startsWith('image/')) {
       setError(s.selectImageError);
+      return;
+    }
+    // 25 MB cap + magic-byte signature check (P3-2, P3-3); decode stays the backstop.
+    const validationError = await validateImageFile(file);
+    if (validationError === 'tooLarge') {
+      setError(s.fileTooLarge);
+      return;
+    }
+    if (validationError === 'badSignature') {
+      setError(s.invalidImageType(file.name));
       return;
     }
     setError('');

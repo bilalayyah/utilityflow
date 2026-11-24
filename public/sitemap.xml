@@ -2347,20 +2347,6 @@
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://utilityflow.online/pricing/</loc>
-    <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/pricing/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/pricing/" />
-    <changefreq>yearly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://utilityflow.online/refund-policy/</loc>
-    <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/refund-policy/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://utilityflow.online/refund-policy/" />
-    <changefreq>yearly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
     <loc>https://utilityflow.online/category/text-writing-tools/</loc>
     <xhtml:link rel="alternate" hreflang="en-US" href="https://utilityflow.online/category/text-writing-tools/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://utilityflow.online/es/categoria/herramientas-de-texto-y-escritura/" />

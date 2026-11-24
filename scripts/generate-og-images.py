@@ -5,10 +5,10 @@ redesign theme (2026-11-21).
 Usage:
     python3 scripts/generate-og-images.py
 
-Output: 23 JPEG files (1200x630, quality 88) written over the existing
+Output: 98 JPEG files (1200x630, quality 88) written over the existing
 files at identical paths, so og:image URLs do not change:
   - public/og-image.jpg                 (default / homepage card)
-  - public/og/<tool>.jpg                (8 top tools)
+  - public/og/<tool>.jpg                (all 83 tools)
   - public/og/<category>.jpg            (7 categories)
   - public/og/tools.jpg                 (all-tools directory)
   - public/og/de/<tool>.jpg             (3 localized, German)
@@ -21,8 +21,12 @@ green domain. No gradients, no blobs, no purple. Pillow only; no
 Chromium, no downloads (Inter is NOT installed — Noto Sans, as in the
 blog script).
 
-Titles are sourced from the repo, never guessed:
-  - EN tool names: src/registry/batches/* (TOOLS_REGISTRY `name` field)
+Titles are sourced from the repo, never guessed: the script parses
+src/registry/batches/**/*.ts at run time and reads each tool's
+TOOLS_REGISTRY `name` field (plus `shortDescription` and
+`categoryId`). It aborts unless it finds exactly EXPECTED_TOOL_COUNT
+tools with unique ids, so a registry change can never silently
+produce a wrong or partial set.
   - EN category names: src/registry/categories.ts (`name` field)
   - de/es tool names: src/locales/<lang>/tools/batch*.ts
     (`<lang>_BATCH_*_OVERRIDES` `name` field)
@@ -30,16 +34,28 @@ Titles are sourced from the repo, never guessed:
     previous OG cards (the repo locale files carry no shared subline
     string for these cards).
 
+Sublines: a tool's own `shortDescription` is used only when it fits
+on one line at the card's 26px subline size (max 1020px wide);
+otherwise the established generic subline is used. No description is
+ever truncated or reworded, so no claim is invented. (As of
+2026-11-24 none of the 83 descriptions fits on one line, so every
+tool card currently uses the generic subline; the fit check stays in
+place so a shorter future description is picked up automatically.)
+
 Icon mapping reuses the blog script's ICON_RULES, matched against the
 FULL tool slug (the blog script strips a trailing "-<type>" segment,
-which would drop "pdf" from "merge-pdf"). Category icons are explicit:
+which would drop "pdf" from "merge-pdf"). Where no rule matches, the
+tool's CATEGORY line-art icon is used (never a hand-drawn per-tool
+icon). Category icons are explicit:
 text-writing->document, calculators->calculator, image-file->image,
 pdf->image, developer->grid (brand mark), social-media->image,
 seo->document.
 """
 
+import glob
 import importlib.util
 import os
+import re
 import sys
 
 from PIL import Image, ImageDraw, ImageFont
@@ -69,21 +85,55 @@ DE_SUBLINE = "Kostenloses Online-Tool \u00b7 Keine Anmeldung \u00b7 L\u00e4uft i
 ES_SUBLINE = "Herramienta en l\u00ednea gratuita \u00b7 Sin registro \u00b7 Funciona en tu navegador"
 
 # ---------------------------------------------------------------------------
-# Jobs. Titles verified against the repo on 2026-11-21 (see module docstring
-# for sources). No removed tools, no "88" anywhere: the live count is 83.
+# Tools. Loaded from the registry at run time (see module docstring) —
+# no hardcoded titles. Verified against the live registry on
+# 2026-11-24: 83 tools, unique ids, id == slug for all.
 # ---------------------------------------------------------------------------
 
-# (tool id, EN display name) — registry `name` field.
-TOOLS = [
-    ("word-counter", "Word Counter"),
-    ("merge-pdf", "Merge PDF"),
-    ("image-compressor", "Image Compressor"),
-    ("percentage-calculator", "Percentage Calculator"),
-    ("qr-code-generator", "QR Code Generator"),
-    ("password-generator", "Cryptographic Password & Passphrase Generator"),
-    ("age-calculator", "Age Calculator"),
-    ("case-converter", "Case Converter"),
-]
+EXPECTED_TOOL_COUNT = 83
+
+# One ToolDefinition object literal: id, slug, name, shortDescription,
+# categoryId, in that order. String values are single-quoted TS literals
+# (may span lines; only \' escapes occur in the registry today).
+_TOOL_RE = re.compile(
+    r"id:\s*'([^']+)',\s*slug:\s*'([^']+)',\s*name:\s*'((?:[^'\\]|\\.)*)',"
+    r"\s*shortDescription:\s*'((?:[^'\\]|\\.)*)',\s*categoryId:\s*'([^']+)'",
+    re.DOTALL,
+)
+
+
+def _unescape_ts(s):
+    """Undo TS single-quote escapes (only \\' occurs in the registry)."""
+    return s.replace("\\'", "'").replace("\\\\", "\\")
+
+
+def load_tools_from_registry():
+    """(tool id, name, shortDescription, categoryId) for every tool in
+    src/registry/batches/**/*.ts, sorted by id. Aborts unless the
+    registry yields exactly EXPECTED_TOOL_COUNT unique tools."""
+    registry_dir = os.path.join(_HERE, "..", "src", "registry", "batches")
+    tools = []
+    for path in sorted(glob.glob(os.path.join(registry_dir, "**", "*.ts"),
+                                 recursive=True)):
+        with open(path, encoding="utf-8") as f:
+            src = f.read()
+        for m in _TOOL_RE.finditer(src):
+            tool_id, slug, name, short, category = (
+                m.group(1), m.group(2), _unescape_ts(m.group(3)),
+                _unescape_ts(m.group(4)), m.group(5),
+            )
+            if tool_id != slug:
+                sys.exit(f"registry id/slug mismatch: {tool_id!r} != {slug!r}")
+            tools.append((tool_id, name, short, category))
+    ids = [t[0] for t in tools]
+    if len(ids) != len(set(ids)):
+        sys.exit(f"duplicate tool ids in registry: {len(ids)} rows, "
+                 f"{len(set(ids))} unique")
+    if len(tools) != EXPECTED_TOOL_COUNT:
+        sys.exit(f"registry has {len(tools)} tools, expected "
+                 f"{EXPECTED_TOOL_COUNT} — update EXPECTED_TOOL_COUNT "
+                 f"and src/config/ogImages.ts together")
+    return sorted(tools)
 
 # (category id, EN display name, icon key) — categories.ts `name` field.
 CATEGORIES = [
@@ -116,12 +166,32 @@ _ICON_BY_KEY = {
 }
 
 
-def icon_for_tool(slug):
-    """Blog-script icon rules, matched against the FULL slug."""
+_CATEGORY_ICON = {
+    cat_id: _ICON_BY_KEY[icon_key] for cat_id, _title, icon_key in CATEGORIES
+}
+
+
+def icon_for_tool(slug, category_id=None):
+    """Blog-script icon rules, matched against the FULL slug; where no
+    rule matches, the tool's category line-art icon (never grid by
+    default — developer tools keep grid because that IS their
+    category icon)."""
     for keywords, fn in gb.ICON_RULES:
         if any(k in slug for k in keywords):
             return fn
+    if category_id and category_id in _CATEGORY_ICON:
+        return _CATEGORY_ICON[category_id]
     return gb.icon_grid
+
+
+def subline_for(short_description, probe_draw):
+    """The tool's own shortDescription when it fits one subline
+    (26px, max 1020px wide); otherwise the established generic
+    subline. Never truncated, never reworded."""
+    sub_font = gb.font_for("en", 26 * SS, bold=False)
+    if probe_draw.textlength(short_description, font=sub_font) <= 1020 * SS:
+        return short_description
+    return TOOL_SUBLINE
 
 
 def _paste_icon(img, icon_fn):
@@ -241,18 +311,34 @@ def save_jpeg(img, path):
 
 def main():
     root = os.path.join(_HERE, "..", "public")
+    tools = load_tools_from_registry()
     out = []
+
+    # Probe draw for the one-line subline fit check (26px subline font).
+    probe = ImageDraw.Draw(Image.new("RGB", (W, H), BG))
 
     # 1. Default / homepage card.
     p = os.path.join(root, "og-image.jpg")
     save_jpeg(render_default_card(), p)
     out.append(p)
 
-    # 2. Top tools.
-    for tool_id, title in TOOLS:
+    # 2. All tools (registry order, sorted by id).
+    used_short = []
+    for tool_id, title, short, category_id in tools:
+        subline = subline_for(short, probe)
+        if subline != TOOL_SUBLINE:
+            used_short.append(tool_id)
         p = os.path.join(root, "og", f"{tool_id}.jpg")
-        save_jpeg(render_card(title, "en", icon_for_tool(tool_id), TOOL_SUBLINE), p)
+        save_jpeg(
+            render_card(title, "en", icon_for_tool(tool_id, category_id),
+                        subline),
+            p,
+        )
         out.append(p)
+    print(f"tools: {len(tools)} cards, "
+          f"{len(used_short)} using their own shortDescription as subline"
+          + (f" ({', '.join(used_short)})" if used_short else
+             " (all use the generic subline)"))
 
     # 3. Categories (+ all-tools directory card, "All 83 Tools").
     for cat_id, title, icon_key in CATEGORIES:

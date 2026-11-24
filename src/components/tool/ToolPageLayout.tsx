@@ -197,6 +197,21 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
           {children}
         </section>
 
+        {/* Internal linking (audit fix #1): the tool's 3 articles.
+            CLS (2026-11-24, measured): this section MUST sit directly
+            under the workbench, above the guide grid — NOT below it. The
+            guide sections load async (loadToolDetail, after first paint)
+            and grow the grid from ~0 to 2,500–4,500px; when this section
+            sat below the grid it was visible in the viewport mid-load
+            (y≈666 on merge-pdf desktop) and the guide pop-in shoved it
+            below the fold — CLS 0.223 of the 0.281 total. Above the grid
+            its position depends only on the header + workbench, both
+            stable once the tool chunk loads (fallback height is matched
+            per tool in ToolPage.tsx), so the guide pop-in below it moves
+            nothing visible. Mirrors the static prerender
+            (scripts/prerender-body.ts renderToolBody). */}
+        <ToolRelatedArticles toolId={tool.id} locale={locale} />
+
         {/* Structured Educational & SEO Guide Sections */}
         <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-10">
           <div className="lg:col-span-8 space-y-12">
@@ -377,12 +392,6 @@ export function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
             )}
           </aside>
         </div>
-
-        {/* Internal linking (audit fix #1): the tool's 3 articles. Renders
-            nothing when the tool has no published articles in this locale.
-            Placed above Related Tools, mirroring the static prerender
-            (scripts/prerender-body.ts renderToolBody) and CMP's layout. */}
-        <ToolRelatedArticles toolId={tool.id} locale={locale} />
 
         <div className="mt-12">
           <RelatedTools tool={tool} />

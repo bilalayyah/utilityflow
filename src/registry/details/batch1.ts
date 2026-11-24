@@ -167,6 +167,20 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
           'Yes. It works in any modern mobile browser with the same live counts, reading time, and copy options.',
       },
     ],
+    howItWorks: [
+      'The word counter splits trimmed text on whitespace runs, so every sequence separated by spaces, tabs, or line breaks counts as one word, including numbers, hyphenated terms, and words with apostrophes.',
+      'Characters are measured two ways: the raw string length, which counts every character including spaces, and the same length after all whitespace is stripped.',
+      'Sentences are detected by splitting on runs of periods, exclamation marks, and question marks, while paragraphs are split on blank lines, and lines are split on line breaks.',
+      'Reading time divides the word total by 225 words per minute and speaking time by 130, rounding to the nearest second with a one-second minimum.',
+      'The frequent-words panel lowercases each token, strips edge punctuation, ignores tokens under two characters, and lists the six most common words with their share.',
+    ],
+    supportedFormats: ['Plain text', 'Multi-line text', 'Emoji', 'Numbers and dates', 'Hyphenated words', 'Apostrophes', 'Line breaks', 'UTF-8 text'],
+    limitations: [
+      'Abbreviations such as Dr. or e.g. end with a period, so the splitter counts them as sentence ends and the sentence total can read high.',
+      'Words are split on whitespace only, so a token joined by punctuation without a space counts as one word rather than two.',
+      'Reading and speaking times use fixed averages of 225 and 130 words per minute, so they are planning estimates, not measurements of any real reader or speaker.',
+      'Character counts use JavaScript string length, so an emoji or other character outside the basic multilingual plane counts as two characters, not one.',
+    ],
   },
   'character-counter': {
     instructions: [
@@ -328,6 +342,19 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
         answer:
           'Yes. Paste the value into the tool to verify it meets a minimum or maximum length requirement before submitting a form.',
       },
+    ],
+    howItWorks: [
+      'The character counter reads the raw string length for the with-spaces total, then strips every whitespace character with a regular expression and measures again for the without-spaces total.',
+      'Letters are counted by matching A to Z in either case, digits by matching 0 to 9, and the difference between the two character totals gives the whitespace count.',
+      'Byte size is measured by encoding the text as UTF-8 with TextEncoder, so accented letters count as two bytes, most emoji as four, and plain ASCII letters as one byte each.',
+      'Each platform bar divides the with-spaces total by a fixed limit, 60 for a meta title, 160 for a meta description or SMS segment, 280 for an X post, 125 for an Instagram caption preview, and 3000 for LinkedIn, and caps the bar at 100 percent.',
+    ],
+    supportedFormats: ['Plain text', 'UTF-8 text', 'Emoji', 'Accented characters', 'Numbers', 'Line breaks', 'Tabs and spaces', 'Multi-paragraph text'],
+    limitations: [
+      'Letters are matched only in the A to Z range, so letters from other alphabets, such as Cyrillic, Arabic, or Chinese characters, are counted as characters but not as letters.',
+      'Platform limits are fixed reference values, not live rules, so a platform that changes its limit or counts characters differently, such as X weighting some characters double, will disagree with the bar.',
+      'The UTF-8 byte total describes storage size, not display width, so it does not predict how much screen space the text occupies or how a platform truncates it.',
+      'Emoji and other characters outside the basic multilingual plane count as two characters in the JavaScript string length, even though they appear as a single symbol.',
     ],
   },
   'case-converter': {
@@ -491,6 +518,20 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
           'Yes. It works in any modern mobile browser with the same one-click conversions and copy button.',
       },
     ],
+    howItWorks: [
+      'Uppercase and lowercase use the built-in case mapping of the browser, which converts every letter in the text at once while leaving numbers, punctuation, and spacing untouched.',
+      'Title Case lowercases the text first, then capitalises the first letter of each word, except small words such as and, of, and the, which stay lowercase unless they open or close the text.',
+      'Sentence case lowercases everything, then capitalises the first letter of the text and the first letter after each period, exclamation mark, question mark, or line break.',
+      'The code styles split words on camelCase boundaries, underscores, and hyphens, strip non-alphanumeric characters, then rejoin the words with the separator or capitalisation of that style: camelCase, PascalCase, snake_case, kebab-case, or CONSTANT_CASE.',
+      'Alternating case walks the text character by character, flipping between upper and lower for letters only, so spaces and punctuation keep their place and do not reset the pattern.',
+    ],
+    supportedFormats: ['Plain text', 'Headings and titles', 'Variable names', 'URLs and slugs', 'Multi-line text', 'Mixed case text', 'Punctuation and symbols', 'Numbers'],
+    limitations: [
+      'Title Case follows a fixed list of minor words, so names, brand spellings, and style-guide exceptions, such as always capitalising a particular word, are not respected.',
+      'The code styles strip accents and non-ASCII letters when splitting words, so a word such as cafe with an accent loses the accent and becomes plain cafe in camelCase, snake_case, and the other identifier styles.',
+      'Sentence case only recognises periods, exclamation marks, question marks, and line breaks as sentence ends, so abbreviations and decimal numbers can trigger a capital letter in the wrong place.',
+      'Conversions replace the text in place, so the original wording is not kept by the tool, and copying the result before converting again is the only way to keep the earlier version.',
+    ],
   },
   'remove-duplicate-lines': {
     instructions: [
@@ -648,6 +689,19 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
           'Yes. It works in any modern mobile browser with the same deduplication options and copy button.',
       },
     ],
+    howItWorks: [
+      'The tool splits the input on line breaks, then walks the lines in order, keeping the first occurrence of each line and dropping later repeats, so the original order of unique lines is preserved.',
+      'Each line is compared through a key: with case sensitivity off, the key is the lowercased line, so Apple@example.com and apple@example.com count as the same line.',
+      'Trimming, on by default, strips leading and trailing spaces from each line before comparison and output, so a line with extra spaces still matches its clean twin.',
+      'Empty lines are dropped when the remove-empty option is on, and the optional alphabetical sort orders the surviving lines with a locale-aware comparison that follows the case-sensitivity setting.',
+    ],
+    supportedFormats: ['Email lists', 'One item per line', 'CSV values', 'URLs', 'Log lines', 'Keywords', 'SKUs and codes', 'Multi-line text'],
+    limitations: [
+      'Comparison is whole-line only, so two lines that differ by a single character, such as a typo in an email address, are treated as different lines and both are kept.',
+      'With case sensitivity off, lines that differ only in capitalisation collapse into one, which can lose a meaningful distinction in case-sensitive data such as passwords or codes.',
+      'Sorting uses the locale comparison of the browser, so the order can vary slightly between browsers and locales for accented characters, symbols, and mixed-case lines.',
+      'The tool works on lines, not words, so duplicates inside a single line, such as a repeated word in a sentence, are never detected or removed.',
+    ],
   },
   'text-diff-checker': {
     instructions: [
@@ -804,6 +858,19 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
           'Yes. It works in any modern mobile browser with the same side-by-side comparison and highlighting.',
       },
     ],
+    howItWorks: [
+      'The checker splits both texts into lines and builds a longest-common-subsequence table, which finds the largest set of lines that appear in the same order in both versions.',
+      'Walking the table from the top, a line present in both versions is marked unchanged, a line only in the original is marked removed, and a line only in the modified text is marked added.',
+      'Ignore whitespace collapses every run of spaces and tabs inside a line to a single space and trims the ends before comparing, so reformatting alone does not show as a change.',
+      'Ignore case lowercases each line before comparing, so a change in capitalisation alone is treated as no change, while the displayed lines keep their original casing.',
+    ],
+    supportedFormats: ['Plain text', 'Configuration files', 'Code snippets', 'Contracts and clauses', 'Multi-line lists', 'CSV text', 'Log output', 'Markdown source'],
+    limitations: [
+      'The diff works line by line, so a changed word inside a long line marks the whole line as removed and added, with no highlighting of the exact word that changed.',
+      'The longest-common-subsequence table grows with the product of the two line counts, so very large files with thousands of lines can slow the browser or use substantial memory.',
+      'When the same line appears several times, the algorithm may pair occurrences differently from a human reader, so moved blocks can appear as a removal plus an addition rather than a move.',
+      'Ignore whitespace only normalises spacing inside lines, so it does not ignore blank-line insertions or deletions, which still appear as added or removed lines.',
+    ],
   },
   'whitespace-remover': {
     instructions: [
@@ -959,6 +1026,19 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
         answer:
           'It works for prose, but be careful with indentation-sensitive code such as Python, because trimming leading spaces can change how the code behaves.',
       },
+    ],
+    howItWorks: [
+      'The tool first normalises Windows line endings to plain line feeds, so mixed line endings from pasted files do not create phantom blank lines.',
+      'Tabs are replaced with a single space each, then runs of two or more spaces inside a line collapse to one, while single spaces between words are left alone.',
+      'The line-break mode decides the fate of every newline: keep them, drop blank lines only, replace each run with a single space, or remove them entirely to join the text into one block.',
+      'Trimming strips spaces from the start and end of every line and from the whole result, and the character counter beside the output shows exactly how many characters were removed.',
+    ],
+    supportedFormats: ['Pasted PDF text', 'Spreadsheet copies', 'Email text', 'Code snippets', 'Multi-line text', 'Tabs and spaces', 'Windows line endings', 'Blank-line heavy text'],
+    limitations: [
+      'Collapsing spaces is purely mechanical, so it cannot tell a meaningful double space, such as the gap after a sentence in older typing styles, from an accidental one.',
+      'Removing all line breaks joins lines without adding a space, so two lines that end and begin without punctuation run together into a single word at the join.',
+      'The tool only handles spaces, tabs, and line breaks, so other invisible characters, such as non-breaking spaces or zero-width characters, are left untouched.',
+      'Trimming line edges removes intentional indentation, so pasted code loses its visual nesting unless the trim option is switched off first.',
     ],
   },
   'sort-lines': {
@@ -1117,6 +1197,19 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
           'Your original list stays in the input field, so you can pick a different sort order and the output updates without losing your pasted list.',
       },
     ],
+    howItWorks: [
+      'The tool splits the input on line breaks, drops blank lines when that option is on, and optionally removes duplicates by keeping the first occurrence of each line.',
+      'Alphabetical sorting uses the Intl.Collator of the browser, which compares lines by language-aware rules rather than raw character codes, so accented letters sort near their base letters.',
+      'Natural sorting enables the numeric mode of the collator, so Item 2 sorts before Item 10 instead of after it, which is the order a plain code-point sort would produce.',
+      'Length modes compare line lengths first and use the collator only to break ties, reverse order flips the list end to end, and shuffle reorders lines with a seeded pseudo-random generator.',
+    ],
+    supportedFormats: ['Word lists', 'Bibliographies', 'Inventory SKUs', 'Code imports', 'Email lists', 'Names', 'Numbers as text', 'Multi-line text'],
+    limitations: [
+      'Sorting follows the locale of the browser, so the same list can sort in a slightly different order in different browsers or language settings, especially for accented characters.',
+      'The shuffle is produced by a simple seeded generator, not a cryptographic random source, so it is fine for reordering a list but not suitable for anything needing true randomness.',
+      'Reverse order only flips the current line sequence, so it does not sort descending, and applying it to an unsorted list gives a reversed unsorted list.',
+      'Deduplication compares whole lines, so lines that differ by trailing spaces or punctuation are treated as different entries unless the text is cleaned first.',
+    ],
   },
   'find-and-replace': {
     instructions: [
@@ -1272,6 +1365,19 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
         answer:
           'There is no set limit. It runs locally in your browser and handles long documents, though extremely large pastes may take a moment to process.',
       },
+    ],
+    howItWorks: [
+      'The tool builds a regular expression from the search text, escaping special characters for plain matching or using the pattern as written in regex mode, then replaces every match at once.',
+      'Case-insensitive matching is the default, adding the global and ignore-case flags, while the case-sensitive option drops the ignore-case flag so capitalisation must match exactly.',
+      'Whole-word mode wraps the escaped search text in word boundaries, so searching for cat no longer matches catalogue or scatter, and the option is disabled while regex mode is on.',
+      'In regex mode, capture groups can be reused in the replacement with $1, $2, and similar references, so Order #(\\d+) can be rewritten as Ref-$1.',
+    ],
+    supportedFormats: ['Plain text', 'CSV snippets', 'Code blocks', 'Prose and articles', 'Email text', 'URLs', 'Regular expressions', 'Multi-line text'],
+    limitations: [
+      'Replacements happen all at once with no undo inside the tool, so a broad pattern that matches more than intended can only be fixed by re-pasting the original text.',
+      'An invalid regular expression shows an error and leaves the output unchanged, but a valid pattern that is too greedy can still replace far more than expected.',
+      'Word boundaries follow JavaScript regex rules, so they do not work as expected around accented letters or non-Latin scripts, where \\b may not recognise the word edge.',
+      'The match count counts non-overlapping matches only, so overlapping occurrences of a pattern, such as aa inside aaaa, are counted once per position the engine advances past.',
     ],
   },
   'text-reverser': {
@@ -1429,6 +1535,19 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
           'No, reversed text reads backwards by design. Paste it back into the tool and reverse it again to restore the original wording.',
       },
     ],
+    howItWorks: [
+      'Reverse Characters flips the whole input end to end using Array.from, which splits the text into Unicode code points, so emoji and other multi-byte symbols stay intact instead of splitting into halves.',
+      'Reverse Word Order works line by line, trimming each line, splitting it on whitespace, and reversing the word sequence while keeping the lines themselves in their original order.',
+      'Reverse Each Word keeps the word order and the spacing between words, but flips the letters inside every non-whitespace run, so only the words themselves are mirrored.',
+      'Reverse Line Order splits the text on line breaks and flips the sequence of lines, leaving the characters inside each line exactly as they were.',
+    ],
+    supportedFormats: ['Plain text', 'Multi-line lists', 'Sentences', 'Single words', 'Emoji', 'Code snippets', 'Palindrome checks', 'Mixed-case text'],
+    limitations: [
+      'Reversing characters flips punctuation and brackets too, so the output is a mirror image, not readable text, and paired marks such as parentheses end up facing the wrong way.',
+      'Reverse Word Order trims each line and joins words with single spaces, so extra spacing and indentation inside a line are lost in the output.',
+      'Characters built from a base letter plus combining marks, such as an accented letter typed as two code points, can separate when reversed, leaving the accent on the wrong letter.',
+      'The tool reverses text only, so it does not check palindromes, translate mirrored writing, or restore text that was reversed by another tool with different rules.',
+    ],
   },
   'lorem-ipsum-generator': {
     instructions: [
@@ -1584,6 +1703,19 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
         answer:
           'Readable draft copy pulls attention to the words themselves, while neutral Lorem Ipsum keeps reviewers focused on layout, typography, and spacing.',
       },
+    ],
+    howItWorks: [
+      'The generator draws from a fixed pool of twelve classic lorem ipsum sentences plus the traditional opening sentence, cycling through the pool in order with an offset that changes on every regenerate.',
+      'Paragraph mode builds each paragraph from exactly four sentences, sentence mode joins the requested number of sentences with spaces, and word mode streams words from the pool until the count is reached.',
+      'The classic-start option forces the first sentence, or the first words in word mode, to be the familiar Lorem ipsum dolor sit amet opening instead of a pool sentence.',
+      'The HTML option wraps each paragraph or the whole word-mode output in <p> tags, and the counters strip those tags before counting words so the totals describe the visible text.',
+    ],
+    supportedFormats: ['Paragraphs', 'Sentences', 'Words', 'HTML <p> tags', 'Plain text', 'Wireframe copy', 'Typography samples', 'Layout prototypes'],
+    limitations: [
+      'The text comes from a small fixed pool of twelve sentences, so large requests repeat sentences, and the output is never unique or varied beyond the regenerate offset.',
+      'Word mode can end mid-sentence, and its final word is capitalised with a period added, so the result reads as a fragment rather than finished prose.',
+      'Counts are capped at 30 paragraphs or sentences and 500 words, so larger blocks must be generated in several runs and joined by hand.',
+      'Lorem ipsum is placeholder Latin with no real meaning, so it cannot test readability, translation, or content accuracy, only layout, spacing, and typography.',
     ],
   },
   'readability-checker': {
@@ -1742,6 +1874,19 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
           'Yes. Teachers and students can use it to check whether an essay matches the intended grade level before submitting it.',
       },
     ],
+    howItWorks: [
+      'The checker counts words with a letter-and-digit pattern, splits sentences on runs of periods, exclamation marks, and question marks, and estimates syllables by counting vowel groups after stripping common silent endings.',
+      'Flesch Reading Ease combines average sentence length and average syllables per word into a 0 to 100 score, clamped at both ends, and labels the result from Very Easy to Very Difficult.',
+      'Flesch-Kincaid Grade Level uses the same two averages to estimate a US school grade, Gunning Fog adds the share of words with three or more syllables and multiplies by 0.4, and SMOG uses the polysyllable count and sentence count under a square root.',
+      'Complex words are any words with three or more estimated syllables, and the tool lists up to twelve distinct examples so the words pushing the scores up are visible.',
+    ],
+    supportedFormats: ['Articles and essays', 'Blog posts', 'Landing page copy', 'Documentation', 'Emails', 'Plain text', 'Multi-paragraph text', 'English prose'],
+    limitations: [
+      'Syllable counting strips silent endings and counts vowel groups in Latin letters only, so irregular words can be miscounted and text in other scripts is largely ignored by the word matcher.',
+      'The formulas only measure sentence length and word length, so they cannot judge meaning, accuracy, logic, or tone, and a clear short text can still score as difficult.',
+      'SMOG was designed for passages of at least thirty sentences, so its result on a short paragraph is a rough guide rather than a reliable grade.',
+      'Lists, headings, tables, and dialogue do not behave like sentences, so pasting a whole page layout instead of running prose produces unreliable scores.',
+    ],
   },
   'word-frequency-counter': {
     instructions: [
@@ -1898,6 +2043,19 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
         answer:
           'Look for words you repeat unintentionally, replace them with varied synonyms, and check that your main topic keywords appear consistently but naturally.',
       },
+    ],
+    howItWorks: [
+      'The tool lowercases the text and extracts tokens of letters, digits, and apostrophes, then strips stray apostrophes from the ends of tokens before counting.',
+      'Single-word mode counts each token, while two- and three-word modes slide a window across the token stream and count every overlapping phrase, skipping phrases made entirely of stop words.',
+      'Stop-word filtering uses a fixed list of thirty common English words, such as the, and, and of, and the minimum-length control drops short tokens in single-word mode only.',
+      'Density divides each term count, multiplied by the phrase length, by the total token count, and the table shows the top fifty terms sorted by count, then alphabetically.',
+    ],
+    supportedFormats: ['Article drafts', 'Product descriptions', 'Blog posts', 'SEO copy', 'Plain text', 'Single words', 'Two-word phrases', 'Three-word phrases'],
+    limitations: [
+      'Tokens are matched as Latin letters, digits, and apostrophes only, so words in other scripts are ignored and hyphenated words are split at the hyphen.',
+      'The stop-word list is a fixed set of thirty English words, so common words in other languages, and domain filler words such as click or here, are counted as meaningful terms.',
+      'Density is a share of tokens in the pasted text, not a search-engine metric, so it says nothing about ranking, and a high density can simply mean a short text.',
+      'Only the top fifty terms are shown, so the rarer terms of a long document never appear in the table, and the CSV export contains only those same fifty rows.',
     ],
   },
   'text-to-slug': {
@@ -2056,6 +2214,19 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
           'Yes, but set up a redirect from the old URL to the new one so existing links and search listings do not break.',
       },
     ],
+    howItWorks: [
+      'Each line is normalised to decomposed Unicode, the accent marks are stripped, and the ampersand is expanded to the word and, so Cafe with an accent and Creme becomes cafe and creme before any other step.',
+      'Every character that is not a letter, digit, space, underscore, or hyphen is replaced with a space, the line is split on runs of spaces, underscores, and hyphens, and the pieces are joined with the chosen separator.',
+      'Force lowercase, on by default, lowercases the joined slug, and the stop-word option removes a fixed list of sixteen common words, but only when more than one word would remain.',
+      'Batch mode processes each input line independently, drops lines that produce an empty slug, and keeps the output lines in the same order as the input titles.',
+    ],
+    supportedFormats: ['Blog titles', 'Product names', 'Page headings', 'One title per line', 'Hyphen separators', 'Underscore separators', 'Accented text', 'Ampersands'],
+    limitations: [
+      'Accents are stripped rather than transliterated, so letters without a Latin decomposition, such as the slashed o, the Polish l, or Chinese characters, are dropped entirely instead of converted.',
+      'The slug is not checked against any website, so it can duplicate an existing URL, exceed a platform length limit, or collide with a reserved path without warning.',
+      'Stop-word removal uses a fixed list of sixteen English words, so stop words in other languages stay in the slug and meaningful short words can be removed by mistake.',
+      'No length cap is applied, so a very long title produces a very long slug, which some content systems truncate or reject when the page is published.',
+    ],
   },
   'markdown-previewer': {
     instructions: [
@@ -2211,6 +2382,19 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
         answer:
           'Yes. Export the HTML file and open it in your browser, then use the browser print function to print it or save it as a PDF.',
       },
+    ],
+    howItWorks: [
+      'The previewer parses the source line by line with its own small parser: headings of one to six hashes, unordered and ordered lists, blockquotes, horizontal rules, and fenced code blocks are each recognised by a pattern.',
+      'Inline formatting is applied after escaping, so bold, italic, strikethrough, inline code, and links are converted to HTML while raw angle brackets in the source are shown as text, never executed.',
+      'Link destinations are checked against an allowlist of https, http, site-relative, anchor, and mailto addresses, and anything else is replaced with a plain hash, while external links open in a new tab.',
+      'The export wraps the compiled HTML in a minimal standalone document with a UTF-8 charset declaration, so the downloaded file opens directly in a browser.',
+    ],
+    supportedFormats: ['Markdown headings', 'Bold and italic', 'Lists', 'Blockquotes', 'Code blocks', 'Links', 'Inline code', 'Strikethrough'],
+    limitations: [
+      'The parser covers common Markdown only, so tables, footnotes, task lists, image syntax, and nested formatting beyond one level are not rendered and appear as plain text.',
+      'An unclosed fenced code block is still rendered as code at the end of the document, so a missing closing fence swallows the rest of the text into the code block.',
+      'The exported file is a bare HTML shell with no stylesheet, so the fonts, colours, and spacing of the preview do not carry over and the page renders with browser defaults.',
+      'Inline formatting uses simple patterns applied in a fixed order, so overlapping or mismatched markers, such as bold markers that span a line break, may render literally instead of formatting.',
     ],
   },
   'line-prefix-suffix': {
@@ -2373,6 +2557,19 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
         answer:
           'Paste the formatted text into the Find and Replace tool or re-run the original list with the correct settings, since this tool only adds text and does not strip it.',
       },
+    ],
+    howItWorks: [
+      'The tool splits the input on line breaks and wraps every line with the prefix and suffix exactly as typed, so a quote and comma turn names into quoted, comma-separated values.',
+      'Numbering counts only non-empty lines, starts at the chosen number, and places the number plus separator before the prefix, so numbering stays sequential across blank lines.',
+      'Zero-padding widens numbers to at least two digits, sized from the final number in the list, so a list numbered to 120 pads as 001 rather than 01.',
+      'Skipping empty lines, on by default, leaves blank lines untouched and unnumbered, so the shape of the original list survives in the output.',
+    ],
+    supportedFormats: ['Name lists', 'Code values', 'CSV rows', 'SQL lists', 'Quoted strings', 'Numbered lists', 'Multi-line text', 'One item per line'],
+    limitations: [
+      'The prefix and suffix are inserted verbatim with no escaping, so a value that already contains a quote or comma can produce broken code or CSV when the output is pasted elsewhere.',
+      'Numbering counts non-empty lines only, so if blank lines are meant to hold a number, the sequence skips them and the output numbers no longer match the line positions.',
+      'The tool formats lines, not fields, so it cannot split a line on commas, quote individual values inside a line, or handle multi-line values such as an address block.',
+      'Start numbers and separators have no validation, so a negative start or an empty separator silently produces unusual output rather than an error.',
     ],
   },
 };

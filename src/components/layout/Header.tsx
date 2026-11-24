@@ -106,7 +106,7 @@ export function Header() {
 
           <Link
             to={localizeStaticPath('/tools/', locale)}
-            className="hidden xl:inline-flex items-center justify-center rounded-full bg-[#0E8A66] px-4 py-2 text-sm font-semibold text-white transition-colors duration-150 hover:bg-[#0B7557] whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0E8A66] focus-visible:ring-offset-2"
+            className="hidden xl:inline-flex items-center justify-center rounded-full bg-[#0B7A59] px-4 py-2 text-sm font-semibold text-white transition-colors duration-150 hover:bg-[#0B7557] whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0E8A66] focus-visible:ring-offset-2"
           >
             {t.nav.allTools}
           </Link>
@@ -156,7 +156,7 @@ export function Header() {
             <Link
               to={localizeStaticPath('/tools/', locale)}
               onClick={() => setMobileOpen(false)}
-              className="flex w-full items-center justify-center rounded-full bg-[#0E8A66] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#0B7557] min-h-[44px]"
+              className="flex w-full items-center justify-center rounded-full bg-[#0B7A59] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#0B7557] min-h-[44px]"
             >
               {t.nav.allTools}
             </Link>

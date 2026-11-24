@@ -260,7 +260,7 @@ export default function SocialThumbnailPreviewerTool() {
           }`}
         >
           <div>
-            <div className={`text-xs font-semibold mb-2 ${darkTheme ? 'text-slate-400' : 'text-slate-500'}`}>
+            <div className={`text-xs font-semibold mb-2 ${darkTheme ? 'text-slate-400' : 'text-slate-600'}`}>
               {s.desktopCard}
             </div>
             <div className="max-w-sm">
@@ -271,7 +271,7 @@ export default function SocialThumbnailPreviewerTool() {
                 </div>
                 <div className="min-w-0">
                   <div className="text-sm font-semibold leading-snug line-clamp-2">{title || s.untitled}</div>
-                  <div className={`mt-1 text-xs ${darkTheme ? 'text-slate-400' : 'text-slate-500'}`}>
+                  <div className={`mt-1 text-xs ${darkTheme ? 'text-slate-400' : 'text-slate-600'}`}>
                     {channel} · {views}
                   </div>
                 </div>
@@ -280,17 +280,17 @@ export default function SocialThumbnailPreviewerTool() {
           </div>
 
           <div className="pt-4 border-t border-slate-300/25">
-            <div className={`text-xs font-semibold mb-2 ${darkTheme ? 'text-slate-400' : 'text-slate-500'}`}>
+            <div className={`text-xs font-semibold mb-2 ${darkTheme ? 'text-slate-400' : 'text-slate-600'}`}>
               {s.sidebar}
             </div>
             <div className="flex gap-3 max-w-md items-start">
               <div className="w-40 shrink-0">{renderThumbBox(true)}</div>
               <div className="min-w-0">
                 <div className="text-xs font-semibold leading-snug line-clamp-2">{title || s.untitled}</div>
-                <div className={`mt-1 text-[11px] ${darkTheme ? 'text-slate-400' : 'text-slate-500'}`}>
+                <div className={`mt-1 text-[11px] ${darkTheme ? 'text-slate-400' : 'text-slate-600'}`}>
                   {channel}
                 </div>
-                <div className={`text-[11px] ${darkTheme ? 'text-slate-400' : 'text-slate-500'}`}>{views}</div>
+                <div className={`text-[11px] ${darkTheme ? 'text-slate-400' : 'text-slate-600'}`}>{views}</div>
               </div>
             </div>
           </div>

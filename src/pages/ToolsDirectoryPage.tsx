@@ -87,7 +87,7 @@ export function ToolsDirectoryPage() {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder={t.directory.searchPlaceholder}
-                className="w-full rounded-xl border border-[#E5E5EA] bg-white px-4 py-2.5 text-sm text-[#1D1D1F] shadow-sm placeholder:text-[#86868B] focus:border-[#0E8A66] focus:outline-none focus:ring-2 focus:ring-[#0E8A66]/20"
+                className="w-full rounded-xl border border-[#E5E5EA] bg-white px-4 py-2.5 text-sm text-[#1D1D1F] shadow-sm placeholder:text-[#64748B] focus:border-[#0E8A66] focus:outline-none focus:ring-2 focus:ring-[#0E8A66]/20"
               />
             </div>
           </div>
@@ -108,7 +108,7 @@ export function ToolsDirectoryPage() {
             onClick={() => setCategoryFilter('all')}
             className={`px-4 py-2 text-xs sm:text-sm font-medium rounded-full transition-colors whitespace-nowrap shrink-0 cursor-pointer shadow-sm ${
               categoryFilter === 'all'
-                ? 'bg-[#0E8A66] text-white'
+                ? 'bg-[#0B7A59] text-white'
                 : 'border border-[#E5E5EA] bg-white text-[#1D1D1F] hover:border-[#BFE3D3] hover:text-[#0B7A59] dark:border-[#243247] dark:bg-[#131D31] dark:text-[#F1F5F9] dark:hover:border-[#34D399] dark:hover:text-[#34D399]'
             }`}
           >
@@ -124,7 +124,7 @@ export function ToolsDirectoryPage() {
                 onClick={() => setCategoryFilter(category.id)}
                 className={`px-4 py-2 text-xs sm:text-sm font-medium rounded-full transition-colors whitespace-nowrap shrink-0 cursor-pointer shadow-sm ${
                   categoryFilter === category.id
-                    ? 'bg-[#0E8A66] text-white'
+                    ? 'bg-[#0B7A59] text-white'
                     : 'border border-[#E5E5EA] bg-white text-[#1D1D1F] hover:border-[#BFE3D3] hover:text-[#0B7A59] dark:border-[#243247] dark:bg-[#131D31] dark:text-[#F1F5F9] dark:hover:border-[#34D399] dark:hover:text-[#34D399]'
                 }`}
               >
@@ -171,14 +171,14 @@ export function ToolsDirectoryPage() {
                           </span>
                           <h3 className="text-lg font-bold text-[#1D1D1F] dark:text-[#F1F5F9]">{category.name}</h3>
                         </div>
-                        <span className="text-xs font-mono text-[#86868B] tabular-nums">
+                        <span className="text-xs font-mono text-[#64748B] tabular-nums">
                           {liveInCategory.length >= category.plannedToolCount
                             ? formatString(t.category.toolsLive, { count: liveInCategory.length })
                             : `${liveInCategory.length}/${category.plannedToolCount}`}
                         </span>
                       </div>
                       <p className="text-sm leading-relaxed text-[#6E6E73] dark:text-[#CBD5E1]">{category.description}</p>
-                      <p className="mt-3 text-xs text-[#86868B]">
+                      <p className="mt-3 text-xs text-[#64748B]">
                         {formatString(t.directory.plannedToolsInclude, {
                           names: category.sampleToolNames.join(', '),
                         })}

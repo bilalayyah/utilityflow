@@ -58,6 +58,26 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       'Adding instant contact or portfolio links to slide decks and packaging',
       'Exporting crisp SVG QR codes for high-DPI print design tools',
     ],
+    howItWorks: [
+      'A QR code stores text as a grid of dark and light squares, called modules, around three large finder squares. A phone camera finds those patterns first, then reads the grid.',
+      'Before encoding, the tool turns your input into a standard payload: a URL stays a URL, Wi-Fi details become a WIFI:T:...;S:...;P:...; string, an email a mailto: link, and a phone number a tel: link.',
+      'Error correction adds redundant data so a damaged code still scans: L recovers about 7% of obscured modules, M 15%, Q 25%, and H 30%. Higher levels survive more damage but print denser.',
+      'The quiet zone is the blank margin around the code, measured in modules. Scanners need that empty border to find where the code ends, so shrinking it is the most common reason a code fails to scan.',
+    ],
+    supportedFormats: [
+      'Website URLs',
+      'Plain text',
+      'Wi-Fi network credentials',
+      'Email links (mailto:)',
+      'Phone numbers (tel:)',
+      'PNG download',
+      'SVG download',
+    ],
+    limitations: [
+      'These are static QR codes, so the destination is baked into the pattern. If a linked page moves or a Wi-Fi password changes, the printed code cannot be updated; you must generate and reprint a new one.',
+      'Very long URLs create dense patterns that need a larger print size. A code that scans on screen can fail on a small business card or a glossy surface.',
+      'Low contrast, inverted colours, or a missing quiet zone can stop scanners reading the code. Always test it with a real phone camera before printing a large batch.',
+    ],
     faqs: [
       {
         question: 'Do QR codes created here expire after a trial period?',
@@ -213,6 +233,26 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       'Measuring individual CTA buttons inside weekly email newsletters',
       'Tagging sponsor links inside YouTube video descriptions',
       'Generating clean UTM links to feed directly into the QR Code Generator',
+    ],
+    howItWorks: [
+      'The UTM Link Builder takes your destination URL and appends tracking tags after a question mark: utm_source names the place, utm_medium the channel, utm_campaign the promotion, utm_term a paid-search keyword, and utm_content separates two links in one campaign.',
+      'Before any tag is added, the destination hostname is validated. A bare word, a space, or an invalid host is rejected with an error, because a tracking link is useless if the underlying address cannot load.',
+      'Normalization, switched on by default, lowercases every tag value and converts spaces to underscores. That stops analytics tools from splitting one campaign into separate rows for Instagram, instagram, and spring launch versus spring_launch.',
+      'Any query string already in your URL is kept, and a #fragment anchor stays at the very end after the new tags. The builder then shows a decoded parameter table so you can spot a typo or mixed casing before copying.',
+    ],
+    supportedFormats: [
+      'utm_source',
+      'utm_medium',
+      'utm_campaign',
+      'utm_term',
+      'utm_content',
+      'Channel presets',
+      'Existing query strings and #anchors',
+    ],
+    limitations: [
+      'UTM tags only work when the analytics tool on the landing page reads them. If a site has no analytics installed, or a visitor’s browser blocks tracking, the click is never attributed to your campaign.',
+      'Tags belong on external inbound links only. Adding them to links inside your own site overwrites the original referral mid-session, so a visitor who arrived from Instagram is suddenly recorded as internal traffic.',
+      'The builder cannot shorten or hide the link. Long UTM URLs look messy in plain text, so use a link-in-bio page or turn them into a QR code with the QR Code Generator instead.',
     ],
     faqs: [
       {
@@ -370,6 +410,26 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       'Editing LinkedIn and Instagram bios strictly within 150–160 character limits',
       'Checking YouTube 70-character mobile title visibility before publishing',
     ],
+    howItWorks: [
+      'Every card measures your draft against the cap: 280 for an X post, 160 for an X bio, 150 for an Instagram bio, 2,200 for an Instagram or TikTok caption, 3,000 for LinkedIn, 500 for Threads, 300 for Bluesky, and 100 for a YouTube title.',
+      'X wraps every link through its t.co shortener, so each URL counts as exactly 23 characters. Other platforms count the full link, which is why one draft can pass on X and fail on LinkedIn.',
+      'Characters are counted by Unicode code points, so a standard emoji counts as one character instead of two UTF-16 units. Joined-symbol emojis may still count as more on the platform itself.',
+      'The fold preview shows what readers see before tapping “See more”: about 125 characters for Instagram, 210 for LinkedIn, 100 for TikTok, 70 for a YouTube title, and 157 for a YouTube description.',
+    ],
+    supportedFormats: [
+      'X posts and bios',
+      'Instagram captions and bios',
+      'LinkedIn posts',
+      'TikTok captions',
+      'Threads posts',
+      'Bluesky posts',
+      'YouTube titles and descriptions',
+    ],
+    limitations: [
+      'Platform limits change, and the caps here are fixed in the tool. If a platform raises a limit later, a draft it would now accept can still show as over the limit.',
+      'Emoji counting is approximate at the edges. Standard emojis count as one character, but flags, skin-tone sequences, and joined emojis may be counted differently by each platform.',
+      'Fold numbers are typical feed values, not guarantees. Instagram and LinkedIn vary the cut-off by device and app version, so a hook at the fold can still be hidden on some phones.',
+    ],
     faqs: [
       {
         question: 'Why does X (Twitter) count long URLs as 23 characters?',
@@ -414,7 +474,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'What is the TikTok caption character limit?',
         answer:
-          'TikTok video captions allow up to 4,000 characters, though short, punchy captions usually perform better because viewers scan quickly.',
+          'TikTok video captions allow up to 2,200 characters, though short, punchy captions usually perform better because viewers scan quickly.',
       },
       {
         question: 'What is the Threads character limit?',
@@ -525,6 +585,27 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       'Formatting technical handles or dates in Monospace Unicode',
       'Adding subtle Small Caps labels in plain-text newsletters or notes',
       'Styling short announcements where native Markdown bold is unsupported',
+    ],
+    howItWorks: [
+      'Each style is a one-to-one character map, not a font. The formatter replaces every plain letter with the matching glyph from a Unicode block: sans-serif bold, italic, bold-italic, serif bold, monospace, double-struck, script, or Fraktur.',
+      'Small caps work differently: Unicode has no small-caps alphabet, so the tool substitutes look-alike phonetic letters such as ᴀ, ʙ, and ᴄ, and leaves letters with no match, like s and x, unchanged.',
+      'Fullwidth shifts every ASCII character into its wide form by adding a fixed offset to its code point, turning a space into an ideographic space. That is why fullwidth headings look airy and double-spaced.',
+      'Characters the Unicode blocks do not define stay untouched: accented letters pass through unchanged, most punctuation is left alone, and double-struck keeps its blackboard symbols for C, H, N, P, Q, R, and Z.',
+    ],
+    supportedFormats: [
+      'Sans-serif bold',
+      'Sans-serif italic',
+      'Serif bold',
+      'Monospace',
+      'Double-struck',
+      'Script and Fraktur',
+      'Small caps',
+      'Fullwidth',
+    ],
+    limitations: [
+      'Styled text is harder for screen readers to announce: a reader may hear each letter with its full Unicode name, so long styled passages confuse blind users. Keep styling to short headings.',
+      'Platform search often cannot match styled words: a search for a plain word will not find it written in mathematical bold, so never style the keywords people use to find you.',
+      'Older phones and computers may lack fonts for some Unicode blocks, and a missing glyph shows as an empty box. Test styled text on a second device before publishing it.',
     ],
     faqs: [
       {
@@ -682,6 +763,25 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       'Cleaning copy pasted out of Notion, Google Docs, or Notes apps before publishing',
       'Separating main caption storytelling from footer calls-to-action',
     ],
+    howItWorks: [
+      'Social apps collapse blank lines when the line above ends in a trailing space. Keyboards and notes apps leave those invisible spaces behind, and the parser treats the gap as an accident and removes it.',
+      'The formatter first trims trailing whitespace from every line, then fills each empty line with a spacer. Invisible Spacer mode inserts U+2800, the Braille Pattern Blank, which renders as empty space on modern phones.',
+      'Dot Spacer mode puts a visible period on each blank line instead. It is less elegant but more reliable on old devices, since a period always renders while an invisible character can show as an empty box.',
+      'Clean Trailing Spaces Only skips spacers and only strips trailing whitespace. Use it when the platform already preserves your breaks. An optional toggle also collapses accidental double spaces inside lines.',
+    ],
+    supportedFormats: [
+      'Instagram captions and bios',
+      'Threads posts',
+      'TikTok captions',
+      'Facebook posts',
+      'X posts',
+      'YouTube descriptions',
+    ],
+    limitations: [
+      'Each U+2800 spacer counts as one character. A bio with several blank lines can eat a noticeable share of Instagram’s 150-character limit, so watch the live counter when space is tight.',
+      'Some apps strip formatting when you paste through an intermediate app. If breaks still collapse, copy again in Invisible Spacer mode and paste directly into the caption field, not through a scheduler.',
+      'Very old fonts may render the invisible spacer as an empty box instead of blank space. The tool cannot control how a reader’s device draws it, so check the result on a second phone after posting.',
+    ],
     faqs: [
       {
         question: 'Why do blank lines disappear when I paste text directly into Instagram?',
@@ -837,6 +937,26 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       'Creating clickable podcast episode show-note timestamps',
       'Sharing exact tutorial steps in documentation, Slack, or Discord',
       'Auditing long-form livestream chapter lists for formatting typos',
+    ],
+    howItWorks: [
+      'YouTube only draws chapter markers when the description meets three rules: the first timestamp is exactly 00:00, at least three timestamps appear in ascending order, and every chapter lasts ten seconds or more.',
+      'Each row stores a time in seconds and a title. Times use MM:SS or HH:MM:SS; once any chapter passes one hour, the tool reformats every timestamp to HH:MM:SS so the list never mixes formats.',
+      'Sort Chronologically reorders rows by their second values, and the spec check flags a missing 00:00 start, fewer than three chapters, out-of-order rows, or any gap shorter than ten seconds before you copy.',
+      'For sharing, the tool extracts the video ID from a watch, shortened, live, embed, or Shorts URL, or a bare eleven-character ID, then builds a clickable ?t= link per chapter.',
+    ],
+    supportedFormats: [
+      'youtube.com watch URLs',
+      'youtu.be short links',
+      'YouTube Shorts links',
+      'Live and embed links',
+      'Bare 11-character video IDs',
+      'MM:SS timestamps',
+      'HH:MM:SS timestamps',
+    ],
+    limitations: [
+      'The tool cannot add chapters to a video you do not own. Chapters only appear when the uploader puts the block in the description; for other videos you can only share ?t= links.',
+      'A chapter shorter than ten seconds is ignored by YouTube even if it looks right in the list. Move the later timestamp forward until every gap clears the minimum, or merge the two sections.',
+      'Timestamp links open the video at the right second but do not force the chapter bar to appear. If the description breaks any of the three rules, viewers see no markers even with perfect links.',
     ],
     faqs: [
       {
@@ -994,6 +1114,26 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       'Verifying thumbnails meet YouTube’s 1280×720, 16:9, and <2 MB requirements',
       'Comparing title phrasing so critical keywords appear before line-clamp truncation',
     ],
+    howItWorks: [
+      'Your image loads through a temporary browser object URL and never leaves your device, so unreleased thumbnails stay private. The URL is revoked when the image is replaced or the tab closes.',
+      'The previewer reads the file’s real pixel dimensions and size, then checks them against YouTube’s recommendations: 1280 by 720 pixels, a 16:9 aspect ratio, and under 2 MB, with 640 pixels as the minimum width.',
+      'The preview renders your thumbnail in a realistic feed card and a compact sidebar card, with your title clamped to two lines. Small sidebar thumbnails shrink the image sharply, exposing thin text and fine detail that blur at that size.',
+      'The safe-zone overlay highlights the bottom-right corner where YouTube places the duration badge, and a Light/Dark toggle re-renders the feed so you can check contrast on both backgrounds.',
+    ],
+    supportedFormats: [
+      'PNG images',
+      'JPG images',
+      'WebP images',
+      'Desktop feed cards',
+      'Sidebar thumbnails',
+      'Light mode feed',
+      'Dark mode feed',
+    ],
+    limitations: [
+      'The preview is a close approximation, not YouTube itself. YouTube changes its layout over time, so a design that fits here should still get a final check on a private or unlisted upload.',
+      'Only local image files can be previewed. The tool cannot fetch a thumbnail from a live video URL; download the thumbnail image first and load that file instead.',
+      'The checks cover dimensions, aspect ratio, and file size only. They say nothing about click-through rate, so a thumbnail that passes every spec can still underperform if its hook is unclear.',
+    ],
     faqs: [
       {
         question: 'Are my uploaded thumbnail images sent to a remote server?',
@@ -1149,6 +1289,25 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       'Converting multi-word SEO keywords into clickable social hashtags',
       'Updating legacy lowercase tag lists to accessible CamelCase formatting',
       'Generating tidy dot-separated hashtag footers for Instagram posts',
+    ],
+    howItWorks: [
+      'Your input is split into separate tags on commas, semicolons, newlines, and spaces before a # symbol, so mixed separators in one paste still work. Leading # marks are stripped first, then re-added to every finished tag.',
+      'Each tag is cleaned character by character. Punctuation that cannot appear in a tag is stripped, and hyphens, underscores, and spaces act as word boundaries, so a hyphenated phrase becomes one CamelCase tag instead of breaking apart.',
+      'PascalCase capitalizes the first letter of every word inside a tag, which lets screen readers pronounce multi-word tags as separate words. Lowercase keeps everything small, and Preserve Case leaves your exact capitalization untouched.',
+      'Deduplication compares tags case-insensitively, so #ContentMarketing and #contentmarketing count as the same tag and only one survives. The counter then checks the total against Instagram’s 30-tag cap.',
+    ],
+    supportedFormats: [
+      'PascalCase (#CamelCase)',
+      'Lowercase hashtags',
+      'Preserve original case',
+      'Inline single-line output',
+      'Vertical line-separated output',
+      'Dot-separated caption footers',
+    ],
+    limitations: [
+      'The tool cannot tell whether a hashtag is banned, shadowbanned, or simply unpopular. A perfectly formatted tag can still be blocked by a platform, so check any tag that returns no results after posting.',
+      'Formatting does not check tag length or relevance. A long tag that is technically valid may still be truncated or ignored, and an irrelevant tag can hurt reach even when it is under the cap.',
+      'The 30-tag counter reflects Instagram’s cap only. Other platforms set their own limits, and the tool does not warn you when a set that fits Instagram exceeds a stricter cap elsewhere.',
     ],
     faqs: [
       {
@@ -1306,6 +1465,27 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       'Formatting educational carousels or weekly tip checklists',
       'Separating opening hooks cleanly from value lists before scheduling',
     ],
+    howItWorks: [
+      'Five copywriting frameworks structure your own words: Problem–Agitate–Solution, Actionable Breakdown, Before–After–Bridge, Audit Checklist, and Myth vs. Reality. Each template maps your hook, context, takeaways, and call-to-action into a fixed order.',
+      'The Caption Template Builder is deterministic, not generative. Every sentence in the preview comes from text you typed; the tool only arranges, numbers, and spaces it, so nothing is rewritten, invented, or padded with generic phrases.',
+      'Each non-empty line in the takeaways box becomes one numbered item, bullet, or checkbox, depending on the template. Switching templates reuses the same inputs, so you can compare how one set of notes reads as a tutorial versus a checklist.',
+      'A live counter measures the assembled caption in characters and words, flagging fit against X’s 280-character limit and the 2,200-character mark the tool uses for LinkedIn and Instagram captions, so you can trim before copying.',
+    ],
+    supportedFormats: [
+      'Problem–Agitate–Solution (PAS)',
+      'Actionable Breakdown',
+      'Before–After–Bridge',
+      'Audit Checklist',
+      'Myth vs. Reality',
+      'LinkedIn posts',
+      'Instagram captions',
+      'X posts',
+    ],
+    limitations: [
+      'The templates arrange words; they cannot improve them. A weak hook stays weak in every framework, so the quality of the finished caption still depends entirely on what you type into each field.',
+      'The character counter checks length only. It cannot judge whether a hook lands, whether a call-to-action is clear, or whether hashtags fit the platform you are posting to.',
+      'Drafts live only in the browser tab. Closing the page loses your caption, and the tool does not save or sync anything, so copy finished work into your notes or scheduler first.',
+    ],
     faqs: [
       {
         question: 'Does this tool use an AI language model to rewrite my words?',
@@ -1461,6 +1641,25 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       'Finding backup prefixes/suffixes when an exact single-word handle is taken',
       'Checking whether a proposed 18-character handle exceeds X’s 15-character cap',
       'Preparing a launch checklist of all official social profile URLs',
+    ],
+    howItWorks: [
+      'Your brand name is lowercased, stripped of characters that cannot appear in a handle, and split into words. Those words are joined plain, with underscores, dots, and hyphens, plus get, use, the, app, hq, and studio variants.',
+      'Each candidate is tested against six networks: X allows 4–15 characters of letters, numbers, and underscores; Instagram 1–30 with periods; TikTok 2–24; YouTube 3–30 with hyphens; Threads 1–30; GitHub 1–39 with single hyphens only.',
+      'The checks are pure pattern tests run locally. A handle passes when its length fits and every character is allowed; Instagram and Threads also reject double periods and trailing periods, while GitHub rejects underscores and leading or trailing hyphens.',
+      'Passing syntax says nothing about availability, so each platform row links to its live profile URL. Opening it shows a real profile when the handle is taken, or an error page when it is free.',
+    ],
+    supportedFormats: [
+      'X (Twitter) handles',
+      'Instagram usernames',
+      'TikTok usernames',
+      'YouTube @handles',
+      'Threads usernames',
+      'GitHub usernames',
+    ],
+    limitations: [
+      'The tool checks syntax, never availability. A handle can pass every rule and still be taken, reserved, or blocked for policy reasons, so open the profile link before announcing a name.',
+      'Platform rules change, and reserved words are invisible to the checker. A platform can reject a valid handle because the word is trademarked, impersonating, or on an internal blocklist.',
+      'Threads shares Instagram’s username namespace, so a Threads handle is only free when the matching Instagram username is free too. Claiming one without the other splits your brand across the two apps.',
     ],
     faqs: [
       {

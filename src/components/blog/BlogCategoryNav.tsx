@@ -29,7 +29,7 @@ export function BlogCategoryNav({ locale, currentCategoryId }: BlogCategoryNavPr
           aria-current={currentCategoryId === undefined ? 'page' : undefined}
           className={`flex items-center gap-2.5 rounded-2xl px-3.5 py-3 text-sm font-semibold shadow-sm transition hover:-translate-y-0.5 hover:shadow-md ${
             currentCategoryId === undefined
-              ? 'bg-[#0E8A66] text-white'
+              ? 'bg-[#0B7A59] text-white'
               : 'bg-[#FFFFFF] border border-[#E5E5EA] text-[#1D1D1F] hover:border-[#BFE3D3] hover:text-[#0B7A59] dark:bg-[#131D31] dark:border-[#243247] dark:text-[#F1F5F9] dark:hover:border-[#34D399] dark:hover:text-[#34D399]'
           }`}
         >
@@ -45,7 +45,7 @@ export function BlogCategoryNav({ locale, currentCategoryId }: BlogCategoryNavPr
               aria-current={isCurrent ? 'page' : undefined}
               className={`flex items-center gap-2.5 rounded-2xl px-3.5 py-3 text-sm font-semibold shadow-sm transition hover:-translate-y-0.5 hover:shadow-md ${
                 isCurrent
-                  ? 'bg-[#0E8A66] text-white'
+                  ? 'bg-[#0B7A59] text-white'
                   : `${palette.card} text-[#1D1D1F] dark:text-[#F1F5F9]`
               }`}
             >

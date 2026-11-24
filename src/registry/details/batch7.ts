@@ -6,6 +6,24 @@ import type { ToolDetail } from '../../types/tool';
 
 export const TOOL_DETAILS: Record<string, ToolDetail> = {
   'image-compressor': {
+    howItWorks: [
+      'When you load a photo, the image compressor decodes it in your browser into a bitmap held in memory, reading its pixel width, height, and original byte size before any compression begins.',
+      'If you set a max-width cap of 1920, 1280, or 800 pixels, the bitmap is redrawn onto a smaller canvas with high-quality smoothing, scaling the height proportionally so the picture never stretches. If you need exact pixel dimensions rather than a cap, the Image Resizer sets them precisely.',
+      'The canvas is then re-encoded with your chosen codec: WebP or JPEG at your quality setting, or PNG without a quality value. Lossy encoders discard fine detail the eye barely notices to shrink the file.',
+      'JPEG output gets a solid white matte painted behind the image first, because JPEG has no alpha channel. The finished blob is measured in bytes, compared with the original, and offered for download.',
+    ],
+    supportedFormats: [
+      'PNG — input & output',
+      'JPG — input & output',
+      'WebP — input & output',
+      'GIF — input only (first frame)',
+    ],
+    limitations: [
+      'WebP and JPEG compression is lossy: every re-encode throws away some detail, so compressing the same file repeatedly at low quality softens edges and adds visible artefacts.',
+      'PNG output is lossless, so a photo saved as PNG can end up larger than the original JPEG, and small PNGs sometimes grow because the browser encoder lacks palette optimisation.',
+      'Canvas re-encoding drops EXIF metadata such as camera settings and location, and animated GIFs collapse to a single still frame.',
+      'Transparency survives only in WebP and PNG output; choosing JPEG fills transparent areas with white, which cannot be undone afterwards.',
+    ],
     instructions: [
       {
         title: 'Choose a source image',
@@ -162,6 +180,24 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
     ],
   },
   'image-resizer': {
+    howItWorks: [
+      'The image resizer decodes your picture into a bitmap, then creates a fresh canvas at exactly the width and height you entered, capped at 8000 pixels per side to stay inside browser memory limits.',
+      'With Lock Aspect Ratio on, changing one side recalculates the other proportionally. Center Cover-Crop instead scales the picture until it fills the target frame, then trims the overflowing edges evenly from the centre.',
+      'Exact Stretch mode skips that protection and maps the whole source onto the target rectangle, which changes the aspect ratio. High-quality smoothing is enabled while the canvas redraws the pixels.',
+      'The finished canvas is exported as a real PNG, JPEG, or WebP file at a fixed 0.92 quality for lossy formats, so the download is a genuine new image at the stated dimensions.',
+    ],
+    supportedFormats: [
+      'PNG input, PNG output',
+      'JPG input, JPG output',
+      'WebP input, WebP output',
+      'GIF input only — still frame',
+    ],
+    limitations: [
+      'Upscaling cannot invent detail: enlarging a small photo to 4K spreads the existing pixels wider, so fine texture and text soften even though the pixel count grows.',
+      'Lossy JPEG and WebP exports are fixed at 0.92 quality, so you cannot trade more quality for a smaller file here — follow up with the Image Compressor when file size matters.',
+      'Center Cover-Crop discards the trimmed edges permanently, and animated GIFs export as a single still frame rather than a moving image.',
+      'JPEG output has no transparency, so transparent areas in a resized PNG become white; keep PNG or WebP output when the alpha channel matters.',
+    ],
     instructions: [
       {
         title: 'Load your image',
@@ -318,6 +354,25 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
     ],
   },
   'image-format-converter': {
+    howItWorks: [
+      'The image format converter decodes each uploaded file into a bitmap at its full native resolution, so an 800 by 600 picture stays exactly 800 by 600 in the new format.',
+      'For JPEG and WebP output, the canvas is re-encoded at the quality you set, while PNG output is lossless and ignores the quality slider. Vector SVG files are rasterised onto the canvas first, then encoded the same way.',
+      'When the target is JPEG, a matte colour is painted behind the picture before drawing, because JPEG cannot store transparency. The default white fill can be swapped for any brand colour.',
+      'Each file in a batch is converted independently in your browser, one canvas at a time, and the tool reports the new dimensions and byte size of every converted file before you download it. Converted images can be embedded directly with the Image to Base64 tool when a page needs a self-contained asset.',
+    ],
+    supportedFormats: [
+      'PNG — convert to and from',
+      'JPG — convert to and from',
+      'WebP — convert to and from',
+      'GIF — input only, still frame',
+      'SVG — input only, rasterised',
+    ],
+    limitations: [
+      'Converting JPEG to PNG never restores detail lost to JPEG compression; the PNG simply stores the existing artefacts losslessly, usually in a much larger file.',
+      'Animated GIFs convert as a single still frame, and HEIC photos only decode in browsers with native HEIC support, such as Safari.',
+      'JPEG output always flattens transparency onto the matte colour you choose, and Canvas re-encoding drops EXIF metadata such as camera settings and location.',
+      'Every file must be 25 MB or smaller, and very large batches are limited by your device memory because each image is decoded into a full bitmap.',
+    ],
     instructions: [
       {
         title: 'Choose target format and options',
@@ -474,6 +529,25 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
     ],
   },
   'image-rotate-flip': {
+    howItWorks: [
+      'The tool draws your photo onto a canvas and applies a rotation matrix, so a 90-degree turn swaps width and height while a 180-degree turn keeps the same dimensions.',
+      'Flips work by scaling the canvas by minus one on the chosen axis, mirroring the picture left to right or top to bottom in a single redraw.',
+      'Brightness, contrast, and grayscale are applied as a single canvas filter when the image is drawn, so tone adjustments and geometry changes bake into the same export.',
+      'Because the rotation is written into the pixels themselves, the result displays upright in every app, unlike an EXIF orientation flag that some viewers ignore.',
+      'Export re-encodes the transformed canvas as PNG, JPEG, or WebP, giving you a real image file at the new dimensions rather than a preview overlay.',
+    ],
+    supportedFormats: [
+      'PNG — rotate, flip, and export',
+      'JPG — rotate, flip, and export',
+      'WebP — rotate, flip, and export',
+      'GIF — input only, still frame',
+    ],
+    limitations: [
+      'Rotation happens in 90-degree steps only, so the tool fixes sideways or upside-down photos but cannot straighten a picture tilted by a few degrees.',
+      'Exporting as JPEG applies lossy compression, and repeated rotate-and-save cycles soften detail; keep a PNG master, then shrink a copy with the Image Compressor when size matters.',
+      'Canvas re-encoding drops EXIF metadata, including the original orientation flag, and animated GIFs export as a single still frame.',
+      'JPEG output fills transparent areas with white, so export as PNG or WebP when a rotated logo or graphic needs its transparency kept.',
+    ],
     instructions: [
       {
         title: 'Upload an image',
@@ -512,6 +586,12 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
         input: '3024×4032 photo rotated 90° clockwise · Brightness: 110% · Contrast: 105%',
         output: '4032×3024 upright image exported cleanly with EXIF orientation baked into pixels.',
         explanation: 'Canvas swaps width and height automatically on 90° and 270° turns.',
+      },
+      {
+        title: 'Mirroring a flipped webcam selfie for a profile photo',
+        input: '800×800 mirrored selfie · Flip: Horizontal',
+        output: '800×800 correctly oriented portrait photo exported as PNG, ready to upload.',
+        explanation: 'A horizontal flip mirrors the picture once, so text and features read the right way round again.',
       },
     ],
     benefits: [
@@ -630,6 +710,28 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
     ],
   },
   'image-to-base64': {
+    howItWorks: [
+      'Encoding reads the file’s raw bytes with a FileReader and converts them to Base64 text, a text-safe alphabet that represents every three bytes as four characters.',
+      'The encoded text is wrapped in a data URI header naming the image type, such as data:image/png;base64,, so browsers can render the string as an image without a separate file request.',
+      'Decoding runs the other way: the tool strips whitespace, adds a PNG data URI header when you paste raw Base64, and hands the string to the browser to render a preview you can download.',
+      'Because Base64 is only a different representation of the same bytes, the round trip is lossless — decoding returns the exact original image, pixel for pixel. For encoding plain text rather than images, the Base64 Encoder / Decoder is the matching tool.',
+    ],
+    supportedFormats: [
+      'PNG — encode & decode',
+      'JPG — encode & decode',
+      'WebP — encode & decode',
+      'SVG — encode & decode',
+      'GIF — encode & decode',
+      'ICO — encode & decode',
+      'Base64 Data URI — output',
+      'Raw Base64 text — output',
+    ],
+    limitations: [
+      'Base64 inflates data by about 33 percent, so a 90 KB photo becomes roughly 120 KB of text, which bloats HTML and CSS and cannot be cached separately like a normal image file.',
+      'Only small images suit embedding — icons and logos under roughly 5 to 10 KB — and some email clients refuse or strip data URIs entirely, so test before sending.',
+      'Decoding needs a complete, valid payload: a truncated string pastes as a broken preview, and raw Base64 is assumed to be PNG unless the header names another type.',
+      'Very large files produce unwieldy strings that are impractical to paste or store, and the tool is limited by browser memory rather than any server cap.',
+    ],
     instructions: [
       {
         title: 'Choose Encode or Decode mode',
@@ -786,6 +888,27 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
     ],
   },
   'color-contrast-checker': {
+    howItWorks: [
+      'Each colour is converted from sRGB to linear light using the WCAG gamma formula, then combined with the weights 0.2126 red, 0.7152 green, and 0.0722 blue into a single relative luminance value.',
+      'The contrast ratio is the lighter luminance plus 0.05 divided by the darker luminance plus 0.05, giving a number such as 6.29 to 1 that the scorecard tests against the AA and AAA thresholds.',
+      'The palette extractor draws your uploaded image onto an offscreen canvas, skips pixels that are more than half transparent, and clusters nearby RGB values into at most eight dominant swatches.',
+      'Changing any HEX, RGB, or HSL field recalculates the other two formats instantly, so the three representations always describe the same colour — the same three formats the Color Converter translates between.',
+    ],
+    supportedFormats: [
+      'HEX colour values',
+      'RGB colour values',
+      'HSL colour values',
+      'PNG images — palette extractor',
+      'JPG images — palette extractor',
+      'WebP images — palette extractor',
+      'SVG images — palette extractor',
+    ],
+    limitations: [
+      'The checker measures luminance contrast only; it cannot judge whether a pairing is readable for colour-blind users or whether colour alone carries meaning.',
+      'Palette extraction groups nearby shades, so rare accent colours can be missed and the eight swatches are an approximation, not an exact inventory of every colour in the image.',
+      'A passing ratio does not guarantee good design: a 4.5 to 1 pair can still look harsh or low-contrast in context, so always preview the pairing as real text.',
+      'The checker tests solid colours only — it does not blend semi-transparent text over a photo background, so layered designs need a separate check.',
+    ],
     instructions: [
       {
         title: 'Pick Foreground and Background colors',
@@ -942,6 +1065,27 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
     ],
   },
   'qr-code-scanner': {
+    howItWorks: [
+      'Uploaded QR images are drawn onto a canvas and read by jsQR, which locates the finder patterns, samples the module grid, and decodes the payload — all inside your browser.',
+      'The decoder tries several scales and both normal and inverted images, so dark-mode QR codes with light modules on a dark background decode as reliably as black-on-white ones.',
+      'The decoded text is classified into a URL, Wi-Fi credential, vCard contact, or plain text, and only http and https URLs become clickable links, so nothing opens before you inspect it.',
+      'The camera mode streams video frames to the same decoder and stops the stream the moment a code is found or you leave the tab. The vCard builder formats your contact as VCF 3.0 and renders a 320-pixel QR as PNG or SVG; for URL or text codes with custom colours, use the QR Code Generator instead.',
+    ],
+    supportedFormats: [
+      'PNG QR images',
+      'JPG QR images',
+      'WebP QR images',
+      'SVG QR images',
+      'vCard 3.0 contact data',
+      'PNG vCard QR — output',
+      'SVG vCard QR — output',
+    ],
+    limitations: [
+      'Decoding reads one QR code per image; a photo containing several codes must be cropped so each code is uploaded separately.',
+      'Blurry, tiny, tightly cropped, or glare-covered codes often fail, because the decoder needs clean finder patterns and a readable module grid.',
+      'The scanner shows you the destination but cannot judge whether it is trustworthy; a decoded URL can still lead to a phishing or malicious page.',
+      'Camera scanning needs your permission and a working webcam, and some browsers block camera access on insecure pages or without a user gesture.',
+    ],
     instructions: [
       {
         title: 'Upload a QR image or enable camera scanning',
@@ -1098,6 +1242,27 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
     ],
   },
   'password-generator': {
+    howItWorks: [
+      'The password generator draws randomness from window.crypto.getRandomValues, your browser’s hardware-backed generator, and never from Math.random, whose output can be predicted.',
+      'Each character is picked by rejection sampling: random 32-bit values that fall outside an even multiple of the pool size are discarded, so every character has exactly the same probability.',
+      'At least one character is forced in from every character class you enabled, then the result is shuffled with an unbiased Fisher-Yates pass so those guaranteed characters never sit in fixed positions.',
+      'Diceware passphrases pick 3 to 8 words at random from a fixed 256-word list, and entropy is shown as length times log base 2 of the pool size, so you can see the guessing work in bits.',
+    ],
+    supportedFormats: [
+      'Random passwords — 8 to 64 characters',
+      'Diceware passphrases — 3 to 8 words',
+      'Uppercase letters (A–Z)',
+      'Lowercase letters (a–z)',
+      'Digits (0–9)',
+      'Symbols',
+      'Batch output — up to 10 passwords',
+    ],
+    limitations: [
+      'A strong password cannot save a breached or phishing site: if the service itself is compromised or you are tricked into typing it elsewhere, the password still leaks.',
+      'Generated passwords live only in the tab’s memory and vanish on refresh, so anything you do not copy into a password manager is lost.',
+      'Passphrases draw from a small 256-word list, so they need five or six words to reach strong entropy; a three-word passphrase is far weaker than it looks.',
+      'Some sites reject symbols or cap length, so a generated password may need regenerating with a smaller character set or shorter length to be accepted.',
+    ],
     instructions: [
       {
         title: 'Choose Random Password or Diceware Passphrase',
@@ -1254,6 +1419,26 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
     ],
   },
   'file-hash-verifier': {
+    howItWorks: [
+      'The file hash verifier reads your file into browser memory as an array buffer and runs it through the Web Crypto subtle.digest function four times in parallel, once per algorithm.',
+      'Each digest compresses the file’s exact bytes into a fixed-length fingerprint — 64 hex characters for SHA-256, 128 for SHA-512, 96 for SHA-384, and 40 for SHA-1.',
+      'Pasting an expected checksum, or a whole hash-plus-filename line from a .sha256sum manifest, extracts the leading hash token and compares it against all four digests, ignoring letter case.',
+      'A match proves the bytes are identical to the publisher’s file, and the downloaded .sha256 text file lets you publish the same proof alongside your own releases. For raw text strings instead of files, use the Hash Generator.',
+    ],
+    supportedFormats: [
+      'Any file type — binary input',
+      'SHA-256 digest',
+      'SHA-512 digest',
+      'SHA-384 digest',
+      'SHA-1 digest — legacy only',
+      '.sha256 export file',
+    ],
+    limitations: [
+      'The browser loads the whole file into memory, so files above roughly 300 to 500 MB can exceed memory limits; multi-gigabyte ISOs need a native tool such as shasum or certutil.',
+      'A matching hash proves only that the file matches the publisher’s copy; if the publisher’s own file were malicious, the hash would still match.',
+      'SHA-1 has known collision weaknesses and is kept for legacy compatibility only — never rely on it for security guarantees.',
+      'The verifier checks one file at a time and cannot scan for malware, so pair it with antivirus checks and a trusted download source.',
+    ],
     instructions: [
       {
         title: 'Select a file from your device',
@@ -1410,6 +1595,28 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
     ],
   },
   'favicon-generator': {
+    howItWorks: [
+      'A monogram badge draws one to three letters onto a canvas in your colours and corner shape, while logo mode centre-crops your uploaded PNG, SVG, or JPG into a square first.',
+      'The same artwork is redrawn at 16, 32, 48, 180, 192, and 512 pixels, so each size is a real render rather than a browser-scaled copy of one image.',
+      'The favicon.ico bundle is assembled byte by byte: a six-byte ICONDIR header plus a 16-byte directory entry per frame, each pointing at its PNG-encoded image data.',
+      'Alongside the bundle you get individual PNG files for tabs, Apple Touch, and PWA manifests, plus the HTML link tags to paste into your page head.',
+    ],
+    supportedFormats: [
+      'PNG logos — input',
+      'SVG logos — input',
+      'JPG logos — input',
+      'Monogram text — 1 to 3 letters',
+      'favicon.ico — output',
+      'PNG icons 16–512 px — output',
+      'Apple Touch 180×180 — output',
+      'PWA icons 192/512 px — output',
+    ],
+    limitations: [
+      'Fine logo detail vanishes at 16 by 16 pixels, so detailed marks turn to blur in browser tabs — bold initials or a single simple shape read far better.',
+      'Wide or tall logos are centre-cropped to a square, which can cut off edges; start from a square source image, or prepare one with the Image Resizer first.',
+      'The set covers websites and PWAs only; native iOS and Android apps need their own icon sets with platform-specific sizes this tool does not generate.',
+      'Browsers cache favicons aggressively, so a new icon may not appear until a hard refresh or cache clear, even when the files are installed correctly.',
+    ],
     instructions: [
       {
         title: 'Choose Monogram Badge or Upload Logo',

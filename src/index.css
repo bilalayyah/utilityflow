@@ -29,7 +29,7 @@
   --text-primary: #1d1d1f;
   --text-strong: #2e2e30;
   --text-secondary: #6e6e73;
-  --text-muted: #86868b;
+  --text-muted: #64748b;
   --text-subtle: #aeaeb2;
   --text-faint: #c7c7cc;
   --border-faint: #f0efea;
@@ -150,7 +150,7 @@ html:not(.dark) .text-slate-600 {
   color: #6e6e73;
 }
 html:not(.dark) .text-slate-500 {
-  color: #86868b;
+  color: #64748b;
 }
 html:not(.dark) .text-slate-400 {
   color: #aeaeb2;

@@ -242,7 +242,7 @@ export default function ReorderDeletePdfPagesTool() {
                     {s.posLabel(idx + 1)}{' '}
                     <span className="font-normal text-slate-500">{s.origLabel(page.originalIndex + 1)}</span>
                   </div>
-                  <div className="text-[11px] text-slate-400 font-mono tabular-nums">
+                  <div className="text-[11px] text-slate-600 font-mono tabular-nums">
                     {page.widthPt}×{page.heightPt} pt
                   </div>
                 </div>

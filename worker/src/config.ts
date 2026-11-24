@@ -70,7 +70,8 @@ export function resolveConfig(env: WorkerEnv): ResolvedAiConfig {
 
 export function isOriginAllowed(origin: string | null, allowedOrigins: string[]): boolean {
   if (!origin) return true; // Same-origin or non-browser CLI request
-  if (allowedOrigins.length === 0) return true; // Optional: allow same-origin & preview hosts when unset
+  // Default-deny: an unset/empty allow-list must not open the endpoint to any origin (P3-5).
+  if (allowedOrigins.length === 0) return false;
   const normalized = origin.replace(/\/+$/, '');
   return allowedOrigins.some((pattern) => {
     if (pattern === '*') return true;

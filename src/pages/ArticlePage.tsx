@@ -181,7 +181,7 @@ export function ArticlePage() {
           <p className="mt-6">
             <Link
               to={getBlogHomeUrl(locale)}
-              className="inline-flex items-center gap-2 rounded-full bg-[#0E8A66] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0B7557]"
+              className="inline-flex items-center gap-2 rounded-full bg-[#0B7A59] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0B7557]"
             >
               <ArrowLeft className="w-4 h-4 rtl:rotate-180" aria-hidden="true" />
               {t.blog.backToBlog}
@@ -236,7 +236,7 @@ export function ArticlePage() {
           <p className="mt-6">
             <Link
               to={getBlogHomeUrl(locale)}
-              className="inline-flex items-center gap-2 rounded-full bg-[#0E8A66] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0B7557]"
+              className="inline-flex items-center gap-2 rounded-full bg-[#0B7A59] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0B7557]"
             >
               <ArrowLeft className="w-4 h-4 rtl:rotate-180" aria-hidden="true" />
               {t.blog.backToBlog}
@@ -394,7 +394,7 @@ export function ArticlePage() {
         <Breadcrumbs items={visibleBreadcrumbs} className="mb-6" />
 
         <header className="max-w-3xl mb-8">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#86868B] dark:text-[#94A3B8]">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#64748B] dark:text-[#94A3B8]">
             Blog Article
           </p>
           {category && (
@@ -506,7 +506,7 @@ export function ArticlePage() {
                 <p className="mt-4">
                   <Link
                     to={toolHref(localizedPrimaryTool.slug, locale)}
-                    className="inline-flex items-center gap-2 rounded-full bg-[#0E8A66] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0B7557]"
+                    className="inline-flex items-center gap-2 rounded-full bg-[#0B7A59] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0B7557]"
                   >
                     {t.blog.tryTool}
                     <ArrowRight className="w-4 h-4 rtl:rotate-180" aria-hidden="true" />

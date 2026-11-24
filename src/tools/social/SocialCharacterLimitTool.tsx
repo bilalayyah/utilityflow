@@ -215,7 +215,7 @@ export default function SocialCharacterLimitTool() {
         </div>
 
         <div className="rounded-lg border border-slate-200 bg-white p-3.5 text-sm text-slate-800 whitespace-pre-wrap break-words">
-          {stats.truncatedPreview || <span className="text-slate-400">{s.previewEmpty}</span>}
+          {stats.truncatedPreview || <span className="text-slate-600">{s.previewEmpty}</span>}
         </div>
       </div>
     </div>

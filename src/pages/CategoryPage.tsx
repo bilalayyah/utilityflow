@@ -156,7 +156,7 @@ export function CategoryPage() {
                     </span>
                   </span>
                   <ChevronRight
-                    className="h-5 w-5 shrink-0 text-[#86868B] transition-transform duration-150 group-hover:translate-x-0.5 rtl:rotate-180 rtl:group-hover:-translate-x-0.5 group-hover:text-[#0E8A66] dark:group-hover:text-[#34D399]"
+                    className="h-5 w-5 shrink-0 text-[#64748B] transition-transform duration-150 group-hover:translate-x-0.5 rtl:rotate-180 rtl:group-hover:-translate-x-0.5 group-hover:text-[#0E8A66] dark:group-hover:text-[#34D399]"
                     aria-hidden="true"
                   />
                 </Link>
@@ -247,7 +247,7 @@ export function CategoryPage() {
                       <div className="text-sm font-semibold text-[#1D1D1F] truncate dark:text-[#F1F5F9]">
                         {item.name}
                       </div>
-                      <div className="text-xs text-[#86868B] tabular-nums">
+                      <div className="text-xs text-[#64748B] tabular-nums">
                         {formatString(t.category.plannedCount, { count: item.plannedToolCount })}
                       </div>
                     </div>

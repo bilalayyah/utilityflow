@@ -71,7 +71,7 @@ export function BlogCard({ article, locale }: BlogCardProps) {
         <p className="mt-2 text-sm leading-relaxed text-[#6E6E73] line-clamp-3 dark:text-[#CBD5E1]">
           {version.description}
         </p>
-        <div className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-[#86868B] dark:text-[#94A3B8]">
+        <div className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-[#64748B] dark:text-[#94A3B8]">
           <time dateTime={article.publishedAt}>{publishedDate}</time>
           <span aria-hidden="true">·</span>
           <span>

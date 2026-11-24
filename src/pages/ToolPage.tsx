@@ -28,6 +28,26 @@ export function ToolPage() {
   const ToolComponent = localized.component;
   const palette = pastelForKey(localized.id);
 
+  // CLS (2026-11-24, measured): the Suspense fallback reserves workbench
+  // space while the lazy tool chunk loads. The old single reserve
+  // (min-h 680px mobile / 480px desktop, rendered 808px / 624px with
+  // p-12 + section padding) overshoots compact workbenches by 300–580px,
+  // so when the real tool painted, everything below it jumped up —
+  // measured CLS 0.28 on /merge-pdf/ desktop. Heights below are the
+  // MEASURED settled workbench-section heights (Playwright, live site):
+  // merge-pdf 198px both widths; bmi-calculator 534px mobile / 332px
+  // desktop. min-h = section height − 96 (p-12) − section padding
+  // (32 mobile / 48 desktop). Tools not listed keep the previous
+  // default: tall text tools measure close to it (word-counter 964px
+  // mobile / 676px desktop), and their related section sits below the
+  // fold through the transition either way.
+  const WORKBENCH_FALLBACK_MIN_H: Record<string, string> = {
+    'merge-pdf': 'min-h-[70px] lg:min-h-[54px]',
+    'bmi-calculator': 'min-h-[406px] lg:min-h-[188px]',
+  };
+  const fallbackMinH =
+    WORKBENCH_FALLBACK_MIN_H[localized.id] ?? 'min-h-[680px] lg:min-h-[480px]';
+
   return (
     <ToolPageLayout tool={localized}>
       <Suspense
@@ -41,7 +61,7 @@ export function ToolPage() {
           // anything; the text is vertically centred in the reserved box.
           // Desktop workspaces are shorter, so the reserve is smaller there.
           <div
-            className={`rounded-2xl ${palette.card} p-12 text-center text-sm text-slate-500 shadow-sm min-h-[680px] lg:min-h-[480px] flex items-center justify-center`}
+            className={`rounded-2xl ${palette.card} p-12 text-center text-sm text-slate-500 shadow-sm ${fallbackMinH} flex items-center justify-center`}
           >
             {formatString(t.toolPage.loadingWorkspace, { name: localized.name })}
           </div>

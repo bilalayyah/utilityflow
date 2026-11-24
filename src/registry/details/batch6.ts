@@ -147,7 +147,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'Does the Meta Tag Generator support multilingual pages?',
         answer:
-          'It generates tags for one page at a time, so set og:locale for the page language and generate a separate tag set for each translated version.',
+          'It generates tags for one page at a time, so generate a separate tag set for each translated version of the page.',
       },
       {
         question: 'Can I download the generated meta tags as a file?',
@@ -159,6 +159,26 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
         answer:
           'No tool guarantees rankings, but accurate titles, descriptions, and social tags improve click-through rates and how your pages are presented.',
       },
+    ],
+    howItWorks: [
+      'This meta tag generator assembles one ordered <head> block from your inputs: charset and viewport first, then the title and description, the robots directive, the canonical link, and finally the Open Graph and Twitter Card tags.',
+      'Every value passes through an attribute escaper that converts &, double quotes, < and > into HTML entities, so a quote or ampersand in a title can never break the surrounding markup.',
+      'Open Graph values reuse the same title, description, canonical URL and image you entered, while og:type and og:site_name are set separately, so the social tags always match the search tags.',
+      'The social preview renders your title, description and canonical hostname inside a 1.91:1 card, giving a quick visual check of truncation before the snippet is copied or downloaded as meta-tags.html.',
+    ],
+    supportedFormats: [
+      'HTML <head> meta tags',
+      'Open Graph (og:*) tags',
+      'Twitter/X Card tags',
+      'Canonical link tags',
+      'Robots index/follow directives',
+      'og:type website, article, product',
+    ],
+    limitations: [
+      'The generator cannot check whether the canonical URL or og:image address actually exists or returns a page; a typo produces valid-looking tags that point nowhere.',
+      'It emits one fixed tag set per page and never inspects your site, so it cannot warn about duplicate titles, missing pages or tags already present in your template.',
+      'The preview is a stylised mock card, not a render from Facebook, LinkedIn or X, so each platform may still crop the image or rewrite the text differently.',
+      'Search engines may rewrite titles and descriptions in live results, so well-formed tags improve presentation without guaranteeing the exact snippet shown.',
     ],
   },
   'serp-snippet-preview': {
@@ -238,7 +258,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'What is the ideal title length for Google search results?',
         answer:
-          'Aim for under roughly 580 pixels on desktop, which usually means 50–60 characters depending on how wide the letters are.',
+          'Aim for under roughly 580 pixels on desktop — the checker passes titles of 30–65 characters, and wider letters mean fewer characters fit.',
       },
       {
         question: 'How does the SERP Snippet Preview measure pixel width?',
@@ -315,6 +335,26 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
         answer:
           'It approximates real search rendering from your browser fonts, so results are most accurate for Latin scripts and may vary for other writing systems.',
       },
+    ],
+    howItWorks: [
+      'This serp snippet preview measures your title with the browser Canvas measureText API, using a 20px Arial font, and compares the result against a 580-pixel desktop budget instead of counting characters.',
+      'Titles wider than the budget are cut with a binary search that keeps the longest fitting prefix and appends an ellipsis, mirroring how search results truncate overflowing titles.',
+      'The description is capped at 158 characters on desktop and 120 on mobile, and an optional date prefix is shown in front of it so you can see how much space the date consumes.',
+      'Your page URL is split into hostname and path segments to build a breadcrumb trail, and the bold keyword field highlights every case-insensitive match inside the title and description.',
+    ],
+    supportedFormats: [
+      'Desktop SERP simulation',
+      'Mobile SERP simulation',
+      'Canvas pixel-width measurement',
+      'Breadcrumb URL trails',
+      'Bold keyword highlighting',
+      'Title and meta description export',
+    ],
+    limitations: [
+      'Pixel widths come from your browser fonts, so the same title can measure slightly differently on another device, and non-Latin scripts are only approximated.',
+      'Google frequently rewrites titles and descriptions to match the search query, so a preview that fits perfectly may still appear differently in live results.',
+      'The tool never contacts Google and shows no ranking, click data or real search results; it is a visual simulator for one snippet at a time.',
+      'Rich results such as ratings, FAQs or sitelinks are not simulated, and the mobile view uses a fixed character fold rather than the exact layout of each phone.',
     ],
   },
   'xml-sitemap-generator': {
@@ -472,6 +512,26 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
           'Yes. Export or copy your canonical URL list from any platform, paste it here, and the tool builds a standard sitemap.xml.',
       },
     ],
+    howItWorks: [
+      'This xml sitemap generator reads one URL per line, parses each with the browser URL parser, and keeps only lines using the http or https protocol; anything else is listed as skipped.',
+      'Valid URLs are normalised and, when deduplication is on, each exact string appears once, so pasting the same address twice never creates a duplicate entry.',
+      'Every <url> entry carries a <loc> element with XML-escaped characters, plus the optional <lastmod>, <changefreq> and <priority> values you selected for the whole file.',
+      'The homepage, the first URL when its path is exactly /, is automatically raised to priority 1.0, and the finished document is wrapped in a Sitemaps 0.9 <urlset> for download as sitemap.xml.',
+    ],
+    supportedFormats: [
+      'Sitemaps 0.9 XML',
+      '<loc> canonical URLs',
+      '<lastmod> dates',
+      '<changefreq> hints',
+      '<priority> values',
+      'http and https URLs',
+    ],
+    limitations: [
+      'The tool never crawls your site or checks that a URL returns a 200 status, so a mistyped or deleted page still produces a well-formed sitemap entry.',
+      'One <lastmod> date applies to every URL in the file, and there is no per-URL date, image, video or news extension support.',
+      'It does not enforce the protocol limit of 50,000 URLs or 50 MB per file, so very large lists must be split into several sitemaps by hand.',
+      'Google ignores <priority> and <changefreq>, and a sitemap only helps discovery; it never guarantees that a listed page will be indexed.',
+    ],
   },
   'robots-txt-generator': {
     instructions: [
@@ -627,6 +687,26 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
         answer:
           'Place the file in the public/ folder or the root of your build output so it is served at https://yourdomain.com/robots.txt.',
       },
+    ],
+    howItWorks: [
+      'This robots.txt generator collects your Allow and Disallow rows and groups them by User-agent, so every crawler gets one block with its own rules instead of scattered lines.',
+      'Four starter presets seed common setups: allow everything, a SaaS app that blocks /api/ and /private/, a WordPress layout that protects /wp-admin/ while allowing admin-ajax.php, and a staging file that blocks the whole site.',
+      'A crawl-delay value, when positive, is added to each User-agent group, and each sitemap address is checked as a full http or https URL before its Sitemap: line is appended.',
+      'The finished file is plain text with groups separated by blank lines, ready to copy or download as robots.txt and place at your domain root.',
+    ],
+    supportedFormats: [
+      'User-agent groups',
+      'Allow and Disallow rules',
+      'Crawl-delay directives',
+      'Sitemap: declarations',
+      'Custom crawler User-agents',
+      'Starter presets for WordPress, SaaS and staging',
+    ],
+    limitations: [
+      'Paths are copied exactly as typed and never validated, so a mistyped path silently blocks or allows the wrong pages; test the file in Search Console after publishing.',
+      'Disallow only stops crawling, not indexing: a blocked URL can still appear in results if other sites link to it, and the file itself is publicly readable.',
+      'Googlebot ignores crawl-delay entirely, so the setting only slows crawlers that choose to respect it, such as Bingbot.',
+      'The generator cannot fetch or test your live robots.txt, and it never checks whether a rule accidentally blocks the CSS or JavaScript your pages need to render.',
     ],
   },
   'schema-markup-generator': {
@@ -784,6 +864,27 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
           'Yes. It runs entirely in your browser with no upload, so you can build schema markup without an internet connection once the page is loaded.',
       },
     ],
+    howItWorks: [
+      'This schema markup generator builds one JSON-LD object per type, always starting with @context https://schema.org and the chosen @type, then filling only the fields you completed.',
+      'Article markup combines the headline, publish date, page URL, featured image, author and publisher into a single object, with the image stored as a one-item array.',
+      'FAQPage turns each question and answer row into a Question with an acceptedAnswer, dropping any row left blank, while BreadcrumbList numbers each trail item from one upward.',
+      'Product markup nests price, currency and availability inside an Offer object, defaulting to USD and 0.00 when those fields are empty.',
+      'The JSON is serialised with two-space indentation and every < character escaped, so an answer containing </script> can never close the script block early; the result is wrapped in a <script type="application/ld+json"> tag.',
+    ],
+    supportedFormats: [
+      'Article JSON-LD',
+      'FAQPage JSON-LD',
+      'Product JSON-LD',
+      'Organization JSON-LD',
+      'BreadcrumbList JSON-LD',
+      '.jsonld file export',
+    ],
+    limitations: [
+      'Only five Schema.org types are supported, so Recipe, Event, Review and other types need hand-written JSON-LD instead.',
+      'Field values are never validated: a wrong date, a broken image URL or a price typed as text still produces syntactically valid JSON-LD.',
+      'Valid markup only makes a page eligible for rich results; search engines decide whether to show them, and FAQ answers must match visible page text or the markup is ignored.',
+      'The tool never checks your live page, so it cannot tell whether the markup you generated actually matches the content visitors see.',
+    ],
   },
   'url-slug-generator': {
     instructions: [
@@ -939,6 +1040,26 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
         answer:
           'The slug is the readable last part of a URL, like "best-cafe-tools", while the permalink is the complete URL including the domain and any folders. For quick developer text conversion with underscore separators, see Text to Slug Converter.',
       },
+    ],
+    howItWorks: [
+      'This url slug generator normalises each headline with Unicode NFD form and strips combining marks, turning Café into cafe while other scripts are removed rather than transliterated.',
+      'Ampersands become the word and, every remaining character that is not a letter, digit, space or hyphen is replaced with a space, and the text is split into lowercase tokens.',
+      'When stop-word removal is on and a headline has more than two words, filler words such as a, the and of are dropped, unless removing them would leave nothing behind.',
+      'Over-long slugs are cut at the last separator before the length limit, or mid-word when no separator sits far enough in, and the base domain and trailing slash are added for the full-URL preview.',
+    ],
+    supportedFormats: [
+      'Hyphen separators',
+      'Underscore separators',
+      'Latin diacritic transliteration',
+      'English stop-word removal',
+      'Batch headline conversion',
+      'Full-URL preview with base domain',
+    ],
+    limitations: [
+      'Only Latin diacritics are transliterated; headlines written entirely in another script can collapse to an empty slug, so add a Latin version of the key words.',
+      'Slugs are never checked against your live site, so the tool cannot warn about duplicates, reserved words or clashes with existing pages.',
+      'When the length limit falls before any usable separator, the cut can still split a word, and raising the limit is the only fix.',
+      'Renaming a live slug without a 301 redirect breaks old links and rankings; generate the replacement slug here, then map the old URL with the Canonical, Hreflang & 301 Redirect Builder.',
     ],
   },
   'keyword-density-checker': {
@@ -1096,6 +1217,26 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
           'Each n-gram size has its own total: a 500-word text has 500 single words but only 499 two-word phrases, so the same phrase count produces a slightly different percentage.',
       },
     ],
+    howItWorks: [
+      'This keyword density checker first removes <script> and <style> blocks, then strips remaining tags with a regular expression when HTML stripping is on, leaving only the visible words.',
+      'Text is lowercased and split into tokens of Unicode letters and numbers, keeping internal apostrophes and hyphens, and each token is counted once per n-gram window.',
+      'Your target phrase is matched exactly, word for word, across the joined tokens, and its density weights each hit by the number of words in the phrase.',
+      'The top fifteen terms are ranked by count, then alphabetically, with each share calculated against total words; reading time assumes 225 words per minute.',
+    ],
+    supportedFormats: [
+      'Plain text analysis',
+      'Pasted HTML analysis',
+      '1-word frequency',
+      '2-word phrase (bigram) analysis',
+      '3-word phrase (trigram) analysis',
+      'Target phrase density',
+    ],
+    limitations: [
+      'Percentages are noisy below about 300 words, so treat density figures from short snippets as rough counts rather than stable signals.',
+      'Matching is exact and literal: plurals, hyphen variants and synonyms never count toward your target phrase.',
+      'HTML stripping uses pattern matching, not a real parser, so malformed markup can leak code or menu text into the counts.',
+      'The checker sees only what you paste — no live page, no competitor URL and no search data — and there is no ideal density percentage to aim for.',
+    ],
   },
   'canonical-hreflang-generator': {
     instructions: [
@@ -1251,6 +1392,27 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
         answer:
           'Yes. Add as many locale rows as your site supports — the tool builds a complete reciprocal set covering every language version you enter.',
       },
+    ],
+    howItWorks: [
+      'This hreflang generator emits one self-referencing canonical link plus a <link rel="alternate"> tag per locale, and the same set again as <xhtml:link> lines for an XML sitemap.',
+      'Each language code is checked against a strict pattern — x-default, or two lowercase letters with an optional uppercase region such as en-US — and invalid codes are skipped with a warning.',
+      'In redirect mode, source and destination pairs split on commas, tabs, arrows or wide spacing are reformatted into Cloudflare Pages _redirects, Apache Redirect 301 or Nginx exact-match location rules.',
+      'Redirect sources gain a leading slash when missing, while destinations are copied verbatim, so an absolute URL stays absolute and a relative path stays relative.',
+    ],
+    supportedFormats: [
+      'HTML hreflang link tags',
+      'XML sitemap xhtml:link lines',
+      'Canonical link tags',
+      'x-default fallback locales',
+      'Cloudflare Pages _redirects',
+      'Apache .htaccess 301 rules',
+      'Nginx 301 location rules',
+    ],
+    limitations: [
+      'Alternate URLs are never validated, so a mistyped address passes through untouched, and the tool never checks that hreflang sets are reciprocal across your pages.',
+      'Only two-letter language codes with an optional region are accepted, so three-letter codes and script subtags such as zh-Hant are rejected.',
+      'The sample rows show example.com addresses, not real UtilityFlow pages, and must be replaced with your own URLs before the output is deployed.',
+      'Nginx output uses exact-match location rules, which do not cover subpaths, and there is no wildcard or folder-wide redirect support in any format.',
     ],
   },
   'on-page-seo-checker': {
@@ -1408,6 +1570,26 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
           'Run one whenever you change a template, publish a new page type, or after a redesign — and re-audit after fixes to confirm the score improved.',
       },
     ],
+    howItWorks: [
+      'This on page seo checker parses your pasted HTML with the browser DOMParser, building an inert document tree that is inspected without running any script or loading any image.',
+      'Six checks run against that tree: title length from 30 to 65 characters, meta description from 110 to 165, exactly one H1, a present canonical link, alt text on every image, and both og:title and at least one JSON-LD block.',
+      'Headings H1 to H4 are extracted in document order with their text cut at 120 characters, and every link is tallied as internal or external by whether its address starts with http:// or https://.',
+      'The score is simply how many of the six checks passed, with the robots meta value shown alongside so a noindex page is never mistaken for a broken one.',
+    ],
+    supportedFormats: [
+      'Pasted HTML source',
+      'DOMParser HTML parsing',
+      'Title and meta description checks',
+      'H1–H4 heading outline',
+      'Image alt attribute audit',
+      'JSON-LD presence check',
+    ],
+    limitations: [
+      'Only pasted HTML is audited: the tool cannot fetch a live URL, crawl a site or see JavaScript-rendered tags unless you paste the rendered outerHTML from DevTools.',
+      'Presence is not quality — a canonical tag pointing at the wrong URL still passes, and JSON-LD blocks are counted, never parsed or validated.',
+      'An absolute link to your own domain counts as external, and an empty alt attribute counts as missing, so read the tallies with those rules in mind.',
+      'DOMParser silently repairs malformed HTML, so a page that parses cleanly here can still contain broken markup in its original source.',
+    ],
   },
   'robots-meta-tag-generator': {
     instructions: [
@@ -1563,6 +1745,27 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
         answer:
           'If a page should be gone for good, delete it and let it return a 404 or 410 status. Use noindex when the page must stay live but should not appear in search results.',
       },
+    ],
+    howItWorks: [
+      'This robots meta tag builder joins your chosen directives into one comma-separated string in a fixed order: index or noindex, follow or nofollow, then archive, snippet and preview limits.',
+      'Snippet and image caps are dropped automatically when they conflict — max-snippet disappears with nosnippet, and max-image-preview disappears with noimageindex — so the output never contradicts itself.',
+      'The same directive string is emitted three ways: an HTML <meta name="robots"> tag for pages, a plain X-Robots-Tag header for PDFs and other non-HTML files, and a Cloudflare Pages _headers block for a path pattern.',
+      'Defaults favour visibility with large image previews: index, follow, max-snippet -1, max-image-preview large and max-video-preview -1, ready to tighten for private pages.',
+    ],
+    supportedFormats: [
+      'HTML robots meta tags',
+      'X-Robots-Tag HTTP headers',
+      'Cloudflare Pages _headers blocks',
+      'noindex and nofollow directives',
+      'max-snippet caps',
+      'max-image-preview:large, standard, none',
+      'max-video-preview caps',
+    ],
+    limitations: [
+      'Only the listed directives are supported: there is no per-crawler targeting, no unavailable_after date and no no-translate option.',
+      'Noindex works only after search engines recrawl the page, which can take days, and it fails entirely when robots.txt blocks the crawl first.',
+      'The path pattern in the _headers block is copied as typed and never checked against your site, so a wrong pattern silently applies the header nowhere.',
+      'Directives control indexing and snippets only; they cannot hide a page from visitors, protect a private file, or remove a URL that other sites link to.',
     ],
   },
 };

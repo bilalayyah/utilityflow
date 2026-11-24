@@ -160,6 +160,19 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
           'Yes. The tool runs locally in your browser, so your date of birth never leaves your device.',
       },
     ],
+    howItWorks: [
+      'The age calculator subtracts your date of birth from the comparison date using real calendar arithmetic, not a 365-day approximation. It first counts whole years, then whole months, then the remaining days, borrowing days from the previous month whenever the target day-of-month is smaller than the birth day.',
+      'Month lengths come from the actual calendar, so February contributes 28 days in common years and 29 in leap years, while other months contribute 30 or 31 days. Leap years follow the Gregorian rule: divisible by 4, except centuries, unless also divisible by 400.',
+      'Total days are counted by converting both dates to UTC midnight timestamps and dividing the difference by 86,400,000 milliseconds per day. Using UTC avoids daylight-saving shifts, so a spring or autumn clock change can never add or remove a day from your age.',
+      'The next-birthday countdown looks for your birthday in the comparison year and, if it has already passed, in the following year. For a February 29 birthday in a non-leap year, the tool clamps the date to February 28 so the countdown stays accurate.',
+      'If you need the gap between two arbitrary dates rather than an age from birth, the Date Difference Calculator applies the same calendar maths to any start and end date.',
+    ],
+    supportedFormats: ['YYYY-MM-DD date input', 'Past, present, or future comparison dates', 'Leap Day (Feb 29) birthdays', 'Years, months, and days breakdown', 'Total days, weeks, and months', 'Next-birthday countdown in days'],
+    limitations: [
+      'The result is a calendar age only; it cannot confirm legal age, because official eligibility depends on documents, local law, and the exact time of birth, none of which the tool knows.',
+      'Total hours are approximate, calculated as total days times 24, so they ignore the time of day you were born and any daylight-saving transitions in your location.',
+      'Dates before the Gregorian calendar reform and dates far in the past may not match historical calendars, since the tool applies modern Gregorian rules to every year.',
+    ],
   },
   'percentage-calculator': {
     instructions: [
@@ -201,12 +214,19 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
         output: '+25% (+30 absolute change)',
         explanation: 'Calculated as ((150 - 120) / |120|) × 100 = +25%.',
       },
+      {
+        title: 'Finding a test score as a percentage',
+        input: 'Marks: 42 out of 50',
+        output: '84%',
+        explanation: 'Divides 42 by 50 and multiplies by 100: (42 ÷ 50) × 100 = 84%.',
+      },
     ],
     benefits: [
       'Displays all three percentage formulas side by side on one screen',
       'Handles decimals, negative starting values, and zero-denominator guards cleanly',
       'Shows absolute delta alongside percentage change',
       'Requires zero page reloads or submit clicks',
+      'Explains each formula on screen so you can check the maths yourself',
     ],
     useCases: [
       'Checking month-over-month traffic, sales, or conversion rate growth',
@@ -315,6 +335,19 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
         answer:
           'The three cards cover X% of Y, what percent X is of Y, and percentage change; for a reverse calculation, divide the known amount by the percentage as a decimal.',
       },
+    ],
+    howItWorks: [
+      'The percentage calculator runs three independent formulas side by side. X% of Y multiplies Y by X divided by 100, X is what % of Y divides X by Y and multiplies by 100, and percentage change divides the difference by the absolute starting value.',
+      'Percentage change uses the absolute value of the starting number as its denominator, so a move from −50 to −25 still reports a meaningful +50% change instead of a misleading negative figure. The signed result shows whether the value rose or fell.',
+      'Every input accepts decimals and negative numbers, and each card recalculates on every keystroke with full floating-point precision. Results are rounded only for display, using up to six decimal places, so a figure like 33.333333% is shown rather than silently truncated to 33%.',
+      'Zero denominators are guarded, not hidden: if the whole is zero in the what-percent card, or the starting value is zero in the change card, the tool shows a validation message instead of infinity or NaN.',
+      'For a discount expressed as a percentage, the Discount & Margin Calculator applies the same change formula to prices and adds tax, while this tool stays focused on the pure percentage maths behind it.',
+    ],
+    supportedFormats: ['X% of Y', 'X is what % of Y', 'Percentage increase / decrease', 'Decimal percentages (e.g. 7.25%)', 'Negative starting values', 'Results to 6 decimal places'],
+    limitations: [
+      'Percentages describe relative change only; a 50% rise followed by a 50% fall does not return to the starting value, because the second change applies to a larger base.',
+      'The tool cannot reverse-engineer an original price from a discounted price on its own — divide the known amount by the remaining percentage as a decimal to work backwards.',
+      'Display rounding to six decimal places can hide tiny differences in very large numbers, so treat the last displayed digit as approximate when values run into the millions.',
     ],
   },
   'loan-emi-calculator': {
@@ -472,6 +505,18 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
           'Yes, you can toggle between the Yearly Summary and the Monthly Schedule views to see repayment in either level of detail.',
       },
     ],
+    howItWorks: [
+      'The loan EMI calculator uses the standard reducing-balance formula: EMI equals P times r times (1 + r) to the power n, divided by (1 + r) to the power n minus 1, where P is the principal, r is the monthly rate (annual rate divided by 12 and by 100), and n is the number of monthly payments.',
+      'Because the balance reduces each month, the interest part of every payment shrinks while the principal part grows. The tool builds the full schedule month by month: interest equals the remaining balance times the monthly rate, and the rest of the EMI repays principal.',
+      'A 0% promotional rate is handled as a special case — the EMI is simply the principal divided by the number of months — so the tool never divides by zero. Tenure can be entered in years or months, and years are converted to months by multiplying by 12.',
+      'The summary also shows total interest, total repayment, and the interest share of everything you pay. For a mortgage with a down payment, taxes, and insurance, the Mortgage Calculator extends the same formula with those extra monthly costs.',
+    ],
+    supportedFormats: ['Tenure in years or months', '0% promotional APR loans', 'Annual rates from 0% to 100%', 'Terms from 1 to 600 months', 'Monthly amortization schedule', 'Yearly amortization summary'],
+    limitations: [
+      'The EMI assumes a fixed interest rate for the whole term, so it does not model floating-rate loans, rate resets, or prepayments that change the schedule.',
+      'Processing fees, insurance, late-payment charges, and taxes are not included, so the EMI covers the loan instalment only — always check the total cost of the loan, not just the monthly figure.',
+      'Results are rounded to two decimal places for display, and the final payment is adjusted to clear the remaining balance, so the last instalment can differ from the standard EMI by a few cents.',
+    ],
   },
   'mortgage-calculator': {
     instructions: [
@@ -628,6 +673,18 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
           'Yes. Enter a realistic home price, down payment, rate, tax, and insurance to see the true monthly PITI cost before you start shopping.',
       },
     ],
+    howItWorks: [
+      'The mortgage calculator starts from the home price and your down payment percentage: the loan amount is the price minus the down payment. Principal and interest are then calculated with the same reducing-balance formula as the Loan & EMI Calculator, using the monthly rate and the term in months.',
+      'Property tax and home insurance are annual figures, so each is divided by 12 and added to the monthly payment. HOA dues are already monthly and are added as entered, giving a complete estimated monthly payment rather than a principal-and-interest figure alone.',
+      'Private mortgage insurance is estimated at 0.5% of the loan amount per year whenever the down payment is below 20% of the home price. At 20% down or more, PMI is zero, which is why a larger deposit can lower the monthly payment twice over.',
+      'The breakdown separates principal and interest, taxes, insurance, HOA dues, and PMI, and the lifetime interest total shows what the loan costs beyond the borrowed amount over the full term.',
+    ],
+    supportedFormats: ['Down payment as a percentage (0–99.9%)', 'Terms from 1 to 50 years', 'Interest rates from 0% to 50% APR', 'Annual property tax and insurance', 'Monthly HOA dues', 'PMI estimate below 20% down'],
+    limitations: [
+      'The PMI figure is a flat 0.5%-per-year estimate, not an actual quote from a lender — real PMI depends on your credit score, loan type, and insurer, and it usually drops off once equity reaches 20%.',
+      'Tax and insurance are treated as fixed annual amounts, but both can rise over a 30-year term, and the tool does not model escrow changes, rate adjustments, or extra principal payments.',
+      'This is an estimate for planning, not a loan offer: closing costs, points, and lender fees are excluded, and the final payment depends on underwriting by the lender.',
+    ],
   },
   'compound-interest-calculator': {
     instructions: [
@@ -668,6 +725,12 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
         input: 'Initial: $10,000 · Monthly: $500 · Return: 7% · Years: 20 · Monthly Compounding',
         output: 'Final Balance: $300,850.56 · Contributions: $130,000 · Interest Earned: $170,850.56',
         explanation: 'Compound returns account for more than 56% of the ending portfolio value.',
+      },
+      {
+        title: 'Pure lump-sum growth, no contributions',
+        input: 'Initial: $10,000 · Monthly: $0 · Return: 10% · Years: 5 · Annual Compounding',
+        output: 'Final Balance: $16,105.10 · Contributions: $10,000 · Interest Earned: $6,105.10',
+        explanation: 'Matches the closed-form result 10,000 × 1.10^5 = $16,105.10.',
       },
     ],
     benefits: [
@@ -784,6 +847,18 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
           'The final balance includes your initial deposit, all monthly contributions, and all compound interest earned over the investment duration.',
       },
     ],
+    howItWorks: [
+      'The compound interest calculator simulates growth month by month rather than applying a single formula once. Each month your contribution is added to the balance first, then interest is applied, so new deposits start earning returns immediately.',
+      'With monthly compounding, the balance grows by the annual rate divided by 12 each month. Quarterly compounding applies the annual rate divided by 4 every three months, annual compounding applies the full rate once a year, and daily compounding uses an effective monthly factor from the daily rate.',
+      'The classic closed-form result matches the simulation when there are no monthly contributions: $10,000 at 10% compounded annually for 5 years grows to $16,105.10, because 10,000 times 1.10 to the power of 5 equals 16,105.10.',
+      'The year-by-year table separates total contributed from interest earned, so you can see when compound growth overtakes your own deposits — usually the point where the interest column starts growing faster than the contributions column.',
+    ],
+    supportedFormats: ['Daily (365/yr) compounding', 'Monthly (12/yr) compounding', 'Quarterly (4/yr) compounding', 'Annual (1/yr) compounding', 'Monthly contributions', 'Horizons from 1 to 100 years'],
+    limitations: [
+      'The return rate is assumed constant every year, but real investments fluctuate — a 7% average can still include losing years, so the projection is a smooth scenario, not a forecast.',
+      'Taxes, fees, and inflation are not included, so the final balance is a nominal pre-tax figure; in real terms its purchasing power will be lower after decades of inflation.',
+      'Contributions are added at the start of each month in the simulation, which slightly raises the result versus end-of-month deposits — a small timing difference, not an error.',
+    ],
   },
   'discount-margin-calculator': {
     instructions: [
@@ -820,10 +895,10 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
     ],
     examples: [
       {
-        title: 'Stacked retail discount calculation',
-        input: 'Original: $120 · Discount 1: 25% · Extra Coupon: 10% · Tax: 0%',
-        output: 'Final Price: $81.00 · Saved: $39.00 · Effective Discount: 32.5%',
-        explanation: 'Sequential discounts multiply (0.75 × 0.90 = 0.675), yielding 32.5% total off rather than 35%.',
+        title: 'Single discount with tax on the sale price',
+        input: 'Original: $120 · Discount: 25% · Tax: 8%',
+        output: 'Savings: $30.00 · Sale Price: $90.00 · Tax: $7.20 · Final Total: $97.20',
+        explanation: 'Tax applies to the discounted $90, not the original $120, so 8% adds $7.20.',
       },
     ],
     benefits: [
@@ -939,6 +1014,18 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
         answer:
           'It is the single discount % that gives the same final price as all your stacked discounts combined — for example, 20% then 10% equals an effective 28% off.',
       },
+    ],
+    howItWorks: [
+      'The discount & margin calculator has two modes. In sale-discount mode it subtracts the discount from the original price — savings equal price times discount percent divided by 100 — then adds tax on the discounted price, not the original.',
+      'In profit-margin mode it works from cost and selling price: gross profit is selling price minus cost, margin is profit divided by selling price times 100, and markup is profit divided by cost times 100. Margin and markup answer different questions, so the tool shows both.',
+      'Tax is always applied after the discount, which matches how most stores charge it: a $120 item at 25% off costs $90 before tax, and 8% tax on $90 adds $7.20, giving a $97.20 total.',
+      'Discount and tax percentages are each capped at 100%, and negative prices are rejected, so the tool shows a validation message instead of a nonsensical negative total.',
+    ],
+    supportedFormats: ['Sale discount mode', 'Profit margin & markup mode', 'Optional tax on discounted price', 'Discount and tax from 0% to 100%', 'Decimal prices and percentages'],
+    limitations: [
+      'Only one discount percentage is applied per calculation — stacked coupons must be run as separate steps, feeding the first sale price back in as the new original price.',
+      'Margin is calculated on the selling price and markup on the cost price, so the two numbers differ for the same product; quoting the wrong one can overstate profitability.',
+      'The tool assumes a single flat tax rate and no rounding rules for cash payments, so totals may differ by a cent from a till that rounds to the nearest five cents.',
     ],
   },
   'vat-tax-calculator': {
@@ -1096,6 +1183,18 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
           'Yes. GST uses the same net/gross formulas as VAT, so enter your amount and the local GST rate — for example 10% in Australia or 5% federal GST in Canada.',
       },
     ],
+    howItWorks: [
+      'The VAT & sales tax calculator works in two directions. In add-tax mode the tax is the net amount times the rate divided by 100, and the gross total is net plus tax — so $1,000 at 20% becomes $1,200 with $200 of tax.',
+      'In remove-tax mode the tool reverses the maths: the net amount is the gross total divided by 1 plus the rate, and the tax is gross minus net. Dividing $120 by 1.20 gives $100 net and $20 tax, not the $24 you would get by wrongly taking 20% of the gross.',
+      'Rate presets cover 5%, 7%, 10%, 15%, 20%, and 21%, matching common VAT and sales-tax rates, but any rate from 0% to 100% can be typed in for a jurisdiction the presets do not cover.',
+      'For a price that is first discounted and then taxed, run the discount in the Discount & Margin Calculator first, then enter the discounted price here so the tax is charged on the correct base.',
+    ],
+    supportedFormats: ['Add tax to a net amount', 'Remove (extract) tax from a gross amount', 'Rate presets: 5%, 7%, 10%, 15%, 20%, 21%', 'Custom rates from 0% to 100%', 'Decimal amounts and rates'],
+    limitations: [
+      'The tool applies one flat rate to the whole amount, so it cannot split a receipt across mixed rates, exemptions, or zero-rated items — those need separate calculations per line.',
+      'Tax rules differ by country and by product, and rates change; the presets are common values, not legal advice, so confirm the rate that applies to your sale before invoicing.',
+      'Results are rounded to two decimal places, and extracting tax from a rounded gross total can leave a one-cent difference versus the original invoice.',
+    ],
   },
   'salary-calculator': {
     instructions: [
@@ -1252,6 +1351,19 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
           'No. It converts base pay only. Add bonuses or commission separately to the annual figure for a fuller picture.',
       },
     ],
+    howItWorks: [
+      'The salary & paycheck converter first turns any pay frequency into an annual gross figure. Hourly pay multiplies by hours per week times weeks per year, daily pay assumes five working days a week, weekly pay multiplies by weeks per year, biweekly by half that, and monthly by 12.',
+      'Hours per week and weeks per year are your own inputs, defaulting to 40 and 52, so a 2,080-hour full-time year is the baseline but part-time schedules and unpaid leave can be modelled by lowering either number.',
+      'Every row in the table — hourly, daily, weekly, biweekly, monthly, and annual — is then derived from the same annual gross, so the figures always agree with each other instead of being rounded independently.',
+      'Estimated net pay applies a single flat tax rate to each gross figure: net equals gross times one minus the tax rate divided by 100. The default 22% is only a starting point — replace it with your own effective rate.',
+      'If you track working hours with the Time Duration Calculator, its weekly total plugs straight into the hours-per-week field here, turning logged time into a pay figure.',
+    ],
+    supportedFormats: ['Hourly, daily, weekly, biweekly, monthly, annual pay', 'Custom hours per week (up to 168)', 'Custom weeks per year (up to 52.2)', 'Effective tax rate from 0% to 99%', 'Gross and estimated net side by side'],
+    limitations: [
+      'The tax figure is a single flat percentage, not a real tax calculation — it ignores brackets, allowances, deductions, pensions, and social-security contributions, so net pay is an estimate.',
+      'Daily pay assumes a five-day working week and no overtime, bonuses, or shift premiums, so irregular schedules will not match the table exactly.',
+      'Unpaid leave is only modelled through the weeks-per-year input, and the tool cannot split a year into paid and unpaid periods.',
+    ],
   },
   'tip-calculator': {
     instructions: [
@@ -1292,6 +1404,12 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
         input: 'Bill: $160.00 · Tip: 20% · People: 4',
         output: 'Tip: $32.00 · Total: $192.00 · Per Person: $48.00',
         explanation: 'Adds 20% gratuity ($32) and divides $192 evenly across 4 guests.',
+      },
+      {
+        title: 'Rounding the total up for a cash payment',
+        input: 'Bill: $84.50 · Tip: 18% · People: 2 · Rounding: Total up',
+        output: 'Tip: $15.50 · Total: $100.00 · Per Person: $50.00 · Effective tip: 18.3%',
+        explanation: 'Unrounded total $99.71 rounds up to $100, so the tip becomes $15.50 instead of $15.21.',
       },
     ],
     benefits: [
@@ -1408,6 +1526,19 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
           'Enter the full bill total and the number of guests. The calculator shows the tip, the total, and what each person owes.',
       },
     ],
+    howItWorks: [
+      'The tip & bill split calculator multiplies the bill by the tip percentage divided by 100 to get the tip, then adds it to the bill for the total. An $84.50 bill at 18% gives a $15.21 tip and a $99.71 total.',
+      'Splitting divides the total evenly by the number of people, from 1 to 100. The tool also shows the tip per person, so each guest can see their share of the gratuity as well as their share of the bill.',
+      'Two rounding modes change how the split is calculated. Rounding the total up raises the whole bill to the next dollar and recomputes the tip from the new total; rounding per person up raises each share to the next dollar, which can push the effective tip above the percentage you chose.',
+      'The effective tip percentage is recalculated after any rounding, so you can see exactly what rate you actually paid — useful when a rounded-up total quietly turns an 18% tip into 19% or more.',
+      'Tip percentages are just percentages, so the Percentage Calculator can check the same maths from the other direction, for example working out what percentage a fixed tip amount represents.',
+    ],
+    supportedFormats: ['Tip presets: 10%, 15%, 18%, 20%, 25%', 'Custom tip from 0% to 200%', 'Split between 1 and 100 people', 'No rounding, round total up, round per person up', 'Effective tip % after rounding'],
+    limitations: [
+      'The tip is calculated on the pre-tax bill total you enter, so if your bill already includes tax or a service charge, the tip will be slightly higher than a tip on the food alone.',
+      'Rounding per person up can raise the effective tip noticeably on small bills split many ways, because each round-up compounds across the group.',
+      'The tool does not know local tipping customs or whether a service charge is already included, so check the receipt before adding a tip on top of one.',
+    ],
   },
   'bmi-calculator': {
     instructions: [
@@ -1448,6 +1579,12 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
         input: 'Height: 175 cm · Weight: 70 kg',
         output: 'BMI: 22.9 kg/m² · WHO Category: Normal weight (56.7 – 76.3 kg)',
         explanation: 'Calculated as 70 / (1.75 × 1.75) = 22.86 kg/m².',
+      },
+      {
+        title: 'Imperial adult BMI check',
+        input: 'Height: 5 ft 11 in · Weight: 176 lbs',
+        output: 'BMI: 24.5 kg/m² · WHO Category: Normal weight (133 – 179 lbs)',
+        explanation: 'Converts 71 in to 1.80 m and 176 lbs to 79.8 kg, then applies kg / m².',
       },
     ],
     benefits: [
@@ -1563,6 +1700,19 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
         answer:
           'The maths is exact for the numbers you enter, but the result is only as accurate as your height and weight measurements.',
       },
+    ],
+    howItWorks: [
+      'The BMI calculator divides weight in kilograms by height in metres squared — BMI equals kg divided by m². For 180 cm and 80 kg that is 80 divided by 1.8 squared, giving 24.7, which sits inside the WHO normal range.',
+      'Imperial inputs are converted first: inches are multiplied by 0.0254 to get metres and pounds by 0.45359237 to get kilograms, so the same formula works in both unit systems without a separate imperial equation.',
+      'The result is classified with the standard WHO bands: below 18.5 is underweight, 18.5 to 24.9 is normal weight, 25 to 29.9 is overweight, and 30 or above is obesity. The boundary values sit in the higher band, so exactly 25.0 counts as overweight.',
+      'The healthy weight range shown beside your result is the same formula run backwards: 18.5 times height squared gives the lightest healthy weight, and 24.9 times height squared gives the heaviest, in kilograms or pounds to match your units.',
+      'BMI is only a screening number, so the Calorie & TDEE Calculator pairs naturally with it: once you know your category, it estimates the daily calories that maintain, lose, or gain weight.',
+    ],
+    supportedFormats: ['Metric: centimetres and kilograms', 'Imperial: feet, inches, and pounds', 'WHO classification bands', 'Healthy weight range in kg or lbs', 'Heights from 20 to 110 inches', 'Weights from 30 to 1,100 lbs'],
+    limitations: [
+      'BMI cannot tell muscle from fat, so athletes and very muscular people can score as overweight while carrying little body fat, and older adults can score as normal while carrying more fat than is healthy.',
+      'The WHO bands are population averages and do not adjust for age, sex, ethnicity, or pregnancy, so a single number is never a diagnosis on its own.',
+      'Height and weight are rounded only for display, but a small measuring error — a centimetre of height or half a kilo of weight — can shift the BMI by a few tenths near a band boundary.',
     ],
   },
   'calorie-calculator': {
@@ -1720,6 +1870,18 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
           'The formula was designed for adults, so results for teenagers or much older adults are rough estimates only. Young people should get nutrition guidance from a parent and a health professional.',
       },
     ],
+    howItWorks: [
+      'The calorie calculator first estimates basal metabolic rate with the Mifflin-St Jeor equation: 10 times weight in kilograms, plus 6.25 times height in centimetres, minus 5 times age, plus 5 for men or minus 161 for women.',
+      'Maintenance calories (TDEE) multiply BMR by an activity factor: 1.2 sedentary, 1.375 lightly active, 1.55 moderately active, 1.725 very active, and 1.9 extra active.',
+      'Weight-loss targets subtract 250 kcal for a mild loss and 500 kcal for about 0.5 kg per week, with a floor of 1,200 kcal; lean gain adds 250 kcal instead.',
+      'The macro split at maintenance is 30% protein, 40% carbohydrates, and 30% fat, converted at 4 kcal per gram for protein and carbohydrate and 9 for fat.',
+    ],
+    supportedFormats: ['Metric: centimetres and kilograms', 'Imperial: feet, inches, and pounds', 'Male and female BMR formulas', 'Five activity levels (1.2×–1.9×)', 'Loss, maintenance, and lean-gain targets', 'Macro split in grams (30/40/30)'],
+    limitations: [
+      'Mifflin-St Jeor estimates an average person, so it can miss by 10% or more for very muscular, very lean, or older bodies, which it cannot distinguish.',
+      'Activity factors are broad categories, not measured expenditure — a desk worker who trains hard can fall between two levels, and TDEE may be off by a few hundred calories.',
+      'The 1,200 kcal floor is a general guardrail, not medical advice; anyone with a medical condition or pregnancy should consult a clinician before restricting calories.',
+    ],
   },
   'date-difference-calculator': {
     instructions: [
@@ -1875,6 +2037,19 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
         answer:
           'Adding months clamps to the last valid day of the target month, so January 31 plus one month lands on February 28 or 29 instead of March 2 or 3.',
       },
+    ],
+    howItWorks: [
+      'Both dates are parsed as UTC midnight timestamps, so daylight-saving transitions can never add or remove an hour from the gap. Total days are the timestamp difference divided by 86,400,000 milliseconds per day.',
+      'The calendar breakdown counts whole years and months first, borrowing days from the previous month when the end day is smaller, using the real length of each month.',
+      'Weekdays and weekends are counted from full weeks of five weekdays and two weekend days, plus each leftover day checked in turn.',
+      'The inclusive-end toggle adds one day, so Monday to Friday counts five days instead of four. Without it, two identical dates differ by zero.',
+      'A second mode adds or subtracts years, months, and days from a base date, clamping the day when the target month is shorter — January 31 plus one month lands on February 28.',
+    ],
+    supportedFormats: ['Difference between two dates', 'Add / subtract years, months, days', 'Inclusive-end toggle', 'Weekday / weekend split', 'Total days, weeks, and months'],
+    limitations: [
+      'Public holidays are not excluded, so the weekday count is a calendar count, not a working-day count — subtract local holidays separately for project planning.',
+      'Dates are treated as whole days with no time component, so two timestamps on the same date always differ by zero even if they are hours apart.',
+      'The tool applies modern Gregorian calendar rules to every date, so spans crossing the 1582 calendar reform or other historical changes will not match historical records.',
     ],
   },
   'time-duration-calculator': {
@@ -2032,6 +2207,19 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
           'Check that every row was entered in the right mode, that no break was counted twice, and that overnight shifts have the rollover option enabled.',
       },
     ],
+    howItWorks: [
+      'The time duration calculator converts every time into seconds since midnight — hours times 3,600 plus minutes times 60 plus seconds — then subtracts, so the maths never depends on clock arithmetic.',
+      'In between-times mode, an end time earlier than the start is treated as an overnight shift when rollover is on: 24 hours are added, so 22:00 to 06:00 measures 8 hours. With rollover off, the tool shows an error.',
+      'A break deduction in minutes is subtracted from the elapsed time, and the tool rejects a break longer than the shift itself. The result is shown as hours, minutes, and seconds, plus decimal hours and total minutes for payroll use.',
+      'In add-durations mode, any number of labelled rows can be summed — morning and afternoon sessions, for example — and the total is shown in the same formats, including a 24-hour-day equivalent for long totals.',
+      'For converting the result into pay, the Salary & Paycheck Converter takes the decimal-hours figure and turns it into hourly, weekly, and monthly earnings.',
+    ],
+    supportedFormats: ['Time between two times (HH:MM:SS)', 'Overnight rollover past midnight', 'Break deduction in minutes (0–1,440)', 'Add multiple durations', 'Decimal hours and total minutes', '24-hour-day equivalent'],
+    limitations: [
+      'The tool works with times of day, not dates, so a shift longer than 24 hours cannot be entered in between-times mode — use the add-durations mode for multi-day totals.',
+      'Seconds are optional in the input, and a missing seconds field is treated as zero, so durations are exact only to the precision you type.',
+      'Breaks are a single flat deduction, so split breaks, paid breaks, and overtime thresholds are not modelled — subtract the minutes of each break in one total.',
+    ],
   },
   'unit-converter': {
     instructions: [
@@ -2187,6 +2375,18 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
         answer:
           'The tool shows full precision so engineering and science work stays accurate. For everyday use, simply round the result to the decimals you need.',
       },
+    ],
+    howItWorks: [
+      'Every conversion routes through a base unit: the input is multiplied by its factor to the base, then divided by the factor of the target unit. Length uses metres, weight uses kilograms, and storage uses bytes.',
+      'Temperature is the exception, because its scales have different zero points: Celsius to Fahrenheit uses F equals C times 9/5 plus 32, and Kelvin shifts by 273.15, so the tool applies offset formulas instead of plain multiplication.',
+      'Digital storage keeps decimal and binary units separate: kilobytes, megabytes, and gigabytes use powers of 1,000, while kibibytes, mebibytes, and gibibytes use powers of 1,024. That is why 1,000 GB shows as 931.32 GiB.',
+      'Volume units are US customary — fluid ounces, cups, pints, quarts, and gallons — so a UK pint or imperial gallon will not match.',
+    ],
+    supportedFormats: ['Length: mm, cm, m, km, in, ft, yd, mi', 'Weight: mg, g, kg, tonne, oz, lb, st', 'Temperature: °C, °F, K', 'Area: cm², m², ha, km², ft², yd², acre, mi²', 'Volume: mL, L, m³, fl oz, cup, pt, qt, gal (US)', 'Speed: m/s, km/h, mph, kn, ft/s', 'Digital storage: B, KB, MB, GB, TB, KiB, MiB, GiB'],
+    limitations: [
+      'The converter handles seven categories only — length, weight, temperature, area, volume, speed, and digital storage — so currencies, time zones, and cooking measures like tablespoons are out of scope.',
+      'All factors are exact defined constants, but display rounding can hide the last digits on very large or very small results, so treat the final digit as approximate.',
+      'US customary volume units are used throughout, and the tool does not convert between US and imperial gallons or pints — check which system your recipe or manual uses first.',
     ],
   },
 };

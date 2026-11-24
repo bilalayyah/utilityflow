@@ -45,6 +45,12 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
         output: 'merged-document.pdf (5 pages)',
         explanation: 'Copies all vector pages, fonts, and embedded images into a single PDF container.',
       },
+      {
+        title: 'Merging a three-part client proposal into one file',
+        input: 'proposal-part1.pdf (6 pages) + proposal-part2.pdf (4 pages) + pricing.pdf (2 pages)',
+        output: 'merged-document.pdf (12 pages, in queue order)',
+        explanation: 'Each part is copied in queue order, so the cover, body, and pricing appendix read as one continuous document ready to send.',
+      },
     ],
     benefits: [
       'Zero file uploads keep contracts, tax returns, and NDAs strictly on your machine',
@@ -57,6 +63,26 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       'Combining scanned multi-part tax documents before filing',
       'Merging lecture slides or study guides into one printable packet',
       'Assembling monthly expense invoices into a single accounting PDF',
+    ],
+    howItWorks: [
+      'When you merge PDF files here, the tool creates a brand-new empty document in your browser and copies every page from each source file into it, in exactly the order shown in your queue. Pages are copied as vector data with pdf-lib, so text, fonts, and embedded images keep their original quality.',
+      'The queue order is the merge order: the first file in the list contributes the opening pages, and each following file appends its pages after them. Use the up and down arrows to rearrange files before merging, because the finished document follows that sequence page by page.',
+      'Each file is checked before it joins the queue: the tool looks for a %PDF header in the first 1,024 bytes and rejects files that are empty, truncated, or password-protected with a clear message. At least two files are required, since merging a single file would only copy it unchanged.',
+      'The merged file downloads as one PDF, named with your chosen filename or merged-document.pdf by default. Page sizes and orientations are kept exactly as they were, so a mix of portrait and landscape pages stays mixed, and text-based pages remain selectable and searchable.',
+    ],
+    supportedFormats: [
+      'PDF (.pdf)',
+      'Unencrypted PDF files',
+      'Text-based PDF pages',
+      'Scanned image PDF pages',
+      'Mixed portrait and landscape pages',
+      'Multi-file queues (2 or more PDFs)',
+    ],
+    limitations: [
+      'Only unencrypted PDF files can be merged; a password-protected file is rejected until you unlock it elsewhere first.',
+      'Document outlines, bookmarks, and interactive form fields are generally not carried into the new file, because the tool builds a fresh document from copied pages.',
+      'There is no fixed file-size limit, but every file is held in browser memory, so very large documents can slow down or fail on low-memory devices.',
+      'Merging does not compress or shrink anything: the output is roughly the sum of its inputs, so combining many image-heavy scans produces a large file.',
     ],
     faqs: [
       {
@@ -201,6 +227,12 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
         output: 'contract-extracted.pdf (4 pages)',
         explanation: 'Exports pages 1, 10, 11, and 12 in ascending sequence while leaving your original file untouched.',
       },
+      {
+        title: 'Splitting a duplex scan into odd and even halves',
+        input: '40-page duplex scan · Mode: Odd Pages Only',
+        output: 'contract-extracted.pdf (20 odd pages)',
+        explanation: 'Odd pages land in one file and even pages in another, so each half can be re-scanned or filed separately without touching the original.',
+      },
     ],
     benefits: [
       'Flexible range parser catches out-of-bounds or reversed ranges before saving',
@@ -213,6 +245,26 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       'Separating individual invoices bundled inside a master billing PDF',
       'Extracting signature or appendix pages from multi-page contracts',
       'Recovering odd/even batch scans from single-sided document feeders',
+    ],
+    howItWorks: [
+      'To split a PDF, the tool loads your document with pdf-lib and copies only the pages you select into a freshly created file. Copying moves the original vector content, fonts, and images unchanged, so extracted pages stay sharp and their text stays selectable.',
+      'In Extract Page Ranges mode, the range parser reads entries like 1-3, 5, 9-12, removes duplicates, and sorts the result into ascending order. Anything outside the document or written backwards, such as 8-3, is flagged with a clear error before anything is saved.',
+      'Odd Pages Only keeps pages 1, 3, 5, and so on, while Even Pages Only keeps pages 2, 4, 6, and so on — handy for reassembling duplex scans. Burst mode instead creates one separate single-page PDF per page, named from your file plus the page number.',
+      'Your original file is never changed: the tool reads it in memory and downloads a new file, called filename-extracted.pdf for ranges or filename-page-N.pdf for each burst page. Run the result through the Reorder & Delete PDF Pages tool if the extracted order needs adjusting.',
+    ],
+    supportedFormats: [
+      'PDF (.pdf)',
+      'Page ranges (1-3, 5)',
+      'Odd pages',
+      'Even pages',
+      'Burst to single pages',
+      'Multi-page PDFs',
+    ],
+    limitations: [
+      'Burst mode is capped at 25 pages, because browsers often block or interrupt more than about 25 rapid downloads in a row; use page ranges for larger extractions.',
+      'Extracted pages always come out in ascending order, even if you type them out of order; custom sequences need the Reorder & Delete PDF Pages tool afterwards.',
+      'Encrypted or password-protected PDFs cannot be split until they are unlocked, and the file is rejected with a friendly error instead of silently failing.',
+      'Bookmarks and document outlines generally do not survive extraction, so check the saved file before sharing it if navigation links matter to your readers.',
     ],
     faqs: [
       {
@@ -357,6 +409,12 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
         output: 'images-bundle.pdf (3 centered, aspect-preserved A4 pages)',
         explanation: 'Scales each image proportionally to fit inside printable A4 margins without distortion.',
       },
+      {
+        title: 'Turning phone photos of a whiteboard into one PDF',
+        input: '4 whiteboard JPGs · Exact Image Dimensions · 24 pt margin',
+        output: 'images-bundle.pdf (4 full-size pages)',
+        explanation: 'Each photo keeps its own proportions on its own page, so the handwriting stays legible and nothing is cropped at the edges.',
+      },
     ],
     benefits: [
       'Embeds native JPG and PNG streams directly and converts WebP cleanly via Canvas',
@@ -369,6 +427,26 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       'Compiling design mockups or UI screenshots into an A4 review deck',
       'Converting scanned document pages into a single uploadable PDF',
       'Packaging portfolio artwork plates without cloud compression',
+    ],
+    howItWorks: [
+      'To convert images to PDF, the tool creates a fresh document and adds one page per image, in the order shown in your list. JPG files are embedded natively with pdf-lib, PNG files are embedded natively too, and WebP files are first decoded through an HTML canvas into lossless PNG frames.',
+      'On A4 Portrait (595.28 by 841.89 points) or US Letter (612 by 792 points), each image is scaled by the smaller of the width and height ratios, so it fits inside your margin without stretching or cropping, then centered on the page.',
+      'Exact Image Dimensions mode skips the standard sheet entirely and sizes each page to its image plus twice the margin, so a tall receipt or wide screenshot keeps its natural shape. The default margin is 24 points, and the default filename is images-bundle.pdf.',
+      'Image previews are temporary local object URLs created in your browser tab, and they disappear when the tab closes. The finished PDF downloads straight to your device; no image is ever uploaded to a server.',
+    ],
+    supportedFormats: [
+      'JPG / JPEG',
+      'PNG',
+      'WebP',
+      'A4 Portrait pages',
+      'US Letter pages',
+      'Exact image dimensions',
+    ],
+    limitations: [
+      'HEIC photos from iPhones are not supported directly; convert them to JPG or PNG first, then add them to the converter.',
+      'Very large images are embedded at full resolution, so a PDF built from many phone photos can grow large; compress the images first if file size matters.',
+      'The PDF has no text layer: pages are pictures, so the result is not searchable and its words cannot be selected or copied.',
+      'PNG transparency shows through on Exact Image Dimensions pages, but on A4 or Letter pages the image sits on a plain white page background.',
     ],
     faqs: [
       {
@@ -513,6 +591,12 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
         output: '3 crisp 2× PNG slide images ready for LinkedIn or blog embeds',
         explanation: 'High-scale canvas rendering keeps diagrams and typography sharp.',
       },
+      {
+        title: 'Saving a signed certificate page as a phone photo',
+        input: 'Pages: 2 · Format: JPG · Scale: 2.0x',
+        output: 'One sharp 144 DPI JPG of page 2',
+        explanation: 'The certificate renders at double resolution, so the signature and seal stay crisp when the image is shared in a chat message.',
+      },
     ],
     benefits: [
       'Uses Vite-bundled PDF.js Web Worker—zero external CDN script requests',
@@ -525,6 +609,26 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       'Saving a single signed certificate or ticket page as a mobile photo',
       'Generating crisp UI previews of printable PDF handouts',
       'Inspecting font/layout rendering visually outside dedicated PDF apps',
+    ],
+    howItWorks: [
+      'To turn PDF pages into images, the tool loads your file with PDF.js, running entirely in your browser through a locally bundled web worker — no external script is fetched. Each page you select is drawn onto a canvas at your chosen scale, then saved as a PNG or JPG file.',
+      'The page field accepts all, or a range such as 1-3, 5, using the same parser as the Split & Extract PDF Pages tool; out-of-bounds pages are rejected before rendering starts. For documents longer than ten pages the field is prefilled with 1-10, and each batch renders at most 20 pages.',
+      'Scale 1.0x renders at screen resolution, 1.5x is the default, and 2.0x renders at about 144 DPI for the sharpest text and diagrams. JPG exports are encoded at 0.92 quality, and because JPG has no transparency, transparent areas are first filled with white.',
+      'Every rendered page appears as a preview card with its pixel dimensions, and each card has its own download button, so you save only the pages you need. The original PDF is never modified, and nothing is uploaded anywhere.',
+    ],
+    supportedFormats: [
+      'PDF (.pdf)',
+      'PNG output',
+      'JPG output',
+      'Page ranges (1-3, 5)',
+      'Scales 1.0x, 1.5x, 2.0x',
+      'Up to 20 pages per batch',
+    ],
+    limitations: [
+      'Each batch renders at most 20 pages, because high-resolution canvases use significant memory; repeat the process with a new range for longer documents.',
+      'Rendered images are pictures, not documents: the text inside them cannot be selected, searched, or copied — use the PDF Text Extractor tool when you need the words.',
+      'Encrypted or password-protected PDFs must be unlocked first, since PDF.js cannot read pages from a file that is still locked.',
+      'Very small or low-resolution source pages will not gain detail at 2.0x scale; upscaling only enlarges the pixels that are already there.',
     ],
     faqs: [
       {
@@ -669,6 +773,12 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
         output: 'Only page 3 rotates clockwise; all other pages preserve existing orientation.',
         explanation: 'Adds 90° modulo 360 to the existing page rotation metadata without rasterizing text.',
       },
+      {
+        title: 'Fixing upside-down back pages from a duplex scan',
+        input: 'Scope: Even Pages Only · Angle: 180° Upside Down',
+        output: 'Even pages flipped upright; odd pages untouched',
+        explanation: 'Duplex scanners often flip every second sheet, so rotating just the even pages corrects the whole document in one pass.',
+      },
     ],
     benefits: [
       'Lossless rotation—updates PDF page orientation flags without recompressing text or images',
@@ -681,6 +791,26 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       'Rotating wide landscape spreadsheets inside mostly portrait reports',
       'Correcting mixed-orientation attachments after merging documents',
       'Preparing cleanly oriented compliance filings for portals',
+    ],
+    howItWorks: [
+      'The PDF Page Rotator fixes orientation by changing each page rotation value in the PDF page dictionary — it never redraws or re-encodes the page. Text, fonts, and embedded images stay exactly as they were, so rotation is completely lossless and the file barely changes size.',
+      'You pick 90 degrees clockwise, 90 degrees counter-clockwise (stored as 270 degrees), or 180 degrees upside down. The tool reads the current angle of each page first and adds your choice to it, wrapping at 360 degrees, so a page already turned 90 degrees turns predictably further.',
+      'Rotation can target all pages, odd pages, even pages, or an exact range such as 2, 5-7, using the shared range parser. That matters for duplex scan batches, where only the back sides come out upside down, and for reports with a few wide landscape tables.',
+      'The corrected file downloads with -rotated added to its name and opens the right way up in any viewer or printer, because the new angle is saved in the file itself. If a page is still sideways, run it again with another 90 degrees in the same direction.',
+    ],
+    supportedFormats: [
+      'PDF (.pdf)',
+      '90° clockwise',
+      '90° counter-clockwise (270°)',
+      '180° upside down',
+      'All, odd, even, or range scope',
+      'Scanned and text PDFs',
+    ],
+    limitations: [
+      'Only quarter turns are possible: 90, 180, and 270 degrees. A page tilted by a small angle, such as a crooked scan at 5 degrees, cannot be straightened by this tool.',
+      'Different pages cannot be rotated by different amounts in one run; rotate one range, download the result, then rotate the next range in that file.',
+      'The tool rotates whole pages only; it cannot straighten a single crooked image or text block sitting inside an otherwise upright page.',
+      'Encrypted or password-protected PDFs must be unlocked first, since the tool cannot rewrite pages in a file that is still locked.',
     ],
     faqs: [
       {
@@ -838,6 +968,26 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       'Duplicating printable form pages or sign-off sheets inside a packet',
       'Cleaning up combined PDFs prior to sending to clients',
     ],
+    howItWorks: [
+      'The Reorder & Delete PDF Pages tool loads your file twice over: pdf-lib reads the real pages, while PDF.js renders small thumbnails at 0.35 scale so you can see what you are moving. Each page gets a card showing its current output position, its original page number, and its size in points.',
+      'Moving a page swaps its place in the working list, duplicating inserts an identical copy directly after the original, and deleting removes the card from the list. Nothing is written to disk until you save; the source file on your device is never touched.',
+      'When you save, the tool builds a brand-new PDF and copies the pages in your card order with pdf-lib, so vector text, fonts, and images keep their original quality. The download is named with -reordered added to your original filename.',
+      'Thumbnails render for the first 30 pages only, to keep browser memory in check on very long documents. Pages beyond 30 still get a card with their position, original number, and dimensions, and they can still be moved, duplicated, or deleted.',
+    ],
+    supportedFormats: [
+      'PDF (.pdf)',
+      'Text-based PDFs',
+      'Scanned PDFs',
+      'Multi-page PDFs',
+      'Portrait and landscape pages',
+      'Single-page PDFs',
+    ],
+    limitations: [
+      'There is no undo button: if you delete the wrong page, re-upload your untouched original file and redo the changes, since the tool never modifies the source.',
+      'At least one page must remain; the tool refuses to save an empty document, so the delete button is blocked once a single page is left.',
+      'Pages move one step at a time with the arrow buttons, so walking a page from the end of a long document to the front takes many clicks.',
+      'Bookmarks, outlines, and internal links generally do not survive the rebuild, and rotation cannot be done here — use the PDF Page Rotator tool first, then reorder.',
+    ],
     faqs: [
       {
         question: 'Why do thumbnails only render for the first 30 pages?',
@@ -994,6 +1144,26 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       'Labeling sample portfolios or preview proofs',
       'Applying consistent review status stamps before archiving',
     ],
+    howItWorks: [
+      'The PDF Watermark Tool stamps text onto your pages with pdf-lib, drawing each stamp as real vector text in Helvetica Bold. Because the stamp is vector, not a bitmap image, it stays perfectly sharp at any size and prints cleanly on paper.',
+      'Each stamp is centered on its page using the width and height of that page, then shifted along its angle with simple trigonometry, so it lands in the same relative spot on portrait and landscape pages alike. The default stamp reads CONFIDENTIAL at 54 points, 22 percent opacity, and a 40-degree angle.',
+      'You control the size from 20 to 96 points, the opacity from 8 to 65 percent in 2-percent steps, the angle from minus 60 to plus 60 degrees, and the colour: Neutral Gray, Brand Indigo, or Stamp Red. Lower opacity keeps the text underneath fully readable.',
+      'By default every page is stamped; ticking First page only limits the stamp to the cover sheet. The finished file downloads with -watermarked added to its name, and the stamp is drawn over the existing content without editing or replacing it.',
+    ],
+    supportedFormats: [
+      'PDF (.pdf)',
+      'Text watermarks',
+      'All pages',
+      'First page only',
+      'Latin (WinAnsi) characters',
+      'Portrait and landscape pages',
+    ],
+    limitations: [
+      'Only standard Latin characters work: the Helvetica Bold font covers WinAnsi text, so Cyrillic, Arabic, Chinese, or emoji characters cannot be stamped.',
+      'Image or logo watermarks are not supported; this tool stamps text only, so a company logo needs a full PDF editor instead.',
+      'The stamp is a normal content object on the page, so anyone with a full PDF editor can select or delete it; it deters casual sharing but does not make a document tamper-proof.',
+      'You cannot stamp a custom middle range of pages: the choice is every page or the first page only, and the angle slider stops at 60 degrees either way.',
+    ],
     faqs: [
       {
         question: 'Can recipients edit or remove the watermark in full PDF editors?',
@@ -1048,7 +1218,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'Can I make the watermark horizontal instead of diagonal?',
         answer:
-          'Yes. Set the angle slider to 0 degrees for a straight horizontal stamp, or pick any angle up to a full diagonal.',
+          'Yes. Set the angle slider to 0 degrees for a straight horizontal stamp, or pick any angle from -60 to +60 degrees.',
       },
       {
         question: 'Can I add an image or logo watermark to a PDF?',
@@ -1149,6 +1319,27 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       'Numbering court filings, appendices, or thesis chapters',
       'Continuing sequential numbering from page 15 onward in a Part 2 volume',
       'Adding subtle bottom-right numbers to printed study guides',
+    ],
+    howItWorks: [
+      'The Add PDF Page Numbers tool draws page numbers as vector text in regular Helvetica, using pdf-lib. The numbers sit at a 28-point margin from the page edge, measured from the width and height of each page, so they stay centered or aligned on portrait and landscape pages alike.',
+      'Three formats are offered: Page 1 of N for formal packets, the compact 1 / N style, and bare digits with no label. The default font size is 11 points in a dark slate-grey, and numbers are clamped at least 12 points from the edge so they never run off the page.',
+      'You can place numbers at Bottom Center, Bottom Right, Bottom Left, or Top Right — Top Right is the header option. A custom start number lets a second volume continue from where the first ended, for example starting at 15, and the total in Page X of N follows the start number.',
+      'With Skip cover page enabled, page 1 stays blank and numbering starts on page 2, while the total counts only the numbered pages — a five-page file with a skipped cover is numbered Page 1 of 4 through Page 4 of 4. The result downloads with -numbered added to its name.',
+    ],
+    supportedFormats: [
+      'PDF (.pdf)',
+      'Page 1 of N',
+      '1 / N',
+      'Bare digits',
+      'Bottom or top placement',
+      'Custom start number',
+      'Skip cover page',
+    ],
+    limitations: [
+      'Numbers are stamped alongside any existing ones, so a PDF that already has printed page numbers will show two sets unless you remove the old ones first.',
+      'Only standard Arabic numerals are used; Roman numerals, section labels, and custom prefixes such as Section 2 – Page 3 are not available.',
+      'You cannot number a custom middle range: numbering covers every page except an optionally skipped cover, and the start number must be a whole number of 1 or more.',
+      'A number can sit close to existing footer text on pages with tight margins; check the output and re-run with a smaller font size if a number crowds a line.',
     ],
     faqs: [
       {
@@ -1306,6 +1497,28 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       'Adding searchable Subject and Keyword tags to downloadable whitepapers',
       'Auditing vendor or candidate PDF submissions locally',
     ],
+    howItWorks: [
+      'The PDF Metadata Inspector & Editor reads the Info dictionary stored in the header of your PDF — the block of properties every PDF carries — and shows Title, Author, Subject, Keywords, Creator, and Producer, plus the page count and the exact dimensions of the first page in points.',
+      'Editing works by loading the whole document with pdf-lib, setting the six fields, and saving a fresh copy. Clearing a field writes an empty value, so Clear Editable Fields blanks all six tags at once — useful before publishing a file that still names its author or the software that made it.',
+      'Keywords are stored as a comma-separated list: the tool splits what you type on commas and trims each entry before saving. The Title you set is what browsers show in the PDF tab, which is why fixing an Untitled-2 title here changes the tab label.',
+      'Nothing changes until you click Save Metadata & Download PDF: viewing alone is read-only, and the download is a new file with -metadata added to its name while your original stays untouched.',
+    ],
+    supportedFormats: [
+      'PDF (.pdf)',
+      'Title',
+      'Author',
+      'Subject',
+      'Keywords',
+      'Creator',
+      'Producer',
+      'Page dimensions (pt)',
+    ],
+    limitations: [
+      'Only the six standard Info dictionary tags are edited; extended XMP metadata packets, if present, are left untouched by this tool.',
+      'Stripping metadata removes hidden tags only; a name or company printed visibly in the body text of a page stays exactly where it is.',
+      'Setting the Title changes the browser tab label, but it does not guarantee any particular search ranking or snippet for the file.',
+      'Encrypted or password-protected PDFs must be unlocked first, and the page dimensions shown come from the first page only, not from every page.',
+    ],
     faqs: [
       {
         question: 'Why does my browser tab show the wrong title when opening a PDF?',
@@ -1461,6 +1674,26 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       'Checking word counts on formatted PDF essays using our Word Counter',
       'Verifying whether an archived PDF contains a searchable text layer vs flat scans',
       'Exporting PDF meeting agendas into plain-text Markdown notes',
+    ],
+    howItWorks: [
+      'The PDF Text Extractor opens your file with PDF.js and walks through it page by page, calling getTextContent on each page. That returns the embedded text items with their positions, which the tool joins into lines using the end-of-line flag on each item, then cleans up double spaces and trailing whitespace.',
+      'With page markers on, every page begins with a line reading --- Page N ---, so you can cite or find sections accurately; switching markers off joins the pages into continuous prose. The output also reports the page count, a word count, and the UTF-8 byte size of the extracted text.',
+      'Extraction is read-only: your PDF is never modified, and the result can be copied with one click or downloaded as a clean UTF-8 .txt file named after your document. From there it pastes straight into Word, Google Docs, or the Word Counter tool for a deeper check.',
+      'If the tool reports zero characters, the PDF is almost certainly a scanned image-only file with no text layer to read — the tool says so plainly instead of guessing. Text stored as an image, or drawn with a font that lacks a Unicode map, simply has no readable stream for PDF.js to extract.',
+    ],
+    supportedFormats: [
+      'PDF (.pdf)',
+      'Plain text output',
+      'UTF-8 .txt download',
+      'Page markers (--- Page N ---)',
+      'Embedded Unicode text',
+      'Multi-page PDFs',
+    ],
+    limitations: [
+      'Scanned image-only PDFs extract zero characters, because no OCR runs in the browser; a scan needs an OCR step elsewhere before its words can be copied.',
+      'Formatting is lost: bold, italics, headings, font sizes, and colours are dropped, since the output is plain text only.',
+      'Multi-column layouts and tables can come out in reading order rather than visual order, because PDF stores positioned text items, not a semantic table structure — lines may wrap where the columns break.',
+      'Filled form values, annotation notes, and hyperlink destinations may not appear, since only the main text layer of each page is read; visible link text is extracted, but the URLs themselves are not.',
     ],
     faqs: [
       {

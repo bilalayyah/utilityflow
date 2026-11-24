@@ -190,7 +190,7 @@ export default function UnicodeTextFormatterTool() {
               </div>
               <p className="text-xs text-slate-500 mb-2">{s.styleNotes[item.id]}</p>
               <div className="rounded-lg bg-slate-50 border border-slate-200 px-3 py-2.5 text-base text-slate-900 break-words">
-                {item.value || <span className="text-slate-400">{s.previewEmpty}</span>}
+                {item.value || <span className="text-slate-600">{s.previewEmpty}</span>}
               </div>
             </div>
           </div>

@@ -12,7 +12,7 @@ export function AuthorProfile() {
       <div className="flex items-center gap-4">
         <span
           aria-hidden="true"
-          className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#0E8A66] text-base font-bold text-white"
+          className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#0B7A59] text-base font-bold text-white"
         >
           BA
         </span>

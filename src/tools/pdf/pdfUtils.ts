@@ -12,9 +12,13 @@ if (typeof window !== 'undefined' && !pdfjsLib.GlobalWorkerOptions.workerSrc) {
 
 export { pdfjsLib };
 
+export const MAX_PDF_FILE_BYTES = 50 * 1024 * 1024; // 50 MB per-file cap (P3-1)
+
 export const PDF_STRINGS_EN = {
     noFile: 'No file was selected.',
     notPdf: (name: string) => `"${name}" does not appear to be a PDF file.`,
+    tooLarge: (name: string) =>
+      `"${name}" exceeds the 50 MB per-file limit. Please choose a smaller PDF.`,
     empty: (name: string) => `"${name}" is empty or truncated.`,
     noHeader: (name: string) =>
       `"${name}" is missing a valid %PDF header and cannot be processed.`,
@@ -60,6 +64,10 @@ export async function readValidatedPdfBytes(
   const lower = file.name.toLowerCase();
   if (file.type && file.type !== 'application/pdf' && !lower.endsWith('.pdf')) {
     throw new Error(s.notPdf(file.name));
+  }
+  // Reject oversized files before reading them fully into memory (P3-1).
+  if (file.size > MAX_PDF_FILE_BYTES) {
+    throw new Error(s.tooLarge(file.name));
   }
   const buffer = await file.arrayBuffer();
   const bytes = new Uint8Array(buffer);

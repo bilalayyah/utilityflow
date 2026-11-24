@@ -188,7 +188,7 @@ export default function JwtDecoderTool() {
           value={token}
           onChange={(e) => setToken(e.target.value)}
           placeholder={s.inputPlaceholder}
-          className="w-full rounded-xl border border-slate-300 bg-white p-3.5 font-mono text-xs sm:text-sm break-all text-slate-900 placeholder:text-slate-400 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/20"
+          className="w-full rounded-xl border border-slate-300 bg-white p-3.5 font-mono text-xs sm:text-sm break-all text-slate-900 placeholder:text-slate-600 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/20"
         />
       </div>
 

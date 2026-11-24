@@ -160,6 +160,26 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
           'Switch to Decode mode, paste the Base64 string, and the tool returns the original UTF-8 text, which you can then copy.',
       },
     ],
+    howItWorks: [
+      'The base64 encoder decoder first converts your text into UTF-8 bytes with the TextEncoder API, so accented letters, non-Latin scripts, and emoji survive the round trip instead of crashing like the legacy btoa function.',
+      'Those bytes are then grouped into sets of three and split into four 6-bit values, each mapped to one of 64 ASCII characters: A–Z, a–z, 0–9, plus + and /. A leftover group is padded with = signs.',
+      'In URL-safe mode the encoder swaps + for - and / for _, and can drop the trailing padding, producing tokens that sit safely inside query strings and filenames without percent-encoding.',
+      'Decoding reverses the process: the tool normalizes - and _ back to + and /, restores any missing padding, converts the characters back to bytes, and decodes them as UTF-8 text. The JWT Decoder uses the same Base64Url rules for token segments.',
+    ],
+    supportedFormats: [
+      'Standard Base64 (RFC 4648)',
+      'Base64URL (- and _)',
+      'Unpadded Base64',
+      'UTF-8 text',
+      'ASCII text',
+      'Data URI payloads',
+    ],
+    limitations: [
+      'Base64 is encoding, not encryption. Anyone who sees an encoded string can decode it instantly, so never use it to hide passwords, API keys, or other secrets.',
+      'This tool encodes text only. It cannot read binary files, so encoding an image or document requires a file reader such as the Image to Base64 & Data URI Converter first.',
+      'Decoding expects UTF-8 bytes. Text originally encoded from another character set, such as Latin-1 or UTF-16, may decode into garbled characters.',
+      'Very long inputs are processed in the browser tab, so extremely large strings can feel slow on low-memory devices.',
+    ],
   },
   'url-encoder-decoder': {
     instructions: [
@@ -315,6 +335,26 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
         answer:
           'Yes. Processing runs locally with no server upload limit, so long URLs encode and decode in your browser as long as your browser can hold the text.',
       },
+    ],
+    howItWorks: [
+      'The url encoder decoder relies on the browser’s built-in encodeURIComponent and encodeURI functions, which convert each character to UTF-8 bytes and then write every non-ASCII or reserved byte as a % sign followed by two hex digits.',
+      'In encodeURIComponent mode every character with a special meaning in a query string, such as & and =, is escaped, so a value cannot accidentally split your parameters.',
+      'In encodeURI mode the structural characters of a full address — : / ? & and # — are left untouched, so the scheme, host, and path survive while only unsafe characters are escaped.',
+      'Decoding reverses the process with decodeURIComponent, turning %20 back into a space. A + in a query string becomes a space first, matching form-encoded data, and the browser URL API splits a full address into protocol, host, path, and query rows.',
+    ],
+    supportedFormats: [
+      'Percent-encoding (%XX)',
+      'encodeURIComponent',
+      'encodeURI',
+      'Form-encoded query strings (+ for space)',
+      'UTF-8 URLs',
+      'Full URLs with query parameters',
+    ],
+    limitations: [
+      'Encoding is not validation. A well-formed but nonexistent domain still encodes cleanly, and the tool never checks whether a link actually loads.',
+      'The decoder only decodes one level at a time. A double-encoded value like %2520 becomes %20 after one pass, so you must decode again for the original text.',
+      'A lone % not followed by two hex digits is a malformed sequence and cannot be decoded. The tool reports the error instead of guessing what you meant.',
+      'The parser uses the browser URL API, so relative links without a scheme or host cannot be broken into parts the way absolute URLs can.',
     ],
   },
   'uuid-generator': {
@@ -472,6 +512,26 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
           'Click Copy all to place the entire batch on your clipboard, one UUID per line, ready to paste into your code, spreadsheet, or SQL script.',
       },
     ],
+    howItWorks: [
+      'The uuid generator draws its randomness from the Web Crypto API, using crypto.randomUUID for v4 and crypto.getRandomValues for v7, so every identifier is backed by cryptographically strong randomness rather than Math.random.',
+      'A v4 UUID sets 122 of its 128 bits at random and fixes the version and variant bits, giving roughly 5.3 × 10^36 possible values — so many that collisions are negligible in practice.',
+      'A v7 UUID starts with a 48-bit Unix millisecond timestamp, followed by version bits and random data, so newer IDs sort after older ones when ordered as text.',
+      'Formatting happens after generation: hyphens can be stripped for a compact 32-character hex string, letters can be uppercased, or the whole ID can be wrapped in {braces} for GUID-style constants.',
+    ],
+    supportedFormats: [
+      'UUID v4 (random)',
+      'UUID v7 (time-ordered)',
+      'Hyphenated (8-4-4-4-12)',
+      'Compact 32-char hex',
+      'Uppercase hex',
+      'Braced GUID {…}',
+    ],
+    limitations: [
+      'A UUID is an identifier, not a secret. It carries no authentication or encryption, so do not use a generated ID as a password or an unguessable API key on its own.',
+      'Batches are capped at 100 IDs per click. Larger fixture sets need repeated generations, and the tool keeps no history, so save any batch you need to reuse.',
+      'UUID v7 ordering depends on the device clock. If the system time jumps backwards, newer IDs can sort before older ones until the clock catches up.',
+      'Generation needs the Web Crypto API. Browsers without crypto.randomUUID or crypto.getRandomValues cannot generate IDs at all.',
+    ],
   },
   'regex-tester': {
     instructions: [
@@ -505,6 +565,11 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
         description:
           'Try empty strings, unusual characters, and multiline input before using a pattern in production, and toggle the i flag to check case sensitivity.',
       },
+      {
+        title: 'Test a replacement before pasting it into code',
+        description:
+          'Type a replacement template using $1, $2, and $& below the test string, then check the preview output to confirm each capture lands in the right place before you use the pattern in your code.',
+      },
     ],
     examples: [
       {
@@ -513,18 +578,26 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
         output: 'Match #1 · $1="support" · $2="utilityflow.online"',
         explanation: 'Parenthesized groups expose captured substrings individually.',
       },
+      {
+        title: 'Matching across lines with the m flag',
+        input: 'Pattern: ^\\d{4}-\\d{2}-\\d{2} · Flags: gm · Text: 2026-01-05 shipped\\n2026-02-11 returned',
+        output: 'Match #1 at index 0 · Match #2 at index 19',
+        explanation: 'The m flag lets ^ match at the start of every line, not just the start of the whole string.',
+      },
     ],
     benefits: [
       'Guards against infinite loops on zero-length matches automatically',
       'Displays exact character index and captured group values per match',
       'Includes live replacement template preview using $1, $2, and $&',
       'Reports RegExp syntax errors cleanly without crashing',
+      'Live replacement preview shows the substituted result before you commit to a pattern',
     ],
     useCases: [
       'Validating email, slug, or form input patterns before shipping',
       'Extracting structured tokens from log lines or HTML snippets',
       'Testing search-and-replace capture templates',
       'Verifying multiline (^ / $) and case-insensitive flag behavior',
+      'Checking that a pattern rejects malformed input, not just that it accepts valid input',
     ],
     faqs: [
       {
@@ -610,7 +683,7 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       {
         question: 'Does the Regex Tester support Unicode characters?',
         answer:
-          'Yes. JavaScript regex handles Unicode text, and you can use escapes like \\u{1F600} or the u flag for full Unicode-aware matching.',
+          'Yes. JavaScript regex handles Unicode text, so you can match emoji and accented characters directly. The tool offers the g, i, m and s toggles only — there is no u-flag toggle, so \\u{1F600}-style escapes that need Unicode mode are not available here.',
       },
       {
         question: 'Is my regex or test text uploaded anywhere?',
@@ -627,6 +700,26 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
         answer:
           'There is no built-in save feature, so copy your pattern and test string into a snippet file or code comment. You can also paste the pattern directly into your source code.',
       },
+    ],
+    howItWorks: [
+      'The regex tester compiles your pattern with the browser’s native JavaScript RegExp engine, so a pattern that matches here behaves identically in client-side code and Node.js.',
+      'With the global flag the engine scans the whole test string, recording each match’s start index and captured groups, and the tool highlights every match in place.',
+      'Parenthesized groups are numbered left to right, and the replacement preview substitutes $1, $2, and $& with the captured text for every match.',
+      'Zero-length matches are guarded automatically: after an empty match the engine advances one character, so a pattern like x* cannot loop forever on the same position.',
+    ],
+    supportedFormats: [
+      'JavaScript (ECMAScript) RegExp',
+      'Flags g, i, m, s',
+      'Capture groups ($1, $2)',
+      'Named groups (?<name>)',
+      'Lookahead & lookbehind',
+      'Replacement templates ($&, $1)',
+    ],
+    limitations: [
+      'Only the JavaScript regex flavor is supported. Patterns written for Python, PCRE, or .NET may use features JavaScript lacks, such as atomic groups, and will fail or behave differently.',
+      'There is no save or share feature. Patterns and test strings live only in the page, so copy anything you want to keep into a snippet file before closing the tab.',
+      'Catastrophic backtracking is still possible with nested quantifiers like (a+)+, which can freeze the tab on long inputs. Simplify overlapping quantifiers before testing.',
+      'The tester shows matches, not performance. A pattern that matches correctly here can still be slow in production on large inputs, so benchmark hot paths separately.',
     ],
   },
   'jwt-decoder': {
@@ -661,6 +754,11 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
         description:
           'Remove extra spaces, line breaks or quotes around the token. A five-segment token is an encrypted JWE, not a JWT, and cannot be decoded without its decryption key.',
       },
+      {
+        title: 'Compare exp against the current time',
+        description:
+          'Read the converted exp date next to the active or expired flag to decide whether a rejected request is caused by an expired token or by something else.',
+      },
     ],
     examples: [
       {
@@ -669,12 +767,19 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
         output: 'Header: { "alg": "HS256", "typ": "JWT" } · exp: 2027-01-15 UTC',
         explanation: 'Decodes Base64Url segments and translates numeric epoch claims into UTC dates.',
       },
+      {
+        title: 'Reading roles from a payload',
+        input: 'Payload: {"sub": "user_42", "roles": ["admin", "editor"]}',
+        output: 'roles: ["admin", "editor"] shown as JSON',
+        explanation: 'Custom claims appear in the payload panel exactly as the issuer wrote them.',
+      },
     ],
     benefits: [
       'Zero network transmission—tokens never leave your browser tab',
       'Translates numeric iat, nbf, and exp claims to readable UTC dates',
       'Highlights whether the token expiration timestamp has already passed',
       'Clearly notes that cryptographic signature verification requires your signing key',
+      'Sample JWT button loads a demo token so you can learn the layout before pasting a real one',
     ],
     useCases: [
       'Debugging OAuth2 / OIDC access and ID tokens during API integration',
@@ -783,6 +888,26 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
         answer:
           'You can, because decoding is local and nothing is uploaded, but it is still best to avoid pasting live production tokens on a computer you do not control.',
       },
+    ],
+    howItWorks: [
+      'The jwt decoder splits the token on dots and expects exactly three segments: header, payload, and signature. Five segments means an encrypted JWE, which cannot be read without a decryption key.',
+      'Each of the first two segments is Base64Url decoded — - and _ mapped back to + and /, padding restored — then parsed as UTF-8 JSON, revealing the header fields and payload claims.',
+      'Numeric timestamp claims are translated into readable dates: iat shows when the token was issued, nbf when it becomes valid, and exp when it stops being valid.',
+      'The signature segment is displayed but never checked, because verification needs the signing secret or public key, which this browser-only tool never asks for.',
+    ],
+    supportedFormats: [
+      'JWT (JWS, 3 segments)',
+      'Base64Url segments',
+      'HS256, RS256, ES256 & none headers',
+      'Unsigned tokens (alg: none)',
+      'OAuth2 / OIDC access & ID tokens',
+      'Unix epoch claims (iat, nbf, exp)',
+    ],
+    limitations: [
+      'Decoding is not verification. Anyone can craft a token with any claims, so a decoded payload proves nothing about authenticity until the signature is checked on your server.',
+      'Encrypted JWE tokens with five segments cannot be decoded here. Their payload is encrypted and only the intended recipient holds the decryption key.',
+      'The decoder cannot tell you whether an issuer or audience is trustworthy. It shows iss and aud claims as-is; your backend must compare them against expected values.',
+      'A token pasted from logs may carry trailing punctuation or line breaks that break decoding. Strip quotes and whitespace before pasting, and use the Unix Timestamp Converter to double-check an exp value.',
     ],
   },
   'hash-generator': {
@@ -940,6 +1065,27 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
           'You can hash a password to compare it with a stored digest, but passwords should be hashed with a slow password algorithm such as bcrypt or Argon2, not plain SHA-256, in real applications.',
       },
     ],
+    howItWorks: [
+      'The hash generator feeds your text through the Web Crypto API, which encodes it as UTF-8 bytes and runs the SHA-2 compression function over them in hardware-accelerated code.',
+      'SHA-256 processes the input in 64-byte blocks, mixing each block into a 256-bit state through 64 rounds, and the final state becomes the 64-character hex digest.',
+      'All four digests — SHA-1, SHA-256, SHA-384, and SHA-512 — are computed from the same bytes in parallel, so you can compare algorithms without re-entering the input.',
+      'In file mode the browser reads the selected file into memory as an ArrayBuffer and hashes those exact bytes, so the checksum matches what any other SHA-256 tool reports for the same file. For a dedicated file workflow, the File Hash & Checksum Verifier tool does the same check.',
+    ],
+    supportedFormats: [
+      'SHA-1 (160-bit)',
+      'SHA-256 (256-bit)',
+      'SHA-384 (384-bit)',
+      'SHA-512 (512-bit)',
+      'Hex output (upper/lowercase)',
+      'Base64 digest output',
+      'Local file checksums',
+    ],
+    limitations: [
+      'Hashing is one-way. A digest cannot be reversed into the original text or file, so a lost input cannot be recovered from its hash.',
+      'SHA-1 has known collision attacks and should not be used for security signatures or certificates. It is kept here for legacy checksums only.',
+      'Plain SHA-256 is too fast for password storage. Passwords need a slow, salted algorithm such as bcrypt or Argon2 instead.',
+      'File mode reads the whole file into browser memory. Extremely large files can strain low-memory devices, and the file is never uploaded anywhere.',
+    ],
   },
   'html-entity-encoder': {
     instructions: [
@@ -1096,6 +1242,25 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
           'The ampersand itself is &amp; or &#38;. Always encode a literal & first, because an unencoded ampersand can make the browser misread the entities that follow it.',
       },
     ],
+    howItWorks: [
+      'The html entity encoder replaces the five reserved characters — ampersand, less-than, greater-than, double quote, and single quote — with their entity codes, starting with the ampersand so later replacements are not double-encoded.',
+      'With non-ASCII encoding enabled, every character above code point 127 is converted to a numeric entity such as &#233;, producing pure ASCII output for systems without reliable UTF-8.',
+      'Decoding reverses the mapping for named entities like &mdash; and numeric entities in both decimal (&#8212;) and hexadecimal (&#x2014;) forms.',
+      'Decoding uses the browser’s DOMParser to parse the escaped text as HTML and read back the plain text, which handles the full named-entity table without a hand-written list.',
+    ],
+    supportedFormats: [
+      'Named entities (&amp; &copy;)',
+      'Decimal numeric (&#169;)',
+      'Hexadecimal numeric (&#xA9;)',
+      'All five reserved characters',
+      'Non-ASCII to numeric entities',
+      'Full HTML documents',
+    ],
+    limitations: [
+      'Escaping is only one layer of XSS defence. Safe output also needs validation, context-aware encoding, and a content security policy.',
+      'The encoder works on text, not on a live page. It cannot tell whether a snippet is meant as code or content, so encode only what should display as text.',
+      'Decoding a fragment with broken markup can produce unexpected results, since the browser parser repairs invalid HTML in its own way.',
+    ],
   },
   'json-csv-converter': {
     instructions: [
@@ -1129,6 +1294,11 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
         description:
           'If conversion fails, validate your JSON syntax first: check for trailing commas, missing quotes and unmatched brackets. For CSV, confirm you picked the delimiter your file actually uses.',
       },
+      {
+        title: 'Check the header row before downloading',
+        description:
+          'Confirm the flattened column names look right, especially dot-separated names such as address.city, since a wrong delimiter choice shows up here first.',
+      },
     ],
     examples: [
       {
@@ -1137,12 +1307,19 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
         output: 'id,name,role\n102,"Marcus, Jr.",Designer',
         explanation: 'Automatically quotes fields containing delimiters or double quotes per RFC 4180.',
       },
+      {
+        title: 'Converting a single object to one CSV row',
+        input: '{"name": "Aisha", "city": "Dubai"}',
+        output: 'name,city\nAisha,Dubai',
+        explanation: 'A single object becomes one data row with its keys as the header row.',
+      },
     ],
     benefits: [
       'Bidirectional JSON ↔ CSV conversion in one workspace',
       'Flattens nested JSON objects using dot-notation column headers',
       'Proper RFC-4180 parser preserves quoted commas and embedded newlines',
       'Supports comma, semicolon (European Excel), and tab delimiters',
+      'Download buttons save the result as a .csv or .json file without any sign-up',
     ],
     useCases: [
       'Exporting REST API JSON lists into Excel or Google Sheets',
@@ -1251,6 +1428,27 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
         answer:
           'Yes. Use the download button to save the result as a .csv or .json file on your device, ready to open in a spreadsheet or import into your app.',
       },
+    ],
+    howItWorks: [
+      'The json to csv converter parses your JSON with JSON.parse, then flattens each object: nested objects become dot-separated columns such as address.city, and arrays are kept as compact JSON strings in a single cell.',
+      'Column headers are the union of every key across all rows, in the order keys first appear, so objects with different keys still align and missing values become empty cells.',
+      'CSV output follows RFC 4180: any field containing a comma, quote, or newline is wrapped in double quotes, and a literal quote inside a field is doubled to "".',
+      'The reverse direction uses a state-machine parser that tracks quoted cells and escaped quotes, so commas inside quotes never split a row, and the first row becomes the keys of each JSON object.',
+    ],
+    supportedFormats: [
+      'JSON arrays & single objects',
+      'CSV (comma)',
+      'CSV (semicolon, European Excel)',
+      'TSV (tab)',
+      'RFC 4180 quoted fields',
+      'Nested objects (dot-notation)',
+      'JSON null / boolean / number values',
+    ],
+    limitations: [
+      'CSV has no data types. Numbers, booleans, and nulls become plain text, and converting back re-infers types by appearance, so a code like 007 can lose its leading zeros.',
+      'Deeply nested arrays are serialized as JSON strings inside one cell rather than expanded into columns, so spreadsheet tools cannot sort or filter inside them.',
+      'Very large datasets run entirely in browser memory. Conversion stays local, but huge files can take a few seconds or strain low-memory devices.',
+      'The converter expects valid JSON. Trailing commas, single-quoted strings, and comments are not JSON and must be fixed before converting.',
     ],
   },
   'unix-timestamp-converter': {
@@ -1408,6 +1606,26 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
           'No. Conversion happens entirely in your browser, so the timestamps and dates you enter never leave your device.',
       },
     ],
+    howItWorks: [
+      'The unix timestamp converter treats the epoch as a count of seconds since 1970-01-01T00:00:00Z, the Unix epoch, and converts it with plain date arithmetic in the browser.',
+      'Auto mode decides the unit by magnitude: values of 100,000,000,000 or more are read as milliseconds, smaller values as seconds, matching the 10-digit versus 13-digit convention.',
+      'Each timestamp is rendered four ways at once — ISO 8601, UTC, RFC 2822, and your local time — plus a relative label such as 2 hours ago, so one paste answers every format question.',
+      'The reverse direction reads your date-picker value as a local time, converts it to a JavaScript Date, and divides its millisecond value by 1,000 to get Unix seconds. Paste an exp claim from the JWT Decoder here to check when a token expires.',
+    ],
+    supportedFormats: [
+      'Unix seconds (10-digit)',
+      'Unix milliseconds (13-digit)',
+      'Negative timestamps (pre-1970)',
+      'ISO 8601',
+      'RFC 2822 GMT',
+      'Local time & relative time',
+    ],
+    limitations: [
+      'Unix time ignores leap seconds and counts every day as exactly 86,400 seconds, so it drifts slightly from true astronomical time over long periods.',
+      'The live clock reads your device time. If your system clock is wrong, the ticking counter and relative labels will be wrong too.',
+      'Auto mode can misread unusual values. A seconds timestamp far in the future can cross the 1e11 threshold and be treated as milliseconds, so force the unit when in doubt.',
+      'The converter shows the instant, not the calendar rules. Daylight saving transitions and historical timezone changes come from the browser’s timezone database, which can differ between devices.',
+    ],
   },
   'sql-formatter': {
     instructions: [
@@ -1563,6 +1781,26 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
         answer:
           'Agree on one casing style, such as UPPERCASE keywords, and run every query through the formatter with that setting before committing it to your repository.',
       },
+    ],
+    howItWorks: [
+      'The sql formatter first tokenizes the query into strings, comments, words, punctuation, and whitespace, so text inside quotes is never mistaken for a keyword.',
+      'Beautify mode walks the tokens and breaks major clauses — SELECT, FROM, JOIN, WHERE, GROUP BY, ORDER BY — onto their own lines, indenting nested subqueries and CTEs one level deeper.',
+      'Keyword casing is normalized only for recognized SQL words, using the same token boundaries, while table names, column names, and string contents keep their original case.',
+      'Minify mode drops comments and collapses the whitespace tokens into single spaces, producing a one-line query that keeps string literals byte-for-byte intact.',
+    ],
+    supportedFormats: [
+      'SELECT / INSERT / UPDATE / DELETE',
+      'DDL (CREATE / ALTER / DROP TABLE)',
+      'CTEs (WITH … AS)',
+      'JOINs incl. LEFT OUTER JOIN',
+      'Window functions (OVER …)',
+      'ANSI SQL (PostgreSQL, MySQL, SQLite, SQL Server)',
+    ],
+    limitations: [
+      'The formatter is a tokenizer, not a SQL parser. It cannot validate your query, so a statement with a syntax error still formats — it just formats the wrong SQL.',
+      'Dialect-specific syntax outside standard ANSI SQL, such as proprietary procedural blocks, may not indent the way its own dialect expects.',
+      'Minify mode strips comments permanently from the output. Keep the original query if those comments document business logic.',
+      'Formatting changes whitespace and keyword case only. It never rewrites logic, so a slow query stays slow — formatting is cosmetic, not optimization.',
     ],
   },
   'css-minifier': {
@@ -1720,6 +1958,26 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
           'Yes. The CSS Minifier works in any modern mobile browser, so you can paste and minify stylesheets without installing anything.',
       },
     ],
+    howItWorks: [
+      'The css minifier scans the stylesheet character by character, tracking whether it is inside a quoted string, a url(...) value, or a /* ... */ comment, so protected content is never altered.',
+      'In Minify mode every comment is dropped and whitespace around punctuation is removed, including the final semicolon before a closing brace, which CSS does not require.',
+      'Beautify mode first minifies, then counts brace depth as it walks the rules, so @media and @supports blocks indent their inner rules one level deeper than the surrounding stylesheet, and declaration colons gain a space after them.',
+      'Byte savings are measured from the real input and output lengths, so the reported percentage is the exact reduction for your stylesheet, not an estimate.',
+    ],
+    supportedFormats: [
+      'CSS rules & declarations',
+      '@media / @supports blocks',
+      '@keyframes / @font-face / @import',
+      'Custom properties (--var)',
+      'Quoted strings & url(...) values',
+      'Grid & flexbox layouts',
+    ],
+    limitations: [
+      'Minification removes comments and whitespace only. It does not delete unused selectors, so dead rules stay in the output and need a separate unused-CSS tool.',
+      'The tool does not validate CSS. A missing closing brace or unclosed string can confuse the brace tracking and produce merged or flat output.',
+      'It works on raw text, not a parsed stylesheet, so exotic syntax such as unquoted url( values with special characters may not survive exactly.',
+      'Beautify works from the minified form, so original comments are lost in Beautify mode and author formatting choices such as blank-line grouping cannot be recovered.',
+    ],
   },
   'js-formatter': {
     instructions: [
@@ -1876,6 +2134,26 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
           'Yes. The JavaScript Minifier works in any modern mobile browser, so you can paste and format code without installing anything.',
       },
     ],
+    howItWorks: [
+      'The javascript minifier tokenizes code into strings, template literals, comments, regex literals, and code, so a // inside a URL string is never mistaken for a comment.',
+      'Minify mode drops both comment styles, then strips spaces around punctuation such as { } ( ) ; , and :, keeping a single space only where two words would otherwise merge.',
+      'Beautify mode re-indents by brace depth, breaking lines after {, }, and ; with your chosen 2-space or 4-space indent, so a compressed one-liner opens back into readable lines.',
+      'Because the tool works on tokens rather than a syntax tree, it never renames variables or restructures code — the logic you paste is the logic you get back, only spaced differently. Spacing inside object literals is not fully normalized in Beautify mode: {a:1, b:2} stays on one line as written.',
+    ],
+    supportedFormats: [
+      'JavaScript (ES6+)',
+      'TypeScript snippets',
+      'Template literals (${…})',
+      'Regex literals',
+      'Arrow functions & classes',
+      'Minify & Beautify modes',
+    ],
+    limitations: [
+      'This is a simple tokenizer, not a Prettier-quality formatter. Spacing inside object literals is not fully normalized, and complex nesting may not indent the way a full parser would.',
+      'It does not mangle or rename variables, so minified output is larger than Terser or esbuild output. For production bundles, use a real bundler instead.',
+      'JSX is not specifically supported: angle brackets in JSX can be misread by the tokenizer, so use a dedicated formatter for React components.',
+      'Code relying on automatic semicolon insertion can break after minification. Add explicit semicolons before minifying multi-statement snippets.',
+    ],
   },
   'cron-expression-parser': {
     instructions: [
@@ -1909,6 +2187,11 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
         description:
           'If both day fields are restricted, standard cron runs when either matches. Use * in one of them if you only want one condition to apply.',
       },
+      {
+        title: 'Start from a preset, then customize',
+        description:
+          'Click a preset such as every hour or daily, read its plain-English summary, then change one field at a time and watch the next run times update.',
+      },
     ],
     examples: [
       {
@@ -1917,12 +2200,19 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
         output: 'At 09:00, on weekday 1-5 (Monday–Friday).',
         explanation: 'Runs at 09:00 AM every Monday through Friday.',
       },
+      {
+        title: 'Every 15 minutes during work hours',
+        input: '*/15 9-17 * * 1-5',
+        output: 'At every 15th minute past every hour from 09:00 through 17:59, Monday–Friday.',
+        explanation: 'Step values combine with hour ranges and weekday ranges in a single expression.',
+      },
     ],
     benefits: [
       'Supports wildcards (*), steps (*/5), ranges (1-5), lists (1,15), and names (MON-FRI)',
       'Computes the next 8 concrete execution timestamps in your local timezone',
       'Flags out-of-range values or missing fields immediately',
       'Includes one-click presets for common intervals',
+      'Plain-English summary translates each field so non-experts can read a schedule at a glance',
     ],
     useCases: [
       'Verifying GitHub Actions `schedule.cron` and Cloudflare Workers Cron Triggers',
@@ -2031,6 +2321,27 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
         answer:
           'Yes. The tool includes one-click presets for common intervals such as every hour, daily, weekly, and monthly, which you can then customize.',
       },
+    ],
+    howItWorks: [
+      'The cron expression parser splits the expression into five fields — minute, hour, day of month, month, and day of week — and rejects anything that is not exactly five fields.',
+      'Each field is parsed as a set of allowed values: * means every value, */15 means every 15th, 1-5 means a range, 1,15 means a list, and MON–FRI or JAN–DEC names map to numbers.',
+      'To find run times the tool scans forward from now, testing each candidate time against all five fields, and collects the first 8 matches within 366 days.',
+      'When both day fields are restricted, a run triggers if either one matches, following standard Vixie cron behavior — the same rule Linux crontab, GitHub Actions, and Cloudflare Workers use.',
+    ],
+    supportedFormats: [
+      '5-field Unix cron',
+      'Wildcards (*)',
+      'Steps (*/5)',
+      'Ranges (1-5)',
+      'Lists (1,15)',
+      'Month & weekday names (MON–FRI, JAN–DEC)',
+      'Sunday as 0 or 7',
+    ],
+    limitations: [
+      'Only standard 5-field Unix cron is supported. Six-field expressions with seconds and Quartz extensions such as L (last) and W (weekday) are rejected.',
+      'Run times are shown in your browser’s local timezone, but cron jobs execute in the server’s timezone. A schedule verified here can still fire at a different local hour on the server.',
+      'The preview shows only the next 8 runs. It cannot show runs inside a custom date range, and it stops searching after 366 days without a match.',
+      'The parser describes schedules; it never runs a job. A valid expression still fails if the command, workflow file, or trigger behind it is misconfigured.',
     ],
   },
   'color-converter': {
@@ -2187,6 +2498,26 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
         answer:
           'Yes. The Color Converter works in any modern mobile browser, so you can convert colors and check contrast without installing anything.',
       },
+    ],
+    howItWorks: [
+      'The color converter treats HEX, RGB, and HSL as three notations for the same color and keeps them synchronized, converting in both directions whenever any channel changes.',
+      'HEX to RGB is a direct split: each pair of hex digits becomes one 0–255 channel, and 3-digit shorthand such as #09f expands to #0099ff first.',
+      'RGB to HSL is computed with the standard hue, saturation, and lightness formulas, which is why lowering Lightness alone darkens a brand color without shifting its hue.',
+      'Contrast is calculated from relative luminance — 0.2126×R + 0.7152×G + 0.0722×B after gamma linearization — and the ratio is tested against the WCAG AA and AAA thresholds. For a deeper audit, the Color Contrast Checker & Palette Extractor tool covers full palettes.',
+    ],
+    supportedFormats: [
+      'HEX (3- & 6-digit)',
+      'RGB (0–255)',
+      'HSL (hue / saturation / lightness)',
+      'CSS color strings',
+      'WCAG 2.1 AA / AAA contrast',
+      'Color picker input',
+    ],
+    limitations: [
+      'No alpha channel is supported. Eight-digit HEX codes and rgba() transparency are not accepted; convert the solid color here and add alpha separately.',
+      'Named CSS colors such as red are not accepted as input. Enter the HEX value instead — red is #FF0000.',
+      'The tool cannot sample colors from an image. Pick the color with the built-in picker or paste a HEX value you already know.',
+      'A passing ratio is a math result, not a design guarantee. Real readability also depends on font weight, size, and the display it is viewed on.',
     ],
   },
 };

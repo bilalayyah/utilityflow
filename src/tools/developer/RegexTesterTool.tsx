@@ -209,7 +209,7 @@ export default function RegexTesterTool() {
             value={testText}
             onChange={(e) => setTestText(e.target.value)}
             placeholder={s.testPlaceholder}
-            className="w-full rounded-xl border border-slate-300 bg-white p-3.5 font-mono text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/20"
+            className="w-full rounded-xl border border-slate-300 bg-white p-3.5 font-mono text-xs sm:text-sm text-slate-900 placeholder:text-slate-600 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/20"
           />
         </div>
 
@@ -235,7 +235,7 @@ export default function RegexTesterTool() {
                 </Fragment>
               ))
             ) : (
-              <span className="text-slate-400">{s.highlightEmpty}</span>
+              <span className="text-slate-600">{s.highlightEmpty}</span>
             )}
           </div>
         </div>

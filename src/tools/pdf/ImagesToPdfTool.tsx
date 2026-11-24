@@ -2,6 +2,7 @@ import { ArrowDown, ArrowUp, FileOutput, ImagePlus, Trash2 } from 'lucide-react'
 import { PDFDocument } from 'pdf-lib';
 import { useEffect, useState } from 'react';
 import { formatBytes, triggerPdfDownload } from './pdfUtils';
+import { validateImageFile } from '../image-file/imageValidation';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
 import { pastelForKey } from '../../components/tool/pastel';
@@ -13,6 +14,9 @@ const STRINGS_EN = {
     errCanvas: 'Canvas 2D context unavailable.',
     errConvert: (name: string) => `Failed converting "${name}" to PNG.`,
     errNotImage: (name: string) => `"${name}" is not a supported image file (PNG, JPG, WebP).`,
+    errTooLarge: (name: string) => `"${name}" exceeds the 25 MB per-file limit.`,
+    errBadSignature: (name: string) =>
+      `"${name}" does not appear to be a valid image — its contents do not match its file type.`,
     errRead: (name: string) => `Unable to read "${name}".`,
     errLoad: 'Unable to load image.',
     errEmpty: 'Add at least one image first.',
@@ -98,6 +102,16 @@ export default function ImagesToPdfTool() {
     for (const file of Array.from(fileList)) {
       if (!file.type.startsWith('image/')) {
         setError(s.errNotImage(file.name));
+        continue;
+      }
+      // 25 MB cap + magic-byte signature check per file (P3-2, P3-3); decode stays the backstop.
+      const validationError = await validateImageFile(file);
+      if (validationError === 'tooLarge') {
+        setError(s.errTooLarge(file.name));
+        continue;
+      }
+      if (validationError === 'badSignature') {
+        setError(s.errBadSignature(file.name));
         continue;
       }
       const previewUrl = URL.createObjectURL(file);

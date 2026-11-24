@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
 import { PASTEL_PALETTES, pastelForKey } from '../../components/tool/pastel';
 import { formatBytes } from '../pdf/pdfUtils';
+import { validateImageFile } from './imageValidation';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
 
@@ -14,6 +15,9 @@ const STRINGS_EN = {
     encodeMode: 'Image → Base64 Data URI',
     decodeMode: 'Base64 → Image Preview',
     selectImageError: 'Select an image file (PNG, JPG, WebP, SVG, GIF, ICO).',
+    fileTooLarge: 'File too large — the per-file limit is 25 MB. Please choose a smaller image.',
+    invalidImageType: (name: string) =>
+      `"${name}" does not appear to be a valid image — its contents do not match its file type.`,
     unableToRead: 'Unable to read "{name}".',
     chooseImage: 'Choose an Image File to Encode',
     fileWithSize: '{name} ({size})',
@@ -48,10 +52,20 @@ export default function ImageToBase64Tool() {
   const [decodeError, setDecodeError] = useState('');
   const [error, setError] = useState('');
 
-  const handleFile = (file: File | undefined) => {
+  const handleFile = async (file: File | undefined) => {
     if (!file) return;
     if (!file.type.startsWith('image/')) {
       setError(s.selectImageError);
+      return;
+    }
+    // 25 MB cap + magic-byte signature check (P3-2, P3-3); decode stays the backstop.
+    const validationError = await validateImageFile(file);
+    if (validationError === 'tooLarge') {
+      setError(s.fileTooLarge);
+      return;
+    }
+    if (validationError === 'badSignature') {
+      setError(s.invalidImageType(file.name));
       return;
     }
     setError('');

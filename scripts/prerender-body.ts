@@ -220,6 +220,28 @@ export function renderToolBody(
       `</div></section>`
   );
 
+  // CLS (2026-11-24, measured): "Related articles" sits directly under
+  // the workspace slot, above the guide — mirroring ToolPageLayout. The
+  // client guide loads async and grows 2,500–4,500px after first paint;
+  // below the guide this section was visible mid-load and got shoved
+  // below the fold (CLS 0.223 on merge-pdf desktop). Above the guide its
+  // position depends only on the header + workbench.
+  // Batch 2: "Related articles" — mirrors ToolRelatedArticles in
+  // ToolPageLayout (renders nothing when the tool has no published
+  // articles in this locale).
+  const toolArticles = getBlogArticlesForTool(tool.id, locale, data);
+  if (toolArticles.length > 0) {
+    parts.push('<section aria-labelledby="related-articles-heading" class="mt-10">');
+    parts.push(
+      `<h2 id="related-articles-heading" class="text-2xl font-bold tracking-tight text-slate-900">${escapeText(t.blog.relatedArticles)}</h2>`
+    );
+    parts.push(blogCards(toolArticles, t, locale, data, 'mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3'));
+    parts.push(
+      `<p class="mt-6"><a href="${escapeAttr(blogHref(locale))}" class="font-semibold text-indigo-700 hover:underline">${escapeText(t.blog.allArticles)} <span class="inline-block rtl:rotate-180" aria-hidden="true">→</span></a></p>`
+    );
+    parts.push('</section>');
+  }
+
   parts.push('<div class="mt-12 space-y-12">');
   if ((tool.instructions ?? []).length > 0) {
     parts.push('<section>');
@@ -312,22 +334,6 @@ export function renderToolBody(
     parts.push('</section>');
   }
   parts.push('</div>');
-
-  // Batch 2: "Related articles" — mirrors ToolRelatedArticles in
-  // ToolPageLayout (renders nothing when the tool has no published
-  // articles in this locale).
-  const toolArticles = getBlogArticlesForTool(tool.id, locale, data);
-  if (toolArticles.length > 0) {
-    parts.push('<section aria-labelledby="related-articles-heading" class="mt-10">');
-    parts.push(
-      `<h2 id="related-articles-heading" class="text-2xl font-bold tracking-tight text-slate-900">${escapeText(t.blog.relatedArticles)}</h2>`
-    );
-    parts.push(blogCards(toolArticles, t, locale, data, 'mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3'));
-    parts.push(
-      `<p class="mt-6"><a href="${escapeAttr(blogHref(locale))}" class="font-semibold text-indigo-700 hover:underline">${escapeText(t.blog.allArticles)} <span class="inline-block rtl:rotate-180" aria-hidden="true">→</span></a></p>`
-    );
-    parts.push('</section>');
-  }
 
   if (related.length > 0 || category) {
     parts.push('<section class="mt-12 pt-10 border-t border-slate-200">');

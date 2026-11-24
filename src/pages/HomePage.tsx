@@ -116,7 +116,7 @@ export function HomePage() {
                 onClick={() => setSelectedCategory(pill.id)}
                 className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
                   selectedCategory === pill.id
-                    ? 'bg-[#0E8A66] text-white shadow-sm'
+                    ? 'bg-[#0B7A59] text-white shadow-sm'
                     : 'border border-[#E5E5EA] bg-white text-[#1D1D1F] shadow-sm hover:border-[#BFE3D3] hover:text-[#0B7A59] dark:border-[#243247] dark:bg-[#131D31] dark:text-[#F1F5F9] dark:hover:border-[#34D399] dark:hover:text-[#34D399]'
                 }`}
               >
@@ -128,7 +128,7 @@ export function HomePage() {
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <a
               href="#directory"
-              className="inline-flex items-center gap-2 rounded-full bg-[#0E8A66] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0B7557] whitespace-nowrap shrink-0"
+              className="inline-flex items-center gap-2 rounded-full bg-[#0B7A59] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0B7557] whitespace-nowrap shrink-0"
             >
               {t.home.exploreCategories}
               <ArrowRight className="w-4 h-4 rtl:rotate-180" aria-hidden="true" />

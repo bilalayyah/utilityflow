@@ -181,7 +181,7 @@ export default function WordFrequencyCounterTool() {
           value={text}
           onChange={(e) => setText(e.target.value)}
           placeholder={s.placeholder}
-          className="w-full rounded-xl border border-slate-300 bg-white p-4 text-sm sm:text-base text-slate-900 placeholder:text-slate-400 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/20"
+          className="w-full rounded-xl border border-slate-300 bg-white p-4 text-sm sm:text-base text-slate-900 placeholder:text-slate-600 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/20"
         />
       </div>
 
@@ -219,7 +219,7 @@ export default function WordFrequencyCounterTool() {
               <tbody className="divide-y divide-slate-100 bg-white">
                 {analysis.rows.map((row, idx) => (
                   <tr key={row.term} className="hover:bg-slate-50/80">
-                    <td className="py-2 px-4 font-mono text-xs text-slate-400 tabular-nums">
+                    <td className="py-2 px-4 font-mono text-xs text-slate-600 tabular-nums">
                       {idx + 1}
                     </td>
                     <td className="py-2 px-4 font-mono text-slate-900">{row.term}</td>

@@ -61,7 +61,7 @@ export function FAQAccordion({ items, defaultOpenIndex = 0, renderAnswer }: FAQA
                 <span>{item.question}</span>
                 <ChevronDown
                   className={`w-4 h-4 shrink-0 transition-transform duration-150 ${
-                    isOpen ? 'rotate-180 text-[#0E8A66] dark:text-[#34D399]' : 'text-[#86868B]'
+                    isOpen ? 'rotate-180 text-[#0E8A66] dark:text-[#34D399]' : 'text-[#64748B]'
                   }`}
                   aria-hidden="true"
                 />

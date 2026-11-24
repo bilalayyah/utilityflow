@@ -37,7 +37,7 @@ async function startServer() {
     app.use(vite.middlewares);
   }
 
-  app.listen(PORT, '0.0.0.0', () => {
+  app.listen(PORT, '127.0.0.1', () => {
     console.log(`UtilityFlow server listening on http://localhost:${PORT}`);
   });
 }

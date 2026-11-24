@@ -48,7 +48,7 @@ export function ThemeToggle({ variant = 'dropdown', onSelect }: ThemeToggleProps
   if (variant === 'segmented') {
     return (
       <div className="space-y-1.5">
-        <div className="px-1 text-xs font-semibold text-[#86868B] dark:text-[#CBD5E1]">
+        <div className="px-1 text-xs font-semibold text-[#64748B] dark:text-[#CBD5E1]">
           Appearance
         </div>
         <div
@@ -109,7 +109,7 @@ export function ThemeToggle({ variant = 'dropdown', onSelect }: ThemeToggleProps
           aria-hidden="true"
         />
         <ChevronDown
-          className={`w-3.5 h-3.5 max-[379px]:hidden text-[#86868B] transition-transform duration-150 dark:text-[#CBD5E1] ${
+          className={`w-3.5 h-3.5 max-[379px]:hidden text-[#64748B] transition-transform duration-150 dark:text-[#CBD5E1] ${
             open ? 'rotate-180' : ''
           }`}
           aria-hidden="true"
@@ -146,7 +146,7 @@ export function ThemeToggle({ variant = 'dropdown', onSelect }: ThemeToggleProps
                   <span>
                     {label}
                     {id === 'system' && (
-                      <span className="ms-1 text-[11px] text-[#86868B] dark:text-[#CBD5E1]">
+                      <span className="ms-1 text-[11px] text-[#64748B] dark:text-[#CBD5E1]">
                         ({systemTheme === 'dark' ? 'Dark' : 'Light'})
                       </span>
                     )}

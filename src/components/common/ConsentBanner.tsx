@@ -57,7 +57,7 @@ export function ConsentBanner() {
         <button
           type="button"
           onClick={() => choose('granted')}
-          className="rounded-full bg-[#0E8A66] px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0B7557] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0E8A66] focus-visible:ring-offset-2"
+          className="rounded-full bg-[#0B7A59] px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0B7557] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0E8A66] focus-visible:ring-offset-2"
         >
           {t.consent.accept}
         </button>

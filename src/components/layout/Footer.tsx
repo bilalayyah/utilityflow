@@ -38,7 +38,7 @@ export function Footer() {
             <p className="text-sm leading-relaxed text-[#6E6E73] max-w-sm dark:text-[#CBD5E1]">
               {t.footer.tagline}
             </p>
-            <p className="text-xs text-[#86868B] dark:text-[#CBD5E1]">
+            <p className="text-xs text-[#64748B] dark:text-[#CBD5E1]">
               {t.nav.contact}:{' '}
               <a
                 href={`mailto:${SITE_CONFIG.contactEmail}`}
@@ -143,7 +143,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 border-t border-[#E5E5EA] pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs text-[#86868B] dark:border-[#243247] dark:text-[#CBD5E1]">
+        <div className="mt-10 border-t border-[#E5E5EA] pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs text-[#64748B] dark:border-[#243247] dark:text-[#CBD5E1]">
           <p>
             © {currentYear} {SITE_CONFIG.name}. {t.footer.rightsReserved}
           </p>
