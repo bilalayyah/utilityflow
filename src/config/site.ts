@@ -35,6 +35,8 @@ export const STATIC_ROUTES = [  { path: '/', label: 'Home', changefreq: 'weekly'
   { path: '/contact/', label: 'Contact', changefreq: 'monthly', priority: '0.5' },
   { path: '/privacy-policy/', label: 'Privacy Policy', changefreq: 'yearly', priority: '0.4' },
   { path: '/terms-of-service/', label: 'Terms of Service', changefreq: 'yearly', priority: '0.4' },
+  { path: '/pricing/', label: 'Pricing', changefreq: 'yearly', priority: '0.4', enOnly: true },
+  { path: '/refund-policy/', label: 'Refund Policy', changefreq: 'yearly', priority: '0.4', enOnly: true },
 ] as const;
 
 export const NAV_LINKS = [

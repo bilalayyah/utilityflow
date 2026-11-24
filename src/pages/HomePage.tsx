@@ -6,7 +6,7 @@ import { SeoHead } from '../components/seo/SeoHead';
 import { ToolCard } from '../components/tool/ToolCard';
 import { ToolSearchBar } from '../components/tool/ToolSearchBar';
 import { PASTEL_PALETTES } from '../components/tool/pastel';
-import { SITE_CONFIG, buildCanonicalUrl } from '../config/site';
+import { PREMIUM_CONFIG, SITE_CONFIG, buildCanonicalUrl } from '../config/site';
 import { useLocale } from '../locales/LocaleContext';
 import { localizeStaticPath } from '../locales/config';
 import { getStaticAlternatePaths, toHreflangEntries } from '../locales/routes';
@@ -235,6 +235,58 @@ export function HomePage() {
               </p>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Pricing Section */}
+      <section aria-labelledby="pricing-heading" className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
+        <div className="max-w-2xl mb-10">
+          <h2 id="pricing-heading" className="text-2xl sm:text-3xl font-bold tracking-tight text-[#1D1D1F] dark:text-[#F1F5F9]">
+            Pricing
+          </h2>
+          <p className="mt-2 text-sm sm:text-base text-[#6E6E73] dark:text-[#CBD5E1]">
+            Free forever. Upgrade once for lifetime access — no subscription.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div className="rounded-2xl border border-[#E5E5EA] bg-white p-6 shadow-sm dark:border-[#243247] dark:bg-[#131D31]">
+            <h3 className="text-lg font-bold text-[#1D1D1F] dark:text-[#F1F5F9]">Free</h3>
+            <p className="mt-2 text-3xl font-extrabold text-[#1D1D1F] dark:text-[#F1F5F9]">$0</p>
+            <p className="mt-1 text-sm text-[#6E6E73] dark:text-[#CBD5E1]">Free forever</p>
+            <ul className="mt-5 space-y-2 text-sm leading-relaxed text-[#6E6E73] dark:text-[#CBD5E1]">
+              <li>All standard tools</li>
+              <li>Ads shown on the site</li>
+              <li>Standard file-size limits apply</li>
+            </ul>
+          </div>
+
+          <div className="rounded-2xl border-2 border-[#0E8A66] bg-white p-6 shadow-sm dark:border-[#34D399] dark:bg-[#131D31]">
+            <p className="inline-flex rounded-full bg-[#0E8A66] px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white">
+              Lifetime Access
+            </p>
+            <h3 className="mt-3 text-lg font-bold text-[#1D1D1F] dark:text-[#F1F5F9]">Lifetime Premium</h3>
+            <p className="mt-2 text-3xl font-extrabold text-[#1D1D1F] dark:text-[#F1F5F9]">{PREMIUM_CONFIG.priceLabel}</p>
+            <p className="mt-1 text-sm text-[#6E6E73] dark:text-[#CBD5E1]">One-time payment · No subscription</p>
+            <ul className="mt-5 space-y-2 text-sm leading-relaxed text-[#6E6E73] dark:text-[#CBD5E1]">
+              <li>Ad-free — no ads anywhere</li>
+              <li>Unlimited standard usage</li>
+              <li>No daily caps</li>
+              <li>No watermarks on exported files</li>
+              <li>All current tools, plus future standard tools</li>
+            </ul>
+            <p className="mt-5 text-sm font-semibold text-[#1D1D1F] dark:text-[#F1F5F9]">Secure checkout is coming soon.</p>
+          </div>
+        </div>
+
+        <div className="mt-6 text-center">
+          <Link
+            to="/pricing/"
+            className="inline-flex items-center gap-2 rounded-full bg-[#0E8A66] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0B7557] whitespace-nowrap shrink-0"
+          >
+            See full pricing
+            <ArrowRight className="w-4 h-4 rtl:rotate-180" aria-hidden="true" />
+          </Link>
         </div>
       </section>
 

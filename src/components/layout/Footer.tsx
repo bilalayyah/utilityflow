@@ -123,6 +123,22 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link
+                  to="/pricing/"
+                  className="hover:text-[#0B7A59] transition-colors underline-offset-4 hover:underline dark:hover:text-[#34D399]"
+                >
+                  Pricing
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/refund-policy/"
+                  className="hover:text-[#0B7A59] transition-colors underline-offset-4 hover:underline dark:hover:text-[#34D399]"
+                >
+                  Refund Policy
+                </Link>
+              </li>
+              <li>
                 <button
                   type="button"
                   onClick={() => requestConsentBanner()}

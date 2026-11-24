@@ -8,6 +8,8 @@ import { ContactPage } from './pages/ContactPage';
 import { HomePage } from './pages/HomePage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage';
+import { PricingPage } from './pages/PricingPage';
+import { RefundPolicyPage } from './pages/RefundPolicyPage';
 import { TermsOfServicePage } from './pages/TermsOfServicePage';
 import { ToolPage } from './pages/ToolPage';
 import { ToolsDirectoryPage } from './pages/ToolsDirectoryPage';
@@ -34,6 +36,10 @@ export default function App() {
             <Route path="/privacy-policy/" element={<PrivacyPolicyPage />} />
             <Route path="/terms-of-service" element={<TermsOfServicePage />} />
             <Route path="/terms-of-service/" element={<TermsOfServicePage />} />
+            <Route path="/pricing" element={<PricingPage />} />
+            <Route path="/pricing/" element={<PricingPage />} />
+            <Route path="/refund-policy" element={<RefundPolicyPage />} />
+            <Route path="/refund-policy/" element={<RefundPolicyPage />} />
                         <Route path="/blog" element={<BlogHomePage />} />
             <Route path="/blog/" element={<BlogHomePage />} />
             <Route path="/blog/category/:categorySlug" element={<BlogCategoryPage />} />

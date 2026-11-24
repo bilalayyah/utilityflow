@@ -62,7 +62,7 @@
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { SITE_CONFIG, STATIC_ROUTES, buildCanonicalUrl } from '../src/config/site';
+import { PREMIUM_CONFIG, SITE_CONFIG, STATIC_ROUTES, buildCanonicalUrl } from '../src/config/site';
 import { DEFAULT_OG_IMAGE, getBlogImageUrl, getOgImageForPage } from '../src/config/ogImages';
 import {
   CATEGORY_LOCALE_SLUGS,
@@ -397,7 +397,7 @@ function directorySeo(t: LocaleData['uiStrings'], locale: LocaleCode): SeoHeadPr
   };
 }
 
-type StaticPageKey = 'about' | 'contact' | 'privacy' | 'terms';
+type StaticPageKey = 'about' | 'contact' | 'privacy' | 'terms' | 'pricing' | 'refund';
 
 const STATIC_PAGE_CONFIG: Record<
   StaticPageKey,
@@ -426,6 +426,20 @@ const STATIC_PAGE_CONFIG: Record<
     seoTitle: (t) => t.terms.seoTitle,
     seoDescription: (t) => t.terms.seoDescription,
     crumbLabel: (t) => t.footer.termsOfService,
+  },
+  pricing: {
+    enPath: '/pricing/',
+    seoTitle: () => 'Pricing — UtilityFlow',
+    seoDescription: () =>
+      `UtilityFlow pricing: Free forever, or Lifetime Premium for a one-time payment of ${PREMIUM_CONFIG.priceLabel}. No subscription, no recurring fees.`,
+    crumbLabel: () => 'Pricing',
+  },
+  refund: {
+    enPath: '/refund-policy/',
+    seoTitle: () => 'Refund Policy — UtilityFlow',
+    seoDescription: () =>
+      'UtilityFlow refund policy: Lifetime Premium purchases can be refunded within 14 days of purchase. Refunds are processed by Paddle.',
+    crumbLabel: () => 'Refund Policy',
   },
 };
 
@@ -1014,6 +1028,9 @@ async function prerender(): Promise<void> {
 
     // Static routes (home, directory, about, contact, privacy, terms).
     for (const route of STATIC_ROUTES) {
+      // EN-only routes (e.g. /pricing/) exist in EN only — skip them for
+      // non-EN locales (they have no localized path or content).
+      if ('enOnly' in route && route.enOnly === true && locale !== 'en') continue;
       const localized =
         route.path === '/'
           ? localizeStaticPath('/', locale)
@@ -1041,6 +1058,14 @@ async function prerender(): Promise<void> {
       } else if (route.path === '/privacy-policy/') {
         props = staticPageSeo('privacy', t, locale);
         body = renderStaticBody('privacy', t, locale, data);
+        preloadFiles = preloadFor(locale, t.nav.allTools);
+      } else if (route.path === '/pricing/') {
+        props = staticPageSeo('pricing', t, locale);
+        body = renderStaticBody('pricing', t, locale, data);
+        preloadFiles = preloadFor(locale, t.nav.allTools);
+      } else if (route.path === '/refund-policy/') {
+        props = staticPageSeo('refund', t, locale);
+        body = renderStaticBody('refund', t, locale, data);
         preloadFiles = preloadFor(locale, t.nav.allTools);
       } else {
         props = staticPageSeo('terms', t, locale);
@@ -1151,8 +1176,14 @@ async function prerender(): Promise<void> {
   // where the article is published — counted from the slug manifest
   // (EN: every published article; non-EN: the manifest articles map),
   // which cross-checks the registry + overrides the loop reads.
+  // EN-only static routes (e.g. /pricing/) exist in EN only, not in every
+  // locale — count them as 1 page each, not 17.
+  const enOnlyRoutes = STATIC_ROUTES.filter(
+    (route) => 'enOnly' in route && route.enOnly === true
+  );
+  const enOnlyPaths = enOnlyRoutes.map((route) => route.path);
   const basePages =
-    STATIC_ROUTES.length + CATEGORIES.length + TOOLS_REGISTRY.length + 1 + CATEGORIES.length;
+    STATIC_ROUTES.length - enOnlyRoutes.length + CATEGORIES.length + TOOLS_REGISTRY.length + 1 + CATEGORIES.length;
   const publishedArticles = getPublishedBlogArticles();
   const articleUrls =
     publishedArticles.length +
@@ -1161,10 +1192,10 @@ async function prerender(): Promise<void> {
         sum + getPublishedArticleCount(l.code as NonDefaultLocale),
       0
     );
-  const expectedTotal = basePages * SUPPORTED_LOCALES.length + articleUrls;
+  const expectedTotal = basePages * SUPPORTED_LOCALES.length + enOnlyRoutes.length + articleUrls;
   if (pages.length !== expectedTotal) {
     throw new Error(
-      `Prerender incomplete: ${pages.length} pages, expected ${expectedTotal} (${basePages} base pages x ${SUPPORTED_LOCALES.length} locales + ${articleUrls} article URLs).`
+      `Prerender incomplete: ${pages.length} pages, expected ${expectedTotal} (${basePages} base pages x ${SUPPORTED_LOCALES.length} locales + ${enOnlyRoutes.length} EN-only pages + ${articleUrls} article URLs).`
     );
   }
   const seen = new Set<string>();
@@ -1189,6 +1220,17 @@ async function prerender(): Promise<void> {
         if (altCount < 2 || altCount > SUPPORTED_LOCALES.length + 1) {
           throw new Error(
             `${page.path} has ${altCount} hreflang alternates, expected 2–${SUPPORTED_LOCALES.length + 1} (published locales only).`
+          );
+        }
+        const langs = new Set(page.props.alternates.map((a) => a.hreflang));
+        if (!langs.has('en-US') || !langs.has('x-default')) {
+          throw new Error(`${page.path} hreflang must include en-US and x-default.`);
+        }
+      } else if (enOnlyPaths.some((p) => page.path === p)) {
+        // EN-only static pages have 2 alternates (en-US + x-default).
+        if (altCount !== 2) {
+          throw new Error(
+            `${page.path} has ${altCount} hreflang alternates, expected 2 (EN-only page).`
           );
         }
         const langs = new Set(page.props.alternates.map((a) => a.hreflang));

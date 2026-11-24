@@ -278,21 +278,32 @@ function generateSitemap(): void {
       articleCountByLocale.set(locale.code, n);
     }
   }
+  // EN-only static routes (e.g. /pricing/) exist in EN only, not in every
+  // locale — count them as 1 URL each, not 17. All other base pages exist
+  // in every locale, so they are counted x17.
+  const enOnlyRoutes = STATIC_ROUTES.filter(
+    (route) => 'enOnly' in route && route.enOnly === true
+  );
+  const enOnlyPaths = enOnlyRoutes.map((route) => route.path);
   const basePages =
-    STATIC_ROUTES.length + CATEGORIES.length + TOOLS_REGISTRY.length + 1 + CATEGORIES.length;
+    STATIC_ROUTES.length - enOnlyRoutes.length + CATEGORIES.length + TOOLS_REGISTRY.length + 1 + CATEGORIES.length;
   const expectedTotal =
     basePages * SUPPORTED_LOCALES.length +
+    enOnlyRoutes.length +
     [...articleCountByLocale.values()].reduce((sum, n) => sum + n, 0);
   if (entries.length !== expectedTotal) {
     throw new Error(
-      `Sitemap incomplete: ${entries.length} URLs, expected ${expectedTotal} (${basePages} base pages x ${SUPPORTED_LOCALES.length} locales + ${[...articleCountByLocale.values()].reduce((sum, n) => sum + n, 0)} article URLs). A page or locale is missing slugs — check the locale overrides.`
+      `Sitemap incomplete: ${entries.length} URLs, expected ${expectedTotal} (${basePages} base pages x ${SUPPORTED_LOCALES.length} locales + ${enOnlyRoutes.length} EN-only URLs + ${[...articleCountByLocale.values()].reduce((sum, n) => sum + n, 0)} article URLs). A page or locale is missing slugs — check the locale overrides.`
     );
   }
   const nonEnPrefixes = SUPPORTED_LOCALES.filter((l) => l.code !== 'en').map(
     (l) => `${l.pathPrefix}/`
   );
   for (const locale of SUPPORTED_LOCALES) {
-    const expectedForLocale = basePages + (articleCountByLocale.get(locale.code) ?? 0);
+    const expectedForLocale =
+      basePages +
+      (locale.code === 'en' ? enOnlyRoutes.length : 0) +
+      (articleCountByLocale.get(locale.code) ?? 0);
     const n =
       locale.code === 'en'
         ? entries.filter((e) => !nonEnPrefixes.some((p) => e.loc.includes(p))).length
@@ -324,10 +335,24 @@ function generateSitemap(): void {
           `Sitemap article entry ${entry.loc} has ${entry.alternates.length} hreflang alternates (expected 2–${SUPPORTED_LOCALES.length + 1}, always including en-US and x-default).`
         );
       }
-    } else if (entry.alternates.length !== SUPPORTED_LOCALES.length + 1) {
-      throw new Error(
-        `Sitemap entry ${entry.loc} has ${entry.alternates.length} hreflang alternates, expected ${SUPPORTED_LOCALES.length + 1} (${SUPPORTED_LOCALES.length} locales + x-default).`
-      );
+    } else {
+      // EN-only static pages (e.g. /pricing/) have 2 alternates (en-US +
+      // x-default), like EN-only articles. All other non-article entries
+      // must have one alternate per locale + x-default.
+      const isEnOnlyStatic = enOnlyPaths.some((p) => entry.loc.endsWith(p));
+      if (isEnOnlyStatic) {
+        const hasEn = entry.alternates.some((a) => a.hreflang === 'en-US');
+        const hasXDefault = entry.alternates.some((a) => a.hreflang === 'x-default');
+        if (entry.alternates.length !== 2 || !hasEn || !hasXDefault) {
+          throw new Error(
+            `Sitemap EN-only entry ${entry.loc} has ${entry.alternates.length} hreflang alternates (expected 2: en-US + x-default).`
+          );
+        }
+      } else if (entry.alternates.length !== SUPPORTED_LOCALES.length + 1) {
+        throw new Error(
+          `Sitemap entry ${entry.loc} has ${entry.alternates.length} hreflang alternates, expected ${SUPPORTED_LOCALES.length + 1} (${SUPPORTED_LOCALES.length} locales + x-default).`
+        );
+      }
     }
   }
 
