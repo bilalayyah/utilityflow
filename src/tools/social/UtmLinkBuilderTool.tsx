@@ -87,6 +87,24 @@ export default function UtmLinkBuilderTool() {
       };
     }
 
+    // WHATWG URL percent-encodes spaces instead of throwing, so an input
+    // like "not a url" parses as https://not%20a%20url/ and would silently
+    // produce a broken campaign URL. Validate the hostname explicitly: only
+    // letters, digits, dots, hyphens and underscores, and it must contain a
+    // dot (a real domain) or be localhost / a bracketed IP literal.
+    const hostname = parsed.hostname;
+    const hostnameOk =
+      hostname === 'localhost' ||
+      /^\[[0-9a-fA-F:]+\]$/.test(hostname) ||
+      (/^[A-Za-z0-9._-]+$/.test(hostname) && hostname.includes('.'));
+    if (!hostnameOk) {
+      return {
+        error: s.errorInvalid,
+        finalUrl: '',
+        params: [] as [string, string][],
+      };
+    }
+
     const entries: [string, string][] = [
       ['utm_source', formatParam(source)],
       ['utm_medium', formatParam(medium)],

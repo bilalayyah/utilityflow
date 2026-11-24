@@ -278,7 +278,7 @@ function generateSitemap(): void {
       articleCountByLocale.set(locale.code, n);
     }
   }
-  // EN-only static routes (e.g. /pricing/) exist in EN only, not in every
+  // EN-only static routes (none currently) exist in EN only, not in every
   // locale — count them as 1 URL each, not 17. All other base pages exist
   // in every locale, so they are counted x17.
   const enOnlyRoutes = STATIC_ROUTES.filter(
@@ -336,7 +336,7 @@ function generateSitemap(): void {
         );
       }
     } else {
-      // EN-only static pages (e.g. /pricing/) have 2 alternates (en-US +
+      // EN-only static pages (none currently) have 2 alternates (en-US +
       // x-default), like EN-only articles. All other non-article entries
       // must have one alternate per locale + x-default.
       const isEnOnlyStatic = enOnlyPaths.some((p) => entry.loc.endsWith(p));

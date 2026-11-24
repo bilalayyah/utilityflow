@@ -12,31 +12,12 @@ export const SITE_CONFIG = {
   totalBatches: 7,
 } as const;
 
-/**
- * Lifetime Premium pricing — the SINGLE source of truth for the premium
- * price. Never hard-code the price in components; read it from here.
- * Price set by the user Mon 2026-11-23: $11.99 one-time (clears Paddle's
- * $10 self-serve threshold). Provider: Paddle. No payment/checkout code
- * exists yet — Phase 4 builds checkout against this config.
- */
-export const PREMIUM_CONFIG = {
-  /** Numeric price in USD (one-time payment, lifetime access). */
-  priceUsd: 11.99,
-  /** Display price, e.g. "$11.99". */
-  priceLabel: '$11.99',
-  billing: 'one-time',
-  label: 'ONE-TIME PAYMENT · LIFETIME ACCESS',
-  provider: 'paddle',
-} as const;
-
 export const STATIC_ROUTES = [  { path: '/', label: 'Home', changefreq: 'weekly', priority: '1.0' },
   { path: '/tools/', label: 'All Tools', changefreq: 'weekly', priority: '0.9' },
   { path: '/about/', label: 'About', changefreq: 'monthly', priority: '0.6' },
   { path: '/contact/', label: 'Contact', changefreq: 'monthly', priority: '0.5' },
   { path: '/privacy-policy/', label: 'Privacy Policy', changefreq: 'yearly', priority: '0.4' },
   { path: '/terms-of-service/', label: 'Terms of Service', changefreq: 'yearly', priority: '0.4' },
-  { path: '/pricing/', label: 'Pricing', changefreq: 'yearly', priority: '0.4', enOnly: true },
-  { path: '/refund-policy/', label: 'Refund Policy', changefreq: 'yearly', priority: '0.4', enOnly: true },
 ] as const;
 
 export const NAV_LINKS = [

@@ -29,7 +29,7 @@
 //   sections <h2>, items <h3>.
 // - When a React page's content changes, update the matching builder here.
 
-import { PREMIUM_CONFIG, SITE_CONFIG, buildCanonicalUrl } from '../src/config/site';
+import { SITE_CONFIG, buildCanonicalUrl } from '../src/config/site';
 import {
   articleHref,
   blogCategoryHref,
@@ -400,44 +400,6 @@ export function renderHomeBody(
   }
   parts.push('</div></section>');
 
-  // Pricing (EN-only for now — hardcoded English; the 17-language rollout
-  // is a follow-up). Mirrors the Pricing section in HomePage.tsx.
-  parts.push('<section class="mt-12">');
-  parts.push(`<h2 class="${H2}">Pricing</h2>`);
-  parts.push('<p class="text-sm sm:text-base text-slate-600 mb-6">Free forever. Upgrade once for lifetime access — no subscription.</p>');
-  parts.push('<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">');
-  parts.push('<div class="rounded-2xl border border-slate-200/70 bg-white p-6 shadow-sm">');
-  parts.push('<h3 class="text-lg font-bold text-slate-900">Free</h3>');
-  parts.push('<p class="mt-2 text-3xl font-extrabold text-slate-900">$0</p>');
-  parts.push('<p class="mt-1 text-sm text-slate-600">Free forever</p>');
-  parts.push('<ul class="mt-5 space-y-2 text-sm leading-relaxed text-slate-600">');
-  parts.push('<li>All standard tools</li>');
-  parts.push('<li>Ads shown on the site</li>');
-  parts.push('<li>Standard file-size limits apply</li>');
-  parts.push('</ul></div>');
-  parts.push('<div class="rounded-2xl border-2 border-[#0E8A66] bg-white p-6 shadow-sm">');
-  parts.push(
-    '<p class="inline-flex rounded-full bg-[#0E8A66] px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white">Lifetime Access</p>'
-  );
-  parts.push('<h3 class="mt-3 text-lg font-bold text-slate-900">Lifetime Premium</h3>');
-  parts.push(
-    `<p class="mt-2 text-3xl font-extrabold text-slate-900">${escapeText(PREMIUM_CONFIG.priceLabel)}</p>`
-  );
-  parts.push('<p class="mt-1 text-sm text-slate-600">One-time payment · No subscription</p>');
-  parts.push('<ul class="mt-5 space-y-2 text-sm leading-relaxed text-slate-600">');
-  parts.push('<li>Ad-free — no ads anywhere</li>');
-  parts.push('<li>Unlimited standard usage</li>');
-  parts.push('<li>No daily caps</li>');
-  parts.push('<li>No watermarks on exported files</li>');
-  parts.push('<li>All current tools, plus future standard tools</li>');
-  parts.push('</ul>');
-  parts.push('<p class="mt-5 text-sm font-semibold text-slate-900">Secure checkout is coming soon.</p>');
-  parts.push('</div></div>');
-  parts.push(
-    '<p class="mt-6 text-center"><a href="/pricing/" class="inline-flex items-center gap-2 rounded-full bg-[#0E8A66] px-5 py-2.5 text-sm font-semibold text-white shadow-sm">See full pricing</a></p>'
-  );
-  parts.push('</section>');
-
   if (t.home.faqs.length > 0) {
     parts.push('<section class="mt-12">');
     parts.push(`<h2 class="${H2}">${escapeText(t.home.faq.title)}</h2>`);
@@ -595,7 +557,7 @@ export function renderCategoryBody(
 // prose, topics and direct-email link are included instead.
 // ---------------------------------------------------------------------------
 
-export type StaticPageKey = 'about' | 'contact' | 'privacy' | 'terms' | 'pricing' | 'refund';
+export type StaticPageKey = 'about' | 'contact' | 'privacy' | 'terms';
 
 export function renderStaticBody(
   key: StaticPageKey,
@@ -717,110 +679,6 @@ export function renderStaticBody(
     parts.push(`<h2 class="text-xl font-bold text-slate-900 mb-2">${escapeText(t.privacy.contactTitle)}</h2>`);
     parts.push(
       `<p>${escapeText(t.privacy.contactBefore)} <a href="${escapeAttr(localizeStaticPath('/contact/', locale))}" class="${LINK}">${escapeText(t.privacy.contactLink)}</a> ${escapeText(t.privacy.contactMiddle)} <a href="mailto:${escapeAttr(SITE_CONFIG.contactEmail)}" class="${LINK}">${escapeText(SITE_CONFIG.contactEmail)}</a>.</p>`
-    );
-    parts.push('</section></div></main>');
-    return parts.join('');
-  }
-
-  if (key === 'pricing') {
-    parts.push(articleOpen);
-    parts.push(
-      breadcrumbs(
-        [{ label: t.footer.home, href: localizeStaticPath('/', locale) }, { label: 'Pricing' }],
-        locale
-      )
-    );
-    parts.push('<header class="mb-10">');
-    parts.push(`<h1 class="${H1}">Pricing</h1>`);
-    parts.push('<p class="mt-2 text-sm text-slate-500">Last updated: November 24, 2026</p>');
-    parts.push(
-      '<p class="mt-4 text-base leading-relaxed text-slate-700">UtilityFlow is free to use. Lifetime Premium is a single one-time payment — no subscription, no recurring fees.</p>'
-    );
-    parts.push('</header>');
-    parts.push('<div class="grid grid-cols-1 gap-6 sm:grid-cols-2">');
-    parts.push('<div class="rounded-2xl bg-white p-6 sm:p-8 shadow-sm">');
-    parts.push('<h2 class="text-xl font-bold text-slate-900">Free</h2>');
-    parts.push('<p class="mt-2 text-3xl font-extrabold text-slate-900">$0</p>');
-    parts.push('<p class="mt-1 text-sm text-slate-500">Free forever</p>');
-    parts.push('<ul class="mt-6 space-y-3 text-base leading-relaxed text-slate-700">');
-    parts.push('<li>All standard tools</li>');
-    parts.push('<li>Ads shown on the site</li>');
-    parts.push('<li>Standard file-size limits apply</li>');
-    parts.push('</ul></div>');
-    parts.push('<div class="rounded-2xl border-2 border-[#0E8A66] bg-white p-6 sm:p-8 shadow-sm">');
-    parts.push(
-      '<p class="inline-flex rounded-full bg-[#0E8A66] px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white">Lifetime Access</p>'
-    );
-    parts.push('<h2 class="mt-3 text-xl font-bold text-slate-900">Lifetime Premium</h2>');
-    parts.push(
-      `<p class="mt-2 text-3xl font-extrabold text-slate-900">${escapeText(PREMIUM_CONFIG.priceLabel)}</p>`
-    );
-    parts.push('<p class="mt-1 text-sm text-slate-500">One-time payment · No subscription</p>');
-    parts.push('<ul class="mt-6 space-y-3 text-base leading-relaxed text-slate-700">');
-    parts.push('<li>Ad-free — no ads anywhere on the site</li>');
-    parts.push('<li>Unlimited standard usage</li>');
-    parts.push('<li>No daily caps</li>');
-    parts.push('<li>No watermarks on exported files</li>');
-    parts.push('<li>All current tools, plus future standard tools</li>');
-    parts.push('</ul>');
-    parts.push('<p class="mt-6 text-sm font-semibold text-slate-900">Secure checkout is coming soon.</p>');
-    parts.push('</div></div>');
-    parts.push(
-      '<div class="mt-8 space-y-8 text-base leading-relaxed text-slate-700 rounded-2xl bg-white p-6 sm:p-8 shadow-sm">'
-    );
-    parts.push('<section>');
-    parts.push('<h2 class="text-xl font-bold text-slate-900 mb-2">Refunds</h2>');
-    parts.push(
-      `<p>Lifetime Premium comes with a 14-day refund window. Read the full <a href="/refund-policy/" class="${LINK}">Refund Policy</a>.</p>`
-    );
-    parts.push('</section>');
-    parts.push('<section>');
-    parts.push('<h2 class="text-xl font-bold text-slate-900 mb-2">Questions?</h2>');
-    parts.push(
-      `<p><a href="${escapeAttr(localizeStaticPath('/contact/', locale))}" class="${LINK}">Contact us</a> or email <a href="mailto:${escapeAttr(SITE_CONFIG.contactEmail)}" class="${LINK}">${escapeText(SITE_CONFIG.contactEmail)}</a>.</p>`
-    );
-    parts.push('</section></div></main>');
-    return parts.join('');
-  }
-
-  if (key === 'refund') {
-    parts.push(articleOpen);
-    parts.push(
-      breadcrumbs(
-        [{ label: t.footer.home, href: localizeStaticPath('/', locale) }, { label: 'Refund Policy' }],
-        locale
-      )
-    );
-    parts.push('<header class="mb-10">');
-    parts.push(`<h1 class="${H1}">Refund Policy</h1>`);
-    parts.push('<p class="mt-2 text-sm text-slate-500">Last updated: November 24, 2026</p>');
-    parts.push('</header><div class="space-y-8 text-base leading-relaxed text-slate-700">');
-    parts.push('<section>');
-    parts.push('<h2 class="text-xl font-bold text-slate-900 mb-2">14-day refund window</h2>');
-    parts.push('<p>You may request a refund within 14 days of purchase.</p>');
-    parts.push(
-      `<p class="mt-3">This applies to Lifetime Premium, a one-time payment of ${escapeText(PREMIUM_CONFIG.priceLabel)} for lifetime access. There is no subscription and no recurring charge.</p>`
-    );
-    parts.push('</section>');
-    parts.push('<section>');
-    parts.push('<h2 class="text-xl font-bold text-slate-900 mb-2">How refunds are processed</h2>');
-    parts.push('<p>Payments are processed by Paddle, our payment processor. Paddle also processes refunds.</p>');
-    parts.push(
-      '<p class="mt-3">Once approved, the refund is returned to the original payment method. The time it takes to appear depends on your bank or card provider.</p>'
-    );
-    parts.push('</section>');
-    parts.push('<section>');
-    parts.push('<h2 class="text-xl font-bold text-slate-900 mb-2">How to request a refund</h2>');
-    parts.push(
-      `<p>Email <a href="mailto:${escapeAttr(SITE_CONFIG.contactEmail)}" class="${LINK}">${escapeText(SITE_CONFIG.contactEmail)}</a> with the email address used for the purchase and your order details.</p>`
-    );
-    parts.push('<p class="mt-3">We will confirm your request and pass it to Paddle for processing.</p>');
-    parts.push('</section>');
-    parts.push('<section>');
-    parts.push('<h2 class="text-xl font-bold text-slate-900 mb-2">No subscription to cancel</h2>');
-    parts.push('<p>Lifetime Premium is a one-time payment. There is no subscription, so there is nothing to cancel.</p>');
-    parts.push(
-      `<p class="mt-3">If you have any other question, <a href="${escapeAttr(localizeStaticPath('/contact/', locale))}" class="${LINK}">contact us</a>.</p>`
     );
     parts.push('</section></div></main>');
     return parts.join('');

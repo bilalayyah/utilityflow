@@ -62,7 +62,7 @@
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { PREMIUM_CONFIG, SITE_CONFIG, STATIC_ROUTES, buildCanonicalUrl } from '../src/config/site';
+import { SITE_CONFIG, STATIC_ROUTES, buildCanonicalUrl } from '../src/config/site';
 import { DEFAULT_OG_IMAGE, getBlogImageUrl, getOgImageForPage } from '../src/config/ogImages';
 import {
   CATEGORY_LOCALE_SLUGS,
@@ -397,7 +397,7 @@ function directorySeo(t: LocaleData['uiStrings'], locale: LocaleCode): SeoHeadPr
   };
 }
 
-type StaticPageKey = 'about' | 'contact' | 'privacy' | 'terms' | 'pricing' | 'refund';
+type StaticPageKey = 'about' | 'contact' | 'privacy' | 'terms';
 
 const STATIC_PAGE_CONFIG: Record<
   StaticPageKey,
@@ -426,20 +426,6 @@ const STATIC_PAGE_CONFIG: Record<
     seoTitle: (t) => t.terms.seoTitle,
     seoDescription: (t) => t.terms.seoDescription,
     crumbLabel: (t) => t.footer.termsOfService,
-  },
-  pricing: {
-    enPath: '/pricing/',
-    seoTitle: () => 'Pricing — UtilityFlow',
-    seoDescription: () =>
-      `UtilityFlow pricing: Free forever, or Lifetime Premium for a one-time payment of ${PREMIUM_CONFIG.priceLabel}. No subscription, no recurring fees.`,
-    crumbLabel: () => 'Pricing',
-  },
-  refund: {
-    enPath: '/refund-policy/',
-    seoTitle: () => 'Refund Policy — UtilityFlow',
-    seoDescription: () =>
-      'UtilityFlow refund policy: Lifetime Premium purchases can be refunded within 14 days of purchase. Refunds are processed by Paddle.',
-    crumbLabel: () => 'Refund Policy',
   },
 };
 
@@ -1028,7 +1014,7 @@ async function prerender(): Promise<void> {
 
     // Static routes (home, directory, about, contact, privacy, terms).
     for (const route of STATIC_ROUTES) {
-      // EN-only routes (e.g. /pricing/) exist in EN only — skip them for
+      // EN-only routes (none currently) exist in EN only — skip them for
       // non-EN locales (they have no localized path or content).
       if ('enOnly' in route && route.enOnly === true && locale !== 'en') continue;
       const localized =
@@ -1058,14 +1044,6 @@ async function prerender(): Promise<void> {
       } else if (route.path === '/privacy-policy/') {
         props = staticPageSeo('privacy', t, locale);
         body = renderStaticBody('privacy', t, locale, data);
-        preloadFiles = preloadFor(locale, t.nav.allTools);
-      } else if (route.path === '/pricing/') {
-        props = staticPageSeo('pricing', t, locale);
-        body = renderStaticBody('pricing', t, locale, data);
-        preloadFiles = preloadFor(locale, t.nav.allTools);
-      } else if (route.path === '/refund-policy/') {
-        props = staticPageSeo('refund', t, locale);
-        body = renderStaticBody('refund', t, locale, data);
         preloadFiles = preloadFor(locale, t.nav.allTools);
       } else {
         props = staticPageSeo('terms', t, locale);
@@ -1176,7 +1154,7 @@ async function prerender(): Promise<void> {
   // where the article is published — counted from the slug manifest
   // (EN: every published article; non-EN: the manifest articles map),
   // which cross-checks the registry + overrides the loop reads.
-  // EN-only static routes (e.g. /pricing/) exist in EN only, not in every
+  // EN-only static routes (none currently) exist in EN only, not in every
   // locale — count them as 1 page each, not 17.
   const enOnlyRoutes = STATIC_ROUTES.filter(
     (route) => 'enOnly' in route && route.enOnly === true
