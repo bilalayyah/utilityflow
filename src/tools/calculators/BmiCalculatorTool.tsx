@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react';
-import { ResultExportPanel } from '../../components/export';
 import { PASTEL_PALETTES, pastelForKey } from '../../components/tool/pastel';
 import { useComponentStrings } from '../../locales/componentStrings';
 
@@ -230,40 +229,6 @@ export default function BmiCalculatorTool() {
             </div>
           </dl>
 
-          <ResultExportPanel
-            fileKind="report"
-            result={{
-              toolId: 'bmi-calculator',
-              toolSlug: 'bmi-calculator',
-              toolName: 'BMI Calculator',
-              input:
-                unitSystem === 'metric'
-                  ? [
-                      { label: s.heightCmLabel, value: `${heightCm} cm`, mono: true },
-                      { label: s.weightKgLabel, value: `${weightKg} kg`, mono: true },
-                    ]
-                  : [
-                      { label: s.heightFtLabel, value: `${heightFt} ft`, mono: true },
-                      { label: s.heightInLabel, value: `${heightIn} in`, mono: true },
-                      { label: s.weightLbsLabel, value: `${weightLbs} lbs`, mono: true },
-                    ],
-              output: [
-                { label: s.bmiLabel, value: `${result.data.bmi.toFixed(1)} kg/m²`, mono: true },
-                { label: s.whoCategory, value: result.data.band.category },
-              ],
-              details: [
-                {
-                  label: s.healthyRange,
-                  value:
-                    unitSystem === 'metric'
-                      ? `${result.data.minHealthyKg.toFixed(1)} – ${result.data.maxHealthyKg.toFixed(1)} kg`
-                      : `${result.data.minHealthyLbs.toFixed(0)} – ${result.data.maxHealthyLbs.toFixed(0)} lbs`,
-                  mono: true,
-                },
-              ],
-              metadata: s.disclaimer,
-            }}
-          />
         </div>
       )}
     </div>

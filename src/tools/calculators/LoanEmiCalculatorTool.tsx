@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react';
-import { ResultExportPanel } from '../../components/export';
 import { PASTEL_PALETTES, pastelForKey } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
@@ -273,33 +272,6 @@ export default function LoanEmiCalculatorTool() {
             )}
           </div>
 
-          <ResultExportPanel
-            fileKind="report"
-            result={{
-              toolId: 'loan-emi-calculator',
-              toolSlug: 'loan-emi-calculator',
-              toolName: 'Loan & EMI Calculator',
-              input: [
-                { label: s.principalLabel, value: `$${formatMoney(Number(principal), locale)}`, mono: true },
-                { label: s.rateLabel, value: `${annualRate}% APR`, mono: true },
-                {
-                  label: s.termLabel,
-                  value: `${termValue} ${termUnit === 'years' ? s.yearsOption : s.monthsOption}`,
-                  mono: true,
-                },
-              ],
-              output: [
-                { label: s.monthlyPayment, value: `$${formatMoney(calculation.data.emi, locale)}`, mono: true },
-                { label: s.totalInterest, value: `$${formatMoney(calculation.data.totalInterest, locale)}`, mono: true },
-                { label: s.totalRepayment, value: `$${formatMoney(calculation.data.totalPayment, locale)}`, mono: true },
-              ],
-              details: [
-                { label: s.principalLabelShort, value: `${calculation.data.principalShare.toFixed(1)}%`, mono: true },
-                { label: s.interestLabelShort, value: `${(100 - calculation.data.principalShare).toFixed(1)}%`, mono: true },
-              ],
-              metadata: `${s.forPrefix} ${calculation.data.months} ${s.monthlyPayments}`,
-            }}
-          />
         </>
       )}
     </div>

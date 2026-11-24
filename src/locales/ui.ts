@@ -73,62 +73,6 @@ export interface UiStrings {
     browserSide: string;
     externalApi: string;
   };
-  /**
-   * Universal Result Export UI (Phase 1). All keys are REQUIRED (never
-   * optional) so tsc + the locale-check scripts enforce parity across
-   * all 17 locales. EN values live in src/locales/en/ui.ts.
-   */
-  export: {
-    title: string;
-    includeInput: string;
-    includeOutput: string;
-    /** Heading for the optional extra-rows section in the export. */
-    details: string;
-    selectAtLeastOne: string;
-    formatPng: string;
-    formatJpg: string;
-    formatPdf: string;
-    formatPrint: string;
-    formatCopy: string;
-    formatShare: string;
-    downloadPng: string;
-    downloadJpg: string;
-    downloadPdf: string;
-    preview: string;
-    pageSize: string;
-    pageSizeA4: string;
-    pageSizeLetter: string;
-    orientation: string;
-    orientationPortrait: string;
-    orientationLandscape: string;
-    fontSize: string;
-    margins: string;
-    marginsNarrow: string;
-    marginsNormal: string;
-    marginsWide: string;
-    template: string;
-    templateSimple: string;
-    templateProfessional: string;
-    templateCompact: string;
-    filename: string;
-    options: string;
-    generating: string;
-    done: string;
-    error: string;
-    /** Page-count template, uses {count}. */
-    pageCount: string;
-    shared: string;
-    recentTitle: string;
-    recentEnable: string;
-    recentClearAll: string;
-    recentDelete: string;
-    recentEmpty: string;
-    recentStorageNote: string;
-    promoTitle: string;
-    promoBody: string;
-    promoCta: string;
-    promoComingSoon: string;
-  };
   home: {
     seoTitle: string;
     seoDescription: string;

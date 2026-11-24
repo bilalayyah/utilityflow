@@ -1,7 +1,6 @@
 import { RotateCcw, Sparkles } from 'lucide-react';
 import { useState } from 'react';
 import { CopyButton } from '../../components/common/CopyButton';
-import { ResultExportPanel } from '../../components/export';
 import { PASTEL_PALETTES } from '../../components/tool/pastel';
 import { useLocale } from '../../locales/LocaleContext';
 import { useComponentStrings } from '../../locales/componentStrings';
@@ -215,18 +214,6 @@ export default function CaseConverterTool() {
         ))}
       </div>
 
-      {lastConversion && (
-        <ResultExportPanel
-          fileKind="result"
-          result={{
-            toolId: 'case-converter',
-            toolSlug: 'case-converter',
-            toolName: 'Case Converter',
-            input: [{ label: s.textToConvert, value: lastConversion.before }],
-            output: [{ label: lastConversion.label, value: lastConversion.after, mono: true }],
-          }}
-        />
-      )}
     </div>
   );
 }
