@@ -46,9 +46,15 @@
     <meta name="twitter:image" content="https://utilityflow.online/og-image.jpg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Self-hosted fonts (2026-11-25): Inter / JetBrains Mono / Great Vibes
+         now come from /fonts/ (see @font-face in src/index.css). The Inter
+         woff2 is preloaded so it arrives before first paint — no font-swap
+         reflow on the hero. The Google Fonts stylesheet below now carries
+         ONLY the Noto locale fonts (non-EN pages). -->
+    <link rel="preload" href="/fonts/inter.woff2" as="font" type="font/woff2" crossorigin />
     <link
       id="utilityflow-fonts"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;500;600;700&family=Great+Vibes&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap"
       rel="stylesheet"
       media="print"
     />
