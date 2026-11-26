@@ -50,7 +50,7 @@ export function LanguageSwitcher({ variant = 'dropdown', onSelect }: LanguageSwi
   if (variant === 'list') {
     return (
       <div className="space-y-1">
-        <div className="px-3 py-1 text-xs font-semibold uppercase tracking-wider text-indigo-600">
+        <div className="px-3 py-1 text-xs font-semibold uppercase tracking-wider text-emerald-600">
           {t.nav.language}
         </div>
         {SUPPORTED_LOCALES.map((item) => (
@@ -61,7 +61,7 @@ export function LanguageSwitcher({ variant = 'dropdown', onSelect }: LanguageSwi
             aria-current={item.code === locale ? 'true' : undefined}
             className={`flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm font-medium min-h-[42px] cursor-pointer ${
               item.code === locale
-                ? 'bg-indigo-50 text-indigo-700'
+                ? 'bg-emerald-50 text-emerald-700'
                 : 'text-slate-700 hover:bg-slate-50 hover:text-slate-950'
             }`}
           >
@@ -69,7 +69,7 @@ export function LanguageSwitcher({ variant = 'dropdown', onSelect }: LanguageSwi
               <Globe className="w-4 h-4 text-slate-400" aria-hidden="true" />
               {item.nativeName}
             </span>
-            {item.code === locale && <Check className="w-4 h-4 text-indigo-600" aria-hidden="true" />}
+            {item.code === locale && <Check className="w-4 h-4 text-emerald-600" aria-hidden="true" />}
           </button>
         ))}
       </div>
@@ -86,7 +86,7 @@ export function LanguageSwitcher({ variant = 'dropdown', onSelect }: LanguageSwi
         aria-haspopup="menu"
         aria-label={`${current.code.toUpperCase()} — ${t.nav.chooseLanguage}`}
         onClick={() => setOpen((prev) => !prev)}
-        className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 px-2.5 max-[379px]:px-2 py-2 min-h-[40px] text-sm font-medium text-slate-700 hover:bg-slate-50 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 cursor-pointer"
+        className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 px-2.5 max-[379px]:px-2 py-2 min-h-[40px] text-sm font-medium text-slate-700 hover:bg-slate-50 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 cursor-pointer"
       >
         <Globe className="w-4 h-4 text-slate-500" aria-hidden="true" />
         <span className="hidden sm:inline">{current.code.toUpperCase()}</span>
@@ -111,12 +111,12 @@ export function LanguageSwitcher({ variant = 'dropdown', onSelect }: LanguageSwi
               aria-current={item.code === locale ? 'true' : undefined}
               className={`flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm font-medium cursor-pointer ${
                 item.code === locale
-                  ? 'bg-indigo-50 text-indigo-700'
+                  ? 'bg-emerald-50 text-emerald-700'
                   : 'text-slate-700 hover:bg-slate-50'
               }`}
             >
               {item.nativeName}
-              {item.code === locale && <Check className="w-4 h-4 text-indigo-600" aria-hidden="true" />}
+              {item.code === locale && <Check className="w-4 h-4 text-emerald-600" aria-hidden="true" />}
             </button>
           ))}
         </div>

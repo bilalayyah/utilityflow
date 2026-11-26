@@ -26,6 +26,15 @@
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
 
+# L-2 (Report C): self-hosted fonts had no long-cache rule, so every
+# repeat visit after an hour revalidated the preloaded Inter file (a 304
+# round-trip on the critical path). One week, NOT immutable — the font
+# filenames are unhashed (inter.woff2, not inter-<hash>.woff2), so an
+# immutable rule would serve a stale font after a future font update.
+# (Hash the filenames first if a 1-year immutable rule is ever wanted.)
+/fonts/*
+  Cache-Control: public, max-age=604800, must-revalidate
+
 /og/*
   Cache-Control: public, max-age=31536000, immutable
 

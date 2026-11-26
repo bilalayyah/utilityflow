@@ -9,7 +9,7 @@
 // caught instead of shipped.
 //
 // Checks:
-//  1. Total URL count == expected (4,103 as of 2026-11-19; computed from
+//  1. Total URL count == expected (6,001 as of 2026-11-26; computed from
 //     the registry, so it follows new articles / locales automatically).
 //  2. No duplicate <loc> values.
 //  3. Every <loc> ends with '/' (trailing-slash canonicals).
@@ -17,9 +17,10 @@
 //  5. Every URL's hreflang alternates are exactly the expected localized
 //     set + x-default -> EN, and every alternate href is itself a <loc>
 //     in the sitemap (reciprocity).
-//  6. lastmod == publishedAt / updatedAt for articles; ABSENT for
-//     tool / category / static pages (audit #8).
-//  7. Per-locale counts match (373 per locale).
+//  6. lastmod == publishedAt / updatedAt for articles; a valid
+//     YYYY-MM-DD build date for tool / category / static pages (M-1,
+//     Report C — they previously carried no lastmod at all).
+//  7. Per-locale counts match (353 per locale, 355 EN).
 // Exit 0 on pass, 1 on any failure (prints every failure, not just the
 // first). Wired as `prebuild` in package.json and in the build chain
 // right after generate-sitemap.ts, so a broken sitemap fails the build.
@@ -297,12 +298,24 @@ function main(): void {
         }
       }
     }
-    if (exp.lastmod) {
-      if (e.lastmod !== exp.lastmod) {
-        fail(`${e.loc}: lastmod ${e.lastmod ?? '(missing)'}, expected ${exp.lastmod}.`);
+    if (exp.isArticle) {
+      if (exp.lastmod) {
+        if (e.lastmod !== exp.lastmod) {
+          fail(`${e.loc}: lastmod ${e.lastmod ?? '(missing)'}, expected ${exp.lastmod}.`);
+        }
+      } else if (e.lastmod) {
+        fail(`${e.loc}: unexpected <lastmod> ${e.lastmod} (article without a content date).`);
       }
-    } else if (e.lastmod) {
-      fail(`${e.loc}: unexpected <lastmod> ${e.lastmod} (non-article pages carry no lastmod).`);
+    } else {
+      // M-1 (Report C): non-article pages carry the build date as
+      // <lastmod>. Validate it as present + a valid YYYY-MM-DD date, NOT
+      // compared to a fixed value — the committed sitemap predates the
+      // current build, so its date legitimately differs from today's.
+      if (!e.lastmod) {
+        fail(`${e.loc}: missing <lastmod> (non-article pages carry the build date).`);
+      } else if (!/^\d{4}-\d{2}-\d{2}$/.test(e.lastmod) || Number.isNaN(Date.parse(e.lastmod))) {
+        fail(`${e.loc}: lastmod ${e.lastmod} is not a valid YYYY-MM-DD date.`);
+      }
     }
   }
 
@@ -331,7 +344,7 @@ function main(): void {
     process.exit(1);
   }
   console.log(
-    `check-sitemap OK: ${parsed.length} URLs, 0 duplicates, all trailing-slash, hreflang reciprocal, lastmod matches article dates.`
+    `check-sitemap OK: ${parsed.length} URLs, 0 duplicates, all trailing-slash, hreflang reciprocal, lastmod matches article dates + build date on non-article pages.`
   );
 }
 

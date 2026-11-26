@@ -116,7 +116,7 @@ export function localeTag(locale: LocaleCode): string {
  * L-13: og:locale tag (Open Graph locale, underscore + region).
  * Unlike localeTag (BCP 47, bare for most locales), og:locale is always
  * normalised to language_REGION form (de_DE, es_ES, ...) so it matches
- * the hreflang region codes and is consistent across all 11 locales.
+ * the hreflang region codes and is consistent across all 17 locales.
  */
 export function ogLocaleTag(locale: LocaleCode): string {
   switch (locale) {

@@ -163,6 +163,15 @@ export function ArticlePage() {
     if (!englishArticle) {
       return <NotFoundPage />;
     }
+    // H-1 (Master Audit Report C): cross-locale slug guard, mirroring
+    // ToolPage — an EN slug under /<locale>/ redirects to the localized
+    // article URL when the article IS published in this locale (all 249
+    // articles are). The "not available" notice below is only for an
+    // article genuinely unpublished in this locale.
+    const localizedVersion = getBlogArticleVersion(englishArticle, locale);
+    if (localizedVersion) {
+      return <Navigate to={articleHref(localizedVersion.slug, locale)} replace />;
+    }
     return (
       <>
         <SeoHead
@@ -394,7 +403,10 @@ export function ArticlePage() {
         <Breadcrumbs items={visibleBreadcrumbs} className="mb-6" />
 
         <header className="max-w-3xl mb-8">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#64748B] dark:text-[#94A3B8]">
+          {/* L-7 (Report C): eyebrow was text-[#64748B] (4.37:1 on the
+              #f8f5f0 canvas, below the 4.5:1 WCAG AA minimum). Slate-600
+              #475569 measures ~4.76:1 on the same canvas. */}
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#475569] dark:text-[#94A3B8]">
             Blog Article
           </p>
           {category && (

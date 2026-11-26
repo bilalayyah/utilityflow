@@ -55,10 +55,11 @@ interface SitemapAlternate {
 
 interface SitemapEntry {
   loc: string;
-  /** Content date (articles only: publishedAt / updatedAt). Omitted for
-   * tool / category / static pages, which have no per-page content date —
-   * lastmod is optional in the sitemap spec, and stamping every URL with
-   * the build date (audit #8) misleads crawlers on every deploy. */
+  /** Content date. Articles: publishedAt / updatedAt (their true content
+   * date). Non-article pages (tools, categories, home, static): the build
+   * date (M-1, Report C) — they have no per-page content date in the
+   * data, so the sitemap carries the date the page was (re)generated.
+   * The build date is never applied to articles (audit #8). */
   lastmod?: string;
   changefreq: string;
   priority: string;
@@ -130,15 +131,26 @@ function generateSitemap(): void {
   }
   const siteOrigin = envOrigin || SITE_CONFIG.defaultOrigin;
 
+  // M-1 (Master Audit Report C): non-article pages (home, tools, hubs,
+  // categories, static) previously carried no <lastmod> at all (1,768
+  // URLs). They have no per-page content date in the data, so they are
+  // stamped with the build date — the date this sitemap (and the
+  // prerendered page) was generated. Articles keep their true content
+  // date (updatedAt ?? publishedAt) below; the build date is never
+  // applied to articles (audit #8: it would overwrite their real
+  // publish dates on every deploy).
+  const buildDate = new Date().toISOString().slice(0, 10);
+
   const entries: SitemapEntry[] = [];
 
   /**
    * Push the EN entry and one twin per translated locale, each carrying
    * hreflang alternates for every locale (en + translated + x-default).
    * localizedPaths maps locale code -> localized path (EN path is the key).
-   * lastmod is the page's CONTENT date (articles: publishedAt/updatedAt)
-   * — pass it only when known; tool / category / static pages carry no
-   * lastmod (audit #8: the build date used to stamp all 4,103 URLs).
+   * lastmod is the page's CONTENT date (articles: publishedAt/updatedAt).
+   * Non-article pages (tools, categories, home, static) carry the build
+   * date as lastmod (M-1, Report C) — they have no per-page content date
+   * in the data. The build date is never applied to articles (audit #8).
    */
   const addMultilingual = (
     enPath: string,
@@ -180,7 +192,7 @@ function generateSitemap(): void {
       const p = STATIC_PATHS[route.path]?.[locale.code];
       if (p) localized[locale.code] = p;
     }
-    addMultilingual(route.path, localized, route.changefreq, route.priority);
+    addMultilingual(route.path, localized, route.changefreq, route.priority, buildDate);
   }
 
   for (const category of CATEGORIES) {
@@ -193,7 +205,7 @@ function generateSitemap(): void {
           `${locale.pathPrefix}/${CATEGORY_PATH_SEGMENT[locale.code]}/${slug}/`;
       }
     }
-    addMultilingual(`/category/${category.slug}/`, localized, 'weekly', '0.8');
+    addMultilingual(`/category/${category.slug}/`, localized, 'weekly', '0.8', buildDate);
   }
 
   for (const tool of TOOLS_REGISTRY) {
@@ -203,7 +215,7 @@ function generateSitemap(): void {
       const slug = TOOL_OVERRIDES_BY_LOCALE[locale.code]?.[tool.id]?.slug;
       if (slug) localized[locale.code] = `${locale.pathPrefix}/${slug}/`;
     }
-    addMultilingual(`/${tool.slug}/`, localized, 'weekly', '0.8');
+    addMultilingual(`/${tool.slug}/`, localized, 'weekly', '0.8', buildDate);
   }
 
   // Blog home (Batch 2): /blog/ in every locale ("blog" in all locales).
@@ -214,7 +226,7 @@ function generateSitemap(): void {
       const p = STATIC_PATHS['/blog/']?.[locale.code];
       if (p) localized[locale.code] = p;
     }
-    addMultilingual('/blog/', localized, 'weekly', '0.9');
+    addMultilingual('/blog/', localized, 'weekly', '0.9', buildDate);
   }
 
   // Blog categories (Batch 2): /blog/category/<slug>/ (EN) and
@@ -230,14 +242,13 @@ function generateSitemap(): void {
         localized[locale.code] = `${locale.pathPrefix}/blog/category/${slug}/`;
       }
     }
-    addMultilingual(`/blog/category/${category.slug}/`, localized, 'weekly', '0.8');
+    addMultilingual(`/blog/category/${category.slug}/`, localized, 'weekly', '0.8', buildDate);
   }
 
   // Blog articles (Batch 3+): only status "published" articles, in every
   // locale where that article's translation is published. An article
   // published only in EN gets an EN entry with just en + x-default
-  // hreflang; a fully translated article gets all 12 alternates. (Batch 2:
-  // BLOG_ARTICLES is empty, so this loop adds nothing yet.)
+  // hreflang; a fully translated article gets all 18 alternates.
   for (const article of BLOG_ARTICLES) {
     if (article.status !== 'published') continue;
     const localized: Partial<Record<LocaleCode, string>> = {};
@@ -260,12 +271,12 @@ function generateSitemap(): void {
   // instead of shipping. Every page exists in every locale, so the counts
   // are exact, not approximate.
   //
-  // Blog pages per locale: 1 home + 7 categories = 8 (exist in all 11
+  // Blog pages per locale: 1 home + 7 categories = 8 (exist in all 17
   // locales). Articles are per-locale: an article counts in a locale
   // only when it is published there (EN: status "published"; non-EN:
-  // a translation override exists). 264 articles are published in EN
-  // and in each localized locale (2,904 article URLs); the total is
-  // 4,103 URLs.
+  // a translation override exists). 249 articles are published in EN
+  // and in each localized locale (4,233 article URLs); the total is
+  // 6,001 URLs.
   const publishedArticles = BLOG_ARTICLES.filter((a) => a.status === 'published');
   const articleCountByLocale = new Map<LocaleCode, number>();
   for (const locale of SUPPORTED_LOCALES) {

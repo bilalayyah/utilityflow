@@ -25,6 +25,14 @@ interface LocaleContextValue {
 
 const LocaleContext = createContext<LocaleContextValue | null>(null);
 
+/** Locales whose script needs a Google Fonts Noto family (L-8, Report C):
+ * hi (Devanagari), ar (Arabic), bn (Bengali), ur (Nastaliq Urdu). */
+const NOTO_SCRIPT_LOCALES: ReadonlySet<LocaleCode> = new Set(['hi', 'ar', 'bn', 'ur']);
+
+/** Noto stylesheet (same families/weights as the old index.html link). */
+const NOTO_FONTS_HREF =
+  'https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap';
+
 function readStoredLocale(): LocaleCode | null {
   try {
     const stored = window.localStorage.getItem(LOCALE_STORAGE_KEY);
@@ -117,6 +125,32 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     document.documentElement.lang = getLocaleInfo(locale).htmlLang;
     document.documentElement.dir = getLocaleInfo(locale).dir;
+  }, [locale]);
+
+  // L-8 (Report C): Noto script fonts load on demand only. The Google
+  // Fonts Noto stylesheet used to ship in index.html on every page
+  // (including EN, which never needs it). It is now injected — with its
+  // preconnects — only when the active locale needs a Noto script font,
+  // on direct visits and on client-side language switches alike. Once
+  // loaded, the link stays (the font is cached; removing it on
+  // switch-away would only force a re-fetch).
+  useEffect(() => {
+    if (!NOTO_SCRIPT_LOCALES.has(locale)) return;
+    if (document.getElementById('utilityflow-noto-fonts')) return;
+    const preconnect = document.createElement('link');
+    preconnect.rel = 'preconnect';
+    preconnect.href = 'https://fonts.googleapis.com';
+    document.head.appendChild(preconnect);
+    const preconnectStatic = document.createElement('link');
+    preconnectStatic.rel = 'preconnect';
+    preconnectStatic.href = 'https://fonts.gstatic.com';
+    preconnectStatic.crossOrigin = 'anonymous';
+    document.head.appendChild(preconnectStatic);
+    const link = document.createElement('link');
+    link.id = 'utilityflow-noto-fonts';
+    link.rel = 'stylesheet';
+    link.href = NOTO_FONTS_HREF;
+    document.head.appendChild(link);
   }, [locale]);
 
   // No translated strings are available yet while loading: render a minimal

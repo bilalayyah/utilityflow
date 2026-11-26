@@ -151,7 +151,7 @@ export default function WordCounterTool() {
             onClick={() => setText(s.sampleText)}
             className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
           >
-            <Sparkles className="w-3.5 h-3.5 text-indigo-600" aria-hidden="true" />
+            <Sparkles className="w-3.5 h-3.5 text-emerald-600" aria-hidden="true" />
             <span>{t.common.loadSample}</span>
           </button>
           <button
@@ -190,7 +190,7 @@ export default function WordCounterTool() {
           value={text}
           onChange={(e) => setText(e.target.value)}
           placeholder={s.placeholder}
-          className="w-full rounded-xl border border-slate-300 bg-white p-4 text-sm sm:text-base leading-relaxed text-slate-900 placeholder:text-slate-600 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/20"
+          className="w-full rounded-xl border border-slate-300 bg-white p-4 text-sm sm:text-base leading-relaxed text-slate-900 placeholder:text-slate-600 focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-600/20"
         />
       </div>
 
