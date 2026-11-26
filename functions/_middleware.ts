@@ -44,7 +44,7 @@ const VERIFICATION_FILES: Record<string, string> = {
     '<html>\n    <head>\n        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">\n    </head>\n    <body>Verification: 1e4f4374733f0a22</body>\n</html>',
 };
 
-// Same three redirects as public/_redirects (both slash forms).
+// Same six redirects as public/_redirects (both slash forms).
 const LEGACY_REDIRECTS: Record<string, string> = {
   '/privacy/': '/privacy-policy/',
   '/privacy': '/privacy-policy/',
@@ -52,6 +52,19 @@ const LEGACY_REDIRECTS: Record<string, string> = {
   '/pdf-merger': '/merge-pdf/',
   '/categories/text-writing/': '/category/text-writing-tools/',
   '/categories/text-writing': '/category/text-writing-tools/',
+  // GSC 2026-11-26: stale localized blog slugs → current slugs.
+  '/ko/blog/jipeiji-jpg-ro-byeonhwan/':
+    '/ko/blog/png-jpg-webp-byeonhwan-haneun-beob/',
+  '/ko/blog/jipeiji-jpg-ro-byeonhwan':
+    '/ko/blog/png-jpg-webp-byeonhwan-haneun-beob/',
+  '/pt/blog/por-que-a-pagina-do-pdf-esta-de-lado/':
+    '/pt/blog/por-que-paginas-pdf-de-lado-correcao/',
+  '/pt/blog/por-que-a-pagina-do-pdf-esta-de-lado':
+    '/pt/blog/por-que-paginas-pdf-de-lado-correcao/',
+  '/de/blog/so-bearbeiten-sie-ein-pdf/':
+    '/de/blog/pdf-metadaten-ansehen-und-bearbeiten-anleitung/',
+  '/de/blog/so-bearbeiten-sie-ein-pdf':
+    '/de/blog/pdf-metadaten-ansehen-und-bearbeiten-anleitung/',
 };
 
 interface MiddlewareContext {

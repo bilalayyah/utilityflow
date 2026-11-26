@@ -1,6 +1,6 @@
-# Cloudflare Pages redirects (Audit Fix #2)
+# Cloudflare Pages redirects (Audit Fix #2 + GSC 2026-11-26)
 # Known dead/guessed URLs 301 to their real pages (both slash forms —
-# the middleware in functions/_middleware.ts carries the same three
+# the middleware in functions/_middleware.ts carries the same six
 # redirects as a safety net in case it runs before _redirects).
 /privacy/ /privacy-policy/ 301
 /privacy /privacy-policy/ 301
@@ -8,6 +8,13 @@
 /pdf-merger /merge-pdf/ 301
 /categories/text-writing/ /category/text-writing-tools/ 301
 /categories/text-writing /category/text-writing-tools/ 301
+# GSC 2026-11-26: stale localized blog slugs → current slugs.
+/ko/blog/jipeiji-jpg-ro-byeonhwan/ /ko/blog/png-jpg-webp-byeonhwan-haneun-beob/ 301
+/ko/blog/jipeiji-jpg-ro-byeonhwan /ko/blog/png-jpg-webp-byeonhwan-haneun-beob/ 301
+/pt/blog/por-que-a-pagina-do-pdf-esta-de-lado/ /pt/blog/por-que-paginas-pdf-de-lado-correcao/ 301
+/pt/blog/por-que-a-pagina-do-pdf-esta-de-lado /pt/blog/por-que-paginas-pdf-de-lado-correcao/ 301
+/de/blog/so-bearbeiten-sie-ein-pdf/ /de/blog/pdf-metadaten-ansehen-und-bearbeiten-anleitung/ 301
+/de/blog/so-bearbeiten-sie-ein-pdf /de/blog/pdf-metadaten-ansehen-und-bearbeiten-anleitung/ 301
 
 # Cloudflare Pages SPA fallback configuration
 # Static assets (robots.txt, sitemap.xml, /assets/*) are served before this rule.
