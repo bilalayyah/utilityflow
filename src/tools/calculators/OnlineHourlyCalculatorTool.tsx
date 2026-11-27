@@ -288,7 +288,6 @@ function ClockInput({
               onCommit();
             }
           }}
-          onBlur={onCommit}
           className={`${INPUT_CLASS} font-mono tabular-nums`}
         />
       </div>
@@ -315,7 +314,6 @@ function ClockInput({
           }}
           onBlur={() => {
             resync12();
-            onCommit();
           }}
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
@@ -342,7 +340,6 @@ function ClockInput({
           }}
           onBlur={() => {
             resync12();
-            onCommit();
           }}
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
@@ -361,7 +358,6 @@ function ClockInput({
             setPeriod(next);
             apply12(hourStr, minStr, next);
           }}
-          onBlur={onCommit}
           className={`${INPUT_CLASS} font-mono tabular-nums`}
         >
           <option value="AM">AM</option>
@@ -867,7 +863,6 @@ export default function OnlineHourlyCalculatorTool() {
                 type="date"
                 value={startDate}
                 onChange={(e) => setStartDate(e.target.value)}
-                onBlur={commitBetween}
                 className={`${INPUT_CLASS} font-mono tabular-nums`}
               />
             </div>
@@ -880,7 +875,6 @@ export default function OnlineHourlyCalculatorTool() {
                 type="date"
                 value={endDate}
                 onChange={(e) => setEndDate(e.target.value)}
-                onBlur={commitBetween}
                 className={`${INPUT_CLASS} font-mono tabular-nums`}
               />
             </div>
@@ -1114,7 +1108,6 @@ export default function OnlineHourlyCalculatorTool() {
               value={additionalBreak}
               onChange={(e) => setAdditionalBreak(e.target.value)}
               onKeyDown={(e) => handleEnter(e, commitWork)}
-              onBlur={commitWork}
               className={`${INPUT_CLASS} font-mono tabular-nums`}
             />
             <p className="mt-1.5 text-xs text-slate-500">{s.additionalBreakHint}</p>
@@ -1280,7 +1273,6 @@ export default function OnlineHourlyCalculatorTool() {
                         setDurRows(durRows.map((r) => (r.id === row.id ? { ...r, hours: e.target.value } : r)))
                       }
                       onKeyDown={(e) => handleEnter(e, commitAddSubtract)}
-                      onBlur={commitAddSubtract}
                       className="w-full rounded-md border border-slate-300 bg-white px-2.5 py-2 font-mono text-sm tabular-nums"
                     />
                   </div>
@@ -1296,7 +1288,6 @@ export default function OnlineHourlyCalculatorTool() {
                         setDurRows(durRows.map((r) => (r.id === row.id ? { ...r, minutes: e.target.value } : r)))
                       }
                       onKeyDown={(e) => handleEnter(e, commitAddSubtract)}
-                      onBlur={commitAddSubtract}
                       className="w-full rounded-md border border-slate-300 bg-white px-2.5 py-2 font-mono text-sm tabular-nums"
                     />
                   </div>
@@ -1386,7 +1377,6 @@ export default function OnlineHourlyCalculatorTool() {
                   value={clockHours}
                   onChange={(e) => setClockHours(e.target.value)}
                   onKeyDown={(e) => handleEnter(e, commitAddSubtract)}
-                  onBlur={commitAddSubtract}
                   className={`${INPUT_CLASS} font-mono tabular-nums`}
                 />
               </div>
@@ -1402,7 +1392,6 @@ export default function OnlineHourlyCalculatorTool() {
                   value={clockMinutes}
                   onChange={(e) => setClockMinutes(e.target.value)}
                   onKeyDown={(e) => handleEnter(e, commitAddSubtract)}
-                  onBlur={commitAddSubtract}
                   className={`${INPUT_CLASS} font-mono tabular-nums`}
                 />
               </div>
@@ -1460,7 +1449,6 @@ export default function OnlineHourlyCalculatorTool() {
                   value={decHours}
                   onChange={(e) => setDecHours(e.target.value)}
                   onKeyDown={(e) => handleEnter(e, commitDecimal)}
-                  onBlur={commitDecimal}
                   className={`${INPUT_CLASS} font-mono tabular-nums`}
                 />
               </div>
@@ -1476,7 +1464,6 @@ export default function OnlineHourlyCalculatorTool() {
                   value={decMinutes}
                   onChange={(e) => setDecMinutes(e.target.value)}
                   onKeyDown={(e) => handleEnter(e, commitDecimal)}
-                  onBlur={commitDecimal}
                   className={`${INPUT_CLASS} font-mono tabular-nums`}
                 />
               </div>
@@ -1528,7 +1515,6 @@ export default function OnlineHourlyCalculatorTool() {
                 value={decValue}
                 onChange={(e) => setDecValue(e.target.value)}
                 onKeyDown={(e) => handleEnter(e, commitDecimal)}
-                onBlur={commitDecimal}
                 className={`${INPUT_CLASS} font-mono tabular-nums`}
               />
             </div>
@@ -1572,7 +1558,6 @@ export default function OnlineHourlyCalculatorTool() {
                 value={decTotalMinutes}
                 onChange={(e) => setDecTotalMinutes(e.target.value)}
                 onKeyDown={(e) => handleEnter(e, commitDecimal)}
-                onBlur={commitDecimal}
                 className={`${INPUT_CLASS} font-mono tabular-nums`}
               />
             </div>
@@ -1621,7 +1606,6 @@ export default function OnlineHourlyCalculatorTool() {
                 value={rate}
                 onChange={(e) => setRate(e.target.value)}
                 onKeyDown={(e) => handleEnter(e, commitPay)}
-                onBlur={commitPay}
                 className={`${INPUT_CLASS} font-mono tabular-nums`}
               />
             </div>
@@ -1633,7 +1617,6 @@ export default function OnlineHourlyCalculatorTool() {
                 id="oh-currency"
                 value={currency}
                 onChange={(e) => setCurrency(e.target.value as CurrencyCode)}
-                onBlur={commitPay}
                 className={`${INPUT_CLASS} font-mono tabular-nums`}
               >
                 {CURRENCIES.map((c) => (
@@ -1659,7 +1642,6 @@ export default function OnlineHourlyCalculatorTool() {
                 value={payHours}
                 onChange={(e) => setPayHours(e.target.value)}
                 onKeyDown={(e) => handleEnter(e, commitPay)}
-                onBlur={commitPay}
                 className={`${INPUT_CLASS} font-mono tabular-nums`}
               />
             </div>
@@ -1675,7 +1657,6 @@ export default function OnlineHourlyCalculatorTool() {
                 value={payMinutes}
                 onChange={(e) => setPayMinutes(e.target.value)}
                 onKeyDown={(e) => handleEnter(e, commitPay)}
-                onBlur={commitPay}
                 className={`${INPUT_CLASS} font-mono tabular-nums`}
               />
             </div>
@@ -1693,7 +1674,6 @@ export default function OnlineHourlyCalculatorTool() {
               value={payBreak}
               onChange={(e) => setPayBreak(e.target.value)}
               onKeyDown={(e) => handleEnter(e, commitPay)}
-              onBlur={commitPay}
               className={`${INPUT_CLASS} font-mono tabular-nums`}
             />
           </div>
@@ -1711,7 +1691,6 @@ export default function OnlineHourlyCalculatorTool() {
                 value={otHours}
                 onChange={(e) => setOtHours(e.target.value)}
                 onKeyDown={(e) => handleEnter(e, commitPay)}
-                onBlur={commitPay}
                 className={`${INPUT_CLASS} font-mono tabular-nums`}
               />
             </div>
@@ -1727,7 +1706,6 @@ export default function OnlineHourlyCalculatorTool() {
                 value={otMinutes}
                 onChange={(e) => setOtMinutes(e.target.value)}
                 onKeyDown={(e) => handleEnter(e, commitPay)}
-                onBlur={commitPay}
                 className={`${INPUT_CLASS} font-mono tabular-nums`}
               />
             </div>
@@ -1744,7 +1722,6 @@ export default function OnlineHourlyCalculatorTool() {
                 value={otMultiplier}
                 onChange={(e) => setOtMultiplier(e.target.value)}
                 onKeyDown={(e) => handleEnter(e, commitPay)}
-                onBlur={commitPay}
                 className={`${INPUT_CLASS} font-mono tabular-nums`}
               />
             </div>
