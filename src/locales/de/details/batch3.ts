@@ -537,4 +537,14 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       { question: "Warum zeigen meine umgerechneten Werte viele Dezimalstellen?", answer: "Das Tool zeigt die volle Genauigkeit, damit Sie bei Bedarf exakt weiterrechnen können; runden Sie für den Alltag auf 2–3 Stellen." },
     ],
   },
+  // Minimal record (EN-first launch): empty guide arrays satisfy the
+  // prerender's hard detail requirement; translated guide content lands
+  // in a later phase. Guide sections stay hidden until then.
+  'roman-numeral-converter': {
+    instructions: [],
+    examples: [],
+    benefits: [],
+    useCases: [],
+    faqs: [],
+  },
 };

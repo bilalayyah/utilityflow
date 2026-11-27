@@ -219,4 +219,19 @@ export const ID_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
     },
     intro: "Konversi secara instan dalam tujuh keluarga pengukuran — panjang, berat & massa, suhu, luas, volume, kecepatan, dan Penyimpanan Digital — dengan tabel perbandingan otomatis yang menampilkan setiap satuan dalam kategori tersebut.",
   },
+  'roman-numeral-converter': {
+    slug: "konverter-angka-romawi",
+    name: "Konverter Angka Romawi",
+    shortDescription: "Ubah angka menjadi angka Romawi dan angka Romawi menjadi angka secara instan, termasuk tanggal dalam angka Romawi.",
+    keywords: ["konverter angka romawi", "angka romawi ke angka", "ubah angka jadi romawi", "konverter tanggal romawi", "kalkulator angka romawi", "angka berapa MMXXVI", "angka romawi 1 sampai 3999", "ubah tahun jadi angka romawi", "tabel angka romawi"],
+    seo: {
+      title: "Konverter Angka Romawi: Angka & Tanggal | UtilityFlow",
+      description: "Ubah angka menjadi angka Romawi dan angka Romawi menjadi angka secara instan. Coba konverter gratis untuk tahun, ulang tahun, dan tanggal Romawi online.",
+      primaryKeyword: "konverter angka romawi",
+      secondaryKeywords: ["angka romawi ke angka biasa", "ubah angka jadi romawi", "konverter tanggal romawi", "kalkulator angka romawi"],
+      longTailKeywords: ["cara mengubah angka menjadi angka romawi", "berapa 2026 dalam angka romawi", "ubah tanggal lahir jadi angka romawi", "ubah tahun menjadi angka romawi online"],
+      schemaApplicationCategory: "UtilitiesApplication",
+    },
+    intro: "Ubah bilangan bulat apa pun dari 1 sampai 3999 menjadi angka Romawi, atau baca angka Romawi sebagai angka biasa — dan ubah tanggal lengkap menjadi angka Romawi juga, langsung di browser Anda.",
+  },
 };

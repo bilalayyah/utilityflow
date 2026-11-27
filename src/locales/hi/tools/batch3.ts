@@ -400,4 +400,42 @@ export const HI_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
     intro:
       'सात माप परिवारों में तुरंत बदलें — लंबाई, वज़न और द्रव्यमान, तापमान, क्षेत्रफल, आयतन, गति और डिजिटल स्टोरेज — कैटेगरी की हर यूनिट दिखाने वाली ऑटोमैटिक साइड-बाय-साइड टेबल के साथ।',
   },
+  'roman-numeral-converter': {
+    slug: 'roman-ank-converter',
+    name: 'रोमन अंक कन्वर्टर',
+    shortDescription:
+      'संख्याओं को रोमन अंकों में और रोमन अंकों को संख्याओं में तुरंत बदलें — तारीखों को भी रोमन अंकों में बदलें।',
+    keywords: [
+      'roman numeral converter hindi',
+      'roman ank kaise nikale',
+      'रोमन अंक कन्वर्टर',
+      'roman numerals to numbers hindi',
+      'roman ank date converter',
+      'roman numeral calculator hindi',
+      'roman ank 1 se 3999',
+      'saal ko roman ank me badle',
+      'roman ank chart hindi',
+    ],
+    seo: {
+      title: 'रोमन अंक कन्वर्टर: संख्या और तारीख बदलें | UtilityFlow',
+      description:
+        'संख्याओं को रोमन अंकों में और रोमन अंकों को संख्याओं में तुरंत बदलें। साल, जन्मदिन और तारीखों के लिए मुफ्त रोमन अंक कन्वर्टर ऑनलाइन आज ही ट्राई करें — मुफ्त।',
+      primaryKeyword: 'roman numeral converter hindi',
+      secondaryKeywords: [
+        'roman ank kaise nikale',
+        'रोमन अंक कन्वर्टर',
+        'roman numerals to numbers hindi',
+        'roman ank date converter',
+      ],
+      longTailKeywords: [
+        'number ko roman ank me kaise badle',
+        '2026 roman ank me kya hota hai',
+        'apna birthday roman ank me kaise badle',
+        'saal ko roman ank me badalne wala tool',
+      ],
+      schemaApplicationCategory: 'UtilitiesApplication',
+    },
+    intro:
+      '1 से 3999 तक किसी भी पूर्ण संख्या को रोमन अंकों में बदलें, या रोमन अंकों को आम संख्याओं की तरह पढ़ें — और पूरी तारीख को भी रोमन अंकों में बदलें, सब कुछ अपने ब्राउज़र में तुरंत।',
+  },
 };

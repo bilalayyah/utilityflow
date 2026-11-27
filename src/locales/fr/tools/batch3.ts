@@ -538,4 +538,42 @@ export const FR_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
     intro:
       'Convertissez instantanément dans sept familles de mesures — longueur, poids et masse, température, surface, volume, vitesse et stockage numérique — avec un tableau automatique côte à côte montrant chaque unité de la catégorie.',
   },
+  'roman-numeral-converter': {
+    slug: 'convertisseur-chiffres-romains',
+    name: 'Convertisseur de Chiffres Romains',
+    shortDescription:
+      'Convertissez les nombres en chiffres romains et les chiffres romains en nombres instantanément, y compris les dates en chiffres romains.',
+    keywords: [
+      'convertisseur chiffres romains',
+      'chiffres romains en nombres',
+      'convertir nombres en chiffres romains',
+      'convertisseur de dates romaines',
+      'calculatrice chiffres romains',
+      'quel nombre est MMXXVI',
+      'chiffres romains de 1 à 3999',
+      'convertir année en chiffres romains',
+      'tableau chiffres romains',
+    ],
+    seo: {
+      title: 'Convertisseur Chiffres Romains – 1 à 3999 | UtilityFlow',
+      description:
+        'Convertissez les nombres en chiffres romains et les chiffres romains en nombres. Essayez le convertisseur gratuit pour les années et les anniversaires.',
+      primaryKeyword: 'convertisseur chiffres romains',
+      secondaryKeywords: [
+        'chiffres romains en nombres',
+        'convertir nombres en chiffres romains',
+        'convertisseur de dates romaines',
+        'calculatrice chiffres romains',
+      ],
+      longTailKeywords: [
+        'comment convertir un nombre en chiffres romains',
+        'que vaut 2026 en chiffres romains',
+        'convertir mon anniversaire en chiffres romains',
+        'convertir une année en chiffres romains en ligne',
+      ],
+      schemaApplicationCategory: 'UtilitiesApplication',
+    },
+    intro:
+      'Convertissez n’importe quel nombre entier de 1 à 3999 en chiffres romains, ou lisez les chiffres romains comme des nombres ordinaires, et transformez aussi une date complète en chiffres romains, instantanément dans votre navigateur.',
+  },
 };

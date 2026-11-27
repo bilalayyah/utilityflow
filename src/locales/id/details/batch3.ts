@@ -537,4 +537,14 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       { question: "Mengapa nilai hasil konversi saya menampilkan banyak desimal?", answer: "Alat ini menampilkan presisi penuh agar Anda dapat menghitung lebih lanjut secara tepat jika perlu; bulatkan ke 2–3 angka untuk penggunaan sehari-hari." },
     ],
   },
+  // Minimal record (EN-first launch): empty guide arrays satisfy the
+  // prerender's hard detail requirement; translated guide content lands
+  // in a later phase. Guide sections stay hidden until then.
+  'roman-numeral-converter': {
+    instructions: [],
+    examples: [],
+    benefits: [],
+    useCases: [],
+    faqs: [],
+  },
 };

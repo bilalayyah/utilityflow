@@ -537,4 +537,14 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       { question: '为什么换算值显示很多位小数？', answer: '工具显示完整精度，保证工程和科学工作的准确性。日常使用时，只需按需要四舍五入到相应小数位。' },
     ],
   },
+  // Minimal record (EN-first launch): empty guide arrays satisfy the
+  // prerender's hard detail requirement; translated guide content lands
+  // in a later phase. Guide sections stay hidden until then.
+  'roman-numeral-converter': {
+    instructions: [],
+    examples: [],
+    benefits: [],
+    useCases: [],
+    faqs: [],
+  },
 };

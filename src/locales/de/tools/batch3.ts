@@ -216,4 +216,19 @@ export const DE_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
     },
     intro: "Rechnen Sie sofort in sieben Messfamilien um – Länge, Gewicht & Masse, Temperatur, Fläche, Volumen, Geschwindigkeit und Digitaler Speicher – mit einer automatischen Vergleichstabelle, die jede Einheit der Kategorie zeigt.",
   },
+  'roman-numeral-converter': {
+    slug: "roemische-zahlen-umrechner",
+    name: "Umrechner für Römische Zahlen",
+    shortDescription: "Wandeln Sie Zahlen in römische Zahlen um und römische Zahlen zurück in Zahlen – sofort, inklusive römischer Datumsangaben.",
+    keywords: ["umrechner römische zahlen", "römische zahlen in zahlen", "zahlen in römische zahlen umwandeln", "römische zahlen datum umrechner", "römische zahlen rechner", "welche zahl ist MMXXVI", "römische zahlen 1 bis 3999", "jahr in römische zahlen umwandeln", "römische zahlen tabelle"],
+    seo: {
+      title: "Umrechner Römische Zahlen – Zahlen & Daten | UtilityFlow",
+      description: "Wandeln Sie Zahlen in römische Zahlen um und römische Zahlen zurück in Zahlen – sofort. Nutzen Sie den kostenlosen Umrechner für Jahre, Geburtstage und Daten.",
+      primaryKeyword: "umrechner römische zahlen",
+      secondaryKeywords: ["römische zahlen in zahlen umwandeln", "zahlen in römische zahlen", "römischer datum umrechner", "römische zahlen rechner"],
+      longTailKeywords: ["wie wandelt man zahlen in römische zahlen um", "was ist 2026 in römischen zahlen", "geburtstag in römische zahlen umwandeln", "jahr in römische zahlen umwandeln online"],
+      schemaApplicationCategory: "UtilitiesApplication",
+    },
+    intro: "Wandeln Sie jede ganze Zahl von 1 bis 3999 in römische Zahlen um oder lesen Sie römische Zahlen als gewöhnliche Zahlen – und verwandeln Sie auch ein komplettes Datum in römische Zahlen, sofort in Ihrem Browser.",
+  },
 };

@@ -400,4 +400,42 @@ export const TR_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
     intro:
       'Yedi ölçüm ailesi arasında anında çevirin: uzunluk, ağırlık ve kütle, sıcaklık, alan, hacim, hız ve dijital depolama; kategorideki her birimi gösteren otomatik yan yana tabloyla.',
   },
+  'roman-numeral-converter': {
+    slug: 'roma-rakamlari-cevirici',
+    name: 'Roma Rakamları Çevirici',
+    shortDescription:
+      'Sayıları Roma rakamlarına ve Roma rakamlarını sayılara anında çevirin; tarihleri de Roma rakamlarıyla yazın.',
+    keywords: [
+      'roma rakamları çevirici',
+      'roma rakamlarını sayıya çevirme',
+      'sayıyı roma rakamına çevirme',
+      'roma rakamları tarih çevirici',
+      'roma rakamları hesaplayıcı',
+      'MMXXVI kaçtır',
+      'roma rakamları 1 ile 3999 arası',
+      'yılı roma rakamına çevirme',
+      'roma rakamları tablosu',
+    ],
+    seo: {
+      title: 'Roma Rakamları Çevirici: Sayı ve Tarih | UtilityFlow',
+      description:
+        'Sayıları Roma rakamlarına ve Roma rakamlarını sayılara anında çevirin. Yıllar, doğum günleri ve tarihler için ücretsiz Roma rakamları çeviriciyi deneyin.',
+      primaryKeyword: 'roma rakamları çevirici',
+      secondaryKeywords: [
+        'roma rakamlarını sayıya çevirme',
+        'sayıyı roma rakamına çevirme',
+        'roma rakamları tarih çevirici',
+        'roma rakamları hesaplayıcı',
+      ],
+      longTailKeywords: [
+        'sayı roma rakamına nasıl çevrilir',
+        '2026 roma rakamıyla nasıl yazılır',
+        'doğum günümü roma rakamına çevirme',
+        'yılı roma rakamına çeviren ücretsiz araç',
+      ],
+      schemaApplicationCategory: 'UtilitiesApplication',
+    },
+    intro:
+      '1 ile 3999 arasındaki herhangi bir tam sayıyı Roma rakamlarına çevirin ya da Roma rakamlarını normal sayılar gibi okuyun — tam bir tarihi de Roma rakamlarına çevirin, hepsi tarayıcınızda anında.',
+  },
 };

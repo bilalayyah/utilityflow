@@ -537,4 +537,14 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       { question: "Почему мои переведённые значения показывают много знаков после запятой?", answer: "Инструмент показывает полную точность, чтобы вы могли при необходимости точно продолжить расчёты; для повседневного использования округлите до 2–3 знаков." },
     ],
   },
+  // Minimal record (EN-first launch): empty guide arrays satisfy the
+  // prerender's hard detail requirement; translated guide content lands
+  // in a later phase. Guide sections stay hidden until then.
+  'roman-numeral-converter': {
+    instructions: [],
+    examples: [],
+    benefits: [],
+    useCases: [],
+    faqs: [],
+  },
 };

@@ -2389,4 +2389,275 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       'US customary volume units are used throughout, and the tool does not convert between US and imperial gallons or pints — check which system your recipe or manual uses first.',
     ],
   },
+  'roman-numeral-converter': {
+    instructions: [
+      {
+        title: 'Choose a conversion mode',
+        description:
+          'Pick Number to Roman, Roman to Number, or Date to Roman at the top of the tool.',
+      },
+      {
+        title: 'Enter a whole number from 1 to 3999',
+        description:
+          'In Number to Roman mode, type a whole number — the Roman numeral appears instantly, with no submit button.',
+      },
+      {
+        title: 'Or type a Roman numeral',
+        description:
+          'In Roman to Number mode, type the numeral using I, V, X, L, C, D and M. Lowercase works too.',
+      },
+      {
+        title: 'Or enter a date',
+        description:
+          'In Date to Roman mode, enter the day, month and year, then choose DD/MM/YYYY, MM/DD/YYYY or YYYY-MM-DD.',
+      },
+      {
+        title: 'Read the result instantly',
+        description:
+          'The converted value appears right away in your browser — no page reload, no data uploaded.',
+      },
+      {
+        title: 'Copy your result or fix an error',
+        description:
+          'Copy the Roman numeral to paste into a document, card or design. If a red message appears, the input is out of range or not a valid numeral.',
+      },
+    ],
+    examples: [
+      {
+        title: 'One',
+        input: '1',
+        output: 'I',
+        explanation: 'The first Roman numeral.',
+      },
+      {
+        title: 'Four uses subtraction',
+        input: '4',
+        output: 'IV',
+        explanation: 'One before five — never IIII.',
+      },
+      {
+        title: 'Nine uses subtraction',
+        input: '9',
+        output: 'IX',
+        explanation: 'One before ten — never VIIII.',
+      },
+      {
+        title: 'Fourteen',
+        input: '14',
+        output: 'XIV',
+        explanation: 'X + IV.',
+      },
+      {
+        title: 'Forty',
+        input: '40',
+        output: 'XL',
+        explanation: 'Ten before fifty — never XXXX.',
+      },
+      {
+        title: 'Ninety-nine',
+        input: '99',
+        output: 'XCIX',
+        explanation: 'XC + IX.',
+      },
+      {
+        title: 'Four hundred',
+        input: '400',
+        output: 'CD',
+        explanation: 'One hundred before five hundred.',
+      },
+      {
+        title: 'Nine hundred',
+        input: '900',
+        output: 'CM',
+        explanation: 'One hundred before one thousand.',
+      },
+      {
+        title: 'A classic year: 1984',
+        input: '1984',
+        output: 'MCMLXXXIV',
+        explanation: 'M + CM + LXXX + IV.',
+      },
+      {
+        title: 'A recent year: 2024',
+        input: '2024',
+        output: 'MMXXIV',
+        explanation: 'MM + XX + IV.',
+      },
+      {
+        title: 'This year: 2026',
+        input: '2026',
+        output: 'MMXXVI',
+        explanation: 'MM + XX + VI.',
+      },
+      {
+        title: 'The largest supported number',
+        input: '3999',
+        output: 'MMMCMXCIX',
+        explanation: 'MMM + CM + XC + IX.',
+      },
+      {
+        title: 'Reading a year back: 1994',
+        input: 'MCMXCIV',
+        output: '1994',
+        explanation: 'M + CM + XC + IV.',
+      },
+      {
+        title: 'Reading a small numeral back',
+        input: 'XIV',
+        output: '14',
+        explanation: 'X + IV.',
+      },
+      {
+        title: 'Reading a year back: 2026',
+        input: 'MMXXVI',
+        output: '2026',
+        explanation: 'MM + XX + VI.',
+      },
+      {
+        title: 'A birthday in Roman numerals',
+        input: '27/11/2026',
+        output: 'XXVII/XI/MMXXVI',
+        explanation: 'Day 27 = XXVII, month 11 = XI, year 2026 = MMXXVI.',
+      },
+      {
+        title: 'A Valentine’s Day date',
+        input: '14/02/2025',
+        output: 'XIV/II/MMXXV',
+        explanation: 'Each part converted separately.',
+      },
+    ],
+    benefits: [
+      'Converts both ways instantly, with no submit button or page reload',
+      'Uses strict standard Roman numerals, so the result is always the accepted form',
+      'Free to use, with no account, sign-up or download',
+      'Runs entirely in your browser — nothing you type is uploaded or stored',
+      'Converts full dates as well as single numbers, so birthdays and anniversaries work too',
+      'Accepts lowercase Roman numerals, so you can type mmxxvi instead of MMXXVI',
+    ],
+    useCases: [
+      'Writing a birthday, wedding date or anniversary in Roman numerals for a card, invitation or tattoo',
+      'Checking homework or teaching children how the Roman numeral system works',
+      'Reading years on buildings, monuments, clocks, book chapters and film credits',
+      'Numbering chapters, sections or outlines in a document in the classical style',
+      'Pairing with the Age Calculator to find an exact age, then writing the matching birthday in Roman numerals',
+      'Preparing dates for engraving, calligraphy or a historical display',
+    ],
+    faqs: [
+      {
+        question: 'What is a Roman numeral converter?',
+        answer:
+          'A free online tool that turns ordinary numbers (1, 2, 3) into Roman numerals (I, II, III) and back again. This one also converts full dates into Roman numerals.',
+      },
+      {
+        question: 'How do I convert numbers into Roman numerals?',
+        answer:
+          'Choose Number to Roman and type a whole number from 1 to 3999 — the Roman numeral appears instantly. For example, type 2026 and you get MMXXVI.',
+      },
+      {
+        question: 'How do I convert Roman numerals into numbers?',
+        answer:
+          'Choose Roman to Number and type the numeral using the letters I, V, X, L, C, D and M — for example, MCMXCIV becomes 1994. Lowercase letters work too.',
+      },
+      {
+        question: 'What is 2026 in Roman numerals?',
+        answer:
+          '2026 in Roman numerals is MMXXVI: MM is 2000, XX is 20 and VI is 6.',
+      },
+      {
+        question: 'What is 2025 in Roman numerals?',
+        answer:
+          '2025 in Roman numerals is MMXXV: MM is 2000, XX is 20 and V is 5.',
+      },
+      {
+        question: 'What is 1999 in Roman numerals?',
+        answer:
+          '1999 in Roman numerals is MCMXCIX: M is 1000, CM is 900, XC is 90 and IX is 9.',
+      },
+      {
+        question: 'What is 1000 in Roman numerals?',
+        answer:
+          '1000 in Roman numerals is M, the first letter of the Latin word mille, meaning a thousand.',
+      },
+      {
+        question: 'What is the largest number supported by this converter?',
+        answer:
+          'The largest number is 3999, written MMMCMXCIX. There is no standard symbol above 1000, so larger numbers need extra notation this tool does not use.',
+      },
+      {
+        question: 'Can I convert Roman numerals back into normal numbers?',
+        answer:
+          'Yes. Choose Roman to Number, type the numeral, and the ordinary number appears at once — try MCMXCIV for 1994, or XIV for 14.',
+      },
+      {
+        question: 'How do I write my birthday in Roman numerals?',
+        answer:
+          'Choose Date to Roman and enter your birth date. For example, 27 November 2026 becomes XXVII/XI/MMXXVI.',
+      },
+      {
+        question: 'How do I convert a date into Roman numerals?',
+        answer:
+          'Use Date to Roman mode, enter the day, month and year, and pick a layout — DD/MM/YYYY, MM/DD/YYYY or YYYY-MM-DD. Each part is converted separately, so 14 February 2025 becomes XIV/II/MMXXV.',
+      },
+      {
+        question: 'Are lowercase Roman numerals valid?',
+        answer:
+          'Yes. Lowercase means exactly the same as uppercase: mmxxvi is 2026, just as MMXXVI is. This tool accepts both and shows the result in uppercase.',
+      },
+      {
+        question: 'Why is IIII invalid?',
+        answer:
+          'I may be repeated at most three times in a row, so 4 must be written IV (one before five), not IIII. You will still see IIII on some old clock faces, but it is not the standard form.',
+      },
+      {
+        question: 'Why is IC not a valid Roman numeral?',
+        answer:
+          'Subtraction is only allowed for 4, 9, 40, 90, 400 and 900, using IV, IX, XL, XC, CD and CM. IC would mean 99, but 99 is XCIX (90 + 9), so IC is rejected.',
+      },
+      {
+        question: 'What are the seven Roman numeral symbols?',
+        answer:
+          'I is 1, V is 5, X is 10, L is 50, C is 100, D is 500 and M is 1000. Every numeral is built from these seven letters, plus the subtractive pairs IV, IX, XL, XC, CD and CM.',
+      },
+      {
+        question: 'Is there a difference between Roman numerals and Arabic numbers?',
+        answer:
+          'Yes. Arabic numbers (0–9) use place value, so the same digit means something different depending on its position. Roman numerals use letters added together, with no zero and no place value — MMXXVI is simply 1000 + 1000 + 10 + 10 + 5 + 1.',
+      },
+      {
+        question: 'Can Roman numerals contain zero?',
+        answer:
+          'No. The Roman system has no symbol for zero. This converter accepts whole numbers from 1 to 3999 only.',
+      },
+      {
+        question: 'Can I use Roman numerals for decimal numbers?',
+        answer:
+          'No. Roman numerals have no decimal point or fractions, so 3.5 has no Roman form. Round to a whole number first, then convert it.',
+      },
+      {
+        question: 'How do subtractive Roman numerals work?',
+        answer:
+          'When a smaller symbol sits before a larger one, subtract it: IV = 4, IX = 9, XL = 40, XC = 90, CD = 400, CM = 900. These six pairs are the only subtractions allowed.',
+      },
+      {
+        question: 'Is this Roman numeral converter free?',
+        answer:
+          'Yes, it is completely free, with no account, sign-up or download. It runs entirely in your browser, so what you enter is never uploaded or stored.',
+      },
+    ],
+    howItWorks: [
+      'Roman numerals use seven symbols: I is 1, V is 5, X is 10, L is 50, C is 100, D is 500 and M is 1000. Numbers are built by adding symbols from largest to smallest, so 2026 is MM + XX + VI = MMXXVI.',
+      'Subtraction is used for 4, 9, 40, 90, 400 and 900: a smaller symbol before a larger one is subtracted from it — IV is 4, IX is 9, XL is 40, XC is 90, CD is 400 and CM is 900. That is why 99 is XCIX (90 + 9), not IC.',
+      'Repetition has strict limits. I, X, C and M may repeat up to three times in a row (III is 3, XXX is 30), while V, L and D are never repeated — VV, LL and DD are not valid. A symbol is subtracted only once, so 8 is VIII, not IIX.',
+      'To read a Roman numeral, the converter scans left to right: when a smaller symbol comes before a larger one, it subtracts; otherwise it adds. It also checks the result against the standard form, so spellings such as IIII, IC or VV are rejected with a clear message instead of being silently accepted.',
+      'The date converter treats each part separately — day, month and year are each converted on their own and joined with slashes or dashes. There is no single universally standardised Roman date format, so the day and month keep their ordinary positions and only the numbers change.',
+    ],
+    supportedFormats: ['Numbers 1–3999', 'Roman numerals I–MMMCMXCIX', 'Dates DD/MM/YYYY', 'Dates MM/DD/YYYY', 'Dates YYYY-MM-DD', 'Lowercase input accepted'],
+    limitations: [
+      'Only whole numbers from 1 to 3999 are supported. There is no Roman numeral for zero, and numbers above 3999 need extra notation this tool does not use.',
+      'Decimals and fractions cannot be converted — there is no decimal point, so enter a whole number only.',
+      'Only strict standard (canonical) Roman numerals are accepted. Spellings such as IIII, IC, IL, VV and XM are rejected, though they sometimes appear on old clocks or monuments.',
+      'The date converter changes the numbers only; it does not translate month names or use the ancient Roman calendar.',
+      'Results are exact for the supported range, but double-check a numeral before engraving, tattooing or printing it — one wrong letter changes the value.',
+    ],
+  },
 };

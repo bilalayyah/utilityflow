@@ -87,10 +87,10 @@ ES_SUBLINE = "Herramienta en l\u00ednea gratuita \u00b7 Sin registro \u00b7 Func
 # ---------------------------------------------------------------------------
 # Tools. Loaded from the registry at run time (see module docstring) —
 # no hardcoded titles. Verified against the live registry on
-# 2026-11-24: 83 tools, unique ids, id == slug for all.
+# 2026-11-27: 84 tools, unique ids, id == slug for all.
 # ---------------------------------------------------------------------------
 
-EXPECTED_TOOL_COUNT = 83
+EXPECTED_TOOL_COUNT = 84
 
 # One ToolDefinition object literal: id, slug, name, shortDescription,
 # categoryId, in that order. String values are single-quoted TS literals
@@ -340,7 +340,7 @@ def main():
           + (f" ({', '.join(used_short)})" if used_short else
              " (all use the generic subline)"))
 
-    # 3. Categories (+ all-tools directory card, "All 83 Tools").
+    # 3. Categories (+ all-tools directory card, "All 84 Tools").
     for cat_id, title, icon_key in CATEGORIES:
         p = os.path.join(root, "og", f"{cat_id}.jpg")
         save_jpeg(
@@ -349,7 +349,7 @@ def main():
         out.append(p)
     p = os.path.join(root, "og", "tools.jpg")
     save_jpeg(
-        render_card("All 83 Tools", "en", gb.icon_grid, CATEGORY_SUBLINE), p
+        render_card("All 84 Tools", "en", gb.icon_grid, CATEGORY_SUBLINE), p
     )
     out.append(p)
 

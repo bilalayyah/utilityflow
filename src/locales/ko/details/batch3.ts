@@ -537,4 +537,14 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       { question: "변환 결과에 소수 자릿수가 많은 이유는 무엇인가요?", answer: "필요하면 정확히 이어서 계산할 수 있도록 완전한 정밀도를 표시합니다. 일상 사용에는 2~3자리로 반올림하세요." },
     ],
   },
+  // Minimal record (EN-first launch): empty guide arrays satisfy the
+  // prerender's hard detail requirement; translated guide content lands
+  // in a later phase. Guide sections stay hidden until then.
+  'roman-numeral-converter': {
+    instructions: [],
+    examples: [],
+    benefits: [],
+    useCases: [],
+    faqs: [],
+  },
 };

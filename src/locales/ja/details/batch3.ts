@@ -537,4 +537,14 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       { question: "変換した値に小数点以下が多く表示されるのはなぜですか？", answer: "工学や科学の作業で正確さを保つため、ツールは精度を保ったまま表示します。日常使いでは、必要な小数点以下に丸めてください。" },
     ],
   },
+  // Minimal record (EN-first launch): empty guide arrays satisfy the
+  // prerender's hard detail requirement; translated guide content lands
+  // in a later phase. Guide sections stay hidden until then.
+  'roman-numeral-converter': {
+    instructions: [],
+    examples: [],
+    benefits: [],
+    useCases: [],
+    faqs: [],
+  },
 };

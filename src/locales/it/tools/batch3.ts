@@ -538,4 +538,42 @@ export const IT_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
     intro:
       'Converti istantaneamente in sette famiglie di misure — lunghezza, peso e massa, temperatura, superficie, volume, velocità e archiviazione digitale — con una tabella automatica fianco a fianco che mostra ogni unità della categoria.',
   },
+  'roman-numeral-converter': {
+    slug: 'convertitore-numeri-romani',
+    name: 'Convertitore di Numeri Romani',
+    shortDescription:
+      'Converte numeri in numeri romani e numeri romani in numeri all’istante, comprese le date in numeri romani.',
+    keywords: [
+      'convertitore numeri romani',
+      'numeri romani in numeri',
+      'convertire numeri in romani',
+      'convertitore di date romane',
+      'calcolatrice numeri romani',
+      'che numero è MMXXVI',
+      'numeri romani da 1 a 3999',
+      'convertire anno in numeri romani',
+      'tabella numeri romani',
+    ],
+    seo: {
+      title: 'Convertitore Numeri Romani – Numeri e Date | UtilityFlow',
+      description:
+        'Converti numeri in numeri romani e numeri romani in numeri all’istante. Prova il convertitore gratuito di anni, compleanni e date in numeri romani online.',
+      primaryKeyword: 'convertitore numeri romani',
+      secondaryKeywords: [
+        'numeri romani in numeri',
+        'convertire numeri in romani',
+        'convertitore di date romane',
+        'calcolatrice numeri romani',
+      ],
+      longTailKeywords: [
+        'come convertire numeri in numeri romani',
+        'quanto vale 2026 in numeri romani',
+        'convertire il compleanno in numeri romani',
+        'convertire un anno in numeri romani online',
+      ],
+      schemaApplicationCategory: 'UtilitiesApplication',
+    },
+    intro:
+      'Converti qualsiasi numero intero da 1 a 3999 in numeri romani, oppure leggi i numeri romani come numeri normali, e trasforma anche una data completa in numeri romani, all’istante nel tuo browser.',
+  },
 };

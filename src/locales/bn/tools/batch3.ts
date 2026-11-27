@@ -400,4 +400,42 @@ export const BN_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
     intro:
       'সাতটি পরিমাপ পরিবারে মুহূর্তে বদলে নিন — দৈর্ঘ্য, ওজন ও ভর, তাপমাত্রা, ক্ষেত্রফল, আয়তন, গতি ও ডিজিটাল স্টোরেজ — বিভাগের প্রতিটি একক দেখানো স্বয়ংক্রিয় পাশাপাশি টেবিলসহ।',
   },
+  'roman-numeral-converter': {
+    slug: 'roman-sankhya-converter',
+    name: 'রোমান সংখ্যা কনভার্টার',
+    shortDescription:
+      'সংখ্যাকে রোমান সংখ্যায় আর রোমান সংখ্যাকে সংখ্যায় মুহূর্তে বদলে নিন — তারিখও রোমান সংখ্যায় বদলান।',
+    keywords: [
+      'roman numeral converter bangla',
+      'roman sankhya kivabe ber korbo',
+      'রোমান সংখ্যা কনভার্টার',
+      'roman numerals to numbers bangla',
+      'roman sankhya date converter',
+      'roman numeral calculator bangla',
+      'roman sankhya 1 theke 3999',
+      'saal ke roman sankhya te bodlan',
+      'roman sankhya chart bangla',
+    ],
+    seo: {
+      title: 'রোমান সংখ্যা কনভার্টার: সংখ্যা ও তারিখ | UtilityFlow',
+      description:
+        'সংখ্যাকে রোমান সংখ্যায় আর রোমান সংখ্যাকে সংখ্যায় মুহূর্তে বদলান। সাল, জন্মদিন ও তারিখের জন্য ফ্রি রোমান সংখ্যা কনভার্টার অনলাইনে আজই চেষ্টা করে দেখুন।',
+      primaryKeyword: 'roman numeral converter bangla',
+      secondaryKeywords: [
+        'roman sankhya kivabe ber korbo',
+        'রোমান সংখ্যা কনভার্টার',
+        'roman numerals to numbers bangla',
+        'roman sankhya date converter',
+      ],
+      longTailKeywords: [
+        'number ke roman sankhya te kivabe bodlabo',
+        '2026 roman sankhya te ki hoy',
+        'amar jonmodin roman sankhya te bodlan',
+        'saal ke roman sankhya te bodlanor tool',
+      ],
+      schemaApplicationCategory: 'UtilitiesApplication',
+    },
+    intro:
+      '১ থেকে ৩৯৯৯ পর্যন্ত যেকোনো পূর্ণ সংখ্যাকে রোমান সংখ্যায় বদলান, বা রোমান সংখ্যাকে সাধারণ সংখ্যার মতো পড়ুন — আর পুরো তারিখও রোমান সংখ্যায় বদলান, সবকিছু আপনার ব্রাউজারে মুহূর্তে।',
+  },
 };

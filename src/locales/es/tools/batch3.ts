@@ -538,4 +538,42 @@ export const ES_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
     intro:
       'Convierte al instante en siete familias de medidas: longitud, peso y masa, temperatura, área, volumen, velocidad y almacenamiento digital, con una tabla automática lado a lado que muestra cada unidad de la categoría.',
   },
+  'roman-numeral-converter': {
+    slug: 'convertidor-de-numeros-romanos',
+    name: 'Convertidor de Números Romanos',
+    shortDescription:
+      'Convierte números en números romanos y números romanos en números al instante, incluidas fechas en números romanos.',
+    keywords: [
+      'convertidor de números romanos',
+      'números romanos a números',
+      'convertir números a romanos',
+      'convertidor de fechas romanas',
+      'calculadora de números romanos',
+      'qué número es MMXXVI',
+      'números romanos del 1 al 3999',
+      'convertir año a números romanos',
+      'tabla de números romanos',
+    ],
+    seo: {
+      title: 'Convertidor de Números Romanos – 1 a 3999 | UtilityFlow',
+      description:
+        'Convierte números en números romanos y números romanos en números al instante. Prueba el convertidor gratuito de años, cumpleaños y fechas en números romanos.',
+      primaryKeyword: 'convertidor de números romanos',
+      secondaryKeywords: [
+        'números romanos a números',
+        'convertir números a romanos',
+        'convertidor de fechas romanas',
+        'calculadora de números romanos',
+      ],
+      longTailKeywords: [
+        'cómo convertir números a números romanos',
+        'qué es 2026 en números romanos',
+        'convertir mi cumpleaños a números romanos',
+        'convertir un año a números romanos en línea',
+      ],
+      schemaApplicationCategory: 'UtilitiesApplication',
+    },
+    intro:
+      'Convierte cualquier número entero del 1 al 3999 en números romanos, o lee números romanos como números normales, y convierte también una fecha completa en números romanos, al instante en tu navegador.',
+  },
 };

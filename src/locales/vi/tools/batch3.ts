@@ -400,4 +400,42 @@ export const VI_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
     intro:
       'Đổi ngay lập tức trong bảy nhóm đo lường — Độ Dài, Khối Lượng, Nhiệt Độ, Diện Tích, Thể Tích, Tốc Độ và Dung Lượng Lưu Trữ Số — kèm bảng so sánh tự động hiển thị mọi đơn vị trong nhóm.',
   },
+  'roman-numeral-converter': {
+    slug: 'bo-chuyen-doi-so-la-ma',
+    name: 'Bộ Chuyển Đổi Số La Mã',
+    shortDescription:
+      'Đổi số thành số La Mã và số La Mã thành số ngay lập tức, kể cả chuyển đổi ngày tháng sang số La Mã.',
+    keywords: [
+      'bộ chuyển đổi số la mã',
+      'số la mã sang số',
+      'đổi số thành số la mã',
+      'chuyển đổi ngày la mã',
+      'máy tính số la mã',
+      'MMXXVI là số mấy',
+      'số la mã từ 1 đến 3999',
+      'đổi năm thành số la mã',
+      'bảng số la mã',
+    ],
+    seo: {
+      title: 'Bộ Chuyển Đổi Số La Mã: Số & Ngày Tháng | UtilityFlow',
+      description:
+        'Đổi số thành số La Mã và số La Mã thành số ngay lập tức. Thử bộ chuyển đổi số La Mã miễn phí cho năm, sinh nhật và ngày tháng trực tuyến, không cần đăng ký.',
+      primaryKeyword: 'bộ chuyển đổi số la mã',
+      secondaryKeywords: [
+        'số la mã sang số thường',
+        'đổi số thành số la mã',
+        'chuyển đổi ngày la mã',
+        'máy tính số la mã',
+      ],
+      longTailKeywords: [
+        'cách đổi số thành số la mã',
+        '2026 viết bằng số la mã là gì',
+        'đổi ngày sinh thành số la mã',
+        'đổi năm thành số la mã trực tuyến miễn phí',
+      ],
+      schemaApplicationCategory: 'UtilitiesApplication',
+    },
+    intro:
+      'Đổi bất kỳ số nguyên nào từ 1 đến 3999 thành số La Mã, hoặc đọc số La Mã như số thường — và đổi cả một ngày đầy đủ thành số La Mã, tất cả ngay trong trình duyệt của bạn.',
+  },
 };

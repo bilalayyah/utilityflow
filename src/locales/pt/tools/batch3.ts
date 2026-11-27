@@ -541,4 +541,42 @@ export const PT_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
     intro:
       'Converta na hora em sete famílias de medidas — Comprimento, Peso e Massa, Temperatura, Área, Volume, Velocidade e Armazenamento Digital — com uma tabela automática lado a lado mostrando cada unidade da categoria.',
   },
+  'roman-numeral-converter': {
+    slug: 'conversor-de-numerais-romanos',
+    name: 'Conversor de Numerais Romanos',
+    shortDescription:
+      'Converta números em numerais romanos e numerais romanos em números na hora, incluindo datas em numerais romanos.',
+    keywords: [
+      'conversor de numerais romanos',
+      'numerais romanos para números',
+      'converter números em romanos',
+      'conversor de datas romanas',
+      'calculadora de numerais romanos',
+      'que número é MMXXVI',
+      'numerais romanos de 1 a 3999',
+      'converter ano em numerais romanos',
+      'tabela de numerais romanos',
+    ],
+    seo: {
+      title: 'Conversor de Numerais Romanos – 1 a 3999 | UtilityFlow',
+      description:
+        'Converta números em numerais romanos e numerais romanos em números na hora. Use o conversor gratuito de anos, aniversários e datas em numerais romanos.',
+      primaryKeyword: 'conversor de numerais romanos',
+      secondaryKeywords: [
+        'numerais romanos para números',
+        'converter números em romanos',
+        'conversor de datas romanas',
+        'calculadora de numerais romanos',
+      ],
+      longTailKeywords: [
+        'como converter números em numerais romanos',
+        'quanto é 2026 em numerais romanos',
+        'converter meu aniversário em numerais romanos',
+        'converter um ano em numerais romanos online',
+      ],
+      schemaApplicationCategory: 'UtilitiesApplication',
+    },
+    intro:
+      'Converta qualquer número inteiro de 1 a 3999 em numerais romanos, ou leia numerais romanos como números comuns, e transforme também uma data completa em numerais romanos, na hora no seu navegador.',
+  },
 };
