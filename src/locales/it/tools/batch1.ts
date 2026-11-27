@@ -429,4 +429,29 @@ export const IT_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
     intro:
       'Aggiungi numeri di riga sequenziali, caratteri di elenco puntato o virgolette di apertura, e aggiungi virgole, punti e virgola o tag di chiusura a ogni riga di un elenco in pochi secondi.',
   },
+  'alphabets-to-word-generator': {
+    slug: 'generatore-di-parole-da-lettere',
+    name: 'Generatore di Parole da Lettere',
+    shortDescription: 'Genera parole dalle tue lettere all’istante: anagrammi, parole corte e lunghe e combinazioni possibili, gratis nel browser.',
+    keywords: [
+      'generatore di parole da lettere',
+      'generatore di parole con lettere',
+      'lettere in parole',
+      'generatore di anagrammi',
+      'risolutore di anagrammi',
+      'sciogliere lettere',
+      'trovare parole con lettere',
+      'generatore di parole inglesi',
+      'parole con lettere date',
+    ],
+    seo: {
+      title: 'Generatore di Parole da Lettere – Crea Parole | UtilityFlow',
+      description: 'Genera parole dalle lettere all’istante con il nostro generatore gratuito. Trova parole corte e lunghe, anagrammi e combinazioni possibili.',
+      primaryKeyword: 'generatore di parole da lettere',
+      secondaryKeywords: ['generatore di anagrammi', 'risolutore di anagrammi', 'sciogliere lettere', 'trovare parole con lettere'],
+      longTailKeywords: ['quali parole posso formare con queste lettere', 'generare parole con lettere online gratis', 'trovare la parola più lunga con le lettere', 'creare anagrammi da una parola'],
+      schemaApplicationCategory: 'UtilitiesApplication',
+    },
+    intro: 'Scrivi le tue lettere e scopri tutte le parole che puoi formare: anagrammi esatti, parole corte e lunghe, con filtri di lunghezza e di lettere, direttamente nel browser.',
+  },
 };

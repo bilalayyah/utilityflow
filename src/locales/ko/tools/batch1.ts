@@ -430,4 +430,29 @@ export const KO_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
     intro:
       '번호가 매겨진 단계, 따옴표로 감싼 SQL 값, 접두사가 붙은 코드 줄에 줄 번호와 맞춤 접두사·접미사를 한 번에 추가하세요.',
   },
+  'alphabets-to-word-generator': {
+    slug: 'munja-ro-daneo-mandeulgi',
+    name: '문자로 단어 만들기',
+    shortDescription: '문자로 단어를 즉시 만드세요. 애너그램, 짧은 단어와 긴 단어, 가능한 조합을 브라우저에서 무료로.',
+    keywords: [
+      '문자로 단어 만들기',
+      '문자에서 단어 생성',
+      '문자를 단어로',
+      '애너그램 생성기',
+      '애너그램 풀이',
+      '문자 섞기',
+      '문자로 단어 찾기',
+      '영어 단어 생성기',
+      '주어진 문자로 단어',
+    ],
+    seo: {
+      title: '문자로 단어 만들기: 무료 온라인 도구 | UtilityFlow',
+      description: '무료 문자로 단어 만들기 도구로 문자에서 단어를 즉시 만드세요. 짧은 단어와 긴 단어, 애너그램, 가능한 조합을 찾으세요.',
+      primaryKeyword: '문자로 단어 만들기',
+      secondaryKeywords: ['애너그램 생성기', '애너그램 풀이', '문자 섞기', '문자로 단어 찾기'],
+      longTailKeywords: ['이 문자들로 어떤 단어를 만들 수 있나요', '문자로 단어 온라인 무료 만들기', '문자로 가장 긴 단어 찾기', '단어로 애너그램 만들기'],
+      schemaApplicationCategory: 'UtilitiesApplication',
+    },
+    intro: '문자를 입력하고 그 문자들로 만들 수 있는 모든 단어를 찾아보세요. 정확한 애너그램, 짧은 단어와 긴 단어를 길이와 문자 필터와 함께 브라우저에서 바로 확인할 수 있습니다.',
+  },
 };

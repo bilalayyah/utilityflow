@@ -429,4 +429,29 @@ export const ZH_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
     intro:
       '一次为列表每行添加行首和行尾文本。加引号、编号、用逗号制作 SQL 的 IN 子句等重复工作瞬间完成。',
   },
+  'alphabets-to-word-generator': {
+    slug: 'zimu-shengcheng-danci',
+    name: '字母生成单词',
+    shortDescription: '用您的字母即时生成单词：变位词、短词和长词以及可能的组合，浏览器中免费使用。',
+    keywords: [
+      '字母生成单词',
+      '用字母生成单词',
+      '字母变单词',
+      '变位词生成器',
+      '变位词求解器',
+      '字母重组',
+      '用字母查找单词',
+      '英语单词生成器',
+      '用给定字母组词',
+    ],
+    seo: {
+      title: '字母生成单词｜免费在线生成单词 | UtilityFlow',
+      description: '使用我们的免费字母生成单词工具，即时用字母生成单词。查找短词和长词、变位词和可能的组合。',
+      primaryKeyword: '字母生成单词',
+      secondaryKeywords: ['变位词生成器', '变位词求解器', '字母重组', '用字母查找单词'],
+      longTailKeywords: ['用这些字母能组成哪些单词', '在线免费通过字母生成单词', '用字母查找最长单词', '用一个单词创建变位词'],
+      schemaApplicationCategory: 'UtilitiesApplication',
+    },
+    intro: '输入您的字母，发现所有可以组成的单词：精确的变位词、短词和长词，配合长度和字母筛选器，直接在浏览器中使用。',
+  },
 };

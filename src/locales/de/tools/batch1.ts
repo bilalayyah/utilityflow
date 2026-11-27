@@ -429,4 +429,29 @@ export const DE_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
     intro:
       'Stellen Sie fortlaufende Zeilennummern, Aufzählungszeichen oder öffnende Anführungszeichen voran und hängen Sie Kommas, Semikolons oder schließende Tags an jede Zeile einer Liste an – in Sekundenschnelle.',
   },
+  'alphabets-to-word-generator': {
+    slug: 'buchstaben-zu-woerter-generator',
+    name: 'Buchstaben-zu-Wörter-Generator',
+    shortDescription: 'Bilden Sie aus Ihren Buchstaben sofort Wörter: Anagramme, kurze und lange Wörter und mögliche Kombinationen – kostenlos im Browser.',
+    keywords: [
+      'buchstaben zu wörter generator',
+      'wörter aus buchstaben bilden',
+      'anagramm generator',
+      'anagramm löser',
+      'buchstaben entschlüsseln',
+      'wörter aus buchstaben finden',
+      'wörter generator aus buchstaben',
+      'buchstaben wörter finden',
+      'längstes wort aus buchstaben',
+    ],
+    seo: {
+      title: 'Buchstaben-zu-Wörter-Generator – Wörter bilden | UtilityFlow',
+      description: 'Bilden Sie aus Buchstaben sofort Wörter mit unserem kostenlosen Generator. Finden Sie kurze und lange Wörter, Anagramme und mögliche Kombinationen.',
+      primaryKeyword: 'buchstaben zu wörter generator',
+      secondaryKeywords: ['anagramm generator', 'anagramm löser', 'wörter aus buchstaben finden', 'buchstaben entschlüsseln'],
+      longTailKeywords: ['welche wörter kann man aus diesen buchstaben bilden', 'wörter aus buchstaben online kostenlos bilden', 'längstes wort aus buchstaben finden', 'anagramm aus einem wort erstellen'],
+      schemaApplicationCategory: 'UtilitiesApplication',
+    },
+    intro: 'Geben Sie Ihre Buchstaben ein und entdecken Sie alle Wörter, die Sie daraus bilden können: exakte Anagramme, kurze und lange Wörter, mit Filtern für Länge und Buchstaben – direkt in Ihrem Browser.',
+  },
 };

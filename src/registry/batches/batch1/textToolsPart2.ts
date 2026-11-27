@@ -187,6 +187,7 @@ export const TEXT_TOOLS_PART_2: ToolDefinition[] = [
       'case-converter',
       'line-prefix-suffix',
       'word-counter',
+      'alphabets-to-word-generator',
     ],
     component: lazy(() => import('../../../tools/text/TextReverserTool')),
   },

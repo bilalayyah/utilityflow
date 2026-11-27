@@ -429,4 +429,29 @@ export const ES_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
     intro:
       'Antepone números de línea secuenciales, caracteres de viñeta o comillas de apertura y agrega comas, puntos y coma o etiquetas de cierre en cada línea de una lista en segundos.',
   },
+  'alphabets-to-word-generator': {
+    slug: 'generador-de-palabras-con-letras',
+    name: 'Generador de Palabras con Letras',
+    shortDescription: 'Genera palabras con tus letras al instante: anagramas, palabras cortas y largas, y combinaciones posibles, gratis en tu navegador.',
+    keywords: [
+      'generador de palabras con letras',
+      'generador de palabras a partir de letras',
+      'letras a palabras',
+      'generador de anagramas',
+      'resolver anagramas',
+      'desordenar letras',
+      'buscar palabras con letras',
+      'generador de palabras en inglés',
+      'palabras con letras dadas',
+    ],
+    seo: {
+      title: 'Generador de Palabras con Letras – Crea Palabras | UtilityFlow',
+      description: 'Genera palabras con letras al instante con nuestro generador gratuito. Encuentra palabras cortas y largas, anagramas y combinaciones posibles.',
+      primaryKeyword: 'generador de palabras con letras',
+      secondaryKeywords: ['generador de anagramas', 'resolver anagramas', 'desordenar letras', 'buscar palabras con letras'],
+      longTailKeywords: ['qué palabras puedo formar con estas letras', 'generar palabras con letras online gratis', 'encontrar la palabra más larga con letras', 'crear anagramas con una palabra'],
+      schemaApplicationCategory: 'UtilitiesApplication',
+    },
+    intro: 'Escribe tus letras y descubre todas las palabras que puedes formar con ellas: anagramas exactos, palabras cortas y largas, con filtros de longitud y de letras, directamente en tu navegador.',
+  },
 };

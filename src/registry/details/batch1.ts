@@ -2572,4 +2572,189 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       'Start numbers and separators have no validation, so a negative start or an empty separator silently produces unusual output rather than an error.',
     ],
   },
+  'alphabets-to-word-generator': {
+    instructions: [
+      {
+        title: 'Enter your letters',
+        description:
+          'Type up to 15 letters into the input box, for example LISTEN. Uppercase and lowercase letters both work, spaces between letters are ignored, and repeated letters are allowed — the tool counts how many times each letter appears and never uses a letter more often than you entered it.',
+      },
+      {
+        title: 'Choose a word-finding mode',
+        description:
+          'Pick one of five modes. Generate finds every word your letters can build; Anagrams finds only words that use all your letters exactly once; Short finds the shortest words; Long finds the longest words first; Pattern Finder searches with known positions, using ? for any unknown letter, for example P?A?ET.',
+      },
+      {
+        title: 'Refine with filters',
+        description:
+          'Set a minimum and maximum word length, ask for words that start or end with a particular letter, require letters that must appear, or exclude letters you do not want. Change any filter at any time — the results update without retyping your letters.',
+      },
+      {
+        title: 'Generate your words',
+        description:
+          'Click Generate Words or press Enter. Results appear with each word and its letter count, sorted alphabetically or by length, longest first or shortest first, depending on the sort you chose. The total result count is shown at the top of the list.',
+      },
+      {
+        title: 'Copy or download results',
+        description:
+          'Copy any single word with its copy button, copy the whole list with Copy All, or download every result as a plain .txt file to keep or share.',
+      },
+      {
+        title: 'Reuse a recent search',
+        description:
+          'Your recent letter sets appear in the history below the results. Click one to run it again with its mode and result count shown, without typing the letters a second time.',
+      },
+    ],
+    examples: [
+      {
+        title: 'LISTEN — five exact anagrams',
+        input: 'LISTEN',
+        output: 'LISTEN · SILENT · ENLIST · TINSEL · INLETS',
+        explanation:
+          'The classic anagram set: every result uses L, I, S, T, E, N exactly once, which is why Anagrams mode returns only these five words from this input.',
+      },
+      {
+        title: 'APPLE — repeated letters counted exactly',
+        input: 'APPLE',
+        output: 'APPLE · PEAL · LEAP · PALE · APE · LAP',
+        explanation:
+          'The letter P appears twice in APPLE, so words may use P at most twice — PEAL and LEAP use both Ps, while APE and LAP use only one. No result ever uses P three times.',
+      },
+      {
+        title: 'EARTH and STONE — anagrams plus shorter words',
+        input: 'EARTH',
+        output: 'EARTH · HEART · HATER · RATE · EAT · TEA',
+        explanation:
+          'Generate mode returns the full anagrams first and then every shorter word the letters can build, so EARTH also gives RATE, EAT, and TEA. STONE behaves the same way, giving STONE, NOTES, ONSET, and TONES.',
+      },
+      {
+        title: 'CARE and ANGLE — short words and word games',
+        input: 'CARE',
+        output: 'CARE · RACE · ACRE · CAR · ARE · ACE',
+        explanation:
+          'Short mode groups two-, three-, and four-letter results separately, which is useful for word games that reward quick short plays. ANGLE works the same way, giving ANGLE, LEAN, GALE, LANE, AGE, and ALE.',
+      },
+    ],
+    benefits: [
+      'Every result is a real dictionary word — no invented or random words, ever',
+      'Runs entirely in your browser: your letters are never uploaded or stored on a server',
+      'Finds short words, long words, and exact anagrams from one input in a single click',
+      'Free with no sign-up, no account, and no limit on how many searches you run',
+      'Keeps working offline once the page and the dictionary have loaded — no connection needed per search',
+      'Copy single words, copy all results, or download them as a plain .txt file',
+    ],
+    useCases: [
+      'Students building vocabulary and practising spelling with real word lists',
+      'Teachers creating word puzzles, anagram worksheets, and classroom word games',
+      'Word game players finding playable words and checking anagram options before a move',
+      'English learners discovering new words that can be built from familiar letters',
+      'Writers and poets hunting for the right word length or a fresh anagram for a line',
+      'Puzzle enthusiasts solving crosswords, word ladders, and anagram challenges',
+    ],
+    faqs: [
+      {
+        question: 'What is an alphabets to word generator?',
+        answer:
+          'Type LISTEN and it shows LISTEN, SILENT, ENLIST, TINSEL, and INLETS, plus every shorter word those letters can form. It is not a random word generator: every result comes from a built-in English dictionary, and no result ever uses a letter more times than it appears in your input.',
+      },
+      {
+        question: 'How do I make words from letters?',
+        answer:
+          'Type your letters into the input box, choose a mode — Generate, Anagrams, Short, Long, or Pattern Finder — and click Generate Words or press Enter. The tool compares your letters against its dictionary and lists every word it can build. Use the filters to set a minimum or maximum length, a starting or ending letter, or letters to include or exclude, then copy or download the words you want.',
+      },
+      {
+        question: 'Can I generate multiple words from one set of letters?',
+        answer:
+          'Yes. One set of letters usually produces many words. LISTEN gives five exact anagrams and dozens of shorter words such as LIST, SENT, TENS, and LINE. The total result count is shown at the top of the list.',
+      },
+      {
+        question: 'What is an anagram?',
+        answer:
+          'An anagram is a word formed by rearranging all the letters of another word exactly once. LISTEN and SILENT are anagrams of each other because they use the same six letters. The Anagrams mode returns only these full rearrangements, while Generate mode also returns shorter words that use only some of your letters.',
+      },
+      {
+        question: 'What is the difference between a word generator and an anagram solver?',
+        answer:
+          'A word generator returns every dictionary word your letters can build, including short words that use only some of them. An anagram solver is stricter: it returns only words that use every letter exactly once, with nothing left over and nothing added. This tool does both: Generate mode is the word generator and Anagrams mode is the anagram solver.',
+      },
+      {
+        question: 'Can I find the longest word from letters?',
+        answer:
+          'Yes. Choose the Long mode, which sorts results longest first and shows every word tied for the maximum length at the top, followed by shorter alternatives. You can also set a maximum number of results if a long input produces hundreds of words.',
+      },
+      {
+        question: 'Can I find short words from letters?',
+        answer:
+          'Yes. The Short mode groups results by length, so you can browse two-letter, three-letter, four-letter, and five-letter words separately, or set your own minimum and maximum length. Short words help in word games that reward quick two- and three-letter plays.',
+      },
+      {
+        question: 'Can I use repeated letters?',
+        answer:
+          'Yes. Repeated letters are allowed and counted exactly. If you enter APPLE, the tool knows P appears twice, so it can return PEAL and LEAP but never a word that needs P three times. Type the letters exactly as you have them — duplicates included — and the generator respects the count.',
+      },
+      {
+        question: 'Does the generator use every letter?',
+        answer:
+          'Only in Anagrams mode, where every result must use all of your letters exactly once. In Generate, Short, Long, and Pattern Finder modes, results may use any subset of your letters, so a six-letter input can also return shorter words. The mode you pick decides whether every letter is required.',
+      },
+      {
+        question: 'Can I find words using all the letters?',
+        answer:
+          'Yes — that is exactly what Anagrams mode does. Enter your letters, choose Anagrams, and you will see only words that use the complete letter set, such as the five anagrams of LISTEN. If no word uses all your letters, the tool shows an empty state instead of inventing a result.',
+      },
+      {
+        question: 'Can I exclude specific letters?',
+        answer:
+          'Yes. The exclude-letters filter removes every word containing a letter you do not want, and the include-letters filter does the opposite, keeping only words that contain a letter you require. Both filters can be combined with a starting-letter, ending-letter, and length filter, and you can change them without retyping your letters.',
+      },
+      {
+        question: 'Can I find words starting with a particular letter?',
+        answer:
+          'Yes. Set the starts-with filter to the letter you want, and every result will begin with it — for example, PLANET starting with P returns PLANET itself. The same filter exists for ending letters, and both work together with the Pattern Finder, where ? stands for any unknown letter in a known position.',
+      },
+      {
+        question: 'Does the tool work offline?',
+        answer:
+          'Yes, after the page and the dictionary have loaded. The dictionary is bundled with the site and downloaded once as a separate chunk when you first use the tool; after that, every search runs entirely in your browser with no internet connection and no per-search server request. Open the page once online first so the dictionary can load.',
+      },
+      {
+        question: 'Is this word generator free?',
+        answer:
+          'Yes, completely free. There is no sign-up, no account, no credit system, and no limit on the number of searches. Every tool on UtilityFlow is free in the same way.',
+      },
+      {
+        question: 'Are all generated words valid English words?',
+        answer:
+          'Yes. Every result is checked against the bundled ENABLE dictionary of 172,823 English words, a public-domain word list built for word games. The tool never invents words, and it never returns a word that is not in the dictionary. ENABLE contains no proper nouns or abbreviations, and offensive words are filtered out.',
+      },
+      {
+        question: 'Does the tool support every word game dictionary?',
+        answer:
+          'No. Different word games use different dictionaries — Scrabble tournaments use the official NASPA or CSW lists, Words With Friends uses its own list, and each list accepts some words the others reject. This tool uses the public-domain ENABLE list, which overlaps heavily with game dictionaries but is not identical to any of them, so always check a word against your game’s own dictionary before playing it.',
+      },
+    ],
+    howItWorks: [
+      'The tool ships with the ENABLE English word list — 172,823 words, released into the public domain, with no proper nouns and no abbreviations. It is bundled with the site and loaded lazily as a separate chunk the first time you use the tool, so it never slows the initial page load.',
+      'Every word and every input is normalized to lowercase letters A–Z, and each is reduced to a letter-frequency count: how many times A appears, how many times B appears, and so on through Z.',
+      'A dictionary word is accepted only if every letter it needs is available in your input at least as many times — this is the canBuildWord check. APPLE can build PEAL because P appears twice in both, but it can never build a word needing three Ps.',
+      'Exact anagrams are found with a sorted-letter signature index: each dictionary word is keyed by its letters in alphabetical order, so LISTEN, SILENT, ENLIST, TINSEL, and INLETS all share the key EILNST and are returned in one lookup.',
+      'Pattern Finder matches position by position: a ? in your pattern stands for any single letter, while a fixed letter must match exactly, so P?A?ET finds PLANET among words built from your letters.',
+      'Results are filtered by your minimum and maximum length, starting and ending letters, and include and exclude lists, then sorted alphabetically, longest first, or shortest first, and capped at your chosen result limit.',
+    ],
+    supportedFormats: [
+      'Uppercase letters (A–Z)',
+      'Lowercase letters (a–z)',
+      'Letters separated by spaces',
+      'Repeated letters',
+      'Pattern search with ? wildcards',
+      'Plain-text (.txt) result download',
+    ],
+    limitations: [
+      'Input is limited to 15 letters, which keeps result lists readable; longer letter sets would return hundreds of words and are not accepted.',
+      'The dictionary is ENABLE, a general word-game list — not an official tournament list — so a word shown here may not be accepted in every word game.',
+      'A small number of offensive words are filtered out of results, so the list you see is a cleaned subset of the dictionary.',
+      'The dictionary contains common English words only: no proper nouns, no abbreviations, and no accented characters.',
+      'The tool works offline only after the page and the dictionary chunk have loaded; the first visit needs a connection so the dictionary can download once.',
+    ],
+  },
 };

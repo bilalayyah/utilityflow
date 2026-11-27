@@ -28,6 +28,7 @@ export const SLUG_IDS = {
   "tools": [
     "add-pdf-page-numbers",
     "age-calculator",
+    "alphabets-to-word-generator",
     "base64-encoder-decoder",
     "bio-line-break-formatter",
     "bmi-calculator",
@@ -379,6 +380,7 @@ export const SLUG_MANIFEST: Record<NonDefaultLocale, SlugManifestEntry> = {
     "tools": [
       "agregar-numeros-de-pagina-a-pdf",
       "calculadora-de-edad",
+      "generador-de-palabras-con-letras",
       "codificador-decodificador-base64",
       "formateador-de-saltos-de-linea-para-bio",
       "calculadora-de-imc",
@@ -728,6 +730,7 @@ export const SLUG_MANIFEST: Record<NonDefaultLocale, SlugManifestEntry> = {
     "tools": [
       "adicionar-numeros-de-pagina-ao-pdf",
       "calculadora-de-idade",
+      "gerador-de-palavras-com-letras",
       "codificador-decodificador-base64",
       "formatador-de-quebras-de-linha-para-bio",
       "calculadora-de-imc",
@@ -1077,6 +1080,7 @@ export const SLUG_MANIFEST: Record<NonDefaultLocale, SlugManifestEntry> = {
     "tools": [
       "ajouter-numeros-page-pdf",
       "calculatrice-age",
+      "generateur-de-mots-avec-lettres",
       "encodeur-decodeur-base64",
       "formateur-sauts-ligne-bio",
       "calculatrice-imc",
@@ -1426,6 +1430,7 @@ export const SLUG_MANIFEST: Record<NonDefaultLocale, SlugManifestEntry> = {
     "tools": [
       "pdf-seitenzahlen-hinzufuegen",
       "altersrechner",
+      "buchstaben-zu-woerter-generator",
       "base64-kodierer-dekodierer",
       "bio-zeilenumbruch-formatierer",
       "bmi-rechner",
@@ -1775,6 +1780,7 @@ export const SLUG_MANIFEST: Record<NonDefaultLocale, SlugManifestEntry> = {
     "tools": [
       "aggiungi-numeri-pagina-pdf",
       "calcolatrice-eta",
+      "generatore-di-parole-da-lettere",
       "codificatore-decodificatore-base64",
       "formattatore-interruzioni-riga-bio",
       "calcolatrice-imc",
@@ -2124,6 +2130,7 @@ export const SLUG_MANIFEST: Record<NonDefaultLocale, SlugManifestEntry> = {
     "tools": [
       "tambah-nomor-halaman-pdf",
       "kalkulator-umur",
+      "generator-kata-dari-huruf",
       "encoder-decoder-base64",
       "pemformat-jeda-baris-bio",
       "kalkulator-bmi",
@@ -2473,6 +2480,7 @@ export const SLUG_MANIFEST: Record<NonDefaultLocale, SlugManifestEntry> = {
     "tools": [
       "dobavlenie-nomerov-stranits-pdf",
       "kalkulyator-vozrasta",
+      "generator-slov-iz-bukv",
       "base64-koder-dekoder",
       "formatirovanie-perenosov-v-bio",
       "kalkulyator-imt",
@@ -2822,6 +2830,7 @@ export const SLUG_MANIFEST: Record<NonDefaultLocale, SlugManifestEntry> = {
     "tools": [
       "pdf-peji-bango-tsuika",
       "nenrei-keisan",
+      "moji-kara-tango-jenereta",
       "base64-enkodo-dekodo",
       "purofiru-kaigyo",
       "bmi-keisan",
@@ -3171,6 +3180,7 @@ export const SLUG_MANIFEST: Record<NonDefaultLocale, SlugManifestEntry> = {
     "tools": [
       "pdf-peiji-beonho-chuga",
       "nai-gyesan-gi",
+      "munja-ro-daneo-mandeulgi",
       "base64-inkodeo-dikodeo",
       "peuropil-julbakkum-jeongni-gi",
       "bmi-gyesan-gi",
@@ -3520,6 +3530,7 @@ export const SLUG_MANIFEST: Record<NonDefaultLocale, SlugManifestEntry> = {
     "tools": [
       "pdf-tianjia-yema",
       "nianling-jisuanqi",
+      "zimu-shengcheng-danci",
       "base64-bianma-jie-ma",
       "jianjie-huanhang-geshi",
       "bmi-jisuanqi",
@@ -3869,6 +3880,7 @@ export const SLUG_MANIFEST: Record<NonDefaultLocale, SlugManifestEntry> = {
     "tools": [
       "pdf-page-number-lagaye",
       "umar-calculator",
+      "aksharon-se-shabd-generator",
       "base64-encode-decode-kare",
       "instagram-bio-line-break",
       "bmi-nikale-online",
@@ -4218,6 +4230,7 @@ export const SLUG_MANIFEST: Record<NonDefaultLocale, SlugManifestEntry> = {
     "tools": [
       "tarkim-safahat-pdf",
       "hasibat-al-umr",
+      "muwallid-kalimat-min-ahruf",
       "base64-tashfir-wa-fakk",
       "fasil-as-tur-fi-al-bio",
       "hasibat-muashir-kutlat-al-jism",
@@ -4567,6 +4580,7 @@ export const SLUG_MANIFEST: Record<NonDefaultLocale, SlugManifestEntry> = {
     "tools": [
       "pdf-sayfa-numarasi-ekle",
       "yas-hesaplayici",
+      "harflerden-kelime-olusturucu",
       "base64-kodlayici-cozucu",
       "instagram-biyografi-satir-boslugu",
       "vki-hesaplayici",
@@ -4916,6 +4930,7 @@ export const SLUG_MANIFEST: Record<NonDefaultLocale, SlugManifestEntry> = {
     "tools": [
       "danh-so-trang-pdf",
       "tinh-tuoi",
+      "tao-tu-tu-chu-cai",
       "ma-hoa-giai-ma-base64",
       "xuong-dong-bio-instagram",
       "tinh-bmi",
@@ -5265,6 +5280,7 @@ export const SLUG_MANIFEST: Record<NonDefaultLocale, SlugManifestEntry> = {
     "tools": [
       "pdf-page-number-lagano",
       "boyos-calculator",
+      "akkhar-diye-shobdo-generator",
       "base64-encode-decode-korun",
       "instagram-bio-line-break",
       "bmi-hisab-online",
@@ -5614,6 +5630,7 @@ export const SLUG_MANIFEST: Record<NonDefaultLocale, SlugManifestEntry> = {
     "tools": [
       "pdf-safha-number-lagane-wala",
       "umar-calculator",
+      "haroof-se-alfaz-generator",
       "base64-inkoder-aur-decoder",
       "bio-me-line-break",
       "wazan-bmi-calculator",

@@ -14,7 +14,7 @@ export const frStrings: UiStrings = {
     contact: 'Contact',
     blog: 'Blog',
     allTools: 'Tous les outils',
-    searchPlaceholder: 'Rechercher parmi 85 outils…',
+    searchPlaceholder: 'Rechercher parmi 86 outils…',
     searchTools: 'Rechercher des outils',
     closeSearch: 'Fermer la recherche',
     openMenu: 'Ouvrir le menu de navigation',
@@ -171,17 +171,17 @@ export const frStrings: UiStrings = {
       {
         question: 'Les outils de UtilityFlow sont-ils gratuits et utilisables sans créer de compte ?',
         answer:
-          'Oui. Les 85 utilitaires navigateur de UtilityFlow sont entièrement gratuits, sans inscription, sans mur de connexion, sans crédits ni abonnement.',
+          'Oui. Les 86 utilitaires navigateur de UtilityFlow sont entièrement gratuits, sans inscription, sans mur de connexion, sans crédits ni abonnement.',
       },
       {
         question: 'UtilityFlow envoie-t-il mes textes, mon code ou mes fichiers vers un serveur ?',
         answer:
-          'Les 85 utilitaires navigateur principaux s’exécutent localement dans votre navigateur web sans envoyer vos données.',
+          'Les 86 utilitaires navigateur principaux s’exécutent localement dans votre navigateur web sans envoyer vos données.',
       },
       {
-        question: 'Comment les 85 outils sont-ils organisés sur la plateforme ?',
+        question: 'Comment les 86 outils sont-ils organisés sur la plateforme ?',
         answer:
-          'UtilityFlow couvre sept catégories principales (texte et écriture, développeurs, calculatrices, réseaux sociaux, PDF, SEO et outils d’images et de fichiers), soit 85 outils navigateur intégrés à la plateforme.',
+          'UtilityFlow couvre sept catégories principales (texte et écriture, développeurs, calculatrices, réseaux sociaux, PDF, SEO et outils d’images et de fichiers), soit 86 outils navigateur intégrés à la plateforme.',
       },
       {
         question: 'Puis-je mettre en favori ou partager un lien direct vers un outil précis ?',
@@ -307,7 +307,7 @@ export const frStrings: UiStrings = {
       'Découvrez comment UtilityFlow crée des utilitaires respectueux de la vie privée pour le navigateur, dans sept catégories, sans compte ni publicité intrusive.',
     title: 'À propos de UtilityFlow',
     intro:
-      'UtilityFlow est une plateforme web indépendante qui construit 85 utilitaires ciblés et fiables pour le travail numérique du quotidien.',
+      'UtilityFlow est une plateforme web indépendante qui construit 86 utilitaires ciblés et fiables pour le travail numérique du quotidien.',
     whyTitle: 'Pourquoi avons-nous créé UtilityFlow',
     whyP1:
       'Les tâches en ligne courantes — compter des mots, valider du JSON, vérifier des limites de caractères, calculer des mensualités de prêt ou compresser une image — obligent souvent à passer par des sites lents, remplis de fenêtres intrusives, de téléchargements confus ou d’inscriptions obligatoires.',
@@ -315,7 +315,7 @@ export const frStrings: UiStrings = {
       'Notre objectif est simple : donner à chaque utilitaire une page propre et dédiée qui se charge vite, explique clairement comment l’outil fonctionne et s’exécute directement dans votre navigateur chaque fois que les standards du web le permettent.',
     orgTitle: 'Qui gère UtilityFlow',
     orgP1:
-      'UtilityFlow est un projet indépendant créé et maintenu par Bilal, un créateur qui développe des outils web gratuits pendant son temps libre. Aucune entreprise ne se cache derrière le site, aucun financement d’investisseurs, aucune équipe d’employés — chaque outil, chaque guide et chaque page d’aide est conçu, construit et testé par une seule personne. Les 85 outils sont gratuits, sans compte ni abonnement. Le crédit en pied de page nomme Shaheen, dont les encouragements ont inspiré le projet et dont le nom apparaît sur chaque page pour rappeler d’où l’idée est née.',
+      'UtilityFlow est un projet indépendant créé et maintenu par Bilal, un créateur qui développe des outils web gratuits pendant son temps libre. Aucune entreprise ne se cache derrière le site, aucun financement d’investisseurs, aucune équipe d’employés — chaque outil, chaque guide et chaque page d’aide est conçu, construit et testé par une seule personne. Les 86 outils sont gratuits, sans compte ni abonnement. Le crédit en pied de page nomme Shaheen, dont les encouragements ont inspiré le projet et dont le nom apparaît sur chaque page pour rappeler d’où l’idée est née.',
     orgP2:
       'Parce que le projet est petit et indépendant, les décisions restent simples : si un outil est lent, confus ou incorrect, il est corrigé. Les messages envoyés via la page Contact arrivent directement à la personne qui peut modifier le code, et les suggestions des visiteurs ont déjà inspiré de nouveaux outils et des améliorations sur tout le site.',
     howTitle: 'Comment nos outils sont construits et testés',
@@ -422,7 +422,7 @@ export const frStrings: UiStrings = {
       {
         title: '2. Données des outils et traitement dans le navigateur',
         paragraphs: [
-          'Les textes, chiffres, extraits de code et fichiers saisis dans nos 85 outils navigateur sont traités localement dans votre session de navigation, sans quitter votre appareil.',
+          'Les textes, chiffres, extraits de code et fichiers saisis dans nos 86 outils navigateur sont traités localement dans votre session de navigation, sans quitter votre appareil.',
           'Les commentaires publiés sous nos outils ne demandent qu’un nom et le texte du commentaire. Le nom et le texte que vous envoyez sont stockés sur notre plateforme d’hébergement et affichés publiquement sur la page de l’outil concerné, avec la date. Nous ne demandons ni adresse e-mail ni compte pour commenter, et nous n’utilisons pas les données des commentaires à des fins publicitaires. Si vous souhaitez qu’un commentaire soit supprimé, contactez-nous en indiquant la page et le nom utilisé, et nous le supprimerons.',
         ],
       },

@@ -429,4 +429,29 @@ export const ID_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
     intro:
       'Tambahkan nomor baris berurutan, karakter poin, atau tanda kutip pembuka di awal dan koma, titik koma, atau tag penutup di akhir setiap baris daftar dalam hitungan detik.',
   },
+  'alphabets-to-word-generator': {
+    slug: 'generator-kata-dari-huruf',
+    name: 'Generator Kata dari Huruf',
+    shortDescription: 'Buat kata dari huruf Anda secara instan: anagram, kata pendek dan panjang, serta kombinasi yang mungkin — gratis di browser.',
+    keywords: [
+      'generator kata dari huruf',
+      'membuat kata dari huruf',
+      'huruf menjadi kata',
+      'generator anagram',
+      'pemecah anagram',
+      'acak huruf',
+      'mencari kata dari huruf',
+      'generator kata bahasa Inggris',
+      'kata dari huruf yang diberikan',
+    ],
+    seo: {
+      title: 'Generator Kata dari Huruf – Buat Kata | UtilityFlow',
+      description: 'Buat kata dari huruf secara instan dengan generator gratis kami. Temukan kata pendek dan panjang, anagram, dan kombinasi yang mungkin.',
+      primaryKeyword: 'generator kata dari huruf',
+      secondaryKeywords: ['generator anagram', 'pemecah anagram', 'acak huruf', 'mencari kata dari huruf'],
+      longTailKeywords: ['kata apa yang bisa saya buat dengan huruf ini', 'membuat kata dari huruf online gratis', 'mencari kata terpanjang dari huruf', 'membuat anagram dari sebuah kata'],
+      schemaApplicationCategory: 'UtilitiesApplication',
+    },
+    intro: 'Masukkan huruf Anda dan temukan semua kata yang bisa dibuat: anagram tepat, kata pendek dan panjang, dengan filter panjang dan huruf — langsung di browser Anda.',
+  },
 };

@@ -429,4 +429,29 @@ export const FR_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
     intro:
       'Ajoutez des numéros de ligne séquentiels, des caractères de puce ou des guillemets ouvrants, et ajoutez des virgules, des points-virgules ou des balises de fermeture à chaque ligne d’une liste en quelques secondes.',
   },
+  'alphabets-to-word-generator': {
+    slug: 'generateur-de-mots-avec-lettres',
+    name: 'Générateur de Mots avec Lettres',
+    shortDescription: 'Générez des mots à partir de vos lettres instantanément : anagrammes, mots courts et longs, et combinaisons possibles, gratuitement dans votre navigateur.',
+    keywords: [
+      'générateur de mots avec lettres',
+      'générateur de mots à partir de lettres',
+      'lettres en mots',
+      'générateur d’anagrammes',
+      'solveur d’anagrammes',
+      'démêler les lettres',
+      'trouver des mots avec des lettres',
+      'générateur de mots anglais',
+      'mots avec lettres données',
+    ],
+    seo: {
+      title: 'Générateur de Mots avec Lettres – Créez des Mots | UtilityFlow',
+      description: 'Générez des mots à partir de lettres instantanément avec notre générateur gratuit. Trouvez des mots courts et longs, des anagrammes et des combinaisons possibles.',
+      primaryKeyword: 'générateur de mots avec lettres',
+      secondaryKeywords: ['générateur d’anagrammes', 'solveur d’anagrammes', 'démêler les lettres', 'trouver des mots avec des lettres'],
+      longTailKeywords: ['quels mots puis-je former avec ces lettres', 'générer des mots avec des lettres en ligne gratuit', 'trouver le mot le plus long avec des lettres', 'créer des anagrammes à partir d’un mot'],
+      schemaApplicationCategory: 'UtilitiesApplication',
+    },
+    intro: 'Saisissez vos lettres et découvrez tous les mots que vous pouvez former : anagrammes exacts, mots courts et longs, avec des filtres de longueur et de lettres, directement dans votre navigateur.',
+  },
 };

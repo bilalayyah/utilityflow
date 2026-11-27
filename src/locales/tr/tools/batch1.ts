@@ -428,4 +428,29 @@ export const TR_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
     intro:
       'Herhangi bir listenin her satırının başına sıralı satır numarası, madde işareti veya açış tırnağı ekleyin; sonuna virgül, noktalı virgül veya kapanış etiketi koyun — saniyeler içinde.',
   },
+  'alphabets-to-word-generator': {
+    slug: 'harflerden-kelime-olusturucu',
+    name: 'Harflerden Kelime Oluşturucu',
+    shortDescription: 'Harflerinizden anında kelimeler oluşturun: anagramlar, kısa ve uzun kelimeler ve olası kombinasyonlar — tarayıcıda ücretsiz.',
+    keywords: [
+      'harflerden kelime oluşturucu',
+      'harflerden kelime yapma',
+      'harften kelime',
+      'anagram oluşturucu',
+      'anagram çözücü',
+      'harfleri çöz',
+      'harflerle kelime bulma',
+      'ingilizce kelime oluşturucu',
+      'verilen harflerle kelime',
+    ],
+    seo: {
+      title: 'Harflerden Kelime Oluşturucu – Kelime Oluştur | UtilityFlow',
+      description: 'Ücretsiz harflerden kelime oluşturucumuzla harflerden anında kelimeler oluşturun. Kısa ve uzun kelimeler, anagramlar ve olası kombinasyonlar bulun.',
+      primaryKeyword: 'harflerden kelime oluşturucu',
+      secondaryKeywords: ['anagram oluşturucu', 'anagram çözücü', 'harfleri çöz', 'harflerle kelime bulma'],
+      longTailKeywords: ['bu harflerle hangi kelimeleri yapabilirim', 'harflerden kelime online ücretsiz oluştur', 'harflerle en uzun kelimeyi bul', 'kelimeden anagram oluştur'],
+      schemaApplicationCategory: 'UtilitiesApplication',
+    },
+    intro: 'Harflerinizi yazın ve onlarla oluşturabileceğiniz tüm kelimeleri keşfedin: tam anagramlar, kısa ve uzun kelimeler, uzunluk ve harf filtreleriyle — doğrudan tarayıcınızda.',
+  },
 };

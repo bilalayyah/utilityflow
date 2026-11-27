@@ -14,7 +14,7 @@ export const idStrings: UiStrings = {
     contact: 'Kontak',
     blog: 'Blog',
     allTools: 'Semua Alat',
-    searchPlaceholder: 'Cari 85 alat...',
+    searchPlaceholder: 'Cari 86 alat...',
     searchTools: 'Cari alat',
     closeSearch: 'Tutup pencarian',
     openMenu: 'Buka menu navigasi',
@@ -171,17 +171,17 @@ export const idStrings: UiStrings = {
       {
         question: 'Apakah alat UtilityFlow gratis digunakan tanpa membuat akun?',
         answer:
-          'Ya. Semua 85 utilitas browser di UtilityFlow tersedia gratis tanpa registrasi, dinding masuk, kredit, atau langganan.',
+          'Ya. Semua 86 utilitas browser di UtilityFlow tersedia gratis tanpa registrasi, dinding masuk, kredit, atau langganan.',
       },
       {
         question: 'Apakah UtilityFlow mengunggah teks, kode, atau file saya ke server?',
         answer:
-          'Semua 85 utilitas browser inti berjalan secara lokal di browser web Anda tanpa mengunggah input.',
+          'Semua 86 utilitas browser inti berjalan secara lokal di browser web Anda tanpa mengunggah input.',
       },
       {
-        question: 'Bagaimana 85 alat diatur di seluruh platform?',
+        question: 'Bagaimana 86 alat diatur di seluruh platform?',
         answer:
-          'UtilityFlow mencakup tujuh kategori inti (Teks & Penulisan, Developer, Kalkulator, Media Sosial, PDF, SEO, dan Alat Gambar & File) dengan total 85 alat browser yang terintegrasi ke dalam platform.',
+          'UtilityFlow mencakup tujuh kategori inti (Teks & Penulisan, Developer, Kalkulator, Media Sosial, PDF, SEO, dan Alat Gambar & File) dengan total 86 alat browser yang terintegrasi ke dalam platform.',
       },
       {
         question: 'Bisakah saya menandai atau membagikan tautan langsung ke alat tertentu?',
@@ -307,7 +307,7 @@ export const idStrings: UiStrings = {
       'Pelajari cara UtilityFlow membangun utilitas browser yang mengutamakan privasi dalam tujuh kategori tanpa akun, kekacauan, atau unggahan data yang tidak perlu.',
     title: 'Tentang UtilityFlow',
     intro:
-      'UtilityFlow adalah platform web independen yang membangun 85 utilitas yang fokus dan andal untuk pekerjaan digital sehari-hari.',
+      'UtilityFlow adalah platform web independen yang membangun 86 utilitas yang fokus dan andal untuk pekerjaan digital sehari-hari.',
     whyTitle: 'Mengapa Kami Membangun UtilityFlow',
     whyP1:
       'Tugas online rutin—menghitung kata, memvalidasi JSON, memeriksa batas karakter, menghitung pembayaran pinjaman, atau mengompresi gambar—sering memaksa orang ke situs lambat yang penuh overlay mengganggu, unduhan membingungkan, atau pendaftaran wajib.',
@@ -315,7 +315,7 @@ export const idStrings: UiStrings = {
       'Tujuan kami sederhana: memberikan setiap utilitas halaman khusus yang bersih, memuat dengan cepat, menjelaskan dengan jelas cara kerja alat, dan berjalan langsung di dalam browser Anda kapan pun standar web memungkinkan.',
     orgTitle: 'Siapa yang Menjalankan UtilityFlow',
     orgP1:
-      'UtilityFlow adalah proyek independen yang dibuat dan dikelola oleh Bilal, seorang pembuat yang membangun alat web gratis di waktu luangnya. Tidak ada perusahaan di balik situs ini, tidak ada pendanaan investor, dan tidak ada tim karyawan — setiap alat, panduan, dan halaman bantuan dirancang, dibangun, dan diuji oleh satu orang. Ke-85 alat tetap gratis digunakan tanpa akun atau langganan. Kredit di footer menyebut Shaheen, yang dorongannya menginspirasi proyek ini dan yang namanya muncul di setiap halaman sebagai pengingat dari mana ide ini bermula.',
+      'UtilityFlow adalah proyek independen yang dibuat dan dikelola oleh Bilal, seorang pembuat yang membangun alat web gratis di waktu luangnya. Tidak ada perusahaan di balik situs ini, tidak ada pendanaan investor, dan tidak ada tim karyawan — setiap alat, panduan, dan halaman bantuan dirancang, dibangun, dan diuji oleh satu orang. Ke-86 alat tetap gratis digunakan tanpa akun atau langganan. Kredit di footer menyebut Shaheen, yang dorongannya menginspirasi proyek ini dan yang namanya muncul di setiap halaman sebagai pengingat dari mana ide ini bermula.',
     orgP2:
       'Karena proyek ini kecil dan independen, keputusan tetap sederhana: jika sebuah alat lambat, membingungkan, atau salah, alat itu diperbaiki. Umpan balik yang dikirim melalui halaman kontak langsung sampai ke orang yang dapat mengubah kodenya, dan saran dari pengunjung telah membentuk alat baru serta berbagai perbaikan di seluruh situs.',
     howTitle: 'Cara Alat Kami Dibangun dan Diuji',
@@ -422,7 +422,7 @@ export const idStrings: UiStrings = {
       {
         title: '2. Input Alat & Pemrosesan Browser',
         paragraphs: [
-          'Teks, angka, cuplikan kode, dan file yang dimasukkan ke dalam 85 alat berbasis browser kami diproses secara lokal di dalam sesi browser Anda tanpa meninggalkan perangkat Anda.',
+          'Teks, angka, cuplikan kode, dan file yang dimasukkan ke dalam 86 alat berbasis browser kami diproses secara lokal di dalam sesi browser Anda tanpa meninggalkan perangkat Anda.',
           'Komentar yang diposting di bawah alat kami hanya meminta nama dan teks komentar. Nama dan teks yang Anda kirimkan disimpan di platform hosting kami dan ditampilkan secara publik di halaman alat tersebut, beserta tanggalnya. Kami tidak meminta alamat email atau akun untuk berkomentar, dan kami tidak menggunakan data komentar untuk iklan. Jika Anda ingin sebuah komentar dihapus, hubungi kami dengan menyebutkan halaman dan nama yang digunakan, dan kami akan menghapusnya.',
         ],
       },

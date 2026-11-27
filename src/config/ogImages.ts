@@ -2,7 +2,7 @@
 //
 // Map of page key -> /og/<slug>.jpg. Empty for now: every page uses the
 // default /og-image.jpg (the same behaviour SeoHead has today).
-// Fix #16 populates this with all 85 tools + 7 categories and wires
+// Fix #16 populates this with all 86 tools + 7 categories and wires
 // the `ogImage` prop through SeoHead; scripts/prerender-meta.ts already
 // reads this module, so the prerendered heads pick the images up
 // automatically once the map is filled.
@@ -16,9 +16,10 @@ export const DEFAULT_OG_IMAGE = `${SITE_CONFIG.defaultOrigin}/og-image.jpg`;
 // site-relative paths; getOgImageForPage() returns an ABSOLUTE URL because
 // og:image / twitter:image must be absolute.
 const OG_IMAGE_MAP: Record<string, string> = {
-  // All 85 tools (per-tool OG cards: scripts/generate-og-images.py)
+  // All 86 tools (per-tool OG cards: scripts/generate-og-images.py)
   'tool:add-pdf-page-numbers': '/og/add-pdf-page-numbers.jpg',
   'tool:age-calculator': '/og/age-calculator.jpg',
+  'tool:alphabets-to-word-generator': '/og/alphabets-to-word-generator.jpg',
   'tool:base64-encoder-decoder': '/og/base64-encoder-decoder.jpg',
   'tool:bio-line-break-formatter': '/og/bio-line-break-formatter.jpg',
   'tool:bmi-calculator': '/og/bmi-calculator.jpg',

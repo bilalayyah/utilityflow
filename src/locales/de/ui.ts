@@ -14,7 +14,7 @@ export const deStrings: UiStrings = {
     contact: 'Kontakt',
     blog: 'Blog',
     allTools: 'Alle Tools',
-    searchPlaceholder: '85 Tools durchsuchen …',
+    searchPlaceholder: '86 Tools durchsuchen …',
     searchTools: 'Tools suchen',
     closeSearch: 'Suche schließen',
     openMenu: 'Navigationsmenü öffnen',
@@ -171,17 +171,17 @@ export const deStrings: UiStrings = {
       {
         question: 'Sind die Tools von UtilityFlow kostenlos und ohne Konto nutzbar?',
         answer:
-          'Ja. Alle 85 Browser-Utilities auf UtilityFlow sind kostenlos verfügbar – ohne Registrierung, Anmeldewand, Guthaben oder Abonnement.',
+          'Ja. Alle 86 Browser-Utilities auf UtilityFlow sind kostenlos verfügbar – ohne Registrierung, Anmeldewand, Guthaben oder Abonnement.',
       },
       {
         question: 'Lädt UtilityFlow meine Texte, meinen Code oder meine Dateien auf einen Server hoch?',
         answer:
-          'Alle 85 zentralen Browser-Utilities laufen lokal in Ihrem Webbrowser, ohne Eingaben hochzuladen.',
+          'Alle 86 zentralen Browser-Utilities laufen lokal in Ihrem Webbrowser, ohne Eingaben hochzuladen.',
       },
       {
-        question: 'Wie sind die 85 Tools auf der Plattform organisiert?',
+        question: 'Wie sind die 86 Tools auf der Plattform organisiert?',
         answer:
-          'UtilityFlow umfasst sieben Hauptkategorien (Text & Schreiben, Entwickler, Rechner, Social Media, PDFs, SEO sowie Bild- & Datei-Tools) mit insgesamt 85 Browser-Tools, die in die Plattform integriert sind.',
+          'UtilityFlow umfasst sieben Hauptkategorien (Text & Schreiben, Entwickler, Rechner, Social Media, PDFs, SEO sowie Bild- & Datei-Tools) mit insgesamt 86 Browser-Tools, die in die Plattform integriert sind.',
       },
       {
         question: 'Kann ich ein Lesezeichen setzen oder einen direkten Link zu einem bestimmten Tool teilen?',
@@ -307,7 +307,7 @@ export const deStrings: UiStrings = {
       'Erfahren Sie, wie UtilityFlow schnelle, datenschutzfreundliche Browser-Tools in sieben Kategorien entwickelt – ohne Konten, Werbung und unnötige Daten-Uploads.',
     title: 'Über UtilityFlow',
     intro:
-      'UtilityFlow ist eine unabhängige Webplattform, die 85 fokussierte, zuverlässige Utilities für die alltägliche digitale Arbeit entwickelt.',
+      'UtilityFlow ist eine unabhängige Webplattform, die 86 fokussierte, zuverlässige Utilities für die alltägliche digitale Arbeit entwickelt.',
     whyTitle: 'Warum wir UtilityFlow gebaut haben',
     whyP1:
       'Routinemäßige Online-Aufgaben – Wörter zählen, JSON validieren, Zeichenlimits prüfen, Kreditraten berechnen oder ein Bild komprimieren – zwingen Nutzer oft auf langsame Seiten voller aufdringlicher Overlays, verwirrender Downloads oder Pflichtregistrierungen.',
@@ -315,7 +315,7 @@ export const deStrings: UiStrings = {
       'Unser Ziel ist einfach: Jedes Utility bekommt eine eigene, saubere Seite, die schnell lädt, klar erklärt, wie das Tool funktioniert, und direkt in Ihrem Browser ausgeführt wird, wann immer es die Webstandards zulassen.',
     orgTitle: 'Wer hinter UtilityFlow steht',
     orgP1:
-      'UtilityFlow ist ein unabhängiges Projekt, das von Bilal erstellt und gepflegt wird – einem Maker, der in seiner Freizeit kostenlose Web-Tools baut. Hinter der Website steht kein Unternehmen, keine Investorenfinanzierung und kein Team von Mitarbeitern: Jedes Tool, jede Anleitung und jede Hilfeseite wird von einer einzigen Person entworfen, gebaut und getestet. Alle 85 Tools sind kostenlos nutzbar – ohne Konten und ohne Abonnements. Die Fußzeile nennt Shaheen, dessen Ermutigung das Projekt inspiriert hat und dessen Name auf jeder Seite als Erinnerung daran steht, wo die Idee begann.',
+      'UtilityFlow ist ein unabhängiges Projekt, das von Bilal erstellt und gepflegt wird – einem Maker, der in seiner Freizeit kostenlose Web-Tools baut. Hinter der Website steht kein Unternehmen, keine Investorenfinanzierung und kein Team von Mitarbeitern: Jedes Tool, jede Anleitung und jede Hilfeseite wird von einer einzigen Person entworfen, gebaut und getestet. Alle 86 Tools sind kostenlos nutzbar – ohne Konten und ohne Abonnements. Die Fußzeile nennt Shaheen, dessen Ermutigung das Projekt inspiriert hat und dessen Name auf jeder Seite als Erinnerung daran steht, wo die Idee begann.',
     orgP2:
       'Weil das Projekt klein und unabhängig ist, bleiben Entscheidungen einfach: Wenn ein Tool langsam, verwirrend oder falsch ist, wird es repariert. Feedback über die Kontaktseite geht direkt an die Person, die den Code ändern kann, und Vorschläge von Besuchern haben bereits neue Tools und Verbesserungen auf der Website geprägt.',
     howTitle: 'Wie unsere Tools gebaut und getestet werden',
@@ -423,7 +423,7 @@ export const deStrings: UiStrings = {
       {
         title: '2. Tool-Eingaben & Browser-Verarbeitung',
         paragraphs: [
-          'Texte, Zahlen, Code-Snippets und Dateien, die Sie in unsere 85 browserbasierten Tools eingeben, werden lokal in Ihrer Browsersitzung verarbeitet, ohne Ihr Gerät zu verlassen.',
+          'Texte, Zahlen, Code-Snippets und Dateien, die Sie in unsere 86 browserbasierten Tools eingeben, werden lokal in Ihrer Browsersitzung verarbeitet, ohne Ihr Gerät zu verlassen.',
           'Kommentare unter unseren Tools fragen nur nach einem Namen und dem Kommentartext. Der Name und der Text, die Sie übermitteln, werden auf unserer Hosting-Plattform gespeichert und zusammen mit dem Datum öffentlich auf der jeweiligen Tool-Seite angezeigt. Wir fragen weder nach einer E-Mail-Adresse noch nach einem Konto, um zu kommentieren, und wir verwenden Kommentardaten nicht für Werbung. Wenn Sie einen Kommentar entfernen lassen möchten, kontaktieren Sie uns mit der Seite und dem verwendeten Namen, und wir löschen ihn.',
         ],
       },

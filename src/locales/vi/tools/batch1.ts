@@ -428,4 +428,29 @@ export const VI_BATCH_1_OVERRIDES: Record<string, ToolLocaleOverride> = {
     intro:
       'Thêm số thứ tự, ký tự đầu dòng hay dấu ngoặc mở vào đầu mỗi dòng trong bất kỳ danh sách nào, và thêm dấu phẩy, dấu chấm phẩy hay thẻ đóng vào cuối dòng — chỉ trong vài giây.',
   },
+  'alphabets-to-word-generator': {
+    slug: 'tao-tu-tu-chu-cai',
+    name: 'Tạo Từ Từ Chữ Cái',
+    shortDescription: 'Tạo từ từ các chữ cái của bạn ngay lập tức: hoán vị, từ ngắn và dài, và các kết hợp có thể — miễn phí trên trình duyệt.',
+    keywords: [
+      'tạo từ từ chữ cái',
+      'tìm từ từ chữ cái',
+      'chữ cái thành từ',
+      'tạo hoán vị chữ',
+      'giải hoán vị',
+      'xáo trộn chữ cái',
+      'tìm từ với chữ cái',
+      'tạo từ tiếng Anh',
+      'từ từ các chữ cái cho trước',
+    ],
+    seo: {
+      title: 'Tạo Từ Từ Chữ Cái – Tạo Từ Miễn Phí | UtilityFlow',
+      description: 'Tạo từ từ các chữ cái ngay lập tức với công cụ miễn phí của chúng tôi. Tìm từ ngắn và dài, hoán vị và các kết hợp có thể.',
+      primaryKeyword: 'tạo từ từ chữ cái',
+      secondaryKeywords: ['tạo hoán vị chữ', 'giải hoán vị', 'xáo trộn chữ cái', 'tìm từ với chữ cái'],
+      longTailKeywords: ['tôi có thể tạo từ nào với các chữ cái này', 'tạo từ từ chữ cái online miễn phí', 'tìm từ dài nhất từ các chữ cái', 'tạo hoán vị từ một từ'],
+      schemaApplicationCategory: 'UtilitiesApplication',
+    },
+    intro: 'Nhập các chữ cái của bạn và khám phá mọi từ có thể tạo ra: hoán vị chính xác, từ ngắn và dài, với bộ lọc độ dài và chữ cái — ngay trên trình duyệt.',
+  },
 };

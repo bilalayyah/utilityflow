@@ -238,4 +238,52 @@ export const TEXT_TOOLS_PART_3: ToolDefinition[] = [
     ],
     component: lazy(() => import('../../../tools/text/LinePrefixSuffixTool')),
   },
+  {
+    id: 'alphabets-to-word-generator',
+    slug: 'alphabets-to-word-generator',
+    name: 'Alphabets to Word Generator',
+    shortDescription:
+      'Generate real English words from your letters — exact anagrams, short and long words, and pattern matches, free in your browser.',
+    categoryId: 'text-writing',
+    batch: 1,
+    processingMode: 'browser',
+    requiresExternalApi: false,
+    popular: true,
+    featured: false,
+    keywords: [
+      'alphabets to word generator',
+      'alphabet to word generator',
+      'letters to words generator',
+      'word generator from letters',
+      'generate words from letters',
+      'anagram solver',
+      'anagram generator',
+      'word unscrambler',
+      'unscramble letters',
+      'find words from letters',
+    ],
+    seo: {
+      title: 'Alphabets to Word Generator – Make Words from Letters',
+      description:
+        'Generate words from letters instantly with our free alphabets to word generator. Find short and long words, anagrams, and possible word combinations.',
+      primaryKeyword: 'alphabets to word generator',
+      secondaryKeywords: ['alphabet to word generator', 'letters to words generator', 'anagram solver', 'word unscrambler'],
+      longTailKeywords: [
+        'what words can i make with these letters',
+        'find the longest word from letters',
+        'find words using all letters',
+        'create anagrams from a word',
+      ],
+      schemaApplicationCategory: 'UtilitiesApplication',
+    },
+    intro:
+      'Enter your letters and discover all the words you can make from them — exact anagrams, short and long words, and pattern matches — checked against a built-in dictionary of 172,823 English words, entirely in your browser.',
+    relatedToolSlugs: [
+      'word-counter',
+      'character-counter',
+      'text-reverser',
+      'case-converter',
+    ],
+    component: lazy(() => import('../../../tools/text/AlphabetsToWordGeneratorTool')),
+  },
 ];

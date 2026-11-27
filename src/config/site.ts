@@ -5,10 +5,10 @@ export const SITE_CONFIG = {
     'Free, fast, privacy-first online utility tools for text analysis, developer formatting, calculators, PDFs, SEO checks, and image workflows.',
   contactEmail: 'bilalayyah@gmail.com',
   defaultOrigin: 'https://utilityflow.online',
-  // Browser-only tools (85). The site total is 85 tools, all browser-based.
+  // Browser-only tools (86). The site total is 86 tools, all browser-based.
   // HomePage renders this as the "Browser Utilities" metric, while "Live Tools"
-  // shows allTools.length (85).
-  plannedTotalTools: 85,
+  // shows allTools.length (86).
+  plannedTotalTools: 86,
   totalBatches: 7,
 } as const;
 
