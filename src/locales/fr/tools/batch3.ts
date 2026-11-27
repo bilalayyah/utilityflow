@@ -613,4 +613,19 @@ export const FR_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
     intro:
       'Calculez les heures entre deux horaires au format 12 ou 24 heures, suivez les postes avec des pauses programmées, additionnez ou soustrayez du temps, convertissez heures et minutes en heures décimales et transformez les heures travaillées en salaire — avec heures supplémentaires, pauses et votre devise, instantanément dans votre navigateur.',
   },
+  'heat-index-calculator': {
+    slug: 'calculateur-indice-de-chaleur',
+    name: 'Calculateur d’Indice de Chaleur',
+    shortDescription: 'Calculez l’indice de chaleur à partir de la température de l’air et de l’humidité relative — découvrez la température ressentie, en Fahrenheit et en Celsius, gratuitement dans votre navigateur.',
+    keywords: ['calculateur indice de chaleur', 'indice de chaleur', 'calculer indice de chaleur', 'calculateur température ressentie', 'calculateur température et humidité', 'indice de chaleur fahrenheit', 'indice de chaleur celsius', 'qu’est-ce que l’indice de chaleur', 'tableau indice de chaleur'],
+    seo: {
+      title: 'Calculateur d’Indice de Chaleur – Calculer la Température Ressentie | UtilityFlow',
+      description: 'Calculez l’indice de chaleur avec la température de l’air et l’humidité. Découvrez la température ressentie avec notre calculateur gratuit d’indice de chaleur en Fahrenheit et Celsius.',
+      primaryKeyword: 'calculateur indice de chaleur',
+      secondaryKeywords: ['calculateur température ressentie', 'calculateur température et humidité', 'indice de chaleur fahrenheit', 'indice de chaleur celsius'],
+      longTailKeywords: ['comment calculer l’indice de chaleur avec température et humidité', 'quel est l’indice de chaleur à 90 degrés', 'comment l’humidité affecte la température ressentie', 'calculer la température apparente en ligne'],
+      schemaApplicationCategory: 'UtilitiesApplication',
+    },
+    intro: 'Saisissez la température de l’air et l’humidité relative pour savoir quelle chaleur vous ressentez vraiment : l’indice de chaleur en Fahrenheit et en Celsius, l’écart avec la température mesurée et le niveau de risque, instantanément dans votre navigateur.',
+  },
 };

@@ -12,7 +12,7 @@ export const enStrings: UiStrings = {
     contact: 'Contact',
     blog: 'Blog',
     allTools: 'All Tools',
-    searchPlaceholder: 'Search 86 tools...',
+    searchPlaceholder: 'Search 87 tools...',
     searchTools: 'Search tools',
     closeSearch: 'Close search',
     openMenu: 'Open navigation menu',
@@ -169,17 +169,17 @@ export const enStrings: UiStrings = {
       {
         question: 'Are UtilityFlow tools free to use without creating an account?',
         answer:
-          'Yes. All 86 browser utilities on UtilityFlow are available free of charge with no registration, sign-in wall, credits, or subscription required.',
+          'Yes. All 87 browser utilities on UtilityFlow are available free of charge with no registration, sign-in wall, credits, or subscription required.',
       },
       {
         question: 'Does UtilityFlow upload my text, code, or files to a server?',
         answer:
-          'All 86 core browser utilities run locally in your web browser without uploading inputs.',
+          'All 87 core browser utilities run locally in your web browser without uploading inputs.',
       },
       {
-        question: 'How are the 86 tools organized across the platform?',
+        question: 'How are the 87 tools organized across the platform?',
         answer:
-          'UtilityFlow covers seven core categories (Text & Writing, Developer, Calculators, Social Media, PDFs, SEO, and Image & File tools) totaling 86 browser tools integrated into the platform.',
+          'UtilityFlow covers seven core categories (Text & Writing, Developer, Calculators, Social Media, PDFs, SEO, and Image & File tools) totaling 87 browser tools integrated into the platform.',
       },
       {
         question: 'Can I bookmark or share a direct link to any specific tool?',
@@ -195,7 +195,7 @@ export const enStrings: UiStrings = {
     trustLine: 'All tools are free • No signup required • Works in your browser',
   },
   directory: {
-    seoTitle: 'Browse All 86 Free Online Utility Tools | UtilityFlow',
+    seoTitle: 'Browse All 87 Free Online Utility Tools | UtilityFlow',
     seoDescription:
       'Browse and search all browser-based utilities and categories on UtilityFlow, organized for writing, development, calculators, PDFs, SEO, and images.',
     seoKeywords: ['utility tools directory', 'all online tools', 'free browser tools'],
@@ -305,7 +305,7 @@ export const enStrings: UiStrings = {
       'Learn how UtilityFlow builds fast, privacy-first browser utilities across seven categories without accounts, clutter, or unnecessary data uploads.',
     title: 'About UtilityFlow',
     intro:
-      'UtilityFlow is an independent web platform building 86 focused, reliable utilities for everyday digital work.',
+      'UtilityFlow is an independent web platform building 87 focused, reliable utilities for everyday digital work.',
     whyTitle: 'Why We Built UtilityFlow',
     whyP1:
       'Routine online tasks—counting words, validating JSON, checking character limits, computing loan payments, or compressing an image—often force people onto slow sites packed with intrusive overlays, confusing downloads, or mandatory sign-ups.',
@@ -313,7 +313,7 @@ export const enStrings: UiStrings = {
       'Our goal is straightforward: give every utility a clean, dedicated page that loads quickly, explains clearly how the tool works, and executes directly inside your browser whenever web standards allow.',
     orgTitle: 'Who Runs UtilityFlow',
     orgP1:
-      'UtilityFlow is an independent project created and maintained by Bilal, a maker who builds free web tools in his spare time. There is no company behind the site, no investor funding, and no team of employees — every tool, guide, and help page is designed, built, and tested by one person. All 86 tools are free to use without accounts or subscriptions. The footer credit names Shaheen, whose encouragement inspired the project and whose name appears on every page as a reminder of where the idea began.',
+      'UtilityFlow is an independent project created and maintained by Bilal, a maker who builds free web tools in his spare time. There is no company behind the site, no investor funding, and no team of employees — every tool, guide, and help page is designed, built, and tested by one person. All 87 tools are free to use without accounts or subscriptions. The footer credit names Shaheen, whose encouragement inspired the project and whose name appears on every page as a reminder of where the idea began.',
     orgP2:
       'Because the project is small and independent, decisions stay simple: if a tool is slow, confusing, or wrong, it gets fixed. Feedback sent through the contact page goes directly to the person who can change the code, and suggestions from visitors have already shaped new tools and improvements across the site.',
     howTitle: 'How Our Tools Are Built and Tested',
@@ -420,7 +420,7 @@ export const enStrings: UiStrings = {
       {
         title: '2. Tool Inputs & Browser Processing',
         paragraphs: [
-          'Text, numbers, code snippets, and files entered into our 86 browser-based tools are processed locally within your browser session without leaving your device.',
+          'Text, numbers, code snippets, and files entered into our 87 browser-based tools are processed locally within your browser session without leaving your device.',
           'Comments posted under our tools ask only for a name and the comment text. The name and text you submit are stored on our hosting platform and shown publicly on that tool’s page, together with the date. We do not ask for an email address or an account to comment, and we do not use comment data for advertising. If you would like a comment removed, contact us with the page and the name used and we will delete it.',
         ],
       },

@@ -2876,4 +2876,249 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       'Results are exact for the inputs given, but double-check times and breaks before using a total for payroll or invoicing — one wrong AM/PM changes the answer by twelve hours.',
     ],
   },
+  'heat-index-calculator': {
+    instructions: [
+      {
+        title: 'What Is the Heat Index?',
+        description:
+          'The heat index is the temperature your body feels, not the one a thermometer reads. It combines air temperature with relative humidity, because humid air slows sweat evaporation — how your body cools itself. So 90°F on a humid day can feel several degrees hotter than the same 90°F on a dry day.',
+      },
+      {
+        title: 'How to Calculate the Heat Index',
+        description:
+          'Enter the air temperature, pick Fahrenheit or Celsius, then enter the relative humidity from 0 to 100%. Press Calculate Heat Index. The result shows the feels-like temperature in both units, the difference from the air temperature, and the risk band. Calculate saves it to your recent calculations.',
+      },
+      {
+        title: 'Heat Index Formula',
+        description:
+          'The tool uses the National Weather Service Rothfusz regression, a polynomial in temperature (T, in °F) and relative humidity (RH, in %). It also applies the official low- and high-humidity adjustments, plus a simpler approximation below 80°F. The full equation is in How It Works below.',
+      },
+      {
+        title: 'How Humidity Affects Feels Like Temperature',
+        description:
+          'Sweat cools you only when it evaporates, and evaporation slows as humidity rises. At 90°F, raising humidity from 40% to 70% lifts the heat index from 90.7°F to 105.9°F — a jump of 15.2°F from humidity alone. That is why humid heat feels so much more oppressive than dry heat.',
+      },
+      {
+        title: 'Heat Index Chart',
+        description:
+          'The tool builds a reference chart from the same tested engine: air-temperature rows against humidity columns, each cell showing the calculated heat index. It shows at a glance how a rise in humidity pushes a warm day into a higher risk band. Out-of-range cells show a dash, never a misleading number.',
+      },
+      {
+        title: 'Heat Index Risk Categories',
+        description:
+          'Caution covers 80°F to below 90°F (26.7 to below 32.2°C); Extreme Caution 90°F to below 103°F (32.2 to below 39.4°C); Danger 103°F to below 125°F (39.4 to below 51.7°C); Extreme Danger 125°F (51.7°C) and above. Each band carries general safety guidance — these are not a medical assessment.',
+      },
+      {
+        title: 'Heat Index in Fahrenheit and Celsius',
+        description:
+          'Enter the temperature in either unit. The tool converts Celsius into Fahrenheit first (°F = °C × 9/5 + 32), runs the Fahrenheit-based calculation, then converts the result back (°C = (°F − 32) × 5/9). Both units are always shown, so no separate conversion step is needed.',
+      },
+      {
+        title: 'Heat Index vs Actual Temperature',
+        description:
+          'Actual temperature is what a thermometer measures; the heat index is how hot that air feels. The two can differ by 15°F or more on a humid day. The Unit Converter converts temperature units; this tool computes apparent temperature from temperature plus humidity — a different job.',
+      },
+      {
+        title: 'Limitations of Heat Index Calculations',
+        description:
+          'Standard heat-index values assume shade and light wind. Full sun can add up to 15°F to how hot it feels, and wind, clothing, activity and health all matter too. The heat index is not the same as WBGT, which also weighs sun and wind. Never use it as a substitute for official weather warnings.',
+      },
+      {
+        title: 'Practical Examples',
+        description:
+          'At 100°F and 55% humidity the heat index is about 124°F — deep in the Danger band. At 96°F and 65% it is about 121°F, the National Weather Service example. At 90°F, humidity alone moves the result from 90.7°F at 40% to 105.9°F at 70%. More worked examples sit below.',
+      },
+    ],
+    examples: [
+      {
+        title: '100°F and 55% humidity — a Danger day',
+        input: 'Temperature: 100°F\nRelative humidity: 55%',
+        output: 'Heat index: 124°F (51.1°C)\nDifference: +24°F\nBand: Danger',
+        explanation:
+          'The classic worked example: 100°F at 55% humidity feels like 124°F, well into the Danger band.',
+      },
+      {
+        title: '96°F and 65% humidity — the NWS example',
+        input: 'Temperature: 96°F\nRelative humidity: 65%',
+        output: 'Heat index: 121°F (49.5°C)\nDifference: +25°F\nBand: Danger',
+        explanation:
+          'The National Weather Service uses this exact case in its own guidance: 96°F at 65% humidity feels like 121°F.',
+      },
+      {
+        title: 'Same temperature, different humidity',
+        input: 'Condition A: 90°F, 40% RH\nCondition B: 90°F, 70% RH',
+        output: 'A: 90.7°F (32.6°C) — Extreme Caution\nB: 105.9°F (41.1°C) — Danger\nDifference: +15.2°F',
+        explanation:
+          'Humidity alone moves the feels-like temperature by 15.2°F — and pushes the day from Extreme Caution into Danger.',
+      },
+      {
+        title: '32°C and 60% humidity',
+        input: 'Temperature: 32°C (89.6°F)\nRelative humidity: 60%',
+        output: 'Heat index: 98.7°F (37.1°C)\nDifference: +9.1°F\nBand: Extreme Caution',
+        explanation:
+          'Celsius input is converted to Fahrenheit first, calculated, then converted back — 32°C at 60% humidity feels like 37.1°C.',
+      },
+      {
+        title: '25°C and 50% humidity — below the scale',
+        input: 'Temperature: 25°C (77°F)\nRelative humidity: 50%',
+        output: 'Heat index: 76.9°F (24.9°C)\nDifference: −0.1°F\nBand: none — below 80°F',
+        explanation:
+          'Mild conditions use the simpler method. The heat index can sit slightly below the air temperature, and no risk band applies below 80°F.',
+      },
+      {
+        title: 'Very dry air cools the feels-like value',
+        input: 'Temperature: 95°F\nRelative humidity: 5%',
+        output: 'Heat index: 88.2°F (31.2°C)\nDifference: −6.8°F\nBand: Caution',
+        explanation:
+          'With dry air the low-humidity adjustment applies, and the heat index lands almost 7°F below the air temperature.',
+      },
+      {
+        title: '80°F and 40% humidity — the boundary case',
+        input: 'Temperature: 80°F\nRelative humidity: 40%',
+        output: 'Heat index: 79.8°F (26.5°C)\nDifference: −0.2°F\nBand: none — below 80°F',
+        explanation:
+          'Right at the boundary, the simpler method applies: the averaged value stays below 80°F, so the regression never runs.',
+      },
+    ],
+    benefits: [
+      'Two inputs only — temperature and humidity — with the result in both Fahrenheit and Celsius',
+      'Heat-risk bands with plain safety guidance, using the National Weather Service thresholds',
+      'Compare two conditions side by side to see exactly what humidity does to feels-like heat',
+      'A reference chart generated from the same tested engine — never hardcoded numbers',
+      'Free with no account, sign-up or download, and everything runs in your browser',
+      'Clear limits: invalid input, out-of-range conditions and valid results are shown differently',
+    ],
+    useCases: [
+      'Checking whether a hot afternoon is safe for outdoor work, sport or exercise',
+      'Comparing morning and afternoon conditions before planning an outdoor event',
+      'Understanding why a humid 90°F day feels worse than a dry 100°F day',
+      'Teaching how humidity changes apparent temperature, with verified worked examples',
+      'Converting a forecast temperature into a feels-like temperature in Celsius or Fahrenheit',
+      'Pairing the result with the Unit Converter when you need other temperature units converted',
+    ],
+    faqs: [
+      {
+        question: 'What is a heat index calculator?',
+        answer:
+          'A tool that combines air temperature and relative humidity to work out how hot the weather feels. The result — the heat index, or apparent temperature — is usually higher than the measured temperature on humid days, and it comes with a heat-risk band.',
+      },
+      {
+        question: 'How do I calculate the heat index?',
+        answer:
+          'Enter the air temperature, pick Fahrenheit or Celsius, enter the relative humidity from 0 to 100%, and press Calculate Heat Index. The tool shows the feels-like temperature in both units, the difference from the air temperature, and the risk band.',
+      },
+      {
+        question: 'What is the heat index formula?',
+        answer:
+          'The National Weather Service Rothfusz regression: a polynomial in temperature (T, in °F) and relative humidity (RH, in %). Low humidity below 13% and high humidity above 85% get small adjustments, and a simpler formula covers conditions below 80°F.',
+      },
+      {
+        question: 'What is the difference between temperature and heat index?',
+        answer:
+          'Temperature is what a thermometer measures. The heat index is how hot that air feels on your skin once humidity is counted. On a humid day the heat index can sit 15°F or more above the measured temperature.',
+      },
+      {
+        question: 'How does humidity affect the heat index?',
+        answer:
+          'Humid air slows sweat evaporation, which is how your body sheds heat. Less evaporation means you feel hotter. At 90°F, raising humidity from 40% to 70% lifts the heat index from 90.7°F to 105.9°F.',
+      },
+      {
+        question: 'What is the heat index at 90°F and 50% humidity?',
+        answer:
+          '94.6°F (34.8°C), in the Extreme Caution band. That is the value from the National Weather Service Rothfusz regression for 90°F at 50% relative humidity.',
+      },
+      {
+        question: 'Can I calculate heat index in Celsius?',
+        answer:
+          'Yes. Enter the temperature in Celsius and the tool converts it to Fahrenheit, runs the Fahrenheit-based calculation, then converts the result back. The answer is shown in both Celsius and Fahrenheit.',
+      },
+      {
+        question: 'Can I calculate heat index in Fahrenheit?',
+        answer:
+          'Yes — Fahrenheit is the native unit of the Rothfusz regression, so Fahrenheit input goes straight into the calculation. The result is shown in Fahrenheit and converted to Celsius as well.',
+      },
+      {
+        question: 'What is considered a dangerous heat index?',
+        answer:
+          'A heat index of 103°F (39.4°C) and above is the Danger band, and 125°F (51.7°C) and above is Extreme Danger. Both mean heat-related illness becomes much more likely, especially during prolonged exposure or strenuous activity.',
+      },
+      {
+        question: 'What does extreme caution mean?',
+        answer:
+          'Extreme Caution covers a heat index from 90°F to below 103°F (32.2 to below 39.4°C). Heat-related illness becomes more concerning with prolonged exposure or physical activity, so take breaks, drink water and seek shade.',
+      },
+      {
+        question: 'What is the Rothfusz regression?',
+        answer:
+          'The polynomial equation the National Weather Service uses to compute the heat index from temperature and humidity. It was fitted to the Steadman apparent-temperature model and is the standard method behind this calculator and official heat-index charts.',
+      },
+      {
+        question: 'Is heat index the same as feels like temperature?',
+        answer:
+          'Almost. “Feels like” is the everyday phrase for apparent temperature, and the heat index is the standard way to calculate it for hot weather. Forecasters sometimes blend in wind or sun, but the heat index itself uses only temperature and humidity.',
+      },
+      {
+        question: 'Does direct sunlight affect heat index?',
+        answer:
+          'Yes, but the standard value does not include it: heat-index figures assume shade and light wind. Full sunlight can add up to 15°F to how hot it feels, so treat the calculated value as a shaded minimum on sunny days.',
+      },
+      {
+        question: 'Is heat index the same as WBGT?',
+        answer:
+          'No. The Wet Bulb Globe Temperature also weighs solar radiation, wind speed and other factors, and it is used for workplace and sports safety limits. The heat index uses only air temperature and relative humidity, so the two numbers are not interchangeable.',
+      },
+      {
+        question: 'Can heat index be lower than actual temperature?',
+        answer:
+          'Yes. When the air is very dry, the heat index can fall below the air temperature — for example, 95°F at 5% humidity feels like 88.2°F. Below 80°F the simpler method can also give a value slightly under the measured temperature.',
+      },
+      {
+        question: 'Is this heat index calculator free?',
+        answer:
+          'Yes, it is completely free, with no account, sign-up or download. It runs entirely in your browser, so what you enter is never uploaded or stored.',
+      },
+      {
+        question: 'How accurate is the heat index formula?',
+        answer:
+          'It is the official National Weather Service method, verified against its published examples — 96°F at 65% humidity gives 121°F, exactly as the NWS states. It is an estimate under shaded, light-wind assumptions, not a measurement of body temperature.',
+      },
+      {
+        question: 'Does this calculator provide live weather information?',
+        answer:
+          'No. This is a manual calculator, not a live weather forecast. You enter the temperature and humidity yourself — it does not fetch current weather, show local alerts, or know conditions where you are. For local alerts and safety decisions, consult official weather authorities.',
+      },
+    ],
+    howItWorks: [
+      'The Rothfusz regression is: HI = −42.379 + 2.04901523·T + 10.14333127·RH − 0.22475541·T·RH − 0.00683783·T² − 0.05481717·RH² + 0.00122874·T²·RH + 0.00085282·T·RH² − 0.00000199·T²·RH².',
+      'T is the air temperature in degrees Fahrenheit. RH is the relative humidity as a percentage from 0 to 100. HI is the resulting heat index, also in degrees Fahrenheit — converted to Celsius only at the end.',
+      'When humidity is below 13% and the temperature is between 80°F and 112°F, a small amount is subtracted: ((13 − RH) / 4) × √((17 − |T − 95|) / 17). Dry air lets sweat evaporate freely, so the air feels cooler than the raw regression suggests.',
+      'When humidity is above 85% and the temperature is between 80°F and 87°F, a small amount is added: ((RH − 85) / 10) × ((87 − T) / 5). Very damp air blocks evaporation, so the air feels hotter.',
+      'Below 80°F the tool uses the simpler National Weather Service approximation: HI_simple = 0.5 × (T + 61.0 + ((T − 68.0) × 1.2) + (RH × 0.094)), averaged with the air temperature. If that average is below 80°F, it is the answer; if it reaches 80°F, the full regression runs instead.',
+      'That averaged-value check has one surprising but correct result: at 82°F and 0% humidity the heat index comes out as 78.09°F — below the air temperature. This is the official method working as published, not a bug, and the test suite pins it.',
+      'The regression is not valid for extreme combinations of heat and humidity. The standard chart tops out at 110°F, so above that range the tool shows an out-of-range message with the Extreme Danger band instead of a bare, misleading number.',
+      'Risk bands use the Fahrenheit thresholds converted exactly: Caution 26.7 to below 32.2°C, Extreme Caution 32.2 to below 39.4°C, Danger 39.4 to below 51.7°C, Extreme Danger 51.7°C and above. Below 80°F (26.7°C) there is no risk band — the tool says so plainly.',
+      'Celsius input is converted to Fahrenheit before anything else, using °F = °C × 9/5 + 32. The whole calculation runs in Fahrenheit, and only the finished result is converted back with °C = (°F − 32) × 5/9.',
+      'There is no separate Celsius formula, so both units always agree. Entering 32°C gives the same result as entering 89.6°F, because both take the same path through the calculation.',
+      'The comparison mode runs the same engine twice: enter one temperature and humidity pair for Condition A and another for Condition B.',
+      'The tool shows both heat-index values side by side with the differences, so you can see exactly what a change in humidity does. A common comparison is the same temperature at low and high humidity, which shows humidity working alone.',
+      'Precautions by band: in Caution, rest in shade and drink water. In Extreme Caution, limit strenuous activity. In Danger, reschedule it where you can. In Extreme Danger, stay somewhere cool and check on vulnerable people nearby.',
+      'Methodology: every value on this page comes from the National Weather Service procedure — the Rothfusz regression, both humidity adjustments, and the below-80°F method — with Celsius handled by converting to Fahrenheit first and back at the end. No separate Celsius approximation is used.',
+      'References: NWS heat safety guidance at https://www.weather.gov/safety/heat-index, the formula and method at https://www.weather.gov/ctp/heat, and the official calculator at https://www.weather.gov/epz/wxcalc_heatindex. UtilityFlow is not affiliated with NOAA or the National Weather Service.',
+    ],
+    supportedFormats: [
+      'Temperature in Fahrenheit (°F) or Celsius (°C)',
+      'Relative humidity from 0% to 100%',
+      'Results in both °F and °C, with the difference from the air temperature',
+      'Four heat-risk bands: Caution, Extreme Caution, Danger, Extreme Danger',
+      'Two-condition comparison (A vs B)',
+      'Generated heat-index reference chart',
+    ],
+    limitations: [
+      'This calculator provides an estimated heat index based on entered air temperature and relative humidity. Standard heat-index calculations assume shaded conditions with light wind and do not fully account for direct sunlight, wind, clothing, activity level, or individual health factors. For local alerts and safety decisions, consult official weather authorities.',
+      'Values assume shade and light wind. Full sun can add up to 15°F to how hot it feels.',
+      'The heat index is not WBGT: it does not account for sun, wind speed, clothing, activity or individual health.',
+      'The regression is not valid for extreme temperature and humidity combinations; above the standard range the tool shows an out-of-range message, not a bare number.',
+      'This is a general estimate, not a medical assessment and not an official weather warning — for local alerts and safety decisions, consult official weather authorities. If someone develops heat-stroke symptoms, seek a cool environment and urgent medical help.',
+    ],
+  },
 };

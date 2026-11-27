@@ -249,4 +249,19 @@ export const JA_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
     },
     intro: "12時間制または24時間制で2つの時刻の間の時間を計算し、休憩時間付きのシフトを記録し、時間を加算・減算し、時間と分を10進時間に変換し、労働時間を給与に換算できます。残業、休憩、通貨の選択もでき、すべてブラウザーで瞬時に使えます。",
   },
+  "heat-index-calculator": {
+    slug: "netsu-shisu-calculator",
+    name: "熱指数計算機",
+    shortDescription: "気温と相対湿度から熱指数を計算 — 体感温度が何度になるかを華氏と摂氏で、ブラウザで無料で調べられます。",
+    keywords: ["熱指数 計算機", "熱指数", "熱指数 計算", "体感温度 計算機", "気温 湿度 計算機", "熱指数 華氏", "熱指数 摂氏", "熱指数 とは", "熱指数 表"],
+    seo: {
+      title: "熱指数計算機 – 体感温度を計算 | UtilityFlow",
+      description: "気温と湿度から熱指数を計算。無料の華氏・摂氏対応の熱指数計算機で、実際にどれほど暑く感じるかが分かります。",
+      primaryKeyword: "熱指数 計算機",
+      secondaryKeywords: ["体感温度 計算機", "気温 湿度 計算機", "熱指数 華氏", "熱指数 摂氏"],
+      longTailKeywords: ["気温と湿度から熱指数を計算する方法", "90度での熱指数は", "湿度が体感温度に与える影響", "見かけの温度をオンラインで計算"],
+      schemaApplicationCategory: "UtilitiesApplication",
+    },
+    intro: "気温と相対湿度を入力すると、実際にどれほど暑く感じるかが分かります。華氏と摂氏の熱指数、実測気温との差、暑さの危険度をブラウザですぐに確認できます。",
+  },
 };

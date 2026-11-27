@@ -475,4 +475,19 @@ export const TR_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
     intro:
       '12 veya 24 saat formatında iki saat arasındaki süreyi hesaplayın, molalı vardiyaları takip edin, süreleri toplayın veya çıkarın, saat ve dakikayı ondalık saate çevirin ve çalışma saatlerini ücrete dönüştürün — fazla mesai, molalar ve para biriminizle, hepsi tarayıcınızda anında.',
   },
+  'heat-index-calculator': {
+    slug: 'isi-indeksi-hesaplayici',
+    name: 'Isı İndeksi Hesaplayıcı',
+    shortDescription: 'Hava sıcaklığı ve bağıl nemden ısı indeksini hesaplayın — havanın gerçekte ne kadar sıcak hissettirdiğini Fahrenheit ve Santigrat olarak tarayıcınızda ücretsiz öğrenin.',
+    keywords: ['ısı indeksi hesaplayıcı', 'ısı indeksi', 'ısı indeksi hesaplama', 'hissedilen sıcaklık hesaplayıcı', 'sıcaklık ve nem hesaplayıcı', 'ısı indeksi fahrenheit', 'ısı indeksi santigrat', 'ısı indeksi nedir', 'ısı indeksi tablosu'],
+    seo: {
+      title: 'Isı İndeksi Hesaplayıcı – Hissedilen Sıcaklığı Hesaplayın | UtilityFlow',
+      description: 'Hava sıcaklığı ve nemi kullanarak ısı indeksini hesaplayın. Ücretsiz Fahrenheit ve Santigrat ısı indeksi hesaplayıcımızla havanın gerçekte ne kadar sıcak hissettirdiğini öğrenin.',
+      primaryKeyword: 'ısı indeksi hesaplayıcı',
+      secondaryKeywords: ['hissedilen sıcaklık hesaplayıcı', 'sıcaklık ve nem hesaplayıcı', 'ısı indeksi fahrenheit', 'ısı indeksi santigrat'],
+      longTailKeywords: ['sıcaklık ve nemden ısı indeksi nasıl hesaplanır', '90 derecede ısı indeksi nedir', 'nem hissedilen sıcaklığı nasıl etkiler', 'görünen sıcaklığı çevrimiçi hesaplayın'],
+      schemaApplicationCategory: 'UtilitiesApplication',
+    },
+    intro: 'Hava sıcaklığını ve bağıl nemi girerek havanın gerçekte ne kadar sıcak hissettirdiğini öğrenin: Fahrenheit ve Santigrat olarak ısı indeksi, ölçülen sıcaklıktan farkı ve ısı riski düzeyi, hepsi tarayıcınızda anında.',
+  },
 };

@@ -40,6 +40,7 @@ const OG_IMAGE_MAP: Record<string, string> = {
   'tool:find-and-replace': '/og/find-and-replace.jpg',
   'tool:hash-generator': '/og/hash-generator.jpg',
   'tool:hashtag-formatter': '/og/hashtag-formatter.jpg',
+  'tool:heat-index-calculator': '/og/heat-index-calculator.jpg',
   'tool:html-entity-encoder': '/og/html-entity-encoder.jpg',
   'tool:image-compressor': '/og/image-compressor.jpg',
   'tool:image-format-converter': '/og/image-format-converter.jpg',

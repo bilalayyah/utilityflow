@@ -249,4 +249,19 @@ export const ID_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
     },
     intro: "Hitung jam di antara dua waktu dalam format 12 atau 24 jam, lacak shift dengan periode istirahat, tambah atau kurangi waktu, ubah jam dan menit menjadi jam desimal, dan ubah jam kerja menjadi upah — dengan lembur, istirahat, dan mata uang pilihan Anda, semuanya instan di browser Anda.",
   },
+  "heat-index-calculator": {
+    slug: "kalkulator-indeks-panas",
+    name: "Kalkulator Indeks Panas",
+    shortDescription: "Hitung indeks panas dari suhu udara dan kelembapan relatif — ketahui seberapa panas rasanya, dalam Fahrenheit dan Celsius, gratis di browser Anda.",
+    keywords: ["kalkulator indeks panas", "indeks panas", "hitung indeks panas", "kalkulator suhu terasa", "kalkulator suhu dan kelembapan", "indeks panas fahrenheit", "indeks panas celsius", "apa itu indeks panas", "tabel indeks panas"],
+    seo: {
+      title: "Kalkulator Indeks Panas – Hitung Suhu yang Terasa | UtilityFlow",
+      description: "Hitung indeks panas menggunakan suhu udara dan kelembapan. Ketahui seberapa panas rasanya dengan kalkulator indeks panas Fahrenheit dan Celsius gratis kami.",
+      primaryKeyword: "kalkulator indeks panas",
+      secondaryKeywords: ["kalkulator suhu terasa", "kalkulator suhu dan kelembapan", "indeks panas fahrenheit", "indeks panas celsius"],
+      longTailKeywords: ["cara menghitung indeks panas dari suhu dan kelembapan", "berapa indeks panas pada 90 derajat", "bagaimana kelembapan memengaruhi suhu yang terasa", "hitung suhu tampak secara online"],
+      schemaApplicationCategory: "UtilitiesApplication",
+    },
+    intro: "Masukkan suhu udara dan kelembapan relatif untuk mengetahui seberapa panas rasanya — indeks panas dalam Fahrenheit dan Celsius, selisih dari suhu terukur, dan tingkat risiko panas, semuanya instan di browser Anda.",
+  },
 };

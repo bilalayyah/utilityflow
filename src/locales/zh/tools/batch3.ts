@@ -249,4 +249,19 @@ export const ZH_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
     },
     intro: '以12小时制或24小时制计算两个时间之间的小时数，记录含休息时段的班次，进行时间的加减运算，把小时和分钟换算成十进制小时，并把工作时间换算成薪资——支持加班、休息时间和货币选择，全部在浏览器中即时完成。',
   },
+  'heat-index-calculator': {
+    slug: 're-zhishu-jisuanqi',
+    name: '热指数计算器',
+    shortDescription: '根据空气温度和相对湿度计算热指数——了解实际体感有多热，支持华氏和摄氏，浏览器中免费使用。',
+    keywords: ['热指数计算器', '热指数', '计算热指数', '体感温度计算器', '温度湿度计算器', '热指数 华氏', '热指数 摄氏', '什么是热指数', '热指数表'],
+    seo: {
+      title: '热指数计算器 – 计算体感温度 | UtilityFlow',
+      description: '使用空气温度和湿度计算热指数。通过我们免费的华氏和摄氏热指数计算器，了解实际体感有多热。',
+      primaryKeyword: '热指数计算器',
+      secondaryKeywords: ['体感温度计算器', '温度湿度计算器', '热指数 华氏', '热指数 摄氏'],
+      longTailKeywords: ['如何根据温度和湿度计算热指数', '90度时热指数是多少', '湿度如何影响体感温度', '在线计算表观温度'],
+      schemaApplicationCategory: 'UtilitiesApplication',
+    },
+    intro: '输入空气温度和相对湿度，了解实际体感有多热——华氏和摄氏热指数、与实测温度的差值以及高温风险等级，全部在浏览器中即时呈现。',
+  },
 };

@@ -613,4 +613,19 @@ export const ES_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
     intro:
       'Calcula las horas entre dos horarios en formato de 12 o 24 horas, registra turnos con descansos programados, suma o resta tiempo, convierte horas y minutos a horas decimales y convierte las horas trabajadas en pago — con horas extras, descansos y tu moneda, al instante en tu navegador.',
   },
+  'heat-index-calculator': {
+    slug: 'calculadora-de-indice-de-calor',
+    name: 'Calculadora de Índice de Calor',
+    shortDescription: 'Calcula el índice de calor a partir de la temperatura del aire y la humedad relativa — descubre cuánto calor se siente realmente, en Fahrenheit y Celsius, gratis en tu navegador.',
+    keywords: ['calculadora de índice de calor', 'índice de calor', 'calcular índice de calor', 'calculadora de sensación térmica', 'calculadora de temperatura y humedad', 'índice de calor fahrenheit', 'índice de calor celsius', 'qué es el índice de calor', 'tabla de índice de calor'],
+    seo: {
+      title: 'Calculadora de Índice de Calor – Calcula la Sensación Térmica | UtilityFlow',
+      description: 'Calcula el índice de calor con la temperatura del aire y la humedad. Descubre cuánto calor se siente con nuestra calculadora gratuita de índice de calor en Fahrenheit y Celsius.',
+      primaryKeyword: 'calculadora de índice de calor',
+      secondaryKeywords: ['calculadora de sensación térmica', 'calculadora de temperatura y humedad', 'índice de calor fahrenheit', 'índice de calor celsius'],
+      longTailKeywords: ['cómo calcular el índice de calor con temperatura y humedad', 'cuál es el índice de calor a 90 grados', 'cómo afecta la humedad a la sensación térmica', 'calcular la temperatura aparente en línea'],
+      schemaApplicationCategory: 'UtilitiesApplication',
+    },
+    intro: 'Ingresa la temperatura del aire y la humedad relativa para saber cuánto calor se siente realmente: el índice de calor en Fahrenheit y Celsius, la diferencia con la temperatura medida y el nivel de riesgo por calor, al instante en tu navegador.',
+  },
 };

@@ -616,4 +616,19 @@ export const PT_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
     intro:
       'Calcule as horas entre dois horários no formato de 12 ou 24 horas, registre turnos com pausas programadas, some ou subtraia tempo, converta horas e minutos em horas decimais e transforme as horas trabalhadas em salário — com horas extras, pausas e a sua moeda, na hora no seu navegador.',
   },
+  'heat-index-calculator': {
+    slug: 'calculadora-de-indice-de-calor',
+    name: 'Calculadora de Índice de Calor',
+    shortDescription: 'Calcule o índice de calor a partir da temperatura do ar e da umidade relativa — descubra quanto calor realmente se sente, em Fahrenheit e Celsius, grátis no navegador.',
+    keywords: ['calculadora de índice de calor', 'índice de calor', 'calcular índice de calor', 'calculadora de sensação térmica', 'calculadora de temperatura e umidade', 'índice de calor fahrenheit', 'índice de calor celsius', 'o que é índice de calor', 'tabela de índice de calor'],
+    seo: {
+      title: 'Calculadora de Índice de Calor – Calcule a Sensação Térmica | UtilityFlow',
+      description: 'Calcule o índice de calor com a temperatura do ar e a umidade. Descubra quanto calor se sente com nossa calculadora gratuita de índice de calor em Fahrenheit e Celsius.',
+      primaryKeyword: 'calculadora de índice de calor',
+      secondaryKeywords: ['calculadora de sensação térmica', 'calculadora de temperatura e umidade', 'índice de calor fahrenheit', 'índice de calor celsius'],
+      longTailKeywords: ['como calcular o índice de calor com temperatura e umidade', 'qual é o índice de calor a 90 graus', 'como a umidade afeta a sensação térmica', 'calcular a temperatura aparente online'],
+      schemaApplicationCategory: 'UtilitiesApplication',
+    },
+    intro: 'Digite a temperatura do ar e a umidade relativa para saber quanto calor realmente se sente: o índice de calor em Fahrenheit e Celsius, a diferença em relação à temperatura medida e o nível de risco de calor, na hora no seu navegador.',
+  },
 };

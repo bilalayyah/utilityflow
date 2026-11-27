@@ -2295,4 +2295,14 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
     useCases: [],
     faqs: [],
   },
+  // Minimal record (EN-first launch): empty guide arrays satisfy the
+  // prerender's hard detail requirement; translated guide content lands
+  // in a later phase. Guide sections stay hidden until then.
+  'heat-index-calculator': {
+    instructions: [],
+    examples: [],
+    benefits: [],
+    useCases: [],
+    faqs: [],
+  },
 };

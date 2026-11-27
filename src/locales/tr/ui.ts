@@ -14,7 +14,7 @@ export const trStrings: UiStrings = {
     contact: 'İletişim',
     blog: 'Blog',
     allTools: 'Tüm Araçlar',
-    searchPlaceholder: '86 araç ara...',
+    searchPlaceholder: '87 araç ara...',
     searchTools: 'Araç ara',
     closeSearch: 'Aramayı kapat',
     openMenu: 'Gezinme menüsünü aç',
@@ -174,17 +174,17 @@ export const trStrings: UiStrings = {
       {
         question: 'UtilityFlow araçlarını hesap oluşturmadan ücretsiz kullanabilir miyim?',
         answer:
-          'Evet. UtilityFlow’daki 86 tarayıcı aracının tamamı kayıt, giriş duvarı, kredi veya abonelik gerekmeden ücretsiz kullanılabilir.',
+          'Evet. UtilityFlow’daki 87 tarayıcı aracının tamamı kayıt, giriş duvarı, kredi veya abonelik gerekmeden ücretsiz kullanılabilir.',
       },
       {
         question: 'UtilityFlow metinlerimi, kodlarımı veya dosyalarımı bir sunucuya yüklüyor mu?',
         answer:
-          '86 temel tarayıcı aracının tamamı, girdilerinizi yüklemeden doğrudan web tarayıcınızda yerel olarak çalışır.',
+          '87 temel tarayıcı aracının tamamı, girdilerinizi yüklemeden doğrudan web tarayıcınızda yerel olarak çalışır.',
       },
       {
-        question: '86 araç platformda nasıl düzenlenmiş?',
+        question: '87 araç platformda nasıl düzenlenmiş?',
         answer:
-          'UtilityFlow; toplam 86 tarayıcı aracıyla yedi temel kategoriyi kapsar (Metin ve Yazı, Geliştirici, Hesap Makineleri, Sosyal Medya, PDF, SEO ve Görüntü ve Dosya araçları).',
+          'UtilityFlow; toplam 87 tarayıcı aracıyla yedi temel kategoriyi kapsar (Metin ve Yazı, Geliştirici, Hesap Makineleri, Sosyal Medya, PDF, SEO ve Görüntü ve Dosya araçları).',
       },
       {
         question: 'Belirli bir araca doğrudan bağlantıyı yer işaretlerine ekleyebilir veya paylaşabilir miyim?',
@@ -200,7 +200,7 @@ export const trStrings: UiStrings = {
     trustLine: 'Tüm araçlar ücretsiz • Kayıt gerekmez • Tarayıcınızda çalışır',
   },
   directory: {
-    seoTitle: 'Tüm 86 Ücretsiz Çevrimiçi Araç | UtilityFlow',
+    seoTitle: 'Tüm 87 Ücretsiz Çevrimiçi Araç | UtilityFlow',
     seoDescription:
       'UtilityFlow’daki tüm tarayıcı tabanlı araçlara ve kategorilere göz atın; yazma, geliştirme, hesap makineleri, PDF, SEO ve görüntüler için düzenlenmiştir.',
     seoKeywords: ['araç dizini', 'tüm çevrimiçi araçlar', 'ücretsiz tarayıcı araçları'],
@@ -310,7 +310,7 @@ export const trStrings: UiStrings = {
       'UtilityFlow’un hesap, karmaşa veya gereksiz veri yükleme olmadan yedi kategoride hızlı ve gizlilik öncelikli tarayıcı araçları nasıl oluşturduğunu öğrenin.',
     title: 'UtilityFlow Hakkında',
     intro:
-      'UtilityFlow; gündelik dijital işler için 86 odaklı ve güvenilir araç geliştiren bağımsız bir web platformudur.',
+      'UtilityFlow; gündelik dijital işler için 87 odaklı ve güvenilir araç geliştiren bağımsız bir web platformudur.',
     whyTitle: 'UtilityFlow’u Neden Kurduk',
     whyP1:
       'Kelime saymak, JSON doğrulamak, karakter sınırını denetlemek, kredi ödemesi hesaplamak veya görüntü sıkıştırmak gibi rutin çevrimiçi işler; insanları çoğu zaman müdahaleci katmanlarla, kafa karıştırıcı indirmelerle veya zorunlu kayıtlarla dolu yavaş sitelere itiyor.',
@@ -318,7 +318,7 @@ export const trStrings: UiStrings = {
       'Hedefimiz basit: her araca hızlı yüklenen, nasıl çalıştığını açıkça anlatan ve web standartları izin verdiğinde doğrudan tarayıcınızda çalışan temiz ve özel bir sayfa vermek.',
     orgTitle: 'UtilityFlow’u Kim Yönetiyor',
     orgP1:
-      'UtilityFlow; boş zamanlarında ücretsiz web araçları geliştiren Bilal adlı bir üreticinin oluşturduğu ve sürdürdüğü bağımsız bir projedir. Sitenin arkasında bir şirket, yatırımcı fonu veya çalışan ekibi yok — her araç, rehber ve yardım sayfası tek bir kişi tarafından tasarlanıyor, geliştiriliyor ve test ediliyor. 86 aracın tamamı hesap veya abonelik olmadan ücretsiz kullanılabilir. Altbilgideki isim Shaheen’dir; onun teşviki projeye ilham verdi ve adı, fikrin nereden başladığını hatırlatmak için her sayfada yer alıyor.',
+      'UtilityFlow; boş zamanlarında ücretsiz web araçları geliştiren Bilal adlı bir üreticinin oluşturduğu ve sürdürdüğü bağımsız bir projedir. Sitenin arkasında bir şirket, yatırımcı fonu veya çalışan ekibi yok — her araç, rehber ve yardım sayfası tek bir kişi tarafından tasarlanıyor, geliştiriliyor ve test ediliyor. 87 aracın tamamı hesap veya abonelik olmadan ücretsiz kullanılabilir. Altbilgideki isim Shaheen’dir; onun teşviki projeye ilham verdi ve adı, fikrin nereden başladığını hatırlatmak için her sayfada yer alıyor.',
     orgP2:
       'Proje küçük ve bağımsız olduğu için kararlar basit kalıyor: bir araç yavaşsa, kafa karıştırıcıysa veya yanlışsa düzeltiliyor. İletişim sayfasından gönderilen geri bildirimler doğrudan kodu değiştirebilecek kişiye ulaşıyor ve ziyaretçilerin önerileri site genelinde yeni araçları ve iyileştirmeleri çoktan şekillendirdi.',
     howTitle: 'Araçlarımız Nasıl Geliştiriliyor ve Test Ediliyor',
@@ -425,7 +425,7 @@ export const trStrings: UiStrings = {
       {
         title: '2. Araç Girdileri ve Tarayıcıda İşleme',
         paragraphs: [
-          '86 tarayıcı tabanlı aracımıza girilen metinler, sayılar, kod parçacıkları ve dosyalar; cihazınızdan ayrılmadan tarayıcı oturumunuzda yerel olarak işlenir.',
+          '87 tarayıcı tabanlı aracımıza girilen metinler, sayılar, kod parçacıkları ve dosyalar; cihazınızdan ayrılmadan tarayıcı oturumunuzda yerel olarak işlenir.',
           'Araçlarımızın altında yayınlanan yorumlar yalnızca bir ad ve yorum metni ister. Gönderdiğiniz ad ve metin, tarihle birlikte barındırma platformumuzda saklanır ve o aracın sayfasında herkese açık gösterilir. Yorum yapmak için e-posta adresi veya hesap istemiyoruz ve yorum verilerini reklam için kullanmıyoruz. Bir yorumun kaldırılmasını isterseniz, sayfayı ve kullanılan adı belirterek bize yazın; yorumu sileriz.',
         ],
       },

@@ -5,10 +5,10 @@ redesign theme (2026-11-21).
 Usage:
     python3 scripts/generate-og-images.py
 
-Output: 100 JPEG files (1200x630, quality 88) written over the existing
+Output: 102 JPEG files (1200x630, quality 88) written over the existing
 files at identical paths, so og:image URLs do not change:
   - public/og-image.jpg                 (default / homepage card)
-  - public/og/<tool>.jpg                (all 86 tools)
+  - public/og/<tool>.jpg                (all 87 tools)
   - public/og/<category>.jpg            (7 categories)
   - public/og/tools.jpg                 (all-tools directory)
   - public/og/de/<tool>.jpg             (3 localized, German)
@@ -87,10 +87,10 @@ ES_SUBLINE = "Herramienta en l\u00ednea gratuita \u00b7 Sin registro \u00b7 Func
 # ---------------------------------------------------------------------------
 # Tools. Loaded from the registry at run time (see module docstring) —
 # no hardcoded titles. Verified against the live registry on
-# 2026-11-27: 86 tools, unique ids, id == slug for all.
+# 2026-11-27: 87 tools, unique ids, id == slug for all.
 # ---------------------------------------------------------------------------
 
-EXPECTED_TOOL_COUNT = 86
+EXPECTED_TOOL_COUNT = 87
 
 # One ToolDefinition object literal: id, slug, name, shortDescription,
 # categoryId, in that order. String values are single-quoted TS literals

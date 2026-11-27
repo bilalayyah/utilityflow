@@ -1278,7 +1278,7 @@ async function prerender(): Promise<void> {
   );
 
   // Fix #10b coverage: every tool page should carry its tool-chunk
-  // preload (86 tools x 17 locales = 1,462 pages). Warn — do not fail the
+  // preload (87 tools x 17 locales = 1,479 pages). Warn — do not fail the
   // build — if any tool's chunk could not be resolved.
   const missingTools = TOOLS_REGISTRY.filter((tool) => !resolvedToolIds.has(tool.id)).map(
     (tool) => tool.id

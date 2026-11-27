@@ -257,6 +257,7 @@ export const CALC_TOOLS_PART_2: ToolDefinition[] = [
       'unit-converter',
       'age-calculator',
       'percentage-calculator',
+      'heat-index-calculator',
     ],
     component: lazy(() => import('../../../tools/calculators/BmiCalculatorTool')),
   },

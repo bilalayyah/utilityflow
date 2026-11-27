@@ -613,4 +613,19 @@ export const IT_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
     intro:
       'Calcola le ore tra due orari nel formato 12 o 24 ore, registra i turni con pause programmate, somma o sottrai tempo, converti ore e minuti in ore decimali e trasforma le ore lavorate in paga — con straordinari, pause e la tua valuta, all’istante nel browser.',
   },
+  'heat-index-calculator': {
+    slug: 'calcolatore-indice-di-calore',
+    name: 'Calcolatore dell’Indice di Calore',
+    shortDescription: 'Calcola l’indice di calore da temperatura dell’aria e umidità relativa — scopri quanto caldo si percepisce davvero, in Fahrenheit e Celsius, gratis nel browser.',
+    keywords: ['calcolatore indice di calore', 'indice di calore', 'calcolare indice di calore', 'calcolatore temperatura percepita', 'calcolatore temperatura e umidità', 'indice di calore fahrenheit', 'indice di calore celsius', 'cos’è l’indice di calore', 'tabella indice di calore'],
+    seo: {
+      title: 'Calcolatore dell’Indice di Calore – Calcola la Temperatura Percepita | UtilityFlow',
+      description: 'Calcola l’indice di calore con temperatura dell’aria e umidità. Scopri quanto caldo si percepisce con il nostro calcolatore gratuito di indice di calore in Fahrenheit e Celsius.',
+      primaryKeyword: 'calcolatore indice di calore',
+      secondaryKeywords: ['calcolatore temperatura percepita', 'calcolatore temperatura e umidità', 'indice di calore fahrenheit', 'indice di calore celsius'],
+      longTailKeywords: ['come calcolare l’indice di calore da temperatura e umidità', 'qual è l’indice di calore a 90 gradi', 'come l’umidità influisce sulla temperatura percepita', 'calcolare la temperatura apparente online'],
+      schemaApplicationCategory: 'UtilitiesApplication',
+    },
+    intro: 'Inserisci la temperatura dell’aria e l’umidità relativa per scoprire quanto caldo si percepisce davvero: l’indice di calore in Fahrenheit e Celsius, la differenza dalla temperatura misurata e il livello di rischio da calore, subito nel browser.',
+  },
 };

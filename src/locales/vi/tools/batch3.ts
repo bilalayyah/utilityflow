@@ -475,4 +475,19 @@ export const VI_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
     intro:
       'Tính số giờ giữa hai thời điểm theo định dạng 12 hoặc 24 giờ, theo dõi ca làm việc với các khoảng nghỉ, cộng hoặc trừ thời gian, đổi giờ và phút sang giờ thập phân, và đổi giờ làm việc thành tiền lương — với làm thêm giờ, giờ nghỉ và đơn vị tiền tệ của bạn, tất cả ngay trong trình duyệt.',
   },
+  'heat-index-calculator': {
+    slug: 'may-tinh-chi-so-nhiet',
+    name: 'Máy Tính Chỉ Số Nhiệt',
+    shortDescription: 'Tính chỉ số nhiệt từ nhiệt độ không khí và độ ẩm tương đối — biết trời nóng đến mức nào, theo độ F và độ C, miễn phí ngay trong trình duyệt.',
+    keywords: ['máy tính chỉ số nhiệt', 'chỉ số nhiệt', 'tính chỉ số nhiệt', 'máy tính nhiệt độ cảm nhận', 'máy tính nhiệt độ và độ ẩm', 'chỉ số nhiệt fahrenheit', 'chỉ số nhiệt celsius', 'chỉ số nhiệt là gì', 'bảng chỉ số nhiệt'],
+    seo: {
+      title: 'Máy Tính Chỉ Số Nhiệt – Tính Nhiệt Độ Cảm Nhận | UtilityFlow',
+      description: 'Tính chỉ số nhiệt bằng nhiệt độ không khí và độ ẩm. Biết trời nóng đến mức nào với máy tính chỉ số nhiệt Fahrenheit và Celsius miễn phí của chúng tôi.',
+      primaryKeyword: 'máy tính chỉ số nhiệt',
+      secondaryKeywords: ['máy tính nhiệt độ cảm nhận', 'máy tính nhiệt độ và độ ẩm', 'chỉ số nhiệt fahrenheit', 'chỉ số nhiệt celsius'],
+      longTailKeywords: ['cách tính chỉ số nhiệt từ nhiệt độ và độ ẩm', 'chỉ số nhiệt ở 90 độ là bao nhiêu', 'độ ẩm ảnh hưởng đến nhiệt độ cảm nhận như thế nào', 'tính nhiệt độ biểu kiến trực tuyến'],
+      schemaApplicationCategory: 'UtilitiesApplication',
+    },
+    intro: 'Nhập nhiệt độ không khí và độ ẩm tương đối để biết trời thực sự nóng đến mức nào: chỉ số nhiệt theo độ F và độ C, chênh lệch so với nhiệt độ đo được và mức rủi ro do nóng, tất cả ngay trong trình duyệt.',
+  },
 };

@@ -246,4 +246,19 @@ export const DE_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
     },
     intro: "Berechnen Sie Stunden zwischen zwei Uhrzeiten im 12- oder 24-Stunden-Format, erfassen Sie Schichten mit Pausenzeiten, addieren oder subtrahieren Sie Zeiten, wandeln Sie Stunden und Minuten in Dezimalstunden um und rechnen Sie Arbeitsstunden in Lohn um – mit Überstunden, Pausen und Ihrer Währung, sofort in Ihrem Browser.",
   },
+  "heat-index-calculator": {
+    slug: "hitzeindex-rechner",
+    name: "Hitzeindex-Rechner",
+    shortDescription: "Berechnen Sie den Hitzeindex aus Lufttemperatur und relativer Luftfeuchtigkeit — wie heiß es sich wirklich anfühlt, in Fahrenheit und Celsius, kostenlos im Browser.",
+    keywords: ["hitzeindex rechner", "hitzeindex berechnen", "hitzeindex", "gefühlte temperatur rechner", "temperatur und luftfeuchtigkeit rechner", "hitzeindex fahrenheit", "hitzeindex celsius", "was ist der hitzeindex", "hitzeindex tabelle"],
+    seo: {
+      title: "Hitzeindex-Rechner – Gefühlte Temperatur berechnen | UtilityFlow",
+      description: "Berechnen Sie den Hitzeindex aus Lufttemperatur und Luftfeuchtigkeit. Erfahren Sie mit unserem kostenlosen Hitzeindex-Rechner für Fahrenheit und Celsius, wie heiß es sich anfühlt.",
+      primaryKeyword: "hitzeindex rechner",
+      secondaryKeywords: ["gefühlte temperatur rechner", "temperatur und luftfeuchtigkeit rechner", "hitzeindex fahrenheit", "hitzeindex celsius"],
+      longTailKeywords: ["hitzeindex aus temperatur und luftfeuchtigkeit berechnen", "was ist der hitzeindex bei 90 grad", "wie beeinflusst luftfeuchtigkeit die gefühlte temperatur", "scheinbare temperatur online berechnen"],
+      schemaApplicationCategory: "UtilitiesApplication",
+    },
+    intro: "Geben Sie Lufttemperatur und relative Luftfeuchtigkeit ein und erfahren Sie, wie heiß es sich wirklich anfühlt — Hitzeindex in Fahrenheit und Celsius, Abweichung von der gemessenen Temperatur und Gefahrenstufe, sofort in Ihrem Browser.",
+  },
 };
