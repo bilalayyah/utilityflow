@@ -5,10 +5,10 @@ redesign theme (2026-11-21).
 Usage:
     python3 scripts/generate-og-images.py
 
-Output: 98 JPEG files (1200x630, quality 88) written over the existing
+Output: 100 JPEG files (1200x630, quality 88) written over the existing
 files at identical paths, so og:image URLs do not change:
   - public/og-image.jpg                 (default / homepage card)
-  - public/og/<tool>.jpg                (all 83 tools)
+  - public/og/<tool>.jpg                (all 85 tools)
   - public/og/<category>.jpg            (7 categories)
   - public/og/tools.jpg                 (all-tools directory)
   - public/og/de/<tool>.jpg             (3 localized, German)
@@ -38,7 +38,7 @@ Sublines: a tool's own `shortDescription` is used only when it fits
 on one line at the card's 26px subline size (max 1020px wide);
 otherwise the established generic subline is used. No description is
 ever truncated or reworded, so no claim is invented. (As of
-2026-11-24 none of the 83 descriptions fits on one line, so every
+2026-11-24 none of the 85 descriptions fits on one line, so every
 tool card currently uses the generic subline; the fit check stays in
 place so a shorter future description is picked up automatically.)
 
@@ -87,10 +87,10 @@ ES_SUBLINE = "Herramienta en l\u00ednea gratuita \u00b7 Sin registro \u00b7 Func
 # ---------------------------------------------------------------------------
 # Tools. Loaded from the registry at run time (see module docstring) —
 # no hardcoded titles. Verified against the live registry on
-# 2026-11-27: 84 tools, unique ids, id == slug for all.
+# 2026-11-27: 85 tools, unique ids, id == slug for all.
 # ---------------------------------------------------------------------------
 
-EXPECTED_TOOL_COUNT = 84
+EXPECTED_TOOL_COUNT = 85
 
 # One ToolDefinition object literal: id, slug, name, shortDescription,
 # categoryId, in that order. String values are single-quoted TS literals
@@ -282,7 +282,7 @@ def render_default_card():
     )
 
     # Headline: two fixed lines, dark then green.
-    head_lines = ["83 free online tools.", "Fast. Private. No sign-up."]
+    head_lines = ["85 free online tools.", "Fast. Private. No sign-up."]
     head_font = _fit_fixed_lines(draw, head_lines, max_width=1020 * SS)
     line_h = int(head_font.size * 1.18)
     y = 268 * SS
@@ -340,7 +340,7 @@ def main():
           + (f" ({', '.join(used_short)})" if used_short else
              " (all use the generic subline)"))
 
-    # 3. Categories (+ all-tools directory card, "All 84 Tools").
+    # 3. Categories (+ all-tools directory card, "All 85 Tools").
     for cat_id, title, icon_key in CATEGORIES:
         p = os.path.join(root, "og", f"{cat_id}.jpg")
         save_jpeg(
@@ -349,7 +349,7 @@ def main():
         out.append(p)
     p = os.path.join(root, "og", "tools.jpg")
     save_jpeg(
-        render_card("All 84 Tools", "en", gb.icon_grid, CATEGORY_SUBLINE), p
+        render_card("All 85 Tools", "en", gb.icon_grid, CATEGORY_SUBLINE), p
     )
     out.append(p)
 

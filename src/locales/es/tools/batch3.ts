@@ -576,4 +576,41 @@ export const ES_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
     intro:
       'Convierte cualquier número entero del 1 al 3999 en números romanos, o lee números romanos como números normales, y convierte también una fecha completa en números romanos, al instante en tu navegador.',
   },
+  'online-hourly-calculator': {
+    slug: 'calculadora-de-horas-en-linea',
+    name: 'Calculadora de Horas en Línea',
+    shortDescription:
+      'Calcula las horas entre dos horarios, las horas de trabajo con descansos, las horas decimales y el pago por hora — gratis, en tu navegador.',
+    keywords: [
+      'calculadora de horas en línea',
+      'calculadora de horas de trabajo',
+      'calcular horas entre dos horarios',
+      'calculadora de pago por hora',
+      'calculadora de horas decimales',
+      'calculadora de horas extras',
+      'sumar restar tiempo',
+      'cuántas horas trabajé',
+    ],
+    seo: {
+      title: 'Calculadora de Horas en Línea – Horas y Pago | UtilityFlow',
+      description:
+        'Usa nuestra calculadora de horas en línea gratuita para calcular horas de trabajo, diferencias de tiempo, descansos, horas decimales y ganancias por hora al instante.',
+      primaryKeyword: 'calculadora de horas en línea',
+      secondaryKeywords: [
+        'calculadora de horas de trabajo',
+        'calcular horas entre dos horarios',
+        'calculadora de pago por hora',
+        'calculadora de horas decimales',
+      ],
+      longTailKeywords: [
+        'cómo calcular las horas entre dos horarios',
+        'cómo calcular horas de trabajo con descanso',
+        'convertir horas y minutos a horas decimales',
+        'calcular el pago por hora con horas extras',
+      ],
+      schemaApplicationCategory: 'UtilitiesApplication',
+    },
+    intro:
+      'Calcula las horas entre dos horarios en formato de 12 o 24 horas, registra turnos con descansos programados, suma o resta tiempo, convierte horas y minutos a horas decimales y convierte las horas trabajadas en pago — con horas extras, descansos y tu moneda, al instante en tu navegador.',
+  },
 };

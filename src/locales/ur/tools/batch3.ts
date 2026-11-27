@@ -438,4 +438,41 @@ export const UR_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
     intro:
       '1 سے 3999 تک کسی بھی مکمل عدد کو رومن اعداد میں بدلیں، یا رومن اعداد کو عام اعداد کی طرح پڑھیں — اور مکمل تاریخ کو بھی رومن اعداد میں بدلیں، سب کچھ آپ کے براؤزر میں فوراً۔',
   },
+  'online-hourly-calculator': {
+    slug: 'online-ghanta-calculator',
+    name: 'آن لائن گھنٹہ کیلکولیٹر',
+    shortDescription:
+      'دو اوقات کے درمیان گھنٹے، وقفوں سمیت کام کے گھنٹے، اعشاری گھنٹے اور فی گھنٹہ اجرت نکالیں — براؤزر میں مفت۔',
+    keywords: [
+      'online ghanta calculator urdu',
+      'kaam ke ghante calculator',
+      'do waqt ke darmiyan ghante',
+      'fi ghanta ujrat calculator',
+      'decimal ghante calculator',
+      'overtime ujrat',
+      'waqt jama tafreeq',
+      'maine kitne ghante kaam kiya',
+    ],
+    seo: {
+      title: 'آن لائن گھنٹہ کیلکولیٹر – گھنٹے اور اجرت نکالیں | UtilityFlow',
+      description:
+        'مفت آن لائن گھنٹہ کیلکولیٹر سے کام کے گھنٹے، وقت کا فرق، وقفے، اعشاری گھنٹے اور فی گھنٹہ آمدنی فوراً نکالیں۔',
+      primaryKeyword: 'online ghanta calculator urdu',
+      secondaryKeywords: [
+        'kaam ke ghante calculator',
+        'do waqt ke darmiyan ghante',
+        'fi ghanta ujrat calculator',
+        'decimal ghante calculator',
+      ],
+      longTailKeywords: [
+        'do waqt ke darmiyan ghante kaise nikale',
+        'waqfe ke saath kaam ke ghante kaise nikale',
+        'ghante minute ko decimal ghante me badle',
+        'overtime ke saath fi ghanta ujrat nikale',
+      ],
+      schemaApplicationCategory: 'UtilitiesApplication',
+    },
+    intro:
+      '12 یا 24 گھنٹے کے فارمیٹ میں دو اوقات کے درمیان گھنٹے نکالیں، مقررہ وقفوں والی شفٹ کا حساب رکھیں، وقت جمع کریں یا گھٹائیں، گھنٹے منٹ کو اعشاری گھنٹوں میں بدلیں، اور کام کے گھنٹوں کو اجرت میں بدلیں — اوورٹائم، وقفوں اور اپنی کرنسی کے ساتھ، سب کچھ براؤزر میں فوراً۔',
+  },
 };

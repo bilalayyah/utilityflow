@@ -438,4 +438,41 @@ export const VI_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
     intro:
       'Đổi bất kỳ số nguyên nào từ 1 đến 3999 thành số La Mã, hoặc đọc số La Mã như số thường — và đổi cả một ngày đầy đủ thành số La Mã, tất cả ngay trong trình duyệt của bạn.',
   },
+  'online-hourly-calculator': {
+    slug: 'may-tinh-gio-truc-tuyen',
+    name: 'Máy Tính Giờ Trực Tuyến',
+    shortDescription:
+      'Tính số giờ giữa hai thời điểm, giờ làm việc có nghỉ giải lao, giờ thập phân và lương theo giờ — miễn phí, ngay trên trình duyệt.',
+    keywords: [
+      'máy tính giờ trực tuyến',
+      'máy tính giờ làm việc',
+      'tính giờ giữa hai thời điểm',
+      'máy tính lương theo giờ',
+      'máy tính giờ thập phân',
+      'máy tính làm thêm giờ',
+      'cộng trừ thời gian',
+      'tôi đã làm bao nhiêu giờ',
+    ],
+    seo: {
+      title: 'Máy Tính Giờ Trực Tuyến – Tính Giờ & Lương | UtilityFlow',
+      description:
+        'Dùng máy tính giờ trực tuyến miễn phí của chúng tôi để tính giờ làm việc, chênh lệch thời gian, giờ nghỉ, giờ thập phân và thu nhập theo giờ ngay lập tức.',
+      primaryKeyword: 'máy tính giờ trực tuyến',
+      secondaryKeywords: [
+        'máy tính giờ làm việc',
+        'tính giờ giữa hai thời điểm',
+        'máy tính lương theo giờ',
+        'máy tính giờ thập phân',
+      ],
+      longTailKeywords: [
+        'cách tính giờ giữa hai thời điểm',
+        'cách tính giờ làm việc có nghỉ giải lao',
+        'đổi giờ và phút sang giờ thập phân',
+        'tính lương theo giờ có làm thêm giờ',
+      ],
+      schemaApplicationCategory: 'UtilitiesApplication',
+    },
+    intro:
+      'Tính số giờ giữa hai thời điểm theo định dạng 12 hoặc 24 giờ, theo dõi ca làm việc với các khoảng nghỉ, cộng hoặc trừ thời gian, đổi giờ và phút sang giờ thập phân, và đổi giờ làm việc thành tiền lương — với làm thêm giờ, giờ nghỉ và đơn vị tiền tệ của bạn, tất cả ngay trong trình duyệt.',
+  },
 };

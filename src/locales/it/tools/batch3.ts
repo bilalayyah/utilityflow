@@ -576,4 +576,41 @@ export const IT_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
     intro:
       'Converti qualsiasi numero intero da 1 a 3999 in numeri romani, oppure leggi i numeri romani come numeri normali, e trasforma anche una data completa in numeri romani, all’istante nel tuo browser.',
   },
+  'online-hourly-calculator': {
+    slug: 'calcolatore-ore-online',
+    name: 'Calcolatore Ore Online',
+    shortDescription:
+      'Calcola le ore tra due orari, le ore di lavoro con pause, le ore decimali e la paga oraria — gratis, nel browser.',
+    keywords: [
+      'calcolatore ore online',
+      'calcolatore ore di lavoro',
+      'calcolare ore tra due orari',
+      'calcolatore paga oraria',
+      'calcolatore ore decimali',
+      'calcolatore straordinari',
+      'sommare sottrarre tempo',
+      'quante ore ho lavorato',
+    ],
+    seo: {
+      title: 'Calcolatore Ore Online – Ore e Paga | UtilityFlow',
+      description:
+        'Usa il nostro calcolatore di ore online gratuito per calcolare ore di lavoro, differenze di tempo, pause, ore decimali e guadagni orari all’istante.',
+      primaryKeyword: 'calcolatore ore online',
+      secondaryKeywords: [
+        'calcolatore ore di lavoro',
+        'calcolare ore tra due orari',
+        'calcolatore paga oraria',
+        'calcolatore ore decimali',
+      ],
+      longTailKeywords: [
+        'come calcolare le ore tra due orari',
+        'come calcolare le ore di lavoro con pausa',
+        'convertire ore e minuti in ore decimali',
+        'calcolare la paga oraria con straordinari',
+      ],
+      schemaApplicationCategory: 'UtilitiesApplication',
+    },
+    intro:
+      'Calcola le ore tra due orari nel formato 12 o 24 ore, registra i turni con pause programmate, somma o sottrai tempo, converti ore e minuti in ore decimali e trasforma le ore lavorate in paga — con straordinari, pause e la tua valuta, all’istante nel browser.',
+  },
 };

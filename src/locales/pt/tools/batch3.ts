@@ -579,4 +579,41 @@ export const PT_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
     intro:
       'Converta qualquer número inteiro de 1 a 3999 em numerais romanos, ou leia numerais romanos como números comuns, e transforme também uma data completa em numerais romanos, na hora no seu navegador.',
   },
+  'online-hourly-calculator': {
+    slug: 'calculadora-de-horas-online',
+    name: 'Calculadora de Horas Online',
+    shortDescription:
+      'Calcule as horas entre dois horários, as horas de trabalho com pausas, as horas decimais e o salário por hora — grátis, no seu navegador.',
+    keywords: [
+      'calculadora de horas online',
+      'calculadora de horas de trabalho',
+      'calcular horas entre dois horários',
+      'calculadora de salário por hora',
+      'calculadora de horas decimais',
+      'calculadora de horas extras',
+      'somar subtrair tempo',
+      'quantas horas trabalhei',
+    ],
+    seo: {
+      title: 'Calculadora de Horas Online – Horas e Salário | UtilityFlow',
+      description:
+        'Use nossa calculadora de horas online gratuita para calcular horas de trabalho, diferenças de tempo, pausas, horas decimais e ganhos por hora na hora.',
+      primaryKeyword: 'calculadora de horas online',
+      secondaryKeywords: [
+        'calculadora de horas de trabalho',
+        'calcular horas entre dois horários',
+        'calculadora de salário por hora',
+        'calculadora de horas decimais',
+      ],
+      longTailKeywords: [
+        'como calcular as horas entre dois horários',
+        'como calcular horas de trabalho com pausa',
+        'converter horas e minutos em horas decimais',
+        'calcular o salário por hora com horas extras',
+      ],
+      schemaApplicationCategory: 'UtilitiesApplication',
+    },
+    intro:
+      'Calcule as horas entre dois horários no formato de 12 ou 24 horas, registre turnos com pausas programadas, some ou subtraia tempo, converta horas e minutos em horas decimais e transforme as horas trabalhadas em salário — com horas extras, pausas e a sua moeda, na hora no seu navegador.',
+  },
 };

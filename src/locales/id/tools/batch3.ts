@@ -234,4 +234,19 @@ export const ID_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
     },
     intro: "Ubah bilangan bulat apa pun dari 1 sampai 3999 menjadi angka Romawi, atau baca angka Romawi sebagai angka biasa — dan ubah tanggal lengkap menjadi angka Romawi juga, langsung di browser Anda.",
   },
+  "online-hourly-calculator": {
+    slug: "kalkulator-jam-online",
+    name: "Kalkulator Jam Online",
+    shortDescription: "Hitung jam di antara dua waktu, jam kerja dengan istirahat, jam desimal, dan upah per jam — gratis, di browser Anda.",
+    keywords: ["kalkulator jam online", "kalkulator jam kerja", "hitung jam di antara dua waktu", "kalkulator upah per jam", "kalkulator jam desimal", "kalkulator lembur", "tambah kurang waktu", "berapa jam saya bekerja"],
+    seo: {
+      title: "Kalkulator Jam Online – Hitung Jam & Upah | UtilityFlow",
+      description: "Gunakan kalkulator jam online gratis kami untuk menghitung jam kerja, selisih waktu, istirahat, jam desimal, dan penghasilan per jam secara instan.",
+      primaryKeyword: "kalkulator jam online",
+      secondaryKeywords: ["kalkulator jam kerja", "hitung jam di antara dua waktu", "kalkulator upah per jam", "kalkulator jam desimal"],
+      longTailKeywords: ["cara menghitung jam di antara dua waktu", "cara menghitung jam kerja dengan istirahat", "mengubah jam dan menit menjadi jam desimal", "menghitung upah per jam dengan lembur"],
+      schemaApplicationCategory: "UtilitiesApplication",
+    },
+    intro: "Hitung jam di antara dua waktu dalam format 12 atau 24 jam, lacak shift dengan periode istirahat, tambah atau kurangi waktu, ubah jam dan menit menjadi jam desimal, dan ubah jam kerja menjadi upah — dengan lembur, istirahat, dan mata uang pilihan Anda, semuanya instan di browser Anda.",
+  },
 };

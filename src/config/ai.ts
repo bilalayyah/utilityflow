@@ -158,7 +158,7 @@ export async function postAiJson<TRequest, TResponseData = string>(
       ok: false,
       error: {
         code: 'SERVICE_UNAVAILABLE',
-        message: 'Unable to reach the free AI backend right now. All 84+ browser tools still work offline.',
+        message: 'Unable to reach the free AI backend right now. All 85+ browser tools still work offline.',
       },
     };
   }

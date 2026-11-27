@@ -438,4 +438,41 @@ export const HI_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
     intro:
       '1 से 3999 तक किसी भी पूर्ण संख्या को रोमन अंकों में बदलें, या रोमन अंकों को आम संख्याओं की तरह पढ़ें — और पूरी तारीख को भी रोमन अंकों में बदलें, सब कुछ अपने ब्राउज़र में तुरंत।',
   },
+  'online-hourly-calculator': {
+    slug: 'online-ghanta-calculator',
+    name: 'ऑनलाइन घंटा कैलकुलेटर',
+    shortDescription:
+      'दो समयों के बीच घंटे, ब्रेक सहित काम के घंटे, दशमलव घंटे और प्रति घंटा वेतन निकालें — ब्राउज़र में मुफ़्त।',
+    keywords: [
+      'online ghanta calculator hindi',
+      'kaam ke ghante calculator',
+      'do samay ke beech ghante',
+      'prati ghanta vetan calculator',
+      'decimal ghante calculator',
+      'overtime vetan',
+      'samay jodna ghatana',
+      'maine kitne ghante kaam kiya',
+    ],
+    seo: {
+      title: 'ऑनलाइन घंटा कैलकुलेटर – घंटे और वेतन निकालें | UtilityFlow',
+      description:
+        'मुफ़्त ऑनलाइन घंटा कैलकुलेटर से काम के घंटे, समय का अंतर, ब्रेक, दशमलव घंटे और प्रति घंटा कमाई तुरंत निकालें।',
+      primaryKeyword: 'online ghanta calculator hindi',
+      secondaryKeywords: [
+        'kaam ke ghante calculator',
+        'do samay ke beech ghante',
+        'prati ghanta vetan calculator',
+        'decimal ghante calculator',
+      ],
+      longTailKeywords: [
+        'do samay ke beech ghante kaise nikale',
+        'break ke saath kaam ke ghante kaise nikale',
+        'ghante minute ko decimal ghante me badle',
+        'overtime ke saath prati ghanta vetan nikale',
+      ],
+      schemaApplicationCategory: 'UtilitiesApplication',
+    },
+    intro:
+      '12 या 24 घंटे के फॉर्मेट में दो समयों के बीच घंटे निकालें, तय ब्रेक वाली शिफ्ट का हिसाब रखें, समय जोड़ें या घटाएँ, घंटे-मिनट को दशमलव घंटों में बदलें, और काम के घंटों को वेतन में बदलें — ओवरटाइम, ब्रेक और अपनी मुद्रा के साथ, सब कुछ ब्राउज़र में तुरंत।',
+  },
 };

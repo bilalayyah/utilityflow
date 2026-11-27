@@ -145,7 +145,7 @@ export const CATEGORIES: ToolCategory[] = [
       },
     ],
     batch: 3,
-    plannedToolCount: 15,
+    plannedToolCount: 16,
     iconName: 'Calculator',
     seo: {
       title: 'Online Calculators – Finance, Date & Math | UtilityFlow',

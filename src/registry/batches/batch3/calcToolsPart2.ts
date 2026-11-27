@@ -152,6 +152,7 @@ export const CALC_TOOLS_PART_2: ToolDefinition[] = [
       'vat-tax-calculator',
       'compound-interest-calculator',
       'loan-emi-calculator',
+      'online-hourly-calculator',
     ],
     component: lazy(() => import('../../../tools/calculators/SalaryCalculatorTool')),
   },

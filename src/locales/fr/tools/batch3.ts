@@ -576,4 +576,41 @@ export const FR_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
     intro:
       'Convertissez n’importe quel nombre entier de 1 à 3999 en chiffres romains, ou lisez les chiffres romains comme des nombres ordinaires, et transformez aussi une date complète en chiffres romains, instantanément dans votre navigateur.',
   },
+  'online-hourly-calculator': {
+    slug: 'calculateur-d-heures-en-ligne',
+    name: 'Calculateur d’Heures en Ligne',
+    shortDescription:
+      'Calculez les heures entre deux horaires, les heures de travail avec pauses, les heures décimales et le salaire horaire — gratuit, dans votre navigateur.',
+    keywords: [
+      'calculateur d’heures en ligne',
+      'calculateur heures de travail',
+      'calculer heures entre deux horaires',
+      'calculateur salaire horaire',
+      'calculateur heures décimales',
+      'calculateur heures supplémentaires',
+      'additionner soustraire temps',
+      'combien d’heures travaillées',
+    ],
+    seo: {
+      title: 'Calculateur d’Heures en Ligne – Heures et Salaire | UtilityFlow',
+      description:
+        'Utilisez notre calculateur d’heures en ligne gratuit pour calculer les heures de travail, les écarts de temps, les pauses, les heures décimales et les gains horaires instantanément.',
+      primaryKeyword: 'calculateur d’heures en ligne',
+      secondaryKeywords: [
+        'calculateur heures de travail',
+        'calculer heures entre deux horaires',
+        'calculateur salaire horaire',
+        'calculateur heures décimales',
+      ],
+      longTailKeywords: [
+        'comment calculer les heures entre deux horaires',
+        'comment calculer les heures de travail avec pause',
+        'convertir heures et minutes en heures décimales',
+        'calculer le salaire horaire avec heures supplémentaires',
+      ],
+      schemaApplicationCategory: 'UtilitiesApplication',
+    },
+    intro:
+      'Calculez les heures entre deux horaires au format 12 ou 24 heures, suivez les postes avec des pauses programmées, additionnez ou soustrayez du temps, convertissez heures et minutes en heures décimales et transformez les heures travaillées en salaire — avec heures supplémentaires, pauses et votre devise, instantanément dans votre navigateur.',
+  },
 };

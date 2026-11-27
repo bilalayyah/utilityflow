@@ -234,4 +234,19 @@ export const ZH_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
     },
     intro: '把1到3999之间的任意整数转换成罗马数字，或把罗马数字读成普通数字，还能把完整日期转换成罗马数字，全部在浏览器中瞬间完成。',
   },
+  'online-hourly-calculator': {
+    slug: 'zaixian-xiaoshi-jisuanqi',
+    name: '在线小时计算器',
+    shortDescription: '计算两个时间之间的小时数、含休息的工作时长、十进制小时和时薪——免费，在浏览器中直接使用。',
+    keywords: ['在线小时计算器', '工作时间计算器', '计算两个时间之间的小时', '时薪计算器', '十进制小时计算器', '加班费计算器', '时间加减', '我工作了多少小时'],
+    seo: {
+      title: '在线小时计算器 – 计算工时与薪资 | UtilityFlow',
+      description: '使用免费的在线小时计算器，立即计算工作时间、时间差、休息时间、十进制小时和时薪收入。',
+      primaryKeyword: '在线小时计算器',
+      secondaryKeywords: ['工作时间计算器', '计算两个时间之间的小时', '时薪计算器', '十进制小时计算器'],
+      longTailKeywords: ['如何计算两个时间之间的小时数', '如何计算含休息的工作时间', '如何把小时和分钟换算成十进制小时', '如何计算含加班的时薪'],
+      schemaApplicationCategory: 'UtilitiesApplication',
+    },
+    intro: '以12小时制或24小时制计算两个时间之间的小时数，记录含休息时段的班次，进行时间的加减运算，把小时和分钟换算成十进制小时，并把工作时间换算成薪资——支持加班、休息时间和货币选择，全部在浏览器中即时完成。',
+  },
 };

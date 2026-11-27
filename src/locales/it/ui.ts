@@ -14,7 +14,7 @@ export const itStrings: UiStrings = {
     contact: 'Contatti',
     blog: 'Blog',
     allTools: 'Tutti gli strumenti',
-    searchPlaceholder: 'Cerca tra 84 strumenti...',
+    searchPlaceholder: 'Cerca tra 85 strumenti...',
     searchTools: 'Cerca strumenti',
     closeSearch: 'Chiudi la ricerca',
     openMenu: 'Apri il menu di navigazione',
@@ -171,17 +171,17 @@ export const itStrings: UiStrings = {
       {
         question: 'Gli strumenti di UtilityFlow sono gratuiti e utilizzabili senza creare un account?',
         answer:
-          'Sì. Tutti gli 84 strumenti nel browser di UtilityFlow sono disponibili gratuitamente, senza registrazione, senza barriere di accesso, senza crediti e senza abbonamento.',
+          'Sì. Tutti gli 85 strumenti nel browser di UtilityFlow sono disponibili gratuitamente, senza registrazione, senza barriere di accesso, senza crediti e senza abbonamento.',
       },
       {
         question: 'UtilityFlow carica i miei testi, il mio codice o i miei file su un server?',
         answer:
-          'Tutti gli 84 strumenti principali nel browser funzionano in locale nel tuo browser web senza caricare i dati inseriti.',
+          'Tutti gli 85 strumenti principali nel browser funzionano in locale nel tuo browser web senza caricare i dati inseriti.',
       },
       {
-        question: 'Come sono organizzati gli 84 strumenti sulla piattaforma?',
+        question: 'Come sono organizzati gli 85 strumenti sulla piattaforma?',
         answer:
-          'UtilityFlow copre sette categorie principali (Testo e scrittura, Sviluppatori, Calcolatrici, Social media, PDF, SEO e Strumenti per immagini e file), per un totale di 84 strumenti nel browser integrati nella piattaforma.',
+          'UtilityFlow copre sette categorie principali (Testo e scrittura, Sviluppatori, Calcolatrici, Social media, PDF, SEO e Strumenti per immagini e file), per un totale di 85 strumenti nel browser integrati nella piattaforma.',
       },
       {
         question: 'Posso salvare nei preferiti o condividere un collegamento diretto a uno strumento specifico?',
@@ -307,7 +307,7 @@ export const itStrings: UiStrings = {
       'Scopri come UtilityFlow crea utilità veloci e attente alla privacy per il browser in sette categorie, senza account, confusione o caricamenti di dati inutili.',
     title: 'Chi è UtilityFlow',
     intro:
-      'UtilityFlow è una piattaforma web indipendente che costruisce 84 utilità mirate e affidabili per il lavoro digitale quotidiano.',
+      'UtilityFlow è una piattaforma web indipendente che costruisce 85 utilità mirate e affidabili per il lavoro digitale quotidiano.',
     whyTitle: 'Perché abbiamo creato UtilityFlow',
     whyP1:
       'Le attività online di routine — contare le parole, convalidare JSON, verificare i limiti di caratteri, calcolare le rate di un prestito o comprimere un’immagine — spesso costringono a passare da siti lenti, pieni di finestre invadenti, download confusi o registrazioni obbligatorie.',
@@ -315,7 +315,7 @@ export const itStrings: UiStrings = {
       'Il nostro obiettivo è semplice: dare a ogni utilità una pagina pulita e dedicata che si carica velocemente, spiega chiaramente come funziona lo strumento e viene eseguita direttamente nel tuo browser ogni volta che gli standard del web lo consentono.',
     orgTitle: 'Chi gestisce UtilityFlow',
     orgP1:
-      'UtilityFlow è un progetto indipendente creato e gestito da Bilal, un creatore che costruisce strumenti web gratuiti nel suo tempo libero. Dietro al sito non c’è nessuna azienda, nessun finanziamento di investitori e nessun team di dipendenti: ogni strumento, guida e pagina di aiuto è progettato, realizzato e testato da una sola persona. Tutti gli 84 strumenti sono gratuiti, senza account né abbonamenti. La riga nel piè di pagina nomina Shaheen, il cui incoraggiamento ha ispirato il progetto e il cui nome compare su ogni pagina come promemoria di dove è nata l’idea.',
+      'UtilityFlow è un progetto indipendente creato e gestito da Bilal, un creatore che costruisce strumenti web gratuiti nel suo tempo libero. Dietro al sito non c’è nessuna azienda, nessun finanziamento di investitori e nessun team di dipendenti: ogni strumento, guida e pagina di aiuto è progettato, realizzato e testato da una sola persona. Tutti gli 85 strumenti sono gratuiti, senza account né abbonamenti. La riga nel piè di pagina nomina Shaheen, il cui incoraggiamento ha ispirato il progetto e il cui nome compare su ogni pagina come promemoria di dove è nata l’idea.',
     orgP2:
       'Poiché il progetto è piccolo e indipendente, le decisioni restano semplici: se uno strumento è lento, poco chiaro o sbagliato, viene corretto. I messaggi inviati dalla pagina Contatti arrivano direttamente alla persona che può modificare il codice, e i suggerimenti dei visitatori hanno già ispirato nuovi strumenti e miglioramenti in tutto il sito.',
     howTitle: 'Come vengono creati e testati i nostri strumenti',
@@ -422,7 +422,7 @@ export const itStrings: UiStrings = {
       {
         title: '2. Dati degli strumenti ed elaborazione nel browser',
         paragraphs: [
-          'Testi, numeri, frammenti di codice e file inseriti nei nostri 84 strumenti nel browser vengono elaborati localmente nella sessione del browser, senza lasciare il tuo dispositivo.',
+          'Testi, numeri, frammenti di codice e file inseriti nei nostri 85 strumenti nel browser vengono elaborati localmente nella sessione del browser, senza lasciare il tuo dispositivo.',
           'I commenti pubblicati sotto i nostri strumenti richiedono solo un nome e il testo del commento. Il nome e il testo che invii vengono memorizzati sulla nostra piattaforma di hosting e mostrati pubblicamente nella pagina di quello strumento, insieme alla data. Non chiediamo un indirizzo email né un account per commentare e non usiamo i dati dei commenti per la pubblicità. Se vuoi far rimuovere un commento, contattaci indicando la pagina e il nome usato e lo elimineremo.',
         ],
       },

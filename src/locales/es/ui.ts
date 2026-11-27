@@ -13,7 +13,7 @@ export const esStrings: UiStrings = {
     contact: 'Contacto',
     blog: 'Blog',
     allTools: 'Todas las herramientas',
-    searchPlaceholder: 'Buscar entre 84 herramientas...',
+    searchPlaceholder: 'Buscar entre 85 herramientas...',
     searchTools: 'Buscar herramientas',
     closeSearch: 'Cerrar búsqueda',
     openMenu: 'Abrir menú de navegación',
@@ -170,17 +170,17 @@ export const esStrings: UiStrings = {
       {
         question: '¿Las herramientas de UtilityFlow son gratuitas y se pueden usar sin crear una cuenta?',
         answer:
-          'Sí. Las 84 utilidades del navegador de UtilityFlow están disponibles de forma gratuita, sin registro, muro de inicio de sesión, créditos ni suscripción.',
+          'Sí. Las 85 utilidades del navegador de UtilityFlow están disponibles de forma gratuita, sin registro, muro de inicio de sesión, créditos ni suscripción.',
       },
       {
         question: '¿UtilityFlow sube mi texto, código o archivos a un servidor?',
         answer:
-          'Las 84 utilidades principales del navegador se ejecutan localmente en tu navegador web sin subir las entradas.',
+          'Las 85 utilidades principales del navegador se ejecutan localmente en tu navegador web sin subir las entradas.',
       },
       {
-        question: '¿Cómo están organizadas las 84 herramientas en la plataforma?',
+        question: '¿Cómo están organizadas las 85 herramientas en la plataforma?',
         answer:
-          'UtilityFlow abarca siete categorías principales (herramientas de texto y escritura, para desarrolladores, calculadoras, redes sociales, PDF, SEO y herramientas de imagen y archivos) con un total de 84 herramientas del navegador integradas en la plataforma.',
+          'UtilityFlow abarca siete categorías principales (herramientas de texto y escritura, para desarrolladores, calculadoras, redes sociales, PDF, SEO y herramientas de imagen y archivos) con un total de 85 herramientas del navegador integradas en la plataforma.',
       },
       {
         question: '¿Puedo marcar o compartir un enlace directo a una herramienta específica?',
@@ -310,7 +310,7 @@ export const esStrings: UiStrings = {
       'Descubre cómo UtilityFlow crea utilidades rápidas y privadas para el navegador en siete categorías, sin cuentas ni subidas de datos.',
     title: 'Acerca de UtilityFlow',
     intro:
-      'UtilityFlow es una plataforma web independiente que crea 84 utilidades enfocadas y confiables para el trabajo digital cotidiano.',
+      'UtilityFlow es una plataforma web independiente que crea 85 utilidades enfocadas y confiables para el trabajo digital cotidiano.',
     whyTitle: 'Por qué creamos UtilityFlow',
     whyP1:
       'Las tareas online rutinarias —contar palabras, validar JSON, revisar límites de caracteres, calcular pagos de préstamos o comprimir una imagen— a menudo obligan a las personas a usar sitios lentos llenos de capas intrusivas, descargas confusas o registros obligatorios.',
@@ -318,7 +318,7 @@ export const esStrings: UiStrings = {
       'Nuestro objetivo es sencillo: dar a cada utilidad una página limpia y dedicada que cargue rápido, explique con claridad cómo funciona la herramienta y se ejecute directamente en tu navegador siempre que los estándares web lo permitan.',
     orgTitle: 'Quién está detrás de UtilityFlow',
     orgP1:
-      'UtilityFlow es un proyecto independiente creado y mantenido por Bilal, un creador que construye herramientas web gratuitas en su tiempo libre. No hay ninguna empresa detrás del sitio, ni financiación de inversionistas, ni un equipo de empleados: cada herramienta, guía y página de ayuda es diseñada, construida y probada por una sola persona. Las 84 herramientas son gratuitas, sin cuentas ni suscripciones. El crédito del pie de página menciona a Shaheen, cuyo apoyo inspiró el proyecto y cuyo nombre aparece en cada página como un recordatorio de dónde comenzó la idea.',
+      'UtilityFlow es un proyecto independiente creado y mantenido por Bilal, un creador que construye herramientas web gratuitas en su tiempo libre. No hay ninguna empresa detrás del sitio, ni financiación de inversionistas, ni un equipo de empleados: cada herramienta, guía y página de ayuda es diseñada, construida y probada por una sola persona. Las 85 herramientas son gratuitas, sin cuentas ni suscripciones. El crédito del pie de página menciona a Shaheen, cuyo apoyo inspiró el proyecto y cuyo nombre aparece en cada página como un recordatorio de dónde comenzó la idea.',
     orgP2:
       'Como el proyecto es pequeño e independiente, las decisiones son sencillas: si una herramienta es lenta, confusa o está mal, se corrige. Los comentarios enviados a través de la página de contacto llegan directamente a la persona que puede cambiar el código, y las sugerencias de los visitantes ya han dado lugar a nuevas herramientas y mejoras en todo el sitio.',
     howTitle: 'Cómo se construyen y se prueban nuestras herramientas',
@@ -425,7 +425,7 @@ export const esStrings: UiStrings = {
       {
         title: '2. Entradas de herramientas y procesamiento en el navegador',
         paragraphs: [
-          'El texto, los números, los fragmentos de código y los archivos que se ingresan en nuestras 84 herramientas basadas en el navegador se procesan localmente dentro de tu sesión del navegador sin salir de tu dispositivo.',
+          'El texto, los números, los fragmentos de código y los archivos que se ingresan en nuestras 85 herramientas basadas en el navegador se procesan localmente dentro de tu sesión del navegador sin salir de tu dispositivo.',
           'Los comentarios publicados en nuestras herramientas solo piden un nombre y el texto del comentario. El nombre y el texto que envías se guardan en nuestra plataforma de alojamiento y se muestran públicamente en la página de esa herramienta, junto con la fecha. No pedimos una dirección de correo ni una cuenta para comentar, y no usamos los datos de los comentarios para publicidad. Si quieres que se elimine un comentario, contáctanos con la página y el nombre usado y lo borraremos.',
         ],
       },

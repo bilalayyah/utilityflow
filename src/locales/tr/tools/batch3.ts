@@ -438,4 +438,41 @@ export const TR_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
     intro:
       '1 ile 3999 arasındaki herhangi bir tam sayıyı Roma rakamlarına çevirin ya da Roma rakamlarını normal sayılar gibi okuyun — tam bir tarihi de Roma rakamlarına çevirin, hepsi tarayıcınızda anında.',
   },
+  'online-hourly-calculator': {
+    slug: 'online-saat-hesaplayici',
+    name: 'Online Saat Hesaplayıcı',
+    shortDescription:
+      'İki saat arasındaki süreyi, molalı çalışma saatlerini, ondalık saatleri ve saatlik ücreti hesaplayın — tarayıcınızda ücretsiz.',
+    keywords: [
+      'online saat hesaplayıcı',
+      'çalışma saati hesaplayıcı',
+      'iki saat arası süre',
+      'saatlik ücret hesaplayıcı',
+      'ondalık saat hesaplayıcı',
+      'fazla mesai hesaplayıcı',
+      'saat toplama çıkarma',
+      'kaç saat çalıştım',
+    ],
+    seo: {
+      title: 'Online Saat Hesaplayıcı – Saat ve Ücret Hesaplayın | UtilityFlow',
+      description:
+        'Ücretsiz online saat hesaplayıcımızla çalışma saatlerini, zaman farklarını, molaları, ondalık saatleri ve saatlik kazancı anında hesaplayın.',
+      primaryKeyword: 'online saat hesaplayıcı',
+      secondaryKeywords: [
+        'çalışma saati hesaplayıcı',
+        'iki saat arası süre hesaplama',
+        'saatlik ücret hesaplayıcı',
+        'ondalık saat hesaplayıcı',
+      ],
+      longTailKeywords: [
+        'iki saat arasındaki süre nasıl hesaplanır',
+        'molalı çalışma saati nasıl hesaplanır',
+        'saat ve dakikayı ondalık saate çevirme',
+        'fazla mesaili saatlik ücret hesaplama',
+      ],
+      schemaApplicationCategory: 'UtilitiesApplication',
+    },
+    intro:
+      '12 veya 24 saat formatında iki saat arasındaki süreyi hesaplayın, molalı vardiyaları takip edin, süreleri toplayın veya çıkarın, saat ve dakikayı ondalık saate çevirin ve çalışma saatlerini ücrete dönüştürün — fazla mesai, molalar ve para biriminizle, hepsi tarayıcınızda anında.',
+  },
 };

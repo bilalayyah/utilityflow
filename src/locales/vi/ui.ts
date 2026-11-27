@@ -15,7 +15,7 @@ export const viStrings: UiStrings = {
     contact: 'Liên hệ',
     blog: 'Blog',
     allTools: 'Tất cả công cụ',
-    searchPlaceholder: 'Tìm kiếm 84 công cụ...',
+    searchPlaceholder: 'Tìm kiếm 85 công cụ...',
     searchTools: 'Tìm công cụ',
     closeSearch: 'Đóng tìm kiếm',
     openMenu: 'Mở menu điều hướng',
@@ -172,17 +172,17 @@ export const viStrings: UiStrings = {
       {
         question: 'Các công cụ của UtilityFlow có miễn phí và không cần tạo tài khoản không?',
         answer:
-          'Có. Cả 84 tiện ích trên trình duyệt của UtilityFlow đều hoàn toàn miễn phí, không cần đăng ký, không bắt đăng nhập, không cần credit hay gói thuê bao.',
+          'Có. Cả 85 tiện ích trên trình duyệt của UtilityFlow đều hoàn toàn miễn phí, không cần đăng ký, không bắt đăng nhập, không cần credit hay gói thuê bao.',
       },
       {
         question: 'UtilityFlow có tải văn bản, code hay file của tôi lên máy chủ không?',
         answer:
-          'Cả 84 tiện ích cốt lõi trên trình duyệt đều chạy ngay trên trình duyệt web của bạn mà không tải dữ liệu nhập lên đâu cả.',
+          'Cả 85 tiện ích cốt lõi trên trình duyệt đều chạy ngay trên trình duyệt web của bạn mà không tải dữ liệu nhập lên đâu cả.',
       },
       {
-        question: '84 công cụ được sắp xếp như thế nào trên nền tảng?',
+        question: '85 công cụ được sắp xếp như thế nào trên nền tảng?',
         answer:
-          'UtilityFlow gồm bảy danh mục chính (Văn bản & Viết lách, Lập trình viên, Máy tính, Mạng xã hội, PDF, SEO và Công cụ hình ảnh & file) với tổng cộng 84 công cụ trên trình duyệt được tích hợp trong cùng một nền tảng.',
+          'UtilityFlow gồm bảy danh mục chính (Văn bản & Viết lách, Lập trình viên, Máy tính, Mạng xã hội, PDF, SEO và Công cụ hình ảnh & file) với tổng cộng 85 công cụ trên trình duyệt được tích hợp trong cùng một nền tảng.',
       },
       {
         question: 'Tôi có thể đánh dấu hoặc chia sẻ liên kết trực tiếp tới một công cụ cụ thể không?',
@@ -198,7 +198,7 @@ export const viStrings: UiStrings = {
     trustLine: 'Mọi công cụ đều miễn phí • Không cần đăng ký • Chạy ngay trong trình duyệt của bạn',
   },
   directory: {
-    seoTitle: 'Duyệt tất cả 84 công cụ tiện ích trực tuyến miễn phí | UtilityFlow',
+    seoTitle: 'Duyệt tất cả 85 công cụ tiện ích trực tuyến miễn phí | UtilityFlow',
     seoDescription:
       'Duyệt và tìm kiếm mọi tiện ích trên trình duyệt cùng các danh mục của UtilityFlow — sắp xếp theo viết lách, lập trình, máy tính, PDF, SEO và hình ảnh.',
     seoKeywords: ['danh mục công cụ tiện ích', 'tất cả công cụ trực tuyến', 'công cụ trình duyệt miễn phí'],
@@ -308,7 +308,7 @@ export const viStrings: UiStrings = {
       'Tìm hiểu cách UtilityFlow xây dựng các tiện ích trình duyệt nhanh, đặt quyền riêng tư lên hàng đầu trong bảy danh mục — không tài khoản, không rườm rà, không tải dữ liệu lên một cách không cần thiết.',
     title: 'Về UtilityFlow',
     intro:
-      'UtilityFlow là một nền tảng web độc lập, xây dựng 84 tiện ích tập trung, đáng tin cậy cho công việc số hằng ngày.',
+      'UtilityFlow là một nền tảng web độc lập, xây dựng 85 tiện ích tập trung, đáng tin cậy cho công việc số hằng ngày.',
     whyTitle: 'Vì sao chúng tôi xây dựng UtilityFlow',
     whyP1:
       'Những việc trực tuyến quen thuộc — đếm từ, kiểm tra JSON, kiểm tra giới hạn ký tự, tính khoản vay, hay nén ảnh — thường đẩy người dùng tới các trang web chậm, đầy quảng cáo chen ngang, nút tải xuống khó hiểu hay bắt buộc đăng ký.',
@@ -316,7 +316,7 @@ export const viStrings: UiStrings = {
       'Mục tiêu của chúng tôi rất rõ ràng: mỗi tiện ích có một trang riêng gọn gàng, tải nhanh, giải thích rõ cách công cụ hoạt động và chạy trực tiếp trong trình duyệt của bạn bất cứ khi nào chuẩn web cho phép.',
     orgTitle: 'Ai vận hành UtilityFlow',
     orgP1:
-      'UtilityFlow là một dự án độc lập do Bilal tạo ra và duy trì — một người làm sản phẩm xây dựng các công cụ web miễn phí trong thời gian rảnh. Đằng sau trang web không có công ty, không có vốn đầu tư và không có đội ngũ nhân viên — mọi công cụ, hướng dẫn và trang trợ giúp đều do một người thiết kế, xây dựng và kiểm thử. Cả 84 công cụ đều miễn phí, không cần tài khoản hay gói thuê bao. Dòng ghi công ở chân trang nhắc tới Shaheen — người đã động viên và truyền cảm hứng cho dự án, và tên của người ấy xuất hiện trên mọi trang như một lời nhắc về nơi ý tưởng bắt đầu.',
+      'UtilityFlow là một dự án độc lập do Bilal tạo ra và duy trì — một người làm sản phẩm xây dựng các công cụ web miễn phí trong thời gian rảnh. Đằng sau trang web không có công ty, không có vốn đầu tư và không có đội ngũ nhân viên — mọi công cụ, hướng dẫn và trang trợ giúp đều do một người thiết kế, xây dựng và kiểm thử. Cả 85 công cụ đều miễn phí, không cần tài khoản hay gói thuê bao. Dòng ghi công ở chân trang nhắc tới Shaheen — người đã động viên và truyền cảm hứng cho dự án, và tên của người ấy xuất hiện trên mọi trang như một lời nhắc về nơi ý tưởng bắt đầu.',
     orgP2:
       'Vì dự án nhỏ và độc lập, mọi quyết định đều đơn giản: công cụ nào chậm, khó hiểu hay sai thì sẽ được sửa. Phản hồi gửi qua trang liên hệ đến thẳng tay người có thể sửa code, và góp ý của khách truy cập đã tạo ra những công cụ mới và cải tiến trên khắp trang web.',
     howTitle: 'Cách các công cụ được xây dựng và kiểm thử',
@@ -423,7 +423,7 @@ export const viStrings: UiStrings = {
       {
         title: '2. Dữ liệu nhập của công cụ & xử lý trên trình duyệt',
         paragraphs: [
-          'Văn bản, con số, đoạn code và file bạn nhập vào 84 công cụ trên trình duyệt của chúng tôi được xử lý ngay trong phiên trình duyệt của bạn, không rời khỏi thiết bị.',
+          'Văn bản, con số, đoạn code và file bạn nhập vào 85 công cụ trên trình duyệt của chúng tôi được xử lý ngay trong phiên trình duyệt của bạn, không rời khỏi thiết bị.',
           'Bình luận đăng dưới các công cụ chỉ yêu cầu tên và nội dung bình luận. Tên và nội dung bạn gửi được lưu trên nền tảng hosting của chúng tôi và hiển thị công khai trên trang của công cụ đó, kèm theo ngày đăng. Chúng tôi không yêu cầu địa chỉ email hay tài khoản để bình luận, và không dùng dữ liệu bình luận cho quảng cáo. Nếu bạn muốn xóa một bình luận, hãy liên hệ với chúng tôi kèm trang và tên đã dùng, chúng tôi sẽ xóa bình luận đó.',
         ],
       },

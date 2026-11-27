@@ -231,4 +231,19 @@ export const DE_BATCH_3_OVERRIDES: Record<string, ToolLocaleOverride> = {
     },
     intro: "Wandeln Sie jede ganze Zahl von 1 bis 3999 in römische Zahlen um oder lesen Sie römische Zahlen als gewöhnliche Zahlen – und verwandeln Sie auch ein komplettes Datum in römische Zahlen, sofort in Ihrem Browser.",
   },
+  "online-hourly-calculator": {
+    slug: "online-stundenrechner",
+    name: "Online-Stundenrechner",
+    shortDescription: "Berechnen Sie Stunden zwischen zwei Uhrzeiten, Arbeitsstunden mit Pausen, Dezimalstunden und Stundenlohn – kostenlos im Browser.",
+    keywords: ["online stundenrechner", "arbeitsstunden rechner", "stunden zwischen zwei uhrzeiten", "stundenlohn rechner", "dezimalstunden rechner", "überstunden rechner", "arbeitszeit rechner", "zeit addieren subtrahieren", "wie viele stunden gearbeitet"],
+    seo: {
+      title: "Online-Stundenrechner – Stunden & Lohn berechnen | UtilityFlow",
+      description: "Berechnen Sie mit dem kostenlosen Online-Stundenrechner Arbeitsstunden, Zeitdifferenzen, Pausen, Dezimalstunden und Stundenlohn sofort.",
+      primaryKeyword: "online stundenrechner",
+      secondaryKeywords: ["arbeitsstunden rechner", "stunden zwischen zwei uhrzeiten berechnen", "stundenlohn rechner", "dezimalstunden rechner"],
+      longTailKeywords: ["wie berechnet man stunden zwischen zwei uhrzeiten", "arbeitsstunden mit pause berechnen", "stunden minuten in dezimalstunden umrechnen", "stundenlohn mit überstunden berechnen"],
+      schemaApplicationCategory: "UtilitiesApplication",
+    },
+    intro: "Berechnen Sie Stunden zwischen zwei Uhrzeiten im 12- oder 24-Stunden-Format, erfassen Sie Schichten mit Pausenzeiten, addieren oder subtrahieren Sie Zeiten, wandeln Sie Stunden und Minuten in Dezimalstunden um und rechnen Sie Arbeitsstunden in Lohn um – mit Überstunden, Pausen und Ihrer Währung, sofort in Ihrem Browser.",
+  },
 };

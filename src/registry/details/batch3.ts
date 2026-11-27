@@ -2660,4 +2660,220 @@ export const TOOL_DETAILS: Record<string, ToolDetail> = {
       'Results are exact for the supported range, but double-check a numeral before engraving, tattooing or printing it — one wrong letter changes the value.',
     ],
   },
+  'online-hourly-calculator': {
+    instructions: [
+      {
+        title: 'Choose a mode',
+        description:
+          'Pick Hours Between Times, Work Hours, Add / Subtract Time, Decimal Hours, or Hourly Pay at the top of the tool.',
+      },
+      {
+        title: 'Pick 12-hour or 24-hour time',
+        description:
+          'Use the format selector above the modes. 12-hour mode shows AM and PM; 24-hour mode uses the clock format you type into a normal time field.',
+      },
+      {
+        title: 'Enter your times — and dates only when they matter',
+        description:
+          'Type a start and end time. Add start and end dates only when the period runs across days; with dates entered, the end must come after the start.',
+      },
+      {
+        title: 'Add breaks as timed periods',
+        description:
+          'In Work Hours mode, add one break row per break with its own start and end time, plus any extra unpaid minutes that are not already covered by a timed break.',
+      },
+      {
+        title: 'Read the result instantly',
+        description:
+          'Totals appear right away in your browser — total hours, minutes, decimal hours and pay — with no page reload and nothing uploaded.',
+      },
+      {
+        title: 'Copy, calculate or clear',
+        description:
+          'Copy any single result, press Calculate to save the result to your recent calculations, or Clear to start the mode again.',
+      },
+    ],
+    examples: [
+      {
+        title: 'A standard workday',
+        input: '09:00 AM – 05:00 PM',
+        output: '8h (8.00 hr, 480 min)',
+        explanation: 'Nine to five is eight hours exactly.',
+      },
+      {
+        title: 'A workday with a lunch break',
+        input: '09:00 AM – 05:30 PM, 30-min break',
+        output: '8h net',
+        explanation: 'Eight and a half hours minus a 30-minute break leaves eight hours of work.',
+      },
+      {
+        title: 'An overnight shift',
+        input: '10:30 PM – 06:30 AM',
+        output: '8h (Overnight)',
+        explanation: 'The end time is earlier than the start, so the overnight option treats it as the next day.',
+      },
+      {
+        title: 'A split shift',
+        input: '08:15 AM – 04:45 PM',
+        output: '8h 30m',
+        explanation: 'Eight hours and thirty minutes.',
+      },
+      {
+        title: 'Adding two durations',
+        input: '2h 30m + 1h 45m',
+        output: '4h 15m',
+        explanation: 'Add the hours (3h) and the minutes (75m = 1h 15m).',
+      },
+      {
+        title: 'Subtracting a duration',
+        input: '8h − 2h 30m',
+        output: '5h 30m',
+        explanation: 'Use the minus sign on a row to subtract it from the total.',
+      },
+      {
+        title: 'Moving a clock time forward',
+        input: '11:30 PM + 2h',
+        output: '01:30 AM (next day)',
+        explanation: 'The result rolls past midnight and says so.',
+      },
+      {
+        title: 'Hours to decimal',
+        input: '1h 30m',
+        output: '1.50 hr',
+        explanation: 'Thirty minutes is half an hour, so 1 hour 30 minutes is 1.50 decimal hours.',
+      },
+      {
+        title: 'Minutes to decimal',
+        input: '2h 15m',
+        output: '2.25 hr',
+        explanation: 'Fifteen minutes is a quarter of an hour, so 2 hours 15 minutes is 2.25.',
+      },
+      {
+        title: 'Decimal back to hours',
+        input: '1.75',
+        output: '1h 45m',
+        explanation: 'Seventy-five hundredths of an hour is 45 minutes.',
+      },
+      {
+        title: 'Simple hourly pay',
+        input: '$20/h × 8h',
+        output: '$160.00',
+        explanation: 'Eight hours at twenty dollars an hour.',
+      },
+      {
+        title: 'Pay with overtime',
+        input: '$20/h × 8h + 2h overtime at 1.5×',
+        output: '$220.00',
+        explanation: 'Regular pay $160 plus overtime 2 × $20 × 1.5 = $60.',
+      },
+    ],
+    benefits: [
+      'Five calculators in one page — hours between times, work hours, time arithmetic, decimal hours and hourly pay',
+      '12-hour AM/PM and 24-hour formats, so you can enter times the way you actually say them',
+      'Timed break periods with overlap checks, so a break is never deducted twice',
+      'Explicit dates for multi-day periods, with strict checks instead of silent overnight guesses',
+      'Overtime and currency are fully under your control — no tax, no statutory rules, no live rates',
+      'Free to use, with no account, sign-up or download, and everything runs in your browser',
+    ],
+    useCases: [
+      'Working out the hours for a timesheet, including lunch breaks and overnight shifts',
+      'Checking a payslip: turning hours worked and an hourly rate into expected pay, with overtime',
+      'Converting clock hours to decimal hours for payroll, invoicing or freelance billing',
+      'Planning a schedule — adding up several work blocks, or finding what time a task ends',
+      'Comparing an hourly wage with a salary: work out the earnings first, then convert periods with the Salary Calculator',
+      'Teaching or learning time arithmetic: adding, subtracting and converting hours and minutes',
+    ],
+    faqs: [
+      {
+        question: 'How do I calculate hours between two times?',
+        answer:
+          'Choose Hours Between Times, enter a start and an end time, and pick 12-hour or 24-hour format. The tool shows the total hours, total minutes, hours-and-minutes format and decimal hours instantly — for example, 9:00 AM to 5:00 PM is 8 hours.',
+      },
+      {
+        question: 'How do I calculate work hours with breaks?',
+        answer:
+          'Choose Work Hours, enter your shift start and end, then add one break row per break with its own start and end time. The tool shows total shift, total break and net work time — for example, 9:00 AM to 5:30 PM with a 30-minute lunch is 8 hours net.',
+      },
+      {
+        question: 'How do I calculate overnight shifts?',
+        answer:
+          'Enter the start and end times and keep the overnight option on. An end time earlier than the start is treated as the next day — 10:30 PM to 6:30 AM is 8 hours, and the result is marked (Overnight). If you enter dates, the end date must be the next day.',
+      },
+      {
+        question: 'How do I convert hours to decimal hours?',
+        answer:
+          'Choose Decimal Hours and enter hours and minutes. The tool divides the minutes by 60: 1 hour 30 minutes is 1.50, and 2 hours 15 minutes is 2.25. Choose 0 to 4 decimal places; the default is 2.',
+      },
+      {
+        question: 'How do I convert decimal hours back to hours and minutes?',
+        answer:
+          'Choose Decimal Hours, enter the decimal number, and the tool multiplies it by 60: 1.75 becomes 1 hour 45 minutes, and 2.5 becomes 2 hours 30 minutes. The total minutes are shown as well.',
+      },
+      {
+        question: 'How do I calculate hourly pay?',
+        answer:
+          'Choose Hourly Pay, enter your hourly rate, pick a currency, and enter the hours and minutes worked plus any unpaid break. The tool shows regular pay, total hours and average earnings per hour — $20 an hour for 8 hours is $160. For pay converted between periods, use the Salary Calculator instead.',
+      },
+      {
+        question: 'How do I calculate overtime pay?',
+        answer:
+          'In Hourly Pay mode, enter overtime hours separately from regular hours and set your overtime multiplier — 1.5 is the usual time-and-a-half. Overtime pay is overtime hours × rate × multiplier, added to regular pay: $20 × 8 hours plus 2 overtime hours at 1.5× is $220 in total.',
+      },
+      {
+        question: 'What is the difference between decimal hours and regular hours?',
+        answer:
+          'Regular hours are written as hours and minutes (1h 30m); decimal hours write the same time as a single decimal number (1.50). Payroll and billing systems usually want the decimal form, because 1.50 × $20 is easier to calculate than 1h 30m × $20.',
+      },
+      {
+        question: 'Can I calculate pay in different currencies?',
+        answer:
+          'Yes. Pick USD, EUR, GBP, AED, PKR, INR, CAD or AUD and the results show that currency’s symbol. The currency is display only — no amount is converted and no exchange rate is used.',
+      },
+      {
+        question: 'Does this calculator apply tax deductions?',
+        answer:
+          'No. The tool shows gross pay from your rate and hours only. It never applies tax, deductions or statutory overtime rules — if you need a net figure, work out the gross here first and then apply your own tax rules.',
+      },
+      {
+        question: 'Can I add or subtract time?',
+        answer:
+          'Yes. Choose Add / Subtract Time, add one row per time value and pick + or − for each row — 2h 30m + 1h 45m is 4h 15m, and 8h − 2h 30m is 5h 30m. You can also add or subtract a duration from a clock time: 11:30 PM + 2 hours is 1:30 AM the next day.',
+      },
+      {
+        question: 'What happens if the end time is earlier than the start time?',
+        answer:
+          'With no dates and the overnight option on, the end is treated as the next day. With it off, you get a clear error asking you to turn it on or fix the time. With dates entered, the tool never assumes overnight — an end before the start is an error with an explanation.',
+      },
+      {
+        question: 'Can I calculate hours across multiple days?',
+        answer:
+          'Yes. Enter a start date and an end date together with the times, and the tool counts the full span — 9:00 AM on 27 November to 9:00 AM on 29 November is 48 hours. The end date and time must come after the start.',
+      },
+      {
+        question: 'Is this hourly calculator free?',
+        answer:
+          'Yes, it is completely free, with no account, sign-up or download. It runs entirely in your browser, so what you enter is never uploaded or stored.',
+      },
+      {
+        question: 'Does this tool store my data?',
+        answer:
+          'No. Every calculation happens locally in your browser. Your recent calculations are kept only in the page’s memory for this session and disappear when you close or reload the page.',
+      },
+    ],
+    howItWorks: [
+      'Hours between two times are simple subtraction once both times sit on the same timeline. The tool turns each clock time into minutes since midnight and subtracts the start from the end. With no dates and the end earlier than the start, the overnight option adds a full day (1,440 minutes) — that is how 10:30 PM to 6:30 AM becomes 8 hours. With dates entered, the tool checks the full date-and-time sequence and refuses an end before the start, explaining why — it never guesses.',
+      'Work hours are the shift length minus the breaks. Every timed break period is checked: each break must start and end inside the shift, and break periods must not overlap, because overlapping breaks would count the same minutes twice. An extra unpaid-break duration in minutes is added on top — but only enter minutes for break time that is not already covered by a timed break, or that time is deducted twice. The net result is the time actually worked.',
+      'Decimal hours divide minutes by 60. Thirty minutes is 30 ÷ 60 = 0.50 hours, so 1 hour 30 minutes is 1.50; fifteen minutes is 0.25, so 2 hours 15 minutes is 2.25. The tool converts in one step with no intermediate rounding — the result is rounded only once, at the end, to the precision you choose (0 to 4 decimal places, default 2). Converting back multiplies the decimal by 60: 1.75 × 60 = 105 minutes = 1 hour 45 minutes.',
+      'Hourly pay is rate times hours. Regular pay is the hourly rate multiplied by the regular hours after unpaid breaks are deducted. Overtime hours are extra hours on top of the regular hours, paid at the rate multiplied by your overtime multiplier — 2 overtime hours at $20 with a 1.5 multiplier is 2 × $20 × 1.5 = $60. Total pay is regular plus overtime, and the average per hour is total pay divided by total hours. The currency selector only changes the symbol shown; it never converts amounts, because no exchange rate is used.',
+      'This tool is the hourly-work companion to two neighbours. The Time Duration Calculator answers a narrower question — elapsed time between two clock times, or the sum of duration rows — while this calculator adds AM/PM input, explicit dates, timed and multiple breaks, subtraction, clock-time results, a dedicated decimal converter and hourly pay. The Salary Calculator converts a pay figure between periods (hourly to annual and back), while this tool works out earnings from the hours you actually worked.',
+    ],
+    supportedFormats: ['12-hour (AM/PM) and 24-hour times', 'Optional start and end dates', 'Multiple timed break periods', 'Decimal hours, 0–4 decimal places', 'Currencies: USD, EUR, GBP, AED, PKR, INR, CAD, AUD (display only)', 'Overtime multiplier, user-controlled'],
+    limitations: [
+      'Times without dates are treated as a single day. If a period really runs over midnight, turn on the overnight option — or enter both dates so the tool can check the sequence exactly.',
+      'A timed break must fall inside the shift and must not overlap another break. A break that crosses midnight cannot be entered as one row — split it into two breaks, one before midnight and one after.',
+      'The additional unpaid-break minutes are separate from the timed breaks. Enter minutes there only for break time not already entered as a timed break, or the same break is deducted twice.',
+      'Currency is display only. The tool never converts between currencies, never fetches exchange rates, and never applies tax, deductions or statutory overtime rules — the multiplier is yours to set.',
+      'Results are exact for the inputs given, but double-check times and breaks before using a total for payroll or invoicing — one wrong AM/PM changes the answer by twelve hours.',
+    ],
+  },
 };
